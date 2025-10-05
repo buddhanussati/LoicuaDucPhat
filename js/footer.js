@@ -372,7 +372,7 @@ $(document).ready(function () {
   $(".raw_sutta").each(function () {
     alignedSplicer($(this), table, sectionDivSelector);
   });
-  table.find("td[lang=pi]").show();
+  table.find("td[lang=en]").hide();
 
   $("#content").append(table);
   /* Set an appropriate caption */
@@ -421,7 +421,7 @@ function unloadPaliLookup() {
 }
 
 // set default state of Pali Lookup to true
-if (localStorage.paliLookupActive === undefined) {
+if (localStorage.paliLookupActive === true) {
   localStorage.paliLookupActive = "true";
 }
 
