@@ -384,17 +384,6 @@ $(document).ready(function () {
 
   $("tr").each(function () {});
 
-  // On load retrieve the state of pali visibility from localStorage
-  // which defaults to null (falsely) if it's never been set.
-  setPaliVisibility(paliVisible);
-});
-
-url_components = /.*\/([\w.]+)\/([\w.-]+)\.html/.exec(location.href);
-division = url_components[1];
-
-if ($(".raw_sutta div[lang=en] > *").length == 0) {
-  $("#pali").remove();
-}
 
 function loadPaliLookup() {
   if ($(".lookup").length == 0) {
