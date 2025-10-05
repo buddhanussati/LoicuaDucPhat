@@ -372,7 +372,7 @@ $(document).ready(function () {
   $(".raw_sutta").each(function () {
     alignedSplicer($(this), table, sectionDivSelector);
   });
-  table.find("td[lang=en]").hide();
+  table.find("td[lang=pi]").show();
 
   $("#content").append(table);
   /* Set an appropriate caption */
