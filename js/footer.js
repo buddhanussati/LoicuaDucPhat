@@ -282,52 +282,53 @@ function buildPairsTableChunked(rawSuttaEls, onDone) {
 }
 
 /* Pali visibility state handling */
+// Always force Pali visible
+localStorage.setItem("paliVisible", "true");
 let paliVisible = true;
+
+function setPaliVisibility() {
+  // show all Pali cells
+  document.querySelectorAll("td[lang=pi]").forEach(td => td.style.display = "");
+  // mark button active
+  const btn = document.getElementById("pali");
+  if (btn) btn.classList.add("active");
+  // persist as true
+  localStorage.setItem("paliVisible", "true");
+  // always load lookup
+  loadPaliLookup();
+}
+
 function loadPaliLookup() {
   if (typeof enablePaliLookup === "function") return enablePaliLookup();
   if (document.querySelector(".lookup") == null) {
-    // Load script via jQuery just like original; success callback should define enablePaliLookup
     jQuery.ajax({
       url: "../js/pali-lookup-standalone.js",
       dataType: "script",
       crossDomain: true,
-      success: function() { if (typeof enablePaliLookup === "function") enablePaliLookup(); }
+      success: function () {
+        if (typeof enablePaliLookup === "function") enablePaliLookup();
+      }
     });
   } else if (typeof enablePaliLookup === "function") {
     enablePaliLookup();
   }
 }
+
 function unloadPaliLookup() {
   if (typeof disablePaliLookup === "function") return disablePaliLookup();
-  if (typeof disablePaliLookup === "function") disablePaliLookup();
 }
 
-function setPaliVisibility(state) {
-  const piTds = document.querySelectorAll("td[lang=pi]");
-  for (let i = 0; i < piTds.length; i++) {
-    piTds[i].style.display = state ? "" : "none";
-  }
-  const btn = document.getElementById("pali");
-  if (btn) {
-    if (state) btn.classList.add("active"); else btn.classList.remove("active");
-  }
-  localStorage.setItem("paliVisible", state ? "true" : "false");
-  if (state && localStorage.getItem("paliLookupActive") === "true") loadPaliLookup();
-  if (!state) { /* optionally unload lookup to save memory */ }
-}
-
-/* Document ready replacement for building table */
+// Document ready replacement for building table
 document.addEventListener("DOMContentLoaded", function () {
   const rawSuttas = Array.from(document.querySelectorAll(".raw_sutta"));
   if (!rawSuttas.length) return;
 
   buildPairsTableChunked(rawSuttas, function (table) {
-    // hide english column (consistent with original behavior)
-    // but target tds by attribute
+    // hide english column
     const enTds = table.querySelectorAll("td[lang=en]");
     for (let i = 0; i < enTds.length; i++) enTds[i].style.display = "none";
 
-    // append caption derived from first H1 if present
+    // caption from first H1
     const h1 = document.querySelector("h1");
     if (h1) {
       const caption = table.querySelector("caption");
@@ -335,21 +336,21 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     document.getElementById("content").appendChild(table);
-    setPaliVisibility(paliVisible);
+    setPaliVisibility();   // no argument needed
   });
 
-  // remove #pali element if no Pali content exists (preserve original intent)
+  // remove #pali button if no Pali content exists
   if (document.querySelectorAll(".raw_sutta div[lang=en] > *").length === 0) {
     const paliBtn = document.getElementById("pali");
     if (paliBtn && paliBtn.parentNode) paliBtn.parentNode.removeChild(paliBtn);
   }
 
-  // bind toggle
+  // bind toggle (optional: but here it won’t hide, just re‑enforce visibility)
   const paliBtn = document.getElementById("pali");
   if (paliBtn) {
     paliBtn.addEventListener("click", function () {
-      paliVisible = !paliVisible;
-      setPaliVisibility(paliVisible);
+      setPaliVisibility();
     });
   }
 });
+
