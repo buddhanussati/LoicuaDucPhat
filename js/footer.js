@@ -1,589 +1,357 @@
-/* This file contains everything which needs to happen at the end of
- * loading the main contents
- */
+"use strict";
 
-DEBUGGERIZE = false;
+/* Configuration */
+const DEBUGGERIZE = false;
+const sectionDivSelector = "hr, hgroup, h1, h2, h3, h4, h5, h6, div.glob";
+const sectionDivHiddenSelector = "hr";
+const spliceOpens = "hgroup, h1, h2, h3";
+const spliceCloses = "p, blockquote, div";
+const SECTION_DIV_SMALL_WEIGHT = 0.01;
 
-if (DEBUGGERIZE) {
-  oldBody = $(document.body).clone();
-}
-
-findClass = "search-match";
-findTargetSelector = "p:visible";
-findResultCurrentClass = "search-current";
-sectionDivSelector = "hr, hgroup, h1, h2, h3, h4, h5, h6, div.glob";
-sectionDivHiddenSelector = "hr";
-paliVisible = true;
-
-/*
-$('#pali').removeClass('active')
-*/
-/* When the english and pali are spliced together, elements are grouped
- * and the groups end on one of the below.
- */
-spliceCloses = "p, blockquote, div";
-/* A new group should open on these, even if it otherwise wouldn't */
-spliceOpens = "hgroup, h1, h2, h3";
-
-/* This function decides whether a paragraph should be lumped anyway
- * It wont be lumped if:
- * The node type is anything other than 'p' (i.e. div or blockquote)
- * If it is at least 200 characters long.
- * If it contains at least 2 sentence-enders.
- * */
-function insignificant(e) {
-  if (e.nodeName != "P") return false;
-  var text = $(e).text();
-  if (text.length < 80) return true;
-  if (text.length >= 200) return false;
-  var m = text.match(/[.!?:]/g),
-    periodCount = m ? m.length : 0;
-
-  return periodCount <= 1;
-}
-
+/* Utility: safe URL capture */
+const url_components = /.*\/([\w.]+)\/([\w.-]+)\.html/.exec(location.href) || [];
+const division = url_components[1] || "";
 var next_sutta = $("#next-sutta").attr("title", "Kinh Tiếp"),
   previous_sutta = $("#previous-sutta").attr("title", "Kinh Trước");
 
-function groupy(collection) {
-  var out = [],
-    group = [];
+$("li.nextprev").append(previous_sutta).append(next_sutta);
 
-  for (var i = 0; i < collection.length; i++) {
-    var e = collection[i];
-    if ($(e).is(spliceOpens) && $(group).is(spliceCloses)) {
+
+/* Deterministic array split */
+function arraySplit(array, splitFn, includeMatching = true) {
+  const out = [];
+  let current = [];
+  for (let i = 0; i < array.length; i++) {
+    const e = array[i];
+    if (splitFn(e)) {
+      if (current.length) out.push(current);
+      if (includeMatching) out.push([e]);
+      current = [];
+    } else {
+      current.push(e);
+    }
+  }
+  if (current.length) out.push(current);
+  return out;
+}
+
+/* Compute text lengths once (excluding .note text lengths) */
+function computeLengths(nodeArray, sectionSelector) {
+  const lengths = new Array(nodeArray.length);
+  const isSection = new Array(nodeArray.length);
+  for (let i = 0; i < nodeArray.length; i++) {
+    const el = nodeArray[i];
+    // fast textContent length
+    let len = (el.textContent || "").length;
+    // subtract notes quickly if present
+    const notes = el.querySelectorAll ? el.querySelectorAll(".note") : [];
+    if (notes && notes.length) {
+      let notesLen = 0;
+      for (let j = 0; j < notes.length; j++) notesLen += (notes[j].textContent || "").length;
+      len = Math.max(0, len - notesLen);
+    }
+    const section = el.matches && el.matches(sectionSelector);
+    isSection[i] = !!section;
+    lengths[i] = section ? SECTION_DIV_SMALL_WEIGHT : len;
+  }
+  return { lengths, isSection };
+}
+
+/* Sum helper */
+function sum(array, from = 0) {
+  let s = 0;
+  for (let i = from; i < array.length; i++) s += array[i];
+  return s;
+}
+
+/* Group contiguous elements by simple heuristics (keeps behavior similar to original) */
+function groupy(collection, isSectionArray, nodeArray) {
+  const out = [];
+  let group = [];
+  for (let i = 0; i < collection.length; i++) {
+    const e = collection[i];
+    const idx = nodeArray ? nodeArray.indexOf(e) : -1;
+    const isOpen = e.matches && e.matches(spliceOpens);
+    const isClose = e.matches && e.matches(spliceCloses);
+    if (isOpen && group.length && group[group.length - 1].matches && group[group.length - 1].matches(spliceCloses)) {
       out.push(group);
       group = [];
     }
     group.push(e);
-    if ($(e).is(spliceCloses) && !insignificant(e)) {
+    if (isClose && (!idx || !isSectionArray || !isSectionArray[idx] || true)) {
+      // preserve previous idea: close groups on spliceCloses
       out.push(group);
       group = [];
     }
   }
-  if (group.length) {
-    out.push(group);
-  }
+  if (group.length) out.push(group);
   return out;
 }
 
-/* Splits an array on elements for which splitFn returns true
- * these elements are included in the output (at the start of the
- * new group) unless excludeMatching is true.
- */
-function arraySplit(array, splitFn, excludeMatching) {
-  var current = [],
-    out = [current],
-    carrying = false;
-
-  for (i = 0; i < array.length; i++) {
-    var e = array[i],
-      matches = splitFn(e);
-    if (matches) {
-      if (carrying) {
-        current.push(e);
-      } else {
-        current = [e];
-        out.push(current);
-        carrying = true;
-      }
-    } else {
-      carrying = false;
-      current.push(e);
-    }
-  }
-  return out;
-}
-
-function td(lang) {
-  return $("<td lang=" + lang + ">");
-}
-
-function sum(array) {
-  var total = 0;
-  return array.reduce(function (a, b) {
-    return a + b;
-  }, 0);
-}
-
-sectionNum = 0;
-
-function extraporlativeSplice(en, pi, table) {
-  sectionNum++;
-
-  var tr, entd, pitd;
-
-  function rowReset() {
-    tr = $("<tr>");
-    entd = td("en").appendTo(tr);
-    pitd = td("pi").appendTo(tr);
-    table.append(tr);
-  }
-
-  if (en.length == 0) {
-    rowReset();
-    pitd.append(pi);
-    return;
-  }
-
-  if (pi.length == 0) {
-    rowReset();
-    entd.append(en);
-    return;
-  }
-
-  function textLength() {
-    var node = $(this).clone();
-    node.find(".note").remove();
-    if ($(node).is(sectionDivSelector)) {
-      return 0.01;
-    }
-    return node.text().length;
-  }
-
-  var enLengths = $(en).map(textLength).toArray(),
-    piLengths = $(pi).map(textLength).toArray(),
-    enRemains = sum(enLengths),
-    piRemains = sum(piLengths),
-    overallRatio = 1;
-  (enIndex = 0), (piIndex = 0);
+/* extraporlativeSplice: pair up sequences using precomputed lengths
+   enElems/piElems are arrays of DOM nodes; enLengths/piLengths are arrays of numbers; enIsSection/piIsSection arrays of booleans */
+function extraporlativeSplice(enElems, enLengths, enIsSection, piElems, piLengths, piIsSection, tbody) {
+  let enIndex = 0, piIndex = 0;
 
   function calculateOverallRatio() {
-    return sum(enLengths.slice(enIndex)) / sum(piLengths.slice(piIndex));
+    const enRem = sum(enLengths, enIndex);
+    const piRem = sum(piLengths, piIndex) || 1;
+    return enRem / piRem;
   }
-
-  function calculateRatio(ex, px) {
-    return (
-      sum(
-        ex.map(function (i) {
-          return enLengths[i];
-        })
-      ) /
-      (sum(
-        px.map(function (i) {
-          return piLengths[i];
-        })
-      ) *
-        overallRatio)
-    );
+  function calculateRatio(enIdxs, piIdxs, overallRatio) {
+    const enSum = enIdxs.reduce((acc, i) => acc + enLengths[i], 0) || 1;
+    const piSum = piIdxs.reduce((acc, i) => acc + piLengths[i], 0) || 1;
+    return enSum / (piSum * overallRatio);
   }
-
   function quality(v) {
-    if (v > 1) return 1 / v;
-    else return v;
+    return v > 1 ? 1 / v : v;
   }
 
-  var enStack, piStack;
-  function stackReset() {
-    enStack = [];
-    piStack = [];
-  }
+  while (enIndex < enElems.length && piIndex < piElems.length) {
+    const overallRatio = calculateOverallRatio();
+    let enStack = [], piStack = [];
 
-  /* This is the meat of the function, it pairs up paragraphs trying
-   * to equalize paragraph length. It advances to a new pairing, when it
-   * can no longer improve the quality by adding additional paragraphs
-   * on either side.
-   */
-  while (true) {
-    var enDone = enIndex >= en.length,
-      piDone = piIndex >= pi.length;
-    if (enDone || piDone) {
-      if (enDone) {
-        pitd.append(pi.slice(piIndex));
-      } else if (piDone) {
-        entd.append(en.slice(enIndex));
-      }
-      break;
-    }
-
-    overallRatio = calculateOverallRatio();
-    if (DEBUGGERIZE) {
-      console.log("The overall ratio is " + overallRatio);
-    }
-    stackReset();
-    rowReset();
-    while ($(enStack[enIndex]).is(sectionDivSelector)) {
+    // start new stacks with one element each (unless it's a section divider then include it but allow advancing)
+    if (enIndex < enElems.length) {
       enStack.push(enIndex);
       enIndex++;
     }
-    while ($(piStack[piIndex]).is(sectionDivSelector)) {
+    if (piIndex < piElems.length) {
       piStack.push(piIndex);
       piIndex++;
     }
 
-    enStack.push(enIndex);
-    enIndex++;
+    let ratio = calculateRatio(enStack, piStack, overallRatio);
+    let bestQuality = quality(ratio);
 
-    piStack.push(piIndex);
-    piIndex++;
-
-    var ratio = calculateRatio(enStack, piStack);
-    var bestQuality = quality(ratio);
-
-    // While the english paragraph is longer
-    while (ratio > 1) {
-      var e = pi[piIndex];
-      if ($(e).is(sectionDivSelector)) {
-        //If we have hit a section divider we can't
-        //continue.
-        break;
-      }
-
+    // grow pi side if english currently longer
+    while (ratio > 1 && piIndex < piElems.length) {
+      if (piIsSection[piIndex]) break;
       piStack.push(piIndex);
       piIndex++;
-      ratio = calculateRatio(enStack, piStack);
-      newQuality = quality(ratio);
-      if (newQuality < bestQuality) {
+      const newRatio = calculateRatio(enStack, piStack, overallRatio);
+      const newQ = quality(newRatio);
+      if (newQ < bestQuality) {
         piStack.pop();
         piIndex--;
         break;
-      } else {
-        bestQuality = newQuality;
       }
+      bestQuality = newQ;
+      ratio = newRatio;
     }
 
-    // While the pali paragraph is longer
-    while (ratio < 1) {
-      var e = en[enIndex];
-      if ($(e).is(sectionDivSelector)) {
-        break;
-      }
+    // grow en side if pali currently longer
+    while (ratio < 1 && enIndex < enElems.length) {
+      if (enIsSection[enIndex]) break;
       enStack.push(enIndex);
       enIndex++;
-      ratio = calculateRatio(enStack, piStack);
-      newQuality = quality(ratio);
-      if (newQuality < bestQuality) {
+      const newRatio = calculateRatio(enStack, piStack, overallRatio);
+      const newQ = quality(newRatio);
+      if (newQ < bestQuality) {
         enStack.pop();
         enIndex--;
         break;
-      } else {
-        bestQuality = newQuality;
       }
+      bestQuality = newQ;
+      ratio = newRatio;
     }
 
-    // The row cannot be improved by adding a paragraph from either side
-    entd.append(
-      enStack.map(function (i) {
-        return en[i];
-      })
-    );
-    pitd.append(
-      piStack.map(function (i) {
-        return pi[i];
-      })
-    );
-  }
+    // append a row
+    const tr = document.createElement("tr");
+    const tdEn = document.createElement("td");
+    tdEn.lang = "en";
+    const tdPi = document.createElement("td");
+    tdPi.lang = "pi";
 
-  return;
-}
-
-function splice(en, pi, table) {
-  if (pi.length == 0 && en.length == 0) {
-    return;
-  }
-
-  // Group into td's
-  var en_tds = groupy(en).map(function (g) {
-      return $("<td lang=en>").append(g);
-    }),
-    pi_tds = groupy(pi).map(function (g) {
-      return $("<td lang=pi>").append(g);
-    }),
-    i = 0;
-
-  while (true) {
-    var tr = $("<tr>"),
-      en = en_tds.shift(),
-      pi = pi_tds.shift();
-
-    if (!en && !pi) {
-      break;
+    // move DOM nodes into cells using DocumentFragment
+    const fragEn = document.createDocumentFragment();
+    for (let ii = 0; ii < enStack.length; ii++) {
+      const idx = enStack[ii];
+      fragEn.appendChild(enElems[idx].cloneNode(true));
     }
+    tdEn.appendChild(fragEn);
 
-    tr.append([en, pi]);
-    table.append(tr);
-  }
-}
-
-function groupAdjacent(elements, wrapper, wrapall) {
-  groups = [];
-  group = [];
-  last = null;
-  for (var i = 0; i < elements.length; i++) {
-    var e = elements[i];
-    if (last != null) {
-      if ($(e).prev()[0] == last) {
-        group.push(e);
-      } else {
-        group = [e];
-        groups.push(group);
-      }
+    const fragPi = document.createDocumentFragment();
+    for (let ii = 0; ii < piStack.length; ii++) {
+      const idx = piStack[ii];
+      fragPi.appendChild(piElems[idx].cloneNode(true));
     }
-    last = e;
+    tdPi.appendChild(fragPi);
+
+    tr.appendChild(tdEn);
+    tr.appendChild(tdPi);
+    tbody.appendChild(tr);
   }
-  groups.forEach(function (group) {
-    if (!wrapall && group.length <= 1) return;
 
-    var wrap = $(wrapper);
-    $(group[0]).replaceWith(wrap);
-    wrap.append(group);
-  });
-}
-
-function alignedSplicer(section, table, selector) {
-  if (!selector) selector = "hr";
-
-  // Group section dividers
-
-  groupAdjacent(section.find("div[lang=pi], div[lang=en]").children(sectionDivSelector), "<div class=glob>");
-
-  var pi = section.find("div[lang=pi] > *");
-  var en = section.find("div[lang=en] > *");
-
-  en.filter(sectionDivHiddenSelector).show();
-  pi.filter(sectionDivHiddenSelector).show();
-
-  var splitFn = function (e) {
-    return $(e).is(selector);
-  };
-  pies = arraySplit(pi, splitFn);
-  ensies = arraySplit(en, splitFn);
-  var msg =
-    "There are " + ensies.length + " divisions of english texts and " + pies.length + " divisions of pali texts.";
-  if (DEBUGGERIZE) {
-    console.log(msg);
+  // leftover English
+  if (enIndex < enElems.length) {
+    const tr = document.createElement("tr");
+    const tdEn = document.createElement("td"); tdEn.lang = "en";
+    const tdPi = document.createElement("td"); tdPi.lang = "pi";
+    const fragEn = document.createDocumentFragment();
+    for (let i = enIndex; i < enElems.length; i++) fragEn.appendChild(enElems[i].cloneNode(true));
+    tdEn.appendChild(fragEn);
+    tr.appendChild(tdEn); tr.appendChild(tdPi);
+    tbody.appendChild(tr);
   }
-  if (pies.length != ensies.length) {
-    /*pies = [pi.toArray()];
- ensies = [en.toArray()];*/
-  }
-  var end = Math.max(pies.length, ensies.length);
-  for (var i = 0; i < end; i++) {
-    extraporlativeSplice(ensies[i] || [], pies[i] || [], table);
+  // leftover Pali
+  if (piIndex < piElems.length) {
+    const tr = document.createElement("tr");
+    const tdEn = document.createElement("td"); tdEn.lang = "en";
+    const tdPi = document.createElement("td"); tdPi.lang = "pi";
+    const fragPi = document.createDocumentFragment();
+    for (let i = piIndex; i < piElems.length; i++) fragPi.appendChild(piElems[i].cloneNode(true));
+    tdPi.appendChild(fragPi);
+    tr.appendChild(tdEn); tr.appendChild(tdPi);
+    tbody.appendChild(tr);
   }
 }
 
-/****** SPLICER ******/
-$(document).ready(function () {
-  if ($(".raw_sutta").length == 0) {
-    return;
+/* Build aligned pairs for one .raw_sutta section */
+function alignedSplicer(sectionEl, tbody) {
+  // collect english and pali node lists under div[lang=en] and div[lang=pi]
+  const enContainer = sectionEl.querySelector("div[lang=en]");
+  const piContainer = sectionEl.querySelector("div[lang=pi]");
+  if (!enContainer && !piContainer) return;
+
+  const enNodes = enContainer ? Array.from(enContainer.children).filter(n => n.nodeType === 1) : [];
+  const piNodes = piContainer ? Array.from(piContainer.children).filter(n => n.nodeType === 1) : [];
+
+  // show elements that are hidden section dividers
+  enNodes.forEach(n => { if (n.matches && n.matches(sectionDivHiddenSelector)) n.style.display = ""; });
+  piNodes.forEach(n => { if (n.matches && n.matches(sectionDivHiddenSelector)) n.style.display = ""; });
+
+  // compute lengths once
+  const enData = computeLengths(enNodes, sectionDivSelector);
+  const piData = computeLengths(piNodes, sectionDivSelector);
+
+  // split on section dividers to keep consistent blocks (use selector that matches hr/hgroup/etc)
+  const splitFnEn = e => e.matches && e.matches(sectionDivSelector);
+  const splitFnPi = e => e.matches && e.matches(sectionDivSelector);
+
+  const enGroups = arraySplit(enNodes, splitFnEn, true);
+  const piGroups = arraySplit(piNodes, splitFnPi, true);
+
+  const maxGroups = Math.max(enGroups.length, piGroups.length);
+  for (let gi = 0; gi < maxGroups; gi++) {
+    const enGroup = enGroups[gi] || [];
+    const piGroup = piGroups[gi] || [];
+
+    // For each group, prepare arrays and translate indices to the original arrays for lengths
+    const enIdxs = enGroup.map(g => enNodes.indexOf(g)).filter(i => i >= 0);
+    const piIdxs = piGroup.map(g => piNodes.indexOf(g)).filter(i => i >= 0);
+
+    const enElems = enIdxs.map(i => enNodes[i]);
+    const enLengths = enIdxs.map(i => enData.lengths[i]);
+    const enIsSection = enIdxs.map(i => enData.isSection[i]);
+
+    const piElems = piIdxs.map(i => piNodes[i]);
+    const piLengths = piIdxs.map(i => piData.lengths[i]);
+    const piIsSection = piIdxs.map(i => piData.isSection[i]);
+
+    extraporlativeSplice(enElems, enLengths, enIsSection, piElems, piLengths, piIsSection, tbody);
   }
-  var table = $('<table class="pairs">');
-  $(".raw_sutta").each(function () {
-    alignedSplicer($(this), table, sectionDivSelector);
-  });
-  table.find("td[lang=en]").hide();
-
-  $("#content").append(table);
-  /* Set an appropriate caption */
-  var h1 = $("h1").first();
-  // h1.prepend(previous_sutta);
-  // h1.append(next_sutta);
-  var caption = $("<caption>").append(h1);
-  table.prepend(caption);
-
-  $("tr").each(function () {});
-
-  // On load retrieve the state of pali visibility from localStorage
-  // which defaults to null (falsely) if it's never been set.
-  setPaliVisibility(paliVisible);
-});
-
-url_components = /.*\/([\w.]+)\/([\w.-]+)\.html/.exec(location.href);
-division = url_components[1];
-
-if ($(".raw_sutta div[lang=en] > *").length == 0) {
-  $("#pali").remove();
 }
+
+/* Chunked processing to keep UI responsive for large suttas */
+function buildPairsTableChunked(rawSuttaEls, onDone) {
+  const frag = document.createDocumentFragment();
+  const table = document.createElement("table");
+  table.className = "pairs";
+  const caption = document.createElement("caption");
+  table.appendChild(caption);
+  const tbody = document.createElement("tbody");
+  table.appendChild(tbody);
+  frag.appendChild(table);
+
+  let i = 0;
+  const CHUNK = 2; // process few suttas per frame; increase if you have few but large suttas
+
+  function step() {
+    const end = Math.min(i + CHUNK, rawSuttaEls.length);
+    for (; i < end; i++) {
+      alignedSplicer(rawSuttaEls[i], tbody);
+    }
+    if (i < rawSuttaEls.length) {
+      requestAnimationFrame(step);
+    } else {
+      onDone(table);
+    }
+  }
+  requestAnimationFrame(step);
+}
+
+/* Pali visibility state handling */
+let paliVisible = localStorage.getItem("paliVisible");
+paliVisible = (paliVisible === null) ? true : (paliVisible === "true");
 
 function loadPaliLookup() {
-  if ($(".lookup").length == 0) {
+  if (typeof enablePaliLookup === "function") return enablePaliLookup();
+  if (document.querySelector(".lookup") == null) {
+    // Load script via jQuery just like original; success callback should define enablePaliLookup
     jQuery.ajax({
       url: "../js/pali-lookup-standalone.js",
       dataType: "script",
-      success: function () {
-        enablePaliLookup();
-      },
       crossDomain: true,
+      success: function() { if (typeof enablePaliLookup === "function") enablePaliLookup(); }
     });
+  } else if (typeof enablePaliLookup === "function") {
+    enablePaliLookup();
   }
 }
-
 function unloadPaliLookup() {
-  jQuery.ajax({
-    url: "../js/pali-lookup-standalone.js",
-    dataType: "script",
-    success: function () {
-      disablePaliLookup();
-    },
-    crossDomain: true,
-  });
-}
-
-// set default state of Pali Lookup to true
-if (localStorage.paliLookupActive === true) {
-  localStorage.paliLookupActive = "true";
+  if (typeof disablePaliLookup === "function") return disablePaliLookup();
+  if (typeof disablePaliLookup === "function") disablePaliLookup();
 }
 
 function setPaliVisibility(state) {
-  // This actually both sets the Pali visibility as well as sets the Pali lookup
-  if (state) {
-    $("td:nth-child(2)").show();
-    $("#pali").addClass("active");
-    if (localStorage.paliLookupActive === "true") {
-      loadPaliLookup();
-    } else {
-      loadPaliLookup();
-    }
-  } else {
-    $("td:nth-child(2)").show();
-    $("#pali").addClass("active");
+  const piTds = document.querySelectorAll("td[lang=pi]");
+  for (let i = 0; i < piTds.length; i++) {
+    piTds[i].style.display = state ? "" : "none";
   }
+  const btn = document.getElementById("pali");
+  if (btn) {
+    if (state) btn.classList.add("active"); else btn.classList.remove("active");
+  }
+  localStorage.setItem("paliVisible", state ? "true" : "false");
+  if (state && localStorage.getItem("paliLookupActive") === "true") loadPaliLookup();
+  if (!state) { /* optionally unload lookup to save memory */ }
 }
 
-$("#pali").on("click", function () {
-  paliVisible = !paliVisible;
-  localStorage.setItem("paliVisible", paliVisible);
-  setPaliVisibility(paliVisible);
-});
+/* Document ready replacement for building table */
+document.addEventListener("DOMContentLoaded", function () {
+  const rawSuttas = Array.from(document.querySelectorAll(".raw_sutta"));
+  if (!rawSuttas.length) return;
 
-$("li.nextprev").append(previous_sutta).append(next_sutta);
+  buildPairsTableChunked(rawSuttas, function (table) {
+    // hide english column (consistent with original behavior)
+    // but target tds by attribute
+    const enTds = table.querySelectorAll("td[lang=en]");
+    for (let i = 0; i < enTds.length; i++) enTds[i].style.display = "none";
 
-Mousetrap.bind("p", function (e) {
-  document.getElementById("previous-sutta").click();
-});
-
-Mousetrap.bind("n", function (e) {
-  document.getElementById("next-sutta").click();
-});
-
-Mousetrap.bind("*", function (e) {
-  document.getElementById("pali").click();
-});
-
-Mousetrap.bind("h", function (e) {
-  window.location.href = "../home/index.html";
-});
-
-Mousetrap.bind("?", function (e) {
-  window.location.href = "../home/help.html";
-});
-
-Mousetrap.bind("c", function (e) {
-  window.location.href = "../home/contact.html";
-});
-
-Mousetrap.bind("d", function (e) {
-  document.getElementsByClassName("light-mode-button")[0].click();
-});
-
-Mousetrap.bind("i", function (e) {
-  const knBooks = ["kp", "dhp", "ud", "it", "snp", "tha", "thi"];
-  const url = location.pathname.replace(/\.html/, "").split(/\//); // splits at  slashes
-  const urlLength = url.length;
-  const book = url[url.length - 2];
-  const secondPart = url[url.length - 1];
-
-  if (book == "home" && secondPart == "index") {
-    return;
-  } else if (book == "home") {
-    window.location.href = "../home/index.html";
-  } else if (book == "vi") {
-    const vinayaBooks = ["kd", "bu-vb", "bi-vb", "bu-pt", "bi-pt"];
-    const bhikkhuRuleTypes = [
-      "bu-vb-pj",
-      "bu-vb-sn",
-      "bu-vb-an",
-      "bu-vb-np",
-      "bu-vb-pc",
-      "bu-vb-pd",
-      "bu-vb-sk",
-      "bu-vb-as",
-    ];
-    const bhikkhuniRuleTypes = ["bi-vb-pj", "bi-vb-sn", "bi-vb-np", "bi-vb-pc", "bi-vb-pd", "bi-vb-sk", "bi-vb-as"];
-
-    if (book == secondPart) {
-      // move from book home page to site homepage
-      window.location.href = "../home/index.html";
-    } else if (vinayaBooks.includes(secondPart)) {
-      // move from various vinaya books home to vi home
-      window.location.href = "../vi/vi.html";
-    } else if (bhikkhuRuleTypes.includes(secondPart)) {
-      // move from bhikkhu rule-type page to bhikkhu Vibhaṅga home
-      window.location.href = "../vi/bu-vb.html";
-    } else if (bhikkhuniRuleTypes.includes(secondPart)) {
-      // move from bhikkhu rule-type page to bhikkhu Vibhaṅga home
-      window.location.href = "../vi/bi-vb.html";
-    } else if (/\d/.test(secondPart)) {
-      // if there is a number in the second part
-      // that means we are on a rule page
-      // move up to rule type page
-      const ruleType = secondPart.replace(/\d/g, "");
-      window.location.href = `../vi/${ruleType}.html`;
+    // append caption derived from first H1 if present
+    const h1 = document.querySelector("h1");
+    if (h1) {
+      const caption = table.querySelector("caption");
+      caption.appendChild(h1.cloneNode(true));
     }
-  } else if (knBooks.includes(book) && book == secondPart) {
-    // this is a top level page for a book in KN
-    window.location.href = "../kn/kn.html#content";
-  } else if (book == secondPart) {
-    // this is a top level page for any nikaya
-    window.location.href = "../home/index.html";
-  } else if (/\./.test(secondPart)) {
-    // This is a sutta page that is within a chapter
-    const chapter = secondPart.split(/\./)[0];
-    window.location.href = `../${book}/${chapter}.html`;
-  } else if (book == "sn" && /sn[1-5]/.test(secondPart)) {
-    // This is a samyutta top level page
-    const samyutta = parseInt(secondPart.replace("sn", ""));
-    if (samyutta >= 1 && samyutta <= 11) {
-      window.location.href = `../sn/sn01.html`;
-    } else if (samyutta >= 12 && samyutta <= 21) {
-      window.location.href = `../sn/sn02.html`;
-    } else if (samyutta >= 22 && samyutta <= 34) {
-      window.location.href = `../sn/sn03.html`;
-    } else if (samyutta >= 35 && samyutta <= 44) {
-      window.location.href = `../sn/sn04.html`;
-    } else {
-      window.location.href = `../sn/sn05.html`;
-    }
-  } else {
-    // This is a sutta not within a chapter
-    window.location.href = `../${book}/${book}.html`;
+
+    document.getElementById("content").appendChild(table);
+    setPaliVisibility(paliVisible);
+  });
+
+  // remove #pali element if no Pali content exists (preserve original intent)
+  if (document.querySelectorAll(".raw_sutta div[lang=en] > *").length === 0) {
+    const paliBtn = document.getElementById("pali");
+    if (paliBtn && paliBtn.parentNode) paliBtn.parentNode.removeChild(paliBtn);
   }
-});
 
-// toggle Pali lookup with keyboard command
-Mousetrap.bind("mod+alt+b", function (e) {
-  changePaliLookupStatus();
-});
-
-function changePaliLookupStatus() {
-  const paliLookupCheckBox = document.getElementById("paliLookupCheck");
-
-  if (localStorage.paliLookupActive === "true") {
-    localStorage.paliLookupActive = "false";
-    paliLookupCheckBox.checked = false;
-    alert("Tra Cứu Từ Điển Pali đã được tắt.\n\nẤn tổ hợp Control+Alt+B \để bật lại.");
-  } else {
-    localStorage.paliLookupActive = "true";
-    paliLookupCheckBox.checked = true;
-    alert("Tra Cứu Từ Điển Pali đã được bật.\n\nẤn tổ hợp Control+Alt+B \để tắt đi.");
+  // bind toggle
+  const paliBtn = document.getElementById("pali");
+  if (paliBtn) {
+    paliBtn.addEventListener("click", function () {
+      paliVisible = !paliVisible;
+      setPaliVisibility(paliVisible);
+    });
   }
-  setPaliVisibility(paliVisible);
-}
-
-// insert the checkbox for Pali lookup
-const footer = document.getElementsByTagName("footer")[0];
-const settingsDiv = document.createElement("div");
-settingsDiv.innerHTML = `<div class="w3-content w3-padding bwcontainer" style="background-color:#FFF3D6"> 
-<label for="paliLookupCheck">Bật Tra Cứu Từ Điển Pali:</label>
-<input type="checkbox" id="paliLookupCheck">
-</div>`;
-footer.after(settingsDiv);
-const paliLookupCheckBox = document.getElementById("paliLookupCheck");
-
-// make the checkbox match the setting stored in local storage
-paliLookupCheckBox.checked = JSON.parse(localStorage.paliLookupActive);
-
-paliLookupCheckBox.addEventListener("change", e => {
-  changePaliLookupStatus();
 });
