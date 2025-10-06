@@ -13,7 +13,7 @@ findTargetSelector = "p:visible";
 findResultCurrentClass = "search-current";
 sectionDivSelector = "hr, hgroup, h1, h2, h3, h4, h5, h6, div.glob";
 sectionDivHiddenSelector = "hr";
-paliVisible = localStorage.getItem("paliVisible") == "true" ? true : false;
+paliVisible = true;
 
 /*
 $('#pali').removeClass('active')
