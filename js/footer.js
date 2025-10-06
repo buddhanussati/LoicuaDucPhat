@@ -282,9 +282,7 @@ function buildPairsTableChunked(rawSuttaEls, onDone) {
 }
 
 /* Pali visibility state handling */
-let paliVisible = localStorage.getItem("paliVisible");
-paliVisible = (paliVisible === null) ? true : (paliVisible === "true");
-
+let paliVisible = true;
 function loadPaliLookup() {
   if (typeof enablePaliLookup === "function") return enablePaliLookup();
   if (document.querySelector(".lookup") == null) {
