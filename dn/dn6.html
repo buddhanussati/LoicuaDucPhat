@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+ 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+ 	<link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+ 	<title>Dīgha Nikāya 1</title>
+ 	<meta name="viewport" content="width=device-width, initial-scale=1">
+		<!-- Loading manifest -->
+	<link rel="manifest" href="../manifest.json">
+ 	<!-- Loading main and menu stylesheets -->
+ 	<link rel="stylesheet" href="../css/w3.css">
+ 	<link rel="stylesheet" href="../css/css.css">
+ 	<link rel="stylesheet" href="../css/menu.css">
+ 	<script src="../js/jquery-1.10.2.min.js"></script>
+ 	<script src="../js/controlpanel.js"></script>
+ 	<script src="../js/mousetrap.min.js"></script>
+    <script src="../js/pali-lookup-standalone.js"></script>
+
+ <script src="../js/suttaFiles.js"></script>
+<script>
+ // Script to open random Sutta
+ function openRandomSutta() {
+  const randomIndex = Math.floor(Math.random() * suttaFiles.length);
+  const selectedFile = suttaFiles[randomIndex];
+
+  // Get root path of your site 
+  const currentPath = location.pathname;
+  const rootPath = currentPath.split("/").slice(0, -2).join("/") + "/";
+
+  // Redirect to the correct file
+  window.location.href = rootPath + selectedFile;
+}
+</script>
+
+
+</head>
+ <body class="container">
+ <div class="header-background">
+ <!-- Header -->
+ <div class="w3-header w3-content w3-padding w3-left-align bwcontainer">
+ 	<div class="centered">
+ 		<button class="light-mode-button" aria-label="Bật Chế Độ Sáng" onclick="toggle_light_mode()">
+ 			<span></span>
+ 			<span></span>
+ 		</button>
+ 		<span class="box-lbl">Sáng/Tối</span>
+ 	</div> <!-- Centered -->
+ 		<a href="../home/index.html" id="bwlogo"><img src="../images/headerlogo.png" alt="Logo Lời Của Đức Phật" class="w3-image"></a>
+ 		<div class="w3-bar bwcontainer">
+ 			<div id="searchlinks">
+ 			<a href="../home/engsearch.html"><span class="w3-bar-item"><i class="fa fa-search"></i>&nbsp;Tìm Tiếng Việt</span></a>
+ 			<a href="../home/palisearch.html"><span class="w3-bar-item"><i class="fa fa-search"></i>&nbsp;Tìm Tiếng Pali</span></a>
+ 			</div><!-- End Searchlinks div -->
+ 			<div class="help"><span><a href="../home/help.html"><img src="../images/help_icon.png" title="Help" alt="Help"></a></span></div>
+ 		</div> <!-- End w3-bar bwcontainer --> 	</div> <!-- End w3-header w3-content w3-padding w3-left-align bwcontainer -->
+ </div> <!-- End header-background -->
+ <!-- Top menu -->
+
+ <div class="w3-main w3-white bwcontainer2">
+ 	<div class="w3-button w3-padding-8 w3-left w3-hide-large" onclick="w3_open()">☰</div>
+ 		<div id="navbar" class="w3-hide-small w3-hide-medium bwcontainer3">
+ 			<ul id="css3menu0">
+ 				<li class="topfirst" id="home"><a href="../home/index.html" class="w3-hide-small">Trang Chủ</a></li>
+  				<li class="topmenu" id="dn"><a href="../dn/dn.html" class="pressed w3-hide-small">Trường Bộ Kinh</a></li>
+ 				<li class="topmenu" id="mn"><a href="../mn/mn.html" class="w3-hide-small">Trung Bộ Kinh</a></li>
+ 				<li class="topmenu" id="sn"><a href="../sn/sn.html" class="w3-hide-small"><i class="fa fa-caret-down"></i>&nbsp;Tương Ưng Bộ Kinh</a>
+ 					<ul>
+ 						<li><a href="../sn/sn01.html" class="w3-hide-small">Tập I - Thiên Có Kệ</a></li>
+ 						<li><a href="../sn/sn02.html" class="w3-hide-small">Tập II - Thiên Nhân Duyên</a></li>
+ 						<li><a href="../sn/sn03.html" class="w3-hide-small">Tập III - Thiên Uẩn</a></li>
+ 						<li><a href="../sn/sn04.html" class="w3-hide-small">Tập IV - Thiên Sáu Xứ</a></li>
+ 						<li><a href="../sn/sn05.html" class="w3-hide-small">Tập V - Thiên Ðại Phẩm</a></li>
+ 					</ul>
+ 				<li class="topmenu" id="an"><a href="../an/an.html" class="w3-hide-small"><i class="fa fa-caret-down"></i>&nbsp;Tăng Chi Bộ Kinh</a>
+ 					<ul>
+ 						<li><a href="../an/an1.html" class="w3-hide-small">Chương Một Pháp</a></li>
+ 						<li><a href="../an/an2.html" class="w3-hide-small">Chương Hai Pháp</a></li>
+ 						<li><a href="../an/an3.html" class="w3-hide-small">Chương Ba Pháp</a></li>
+ 						<li><a href="../an/an4.html" class="w3-hide-small">Chương Bốn Pháp</a></li>
+ 						<li><a href="../an/an5.html" class="w3-hide-small">Chương Năm Pháp</a></li>
+ 						<li><a href="../an/an6.html" class="w3-hide-small">Chương Sáu Pháp</a></li>
+ 						<li><a href="../an/an7.html" class="w3-hide-small">Chương Bảy Pháp</a></li>
+ 						<li><a href="../an/an8.html" class="w3-hide-small">Chương Tám Pháp</a></li>
+ 						<li><a href="../an/an9.html" class="w3-hide-small">Chương Chín Pháp</a></li>
+ 						<li><a href="../an/an10.html" class="w3-hide-small">Chương Mười Pháp</a></li>
+ 						<li><a href="../an/an11.html" class="w3-hide-small">Chương Mười Một Pháp</a></li>
+ 					</ul>
+ 				</li>
+ 				<li class="topmenu" id="kn"><a href="../kn/kn.html" class="w3-hide-small"><i class="fa fa-caret-down"></i>&nbsp;Tiểu Bộ Kinh</a>
+ 					<ul>
+ 						<li><a href="../kp/kp.html" class="w3-hide-small">Kinh Tiểu Tụng</a></li>
+ 						<li><a href="../dhp/dhp.html" class="w3-hide-small">Kinh Pháp Cú</a></li>
+ 						<li><a href="../snp/snp.html" class="w3-hide-small">Kinh Tập</a></li>
+ 						<li><a href="../ud/ud.html" class="w3-hide-small">Kinh Phật Tự Thuyết</a></li>
+ 						<li><a href="../it/it.html" class="w3-hide-small">Kinh Phật Thuyết Như Vậy</a></li>
+ 						<li><a href="../tha/tha.html" class="w3-hide-small">Trưởng Lão Tăng Kệ</a></li>
+ 						<li><a href="../thi/thi.html" class="w3-hide-small">Trưởng Lão Ni Kệ</a></li>
+ 					</ul>
+ 				</li>
+				<li class="toplast" id="rd"><a href="../rd/rd.html" class="w3-hide-small"></i>Kinh Ngẫu Nhiên Theo Nhóm</a>
+ 					</ul>
+ 				</li>
+ 			</ul>
+ 			</div>
+ 		</div> <!--navbar-->
+
+<!-- Sidebar (hidden by default) -->
+ <nav class="w3-sidebar w3-bar-block w3-card w3-border w3-top w3-animate-left w3-hide-large" id="mySidebar">
+ 	<a href="javascript:void(0)" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-times fa-2x red-color"></i>&nbsp;&nbsp;&nbsp;Close</a><!-- Hides the sidebar when clicked -->
+ 		<div class="w3-bar-block w3-white">
+ 			<a href="../home/index.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-home fa-lg"></i>&nbsp;&nbsp;&nbsp;Home</a>
+ 			<a href="../guide/guide.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Guide</a>
+ 			<a href="../dn/dn.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Trường Bộ Kinh</a>
+ 			<a href="../mn/mn.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Trung Bộ Kinh</a>
+ 			<a href="../sn/sn.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Tương Ưng Bộ Kinh</a>
+ 			<a href="../an/an.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Tăng Chi Bộ Kinh
+ 			<a href="../kn/kn.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Tiểu Bộ Kinh</a>
+			<a href="../rd/rd.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>Kinh Ngẫu Nhiên Theo Nhóm</a>
+ 		</div>
+ </nav>
+ 
+ 
+ 
+   <!-- !PAGE CONTENT! --> 
+<div class="w3-main w3-content w3-padding w3-left-align bwcontainer4">
+<div id="content">
+<h2>Dīgha Nikāya – Trường Bộ Kinh</h2>
+<h5><span style="font-style: italic;">Hoà Thượng Thích Minh Châu dịch Việt</span></h5>
+
+</div>
+
+<br>
+
+<p lang="vi"; style="text-align: center">Trường Bộ 6<br>
+<span lang="pi" class="pali">Dīgha Nikāya 6</span></p>
+
+<p lang="vi"; style="text-align: center">Kinh Mahāli<br>
+<span lang="pi" class="pali">Mahālisutta</span></p>
+
+<p lang="vi" class="vi">1. Nhóm Sứ Giả Bà-la-môn<br>
+<span lang="pi" class="pali">1. Brāhmaṇadūtavatthu</span></p>
+
+<p lang="vi" class="vi">Như vậy tôi nghe.<br>
+<span lang="pi" class="pali">Evaṁ me sutaṁ—</span></p>
+
+<p lang="vi" class="vi">Một thời đức Thế Tôn trú tại Vesali (Tỳ-xá-ly) ở giảng đường Trùng Các, rừng Ðại Lâm.<br>
+<span lang="pi" class="pali">ekaṁ samayaṁ bhagavā vesāliyaṁ viharati mahāvane kūṭāgārasālāyaṁ.</span></p>
+
+<p lang="vi" class="vi">Lúc bấy giờ, một số đông sứ giả Bà-la-môn nước Kosala (Câu-tất-la) và nước Magadha (Ma-kiệt-đà), đang ở tại Vesali vì một vài công việc.<br>
+<span lang="pi" class="pali">Tena kho pana samayena sambahulā kosalakā ca brāhmaṇadūtā māgadhakā ca brāhmaṇadūtā vesāliyaṁ paṭivasanti kenacideva karaṇīyena.</span></p>
+
+<p lang="vi" class="vi">Những vị sứ giả ấy được nghe như sau:<br>
+<span lang="pi" class="pali">Assosuṁ kho te kosalakā ca brāhmaṇadūtā māgadhakā ca brāhmaṇadūtā:</span></p>
+
+<p lang="vi" class="vi">“Này các Tôn giả, Sa-môn Gotama là Thích tử, xuất gia từ dòng họ Thích-ca hiện nay đang trú tại Vesali, ở giảng đường Trùng Các, rừng Ðại Lâm.<br>
+<span lang="pi" class="pali">“samaṇo khalu, bho, gotamo sakyaputto sakyakulā pabbajito vesāliyaṁ viharati mahāvane kūṭāgārasālāyaṁ.</span></p>
+
+<p lang="vi" class="vi">Tiếng đồn tốt đẹp sau đây được truyền đi về Sa-môn Gotama:<br>
+<span lang="pi" class="pali">Taṁ kho pana bhavantaṁ gotamaṁ evaṁ kalyāṇo kittisaddo abbhuggato:</span></p>
+
+<p lang="vi" class="vi">“Ngài là bậc Thế Tôn, A-la-hán, Chánh Ðẳng Giác, Minh Hạnh Túc, Thiện Thệ, Thế Gian Giải, Vô Thượng Sĩ Ðiều Ngự Trượng Phu, Thiên Nhân Sư, Phật, Thế Tôn.”<br>
+<span lang="pi" class="pali">‘itipi so bhagavā arahaṁ sammāsambuddho vijjācaraṇasampanno sugato lokavidū anuttaro purisadammasārathi satthā devamanussānaṁ buddho bhagavā’.</span></p>
+
+<p lang="vi" class="vi">Ngài đã tự chứng ngộ thế giới này với Thiên giới, Ma giới, Phạm thiên giới, với các chúng Sa-môn, Bà-la-môn, chư Thiên và loài Người, tự chứng ngộ rồi hiển thị cho mọi loài được biết.<br>
+<span lang="pi" class="pali">So imaṁ lokaṁ sadevakaṁ samārakaṁ sabrahmakaṁ sassamaṇabrāhmaṇiṁ pajaṁ sadevamanussaṁ sayaṁ abhiññā sacchikatvā pavedeti.</span></p>
+
+<p lang="vi" class="vi">Ngài thuyết pháp sơ thiện, trung thiện, hậu thiện, có nghĩa có văn, trình bày phạm hạnh hoàn toàn đầy đủ thanh tịnh”.<br>
+<span lang="pi" class="pali">So dhammaṁ deseti ādikalyāṇaṁ majjhekalyāṇaṁ pariyosānakalyāṇaṁ sātthaṁ sabyañjanaṁ kevalaparipuṇṇaṁ parisuddhaṁ brahmacariyaṁ pakāseti.</span></p>
+
+<p lang="vi" class="vi">Nếu được yết kiến một vị A-la-hán như vậy thì rất quý”.<br>
+<span lang="pi" class="pali">”Sādhu kho pana tathārūpānaṁ arahataṁ dassanaṁ hotī”ti.</span></p>
+
+<p lang="vi" class="vi">Những vị sứ giả Bà-la-môn ở Kosala và ở Magadha ấy đi đến giảng đường tại rừng Ðại Lâm.<br>
+<span lang="pi" class="pali">Atha kho te kosalakā ca brāhmaṇadūtā māgadhakā ca brāhmaṇadūtā yena mahāvanaṁ kūṭāgārasālā tenupasaṅkamiṁsu.</span></p>
+
+<p lang="vi" class="vi">Lúc bấy giờ, đại đức Nāgita là thị giả đức Thế Tôn.<br>
+<span lang="pi" class="pali">Tena kho pana samayena āyasmā nāgito bhagavato upaṭṭhāko hoti.</span></p>
+
+<p lang="vi" class="vi">Những vị sứ giả Bà-la-môn ở Kosala và ở Magadha ấy đi đến chỗ đại đức Nāgita ở và thưa:<br>
+<span lang="pi" class="pali">Atha kho te kosalakā ca brāhmaṇadūtā māgadhakā ca brāhmaṇadūtā yenāyasmā nāgito tenupasaṅkamiṁsu. upasaṅkamitvā āyasmantaṁ nāgitaṁ etadavocuṁ:</span></p>
+
+<p lang="vi" class="vi">Tôn giả Nāgita, hiện nay Tôn giả Gotama ở tại đâu?<br>
+<span lang="pi" class="pali">“kahaṁ nu kho, bho nāgita, etarahi so bhavaṁ gotamo viharati?</span></p>
+
+<p lang="vi" class="vi">Chúng tôi muốn yết kiến Tôn giả Gotama.<br>
+<span lang="pi" class="pali">”Dassanakāmā hi mayaṁ taṁ bhavantaṁ gotaman”ti.</span></p>
+
+<p lang="vi" class="vi">Các Hiền giả, nay không phải thời yết kiến đức Thế Tôn. Ðức Thế Tôn đang chỉ tịnh.<br>
+<span lang="pi" class="pali">“Akālo kho, āvuso, bhagavantaṁ dassanāya, paṭisallīno bhagavā”ti.</span></p>
+
+<p lang="vi" class="vi">Những sứ giả Bà-la-môn ở Kosala và Magadha liền ngồi xuống tại một bên và nói:<br>
+<span lang="pi" class="pali">Atha kho te kosalakā ca brāhmaṇadūtā māgadhakā ca brāhmaṇadūtā tattheva ekamantaṁ nisīdiṁsu:</span></p>
+
+<p lang="vi" class="vi">“Sau khi được yết kiến Tôn giả Gotama, chúng tôi mới đi.”<br>
+<span lang="pi" class="pali">“disvāva mayaṁ taṁ bhavantaṁ gotamaṁ gamissāmā”ti.</span></p>
+
+<p lang="vi" class="vi">2. Oṭṭhaddha Người Licchavi<br>
+<span lang="pi" class="pali">2. Oṭṭhaddhalicchavīvatthu</span></p>
+
+<p lang="vi" class="vi">Otthadda (Môi thỏ) người Licchavi cùng với một số đông dân chúng Licchavi cũng đi đến Trùng Các giảng đường, rừng Ðại Lâm gặp đại đức Nāgita, đảnh lễ vị này rồi đứng một bên. Otthadda người Licchavi thưa với đại đức Nāgita:<br>
+<span lang="pi" class="pali">Oṭṭhaddhopi licchavī mahatiyā licchavīparisāya saddhiṁ yena mahāvanaṁ kūṭāgārasālā yenāyasmā nāgito tenupasaṅkami; upasaṅkamitvā āyasmantaṁ nāgitaṁ abhivādetvā ekamantaṁ aṭṭhāsi. Ekamantaṁ ṭhito kho oṭṭhaddhopi licchavī āyasmantaṁ nāgitaṁ etadavoca:</span></p>
+
+<p lang="vi" class="vi">Hiện nay đức Thế Tôn, A-la-hán, Chánh Ðẳng Giác ở tại đâu?<br>
+<span lang="pi" class="pali">kahaṁ nu kho, bhante nāgita, etarahi so bhagavā viharati arahaṁ sammāsambuddho,</span></p>
+
+<p lang="vi" class="vi">Chúng con muốn yết kiến đức Thế Tôn, A-la-hán, Chánh Ðẳng Giác.<br>
+<span lang="pi" class="pali">”dassanakāmā hi mayaṁ taṁ bhagavantaṁ arahantaṁ sammāsambuddhan”ti.</span></p>
+
+<p lang="vi" class="vi">Māhāli, nay không phải thời yết kiến đức Thế Tôn, Ðức Thế Tôn đang chỉ tịnh.<br>
+<span lang="pi" class="pali">“Akālo kho, mahāli, bhagavantaṁ dassanāya, paṭisallīno bhagavā”ti.</span></p>
+
+<p lang="vi" class="vi">Otthadda người Licchavi liền ngồi xuống một bên tại chỗ ấy và nói:<br>
+<span lang="pi" class="pali">Oṭṭhaddhopi licchavī tattheva ekamantaṁ nisīdi:</span></p>
+
+<p lang="vi" class="vi">Sau khi được yết kiến đức Thế Tôn, A-la-hán, Chánh Ðẳng Giác con mới đi.<br>
+<span lang="pi" class="pali">“disvāva ahaṁ taṁ bhagavantaṁ gamissāmi arahantaṁ sammāsambuddhan”ti.</span></p>
+
+<p lang="vi" class="vi">Khi ấy Sa-di Sīha đến đại đức Nāgita, đảnh lễ đại đức và đứng một bên. Sau khi đứng một bên, Sa-di Sīha nói với đại đức Nāgita:<br>
+<span lang="pi" class="pali">Atha kho sīho samaṇuddeso yenāyasmā nāgito tenupasaṅkami; upasaṅkamitvā āyasmantaṁ nāgitaṁ abhivādetvā ekamantaṁ aṭṭhāsi. Ekamantaṁ ṭhito kho sīho samaṇuddeso āyasmantaṁ nāgitaṁ etadavoca:</span></p>
+
+<p lang="vi" class="vi">Bạch Ðại đức Kassapa (Ca-diếp) một số đông sứ giả Bà-La-môn ở Kosala và Magadha đã đến đây để yết kiến đức Thế Tôn; Otthada người Licchavi cũng đến đây với số đông dân chúng Licchavi để yết kiến đức Thế Tôn. Ðại đức Kassapa, lành thay, nếu những vị này được yết kiến đức Thế Tôn.<br>
+<span lang="pi" class="pali">“ete, bhante kassapa, sambahulā kosalakā ca brāhmaṇadūtā māgadhakā ca brāhmaṇadūtā idhūpasaṅkantā bhagavantaṁ dassanāya; oṭṭhaddhopi licchavī mahatiyā licchavīparisāya saddhiṁ idhūpasaṅkanto bhagavantaṁ dassanāya, sādhu, bhante kassapa, labhataṁ esā janatā bhagavantaṁ dassanāyā”ti.</span></p>
+
+<p lang="vi" class="vi">Vậy Sīha hãy thưa với đức Thế Tôn.<br>
+<span lang="pi" class="pali">“Tena hi, sīha, tvaññeva bhagavato ārocehī”ti.</span></p>
+
+<p lang="vi" class="vi">Thưa vâng, bạch Ðại đức! Sa-di Sīha vâng theo lời dạy của đại đức Nāgita, đến tại chỗ đức Thế Tôn, đảnh lễ Ngài rồi đứng một bên. Sa-di Sīha sau khi đứng một bên liền bạch đức Thế Tôn:<br>
+<span lang="pi" class="pali">“Evaṁ, bhante”ti kho sīho samaṇuddeso āyasmato nāgitassa paṭissutvā yena bhagavā tenupasaṅkami; upasaṅkamitvā bhagavantaṁ abhivādetvā ekamantaṁ aṭṭhāsi. Ekamantaṁ ṭhito kho sīho samaṇuddeso bhagavantaṁ etadavoca:</span></p>
+
+<p lang="vi" class="vi">Bạch đức Thế Tôn, một số đông sứ giả Bà-la-môn ở Kosala và Magadha đến đây để yết kiến đức Thế Tôn. Otthadda, người Licchavi cùng một số đông dân chúng Licchavi đã đến đây để yết kiến đức Thế Tôn.<br>
+<span lang="pi" class="pali">“ete, bhante, sambahulā kosalakā ca brāhmaṇadūtā māgadhakā ca brāhmaṇadūtā idhūpasaṅkantā bhagavantaṁ dassanāya, oṭṭhaddhopi licchavī mahatiyā licchavīparisāya saddhiṁ idhūpasaṅkanto bhagavantaṁ dassanāya.</span></p>
+
+<p lang="vi" class="vi">Lành thay nếu những vị này được yết kiến đức Thế Tôn!<br>
+<span lang="pi" class="pali">”Sādhu, bhante, labhataṁ esā janatā bhagavantaṁ dassanāyā”ti.</span></p>
+
+<p lang="vi" class="vi">Này Sīha, hãy dọn chỗ ngồi trong bóng mát, trước mặt ngôi tịnh xá.<br>
+<span lang="pi" class="pali">“Tena hi, sīha, vihārapacchāyāyaṁ āsanaṁ paññapehī”ti.</span></p>
+
+<p lang="vi" class="vi">Thưa vâng, bạch Thế Tôn! Sa-di Sīha vâng theo lời dạy đức Thế Tôn, sắp đặt một chỗ ngồi trong bóng mát trước mặt ngôi tịnh xá<br>
+<span lang="pi" class="pali">“Evaṁ, bhante”ti kho sīho samaṇuddeso bhagavato paṭissutvā vihārapacchāyāyaṁ āsanaṁ paññapesi.</span></p>
+
+<p lang="vi" class="vi">Và đức Thế Tôn đi ra khỏi tịnh xá và ngồi trên chỗ ngồi đã soạn sẵn trong bóng mát, trước mặt ngôi tịnh xá.<br>
+<span lang="pi" class="pali">Atha kho bhagavā vihārā nikkhamma vihārapacchāyāyaṁ paññatte āsane nisīdi.</span></p>
+
+<p lang="vi" class="vi">Rồi các sứ giả Bà-la-môn ở Kosala và Magadha đến tại chỗ đức Phật, nói lên những lời chúc tụng thân hữu và xã giao với Thế Tôn rồi ngồi xuống một bên.<br>
+<span lang="pi" class="pali">Atha kho te kosalakā ca brāhmaṇadūtā māgadhakā ca brāhmaṇadūtā yena bhagavā tenupasaṅkamiṁsu; upasaṅkamitvā bhagavatā saddhiṁ sammodiṁsu. Sammodanīyaṁ kathaṁ sāraṇīyaṁ vītisāretvā ekamantaṁ nisīdiṁsu.</span></p>
+
+<p lang="vi" class="vi">Otthadda người Licchavi cùng với một số lớn dân Licchavi cũng đến tại chỗ đức Phật, đảnh lễ Ngài và ngồi xuống một bên. Sau khi ngồi xuống một bên, Otthadda người Licchavi thưa với Thế Tôn.<br>
+<span lang="pi" class="pali">Oṭṭhaddhopi licchavī mahatiyā licchavīparisāya saddhiṁ yena bhagavā tenupasaṅkami; upasaṅkamitvā bhagavantaṁ abhivādetvā ekamantaṁ nisīdi. Ekamantaṁ nisinno kho oṭṭhaddho licchavī bhagavantaṁ etadavoca:</span></p>
+
+<p lang="vi" class="vi">Bạch Ðại đức, hai ba ngày về trước, Sunakkhatta, dòng họ Licchavi đến chỗ con ở và nói với con:<br>
+<span lang="pi" class="pali">“purimāni, bhante, divasāni purimatarāni sunakkhatto licchaviputto yenāhaṁ tenupasaṅkami; upasaṅkamitvā maṁ etadavoca:</span></p>
+
+<p lang="vi" class="vi">“Này Mahāli, từ khi tôi sống gần đức Phật, không lâu quá ba năm, tôi được thấy những thiên sắc mỹ diệu, thích thú, phấn khởi nhưng không được nghe các thiên âm mỹ diệu, thích thú, phấn khởi”.<br>
+<span lang="pi" class="pali">’‘yadagge ahaṁ, mahāli, bhagavantaṁ upanissāya viharāmi, na ciraṁ tīṇi vassāni, dibbāni hi kho rūpāni passāmi piyarūpāni kāmūpasaṁhitāni rajanīyāni, no ca kho dibbāni saddāni suṇāmi piyarūpāni kāmūpasaṁhitāni rajanīyānī’ti.</span></p>
+
+<p lang="vi" class="vi">Bạch Thế Tôn, những thiên âm mà Sunakkhatta dòng họ Licchavi không nghe, những thiên âm mỹ diệu, thích thú, phấn khởi, không hiểu những thiên âm ấy có thật hay không có thật?<br>
+<span lang="pi" class="pali">”Santāneva nu kho, bhante, sunakkhatto licchaviputto dibbāni saddāni nāssosi piyarūpāni kāmūpasaṁhitāni rajanīyāni, udāhu asantānī”ti?</span></p>
+
+<p lang="vi" class="vi">2.1. Tu Định Một Hướng<br>
+<span lang="pi" class="pali">2.1. Ekaṁsabhāvitasamādhi</span></p>
+
+<p lang="vi" class="vi">Này Mahāli những thiên âm mà Sunakkhatta dòng họ Licchavi không nghe, những thiên âm mỹ diệu, thích thú, phấn khởi, những thiên âm ấy có thật, không phải không có.<br>
+<span lang="pi" class="pali">“Santāneva kho, mahāli, sunakkhatto licchaviputto dibbāni saddāni nāssosi piyarūpāni kāmūpasaṁhitāni rajanīyāni, no asantānī”ti.</span></p>
+
+<p lang="vi" class="vi">Bạch Thế Tôn, do nhân gì, do duyên gì, những thiên âm mà Sunakkhatta, dòng họ Licchavi không nghe, những thiên âm mỹ diệu, thích thú, phấn khởi, những thiên âm ấy có thật, không phải là không có?<br>
+<span lang="pi" class="pali">“Ko nu kho, bhante, hetu, ko paccayo, yena santāneva sunakkhatto licchaviputto dibbāni saddāni nāssosi piyarūpāni kāmūpasaṁhitāni rajanīyāni, no asantānī”ti?</span></p>
+
+<p lang="vi" class="vi">“Này Mahāli, có Tỷ-kheo tu định nhất hướng, hướng về phía Ðông với mục đích thấy các thiên sắc mỹ diệu, thích thú, phấn khởi, nhưng không với mục đích nghe các thiên âm mỹ diệu, thích thú, phấn khởi.<br>
+<span lang="pi" class="pali">“Idha, mahāli, bhikkhuno puratthimāya disāya ekaṁsabhāvito samādhi hoti dibbānaṁ rūpānaṁ dassanāya piyarūpānaṁ kāmūpasaṁhitānaṁ rajanīyānaṁ, no ca kho dibbānaṁ saddānaṁ savanāya piyarūpānaṁ kāmūpasaṁhitānaṁ rajanīyānaṁ.</span></p>
+
+<p lang="vi" class="vi">Vì vị này tu định nhứt hướng, hướng về phía Ðông với mục đích thấy các thiên sắc mỹ diệu, thích thú, phấn khởi, nhưng không với mục đích nghe các thiên âm mỹ diệu, thích thú, phấn khởi,<br>
+<span lang="pi" class="pali">So puratthimāya disāya ekaṁsabhāvite samādhimhi dibbānaṁ rūpānaṁ dassanāya piyarūpānaṁ kāmūpasaṁhitānaṁ rajanīyānaṁ, no ca kho dibbānaṁ saddānaṁ savanāya piyarūpānaṁ kāmūpasaṁhitānaṁ rajanīyānaṁ.</span></p>
+
+<p lang="vi" class="vi">nên vị này thấy được về phía Ðông các thiên sắc mỹ diệu, thích thú, phấn khởi, nhưng không nghe các thiên âm mỹ diệu, thích thú, phấn khởi.<br>
+<span lang="pi" class="pali">Puratthimāya disāya dibbāni rūpāni passati piyarūpāni kāmūpasaṁhitāni rajanīyāni, no ca kho dibbāni saddāni suṇāti piyarūpāni kāmūpasaṁhitāni rajanīyāni.</span></p>
+
+<p lang="vi" class="vi">Vì sao vậy?<br>
+<span lang="pi" class="pali">Taṁ kissa hetu?</span></p>
+
+<p lang="vi" class="vi">Này Mahāli vì Tỷ-kheo này trong khi tu định nhứt hướng, hướng về phía Ðông, chỉ với mục đích thấy các thiên sắc, mỹ diệu, thích thú, phấn khởi nhưng không với mục đích nghe các thiên âm mỹ diệu, thích thú, phấn khởi.<br>
+<span lang="pi" class="pali">Evañhetaṁ, mahāli, hoti bhikkhuno puratthimāya disāya ekaṁsabhāvite samādhimhi dibbānaṁ rūpānaṁ dassanāya piyarūpānaṁ kāmūpasaṁhitānaṁ rajanīyānaṁ, no ca kho dibbānaṁ saddānaṁ savanāya piyarūpānaṁ kāmūpasaṁhitānaṁ rajanīyānaṁ.</span></p>
+
+<p lang="vi" class="vi">Lại nữa, này Mahāli, có vị Tỷ-kheo tu định nhứt hướng, hướng về phía Nam…<br>
+<span lang="pi" class="pali">Puna caparaṁ, mahāli, bhikkhuno dakkhiṇāya disāya …pe…</span></p>
+
+<p lang="vi" class="vi">về phía Tây…<br>
+<span lang="pi" class="pali">pacchimāya disāya …</span></p>
+
+<p lang="vi" class="vi">về phía Bắc…<br>
+<span lang="pi" class="pali">uttarāya disāya …</span></p>
+
+<p lang="vi" class="vi">phía Trên, Dưới, Ngang, với mục đích thấy các thiên sắc, mỹ diệu, thích thú, phấn khởi, nhưng không với mục đích nghe các thiên âm, mỹ diệu, thích thú, phấn khởi. Vị này tu định nhứt hướng, hướng về phía Trên, Dưới, Ngang, với mục đích thấy các thiên sắc, mỹ diệu, thích thú, phấn khởi, nhưng không với mục đích nghe các thiên âm, mỹ diệu, thích thú, phấn khởi, nên vị này thấy được về phía Trên, Dưới, Ngang, các thiên sắc mỹ diệu, thích thú, phấn khởi, nhưng không nghe các thiên âm mỹ diệu, thích thú, phấn khởi. Vì sao vậy?<br>
+<span lang="pi" class="pali">uddhamadho tiriyaṁ ekaṁsabhāvito samādhi hoti dibbānaṁ rūpānaṁ dassanāya piyarūpānaṁ kāmūpasaṁhitānaṁ rajanīyānaṁ, no ca kho dibbānaṁ saddānaṁ savanāya piyarūpānaṁ kāmūpasaṁhitānaṁ rajanīyānaṁ.So uddhamadho tiriyaṁ ekaṁsabhāvite samādhimhi dibbānaṁ rūpānaṁ dassanāya piyarūpānaṁ kāmūpasaṁhitānaṁ rajanīyānaṁ, no ca kho dibbānaṁ saddānaṁ savanāya piyarūpānaṁ kāmūpasaṁhitānaṁ rajanīyānaṁ.Uddhamadho tiriyaṁ dibbāni rūpāni passati piyarūpāni kāmūpasaṁhitāni rajanīyāni, no ca kho dibbāni saddāni suṇāti piyarūpāni kāmūpasaṁhitāni rajanīyāni.Taṁ kissa hetu?</span></p>
+
+<p lang="vi" class="vi">Này Mahāli, vì Tỷ-kheo này trong khi tu định nhứt hướng, hướng về phía Trên, Dưới, Ngang, chỉ với mục đích thấy các thiên sắc mỹ diệu, thích thú, phấn khởi nhưng không với mục đích nghe các thiên âm mỹ diệu, thích thú, phấn khởi.<br>
+<span lang="pi" class="pali">Evañhetaṁ, mahāli, hoti bhikkhuno uddhamadho tiriyaṁ ekaṁsabhāvite samādhimhi dibbānaṁ rūpānaṁ dassanāya piyarūpānaṁ kāmūpasaṁhitānaṁ rajanīyānaṁ, no ca kho dibbānaṁ saddānaṁ savanāya piyarūpānaṁ kāmūpasaṁhitānaṁ rajanīyānaṁ.</span></p>
+
+<p lang="vi" class="vi">Này Mahāli, có vị Tỷ-kheo tu định nhất hướng, hướng về phía Ðông với mục đích nghe các thiên âm mỹ diệu, thích thú, phấn khởi nhưng không với mục đích thấy các thiên sắc mỹ diệu, thích thú, phấn khởi.<br>
+<span lang="pi" class="pali">Idha, mahāli, bhikkhuno puratthimāya disāya ekaṁsabhāvito samādhi hoti dibbānaṁ saddānaṁ savanāya piyarūpānaṁ kāmūpasaṁhitānaṁ rajanīyānaṁ, no ca kho dibbānaṁ rūpānaṁ dassanāya piyarūpānaṁ kāmūpasaṁhitānaṁ rajanīyānaṁ.</span></p>
+
+<p lang="vi" class="vi">Vì vị này tu định nhất hướng, hướng về phía Ðông với mục đích nghe các thiên âm mỹ diệu, thích thú, phấn khởi, nhưng không với mục đích thấy các thiên sắc mỹ diệu, thích thú, phấn khởi,<br>
+<span lang="pi" class="pali">So puratthimāya disāya ekaṁsabhāvite samādhimhi dibbānaṁ saddānaṁ savanāya piyarūpānaṁ kāmūpasaṁhitānaṁ rajanīyānaṁ, no ca kho dibbānaṁ rūpānaṁ dassanāya piyarūpānaṁ kāmūpasaṁhitānaṁ rajanīyānaṁ.</span></p>
+
+<p lang="vi" class="vi">nên vị này nghe được về phía Ðông các thiên âm mỹ diệu, thích thú, phấn khởi.<br>
+<span lang="pi" class="pali">Puratthimāya disāya dibbāni saddāni suṇāti piyarūpāni kāmūpasaṁhitāni rajanīyāni, no ca kho dibbāni rūpāni passati piyarūpāni kāmūpasaṁhitāni rajanīyāni.</span></p>
+
+<p lang="vi" class="vi">Vì sao vậy?<br>
+<span lang="pi" class="pali">Taṁ kissa hetu?</span></p>
+
+<p lang="vi" class="vi">Này Mahāli, vì vị Tỷ-kheo này trong khi tu định nhứt hướng, hướng về phía Ðông, chỉ với mục đích nghe các thiên âm mỹ diệu, thích thú, phấn khởi nhưng không với mục đích thấy các thiên sắc mỹ diệu, thích thú, phấn khởi.<br>
+<span lang="pi" class="pali">Evañhetaṁ, mahāli, hoti bhikkhuno puratthimāya disāya ekaṁsabhāvite samādhimhi dibbānaṁ saddānaṁ savanāya piyarūpānaṁ kāmūpasaṁhitānaṁ rajanīyānaṁ, no ca kho dibbānaṁ rūpānaṁ dassanāya piyarūpānaṁ kāmūpasaṁhitānaṁ rajanīyānaṁ.</span></p>
+
+<p lang="vi" class="vi">Lại nữa, này Mahāli, có Tỷ-kheo tu định nhứt hướng, hướng về phía Nam…<br>
+<span lang="pi" class="pali">Puna caparaṁ, mahāli, bhikkhuno dakkhiṇāya disāya …pe…</span></p>
+
+<p lang="vi" class="vi">hướng về phía Tây…<br>
+<span lang="pi" class="pali">pacchimāya disāya …</span></p>
+
+<p lang="vi" class="vi">hướng về phía Bắc…<br>
+<span lang="pi" class="pali">uttarāya disāya …</span></p>
+
+<p lang="vi" class="vi">phía Trên, Dưới, Ngang với mục đích nghe các thiên âm mỹ diệu, thích thú phấn khởi. Vì vị này tu định nhứt hướng, hướng về phía Trên, Dưới, Ngang với mục đích nghe các thiên âm mỹ diệu, thích thú, phấn khởi, nhưng không với mục đích thấy các thiên sắc, mỹ diệu, thích thú, phấn khởi, nên vị này nghe được, phía Trên, Dưới, Ngang, các thiên âm mỹ diệu, thích thú, phấn khởi, nhưng không thấy được các thiên sắc mỹ diệu, thích thú, phấn khởi. Vì sao vậy?<br>
+<span lang="pi" class="pali">uddhamadho tiriyaṁ ekaṁsabhāvito samādhi hoti dibbānaṁ saddānaṁ savanāya piyarūpānaṁ kāmūpasaṁhitānaṁ rajanīyānaṁ, no ca kho dibbānaṁ rūpānaṁ dassanāya piyarūpānaṁ kāmūpasaṁhitānaṁ rajanīyānaṁ.So uddhamadho tiriyaṁ ekaṁsabhāvite samādhimhi dibbānaṁ saddānaṁ savanāya piyarūpānaṁ kāmūpasaṁhitānaṁ rajanīyānaṁ, no ca kho dibbānaṁ rūpānaṁ dassanāya piyarūpānaṁ kāmūpasaṁhitānaṁ rajanīyānaṁ.Uddhamadho tiriyaṁ dibbāni saddāni suṇāti piyarūpāni kāmūpasaṁhitāni rajanīyāni, no ca kho dibbāni rūpāni passati piyarūpāni kāmūpasaṁhitāni rajanīyāni. Taṁ kissa hetu?</span></p>
+
+<p lang="vi" class="vi">Này Mahāli, vì Tỷ-kheo này trong khi tu định nhứt hướng, hướng về phía Trên, Dưới, Ngang chỉ với mục đích nghe các thiên âm mỹ diệu, thích thú, phấn khởi nhưng không với mục đích thấy các thiên sắc mỹ diệu, thích thú, phấn khởi.<br>
+<span lang="pi" class="pali">Evañhetaṁ, mahāli, hoti bhikkhuno uddhamadho tiriyaṁ ekaṁsabhāvite samādhimhi dibbānaṁ saddānaṁ savanāya piyarūpānaṁ kāmūpasaṁhitānaṁ rajanīyānaṁ, no ca kho dibbānaṁ rūpānaṁ dassanāya piyarūpānaṁ kāmūpasaṁhitānaṁ rajanīyānaṁ.</span></p>
+
+<p lang="vi" class="vi">Này Mahāli, có Tỷ-kheo tu định nhị hướng, hướng về phía Ðông với mục đích thấy các thiên sắc mỹ diệu, thích thú, phấn khởi và với mục đích nghe các thiên âm mỹ diệu, thích thú, phấn khởi.<br>
+<span lang="pi" class="pali">Idha, mahāli, bhikkhuno puratthimāya disāya ubhayaṁsabhāvito samādhi hoti dibbānañca rūpānaṁ dassanāya piyarūpānaṁ kāmūpasaṁhitānaṁ rajanīyānaṁ dibbānañca saddānaṁ savanāya piyarūpānaṁ kāmūpasaṁhitānaṁ rajanīyānaṁ.</span></p>
+
+<p lang="vi" class="vi">Vì vị tu định nhị hướng, hướng về phía Ðông với mục đích thấy các thiên sắc mỹ diệu, thích thú, phấn khởi và với mục đích nghe các thiên âm, mỹ diệu, thích thú, phấn khởi<br>
+<span lang="pi" class="pali">So puratthimāya disāya ubhayaṁsabhāvite samādhimhi dibbānañca rūpānaṁ dassanāya piyarūpānaṁ kāmūpasaṁhitānaṁ rajanīyānaṁ, dibbānañca saddānaṁ savanāya piyarūpānaṁ kāmūpasaṁhitānaṁ rajanīyānaṁ.</span></p>
+
+<p lang="vi" class="vi">nên vị này hướng về phía Ðông thấy được các thiên sắc mỹ diệu, thích thú, phấn khởi và nghe được các thiên âm mỹ diệu, thích thú, phấn khởi.<br>
+<span lang="pi" class="pali">Puratthimāya disāya dibbāni ca rūpāni passati piyarūpāni kāmūpasaṁhitāni rajanīyāni, dibbāni ca saddāni suṇāti piyarūpāni kāmūpasaṁhitāni rajanīyāni.</span></p>
+
+<p lang="vi" class="vi">Vì sao vậy?<br>
+<span lang="pi" class="pali">Taṁ kissa hetu?</span></p>
+
+<p lang="vi" class="vi">Này Mahāli, vì Tỷ-kheo này trong khi tu định nhị hướng, hướng về phía Ðông với mục đích thấy các thiên sắc mỹ diệu, thích thú, phấn khởi và với mục đích nghe các thiên âm, mỹ diệu, thích thú, phấn khởi.<br>
+<span lang="pi" class="pali">Evañhetaṁ, mahāli, hoti bhikkhuno puratthimāya disāya ubhayaṁsabhāvite samādhimhi dibbānañca rūpānaṁ dassanāya piyarūpānaṁ kāmūpasaṁhitānaṁ rajanīyānaṁ dibbānañca saddānaṁ savanāya piyarūpānaṁ kāmūpasaṁhitānaṁ rajanīyānaṁ.</span></p>
+
+<p lang="vi" class="vi">Này Mahāli, có vị Tỷ-kheo tu định nhị hướng, hướng về phía Nam…<br>
+<span lang="pi" class="pali">Puna caparaṁ, mahāli, bhikkhuno dakkhiṇāya disāya …pe…</span></p>
+
+<p lang="vi" class="vi">hướng Tây…<br>
+<span lang="pi" class="pali">pacchimāya disāya …</span></p>
+
+<p lang="vi" class="vi">hướng về phía Bắc…<br>
+<span lang="pi" class="pali">uttarāya disāya …</span></p>
+
+<p lang="vi" class="vi">về phía Trên, Dưới, Ngang, với mục đích thấy các thiên sắc mỹ diệu, thích thú, phấn khởi và với mục đích nghe các thiên âm mỹ diệu, thích thú, phấn khởi. Vì vị này tu định nhị hướng, hướng về phía Trên, Dưới, Ngang với mục đích thấy các thiên sắc mỹ diệu, thích thú, phấn khởi và với mục đích nghe các thiên âm mỹ diệu, thích thú, phấn khởi nên vị này hướng về phía Trên, Dưới, Ngang, thấy các thiên sắc mỹ diệu, thích thú, phấn khởi và nghe các thiên âm mỹ diệu, thích thú, phấn khởi. Vì cớ sao?<br>
+<span lang="pi" class="pali">uddhamadho tiriyaṁ ubhayaṁsabhāvito samādhi hoti dibbānañca rūpānaṁ dassanāya piyarūpānaṁ kāmūpasaṁhitānaṁ rajanīyānaṁ, dibbānañca saddānaṁ savanāya piyarūpānaṁ kāmūpasaṁhitānaṁ rajanīyānaṁ.So uddhamadho tiriyaṁ ubhayaṁsabhāvite samādhimhi dibbānañca rūpānaṁ dassanāya piyarūpānaṁ kāmūpasaṁhitānaṁ rajanīyānaṁ dibbānañca saddānaṁ savanāya piyarūpānaṁ kāmūpasaṁhitānaṁ rajanīyānaṁ.Uddhamadho tiriyaṁ dibbāni ca rūpāni passati piyarūpāni kāmūpasaṁhitāni rajanīyāni, dibbāni ca saddāni suṇāti piyarūpāni kāmūpasaṁhitāni rajanīyāni.Taṁ kissa hetu?</span></p>
+
+<p lang="vi" class="vi">Này Mahāli, vì Tỷ-kheo này trong khi tu định nhị hướng, hướng về phía Trên, Dưới, Ngang với mục đích thấy các thiên sắc mỹ diệu, thích thú, phấn khởi, và với mục đích nghe các thiên âm mỹ diệu, thích thú, phấn khởi.<br>
+<span lang="pi" class="pali">Evañhetaṁ, mahāli, hoti bhikkhuno uddhamadho tiriyaṁ ubhayaṁsabhāvite samādhimhi dibbānañca rūpānaṁ dassanāya piyarūpānaṁ kāmūpasaṁhitānaṁ rajanīyānaṁ, dibbānañca saddānaṁ savanāya piyarūpānaṁ kāmūpasaṁhitānaṁ rajanīyānaṁ.</span></p>
+
+<p lang="vi" class="vi">Này Mahāli, do nhân này, do duyên này, những thiên âm ấy có thật, không phải là không có.<br>
+<span lang="pi" class="pali">”Ayaṁ kho, mahāli, hetu ayaṁ paccayo, yena santāneva sunakkhatto licchaviputto dibbāni saddāni nāssosi piyarūpāni kāmūpasaṁhitāni rajanīyāni, no asantānī”ti.</span></p>
+
+<p lang="vi" class="vi">Bạch Thế Tôn, như vậy có phải muốn chứng được các pháp định thiền định ấy mà các Tỷ-kheo sống đời phạm hạnh, dưới (sự chỉ dạy của) Thế Tôn?<br>
+<span lang="pi" class="pali">“Etāsaṁ nūna, bhante, samādhibhāvanānaṁ sacchikiriyāhetu bhikkhū bhagavati brahmacariyaṁ carantī”ti.</span></p>
+
+<p lang="vi" class="vi">Này Mahāli, không phải muốn chứng được các pháp thiền định ấy mà các Tỷ-kheo sống đời phạm hạnh, dưới sự chỉ dạy của Ta.<br>
+<span lang="pi" class="pali">“Na kho, mahāli, etāsaṁ samādhibhāvanānaṁ sacchikiriyāhetu bhikkhū mayi brahmacariyaṁ caranti.</span></p>
+
+<p lang="vi" class="vi">Này Mahāli, có những pháp khác cao thượng hơn, thù thắng hơn. Vì muốn chứng được những pháp ấy, các vị Tỷ-kheo sống đời phạm hạnh, dưới (sự chỉ dạy của) Ta.<br>
+<span lang="pi" class="pali">”Atthi kho, mahāli, aññeva dhammā uttaritarā ca paṇītatarā ca, yesaṁ sacchikiriyāhetu bhikkhū mayi brahmacariyaṁ carantī”ti.</span></p>
+
+<p lang="vi" class="vi">2.2. Bốn Đạo Quả<br>
+<span lang="pi" class="pali">2.2. Catuariyaphala</span></p>
+
+<p lang="vi" class="vi">Bạch Thế Tôn, những pháp ấy, cao thượng hơn, thù thắng hơn là gì mà các vị Tỷ-kheo vì muốn chứng được những pháp ấy sống đời phạm hạnh, dưới (sự chỉ dạy của) Thế Tôn?<br>
+<span lang="pi" class="pali">“Katame pana te, bhante, dhammā uttaritarā ca paṇītatarā ca, yesaṁ sacchikiriyāhetu bhikkhū bhagavati brahmacariyaṁ carantī”ti?</span></p>
+
+<p lang="vi" class="vi">Này Mahàli, ở đây Tỷ-kheo đoạn dứt ba kiết sử, thành bậc Dự lưu, không đọa ác thú, chắc chắn đạt quả Bồ-đề.<br>
+<span lang="pi" class="pali">Idha, mahāli, bhikkhu tiṇṇaṁ saṁyojanānaṁ parikkhayā sotāpanno hoti avinipātadhammo niyato sambodhiparāyaṇo.</span></p>
+
+<p lang="vi" class="vi">Này Mahāli, pháp này cao thượng và thù thắng hơn, vì muốn chứng được pháp này, các Tỷ-kheo sống phạm hạnh dưới (sự chỉ dạy của) Ta..<br>
+<span lang="pi" class="pali">Ayampi kho, mahāli, dhammo uttaritaro ca paṇītataro ca, yassa sacchikiriyāhetu bhikkhū mayi brahmacariyaṁ caranti.</span></p>
+
+<p lang="vi" class="vi">Lại nữa, này Mahāli, Tỷ-kheo đoạn dứt ba kiết sử làm nhẹ bớt tham, sân, si, thành bậc Nhứt lai, còn phải sanh lại trong đời này một lần nữa trước khi diệt hẳn khổ đau.<br>
+<span lang="pi" class="pali">Puna caparaṁ, mahāli, bhikkhu tiṇṇaṁ saṁyojanānaṁ parikkhayā rāgadosamohānaṁ tanuttā sakadāgāmī hoti, sakideva imaṁ lokaṁ āgantvā dukkhassantaṁ karoti.</span></p>
+
+<p lang="vi" class="vi">Này Mahāli, pháp này cao thượng hơn và thù thắng hơn. Vì muốn chứng được pháp này, các Tỷ-kheo sống phạm hạnh, dưới (sự chỉ dạy của) Ta.<br>
+<span lang="pi" class="pali">Ayampi kho, mahāli, dhammo uttaritaro ca paṇītataro ca, yassa sacchikiriyāhetu bhikkhū mayi brahmacariyaṁ caranti.</span></p>
+
+<p lang="vi" class="vi">Lại nữa, này Mahāli, vị Tỷ-kheo đã đoạn dứt năm hạ phần kiết sử, thành vị hóa sanh, nhập Niết-bàn tại đấy, không còn phải trở lại thế giới này nữa.<br>
+<span lang="pi" class="pali">Puna caparaṁ, mahāli, bhikkhu pañcannaṁ orambhāgiyānaṁ saṁyojanānaṁ parikkhayā opapātiko hoti, tattha parinibbāyī, anāvattidhammo tasmā lokā.</span></p>
+
+<p lang="vi" class="vi">Này Mahāli, pháp này cao thượng và thù thắng hơn. Vì muốn chứng được pháp này, các Tỷ-kheo sống phạm hạnh dưới (sự chỉ dạy của) Ta.<br>
+<span lang="pi" class="pali">Ayampi kho, mahāli, dhammo uttaritaro ca paṇītataro ca, yassa sacchikiriyāhetu bhikkhū mayi brahmacariyaṁ caranti.</span></p>
+
+<p lang="vi" class="vi">Lại nữa, này Mahāli, vị Tỷ-kheo do đoạn trừ các lậu hoặc, ngay trong hiện tại tự mình chứng tri, chứng ngộ và an trú vô lậu tâm giải thoát, tuệ giải thoát.<br>
+<span lang="pi" class="pali">Puna caparaṁ, mahāli, bhikkhu āsavānaṁ khayā anāsavaṁ cetovimuttiṁ paññāvimuttiṁ diṭṭheva dhamme sayaṁ abhiññā sacchikatvā upasampajja viharati.</span></p>
+
+<p lang="vi" class="vi">Này Mahāli, pháp này cao thượng hơn và thù thắng hơn. Vì muốn chứng được pháp này, các Tỷ-kheo sống phạm hạnh dưới (sự chỉ dạy của) Ta.<br>
+<span lang="pi" class="pali">Ayampi kho, mahāli, dhammo uttaritaro ca paṇītataro ca, yassa sacchikiriyāhetu bhikkhū mayi brahmacariyaṁ caranti.</span></p>
+
+<p lang="vi" class="vi">Này Mahāli, những pháp cao thượng và thù thắng này, vì muốn chứng được pháp ấy, các Tỷ-kheo sống phạm hạnh dưới (sự chỉ dạy của) Ta.<br>
+<span lang="pi" class="pali">”Ime kho te, mahāli, dhammā uttaritarā ca paṇītatarā ca, yesaṁ sacchikiriyāhetu bhikkhū mayi brahmacariyaṁ carantī”ti</span></p>
+
+<p lang="vi" class="vi">2.3. Bát Chánh Đạo<br>
+<span lang="pi" class="pali">2.3. Ariyaaṭṭhaṅgikamagga</span></p>
+
+<p lang="vi" class="vi">Bạch Thế Tôn, có con đường nào, có đạo lộ nào đưa đến sự chứng ngộ những pháp ấy?<br>
+<span lang="pi" class="pali">“Atthi pana, bhante, maggo atthi paṭipadā etesaṁ dhammānaṁ sacchikiriyāyā”ti?</span></p>
+
+<p lang="vi" class="vi">Này Mahāli, có con đường, có đạo lộ đưa đến sự chứng ngộ những pháp ấy.<br>
+<span lang="pi" class="pali">“Atthi kho, mahāli, maggo atthi paṭipadā etesaṁ dhammānaṁ sacchikiriyāyā”ti.</span></p>
+
+<p lang="vi" class="vi">Bạch Thế Tôn, có con đường nào, có đạo lộ nào đưa đến sự chứng ngộ những pháp ấy?<br>
+<span lang="pi" class="pali">“Katamo pana, bhante, maggo katamā paṭipadā etesaṁ dhammānaṁ sacchikiriyāyā”ti?</span></p>
+
+<p lang="vi" class="vi">Ðó là con đường Thánh có tám ngành:<br>
+<span lang="pi" class="pali">“Ayameva ariyo aṭṭhaṅgiko maggo.</span></p>
+
+<p lang="vi" class="vi">Chánh tri kiến, chánh tư duy, chánh ngữ, chánh nghiệp, chánh mạng, chánh tinh tấn, chánh niệm, chánh định.<br>
+<span lang="pi" class="pali">Seyyathidaṁ—sammādiṭṭhi sammāsaṅkappo sammāvācā sammākammanto sammāājīvo sammāvāyāmo sammāsati sammāsamādhi.</span></p>
+
+<p lang="vi" class="vi">Này Mahāli, con đường này, đạo lộ này đưa đến sự chứng ngộ những pháp ấy.<br>
+<span lang="pi" class="pali">Ayaṁ kho, mahāli, maggo ayaṁ paṭipadā etesaṁ dhammānaṁ sacchikiriyāya.</span></p>
+
+<p lang="vi" class="vi">2.4. Hai Vị Xuất Gia<br>
+<span lang="pi" class="pali">2.4. Dvepabbajitavatthu</span></p>
+
+<p lang="vi" class="vi">Này Mahāli, một thời Ta ở Kosambi vườn Ghositārāma.<br>
+<span lang="pi" class="pali">Ekamidāhaṁ, mahāli, samayaṁ kosambiyaṁ viharāmi ghositārāme.</span></p>
+
+<p lang="vi" class="vi">Lúc bấy giờ có hai người xuất gia.—<br>
+<span lang="pi" class="pali">Atha kho dve pabbajitā—</span></p>
+
+<p lang="vi" class="vi">Mundissa một vị du sĩ và Jāliya đệ tử của Dārupattika, đến tại chỗ Ta ở,<br>
+<span lang="pi" class="pali">muṇḍiyo ca paribbājako jāliyo ca dārupattikantevāsī yenāhaṁ tenupasaṅkamiṁsu. upasaṅkamitvā mayā saddhiṁ sammodiṁsu.</span></p>
+
+<p lang="vi" class="vi">nói lên những lời chúc tụng thân hữu và xã giao với Ta rồi đứng một bên. Sau khi đứng một bên, hai vị xuất gia nói với Ta như sau:<br>
+<span lang="pi" class="pali">Sammodanīyaṁ kathaṁ sāraṇīyaṁ vītisāretvā ekamantaṁ aṭṭhaṁsu. Ekamantaṁ ṭhitā kho te dve pabbajitā maṁ etadavocuṁ:</span></p>
+
+<p lang="vi" class="vi">Này Hiền giả, mạng căn và thân thể là một hay là khác?<br>
+<span lang="pi" class="pali">‘kiṁ nu kho, āvuso gotama, taṁ jīvaṁ taṁ sarīraṁ, udāhu aññaṁ jīvaṁ aññaṁ sarīran’ti?</span></p>
+
+<p lang="vi" class="vi">Này Hiền giả, hãy nghe và khéo tác ý, Ta sẽ nói.<br>
+<span lang="pi" class="pali">’‘Tena hāvuso, suṇātha sādhukaṁ manasi karotha bhāsissāmī’ti.</span></p>
+
+<p lang="vi" class="vi">Vâng, Hiền giả! Hai vị xuất gia trả lời Ta như thế<br>
+<span lang="pi" class="pali">‘Evamāvuso’ti kho te dve pabbajitā mama paccassosuṁ.</span></p>
+
+<p lang="vi" class="vi">và Ta nói như sau:<br>
+<span lang="pi" class="pali">Ahaṁ etadavocaṁ:</span></p>
+
+<p lang="vi" class="vi">Này Hiền giả, ở đây Như Lai sanh ra đời, vị A-la-hán, Chánh Ðẳng Giác …(DN2 4.3. Kết Quả Thù Thắng Hơn Của Hạnh Sa Môn)<br>
+<span lang="pi" class="pali">‘idhāvuso tathāgato loke uppajjati arahaṁ sammāsambuddho …pe…</span></p>
+
+<p lang="vi" class="vi">Này Hiền giả, như vậy vị Tỷ-kheo thành tựu giới hạnh…<br>
+<span lang="pi" class="pali">Evaṁ kho, āvuso, bhikkhu sīlasampanno hoti.</span></p>
+
+<p lang="vi" class="vi">…pe…chứng và an trú Sơ thiền. (DN2 4.3.2.5. Nhất Thiền)<br>
+<span lang="pi" class="pali">Paṭhamaṁ jhānaṁ upasampajja viharati.</span></p>
+
+<p lang="vi" class="vi">Này Hiền giả, khi Tỷ-kheo biết như vậy, thấy như vậy, vị ấy có sẵn sàng đề cập đến vấn đề:<br>
+<span lang="pi" class="pali">Yo kho, āvuso, bhikkhu evaṁ jānāti evaṁ passati, kallaṁ nu kho tassetaṁ vacanāya:</span></p>
+
+<p lang="vi" class="vi">“Mạng căn và thân thể là một hay khác” không?<br>
+<span lang="pi" class="pali">‘taṁ jīvaṁ taṁ sarīran’ti vā ‘aññaṁ jīvaṁ aññaṁ sarīran’ti vāti?</span></p>
+
+<p lang="vi" class="vi">Này Hiền giả, Tỷ-kheo biết như vậy, thấy như vậy, vị ấy sẵn sàng đề cập đến vấn đề “Mạng căn và thân thể là một hay là khác”.<br>
+<span lang="pi" class="pali">Yo so, āvuso, bhikkhu evaṁ jānāti evaṁ passati, kallaṁ tassetaṁ vacanāya:‘taṁ jīvaṁ taṁ sarīran’ti vā, ‘aññaṁ jīvaṁ aññaṁ sarīran’ti vāti.</span></p>
+
+<p lang="vi" class="vi">Này Hiền giả, tuy Ta biết như vậy,<br>
+<span lang="pi" class="pali">Ahaṁ kho panetaṁ, āvuso, evaṁ jānāmi evaṁ passāmi.</span></p>
+
+<p lang="vi" class="vi">nhưng Ta không nói:<br>
+<span lang="pi" class="pali">Atha ca panāhaṁ na vadāmi:</span></p>
+
+<p lang="vi" class="vi">“Mạng căn và thân thể là một hay là khác”.<br>
+<span lang="pi" class="pali">‘taṁ jīvaṁ taṁ sarīran’ti vā ‘aññaṁ jīvaṁ aññaṁ sarīran’ti vā …pe…</span></p>
+
+<p lang="vi" class="vi">Chứng và an trú đệ nhị thiền…(DN2 4.3.2.6. Nhị Thiền)<br>
+<span lang="pi" class="pali">dutiyaṁ jhānaṁ …</span></p>
+
+<p lang="vi" class="vi">đệ tam thiền…(DN2 4.3.2.7. Tam Thiền)<br>
+<span lang="pi" class="pali">tatiyaṁ jhānaṁ …</span></p>
+
+<p lang="vi" class="vi">đệ tứ thiền.(DN2 4.3.2.8 Catutthajhāna – Tứ Thiền)<br>
+<span lang="pi" class="pali">catutthaṁ jhānaṁ upasampajja viharati.</span></p>
+
+<p lang="vi" class="vi">Này Hiền giả, khi Tỷ-kheo biết như vậy, thấy như vậy, vị ấy có sẵn sàng đề cập đến vấn đề:<br>
+<span lang="pi" class="pali">Yo kho, āvuso, bhikkhu evaṁ jānāti evaṁ passati, kallaṁ nu kho tassetaṁ vacanāya:</span></p>
+
+<p lang="vi" class="vi">“Mạng căn và thân thể là một hay khác” không?<br>
+<span lang="pi" class="pali">’taṁ jīvaṁ taṁ sarīran’ti vā ‘aññaṁ jīvaṁ aññaṁ sarīran’ti vāti?</span></p>
+
+<p lang="vi" class="vi">Này Hiền giả, Tỷ-kheo biết như vậy, thấy như vậy vị ấy sẵn sàng đề cập đến vấn đề “Mạng căn và thân thể là một hay là khác”.<br>
+<span lang="pi" class="pali">Yo so, āvuso, bhikkhu evaṁ jānāti evaṁ passati, kallaṁ tassetaṁ vacanāya:‘taṁ jīvaṁ taṁ sarīran’ti vā ‘aññaṁ jīvaṁ aññaṁ sarīran’ti vāti.</span></p>
+
+<p lang="vi" class="vi">Này Hiền giả, tuy Ta biết như vậy, thấy như vậy,<br>
+<span lang="pi" class="pali">Ahaṁ kho panetaṁ, āvuso, evaṁ jānāmi evaṁ passāmi.</span></p>
+
+<p lang="vi" class="vi">nhưng Ta không nói<br>
+<span lang="pi" class="pali">Atha ca panāhaṁ na vadāmi:</span></p>
+
+<p lang="vi" class="vi">“Mạng căn và thân thể là một hay là khác” …<br>
+<span lang="pi" class="pali">‘taṁ jīvaṁ taṁ sarīran’ti vā ‘aññaṁ jīvaṁ aññaṁ sarīran’ti vā …pe…</span></p>
+
+<p lang="vi" class="vi">Vị Tỷ-kheo ấy hướng tâm, dẫn tâm đến tri kiến. …<br>
+<span lang="pi" class="pali">ñāṇadassanāya cittaṁ abhinīharati abhininnāmeti …</span></p>
+
+<p lang="vi" class="vi">Này Hiền giả, khi vị Tỷ-kheo biết như vậy, thấy như vậy, vị ấy có sẵn sàng đề cập đến vấn đề:<br>
+<span lang="pi" class="pali">yo kho, āvuso, bhikkhu evaṁ jānāti evaṁ passati, kallaṁ nu kho tassetaṁ vacanāya:</span></p>
+
+<p lang="vi" class="vi">“Mạng căn và thân thể là một hay là khác” không?<br>
+<span lang="pi" class="pali">‘taṁ jīvaṁ taṁ sarīran’ti vā ‘aññaṁ jīvaṁ aññaṁ sarīran’ti vāti?…pe…</span></p>
+
+<p lang="vi" class="vi">Này Hiền giả, vị Tỷ-kheo biết như vậy, thấy như vậy, vị ấy sẵn sàng đề cập đến vấn đề: “Mạng căn và thân thể là một hay là khác”.<br>
+<span lang="pi" class="pali">Yo so, āvuso, bhikkhu evaṁ jānāti evaṁ passati, kallaṁ tassetaṁ vacanāya:‘taṁ jīvaṁ taṁ sarīran’ti vā ‘aññaṁ jīvaṁ aññaṁ sarīran’ti vāti.</span></p>
+
+<p lang="vi" class="vi">Này Hiền giả, tuy Ta biết như vậy, thấy như vậy,<br>
+<span lang="pi" class="pali">Ahaṁ kho panetaṁ, āvuso, evaṁ jānāmi evaṁ passāmi.</span></p>
+
+<p lang="vi" class="vi">nhưng Ta không nói “Mạng căn và thân thể là một hay là khác”. …<br>
+<span lang="pi" class="pali">‘taṁ jīvaṁ taṁ sarīran’ti vā ‘aññaṁ jīvaṁ aññaṁ sarīran’ti vā. …pe…</span></p>
+
+<p lang="vi" class="vi">Vị ấy biết: “Sau đời này sẽ không có đời khác nữa”<br>
+<span lang="pi" class="pali">Nāparaṁ itthattāyāti pajānāti.</span></p>
+
+<p lang="vi" class="vi">Này Hiền giả, khi Tỷ-kheo biết như vậy, thấy như vậy, vị ấy có sẵn sàng đề cập đến vấn đề:<br>
+<span lang="pi" class="pali">Yo kho, āvuso, bhikkhu evaṁ jānāti evaṁ passati, kallaṁ nu kho tassetaṁ vacanāya:</span></p>
+
+<p lang="vi" class="vi">“Mạng căn và thân thể là một hay là khác” không?<br>
+<span lang="pi" class="pali">’‘taṁ jīvaṁ taṁ sarīran’ti vā ‘aññaṁ jīvaṁ aññaṁ sarīran’ti vāti?</span></p>
+
+<p lang="vi" class="vi">Này Hiền giả, vị Tỷ-kheo biết như vậy, vị ấy sẵn sàng đề cập đến vấn đề “Mạng căn và thân thể là một hay là khác”.<br>
+<span lang="pi" class="pali">Yo so, āvuso, bhikkhu evaṁ jānāti evaṁ passati na kallaṁ tassetaṁ vacanāya:‘taṁ jīvaṁ taṁ sarīran’ti vā ‘aññaṁ jīvaṁ aññaṁ sarīran’ti vāti.</span></p>
+
+<p lang="vi" class="vi">tuy Ta biết như vậy, thấy như vậy,<br>
+<span lang="pi" class="pali">Ahaṁ kho panetaṁ, āvuso, evaṁ jānāmi evaṁ passāmi.</span></p>
+
+<p lang="vi" class="vi">nhưng Ta không nói<br>
+<span lang="pi" class="pali">Atha ca panāhaṁ na vadāmi:</span></p>
+
+<p lang="vi" class="vi">“Mạng căn và thân thể là một hay là khác”.<br>
+<span lang="pi" class="pali">”‘taṁ jīvaṁ taṁ sarīran’ti vā ‘aññaṁ jīvaṁ aññaṁ sarīran’ti vā”ti.</span></p>
+
+<p lang="vi" class="vi">Ðức Thế Tôn thuyết như vậy. Otthadda người Licchavi hoan hỷ tín họ lời Thế Tôn dạy.<br>
+<span lang="pi" class="pali">Attamano oṭṭhaddho licchavī bhagavato bhāsitaṁ abhinandīti.</span></p>
+
+<span lang="pi">Mahālisuttaṁ niṭṭhitaṁ chaṭṭhaṁ.</p>
+
+
+<!-- COPY CONTENT SUTTA Ở ĐÂY -->
+
+
+<p><p style="text-align: right;font-style: italic;">Hoà Thượng Thích Minh Châu dịch Việt</span></p>
+
+
+
+</section>  <!-- End English and Pali -->
+
+
+
+
+
+<!-- COPY SCRIPT NEXT VÀ PREVIOUS Ở ĐÂY -->
+
+
+<div id="nextprev"><a id="previous-sutta" href="./dn5.html#content"></a><a id="next-sutta" href="./dn7.html#content"></a></div>
+
+
+
+
+<footer>
+					 <!-- End bottom links -->
+</footer>
+
+
+ 
+ <!-- Scripts -->
+
+ <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      if (typeof enablePaliLookup === "function") {
+        enablePaliLookup();
+      } else {
+        console.error("enablePaliLookup is not defined");
+      }
+    });
+  </script>
+
+ <script>
+ // Script to open and close sidebar
+ 	function w3_open() {
+ 	document.getElementById("mySidebar").style.display = "block";
+ 	}
+ 		function w3_close() {
+ 		document.getElementById("mySidebar").style.display = "none";
+ 	}
+ </script>
+ <script>
+ 		var app = document.getElementsByTagName("BODY")[0];
+ 		if (localStorage.lightMode == "dark") {
+ 			app.setAttribute("light-mode", "dark");
+ 	}
+ </script>
+ 
+ <script>
+ 		function toggle_light_mode() {
+ 			var app = document.getElementsByTagName("BODY")[0];
+ 				if (localStorage.lightMode == "dark") {
+ 			localStorage.lightMode = "light";
+ 			app.setAttribute("light-mode", "light");
+ 		} else {
+ 					localStorage.lightMode = "dark";
+ 					app.setAttribute("light-mode", "dark");
+ 	}
+ 		}
+ 
+ 		window.addEventListener("storage", function () {
+ 			if (localStorage.lightMode == "dark") {
+ 				app.setAttribute("light-mode", "dark");
+ 				} else {
+ 				app.setAttribute("light-mode", "light");
+ 		}
+ 		}, false);
+ 
+ </script>
+ <script src="../js/footer.js"></script><script src="../js/dpd_deconstructor.js"></script><script src="../js/dpd_ebts.js"></script><script src="../js/dpd_i2h.js"></script>
+ <script src="/sw.js"></script>
+ </body>
+ </html>
+
+
