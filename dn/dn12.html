@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+ 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+ 	<link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+ 	<meta name="viewport" content="width=device-width, initial-scale=1">
+		<!-- Loading manifest -->
+	<link rel="manifest" href="../manifest.json">
+ 	<!-- Loading main and menu stylesheets -->
+ 	<link rel="stylesheet" href="../css/w3.css">
+ 	<link rel="stylesheet" href="../css/css.css">
+ 	<link rel="stylesheet" href="../css/menu.css">
+ 	<script src="../js/jquery-1.10.2.min.js"></script>
+ 	<script src="../js/controlpanel.js"></script>
+ 	<script src="../js/mousetrap.min.js"></script>
+    <script src="../js/pali-lookup-standalone.js"></script>
+
+ <script src="../js/suttaFiles.js"></script>
+<script>
+ // Script to open random Sutta
+ function openRandomSutta() {
+  const randomIndex = Math.floor(Math.random() * suttaFiles.length);
+  const selectedFile = suttaFiles[randomIndex];
+
+  // Get root path of your site 
+  const currentPath = location.pathname;
+  const rootPath = currentPath.split("/").slice(0, -2).join("/") + "/";
+
+  // Redirect to the correct file
+  window.location.href = rootPath + selectedFile;
+}
+</script>
+
+
+</head>
+ <body class="container">
+ <div class="header-background">
+ <!-- Header -->
+ <div class="w3-header w3-content w3-padding w3-left-align bwcontainer">
+ 	<div class="centered">
+ 		<button class="light-mode-button" aria-label="Bật Chế Độ Sáng" onclick="toggle_light_mode()">
+ 			<span></span>
+ 			<span></span>
+ 		</button>
+ 		<span class="box-lbl">Sáng/Tối</span>
+ 	</div> <!-- Centered -->
+ 		<a href="../home/index.html" id="bwlogo"><img src="../images/headerlogo.png" alt="Logo Lời Của Đức Phật" class="w3-image"></a>
+ 		<div class="w3-bar bwcontainer">
+ 			<div id="searchlinks">
+ 			<a href="../home/engsearch.html"><span class="w3-bar-item"><i class="fa fa-search"></i>&nbsp;Tìm Tiếng Việt</span></a>
+ 			<a href="../home/palisearch.html"><span class="w3-bar-item"><i class="fa fa-search"></i>&nbsp;Tìm Tiếng Pali</span></a>
+ 			</div><!-- End Searchlinks div -->
+ 			<div class="help"><span><a href="../home/help.html"><img src="../images/help_icon.png" title="Help" alt="Help"></a></span></div>
+ 		</div> <!-- End w3-bar bwcontainer --> 	</div> <!-- End w3-header w3-content w3-padding w3-left-align bwcontainer -->
+ </div> <!-- End header-background -->
+ <!-- Top menu -->
+
+ <div class="w3-main w3-white bwcontainer2">
+ 	<div class="w3-button w3-padding-8 w3-left w3-hide-large" onclick="w3_open()">☰</div>
+ 		<div id="navbar" class="w3-hide-small w3-hide-medium bwcontainer3">
+ 			<ul id="css3menu0">
+ 				<li class="topfirst" id="home"><a href="../home/index.html" class="w3-hide-small">Trang Chủ</a></li>
+  				<li class="topmenu" id="dn"><a href="../dn/dn.html" class="pressed w3-hide-small">Trường Bộ Kinh</a></li>
+ 				<li class="topmenu" id="mn"><a href="../mn/mn.html" class="w3-hide-small">Trung Bộ Kinh</a></li>
+ 				<li class="topmenu" id="sn"><a href="../sn/sn.html" class="w3-hide-small"><i class="fa fa-caret-down"></i>&nbsp;Tương Ưng Bộ Kinh</a>
+ 					<ul>
+ 						<li><a href="../sn/sn01.html" class="w3-hide-small">Tập I - Thiên Có Kệ</a></li>
+ 						<li><a href="../sn/sn02.html" class="w3-hide-small">Tập II - Thiên Nhân Duyên</a></li>
+ 						<li><a href="../sn/sn03.html" class="w3-hide-small">Tập III - Thiên Uẩn</a></li>
+ 						<li><a href="../sn/sn04.html" class="w3-hide-small">Tập IV - Thiên Sáu Xứ</a></li>
+ 						<li><a href="../sn/sn05.html" class="w3-hide-small">Tập V - Thiên Ðại Phẩm</a></li>
+ 					</ul>
+ 				<li class="topmenu" id="an"><a href="../an/an.html" class="w3-hide-small"><i class="fa fa-caret-down"></i>&nbsp;Tăng Chi Bộ Kinh</a>
+ 					<ul>
+ 						<li><a href="../an/an1.html" class="w3-hide-small">Chương Một Pháp</a></li>
+ 						<li><a href="../an/an2.html" class="w3-hide-small">Chương Hai Pháp</a></li>
+ 						<li><a href="../an/an3.html" class="w3-hide-small">Chương Ba Pháp</a></li>
+ 						<li><a href="../an/an4.html" class="w3-hide-small">Chương Bốn Pháp</a></li>
+ 						<li><a href="../an/an5.html" class="w3-hide-small">Chương Năm Pháp</a></li>
+ 						<li><a href="../an/an6.html" class="w3-hide-small">Chương Sáu Pháp</a></li>
+ 						<li><a href="../an/an7.html" class="w3-hide-small">Chương Bảy Pháp</a></li>
+ 						<li><a href="../an/an8.html" class="w3-hide-small">Chương Tám Pháp</a></li>
+ 						<li><a href="../an/an9.html" class="w3-hide-small">Chương Chín Pháp</a></li>
+ 						<li><a href="../an/an10.html" class="w3-hide-small">Chương Mười Pháp</a></li>
+ 						<li><a href="../an/an11.html" class="w3-hide-small">Chương Mười Một Pháp</a></li>
+ 					</ul>
+ 				</li>
+ 				<li class="topmenu" id="kn"><a href="../kn/kn.html" class="w3-hide-small"><i class="fa fa-caret-down"></i>&nbsp;Tiểu Bộ Kinh</a>
+ 					<ul>
+ 						<li><a href="../kp/kp.html" class="w3-hide-small">Kinh Tiểu Tụng</a></li>
+ 						<li><a href="../dhp/dhp.html" class="w3-hide-small">Kinh Pháp Cú</a></li>
+ 						<li><a href="../snp/snp.html" class="w3-hide-small">Kinh Tập</a></li>
+ 						<li><a href="../ud/ud.html" class="w3-hide-small">Kinh Phật Tự Thuyết</a></li>
+ 						<li><a href="../it/it.html" class="w3-hide-small">Kinh Phật Thuyết Như Vậy</a></li>
+ 						<li><a href="../tha/tha.html" class="w3-hide-small">Trưởng Lão Tăng Kệ</a></li>
+ 						<li><a href="../thi/thi.html" class="w3-hide-small">Trưởng Lão Ni Kệ</a></li>
+ 					</ul>
+ 				</li>
+				<li class="toplast" id="rd"><a href="../rd/rd.html" class="w3-hide-small"></i>Kinh Ngẫu Nhiên Theo Nhóm</a>
+ 					</ul>
+ 				</li>
+ 			</ul>
+ 			</div>
+ 		</div> <!--navbar-->
+
+<!-- Sidebar (hidden by default) -->
+ <nav class="w3-sidebar w3-bar-block w3-card w3-border w3-top w3-animate-left w3-hide-large" id="mySidebar">
+ 	<a href="javascript:void(0)" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-times fa-2x red-color"></i>&nbsp;&nbsp;&nbsp;Close</a><!-- Hides the sidebar when clicked -->
+ 		<div class="w3-bar-block w3-white">
+ 			<a href="../home/index.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-home fa-lg"></i>&nbsp;&nbsp;&nbsp;Home</a>
+ 			<a href="../guide/guide.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Guide</a>
+ 			<a href="../dn/dn.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Trường Bộ Kinh</a>
+ 			<a href="../mn/mn.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Trung Bộ Kinh</a>
+ 			<a href="../sn/sn.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Tương Ưng Bộ Kinh</a>
+ 			<a href="../an/an.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Tăng Chi Bộ Kinh
+ 			<a href="../kn/kn.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Tiểu Bộ Kinh</a>
+			<a href="../rd/rd.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>Kinh Ngẫu Nhiên Theo Nhóm</a>
+ 		</div>
+ </nav>
+ 
+ 
+ 
+   <!-- !PAGE CONTENT! --> 
+<div class="w3-main w3-content w3-padding w3-left-align bwcontainer4">
+<div id="content">
+<h2>Dīgha Nikāya – Trường Bộ Kinh</h2>
+<h5><span style="font-style: italic;">Hoà Thượng Thích Minh Châu dịch Việt</span></h5>
+
+</div>
+
+<br>
+
+
+<p lang="vi" class="vi"; style="text-align: center">Trường Bộ 12<br>
+<span lang="pi" class="pali"; style="text-align: center">Dīgha Nikāya 12</span></p>
+
+<p lang="vi" class="vi"; style="text-align: center">Kinh Lohicca<br>
+<span lang="pi" class="pali"; style="text-align: center">Lohiccasutta</span></p>
+
+<p lang="vi" class="vi">Như vậy tôi nghe.<br>
+<span lang="pi" class="pali">Evaṁ me sutaṁ—</span></p>
+
+<p lang="vi" class="vi">Một thời đức Thế Tôn đang đi du hành tại nước Kosala (Câu-tát-la) cùng với đại chúng Tỷ-kheo khoảng năm trăm vị, và đến tại Sālavatikā (một làng có dãy cây tala bao bọc).<br>
+<span lang="pi" class="pali">ekaṁ samayaṁ bhagavā kosalesu cārikaṁ caramāno mahatā bhikkhusaṅghena saddhiṁ pañcamattehi bhikkhusatehi yena sālavatikā tadavasari.</span></p>
+
+<p lang="vi" class="vi">Lúc bấy giờ, Bà-la-môn Lohicca ở tại Sālavatikā, một chỗ dân cư đông đúc, cây cỏ, ao nước, ngũ cốc phong phú, vốn là đất đai của vua, sau vua Pasenadi (Ba-tư-nặc) cấp cho để hưởng một phần lợi tức.<br>
+<span lang="pi" class="pali">Tena kho pana samayena lohicco brāhmaṇo sālavatikaṁ ajjhāvasati sattussadaṁ satiṇakaṭṭhodakaṁ sadhaññaṁ rājabhoggaṁ raññā pasenadinā kosalena dinnaṁ rājadāyaṁ brahmadeyyaṁ.</span></p>
+
+<p lang="vi" class="vi">Lúc bấy giờ, Bà-la-môn Lohicca khởi lên ác kiến sau đây:<br>
+<span lang="pi" class="pali">Tena kho pana samayena lohiccassa brāhmaṇassa evarūpaṁ pāpakaṁ diṭṭhigataṁ uppannaṁ hoti:</span></p>
+
+<p lang="vi" class="vi">“Ở đời, có vị Sa-môn hay Bà-la-môn chứng được thiện pháp, sau khi chứng được thiện pháp không nên nói cho người khác biết, vì có ai lại làm giúp cho ai được?<br>
+<span lang="pi" class="pali">idha samaṇo vā brāhmaṇo vā kusalaṁ dhammaṁ adhigaccheyya, kusalaṁ dhammaṁ adhigantvā na parassa āroceyya, kiñhi paro parassa karissati.</span></p>
+
+<p lang="vi" class="vi">Ví như một người sau khi cắt sợi dây cũ trói buộc, lại tự làm một sợi dây mới khác nữa.<br>
+<span lang="pi" class="pali">Seyyathāpi nāma purāṇaṁ bandhanaṁ chinditvā aññaṁ navaṁ bandhanaṁ kareyya;</span></p>
+
+<p lang="vi" class="vi">Ta nói sự thành tựu là ác pháp, tham pháp vì có ai lại làm giúp cho ai được?”.<br>
+<span lang="pi" class="pali">”evaṁ sampadamidaṁ pāpakaṁ lobhadhammaṁ vadāmi, kiñhi paro parassa karissatī”ti.</span></p>
+
+<p lang="vi" class="vi">Bà-la-môn Lohicca nghe đồn:<br>
+<span lang="pi" class="pali">Assosi kho lohicco brāhmaṇo:</span></p>
+
+<p lang="vi" class="vi">“Sa-môn Gotama là Thích tử, xuất gia từ dòng họ Thích-ca, đang du hành tại nước Kosala, cùng với đại chúng Tỷ-kheo khoảng năm trăm vị, nay đã đến Sālavatikā.<br>
+<span lang="pi" class="pali">samaṇo khalu, bho, gotamo sakyaputto sakyakulā pabbajito kosalesu cārikaṁ caramāno mahatā bhikkhusaṅghena saddhiṁ pañcamattehi bhikkhusatehi sālavatikaṁ anuppatto.</span></p>
+
+<p lang="vi" class="vi">Những tiếng đồn tốt đẹp sau đây được truyền đi về Sa-môn Gotama:<br>
+<span lang="pi" class="pali">Taṁ kho pana bhavantaṁ gotamaṁ evaṁ kalyāṇo kittisaddo abbhuggato:</span></p>
+
+<p lang="vi" class="vi">“Ngài là bậc Thế Tôn, A-la-hán, Chánh Ðẳng Giác, Minh Hạnh Túc, Thiện Thệ, Thế Gian Giải, Vô Thượng Sĩ, Ðiều Ngự Trượng Phu, Thiên Nhân Sư, Phật, Thế Tôn.<br>
+<span lang="pi" class="pali">‘itipi so bhagavā arahaṁ sammāsambuddho vijjācaraṇasampanno sugato lokavidū anuttaro purisadammasārathi satthā devamanussānaṁ buddho bhagavā’.</span></p>
+
+<p lang="vi" class="vi">Ngài đã tự chứng ngộ thế giới này với Thiên giới, Ma giới, Phạm thiên giới, với các chúng Sa-môn, Bà-la-môn, chư Thiên và loài Người, tự mình chứng ngộ với thắng trí rồi hiển thị cho mọi loài được biết.<br>
+<span lang="pi" class="pali">So imaṁ lokaṁ sadevakaṁ samārakaṁ sabrahmakaṁ sassamaṇabrāhmaṇiṁ pajaṁ sadevamanussaṁ sayaṁ abhiññā sacchikatvā pavedeti.</span></p>
+
+<p lang="vi" class="vi">Ngài thuyết pháp, sơ thiện, trung thiện, hậu thiện, trình bày phạm hạnh hoàn toàn đầy đủ, thanh tịnh.<br>
+<span lang="pi" class="pali">So dhammaṁ deseti ādikalyāṇaṁ majjhekalyāṇaṁ pariyosānakalyāṇaṁ sātthaṁ sabyañjanaṁ kevalaparipuṇṇaṁ parisuddhaṁ brahmacariyaṁ pakāseti.</span></p>
+
+<p lang="vi" class="vi">Lành thay, nếu được yết kiến một vị A-la-hán như vậy”.<br>
+<span lang="pi" class="pali">”Sādhu kho pana tathārūpānaṁ arahataṁ dassanaṁ hotī”ti.</span></p>
+
+<p lang="vi" class="vi">Bà-la-môn Lohicca nói với Rosika, người hớt tóc:<br>
+<span lang="pi" class="pali">Atha kho lohicco brāhmaṇo rosikaṁ nhāpitaṁ āmantesi:</span></p>
+
+<p lang="vi" class="vi">“Này thiện nhân Rosika, hãy đi đến Sa-môn Gotama thay mặt ta hỏi thăm Sa-môn Gotama có được ít bệnh ít não, khinh an, khí lực sung mãn, lạc trú không: “Tôn giả Gotama, Bà-la-môn Lohicca hỏi thăm Thế Tôn có được ít bệnh, ít não, khinh an, khí lực sung mãn, lạc trú không?”<br>
+<span lang="pi" class="pali">ehi tvaṁ, samma rosike, yena samaṇo gotamo tenupasaṅkama; upasaṅkamitvā mama vacanena samaṇaṁ gotamaṁ appābādhaṁ appātaṅkaṁ lahuṭṭhānaṁ balaṁ phāsuvihāraṁ puccha:‘lohicco, bho gotama, brāhmaṇo bhavantaṁ gotamaṁ appābādhaṁ appātaṅkaṁ lahuṭṭhānaṁ balaṁ phāsuvihāraṁ pucchatī’ti;</span></p>
+
+<p lang="vi" class="vi">và nói thêm: “Mong Thế Tôn nhận lời của Bà-la-môn Lohicca sáng mai đến dùng cơm cùng với đại chúng Tỷ-kheo!”.<br>
+<span lang="pi" class="pali">evañca vadehi ”adhivāsetu kira bhavaṁ gotamo lohiccassa brāhmaṇassa svātanāya bhattaṁ saddhiṁ bhikkhusaṅghenā”ti.</span></p>
+
+<p lang="vi" class="vi">Tôn giả, xin vâng! Rosika người hớt tóc vâng theo lời của Bà-la-môn Lohicca đến với Thế Tôn và ngồi xuống một bên. Sau khi ngồi xuống một bên. Rosika người hớt tóc bạch Thế Tôn: Bạch Thế Tôn, Bà-la-môn Lohicca hỏi thăm “Thế Tôn có được ít bệnh, ít não, khinh an, khí lực sung mãn, lạc trú không?” và nói thêm: “Mong đức Thế Tôn nhận lời mời của Bà-la-môn Lohicca sáng mai đến dùng cơm với đại chúng Tỷ-kheo”.<br>
+<span lang="pi" class="pali">“Evaṁ, bho”ti kho rosikā nhāpito lohiccassa brāhmaṇassa paṭissutvā yena bhagavā tenupasaṅkami; upasaṅkamitvā bhagavantaṁ abhivādetvā ekamantaṁ nisīdi. Ekamantaṁ nisinno kho rosikā nhāpito bhagavantaṁ etadavoca:“lohicco, bhante, brāhmaṇo bhagavantaṁ appābādhaṁ appātaṅkaṁ lahuṭṭhānaṁ balaṁ phāsuvihāraṁ pucchati;evañca vadeti—adhivāsetu kira, bhante, bhagavā lohiccassa brāhmaṇassa svātanāya bhattaṁ saddhiṁ bhikkhusaṅghenā”ti.</span></p>
+
+<p lang="vi" class="vi">Ðức Thế Tôn im lặng nhận lời.<br>
+<span lang="pi" class="pali">Adhivāsesi bhagavā tuṇhībhāvena.</span></p>
+
+<p lang="vi" class="vi">Rosika, người hớt tóc, được biết Thế Tôn nhận lời, từ chỗ ngồi đứng dậy, đảnh lễ Thế Tôn, thân phía hữu hướng về Ngài, đi đến Bà-la-môn Lohicca, khi đã đến, liền thưa với Bà-la-môn Lohicca:<br>
+<span lang="pi" class="pali">Atha kho rosikā nhāpito bhagavato adhivāsanaṁ viditvā uṭṭhāyāsanā bhagavantaṁ abhivādetvā padakkhiṇaṁ katvā yena lohicco brāhmaṇo tenupasaṅkami; upasaṅkamitvā lohiccaṁ brāhmaṇaṁ etadavoca:</span></p>
+
+<p lang="vi" class="vi">Tôn giả, chúng tôi đã thay mặt Tôn giả thưa với Thế Tôn: “Bạch Thế Tôn, Bà-la-môn Lohicca hỏi thăm Thế Tôn Gotama có được ít bệnh, ít não, khinh an, khí lực sung mãn không” và nói thêm: “Mong Thế Tôn nhận lời của Bà-la-môn Lohicca sáng mai đến dùng cơm với đại chúng Tỷ-kheo” và Thế Tôn nhận lời.<br>
+<span lang="pi" class="pali">“avocumhā kho mayaṁ bhoto vacanena taṁ bhagavantaṁ:‘lohicco, bhante, brāhmaṇo bhagavantaṁ appābādhaṁ appātaṅkaṁ lahuṭṭhānaṁ balaṁ phāsuvihāraṁ pucchati;evañca vadeti—adhivāsetu kira, bhante, bhagavā lohiccassa brāhmaṇassa svātanāya bhattaṁ saddhiṁ bhikkhusaṅghenā’ti. ”Adhivutthañca pana tena bhagavatā”ti.</span></p>
+
+<p lang="vi" class="vi">Rồi Bà-la-môn, Lohicca sau khi đêm ấy đã mãn, làm sẵn sàng tại nhà các món ăn thượng vị, loại cứng và loại mềm rồi nói với Rosika, người hớt tóc:<br>
+<span lang="pi" class="pali">Atha kho lohicco brāhmaṇo tassā rattiyā accayena sake nivesane paṇītaṁ khādanīyaṁ bhojanīyaṁ paṭiyādāpetvā rosikaṁ nhāpitaṁ āmantesi:</span></p>
+
+<p lang="vi" class="vi">Này thiện nhân Rosika, hãy đi đến Sa-môn Gotama, khi đã đến, hãy báo giờ cho Sa-môn Gotama: “Bạch Thế Tôn, cơm đã sẵn sàng”.<br>
+<span lang="pi" class="pali">ehi tvaṁ, samma rosike, yena samaṇo gotamo tenupasaṅkama; upasaṅkamitvā samaṇassa gotamassa kālaṁ ārocehi— ”kālo, bho gotama, niṭṭhitaṁ bhattan”ti.</span></p>
+
+<p lang="vi" class="vi">Tôn giả, xin vâng! Rosika người hớt tóc, vâng theo lời của Bà-la-môn Lohicca, đi đến Thế Tôn, khi đã đến, liền đảnh lễ Thế Tôn và đứng một bên. Sau khi đứng một bên, Rosika người hớt tóc báo thời giờ cho Sa-môn Gotama: “Bạch Thế Tôn, giờ đã đến, cơm đã sẵn sàng”.<br>
+<span lang="pi" class="pali">“Evaṁ, bho”ti kho rosikā nhāpito lohiccassa brāhmaṇassa paṭissutvā yena bhagavā tenupasaṅkami; upasaṅkamitvā bhagavantaṁ abhivādetvā ekamantaṁ aṭṭhāsi.Ekamantaṁ ṭhito kho rosikā nhāpito bhagavato kālaṁ ārocesi:“kālo, bhante, niṭṭhitaṁ bhattan”ti.</span></p>
+
+<p lang="vi" class="vi">Khi ấy Thế Tôn buổi sáng đắp y, đem theo y bát và cùng với chúng Tỷ-kheo đi đến Sālavatikā.<br>
+<span lang="pi" class="pali">Atha kho bhagavā pubbaṇhasamayaṁ nivāsetvā pattacīvaramādāya saddhiṁ bhikkhusaṅghena yena sālavatikā tenupasaṅkami.</span></p>
+
+<p lang="vi" class="vi">Lúc bấy giờ, Rosika, người hớt tóc, đang đi sau lưng Thế Tôn.<br>
+<span lang="pi" class="pali">Tena kho pana samayena rosikā nhāpito bhagavantaṁ piṭṭhito piṭṭhito anubandho hoti.</span></p>
+
+<p lang="vi" class="vi">Rồi Rosika, người hớt tóc bạch Thế Tôn: Bà-la-môn Lohicca có khởi lên ác kiến sau đây: “Ở đời có vị Sa-môn hay Bà-la-môn chứng được thiện pháp, sau khi chứng được thiện pháp, không nên nói cho người khác biết, vì có ai lại làm giúp cho ai được? Ví như một người, sau khi cắt sợi dây trói buộc, lại tự làm một sợi dây mới khác nữa. Ta nói sự thành tựu là ác pháp, tham pháp. Vì có ai lại làm giúp cho ai được ?”<br>
+<span lang="pi" class="pali">Atha kho rosikā nhāpito bhagavantaṁ etadavoca:“lohiccassa, bhante, brāhmaṇassa evarūpaṁ pāpakaṁ diṭṭhigataṁ uppannaṁ:‘idha samaṇo vā brāhmaṇo vā kusalaṁ dhammaṁ adhigaccheyya, kusalaṁ dhammaṁ adhigantvā na parassa āroceyya—kiñhi paro parassa karissati.Seyyathāpi nāma purāṇaṁ bandhanaṁ chinditvā aññaṁ navaṁ bandhanaṁ kareyya;evaṁ sampadamidaṁ pāpakaṁ lobhadhammaṁ vadāmi—kiñhi paro parassa karissatī’ti.“</span></p>
+
+<p lang="vi" class="vi">Bạch Thế Tôn, lành thay, nếu Thế Tôn có thể giúp Bà-la-môn Lohicca trừ ác kiến ấy!<br>
+<span lang="pi" class="pali">”Sādhu, bhante, bhagavā lohiccaṁ brāhmaṇaṁ etasmā pāpakā diṭṭhigatā vivecetū”ti.</span></p>
+
+<p lang="vi" class="vi">Này Rosika, việc ấy có thể được. Này Rosika, việc ấy có thể được.<br>
+<span lang="pi" class="pali">“Appeva nāma siyā, rosike, appeva nāma siyā, rosike”ti.</span></p>
+
+<p lang="vi" class="vi">Lúc bấy giờ, Thế Tôn đến tại cư xá của Bà-la-môn Lohicca, khi đến liền ngồi trên chỗ đã soạn sẵn.<br>
+<span lang="pi" class="pali">Atha kho bhagavā yena lohiccassa brāhmaṇassa nivesanaṁ tenupasaṅkami; upasaṅkamitvā paññatte āsane nisīdi.</span></p>
+
+<p lang="vi" class="vi">Bà-la-môn Lohicca tự tay làm cho chúng Tỷ-kheo với đức Phật là vị cầm đầu, thỏa mãn với những món thượng vị, loại cứng loại mềm.<br>
+<span lang="pi" class="pali">Atha kho lohicco brāhmaṇo buddhappamukhaṁ bhikkhusaṅghaṁ paṇītena khādanīyena bhojanīyena sahatthā santappesi sampavāresi.</span></p>
+
+<p lang="vi" class="vi">1. Câu Hỏi Của Bà-la-môn Lohicca<br>
+<span lang="pi" class="pali">1. Lohiccabrāhmaṇānuyoga</span></p>
+
+<p lang="vi" class="vi">Bà-la-môn Lohicca, sau khi biết Thế Tôn dùng cơm xong, tay đã rời khỏi bát, liền lấy một ghế ngồi thấp khác và ngồi xuống một bên.<br>
+<span lang="pi" class="pali">Atha kho lohicco brāhmaṇo bhagavantaṁ bhuttāviṁ onītapattapāṇiṁ aññataraṁ nīcaṁ āsanaṁ gahetvā ekamantaṁ nisīdi.</span></p>
+
+<p lang="vi" class="vi">Rồi Thế Tôn nói với Bà-la-môn Lohicca:<br>
+<span lang="pi" class="pali">Ekamantaṁ nisinnaṁ kho lohiccaṁ brāhmaṇaṁ bhagavā etadavoca:</span></p>
+
+<p lang="vi" class="vi">Này Lohicca, có thật chăng, Ngươi khởi lên ác kiến như sau:<br>
+<span lang="pi" class="pali">saccaṁ kira te, lohicca, evarūpaṁ pāpakaṁ diṭṭhigataṁ uppannaṁ:</span></p>
+
+<p lang="vi" class="vi">“Ở đời, có vị Sa-môn hay Bà-la-môn chứng được thiện pháp, sau khi chứng được thiện pháp, không nên nói cho người khác biết, vì có ai lại làm giúp cho ai được?<br>
+<span lang="pi" class="pali">idha samaṇo vā brāhmaṇo vā kusalaṁ dhammaṁ adhigaccheyya, kusalaṁ dhammaṁ adhigantvā na parassa āroceyya, kiñhi paro parassa karissati.</span></p>
+
+<p lang="vi" class="vi">Ví như một người sau khi cắt sợi dây cũ trói buộc, lại tự làm một sợi dây mới khác nữa.<br>
+<span lang="pi" class="pali">Seyyathāpi nāma purāṇaṁ bandhanaṁ chinditvā aññaṁ navaṁ bandhanaṁ kareyya;</span></p>
+
+<p lang="vi" class="vi">Ta nói sự thành tựu ấy là ác pháp, tham pháp. Vì có ai lại làm giúp cho ai được?”<br>
+<span lang="pi" class="pali">”evaṁ sampadamidaṁ pāpakaṁ lobhadhammaṁ vadāmi, kiñhi paro parassa karissatī’”ti?</span></p>
+
+<p lang="vi" class="vi">Vâng phải, Tôn giả Gotama!<br>
+<span lang="pi" class="pali">“Evaṁ, bho gotama”.</span></p>
+
+<p lang="vi" class="vi">Này Lohicca, Ngươi nghĩ thế nào, “có phải Ngươi ở tại Sālavatikā?”<br>
+<span lang="pi" class="pali">Taṁ kiṁ maññasi, lohicca, ”nanu tvaṁ sālavatikaṁ ajjhāvasasī”ti?</span></p>
+
+<p lang="vi" class="vi">Vâng phải, Tôn giả Gotama!<br>
+<span lang="pi" class="pali">“Evaṁ, bho gotama”.</span></p>
+
+<p lang="vi" class="vi">Này Lohicca, nếu có người nói:<br>
+<span lang="pi" class="pali">Yo nu kho, lohicca, evaṁ vadeyya:</span></p>
+
+<p lang="vi" class="vi">“Bà-la-môn Lohicca sống ở Sālavatikā. Hãy để Bà-la-môn Lohicca hưởng một mình mọi sản phẩm của Sālavatikā, không cho một ai khác”.<br>
+<span lang="pi" class="pali">Lohicco brāhmaṇo sālavatikaṁ ajjhāvasati. Yā sālavatikāya samudayasañjāti lohiccova taṁ brāhmaṇo ekako paribhuñjeyya, na aññesaṁ dadeyyā’ti.</span></p>
+
+<p lang="vi" class="vi">Người nói vậy là người gây chướng ngại cho ai sống tùy thuộc vào Ngươi, có phải không?<br>
+<span lang="pi" class="pali">”Evaṁ vādī so ye taṁ upajīvanti, tesaṁ antarāyakaro vā hoti, no vā”ti?</span></p>
+
+<p lang="vi" class="vi">Tôn giả Gotama, là người gây chướng ngại.<br>
+<span lang="pi" class="pali">“Antarāyakaro, bho gotama”.</span></p>
+
+<p lang="vi" class="vi">Này Lohicca, đã là người gây chướng ngại, người ấy có phải là người có từ tâm nghĩ đến lợi ích cho những người kia?<br>
+<span lang="pi" class="pali">“Antarāyakaro samāno hitānukampī vā tesaṁ hoti ahitānukampī vā”ti?</span></p>
+
+<p lang="vi" class="vi">Tôn giả Gotama, là người không có từ tâm nghĩ đến lợi ích.<br>
+<span lang="pi" class="pali">“Ahitānukampī, bho gotama”.</span></p>
+
+<p lang="vi" class="vi">Ðã không có từ tâm nghĩ đến lợi ích, người ấy an trú từ tâm hay an trú hại tâm?<br>
+<span lang="pi" class="pali">“Ahitānukampissa mettaṁ vā tesu cittaṁ paccupaṭṭhitaṁ hoti sapattakaṁ vā”ti?</span></p>
+
+<p lang="vi" class="vi">Tôn giả Gotama, hại tâm!<br>
+<span lang="pi" class="pali">“Sapattakaṁ, bho gotama”.</span></p>
+
+<p lang="vi" class="vi">Khi an trú hại tâm, như vậy là chánh kiến hay tà kiến?<br>
+<span lang="pi" class="pali">“Sapattake citte paccupaṭṭhite micchādiṭṭhi vā hoti sammādiṭṭhi vā”ti?</span></p>
+
+<p lang="vi" class="vi">Tôn giả Gotama, là tà kiến!<br>
+<span lang="pi" class="pali">“Micchādiṭṭhi, bho gotama”.</span></p>
+
+<p lang="vi" class="vi">Này Lohicca, Ta nói rằng, một người tà kiến sẽ sanh vào một trong hai ác thú sau đây: địa ngục hay súc sanh.<br>
+<span lang="pi" class="pali">Micchādiṭṭhissa kho ahaṁ, lohicca, dvinnaṁ gatīnaṁ aññataraṁ gatiṁ vadāmi nirayaṁ vā tiracchānayoniṁ vā.</span></p>
+
+<p lang="vi" class="vi">Này Lohicca, ngươi nghĩ thế nào?<br>
+<span lang="pi" class="pali">Taṁ kiṁ maññasi, lohicca,</span></p>
+
+<p lang="vi" class="vi">Có phải vua Pasenadi Kosala (Ba-tư-nặc-câu-tát-la) ở tại Kāsī – Kosala (Ca-Thi Câu-tát-la) không?<br>
+<span lang="pi" class="pali">”nanu rājā pasenadi kosalo kāsikosalaṁ ajjhāvasatī”ti?</span></p>
+
+<p lang="vi" class="vi">Tôn giả Gotama, vâng phải!<br>
+<span lang="pi" class="pali">“Evaṁ, bho gotama”.</span></p>
+
+<p lang="vi" class="vi">Này Lohicca, nếu có người nói:<br>
+<span lang="pi" class="pali">Yo nu kho, lohicca, evaṁ vadeyya:</span></p>
+
+<p lang="vi" class="vi">“Vua Pasenadi Kosala sống ở Kasi-Kosala; Hãy để vua Pasenadi Kosala hưởng một mình mọi sản phẩm của Kasi – Kosala, không một ai khác”.<br>
+<span lang="pi" class="pali">rājā pasenadi kosalo kāsikosalaṁ ajjhāvasati; ’yā kāsikosale samudayasañjāti, rājāva taṁ pasenadi kosalo ekako paribhuñjeyya, na aññesaṁ dadeyyā’ti.</span></p>
+
+<p lang="vi" class="vi">Người nói như vậy có phải là người gây chướng ngại cho những ai sống tùy thuộc vào vua Pasenadi Kosala, có phải không?<br>
+<span lang="pi" class="pali">”Evaṁ vādī so ye rājānaṁ pasenadiṁ kosalaṁ upajīvanti tumhe ceva aññe ca, tesaṁ antarāyakaro vā hoti, no vā”ti?</span></p>
+
+<p lang="vi" class="vi">Tôn giả Gotama, là người đã gây chướng ngại.<br>
+<span lang="pi" class="pali">“Antarāyakaro, bho gotama”.</span></p>
+
+<p lang="vi" class="vi">Này Lohicca, đã là người gây chướng ngại, người ấy có phải là người có từ tâm nghĩ đến lợi ích cho những người kia hay là người không có từ tâm nghĩ đến lợi ích cho những người kia.<br>
+<span lang="pi" class="pali">“Antarāyakaro samāno hitānukampī vā tesaṁ hoti ahitānukampī vā”ti?</span></p>
+
+<p lang="vi" class="vi">“Tôn giả Gotama, là người không có từ tâm nghĩ đến lợi ích.”<br>
+<span lang="pi" class="pali">“Ahitānukampī, bho gotama”.</span></p>
+
+<p lang="vi" class="vi">Ðã không có từ tâm nghĩ đến lợi ích, người ấy an trú từ tâm hay an trú hại tâm?<br>
+<span lang="pi" class="pali">“Ahitānukampissa mettaṁ vā tesu cittaṁ paccupaṭṭhitaṁ hoti sapattakaṁ vā”ti?</span></p>
+
+<p lang="vi" class="vi">Tôn giả Gotama, hại tâm!<br>
+<span lang="pi" class="pali">“Sapattakaṁ, bho gotama”.</span></p>
+
+<p lang="vi" class="vi">Khi an trú hại tâm, như vậy là chánh kiến hay tà kiến?<br>
+<span lang="pi" class="pali">“Sapattake citte paccupaṭṭhite micchādiṭṭhi vā hoti sammādiṭṭhi vā”ti?</span></p>
+
+<p lang="vi" class="vi">Tôn giả Gotama, là tà kiến!<br>
+<span lang="pi" class="pali">“Micchādiṭṭhi, bho gotama”.</span></p>
+
+<p lang="vi" class="vi">Này Lohicca, ta nói rằng, một người tà kiến sẽ sanh vào một trong hai ác thú sau đây: địa ngục hay súc sanh.<br>
+<span lang="pi" class="pali">Micchādiṭṭhissa kho ahaṁ, lohicca, dvinnaṁ gatīnaṁ aññataraṁ gatiṁ vadāmi: nirayaṁ vā tiracchānayoniṁ vā.</span></p>
+
+<p lang="vi" class="vi">Này Lohicca, nếu có người nói: “Bà-la-môn Lohicca sống ở Sālavatikā. Hãy để Bà-la-môn Lohicca hưởng một mình mọi sản phẩm của Sālavatikā, không cho một ai khác”. Người nói vậy là người gây chướng ngại cho ai tùy thuộc vào Ngươi;<br>
+<span lang="pi" class="pali">Iti kira, lohicca, yo evaṁ vadeyya: lohicco brāhmaṇo sālavatikaṁ ajjhāvasati;yā sālavatikāya samudayasañjāti, lohiccova taṁ brāhmaṇo ekako paribhuñjeyya, na aññesaṁ dadeyyā’ti.Evaṁvādī so ye taṁ upajīvanti, tesaṁ antarāyakaro hoti.</span></p>
+
+<p lang="vi" class="vi">đã là người gây chướng ngại, người ấy không có từ tâm nghĩ đến lợi ích, người ấy an trú hại tâm; và đã an trú hại tâm tức thuộc về tà kiến.<br>
+<span lang="pi" class="pali">Antarāyakaro samāno ahitānukampī hoti, ahitānukampissa sapattakaṁ cittaṁ paccupaṭṭhitaṁ hoti, sapattake citte paccupaṭṭhite micchādiṭṭhi hoti.</span></p>
+
+<p lang="vi" class="vi">Ðã như vậy, này Lohicca, nếu có người nói:<br>
+<span lang="pi" class="pali">Evameva kho, lohicca, yo evaṁ vadeyya:</span></p>
+
+<p lang="vi" class="vi">“Ở đời có vị Sa-môn hay Bà-la-môn chứng được thiện pháp, sau khi chứng được thiện pháp, không nên nói cho người ta biết, vì có ai lại làm giúp cho ai được?<br>
+<span lang="pi" class="pali">idha samaṇo vā brāhmaṇo vā kusalaṁ dhammaṁ adhigaccheyya, kusalaṁ dhammaṁ adhigantvā na parassa āroceyya, kiñhi paro parassa karissati</span></p>
+
+<p lang="vi" class="vi">Ví như một người cắt sợi dây cũ trói buộc, lại tự làm một sợi dây mới khác nữa … Ta nói sự thành tựu là ác pháp, tham pháp. Vì có ai lại làm giúp cho ai được?”<br>
+<span lang="pi" class="pali">Seyyathāpi nāma purāṇaṁ bandhanaṁ chinditvā aññaṁ navaṁ bandhanaṁ kareyya …pe… ’karissatī’ti.</span></p>
+
+<p lang="vi" class="vi">Người nói vậy gây chướng ngại cho những thiện nam tử đến với pháp luật do đức Như Lai giảng dạy và chứng được những quả vị thù thắng đặc biệt như Dự lưu, Nhất lai, Bất lai hay A-la-hán quả. Người nói vậy cũng gây chướng ngại cho những vị đang làm cho thành tựu sự tái sanh lên các cõi trời để được sanh làm chư Thiên. Ðã là người gây chướng ngại, người ấy không có từ tâm nghĩ đến lợi ích, người ấy an trú hại tâm; và đã an trú hại tâm tức thuộc về tà kiến.<br>
+<span lang="pi" class="pali">Evaṁvādī so ye te kulaputtā tathāgatappaveditaṁ dhammavinayaṁ āgamma evarūpaṁ uḷāraṁ visesaṁ adhigacchanti, sotāpattiphalampi sacchikaronti, sakadāgāmiphalampi sacchikaronti, anāgāmiphalampi sacchikaronti, arahattampi sacchikaronti, ye cime dibbā gabbhā paripācenti dibbānaṁ bhavānaṁ abhinibbattiyā, tesaṁ antarāyakaro hoti, antarāyakaro samāno ahitānukampī hoti, ahitānukampissa sapattakaṁ cittaṁ paccupaṭṭhitaṁ hoti, sapattake citte paccupaṭṭhite micchādiṭṭhi hoti.</span></p>
+
+<p lang="vi" class="vi">Và này Lohicca, ta nói rằng một người có tà kiến sẽ sanh vào một trong hai ác thú sau đây: địa ngục hay súc sanh.<br>
+<span lang="pi" class="pali">Micchādiṭṭhissa kho ahaṁ, lohicca, dvinnaṁ gatīnaṁ aññataraṁ gatiṁ vadāmi: nirayaṁ vā tiracchānayoniṁ vā.</span></p>
+
+<p lang="vi" class="vi">Này Lohicca, nếu có người nói: “Vua Pasenadi Kosala sống ở tại Kasi-Kosala. Hãy để vua Pasenadi Kosala hưởng một mình mọi sản phẩm của Kasi -Kosala, không cho một ai khác”. Người nói vậy là người gây chướng ngại cho ai sống tùy thuộc vào người ấy. Ðã là người gây nguy hiểm, người ấy không tha thiết đến hạnh phúc. Ðã không tha thiết đến hạnh phúc, người ấy an trú hại tâm; và an trú hại tâm tức thuộc về tà kiến.<br>
+<span lang="pi" class="pali">Iti kira, lohicca, yo evaṁ vadeyya:‘rājā pasenadi kosalo kāsikosalaṁ ajjhāvasati;yā kāsikosale samudayasañjāti, rājāva taṁ pasenadi kosalo ekako paribhuñjeyya, na aññesaṁ dadeyyā’ti.Evaṁvādī so ye rājānaṁ pasenadiṁ kosalaṁ upajīvanti tumhe ceva aññe ca, tesaṁ antarāyakaro hoti.Antarāyakaro samāno ahitānukampī hoti, ahitānukampissa sapattakaṁ cittaṁ paccupaṭṭhitaṁ hoti, sapattake citte paccupaṭṭhite micchādiṭṭhi hoti.</span></p>
+
+<p lang="vi" class="vi">Ðã như vậy, này Lohicca, nếu có ai nói: “Ở đời có vị Sa-môn chứng được thiện pháp, sau khi chứng được thiện pháp, không nên nói cho người khác, vì có ai lại làm giúp cho ai được? Ví như một người cắt sợi dây cũ trói buộc, lại tự làm một sợi dây mới khác nữa. Ta nói sự thành tựu ấy là ác pháp, tham pháp. Vì có ai lại làm giúp cho ai được?” Người nói vậy gây chướng ngại cho người thiện nam tử đến với pháp luật do đức Như Lai giảng dạy và chứng được những quả vị thù thắng đặc biệt như Dự lưu, Nhất lai, Bất lai hay A-la-hán quả. Người nói vậy gây nguy hiểm cho những vị đang làm cho thành tựu sự tái sanh lên các cõi trời để được sanh làm chư Thiên. Ðã là người gây chướng ngại, người ấy không có từ tâm nghĩ đến lợi ích, người ấy an trú hại tâm; và đã an trú hại tâm tức thuộc về tà kiến”. Và này Lohicca, Ta nói rằng một người có tà kiến sẽ sanh vào một trong hai ác thú sau đây: địa ngục hay súc sinh.<br>
+<span lang="pi" class="pali">Evameva kho, lohicca, yo evaṁ vadeyya:‘idha samaṇo vā brāhmaṇo vā kusalaṁ dhammaṁ adhigaccheyya, kusalaṁ dhammaṁ adhigantvā na parassa āroceyya, kiñhi paro parassa karissati.Seyyathāpi nāma …pe…kiñhi paro parassa karissatī’ti.Evaṁvādī so ye te kulaputtā tathāgatappaveditaṁ dhammavinayaṁ āgamma evarūpaṁ uḷāraṁ visesaṁ adhigacchanti, sotāpattiphalampi sacchikaronti, sakadāgāmiphalampi sacchikaronti, anāgāmiphalampi sacchikaronti, arahattampi sacchikaronti.Ye cime dibbā gabbhā paripācenti dibbānaṁ bhavānaṁ abhinibbattiyā, tesaṁ antarāyakaro hoti,antarāyakaro samāno ahitānukampī hoti, ahitānukampissa sapattakaṁ cittaṁ paccupaṭṭhitaṁ hoti, sapattake citte paccupaṭṭhite micchādiṭṭhi hoti.Micchādiṭṭhissa kho ahaṁ, lohicca, dvinnaṁ gatīnaṁ aññataraṁ gatiṁ vadāmi—nirayaṁ vā tiracchānayoniṁ vā.</span></p>
+
+<p lang="vi" class="vi">2. Ba Vị Đạo Sự Đáng Bị Chỉ Trích<br>
+<span lang="pi" class="pali">2. Tayocodanārahā</span></p>
+
+<p lang="vi" class="vi">Này Lohicca, ở đời có ba vị đạo sư đáng bị chỉ trích và ai chỉ trích đạo sư như vậy; sự chỉ trích của vị này chơn chánh, hợp pháp, không lỗi lầm.<br>
+<span lang="pi" class="pali">Tayo khome, lohicca, satthāro, ye loke codanārahā; yo ca panevarūpe satthāro codeti, sā codanā bhūtā tacchā dhammikā anavajjā.</span></p>
+
+<p lang="vi" class="vi">Thế nào là ba?<br>
+<span lang="pi" class="pali">Katame tayo?</span></p>
+
+<p lang="vi" class="vi">Này Lohicca, ở đời có một vị đạo sư không chứng mục đích của Sa-môn quả mà mọi người xuất gia, từ bỏ gia đình, sống không gia đình hướng đến.<br>
+<span lang="pi" class="pali">Idha, lohicca, ekacco satthā yassatthāya agārasmā anagāriyaṁ pabbajito hoti, svāssa sāmaññattho ananuppatto hoti.</span></p>
+
+<p lang="vi" class="vi">Không chứng được mục đích Sa-môn quả, vị này thuyết pháp cho các đệ tử:<br>
+<span lang="pi" class="pali">So taṁ sāmaññatthaṁ ananupāpuṇitvā sāvakānaṁ dhammaṁ deseti:</span></p>
+
+<p lang="vi" class="vi">“Như thế này là lợi ích cho các người! Như thế này là hạnh phúc cho các người!”<br>
+<span lang="pi" class="pali">‘idaṁ vo hitāya idaṁ vo sukhāyā’ti.</span></p>
+
+<p lang="vi" class="vi">Những đệ tử này không nghe lời dạy của vị ấy, không để tai ghi nhận, không trú tâm phát xuất từ hiểu biết và sống trái ngược với giáo pháp của vị bổn sư.<br>
+<span lang="pi" class="pali">Tassa sāvakā na sussūsanti, na sotaṁ odahanti, na aññā cittaṁ upaṭṭhapenti, vokkamma ca satthusāsanā vattanti.</span></p>
+
+<p lang="vi" class="vi">Ðạo sư như vậy cần phải được khiển trách:<br>
+<span lang="pi" class="pali">So evamassa codetabbo:</span></p>
+
+<p lang="vi" class="vi">“Ðại đức không chứng mục đích Sa-môn quả mà Ðại đức xuất gia, từ bỏ gia đình, sống không gia đình hướng đến. Không chứng được mục đích Sa-môn quả ấy, Ðại đức thuyết pháp cho các đệ tử: “Như thế này là lợi ích cho các người. Như thế này là hạnh phúc cho các người”.<br>
+<span lang="pi" class="pali">āyasmā kho yassatthāya agārasmā anagāriyaṁ pabbajito, so te sāmaññattho ananuppatto, taṁ tvaṁ sāmaññatthaṁ ananupāpuṇitvā sāvakānaṁ dhammaṁ desesi:“idaṁ vo hitāya idaṁ vo sukhāyā”ti.</span></p>
+
+<p lang="vi" class="vi">Những đệ tử này không nghe lời dạy của Ðại đức, không để tai ghi nhận, không trú tâm phát xuất từ hiểu biết và sống trái ngược với giáo pháp của vị bổn sư.<br>
+<span lang="pi" class="pali">Tassa te sāvakā na sussūsanti, na sotaṁ odahanti, na aññā cittaṁ upaṭṭhapenti, vokkamma ca satthusāsanā vattanti.</span></p>
+
+<p lang="vi" class="vi">Như người tán tỉnh cô gái muốn xa mình, hay ôm hôn cô gái muốn né mặt mình; “ta nói cử chỉ ấy là ác pháp, tham pháp vì có ai lại làm giúp cho ai được?”<br>
+<span lang="pi" class="pali">Seyyathāpi nāma osakkantiyā vā ussakkeyya, parammukhiṁ vā āliṅgeyya; ’evaṁ sampadamidaṁ pāpakaṁ lobhadhammaṁ vadāmi—kiñhi paro parassa karissatī’ti.</span></p>
+
+<p lang="vi" class="vi">Này Lohicca, như vậy là hạng đạo sư thứ nhất đáng bị chỉ trích và ai chỉ trích đạo sư như vậy, sự chỉ trích của vị này chơn chánh, hợp pháp, không lỗi lầm.<br>
+<span lang="pi" class="pali">Ayaṁ kho, lohicca, paṭhamo satthā, yo loke codanāraho;yo ca panevarūpaṁ satthāraṁ codeti, sā codanā bhūtā tacchā dhammikā anavajjā.</span></p>
+
+<p lang="vi" class="vi">Lại nữa, này Lohicca, ở đời có vị đạo sư không chứng mục đích của Sa-môn quả mà mọi người xuất gia, từ bỏ gia đình, sống không gia đình hướng đến.<br>
+<span lang="pi" class="pali">Puna caparaṁ, lohicca, idhekacco satthā yassatthāya agārasmā anagāriyaṁ pabbajito hoti, svāssa sāmaññattho ananuppatto hoti.</span></p>
+
+<p lang="vi" class="vi">Không chứng được mục đích Sa-môn quả ấy, vị này thuyết pháp cho các đệ tử:<br>
+<span lang="pi" class="pali">So taṁ sāmaññatthaṁ ananupāpuṇitvā sāvakānaṁ dhammaṁ deseti:</span></p>
+
+<p lang="vi" class="vi">“Như thế này là lợi ích cho các người! Như thế này là hạnh phúc cho các người!”.<br>
+<span lang="pi" class="pali">‘idaṁ vo hitāya, idaṁ vo sukhāyā’ti.</span></p>
+
+<p lang="vi" class="vi">Những đệ tử này nghe lời dạy của vị ấy, lóng tai ghi nhận và trú tâm phát xuất từ hiểu biết, sống không trái với giáo pháp của vị bổn sư.<br>
+<span lang="pi" class="pali">Tassa sāvakā sussūsanti, sotaṁ odahanti, aññā cittaṁ upaṭṭhapenti, na ca vokkamma satthusāsanā vattanti.</span></p>
+
+<p lang="vi" class="vi">Ðạo sư như vậy cần phải được khiển trách:<br>
+<span lang="pi" class="pali">So evamassa codetabbo:</span></p>
+
+<p lang="vi" class="vi">Ðại đức không chứng mục đích Sa-môn quả mà Ðại đức xuất gia, từ bỏ gia đình, sống không gia đình hướng đến. Không chứng được mục đích Sa-môn quả ấy, Ðại đức thuyết pháp cho các đệ tử: “Như thế này là lợi ích cho các người! Như thế này là hạnh phúc cho các người”.<br>
+<span lang="pi" class="pali">āyasmā kho yassatthāya agārasmā anagāriyaṁ pabbajito, so te sāmaññattho ananuppatto. Taṁ tvaṁ sāmaññatthaṁ ananupāpuṇitvā sāvakānaṁ dhammaṁ desesi:“idaṁ vo hitāya, idaṁ vo sukhāyā”ti.</span></p>
+
+<p lang="vi" class="vi">Những đệ tử này nghe lời dạy của Ðại đức, lóng tai ghi nhận, trú tâm phát xuất từ hiểu biết, nhưng sống trái ngược với giáo pháp của vị bổn sư.<br>
+<span lang="pi" class="pali">Tassa te sāvakā sussūsanti, sotaṁ odahanti, aññā cittaṁ upaṭṭhapenti, na ca vokkamma satthusāsanā vattanti.</span></p>
+
+<p lang="vi" class="vi">Như người bỏ ruộng dưa của mình mà nghĩ đến việc nhổ cỏ cho ruộng của người. Ta nói cử chỉ ấy là ác pháp, tham pháp vì có ai lại làm giúp cho ai được?”<br>
+<span lang="pi" class="pali">’Seyyathāpi nāma sakaṁ khettaṁ ohāya paraṁ khettaṁ niddāyitabbaṁ maññeyya, evaṁ sampadamidaṁ pāpakaṁ lobhadhammaṁ vadāmi—kiñhi paro parassa karissatī’ti.</span></p>
+
+<p lang="vi" class="vi">Này Lohicca, như vậy là hạng đạo sư thứ hai đáng bị chỉ trích và ai chỉ trích đạo sư như vậy, sự chỉ trích của vị này chơn chánh, hợp pháp, không sai lầm.<br>
+<span lang="pi" class="pali">Ayaṁ kho, lohicca, dutiyo satthā, yo, loke codanāraho;yo ca panevarūpaṁ satthāraṁ codeti, sā codanā bhūtā tacchā dhammikā anavajjā.</span></p>
+
+<p lang="vi" class="vi">Lại nữa, này Lohicca, ở đời có vị đạo sư chứng mục đích của Sa-môn quả mà mọi người xuất gia, từ bỏ gia đình, sống không gia đình hướng đến.<br>
+<span lang="pi" class="pali">Puna caparaṁ, lohicca, idhekacco satthā yassatthāya agārasmā anagāriyaṁ pabbajito hoti, svāssa sāmaññattho anuppatto hoti.</span></p>
+
+<p lang="vi" class="vi">Không chứng được mục đích Sa-môn quả ấy, vị này thuyết pháp cho các đệ tử:<br>
+<span lang="pi" class="pali">So taṁ sāmaññatthaṁ anupāpuṇitvā sāvakānaṁ dhammaṁ deseti:</span></p>
+
+<p lang="vi" class="vi">“Như thế này là lợi ích cho các người! Như thế này là hạnh phúc cho các người”.<br>
+<span lang="pi" class="pali">‘idaṁ vo hitāya, idaṁ vo sukhāyā’ti.</span></p>
+
+<p lang="vi" class="vi">Những đệ tử này không nghe lời dạy của vị ấy, không lóng tai nghi nhận, không trú tâm xuất phát từ hiểu biết, sống trái ngược với giáo pháp của vị bổn sư.<br>
+<span lang="pi" class="pali">Tassa sāvakā na sussūsanti, na sotaṁ odahanti, na aññā cittaṁ upaṭṭhapenti, vokkamma ca satthusāsanā vattanti.</span></p>
+
+<p lang="vi" class="vi">Ðạo sư như vậy cần phải được khiển trách:<br>
+<span lang="pi" class="pali">So evamassa codetabbo:</span></p>
+
+<p lang="vi" class="vi">“Ðại đức đã chứng được mục đích Sa-môn quả mà Ðại đức xuất gia, từ bỏ gia đình, sống không gia đình, hướng đến. Chứng được mục đích Sa-môn quả ấy, Ðại đức thuyết pháp cho các đệ tử: “Như thế này là lợi ích cho các ngươi! Như thế này là hạnh phúc cho các ngươi!”<br>
+<span lang="pi" class="pali">āyasmā kho yassatthāya agārasmā anagāriyaṁ pabbajito, so te sāmaññattho anuppatto.Taṁ tvaṁ sāmaññatthaṁ anupāpuṇitvā sāvakānaṁ dhammaṁ desesi:“idaṁ vo hitāya, idaṁ vo sukhāyā”ti.</span></p>
+
+<p lang="vi" class="vi">Những đệ tử này không nghe lời dạy của Ðại đức, không lóng tai nghi nhận, không trú tâm xuất phát từ hiểu biết, sống trái ngược với giáo pháp của vị bổn sư.<br>
+<span lang="pi" class="pali">Tassa te sāvakā na sussūsanti, na sotaṁ odahanti, na aññā cittaṁ upaṭṭhapenti, vokkamma ca satthusāsanā vattanti.</span></p>
+
+<p lang="vi" class="vi">Như người cắt sợi dây cũ trói buộc, lại tự làm một sợi mới khác né mặt mình; “ta nói cử chỉ ấy là ác pháp, tham pháp vì có ai lại làm giúp cho ai được?”<br>
+<span lang="pi" class="pali">Seyyathāpi nāma purāṇaṁ bandhanaṁ chinditvā aññaṁ navaṁ bandhanaṁ kareyya; ’evaṁ sampadamidaṁ pāpakaṁ lobhadhammaṁ vadāmi, kiñhi paro parassa karissatī’ti.</span></p>
+
+<p lang="vi" class="vi">Này Lohicca, như vậy là hạng đạo sư thứ ba đáng bị chỉ trích và ai chỉ trích đạo sư như vậy, sự chỉ trích của vị này chơn chánh, hợp pháp, không lỗi lầm.<br>
+<span lang="pi" class="pali">Ayaṁ kho, lohicca, tatiyo satthā, yo loke codanāraho;yo ca panevarūpaṁ satthāraṁ codeti, sā codanā bhūtā tacchā dhammikā anavajjā.</span></p>
+
+<p lang="vi" class="vi">Này Lohicca, như vậy là hạng đạo sư thứ ba đáng bị chỉ trích, “ai chỉ trích đạo sư như vậy, sự chỉ trích của vị này chơn chánh, hợp pháp, không lỗi lầm.”<br>
+<span lang="pi" class="pali">Ime kho, lohicca, tayo satthāro, ye loke codanārahā, ”yo ca panevarūpe satthāro codeti, sā codanā bhūtā tacchā dhammikā anavajjā”ti.</span></p>
+
+<p lang="vi" class="vi">3. Ba Hạng Đạo Sư Không Đáng Bị Chỉ Trích<br>
+<span lang="pi" class="pali">3. Nacodanārahasatthu</span></p>
+
+<p lang="vi" class="vi">Khi nghe nói như vậy, Bà-la-môn Lohicca bạch đức Thế Tôn:<br>
+<span lang="pi" class="pali">Evaṁ vutte, lohicco brāhmaṇo bhagavantaṁ etadavoca:</span></p>
+
+<p lang="vi" class="vi">Tôn giả Gotama, ở đời có vị đạo sư nào không đáng bị chỉ trích?<br>
+<span lang="pi" class="pali">“atthi pana, bho gotama, koci satthā, yo loke nacodanāraho”ti?</span></p>
+
+<p lang="vi" class="vi">Này Lohicca, ở đời có vị đạo sư không đáng bị chỉ trích.<br>
+<span lang="pi" class="pali">“Atthi kho, lohicca, satthā, yo loke nacodanāraho”ti.</span></p>
+
+<p lang="vi" class="vi">Tôn giả Gotama, ở đời, thế nào là đạo sư không đáng bị chỉ trích?<br>
+<span lang="pi" class="pali">“Katamo pana so, bho gotama, satthā, yo loke nacodanāraho”ti?</span></p>
+
+<p lang="vi" class="vi">Này Lohicca, ở đời, đức Như Lai xuất hiện, là bậc A-la-hán, Chánh Biến Tri, Minh Hạnh Túc, Thiện Thệ, Thế Gian Giải, Vô Thượng Sĩ, Ðiều Ngự Trượng Phu, Thiên Nhân Sư, Phật, Thế Tôn… (DN2 4.3. Kết Quả Thù Thắng Hơn Của Hạnh Sa Môn)<br>
+<span lang="pi" class="pali">Idha, lohicca, tathāgato loke uppajjati arahaṁ, sammāsambuddho …pe…</span></p>
+
+<p lang="vi" class="vi">Như vậy là giới hạnh của vị ấy. … (DN2 4.3.1 Giới)<br>
+<span lang="pi" class="pali">Evaṁ kho, lohicca, bhikkhu sīlasampanno hoti …pe…</span></p>
+
+<p lang="vi" class="vi">Khi quán tự thân đã xả ly năm triền cái ấy, hân hoan sanh, do hân hoan, nên hoan hỷ sanh; do tâm hoan hỷ, thân được khinh an, do thân khinh an, lạc thọ sanh, do lạc thọ, tâm được định tĩnh Tỷ-kheo ly dục, ly ác pháp, chứng và trú thiền thứ nhất, một trạng thái hỷ lạc do ly dục sanh, với tầm, với tứ. Tỷ-kheo thấm nhuần, tẩm ướt, làm cho sung mãn tràn đầy thân mình với hỷ lạc do ly dục sanh, không một chỗ nào trên toàn thân không hỷ lạc do ly dục sanh ấy thấm nhuần. Này Lohicca, như một người hầu tắm lão luyện hay đệ tử người hầu tắm. Sau khi rắc bột tắm trong thau bằng đồng, liền nhồi bột ấy với nước, cục bột ấy thấm nhuần nước ướt nhào trộn với nước ướt, thấm ướt cả trong lẫn ngoài với nước, nhưng không chảy thành giọt – cũng vậy này Lohicca, Tỷ-kheo thấm nhuần, tẩm ướt, làm cho sung mãn, tràn đầy trên thân mình với hỷ lạc do ly dục sanh, không một chỗ nào trên toàn thân, không được hỷ lạc do ly dục sanh ấy thấm nhuần.  (DN2 4.3.2.5. Nhất Thiền)<br>
+<span lang="pi" class="pali">paṭhamaṁ jhānaṁ upasampajja viharati …</span></p>
+
+<p lang="vi" class="vi">Này Lohicca, đệ tử của vị đạo sư nào chứng được quả vị thù thắng đặc biệt ấy, thời này Lohicca, vị đạo sư không đáng bị chỉ trích.<br>
+<span lang="pi" class="pali">yasmiṁ kho, lohicca, satthari sāvako evarūpaṁ uḷāraṁ visesaṁ adhigacchati, ayampi kho, lohicca, satthā, yo loke nacodanāraho.</span></p>
+
+<p lang="vi" class="vi">Và ai chỉ trích một vị đạo sư như vậy, sự chỉ trích ấy sẽ không xác thực, không chân chánh, không hợp pháp, và có lỗi lầm …<br>
+<span lang="pi" class="pali">Yo ca panevarūpaṁ satthāraṁ codeti, sā codanā abhūtā atacchā adhammikā sāvajjā …pe…</span></p>
+
+<p lang="vi" class="vi">Này Lohicca, lại nữa, Tỷ-kheo diệt tầm và tứ, chứng và trú thiền thứ hai, một trạng thái hỷ lạc do định sanh, không tầm, không tứ, nội tĩnh nhất tâm … (DN2 4.3.2.6. Nhị Thiền)<br>
+<span lang="pi" class="pali">Dutiyaṁ jhānaṁ …pe…</span></p>
+
+<p lang="vi" class="vi">thiền thứ ba… (DN2 4.3.2.7. Tam Thiền)<br>
+<span lang="pi" class="pali">tatiyaṁ jhānaṁ …pe…</span></p>
+
+<p lang="vi" class="vi">chứng và trú thiền thứ tư … (DN2 4.3.2.8 Tứ Thiền)<br>
+<span lang="pi" class="pali">catutthaṁ jhānaṁ upasampajja viharati.</span></p>
+
+<p lang="vi" class="vi">Này Lohicca, đệ tử của vị đạo sư nào chứng được quả vị thù thắng đặc biệt ấy, thời này Lohicca, vị đạo sư như vậy không đáng bị chỉ trích, và ai chỉ trích một vị đạo sư như vậy, sự chỉ trích ấy sẽ không xác thật, không chân chánh, không hợp pháp, và có lỗi lầm.<br>
+<span lang="pi" class="pali">Yasmiṁ kho, lohicca, satthari sāvako evarūpaṁ uḷāraṁ visesaṁ adhigacchati, ayampi kho, lohicca, satthā, yo loke nacodanāraho, yo ca panevarūpaṁ satthāraṁ codeti, sā codanā abhūtā atacchā adhammikā sāvajjā …pe…</span></p>
+
+<p lang="vi" class="vi">Với tâm định tĩnh, thuần tịnh, không cấu nhiễm, không phiền não, nhu nhuyến, dễ sử dụng, vững chắc, bình thản như vậy, vị Tỷ-kheo dẫn tâm, hướng tâm đến lậu tận trí. Vị ấy biết như thật, “Ðây là khổ” … (DN2 4.3.3 Bát Minh)<br>
+<span lang="pi" class="pali">Ñāṇadassanāya cittaṁ abhinīharati abhininnāmeti …</span></p>
+
+<p lang="vi" class="vi">Này Lohicca, đệ tử của vị đạo sư nào chứng được quả vị thù thắng đặc biệt ấy, này Lohicca, vị đạo sư như vậy không đáng bị chỉ trích, và ai chỉ trích một đạo sư như vậy, sự chỉ trích ấy sẽ không xác thật, không chơn chánh, không hợp pháp, và có lỗi lầm!<br>
+<span lang="pi" class="pali">yasmiṁ kho, lohicca, satthari sāvako evarūpaṁ uḷāraṁ visesaṁ adhigacchati, ayampi kho, lohicca, satthā, yo loke nacodanāraho, yo ca panevarūpaṁ satthāraṁ codeti, sā codanā abhūtā atacchā adhammikā sāvajjā.</span></p>
+
+<p lang="vi" class="vi">Vị ấy biết: Sanh đã tận, phạm hạnh đã thành, những việc cần làm đã làm; sau đời hiện tại, không có đời sống nào khác nữa.<br>
+<span lang="pi" class="pali">…pe… Nāparaṁ itthattāyāti pajānāti.</span></p>
+
+<p lang="vi" class="vi">Này Lohicca, đệ tử của vị đạo sư nào chứng được quả vị thù thắng đặc biệt ấy, này Lohicca, vị đạo sư như vậy không đáng bị chỉ trích, và ai chỉ trích một đạo sư như vậy, sự chỉ trích ấy sẽ không xác thật, không chơn chánh, không hợp pháp, và có lỗi lầm!<br>
+<span lang="pi" class="pali">”Yasmiṁ kho, lohicca, satthari sāvako evarūpaṁ uḷāraṁ visesaṁ adhigacchati, ayampi kho, lohicca, satthā, yo loke nacodanāraho, yo ca panevarūpaṁ satthāraṁ codeti, sā codanā abhūtā atacchā adhammikā sāvajjā”ti.</span></p>
+
+<p lang="vi" class="vi">Khi nghe như vậy, Bà-la-môn Lohicca bạch đức Thế Tôn:<br>
+<span lang="pi" class="pali">Evaṁ vutte, lohicco brāhmaṇo bhagavantaṁ etadavoca:</span></p>
+
+<p lang="vi" class="vi">Như người nắm được tóc của một người sắp sửa rơi vào vực thẳm của địa ngục, nhắc bổng và đặt người ấy trên đất liền,<br>
+<span lang="pi" class="pali">seyyathāpi, bho gotama, puriso purisaṁ narakapapātaṁ patantaṁ kesesu gahetvā uddharitvā thale patiṭṭhapeyya;</span></p>
+
+<p lang="vi" class="vi">cũng vậy Tôn giả Gotama đã nắm được tóc khi con sắp sửa rơi vào vực thẳm của địa ngục, nhắc bổng và đặt con trên đất liền.<br>
+<span lang="pi" class="pali">evamevāhaṁ bhotā gotamena narakapapātaṁ papatanto uddharitvā thale patiṭṭhāpito.</span></p>
+
+<p lang="vi" class="vi">Thật vi diệu thay, Tôn giả Gotama! Thật vi diệu thay, Tôn giả Gotama!<br>
+<span lang="pi" class="pali">Abhikkantaṁ, bho gotama, abhikkantaṁ, bho gotama.</span></p>
+
+<p lang="vi" class="vi">Tôn giả Gotama, như người dựng đứng lại những gì bị quăng ngã xuống, phơi bày ra những gì che kín, chỉ đường cho kẻ bị lạc hướng, đem đèn sáng vào trong bóng tối để những ai có mắt có thể thấy sắc. Cũng vậy Chánh pháp đã được đức Thế Tôn dùng nhiều phương tiện trình bày.<br>
+<span lang="pi" class="pali">Seyyathāpi, bho gotama, nikkujjitaṁ vā ukkujjeyya, paṭicchannaṁ vā vivareyya, mūḷhassa vā maggaṁ ācikkheyya, andhakāre vā telapajjotaṁ dhāreyya: ‘cakkhumanto rūpāni dakkhantī’ti; evamevaṁ bhotā gotamena anekapariyāyena dhammo pakāsito.</span></p>
+
+<p lang="vi" class="vi">Nay con xin quy y đức Thế Tôn, quy y Pháp và quy y Tỷ-kheo Tăng.<br>
+<span lang="pi" class="pali">Esāhaṁ bhavantaṁ gotamaṁ saraṇaṁ gacchāmi dhammañca bhikkhusaṅghañca.</span></p>
+
+<p lang="vi" class="vi">Mong đức Thế Tôn nhận con làm đệ tử từ nay trở đi cho đến mạng chung, con trọn đời quy ngưỡng.<br>
+<span lang="pi" class="pali">”Upāsakaṁ maṁ bhavaṁ gotamo dhāretu ajjatagge pāṇupetaṁ saraṇaṁ gatan”ti.</span></p>
+
+<span lang="pi" class="vi">Lohiccasuttaṁ niṭṭhitaṁ dvādasamaṁ.</p>
+
+<!-- COPY CONTENT SUTTA Ở ĐÂY -->
+
+
+
+<br>
+<p><p style="text-align: right;font-style: italic;">Hoà Thượng Thích Minh Châu dịch Việt</span></p>
+
+
+
+</section>  <!-- End English and Pali -->
+
+
+
+
+
+</section>  <!-- End English and Pali -->
+<div id="nextprev"><a id="previous-sutta" href="./dn11.html#content"></a><a id="next-sutta" href="./dn13.html#content"></a></div>
+</div>  <!--End Content -->
+</div>  <!-- End Page -->
+
+
+
+
+
+
+<footer>
+					 <!-- End bottom links -->
+</footer>
+
+
+ 
+ <!-- Scripts -->
+
+ <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      if (typeof enablePaliLookup === "function") {
+        enablePaliLookup();
+      } else {
+        console.error("enablePaliLookup is not defined");
+      }
+    });
+  </script>
+
+ <script>
+ // Script to open and close sidebar
+ 	function w3_open() {
+ 	document.getElementById("mySidebar").style.display = "block";
+ 	}
+ 		function w3_close() {
+ 		document.getElementById("mySidebar").style.display = "none";
+ 	}
+ </script>
+ <script>
+ 		var app = document.getElementsByTagName("BODY")[0];
+ 		if (localStorage.lightMode == "dark") {
+ 			app.setAttribute("light-mode", "dark");
+ 	}
+ </script>
+ 
+ <script>
+ 		function toggle_light_mode() {
+ 			var app = document.getElementsByTagName("BODY")[0];
+ 				if (localStorage.lightMode == "dark") {
+ 			localStorage.lightMode = "light";
+ 			app.setAttribute("light-mode", "light");
+ 		} else {
+ 					localStorage.lightMode = "dark";
+ 					app.setAttribute("light-mode", "dark");
+ 	}
+ 		}
+ 
+ 		window.addEventListener("storage", function () {
+ 			if (localStorage.lightMode == "dark") {
+ 				app.setAttribute("light-mode", "dark");
+ 				} else {
+ 				app.setAttribute("light-mode", "light");
+ 		}
+ 		}, false);
+ 
+ </script>
+ <script src="../js/footer.js"></script><script src="../js/dpd_deconstructor.js"></script><script src="../js/dpd_ebts.js"></script><script src="../js/dpd_i2h.js"></script>
+ <script src="/sw.js"></script>
+ </body>
+ </html>

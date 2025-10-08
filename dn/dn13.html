@@ -1,0 +1,921 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+ 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+ 	<link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+ 	<meta name="viewport" content="width=device-width, initial-scale=1">
+		<!-- Loading manifest -->
+	<link rel="manifest" href="../manifest.json">
+ 	<!-- Loading main and menu stylesheets -->
+ 	<link rel="stylesheet" href="../css/w3.css">
+ 	<link rel="stylesheet" href="../css/css.css">
+ 	<link rel="stylesheet" href="../css/menu.css">
+ 	<script src="../js/jquery-1.10.2.min.js"></script>
+ 	<script src="../js/controlpanel.js"></script>
+ 	<script src="../js/mousetrap.min.js"></script>
+    <script src="../js/pali-lookup-standalone.js"></script>
+
+ <script src="../js/suttaFiles.js"></script>
+<script>
+ // Script to open random Sutta
+ function openRandomSutta() {
+  const randomIndex = Math.floor(Math.random() * suttaFiles.length);
+  const selectedFile = suttaFiles[randomIndex];
+
+  // Get root path of your site 
+  const currentPath = location.pathname;
+  const rootPath = currentPath.split("/").slice(0, -2).join("/") + "/";
+
+  // Redirect to the correct file
+  window.location.href = rootPath + selectedFile;
+}
+</script>
+
+
+</head>
+ <body class="container">
+ <div class="header-background">
+ <!-- Header -->
+ <div class="w3-header w3-content w3-padding w3-left-align bwcontainer">
+ 	<div class="centered">
+ 		<button class="light-mode-button" aria-label="Bật Chế Độ Sáng" onclick="toggle_light_mode()">
+ 			<span></span>
+ 			<span></span>
+ 		</button>
+ 		<span class="box-lbl">Sáng/Tối</span>
+ 	</div> <!-- Centered -->
+ 		<a href="../home/index.html" id="bwlogo"><img src="../images/headerlogo.png" alt="Logo Lời Của Đức Phật" class="w3-image"></a>
+ 		<div class="w3-bar bwcontainer">
+ 			<div id="searchlinks">
+ 			<a href="../home/engsearch.html"><span class="w3-bar-item"><i class="fa fa-search"></i>&nbsp;Tìm Tiếng Việt</span></a>
+ 			<a href="../home/palisearch.html"><span class="w3-bar-item"><i class="fa fa-search"></i>&nbsp;Tìm Tiếng Pali</span></a>
+ 			</div><!-- End Searchlinks div -->
+ 			<div class="help"><span><a href="../home/help.html"><img src="../images/help_icon.png" title="Help" alt="Help"></a></span></div>
+ 		</div> <!-- End w3-bar bwcontainer --> 	</div> <!-- End w3-header w3-content w3-padding w3-left-align bwcontainer -->
+ </div> <!-- End header-background -->
+ <!-- Top menu -->
+
+ <div class="w3-main w3-white bwcontainer2">
+ 	<div class="w3-button w3-padding-8 w3-left w3-hide-large" onclick="w3_open()">☰</div>
+ 		<div id="navbar" class="w3-hide-small w3-hide-medium bwcontainer3">
+ 			<ul id="css3menu0">
+ 				<li class="topfirst" id="home"><a href="../home/index.html" class="w3-hide-small">Trang Chủ</a></li>
+  				<li class="topmenu" id="dn"><a href="../dn/dn.html" class="pressed w3-hide-small">Trường Bộ Kinh</a></li>
+ 				<li class="topmenu" id="mn"><a href="../mn/mn.html" class="w3-hide-small">Trung Bộ Kinh</a></li>
+ 				<li class="topmenu" id="sn"><a href="../sn/sn.html" class="w3-hide-small"><i class="fa fa-caret-down"></i>&nbsp;Tương Ưng Bộ Kinh</a>
+ 					<ul>
+ 						<li><a href="../sn/sn01.html" class="w3-hide-small">Tập I - Thiên Có Kệ</a></li>
+ 						<li><a href="../sn/sn02.html" class="w3-hide-small">Tập II - Thiên Nhân Duyên</a></li>
+ 						<li><a href="../sn/sn03.html" class="w3-hide-small">Tập III - Thiên Uẩn</a></li>
+ 						<li><a href="../sn/sn04.html" class="w3-hide-small">Tập IV - Thiên Sáu Xứ</a></li>
+ 						<li><a href="../sn/sn05.html" class="w3-hide-small">Tập V - Thiên Ðại Phẩm</a></li>
+ 					</ul>
+ 				<li class="topmenu" id="an"><a href="../an/an.html" class="w3-hide-small"><i class="fa fa-caret-down"></i>&nbsp;Tăng Chi Bộ Kinh</a>
+ 					<ul>
+ 						<li><a href="../an/an1.html" class="w3-hide-small">Chương Một Pháp</a></li>
+ 						<li><a href="../an/an2.html" class="w3-hide-small">Chương Hai Pháp</a></li>
+ 						<li><a href="../an/an3.html" class="w3-hide-small">Chương Ba Pháp</a></li>
+ 						<li><a href="../an/an4.html" class="w3-hide-small">Chương Bốn Pháp</a></li>
+ 						<li><a href="../an/an5.html" class="w3-hide-small">Chương Năm Pháp</a></li>
+ 						<li><a href="../an/an6.html" class="w3-hide-small">Chương Sáu Pháp</a></li>
+ 						<li><a href="../an/an7.html" class="w3-hide-small">Chương Bảy Pháp</a></li>
+ 						<li><a href="../an/an8.html" class="w3-hide-small">Chương Tám Pháp</a></li>
+ 						<li><a href="../an/an9.html" class="w3-hide-small">Chương Chín Pháp</a></li>
+ 						<li><a href="../an/an10.html" class="w3-hide-small">Chương Mười Pháp</a></li>
+ 						<li><a href="../an/an11.html" class="w3-hide-small">Chương Mười Một Pháp</a></li>
+ 					</ul>
+ 				</li>
+ 				<li class="topmenu" id="kn"><a href="../kn/kn.html" class="w3-hide-small"><i class="fa fa-caret-down"></i>&nbsp;Tiểu Bộ Kinh</a>
+ 					<ul>
+ 						<li><a href="../kp/kp.html" class="w3-hide-small">Kinh Tiểu Tụng</a></li>
+ 						<li><a href="../dhp/dhp.html" class="w3-hide-small">Kinh Pháp Cú</a></li>
+ 						<li><a href="../snp/snp.html" class="w3-hide-small">Kinh Tập</a></li>
+ 						<li><a href="../ud/ud.html" class="w3-hide-small">Kinh Phật Tự Thuyết</a></li>
+ 						<li><a href="../it/it.html" class="w3-hide-small">Kinh Phật Thuyết Như Vậy</a></li>
+ 						<li><a href="../tha/tha.html" class="w3-hide-small">Trưởng Lão Tăng Kệ</a></li>
+ 						<li><a href="../thi/thi.html" class="w3-hide-small">Trưởng Lão Ni Kệ</a></li>
+ 					</ul>
+ 				</li>
+				<li class="toplast" id="rd"><a href="../rd/rd.html" class="w3-hide-small"></i>Kinh Ngẫu Nhiên Theo Nhóm</a>
+ 					</ul>
+ 				</li>
+ 			</ul>
+ 			</div>
+ 		</div> <!--navbar-->
+
+<!-- Sidebar (hidden by default) -->
+ <nav class="w3-sidebar w3-bar-block w3-card w3-border w3-top w3-animate-left w3-hide-large" id="mySidebar">
+ 	<a href="javascript:void(0)" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-times fa-2x red-color"></i>&nbsp;&nbsp;&nbsp;Close</a><!-- Hides the sidebar when clicked -->
+ 		<div class="w3-bar-block w3-white">
+ 			<a href="../home/index.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-home fa-lg"></i>&nbsp;&nbsp;&nbsp;Home</a>
+ 			<a href="../guide/guide.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Guide</a>
+ 			<a href="../dn/dn.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Trường Bộ Kinh</a>
+ 			<a href="../mn/mn.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Trung Bộ Kinh</a>
+ 			<a href="../sn/sn.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Tương Ưng Bộ Kinh</a>
+ 			<a href="../an/an.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Tăng Chi Bộ Kinh
+ 			<a href="../kn/kn.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Tiểu Bộ Kinh</a>
+			<a href="../rd/rd.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>Kinh Ngẫu Nhiên Theo Nhóm</a>
+ 		</div>
+ </nav>
+ 
+ 
+ 
+   <!-- !PAGE CONTENT! --> 
+<div class="w3-main w3-content w3-padding w3-left-align bwcontainer4">
+<div id="content">
+<h2>Dīgha Nikāya – Trường Bộ Kinh</h2>
+<h5><span style="font-style: italic;">Hoà Thượng Thích Minh Châu dịch Việt</span></h5>
+
+</div>
+
+<br>
+
+
+<p lang="vi" class="vi"; style="text-align: center">Trường Bộ 13<br>
+<span lang="pi" class="pali">Dīgha Nikāya 13</span></p>
+
+<p lang="vi" class="vi"; style="text-align: center">Kinh Tam Minh<br>
+<span lang="pi" class="pali">Tevijjasutta</span></p>
+
+<p lang="vi" class="vi">Như vầy tôi nghe.<br>
+<span lang="pi" class="pali">Evaṁ me sutaṁ—</span></p>
+
+<p lang="vi" class="vi">Một thời Thế Tôn đang du hành ở Kosala (Câu-tát-la) cùng với đại chúng Tỷ-kheo khoảng năm trăm vị và đi đến một làng Bà-la-môn ở Kosala tên là Manasākata.<br>
+<span lang="pi" class="pali">ekaṁ samayaṁ bhagavā kosalesu cārikaṁ caramāno mahatā bhikkhusaṅghena saddhiṁ pañcamattehi bhikkhusatehi yena manasākaṭaṁ nāma kosalānaṁ brāhmaṇagāmo tadavasari.</span></p>
+
+<p lang="vi" class="vi">Tại đây, ở Manasakata, Thế Tôn trú tại một vườn xoài trên bờ sông Aciravati (A-trí-la-phạt-để), phía Bắc làng Manasākata.<br>
+<span lang="pi" class="pali">Tatra sudaṁ bhagavā manasākaṭe viharati uttarena manasākaṭassa aciravatiyā nadiyā tīre ambavane.</span></p>
+
+<p lang="vi" class="vi">Lúc bấy giờ, nhiều Bà-la-môn trứ danh, đại phú hào ở tại Manasākata như:<br>
+<span lang="pi" class="pali">Tena kho pana samayena sambahulā abhiññātā abhiññātā brāhmaṇamahāsālā manasākaṭe paṭivasanti, seyyathidaṁ—</span></p>
+
+<p lang="vi" class="vi">Bà-la-môn Caṅkī (Thường-già), Bà-la-môn Tārukkha (Ða-lê-xa) Bà-la-môn Pokkharasāti (Phí-già-la-bà-la), Bà-la-môn Jāṇusoṇi (Sanh Lậu), Bà-la-môn Todeyya (Ðạo-đề-da) và nhiều Bà-la-môn trứ danh, đại phú hào khác.<br>
+<span lang="pi" class="pali">caṅkī brāhmaṇo tārukkho brāhmaṇo pokkharasāti brāhmaṇo jāṇusoṇi brāhmaṇo todeyyo brāhmaṇo aññe ca abhiññātā abhiññātā brāhmaṇamahāsālā.</span></p>
+
+<p lang="vi" class="vi">Lúc bấy giờ, một cuộc nghị luận về chánh đạo và tà đạo khởi lên giữa Vāseṭṭha (Bà-tất-sá) và Bhāradvāja (Bạt-la-đà-phạn-xà) trong khi đi bách bộ để tĩnh dưỡng, vừa đi vừa suy nghĩ tư duy.<br>
+<span lang="pi" class="pali">Atha kho vāseṭṭhabhāradvājānaṁ māṇavānaṁ jaṅghavihāraṁ anucaṅkamantānaṁ anuvicarantānaṁ maggāmagge kathā udapādi.</span></p>
+
+<p lang="vi" class="vi">Thanh niên Bà-la-môn Vāseṭṭha nói:<br>
+<span lang="pi" class="pali">Atha kho vāseṭṭho māṇavo evamāha:</span></p>
+
+<p lang="vi" class="vi">“Ðây là trực đạo, đây là chánh đạo hướng đến, dẫn đến cộng trú với Phạm thiên cho những ai thực hành theo. Ðó là con đường do Bà-la-môn Pokkharasāti giảng dạy.”<br>
+<span lang="pi" class="pali">“ayameva ujumaggo, ayamañjasāyano niyyāniko niyyāti takkarassa brahmasahabyatāya, yvāyaṁ akkhāto brāhmaṇena pokkharasātinā”ti.</span></p>
+
+<p lang="vi" class="vi">Thanh niên Bà-la-môn Bhāradvāja nói:<br>
+<span lang="pi" class="pali">Bhāradvājopi māṇavo evamāha:</span></p>
+
+<p lang="vi" class="vi">“Ðây là trực đạo, đây là chánh đạo hướng đến, dẫn đến cộng trú với Phạm thiên cho những ai thực hành theo, đó là con đường do Bà-la-môn Tārukkha giảng dạy.”<br>
+<span lang="pi" class="pali">“ayameva ujumaggo, ayamañjasāyano niyyāniko, niyyāti takkarassa brahmasahabyatāya, yvāyaṁ akkhāto brāhmaṇena tārukkhenā”ti.</span></p>
+
+<p lang="vi" class="vi">Thanh niên Bà-la-môn Vāseṭṭha không thể thuyết phục được thanh niên Bà-la-môn Bhāradvāja và thanh niên Bà-la-môn Bhāradvāja, cũng không thể thuyết phục được thanh niên Bà-la-môn Vāseṭṭha. Khi ấy thanh niên Bà-la-môn Vāseṭṭha nói với thanh niên Bà-la-môn Bhāradvāja:<br>
+<span lang="pi" class="pali">Neva kho asakkhi vāseṭṭho māṇavo bhāradvājaṁ māṇavaṁ saññāpetuṁ, na pana asakkhi bhāradvājo māṇavo vāseṭṭhaṁ māṇavaṁ saññāpetuṁ.So Vāseṭṭha said to Bhāradvāja,Atha kho vāseṭṭho māṇavo bhāradvājaṁ māṇavaṁ āmantesi:</span></p>
+
+<p lang="vi" class="vi">“Này Bhāradvāja, Sa-môn Gotama là Thích tử, xuất gia từ dòng họ Thích-ca, nay trú ở Manasākata, tại một vườn xoài trên bờ sông Aciravati, phía Bắc làng Manasākata.“<br>
+<span lang="pi" class="pali">ayaṁ kho, bhāradvāja, samaṇo gotamo sakyaputto sakyakulā pabbajito manasākaṭe viharati uttarena manasākaṭassa aciravatiyā nadiyā tīre ambavane.</span></p>
+
+<p lang="vi" class="vi">Tiếng đồn tốt đẹp sau đây được truyền đi về Tôn giả Gotama:<br>
+<span lang="pi" class="pali">Taṁ kho pana bhavantaṁ gotamaṁ evaṁ kalyāṇo kittisaddo abbhuggato:</span></p>
+
+<p lang="vi" class="vi">“Ngài là Thế Tôn, bậc A-la-hán, Chánh Biến Tri, Minh Hạnh Túc, Thiện Thệ, Thế Gian Giải, Vô Thượng Sĩ, Ðiều Ngự Trượng Phu, Thiên Nhân Sư, Phật, Thế Tôn”.<br>
+<span lang="pi" class="pali">‘itipi so bhagavā arahaṁ sammāsambuddho vijjācaraṇasampanno sugato lokavidū anuttaro purisadammasārathi satthā devamanussānaṁ buddho bhagavā’ti.</span></p>
+
+<p lang="vi" class="vi">Này Bhāradvāja, hãy đến Sa-môn Gotama và hỏi Sa-môn Gotama về nghĩa lý này<br>
+<span lang="pi" class="pali">Āyāma, bho bhāradvāja, yena samaṇo gotamo tenupasaṅkamissāma; upasaṅkamitvā etamatthaṁ samaṇaṁ gotamaṁ pucchissāma.</span></p>
+
+<p lang="vi" class="vi">và Sa-môn Gotama trả lời như thế nào, chúng ta sẽ như vậy thọ trì.<br>
+<span lang="pi" class="pali">”Yathā no samaṇo gotamo byākarissati, tathā naṁ dhāressāmā”ti.</span></p>
+
+<p lang="vi" class="vi">Tôn giả, xin vâng! Thanh niên Bà-la-môn Bhāradvāja trả lời với thanh niên Bà-la-môn Vāseṭṭha.<br>
+<span lang="pi" class="pali">“Evaṁ, bho”ti kho bhāradvājo māṇavo vāseṭṭhassa māṇavassa paccassosi.</span></p>
+
+<p lang="vi" class="vi">1. Những Con Đường Sai Khác<br>
+<span lang="pi" class="pali">1. Maggāmaggakathā</span></p>
+
+<p lang="vi" class="vi">Lúc bấy giờ hai thanh niên Bà-la-môn Vāseṭṭha và Bhāradvāja đến Thế Tôn.<br>
+<span lang="pi" class="pali">Atha kho vāseṭṭhabhāradvājā māṇavā yena bhagavā tenupasaṅkamiṁsu; upasaṅkamitvā bhagavatā saddhiṁ sammodiṁsu.</span></p>
+
+<p lang="vi" class="vi">Khi đã đến liền nói những lời chào đón hỏi thăm xã giao với Thế Tôn và ngồi xuống một bên, khi ngồi xuống một bên, thanh niên Bà-la-môn Vāseṭṭha bạch Thế Tôn: Tôn giả Gotama, một cuộc nghị luận về chánh đạo và tà đạo khởi lên giữa hai chúng tôi trong khi đi bách bộ để tĩnh dưỡng vừa đi vừa suy nghĩ, tư duy. Tôi nói như vầy: “Ðây là trực đạo, đây là chánh đạo, hướng đến, dẫn đến cộng trú với Phạm thiên cho những ai thực hành theo, đó là con đường do Bà-la-môn Pokkharasāti giảng dạy”. Thanh niên Bà-la-môn Bhāradvāja nói như vầy: “Ðây là trực đạo, đây là chánh đạo hướng đến, dẫn đến cộng trú với Phạm thiên cho những ai thực hành theo, đó là con đường do Bà-la-môn Tārukkha giảng dạy”.<br>
+<span lang="pi" class="pali">Sammodanīyaṁ kathaṁ sāraṇīyaṁ vītisāretvā ekamantaṁ nisīdiṁsu. Ekamantaṁ nisinno kho vāseṭṭho māṇavo bhagavantaṁ etadavoca:“idha, bho gotama, amhākaṁ jaṅghavihāraṁ anucaṅkamantānaṁ anuvicarantānaṁ maggāmagge kathā udapādi.Ahaṁ evaṁ vadāmi:‘ayameva ujumaggo, ayamañjasāyano niyyāniko niyyāti takkarassa brahmasahabyatāya, yvāyaṁ akkhāto brāhmaṇena pokkharasātinā’ti.Bhāradvājo māṇavo evamāha:‘ayameva ujumaggo ayamañjasāyano niyyāniko niyyāti takkarassa brahmasahabyatāya, yvāyaṁ akkhāto brāhmaṇena tārukkhenā’ti.“</span></p>
+
+<p lang="vi" class="vi">Tôn giả Gotama , đó là sự tranh luận, sự luận chấp, đó là sự bất đồng ý kiến.<br>
+<span lang="pi" class="pali">”Ettha, bho gotama, attheva viggaho, atthi vivādo, atthi nānāvādo”ti.</span></p>
+
+<p lang="vi" class="vi">Này Vāseṭṭha, Ngươi nói như vầy:<br>
+<span lang="pi" class="pali">“Iti kira, vāseṭṭha, tvaṁ evaṁ vadesi:</span></p>
+
+<p lang="vi" class="vi">“Ðây là trực đạo, đây là chánh đạo, hướng đến, dẫn đến cộng trú với Phạm thiên cho những ai thực hành theo. Ðó là con đường do Bà-la-môn Pokkharasāti giảng dạy”.<br>
+<span lang="pi" class="pali">‘ayameva ujumaggo, ayamañjasāyano niyyāniko niyyāti takkarassa brahmasahabyatāya, yvāyaṁ akkhāto brāhmaṇena pokkharasātinā’ti.</span></p>
+
+<p lang="vi" class="vi">Còn thanh niên Bà-la-môn Bhāradvāja nói như vầy:<br>
+<span lang="pi" class="pali">Bhāradvājo māṇavo evamāha:</span></p>
+
+<p lang="vi" class="vi">“Ðây là trực đạo, đây là chánh đạo hướng , dẫn đến cộng trú với Phạm thiên cho những ai thực hành theo, đó là con đường do Bà-la-môn Tārukkha giảng dạy”.<br>
+<span lang="pi" class="pali">‘ayameva ujumaggo ayamañjasāyano niyyāniko niyyāti takkarassa brahmasahabyatāya, yvāyaṁ akkhāto brāhmaṇena tārukkhenā’ti.</span></p>
+
+<p lang="vi" class="vi">Này Vāseṭṭha, ở nơi đây tranh biện về vấn đề gì, luận chấp về vấn đề gì và bất đồng ý kiến về vấn đề gì?<br>
+<span lang="pi" class="pali">”Atha kismiṁ pana vo, vāseṭṭha, viggaho, kismiṁ vivādo, kismiṁ nānāvādo”ti?</span></p>
+
+<p lang="vi" class="vi">“Tôn giả Gotama, về vấn đề chánh đạo và tà đạo.<br>
+<span lang="pi" class="pali">Maggāmagge, bho gotama.</span></p>
+
+<p lang="vi" class="vi">Tôn giả Gotama, nhiều Bà-la-môn thuyết dạy nhiều con đường sai khác như các vị Bà-la-môn Addhāriyā, các vị Bà-la-môn Tittiriyā, và các vị Bà-la-môn Chandokā, các vị Bà-la-môn Chandavā, các vị Bà-la-môn Brāhmacariyā – tất cả con đường này hướng đến, dẫn đến cộng trú với Phạm thiên cho những ai thực hành theo.<br>
+<span lang="pi" class="pali">Kiñcāpi, bho gotama, brāhmaṇā nānāmagge paññāpenti, addhariyā brāhmaṇā tittiriyā brāhmaṇā chandokā brāhmaṇā bavhārijjhā brāhmaṇā, atha kho sabbāni tāni niyyānikā niyyanti takkarassa brahmasahabyatāya.</span></p>
+
+<p lang="vi" class="vi">Tôn giả Gotama, như gần làng hay gần trị trấn có nhiều con đường sai khác, nhưng tất cả con đường này đều dẫn đến làng.<br>
+<span lang="pi" class="pali">Seyyathāpi, bho gotama, gāmassa vā nigamassa vā avidūre bahūni cepi nānāmaggāni bhavanti, atha kho sabbāni tāni gāmasamosaraṇāni bhavanti;</span></p>
+
+<p lang="vi" class="vi">Cũng vậy, Tôn giả Gotama, nhiều Bà-la-môn thuyết dạy nhiều con đường sai khác – như các Bà-la-môn Addhariyā, các vị Bà-la-môn Tittiriyā, các vị Bà-la-môn Chandokā, các vị Bà-la-môn Chandāvā, các vị Bà-la-môn Brāhmacariyā. Tất cả con đường này hướng đến, dẫn đến cộng trú với Phạm thiên cho những ai thực hành theo.<br>
+<span lang="pi" class="pali">”evameva kho, bho gotama, kiñcāpi brāhmaṇā nānāmagge paññāpenti, addhariyā brāhmaṇā tittiriyā brāhmaṇā chandokā brāhmaṇā bavhārijjhā brāhmaṇā, atha kho sabbāni tāni niyyānikā niyyanti takkarassa brahmasahabyatāyā”ti.</span></p>
+
+<p lang="vi" class="vi">2. Câu Hỏi Của Vāseṭṭha<br>
+<span lang="pi" class="pali">2. Vāseṭṭhamāṇavānuyoga</span></p>
+
+<p lang="vi" class="vi">Này Vāseṭṭha, có phải Ngươi nói: “Chúng dẫn đến?”<br>
+<span lang="pi" class="pali">“Niyyantīti, vāseṭṭha vadesi”?</span></p>
+
+<p lang="vi" class="vi">Tôn giả Gotama, vâng, tôi nói: “Chúng dẫn đến”.<br>
+<span lang="pi" class="pali">“Niyyantīti, bho gotama, vadāmi”.</span></p>
+
+<p lang="vi" class="vi">Này Vāseṭṭha, có phải Ngươi nói: “Chúng dẫn đến”.<br>
+<span lang="pi" class="pali">“Niyyantīti, vāseṭṭha, vadesi”?</span></p>
+
+<p lang="vi" class="vi">Tôn giả Gotama, vâng, tôi nói: “Chúng dẫn đến”.<br>
+<span lang="pi" class="pali">“Niyyantīti, bho gotama, vadāmi”</span></p>
+
+<p lang="vi" class="vi">Này Vāseṭṭha, có phải Ngươi nói: “Chúng dẫn đến”.<br>
+<span lang="pi" class="pali">“Niyyantīti, vāseṭṭha, vadesi”?</span></p>
+
+<p lang="vi" class="vi">Tôn giả Gotama, vâng, tôi nói: “Chúng dẫn dến”.<br>
+<span lang="pi" class="pali">“Niyyantīti, bho gotama, vadāmi”.</span></p>
+
+<p lang="vi" class="vi">Thế nào Vāseṭṭha? Có Bà-la-môn nào trong những Bà-la-môn tinh thông ba tập Vedā tận mặt đã thấy Phạm thiên?<br>
+<span lang="pi" class="pali">“Kiṁ pana, vāseṭṭha, atthi koci tevijjānaṁ brāhmaṇānaṁ ekabrāhmaṇopi, yena brahmā sakkhidiṭṭho”ti?</span></p>
+
+<p lang="vi" class="vi">Tôn giả Gotama, không có vị nào.<br>
+<span lang="pi" class="pali">“No hidaṁ, bho gotama”.</span></p>
+
+<p lang="vi" class="vi">Thế nào Vāseṭṭha? Có tôn sư nào của các Bà-la-môn tinh thông ba tập Vedā đã tận mặt thấy Phạm thiên?<br>
+<span lang="pi" class="pali">“Kiṁ pana, vāseṭṭha, atthi koci tevijjānaṁ brāhmaṇānaṁ ekācariyopi, yena brahmā sakkhidiṭṭho”ti?</span></p>
+
+<p lang="vi" class="vi">Tôn giả Gotama, không có vị nào.<br>
+<span lang="pi" class="pali">“No hidaṁ, bho gotama”.</span></p>
+
+<p lang="vi" class="vi">Thế nào Vāseṭṭha? Có tôn sư nào của các tôn sư các Bà-la-môn tinh thông ba tập Vedā đã tận mặt thấy Phạm thiên?<br>
+<span lang="pi" class="pali">“Kiṁ pana, vāseṭṭha, atthi koci tevijjānaṁ brāhmaṇānaṁ ekācariyapācariyopi, yena brahmā sakkhidiṭṭho”ti?</span></p>
+
+<p lang="vi" class="vi">Tôn giả Gotama, không có vị nào.<br>
+<span lang="pi" class="pali">“No hidaṁ, bho gotama”.</span></p>
+
+<p lang="vi" class="vi">Thế nào Vāseṭṭha? Có Bà-la-môn nào cho đến bảy đời tôn sư và đại tôn sư của những vị Bà-la-môn tinh thông ba tập Vedā đã tận mặt nhìn thấy Phạm thiên?<br>
+<span lang="pi" class="pali">“Kiṁ pana, vāseṭṭha, atthi koci tevijjānaṁ brāhmaṇānaṁ yāva sattamā ācariyāmahayugā yena brahmā sakkhidiṭṭho”ti?</span></p>
+
+<p lang="vi" class="vi">Tôn giả Gotama, không có vị nào.<br>
+<span lang="pi" class="pali">“No hidaṁ, bho gotama”.</span></p>
+
+<p lang="vi" class="vi">Thế nào, này Vāseṭṭha. Những vị tu sĩ thời cổ trong các Bà-la-môn tinh thông ba tập Vedā, những vị sáng tác các thần chú, những vị trì tụng thần chú mà xưa kia những thần chú được hát lên, được trì tụng, được ngâm vịnh và ngày nay những vị Bà-la-môn tinh thông ba tập Vedā cũng hát lên, trì tụng và ngâm giảng như các vị Atthaka (A-sá-ca) Vāmaka (Bà-ma), Vāmadeva (Bà-ma-đề-bà), Angirasa (Ương-kỳ-sá), Bhāradvāja (Bạt-la-đà-phan-xà), Vāseṭṭha (Bà-tất-sá), Kassapa (Ca-diếp), Bhagu (Bà-cữu). Những vị này có nói:<br>
+<span lang="pi" class="pali">Kiṁ pana, vāseṭṭha, yepi tevijjānaṁ brāhmaṇānaṁ pubbakā isayo mantānaṁ kattāro mantānaṁ pavattāro, yesamidaṁ etarahi tevijjā brāhmaṇā porāṇaṁ mantapadaṁ gītaṁ pavuttaṁ samihitaṁ, tadanugāyanti, tadanubhāsanti, bhāsitamanubhāsanti, vācitamanuvācenti, seyyathidaṁ—aṭṭhako vāmako vāmadevo vessāmitto yamataggi aṅgīraso bhāradvājo vāseṭṭho kassapo bhagu. Tepi evamāhaṁsu:</span></p>
+
+<p lang="vi" class="vi">“Chúng tôi biết, chúng tôi thấy chỗ ở Phạm thiên, chỗ đến Phạm thiên, chỗ đi Phạm thiên?”<br>
+<span lang="pi" class="pali">”‘mayametaṁ jānāma, mayametaṁ passāma, yattha vā brahmā, yena vā brahmā, yahiṁ vā brahmā’”ti?</span></p>
+
+<p lang="vi" class="vi">Tôn giả Gotama, không có vị nào.<br>
+<span lang="pi" class="pali">“No hidaṁ, bho gotama”.</span></p>
+
+<p lang="vi" class="vi">Này Vāseṭṭha, như vậy Ngươi nói không có một Bà-la-môn nào trong những vị tinh thông ba tập Vedā đã tận mặt thấy Phạm thiên – không có một tôn sư nào của các Bà-la-môn tinh thông ba tập Vedā đã tận mặt thấy Phạm thiên, không có một đại tôn sư nào của ác Bà-la-môn tinh thông ba tập và đã tận mặt thấy Phạm thiên – không có một Bà-la-môn nào cho đến bảy đời đại tôn sư, tôn sư của những Bà-la-môn tinh thông ba tập Vedā đã tận mắt thấy Phạm thiên,<br>
+<span lang="pi" class="pali">Iti kira, vāseṭṭha, natthi koci tevijjānaṁ brāhmaṇānaṁ ekabrāhmaṇopi, yena brahmā sakkhidiṭṭho.Natthi koci tevijjānaṁ brāhmaṇānaṁ ekācariyopi, yena brahmā sakkhidiṭṭho.Natthi koci tevijjānaṁ brāhmaṇānaṁ ekācariyapācariyopi, yena brahmā sakkhidiṭṭho.Natthi koci tevijjānaṁ brāhmaṇānaṁ yāva sattamā ācariyāmahayugā yena brahmā sakkhidiṭṭho.</span></p>
+
+<p lang="vi" class="vi">trong những tu sĩ thời cổ, trong các Bà-la-môn tinh thông ba tập Vedā, những vị sáng tác các thần chú, những vị trì tụng thần chú mà xưa kia những thần chú được hát lên, được trì tụng, được ngâm vịnh và ngày nay những Bà-la-môn tinh thông ba tập Vedā cũng hát lên, trì tụng và giảng dạy như các vị Atthaka, Vāmaka, Vàmadeva, Vessāmita, Yamataggi, Angirasa, Bhāradvāja, Vāseṭṭha, Kassapa, Bhagu, không có một vị nào đã nói:<br>
+<span lang="pi" class="pali">Yepi kira tevijjānaṁ brāhmaṇānaṁ pubbakā isayo mantānaṁ kattāro mantānaṁ pavattāro, yesamidaṁ etarahi tevijjā brāhmaṇā porāṇaṁ mantapadaṁ gītaṁ pavuttaṁ samihitaṁ, tadanugāyanti, tadanubhāsanti, bhāsitamanubhāsanti, vācitamanuvācenti, seyyathidaṁ—aṭṭhako vāmako vāmadevo vessāmitto yamataggi aṅgīraso bhāradvājo vāseṭṭho kassapo bhagu, tepi na evamāhaṁsu:</span></p>
+
+<p lang="vi" class="vi">“Chúng tôi biết, chúng tôi thấy Phạm thiên ở đâu, Phạm thiên từ đâu đến, Phạm thiên sẽ đi đâu”.<br>
+<span lang="pi" class="pali">‘mayametaṁ jānāma, mayametaṁ passāma, yattha vā brahmā, yena vā brahmā, yahiṁ vā brahmā’ti.</span></p>
+
+<p lang="vi" class="vi">Như vậy, các Bà-la-môn tinh thông ba tập Vedā đã nói:<br>
+<span lang="pi" class="pali">Teva tevijjā brāhmaṇā evamāhaṁsu:</span></p>
+
+<p lang="vi" class="vi">“Chúng tôi không biết, chúng tôi không thấy con đường đưa đến cộng trú với Phạm thiên,<br>
+<span lang="pi" class="pali">yaṁ na jānāma, yaṁ na passāma, tassa sahabyatāya maggaṁ desema.</span></p>
+
+<p lang="vi" class="vi">nhưng chúng tôi thuyết dạy con đường ấy: “Ðây là trực đạo, đây là chánh đạo hướng đến, dẫn đến cộng trú với Phạm thiên cho những ai thực hành theo”.<br>
+<span lang="pi" class="pali">’Ayameva ujumaggo ayamañjasāyano niyyāniko, niyyāti takkarassa brahmasahabyatāyā’ti.</span></p>
+
+<p lang="vi" class="vi">Này Vāseṭṭha, Ngươi nghĩ thế nào?<br>
+<span lang="pi" class="pali">Taṁ kiṁ maññasi, vāseṭṭha?</span></p>
+
+<p lang="vi" class="vi">Sự kiện là như vậy thời có phải lời nói của những Bà-la-môn tinh thông ba tập Vedā là không chánh xác, hợp lý?<br>
+<span lang="pi" class="pali">”nanu evaṁ sante tevijjānaṁ brāhmaṇānaṁ appāṭihīrakataṁ bhāsitaṁ sampajjatī”ti?</span></p>
+
+<p lang="vi" class="vi">Tôn giả Gotama, sự kiện là như vậy thời lời nói của những Bà-la-môn tinh thông ba tập Vedā là không chánh xác, hợp lý.<br>
+<span lang="pi" class="pali">“Addhā kho, bho gotama, evaṁ sante tevijjānaṁ brāhmaṇānaṁ appāṭihīrakataṁ bhāsitaṁ sampajjatī”ti.</span></p>
+
+<p lang="vi" class="vi">Lành thay, này Vāseṭṭha, những Bà-la-môn tinh thông ba tập Vedā không biết, không thấy con đường đưa đến cộng trú với Phạm thiên mà thuyết dạy: “Ðây là trực đạo, đây là chánh đạo hướng đến, dẫn đến cộng trú với Phạm thiên cho những ai thực hành theo”, thật không thể có sự kiện ấy.<br>
+<span lang="pi" class="pali">Sādhu, vāseṭṭha, te vata, vāseṭṭha, tevijjā brāhmaṇā yaṁ na jānanti, yaṁ na passanti, tassa sahabyatāya maggaṁ desessanti. ‘Ayameva ujumaggo, ayamañjasāyano niyyāniko, niyyāti takkarassa brahmasahabyatāyā’ti, netaṁ ṭhānaṁ vijjati.</span></p>
+
+<p lang="vi" class="vi">Này Vāseṭṭha, ví như một chuỗi người mù ôm lưng nhau, người trước không thấy, người giữa cũng không thấy, người cuối cùng cũng không thấy.<br>
+<span lang="pi" class="pali">Seyyathāpi, vāseṭṭha, andhaveṇi paramparasaṁsattā purimopi na passati, majjhimopi na passati, pacchimopi na passati;</span></p>
+
+<p lang="vi" class="vi">Như vậy, này Vāseṭṭha lời nói của những Bà-la-môn tinh thông ba tập Vedā, người đầu không thấy, giữa cũng không thấy, người cuối cùng cũng không thấy, giống như lời nói mù quáng.<br>
+<span lang="pi" class="pali">evameva kho, vāseṭṭha, andhaveṇūpamaṁ maññe tevijjānaṁ brāhmaṇānaṁ bhāsitaṁ, purimopi na passati, majjhimopi na passati, pacchimopi na passati.</span></p>
+
+<p lang="vi" class="vi">Lời nói của những Bà-la-môn tinh thông ba tập Vedā như vậy là lời nói đáng chê cười, là lời nói suông, là lời nói không tưởng, là lời nói trống rỗng.<br>
+<span lang="pi" class="pali">Tesamidaṁ tevijjānaṁ brāhmaṇānaṁ bhāsitaṁ hassakaññeva sampajjati, nāmakaññeva sampajjati, rittakaññeva sampajjati, tucchakaññeva sampajjati.</span></p>
+
+<p lang="vi" class="vi">Này Vāseṭṭha, nhà Ngươi nghĩ thế nào?<br>
+<span lang="pi" class="pali">Taṁ kiṁ maññasi, vāseṭṭha?</span></p>
+
+<p lang="vi" class="vi">Các Bà-la-môn tinh thông ba tập Vedā như phần đông nhiều người khác – có thể thấy mặt trăng, mặt trời không, trong khi các vị này cầu khẩn, tán thán, vừa đi xung quanh, vừa chấp tay và đảnh lễ chỗ mặt trăng, mặt trời mọc và lặn?<br>
+<span lang="pi" class="pali">”passanti tevijjā brāhmaṇā candimasūriye, aññe cāpi bahujanā, yato ca candimasūriyā uggacchanti, yattha ca ogacchanti, āyācanti thomayanti pañjalikā namassamānā anuparivattantī”ti?</span></p>
+
+<p lang="vi" class="vi">Thưa vâng, Tôn giả Gotama, các Bà-la-môn tinh thông ba tập Vedā như phần đông nhiều người khác có thể thấy mặt trăng, mặt trời, trong khi các vị này cầu khẩn, tán thán, vừa đi xung quanh, vừa chấp tay đảnh lễ chỗ mặt trăng, mặt trời mọc và lặn.<br>
+<span lang="pi" class="pali">“Evaṁ, bho gotama, passanti tevijjā brāhmaṇā candimasūriye, aññe cāpi bahujanā, yato ca candimasūriyā uggacchanti, yattha ca ogacchanti, āyācanti thomayanti pañjalikā namassamānā anuparivattantī”ti.</span></p>
+
+<p lang="vi" class="vi">Này Vāseṭṭha, nhà Ngươi nghĩ thế nào?<br>
+<span lang="pi" class="pali">Taṁ kiṁ maññasi, vāseṭṭha?</span></p>
+
+<p lang="vi" class="vi">Các Bà-la-môn tinh thông ba tập Vedā – như phần đông nhiều người khác thấy mặt trăng, mặt trời, trong khi các vị này cầu khẩn, tán thán, vừa đi xung quanh, vừa chấp tay và đảnh lễ chỗ mặt trăng mặt trời mọc và lặn, những vị này có thể thuyết dạy con đường đưa đến sự cộng trú với mặt trăng mặt trời không?<br>
+<span lang="pi" class="pali">yaṁ passanti tevijjā brāhmaṇā candimasūriye, aññe cāpi bahujanā, yato ca candimasūriyā uggacchanti, yattha ca ogacchanti, āyācanti thomayanti pañjalikā namassamānā anuparivattanti, pahonti tevijjā brāhmaṇā candimasūriyānaṁ sahabyatāya maggaṁ desetuṁ:</span></p>
+
+<p lang="vi" class="vi">Ðây là trực đạo, đây là chánh đạo hướng đến, dẫn đến cộng trú với mặt trăng, mặt trời cho những ai thực hành theo?<br>
+<span lang="pi" class="pali">”‘ayameva ujumaggo, ayamañjasāyano niyyāniko, niyyāti takkarassa candimasūriyānaṁ sahabyatāyā’”ti?</span></p>
+
+<p lang="vi" class="vi">Tôn giả Gotama, không thể được!<br>
+<span lang="pi" class="pali">“No hidaṁ, bho gotama”.</span></p>
+
+<p lang="vi" class="vi">Này Vāseṭṭha, Ngươi nói rằng các Bà-la-môn tinh thông ba tập Vedā như phần đông nhiều người khác, thấy mặt trăng, mặt trời trong khi các vị này cầu khẩn tán thán, vừa đi xung quanh, vừa chấp tay và đảnh lễ chỗ mặt trăng, mặt trời mọc và lặn, những vị này không có thể thuyết dạy con đường đưa đến sự cộng trú với mặt trăng mặt trời: “Ðây là trực đạo, đây là chánh đạo hướng đến, dẫn đến cọng trú với mặt trăng, mặt trời cho những ai thực hành theo”.<br>
+<span lang="pi" class="pali">Iti kira, vāseṭṭha, yaṁ passanti tevijjā brāhmaṇā candimasūriye, aññe cāpi bahujanā, yato ca candimasūriyā uggacchanti, yattha ca ogacchanti, āyācanti thomayanti pañjalikā namassamānā anuparivattanti, tesampi nappahonti candimasūriyānaṁ sahabyatāya maggaṁ desetuṁ:‘ayameva ujumaggo, ayamañjasāyano niyyāniko, niyyāti takkarassa candimasūriyānaṁ sahabyatāyā’ti.</span></p>
+
+<p lang="vi" class="vi">Ngươi cũng nói các Bà-la-môn tinh thông ba tập Vedā không thể tận mắt thấy được Phạm thiên, các tôn sư của những Bà-la-môn tinh thông ba tập Vedā không thể tận mắt thấy được Phạm thiên, các đại tôn sư các Bà-la-môn tinh thông ba tập Vedā không thể tận mắt thấy được Phạm thiên, các Bà-la-môn cho đến bảy đời đại tôn sư, tôn sư của những Bà-la-môn tinh thông ba tập Vedā không thể tận mắt thấy được Phạm thiên. Ngươi cũng nói trong những tu sĩ thời cổ trong các Bà-la-môn tinh thông ba tập Vedā, những vị sáng tác các thần chú, được hát lên, được trì tụng, được ngâm vịnh và ngày nay những Bà-la-môn cũng hát lên, trì tụng và giảng dạy – như các vị Atthaka, Vāmaka, Vāmadeva, Vessāmitta, Yamataggi, Anigirasa, Bhāradvāja, Vāseṭṭha, Kassapa, Bhagu, không có một vị nào đã nói: “Chúng tôi biết, chúng tôi thấy Phạm thiên ở đâu, Phạm thiên từ đâu đến, Phạm thiên sẽ đi đâu”.<br>
+<span lang="pi" class="pali">Iti pana na kira tevijjehi brāhmaṇehi brahmā sakkhidiṭṭho.Napi kira tevijjānaṁ brāhmaṇānaṁ ācariyehi brahmā sakkhidiṭṭho.Napi kira tevijjānaṁ brāhmaṇānaṁ ācariyapācariyehi brahmā sakkhidiṭṭho.Napi kira tevijjānaṁ brāhmaṇānaṁ yāva sattamā ācariyāmahayugehi brahmā sakkhidiṭṭho.Yepi kira tevijjānaṁ brāhmaṇānaṁ pubbakā isayo mantānaṁ kattāro mantānaṁ pavattāro, yesamidaṁ etarahi tevijjā brāhmaṇā porāṇaṁ mantapadaṁ gītaṁ pavuttaṁ samihitaṁ, tadanugāyanti, tadanubhāsanti, bhāsitamanubhāsanti, vācitamanuvācenti, seyyathidaṁ—aṭṭhako vāmako vāmadevo vessāmitto yamataggi aṅgīraso bhāradvājo vāseṭṭho kassapo bhagu, tepi na evamāhaṁsu:‘mayametaṁ jānāma, mayametaṁ passāma, yattha vā brahmā, yena vā brahmā, yahiṁ vā brahmā’ti.</span></p>
+
+<p lang="vi" class="vi">Như vậy các Bà-la-môn tinh thông ba tập Vedā đã nói:<br>
+<span lang="pi" class="pali">Teva tevijjā brāhmaṇā evamāhaṁsu:</span></p>
+
+<p lang="vi" class="vi">Chúng tôi không biết, chúng tôi không thấy con đường đưa đến cộng trú với Phạm thiên, nhưng chúng tôi thuyết dạy con đường ấy: “Ðây là trực đạo, đây là chánh đạo hướng đến, dẫn đến cộng trú với Phạm thiên cho những ai thực hành theo”.<br>
+<span lang="pi" class="pali">‘yaṁ na jānāma, yaṁ na passāma, tassa sahabyatāya maggaṁ desema: ayameva ujumaggo ayamañjasāyano niyyāniko niyyāti takkarassa brahmasahabyatāyā’ti.</span></p>
+
+<p lang="vi" class="vi">Này Vāseṭṭha, nhà Ngươi nghĩ thế nào?<br>
+<span lang="pi" class="pali">Taṁ kiṁ maññasi, vāseṭṭha,</span></p>
+
+<p lang="vi" class="vi">Sự kiện là như vậy, thời có phải lời nói của những Bà-la-môn tinh thông ba tập Vedā là không chánh xác, hợp lý?”<br>
+<span lang="pi" class="pali">”nanu evaṁ sante tevijjānaṁ brāhmaṇānaṁ appāṭihīrakataṁ bhāsitaṁ sampajjatī”ti?</span></p>
+
+<p lang="vi" class="vi">Tôn giả Gotama, sự kiện là như vậy, thời lời nói của những Bà-la-môn tinh thông ba tập Vedā là không chánh xác, hợp lý.<br>
+<span lang="pi" class="pali">“Addhā kho, bho gotama, evaṁ sante tevijjānaṁ brāhmaṇānaṁ appāṭihīrakataṁ bhāsitaṁ sampajjatī”ti.</span></p>
+
+<p lang="vi" class="vi">Lành thay, này Vāseṭṭha! Những Bà-la-môn tinh thông ba tập Vedā không biết, không thấy con đường đưa đến cọng trú với Phạm thiên mà thuyết dạy: “Ðây là trực đạo, đây là chánh đạo hướng đến, dẫn đến cộng trú với Phạm thiên cho những ai thực hành theo”. Thật không có sự kiện ấy.<br>
+<span lang="pi" class="pali">Sādhu, vāseṭṭha, te vata, vāseṭṭha, tevijjā brāhmaṇā yaṁ na jānanti, yaṁ na passanti, tassa sahabyatāya maggaṁ desessanti: ‘ayameva ujumaggo, ayamañjasāyano niyyāniko, niyyāti takkarassa brahmasahabyatāyā’ti, netaṁ ṭhānaṁ vijjati.</span></p>
+
+<p lang="vi" class="vi">2.1. Ví Dụ Mỹ Nữ Trong Quốc Độ<br>
+<span lang="pi" class="pali">2.1. Janapadakalyāṇīupamā</span></p>
+
+<p lang="vi" class="vi">Này Vāseṭṭha, như có người nói: “Tôi yêu và ái luyến một cô gái đẹp trong nước này”.<br>
+<span lang="pi" class="pali">Seyyathāpi, vāseṭṭha, puriso evaṁ vadeyya: ‘ahaṁ yā imasmiṁ janapade janapadakalyāṇī, taṁ icchāmi, taṁ kāmemī’ti.</span></p>
+
+<p lang="vi" class="vi">Có người hỏi: “Này bạn, cô gái đẹp mà Ông yêu và ái luyến ấy: Ông có biết là người giai cấp nào, là Sát-đế-lỵ, hay Bà-la-môn, hay Phệ-xá, hay Thủ-đà?”<br>
+<span lang="pi" class="pali">Tamenaṁ evaṁ vadeyyuṁ: ambho purisa, yaṁ tvaṁ janapadakalyāṇiṁ icchasi kāmesi, jānāsi taṁ janapadakalyāṇiṁ—khattiyī vā brāhmaṇī vā vessī vā suddī vā’ti?</span></p>
+
+<p lang="vi" class="vi">Khi được hỏi, người ấy trả lời không biết.<br>
+<span lang="pi" class="pali">Iti puṭṭho ‘no’ti vadeyya.</span></p>
+
+<p lang="vi" class="vi">Có người hỏi: “Này bạn, cô gái đẹp Ông yêu và ái luyến ấy, Ông có biết tên gì, họ gì, lớn người, thấp người hay người bậc trung? Da đen sẩm, da ngăm ngăm đen hay da hồng hào? Ở tại làng nào, ấp nào, hay thành phố nào?”<br>
+<span lang="pi" class="pali">Tamenaṁ evaṁ vadeyyuṁ: ‘ambho purisa, yaṁ tvaṁ janapadakalyāṇiṁ icchasi kāmesi, jānāsi taṁ janapadakalyāṇiṁ—evaṁnāmā evaṅgottāti vā, dīghā vā rassā vā majjhimā vā kāḷī vā sāmā vā maṅguracchavī vāti, amukasmiṁ gāme vā nigame vā nagare vā’ti?</span></p>
+
+<p lang="vi" class="vi">Khi được hỏi vậy, người ấy trả lời không biết.<br>
+<span lang="pi" class="pali">Iti puṭṭho ‘no’ti vadeyya.</span></p>
+
+<p lang="vi" class="vi">Có người hỏi: “Này bạn, như vậy có phải Ông đã yêu và đã ái luyến một người Ông không biết, không thấy?”<br>
+<span lang="pi" class="pali">Tamenaṁ evaṁ vadeyyuṁ: ambho purisa, yaṁ tvaṁ na jānāsi na passasi, taṁ tvaṁ icchasi kāmesī’ti?</span></p>
+
+<p lang="vi" class="vi">Ðược hỏi vậy, vị ấy trả lời phải.<br>
+<span lang="pi" class="pali">Iti puṭṭho ‘āmā’ti vadeyya.</span></p>
+
+<p lang="vi" class="vi">Này Vāseṭṭha, Ngươi nghĩ thế nào?<br>
+<span lang="pi" class="pali">Taṁ kiṁ maññasi, vāseṭṭha,</span></p>
+
+<p lang="vi" class="vi">Sự kiện là như vậy, thời có phải lời nói của người kia là không chánh xác, hợp lý?<br>
+<span lang="pi" class="pali">”nanu evaṁ sante tassa purisassa appāṭihīrakataṁ bhāsitaṁ sampajjatī”ti?</span></p>
+
+<p lang="vi" class="vi">Vâng phải, Tôn giả Gotama. Sự kiện là như vậy, thời lời nói của người kia không chánh xác, hợp lý.<br>
+<span lang="pi" class="pali">“Addhā kho, bho gotama, evaṁ sante tassa purisassa appāṭihīrakataṁ bhāsitaṁ sampajjatī”ti.</span></p>
+
+<p lang="vi" class="vi">Cũng vậy, này Vāseṭṭha, Ngươi nói rằng các Bà-la-môn tinh thông ba tập Vedā không thể tận mắt thấy được Phạm thiên, các đại tôn sư các Bà-la-môn tinh thông ba tập Vedā không thể tận mắt thấy được Phạm thiên, các Bà-la-môn cho đến bảy đời đại tôn sư, tôn sư của những Bà-la-môn tinh thông ba tập Vedā, không thể tận mắt thấy được Phạm thiên. Ngươi cũng nói những tu sĩ thời cổ trong các Bà-la-môn tinh thông ba tập Vedā, những vị sáng tác các thần chú, những vị trì tụng thần chú mà xưa kia các thần chú được hát lên, được trì tụng, được ngâm vịnh và ngày nay những Bà-la-môn tinh thông ba tập Vedā cũng hát lên, cũng trì tụng và giảng dạy như các vị Vāmaka, Vāmadeva, Vessāmitta, Yamataggi, Angirasa, Bhāradvāja, Vāseṭṭha, Kassapa, Bhagu, không có một vị nào đã nói: “Chúng tôi biết, chúng tôi thấy Phạm thiên ở đâu, Phạm thiên từ đâu đến, Phạm thiên sẽ đi đâu”. Như vậy các Bà-la-môn tinh thông ba tập Vedā đã nói: “Chúng tôi không biết, chúng tôi không thấy con đường đưa đến sự cộng trú với Phạm thiên nhưng chúng tôi thuyết dạy con đường ấy: “Ðây là trực đạo, đây là chánh đạo hướng đến, dẫn đến cộng trú với Phạm thiên cho những ai thực hành theo”.<br>
+<span lang="pi" class="pali">Evameva kho, vāseṭṭha, na kira tevijjehi brāhmaṇehi brahmā sakkhidiṭṭho, napi kira tevijjānaṁ brāhmaṇānaṁ ācariyehi brahmā sakkhidiṭṭho, napi kira tevijjānaṁ brāhmaṇānaṁ ācariyapācariyehi brahmā sakkhidiṭṭho.Napi kira tevijjānaṁ brāhmaṇānaṁ yāva sattamā ācariyāmahayugehi brahmā sakkhidiṭṭho.Yepi kira tevijjānaṁ brāhmaṇānaṁ pubbakā isayo mantānaṁ kattāro mantānaṁ pavattāro, yesamidaṁ etarahi tevijjā brāhmaṇā porāṇaṁ mantapadaṁ gītaṁ pavuttaṁ samihitaṁ, tadanugāyanti, tadanubhāsanti, bhāsitamanubhāsanti, vācitamanuvācenti, seyyathidaṁ—aṭṭhako vāmako vāmadevo vessāmitto yamataggi aṅgīraso bhāradvājo vāseṭṭho kassapo bhagu, tepi na evamāhaṁsu:‘mayametaṁ jānāma, mayametaṁ passāma, yattha vā brahmā, yena vā brahmā, yahiṁ vā brahmā’ti.Teva tevijjā brāhmaṇā evamāhaṁsu:‘yaṁ na jānāma, yaṁ na passāma, tassa sahabyatāya maggaṁ desema—ayameva ujumaggo ayamañjasāyano niyyāniko niyyāti takkarassa brahmasahabyatāyā’ti.</span></p>
+
+<p lang="vi" class="vi">Này Vāseṭṭha, Ngươi nghĩ thế nào? Sự kiện là như vậy, thời có phải lời nói của những Bà-la-môn tinh thông ba tập Vedā là không chánh xác, hợp lý?<br>
+<span lang="pi" class="pali">”Taṁ kiṁ maññasi, vāseṭṭha, nanu evaṁ sante tevijjānaṁ brāhmaṇānaṁ appāṭihīrakataṁ bhāsitaṁ sampajjatī”ti?</span></p>
+
+<p lang="vi" class="vi">Tôn giả Gotama, sự kiện là như vậy thời lời nói của những Bà-la-môn tinh thông ba tập Vedā là không chánh xác, hợp lý.<br>
+<span lang="pi" class="pali">“Addhā kho, bho gotama, evaṁ sante tevijjānaṁ brāhmaṇānaṁ appāṭihīrakataṁ bhāsitaṁ sampajjatī”ti.</span></p>
+
+<p lang="vi" class="vi">Lành thay, Vāseṭṭha, những Bà-la-môn tinh thông ba tập Vedā không biết, không thấy con đường đưa đến cộng trú với Phạm thiên mà thuyết dạy: “Ðây là trực đạo, đây là chánh đạo hướng đến, dẫn đến cộng trú với Phạm thiên cho những ai thực hành theo”, thật không có sự kiện ấy.<br>
+<span lang="pi" class="pali">Sādhu, vāseṭṭha, te vata, vāseṭṭha, tevijjā brāhmaṇā yaṁ na jānanti, yaṁ na passanti, tassa sahabyatāya maggaṁ desessanti—ayameva ujumaggo ayamañjasāyano niyyāniko niyyāti takkarassa brahmasahabyatāyāti netaṁ ṭhānaṁ vijjati.</span></p>
+
+<p lang="vi" class="vi">2.2. Ví Dụ Về Cái Thang<br>
+<span lang="pi" class="pali">2.2. Nisseṇīupamā</span></p>
+
+<p lang="vi" class="vi">Này Vāseṭṭha, như một người muốn xây tại ngã tư đường một cái thang để leo lên lầu.<br>
+<span lang="pi" class="pali">Seyyathāpi, vāseṭṭha, puriso cātumahāpathe nisseṇiṁ kareyya pāsādassa ārohaṇāya.</span></p>
+
+<p lang="vi" class="vi">Có người hỏi: “Này bạn, Ông muốn xây một cái thang để leo lên lầu, vậy Ông có biết lầu ấy là về hướng Ðông, hay về hướng Tây, hay về hướng Bắc, hay về hướng Nam? Nhà lầu ấy cao hay thấp, hay trung bình?”<br>
+<span lang="pi" class="pali">Tamenaṁ evaṁ vadeyyuṁ:‘ambho purisa, yassa tvaṁ pāsādassa ārohaṇāya nisseṇiṁ karosi, jānāsi taṁ pāsādaṁ—puratthimāya vā disāya dakkhiṇāya vā disāya pacchimāya vā disāya uttarāya vā disāya ucco vā nīco vā majjhimo vā’ti?</span></p>
+
+<p lang="vi" class="vi">Ðược hỏi vậy, vị ấy trả lời không biết.<br>
+<span lang="pi" class="pali">Iti puṭṭho ‘no’ti vadeyya.</span></p>
+
+<p lang="vi" class="vi">Có người hỏi: “Này bạn, như vậy có phải Ông xây một cái thang để leo lên một cái lầu mà Ông không biết, không thấy?”<br>
+<span lang="pi" class="pali">Tamenaṁ evaṁ vadeyyuṁ: ‘ambho purisa, yaṁ tvaṁ na jānāsi, na passasi, tassa tvaṁ pāsādassa ārohaṇāya nisseṇiṁ karosī’ti?</span></p>
+
+<p lang="vi" class="vi">Hỏi vậy, vị ấy trả lời phải.<br>
+<span lang="pi" class="pali">Iti puṭṭho ‘āmā’ti vadeyya.</span></p>
+
+<p lang="vi" class="vi">Này Vāseṭṭha, ngươi nghĩ thế nào?<br>
+<span lang="pi" class="pali">Taṁ kiṁ maññasi, vāseṭṭha?</span></p>
+
+<p lang="vi" class="vi">Sự kiện là như vậy, thời có phải lời nói người kia không chánh xác, hợp lý?<br>
+<span lang="pi" class="pali">”nanu evaṁ sante tassa purisassa appāṭihīrakataṁ bhāsitaṁ sampajjatī”ti?</span></p>
+
+<p lang="vi" class="vi">Vâng phải, bạch Thế Tôn. Sự kiện là như vậy thời lời nói của người kia là không chánh xác, hợp lý.<br>
+<span lang="pi" class="pali">“Addhā kho, bho gotama, evaṁ sante tassa purisassa appāṭihīrakataṁ bhāsitaṁ sampajjatī”ti.</span></p>
+
+<p lang="vi" class="vi">Cũng vậy, này Vāseṭṭha. Ngươi nói rằng các Bà-la-môn tinh thông ba tập Vedā không thể tận mắt thấy được Phạm thiên, các tôn sư các Bà-la-môn tinh thông ba tập Vedā không thể tận mắt thấy được Phạm thiên, các đại tôn sư các Bà-la-môn tinh thông ba tập Vedā không thể tận mắt thấy được Phạm thiên, các Bà-la-môn cho đến bảy đời đại tôn sư, tôn sư của những Bà-la-môn tinh thông ba tập Vedā không thể tận mắt thấy được Phạm thiên. Người cũng nói trong những ẩn sĩ thời cổ trong các Bà-la-môn tinh thông ba tập Vedā, những vị sáng tác các thần chú, những vị trì tụng thần chú mà xưa kia những thần chú được hát lên, được trì tụng, được bình tán và ngày nay những Bà-la-môn tinh thông ba tập Vedā cũng hát lên, trì tụng và giảng dạy – như các vị Atthaka, Vamaka, Vāmadeva, Vessāmitta, Yamataggi, Angirasa, Bhāradvāja, Vāseṭṭha, Kassapa, Bhagu, không có một vị nào đã nói: “Chúng tôi biết, chúng tôi thấy Phạm thiên ở đâu, Phạm thiên từ đâu đến, Phạm thiên sẽ đi đâu?” Như vậy các Bà-la-môn tinh thông ba tập Vedā đã nói: “Chúng tôi không biết, chúng tôi không thấy con đường đưa đến sự cộng trú với Phạm thiên nhưng chúng tôi thuyết dạy con đường ấy: “Ðây là trực đạo, đây là chánh đạo hướng đến, dẫn đến cộng trú với Phạm thiên cho những ai thực hành theo”.<br>
+<span lang="pi" class="pali">Evameva kho, vāseṭṭha, na kira tevijjehi brāhmaṇehi brahmā sakkhidiṭṭho, napi kira tevijjānaṁ brāhmaṇānaṁ ācariyehi brahmā sakkhidiṭṭho, napi kira tevijjānaṁ brāhmaṇānaṁ ācariyapācariyehi brahmā sakkhidiṭṭho, napi kira tevijjānaṁ brāhmaṇānaṁ yāva sattamā ācariyāmahayugehi brahmā sakkhidiṭṭho.Yepi kira tevijjānaṁ brāhmaṇānaṁ pubbakā isayo mantānaṁ kattāro mantānaṁ pavattāro, yesamidaṁ etarahi tevijjā brāhmaṇā porāṇaṁ mantapadaṁ gītaṁ pavuttaṁ samihitaṁ, tadanugāyanti, tadanubhāsanti, bhāsitamanubhāsanti, vācitamanuvācenti, seyyathidaṁ—aṭṭhako vāmako vāmadevo vessāmitto yamataggi aṅgīraso bhāradvājo vāseṭṭho kassapo bhagu, tepi na evamāhaṁsu—mayametaṁ jānāma, mayametaṁ passāma, yattha vā brahmā, yena vā brahmā, yahiṁ vā brahmāti.Teva tevijjā brāhmaṇā evamāhaṁsu:‘yaṁ na jānāma, yaṁ na passāma, tassa sahabyatāya maggaṁ desema, ayameva ujumaggo ayamañjasāyano niyyāniko niyyāti takkarassa brahmasahabyatāyā’ti.</span></p>
+
+<p lang="vi" class="vi">Này Vāseṭṭha, ngươi nghĩ thế nào? Sự kiện là như vậy thời có phải lời nói của những Bà-la-môn tinh thông ba tập Vedā là không chánh xác, hợp lý?<br>
+<span lang="pi" class="pali">”Taṁ kiṁ maññasi, vāseṭṭha, nanu evaṁ sante tevijjānaṁ brāhmaṇānaṁ appāṭihīrakataṁ bhāsitaṁ sampajjatī”ti?</span></p>
+
+<p lang="vi" class="vi">Tôn giả Gotama, sự kiện là như vậy thời lời nói của những Bà-la-môn tinh thông ba tập Vedā là không chính xác hợp lý.<br>
+<span lang="pi" class="pali">“Addhā kho, bho gotama, evaṁ sante tevijjānaṁ brāhmaṇānaṁ appāṭihīrakataṁ bhāsitaṁ sampajjatī”ti.</span></p>
+
+<p lang="vi" class="vi">Lành thay, Vāseṭṭha. Những Bà-la-môn tinh thông ba tập Vedā không biết, không thấy con đường đưa đến cộng trú với Phạm thiên mà thuyết dạy: “Ðây là trực đạo, đây là chánh đạo hướng đến, dẫn đến cộng trú với Phạm thiên cho những ai thực hành theo”. Thật không có sự kiện ấy.<br>
+<span lang="pi" class="pali">Sādhu, vāseṭṭha, te vata, vāseṭṭha, tevijjā brāhmaṇā yaṁ na jānanti, yaṁ na passanti, tassa sahabyatāya maggaṁ desessanti. Ayameva ujumaggo ayamañjasāyano niyyāniko niyyāti takkarassa brahmasahabyatāyāti, netaṁ ṭhānaṁ vijjati.</span></p>
+
+<p lang="vi" class="vi">2.3. Ví Dụ Về Con Sông Aciravatī<br>
+<span lang="pi" class="pali">2.3. Aciravatīnadīupamā</span></p>
+
+<p lang="vi" class="vi">Này Vāseṭṭha, như sông Aciravati này, đầy tràn cho đến bờ khiến con quạ có thể uống được.<br>
+<span lang="pi" class="pali">Seyyathāpi, vāseṭṭha, ayaṁ aciravatī nadī pūrā udakassa samatittikā kākapeyyā.</span></p>
+
+<p lang="vi" class="vi">Có người đến, có sự việc bên bờ bên kia, tìm đến bờ bên kia, hướng đến bờ bên kia và muốn lội qua bờ bên kia.<br>
+<span lang="pi" class="pali">Atha puriso āgaccheyya pāratthiko pāragavesī pāragāmī pāraṁ taritukāmo.</span></p>
+
+<p lang="vi" class="vi">Người đứng bờ bên này kêu bờ bên kia và nói: “Bờ bên kia, hãy lại đây! Bờ bên kia, hãy lại đây”.<br>
+<span lang="pi" class="pali">So orime tīre ṭhito pārimaṁ tīraṁ avheyya: ‘ehi pārāpāraṁ, ehi pārāpāran’ti.</span></p>
+
+<p lang="vi" class="vi">Này Vāseṭṭha, Ngươi nghĩ thế nào?<br>
+<span lang="pi" class="pali">Taṁ kiṁ maññasi, vāseṭṭha?</span></p>
+
+<p lang="vi" class="vi">Có phải vì người kia kêu gọi bờ bên kia, vì cầu khẩn, vì hy vọng, vì tán thán mà bờ bên kia của sông Aciravati đến bờ bên này không?<br>
+<span lang="pi" class="pali">”api nu tassa purisassa avhāyanahetu vā āyācanahetu vā patthanahetu vā abhinandanahetu vā aciravatiyā nadiyā pārimaṁ tīraṁ orimaṁ tīraṁ āgaccheyyā”ti?</span></p>
+
+<p lang="vi" class="vi">Tôn giả Gotama, không thể vậy.<br>
+<span lang="pi" class="pali">“No hidaṁ, bho gotama”.</span></p>
+
+<p lang="vi" class="vi">Cũng vậy, này Vāseṭṭha, những Bà-la-môn tinh thông ba tập Vedā, loại bỏ những pháp tác thành người Bà-la-môn, tuân theo những pháp không tác thành người Bà-la-môn, những vị này đã nói:<br>
+<span lang="pi" class="pali">“Evameva kho, vāseṭṭha, tevijjā brāhmaṇā ye dhammā brāhmaṇakārakā te dhamme pahāya vattamānā, ye dhammā abrāhmaṇakārakā te dhamme samādāya vattamānā evamāhaṁsu:</span></p>
+
+<p lang="vi" class="vi">“Chúng tôi cầu khẩn Indra (Nhân-đà-la), chúng tôi cầu khẩn Soma (Tô-ma), chúng tôi cầu khẩn Vanena (Bà-lưu-va), chúng tôi cầu khẩn Īsāna (Y-sa-na), chúng tôi cầu khẩn Pajāpati (Sanh chủ), chúng tôi cầu khẩn Brahmā (Phạm thiên), chúng tôi cầu khẩn Mahiddhi (Ma-hi-đề), chúng tôi cầu khẩn Yama (Dạ-ma).<br>
+<span lang="pi" class="pali">‘indamavhayāma, somamavhayāma, varuṇamavhayāma, īsānamavhayāma, pajāpatimavhayāma, brahmamavhayāma, mahiddhimavhayāma, yamamavhayāmā’ti.</span></p>
+
+<p lang="vi" class="vi">Này Vāseṭṭha, những Bà-la-môn tinh thông ba tập Vedā ấy, loại bỏ những pháp tác thành người Bà-la-môn – vì kêu gọi, vì cầu khẩn, vì hy vọng, vì tán thán, sau khi thân hoại mạng chung, những vị ấy sẽ cộng trú với Phạm thiên – Thật không có sự kiện ấy.<br>
+<span lang="pi" class="pali">Te vata, vāseṭṭha, tevijjā brāhmaṇā ye dhammā brāhmaṇakārakā te dhamme pahāya vattamānā, ye dhammā abrāhmaṇakārakā te dhamme samādāya vattamānā avhāyanahetu vā āyācanahetu vā patthanahetu vā abhinandanahetu vā kāyassa bhedā paraṁ maraṇā brahmānaṁ sahabyūpagā bhavissantīti, netaṁ ṭhānaṁ vijjati.</span></p>
+
+<p lang="vi" class="vi">Này Vāseṭṭha, như sông Aciravati này, đầy tràn cho đến bờ khiến con quạ có thể uống được.<br>
+<span lang="pi" class="pali">Seyyathāpi, vāseṭṭha, ayaṁ aciravatī nadī pūrā udakassa samatittikā kākapeyyā.</span></p>
+
+<p lang="vi" class="vi">Có người đến, có sự việc bên bờ bên kia, tiến đến bờ bên kia, hướng đến bờ bên kia, và muốn lội qua bờ bên kia.<br>
+<span lang="pi" class="pali">Atha puriso āgaccheyya pāratthiko pāragavesī pāragāmī pāraṁ taritukāmo.</span></p>
+
+<p lang="vi" class="vi">Người này đứng bên bờ này kêu bờ bên kia và nói: “Bờ bên kia hãy lại đây! Bờ bên kia hãy lại đây!”<br>
+<span lang="pi" class="pali">So orime tīre daḷhāya anduyā pacchābāhaṁ gāḷhabandhanaṁ baddho.</span></p>
+
+<p lang="vi" class="vi">Này Vāseṭṭha, Ngươi nghĩ thế nào?<br>
+<span lang="pi" class="pali">Taṁ kiṁ maññasi, vāseṭṭha?</span></p>
+
+<p lang="vi" class="vi">Có phải vì người kia kêu gọi bờ bên kia, vì cầu khẩn, vì hy vọng, vì tán thán mà bờ bên kia của sông Aciravati đến bờ bên này không?<br>
+<span lang="pi" class="pali">”api nu so puriso aciravatiyā nadiyā orimā tīrā pārimaṁ tīraṁ gaccheyyā”ti?</span></p>
+
+<p lang="vi" class="vi">Tôn giả Gotama, không thể vậy.<br>
+<span lang="pi" class="pali">“No hidaṁ, bho gotama”.</span></p>
+
+<p lang="vi" class="vi">Cũng vậy, này Vāseṭṭha, có năm pháp khiến dục lạc tăng thịnh. Năm pháp này được xem là sợi dây chuyền, sợi dây thắng trong giới luật của bậc Thánh.<br>
+<span lang="pi" class="pali">Evameva kho, vāseṭṭha, pañcime kāmaguṇā ariyassa vinaye andūtipi vuccanti, bandhanantipi vuccanti.</span></p>
+
+<p lang="vi" class="vi">Thế nào là năm?<br>
+<span lang="pi" class="pali">Katame pañca?</span></p>
+
+<p lang="vi" class="vi">Những sắc pháp do mắt cảm nhận khả ái, mỹ miều, thích thú, hấp dẫn, câu hữu với dục, ái lạc;<br>
+<span lang="pi" class="pali">Cakkhuviññeyyā rūpā iṭṭhā kantā manāpā piyarūpā kāmūpasaṁhitā rajanīyā.</span></p>
+
+<p lang="vi" class="vi">những tiếng do tai cảm nhận…những hương do mũi cảm nhận…những vị do lưỡi cảm nhận…<br>
+<span lang="pi" class="pali">Sotaviññeyyā saddā …pe…ghānaviññeyyā gandhā … jivhāviññeyyā rasā …</span></p>
+
+<p lang="vi" class="vi">những xúc do thân cảm nhận khả ái, mỹ miều, thích thú, hấp dẫn, câu hữu với dục lạc.<br>
+<span lang="pi" class="pali">kāyaviññeyyā phoṭṭhabbā iṭṭhā kantā manāpā piyarūpā kāmūpasaṁhitā rajanīyā.</span></p>
+
+<p lang="vi" class="vi">Này Vāseṭṭha, năm pháp khiến dục lạc tăng thịnh ấy, được xem là sợi dây chuyền, sợi dây thắng trong giới luật của bậc Thánh.<br>
+<span lang="pi" class="pali">Ime kho, vāseṭṭha, pañca kāmaguṇā ariyassa vinaye andūtipi vuccanti, bandhanantipi vuccanti.</span></p>
+
+<p lang="vi" class="vi">Này Vāseṭṭha, năm pháp khiến dục lạc tăng thịnh ấy, các Bà-la-môn tinh thông ba tập Vedā chấp trước, mê đắm, bị trói buộc, không thấy nguy hiểm của chúng, không nhận thức sự không thoát ly của chúng, đã tận hưởng năm pháp ấy.<br>
+<span lang="pi" class="pali">Ime kho, vāseṭṭha, pañca kāmaguṇe tevijjā brāhmaṇā gadhitā mucchitā ajjhopannā anādīnavadassāvino anissaraṇapaññā paribhuñjanti.</span></p>
+
+<p lang="vi" class="vi">Này Vāseṭṭha, những Bà-la-môn tinh thông ba tập Vedā, loại bỏ những pháp tác thành người Bà-la-môn, tuân theo những pháp không tác thành người Bà-la-môn, chấp trước, mê đắm, bị trói buộc, không thấy nguy hiểm của chúng, không nhận thức sự không thoát ly của chúng, tận hưởng chúng, bị trói buộc bởi sự trói buộc của dục lạc, sau khi thân hoại mạng chung sẽ cộng trú với Phạm thiên, thật không có sự kiện ấy.<br>
+<span lang="pi" class="pali">Te vata, vāseṭṭha, tevijjā brāhmaṇā ye dhammā brāhmaṇakārakā, te dhamme pahāya vattamānā, ye dhammā abrāhmaṇakārakā, te dhamme samādāya vattamānā pañca kāmaguṇe gadhitā mucchitā ajjhopannā anādīnavadassāvino anissaraṇapaññā paribhuñjantā kāmandubandhanabaddhā kāyassa bhedā paraṁ maraṇā brahmānaṁ sahabyūpagā bhavissantīti, netaṁ ṭhānaṁ vijjati.</span></p>
+
+<p lang="vi" class="vi">Này Vāseṭṭha, như sông Acivarati này, đầy tràn cho đến bờ khiến con quạ có thể uống được.<br>
+<span lang="pi" class="pali">Seyyathāpi, vāseṭṭha, ayaṁ aciravatī nadī pūrā udakassa samatittikā kākapeyyā.</span></p>
+
+<p lang="vi" class="vi">Có người đến, có sự việc bên bờ bên kia, tìm đến bờ bên kia, hướng đến bờ bên kia và muốn lội qua bờ bên kia.<br>
+<span lang="pi" class="pali">Atha puriso āgaccheyya pāratthiko pāragavesī pāragāmī pāraṁ taritukāmo.</span></p>
+
+<p lang="vi" class="vi">Người này ở bên bờ này trùm đầu và nằm ngủ.<br>
+<span lang="pi" class="pali">So orime tīre sasīsaṁ pārupitvā nipajjeyya.</span></p>
+
+<p lang="vi" class="vi">Này Vāseṭṭha, nhà Ngươi nghĩ thế nào?<br>
+<span lang="pi" class="pali">Taṁ kiṁ maññasi, vāseṭṭha?</span></p>
+
+<p lang="vi" class="vi">Người ấy có thể từ bên này của sông Aciravati đến bờ bên kia không?<br>
+<span lang="pi" class="pali">”api nu so puriso aciravatiyā nadiyā orimā tīrā pārimaṁ tīraṁ gaccheyyā”ti?</span></p>
+
+<p lang="vi" class="vi">Tôn giả Gotama, không có thể được.<br>
+<span lang="pi" class="pali">“No hidaṁ, bho gotama”.</span></p>
+
+<p lang="vi" class="vi">Cũng vậy, này Vāseṭṭha, có năm triền cái được gọi là chướng ngại, cũng được gọi là triền cái, cũng được gọi là màn che, cũng được gọi là triền phược trong giới luật của bậc Thánh.<br>
+<span lang="pi" class="pali">Evameva kho, vāseṭṭha, pañcime nīvaraṇā ariyassa vinaye āvaraṇātipi vuccanti, nīvaraṇātipi vuccanti, onāhanātipi vuccanti, pariyonāhanātipi vuccanti.</span></p>
+
+<p lang="vi" class="vi">Thế nào là năm?<br>
+<span lang="pi" class="pali">Katame pañca?</span></p>
+
+<p lang="vi" class="vi">Dục cái, sân cái, hôn trầm thụy miên cái, trạo hối cái, nghi cái.<br>
+<span lang="pi" class="pali">Kāmacchandanīvaraṇaṁ, byāpādanīvaraṇaṁ, thinamiddhanīvaraṇaṁ, uddhaccakukkuccanīvaraṇaṁ, vicikicchānīvaraṇaṁ.</span></p>
+
+<p lang="vi" class="vi">Này Vāseṭṭha, năm triền cái này được gọi là chướng ngại, cũng được gọi là triền cái, cũng được gọi là màn che, cũng được gọi là triền phược.<br>
+<span lang="pi" class="pali">Ime kho, vāseṭṭha, pañca nīvaraṇā ariyassa vinaye āvaraṇātipi vuccanti, nīvaraṇātipi vuccanti, onāhanātipi vuccanti, pariyonāhanātipi vuccanti.</span></p>
+
+<p lang="vi" class="vi">Này Vāseṭṭha, các Bà-la-môn tinh thông ba tập Vedā, bị chướng ngại, bị triền phược, bị che đậy, bị trói buộc bởi năm triền cái này,<br>
+<span lang="pi" class="pali">Imehi kho, vāseṭṭha, pañcahi nīvaraṇehi tevijjā brāhmaṇā āvuṭā nivutā onaddhā pariyonaddhā.</span></p>
+
+<p lang="vi" class="vi">Này Vāseṭṭha, thật vậy, những Bà-la-môn tinh thông ba tập Vedā, loại bỏ những pháp tác thành người Bà-la-môn, tuân theo những pháp không tác thành người Bà-la-môn, bị chướng ngại, bị triền phược, bị che đậy, bị trói buộc bởi năm triền cái, sau khi thân hoại mạng chung, sẽ cộng trú với Phạm thiên – Thật không thể có sự kiện ấy.<br>
+<span lang="pi" class="pali">Te vata, vāseṭṭha, tevijjā brāhmaṇā ye dhammā brāhmaṇakārakā te dhamme pahāya vattamānā, ye dhammā abrāhmaṇakārakā te dhamme samādāya vattamānā pañcahi nīvaraṇehi āvuṭā nivutā onaddhā pariyonaddhā kāyassa bhedā paraṁ maraṇā brahmānaṁ sahabyūpagā bhavissantīti, netaṁ ṭhānaṁ vijjati.</span></p>
+
+<p lang="vi" class="vi">3. Phẩm Tánh Hội Tụ<br>
+<span lang="pi" class="pali">3. Saṁsandanakathā</span></p>
+
+<p lang="vi" class="vi">Này Vāseṭṭha, Ngươi nghĩ thế nào?<br>
+<span lang="pi" class="pali">Taṁ kiṁ maññasi, vāseṭṭha?</span></p>
+
+<p lang="vi" class="vi">Ngươi có nghe những Bà-la-môn niên cao lạp trưởng, tôn sư và đại tôn sư cùng nhau nói chuyện không? Phạm thiên có dục ái hay không dục ái?<br>
+<span lang="pi" class="pali">”kinti te sutaṁ brāhmaṇānaṁ vuddhānaṁ mahallakānaṁ ācariyapācariyānaṁ bhāsamānānaṁ, sapariggaho vā brahmā apariggaho vā”ti?</span></p>
+
+<p lang="vi" class="vi">Tôn giả Gotama, không có dục ái.<br>
+<span lang="pi" class="pali">“Apariggaho, bho gotama”.</span></p>
+
+<p lang="vi" class="vi">Có hận tâm hay không hận tâm?<br>
+<span lang="pi" class="pali">“Saveracitto vā averacitto vā”ti?</span></p>
+
+<p lang="vi" class="vi">Tôn giả Gotama, không có hận tâm.<br>
+<span lang="pi" class="pali">“Averacitto, bho gotama”.</span></p>
+
+<p lang="vi" class="vi">Có sân tâm hay không sân tâm?<br>
+<span lang="pi" class="pali">“Sabyāpajjacitto vā abyāpajjacitto vā”ti?</span></p>
+
+<p lang="vi" class="vi">Tôn giả Gotama, không có sân tâm.<br>
+<span lang="pi" class="pali">“Abyāpajjacitto, bho gotama”.</span></p>
+
+<p lang="vi" class="vi">Có nhiễm tâm hay không có nhiễm tâm?<br>
+<span lang="pi" class="pali">“Saṅkiliṭṭhacitto vā asaṅkiliṭṭhacitto vā”ti?</span></p>
+
+<p lang="vi" class="vi">Tôn giả Gotama, không có nhiễm tâm.<br>
+<span lang="pi" class="pali">“Asaṅkiliṭṭhacitto, bho gotama”.</span></p>
+
+<p lang="vi" class="vi">Có tự tại hay không có tự tại?<br>
+<span lang="pi" class="pali">“Vasavattī vā avasavattī vā”ti?</span></p>
+
+<p lang="vi" class="vi">Tôn giả Gotama, có tự tại.<br>
+<span lang="pi" class="pali">“Vasavattī, bho gotama”.</span></p>
+
+<p lang="vi" class="vi">Này Vāseṭṭha, Ngươi nghĩ thế nào?<br>
+<span lang="pi" class="pali">Taṁ kiṁ maññasi, vāseṭṭha?</span></p>
+
+<p lang="vi" class="vi">Các Bà-la-môn tinh thông ba tập Vedā có dục ái hay không dục ái?<br>
+<span lang="pi" class="pali">”sapariggahā vā tevijjā brāhmaṇā apariggahā vā”ti?</span></p>
+
+<p lang="vi" class="vi">Tôn giả Gotama, có dục ái.<br>
+<span lang="pi" class="pali">“Sapariggahā, bho gotama”.</span></p>
+
+<p lang="vi" class="vi">Có hận tâm hay không hận tâm?<br>
+<span lang="pi" class="pali">“Saveracittā vā averacittā vā”ti?</span></p>
+
+<p lang="vi" class="vi">Tôn giả Gotama, có hận tâm.<br>
+<span lang="pi" class="pali">“Saveracittā, bho gotama”.</span></p>
+
+<p lang="vi" class="vi">Có sân tâm hay không có sân tâm?<br>
+<span lang="pi" class="pali">“Sabyāpajjacittā vā abyāpajjacittā vā”ti?</span></p>
+
+<p lang="vi" class="vi">Tôn giả Gotama, có sân tâm.<br>
+<span lang="pi" class="pali">“Sabyāpajjacittā, bho gotama”.</span></p>
+
+<p lang="vi" class="vi">Có nhiễm tâm hay không có nhiễm tâm?<br>
+<span lang="pi" class="pali">“Saṅkiliṭṭhacittā vā asaṅkiliṭṭhacittā vā”ti?</span></p>
+
+<p lang="vi" class="vi">Tôn giả Gotama, có nhiễm tâm.<br>
+<span lang="pi" class="pali">“Saṅkiliṭṭhacittā, bho gotama”.</span></p>
+
+<p lang="vi" class="vi">Có tự tại hay không có tự tại?<br>
+<span lang="pi" class="pali">“Vasavattī vā avasavattī vā”ti?</span></p>
+
+<p lang="vi" class="vi">Tôn giả Gotama, không có tự tại.<br>
+<span lang="pi" class="pali">“Avasavattī, bho gotama”.</span></p>
+
+<p lang="vi" class="vi">Này Vāseṭṭha, Ngươi nói rằng các Bà-la-môn tinh thông ba tập Vedā là có tham ái, Phạm thiên không có tham ái.<br>
+<span lang="pi" class="pali">Iti kira, vāseṭṭha, sapariggahā tevijjā brāhmaṇā apariggaho brahmā.</span></p>
+
+<p lang="vi" class="vi">Giữa các Bà-la-môn tinh thông ba tập Vedā là có tham ái với Phạm thiên không có tham ái, có thể có một sự cọng hành, cọng trú không?<br>
+<span lang="pi" class="pali">”Api nu kho sapariggahānaṁ tevijjānaṁ brāhmaṇānaṁ apariggahena brahmunā saddhiṁ saṁsandati sametī”ti?</span></p>
+
+<p lang="vi" class="vi">Tôn giả Gotama, không thể có được.<br>
+<span lang="pi" class="pali">“No hidaṁ, bho gotama”.</span></p>
+
+<p lang="vi" class="vi">Lành thay, Vāseṭṭha. Này Vāseṭṭha, những Bà-la-môn tinh thông ba tập Vedā có dục ái ấy sau khi thân hoại mạng chung sẽ cộng trú với Phạm thiên – Thật không thể có sự kiện ấy.<br>
+<span lang="pi" class="pali">Sādhu, vāseṭṭha, te vata, vāseṭṭha, sapariggahā tevijjā brāhmaṇā kāyassa bhedā paraṁ maraṇā apariggahassa brahmuno sahabyūpagā bhavissantīti, netaṁ ṭhānaṁ vijjati.</span></p>
+
+<p lang="vi" class="vi">Này Vāseṭṭha, Ngươi nói rằng các Bà-la-môn tinh thông ba tập Vedā có hận tâm, Phạm thiên không có hận tâm… các Bà-la-môn tinh thông ba tập Vedā là có sân tâm, Phạm thiên không có sân tâm… các Bà-la-môn tinh thông ba tập Vedā là có nhiễm tâm, Phạm thiên không có nhiễm tâm… các Bà-la-môn tinh thông ba tập Vedā không có tự tại, Phạm thiên có tự tại.<br>
+<span lang="pi" class="pali">Iti kira, vāseṭṭha, saveracittā tevijjā brāhmaṇā, averacitto brahmā …pe…,sabyāpajjacittā tevijjā brāhmaṇā abyāpajjacitto brahmā …saṅkiliṭṭhacittā tevijjā brāhmaṇā asaṅkiliṭṭhacitto brahmā …</span></p>
+
+<p lang="vi" class="vi">Giữa các Bà-la-môn tinh thông ba tập Vedā, không có tự tại với Phạm thiên có tự tại có thể có một sự cọng hành, cọng trú không?<br>
+<span lang="pi" class="pali">”avasavattī tevijjā brāhmaṇā vasavattī brahmā, api nu kho avasavattīnaṁ tevijjānaṁ brāhmaṇānaṁ vasavattinā brahmunā saddhiṁ saṁsandati sametī”ti?</span></p>
+
+<p lang="vi" class="vi">Tôn giả Gotama, không thể có được.<br>
+<span lang="pi" class="pali">“No hidaṁ, bho gotama”.</span></p>
+
+<p lang="vi" class="vi">Lành thay, Vāseṭṭha. Này Vāseṭṭha, những vị Bà-la-môn tinh thông ba tập Vedā sau khi thân hoại mạng chung sẽ cộng trú với Phạm thiên – Thật không thể có sự kiện ấy.<br>
+<span lang="pi" class="pali">Sādhu, vāseṭṭha, te vata, vāseṭṭha, avasavattī tevijjā brāhmaṇā kāyassa bhedā paraṁ maraṇā vasavattissa brahmuno sahabyūpagā bhavissantīti, netaṁ ṭhānaṁ vijjati.</span></p>
+
+<p lang="vi" class="vi">Này Vāseṭṭha, ở đời các Bà-la-môn dầu có tinh thông ba tập Vedā, khi các vị này ngồi (với sự tự tín), thật sự đang chìm (trong bùn lầy), và khi đang chìm (trong bùn lầy) phải sống trong thất vọng, lầm tưởng rằng đã đến cảnh giới an lạc hơn.<br>
+<span lang="pi" class="pali">Idha kho pana te, vāseṭṭha, tevijjā brāhmaṇā āsīditvā saṁsīdanti, saṁsīditvā visāraṁ pāpuṇanti, sukkhataraṁ maññe taranti.</span></p>
+
+<p lang="vi" class="vi">Do vậy đối với những Bà-la-môn tinh thông Vedā sự tinh thông ấy được gọi là bãi sa mạc không có nước, sự tinh thông ấy cũng được gọi là rừng rậm không có đường lối, sự tinh thông ấy cũng được gọi là sự bất hạnh.<br>
+<span lang="pi" class="pali">”Tasmā idaṁ tevijjānaṁ brāhmaṇānaṁ tevijjāiriṇantipi vuccati, tevijjāvivanantipi vuccati, tevijjābyasanantipi vuccatī”ti.</span></p>
+
+<p lang="vi" class="vi">Khi nghe vậy, thanh niên Bà-la-môn Vāseṭṭha bạch Thế Tôn:<br>
+<span lang="pi" class="pali">Evaṁ vutte, vāseṭṭho māṇavo bhagavantaṁ etadavoca:</span></p>
+
+<p lang="vi" class="vi">Tôn giả Gotama, tôi có nghe nói Sa-môn Gotama biết con đường đưa đến cộng trú với Phạm thiên.<br>
+<span lang="pi" class="pali">“sutaṁ metaṁ, bho gotama, samaṇo gotamo brahmānaṁ sahabyatāya maggaṁ jānātī”ti.</span></p>
+
+<p lang="vi" class="vi">Này Vāseṭṭha, Ngươi nghĩ thế nào?<br>
+<span lang="pi" class="pali">Taṁ kiṁ maññasi, vāseṭṭha.</span></p>
+
+<p lang="vi" class="vi">Ở đây có người sinh trưởng ở Manasākaṭa, nhưng chưa bao giờ rời khỏi chỗ này?<br>
+<span lang="pi" class="pali">”Āsanne ito manasākaṭaṁ, na ito dūre manasākaṭan”ti?</span></p>
+
+<p lang="vi" class="vi">Vâng phải, bạch Thế Tôn.<br>
+<span lang="pi" class="pali">“Evaṁ, bho gotama, āsanne ito manasākaṭaṁ, na ito dūre manasākaṭan”ti.</span></p>
+
+<p lang="vi" class="vi">Này Vāseṭṭha, Ngươi nghĩ thế nào?<br>
+<span lang="pi" class="pali">Taṁ kiṁ maññasi, vāseṭṭha?</span></p>
+
+<p lang="vi" class="vi">Ở đây, có người sinh ra và lớn lên ở Manasākaṭa.<br>
+<span lang="pi" class="pali">idhassa puriso manasākaṭe jātasaṁvaddho.</span></p>
+
+<p lang="vi" class="vi">Có người hỏi con đường đưa đến Manasākata.<br>
+<span lang="pi" class="pali">Tamenaṁ manasākaṭato tāvadeva avasaṭaṁ manasākaṭassa maggaṁ puccheyyuṁ.</span></p>
+
+<p lang="vi" class="vi">Này Vāseṭṭha, đối với người ấy đã sinh trưởng ở Manasākata, chắc không có gì nghi ngờ hay khó khăn thì phải?<br>
+<span lang="pi" class="pali">”Siyā nu kho, vāseṭṭha, tassa purisassa manasākaṭe jātasaṁvaddhassa manasākaṭassa maggaṁ puṭṭhassa dandhāyitattaṁ vā vitthāyitattaṁ vā”ti?</span></p>
+
+<p lang="vi" class="vi">Tôn giả Gotama, thật không có gì nghi ngờ hay khó khăn.<br>
+<span lang="pi" class="pali">No hidaṁ, bho gotama.</span></p>
+
+<p lang="vi" class="vi">Vì cớ sao?<br>
+<span lang="pi" class="pali">Taṁ kissa hetu ?</span></p>
+
+<p lang="vi" class="vi">Tôn giả Gotama, người ấy sinh trưởng ở Manasākata đều biết rõ tất cả con đường đưa đến Manasākata.<br>
+<span lang="pi" class="pali">“Amu hi, bho gotama, puriso manasākaṭe jātasaṁvaddho, tassa sabbāneva manasākaṭassa maggāni suviditānī”ti.</span></p>
+
+<p lang="vi" class="vi">Này Vāseṭṭha, đối với người ấy đã sinh trưởng Manasākata, còn có thể nghi ngờ và có khó khăn hỏi đến con đường đưa đến Manasākata nhưng đối với Như Lai thì không có nghi ngờ hay khó khăn gì khi hỏi đến Phạm thiên giới hay con đường đưa đến Phạm thiên giới!<br>
+<span lang="pi" class="pali">Siyā kho, vāseṭṭha, tassa purisassa manasākaṭe jātasaṁvaddhassa manasākaṭassa maggaṁ puṭṭhassa dandhāyitattaṁ vā vitthāyitattaṁ vā, na tveva tathāgatassa brahmaloke vā brahmalokagāminiyā vā paṭipadāya puṭṭhassa dandhāyitattaṁ vā vitthāyitattaṁ vā.</span></p>
+
+<p lang="vi" class="vi">Này Vāseṭṭha, Ta biết đến Phạm thiên, Phạm thiên giới và con đường đưa đến Phạm thiên giới.<br>
+<span lang="pi" class="pali">”Brahmānañcāhaṁ, vāseṭṭha, pajānāmi brahmalokañca brahmalokagāminiñca paṭipadaṁ, yathā paṭipanno ca brahmalokaṁ upapanno, tañca pajānāmī”ti.</span></p>
+
+<p lang="vi" class="vi">Khi nghe nói vậy, thanh niên Bà-la-môn Vāseṭṭha bạch Thế Tôn:<br>
+<span lang="pi" class="pali">Evaṁ vutte, vāseṭṭho māṇavo bhagavantaṁ etadavoca:</span></p>
+
+<p lang="vi" class="vi">Tôn giả Gotama, tôi đã nghe: “Sa-môn Gotama, giảng dạy con đường đưa đến cộng trú với Phạm thiên”.<br>
+<span lang="pi" class="pali">“sutaṁ metaṁ, bho gotama, samaṇo gotamo brahmānaṁ sahabyatāya maggaṁ desetī”ti.</span></p>
+
+<p lang="vi" class="vi">Lành thay, nếu Sa-môn Gotama thuyết dạy con đường đưa đến cọng trú với Phạm thiên! Mong Tôn giả Gotama tế độ chúng Bà-la-môn!<br>
+<span lang="pi" class="pali">“Sādhu no bhavaṁ gotamo brahmānaṁ sahabyatāya maggaṁ desetu ullumpatu bhavaṁ gotamo brāhmaṇiṁ pajan”ti.</span></p>
+
+<p lang="vi" class="vi">Này Vāseṭṭha, vậy hãy lóng nghe và khéo tác ý kỹ?<br>
+<span lang="pi" class="pali">“Tena hi, vāseṭṭha, suṇāhi; sādhukaṁ manasi karohi; bhāsissāmī”ti.</span></p>
+
+<p lang="vi" class="vi">Vâng, bạch Thế Tôn. Vāseṭṭha đáp lời Thế Tôn.<br>
+<span lang="pi" class="pali">“Evaṁ, bho”ti kho vāseṭṭho māṇavo bhagavato paccassosi.</span></p>
+
+<p lang="vi" class="vi">4. Thuyết Giảng Con Đường Đến Cõi Phạm Thiên (Brahmā)<br>
+<span lang="pi" class="pali">4. Brahmalokamaggadesanā</span></p>
+
+<p lang="vi" class="vi">Ta sẽ nói:<br>
+<span lang="pi" class="pali">Bhagavā etadavoca:</span></p>
+
+<p lang="vi" class="vi">Này Vāseṭṭha, nay ở đời đức Như Lai xuất hiện, là bậc A-la-hán, Chánh Biến Tri, Minh Hạnh Túc, Thiện Thệ, Thế Gian Giải, Vô Thượng Sĩ, Ðiều Ngự Trượng Phu, Thiên Nhân Sư, Phật, Thế Tôn. Ðức Như Lai sau khi tự mình chứng ngộ với thượng trí, thế giới này với Thiên giới, Ma giới, Phạm thiên giới, gồm cả thế giới này với Sa-môn, Bà-la-môn, Trời, Người lại tuyên thuyết điều Ngài đã chứng ngộ. Ngài thuyết pháp, sơ thiện, trung thiện, hậu thiện đầy đủ văn nghĩa, Ngài truyền dạy phạm hạnh hoàn toàn đầy đủ thanh tịnh. Người gia trưởng hay con vị gia trưởng, hay một người sinh ở giai cấp (hạ tiện) nào nghe pháp ấy. Sau khi nghe pháp, người ấy sanh lòng tín ngưỡng Như Lai. Khi có lòng tin ngưỡng ấy, vị này suy nghĩ: “Ðời sống tại gia đầy những triền phược, con đường đầy những bụi đời. Ðời sống xuất gia phóng khoáng như hư không. Thật rất khó cho một người sống tại gia có thể sống theo phạm hạnh hoàn toàn đầy đủ, hoàn toàn thanh tịnh, trắng bạch như vỏ ốc. Vậy ta nên cạo bỏ râu tóc, đắp áo cà sa, xuất gia, từ bỏ gia đình”. Một thời gian sau, người ấy bỏ tài sản nhỏ hay bỏ tài sản lớn, bỏ bà con quyến thuộc nhỏ hay bà con quyến thuộc lớn, cạo bỏ râu tóc, đắp áo cà sa, và xuất gia từ bỏ gia đình, sống không gia đình. Người gia trưởng hay con vị gia trưởng, hay một người sinh ở giai cấp (hạ tiện) nào nghe pháp ấy. Sau khi nghe pháp, người ấy sanh lòng tín ngưỡng Như Lai. Khi có lòng tin ngưỡng ấy, vị này suy nghĩ: “Ðời sống tại gia đầy những triền phược, con đường đầy những bụi đời. Ðời sống xuất gia phóng khoáng như hư không. Thật rất khó cho một người tại gia có thể sống theo phạm hạnh hoàn toàn đầy đủ, hoàn toàn thanh tịnh, trắng bạch như vỏ ốc. Vậy ta nên cạo bỏ râu tóc, đắp áo cà sa, xuất gia, từ bỏ gia đình”. Một thời gian sau, người ấy bỏ tài sản nhỏ hay bỏ tài sản lớn, bỏ bà con quyến thuộc nhỏ hay bà con quyến thuộc lớn, cạo bỏ râu tóc, đắp áo cà sa, và xuất gia từ bỏ gia đình, sống không gia đình.<br>
+<span lang="pi" class="pali">idha, vāseṭṭha, tathāgato loke uppajjati arahaṁ, sammāsambuddho …pe…</span></p>
+
+<p lang="vi" class="vi">Này Vāseṭṭha, thế nào là Tỷ-kheo giới hạnh cụ túc? … (DN2 4.3.1 Giới)<br>
+<span lang="pi" class="pali">Evaṁ kho, vāseṭṭha, bhikkhu sīlasampanno hoti …pe…</span></p>
+
+<p lang="vi" class="vi">Ở đây, này Vāseṭṭha, Tỷ-kheo từ bỏ sát sinh, tránh xa sát sinh…   do lạc thọ, tâm được định tĩnh… chứng và trú thiền thứ nhất, … (DN2 4.3.2. Thiền Định)<br>
+<span lang="pi" class="pali">tassime pañca nīvaraṇe pahīne attani samanupassato pāmojjaṁ jāyati, pamuditassa pīti jāyati, pītimanassa kāyo passambhati, passaddhakāyo sukhaṁ vedeti, sukhino cittaṁ samādhiyati.</span></p>
+
+<p lang="vi" class="vi">Vị ấy an trú, biến mãn một phương với tâm câu hữu với từ, cũng vậy phương thứ hai, cũng vậy phương thứ ba, cũng vậy phương thứ tư. Như vậy cùng khắp thế giới, trên, dưới, bề ngang, hết thảy phương xứ, cùng khắp vô biên giới, vị ấy an trú biến mãn với tâm câu hữu với từ, quảng đại, vô biên, không hận, không sân.<br>
+<span lang="pi" class="pali">So mettāsahagatena cetasā ekaṁ disaṁ pharitvā viharati. Tathā dutiyaṁ. Tathā tatiyaṁ. Tathā catutthaṁ. Iti uddhamadho tiriyaṁ sabbadhi sabbattatāya sabbāvantaṁ lokaṁ mettāsahagatena cetasā vipulena mahaggatena appamāṇena averena abyāpajjena pharitvā viharati.</span></p>
+
+<p lang="vi" class="vi">Này Vāseṭṭha, như người lực sĩ thổi tù và khiến tiếng được nghe khắp bốn phương, không có gì khó khăn;<br>
+<span lang="pi" class="pali">Seyyathāpi, vāseṭṭha, balavā saṅkhadhamo appakasireneva catuddisā viññāpeyya;</span></p>
+
+<p lang="vi" class="vi">cũng vậy này Vāseṭṭha, đối với mọi hình thức của sự sống, không có ai là vị ấy bỏ qua hay bỏ sót mà không biến mãn với tâm giải thoát, câu hữu với từ.<br>
+<span lang="pi" class="pali">evameva kho, vāseṭṭha, evaṁ bhāvitāya mettāya cetovimuttiyā yaṁ pamāṇakataṁ kammaṁ na taṁ tatrāvasissati, na taṁ tatrāvatiṭṭhati.</span></p>
+
+<p lang="vi" class="vi">Này Vāseṭṭha, đó là con đường đưa đến cộng trú với Phạm thiên.<br>
+<span lang="pi" class="pali">Ayampi kho, vāseṭṭha, brahmānaṁ sahabyatāya maggo.</span></p>
+
+<p lang="vi" class="vi">Lại nữa, này Vàsettha, vị Tỷ-kheo an trú, biến mãn một phương với tâm câu hữu với từ… biến mãn một phương với tâm câu hữu với bi…<br>
+<span lang="pi" class="pali">Puna caparaṁ, vāseṭṭha, bhikkhu karuṇāsahagatena cetasā …pe… muditāsahagatena cetasā …pe…</span></p>
+
+<p lang="vi" class="vi">với tâm câu hữu với hỷ… biến mãn một phương với tâm câu hữu với xả, cũng vậy phương thứ hai, cũng vậy phương thứ ba, cũng vậy phương thứ tư. Như vậy, cùng khắp thế giới, trên, dưới, bề ngang hết thảy phương xứ, cùng khắp vô biên giới, vị ấy an trú biến mãn với tâm câu hữu với xả, quảng đại, vô biên, không hận, không sân.<br>
+<span lang="pi" class="pali">upekkhāsahagatena cetasā ekaṁ disaṁ pharitvā viharati. Tathā dutiyaṁ. Tathā tatiyaṁ. Tathā catutthaṁ. Iti uddhamadho tiriyaṁ sabbadhi sabbattatāya sabbāvantaṁ lokaṁ upekkhāsahagatena cetasā vipulena mahaggatena appamāṇena averena abyāpajjena pharitvā viharati.</span></p>
+
+<p lang="vi" class="vi">Này Vāseṭṭha, như người lực sĩ thổi tù và khiến tiếng được nghe khắp bốn phương, không có gì khó khăn;<br>
+<span lang="pi" class="pali">Seyyathāpi, vāseṭṭha, balavā saṅkhadhamo appakasireneva catuddisā viññāpeyya;</span></p>
+
+<p lang="vi" class="vi">cũng vậy này Vāseṭṭha, đối với mọi hình thức của sự sống, không có ai là vị ấy bỏ qua hay bỏ sót mà không biến mãn với tâm giải thoát, cùng khởi với xả.<br>
+<span lang="pi" class="pali">evameva kho, vāseṭṭha, evaṁ bhāvitāya upekkhāya cetovimuttiyā yaṁ pamāṇakataṁ kammaṁ na taṁ tatrāvasissati, na taṁ tatrāvatiṭṭhati.</span></p>
+
+<p lang="vi" class="vi">Này Vāseṭṭha, đó là con đường đưa đến cộng trú với Phạm thiên.<br>
+<span lang="pi" class="pali">Ayampi kho, vāseṭṭha, brahmānaṁ sahabyatāya maggo.</span></p>
+
+<p lang="vi" class="vi">Này Vāseṭṭha, Ngươi nghĩ thế nào?<br>
+<span lang="pi" class="pali">Taṁ kiṁ maññasi, vāseṭṭha?</span></p>
+
+<p lang="vi" class="vi">Tỷ-kheo an trú như vậy là có dục ái hay không dục ái?<br>
+<span lang="pi" class="pali">”evaṁvihārī bhikkhu sapariggaho vā apariggaho vā”ti?</span></p>
+
+<p lang="vi" class="vi">Tôn giả Gotama, không có dục ái.<br>
+<span lang="pi" class="pali">“Apariggaho, bho gotama”.</span></p>
+
+<p lang="vi" class="vi">Có hận tâm hay không có hận tâm?<br>
+<span lang="pi" class="pali">“Saveracitto vā averacitto vā”ti?</span></p>
+
+<p lang="vi" class="vi">Tôn giả Gotama, không có hận tâm.<br>
+<span lang="pi" class="pali">“Averacitto, bho gotama”.</span></p>
+
+<p lang="vi" class="vi">Có sân tâm hay không có sân tâm?<br>
+<span lang="pi" class="pali">“Sabyāpajjacitto vā abyāpajjacitto vā”ti?</span></p>
+
+<p lang="vi" class="vi">Tôn giả Gotama, không có sân tâm.<br>
+<span lang="pi" class="pali">“Abyāpajjacitto, bho gotama”.</span></p>
+
+<p lang="vi" class="vi">Có nhiễm tâm hay không có nhiễm tâm?<br>
+<span lang="pi" class="pali">“Saṅkiliṭṭhacitto vā asaṅkiliṭṭhacitto vā”ti?</span></p>
+
+<p lang="vi" class="vi">Tôn giả Gotama, không có nhiễm tâm.<br>
+<span lang="pi" class="pali">“Asaṅkiliṭṭhacitto, bho gotama”.</span></p>
+
+<p lang="vi" class="vi">Có tự tại hay không có tự tại?<br>
+<span lang="pi" class="pali">“Vasavattī vā avasavattī vā”ti?</span></p>
+
+<p lang="vi" class="vi">Tôn giả Gomata, có tự tại.<br>
+<span lang="pi" class="pali">“Vasavattī, bho gotama”.</span></p>
+
+<p lang="vi" class="vi">Này Vāseṭṭha, Ngươi nói Tỷ-kheo không có dục ái, Phạm thiên không có dục ái.<br>
+<span lang="pi" class="pali">Iti kira, vāseṭṭha, apariggaho bhikkhu, apariggaho brahmā.</span></p>
+
+<p lang="vi" class="vi">Giữa Tỷ-kheo không có dục ái với Phạm thiên không có dục ái, có thể có một sự cộng hành, cộng trú không?<br>
+<span lang="pi" class="pali">”Api nu kho apariggahassa bhikkhuno apariggahena brahmunā saddhiṁ saṁsandati sametī”ti?</span></p>
+
+<p lang="vi" class="vi">“Tôn giả Gotama, có thể có được.”<br>
+<span lang="pi" class="pali">“Evaṁ, bho gotama”.</span></p>
+
+<p lang="vi" class="vi">Lành thay, Vāseṭṭha. Này Vāseṭṭha, Tỷ-kheo sau khi tâm thân hoại mạng chung sẽ cọng trú với Phạm thiên. Thật có thể có sự kiện ấy.<br>
+<span lang="pi" class="pali">Sādhu, vāseṭṭha, so vata vāseṭṭha apariggaho bhikkhu kāyassa bhedā paraṁ maraṇā apariggahassa brahmuno sahabyūpago bhavissatīti, ṭhānametaṁ vijjati.</span></p>
+
+<p lang="vi" class="vi">Này Vāseṭṭha, Ngươi nói Tỷ-kheo không có hận tâm, Phạm thiên không có hận tâm…<br>
+<span lang="pi" class="pali">Iti kira, vāseṭṭha, averacitto bhikkhu, averacitto brahmā …pe…</span></p>
+
+<p lang="vi" class="vi">Tỷ-kheo không có sân tâm, Phạm thiên không có sân tâm.<br>
+<span lang="pi" class="pali">abyāpajjacitto bhikkhu, abyāpajjacitto brahmā …</span></p>
+
+<p lang="vi" class="vi">Tỷ-kheo không có nhiễm tâm, Phạm thiên không có nhiễm tâm.<br>
+<span lang="pi" class="pali">asaṅkiliṭṭhacitto bhikkhu, asaṅkiliṭṭhacitto brahmā …</span></p>
+
+<p lang="vi" class="vi">Tỷ-kheo có tự tại, Phạm Thiên có tự tại. Giữa Tỷ-kheo có tự tại với Phạm thiên có tự tại, có thể có một sự cọng hành, cọng trú không?<br>
+<span lang="pi" class="pali">”vasavattī bhikkhu, vasavattī brahmā, api nu kho vasavattissa bhikkhuno vasavattinā brahmunā saddhiṁ saṁsandati sametī”ti?</span></p>
+
+<p lang="vi" class="vi">Tôn giả Gotama, có thể có được.<br>
+<span lang="pi" class="pali">“Evaṁ, bho gotama”.</span></p>
+
+<p lang="vi" class="vi">Lành thay, Vāseṭṭha. Này Vāseṭṭha, Tỷ-kheo sau khi thân hoại mạng chung sẽ cọng trú với Phạm thiên. Sự kiện ấy thật có thể có.<br>
+<span lang="pi" class="pali">“Sādhu, vāseṭṭha, so vata, vāseṭṭha, vasavattī bhikkhu kāyassa bhedā paraṁ maraṇā vasavattissa brahmuno sahabyūpago bhavissatīti, ṭhānametaṁ vijjatī”ti.</span></p>
+
+<p lang="vi" class="vi">Khi nghe nói vậy, hai thanh niên Bà-la-môn Vāseṭṭha và Bharadvāja bạch Thế Tôn:<br>
+<span lang="pi" class="pali">Evaṁ vutte, vāseṭṭhabhāradvājā māṇavā bhagavantaṁ etadavocuṁ</span></p>
+
+<p lang="vi" class="vi">Thật vi diệu thay, Tôn giả Gotama! Thật vi diệu thay, Tôn giả Gotama!<br>
+<span lang="pi" class="pali">abhikkantaṁ, bho gotama, abhikkantaṁ, bho gotama.</span></p>
+
+<p lang="vi" class="vi">Tôn giả Gotama, như người dựng đứng lại những gì bị quăng ngã xuống, phơi bày ra những gì bị che kín, chỉ đường cho kẻ bị lạc hướng, đem đèn sáng vào trong bóng tối để những ai có mắt có thể thấy sắc. Cũng vậy Chánh pháp đã được Thế Tôn dùng nhiều phương tiện trình bày.<br>
+<span lang="pi" class="pali">Seyyathāpi, bho gotama, nikkujjitaṁ vā ukkujjeyya, paṭicchannaṁ vā vivareyya, mūḷhassa vā maggaṁ ācikkheyya, andhakāre vā telapajjotaṁ dhāreyya: ‘cakkhumanto rūpāni dakkhantī’ti; evamevaṁ bhotā gotamena anekapariyāyena dhammo pakāsito.</span></p>
+
+<p lang="vi" class="vi">Và nay chúng con xin quy y Tôn giả Gotama, quy y Pháp và quy y Tỷ-kheo Tăng.<br>
+<span lang="pi" class="pali">Ete mayaṁ bhavantaṁ gotamaṁ saraṇaṁ gacchāma, dhammañca bhikkhusaṅghañca.</span></p>
+
+<p lang="vi" class="vi">Mong Tôn giả Gotama nhận chúng con làm đệ tử; từ này trở đi cho đến mạng chung, chúng con trọn đời quy ngưỡng.<br>
+<span lang="pi" class="pali">”Upāsake no bhavaṁ gotamo dhāretu ajjatagge pāṇupete saraṇaṁ gate”ti.</span></p>
+
+<span lang="pi" class="vi">Tevijjasuttaṁ niṭṭhitaṁ terasamaṁ.</p>
+
+<!-- COPY CONTENT SUTTA Ở ĐÂY -->
+
+
+
+<br>
+<p><p style="text-align: right;font-style: italic;">Hoà Thượng Thích Minh Châu dịch Việt</span></p>
+
+
+
+</section>  <!-- End English and Pali -->
+
+
+
+
+
+</section>  <!-- End English and Pali -->
+<div id="nextprev"><a id="previous-sutta" href="./dn12.html#content"></a><a id="next-sutta" href="./dn14.html#content"></a></div>
+</div>  <!--End Content -->
+</div>  <!-- End Page -->
+
+
+
+
+
+
+<footer>
+					 <!-- End bottom links -->
+</footer>
+
+
+ 
+ <!-- Scripts -->
+
+ <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      if (typeof enablePaliLookup === "function") {
+        enablePaliLookup();
+      } else {
+        console.error("enablePaliLookup is not defined");
+      }
+    });
+  </script>
+
+ <script>
+ // Script to open and close sidebar
+ 	function w3_open() {
+ 	document.getElementById("mySidebar").style.display = "block";
+ 	}
+ 		function w3_close() {
+ 		document.getElementById("mySidebar").style.display = "none";
+ 	}
+ </script>
+ <script>
+ 		var app = document.getElementsByTagName("BODY")[0];
+ 		if (localStorage.lightMode == "dark") {
+ 			app.setAttribute("light-mode", "dark");
+ 	}
+ </script>
+ 
+ <script>
+ 		function toggle_light_mode() {
+ 			var app = document.getElementsByTagName("BODY")[0];
+ 				if (localStorage.lightMode == "dark") {
+ 			localStorage.lightMode = "light";
+ 			app.setAttribute("light-mode", "light");
+ 		} else {
+ 					localStorage.lightMode = "dark";
+ 					app.setAttribute("light-mode", "dark");
+ 	}
+ 		}
+ 
+ 		window.addEventListener("storage", function () {
+ 			if (localStorage.lightMode == "dark") {
+ 				app.setAttribute("light-mode", "dark");
+ 				} else {
+ 				app.setAttribute("light-mode", "light");
+ 		}
+ 		}, false);
+ 
+ </script>
+ <script src="../js/footer.js"></script><script src="../js/dpd_deconstructor.js"></script><script src="../js/dpd_ebts.js"></script><script src="../js/dpd_i2h.js"></script>
+ <script src="/sw.js"></script>
+ </body>
+ </html>
