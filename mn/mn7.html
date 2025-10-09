@@ -1,14 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
 <head>
  	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
  	<link rel="icon" type="image/x-icon" href="../images/favicon.ico">
- 	<title>Majjhima Nikāya 7</title>
  	<meta name="viewport" content="width=device-width, initial-scale=1">
 		<!-- Loading manifest -->
 	<link rel="manifest" href="../manifest.json">
- 	<!-- Loading third party fonts -->
- 	<link href="../fonts/font-awesome.min.css" rel="stylesheet" type="text/css">
  	<!-- Loading main and menu stylesheets -->
  	<link rel="stylesheet" href="../css/w3.css">
  	<link rel="stylesheet" href="../css/css.css">
@@ -16,25 +13,44 @@
  	<script src="../js/jquery-1.10.2.min.js"></script>
  	<script src="../js/controlpanel.js"></script>
  	<script src="../js/mousetrap.min.js"></script>
- </head>
+    <script src="../js/pali-lookup-standalone.js"></script>
+
+ <script src="../js/suttaFiles.js"></script>
+<script>
+ // Script to open random Sutta
+ function openRandomSutta() {
+  const randomIndex = Math.floor(Math.random() * suttaFiles.length);
+  const selectedFile = suttaFiles[randomIndex];
+
+  // Get root path of your site 
+  const currentPath = location.pathname;
+  const rootPath = currentPath.split("/").slice(0, -2).join("/") + "/";
+
+  // Redirect to the correct file
+  window.location.href = rootPath + selectedFile;
+}
+</script>
+
+
+</head>
  <body class="container">
  <div class="header-background">
  <!-- Header -->
  <div class="w3-header w3-content w3-padding w3-left-align bwcontainer">
  	<div class="centered">
- 		<button class="light-mode-button" aria-label="Toggle Light Mode" onclick="toggle_light_mode()">
+ 		<button class="light-mode-button" aria-label="Bật Chế Độ Sáng" onclick="toggle_light_mode()">
  			<span></span>
  			<span></span>
  		</button>
- 		<span class="box-lbl">Light/Dark</span>
+ 		<span class="box-lbl">Sáng/Tối</span>
  	</div> <!-- Centered -->
- 		<a href="../home/index.html" id="bwlogo"><img src="../images/headerlogo.png" alt="The Buddha's Words logo" class="w3-image"></a>
+ 		<a href="../home/index.html" id="bwlogo"><img src="../images/headerlogo.png" alt="Logo Lời Của Đức Phật" class="w3-image"></a>
  		<div class="w3-bar bwcontainer">
  			<div id="searchlinks">
- 			<a href="../home/engsearch.html"><span class="w3-bar-item"><i class="fa fa-search"></i>&nbsp;Search English</span></a>
- 			<a href="../home/palisearch.html"><span class="w3-bar-item"><i class="fa fa-search"></i>&nbsp;Search Pali</span></a>
+ 			<a href="../home/visearch.html"><span class="w3-bar-item"><i class="fa fa-search"></i>&nbsp;Tìm Tiếng Việt</span></a>
+ 			<a href="../home/palisearch.html"><span class="w3-bar-item"><i class="fa fa-search"></i>&nbsp;Tìm Tiếng Pali</span></a>
  			</div><!-- End Searchlinks div -->
- 			<div class="help"><span><a href="../home/help.html"><img src="../images/help_icon.png" title="Help" alt="Help"></a></span></div>
+ 			<div class="help"><span><a href="../home/help.html"><img src="../images/help_icon.png" title="Trợ Giúp" alt="Help"></a></span></div>
  		</div> <!-- End w3-bar bwcontainer --> 	</div> <!-- End w3-header w3-content w3-padding w3-left-align bwcontainer -->
  </div> <!-- End header-background -->
  <!-- Top menu -->
@@ -43,50 +59,44 @@
  	<div class="w3-button w3-padding-8 w3-left w3-hide-large" onclick="w3_open()">☰</div>
  		<div id="navbar" class="w3-hide-small w3-hide-medium bwcontainer3">
  			<ul id="css3menu0">
- 				<li class="topfirst" id="home"><a href="../home/index.html" class="w3-hide-small">Home</a></li>
- 			<li class="topmenu" id="dn"><a href="../dn/dn.html" class="w3-hide-small">Dīgha Nikāya</a></li>
- 				<li class="topmenu" id="mn"><a href="../mn/mn.html" class="pressed w3-hide-small">Majjhima Nikāya</a></li>
- 				<li class="topmenu" id="sn"><a href="../sn/sn.html" class="w3-hide-small"><i class="fa fa-caret-down"></i>&nbsp;Saṁyutta Nikāya</a>
+ 				<li class="topfirst" id="home"><a href="../home/index.html" class="w3-hide-small">Trang Chủ</a></li>
+  				<li class="topmenu" id="dn"><a href="../dn/dn.html" class="pressed w3-hide-small">Trường Bộ Kinh</a></li>
+ 				<li class="topmenu" id="mn"><a href="../mn/mn.html" class="w3-hide-small">Trung Bộ Kinh</a></li>
+ 				<li class="topmenu" id="sn"><a href="../sn/sn.html" class="w3-hide-small"><i class="fa fa-caret-down"></i>&nbsp;Tương Ưng Bộ Kinh</a>
  					<ul>
- 						<li><a href="../sn/sn01.html" class="w3-hide-small">Vol. 1 ‒ The Book with Verses</a></li>
- 						<li><a href="../sn/sn02.html" class="w3-hide-small">Vol. 2 ‒ The Book of Causation</a></li>
- 						<li><a href="../sn/sn03.html" class="w3-hide-small">Vol. 3 ‒ The Book of the Aggregates</a></li>
- 						<li><a href="../sn/sn04.html" class="w3-hide-small">Vol. 4 ‒ The Book of the Six Sense Bases</a></li>
- 						<li><a href="../sn/sn05.html" class="w3-hide-small">Vol. 5 ‒ The Great Book</a></li>
+ 						<li><a href="../sn/sn01.html" class="w3-hide-small">Tập I - Thiên Có Kệ</a></li>
+ 						<li><a href="../sn/sn02.html" class="w3-hide-small">Tập II - Thiên Nhân Duyên</a></li>
+ 						<li><a href="../sn/sn03.html" class="w3-hide-small">Tập III - Thiên Uẩn</a></li>
+ 						<li><a href="../sn/sn04.html" class="w3-hide-small">Tập IV - Thiên Sáu Xứ</a></li>
+ 						<li><a href="../sn/sn05.html" class="w3-hide-small">Tập V - Thiên Ðại Phẩm</a></li>
  					</ul>
- 				<li class="topmenu" id="an"><a href="../an/an.html" class="w3-hide-small"><i class="fa fa-caret-down"></i>&nbsp;Aṅguttara Nikāya</a>
+ 				<li class="topmenu" id="an"><a href="../an/an.html" class="w3-hide-small"><i class="fa fa-caret-down"></i>&nbsp;Tăng Chi Bộ Kinh</a>
  					<ul>
- 						<li><a href="../an/an1.html" class="w3-hide-small">The Ones</a></li>
- 						<li><a href="../an/an2.html" class="w3-hide-small">The Twos</a></li>
- 						<li><a href="../an/an3.html" class="w3-hide-small">The Threes</a></li>
- 						<li><a href="../an/an4.html" class="w3-hide-small">The Fours</a></li>
- 						<li><a href="../an/an5.html" class="w3-hide-small">The Fives</a></li>
- 						<li><a href="../an/an6.html" class="w3-hide-small">The Sixes</a></li>
- 						<li><a href="../an/an7.html" class="w3-hide-small">The Sevens</a></li>
- 						<li><a href="../an/an8.html" class="w3-hide-small">The Eights</a></li>
- 						<li><a href="../an/an9.html" class="w3-hide-small">The Nines</a></li>
- 						<li><a href="../an/an10.html" class="w3-hide-small">The Tens</a></li>
- 						<li><a href="../an/an11.html" class="w3-hide-small">The Elevens</a></li>
- 					</ul>
- 				</li>
- 				<li class="topmenu" id="kn"><a href="../kn/kn.html" class="w3-hide-small"><i class="fa fa-caret-down"></i>&nbsp;Khuddaka Nikāya</a>
- 					<ul>
- 						<li><a href="../kp/kp.html" class="w3-hide-small">The Khuddakapatha</a></li>
- 						<li><a href="../dhp/dhp.html" class="w3-hide-small">The Dhammapada</a></li>
- 						<li><a href="../snp/snp.html" class="w3-hide-small">Sutta Nipata</a></li>
- 						<li><a href="../ud/ud.html" class="w3-hide-small">Udana</a></li>
- 						<li><a href="../it/it.html" class="w3-hide-small">Itivuttaka</a></li>
- 						<li><a href="../tha/tha.html" class="w3-hide-small">The Theragatha</a></li>
- 						<li><a href="../thi/thi.html" class="w3-hide-small">The Therigatha</a></li>
+ 						<li><a href="../an/an1.html" class="w3-hide-small">Chương Một Pháp</a></li>
+ 						<li><a href="../an/an2.html" class="w3-hide-small">Chương Hai Pháp</a></li>
+ 						<li><a href="../an/an3.html" class="w3-hide-small">Chương Ba Pháp</a></li>
+ 						<li><a href="../an/an4.html" class="w3-hide-small">Chương Bốn Pháp</a></li>
+ 						<li><a href="../an/an5.html" class="w3-hide-small">Chương Năm Pháp</a></li>
+ 						<li><a href="../an/an6.html" class="w3-hide-small">Chương Sáu Pháp</a></li>
+ 						<li><a href="../an/an7.html" class="w3-hide-small">Chương Bảy Pháp</a></li>
+ 						<li><a href="../an/an8.html" class="w3-hide-small">Chương Tám Pháp</a></li>
+ 						<li><a href="../an/an9.html" class="w3-hide-small">Chương Chín Pháp</a></li>
+ 						<li><a href="../an/an10.html" class="w3-hide-small">Chương Mười Pháp</a></li>
+ 						<li><a href="../an/an11.html" class="w3-hide-small">Chương Mười Một Pháp</a></li>
  					</ul>
  				</li>
- 				<li class="toplast" id="vi"><a href="../vi/vi.html" class="w3-hide-small"><i class="fa fa-caret-down"></i>&nbsp;Vinaya Piṭaka</a>
+ 				<li class="topmenu" id="kn"><a href="../kn/kn.html" class="w3-hide-small"><i class="fa fa-caret-down"></i>&nbsp;Tiểu Bộ Kinh</a>
  					<ul>
- 						<li><a href="../vi/kd.html" class="w3-hide-small">Khandhaka</a></li>
- 						<li><a href="../vi/bu-vb.html" class="w3-hide-small">Bhikkhu Vibhaṅga</a></li>
- 						<li><a href="../vi/bu-pt.html" class="w3-hide-small">Bhikkhu Pātimokkha</a></li>
- 						<li><a href="../vi/bi-pt.html" class="w3-hide-small">Bhikkhunī Pātimokkha</a></li>
- 						<li><a href="../vi/bi-vb.html" class="w3-hide-small">Bhikkhunī Vibhaṅga</a></li>
+ 						<li><a href="../kp/kp.html" class="w3-hide-small">Kinh Tiểu Tụng</a></li>
+ 						<li><a href="../dhp/dhp.html" class="w3-hide-small">Kinh Pháp Cú</a></li>
+ 						<li><a href="../snp/snp.html" class="w3-hide-small">Kinh Tập</a></li>
+ 						<li><a href="../ud/ud.html" class="w3-hide-small">Kinh Phật Tự Thuyết</a></li>
+ 						<li><a href="../it/it.html" class="w3-hide-small">Kinh Phật Thuyết Như Vậy</a></li>
+ 						<li><a href="../tha/tha.html" class="w3-hide-small">Trưởng Lão Tăng Kệ</a></li>
+ 						<li><a href="../thi/thi.html" class="w3-hide-small">Trưởng Lão Ni Kệ</a></li>
+ 					</ul>
+ 				</li>
+				<li class="toplast" id="rd"><a href="../rd/rd.html" class="w3-hide-small"></i>Kinh Ngẫu Nhiên Theo Nhóm</a>
  					</ul>
  				</li>
  			</ul>
@@ -99,12 +109,12 @@
  		<div class="w3-bar-block w3-white">
  			<a href="../home/index.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-home fa-lg"></i>&nbsp;&nbsp;&nbsp;Home</a>
  			<a href="../guide/guide.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Guide</a>
- 			<a href="../dn/dn.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Dīgha Nikāya</a>
- 			<a href="../mn/mn.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Majjhima Nikāya</a>
- 			<a href="../sn/sn.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Saṁyutta Nikāya</a>
- 			<a href="../an/an.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Aṅguttara Nikāya</a>
- 			<a href="../kn/kn.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Khuddaka Nikāya</a>
- 			<a href="../vi/vi.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Vinaya Piṭaka</a>
+ 			<a href="../dn/dn.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Trường Bộ Kinh</a>
+ 			<a href="../mn/mn.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Trung Bộ Kinh</a>
+ 			<a href="../sn/sn.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Tương Ưng Bộ Kinh</a>
+ 			<a href="../an/an.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Tăng Chi Bộ Kinh
+ 			<a href="../kn/kn.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Tiểu Bộ Kinh</a>
+			<a href="../rd/rd.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>Kinh Ngẫu Nhiên Theo Nhóm</a>
  		</div>
  </nav>
  
@@ -112,255 +122,749 @@
  
    <!-- !PAGE CONTENT! --> 
 <div class="w3-main w3-content w3-padding w3-left-align bwcontainer4">
-
-<h2>Majjhima Nikāya</h2>
-
 <div id="content">
-
-<h2>MN7: Vatthūpama Sutta - The Simile of the Cloth</h2>
-
-<div id="metaarea">
-	<ul class="translator">
-		<li>©&nbsp;Translated from the Pali by Bhante Sujato.&nbsp;<a href="../home/copyright.html#sc">(More copyright information)</a>
-	</ul>
-</div>
-
-<section class="raw_sutta">
-<div lang="en">
-<p id="p1"><span class="parno">1</span>So I have heard. At one time the Buddha was staying near Sāvatthī in Jeta’s Grove, Anāthapiṇḍika’s monastery. There the Buddha addressed the mendicants: “Mendicants!”</p>
-
-
-<p>“Venerable sir,” they replied. The Buddha said this:</p>
-
-<p id="p2"><span class="parno">2</span>“Suppose, mendicants, there was a cloth that was dirty and soiled. No matter what dye the dyer applied — whether yellow or red or magenta — it would look poorly dyed and impure in color. Why is that? Because of the impurity of the cloth.</p>
-
-<p>In the same way, when the mind is corrupt, a bad destiny is to be expected. Suppose there was a cloth that was pure and clean. No matter what dye the dyer applied — whether yellow or red or magenta — it would look well dyed and pure in color. Why is that? Because of the purity of the cloth.</p>
-
-<p>In the same way, when the mind isn’t corrupt, a good destiny is to be expected.</p>
-
-<hr>
-
-<p id="p3"><span class="parno">3</span>And what are the corruptions of the mind? Covetousness and immoral greed, ill will, anger, hostility, offensiveness, contempt, jealousy, stinginess, deceit, deviousness, obstinacy, aggression, conceit, arrogance, vanity, and negligence are corruptions of the mind.</p>
-
-<hr>
-
-<p id="p4-5"><span class="parno">4-5</span>A mendicant who understands that covetousness and immoral greed are corruptions of the mind gives them up. A mendicant who understands that ill will … negligence is a corruption of the mind gives it up.When they have understood these corruptions of the mind for what they are, and have given them up … </p>
-
-<hr>
-
-<p id="p6"><span class="parno">6</span> … they have experiential confidence in the Buddha: ‘That Blessed One is perfected, a fully awakened Buddha, accomplished in knowledge and conduct, holy, knower of the world, supreme guide for those who wish to train, teacher of gods and humans, awakened, blessed.’</p>
-
-<p>They have experiential confidence in the teaching: ‘The teaching is well explained by the Buddha — visible in this very life, immediately effective, inviting inspection, relevant, so that sensible people can know it for themselves.’</p>
-
-<p>They have experiential confidence in the Saṅgha: ‘The Saṅgha of the Buddha’s disciples is practicing the way that’s good, straightforward, methodical, and proper. It consists of the four pairs, the eight individuals. This is the Saṅgha of the Buddha’s disciples that is worthy of offerings dedicated to the gods, worthy of hospitality, worthy of a religious donation, worthy of greeting with joined palms, and is the supreme field of merit for the world.’</p>
-
-<hr>
-
-<p id="p7"><span class="parno">7</span>When a mendicant has discarded, eliminated, released, given up, and relinquished to this extent, thinking, ‘I have experiential confidence in the Buddha … the teaching … the Saṅgha,’ they find joy in the meaning and the teaching, and find joy connected with the teaching. Thinking: ‘I have discarded, eliminated, released, given up, and relinquished to this extent,’ they find joy in the meaning and the teaching, and find joy connected with the teaching. When they’re joyful, rapture springs up. When the mind is full of rapture, the body becomes tranquil. When the body is tranquil, they feel bliss. And when they’re blissful, the mind becomes immersed in samādhi.</p>
-
-<hr>
-
-<p id="p8"><span class="parno">8</span>When a mendicant of such ethics, such qualities, and such wisdom eats boiled fine rice with the dark grains picked out and served with many soups and sauces, that is no obstacle for them. Compare with cloth that is dirty and soiled; it can be made pure and clean by pure water. Or unrefined gold, which can be made pure and bright by a forge. In the same way, when a mendicant of such ethics, such qualities, and such wisdom eats boiled fine rice with the dark grains picked out and served with many soups and sauces, that is no obstacle for them.</p>
-
-<hr>
-
-<p id="p9"><span class="parno">9</span>They meditate spreading a heart full of love to one direction, and to the second, and to the third, and to the fourth. In the same way above, below, across, everywhere, all around, they spread a heart full of love to the whole world — abundant, expansive, limitless, free of enmity and ill will. They meditate spreading a heart full of compassion to one direction, and to the second, and to the third, and to the fourth. In the same way above, below, across, everywhere, all around, they spread a heart full of compassion to the whole world — abundant, expansive, limitless, free of enmity and ill will. They meditate spreading a heart full of rejoicing to one direction, and to the second, and to the third, and to the fourth. In the same way above, below, across, everywhere, all around, they spread a heart full of rejoicing to the whole world — abundant, expansive, limitless, free of enmity and ill will. They meditate spreading a heart full of equanimity to one direction, and to the second, and to the third, and to the fourth. In the same way above, below, across, everywhere, all around, they spread a heart full of equanimity to the whole world — abundant, expansive, limitless, free of enmity and ill will.</p>
-
-<hr>
-
-<p id="p10"><span class="parno">10</span>They understand: ‘There is this, there is what is worse than this, there is what is better than this, and there is an escape beyond the scope of perception.’</p>
-
-<p>Knowing and seeing like this, their mind is freed from the defilements of sensuality, desire to be reborn, and ignorance. When they’re freed, they know they’re freed.</p>
-
-<p>They understand: ‘Rebirth is ended, the spiritual journey has been completed, what had to be done has been done, there is no return to any state of existence.’ This is called a mendicant who is bathed with the inner bathing.”</p>
-
-<hr>
-
-<p id="p11"><span class="parno">11</span>Now, at that time the brahmin Sundarika Bhāradvāja was sitting not far from the Buddha. He said to the Buddha: “But does Master Gotama go to the river Bāhuka to bathe?”</p>
-
-<p>“Brahmin, why go to the river Bāhuka? What can the river Bāhuka do?”</p>
-
-<p>“Many people agree that the river Bāhuka bestows cleanliness and merit. And many people wash off their bad deeds in the river Bāhuka.”</p>
-
-<p>Then the Buddha addressed Sundarika in verse:</p>
-
-<hr>
-
-<p class="verse" id="p12"><span class="parno">12</span>“The Bāhuka and the Adhikakka, <br>
-the Gaya and the Sundarika too, <br>
-Sarasvatī and Payāga, <br>
-and the river Bāhumati: <br>
-a fool can constantly plunge into them <br>
-but it won’t purify their dark deeds.</p>
-
-<p class="verse" id="p13"><span class="parno">13</span>What can the Sundarika do? <br>
-What the Payāga or the Bāhuka? <br>
-They can’t cleanse a cruel and criminal person <br>
-from their bad deeds.</p>
-
-<p class="verse" id="p14"><span class="parno">14</span>For the pure in heart it’s always <br>
-the spring festival or the sabbath. <br>
-For the pure in heart and clean of deed, <br>
-their vows will always be fulfilled. <br>
-It’s here alone that you should bathe, brahmin, <br>
-making yourself a sanctuary for all creatures.</p>
-
-<p class="verse" id="p15"><span class="parno">15</span>And if you speak no lies, <br>
-nor harm any living creature, <br>
-nor steal anything not given, <br>
-and you’re faithful and not stingy: <br>
-what’s the point of going to Gaya? <br>
-For any well will be your Gaya!”</p>
-
-
-<hr>
-
-<p id="p16"><span class="parno">16</span>When he had spoken, the brahmin Sundarika Bhāradvāja said to the Buddha: “Excellent, Master Gotama! Excellent! As if he were righting the overturned, or revealing the hidden, or pointing out the path to the lost, or lighting a lamp in the dark so people with good eyes can see what’s there, Master Gotama has made the teaching clear in many ways. I go for refuge to Master Gotama, to the teaching, and to the mendicant Saṅgha. Sir, may I receive the going forth, the ordination in the Buddha’s presence?”</p>
-
-<p>And the brahmin Sundarika Bhāradvāja received the going forth, the ordination in the Buddha’s presence. Not long after his ordination, Venerable Bhāradvāja, living alone, withdrawn, diligent, keen, and resolute, soon realized the supreme end of the spiritual path in this very life. He lived having achieved with his own insight the goal for which gentlemen rightly go forth from the lay life to homelessness.</p>
-
-<p>He understood: “Rebirth is ended; the spiritual journey has been completed; what had to be done has been done; there is no return to any state of existence.” And Venerable Bhāradvāja became one of the perfected.</p>
-
+<h2>Majjhima Nikāya - Trung Bộ Kinh</h2>
+<h5><span style="font-style: italic;">Hoà Thượng Thích Minh Châu dịch Việt</span></h5>
 
 </div>
 
-<div lang="pi">
+<br>
+ 	<title>     Trung Bộ 7              </title>
 
-<p><span class="parno">1</span>Evaṁ me sutaṁ — ​ ekaṁ samayaṁ bhagavā sāvatthiyaṁ viharati jetavane anāthapiṇḍikassa ārāme. Tatra kho bhagavā bhikkhū āmantesi: "bhikkhavo"ti. </p>
+<p lang="vi" class="vi"; style="text-align: center">
+Trung Bộ 7<br>
+<span lang="pi" class="pali">
+Majjhima Nikāya 7<br>
+</span>
+</p>
 
-<p>"Bhadante"ti te bhikkhū bhagavato paccassosuṁ. Bhagavā etadavoca:</p>
+<p lang="vi" class="vi"; style="text-align: center">
+Kinh Ví Dụ Tấm Vải<br>
+<span lang="pi" class="pali">
+Vatthasutta<br>
+</span>
+</p>
 
-<p><span class="parno">2</span>"Seyyathāpi, bhikkhave, vatthaṁ saṁkiliṭṭhaṁ malaggahitaṁ; tamenaṁ rajako yasmiṁ yasmiṁ raṅgajāte upasaṁhareyya — yadi nīlakāya yadi pītakāya yadi lohitakāya yadi <span class="var" title="mañjeṭṭhakāya (bj, pts1) | mañjeṭṭhikāya (s1–3)" id="note60">mañjiṭṭhakāya</span> durattavaṇṇamevassa aparisuddhavaṇṇamevassa. Taṁ kissa hetu? Aparisuddhattā, bhikkhave, vatthassa. </p>
+<p lang="vi" class="vi">
+Như vầy tôi nghe.<br>
+<span lang="pi" class="pali">
+Evaṁ me sutaṁ—<br>
+</span>
+</p>
 
-<p>Evameva kho, bhikkhave, citte saṁkiliṭṭhe, duggati pāṭikaṅkhā. Seyyathāpi, bhikkhave, vatthaṁ parisuddhaṁ pariyodātaṁ; tamenaṁ rajako yasmiṁ yasmiṁ raṅgajāte upasaṁhareyya — yadi nīlakāya yadi pītakāya yadi lohitakāya yadi mañjiṭṭhakāya — surattavaṇṇamevassa parisuddhavaṇṇamevassa. Taṁ kissa hetu? Parisuddhattā, bhikkhave, vatthassa. </p>
+<p lang="vi" class="vi">
+Một thời Thế Tôn ở Sāvatthī (Xá-vệ), tại Jetavana (Kỳ-đà Lâm), vườn ông Anāthapiṇḍika (Cấp Cô Ðộc).<br>
+<span lang="pi" class="pali">
+ekaṁ samayaṁ bhagavā sāvatthiyaṁ viharati jetavane anāthapiṇḍikassa ārāme.<br>
+</span>
+</p>
 
-<p>Evameva kho, bhikkhave, citte asaṁkiliṭṭhe, sugati pāṭikaṅkhā.</p>
+<p lang="vi" class="vi">
+Lúc bấy giờ Thế Tôn gọi các Tỷ-kheo: “Này các Tỷ-kheo”.<br>
+<span lang="pi" class="pali">
+Tatra kho bhagavā bhikkhū āmantesi: “bhikkhavo”ti.<br>
+</span>
+</p>
 
-<hr>
+<p lang="vi" class="vi">
+“Bạch Thế Tôn”, các vị Tỷ-kheo ấy vâng đáp Thế Tôn. Thế Tôn nói như sau:<br>
+<span lang="pi" class="pali">
+“Bhadante”ti te bhikkhū bhagavato paccassosuṁ. Bhagavā etadavoca:<br>
+</span>
+</p>
 
-<p><span class="parno">3</span>Katame ca, bhikkhave, cittassa upakkilesā? Abhijjhāvisamalobho cittassa upakkileso, byāpādo cittassa upakkileso, kodho cittassa upakkileso, upanāho cittassa upakkileso, makkho cittassa upakkileso, paḷāso cittassa upakkileso, issā cittassa upakkileso, macchariyaṁ cittassa upakkileso, māyā cittassa upakkileso, sāṭheyyaṁ cittassa upakkileso, thambho cittassa upakkileso, sārambho cittassa upakkileso, māno cittassa upakkileso, atimāno cittassa upakkileso, mado cittassa upakkileso, pamādo cittassa upakkileso.</p>
+<p lang="vi" class="vi">
+“Này các Tỷ-kheo, như một tấm vải cấu uế, nhiễm bụi.<br>
+<span lang="pi" class="pali">
+“Seyyathāpi, bhikkhave, vatthaṁ saṅkiliṭṭhaṁ malaggahitaṁ;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+một người thợ nhuộm nhúng tấm vải ấy vào thuốc nhuộm này hay thuốc nhuộm khác – hoặc xanh, hoặc vàng, hoặc đỏ, hoặc tía – vải ấy sẽ được màu nhuộm không tốt đẹp, sẽ được màu nhuộm không sạch sẽ. Vì sao vậy?<br>
+<span lang="pi" class="pali">
+tamenaṁ rajako yasmiṁ yasmiṁ raṅgajāte upasaṁhareyya—yadi nīlakāya yadi pītakāya yadi lohitakāya yadi mañjiṭṭhakāya durattavaṇṇamevassa aparisuddhavaṇṇamevassa. Taṁ kissa hetu?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này các Tỷ-kheo, vì tấm vải không được trong sạch.<br>
+<span lang="pi" class="pali">
+Aparisuddhattā, bhikkhave, vatthassa.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Cũng vậy, này các Tỷ-kheo, cõi ác chờ đợi một tâm cấu uế.<br>
+<span lang="pi" class="pali">
+Evameva kho, bhikkhave, citte saṅkiliṭṭhe, duggati pāṭikaṅkhā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này các Tỷ-kheo, như một tấm vải thanh tịnh, trong sạch.<br>
+<span lang="pi" class="pali">
+Seyyathāpi, bhikkhave, vatthaṁ parisuddhaṁ pariyodātaṁ;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+một người thợ nhuộm nhúng tấm vải ấy vào thuốc nhuộm này hay thuốc nhuộm khác – hoặc xanh, hoặc vàng, hoặc đỏ, hoặc tía, vải ấy sẽ được màu nhuộm tốt đẹp, sẽ được màu nhuộm sạch sẽ. Vì sao vậy?<br>
+<span lang="pi" class="pali">
+tamenaṁ rajako yasmiṁ yasmiṁ raṅgajāte upasaṁhareyya—yadi nīlakāya yadi pītakāya yadi lohitakāya yadi mañjiṭṭhakāya—surattavaṇṇamevassa parisuddhavaṇṇamevassa. Taṁ kissa hetu?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này các Tỷ-kheo, vì tấm vải được trong sạch.<br>
+<span lang="pi" class="pali">
+Parisuddhattā, bhikkhave, vatthassa.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Cũng vậy, này các Tỷ-kheo, cõi thiện chờ đợi một tâm không cấu uế.<br>
+<span lang="pi" class="pali">
+Evameva kho, bhikkhave, citte asaṅkiliṭṭhe, sugati pāṭikaṅkhā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Và này các Tỷ-kheo, thế nào là những cấu uế của tâm?<br>
+<span lang="pi" class="pali">
+Katame ca, bhikkhave, cittassa upakkilesā?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Tham dục, tà tham là cấu uế của tâm, sân là cấu uế của tâm, phẫn là cấu uế của tâm, hận là cấu uế của tâm, hư ngụy, não hại, tật đố, xan tham, man trá, khi cuống, ngoan cố, cấp tháo, mạn, quá mạn, kiêu, phóng dật là cấu uế của tâm.<br>
+<span lang="pi" class="pali">
+Abhijjhāvisamalobho cittassa upakkileso, byāpādo cittassa upakkileso, kodho cittassa upakkileso, upanāho cittassa upakkileso, makkho cittassa upakkileso, paḷāso cittassa upakkileso, issā cittassa upakkileso, macchariyaṁ cittassa upakkileso, māyā cittassa upakkileso, sāṭheyyaṁ cittassa upakkileso, thambho cittassa upakkileso, sārambho cittassa upakkileso, māno cittassa upakkileso, atimāno cittassa upakkileso, mado cittassa upakkileso, pamādo cittassa upakkileso.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này các Tỷ-kheo, Tỷ-kheo nào nghĩ rằng: “Tham dục, tà tham là cấu uế của tâm” và sau khi biết vậy, vị ấy đoạn trừ tham dục, tà tham cấu uế của tâm;<br>
+<span lang="pi" class="pali">
+Sa kho so, bhikkhave, bhikkhu ‘abhijjhāvisamalobho cittassa upakkileso’ti—iti viditvā abhijjhāvisamalobhaṁ cittassa upakkilesaṁ pajahati;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+nghĩ rằng: “Sân là cấu uế của tâm”, và sau khi biết vậy, vị ấy đoạn trừ sân, cấu uế của tâm;<br>
+<span lang="pi" class="pali">
+‘byāpādo cittassa upakkileso’ti— iti viditvā byāpādaṁ cittassa upakkilesaṁ pajahati;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+phẫn …<br>
+<span lang="pi" class="pali">
+‘kodho cittassa upakkileso’ti—iti viditvā kodhaṁ cittassa upakkilesaṁ pajahati;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+hận …<br>
+<span lang="pi" class="pali">
+‘upanāho cittassa upakkileso’ti—iti viditvā upanāhaṁ cittassa upakkilesaṁ pajahati;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+hư ngụy …<br>
+<span lang="pi" class="pali">
+‘makkho cittassa upakkileso’ti—iti viditvā makkhaṁ cittassa upakkilesaṁ pajahati;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+não hại …<br>
+<span lang="pi" class="pali">
+‘paḷāso cittassa upakkileso’ti—iti viditvā paḷāsaṁ cittassa upakkilesaṁ pajahati;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+tật đố …<br>
+<span lang="pi" class="pali">
+‘issā cittassa upakkileso’ti—iti viditvā issaṁ cittassa upakkilesaṁ pajahati;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+xan tham …<br>
+<span lang="pi" class="pali">
+‘macchariyaṁ cittassa upakkileso’ti—iti viditvā macchariyaṁ cittassa upakkilesaṁ pajahati;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+man trá …<br>
+<span lang="pi" class="pali">
+‘māyā cittassa upakkileso’ti—iti viditvā māyaṁ cittassa upakkilesaṁ pajahati;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+khi cuống …<br>
+<span lang="pi" class="pali">
+‘sāṭheyyaṁ cittassa upakkileso’ti—iti viditvā sāṭheyyaṁ cittassa upakkilesaṁ pajahati;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+ngoan cố …<br>
+<span lang="pi" class="pali">
+‘thambho cittassa upakkileso’ti—iti viditvā thambhaṁ cittassa upakkilesaṁ pajahati;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+cấp tháo …<br>
+<span lang="pi" class="pali">
+‘sārambho cittassa upakkileso’ti—iti viditvā sārambhaṁ cittassa upakkilesaṁ pajahati;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+mạn …<br>
+<span lang="pi" class="pali">
+‘māno cittassa upakkileso’ti—iti viditvā mānaṁ cittassa upakkilesaṁ pajahati;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+quá mạn …<br>
+<span lang="pi" class="pali">
+‘atimāno cittassa upakkileso’ti—iti viditvā atimānaṁ cittassa upakkilesaṁ pajahati;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+kiêu …<br>
+<span lang="pi" class="pali">
+‘mado cittassa upakkileso’ti—iti viditvā madaṁ cittassa upakkilesaṁ pajahati;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+nghĩ rằng: “Phóng dật là cấu uế của tâm” thì sau khi biết vậy, vị ấy đoạn trừ phóng dật, cấu uế của tâm.<br>
+<span lang="pi" class="pali">
+‘pamādo cittassa upakkileso’ti—iti viditvā pamādaṁ cittassa upakkilesaṁ pajahati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này các Tỷ-kheo, khi nào Tỷ-kheo biết được: “Tham dục, tà tham là cấu uế của tâm”, tham dục, tà tham cấu uế của tâm được diệt trừ<br>
+<span lang="pi" class="pali">
+Yato kho, bhikkhave, bhikkhuno ‘abhijjhāvisamalobho cittassa upakkileso’ti—iti viditvā abhijjhāvisamalobho cittassa upakkileso pahīno hoti,<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+sân …<br>
+<span lang="pi" class="pali">
+‘byāpādo cittassa upakkileso’ti—iti viditvā byāpādo cittassa upakkileso pahīno hoti;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+phẫn …<br>
+<span lang="pi" class="pali">
+‘kodho cittassa upakkileso’ti—iti viditvā kodho cittassa upakkileso pahīno hoti;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+hận …<br>
+<span lang="pi" class="pali">
+‘upanāho cittassa upakkileso’ti—iti viditvā upanāho cittassa upakkileso pahīno hoti;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+hư ngụy …<br>
+<span lang="pi" class="pali">
+‘makkho cittassa upakkileso’ti—iti viditvā makkho cittassa upakkileso pahīno hoti;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+não hại …<br>
+<span lang="pi" class="pali">
+‘paḷāso cittassa upakkileso’ti—iti viditvā paḷāso cittassa upakkileso pahīno hoti;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+tật đố …<br>
+<span lang="pi" class="pali">
+‘issā cittassa upakkileso’ti—iti viditvā issā cittassa upakkileso pahīno hoti;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+xan tham …<br>
+<span lang="pi" class="pali">
+‘macchariyaṁ cittassa upakkileso’ti—iti viditvā macchariyaṁ cittassa upakkileso pahīno hoti;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+man trá …<br>
+<span lang="pi" class="pali">
+‘māyā cittassa upakkileso’ti—iti viditvā māyā cittassa upakkileso pahīno hoti;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+khi cuống …<br>
+<span lang="pi" class="pali">
+‘sāṭheyyaṁ cittassa upakkileso’ti—iti viditvā sāṭheyyaṁ cittassa upakkileso pahīno hoti;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+ngoan cố …<br>
+<span lang="pi" class="pali">
+‘thambho cittassa upakkileso’ti—iti viditvā thambho cittassa upakkileso pahīno hoti;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+cấp tháo …<br>
+<span lang="pi" class="pali">
+‘sārambho cittassa upakkileso’ti—iti viditvā sārambho cittassa upakkileso pahīno hoti;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+mạn …<br>
+<span lang="pi" class="pali">
+‘māno cittassa upakkileso’ti—iti viditvā māno cittassa upakkileso pahīno hoti;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+quá mạn …<br>
+<span lang="pi" class="pali">
+‘atimāno cittassa upakkileso’ti—iti viditvā atimāno cittassa upakkileso pahīno hoti;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+kiêu …<br>
+<span lang="pi" class="pali">
+‘mado cittassa upakkileso’ti—iti viditvā mado cittassa upakkileso pahīno hoti;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+khi nào Tỷ-kheo biết được: “Phóng dật là cấu uế của tâm”, phóng dật, cấu uế của tâm được diệt trừ<br>
+<span lang="pi" class="pali">
+‘pamādo cittassa upakkileso’ti—iti viditvā pamādo cittassa upakkileso pahīno hoti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Tỷ-kheo ấy thành tựu lòng tin tuyệt đối đối với Phật:<br>
+<span lang="pi" class="pali">
+So buddhe aveccappasādena samannāgato hoti:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Ngài là bậc Thế Tôn, A-la-hán, Chánh Ðẳng Giác, Minh Hạnh Túc, Thiện Thệ, Thế Gian Giải, Ðiều Ngự Trượng Phu, Vô Thượng Sĩ, Thiên Nhân Sư, Phật, Thế Tôn.’<br>
+<span lang="pi" class="pali">
+‘itipi so bhagavā arahaṁ sammāsambuddho vijjācaraṇasampanno sugato lokavidū anuttaro purisadammasārathi satthā devamanussānaṁ buddho bhagavā’ti;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vị ấy thành tựu lòng tin tuyệt đối đối với Pháp:<br>
+<span lang="pi" class="pali">
+dhamme aveccappasādena samannāgato hoti:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Pháp được Thế Tôn khéo thuyết giảng, thiết thực hiện tại, không có thời gian, đến để mà thấy, có khả năng hướng thượng, được người có trí chứng hiểu.’<br>
+<span lang="pi" class="pali">
+‘svākkhāto bhagavatā dhammo sandiṭṭhiko akāliko ehipassiko opaneyyiko paccattaṁ veditabbo viññūhī’ti;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vị ấy thành tựu lòng tin tuyệt đối đối với chúng Tăng:<br>
+<span lang="pi" class="pali">
+saṅghe aveccappasādena samannāgato hoti:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Diệu hạnh là chúng Tăng, đệ tử Thế Tôn; Trực hạnh là chúng Tăng, đệ tử Thế Tôn; Như lý hạnh là chúng Tăng, đệ tử Thế Tôn; Chánh hạnh là chúng Tăng, đệ tử Thế Tôn. Tức là bốn đôi tám vị. Chúng Tăng, đệ tử Thế Tôn, đáng được cung kính, đáng được tôn trọng, đáng được cúng dường, đáng được chắp tay, là phước điền vô thượng ở đời.’<br>
+<span lang="pi" class="pali">
+‘suppaṭipanno bhagavato sāvakasaṅgho, ujuppaṭipanno bhagavato sāvakasaṅgho, ñāyappaṭipanno bhagavato sāvakasaṅgho, sāmīcippaṭipanno bhagavato sāvakasaṅgho, yadidaṁ cattāri purisayugāni, aṭṭha purisapuggalā. Esa bhagavato sāvakasaṅgho āhuneyyo pāhuneyyo dakkhiṇeyyo añjalikaraṇīyo, anuttaraṁ puññakkhettaṁ lokassā’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ðến giai đoạn này, đối với vị ấy có sự từ bỏ, có sự diệt trừ, có sự giải thoát, có sự đoạn trừ, có sự xả ly. Vị ấy tự nghĩ: “Ta thành tựu lòng tin tuyệt đối đối với Thế Tôn”, và chứng được nghĩa tín thọ, chứng được pháp tín thọ, chứng được hân hoan liên hệ đến pháp; từ hân hoan, hỷ sanh; từ hỷ, thân được khinh an; thân khinh an, cảm giác được lạc thọ; với lạc thọ, tâm được Thiền định.<br>
+<span lang="pi" class="pali">
+Yathodhi kho panassa cattaṁ hoti vantaṁ muttaṁ pahīnaṁ paṭinissaṭṭhaṁ, so ‘buddhe aveccappasādena samannāgatomhī’ti labhati atthavedaṁ, labhati dhammavedaṁ, labhati dhammūpasaṁhitaṁ pāmojjaṁ. Pamuditassa pīti jāyati, pītimanassa kāyo passambhati, passaddhakāyo sukhaṁ vedeti, sukhino cittaṁ samādhiyati;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vị ấy tự nghĩ: “Ta thành tựu lòng tin tuyệt đối đối với Pháp”, và chứng được nghĩa tín thọ, chứng được pháp tín thọ, chứng được hân hoan liên hệ đến pháp; từ hân hoan, hỷ sanh; từ hỷ, thân được khinh an; thân khinh an, cảm giác được lạc thọ; với lạc thọ, tâm được Thiền định.<br>
+<span lang="pi" class="pali">
+‘dhamme …pe…<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vị ấy tự nghĩ: “Ta thành tựu lòng tin tuyệt đối đối với Tăng”, và chứng được nghĩa tín thọ, chứng được pháp tín thọ, chứng được hân hoan liên hệ đến pháp; từ hân hoan hỷ sanh; từ hỷ, thân được khinh an, thân khinh an, cảm giác được lạc thọ; với lạc thọ, tâm được Thiền định.<br>
+<span lang="pi" class="pali">
+saṅghe aveccappasādena samannāgatomhī’ti labhati atthavedaṁ, labhati dhammavedaṁ, labhati dhammūpasaṁhitaṁ pāmojjaṁ; pamuditassa pīti jāyati, pītimanassa kāyo passambhati, passaddhakāyo sukhaṁ vedeti, sukhino cittaṁ samādhiyati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vị ấy tự nghĩ: “Ðến giai đoạn này, đối với Ta, có sự từ bỏ, có sự diệt trừ, có sự giải thoát, có sự đoạn trừ, có sự xả ly”, và chứng được nghĩa tín thọ, chứng được pháp tín thọ, chứng được hân hoan liên hệ đến pháp;<br>
+<span lang="pi" class="pali">
+‘Yathodhi kho pana me cattaṁ vantaṁ muttaṁ pahīnaṁ paṭinissaṭṭhan’ti labhati atthavedaṁ, labhati dhammavedaṁ, labhati dhammūpasaṁhitaṁ pāmojjaṁ;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+từ hân hoan, hỷ sanh; từ hỷ, thân khinh an; thân khinh an, cảm giác được lạc thọ; với lạc thọ, tâm được Thiền định.<br>
+<span lang="pi" class="pali">
+pamuditassa pīti jāyati, pītimanassa kāyo passambhati, passaddhakāyo sukhaṁ vedeti, sukhino cittaṁ samādhiyati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này các Tỷ-kheo, vị Tỷ-kheo, giới như vậy, pháp như vậy, tuệ như vậy, – nếu có ăn đồ khất thực với gạo thơm, hạt đen được vất đi, với các món canh, với các món ăn khác cũng không vì vậy trở thành một chướng ngại cho vị ấy.<br>
+<span lang="pi" class="pali">
+Sa kho so, bhikkhave, bhikkhu evaṁsīlo evaṁdhammo evaṁpañño sālīnañcepi piṇḍapātaṁ bhuñjati vicitakāḷakaṁ anekasūpaṁ anekabyañjanaṁ, nevassa taṁ hoti antarāyāya.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này các Tỷ-kheo, như một tấm vải cấu uế, nhiễm bụi, nếu bỏ trong nước sạch, trở thành thanh tịnh sạch sẽ, như bỏ vào lò lửa trở thành thanh tịnh sạch sẽ.<br>
+<span lang="pi" class="pali">
+Seyyathāpi, bhikkhave, vatthaṁ saṅkiliṭṭhaṁ malaggahitaṁ acchodakaṁ āgamma parisuddhaṁ hoti pariyodātaṁ, ukkāmukhaṁ vā panāgamma jātarūpaṁ parisuddhaṁ hoti pariyodātaṁ;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Cũng vậy, này các Tỷ-kheo, một Tỷ-kheo, giới như vậy, pháp như vậy, tuệ như vậy, nếu có ăn đồ khất thực với gạo thơm, hạt đen được vất đi, với các món canh, với các món ăn khác, cũng không vì vậy trở thành một chướng ngại cho vị ấy.<br>
+<span lang="pi" class="pali">
+evameva kho, bhikkhave, bhikkhu evaṁsīlo evaṁdhammo evaṁpañño sālīnañcepi piṇḍapātaṁ bhuñjati vicitakāḷakaṁ anekasūpaṁ anekabyañjanaṁ, nevassa taṁ hoti antarāyāya.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vị ấy an trú, biến mãn một phương với tâm câu hữu với từ, cũng vậy phương thứ hai, cũng vậy phương thứ ba, cũng vậy phương thứ tư. Như vậy, cùng khắp thế giới, trên dưới bề ngang, hết thảy phương xứ, cùng khắp vô biên giới, vị ấy an trú biến mãn với tâm câu hữu với từ, quảng đại, vô biên, không hận, không sân.<br>
+<span lang="pi" class="pali">
+So mettāsahagatena cetasā ekaṁ disaṁ pharitvā viharati, tathā dutiyaṁ, tathā tatiyaṁ, tathā catutthaṁ. Iti uddhamadho tiriyaṁ sabbadhi sabbattatāya sabbāvantaṁ lokaṁ mettāsahagatena cetasā vipulena mahaggatena appamāṇena averena abyāpajjena pharitvā viharati;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vị ấy an trú, biến mãn một phương với tâm câu hữu với bi, cũng vậy phương thứ hai, cũng vậy phương thứ ba, cũng vậy phương thứ tư. Như vậy, cùng khắp thế giới, trên dưới bề ngang, hết thảy phương xứ, cùng khắp vô biên giới, vị ấy an trú biến mãn với tâm câu hữu với từ, quảng đại, vô biên, không hận, không sân.<br>
+<span lang="pi" class="pali">
+karuṇāsahagatena cetasā …pe…<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vị ấy an trú, biến mãn một phương với tâm câu hữu với hỷ, cũng vậy phương thứ hai, cũng vậy phương thứ ba, cũng vậy phương thứ tư. Như vậy, cùng khắp thế giới, trên dưới bề ngang, hết thảy phương xứ, cùng khắp vô biên giới, vị ấy an trú biến mãn với tâm câu hữu với từ, quảng đại, vô biên, không hận, không sân.<br>
+<span lang="pi" class="pali">
+muditāsahagatena cetasā …pe…<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vị ấy an trú, biến mãn một phương với tâm câu hữu với xả, cũng vậy phương thứ hai, cũng vậy phương thứ ba, cũng vậy phương thứ tư. Như vậy, cùng khắp thế giới, trên dưới bề ngang, hết thảy phương xứ, cùng khắp vô biên giới, vị ấy an trú biến mãn với tâm câu hữu với từ, quảng đại, vô biên, không hận, không sân.<br>
+<span lang="pi" class="pali">
+upekkhāsahagatena cetasā ekaṁ disaṁ pharitvā viharati, tathā dutiyaṁ, tathā tatiyaṁ, tathā catutthaṁ. Iti uddhamadho tiriyaṁ sabbadhi sabbattatāya sabbāvantaṁ lokaṁ upekkhāsahagatena cetasā vipulena mahaggatena appamāṇena averena abyāpajjena pharitvā viharati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vị ấy biết: “Có cái này, có cái hạ liệt, có cái cao thượng, có sự giải thoát vượt qua các tưởng”.<br>
+<span lang="pi" class="pali">
+So ‘atthi idaṁ, atthi hīnaṁ, atthi paṇītaṁ, atthi imassa saññāgatassa uttari nissaraṇan’ti pajānāti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Do vị ấy biết như vậy, thấy như vậy, tâm được giải thoát khỏi dục lậu, tâm được giải thoát khỏi hữu lậu, tâm được giải thoát khỏi vô minh lậu.<br>
+<span lang="pi" class="pali">
+Tassa evaṁ jānato evaṁ passato kāmāsavāpi cittaṁ vimuccati, bhavāsavāpi cittaṁ vimuccati, avijjāsavāpi cittaṁ vimuccati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ðối với tự thân đã giải thoát, trí khởi lên: “Ta đã giải thoát, sanh đã tận, phạm hạnh đã thành, những việc nên làm đã làm, không còn trở lui trạng thái này nữa”.<br>
+<span lang="pi" class="pali">
+Vimuttasmiṁ vimuttamiti ñāṇaṁ hoti. ‘Khīṇā jāti, vusitaṁ brahmacariyaṁ, kataṁ karaṇīyaṁ, nāparaṁ itthattāyā’ti pajānāti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này các Tỷ-kheo, Tỷ-kheo ấy được gọi là Tỷ-kheo đã được tắm rửa với sự tắm rửa nội tâm.<br>
+<span lang="pi" class="pali">
+Ayaṁ vuccati, bhikkhave: ‘bhikkhu sināto antarena sinānenā’”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Lúc bấy giờ, Bà-la-môn Sundarikabhāradvāja đang ngồi không xa Thế Tôn.<br>
+<span lang="pi" class="pali">
+Tena kho pana samayena sundarikabhāradvājo brāhmaṇo bhagavato avidūre nisinno hoti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Rồi Bà-la-môn Sundarikabhāradvāja bạch Thế Tôn:<br>
+<span lang="pi" class="pali">
+Atha kho sundarikabhāradvājo brāhmaṇo bhagavantaṁ etadavoca:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Tôn giả Gotama có đi đến sông Bāhukā để tắm rửa không?”<br>
+<span lang="pi" class="pali">
+“gacchati pana bhavaṁ gotamo bāhukaṁ nadiṁ sināyitun”ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Này Bà-la-môn, sông Bāhukā là gì? Sông Bāhukā có làm được lợi ích gì?<br>
+<span lang="pi" class="pali">
+“Kiṁ, brāhmaṇa, bāhukāya nadiyā? Kiṁ bāhukā nadī karissatī”ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Tôn giả Gotama, sông Bāhukā được nhiều người xem là có khả năng giải thoát. Tôn giả Gotama, sông Bāhukā được nhiều người xem là có khả năng đem lại công đức. Và nhiều người đã gội sạch các ác nghiệp trong sông Bāhukā.”<br>
+<span lang="pi" class="pali">
+“Lokkhasammatā hi, bho gotama, bāhukā nadī bahujanassa, puññasammatā hi, bho gotama, bāhukā nadī bahujanassa, bāhukāya pana nadiyā bahujano pāpakammaṁ kataṁ pavāhetī”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Rồi Thế Tôn nói lên những bài kệ sau đây cho Bà-la-môn Sundarikabhāradvāja:<br>
+<span lang="pi" class="pali">
+Atha kho bhagavā sundarikabhāradvājaṁ brāhmaṇaṁ gāthāhi ajjhabhāsi:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Bāhukā và Adhikakkā,<br>
+Gayā và Sundarikā,<br>
+Sarasvatī và Payāga,<br>
+và sông Bāhumati:<br>
+Kẻ ngu dù thường tắm,<br>
+Ác nghiệp không rửa sạch.<br>
+<span lang="pi" class="pali">
+“Bāhukaṁ adhikakkañca,<br>
+gayaṁ sundarikaṁ mapi;<br>
+Sarassatiṁ payāgañca,<br>
+atho bāhumatiṁ nadiṁ;<br>
+Niccampi bālo pakkhando,<br>
+kaṇhakammo na sujjhati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Sông Sundarikā<br>
+có thể làm gì?<br>
+Payāga hay Bāhukā<br>
+Có thể làm gì?<br>
+Không thể rửa nghiệp đen,<br>
+Của kẻ ác gây tội.<br>
+<span lang="pi" class="pali">
+Kiṁ sundarikā karissati,<br>
+Kiṁ payāgā kiṁ bāhukā nadī;<br>
+Veriṁ katakibbisaṁ naraṁ,<br>
+Na hi naṁ sodhaye pāpakamminaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Với ai sống thanh tịnh,<br>
+Ngày nào cũng ngày tốt,<br>
+Với kẻ sống thanh tịnh,<br>
+Ngày nào cũng ngày lành,<br>
+Các tịnh nghiệp thanh tịnh,<br>
+Luôn thành tựu thiện hạnh,<br>
+Này vị Bà-la-môn,<br>
+Chỉ nên tắm ở đây,<br>
+Khiến mọi loài chúng sanh,<br>
+Được sống trong an ổn.<br>
+<span lang="pi" class="pali">
+Suddhassa ve sadā phaggu,<br>
+Suddhassuposatho sadā;<br>
+Suddhassa sucikammassa,<br>
+Sadā sampajjate vataṁ;<br>
+Idheva sināhi brāhmaṇa,<br>
+Sabbabhūtesu karohi khemataṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Nếu không nói giả dối,<br>
+Nếu không hại chúng sanh,<br>
+Không lấy của không cho,<br>
+Có lòng tin, không tham,<br>
+Đến sông Hằng làm gì,<br>
+Sông Hằng là giếng nước?”<br>
+<span lang="pi" class="pali">
+Sace musā na bhaṇasi,<br>
+sace pāṇaṁ na hiṁsasi;<br>
+Sace adinnaṁ nādiyasi,<br>
+saddahāno amaccharī;<br>
+Kiṁ kāhasi gayaṁ gantvā,<br>
+udapānopi te gayā”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Khi được nghe nói vậy, Bà-la-môn Sundarikabhāradvāja bạch Thế Tôn:<br>
+<span lang="pi" class="pali">
+Evaṁ vutte, sundarikabhāradvājo brāhmaṇo bhagavantaṁ etadavoca:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Thật vi diệu thay, Tôn giả Gotama! Thật vi diệu thay, Tôn giả Gotama!<br>
+<span lang="pi" class="pali">
+“abhikkantaṁ, bho gotama, abhikkantaṁ, bho gotama.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Tôn giả Gotama, như người dựng đứng lại những gì bị quăng ngã xuống, phơi bày ra những gì bị che kín, chỉ đường cho kẻ bị lạc hướng, đem đèn sáng vào trong bóng tối, để những ai có mắt có thể thấy sắc.<br>
+<span lang="pi" class="pali">
+Seyyathāpi, bho gotama, nikkujjitaṁ vā ukkujjeyya, paṭicchannaṁ vā vivareyya, mūḷhassa vā maggaṁ ācikkheyya, andhakāre vā telapajjotaṁ dhāreyya—cakkhumanto rūpāni dakkhantīti;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Cũng vậy Chánh pháp đã được Tôn giả Gotama dùng nhiều phương tiện trình bày.<br>
+<span lang="pi" class="pali">
+evamevaṁ bhotā gotamena anekapariyāyena dhammo pakāsito.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Nay con quy y Tôn giả Gotama, quy y Pháp và quy y Tăng.<br>
+<span lang="pi" class="pali">
+Esāhaṁ bhavantaṁ gotamaṁ saraṇaṁ gacchāmi dhammañca bhikkhusaṅghañca.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Mong con được xuất gia với Tôn giả Gotama! Mong con được thọ đại giới!”<br>
+<span lang="pi" class="pali">
+Labheyyāhaṁ bhoto gotamassa santike pabbajjaṁ, labheyyaṁ upasampadan”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Bà-la-môn Sundarikabhāradvāja được xuất gia với Thế Tôn, được thọ đại giới.<br>
+<span lang="pi" class="pali">
+Alattha kho sundarikabhāradvājo brāhmaṇo bhagavato santike pabbajjaṁ, alattha upasampadaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Trong thời gian ngắn sau khi thọ đại giới, Tôn giả Bhāradvāja sống độc cư, không phóng dật, nhiệt tâm tinh cần và không bao lâu sau khi tự thân chứng ngộ với thượng trí, chứng đắc và an trú ngay trong hiện tại, vô thượng cứu cánh Phạm hạnh mà vì mục đích này các Thiện nam tử xuất gia, từ bỏ gia đình, sống không gia đình.<br>
+<span lang="pi" class="pali">
+Acirūpasampanno kho panāyasmā bhāradvājo eko vūpakaṭṭho appamatto ātāpī pahitatto viharanto nacirasseva—yassatthāya kulaputtā sammadeva agārasmā anagāriyaṁ pabbajanti, tadanuttaraṁ—brahmacariyapariyosānaṁ diṭṭheva dhamme sayaṁ abhiññā sacchikatvā upasampajja vihāsi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vị ấy đã thắng tri: “Sanh đã tận, Phạm hạnh đã thành, những việc nên làm đã làm, không còn trở lui trạng thái này nữa”.<br>
+<span lang="pi" class="pali">
+“Khīṇā jāti, vusitaṁ brahmacariyaṁ, kataṁ karaṇīyaṁ, nāparaṁ itthattāyā”ti abbhaññāsi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Như vậy, Tôn giả Bhāradvāja trở thành một vị A-la-hán nữa.<br>
+<span lang="pi" class="pali">
+Aññataro kho panāyasmā bhāradvājo arahataṁ ahosīti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+<span lang="pi" class="vi">
+Vatthasuttaṁ niṭṭhitaṁ sattamaṁ.<br>
+</span>
+</p>
 
 
-<hr>
 
-<p><span class="parno">4</span>Sa kho so, bhikkhave, bhikkhu ‘abhijjhāvisamalobho cittassa upakkileso’ti — iti viditvā abhijjhāvisamalobhaṁ cittassa upakkilesaṁ pajahati; ‘byāpādo cittassa upakkileso’ti — iti viditvā byāpādaṁ cittassa upakkilesaṁ pajahati; ‘kodho cittassa upakkileso’ti — iti viditvā kodhaṁ cittassa upakkilesaṁ pajahati; ‘upanāho cittassa upakkileso’ti — iti viditvā upanāhaṁ cittassa upakkilesaṁ pajahati; ‘makkho cittassa upakkileso’ti — iti viditvā makkhaṁ cittassa upakkilesaṁ pajahati; ‘paḷāso cittassa upakkileso’ti — iti viditvā paḷāsaṁ cittassa upakkilesaṁ pajahati; ‘issā cittassa upakkileso’ti — iti viditvā issaṁ cittassa upakkilesaṁ pajahati; ‘macchariyaṁ cittassa upakkileso’ti — iti viditvā macchariyaṁ cittassa upakkilesaṁ pajahati; ‘māyā cittassa upakkileso’ti — iti viditvā māyaṁ cittassa upakkilesaṁ pajahati; ‘sāṭheyyaṁ cittassa upakkileso’ti — iti viditvā sāṭheyyaṁ cittassa upakkilesaṁ pajahati; ‘thambho cittassa upakkileso’ti — iti viditvā thambhaṁ cittassa upakkilesaṁ pajahati; ‘sārambho cittassa upakkileso’ti — iti viditvā sārambhaṁ cittassa upakkilesaṁ pajahati; ‘māno cittassa upakkileso’ti — iti viditvā mānaṁ cittassa upakkilesaṁ pajahati; ‘atimāno cittassa upakkileso’ti — iti viditvā atimānaṁ cittassa upakkilesaṁ pajahati; ‘mado cittassa upakkileso’ti — iti viditvā madaṁ cittassa upakkilesaṁ pajahati; ‘pamādo cittassa upakkileso’ti — iti viditvā pamādaṁ cittassa upakkilesaṁ pajahati.</p>
-
-<p><span class="parno">5</span><span class="var" title="yato ca kho (bj)" id="note61">Yato kho</span>, bhikkhave, bhikkhuno ‘abhijjhāvisamalobho cittassa upakkileso’ti –  iti viditvā abhijjhāvisamalobho cittassa upakkileso pahīno hoti, ‘byāpādo cittassa upakkileso’ti — iti viditvā byāpādo cittassa upakkileso pahīno hoti; ‘kodho cittassa upakkileso’ti — iti viditvā kodho cittassa upakkileso pahīno hoti; ‘upanāho cittassa upakkileso’ti — iti viditvā upanāho cittassa upakkileso pahīno hoti; ‘makkho cittassa upakkileso’ti — iti viditvā makkho cittassa upakkileso pahīno hoti; ‘paḷāso cittassa upakkileso’ti — iti viditvā paḷāso cittassa upakkileso pahīno hoti; ‘issā cittassa upakkileso’ti — iti viditvā issā cittassa upakkileso pahīno hoti; ‘macchariyaṁ cittassa upakkileso’ti — iti viditvā macchariyaṁ cittassa upakkileso pahīno hoti; ‘māyā cittassa upakkileso’ti — iti viditvā māyā cittassa upakkileso pahīno hoti; ‘sāṭheyyaṁ cittassa upakkileso’ti — iti viditvā sāṭheyyaṁ cittassa upakkileso pahīno hoti; ‘thambho cittassa upakkileso’ti — iti viditvā thambho cittassa upakkileso pahīno hoti; ‘sārambho cittassa upakkileso’ti — iti viditvā sārambho cittassa upakkileso pahīno hoti; ‘māno cittassa upakkileso’ti — iti viditvā māno cittassa upakkileso pahīno hoti; ‘atimāno cittassa upakkileso’ti — iti viditvā atimāno cittassa upakkileso pahīno hoti; ‘mado cittassa upakkileso’ti — iti viditvā mado cittassa upakkileso pahīno hoti; ‘pamādo cittassa upakkileso’ti –  iti viditvā pamādo cittassa upakkileso pahīno hoti.</p>
-
-<hr>
-
-<p><span class="parno">6</span>So buddhe aveccappasādena samannāgato hoti: ‘itipi so bhagavā arahaṁ sammāsambuddho vijjācaraṇasampanno sugato lokavidū anuttaro purisadammasārathi satthā devamanussānaṁ buddho bhagavā’ti;</p>
-
-<p>dhamme aveccappasādena samannāgato hoti: ‘svākkhāto bhagavatā dhammo sandiṭṭhiko akāliko ehipassiko opaneyyiko paccattaṁ veditabbo viññūhī’ti;</p>
-
-<p>saṅghe aveccappasādena samannāgato hoti: ‘suppaṭipanno bhagavato sāvakasaṅgho, ujuppaṭipanno bhagavato sāvakasaṅgho, ñāyappaṭipanno bhagavato sāvakasaṅgho, sāmīcippaṭipanno bhagavato sāvakasaṅgho, yadidaṁ cattāri purisayugāni, aṭṭha purisapuggalā. Esa bhagavato sāvakasaṅgho āhuneyyo pāhuneyyo dakkhiṇeyyo añjalikaraṇīyo, anuttaraṁ puññakkhettaṁ lokassā’ti.</p>
-
-<hr>
-
-<p><span class="parno">7</span><span class="var" title="yatopi (bj) | yatodhi (aṭṭhakathāyaṁ pāṭhantaraṁ)" id="note62">Yathodhi</span> kho panassa cattaṁ hoti vantaṁ muttaṁ pahīnaṁ paṭinissaṭṭhaṁ, so ‘buddhe aveccappasādena samannāgatomhī’ti labhati atthavedaṁ, labhati dhammavedaṁ, labhati dhammūpasaṁhitaṁ pāmojjaṁ. Pamuditassa pīti jāyati, pītimanassa kāyo passambhati, passaddhakāyo sukhaṁ vedeti, sukhino cittaṁ samādhiyati;</p>
-
-<p>‘dhamme … pe … saṁghe aveccappasādena samannāgatomhī’ti labhati atthavedaṁ, labhati dhammavedaṁ, labhati dhammūpasaṁhitaṁ pāmojjaṁ; pamuditassa pīti jāyati, pītimanassa kāyo passambhati, passaddhakāyo sukhaṁ vedeti, sukhino cittaṁ samādhiyati.</p>
-
-<p>‘Yathodhi kho pana me cattaṁ vantaṁ muttaṁ pahīnaṁ paṭinissaṭṭhan’ti labhati atthavedaṁ, labhati dhammavedaṁ, labhati dhammūpasaṁhitaṁ pāmojjaṁ; pamuditassa pīti jāyati, pītimanassa kāyo passambhati, passaddhakāyo sukhaṁ vedeti, sukhino cittaṁ samādhiyati.</p>
-
-<hr>
-
-<p><span class="parno">8</span>Sa kho so, bhikkhave, bhikkhu evaṁsīlo evaṁdhammo evaṁpañño sālīnañcepi piṇḍapātaṁ bhuñjati vicitakāḷakaṁ anekasūpaṁ anekabyañjanaṁ, nevassa taṁ hoti antarāyāya. Seyyathāpi, bhikkhave, vatthaṁ saṅkiliṭṭhaṁ malaggahitaṁ acchodakaṁ āgamma parisuddhaṁ hoti pariyodātaṁ, ukkāmukhaṁ vā panāgamma jātarūpaṁ parisuddhaṁ hoti pariyodātaṁ; evameva kho, bhikkhave, bhikkhu evaṁsīlo evaṁdhammo evaṁpañño sālīnañcepi piṇḍapātaṁ bhuñjati vicitakāḷakaṁ anekasūpaṁ anekabyañjanaṁ, nevassa taṁ hoti antarāyāya.</p>
-
-<hr>
-
-<p><span class="parno">9</span>So mettāsahagatena cetasā ekaṁ disaṁ pharitvā viharati, tathā dutiyaṁ, tathā tatiyaṁ, tathā <span class="var" title="catutthiṁ (bj, pts1)" id="note63">catutthaṁ</span>. Iti uddhamadho tiriyaṁ sabbadhi sabbattatāya sabbāvantaṁ lokaṁ mettāsahagatena cetasā vipulena mahaggatena appamāṇena averena abyāpajjena pharitvā viharati; karuṇāsahagatena cetasā … pe … muditāsahagatena cetasā … pe … upekkhāsahagatena cetasā ekaṁ disaṁ pharitvā viharati, tathā dutiyaṁ, tathā tatiyaṁ, tathā catutthaṁ. Iti uddhamadho tiriyaṁ sabbadhi sabbattatāya sabbāvantaṁ lokaṁ upekkhāsahagatena cetasā vipulena mahaggatena appamāṇena averena abyāpajjena pharitvā viharati.</p>
-
-<hr>
-
-<p><span class="parno">10</span>So ‘atthi idaṁ, atthi hīnaṁ, atthi paṇītaṁ, atthi imassa saññāgatassa uttari nissaraṇan’ti pajānāti. </p>
-
-<p>Tassa evaṁ jānato evaṁ passato kāmāsavāpi cittaṁ vimuccati, bhavāsavāpi cittaṁ vimuccati, avijjāsavāpi cittaṁ vimuccati. Vimuttasmiṁ vimuttamiti ñāṇaṁ hoti. </p>
-
-<p>‘Khīṇā jāti, vusitaṁ brahmacariyaṁ, kataṁ karaṇīyaṁ, nāparaṁ itthattāyā’ti pajānāti. Ayaṁ vuccati, bhikkhave: ‘bhikkhu sināto antarena sinānenā’"ti.</p>
-
-<hr>
-
-<p><span class="parno">11</span>Tena kho pana samayena sundarikabhāradvājo brāhmaṇo bhagavato avidūre nisinno hoti. Atha kho sundarikabhāradvājo brāhmaṇo bhagavantaṁ etadavoca: "gacchati pana bhavaṁ gotamo bāhukaṁ nadiṁ sināyitun"ti?</p>
-
-<p>"Kiṁ, brāhmaṇa, bāhukāya nadiyā? Kiṁ bāhukā nadī karissatī"ti? </p>
-
-<p>"<span class="var" title="lokhyasammatā (bj) | lokasammatā (s1–3) | mokkhasammatā (pts1)" id="note64">Lokkhasammatā</span> hi, bho gotama, bāhukā nadī bahujanassa, puññasammatā hi, bho gotama, bāhukā nadī bahujanassa, bāhukāya pana nadiyā bahujano pāpakammaṁ kataṁ pavāhetī"ti. </p>
-
-<p>Atha kho bhagavā sundarikabhāradvājaṁ brāhmaṇaṁ gāthāhi ajjhabhāsi:</p>
+<!-- COPY CONTENT SUTTA Ở ĐÂY -->
 
 
-<hr>
 
-<p class="verse"><span class="parno">12</span>"Bāhukaṁ adhikakkañca,
-<br>gayaṁ <span class="var" title="sundarikāmapi (bj, s1–3, pts1) | sundarikaṁ mahiṁ (itipi)" id="note65">sundarikaṁ mapi</span>;
-<br>Sarassatiṁ payāgañca,
-<br>atho bāhumatiṁ nadiṁ;
-<br>Niccampi bālo <span class="var" title="pakkhanno (bj, s1–3, pts1)" id="note66">pakkhando</span>,
-<br>kaṇhakammo na sujjhati.</p>
+<br>
+<p><p style="text-align: right;font-style: italic;">Hoà Thượng Thích Minh Châu dịch Việt</span></p>
 
-<p class="verse"><span class="parno">13</span>Kiṁ sundarikā karissati,
-<br>Kiṁ <span class="var" title="payāgo (bj, s1–3, pts1)" id="note67">payāgā</span> kiṁ bāhukā nadī;
-<br>Veriṁ katakibbisaṁ naraṁ,
-<br>Na hi naṁ sodhaye pāpakamminaṁ.</p>
 
-<p class="verse"><span class="parno">14</span>Suddhassa ve sadā phaggu,
-<br>Suddhassuposatho sadā;
-<br>Suddhassa sucikammassa,
-<br>Sadā sampajjate vataṁ;
-<br>Idheva sināhi brāhmaṇa,
-<br>Sabbabhūtesu karohi khemataṁ.</p>
 
-<p class="verse"><span class="parno">15</span>Sace musā na bhaṇasi,
-<br>sace pāṇaṁ na hiṁsasi;
-<br>Sace adinnaṁ nādiyasi,
-<br>saddahāno amaccharī;
-<br>Kiṁ kāhasi gayaṁ gantvā,
-<br>udapānopi te gayā"ti.</p>
+</section>  <!-- End English and Pali -->
 
-<hr>
 
-<p><span class="parno">16</span>Evaṁ vutte, sundarikabhāradvājo brāhmaṇo bhagavantaṁ etadavoca: "Abhikkantaṁ, bho gotama, abhikkantaṁ, bho gotama. Seyyathāpi, bho gotama, nikkujjitaṁ vā ukkujjeyya, paṭicchannaṁ vā vivareyya, mūḷhassa vā maggaṁ ācikkheyya, andhakāre vā telapajjotaṁ dhāreyya — cakkhumanto rūpāni dakkhantīti; evamevaṁ bhotā gotamena anekapariyāyena
-dhammo pakāsito. Esāhaṁ bhavantaṁ gotamaṁ saraṇaṁ gacchāmi dhammañca bhikkhusaṅghañca. Labheyyāhaṁ bhoto gotamassa santike pabbajjaṁ, labheyyaṁ upasampadan"ti.</p>
 
-<p>Alattha kho sundarikabhāradvājo brāhmaṇo bhagavato santike pabbajjaṁ, alattha upasampadaṁ. Acirūpasampanno kho panāyasmā bhāradvājo eko vūpakaṭṭho appamatto ātāpī pahitatto viharanto nacirasseva – yassatthāya kulaputtā sammadeva agārasmā anagāriyaṁ pabbajanti, tadanuttaraṁ — brahmacariyapariyosānaṁ diṭṭheva dhamme sayaṁ abhiññā sacchikatvā upasampajja vihāsi. </p>
 
-<p>"Khīṇā jāti, vusitaṁ brahmacariyaṁ, kataṁ karaṇīyaṁ, nāparaṁ itthattāyā"ti abbhaññāsi. Aññataro kho panāyasmā bhāradvājo arahataṁ ahosīti.</p>
 
-<p class="endsection">Vatthasuttaṁ niṭṭhitaṁ sattamaṁ.</p>
-</div>
+</section>  <!-- End English and Pali -->
+
+
+
+
+
+</section>  <!-- End English and Pali -->
+
+
+
+
+
 </section>  <!-- End English and Pali -->
 <div id="nextprev"><a id="previous-sutta" href="./mn6.html#content"></a><a id="next-sutta" href="./mn8.html#content"></a></div>
 </div>  <!--End Content -->
 </div>  <!-- End Page -->
-<div class="w3-white bwcontainer2"> <!-- Footer div -->
-<!-- Footer -->
-		<footer>
-			<div id="breadcrumbs"><a href="../home/index.html">Home</a><a href="../mn/mn.html">Majjhima Nikāya</a>MN7: Vatthūpama Sutta</div>
-					<div class="bottomlinks">
- 	<a href="../guide/guide.html"><span class="w3-bar-item"><i class="fa fa-compass"></i>&nbsp;Guide</span></a>
- 	 	<a href="../home/help.html"><span class="w3-bar-item"><i class="fa fa-info"></i>&nbsp;Help</span></a>
- 	<a href="../home/crossreference.html"><span class="w3-bar-item"><i class="fa fa-exchange"></i>&nbsp;Links&nbsp;Cross&nbsp;Reference</span></a>
- 	<a href="../home/copyright.html"><span class="w3-bar-item">&copy;&nbsp;Copyright</span></a>
- 	<a href="../home/contact.html"><span class="w3-bar-item"><i class="fa fa-envelope"></i>&nbsp;Contact</span></a>
- </div>  <!-- End bottom links -->
+
+
+
+
+
+
+<footer>
+					 <!-- End bottom links -->
 </footer>
- </div>
+
+
  
  <!-- Scripts -->
 
-<script>
- // Script to turn Pali Lookup on and off
- function togPaliLookup() {
- 		var checkBox = document.getElementById("myCheck");
- 		var text = document.getElementById("text");
- 		if (checkBox.checked == true){
- 				text.style.display = "block";
- 					} else {
- 							text.style.display = "none";
- 		}
- }
- </script>
+ <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      if (typeof enablePaliLookup === "function") {
+        enablePaliLookup();
+      } else {
+        console.error("enablePaliLookup is not defined");
+      }
+    });
+  </script>
 
  <script>
  // Script to open and close sidebar
