@@ -1,0 +1,94 @@
+// Define the specific path to filter the cached files
+const TARGET_URL_PREFIX = 'https://www.digitalpalireader.online/_external/translations/bt-bdhrs/mn/';
+
+// Function 1: Saves the Response to a local file, triggering a download.
+async function saveResponseToFile(url, response) {
+    try {
+        const clonedResponse = response.clone();
+        
+        const contentType = clonedResponse.headers.get('Content-Type') || 'application/octet-stream';
+        const urlPath = new URL(url).pathname;
+        let filename = urlPath.split('/').pop() || 'index.html';
+        
+        // Clean up and standardize the filename
+        if (filename.indexOf('.') === -1 || urlPath.endsWith('/')) {
+            // For files without a clear extension, use the last path segment and add an extension
+            let pathSegment = urlPath.split('/').filter(s => s.length > 0).pop() || 'index';
+            filename = pathSegment.replace(/\W/g, '_'); 
+            
+            if (contentType.includes('html')) {
+                filename += '.html';
+            } else if (contentType.includes('css')) {
+                filename += '.css';
+            } else if (contentType.includes('json')) {
+                filename += '.json';
+            } else {
+                filename += '.dat'; 
+            }
+        }
+        
+        // Ensure the root of the target directory is named clearly if it was cached
+        if (url === TARGET_URL_PREFIX) {
+            filename = 'bt-bdhrs-index.html';
+        }
+
+        const blob = await clonedResponse.blob();
+        
+        const a = document.createElement('a');
+        a.href = URL.createObjectURL(blob);
+        a.download = filename; 
+        
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        
+        URL.revokeObjectURL(a.href);
+        
+        console.log(`✅ Download requested for: ${filename}`);
+    } catch (error) {
+        console.error(`❌ Failed to save ${url}:`, error);
+    }
+}
+
+// Function 2: Main logic to iterate through all caches and files, using a filter.
+async function extractPWACache() {
+    if (!('caches' in window)) {
+        console.error('Cache API not supported.');
+        return;
+    }
+    
+    console.log(`--- Starting PWA Cache Extraction, filtering for: ${TARGET_URL_PREFIX} ---`);
+
+    try {
+        const cacheNames = await caches.keys();
+        let filesFound = 0;
+        
+        for (const cacheName of cacheNames) {
+            const cache = await caches.open(cacheName);
+            const requests = await cache.keys(); 
+            
+            for (const request of requests) {
+                const url = request.url;
+                
+                // --- THE MODIFIED FILTER CHECK ---
+                if (url.startsWith(TARGET_URL_PREFIX)) {
+                    const response = await cache.match(request);
+                    if (response) {
+                        await saveResponseToFile(url, response);
+                        filesFound++;
+                    }
+                }
+                // ---------------------------------
+            }
+        }
+        
+        if (filesFound === 0) {
+            console.warn(`\nNo files found in cache starting with the target prefix: ${TARGET_URL_PREFIX}.`);
+        } else {
+            console.log(`\n--- Cache extraction complete. Total files found and queued for download: ${filesFound}. Check your downloads folder. ---`);
+        }
+        
+    } catch (e) {
+        console.error('An error occurred during cache extraction:', e);
+    }
+}
