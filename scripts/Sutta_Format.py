@@ -38,15 +38,25 @@ vietnamese_markers = [
     'Ý', 'Ỳ', 'Ỷ', 'Ỹ', 'Ỵ',
     'Ắ', 'Ằ', 'Ẳ', 'Ẵ', 'Ặ',
 
-    # Common Vietnamese words
-    'con', 'trai', 'vua', 'xong', 'Con', 'kinh', 'Kinh', 'trong'
 ]
 
+# Whole-word Vietnamese terms
+vietnamese_words = ['con', 'trai', 'vua', 'xong', 'Con', 'kinh', 'Kinh', 'trong', 'hay', 'cho', 'tham', 'nay', 'khi', 'sanh', 'thanh', 'cao', 'mai', 'sinh', 'ai', 'chung', 'chia', 'trung', 'sau', 'thay', 'minh', 'danh', 'oai', 'nghi', 'hai']
 
 def is_vietnamese(line):
+    # Check for any diacritic character
     if any(char in line for char in vietnamese_markers):
         return True
+
+    # Check for whole-word matches using regex (Python 2.7 compatible)
+    for word in vietnamese_words:
+        pattern = r'\b{}\b'.format(re.escape(word))
+        if re.search(pattern, line):
+            return True
+
     return False
+
+
 
 def is_pali(line):
     return not is_vietnamese(line)
