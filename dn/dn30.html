@@ -1,0 +1,4084 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+ 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+ 	<link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+ 	<meta name="viewport" content="width=device-width, initial-scale=1">
+		<!-- Loading manifest -->
+	<link rel="manifest" href="../manifest.json">
+ 	<!-- Loading main and menu stylesheets -->
+ 	<link rel="stylesheet" href="../css/w3.css">
+ 	<link rel="stylesheet" href="../css/css.css">
+ 	<link rel="stylesheet" href="../css/menu.css">
+ 	<script src="../js/jquery-1.10.2.min.js"></script>
+ 	<script src="../js/controlpanel.js"></script>
+ 	<script src="../js/mousetrap.min.js"></script>
+    <script src="../js/pali-lookup-standalone.js"></script>
+
+ <script src="../js/suttaFiles.js"></script>
+<script>
+ // Script to open random Sutta
+ function openRandomSutta() {
+  const randomIndex = Math.floor(Math.random() * suttaFiles.length);
+  const selectedFile = suttaFiles[randomIndex];
+
+  // Get root path of your site 
+  const currentPath = location.pathname;
+  const rootPath = currentPath.split("/").slice(0, -2).join("/") + "/";
+
+  // Redirect to the correct file
+  window.location.href = rootPath + selectedFile;
+}
+</script>
+
+
+</head>
+ <body class="container">
+ <div class="header-background">
+ <!-- Header -->
+ <div class="w3-header w3-content w3-padding w3-left-align bwcontainer">
+ 	<div class="centered">
+ 		<button class="light-mode-button" aria-label="Bật Chế Độ Sáng" onclick="toggle_light_mode()">
+ 			<span></span>
+ 			<span></span>
+ 		</button>
+ 		<span class="box-lbl">Sáng/Tối</span>
+ 	</div> <!-- Centered -->
+ 		<a href="../home/index.html" id="bwlogo"><img src="../images/headerlogo.png" alt="Logo Lời Của Đức Phật" class="w3-image"></a>
+ 		<div class="w3-bar bwcontainer">
+ 			<div id="searchlinks">
+ 			<a href="../home/visearch.html"><span class="w3-bar-item"><i class="fa fa-search"></i>&nbsp;Tìm Tiếng Việt</span></a>
+ 			<a href="../home/palisearch.html"><span class="w3-bar-item"><i class="fa fa-search"></i>&nbsp;Tìm Tiếng Pali</span></a>
+ 			</div><!-- End Searchlinks div -->
+ 			<div class="help"><span><a href="../home/help.html"><img src="../images/help_icon.png" title="Trợ Giúp" alt="Help"></a></span></div>
+ 		</div> <!-- End w3-bar bwcontainer --> 	</div> <!-- End w3-header w3-content w3-padding w3-left-align bwcontainer -->
+ </div> <!-- End header-background -->
+ <!-- Top menu -->
+
+ <div class="w3-main w3-white bwcontainer2">
+ 	<div class="w3-button w3-padding-8 w3-left w3-hide-large" onclick="w3_open()">☰</div>
+ 		<div id="navbar" class="w3-hide-small w3-hide-medium bwcontainer3">
+ 			<ul id="css3menu0">
+ 				<li class="topfirst" id="home"><a href="../home/index.html" class="w3-hide-small">Trang Chủ</a></li>
+  				<li class="topmenu" id="dn"><a href="../dn/dn.html" class="pressed w3-hide-small">Trường Bộ Kinh</a></li>
+ 				<li class="topmenu" id="mn"><a href="../mn/mn.html" class="w3-hide-small">Trung Bộ Kinh</a></li>
+ 				<li class="topmenu" id="sn"><a href="../sn/sn.html" class="w3-hide-small"><i class="fa fa-caret-down"></i>&nbsp;Tương Ưng Bộ Kinh</a>
+ 					<ul>
+ 						<li><a href="../sn/sn01.html" class="w3-hide-small">Tập I - Thiên Có Kệ</a></li>
+ 						<li><a href="../sn/sn02.html" class="w3-hide-small">Tập II - Thiên Nhân Duyên</a></li>
+ 						<li><a href="../sn/sn03.html" class="w3-hide-small">Tập III - Thiên Uẩn</a></li>
+ 						<li><a href="../sn/sn04.html" class="w3-hide-small">Tập IV - Thiên Sáu Xứ</a></li>
+ 						<li><a href="../sn/sn05.html" class="w3-hide-small">Tập V - Thiên Ðại Phẩm</a></li>
+ 					</ul>
+ 				<li class="topmenu" id="an"><a href="../an/an.html" class="w3-hide-small"><i class="fa fa-caret-down"></i>&nbsp;Tăng Chi Bộ Kinh</a>
+ 					<ul>
+ 						<li><a href="../an/an1.html" class="w3-hide-small">Chương Một Pháp</a></li>
+ 						<li><a href="../an/an2.html" class="w3-hide-small">Chương Hai Pháp</a></li>
+ 						<li><a href="../an/an3.html" class="w3-hide-small">Chương Ba Pháp</a></li>
+ 						<li><a href="../an/an4.html" class="w3-hide-small">Chương Bốn Pháp</a></li>
+ 						<li><a href="../an/an5.html" class="w3-hide-small">Chương Năm Pháp</a></li>
+ 						<li><a href="../an/an6.html" class="w3-hide-small">Chương Sáu Pháp</a></li>
+ 						<li><a href="../an/an7.html" class="w3-hide-small">Chương Bảy Pháp</a></li>
+ 						<li><a href="../an/an8.html" class="w3-hide-small">Chương Tám Pháp</a></li>
+ 						<li><a href="../an/an9.html" class="w3-hide-small">Chương Chín Pháp</a></li>
+ 						<li><a href="../an/an10.html" class="w3-hide-small">Chương Mười Pháp</a></li>
+ 						<li><a href="../an/an11.html" class="w3-hide-small">Chương Mười Một Pháp</a></li>
+ 					</ul>
+ 				</li>
+ 				<li class="topmenu" id="kn"><a href="../kn/kn.html" class="w3-hide-small"><i class="fa fa-caret-down"></i>&nbsp;Tiểu Bộ Kinh</a>
+ 					<ul>
+ 						<li><a href="../kp/kp.html" class="w3-hide-small">Kinh Tiểu Tụng</a></li>
+ 						<li><a href="../dhp/dhp.html" class="w3-hide-small">Kinh Pháp Cú</a></li>
+ 						<li><a href="../snp/snp.html" class="w3-hide-small">Kinh Tập</a></li>
+ 						<li><a href="../ud/ud.html" class="w3-hide-small">Kinh Phật Tự Thuyết</a></li>
+ 						<li><a href="../it/it.html" class="w3-hide-small">Kinh Phật Thuyết Như Vậy</a></li>
+ 						<li><a href="../tha/tha.html" class="w3-hide-small">Trưởng Lão Tăng Kệ</a></li>
+ 						<li><a href="../thi/thi.html" class="w3-hide-small">Trưởng Lão Ni Kệ</a></li>
+ 					</ul>
+ 				</li>
+				<li class="toplast" id="rd"><a href="../rd/rd.html" class="w3-hide-small"></i>Kinh Ngẫu Nhiên Theo Nhóm</a>
+ 					</ul>
+ 				</li>
+ 			</ul>
+ 			</div>
+ 		</div> <!--navbar-->
+
+<!-- Sidebar (hidden by default) -->
+ <nav class="w3-sidebar w3-bar-block w3-card w3-border w3-top w3-animate-left w3-hide-large" id="mySidebar">
+ 	<a href="javascript:void(0)" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-times fa-2x red-color"></i>&nbsp;&nbsp;&nbsp;Close</a><!-- Hides the sidebar when clicked -->
+ 		<div class="w3-bar-block w3-white">
+ 			<a href="../home/index.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-home fa-lg"></i>&nbsp;&nbsp;&nbsp;Home</a>
+ 			<a href="../guide/guide.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Guide</a>
+ 			<a href="../dn/dn.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Trường Bộ Kinh</a>
+ 			<a href="../mn/mn.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Trung Bộ Kinh</a>
+ 			<a href="../sn/sn.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Tương Ưng Bộ Kinh</a>
+ 			<a href="../an/an.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Tăng Chi Bộ Kinh
+ 			<a href="../kn/kn.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Tiểu Bộ Kinh</a>
+			<a href="../rd/rd.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>Kinh Ngẫu Nhiên Theo Nhóm</a>
+ 		</div>
+ </nav>
+ 
+ 
+ 
+   <!-- !PAGE CONTENT! --> 
+<div class="w3-main w3-content w3-padding w3-left-align bwcontainer4">
+<div id="content">
+<h2>Dīgha Nikāya – Trường Bộ Kinh</h2>
+<h5><span style="font-style: italic;">Hoà Thượng Thích Minh Châu dịch Việt</span></h5>
+
+</div>
+
+<br>
+ 	<title>        Trường Bộ 30           </title>
+
+
+
+<p lang="vi" class="vi"; style="text-align: center">
+Trường Bộ 30<br>
+<span lang="pi" class="pali">
+Dīgha Nikāya 30<br>
+</span>
+</p>
+
+<p lang="vi" class="vi"; style="text-align: center">
+Kinh Tướng<br>
+<span lang="pi" class="pali">
+Lakkhaṇasutta<br>
+</span>
+</p>
+
+
+<p lang="vi" class="vi">
+Như vầy tôi nghe.<br>
+<span lang="pi" class="pali">
+Evaṁ me sutaṁ—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Một thời, Thế Tôn trú tại Sāvatthī, rừng thái tử Jeta, vườn ông Anāthapiṇḍika (Cấp Cô Ðộc).<br>
+<span lang="pi" class="pali">
+ekaṁ samayaṁ bhagavā sāvatthiyaṁ viharati jetavane anāthapiṇḍikassa ārāme.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Lúc bấy giờ, Thế Tôn gọi các Tỷ-kheo:<br>
+<span lang="pi" class="pali">
+Tatra kho bhagavā bhikkhū āmantesi:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Này các Tỷ-kheo!”<br>
+<span lang="pi" class="pali">
+“bhikkhavo”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Bạch Thế Tôn”, các vị Tỷ-kheo đáp lời Thế Tôn.<br>
+<span lang="pi" class="pali">
+“Bhaddante”ti te bhikkhū bhagavato paccassosuṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Thế Tôn giảng như sau:<br>
+<span lang="pi" class="pali">
+Bhagavā etadavoca:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Này các Tỷ-kheo, những ai có đầy đủ ba mươi hai tướng Ðại Trượng phu này, những vị ấy sẽ chọn hai con đường này thôi, không có con đường nào khác.<br>
+<span lang="pi" class="pali">
+“Dvattiṁsimāni, bhikkhave, mahāpurisassa mahāpurisalakkhaṇāni, yehi samannāgatassa mahāpurisassa dveva gatiyo bhavanti anaññā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Nếu sống tại gia sẽ làm vị Chuyển luân Thánh vương, dùng Chánh pháp trị nước, bình định bốn phương, đem lại an toàn cho quốc độ, đầy đủ bảy món báu.<br>
+<span lang="pi" class="pali">
+Sace agāraṁ ajjhāvasati, rājā hoti cakkavattī dhammiko dhammarājā cāturanto vijitāvī janapadatthāvariyappatto sattaratanasamannāgato.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Bảy món báu trở thành vật sở hữu của vị này, tức là:<br>
+<span lang="pi" class="pali">
+Tassimāni satta ratanāni bhavanti;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+xe báu, voi báu, ngựa báu, ngọc báu, nữ báu, gia chủ báu và thứ bảy là tướng quân báu.<br>
+<span lang="pi" class="pali">
+Seyyathidaṁ—cakkaratanaṁ hatthiratanaṁ assaratanaṁ maṇiratanaṁ itthiratanaṁ gahapatiratanaṁ pariṇāyakaratanameva sattamaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vị này có đến hơn một ngàn thái tử, những bậc anh hùng, chiến thắng, thân thể dõng kiện, nhiếp phục địch quân.<br>
+<span lang="pi" class="pali">
+Parosahassaṁ kho panassa puttā bhavanti sūrā vīraṅgarūpā parasenappamaddanā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vị này chinh phục quả đất này cho đến hải biên và trị nước với Chánh pháp, không dùng trượng, không dùng đao.<br>
+<span lang="pi" class="pali">
+So imaṁ pathaviṁ sāgarapariyantaṁ adaṇḍena asatthena dhammena abhivijiya ajjhāvasati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Nếu vị này, từ bỏ gia đình, xuất gia sống không gia đình, vị này sẽ thành bậc A-la-hán, Chánh Ðẳng Giác, vén lui màn vô minh che đời.<br>
+<span lang="pi" class="pali">
+Sace kho pana agārasmā anagāriyaṁ pabbajati, arahaṁ hoti sammāsambuddho loke vivaṭṭacchado.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này các Tỷ-kheo, ba mươi hai tướng Ðại Trượng phu này là gì mà những ai đầy đủ những tướng Ðại Trượng phu này sẽ chọn đi hai con đường, không còn con đường nào khác?<br>
+<span lang="pi" class="pali">
+Katamāni ca tāni, bhikkhave, dvattiṁsa mahāpurisassa mahāpurisalakkhaṇāni, yehi samannāgatassa mahāpurisassa dveva gatiyo bhavanti anaññā?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này các Tỷ-kheo, vị này có lòng bàn chân bằng phẳng. Tướng này được xem là tướng tốt của bậc Ðại nhân.<br>
+<span lang="pi" class="pali">
+Idha, bhikkhave, mahāpuriso suppatiṭṭhitapādo hoti. Yampi, bhikkhave, mahāpuriso suppatiṭṭhitapādo hoti, idampi, bhikkhave, mahāpurisassa mahāpurisalakkhaṇaṁ bhavati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này các Tỷ-kheo, dưới hai bàn chân của vị này có hiện ra hình bánh xe, với ngàn tăm xem với trục xe vành xe, với các bộ phận hoàn toàn đầy đủ…<br>
+<span lang="pi" class="pali">
+Puna caparaṁ, bhikkhave, mahāpurisassa heṭṭhāpādatalesu cakkāni jātāni honti sahassārāni sanemikāni sanābhikāni sabbākāraparipūrāni. Yampi, bhikkhave, mahāpurisassa heṭṭhāpādatalesu cakkāni jātāni honti sahassārāni sanemikāni sanābhikāni sabbākāraparipūrāni, idampi, bhikkhave, mahāpurisassa mahāpurisalakkhaṇaṁ bhavati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Nếu sống tại gia, sẽ làm vị Chuyển luân Thánh vương…<br>
+<span lang="pi" class="pali">
+Sace agāraṁ ajjhāvasati, rājā hoti cakkavattī …pe…<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này các Tỷ-kheo, vị này có gót chân thon dài…<br>
+<span lang="pi" class="pali">
+Puna caparaṁ, bhikkhave, mahāpuriso āyatapaṇhi hoti …pe…<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Nếu vị ấy xuất gia, từ bỏ gia đình sống không gia đình, vị ấy sẽ thành bậc A-la-hán, Chánh Ðẳng Giác, vén lui màn vô minh che đời.<br>
+<span lang="pi" class="pali">
+sace kho pana agārasmā anagāriyaṁ pabbajati, arahaṁ hoti sammāsambuddho loke vivaṭṭacchado.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vị này có ngón tay, ngón chân dài…<br>
+<span lang="pi" class="pali">
+dīghaṅguli hoti …<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vị này có tay chân mềm mại…<br>
+<span lang="pi" class="pali">
+mudutalunahatthapādo hoti …<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vị này tay chân có màn da lưới…<br>
+<span lang="pi" class="pali">
+jālahatthapādo hoti …<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vị này có mắt cá tròn như con sò…<br>
+<span lang="pi" class="pali">
+ussaṅkhapādo hoti …<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vị này có ống chân như con dê rừng….<br>
+<span lang="pi" class="pali">
+eṇijaṅgho hoti …<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vị này đứng thẳng, không co lưng xuống có thể sờ đầu gối với hai bàn tay…<br>
+<span lang="pi" class="pali">
+ṭhitakova anonamanto ubhohi pāṇitalehi jaṇṇukāni parimasati parimajjati …<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vị này có tướng mã âm tàng…<br>
+<span lang="pi" class="pali">
+kosohitavatthaguyho hoti …<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vị này có màu da đồng, màu sắc như vàng…<br>
+<span lang="pi" class="pali">
+suvaṇṇavaṇṇo hoti kañcanasannibhattaco …<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vị này có da trơn mướt, khiến bụi không thể bám dính vào…<br>
+<span lang="pi" class="pali">
+sukhumacchavi hoti, sukhumattā chaviyā rajojallaṁ kāye na upalimpati …<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vị này có lông da mọc từ lông một, mỗi lỗ chân lông có một lông…<br>
+<span lang="pi" class="pali">
+ekekalomo hoti, ekekāni lomāni lomakūpesu jātāni …<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vị này có lông mọc xoáy trong thẳng lên, mỗi sợi lông đều vậy, màu xanh đậm như thuốc bôi mắt, xoáy lên từng xoáy tròn nhỏ, và xoáy về hướng mặt…<br>
+<span lang="pi" class="pali">
+uddhaggalomo hoti, uddhaggāni lomāni jātāni nīlāni añjanavaṇṇāni kuṇḍalāvaṭṭāni dakkhiṇāvaṭṭakajātāni …<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vị này có thân hình cao thẳng…<br>
+<span lang="pi" class="pali">
+brahmujugatto hoti …<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vị nầy có thân với các góc cạnh tròn đầy, đều đặn…<br>
+<span lang="pi" class="pali">
+sattussado hoti …<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vị này có nửa thân trước như thân con sư tử…<br>
+<span lang="pi" class="pali">
+sīhapubbaddhakāyo hoti …<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vị này không có lõm khuyết xuống giữa hai vai…<br>
+<span lang="pi" class="pali">
+citantaraṁso hoti …<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vị này có thân thể cân đối như cây bàng. Bề cao của thân ngang bằng bề dài của hai tay sải rộng, bề dài của hai tay sải rộng ngang bằng bề cao của thân…<br>
+<span lang="pi" class="pali">
+nigrodhaparimaṇḍalo hoti, yāvatakvassa kāyo tāvatakvassa byāmo yāvatakvassa byāmo tāvatakvassa kāyo …<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vị này có bán thân trên vuông tròn…<br>
+<span lang="pi" class="pali">
+samavaṭṭakkhandho hoti …<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vị này có vị giác rất nhạy bén…<br>
+<span lang="pi" class="pali">
+rasaggasaggī hoti …<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vị này có quai hàm như con sư tử…<br>
+<span lang="pi" class="pali">
+sīhahanu hoti …<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vị này có bốn mươi cái răng…<br>
+<span lang="pi" class="pali">
+cattālīsadanto hoti …<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vị này có răng đều đặn…<br>
+<span lang="pi" class="pali">
+samadanto hoti …<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vị này có răng không khuyết hở…<br>
+<span lang="pi" class="pali">
+aviraḷadanto hoti …<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vị này có răng cửa trơn láng…<br>
+<span lang="pi" class="pali">
+susukkadāṭho hoti …<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vị này có tướng lưỡi rộng dài…<br>
+<span lang="pi" class="pali">
+pahūtajivho hoti …<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vị này có giọng Phạm Âm, giọng nói tuyệt diệu như tiếng chim Ca-lăng-tần-già…<br>
+<span lang="pi" class="pali">
+brahmassaro hoti karavīkabhāṇī …<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vị này có hai mắt màu xanh đậm…<br>
+<span lang="pi" class="pali">
+abhinīlanetto hoti …<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vị này có lông mi con bò cái…<br>
+<span lang="pi" class="pali">
+gopakhumo hoti …<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vị này có hai lông mày, có sợi lông trắng mọc lên, mịn màng như bông nhẹ…<br>
+<span lang="pi" class="pali">
+uṇṇā bhamukantare jātā hoti, odātā mudutūlasannibhā. Yampi, bhikkhave, mahāpurisassa uṇṇā bhamukantare jātā hoti, odātā mudutūlasannibhā, idampi, bhikkhave, mahāpurisassa mahāpurisalakkhaṇaṁ bhavati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vị này có nhục kế trên đầu…<br>
+<span lang="pi" class="pali">
+Puna caparaṁ, bhikkhave, mahāpuriso uṇhīsasīso hoti. Yampi, bhikkhave, mahāpuriso uṇhīsasīso hoti, idampi, bhikkhave, mahāpurisassa mahāpurisalakkhaṇaṁ bhavati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này các Tỷ-kheo, những ai có đầy đủ ba mươi hai tướng Ðại Trượng phu này, những vị ấy sẽ chọn hai con đường này thôi, không có con đường nào khác.<br>
+<span lang="pi" class="pali">
+Imāni kho tāni, bhikkhave, dvattiṁsa mahāpurisassa mahāpurisalakkhaṇāni, yehi samannāgatassa mahāpurisassa dveva gatiyo bhavanti anaññā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này các Tỷ-kheo, những vị ẩn sĩ ngoại đạo thọ trì ba mươi hai tướng Ðại Trượng phu này nhưng không biết là:<br>
+<span lang="pi" class="pali">
+Imāni kho, bhikkhave, dvattiṁsa mahāpurisassa mahāpurisalakkhaṇāni bāhirakāpi isayo dhārenti, no ca kho te jānanti:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Do tạo nghiệp nào mà được những tướng này.’<br>
+<span lang="pi" class="pali">
+‘imassa kammassa kaṭattā idaṁ lakkhaṇaṁ paṭilabhatī’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+1. Lòng Bàn Chân Bằng Phẳng<br>
+<span lang="pi" class="pali">
+1. Suppatiṭṭhitapādatālakkhaṇaṁ<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này các Tỷ-kheo, trong bất kỳ đời trước nào, hiện hữu nào, trú xứ nào, Như Lai đời trước làm Người kiên trì và không dao động đối với các thiện Pháp, thiện hành về thân, thiện hành về miệng, thiện hành về ý, phân định bố thí, thủ hộ giới luật, tuân giữ các lễ Bồ tát, hiếu kính với mẹ, hiếu kính với cha, cúng dường Sa-môn, cúng dường Bà-la-môn, tôn kính các bậc đàn anh trong gia đình, và tất cả những vị tối thắng khác.<br>
+<span lang="pi" class="pali">
+Yampi, bhikkhave, tathāgato purimaṁ jātiṁ purimaṁ bhavaṁ purimaṁ niketaṁ pubbe manussabhūto samāno daḷhasamādāno ahosi kusalesu dhammesu, avatthitasamādāno kāyasucarite vacīsucarite manosucarite dānasaṁvibhāge sīlasamādāne uposathupavāse matteyyatāya petteyyatāya sāmaññatāya brahmaññatāya kule jeṭṭhāpacāyitāya aññataraññataresu ca adhikusalesu dhammesu.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Với tác động, chất chứa, tích tụ và tăng thịnh của nghiệp ấy, sau khi thân hoại mạng chung được sanh cõi thiện thú, cõi Trời hay đời này.<br>
+<span lang="pi" class="pali">
+So tassa kammassa kaṭattā upacitattā ussannattā vipulattā kāyassa bhedā paraṁ maraṇā sugatiṁ saggaṁ lokaṁ upapajjati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ở đây, Ngài có mười điểm thắng hơn chư Thiên khác, thiên giới thọ mạng, thiên sắc, thiên lạc, thiên giới danh xưng, thiên giới uy lực, thiên giới sắc tướng, thiên giới âm thanh, thiên hương, thiên vị, thiên xúc.<br>
+<span lang="pi" class="pali">
+So tattha aññe deve dasahi ṭhānehi adhiggaṇhāti dibbena āyunā dibbena vaṇṇena dibbena sukhena dibbena yasena dibbena ādhipateyyena dibbehi rūpehi dibbehi saddehi dibbehi gandhehi dibbehi rasehi dibbehi phoṭṭhabbehi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ngài từ trần từ chỗ kia sanh đến chỗ này được tướng Ðại Trượng phu này, nghĩa là:<br>
+<span lang="pi" class="pali">
+So tato cuto itthattaṁ āgato samāno imaṁ mahāpurisalakkhaṇaṁ paṭilabhati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Lòng bàn chân bằng phẳng<br>
+<span lang="pi" class="pali">
+Suppatiṭṭhitapādo hoti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+đặt chân trên đất một cách bằng phẳng, bàn chân chạm đất với toàn thể bàn chân một lần.<br>
+<span lang="pi" class="pali">
+Samaṁ pādaṁ bhūmiyaṁ nikkhipati, samaṁ uddharati, samaṁ sabbāvantehi pādatalehi bhūmiṁ phusati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ngài đầy đủ tướng này, nếu ở tại gia sẽ làm vị Chuyển Luân Thánh vương, dùng Chánh pháp trị nước, là vị Pháp vương, bình định bốn phương, đem lại an toàn cho quốc độ, đầy đủ bảy món báu.<br>
+<span lang="pi" class="pali">
+So tena lakkhaṇena samannāgato sace agāraṁ ajjhāvasati, rājā hoti cakkavattī dhammiko dhammarājā cāturanto vijitāvī janapadatthāvariyappatto sattaratanasamannāgato.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Bảy món báu trở thành vật sở hữu của vị ấy là:<br>
+<span lang="pi" class="pali">
+Tassimāni satta ratanāni bhavanti;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+xe báu, voi báu, ngựa báu, ngọc báu, nữ báu, gia chủ báu và thứ bảy là tướng quân báu.<br>
+<span lang="pi" class="pali">
+Seyyathidaṁ—cakkaratanaṁ hatthiratanaṁ assaratanaṁ maṇiratanaṁ itthiratanaṁ gahapatiratanaṁ pariṇāyakaratanameva sattamaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vị này có đến một ngàn thái tử, những bậc anh hùng, chiến thắng, thân thể dõng kiện, nhiếp phục địch quân.<br>
+<span lang="pi" class="pali">
+Parosahassaṁ kho panassa puttā bhavanti sūrā vīraṅgarūpā parasenappamaddanā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vị này chinh phục và trị nước với chánh pháp, không dùng trượng, không dùng đao, trị vì đất này cho đến hải biên, một cõi đất không hoang vu, không có tướng nguy hiểm, không có gai góc, phồn vinh, phong phú, an ổn, may mắn, không có nguy hiểm.<br>
+<span lang="pi" class="pali">
+So imaṁ pathaviṁ sāgarapariyantaṁ akhilamanimittamakaṇṭakaṁ iddhaṁ phītaṁ khemaṁ sivaṁ nirabbudaṁ adaṇḍena asatthena dhammena abhivijiya ajjhāvasati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Làm vua được những gì?<br>
+<span lang="pi" class="pali">
+Rājā samāno kiṁ labhati?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Làm vua không bị người thù hay kẻ địch làm trở ngại.<br>
+<span lang="pi" class="pali">
+Akkhambhiyo hoti kenaci manussabhūtena paccatthikena paccāmittena.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Làm vua được lợi như vậy.<br>
+<span lang="pi" class="pali">
+Rājā samāno idaṁ labhati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Nếu Ngài xuất gia, từ bỏ gia đình sống không gia đình, Ngài thành bậc A-La-hán, Chánh Ðẳng Giác, vén lui màn vô minh che đời.<br>
+<span lang="pi" class="pali">
+Sace kho pana agārasmā anagāriyaṁ pabbajati, arahaṁ hoti sammāsambuddho loke vivaṭṭacchado.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Làm Phật được lợi những gì?<br>
+<span lang="pi" class="pali">
+Buddho samāno kiṁ labhati?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ngài không bị người thù hay kẻ địch ở trong cũng như ở ngoài, không bị tham, sân, si, không bị Sa- môn, Bà-la-môn, Thiên, Ma, Phạm thiên hay bất cứ một ai ở ngoài đời làm trở ngại.<br>
+<span lang="pi" class="pali">
+Akkhambhiyo hoti abbhantarehi vā bāhirehi vā paccatthikehi paccāmittehi rāgena vā dosena vā mohena vā samaṇena vā brāhmaṇena vā devena vā mārena vā brahmunā vā kenaci vā lokasmiṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Làm Phật được lợi như vậy.”<br>
+<span lang="pi" class="pali">
+Buddho samāno idaṁ labhati”.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Thế Tôn thuyết nghĩa như vậy.<br>
+<span lang="pi" class="pali">
+Etamatthaṁ bhagavā avoca.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ở đây lời nói này được nói lên:<br>
+<span lang="pi" class="pali">
+Tatthetaṁ vuccati:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Sống chân thực đúng Pháp,<br>
+Ðiều phục và tự chế,<br>
+<span lang="pi" class="pali">
+“Sacce ca dhamme ca dame ca saṁyame,<br>
+</span>
+Sống với hạnh thanh tịnh,<br>
+Ngày trai giới, Bố tát.<br>
+<span lang="pi" class="pali">
+Soceyyasīlālayuposathesu ca;<br>
+</span>
+Bố thí, không bạo động,<br>
+Không làm hại một ai,<br>
+<span lang="pi" class="pali">
+Dāne ahiṁsāya asāhase rato,<br>
+</span>
+Tâm kiên cố hành trì,<br>
+Sống thật sự toàn diện.<br>
+<span lang="pi" class="pali">
+Daḷhaṁ samādāya samattamācari.<br>
+</span>
+Với hạnh nghiệp như vậy,<br>
+Ngài được sanh cõi Trời,<br>
+<span lang="pi" class="pali">
+So tena kammena divaṁ samakkami,<br>
+</span>
+Sống trong niềm hoan hỷ,<br>
+An lạc vô cùng tận.<br>
+<span lang="pi" class="pali">
+Sukhañca khiḍḍāratiyo ca anvabhi;<br>
+</span>
+Từ chỗ kia mạng chung,<br>
+Tái sanh lại chỗ này,<br>
+<span lang="pi" class="pali">
+Tato cavitvā punarāgato idha,<br>
+</span>
+Với bàn chân bằng phẳng,<br>
+Chạm đất thật đều đặn.<br>
+<span lang="pi" class="pali">
+Samehi pādehi phusī vasundharaṁ.<br>
+</span>
+Các bậc chiêm tướng gia,<br>
+Hội họp và tuyên bố,<br>
+<span lang="pi" class="pali">
+Byākaṁsu veyyañjanikā samāgatā,<br>
+</span>
+Không ai làm trở ngại,<br>
+Vị bàn chân bằng phẳng.<br>
+<span lang="pi" class="pali">
+Samappatiṭṭhassa na hoti khambhanā;<br>
+</span>
+Dầu tại gia, xuất gia.<br>
+<span lang="pi" class="pali">
+Gihissa vā pabbajitassa vā puna,<br>
+</span>
+Nghĩa tướng thật rõ ràng,<br>
+<span lang="pi" class="pali">
+Taṁ lakkhaṇaṁ bhavati tadatthajotakaṁ.<br>
+</span>
+Nếu sống tại gia đình,<br>
+Không bị trở ngại gì,<br>
+<span lang="pi" class="pali">
+Akkhambhiyo hoti agāramāvasaṁ,<br>
+</span>
+Chiến thắng mọi quân thù.<br>
+Ðại phá cả quân địch,<br>
+<span lang="pi" class="pali">
+Parābhibhū sattubhi nappamaddano;<br>
+</span>
+Không ai ngăn chặn được,<br>
+<span lang="pi" class="pali">
+Manussabhūtenidha hoti kenaci,<br>
+</span>
+Vị nghiệp báo như vậy.<br>
+<span lang="pi" class="pali">
+Akkhambhiyo tassa phalena kammuno.<br>
+</span>
+Nếu xuất gia ly dục,<br>
+<span lang="pi" class="pali">
+Sace ca pabbajjamupeti tādiso,<br>
+</span>
+Sống thiểu dục sáng suốt,<br>
+<span lang="pi" class="pali">
+Nekkhammachandābhirato vicakkhaṇo;<br>
+</span>
+Là bậc Thánh siêu phàm,<br>
+Không còn phải thai sanh,<br>
+<span lang="pi" class="pali">
+Aggo na so gacchati jātu khambhanaṁ,<br>
+</span>
+Bậc Vô Thượng, Chánh Giác,<br>
+Pháp nhĩ là như vậy.”<br>
+<span lang="pi" class="pali">
+Naruttamo esa hi tassa dhammatā”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Nếu sống tại gia, sẽ làm vị Chuyển luân Thánh vương, dùng Chánh pháp trị nước, là vị Pháp vương, bình định bốn phương, đem lại an toàn cho quốc độ, đầy đủ bảy món báu. Bảy món báu trở thành vật sở hữu của vị này, tức là xe báu, voi báu, ngựa báu, ngọc báu, nữ báu, gia chủ báu và thứ bảy là tướng quân báu. Vị này có đến một ngàn thái tử, những bậc anh hùng, chiến thắng, thân thể dõng kiện, nhiếp phục địch quân. Vị này chinh phục quả đất này cho đến hải biên và trị nước với Chánh pháp, không dùng trượng, không dùng đao.<br>
+<span lang="pi" class="pali">
+Sace agāraṁ ajjhāvasati, rājā hoti cakkavattī …pe…<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+2. Bánh Xe Ngàn Tăm Dưới Lòng Bàn Chân<br>
+<span lang="pi" class="pali">
+2. Pādatalacakkalakkhaṇaṁ<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Này các Tỷ-kheo, trong bất kỳ đời trước nào, hiện hữu nào, trú xứ nào, Như Lai đời trước làm Người, sống vì hạnh phúc cho chúng sanh, trừ diệt mọi sợ hãi kinh hoàng, sắp đặt sự che chở, hộ trì, bảo vệ đúng Pháp, bố thí cho các người tùy tùng.<br>
+<span lang="pi" class="pali">
+“Yampi, bhikkhave, tathāgato purimaṁ jātiṁ purimaṁ bhavaṁ purimaṁ niketaṁ pubbe manussabhūto samāno bahujanassa sukhāvaho ahosi, ubbegauttāsabhayaṁ apanuditā, dhammikañca rakkhāvaraṇaguttiṁ saṁvidhātā, saparivārañca dānaṁ adāsi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Với tác động, chất chứa, tích tụ và tăng thịnh của sự nghiệp ấy, sau khi thân hoại mạng chung, được sanh cõi thiện thú, thiên giới hay đời này…<br>
+<span lang="pi" class="pali">
+So tassa kammassa kaṭattā upacitattā ussannattā vipulattā kāyassa bhedā paraṁ maraṇā sugatiṁ saggaṁ lokaṁ upapajjati …pe…<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ngài từ trần từ chỗ kia sanh đến chỗ này được tướng Ðại Trượng phu này:<br>
+<span lang="pi" class="pali">
+so tato cuto itthattaṁ āgato samāno imaṁ mahāpurisalakkhaṇaṁ paṭilabhati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Dưới bàn chân, có hình bánh xe hiện ra, với một ngàn tăm xe, với bánh xe, trục xe, các bộ phận hoàn toàn đầy đủ.<br>
+<span lang="pi" class="pali">
+Heṭṭhāpādatalesu cakkāni jātāni honti sahassārāni sanemikāni sanābhikāni sabbākāraparipūrāni suvibhattantarāni.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ngài đầy đủ tướng này, nếu ở tại gia thành vị Chuyển Luân Thánh vương…<br>
+<span lang="pi" class="pali">
+So tena lakkhaṇena samannāgato sace agāraṁ ajjhāvasati, rājā hoti cakkavattī …pe…<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Làm vua được những gì? có nhiều kẻ hầu cận.<br>
+<span lang="pi" class="pali">
+rājā samāno kiṁ labhati? Mahāparivāro hoti;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Số hầu cận rất đông, có cư sĩ, Bà la môn, thị dân, thôn dân, tài chánh quan, tư pháp quan, vệ sĩ, thủ môn quan, các đại thần, các chư hầu, các hào phú, các vương tử.<br>
+<span lang="pi" class="pali">
+mahāssa honti parivārā brāhmaṇagahapatikā negamajānapadā gaṇakamahāmattā anīkaṭṭhā dovārikā amaccā pārisajjā rājāno bhogiyā kumārā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Làm vua được như vậy.<br>
+<span lang="pi" class="pali">
+Rājā samāno idaṁ labhati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Nếu Ngài xuất gia, từ bỏ gia đình, sống không gia đình, ngài thành bậc A-la-hán, Chánh Ðẳng Giác, vén lui màn vô minh che đời.<br>
+<span lang="pi" class="pali">
+Sace kho pana agārasmā anagāriyaṁ pabbajati, arahaṁ hoti sammāsambuddho loke vivaṭṭacchado.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Làm Phật được những gì?<br>
+<span lang="pi" class="pali">
+Buddho samāno kiṁ labhati?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ngài có đại chúng hầu cận, số đại chúng rất đông, gồm có Tỷ-kheo, Tỷ kheo ni, Nam cư sĩ, Nữ cư sĩ, chư Thiên, loài Người, A-tu-la, các loài Thần rắn, Càn thát bà.<br>
+<span lang="pi" class="pali">
+Mahāparivāro hoti; mahāssa honti parivārā bhikkhū bhikkhuniyo upāsakā upāsikāyo devā manussā asurā nāgā gandhabbā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Làm Phật được như vậy.”<br>
+<span lang="pi" class="pali">
+Buddho samāno idaṁ labhati”.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Thế Tôn thuyết giảng như vậy.<br>
+<span lang="pi" class="pali">
+Etamatthaṁ bhagavā avoca.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ở đây lời nói này được nói lên:<br>
+<span lang="pi" class="pali">
+Tatthetaṁ vuccati:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Trong những năm đã qua,<br>
+Trong những đời quá khứ,<br>
+<span lang="pi" class="pali">
+“Pure puratthā purimāsu jātisu,<br>
+</span>
+Khi Ngài được làm Người,<br>
+Khiến nhiều người hạnh phúc.<br>
+<span lang="pi" class="pali">
+Manussabhūto bahunaṁ sukhāvaho;<br>
+</span>
+Ngài trừ diệt kinh hoàng,<br>
+<span lang="pi" class="pali">
+Ubbhegauttāsabhayāpanūdano,<br>
+</span>
+Hộ trì và bảo vệ,<br>
+<span lang="pi" class="pali">
+Guttīsu rakkhāvaraṇesu ussuko.<br>
+</span>
+Nhờ nghiệp ấy, sanh Thiên,<br>
+<span lang="pi" class="pali">
+So tena kammena divaṁ samakkami,<br>
+</span>
+Hưởng an lạc hạnh phúc.<br>
+<span lang="pi" class="pali">
+Sukhañca khiḍḍāratiyo ca anvabhi;<br>
+</span>
+Từ chỗ kia mạng chung,<br>
+Tái sanh lại chỗ này,<br>
+<span lang="pi" class="pali">
+Tato cavitvā punarāgato idha,<br>
+</span>
+Dưới hai bàn chân Ngài,<br>
+Có bánh xe hiện ra,<br>
+<span lang="pi" class="pali">
+Cakkāni pādesu duvesu vindati.<br>
+</span>
+Với bánh xe đầy đủ,<br>
+Ðủ một ngàn căm xe.<br>
+<span lang="pi" class="pali">
+Samantanemīni sahassarāni ca,<br>
+</span>
+Các bậc chiêm tướng gia,<br>
+Hội họp và tuyên bố,<br>
+<span lang="pi" class="pali">
+Byākaṁsu veyyañjanikā samāgatā;<br>
+</span>
+Khi thấy trăm đức này:<br>
+<span lang="pi" class="pali">
+Disvā kumāraṁ satapuññalakkhaṇaṁ,<br>
+</span>
+Ðược quần chúng bao vây,<br>
+Ðịch quân được nhiếp phục,<br>
+<span lang="pi" class="pali">
+Parivāravā hessati sattumaddano.<br>
+</span>
+Như bánh xe quay tròn,<br>
+Với vành xe đầy đủ.<br>
+<span lang="pi" class="pali">
+Tathā hi cakkāni samantanemini,<br>
+</span>
+Nếu Ngài không xuất gia,<br>
+Sống đời sống như vậy,<br>
+<span lang="pi" class="pali">
+Sace na pabbajjamupeti tādiso;<br>
+</span>
+Ngài chuyển vận bánh xe,<br>
+Trị vì khắp cõi đất.<br>
+<span lang="pi" class="pali">
+Vatteti cakkaṁ pathaviṁ pasāsati,<br>
+</span>
+Ở đây Sát đế lỵ,<br>
+Ðều chịu thần phục Ngài,<br>
+<span lang="pi" class="pali">
+Tassānuyantādha bhavanti khattiyā.<br>
+</span>
+Hầu hạ chung quanh Ngài,<br>
+Là bậc Ðại danh xưng.<br>
+<span lang="pi" class="pali">
+Mahāyasaṁ samparivārayanti naṁ,<br>
+</span>
+Nếu xuất gia ly dục,<br>
+<span lang="pi" class="pali">
+Sace ca pabbajjamupeti tādiso;<br>
+</span>
+Sống thoát dục, sáng suốt,<br>
+<span lang="pi" class="pali">
+Nekkhammachandābhirato vicakkhaṇo,<br>
+</span>
+chư Thiên và loài Người,<br>
+Ðế thích và Dạ xoa,<br>
+<span lang="pi" class="pali">
+Devā manussāsurasakkarakkhasā.<br>
+</span>
+Càn thát bà, Long xà,<br>
+Phi điểu, loài bốn chân,<br>
+<span lang="pi" class="pali">
+Gandhabbanāgā vihagā catuppadā,<br>
+</span>
+Tất cả đoanh vây Ngài,<br>
+<span lang="pi" class="pali">
+Anuttaraṁ devamanussapūjitaṁ;<br>
+</span>
+Là bậc Ðại danh xưng,<br>
+Bậc Vô Thượng, Chánh Giác,<br>
+Ðược Thiên, Nhơn cung kính.”<br>
+<span lang="pi" class="pali">
+Mahāyasaṁ samparivārayanti nan”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Nếu vị này từ bỏ gia đình xuất gia, sống không gia đình, vị này sẽ thành bậc A-la-hán, Chánh Ðẳng Giác, vén lui màn vô minh che đời.<br>
+<span lang="pi" class="pali">
+sace kho pana agārasmā anagāriyaṁ pabbajati, arahaṁ hoti sammāsambuddho loke vivaṭṭacchado.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+3–5. Gót Chân, Ngón Tay, Ngón Chân,…<br>
+<span lang="pi" class="pali">
+3–5. Āyatapaṇhitāditilakkhaṇaṁ<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Này các Tỷ-kheo, trong bất kỳ đời trước nào, hiện hữu nào, trú xứ nào, Như Lai đời trước làm Người, từ bỏ sát sanh, chế ngự sát sanh, bỏ trượng, bỏ kiếm, biết tàm quý, có lòng từ, sống thương sót đến hạnh phúc của tất cả chúng sanh và loài hữu tình.<br>
+<span lang="pi" class="pali">
+“Yampi, bhikkhave, tathāgato purimaṁ jātiṁ purimaṁ bhavaṁ purimaṁ niketaṁ pubbe manussabhūto samāno pāṇātipātaṁ pahāya pāṇātipātā paṭivirato ahosi nihitadaṇḍo nihitasattho lajjī dayāpanno, sabbapāṇabhūtahitānukampī vihāsi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Với tác động, chất chứa, tích tụ và tăng thịnh của nghiệp ấy, sau khi thân hoại mạng chung được sanh cõi thiện thú, Thiên giới hay đời này…<br>
+<span lang="pi" class="pali">
+So tassa kammassa kaṭattā upacitattā ussannattā vipulattā …pe…<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ngài từ trần từ chỗ kia, sanh đến chỗ này, được ba tướng Ðại Trượng phu này:<br>
+<span lang="pi" class="pali">
+so tato cuto itthattaṁ āgato samāno imāni tīṇi mahāpurisalakkhaṇāni paṭilabhati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+gót chân thon dài, ngón tay, ngón chân dài và tay chân mềm mại.<br>
+<span lang="pi" class="pali">
+Āyatapaṇhi ca hoti, dīghaṅguli ca brahmujugatto ca.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ngài đầy đủ ba tướng này, nếu sống tại gia sẽ thành vị Chuyển luân thánh vương… Làm vua được những gì?<br>
+<span lang="pi" class="pali">
+So tehi lakkhaṇehi samannāgato sace agāraṁ ajjhāvasati, rājā hoti cakkavattī …pe…rājā samāno kiṁ labhati?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Thọ mạng lâu dài, được sống lâu năm, thọ mạng được hộ trì lâu dài, không một người nào dưới hình thức kẻ thù hay kẻ nghịch có thể hại mạng sống Ngài.<br>
+<span lang="pi" class="pali">
+Dīghāyuko hoti ciraṭṭhitiko, dīghamāyuṁ pāleti, na sakkā hoti antarā jīvitā voropetuṁ kenaci manussabhūtena paccatthikena paccāmittena.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Làm vua được như vậy…<br>
+<span lang="pi" class="pali">
+Rājā samāno idaṁ labhati …pe…<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Làm Phật được những gì?<br>
+<span lang="pi" class="pali">
+buddho samāno kiṁ labhati?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Thọ mạng lâu dài, được sống lâu năm, thọ mạng được hộ trì lâu dài, không một kẻ thù, kẻ nghịch nào có thể hại được mạng sống Ngài, dưới hình thức Sa môn, Bà la môn, chư Thiên, Ma vương, Phạm thiên hay bất cứ ai trong đời.<br>
+<span lang="pi" class="pali">
+Dīghāyuko hoti ciraṭṭhitiko, dīghamāyuṁ pāleti, na sakkā hoti antarā jīvitā voropetuṁ paccatthikehi paccāmittehi samaṇena vā brāhmaṇena vā devena vā mārena vā brahmunā vā kenaci vā lokasmiṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Làm Phật được như vậy.”<br>
+<span lang="pi" class="pali">
+Buddho samāno idaṁ labhati”.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Thế Tôn thuyết giảng như vậy.<br>
+<span lang="pi" class="pali">
+Etamatthaṁ bhagavā avoca.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ở đây, lời nói này được nói lên:<br>
+<span lang="pi" class="pali">
+Tatthetaṁ vuccati:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Tự biết mình sợ hãi,<br>
+Sợ chết sợ tàn hại,<br>
+<span lang="pi" class="pali">
+“Māraṇavadhabhayattano viditvā,<br>
+</span>
+Ngài từ bỏ giết hại,<br>
+Hết mọi loài chúng sanh.<br>
+<span lang="pi" class="pali">
+Paṭivirato paraṁ māraṇāyahosi;<br>
+</span>
+Nhờ sống hành thiện pháp,<br>
+Ðược sanh lên cõi Trời,<br>
+<span lang="pi" class="pali">
+Tena sucaritena saggamagamā,<br>
+</span>
+Tự hưởng quả dị thục,<br>
+Do thiện báo đem lại.<br>
+<span lang="pi" class="pali">
+Sukataphalavipākamanubhosi.<br>
+</span>
+Từ chỗ kia mạng chung,<br>
+Tái sanh lại chỗ này,<br>
+<span lang="pi" class="pali">
+Caviya punaridhāgato samāno,<br>
+</span>
+Ðược hưởng tại nơi đây,<br>
+Ba Ðại trượng phu tướng:<br>
+<span lang="pi" class="pali">
+Paṭilabhati idha tīṇi lakkhaṇāni;<br>
+</span>
+Gót chân đầy và dài,<br>
+<span lang="pi" class="pali">
+Bhavati vipuladīghapāsaṇhiko,<br>
+</span>
+Thân thẳng như Phạm thiên.<br>
+Khả ái, hình vóc đẹp,<br>
+<span lang="pi" class="pali">
+Brahmāva suju subho sujātagatto.<br>
+</span>
+Khéo cân xứng, khéo sanh,<br>
+<span lang="pi" class="pali">
+Subhujo susu susaṇṭhito sujāto,<br>
+</span>
+Các ngón tay, ngón chân,<br>
+Ðều mềm mại trẻ đẹp.<br>
+<span lang="pi" class="pali">
+Mudutalunaṅguliyassa honti;<br>
+</span>
+Với ba tướng Trượng phu,<br>
+<span lang="pi" class="pali">
+Dīghā tībhi purisavaraggalakkhaṇehi,<br>
+</span>
+Sống lâu luôn luôn trẻ.<br>
+<span lang="pi" class="pali">
+Cirayapanāya kumāramādisanti.<br>
+</span>
+‘Nếu sống tại gia đình,<br>
+Thọ mạng sẽ lâu dài.<br>
+<span lang="pi" class="pali">
+Bhavati yadi gihī ciraṁ yapeti,<br>
+</span>
+Nếu sống đời xuất gia,<br>
+Tuổi thọ được dài thêm,<br>
+<span lang="pi" class="pali">
+Cirataraṁ pabbajati yadi tato hi;<br>
+</span>
+Như vậy tướng hảo này,<br>
+<span lang="pi" class="pali">
+Yāpayati ca vasiddhibhāvanāya,<br>
+</span>
+Là tướng tuổi trường thọ.’”<br>
+<span lang="pi" class="pali">
+Iti dīghāyukatāya taṁ nimittan”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+6. Bảy Chỗ Tròn Đầy<br>
+<span lang="pi" class="pali">
+6. Sattussadatālakkhaṇaṁ<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Này các Tỷ-kheo, trong bất kỳ đời trước nào, hiện hữu nào, trú xứ nào, Như Lai đời trước làm Người,<br>
+<span lang="pi" class="pali">
+“Yampi, bhikkhave, tathāgato purimaṁ jātiṁ purimaṁ bhavaṁ purimaṁ niketaṁ pubbe manussabhūto samāno<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+là vị bố thí các món ăn loại cứng loại mềm, các loại liếm, loại uống, cao lương mỹ vị.<br>
+<span lang="pi" class="pali">
+dātā ahosi paṇītānaṁ rasitānaṁ khādanīyānaṁ bhojanīyānaṁ sāyanīyānaṁ lehanīyānaṁ pānānaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Với tác động, chất chứa, tích tụ và tăng thịnh của nghiệp ấy, sau khi thân hoại mạng chung được sanh cõi thiện thú, Thiên giới hay đời này…<br>
+<span lang="pi" class="pali">
+So tassa kammassa kaṭattā …pe…<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ngài từ trần từ chỗ kia, sanh đến chỗ này, được tướng Ðại Trượng phu này là bảy chỗ tròn đầy.<br>
+<span lang="pi" class="pali">
+so tato cuto itthattaṁ āgato samāno imaṁ mahāpurisalakkhaṇaṁ paṭilabhati, sattussado hoti, sattassa ussadā honti;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Bảy chỗ tròn đầy là hai tay tròn đầy, hai chân tròn đầy, hai vai tròn đầy và thân hình tròn đầy.<br>
+<span lang="pi" class="pali">
+ubhosu hatthesu ussadā honti, ubhosu pādesu ussadā honti, ubhosu aṁsakūṭesu ussadā honti, khandhe ussado hoti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ngài đầy đủ tướng này, nếu sống tại gia, làm vị Chuyển luân Thánh vương…Làm vua được những gì?<br>
+<span lang="pi" class="pali">
+So tena lakkhaṇena samannāgato sace agāraṁ ajjhāvasati, rājā hoti cakkavattī …pe…rājā samāno kiṁ labhati?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ðược các món ăn, loại cứng, loại mềm, các loại nếm, loại liếm, loại uống, cao lương mỹ vị.<br>
+<span lang="pi" class="pali">
+Lābhī hoti paṇītānaṁ rasitānaṁ khādanīyānaṁ bhojanīyānaṁ sāyanīyānaṁ lehanīyānaṁ pānānaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Làm vua được như vậy…<br>
+<span lang="pi" class="pali">
+Rājā samāno idaṁ labhati …pe…<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Làm Phật được những gì?<br>
+<span lang="pi" class="pali">
+buddho samāno kiṁ labhati?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ðược các món ăn loại cứng, loại mềm, các loại nếm, loại uống, cao lương mỹ vị. Làm Phật được như vậy.<br>
+<span lang="pi" class="pali">
+Lābhī hoti paṇītānaṁ rasitānaṁ khādanīyānaṁ bhojanīyānaṁ sāyanīyānaṁ lehanīyānaṁ pānānaṁ. Buddho samāno idaṁ labhati”.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Thế Tôn thuyết giảng như vậy.<br>
+<span lang="pi" class="pali">
+Etamatthaṁ bhagavā avoca.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ở đây, lời nói này được nói lên:<br>
+<span lang="pi" class="pali">
+Tatthetaṁ vuccati:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Bố thí các món ăn,<br>
+Thượng vị hợp sở thích<br>
+<span lang="pi" class="pali">
+“Khajjabhojjamatha leyya sāyiyaṁ,<br>
+</span>
+Loại cứng vị hợp sở thích<br>
+Loại cứng và loại mềm,<br>
+Loại liếm cả loại nếm.<br>
+<span lang="pi" class="pali">
+Uttamaggarasadāyako ahu;<br>
+</span>
+Nhờ hành thiện tốt đẹp,<br>
+<span lang="pi" class="pali">
+Tena so sucaritena kammunā,<br>
+</span>
+Sống lâu thiên hỷ lạc.<br>
+<span lang="pi" class="pali">
+Nandane ciramabhippamodati.<br>
+</span>
+Ðược sanh tại chỗ này,<br>
+Với bảy chỗ tròn đầy.<br>
+<span lang="pi" class="pali">
+Satta cussade idhādhigacchati,<br>
+</span>
+Với tay chân mềm mại,<br>
+<span lang="pi" class="pali">
+Hatthapādamudutañca vindati;<br>
+</span>
+Nhà chiêm tướng thiện xảo,<br>
+Tuyên bố Ngài đầy đủ,<br>
+<span lang="pi" class="pali">
+Āhu byañjananimittakovidā,<br>
+</span>
+‘Món ăn thật ngon lành,<br>
+Loại cứng và loại mềm<br>
+<span lang="pi" class="pali">
+Khajjabhojjarasalābhitāya naṁ.<br>
+</span>
+Không riêng gì tại gia,<br>
+Ðược tướng hảo như vậy,<br>
+<span lang="pi" class="pali">
+Yaṁ gihissapi tadatthajotakaṁ,<br>
+</span>
+Nếu sống hạnh xuất gia,<br>
+Cũng được hảo tướng ấy.<br>
+<span lang="pi" class="pali">
+Pabbajjampi ca tadādhigacchati;<br>
+</span>
+Món ăn thật thượng vị<br>
+Loại cứng và loại mềm,<br>
+<span lang="pi" class="pali">
+Khajjabhojjarasalābhiruttamaṁ,<br>
+</span>
+Chặt đứt các trói buộc.<br>
+Tất cả hàng cư sĩ.’”<br>
+<span lang="pi" class="pali">
+Āhu sabbagihibandhanacchidan”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+7–8. Tay Chân Mềm Mại, Có Lưới Da Ngón Giữa<br>
+<span lang="pi" class="pali">
+7–8. Karacaraṇamudujālatālakkhaṇāni<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Này các Tỷ-kheo, trong bất kỳ đời trước nào, hiện hữu nào, trú xứ nào, Như Lai đời trước làm Người.<br>
+<span lang="pi" class="pali">
+“Yampi, bhikkhave, tathāgato purimaṁ jātiṁ purimaṁ bhavaṁ purimaṁ niketaṁ pubbe manussabhūto samāno<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Được đầy đủ Bốn Nhiếp pháp:<br>
+<span lang="pi" class="pali">
+catūhi saṅgahavatthūhi janaṁ saṅgāhako ahosi—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Bố thí, ái ngữ, lợi hành, đồng sự.<br>
+<span lang="pi" class="pali">
+dānena peyyavajjena atthacariyāya samānattatāya.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Với tác động, chất chứa, tích tụ và tăng thịnh của nghiệp ấy, sau khi thân hoại mạng chung được sanh cõi thiện thú, Thiên giới, hay đời này.<br>
+<span lang="pi" class="pali">
+So tassa kammassa kaṭattā …pe…<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ngài từ trần từ chỗ kia, sanh đến chỗ này với hai tướng Ðại Trượng phu:<br>
+<span lang="pi" class="pali">
+so tato cuto itthattaṁ āgato samāno imāni dve mahāpurisalakkhaṇāni paṭilabhati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Tay chân mềm mại, và có lưới da giữa ngón tay, ngón chân.<br>
+<span lang="pi" class="pali">
+Mudutalunahatthapādo ca hoti jālahatthapādo ca.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ngài đầy đủ hai tướng này, nếu sống tại gia, làm vị Chuyển luân Thánh vương… Làm vua được những gì?<br>
+<span lang="pi" class="pali">
+So tehi lakkhaṇehi samannāgato sace agāraṁ ajjhāvasati, rājā hoti cakkavattī …pe…rājā samāno kiṁ labhati?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ðược khéo thâu nhiếp các vị tùy tùng. Ðược khéo thâu nhiếp các cư sĩ, Bà-la-môn, thị dân, thôn dân, tài chánh quan, tư pháp quan, thủ môn quan, các đại thần, các chư hầu, các hào phú, các vương tử.<br>
+<span lang="pi" class="pali">
+Susaṅgahitaparijano hoti, susaṅgahitāssa honti brāhmaṇagahapatikā negamajānapadā gaṇakamahāmattā anīkaṭṭhā dovārikā amaccā pārisajjā rājāno bhogiyā kumārā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Làm vua được như vậy.<br>
+<span lang="pi" class="pali">
+Rājā samāno idaṁ labhati …<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Làm Phật được những gì?<br>
+<span lang="pi" class="pali">
+buddho samāno kiṁ labhati?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ðược khéo thâu nhiếp các vị tùy tùng, được khéo thâu nhiếp các vị Tỷ-kheo, Tỷ-kheo-ni, các Nam cư sĩ, Nữ cư sĩ, chư Thiên, loài Người, A-tu-la, Long thần, Càn-thát-bà.<br>
+<span lang="pi" class="pali">
+Susaṅgahitaparijano hoti, susaṅgahitāssa honti bhikkhū bhikkhuniyo upāsakā upāsikāyo devā manussā asurā nāgā gandhabbā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Làm Phật được như vậy.”<br>
+<span lang="pi" class="pali">
+Buddho samāno idaṁ labhati”.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Thế Tôn thuyết giảng như vậy.<br>
+<span lang="pi" class="pali">
+Etamatthaṁ bhagavā avoca.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ở đây, lời nói này được nói lên:<br>
+<span lang="pi" class="pali">
+Tatthetaṁ vuccati:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Bố thí và lợi hành,<br>
+<span lang="pi" class="pali">
+“Dānampi catthacariyatañca,<br>
+</span>
+Ái ngữ và đồng sự,<br>
+<span lang="pi" class="pali">
+Piyavāditañca samānattatañca;<br>
+</span>
+Nhiếp phục nhiều tùy tùng.<br>
+<span lang="pi" class="pali">
+Kariyacariyasusaṅgahaṁ bahūnaṁ,<br>
+</span>
+Do hành thiện pháp này,<br>
+Nhờ vô lượng công đức,<br>
+Ðược sanh lên cõi Trời.<br>
+<span lang="pi" class="pali">
+Anavamatena guṇena yāti saggaṁ.<br>
+</span>
+Tạ thế tại chỗ kia,<br>
+Tái sanh tại chỗ này,<br>
+<span lang="pi" class="pali">
+Caviya punaridhāgato samāno,<br>
+</span>
+Do hạnh ấy tay chân,<br>
+Mềm mại và có lưới.<br>
+<span lang="pi" class="pali">
+Karacaraṇamudutañca jālino ca;<br>
+</span>
+Ðược sắc tướng đoan nghiêm,<br>
+Mỹ lệ và khả ái<br>
+<span lang="pi" class="pali">
+Atirucirasuvaggudassaneyyaṁ,<br>
+</span>
+Dầu còn là niên thiếu,<br>
+Trẻ thơ măng sữa vậy,<br>
+<span lang="pi" class="pali">
+Paṭilabhati daharo susu kumāro.<br>
+</span>
+Quần chúng chịu tùy thuận,<br>
+<span lang="pi" class="pali">
+Bhavati parijanassavo vidheyyo,<br>
+</span>
+Nhiếp phục cõi đất này.<br>
+<span lang="pi" class="pali">
+Mahimaṁ āvasito susaṅgahito;<br>
+</span>
+Luôn luôn dùng ái ngữ,<br>
+Cầu hạnh phúc quần sanh.<br>
+<span lang="pi" class="pali">
+Piyavadū hitasukhataṁ jigīsamāno,<br>
+</span>
+Như vậy sống thanh tịnh,<br>
+Với công đức thù thắng.<br>
+<span lang="pi" class="pali">
+Abhirucitāni guṇāni ācarati.<br>
+</span>
+Nếu Ngài sống từ bỏ,<br>
+Mọi dục lạc tài sản,<br>
+<span lang="pi" class="pali">
+Yadi ca jahati sabbakāmabhogaṁ,<br>
+</span>
+Tuyên thuyết vi diệu pháp,<br>
+Vị chiến thắng quần sanh,<br>
+<span lang="pi" class="pali">
+Kathayati dhammakathaṁ jino janassa;<br>
+</span>
+Họ nghe tâm hoan hỷ,<br>
+Vâng hành lời Ngài dạy.<br>
+<span lang="pi" class="pali">
+Vacanapaṭikarassābhippasannā,<br>
+</span>
+Họ sống thiện hành trì,<br>
+Theo Chánh pháp, Tùy pháp.”<br>
+<span lang="pi" class="pali">
+Sutvāna dhammānudhammamācarantī”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+9–10. Mắt Cá Tròn Và Sợi Lông Mọc Thẳng<br>
+<span lang="pi" class="pali">
+9–10. Ussaṅkhapāda-uddhaggalomatālakkhaṇāni<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Này các Tỷ-kheo, trong bất cứ đời trước nào, hiện hữu nào, trú xứ nào, Như Lai đời trước làm Người, Như Lai là một vị nói lời liên hệ lợi ích cho chúng sanh, liên hệ đến pháp, giải thích cho đại chúng, đem lại hạnh phúc an lạc cho chúng sanh, tán dương chánh hạnh.<br>
+<span lang="pi" class="pali">
+“Yampi, bhikkhave, tathāgato purimaṁ jātiṁ purimaṁ bhavaṁ purimaṁ niketaṁ pubbe manussabhūto samāno atthūpasaṁhitaṁ dhammūpasaṁhitaṁ vācaṁ bhāsitā ahosi, bahujanaṁ nidaṁsesi, pāṇīnaṁ hitasukhāvaho dhammayāgī.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Với tác động, chất chứa, tích tụ và tăng thịnh của nghiệp…<br>
+<span lang="pi" class="pali">
+So tassa kammassa kaṭattā …pe…<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ngài từ trần từ chỗ kia và tái sanh ở đây với hai tướng Ðại Trượng phu:<br>
+<span lang="pi" class="pali">
+so tato cuto itthattaṁ āgato samāno imāni dve mahāpurisalakkhaṇāni paṭilabhati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+mắt cá tròn như con sò và lông mọc xoay tròn thẳng lên.<br>
+<span lang="pi" class="pali">
+Ussaṅkhapādo ca hoti, uddhaggalomo ca.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ngài đầy đủ với những tướng như vậy, nếu sống tại gia, thành vị Chuyển luân Thánh vương… Làm vua được những gì?<br>
+<span lang="pi" class="pali">
+So tehi lakkhaṇehi samannāgato, sace agāraṁ ajjhāvasati, rājā hoti cakkavattī …pe…rājā samāno kiṁ labhati?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Tài vật dục lạc đều tối thắng, tối ưu, cao tột, đệ nhất. Làm vua được như vậy…<br>
+<span lang="pi" class="pali">
+Aggo ca hoti seṭṭho ca pāmokkho ca uttamo ca pavaro ca kāmabhogīnaṁ. Rājā samāno idaṁ labhati …pe…<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Làm Phật được những gì?<br>
+<span lang="pi" class="pali">
+buddho samāno kiṁ labhati?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ngài trở thành bậc tối thắng, tối ưu, cao tột, đệ nhất cho toàn thể chúng sanh. Làm Phật được như vậy.<br>
+<span lang="pi" class="pali">
+Aggo ca hoti seṭṭho ca pāmokkho ca uttamo ca pavaro ca sabbasattānaṁ. Buddho samāno idaṁ labhati”.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Thế Tôn thuyết giảng như vậy.<br>
+<span lang="pi" class="pali">
+Etamatthaṁ bhagavā avoca.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ở đây, lời nói này được nói lên:<br>
+<span lang="pi" class="pali">
+Tatthetaṁ vuccati:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Thuyết giảng có mục đích,<br>
+Liên hệ đến Chánh Pháp,<br>
+<span lang="pi" class="pali">
+“Atthadhammasahitaṁ pure giraṁ,<br>
+</span>
+Cùng lời giảng lay động;<br>
+<span lang="pi" class="pali">
+Erayaṁ bahujanaṁ nidaṁsayi;<br>
+</span>
+Hạnh phúc cho chúng sanh,<br>
+<span lang="pi" class="pali">
+Pāṇinaṁ hitasukhāvaho ahu,<br>
+</span>
+Rộng rãi cúng dường Pháp.<br>
+<span lang="pi" class="pali">
+Dhammayāgamayajī amaccharī.<br>
+</span>
+Nhờ hành trì thiện nghiệp,<br>
+<span lang="pi" class="pali">
+Tena so sucaritena kammunā,<br>
+</span>
+Sống hoan hỷ cõi Trời.<br>
+<span lang="pi" class="pali">
+Suggatiṁ vajati tattha modati;<br>
+</span>
+Tái sanh tại nơi đây,<br>
+Ngài được hai hảo tướng,<br>
+<span lang="pi" class="pali">
+Lakkhaṇāni ca duve idhāgato,<br>
+</span>
+Hưởng hạnh phúc tối thượng.<br>
+<span lang="pi" class="pali">
+Uttamappamukhatāya vindati.<br>
+</span>
+Lông mọc xoay thẳng lên,<br>
+<span lang="pi" class="pali">
+Ubbhamuppatitalomavā saso,<br>
+</span>
+Mắt cá tròn khéo gọn,<br>
+<span lang="pi" class="pali">
+Pādagaṇṭhirahu sādhusaṇṭhitā;<br>
+</span>
+Dưới có thịt, có da<br>
+<span lang="pi" class="pali">
+Maṁsalohitācitā tacotthatā,<br>
+</span>
+Trên hình dáng đẹp đẽ.<br>
+<span lang="pi" class="pali">
+Uparicaraṇasobhanā ahu.<br>
+</span>
+Nếu Ngài sống tại gia,<br>
+<span lang="pi" class="pali">
+Gehamāvasati ce tathāvidho,<br>
+</span>
+Tài dục đều tối thượng.<br>
+<span lang="pi" class="pali">
+Aggataṁ vajati kāmabhoginaṁ;<br>
+</span>
+Không ai thắng hơn Ngài.<br>
+<span lang="pi" class="pali">
+Tena uttaritaro na vijjati,<br>
+</span>
+Chinh phục Diêm-phù-đề.<br>
+<span lang="pi" class="pali">
+Jambudīpamabhibhuyya iriyati.<br>
+</span>
+Nếu hạnh Ngài xuất gia,<br>
+<span lang="pi" class="pali">
+Pabbajampi ca anomanikkamo,<br>
+</span>
+Tinh tấn hơn mọi người,<br>
+Trong tất cả chúng sanh.<br>
+<span lang="pi" class="pali">
+Aggataṁ vajati sabbapāṇinaṁ;<br>
+</span>
+Do vậy không tìm được,<br>
+Kẻ tối thắng hơn Ngài.<br>
+<span lang="pi" class="pali">
+Tena uttaritaro na vijjati,<br>
+</span>
+Ngài sống và ngự trị,<br>
+Cùng khắp mọi thế giới.”<br>
+<span lang="pi" class="pali">
+Sabbalokamabhibhuyya viharatī”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+11. Ống Chân Giống Con Dê Rừng<br>
+<span lang="pi" class="pali">
+11. Eṇijaṅghalakkhaṇaṁ<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Này các Tỷ-kheo, trong bất cứ đời trước nào, hiện hữu nào, trú xứ nào, Như Lai trước làm Người, ngài siêng năng học hỏi, nghề nghiệp, mọi kỹ thuật, học thuật, oai nghi hay hành động:<br>
+<span lang="pi" class="pali">
+“Yampi, bhikkhave, tathāgato purimaṁ jātiṁ purimaṁ bhavaṁ purimaṁ niketaṁ pubbe manussabhūto samāno sakkaccaṁ vācetā ahosi sippaṁ vā vijjaṁ vā caraṇaṁ vā kammaṁ vā:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Làm thế nào để tôi mau học được, làm thế nào để tôi mau biết, làm thế nào để tôi mau thâu hoạch được, khỏi phải mệt nhọc lâu ngày?’<br>
+<span lang="pi" class="pali">
+‘kintime khippaṁ vijāneyyuṁ, khippaṁ paṭipajjeyyuṁ, na ciraṁ kilisseyyun’”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Với tác động, chất chứa, tích tụ và tăng thịnh của nghiệp ấy…<br>
+<span lang="pi" class="pali">
+So tassa kammassa kaṭattā …pe…<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ngài từ trần từ chỗ kia và tái sanh ở đây, với tướng Ðại Trượng phu:<br>
+<span lang="pi" class="pali">
+so tato cuto itthattaṁ āgato samāno imaṁ mahāpurisalakkhaṇaṁ paṭilabhati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Có ống chân giống như con dê rừng.<br>
+<span lang="pi" class="pali">
+Eṇijaṅgho hoti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ngài đầy đủ với tướng này, nếu sống tại gia thành vị Chuyển luân Thánh vương… Làm vua được những gì?<br>
+<span lang="pi" class="pali">
+So tena lakkhaṇena samannāgato sace agāraṁ ajjhāvasati, rājā hoti cakkavattī …pe…rājā samāno kiṁ labhati?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Tất cả sự vật xứng đáng nhà vua, đặc tướng nhà vua, tài sản nhà vua, sở hữu nhà vua, Ngài đều có được một cách mau chóng. Làm vua được như vậy.<br>
+<span lang="pi" class="pali">
+Yāni tāni rājārahāni rājaṅgāni rājūpabhogāni rājānucchavikāni tāni khippaṁ paṭilabhati. Rājā samāno idaṁ labhati …pe…<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Làm Phật được những gì?<br>
+<span lang="pi" class="pali">
+buddho samāno kiṁ labhati?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Tất cả sự vật gì xứng đáng vị Sa-môn, đặc tướng Sa-môn, tài sản Sa-môn, sở hữu Sa-môn, Ngài đều có được một cách mau chóng. Làm Phật được như vậy.<br>
+<span lang="pi" class="pali">
+Yāni tāni samaṇārahāni samaṇaṅgāni samaṇūpabhogāni samaṇānucchavikāni, tāni khippaṁ paṭilabhati. Buddho samāno idaṁ labhati”.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Thế Tôn thuyết giảng như vậy.<br>
+<span lang="pi" class="pali">
+Etamatthaṁ bhagavā avoca.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ở đây, lời nói này được nói lên:<br>
+<span lang="pi" class="pali">
+Tatthetaṁ vuccati:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Trong các nghề, kỹ thuật<br>
+Trong cử chỉ, hành động,<br>
+<span lang="pi" class="pali">
+“Sippesu vijjācaraṇesu kammesu,<br>
+</span>
+Ngài muốn làm thế nào,<br>
+Ðể học biết mau chóng.<br>
+<span lang="pi" class="pali">
+Kathaṁ vijāneyyuṁ lahunti icchati;<br>
+</span>
+Không ai bị thương hại,<br>
+<span lang="pi" class="pali">
+Yadūpaghātāya na hoti kassaci,<br>
+</span>
+Học mau, không mệt mỏi,<br>
+<span lang="pi" class="pali">
+Vāceti khippaṁ na ciraṁ kilissati.<br>
+</span>
+Do hành thiện nghiệp này,<br>
+Ðược quả thiện nghiệp này,<br>
+Ðược quả thiện tốt đẹp.<br>
+<span lang="pi" class="pali">
+Taṁ kammaṁ katvā kusalaṁ sukhudrayaṁ,<br>
+</span>
+Có tướng chân dê rừng.<br>
+<span lang="pi" class="pali">
+Jaṅghā manuññā labhate susaṇṭhitā;<br>
+</span>
+Cân đối xoay nhẹ nhàng,<br>
+Trên da trơn mềm mại,<br>
+<span lang="pi" class="pali">
+Vaṭṭā sujātā anupubbamuggatā,<br>
+</span>
+Lông được mọc đứng lên.<br>
+<span lang="pi" class="pali">
+Uddhaggalomā sukhumattacotthatā.<br>
+</span>
+Người như vậy được gọi,<br>
+Người có chân dê rừng.<br>
+<span lang="pi" class="pali">
+Eṇeyyajaṅghoti tamāhu puggalaṁ,<br>
+</span>
+Thành tựu đều mau lẹ;<br>
+<span lang="pi" class="pali">
+Sampattiyā khippamidhāhu lakkhaṇaṁ;<br>
+</span>
+Nếu sống đời tại gia,<br>
+Bất kể điều chi muốn,<br>
+<span lang="pi" class="pali">
+Gehānulomāni yadābhikaṅkhati,<br>
+</span>
+Khiến học hỏi mau chóng.<br>
+<span lang="pi" class="pali">
+Apabbajaṁ khippamidhādhigacchati.<br>
+</span>
+Nếu xuất gia ly dục,<br>
+<span lang="pi" class="pali">
+Sace ca pabbajjamupeti tādiso,<br>
+</span>
+Sống thiểu dục sáng suốt.<br>
+<span lang="pi" class="pali">
+Nekkhammachandābhirato vicakkhaṇo;<br>
+</span>
+Mọi sự vật hợp pháp,<br>
+Ngài tuần tự chứng đắc,<br>
+<span lang="pi" class="pali">
+Anucchavikassa yadānulomikaṁ,<br>
+</span>
+Sống tinh tấn cao thượng,<br>
+Quả chứng thật mau chóng.”<br>
+<span lang="pi" class="pali">
+Taṁ vindati khippamanomavikkamo”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+12. Da Trơn Mịn<br>
+<span lang="pi" class="pali">
+12. Sukhumacchavilakkhaṇaṁ<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Này các Tỷ-kheo, trong bất cứ đời trước nào, hiện hữu nào, trú xứ nào, Như Lai đời trước làm Người, đi đến các vị Sa-môn hay Bà-la-môn, sau khi đến liền hỏi:<br>
+<span lang="pi" class="pali">
+“Yampi, bhikkhave, tathāgato purimaṁ jātiṁ purimaṁ bhavaṁ purimaṁ niketaṁ pubbe manussabhūto samāno samaṇaṁ vā brāhmaṇaṁ vā upasaṅkamitvā paripucchitā ahosi:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Bạch Tôn giả, thế nào là thiện? Thế nào là bất thiện? Thế nào là có tội? Thế nào là không có tội? Ðiều nào nên làm? Ðiều nào không nên làm? Ðiều nào làm sẽ đưa đến cho ta bất hạnh và đau khổ lâu dài? Ðiều nào nếu làm sẽ đưa đến cho ta hạnh phúc và an lạc lâu dài?’<br>
+<span lang="pi" class="pali">
+‘kiṁ, bhante, kusalaṁ, kiṁ akusalaṁ, kiṁ sāvajjaṁ, kiṁ anavajjaṁ, kiṁ sevitabbaṁ, kiṁ na sevitabbaṁ, kiṁ me karīyamānaṁ dīgharattaṁ ahitāya dukkhāya assa, kiṁ vā pana me karīyamānaṁ dīgharattaṁ hitāya sukhāya assā’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Với tác động, chất chứa, tích tụ, tăng thịnh của nghiệp này…<br>
+<span lang="pi" class="pali">
+So tassa kammassa kaṭattā …pe…<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ngài sau khi từ trần từ chỗ kia được tái sanh lại đây với tướng Ðại Trượng phu này:<br>
+<span lang="pi" class="pali">
+so tato cuto itthattaṁ āgato samāno imaṁ mahāpurisalakkhaṇaṁ paṭilabhati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Da của Ngài trơn mịn khiến bụi bặm không thể bám dính vào thân.<br>
+<span lang="pi" class="pali">
+Sukhumacchavi hoti, sukhumattā chaviyā rajojallaṁ kāye na upalimpati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ngài đầy đủ với các tướng này, nếu sống tại gia làm vị Chuyển luân Thánh vương… Làm vua, được những gì?<br>
+<span lang="pi" class="pali">
+So tena lakkhaṇena samannāgato sace agāraṁ ajjhāvasati, rājā hoti cakkavattī …pe…rājā samāno kiṁ labhati?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ðại trí tuệ, không có ai bằng Ngài về trí tuệ. Hay không ai hơn Ngài về tài sản thế tục. Làm vua được như vậy…<br>
+<span lang="pi" class="pali">
+Mahāpañño hoti, nāssa hoti koci paññāya sadiso vā seṭṭho vā kāmabhogīnaṁ. Rājā samāno idaṁ labhati …pe…<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Làm Phật được những gì?<br>
+<span lang="pi" class="pali">
+buddho samāno kiṁ labhati?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ðược đại trí tuệ, quảng trí tuệ, hỷ tâm trí tuệ, mẫn tiệp trí tuệ, thông nhuệ trí tuệ, yểm ly trí tuệ, không có ai bằng Ngài về trí tuệ hay không có chúng sanh nào hơn Ngài. Làm Phật, Ngài được như vậy.<br>
+<span lang="pi" class="pali">
+Mahāpañño hoti puthupañño hāsapañño javanapañño tikkhapañño nibbedhikapañño, nāssa hoti koci paññāya sadiso vā seṭṭho vā sabbasattānaṁ. Buddho samāno idaṁ labhati”.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Thế Tôn thuyết giảng như vậy.<br>
+<span lang="pi" class="pali">
+Etamatthaṁ bhagavā avoca.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ở đây, lời nói này được nói lên:<br>
+<span lang="pi" class="pali">
+Tatthetaṁ vuccati:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Trong những ngày quá khứ,<br>
+<span lang="pi" class="pali">
+“Pure puratthā purimāsu jātisu,<br>
+</span>
+Ngài tha thiết muốn biết,<br>
+Ngài tha thiết muốn hỏi,<br>
+<span lang="pi" class="pali">
+Aññātukāmo paripucchitā ahu;<br>
+</span>
+Yết kiến vị xuất gia,<br>
+<span lang="pi" class="pali">
+Sussūsitā pabbajitaṁ upāsitā,<br>
+</span>
+Khéo nghe và học hỏi.<br>
+<span lang="pi" class="pali">
+Atthantaro atthakathaṁ nisāmayi.<br>
+</span>
+Chính nhờ hạnh nghiệp ấy,<br>
+Ngài chứng được trí tuệ.<br>
+<span lang="pi" class="pali">
+Paññāpaṭilābhagatena kammunā,<br>
+</span>
+Và sanh vào loài Người,<br>
+Ngài được da mịn màng.<br>
+<span lang="pi" class="pali">
+Manussabhūto sukhumacchavī ahu;<br>
+</span>
+Các vị chiêm tướng gia,<br>
+Hội họp và tuyên bố:<br>
+<span lang="pi" class="pali">
+Byākaṁsu uppādanimittakovidā,<br>
+</span>
+‘Vị này biết và thấy,<br>
+Mọi ý nghĩa tế nhị.’<br>
+<span lang="pi" class="pali">
+Sukhumāni atthāni avecca dakkhiti.<br>
+</span>
+Nếu hạnh không xuất gia,<br>
+Sống hành trì như vậy,<br>
+<span lang="pi" class="pali">
+Sace na pabbajjamupeti tādiso,<br>
+</span>
+Ngài là vị Chuyển luân,<br>
+Ngự trị cõi đất này.<br>
+<span lang="pi" class="pali">
+Vatteti cakkaṁ pathaviṁ pasāsati;<br>
+</span>
+Những vị nắm được nghĩa,<br>
+<span lang="pi" class="pali">
+Atthānusiṭṭhīsu pariggahesu ca,<br>
+</span>
+Không ai hơn bằng Ngài.<br>
+<span lang="pi" class="pali">
+Na tena seyyo sadiso ca vijjati.<br>
+</span>
+Nếu xuất gia ly dục,<br>
+<span lang="pi" class="pali">
+Sace ca pabbajjamupeti tādiso,<br>
+</span>
+Sống thoát tục sáng suốt;<br>
+<span lang="pi" class="pali">
+Nekkhammachandābhirato vicakkhaṇo;<br>
+</span>
+Tuệ tối hảo vô thượng,<br>
+<span lang="pi" class="pali">
+Paññāvisiṭṭhaṁ labhate anuttaraṁ,<br>
+</span>
+Chứng được đạo Bồ-đề.”<br>
+<span lang="pi" class="pali">
+Pappoti bodhiṁ varabhūrimedhaso”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+13. Da Màu Vàng<br>
+<span lang="pi" class="pali">
+13. Suvaṇṇavaṇṇalakkhaṇaṁ<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Này các Tỷ-kheo, trong bất cứ đời trước nào, hiện hữu nào, trú xứ nào, Như Lai đời trước làm Người, không sân hận, hoàn toàn không ảo não, dầu có bị nói nhiều cũng không tức tối, không phẫn nộ, không hiềm khích, không mất bình tĩnh, không biểu lộ phẫn nộ, không sân hận phiền muộn.<br>
+<span lang="pi" class="pali">
+“Yampi, bhikkhave, tathāgato purimaṁ jātiṁ purimaṁ bhavaṁ purimaṁ niketaṁ pubbe manussabhūto samāno akkodhano ahosi anupāyāsabahulo, bahumpi vutto samāno nābhisajji na kuppi na byāpajji na patitthīyi, na kopañca dosañca appaccayañca pātvākāsi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Trái lại, Ngài bố thí các đồ che đắp, mang mặc mềm mại, nhẹ nhàng; vải quyên mềm mại, vải bông mềm mại, vải lụa mềm mại, vải len mềm mại.<br>
+<span lang="pi" class="pali">
+Dātā ca ahosi sukhumānaṁ mudukānaṁ attharaṇānaṁ pāvuraṇānaṁ khomasukhumānaṁ kappāsikasukhumānaṁ koseyyasukhumānaṁ kambalasukhumānaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Với tác động, chất chứa, tích tụ, tăng thịnh của nghiệp này…<br>
+<span lang="pi" class="pali">
+So tassa kammassa kaṭattā upacitattā …pe…<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ngài từ trần từ chỗ kia, thác sanh tại chỗ này, được tướng Ðại Trượng phu này:<br>
+<span lang="pi" class="pali">
+so tato cuto itthattaṁ āgato samāno imaṁ mahāpurisalakkhaṇaṁ paṭilabhati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+sắc hoàng kim, da màu đồng, sáng bóng.<br>
+<span lang="pi" class="pali">
+Suvaṇṇavaṇṇo hoti kañcanasannibhattaco.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ngài đầy đủ với tướng này, nếu sống tại gia, thành vị Chuyển luân Thánh vương. Làm vua được những gì?<br>
+<span lang="pi" class="pali">
+So tena lakkhaṇena samannāgato sace agāraṁ ajjhāvasati, rājā hoti cakkavattī …pe…rājā samāno kiṁ labhati?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ðược các đồ che đắp, mang mặc mềm mại, nhẹ nhàng; vải quyên mềm mại, vải bông mềm mại, vải lụa mềm mại, vải len mềm mại. Làm vua được như vậy…<br>
+<span lang="pi" class="pali">
+Lābhī hoti sukhumānaṁ mudukānaṁ attharaṇānaṁ pāvuraṇānaṁ khomasukhumānaṁ kappāsikasukhumānaṁ koseyyasukhumānaṁ kambalasukhumānaṁ. Rājā samāno idaṁ labhati …pe…<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Làm Phật được những gì?<br>
+<span lang="pi" class="pali">
+buddho samāno kiṁ labhati?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ðược các đồ che đắp, mang mặc mềm mại, nhẹ nhàng; vải quyên mềm mại, vải bông mềm mại, vải lụa mềm mại, vải len mềm mại. Làm Phật, Ngài được như vậy.<br>
+<span lang="pi" class="pali">
+Lābhī hoti sukhumānaṁ mudukānaṁ attharaṇānaṁ pāvuraṇānaṁ khomasukhumānaṁ kappāsikasukhumānaṁ koseyyasukhumānaṁ kambalasukhumānaṁ. Buddho samāno idaṁ labhati”.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Thế Tôn thuyết giảng như vậy.<br>
+<span lang="pi" class="pali">
+Etamatthaṁ bhagavā avoca.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ở đây, lời nói này được nói lên:<br>
+<span lang="pi" class="pali">
+Tatthetaṁ vuccati:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Cương quyết không sân hận,<br>
+Ngài sẵn sàng bố thí<br>
+<span lang="pi" class="pali">
+“Akkodhañca adhiṭṭhahi adāsi,<br>
+</span>
+Trong những đời sống trước,<br>
+Ngài phân phát vải vóc,<br>
+<span lang="pi" class="pali">
+Dānañca vatthāni sukhumāni succhavīni;<br>
+</span>
+Các loại vải mềm mại,<br>
+Các đồ đắp mềm mại.<br>
+<span lang="pi" class="pali">
+Purimatarabhave ṭhito abhivissaji,<br>
+</span>
+Như thần mưa tung vải,<br>
+Mây móc trên đất liền.<br>
+<span lang="pi" class="pali">
+Mahimiva suro abhivassaṁ.<br>
+</span>
+Từ trần tại chỗ kia,<br>
+Ðược sanh lên cõi Trời,<br>
+<span lang="pi" class="pali">
+Taṁ katvāna ito cuto dibbaṁ,<br>
+</span>
+Nhờ hạnh nghiệp như vậy,<br>
+Hưởng quả báo thiện hạnh.<br>
+<span lang="pi" class="pali">
+Upapajji sukataphalavipākamanubhutvā;<br>
+</span>
+Với thân màu hoàng kim,<br>
+Sáng chói như vàng ròng,<br>
+<span lang="pi" class="pali">
+Kanakatanusannibho idhābhibhavati,<br>
+</span>
+Mỹ lệ hùng tráng hơn,<br>
+Chẳng khác gì Ðế-thích.<br>
+<span lang="pi" class="pali">
+Suravarataroriva indo.<br>
+</span>
+Nếu không muốn xuất gia,<br>
+<span lang="pi" class="pali">
+Gehañcāvasati naro apabbajja,<br>
+</span>
+Ngài trị vì đất này,<br>
+<span lang="pi" class="pali">
+Micchaṁ mahatimahiṁ anusāsati;<br>
+</span>
+Ngài được thật đầy đủ,<br>
+<span lang="pi" class="pali">
+Pasayha sahidha sattaratanaṁ,<br>
+</span>
+Vải mềm mại, tế nhị,<br>
+<span lang="pi" class="pali">
+Paṭilabhati vimalasukhumacchaviṁ suciñca.<br>
+</span>
+Ðồ che đắp mang mặc.<br>
+<span lang="pi" class="pali">
+Lābhī acchādanavatthamokkhapāvuraṇānaṁ,<br>
+</span>
+Nếu Ngài sống đời sống,<br>
+Xuất gia, không gia đình,<br>
+<span lang="pi" class="pali">
+Bhavati yadi anāgāriyataṁ upeti;<br>
+</span>
+Quả báo nghiệp quá khứ,<br>
+<span lang="pi" class="pali">
+Sahito purimakataphalaṁ anubhavati,<br>
+</span>
+Những điều Ngài đã làm,<br>
+Không bao giờ vô hiệu.”<br>
+<span lang="pi" class="pali">
+Na bhavati katassa panāso”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+14. Tướng Mã Âm Tàng<br>
+<span lang="pi" class="pali">
+14. Kosohitavatthaguyhalakkhaṇaṁ<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Này các Tỷ-kheo, trong bất cứ đời trước nào, hiện hữu nào, trú xứ nào, Như Lai đời trước làm Người.<br>
+<span lang="pi" class="pali">
+“Yampi, bhikkhave, tathāgato purimaṁ jātiṁ purimaṁ bhavaṁ purimaṁ niketaṁ pubbe manussabhūto samāno<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ngài làm cho sum họp lại những bà con bạn bè thân tín không gặp nhau lâu ngày, bị đau khổ lâu ngày.<br>
+<span lang="pi" class="pali">
+cirappanaṭṭhe sucirappavāsino ñātimitte suhajje sakhino samānetā ahosi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Làm cho sum họp lại mẹ với con, con với mẹ, làm cho sum họp lại cha với con, con với cha, làm cho sum họp lại giữa anh em với nhau, làm cho sum họp lại giữa anh và chị, giữa chị và em, làm cho hòa hợp lại, sống vui vẻ với nhau.<br>
+<span lang="pi" class="pali">
+Mātarampi puttena samānetā ahosi, puttampi mātarā samānetā ahosi, pitarampi puttena samānetā ahosi, puttampi pitarā samānetā ahosi, bhātarampi bhātarā samānetā ahosi, bhātarampi bhaginiyā samānetā ahosi, bhaginimpi bhātarā samānetā ahosi, bhaginimpi bhaginiyā samānetā ahosi, samaṅgīkatvā ca abbhanumoditā ahosi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Với tác động, chất chứa, tích tụ, tăng thịnh của nghiệp này…<br>
+<span lang="pi" class="pali">
+So tassa kammassa kaṭattā …pe…<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ngài từ trần từ chỗ kia, thác sanh tại chỗ này, được tướng Ðại Trượng phu này:<br>
+<span lang="pi" class="pali">
+so tato cuto itthattaṁ āgato samāno imaṁ mahāpurisalakkhaṇaṁ paṭilabhati—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Tướng mã âm tàng.<br>
+<span lang="pi" class="pali">
+kosohitavatthaguyho hoti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ngài đầy đủ tướng này, nếu sống tại gia, làm vị Chuyển luân Thánh vương. Làm vua được những gì?<br>
+<span lang="pi" class="pali">
+So tena lakkhaṇena samannāgato sace agāraṁ ajjhāvasati, rājā hoti cakkavattī …pe…rājā samāno kiṁ labhati?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ðược nhiều con, hơn một ngàn người con đều là bậc anh hùng, bậc chiến thắng, dõng kiện, nhiếp phục địch quân. Làm vua, vị ấy được như vậy…<br>
+<span lang="pi" class="pali">
+Pahūtaputto hoti, parosahassaṁ kho panassa puttā bhavanti sūrā vīraṅgarūpā parasenappamaddanā. Rājā samāno idaṁ labhati …pe…<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Làm Phật được những gì?<br>
+<span lang="pi" class="pali">
+buddho samāno kiṁ labhati?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ðược nhiều con, sẽ có hàng ngàn người con (xuất gia và tại gia) đều là bậc anh hùng, các bậc vô song, các bậc dõng kiện, nhiếp phục các địch quân. Làm Phật, Ngài được như vậy.<br>
+<span lang="pi" class="pali">
+Pahūtaputto hoti, anekasahassaṁ kho panassa puttā bhavanti sūrā vīraṅgarūpā parasenappamaddanā. Buddho samāno idaṁ labhati”.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Thế Tôn thuyết giảng như vậy.<br>
+<span lang="pi" class="pali">
+Etamatthaṁ bhagavā avoca.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ở đây, lời nói này được nói lên:<br>
+<span lang="pi" class="pali">
+Tatthetaṁ vuccati:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Thuở xưa trong quá khứ,<br>
+Trong nhiều đời tiền thân,<br>
+<span lang="pi" class="pali">
+“Pure puratthā purimāsu jātisu,<br>
+</span>
+Ngài khiến cho sum họp,<br>
+<span lang="pi" class="pali">
+Cirappanaṭṭhe sucirappavāsino;<br>
+</span>
+Bà con, bạn, thân tín.<br>
+Ðã đau khổ lâu ngày,<br>
+Ðã phiêu bạt lâu ngày,<br>
+<span lang="pi" class="pali">
+Ñātī suhajje sakhino samānayi,<br>
+</span>
+Ngài khiến họ hòa hợp,<br>
+Sống hoan hỷ với nhau.<br>
+<span lang="pi" class="pali">
+Samaṅgikatvā anumoditā ahu.<br>
+</span>
+Hạnh này Ngài sanh Thiên,<br>
+<span lang="pi" class="pali">
+So tena kammena divaṁ samakkami,<br>
+</span>
+Hưởng hạnh phúc hỷ lạc,<br>
+<span lang="pi" class="pali">
+Sukhañca khiḍḍāratiyo ca anvabhi;<br>
+</span>
+Chết kia, sanh chỗ này,<br>
+<span lang="pi" class="pali">
+Tato cavitvā punarāgato idha,<br>
+</span>
+Ngài được mã âm tàng.<br>
+<span lang="pi" class="pali">
+Kosohitaṁ vindati vatthachādiyaṁ.<br>
+</span>
+Ngài có rất nhiều con,<br>
+<span lang="pi" class="pali">
+Pahūtaputto bhavatī tathāvidho,<br>
+</span>
+Hơn đến số ngàn vị,<br>
+<span lang="pi" class="pali">
+Parosahassañca bhavanti atrajā;<br>
+</span>
+Là những bậc anh hùng,<br>
+Chiến thắng nhiếp địch quân,<br>
+<span lang="pi" class="pali">
+Sūrā ca vīrā ca amittatāpanā,<br>
+</span>
+Ðón chào lời hiếu kính,<br>
+Khiến tại gia hoan hỷ.<br>
+<span lang="pi" class="pali">
+Gihissa pītiṁ jananā piyaṁvadā.<br>
+</span>
+Nếu xuất gia tu đạo,<br>
+Uy lực thắng hơn nhiều.<br>
+<span lang="pi" class="pali">
+Bahūtarā pabbajitassa iriyato,<br>
+</span>
+Số con có nhiều hơn,<br>
+Biết vâng lời chỉ giáo.<br>
+<span lang="pi" class="pali">
+Bhavanti puttā vacanānusārino;<br>
+</span>
+Dầu tại gia, xuất gia,<br>
+<span lang="pi" class="pali">
+Gihissa vā pabbajitassa vā puna,<br>
+</span>
+Hảo tướng thật rõ ràng.”<br>
+<span lang="pi" class="pali">
+Taṁ lakkhaṇaṁ jāyati tadatthajotakan”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Dứt phẩm thứ nhất.<br>
+<span lang="pi" class="pali">
+Paṭhamabhāṇavāro niṭṭhito.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+15–16. Thân Hình Cân Đối Và Bàn Tay Chạm Gối<br>
+<span lang="pi" class="pali">
+15–16. Parimaṇḍalaanonamajaṇṇuparimasanalakkhaṇāni<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Này các Tỷ-kheo, trong bất cứ đời trước nào, hiện hữu nào, trú xứ nào, Như Lai đời trước làm Người.<br>
+<span lang="pi" class="pali">
+“Yampi, bhikkhave, tathāgato purimaṁ jātiṁ purimaṁ bhavaṁ purimaṁ niketaṁ pubbe manussabhūto samāno<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Quán sát và hiểu biết rõ ràng toàn thể Ðại chúng, biết mình, biết người, biết sự sai biệt giữa mọi người:<br>
+<span lang="pi" class="pali">
+mahājanasaṅgahaṁ samekkhamāno samaṁ jānāti sāmaṁ jānāti, purisaṁ jānāti purisavisesaṁ jānāti:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Người này xứng đáng như thế này, người này xứng đáng như thế này”, và Ngài hành động tùy theo sự sai biệt giữa mọi người ấy.<br>
+<span lang="pi" class="pali">
+‘ayamidamarahati ayamidamarahatī’ti tattha tattha purisavisesakaro ahosi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Với tác động, chất chứa, tích tụ, tăng thịnh của nghiệp này…<br>
+<span lang="pi" class="pali">
+So tassa kammassa kaṭattā …pe…<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ngài từ trần từ chỗ kia tái sanh tại đây với hai tướng Ðại Trượng phu:<br>
+<span lang="pi" class="pali">
+so tato cuto itthattaṁ āgato samāno imāni dve mahāpurisalakkhaṇāni paṭilabhati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Thân hình tròn như cây Nigrodha (cây bàng) và đứng thẳng không cong lưng, Ngài có thể sờ và thoa đầu gối với hai lòng bàn tay.<br>
+<span lang="pi" class="pali">
+Nigrodhaparimaṇḍalo ca hoti, ṭhitakoyeva ca anonamanto ubhohi pāṇitalehi jaṇṇukāni parimasati parimajjati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ngài đầy đủ những tướng như vậy, nếu sống tại gia thành vị Chuyển luân Thánh vương… Làm vua được những gì?<br>
+<span lang="pi" class="pali">
+So tehi lakkhaṇehi samannāgato sace agāraṁ ajjhāvasati, rājā hoti cakkavattī …pe…rājā samāno kiṁ labhati?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Làm vị triệu phú, đại triệu phú, với kho tàng đầy vàng bạc, đầy tài vật, đầy tiền lúa, kho tàng tràn đầy. Làm vua được như vậy…<br>
+<span lang="pi" class="pali">
+Aḍḍho hoti mahaddhano mahābhogo pahūtajātarūparajato pahūtavittūpakaraṇo pahūtadhanadhañño paripuṇṇakosakoṭṭhāgāro. Rājā samāno idaṁ labhati …pe…<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Làm Phật được những gì?<br>
+<span lang="pi" class="pali">
+buddho samāno kiṁ labhati?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Làm vị triệu phú, đại triệu phú.<br>
+<span lang="pi" class="pali">
+Aḍḍho hoti mahaddhano mahābhogo.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Tài vật của Ngài là:<br>
+<span lang="pi" class="pali">
+Tassimāni dhanāni honti, seyyathidaṁ—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+tín tài, giới tài, tàm tài, quý tài, đa văn tài, thí tài, trí tuệ tài.<br>
+<span lang="pi" class="pali">
+saddhādhanaṁ sīladhanaṁ hiridhanaṁ ottappadhanaṁ sutadhanaṁ cāgadhanaṁ paññādhanaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Làm Phật được như vậy.”<br>
+<span lang="pi" class="pali">
+Buddho samāno idaṁ labhati”.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Thế Tôn thuyết giảng như vậy.<br>
+<span lang="pi" class="pali">
+Etamatthaṁ bhagavā avoca.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ở đây, lời nói này được nói lên:<br>
+<span lang="pi" class="pali">
+Tatthetaṁ vuccati:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Cân nhắc, tìm, suy tư,<br>
+Ngài quán sát Ðại chúng,<br>
+<span lang="pi" class="pali">
+“Tuliya paṭivicaya cintayitvā,<br>
+</span>
+Ở chỗ này chỗ kia,<br>
+<span lang="pi" class="pali">
+Mahājanasaṅgahanaṁ samekkhamāno;<br>
+</span>
+‘Người này xứng thế này.’<br>
+<span lang="pi" class="pali">
+Ayamidamarahati tattha tattha,<br>
+</span>
+Hành động Ngài tương xứng,<br>
+Sự sai biệt loài Người.<br>
+<span lang="pi" class="pali">
+Purisavisesakaro pure ahosi.<br>
+</span>
+Ðứng thẳng không cong lưng,<br>
+<span lang="pi" class="pali">
+Mahiñca pana ṭhito anonamanto,<br>
+</span>
+Hai tay sờ đầu gối,<br>
+<span lang="pi" class="pali">
+Phusati karehi ubhohi jaṇṇukāni;<br>
+</span>
+Với thiện báo đặc biệt.<br>
+<span lang="pi" class="pali">
+Mahiruhaparimaṇḍalo ahosi,<br>
+</span>
+Thân như cây tròn cao,<br>
+<span lang="pi" class="pali">
+Sucaritakammavipākasesakena.<br>
+</span>
+Bậc thiện xảo siêu nhân,<br>
+<span lang="pi" class="pali">
+Bahuvividhanimittalakkhaṇaññū,<br>
+</span>
+Ðều tuyên bố như sau:<br>
+<span lang="pi" class="pali">
+Atinipuṇā manujā byākariṁsu;<br>
+</span>
+‘Ðứa trẻ được tất cả,<br>
+<span lang="pi" class="pali">
+Bahuvividhā gihīnaṁ arahāni,<br>
+</span>
+Những gì xứng cư sĩ,<br>
+Là cư sĩ, Ngài được,<br>
+<span lang="pi" class="pali">
+Paṭilabhati daharo susu kumāro.<br>
+</span>
+Mọi dục lạc tài sản,<br>
+Phong phú và thích hợp,<br>
+<span lang="pi" class="pali">
+Idha ca mahīpatissa kāmabhogī,<br>
+</span>
+Với vua cõi đất này.<br>
+<span lang="pi" class="pali">
+Gihipatirūpakā bahū bhavanti;<br>
+</span>
+Nếu phát tâm từ bỏ,<br>
+Mọi dục lạc tài sản,<br>
+<span lang="pi" class="pali">
+Yadi ca jahati sabbakāmabhogaṁ,<br>
+</span>
+Ngài sẽ được tài vật,<br>
+Vô thượng và tối thiện.’”<br>
+<span lang="pi" class="pali">
+Labhati anuttaraṁ uttamadhanaggan”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+17–19. Vai Sư Tử, Thân Hình Tròn đều<br>
+<span lang="pi" class="pali">
+17–19. Sīhapubbaddhakāyāditilakkhaṇaṁ<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Này các Tỷ-kheo, trong bất cứ đời trước nào, hiện hữu nào, trú xứ nào, Như Lai đời trước làm Người.<br>
+<span lang="pi" class="pali">
+“Yampi, bhikkhave, tathāgato purimaṁ jātiṁ purimaṁ bhavaṁ purimaṁ niketaṁ pubbe manussabhūto samāno<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Tha thiết với sự lợi ích của Ðại chúng, tha thiết với hạnh phúc, tha thiết với sự thoải mái, tha thiết với sự an ủi của Ðại chúng:<br>
+<span lang="pi" class="pali">
+bahujanassa atthakāmo ahosi hitakāmo phāsukāmo yogakkhemakāmo:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Làm thế nào cho họ tăng trưởng lòng tin, tăng trưởng giới, tăng trưởng đa văn, tăng trưởng bố thí, tăng trưởng pháp, tăng trưởng trí tuệ, tăng trưởng tài vật và lúa gạo, tăng trưởng đất ruộng, tăng trưởng các loài hai chân và bốn chân, tăng trưởng vợ con, tăng trưởng đầy tớ và lao công, tăng trưởng bà con, tăng trưởng bạn bè, tăng trưởng quyến thuộc?’<br>
+<span lang="pi" class="pali">
+‘kintime saddhāya vaḍḍheyyuṁ, sīlena vaḍḍheyyuṁ, sutena vaḍḍheyyuṁ, cāgena vaḍḍheyyuṁ, dhammena vaḍḍheyyuṁ, paññāya vaḍḍheyyuṁ, dhanadhaññena vaḍḍheyyuṁ, khettavatthunā vaḍḍheyyuṁ, dvipadacatuppadehi vaḍḍheyyuṁ, puttadārehi vaḍḍheyyuṁ, dāsakammakaraporisehi vaḍḍheyyuṁ, ñātīhi vaḍḍheyyuṁ, mittehi vaḍḍheyyuṁ, bandhavehi vaḍḍheyyun’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Với tác động, chất chứa, tích tụ, và tăng thịnh của nghiệp ấy, sau khi thân hoại mạng chung, được sanh cõi thiện thú, Thiên giới hay đời này.<br>
+<span lang="pi" class="pali">
+So tassa kammassa kaṭattā …pe…<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ngài tạ thế từ chỗ kia, sanh tại chỗ này, được ba tướng Ðại Trượng phu:<br>
+<span lang="pi" class="pali">
+so tato cuto itthattaṁ āgato samāno imāni tīṇi mahāpurisalakkhaṇāni paṭilabhati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Nửa thân trên như thân con sư tử, hai vai không có lõm khuyết xuống, và thân hình tròn đều.<br>
+<span lang="pi" class="pali">
+Sīhapubbaddhakāyo ca hoti citantaraṁso ca samavaṭṭakkhandho ca.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ngài với những tướng như thế này, nếu sống tại gia sẽ thành vị Chuyển luân Thánh vương. Làm vua được những gì?<br>
+<span lang="pi" class="pali">
+So tehi lakkhaṇehi samannāgato sace agāraṁ ajjhāvasati, rājā hoti cakkavattī …pe…rājā samāno kiṁ labhati?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ngài không bị thất bại và mất mát. Ngài không mất tài sản lúa gạo, ruộng đất, các loài hai chân bốn chân, vợ con, đầy tớ lao công, bạn bè, quyến thuộc. Ngài thành tựu tất cả, không thất bại một điều gì…Làm vua, vị ấy được như vậy…<br>
+<span lang="pi" class="pali">
+Aparihānadhammo hoti, na parihāyati dhanadhaññena khettavatthunā dvipadacatuppadehi puttadārehi dāsakammakaraporisehi ñātīhi mittehi bandhavehi, na parihāyati sabbasampattiyā. Rājā samāno idaṁ labhati …pe…<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Làm Phật, Ngài được những gì?<br>
+<span lang="pi" class="pali">
+buddho samāno kiṁ labhati?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ngài không bị thất bại và mất mát. Ngài không mất tín, giới, văn, thí xả và tuệ. Ngài thành tựu tất cả, không bị thất bại một điều gì.<br>
+<span lang="pi" class="pali">
+Aparihānadhammo hoti, na parihāyati saddhāya sīlena sutena cāgena paññāya, na parihāyati sabbasampattiyā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Làm Phật, Ngài được như vậy.”<br>
+<span lang="pi" class="pali">
+Buddho samāno idaṁ labhati”.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Thế Tôn thuyết giảng như vậy.<br>
+<span lang="pi" class="pali">
+Etamatthaṁ bhagavā avoca.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ở đây, lời nói này được nói lên:<br>
+<span lang="pi" class="pali">
+Tatthetaṁ vuccati:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Tín, giới, văn, trí tuệ,<br>
+<span lang="pi" class="pali">
+“Saddhāya sīlena sutena buddhiyā,<br>
+</span>
+Chỉ dạy không suy giảm;<br>
+<span lang="pi" class="pali">
+Cāgena dhammena bahūhi sādhuhi;<br>
+</span>
+Thí, pháp, nhiều thiện sự.<br>
+<span lang="pi" class="pali">
+Dhanena dhaññena ca khettavatthunā,<br>
+</span>
+Tài sản, lúa, ruộng đất,<br>
+<span lang="pi" class="pali">
+Puttehi dārehi catuppadehi ca.<br>
+</span>
+Vợ, con, loài bốn chân.<br>
+<span lang="pi" class="pali">
+Ñātīhi mittehi ca bandhavehi ca,<br>
+</span>
+Quyến thuộc, bạn, bà con,<br>
+<span lang="pi" class="pali">
+Balena vaṇṇena sukhena cūbhayaṁ;<br>
+</span>
+Sức mạnh, sắc, hạnh phúc’<br>
+<span lang="pi" class="pali">
+Kathaṁ na hāyeyyuṁ pareti icchati,<br>
+</span>
+Ngài ao ước mong cầu,<br>
+Hết thảy đều thành tựu.<br>
+<span lang="pi" class="pali">
+Atthassa middhī ca panābhikaṅkhati.<br>
+</span>
+Thân trên như sư tử,<br>
+<span lang="pi" class="pali">
+Sa sīhapubbaddhasusaṇṭhito ahu,<br>
+</span>
+Vai vuông tròn đều đặn.<br>
+<span lang="pi" class="pali">
+Samavaṭṭakhandho ca citantaraṁso;<br>
+</span>
+Nhờ hạnh xưa, không hư,<br>
+<span lang="pi" class="pali">
+Pubbe suciṇṇena katena kammunā,<br>
+</span>
+Hết thảy đều tăng trưởng.<br>
+<span lang="pi" class="pali">
+Ahāniyaṁ pubbanimittamassa taṁ.<br>
+</span>
+Sống đời ở tại gia<br>
+Tăng trưởng gạo, tài sản<br>
+<span lang="pi" class="pali">
+Gihīpi dhaññena dhanena vaḍḍhati,<br>
+</span>
+Vợ, con loài bốn chân;<br>
+<span lang="pi" class="pali">
+Puttehi dārehi catuppadehi ca;<br>
+</span>
+Nếu sống đời xuất gia,<br>
+Không gì không thể đạt;<br>
+<span lang="pi" class="pali">
+Akiñcano pabbajito anuttaraṁ,<br>
+</span>
+Chứng Bồ-đề vô thượng,<br>
+Không bao giờ tiêu diệt,<br>
+Pháp nhĩ là như vậy.”<br>
+<span lang="pi" class="pali">
+Pappoti bodhiṁ asahānadhammatan”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+20. Cảm Vị Nhạy Bén<br>
+<span lang="pi" class="pali">
+20. Rasaggasaggitālakkhaṇaṁ<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Này các Tỷ-kheo, trong bất cứ đời trước nào, hiện hữu nào, trú xứ nào, Như Lai đời trước làm Người.<br>
+<span lang="pi" class="pali">
+“Yampi, bhikkhave, tathāgato purimaṁ jātiṁ purimaṁ bhavaṁ purimaṁ niketaṁ pubbe manussabhūto samāno<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Không làm điều gì hại đến các loài hữu tình, hoặc bằng tay, bằng đá, bằng gậy, hay bằng đao.<br>
+<span lang="pi" class="pali">
+sattānaṁ aviheṭhakajātiko ahosi pāṇinā vā leḍḍunā vā daṇḍena vā satthena vā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Với tác động chất chứa, tích tụ và tăng thịnh của nghiệp ấy, sau khi thân hoại mạng chung, được sanh lên cõi thiện thú, Thiên giới, cõi đời này…<br>
+<span lang="pi" class="pali">
+So tassa kammassa kaṭattā upacitattā …pe…<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ngài tạ thế từ chỗ kia, sanh tại chỗ này được tướng Ðại Trượng phu này: cảm vị hết sức nhạy bén, khi vật gì chạm đầu ngọn lưỡi, những cảm giác được khởi lên tại cổ họng và truyền đi khắp nơi.<br>
+<span lang="pi" class="pali">
+so tato cuto itthattaṁ āgato samāno imaṁ mahāpurisalakkhaṇaṁ paṭilabhati, rasaggasaggī hoti, uddhaggāssa rasaharaṇīyo gīvāya jātā honti samābhivāhiniyo.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ngài đầy đủ với tướng này, nếu sống tại gia thì làm vị Chuyển luân Thánh vương. Làm vua được những gì?<br>
+<span lang="pi" class="pali">
+So tena lakkhaṇena samannāgato sace agāraṁ ajjhāvasati, rājā hoti cakkavattī …pe…rājā samāno kiṁ labhati?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Thiểu bệnh, thiểu não, tiêu hóa tốt đẹp, nhiệt độ thăng bằng, không lạnh quá, không nóng quá. Làm vua được như vậy.<br>
+<span lang="pi" class="pali">
+Appābādho hoti appātaṅko, samavepākiniyā gahaṇiyā samannāgato nātisītāya nāccuṇhāya. Rājā samāno idaṁ labhati …pe…<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Làm Phật được những gì?<br>
+<span lang="pi" class="pali">
+buddho samāno kiṁ labhati?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Thiểu bệnh, thiểu não, tiêu hóa tốt đẹp, nhiệt độ thăng bằng, không lạnh quá, không nóng quá, trung bình, có thể kham nhẫn, siêng năng. Làm Phật được như vậy.<br>
+<span lang="pi" class="pali">
+Appābādho hoti appātaṅko samavepākiniyā gahaṇiyā samannāgato nātisītāya nāccuṇhāya majjhimāya padhānakkhamāya. Buddho samāno idaṁ labhati”.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Thế Tôn thuyết giảng như vậy.<br>
+<span lang="pi" class="pali">
+Etamatthaṁ bhagavā avoca.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ở đây, lời này được nói lên:<br>
+<span lang="pi" class="pali">
+Tatthetaṁ vuccati:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Ngài không hại một ai,<br>
+Với tay, gậy, đá, gươm,<br>
+<span lang="pi" class="pali">
+“Na pāṇidaṇḍehi panātha leḍḍunā,<br>
+</span>
+Không sát sanh hại mạng.<br>
+<span lang="pi" class="pali">
+Satthena vā maraṇavadhena vā pana;<br>
+</span>
+Không trói, không dọa dạt,<br>
+<span lang="pi" class="pali">
+Ubbādhanāya paritajjanāya vā,<br>
+</span>
+Do vậy Ngài sanh thiên,<br>
+<span lang="pi" class="pali">
+Na heṭhayī janatamaheṭhako ahu.<br>
+</span>
+Hưởng quả báo an lạc,<br>
+Tái sanh tại nơi đây,<br>
+<span lang="pi" class="pali">
+Teneva so sugatimupecca modati,<br>
+</span>
+Có được sự hỷ lạc<br>
+Từ quả lành an vui,<br>
+<span lang="pi" class="pali">
+Sukhapphalaṁ kariya sukhāni vindati;<br>
+</span>
+Cảm vị rất nhạy bén,<br>
+Cổ họng khéo an trú,<br>
+<span lang="pi" class="pali">
+Samojasā rasaharaṇī susaṇṭhitā,<br>
+</span>
+Thượng vị nhạy truyền đi.<br>
+<span lang="pi" class="pali">
+Idhāgato labhati rasaggasaggitaṁ.<br>
+</span>
+Thiện xảo chiêm tướng gia,<br>
+Tuyên bố về Ngài rằng:<br>
+<span lang="pi" class="pali">
+Tenāhu naṁ atinipuṇā vicakkhaṇā,<br>
+</span>
+‘Người này sẽ được hưởng,<br>
+Nhiều hạnh phúc an lạc,<br>
+<span lang="pi" class="pali">
+Ayaṁ naro sukhabahulo bhavissati;<br>
+</span>
+Dầu tại gia xuất gia,<br>
+<span lang="pi" class="pali">
+Gihissa vā pabbajitassa vā puna,<br>
+</span>
+Hảo tướng thật rõ ràng.’”<br>
+<span lang="pi" class="pali">
+Taṁ lakkhaṇaṁ bhavati tadatthajotakan”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+21–22. Cặp Mắt Xanh Đậm<br>
+<span lang="pi" class="pali">
+21–22. Abhinīlanettagopakhumalakkhaṇāni<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Này các Tỷ-kheo, trong bất cứ đời trước nào, hiện hữu nào, trú xứ nào, Như Lai đời trước làm Người.<br>
+<span lang="pi" class="pali">
+“Yampi, bhikkhave, tathāgato purimaṁ jātiṁ purimaṁ bhavaṁ purimaṁ niketaṁ pubbe manussabhūto samāno<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Có thói quen không ngó liếc, không ngó xiên, không ngó trộm, nhưng với tâm chánh trực mở rộng, cao thượng, Ngài nhìn Ðại chúng với tâm từ bi.<br>
+<span lang="pi" class="pali">
+na ca visaṭaṁ, na ca visāci, na ca pana viceyya pekkhitā, ujuṁ tathā pasaṭamujumano, piyacakkhunā bahujanaṁ udikkhitā ahosi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Với tác động, chất chứa, tích tụ, tăng thịnh của nghiệp ấy, sau khi thân hoại mạng chung, được sanh lên cõi thiện thú, Thiên giới, cõi đời này…<br>
+<span lang="pi" class="pali">
+So tassa kammassa kaṭattā …pe…<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Sau khi tạ thế từ chỗ kia, Ngài sanh lại tại chỗ này với hai tướng Ðại Trượng phu:<br>
+<span lang="pi" class="pali">
+so tato cuto itthattaṁ āgato samāno imāni dve mahāpurisalakkhaṇāni paṭilabhati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Cặp mắt hết sức xanh và lông mi như con bò cái.<br>
+<span lang="pi" class="pali">
+Abhinīlanetto ca hoti gopakhumo ca.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ngài đầy đủ với những tướng này, nếu sống tại gia làm vị Chuyển luân Thánh vương. Làm vua được những gì?<br>
+<span lang="pi" class="pali">
+So tehi lakkhaṇehi samannāgato, sace agāraṁ ajjhāvasati, rājā hoti cakkavattī …pe…rājā samāno kiṁ labhati?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ðại chúng ưa nhìn Ngài. Các cư sĩ, Bà-la-môn, thị dân, thôn dân, tài chánh quan, tư pháp quan, vệ sĩ, các thủ môn quan, các đại thần, chư hầu, phú gia, vương tử đều hoan nghênh, tương kính Ngài. Làm vua được như vậy.<br>
+<span lang="pi" class="pali">
+Piyadassano hoti bahuno janassa, piyo hoti manāpo brāhmaṇagahapatikānaṁ negamajānapadānaṁ gaṇakamahāmattānaṁ anīkaṭṭhānaṁ dovārikānaṁ amaccānaṁ pārisajjānaṁ rājūnaṁ bhogiyānaṁ kumārānaṁ. Rājā samāno idaṁ labhati …pe…<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Làm Phật được những gì?<br>
+<span lang="pi" class="pali">
+buddho samāno kiṁ labhati?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ðại chúng ưa Ngài. Các Tỷ-kheo, Tỷ-kheo-ni, Nam cư sĩ, Nữ cư sĩ, chư Thiên, loài Người, A-tu-la, Long xà, Càn-thát-bà hoan nghênh và thương kính Ngài. Làm Phật được như vậy.<br>
+<span lang="pi" class="pali">
+Piyadassano hoti bahuno janassa, piyo hoti manāpo bhikkhūnaṁ bhikkhunīnaṁ upāsakānaṁ upāsikānaṁ devānaṁ manussānaṁ asurānaṁ nāgānaṁ gandhabbānaṁ. Buddho samāno idaṁ labhati”.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Thế Tôn thuyết giảng như vậy.<br>
+<span lang="pi" class="pali">
+Etamatthaṁ bhagavā avoca.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ở đây, lời nói này được nói lên:<br>
+<span lang="pi" class="pali">
+Tatthetaṁ vuccati:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Không ngó liếc, ngó xiên,<br>
+<span lang="pi" class="pali">
+“Na ca visaṭaṁ na ca visāci,<br>
+</span>
+Và cũng không ngó trộm,<br>
+<span lang="pi" class="pali">
+Na ca pana viceyyapekkhitā;<br>
+</span>
+Nhưng với tâm chánh trực,<br>
+Rộng mở và cao thượng,<br>
+<span lang="pi" class="pali">
+Ujuṁ tathā pasaṭamujumano,<br>
+</span>
+Ngài nhìn khắp Ðại chúng,<br>
+Với từ tâm của Ngài.<br>
+<span lang="pi" class="pali">
+Piyacakkhunā bahujanaṁ udikkhitā.<br>
+</span>
+Ở đây Ngài tận hưởng,<br>
+<span lang="pi" class="pali">
+Sugatīsu so phalavipākaṁ,<br>
+</span>
+Quả an lạc chư Thiên,<br>
+<span lang="pi" class="pali">
+Anubhavati tattha modati;<br>
+</span>
+Ở đây lông mi Ngài,<br>
+Như mi con bò cái,<br>
+<span lang="pi" class="pali">
+Idha ca pana bhavati gopakhumo,<br>
+</span>
+Cặp mắt hết sức xanh,<br>
+Ðẹp đẽ thật ưa nhìn.<br>
+<span lang="pi" class="pali">
+Abhinīlanettanayano sudassano.<br>
+</span>
+Chiêm tướng gia lão luyện,<br>
+<span lang="pi" class="pali">
+Abhiyogino ca nipuṇā,<br>
+</span>
+Tinh thông về hảo tướng,<br>
+<span lang="pi" class="pali">
+Bahū pana nimittakovidā;<br>
+</span>
+Ngài thành bậc Thiện nhân.<br>
+Với cặp mắt tế nhị,<br>
+<span lang="pi" class="pali">
+Sukhumanayanakusalā manujā,<br>
+</span>
+Ðược mọi người hoan nghênh,<br>
+Ưa thích ngắm nhìn Ngài.<br>
+<span lang="pi" class="pali">
+Piyadassanoti abhiniddisanti naṁ.<br>
+</span>
+Cư sĩ ưa nhìn Ngài,<br>
+<span lang="pi" class="pali">
+Piyadassano gihīpi santo ca,<br>
+</span>
+Ðược mọi người kính yêu.<br>
+<span lang="pi" class="pali">
+Bhavati bahujanapiyāyito;<br>
+</span>
+Tại gia hay Sa-môn,,<br>
+<span lang="pi" class="pali">
+Yadi ca na bhavati gihī samaṇo hoti,<br>
+</span>
+Ngài được người kính mến,<br>
+Như người đã cứu chữa,<br>
+Khổ sầu cho Ðại chúng.”<br>
+<span lang="pi" class="pali">
+Piyo bahūnaṁ sokanāsano”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+23. Nhục Kế Trên Đầu<br>
+<span lang="pi" class="pali">
+23. Uṇhīsasīsalakkhaṇaṁ<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Này các Tỷ-kheo, trong bất cứ đời trước nào, hiện hữu nào, trú xứ nào, Như Lai đời trước làm Người.<br>
+<span lang="pi" class="pali">
+“Yampi, bhikkhave, tathāgato purimaṁ jātiṁ purimaṁ bhavaṁ purimaṁ niketaṁ pubbe manussabhūto samāno<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Là vị lãnh đạo Ðại chúng về các thiện pháp, là vị tiền phong Ðại chúng về thiện hành thuộc thân, khẩu, ý, phân phát bố thí, thủ hộ giới luật, tham dự các lễ Bố-tát, hiếu kính cha mẹ, lễ kính Sa-môn, cung kính bậc trưởng thượng trong gia đình và về các thiện pháp đặc biệt khác.<br>
+<span lang="pi" class="pali">
+bahujanapubbaṅgamo ahosi kusalesu dhammesu bahujanapāmokkho kāyasucarite vacīsucarite manosucarite dānasaṁvibhāge sīlasamādāne uposathupavāse matteyyatāya petteyyatāya sāmaññatāya brahmaññatāya kule jeṭṭhāpacāyitāya aññataraññataresu ca adhikusalesu dhammesu.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Với sự tác động, chất chứa, tích tụ, tăng thịnh của nghiệp ấy, sau khi thân hoại mạng chung, được sanh lên cõi thiện thú, Thiên giới, cõi đời này…<br>
+<span lang="pi" class="pali">
+So tassa kammassa kaṭattā …pe…<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ngài sau khi tạ thế từ chỗ kia, sanh tại chỗ này với tướng Ðại Trượng phu là: có nhục kế trên đầu.<br>
+<span lang="pi" class="pali">
+so tato cuto itthattaṁ āgato samāno imaṁ mahāpurisalakkhaṇaṁ paṭilabhati—uṇhīsasīso hoti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ngài đầy đủ với tướng này, nếu sống tại gia, sẽ thành vị Chuyển luân Thánh vương. Làm vua, Ngài được những gì?<br>
+<span lang="pi" class="pali">
+So tena lakkhaṇena samannāgato sace agāraṁ ajjhāvasati, rājā hoti cakkavattī …pe…rājā samāno kiṁ labhati?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ngài được sự trung thành của Ðại chúng, các Cư sĩ, Bà-la-môn, thị dân, thôn dân, các tài chính quan, tư chánh quan, vệ sĩ, thủ môn quan, đại thần, phó vương, phú gia, các vương tử đều trung thành với Ngài. Làm vua, ngài được như vậy.<br>
+<span lang="pi" class="pali">
+Mahāssa jano anvāyiko hoti, brāhmaṇagahapatikā negamajānapadā gaṇakamahāmattā anīkaṭṭhā dovārikā amaccā pārisajjā rājāno bhogiyā kumārā. Rājā samāno idaṁ labhati …pe…<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Làm Phật Ngài được những gì?<br>
+<span lang="pi" class="pali">
+buddho samāno kiṁ labhati?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ngài được sự trung thành của Ðại chúng. Các vị Tỷ-kheo, Tỷ-kheo-ni, Nam cư sĩ, Nữ cư sĩ, chư Thiên, loài Người, các hàng A-tu-la, các loài Long xà, Càn-thát-bà đều trung thành với Ngài. Làm Phật, Ngài được như vậy.<br>
+<span lang="pi" class="pali">
+Mahāssa jano anvāyiko hoti, bhikkhū bhikkhuniyo upāsakā upāsikāyo devā manussā asurā nāgā gandhabbā. Buddho samāno idaṁ labhati”.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Thế Tôn thuyết giảng như vậy.<br>
+<span lang="pi" class="pali">
+Etamatthaṁ bhagavā avoca.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ở đây, lời nói này được nói lên:<br>
+<span lang="pi" class="pali">
+Tatthetaṁ vuccati:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Lãnh đạo các chánh hạnh,<br>
+<span lang="pi" class="pali">
+“Pubbaṅgamo sucaritesu ahu,<br>
+</span>
+Hoan hỷ trong pháp lành,<br>
+<span lang="pi" class="pali">
+Dhammesu dhammacariyābhirato;<br>
+</span>
+Ðược Ðại chúng trung thành,<br>
+<span lang="pi" class="pali">
+Anvāyiko bahujanassa ahu,<br>
+</span>
+Hưởng công đức chư Thiên.<br>
+<span lang="pi" class="pali">
+Saggesu vedayittha puññaphalaṁ.<br>
+</span>
+Hưởng xong các thiện quả,<br>
+<span lang="pi" class="pali">
+Veditvā so sucaritassa phalaṁ,<br>
+</span>
+Sanh đây được nhục kế.<br>
+<span lang="pi" class="pali">
+Uṇhīsasīsattamidhajjhagamā;<br>
+</span>
+Chiêm tướng gia thiện xảo,<br>
+Ðồng tuyên bố về Ngài:<br>
+<span lang="pi" class="pali">
+Byākaṁsu byañjananimittadharā,<br>
+</span>
+‘Ngài lãnh đạo Ðại chúng,<br>
+<span lang="pi" class="pali">
+Pubbaṅgamo bahujanaṁ hessati.<br>
+</span>
+Những người trong tiền kiếp,<br>
+<span lang="pi" class="pali">
+Paṭibhogiyā manujesu idha,<br>
+</span>
+Ðược tiền của hiến dâng,<br>
+Mọi người phục vụ Ngài.<br>
+<span lang="pi" class="pali">
+Pubbeva tassa abhiharanti tadā;<br>
+</span>
+Nếu là Sát-đế-ly,<br>
+Ngài trị vì quốc độ,<br>
+<span lang="pi" class="pali">
+Yadi khattiyo bhavati bhūmipati,<br>
+</span>
+Ðược đa số quần chúng,<br>
+Thành tâm phục vụ Ngài.<br>
+<span lang="pi" class="pali">
+Paṭihārakaṁ bahujane labhati.<br>
+</span>
+Nếu Ngài sống xuất gia,<br>
+<span lang="pi" class="pali">
+Atha cepi pabbajati so manujo,<br>
+</span>
+Thời vị Thượng nhân này,<br>
+Tinh thông và thiện xảo,<br>
+Ðối với các thiện pháp.<br>
+<span lang="pi" class="pali">
+Dhammesu hoti paguṇo visavī;<br>
+</span>
+Hoan hỷ với đức hạnh<br>
+Quần chúng nhiệt tâm theo,<br>
+<span lang="pi" class="pali">
+Tassānusāsaniguṇābhirato,<br>
+</span>
+Mọi người quy y Ngài’”<br>
+<span lang="pi" class="pali">
+Anvāyiko bahujano bhavatī”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+24–25. Mỗi Lỗ Chân Lông Một Sợi Lông Và Tướng Bạch Hào Sanh<br>
+<span lang="pi" class="pali">
+24–25. Ekekalomatāuṇṇālakkhaṇāni<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Này các Tỷ-kheo, trong bất cứ đời trước nào, hiện hữu nào, trú xứ nào, Như Lai đời trước làm Người.<br>
+<span lang="pi" class="pali">
+“Yampi, bhikkhave, tathāgato purimaṁ jātiṁ purimaṁ bhavaṁ purimaṁ niketaṁ pubbe manussabhūto samāno<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Từ bỏ nói láo, tránh xa nói láo, nói lời chân thật, y chỉ chơn thật, chắc chắn đáng tin cậy, không thất hứa một ai.<br>
+<span lang="pi" class="pali">
+musāvādaṁ pahāya musāvādā paṭivirato ahosi, saccavādī saccasandho theto paccayiko avisaṁvādako lokassa.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Với tác động, chất chứa, tích tụ, tăng thịnh của nghiệp ấy…<br>
+<span lang="pi" class="pali">
+So tassa kammassa kaṭattā upacitattā …pe…<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ngài sau khi tạ thế từ chỗ kia, sanh tại chỗ này với hai tướng Ðại Trượng phu:<br>
+<span lang="pi" class="pali">
+so tato cuto itthattaṁ āgato samāno imāni dve mahāpurisalakkhaṇāni paṭilabhati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Mỗi lỗ chân lông là mỗi một sợi lông mọc lên và giữa hai lông mày có tướng bạch hào sanh, màu trắng, mềm mại giống như bông.<br>
+<span lang="pi" class="pali">
+Ekekalomo ca hoti, uṇṇā ca bhamukantare jātā hoti odātā mudutūlasannibhā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ngài đầy đủ những tướng này, nếu sống tại gia sẽ thành vị Chuyển luân Thánh vương. Làm vua được những gì?<br>
+<span lang="pi" class="pali">
+So tehi lakkhaṇehi samannāgato, sace agāraṁ ajjhāvasati, rājā hoti cakkavattī …pe…rājā samāno kiṁ labhati?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ðại chúng tuân theo ý muốn của Ngài. Các cư sĩ, Bà-la-môn, thị dân, thôn dân, các tài chánh quan, tư chánh quan, các vệ sĩ, thủ môn quan, đại thần, phó vương, phú gia, vương tử đều tuân theo ý muốn của Ngài. Làm vua, Ngài được như vậy.<br>
+<span lang="pi" class="pali">
+Mahāssa jano upavattati, brāhmaṇagahapatikā negamajānapadā gaṇakamahāmattā anīkaṭṭhā dovārikā amaccā pārisajjā rājāno bhogiyā kumārā. Rājā samāno idaṁ labhati …pe…<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Làm Phật, Ngài được những gì?<br>
+<span lang="pi" class="pali">
+buddho samāno kiṁ labhati?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ðại chúng đều tuân theo ý muốn của Ngài. Các vị Tỷ-kheo, Tỷ-kheo-ni, Nam cư sĩ, Nữ cư sĩ, Thiên, Nhân, A-tu-la, Long xà, Càn-thát-bà tuân theo ý muốn của Ngài. Làm Phật Ngài được như vậy.<br>
+<span lang="pi" class="pali">
+Mahāssa jano upavattati, bhikkhū bhikkhuniyo upāsakā upāsikāyo devā manussā asurā nāgā gandhabbā. Buddho samāno idaṁ labhati”.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Thế Tôn thuyết giảng như vậy.<br>
+<span lang="pi" class="pali">
+Etamatthaṁ bhagavā avoca.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ở đây, lời này được nói lên:<br>
+<span lang="pi" class="pali">
+Tatthetaṁ vuccati:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Trong những đời quá khứ,<br>
+Ngài giữ hạnh chân thật,<br>
+<span lang="pi" class="pali">
+“Saccappaṭiñño purimāsu jātisu,<br>
+</span>
+Không nói lời hai lưỡi,<br>
+Tránh lời nói hư vọng.<br>
+<span lang="pi" class="pali">
+Advejjhavāco alikaṁ vivajjayi;<br>
+</span>
+Ðối với chung tất cả,<br>
+Không bội ước một ai,<br>
+<span lang="pi" class="pali">
+Na so visaṁvādayitāpi kassaci,<br>
+</span>
+Ngài sống trong hoan hỷ,<br>
+Chơn chánh và như thật.<br>
+<span lang="pi" class="pali">
+Bhūtena tacchena tathena bhāsayi.<br>
+</span>
+Ngài có tướng bạch hào,<br>
+<span lang="pi" class="pali">
+Setā susukkā mudutūlasannibhā,<br>
+</span>
+Mọc giữa hai chân mày,<br>
+<span lang="pi" class="pali">
+Uṇṇā sujātā bhamukantare ahu;<br>
+</span>
+Không hai lông một chỗ.<br>
+<span lang="pi" class="pali">
+Na lomakūpesu duve ajāyisuṁ,<br>
+</span>
+Mỗi chỗ một sợi lông.<br>
+<span lang="pi" class="pali">
+Ekekalomūpacitaṅgavā ahu.<br>
+</span>
+Khi nhiều vị chiêm tướng,<br>
+<span lang="pi" class="pali">
+Taṁ lakkhaṇaññū bahavo samāgatā,<br>
+</span>
+Những vị tinh thông này,<br>
+Ðồng tuyên bố về ngài:<br>
+<span lang="pi" class="pali">
+Byākaṁsu uppādanimittakovidā;<br>
+</span>
+‘Mười bạch hào hảo tướng,<br>
+Và lông mày khéo mọc,<br>
+<span lang="pi" class="pali">
+Uṇṇā ca lomā ca yathā susaṇṭhitā,<br>
+</span>
+Nên Ngài được mọi người,<br>
+Vâng theo ý muốn Ngài.<br>
+<span lang="pi" class="pali">
+Upavattatī īdisakaṁ bahujjano.<br>
+</span>
+Là Cư sĩ, Ðại chúng,<br>
+Tuân theo ý muốn Ngài,<br>
+<span lang="pi" class="pali">
+Gihimpi santaṁ upavattatī jano,<br>
+</span>
+Vì hành động quá khứ,<br>
+Quá rõ ràng cao thượng.<br>
+<span lang="pi" class="pali">
+Bahu puratthāpakatena kammunā;<br>
+</span>
+Bỏ tất cả, xuất gia,<br>
+Ngài được cả Ðại chúng,<br>
+<span lang="pi" class="pali">
+Akiñcanaṁ pabbajitaṁ anuttaraṁ,<br>
+</span>
+Tuân theo bậc Giác Ngộ,<br>
+Tối vô thượng, tịch tịnh.’”<br>
+<span lang="pi" class="pali">
+Buddhampi santaṁ upavattati jano”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+26–27. Bốn Mươi Chiếc Răng<br>
+<span lang="pi" class="pali">
+26–27. Cattālīsaaviraḷadantalakkhaṇāni<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Này các Tỷ-kheo, trong bất cứ đời trước nào, hiện hữu nào, trú xứ nào, Như Lai đời trước làm Người.<br>
+<span lang="pi" class="pali">
+“Yampi, bhikkhave tathāgato purimaṁ jātiṁ purimaṁ bhavaṁ purimaṁ niketaṁ pubbe manussabhūto samāno<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Từ bỏ nói hai lưỡi, tránh xa nói hai lưỡi, nghe điều gì chỗ này không đi nói chỗ kia để sanh chia rẽ ở những người này, nghe điều gì ở chỗ kia không đi nói với những người này để sanh chia rẽ ở những người kia. Ngài sống hòa hợp những kẻ ly gián, tăng trưởng những kẻ đã hòa hợp, hoan hỷ trong hòa hợp, nói lời đưa đến hòa hợp.<br>
+<span lang="pi" class="pali">
+pisuṇaṁ vācaṁ pahāya pisuṇāya vācāya paṭivirato ahosi. Ito sutvā na amutra akkhātā imesaṁ bhedāya, amutra vā sutvā na imesaṁ akkhātā amūsaṁ bhedāya, iti bhinnānaṁ vā sandhātā, sahitānaṁ vā anuppadātā, samaggārāmo samaggarato samagganandī samaggakaraṇiṁ vācaṁ bhāsitā ahosi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Do tác động, chất chứa, tích tụ, tăng thịnh của nghiệp ấy, sau khi thân hoại mạng chung, được sanh lên cõi thiện thú, Thiên giới, cõi đời này…<br>
+<span lang="pi" class="pali">
+So tassa kammassa kaṭattā …pe…<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ngài sau khi tạ thế từ chỗ kia sanh lại tại chỗ này với hai tướng Ðại Trượng phu: có bốn mươi răng, và giữa răng không có kẻ hở.<br>
+<span lang="pi" class="pali">
+so tato cuto itthattaṁ āgato samāno imāni dve mahāpurisalakkhaṇāni paṭilabhati: Cattālīsadanto ca hoti aviraḷadanto ca.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ngài đầy đủ các tướng này, nếu sống tại gia sẽ là vị Chuyển luân Thánh vương. Làm vua, được những gì?<br>
+<span lang="pi" class="pali">
+So tehi lakkhaṇehi samannāgato sace agāraṁ ajjhāvasati, rājā hoti cakkavattī …pe… rājā samāno kiṁ labhati?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Chúng tùy tùng của Ngài không có chia rẽ. Các vị cư sĩ, Bà-la-môn, thị dân, thôn dân, tài chánh quan, tư chánh quan, vệ sĩ, thủ môn quan, các đại thần, phó vương, phú gia, các vương tử đều không chia rẽ. Làm vua, Ngài được như vậy…<br>
+<span lang="pi" class="pali">
+Abhejjapariso hoti, abhejjāssa honti parisā, brāhmaṇagahapatikā negamajānapadā gaṇakamahāmattā anīkaṭṭhā dovārikā amaccā pārisajjā rājāno bhogiyā kumārā. Rājā samāno idaṁ labhati …<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Làm Phật, được những gì?<br>
+<span lang="pi" class="pali">
+buddho samāno kiṁ labhati?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Các người tùy tùng không có chia rẽ. Các vị Tỷ-kheo, Tỷ-kheo-ni, Nam cư sĩ, Nữ cư sĩ, chư Thiên, loài Người, các vị A-tu-la, các Long xà, các Càn-thát-bà đều không chia rẽ. Làm Phật được như vậy.<br>
+<span lang="pi" class="pali">
+Abhejjapariso hoti, abhejjāssa honti parisā, bhikkhū bhikkhuniyo upāsakā upāsikāyo devā manussā asurā nāgā gandhabbā. Buddho samāno idaṁ labhati”.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Thế Tôn thuyết giảng như vậy.<br>
+<span lang="pi" class="pali">
+Etamatthaṁ bhagavā avoca.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ở đây, lời nói này được nói lên:<br>
+<span lang="pi" class="pali">
+Tatthetaṁ vuccati:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Không nói lời hai lưỡi,<br>
+<span lang="pi" class="pali">
+“Vebhūtiyaṁ sahitabhedakāriṁ,<br>
+</span>
+Hay nói lời chia rẽ;<br>
+<span lang="pi" class="pali">
+Bhedappavaḍḍhanavivādakāriṁ;<br>
+</span>
+Không phát sanh đấu tranh,<br>
+<span lang="pi" class="pali">
+Kalahappavaḍḍhanaākiccakāriṁ,<br>
+</span>
+Không chia rẽ bằng hữu;<br>
+<span lang="pi" class="pali">
+Sahitānaṁ bhedajananiṁ na bhaṇi.<br>
+</span>
+Ngài nói lời tử tế<br>
+Nuôi dưỡng sự hoà ái,<br>
+<span lang="pi" class="pali">
+Avivādavaḍḍhanakariṁ sugiraṁ,<br>
+</span>
+Lời phát sanh gắn kết,<br>
+Giữa những người chia rẽ.<br>
+<span lang="pi" class="pali">
+Bhinnānusandhijananiṁ abhaṇi;<br>
+</span>
+Những lời có khả năng,<br>
+Trừ tranh chấp mọi người,<br>
+<span lang="pi" class="pali">
+Kalahaṁ janassa panudī samaṅgī,<br>
+</span>
+Ngài hoan hỷ thoải mái,<br>
+Trong đoàn kết hòa hợp.<br>
+<span lang="pi" class="pali">
+Sahitehi nandati pamodati ca.<br>
+</span>
+Do nghiệp báo dị thục,<br>
+Ðược sanh cõi thiện thú,<br>
+<span lang="pi" class="pali">
+Sugatīsu so phalavipākaṁ,<br>
+</span>
+Ngài hoan hỷ thọ hưởng,<br>
+Phước báo cõi chư Thiên.<br>
+<span lang="pi" class="pali">
+Anubhavati tattha modati;<br>
+</span>
+Ở đây răng của Ngài,<br>
+Ðều đặn, không kẻ hở,<br>
+<span lang="pi" class="pali">
+Dantā idha honti aviraḷā sahitā,<br>
+</span>
+Có bốn mươi tất cả,<br>
+Mọc trong miệng khéo bày.<br>
+<span lang="pi" class="pali">
+Caturo dasassa mukhajā susaṇṭhitā.<br>
+</span>
+Nếu sanh Sát-đế-ly,<br>
+Ngài trị vì quốc độ,<br>
+<span lang="pi" class="pali">
+Yadi khattiyo bhavati bhūmipati,<br>
+</span>
+Dân chúng Ngài trị vì,<br>
+Là dân chúng thuần lương.<br>
+<span lang="pi" class="pali">
+Avibhediyāssa parisā bhavati;<br>
+</span>
+Sống làm bậc Sa-môn,<br>
+Thanh tịnh không cấu uế,<br>
+<span lang="pi" class="pali">
+Samaṇo ca hoti virajo vimalo,<br>
+</span>
+Dân chúng tháp tùng Ngài,<br>
+Kỷ cương, không dao động.”<br>
+<span lang="pi" class="pali">
+Parisāssa hoti anugatā acalā”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+28–29. Lưỡi Dài Và Giọng Phạm Âm<br>
+<span lang="pi" class="pali">
+28–29. Pahūtajivhābrahmassaralakkhaṇāni<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Này các Tỷ-kheo, trong bất cứ đời trước nào, hiện hữu nào, trú xứ nào, Như Lai đời trước làm Người.<br>
+<span lang="pi" class="pali">
+“Yampi, bhikkhave, tathāgato purimaṁ jātiṁ purimaṁ bhavaṁ purimaṁ niketaṁ pubbe manussabhūto samāno<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ngài từ bỏ nói lời độc ác, tránh nói lời độc ác, nói những lời không lỗi lầm, đẹp tai, dễ thương, thông cảm đến tâm, tao nhã, đẹp lòng nhiều người, vui lòng nhiều người. Ngài nói những lời như vậy.<br>
+<span lang="pi" class="pali">
+pharusaṁ vācaṁ pahāya pharusāya vācāya paṭivirato ahosi. Yā sā vācā nelā kaṇṇasukhā pemanīyā hadayaṅgamā porī bahujanakantā bahujanamanāpā, tathārūpiṁ vācaṁ bhāsitā ahosi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Với tác động, chất chứa, tích tụ, tăng thịnh của nghiệp ấy, sau khi thân hoại mạng chung, được sanh lên cõi thiện thú, Thiên giới, cõi đời này…<br>
+<span lang="pi" class="pali">
+So tassa kammassa kaṭattā upacitattā …pe…<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ngài sau khi tạ thế từ chỗ kia sanh lại tại chỗ này với hai tướng Ðại Trượng phu: lưỡi dài và giọng Phạm Âm dịu ngọt như tiếng chim Karavika (Ca-lăng-tần-già).<br>
+<span lang="pi" class="pali">
+so tato cuto itthattaṁ āgato samāno imāni dve mahāpurisalakkhaṇāni paṭilabhati. Pahūtajivho ca hoti brahmassaro ca karavīkabhāṇī.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ngài đầy đủ các tướng ấy, nếu sống tại gia làm vị Chuyển luân Thánh vương. Làm vua được những gì?<br>
+<span lang="pi" class="pali">
+So tehi lakkhaṇehi samannāgato sace agāraṁ ajjhāvasati, rājā hoti cakkavattī …pe…rājā samāno kiṁ labhati?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Lời nói được chấp nhận. Các vị cư sĩ, Bà-la-môn, thị dân, thôn dân, tài chánh quan, tư chánh quan, võ sĩ, thủ môn quan, đại thần, phó vương, phú gia, các vương tử đều chấp nhận lời nói của Ngài. Làm vua Ngài được như vậy…<br>
+<span lang="pi" class="pali">
+Ādeyyavāco hoti, ādiyantissa vacanaṁ brāhmaṇagahapatikā negamajānapadā gaṇakamahāmattā anīkaṭṭhā dovārikā amaccā pārisajjā rājāno bhogiyā kumārā. Rājā samāno idaṁ labhati …pe…<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Làm Phật được những gì?<br>
+<span lang="pi" class="pali">
+buddho samāno kiṁ labhati?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Lời nói Ngài được chấp nhận. Các vị Tỷ-kheo, Tỷ-kheo-ni, Nam cư sĩ, Nữ cư sĩ, chư Thiên, loài Người, A-tu-la, Long xà, Càn-thát-bà chấp nhận lời của Ngài. Làm Phật được như vậy.<br>
+<span lang="pi" class="pali">
+Ādeyyavāco hoti, ādiyantissa vacanaṁ bhikkhū bhikkhuniyo upāsakā upāsikāyo devā manussā asurā nāgā gandhabbā. Buddho samāno idaṁ labhati”.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Thế Tôn thuyết giảng như vậy.<br>
+<span lang="pi" class="pali">
+Etamatthaṁ bhagavā avoca.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ở đây, lời nói này được nói lên:<br>
+<span lang="pi" class="pali">
+Tatthetaṁ vuccati:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Không nói lời độc ác,<br>
+<span lang="pi" class="pali">
+“Akkosabhaṇḍanavihesakāriṁ,<br>
+</span>
+Xúc phạm hay gây gổ;<br>
+<span lang="pi" class="pali">
+Ubbādhikaṁ bahujanappamaddanaṁ;<br>
+</span>
+Não hại, hiếp Ðại chúng.<br>
+<span lang="pi" class="pali">
+Abāḷhaṁ giraṁ so na bhaṇi pharusaṁ,<br>
+</span>
+Ngài nói lời ngọt ngào,<br>
+Hòa dịu cùng thân ái,<br>
+<span lang="pi" class="pali">
+Madhuraṁ bhaṇi susaṁhitaṁ sakhilaṁ.<br>
+</span>
+Lời nói đẹp ý lòng,<br>
+Ði sâu vào nội tâm.<br>
+<span lang="pi" class="pali">
+Manaso piyā hadayagāminiyo,<br>
+</span>
+Lời nói khiến tai nghe,<br>
+Cảm thấy lòng an lạc,<br>
+<span lang="pi" class="pali">
+Vācā so erayati kaṇṇasukhā;<br>
+</span>
+Ngài thọ hưởng quả báo,<br>
+Do khẩu hành tốt đẹp,<br>
+<span lang="pi" class="pali">
+Vācāsuciṇṇaphalamanubhavi,<br>
+</span>
+Hưởng công đức quả báo,<br>
+Tại cảnh giới chư Thiên.<br>
+<span lang="pi" class="pali">
+Saggesu vedayatha puññaphalaṁ.<br>
+</span>
+Sau khi hưởng quả lành,<br>
+Do thiện hành đem lại,<br>
+<span lang="pi" class="pali">
+Veditvā so sucaritassa phalaṁ,<br>
+</span>
+Ngài tái sanh nơi đây,<br>
+Với phạm âm thù thắng,<br>
+<span lang="pi" class="pali">
+Brahmassarattamidhamajjhagamā;<br>
+</span>
+Ðược tướng lưỡi tốt đẹp,<br>
+Vừa rộng lại vừa dài.<br>
+<span lang="pi" class="pali">
+Jivhāssa hoti vipulā puthulā,<br>
+</span>
+Lời nói Ngài phát ra,<br>
+Ðược mọi người chấp nhận.<br>
+<span lang="pi" class="pali">
+Ādeyyavākyavacano bhavati.<br>
+</span>
+Nếu làm vị cư sĩ,<br>
+Lời nói được thành công.<br>
+<span lang="pi" class="pali">
+Gihinopi ijjhati yathā bhaṇato,<br>
+</span>
+Nếu Ngài sống xuất gia,<br>
+<span lang="pi" class="pali">
+Atha ce pabbajati so manujo;<br>
+</span>
+Lời nói Ngài càng nhiều,<br>
+<span lang="pi" class="pali">
+Ādiyantissa vacanaṁ janatā,<br>
+</span>
+Lời nói được chấp nhận,<br>
+Càng nhiều người tin tưởng.”<br>
+<span lang="pi" class="pali">
+Bahuno bahuṁ subhaṇitaṁ bhaṇato”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+30. Hàm Sư Tử<br>
+<span lang="pi" class="pali">
+30. Sīhahanulakkhaṇaṁ<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Này các Tỷ-kheo, trong bất kỳ đời trước nào, thiện hữu nào, trú xứ nào, Như Lai đời trước làm Người.<br>
+<span lang="pi" class="pali">
+“Yampi, bhikkhave, tathāgato purimaṁ jātiṁ purimaṁ bhavaṁ purimaṁ niketaṁ pubbe manussabhūto samāno<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Từ bỏ lời nói ỷ ngữ, tránh xa lời nói ỷ ngữ, nói đúng thời, nói những lời chân thật, nói những lời có ý nghĩa, nói những lời về Chánh pháp, nói những lời về Luật, nói những lời đáng được gìn giữ, những lời hợp thời, thuận lý, có mạch lạc, hệ thống, có ích lợi.<br>
+<span lang="pi" class="pali">
+samphappalāpaṁ pahāya samphappalāpā paṭivirato ahosi kālavādī bhūtavādī atthavādī dhammavādī vinayavādī, nidhānavatiṁ vācaṁ bhāsitā ahosi kālena sāpadesaṁ pariyantavatiṁ atthasaṁhitaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Với tác động, chất chứa, tích tụ, tăng thịnh của nghiệp ấy, sau khi thân hoại mạng chung được sanh lên cõi thiện thú, Thiên giới, cõi đời này…<br>
+<span lang="pi" class="pali">
+So tassa kammassa kaṭattā …pe…<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ngài sau khi tạ thế từ chỗ kia, sanh lại tại chỗ này được tướng Ðại Trượng phu này là hàm như hàm con sư tử.<br>
+<span lang="pi" class="pali">
+so tato cuto itthattaṁ āgato samāno imaṁ mahāpurisalakkhaṇaṁ paṭilabhati, sīhahanu hoti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ngài đầy đủ với tướng này, nếu sống tại gia thì làm vị Chuyển luân Thánh vương. Làm vua được những gì?<br>
+<span lang="pi" class="pali">
+So tena lakkhaṇena samannāgato sace agāraṁ ajjhāvasati, rājā hoti cakkavattī …pe…rājā samāno kiṁ labhati?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ngài không bao giờ bị ai chinh phục, kẻ thù hay kẻ địch, thuộc loại người nào. Làm vua, Ngài được như vậy.<br>
+<span lang="pi" class="pali">
+Appadhaṁsiyo hoti kenaci manussabhūtena paccatthikena paccāmittena. Rājā samāno idaṁ labhati …pe…<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Làm Phật, được những gì?<br>
+<span lang="pi" class="pali">
+buddho samāno kiṁ labhati?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ngài không bị ai chinh phục bởi nội địch hay ngoại địch, nội oán hay ngoại oán, bởi tham, sân hay si, bởi vị Sa-môn, Bà-la-môn, chư Thiên, Ma vương, Phạm thiên hay bất cứ một ai ở đời. Làm Phật, Ngài được như vậy.<br>
+<span lang="pi" class="pali">
+Appadhaṁsiyo hoti abbhantarehi vā bāhirehi vā paccatthikehi paccāmittehi, rāgena vā dosena vā mohena vā samaṇena vā brāhmaṇena vā devena vā mārena vā brahmunā vā kenaci vā lokasmiṁ. Buddho samāno idaṁ labhati”.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Thế Tôn thuyết giảng như vậy.<br>
+<span lang="pi" class="pali">
+Etamatthaṁ bhagavā avoca.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ở đây, lời nói này được nói lên:<br>
+<span lang="pi" class="pali">
+Tatthetaṁ vuccati:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Không nói lời ỷ ngữ,<br>
+Ngu độn và dao động,<br>
+<span lang="pi" class="pali">
+“Na samphappalāpaṁ na muddhataṁ,<br>
+</span>
+Chỉ nói lời có lợi.<br>
+Thứ tự và mạch lạc.<br>
+<span lang="pi" class="pali">
+Avikiṇṇavacanabyappatho ahosi;<br>
+</span>
+Từ bỏ lời có hại,<br>
+<span lang="pi" class="pali">
+Ahitamapi ca apanudi,<br>
+</span>
+Những lời đem an lạc,<br>
+Cho tất cả Ðại chúng.<br>
+<span lang="pi" class="pali">
+Hitamapi ca bahujanasukhañca abhaṇi.<br>
+</span>
+Làm vậy Ngài tạ thế,<br>
+Ðược sanh lên Thiên giới,<br>
+<span lang="pi" class="pali">
+Taṁ katvā ito cuto divamupapajji,<br>
+</span>
+Và hưởng thọ quả báo,<br>
+Do thiện hạnh đem lại.<br>
+<span lang="pi" class="pali">
+Sukataphalavipākamanubhosi;<br>
+</span>
+Sau khi Ngài tạ thế,<br>
+Ðược sanh lại nơi đây,<br>
+<span lang="pi" class="pali">
+Caviya punaridhāgato samāno,<br>
+</span>
+Có quai hàm tốt đẹp.<br>
+<span lang="pi" class="pali">
+Dvidugamavaratarahanuttamalattha.<br>
+</span>
+Vị vua khó đánh bại.<br>
+<span lang="pi" class="pali">
+Rājā hoti suduppadhaṁsiyo,<br>
+</span>
+Chinh phục cả nhân loại,<br>
+Thống lãnh khắp nhân gian,<br>
+<span lang="pi" class="pali">
+Manujindo manujādhipati mahānubhāvo;<br>
+</span>
+Ngài ngang sức ngang tài,<br>
+Thống lãnh tam thập tam.<br>
+<span lang="pi" class="pali">
+Tidivapuravarasamo bhavati,<br>
+</span>
+Như Ðế-thích ngự trị,<br>
+Thành trì cõi chư Thiên,<br>
+<span lang="pi" class="pali">
+Suravarataroriva indo.<br>
+</span>
+Nhiếp phục Càn-thát-bà,<br>
+A-tu-la cùng dạ xoa.<br>
+<span lang="pi" class="pali">
+Gandhabbāsurayakkharakkhasebhi,<br>
+</span>
+Không ai nhiếp thắng Ngài.<br>
+<span lang="pi" class="pali">
+Surehi na hi bhavati suppadhaṁsiyo;<br>
+</span>
+Ngài sẽ là như vậy,<br>
+<span lang="pi" class="pali">
+Tathatto yadi bhavati tathāvidho,<br>
+</span>
+Cùng khắp cả bốn phương,<br>
+Bốn duy và thượng hạ.”<br>
+<span lang="pi" class="pali">
+Idha disā ca paṭidisā ca vidisā cā”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+31–32. Răng Đều Đặn Sáng Chói<br>
+<span lang="pi" class="pali">
+31–32. Samadantasusukkadāṭhālakkhaṇāni<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Này các Tỷ-kheo, trong bất cứ đời trước nào, hiện hữu nào, trú xứ nào, Như Lai đời trước làm Người.<br>
+<span lang="pi" class="pali">
+“Yampi, bhikkhave, tathāgato purimaṁ jātiṁ purimaṁ bhavaṁ purimaṁ niketaṁ pubbe manussabhūto samāno<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Từ bỏ tà mạng, nuôi  sống theo chánh mạng, tránh xa các sự gian lận bằng cân tiền bạc đo lường, hối lộ, gian trá, lừa đảo, không làm tổn thương, sát hại, câu thúc, bức đoạt, trộm cắp, cướp phá.<br>
+<span lang="pi" class="pali">
+micchājīvaṁ pahāya sammāājīvena jīvikaṁ kappesi, tulākūṭakaṁsakūṭamānakūṭaukkoṭanavañcananikatisāciyogachedanavadhabandhanaviparāmosaālopasahasākārā paṭivirato ahosi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Với tác động, chất chứa, tích tụ, tăng thịnh của nghiệp ấy, sau khi thân hoại mạng chung được sanh lên cõi thiện thú, Thiên giới, cõi đời này…<br>
+<span lang="pi" class="pali">
+So tassa kammassa kaṭattā upacitattā ussannattā vipulattā kāyassa bhedā paraṁ maraṇā sugatiṁ saggaṁ lokaṁ upapajjati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ở đó, Ngài vượt qua các vị chư thiên khác về: tuổi thọ, sắc đẹp, hạnh phúc, danh xưng, quyền lực, sắc, thanh, hương, vị và xúc.<br>
+<span lang="pi" class="pali">
+So tattha aññe deve dasahi ṭhānehi adhigaṇhāti dibbena āyunā dibbena vaṇṇena dibbena sukhena dibbena yasena dibbena ādhipateyyena dibbehi rūpehi dibbehi saddehi dibbehi gandhehi dibbehi rasehi dibbehi phoṭṭhabbehi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Sau khi tạ thế từ chỗ kia, sanh lại tại chỗ này, được hai tướng Ðại Trượng phu này là các răng đều đặn và sáng chói.<br>
+<span lang="pi" class="pali">
+So tato cuto itthattaṁ āgato samāno imāni dve mahāpurisalakkhaṇāni paṭilabhati, samadanto ca hoti susukkadāṭho ca.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ngài đầy đủ những tướng này, nếu sống tại gia thành vị Chuyển luân Thánh vương, dùng Chánh pháp trị nước, là vị pháp vương bình định bốn phương, đem lại an toàn cho quốc độ, đầy đủ bảy món báu.<br>
+<span lang="pi" class="pali">
+So tehi lakkhaṇehi samannāgato sace agāraṁ ajjhāvasati, rājā hoti cakkavattī dhammiko dhammarājā cāturanto vijitāvī janapadatthāvariyappatto sattaratanasamannāgato.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Bảy món báu trở thành vật sở hữu của vị ấy, tức là: xe báu, voi báu, ngựa báu, ngọc báu, nữ báu, gia chủ báu, và thứ bảy là tướng quân báu.<br>
+<span lang="pi" class="pali">
+Tassimāni satta ratanāni bhavanti, seyyathidaṁ—cakkaratanaṁ hatthiratanaṁ assaratanaṁ maṇiratanaṁ itthiratanaṁ gahapatiratanaṁ pariṇāyakaratanameva sattamaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vị này có hơn một ngàn thái tử, những bậc anh hùng, chiến thắng, thân thể dõng kiện, nhiếp phục địch quân.<br>
+<span lang="pi" class="pali">
+Parosahassaṁ kho panassa puttā bhavanti sūrā vīraṅgarūpā parasenappamaddanā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vị này chinh phục quả đất này cho đến hải biên, và trị nước với Chánh pháp, không dùng trượng, không dùng đao.<br>
+<span lang="pi" class="pali">
+So imaṁ pathaviṁ sāgarapariyantaṁ akhilamanimittamakaṇṭakaṁ iddhaṁ phītaṁ khemaṁ sivaṁ nirabbudaṁ adaṇḍena asatthena dhammena abhivijiya ajjhāvasati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Làm vua được những gì?<br>
+<span lang="pi" class="pali">
+Rājā samāno kiṁ labhati?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Tùy tùng của Ngài được tâm thanh tịnh. Các vị tài chánh quan, tư chánh quan, vệ sĩ, thủ môn quan, các đại thần, các phó vương, phú gia, các vương tử đều có tâm thanh tịnh. Làm vua Ngài được như vậy.<br>
+<span lang="pi" class="pali">
+Suciparivāro hoti sucissa honti parivārā brāhmaṇagahapatikā negamajānapadā gaṇakamahāmattā anīkaṭṭhā dovārikā amaccā pārisajjā rājāno bhogiyā kumārā. Rājā samāno idaṁ labhati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Nếu Ngài xuất gia, từ bỏ gia đình, Ngài là vị A-la-hán, Chánh Ðẳng Giác, vén lui màn vô minh che đời. Làm Phật được những gì?<br>
+<span lang="pi" class="pali">
+Sace kho pana agārasmā anagāriyaṁ pabbajati, arahaṁ hoti sammāsambuddho loke vivaṭṭacchado. Buddho samāno kiṁ labhati?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Các tùy tùng của Ngài được tâm thanh tịnh. Các vị Tỷ-kheo, Tỷ-kheo-ni, Nam cư sĩ, Nữ cư sĩ, chư Thiên, loài Người, các A-tu-la, các Long xà, Càn-thát-bà được tâm thanh tịnh. Làm Phật, Ngài được như vậy.<br>
+<span lang="pi" class="pali">
+Suciparivāro hoti, sucissa honti parivārā, bhikkhū bhikkhuniyo upāsakā upāsikāyo devā manussā asurā nāgā gandhabbā. Buddho samāno idaṁ labhati”.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Thế Tôn thuyết giảng như vậy.<br>
+<span lang="pi" class="pali">
+Etamatthaṁ bhagavā avoca.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ở đây, lời nói này được nói lên:<br>
+<span lang="pi" class="pali">
+Tatthetaṁ vuccati:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Từ bỏ sống tà mạng,<br>
+<span lang="pi" class="pali">
+“Micchājīvañca avassaji samena vuttiṁ,<br>
+</span>
+Sống thanh tịnh đúng Pháp,<br>
+<span lang="pi" class="pali">
+Sucinā so janayittha dhammikena;<br>
+</span>
+Từ bỏ hạnh có hại,<br>
+<span lang="pi" class="pali">
+Ahitamapi ca apanudi,<br>
+</span>
+Chỉ làm hạnh có lợi.<br>
+Các hạnh đem an lạc,<br>
+Cho tất cả chúng sanh,<br>
+<span lang="pi" class="pali">
+Hitamapi ca bahujanasukhañca acari.<br>
+</span>
+Làm Người Ngài hưởng quả,<br>
+An lạc ở Thiên giới.<br>
+<span lang="pi" class="pali">
+Sagge vedayati naro sukhapphalāni,<br>
+</span>
+Do vậy đời sống Ngài,<br>
+Hưởng hỷ lạc, hoan lạc,<br>
+<span lang="pi" class="pali">
+Karitvā nipuṇebhi vidūhi sabbhi;<br>
+</span>
+Như vị chúa tối tôn,<br>
+Ở kinh thành chư Thiên.<br>
+<span lang="pi" class="pali">
+Vaṇṇitāni tidivapuravarasamo,<br>
+</span>
+Tận hưởng mọi hạnh phúc.<br>
+<span lang="pi" class="pali">
+Abhiramati ratikhiḍḍāsamaṅgī.<br>
+</span>
+Từ đó xuống làm Người,<br>
+<span lang="pi" class="pali">
+Laddhāna mānusakaṁ bhavaṁ tato,<br>
+</span>
+Nhờ kết quả thiện hạnh,<br>
+<span lang="pi" class="pali">
+Cavitvāna sukataphalavipākaṁ;<br>
+</span>
+Hàm răng Ngài đều đặn,<br>
+<span lang="pi" class="pali">
+Sesakena paṭilabhati lapanajaṁ,<br>
+</span>
+Thanh tịnh và trong sáng.<br>
+<span lang="pi" class="pali">
+Samamapi sucisusukkaṁ.<br>
+</span>
+Nhiều vị chiêm tướng giỏi,<br>
+<span lang="pi" class="pali">
+Taṁ veyyañjanikā samāgatā bahavo,<br>
+</span>
+Ðến tụ họp tuyên bố:<br>
+<span lang="pi" class="pali">
+Byākaṁsu nipuṇasammatā manujā;<br>
+</span>
+‘Hai hàm răng thật đều,<br>
+Trong sáng và thanh tịnh,<br>
+<span lang="pi" class="pali">
+Sucijanaparivāragaṇo bhavati,<br>
+</span>
+Tùy tùng đều thanh tịnh,<br>
+<span lang="pi" class="pali">
+Dijasamasukkasucisobhanadanto.<br>
+</span>
+Làm vua, có quần chúng,<br>
+Hết thảy đều y vậy.<br>
+<span lang="pi" class="pali">
+Rañño hoti bahujano,<br>
+</span>
+Trị vì mọi quốc độ.<br>
+<span lang="pi" class="pali">
+Suciparivāro mahatiṁ mahiṁ anusāsato;<br>
+</span>
+Quần chúng sẽ không bị,<br>
+Áp bức bởi sức mạnh<br>
+<span lang="pi" class="pali">
+Pasayha na ca janapadatudanaṁ,<br>
+</span>
+Họ sống đời mong cầu,<br>
+Hạnh phúc cho mọi người.<br>
+<span lang="pi" class="pali">
+Hitamapi ca bahujanasukhañca caranti.<br>
+</span>
+Nếu Ngài sống xuất gia,<br>
+Từ bỏ các ác pháp,<br>
+<span lang="pi" class="pali">
+Atha ce pabbajati bhavati vipāpo,<br>
+</span>
+Ái nhiễm được gột sạch,<br>
+Vô mình được vén lên,<br>
+<span lang="pi" class="pali">
+Samaṇo samitarajo vivaṭṭacchado;<br>
+</span>
+Lo âu cùng mệt mỏi,<br>
+Thảy đều được trừ diệt,<br>
+<span lang="pi" class="pali">
+Vigatadarathakilamatho,<br>
+</span>
+Thấy đời này, đời sau,<br>
+<span lang="pi" class="pali">
+Imamapi ca paramapi ca passati lokaṁ.<br>
+</span>
+Nhiều cư sĩ, xuất gia,<br>
+<span lang="pi" class="pali">
+Tassovādakarā bahugihī ca pabbajitā ca,<br>
+</span>
+Hành trì theo Ngài dạy,<br>
+Tránh xa đời bất tịnh,<br>
+Lỗi lầm và độc ác.<br>
+<span lang="pi" class="pali">
+Asuciṁ garahitaṁ dhunanti pāpaṁ;<br>
+</span>
+Tùy tùng đồ chúng Ngài,<br>
+Ðều là bậc thanh tịnh,<br>
+<span lang="pi" class="pali">
+Sa hi sucibhi parivuto bhavati,<br>
+</span>
+Trừ được mọi uế chướng,<br>
+Tội quá cùng phiền não.’”<br>
+<span lang="pi" class="pali">
+Malakhilakalikilese panudehī”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Thế Tôn thuyết dạy như vậy.<br>
+<span lang="pi" class="pali">
+Idamavoca bhagavā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Các tỳ kheo, hoan hỷ, tín thọ lời dạy của Thế Tôn.<br>
+<span lang="pi" class="pali">
+Attamanā te bhikkhū bhagavato bhāsitaṁ abhinandunti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Dứt bài kinh tướng.<br>
+<span lang="pi" class="pali">
+Lakkhaṇasuttaṁ niṭṭhitaṁ sattamaṁ.<br>
+</span>
+</p>
+
+
+<!-- COPY CONTENT SUTTA Ở ĐÂY -->
+
+
+
+<br>
+<p><p style="text-align: right;font-style: italic;">Hoà Thượng Thích Minh Châu dịch Việt</span></p>
+
+
+
+</section>  <!-- End English and Pali -->
+
+
+
+
+
+</section>  <!-- End English and Pali -->
+
+
+
+
+
+</section>  <!-- End English and Pali -->
+<div id="nextprev"><a id="previous-sutta" href="./dn29.html#content"></a><a id="next-sutta" href="./dn31.html#content"></a></div>
+</div>  <!--End Content -->
+</div>  <!-- End Page -->
+
+
+
+
+
+
+<footer>
+					 <!-- End bottom links -->
+</footer>
+
+
+ 
+ <!-- Scripts -->
+
+ <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      if (typeof enablePaliLookup === "function") {
+        enablePaliLookup();
+      } else {
+        console.error("enablePaliLookup is not defined");
+      }
+    });
+  </script>
+
+ <script>
+ // Script to open and close sidebar
+ 	function w3_open() {
+ 	document.getElementById("mySidebar").style.display = "block";
+ 	}
+ 		function w3_close() {
+ 		document.getElementById("mySidebar").style.display = "none";
+ 	}
+ </script>
+ <script>
+ 		var app = document.getElementsByTagName("BODY")[0];
+ 		if (localStorage.lightMode == "dark") {
+ 			app.setAttribute("light-mode", "dark");
+ 	}
+ </script>
+ 
+ <script>
+ 		function toggle_light_mode() {
+ 			var app = document.getElementsByTagName("BODY")[0];
+ 				if (localStorage.lightMode == "dark") {
+ 			localStorage.lightMode = "light";
+ 			app.setAttribute("light-mode", "light");
+ 		} else {
+ 					localStorage.lightMode = "dark";
+ 					app.setAttribute("light-mode", "dark");
+ 	}
+ 		}
+ 
+ 		window.addEventListener("storage", function () {
+ 			if (localStorage.lightMode == "dark") {
+ 				app.setAttribute("light-mode", "dark");
+ 				} else {
+ 				app.setAttribute("light-mode", "light");
+ 		}
+ 		}, false);
+ 
+ </script>
+ <script src="../js/footer.js"></script><script src="../js/dpd_deconstructor.js"></script><script src="../js/dpd_ebts.js"></script><script src="../js/dpd_i2h.js"></script>
+ <script src="/sw.js"></script>
+ </body>
+ </html>

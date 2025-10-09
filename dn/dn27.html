@@ -1,0 +1,2257 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+ 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+ 	<link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+ 	<meta name="viewport" content="width=device-width, initial-scale=1">
+		<!-- Loading manifest -->
+	<link rel="manifest" href="../manifest.json">
+ 	<!-- Loading main and menu stylesheets -->
+ 	<link rel="stylesheet" href="../css/w3.css">
+ 	<link rel="stylesheet" href="../css/css.css">
+ 	<link rel="stylesheet" href="../css/menu.css">
+ 	<script src="../js/jquery-1.10.2.min.js"></script>
+ 	<script src="../js/controlpanel.js"></script>
+ 	<script src="../js/mousetrap.min.js"></script>
+    <script src="../js/pali-lookup-standalone.js"></script>
+
+ <script src="../js/suttaFiles.js"></script>
+<script>
+ // Script to open random Sutta
+ function openRandomSutta() {
+  const randomIndex = Math.floor(Math.random() * suttaFiles.length);
+  const selectedFile = suttaFiles[randomIndex];
+
+  // Get root path of your site 
+  const currentPath = location.pathname;
+  const rootPath = currentPath.split("/").slice(0, -2).join("/") + "/";
+
+  // Redirect to the correct file
+  window.location.href = rootPath + selectedFile;
+}
+</script>
+
+
+</head>
+ <body class="container">
+ <div class="header-background">
+ <!-- Header -->
+ <div class="w3-header w3-content w3-padding w3-left-align bwcontainer">
+ 	<div class="centered">
+ 		<button class="light-mode-button" aria-label="Bật Chế Độ Sáng" onclick="toggle_light_mode()">
+ 			<span></span>
+ 			<span></span>
+ 		</button>
+ 		<span class="box-lbl">Sáng/Tối</span>
+ 	</div> <!-- Centered -->
+ 		<a href="../home/index.html" id="bwlogo"><img src="../images/headerlogo.png" alt="Logo Lời Của Đức Phật" class="w3-image"></a>
+ 		<div class="w3-bar bwcontainer">
+ 			<div id="searchlinks">
+ 			<a href="../home/visearch.html"><span class="w3-bar-item"><i class="fa fa-search"></i>&nbsp;Tìm Tiếng Việt</span></a>
+ 			<a href="../home/palisearch.html"><span class="w3-bar-item"><i class="fa fa-search"></i>&nbsp;Tìm Tiếng Pali</span></a>
+ 			</div><!-- End Searchlinks div -->
+ 			<div class="help"><span><a href="../home/help.html"><img src="../images/help_icon.png" title="Trợ Giúp" alt="Help"></a></span></div>
+ 		</div> <!-- End w3-bar bwcontainer --> 	</div> <!-- End w3-header w3-content w3-padding w3-left-align bwcontainer -->
+ </div> <!-- End header-background -->
+ <!-- Top menu -->
+
+ <div class="w3-main w3-white bwcontainer2">
+ 	<div class="w3-button w3-padding-8 w3-left w3-hide-large" onclick="w3_open()">☰</div>
+ 		<div id="navbar" class="w3-hide-small w3-hide-medium bwcontainer3">
+ 			<ul id="css3menu0">
+ 				<li class="topfirst" id="home"><a href="../home/index.html" class="w3-hide-small">Trang Chủ</a></li>
+  				<li class="topmenu" id="dn"><a href="../dn/dn.html" class="pressed w3-hide-small">Trường Bộ Kinh</a></li>
+ 				<li class="topmenu" id="mn"><a href="../mn/mn.html" class="w3-hide-small">Trung Bộ Kinh</a></li>
+ 				<li class="topmenu" id="sn"><a href="../sn/sn.html" class="w3-hide-small"><i class="fa fa-caret-down"></i>&nbsp;Tương Ưng Bộ Kinh</a>
+ 					<ul>
+ 						<li><a href="../sn/sn01.html" class="w3-hide-small">Tập I - Thiên Có Kệ</a></li>
+ 						<li><a href="../sn/sn02.html" class="w3-hide-small">Tập II - Thiên Nhân Duyên</a></li>
+ 						<li><a href="../sn/sn03.html" class="w3-hide-small">Tập III - Thiên Uẩn</a></li>
+ 						<li><a href="../sn/sn04.html" class="w3-hide-small">Tập IV - Thiên Sáu Xứ</a></li>
+ 						<li><a href="../sn/sn05.html" class="w3-hide-small">Tập V - Thiên Ðại Phẩm</a></li>
+ 					</ul>
+ 				<li class="topmenu" id="an"><a href="../an/an.html" class="w3-hide-small"><i class="fa fa-caret-down"></i>&nbsp;Tăng Chi Bộ Kinh</a>
+ 					<ul>
+ 						<li><a href="../an/an1.html" class="w3-hide-small">Chương Một Pháp</a></li>
+ 						<li><a href="../an/an2.html" class="w3-hide-small">Chương Hai Pháp</a></li>
+ 						<li><a href="../an/an3.html" class="w3-hide-small">Chương Ba Pháp</a></li>
+ 						<li><a href="../an/an4.html" class="w3-hide-small">Chương Bốn Pháp</a></li>
+ 						<li><a href="../an/an5.html" class="w3-hide-small">Chương Năm Pháp</a></li>
+ 						<li><a href="../an/an6.html" class="w3-hide-small">Chương Sáu Pháp</a></li>
+ 						<li><a href="../an/an7.html" class="w3-hide-small">Chương Bảy Pháp</a></li>
+ 						<li><a href="../an/an8.html" class="w3-hide-small">Chương Tám Pháp</a></li>
+ 						<li><a href="../an/an9.html" class="w3-hide-small">Chương Chín Pháp</a></li>
+ 						<li><a href="../an/an10.html" class="w3-hide-small">Chương Mười Pháp</a></li>
+ 						<li><a href="../an/an11.html" class="w3-hide-small">Chương Mười Một Pháp</a></li>
+ 					</ul>
+ 				</li>
+ 				<li class="topmenu" id="kn"><a href="../kn/kn.html" class="w3-hide-small"><i class="fa fa-caret-down"></i>&nbsp;Tiểu Bộ Kinh</a>
+ 					<ul>
+ 						<li><a href="../kp/kp.html" class="w3-hide-small">Kinh Tiểu Tụng</a></li>
+ 						<li><a href="../dhp/dhp.html" class="w3-hide-small">Kinh Pháp Cú</a></li>
+ 						<li><a href="../snp/snp.html" class="w3-hide-small">Kinh Tập</a></li>
+ 						<li><a href="../ud/ud.html" class="w3-hide-small">Kinh Phật Tự Thuyết</a></li>
+ 						<li><a href="../it/it.html" class="w3-hide-small">Kinh Phật Thuyết Như Vậy</a></li>
+ 						<li><a href="../tha/tha.html" class="w3-hide-small">Trưởng Lão Tăng Kệ</a></li>
+ 						<li><a href="../thi/thi.html" class="w3-hide-small">Trưởng Lão Ni Kệ</a></li>
+ 					</ul>
+ 				</li>
+				<li class="toplast" id="rd"><a href="../rd/rd.html" class="w3-hide-small"></i>Kinh Ngẫu Nhiên Theo Nhóm</a>
+ 					</ul>
+ 				</li>
+ 			</ul>
+ 			</div>
+ 		</div> <!--navbar-->
+
+<!-- Sidebar (hidden by default) -->
+ <nav class="w3-sidebar w3-bar-block w3-card w3-border w3-top w3-animate-left w3-hide-large" id="mySidebar">
+ 	<a href="javascript:void(0)" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-times fa-2x red-color"></i>&nbsp;&nbsp;&nbsp;Close</a><!-- Hides the sidebar when clicked -->
+ 		<div class="w3-bar-block w3-white">
+ 			<a href="../home/index.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-home fa-lg"></i>&nbsp;&nbsp;&nbsp;Home</a>
+ 			<a href="../guide/guide.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Guide</a>
+ 			<a href="../dn/dn.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Trường Bộ Kinh</a>
+ 			<a href="../mn/mn.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Trung Bộ Kinh</a>
+ 			<a href="../sn/sn.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Tương Ưng Bộ Kinh</a>
+ 			<a href="../an/an.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Tăng Chi Bộ Kinh
+ 			<a href="../kn/kn.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Tiểu Bộ Kinh</a>
+			<a href="../rd/rd.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>Kinh Ngẫu Nhiên Theo Nhóm</a>
+ 		</div>
+ </nav>
+ 
+ 
+ 
+   <!-- !PAGE CONTENT! --> 
+<div class="w3-main w3-content w3-padding w3-left-align bwcontainer4">
+<div id="content">
+<h2>Dīgha Nikāya – Trường Bộ Kinh</h2>
+<h5><span style="font-style: italic;">Hoà Thượng Thích Minh Châu dịch Việt</span></h5>
+
+</div>
+
+<br>
+ 	<title>         Trường Bộ 27          </title>
+
+
+<p lang="vi" class="vi"; style="text-align: center">
+Trường Bộ 27<br>
+<span lang="pi" class="pali">
+Dīgha Nikāya 27<br>
+</span>
+</p>
+
+<p lang="vi" class="vi"; style="text-align: center">
+Kinh Khởi Thế Nhân Bổn<br>
+<span lang="pi" class="pali">
+Aggaññasutta<br>
+</span>
+</p>
+
+
+<p lang="vi" class="vi">
+Như vầy tôi nghe:<br>
+<span lang="pi" class="pali">
+Evaṁ me sutaṁ—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Một thời Thế Tôn trú tại Sāvatthi (Xá-vệ), Pubbārāma (Thành Tín Viên lâm), ở lầu của Migāramātu (Lộc Mẫu Giảng đường).<br>
+<span lang="pi" class="pali">
+ekaṁ samayaṁ bhagavā sāvatthiyaṁ viharati pubbārāme migāramātupāsāde.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Lúc bấy giờ, Vāseṭṭha và Bhāradvāja sống giữa các vị Tỷ kheo và muốn trở thành Tỷ kheo.<br>
+<span lang="pi" class="pali">
+Tena kho pana samayena vāseṭṭhabhāradvājā bhikkhūsu parivasanti bhikkhubhāvaṁ ākaṅkhamānā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Thế Tôn vào buổi chiều, từ thiền tịnh khởi dậy, bước xuống khỏi lầu, đi qua lại giữa trời, dưới bóng ngôi lầu.<br>
+<span lang="pi" class="pali">
+Atha kho bhagavā sāyanhasamayaṁ paṭisallānā vuṭṭhito pāsādā orohitvā pāsādapacchāyāyaṁ abbhokāse caṅkamati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vāseṭṭha thấy Thế Tôn vào buổi chiều, từ thiền tịnh khởi dậy, bước xuống khỏi ngôi lầu, đi qua lại giữa trời, dưới bóng ngôi lầu.<br>
+<span lang="pi" class="pali">
+Addasā kho vāseṭṭho bhagavantaṁ sāyanhasamayaṁ paṭisallānā vuṭṭhitaṁ pāsādā orohitvā pāsādapacchāyāyaṁ abbhokāse caṅkamantaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Thấy vậy Vāseṭṭha nói với Bhāradvāja:<br>
+<span lang="pi" class="pali">
+Disvāna bhāradvājaṁ āmantesi:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Này bạn Bhāradvāja, Thế Tôn vào buổi chiều, từ thiền tịnh khởi dậy, bước xuống khỏi lầu, đi qua lại giữa trời, dưới bóng ngôi lầu.<br>
+<span lang="pi" class="pali">
+“ayaṁ, āvuso bhāradvāja, bhagavā sāyanhasamayaṁ paṭisallānā vuṭṭhito pāsādā orohitvā pāsādapacchāyāyaṁ abbhokāse caṅkamati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này bạn Bhāradvāja, chúng ta hãy đến yết kiến Thế Tôn.<br>
+<span lang="pi" class="pali">
+Āyāmāvuso bhāradvāja, yena bhagavā tenupasaṅkamissāma;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Rất có thể chúng ta được nghe một thời pháp từ Thế Tôn.”<br>
+<span lang="pi" class="pali">
+appeva nāma labheyyāma bhagavato santikā dhammiṁ kathaṁ savanāyā”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Thưa vâng, Hiền giả! Bhāradvāja vâng theo lời Vāseṭṭha.<br>
+<span lang="pi" class="pali">
+“Evamāvuso”ti kho bhāradvājo vāseṭṭhassa paccassosi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Rồi cả Vāseṭṭha và Bhāradvāja cùng đến gần Thế Tôn, khi đến xong đảnh lễ Ngài và đi theo sau lưng Thế Tôn, khi Ngài đang đi qua đi lại.<br>
+<span lang="pi" class="pali">
+Atha kho vāseṭṭhabhāradvājā yena bhagavā tenupasaṅkamiṁsu; upasaṅkamitvā bhagavantaṁ abhivādetvā bhagavantaṁ caṅkamantaṁ anucaṅkamiṁsu.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Rồi Thế Tôn nói với Vāseṭṭha:<br>
+<span lang="pi" class="pali">
+Atha kho bhagavā vāseṭṭhaṁ āmantesi:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Này Vāseṭṭha, Ngươi sanh trưởng là Bà-la-môn và thuộc gia tộc Bà-la-môn, xuất gia từ bỏ gia đình, sống không gia đình từ gia tộc Bà-la-môn. Này Vāseṭṭha, người Bà-la-môn có chỉ trích Ngươi, phỉ báng Ngươi chăng?”<br>
+<span lang="pi" class="pali">
+“tumhe khvattha, vāseṭṭha, brāhmaṇajaccā brāhmaṇakulīnā brāhmaṇakulā agārasmā anagāriyaṁ pabbajitā, kacci vo, vāseṭṭha, brāhmaṇā na akkosanti na paribhāsantī”ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Bạch Thế Tôn, các vị Bà-la-môn thật có chỉ trích chúng con, phỉ báng chúng con, với những lời phỉ báng thật chí tình, phỉ báng thật toàn diện, chớ không phải không toàn diện.”<br>
+<span lang="pi" class="pali">
+“Taggha no, bhante, brāhmaṇā akkosanti paribhāsanti attarūpāya paribhāsāya paripuṇṇāya, no aparipuṇṇāyā”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Này Vāseṭṭha, các vị Bà-la-môn dùng lời lẽ như thế nào để chỉ trích các Ngươi, phỉ báng các Ngươi, với những lời phỉ báng thật chí tình, phỉ báng thật toàn diện, chớ không phải không toàn diện?”<br>
+<span lang="pi" class="pali">
+“Yathā kathaṁ pana vo, vāseṭṭha, brāhmaṇā akkosanti paribhāsanti attarūpāya paribhāsāya paripuṇṇāya, no aparipuṇṇāyā”ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Bạch Thế Tôn, các vị Bà-la-môn đã nói như sau:<br>
+<span lang="pi" class="pali">
+“Brāhmaṇā, bhante, evamāhaṁsu:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Bà-la-môn là giai cấp tối thượng, giai cấp khác là hạ liệt.<br>
+<span lang="pi" class="pali">
+‘brāhmaṇova seṭṭho vaṇṇo, hīnā aññe vaṇṇā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Chỉ có giai cấp Bà-la-môn là da trắng, giai cấp khác là da đen.<br>
+<span lang="pi" class="pali">
+Brāhmaṇova sukko vaṇṇo, kaṇhā aññe vaṇṇā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Chỉ có Bà-la-môn là thuần túy, các giai cấp phi Bà-la-môn không phải như vậy.<br>
+<span lang="pi" class="pali">
+Brāhmaṇāva sujjhanti, no abrāhmaṇā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Chỉ có Bà-la-môn mới là con chính tông của Phạm thiên, sanh từ miệng Phạm thiên, do Phạm thiên sanh, do Phạm thiên tạo ra, là con cháu thừa tự của Phạm thiên.<br>
+<span lang="pi" class="pali">
+Brāhmaṇāva brahmuno puttā orasā mukhato jātā brahmajā brahmanimmitā brahmadāyādā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Các Ngươi đã từ bỏ giai cấp tối thượng, cúi mình vào giai cấp hạ tiện – giai cấp các Sa môn trọc đầu, đê tiện, đen đủi, giòng giống thuộc bàn chân.<br>
+<span lang="pi" class="pali">
+Te tumhe seṭṭhaṁ vaṇṇaṁ hitvā hīnamattha vaṇṇaṁ ajjhupagatā, yadidaṁ muṇḍake samaṇake ibbhe kaṇhe bandhupādāpacce.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Làm vậy thật là không tốt, làm vậy thật là không hợp, khi các Ngươi từ bỏ giai cấp tối thượng, cúi mình vào giai cấp hạ tiện, giai cấp Bà-la-môn trọc đầu, đê tiện, đen đủi, giòng giống thuộc bàn chân”.<br>
+<span lang="pi" class="pali">
+Tayidaṁ na sādhu, tayidaṁ nappatirūpaṁ, yaṁ tumhe seṭṭhaṁ vaṇṇaṁ hitvā hīnamattha vaṇṇaṁ ajjhupagatā yadidaṁ muṇḍake samaṇake ibbhe kaṇhe bandhupādāpacce’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Bạch Thế Tôn, như vậy các vị Bà-la-môn chỉ trích chúng con, phỉ báng chúng con, với những lời phỉ báng thật chí tình, phỉ báng thật toàn diện, chớ không phải không toàn diện.”<br>
+<span lang="pi" class="pali">
+Evaṁ kho no, bhante, brāhmaṇā akkosanti paribhāsanti attarūpāya paribhāsāya paripuṇṇāya, no aparipuṇṇāyā”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Vāseṭṭha, các người Bà-la-môn thật đã quên quá khứ khi họ nói:<br>
+<span lang="pi" class="pali">
+“Taggha vo, vāseṭṭha, brāhmaṇā porāṇaṁ assarantā evamāhaṁsu:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Bà-la-môn là giai cấp tối thượng, giai cấp khác là hạ tiện.<br>
+<span lang="pi" class="pali">
+‘brāhmaṇova seṭṭho vaṇṇo, hīnā aññe vaṇṇā;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Chỉ có giai cấp Bà-la-môn là da trắng, giai cấp khác là da đen.<br>
+<span lang="pi" class="pali">
+brāhmaṇova sukko vaṇṇo, kaṇhā aññe vaṇṇā;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Chỉ có Bà-la-môn là thuần túy, các giai cấp phi Bà-la-môn không phải như vậy.<br>
+<span lang="pi" class="pali">
+brāhmaṇāva sujjhanti, no abrāhmaṇā;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Chỉ có Bà-la-môn mới là con chính tông của Phạm thiên, sanh từ miệng Phạm thiên, do Phạm thiên sanh, do Phạm thiên tạo ra, là con cháu thừa tự của Phạm thiên”.<br>
+<span lang="pi" class="pali">
+brāhmaṇāva brahmuno puttā orasā mukhato jātā brahmajā brahmanimmitā brahmadāyādā’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Vāseṭṭha, các nữ Bà-la-môn, vợ của các Bà-la-môn được thấy là có kinh nguyệt, có mang thai, có sanh con, có cho con bú.<br>
+<span lang="pi" class="pali">
+Dissanti kho pana, vāseṭṭha, brāhmaṇānaṁ brāhmaṇiyo utuniyopi gabbhiniyopi vijāyamānāpi pāyamānāpi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Và những Bà-la-môn ấy chính do thai sanh, lại nói rằng:<br>
+<span lang="pi" class="pali">
+Te ca brāhmaṇā yonijāva samānā evamāhaṁsu:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Bà-la-môn là giai cấp tối thượng, giai cấp khác là hạ tiện.<br>
+<span lang="pi" class="pali">
+‘brāhmaṇova seṭṭho vaṇṇo, hīnā aññe vaṇṇā;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Chỉ có giai cấp Bà-la-môn là da trắng, giai cấp khác là da đen.<br>
+<span lang="pi" class="pali">
+brāhmaṇova sukko vaṇṇo, kaṇhā aññe vaṇṇā;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Chỉ có Bà-la-môn là thuần túy, các giai cấp phi Bà-la-môn không phải như vậy.<br>
+<span lang="pi" class="pali">
+brāhmaṇāva sujjhanti, no abrāhmaṇā;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Chỉ có Bà-la-môn mới là con chính tông của Phạm thiên, sanh từ miệng Phạm thiên, do Phạm thiên sanh, do Phạm thiên tạo ra, là con cháu thừa tự của Phạm thiên”.<br>
+<span lang="pi" class="pali">
+brāhmaṇāva brahmuno puttā orasā mukhato jātā brahmajā brahmanimmitā brahmadāyādā’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Họ xuyên tạc các Bà-la-môn, nói sai sự thật và tạo nhiều ác nghiệp.<br>
+<span lang="pi" class="pali">
+Te brahmānañceva abbhācikkhanti, musā ca bhāsanti, bahuñca apuññaṁ pasavanti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+1. Phân chia bốn giai cấp<br>
+<span lang="pi" class="pali">
+1. Catuvaṇṇasuddhi<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Vāseṭṭha, có bốn giai cấp:<br>
+<span lang="pi" class="pali">
+Cattārome, vāseṭṭha, vaṇṇā—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Sát đế lỵ, Bà-la-môn, Phệ xá và Sudda (Thủ-đà-la).<br>
+<span lang="pi" class="pali">
+khattiyā, brāhmaṇā, vessā, suddā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Vāseṭṭha, có người Sát đế lỵ sát sanh, lấy của không cho, có tà hạnh, nói láo, nói hai lưỡi, nói ác khẩu, nói lời phù phiếm, có tâm tham, có tâm sân, có tà kiến.<br>
+<span lang="pi" class="pali">
+Khattiyopi kho, vāseṭṭha, idhekacco pāṇātipātī hoti adinnādāyī kāmesumicchācārī musāvādī pisuṇavāco pharusavāco samphappalāpī abhijjhālu byāpannacitto micchādiṭṭhī.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Vāseṭṭha, những pháp ấy là bất thiện và được gọi là bất thiện; những pháp ấy là có tội và được gọi là có tội; những pháp ấy không nên hành trì và được gọi là các pháp không nên hành trì; những pháp ấy không xứng Thánh pháp và được gọi là không xứng Thánh pháp; những pháp ấy là hắc pháp và hắc báo; những pháp ấy bị người có trí quở trách. Ở đây, những pháp ấy được tìm thấy trong một số người Sát đế lỵ.<br>
+<span lang="pi" class="pali">
+Iti kho, vāseṭṭha, yeme dhammā akusalā akusalasaṅkhātā sāvajjā sāvajjasaṅkhātā asevitabbā asevitabbasaṅkhātā naalamariyā naalamariyasaṅkhātā kaṇhā kaṇhavipākā viññugarahitā, khattiyepi te idhekacce sandissanti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Vāseṭṭha, có người Bà-la-môn…<br>
+<span lang="pi" class="pali">
+Brāhmaṇopi kho, vāseṭṭha …pe…<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Vāseṭṭha, có người Phệ xá…<br>
+<span lang="pi" class="pali">
+vessopi kho, vāseṭṭha …pe…<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Vāseṭṭha, có người Thủ đà la sát sanh, lấy của không cho, có tà hạnh, nói láo, nói hai lưỡi, nói ác khẩu, nói lời phù phiếm, có tâm tham, có tâm sân, có tà kiến.<br>
+<span lang="pi" class="pali">
+suddopi kho, vāseṭṭha, idhekacco pāṇātipātī hoti adinnādāyī kāmesumicchācārī musāvādī pisuṇavāco pharusavāco samphappalāpī abhijjhālu byāpannacitto micchādiṭṭhī.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Vāseṭṭha, những pháp ấy là bất thiện và được gọi là bất thiện…là hắc pháp và hắc báo; những pháp ấy bị người có trí quở trách. Ở đây, những pháp ấy được tìm thấy trong một số người Thủ đà la.<br>
+<span lang="pi" class="pali">
+Iti kho, vāseṭṭha, yeme dhammā akusalā akusalasaṅkhātā …pe…kaṇhā kaṇhavipākā viññugarahitā; suddepi te idhekacce sandissanti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Vāseṭṭha, có người Sát đế lỵ không sát sanh, không lấy của không cho, không có tà hạnh, không nói láo, không nói hai lưỡi, không nói ác khẩu, không nói lời phù phiếm, không có tâm tham, không có tâm sân, có chánh kiến.<br>
+<span lang="pi" class="pali">
+Khattiyopi kho, vāseṭṭha, idhekacco pāṇātipātā paṭivirato hoti, adinnādānā paṭivirato, kāmesumicchācārā paṭivirato, musāvādā paṭivirato, pisuṇāya vācāya paṭivirato, pharusāya vācāya paṭivirato, samphappalāpā paṭivirato, anabhijjhālu abyāpannacitto, sammādiṭṭhī.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Vāseṭṭha, những pháp ấy là thiện và được gọi là thiện; những pháp ấy không có tội và được gọi là không có tội; những pháp ấy nên hành trì và được gọi là các pháp nên hành trì; những pháp ấy xứng Thánh pháp và được gọi là xứng Thánh pháp; những pháp ấy là bạch pháp và có bạch quả; những pháp ấy được người có trí tán thán. Ở đây, những pháp ấy được tìm thấy trong một số người Sát đế lỵ.<br>
+<span lang="pi" class="pali">
+Iti kho, vāseṭṭha, yeme dhammā kusalā kusalasaṅkhātā anavajjā anavajjasaṅkhātā sevitabbā sevitabbasaṅkhātā alamariyā alamariyasaṅkhātā sukkā sukkavipākā viññuppasatthā, khattiyepi te idhekacce sandissanti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Vāseṭṭha, có người Bà-la-môn…<br>
+<span lang="pi" class="pali">
+Brāhmaṇopi kho, vāseṭṭha …pe…<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Vāseṭṭha, có người Phệ xá…<br>
+<span lang="pi" class="pali">
+vessopi kho, vāseṭṭha …pe…<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Vāseṭṭha, có người Thủ đà la không sát sanh…không có tham tâm, không có sân tâm, có chánh kiến.<br>
+<span lang="pi" class="pali">
+suddopi kho, vāseṭṭha, idhekacco pāṇātipātā paṭivirato hoti …pe…anabhijjhālu, abyāpannacitto, sammādiṭṭhī.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Vāseṭṭha, những pháp ấy là thiện và được gọi là thiện; những pháp ấy không có tội và được gọi là không có tội; những pháp ấy nên hành trì và được gọi là các pháp nên hành trì; những pháp ấy xứng Thánh pháp và được gọi là xứng Thánh pháp; những pháp ấy là bạch pháp và có bạch quả; những pháp được người có trí tán thán.<br>
+<span lang="pi" class="pali">
+Iti kho, vāseṭṭha, yeme dhammā kusalā kusalasaṅkhātā anavajjā anavajjasaṅkhātā sevitabbā sevitabbasaṅkhātā alamariyā alamariyasaṅkhātā sukkā sukkavipākā viññuppasatthā;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ở đây, những pháp ấy được tìm thấy trong một số người Thủ đà la.<br>
+<span lang="pi" class="pali">
+suddepi te idhekacce sandissanti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Vāseṭṭha, vì rằng cả hai pháp hắc và bạch được chỉ trích và được tán thán bởi những người có trí, đều có mặt lẫn lộn trong bốn giai cấp này, nên ở đây, những Bà-la-môn nào nói rằng:<br>
+<span lang="pi" class="pali">
+Imesu kho, vāseṭṭha, catūsu vaṇṇesu evaṁ ubhayavokiṇṇesu vattamānesu kaṇhasukkesu dhammesu viññugarahitesu ceva viññuppasatthesu ca yadettha brāhmaṇā evamāhaṁsu:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Bà-la-môn là giai cấp tối thượng, các giai cấp khác là hạ liệt;<br>
+<span lang="pi" class="pali">
+‘brāhmaṇova seṭṭho vaṇṇo, hīnā aññe vaṇṇā;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+chỉ có giai cấp Bà-la-môn là da trắng, giai cấp khác là da đen;<br>
+<span lang="pi" class="pali">
+brāhmaṇova sukko vaṇṇo, kaṇhā aññe vaṇṇā;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+chỉ có Bà-la-môn là thuần túy, các giai cấp phi Bà-la-môn không phải như vậy;<br>
+<span lang="pi" class="pali">
+brāhmaṇāva sujjhanti, no abrāhmaṇā;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+chỉ có Bà-la-môn là con chính tông của Phạm thiên, sanh từ miệng Phạm thiên, do Phạm thiên sanh, do Phạm thiên tạo ra, là con cháu thừa tự của Phạm thiên.”<br>
+<span lang="pi" class="pali">
+brāhmaṇāva brahmuno puttā orasā mukhato jātā brahmajā brahmanimmitā brahmadāyādā’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Các vị có trí không thể chấp nhận như vậy.<br>
+<span lang="pi" class="pali">
+Taṁ tesaṁ viññū nānujānanti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Tại sao vậy?<br>
+<span lang="pi" class="pali">
+Taṁ kissa hetu?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Vāseṭṭha, vì rằng nếu có ai trong bốn giai cấp là một vị Tỷ kheo, một vị A la hán, các lậu hoặc đã được diệt tận, phạm hạnh đã thành, đã làm những việc phải làm, đã đặt gánh nặng xuống, đã đạt mục đích tối thượng, hữu kiết sử đã diệt, nhờ chánh trí đã được giải thoát, vị ấy sẽ được xem là tối thượng so sánh với bốn giai cấp, vì xứng với Pháp, không phải không xứng với Pháp.<br>
+<span lang="pi" class="pali">
+Imesañhi, vāseṭṭha, catunnaṁ vaṇṇānaṁ yo hoti bhikkhu arahaṁ khīṇāsavo vusitavā katakaraṇīyo ohitabhāro anuppattasadattho parikkhīṇabhavasaṁyojano sammadaññāvimutto, so nesaṁ aggamakkhāyati dhammeneva, no adhammena.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Vāseṭṭha, Pháp là tối thượng giữa các loài hữu tình, trong đời này và cả đời sau.<br>
+<span lang="pi" class="pali">
+Dhammo hi, vāseṭṭha, seṭṭho janetasmiṁ, diṭṭhe ceva dhamme abhisamparāyañca.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Vāseṭṭha, đây là một chứng minh điển hình để biết vì sao Pháp là tối thượng giữa các loài hữu tình, trong đời này và cả đời sau.<br>
+<span lang="pi" class="pali">
+Tadamināpetaṁ, vāseṭṭha, pariyāyena veditabbaṁ, yathā dhammova seṭṭho janetasmiṁ, diṭṭhe ceva dhamme abhisamparāyañca.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Vāseṭṭha, vua Pasenadi (Ba tư nặc) nước Kosala biết rằng:<br>
+<span lang="pi" class="pali">
+Jānāti kho, vāseṭṭha, rājā pasenadi kosalo:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Sa môn Gotama xuất gia từ giòng họ Sākyā. Này Vāseṭṭha, vua Pasenadi nước Kosala hết lòng, nhiệt tình với giòng họ Sākyā.<br>
+<span lang="pi" class="pali">
+‘samaṇo gotamo anantarā sakyakulā pabbajito’ti. Sakyā kho pana, vāseṭṭha, rañño pasenadissa kosalassa anuyuttā bhavanti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Vāseṭṭha, dòng họ Sākyā cũng bày tỏ sự tôn trọng, đảnh lễ, đứng dậy, chấp tay và đối xử với vua Pasenadi nước Kosala rất lễ độ phải phép.<br>
+<span lang="pi" class="pali">
+Karonti kho, vāseṭṭha, sakyā raññe pasenadimhi kosale nipaccakāraṁ abhivādanaṁ paccuṭṭhānaṁ añjalikammaṁ sāmīcikammaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Cũng vậy, này Vāseṭṭha, vua Pasenadi nước Kosala tôn trọng, đảnh lễ, đứng dậy, chấp tay và đối xử với Như Lai rất lễ độ, phải phép, vì vua nghĩ: “Có phải Sa môn Gotama là thiện sanh? Còn ta không phải thiện sanh;<br>
+<span lang="pi" class="pali">
+Iti kho, vāseṭṭha, yaṁ karonti sakyā raññe pasenadimhi kosale nipaccakāraṁ abhivādanaṁ paccuṭṭhānaṁ añjalikammaṁ sāmīcikammaṁ, karoti taṁ rājā pasenadi kosalo tathāgate nipaccakāraṁ abhivādanaṁ paccuṭṭhānaṁ añjalikammaṁ sāmīcikammaṁ, na naṁ ‘sujāto samaṇo gotamo, dujjātohamasmi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Sa môn Gotama có hùng lực, ta không có hùng lực;<br>
+<span lang="pi" class="pali">
+Balavā samaṇo gotamo, dubbalohamasmi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Sa môn Gotama có dáng mặt đẹp đẽ, còn ta có dáng mặt thô xấu;<br>
+<span lang="pi" class="pali">
+Pāsādiko samaṇo gotamo, dubbaṇṇohamasmi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Sa môn Gotama là vị có nhiều thế lực, còn ta ít có thế lực?”<br>
+<span lang="pi" class="pali">
+Mahesakkho samaṇo gotamo, appesakkhohamasmī’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vì rằng vua Pasenadi nước Kosala tôn trọng Pháp, cung kính Pháp, đảnh lễ Pháp, cúng dường Pháp, kính lễ Pháp nên vua tôn trọng, đảnh lễ, đứng dậy, chấp tay và đối xử với Như Lai rất lễ độ, phải phép.<br>
+<span lang="pi" class="pali">
+Atha kho naṁ dhammaṁyeva sakkaronto dhammaṁ garuṁ karonto dhammaṁ mānento dhammaṁ pūjento dhammaṁ apacāyamāno evaṁ rājā pasenadi kosalo tathāgate nipaccakāraṁ karoti, abhivādanaṁ paccuṭṭhānaṁ añjalikammaṁ sāmīcikammaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Vāseṭṭha, với chứng minh điển hình này, cần hiểu như thế nào Pháp là tối thượng giữa các loài hữu tình, trong đời này và cả đời sau.<br>
+<span lang="pi" class="pali">
+Imināpi kho etaṁ, vāseṭṭha, pariyāyena veditabbaṁ, yathā dhammova seṭṭho janetasmiṁ, diṭṭhe ceva dhamme abhisamparāyañca.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Vāseṭṭha, các Ngươi, sanh sai biệt, danh sai biệt, tánh sai biệt, gia hệ sai biệt, đã xuất gia từ bỏ gia đình, sống không gia đình.<br>
+<span lang="pi" class="pali">
+Tumhe khvattha, vāseṭṭha, nānājaccā nānānāmā nānāgottā nānākulā agārasmā anagāriyaṁ pabbajitā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Nếu có ai hỏi: “Các vị là ai?”, các Ngươi cần trả lời: “Chúng tôi là Sa môn, dưới sự lãnh đạo của Thích ca tử”.<br>
+<span lang="pi" class="pali">
+‘Ke tumhe’ti—puṭṭhā samānā ‘samaṇā sakyaputtiyāmhā’ti—paṭijānātha.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Vāseṭṭha, ai có lòng tin Như Lai, lòng tin ấy được an trí, có căn đế, an trú và chắc chắn, một lòng tin không bị lôi kéo bởi Sa môn, Bà-la-môn, chư Thiên, Ma vương, Phạm thiên hay một vị nào ở trên đời, vị ấy có thể nói:<br>
+<span lang="pi" class="pali">
+Yassa kho panassa, vāseṭṭha, tathāgate saddhā niviṭṭhā mūlajātā patiṭṭhitā daḷhā asaṁhāriyā samaṇena vā brāhmaṇena vā devena vā mārena vā brahmunā vā kenaci vā lokasmiṁ, tassetaṁ kallaṁ vacanāya:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Ta là con chính tông của Thế Tôn, sanh ra từ miệng, do Pháp sanh, do Pháp tạo ra, là con cháu thừa tự của Pháp.”<br>
+<span lang="pi" class="pali">
+‘bhagavatomhi putto oraso mukhato jāto dhammajo dhammanimmito dhammadāyādo’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vì sao vậy?<br>
+<span lang="pi" class="pali">
+Taṁ kissa hetu?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Vāseṭṭha, vì là những chữ đồng nghĩa với Như Lai là Pháp thân, là Phạm thân, là Pháp thể, là Phạm thể.<br>
+<span lang="pi" class="pali">
+Tathāgatassa hetaṁ, vāseṭṭha, adhivacanaṁ ‘dhammakāyo’ itipi, ‘brahmakāyo’ itipi, ‘dhammabhūto’ itipi, ‘brahmabhūto’ itipi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Vāseṭṭha, có một thời đến một giai đoạn nào đó, sau một thời hạn rất lâu, thế giới này chuyển hoại.<br>
+<span lang="pi" class="pali">
+Hoti kho so, vāseṭṭha, samayo yaṁ kadāci karahaci dīghassa addhuno accayena ayaṁ loko saṁvaṭṭati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Trong khi thế giới chuyển hoại, các loại hữu tình phần lớn sanh qua cõi Abhassara (Quang Âm thiên).<br>
+<span lang="pi" class="pali">
+Saṁvaṭṭamāne loke yebhuyyena sattā ābhassarasaṁvattanikā honti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ở tại đây, những loại chúng sanh này do ý sanh, nuôi sống bằng hỷ, tự chiếu hào quang, phi hành trên hư không, sống trong sự quang vinh, và sống như vậy một thời gian khá dài.<br>
+<span lang="pi" class="pali">
+Te tattha honti manomayā pītibhakkhā sayaṁpabhā antalikkhacarā subhaṭṭhāyino ciraṁ dīghamaddhānaṁ tiṭṭhanti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Vāseṭṭha, có một thời đến một giai đoạn nào đó, sau một thời hạn rất lâu, thế giới này chuyển thành.<br>
+<span lang="pi" class="pali">
+Hoti kho so, vāseṭṭha, samayo yaṁ kadāci karahaci dīghassa addhuno accayena ayaṁ loko vivaṭṭati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Trong khi thế giới này chuyển thành, một số lớn chúng sanh từ Quang Âm thiên thác sanh qua tại đây.<br>
+<span lang="pi" class="pali">
+Vivaṭṭamāne loke yebhuyyena sattā ābhassarakāyā cavitvā itthattaṁ āgacchanti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Những chúng sanh này do ý sanh, nuôi sống bằng hỷ, tự chiếu hào quang, phi hành trên hư không, sống trong sự quang vinh và sống như vậy một thời gia khá dài.<br>
+<span lang="pi" class="pali">
+Tedha honti manomayā pītibhakkhā sayaṁpabhā antalikkhacarā subhaṭṭhāyino ciraṁ dīghamaddhānaṁ tiṭṭhanti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+2. Vị của đất xuất hiện<br>
+<span lang="pi" class="pali">
+2. Rasapathavipātubhāva<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Vāseṭṭha, lúc bấy giờ, vạn vật trở thành một thế giới toàn nước đen sẫm, một màu đen khiến mắt phải mù.<br>
+<span lang="pi" class="pali">
+Ekodakībhūtaṁ kho pana, vāseṭṭha, tena samayena hoti andhakāro andhakāratimisā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Mặt trăng, mặt trời không hiện ra; sao và chòm sao không hiện ra; không có ngày đêm; không có tháng và nửa tháng; không có năm và thời tiết; không có đàn bà đàn ông. Các loài hữu tình chỉ được xem là loài hữu tình mà thôi.<br>
+<span lang="pi" class="pali">
+Na candimasūriyā paññāyanti, na nakkhattāni tārakarūpāni paññāyanti, na rattindivā paññāyanti, na māsaḍḍhamāsā paññāyanti, na utusaṁvaccharā paññāyanti, na itthipumā paññāyanti, sattā sattātveva saṅkhyaṁ gacchanti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Vāseṭṭha, đối với các loài hữu tình ấy, sau một thời gian rất lâu, vị đất tan ra trong nước.<br>
+<span lang="pi" class="pali">
+Atha kho tesaṁ, vāseṭṭha, sattānaṁ kadāci karahaci dīghassa addhuno accayena rasapathavī udakasmiṁ samatani;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Như bọt nổi lên trên mặt cháo sữa nóng đang nguội dần, cũng vậy đất hiện ra.<br>
+<span lang="pi" class="pali">
+seyyathāpi nāma payaso tattassa nibbāyamānassa upari santānakaṁ hoti; evameva pāturahosi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ðất này có màu sắc, có hương và có vị. Màu sắc của đất giống như đề hồ hay thuần túy như tô.<br>
+<span lang="pi" class="pali">
+Sā ahosi vaṇṇasampannā gandhasampannā rasasampannā, seyyathāpi nāma sampannaṁ vā sappi sampannaṁ vā navanītaṁ evaṁvaṇṇā ahosi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Và vị của đất như mật ong thuần tịnh.<br>
+<span lang="pi" class="pali">
+Seyyathāpi nāma khuddamadhuṁ aneḷakaṁ; evamassādā ahosi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Vāseṭṭha, có loài hữu tình, có tánh tham, nói:<br>
+<span lang="pi" class="pali">
+Atha kho, vāseṭṭha, aññataro satto lolajātiko:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Kìa xem, vật này là gì vậy?”, lấy ngón tay nếm vị của đất.<br>
+<span lang="pi" class="pali">
+‘ambho, kimevidaṁ bhavissatī’ti rasapathaviṁ aṅguliyā sāyi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Khi lấy ngón tay nếm vị của đất, vị ấy thấm vào thân và tham ái khởi lên.<br>
+<span lang="pi" class="pali">
+Tassa rasapathaviṁ aṅguliyā sāyato acchādesi, taṇhā cassa okkami.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Vāseṭṭha, các loài hữu tình khác, theo gương hữu tình kia, lấy ngón tay nếm vị của đất.<br>
+<span lang="pi" class="pali">
+Aññepi kho, vāseṭṭha, sattā tassa sattassa diṭṭhānugatiṁ āpajjamānā rasapathaviṁ aṅguliyā sāyiṁsu.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Khi lấy ngón tay nếm vị của đất, vị ấy thấm vào thân và tham ái khởi lên.<br>
+<span lang="pi" class="pali">
+Tesaṁ rasapathaviṁ aṅguliyā sāyataṁ acchādesi, taṇhā ca tesaṁ okkami.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+3. Mặt trăng và mặt trời xuất hiện<br>
+<span lang="pi" class="pali">
+3. Candimasūriyādipātubhāva<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Vāseṭṭha, các loài hữu tình khác, theo gương hữu tình kia, lấy ngón tay nếm vị của đất.<br>
+<span lang="pi" class="pali">
+Atha kho te, vāseṭṭha, sattā rasapathaviṁ hatthehi āluppakārakaṁ upakkamiṁsu paribhuñjituṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Vāseṭṭha, khi lấy ngón tay nếm vị của đất, vị ấy thấm vào thân và tham ái khởi lên.<br>
+<span lang="pi" class="pali">
+Yato kho te, vāseṭṭha, sattā rasapathaviṁ hatthehi āluppakārakaṁ upakkamiṁsu paribhuñjituṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Rồi các hữu tình kia bắt đầu thưởng thức vị của đất, bằng cách bẻ từng cục đất với bàn tay nhỏ của họ, thời ánh sáng của họ biến mất.<br>
+<span lang="pi" class="pali">
+Atha tesaṁ sattānaṁ sayaṁpabhā antaradhāyi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Khi ánh sáng của họ biến mất, mặt trăng mặt trời hiện ra.<br>
+<span lang="pi" class="pali">
+Sayaṁpabhāya antarahitāya candimasūriyā pāturahesuṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Khi mặt trăng, mặt trời hiện ra, thì sao và chòm sao hiện ra.<br>
+<span lang="pi" class="pali">
+Candimasūriyesu pātubhūtesu nakkhattāni tārakarūpāni pāturahesuṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Khi sao và chòm sao hiện ra, ngày và đêm hiện ra,<br>
+<span lang="pi" class="pali">
+Nakkhattesu tārakarūpesu pātubhūtesu rattindivā paññāyiṁsu.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+khi ngày và đêm hiện ra, thì nửa tháng và tháng hiện ra.<br>
+<span lang="pi" class="pali">
+Rattindivesu paññāyamānesu māsaḍḍhamāsā paññāyiṁsu.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Khi nửa tháng và tháng hiện ra, thời tiết và năm hiện ra.<br>
+<span lang="pi" class="pali">
+Māsaḍḍhamāsesu paññāyamānesu utusaṁvaccharā paññāyiṁsu.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Như vậy, này Vāseṭṭha, thế giới này bắt đầu thành trở lại.<br>
+<span lang="pi" class="pali">
+Ettāvatā kho, vāseṭṭha, ayaṁ loko puna vivaṭṭo hoti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Vāseṭṭha, những hữu tình ấy, thưởng thức vị của đất, lấy đất làm chất ăn, lấy đất làm món ăn trong một thời gian khá lâu.<br>
+<span lang="pi" class="pali">
+Atha kho te, vāseṭṭha, sattā rasapathaviṁ paribhuñjantā tambhakkhā tadāhārā ciraṁ dīghamaddhānaṁ aṭṭhaṁsu.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Vāseṭṭha, vì các hữu tình ấy thưởng thức vị của đất, lấy đất làm chất ăn, lấy đất làm món ăn trong một thời gian khá lâu, thân của họ trở thành cứng rắn, và sắc đẹp của họ trở thành sai biệt.<br>
+<span lang="pi" class="pali">
+Yathā yathā kho te, vāseṭṭha, sattā rasapathaviṁ paribhuñjantā tambhakkhā tadāhārā ciraṁ dīghamaddhānaṁ aṭṭhaṁsu tathā tathā tesaṁ sattānaṁ rasapathaviṁ paribhuñjantānaṁ kharattañceva kāyasmiṁ okkami, vaṇṇavevaṇṇatā ca paññāyittha.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Có hạng hữu tình có sắc đẹp, có hạng hữu tình không có sắc đẹp.<br>
+<span lang="pi" class="pali">
+Ekidaṁ sattā vaṇṇavanto honti, ekidaṁ sattā dubbaṇṇā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ở đây các hữu tình có sắc đẹp khinh các hữu tình không có sắc đẹp:<br>
+<span lang="pi" class="pali">
+Tattha ye te sattā vaṇṇavanto, te dubbaṇṇe satte atimaññanti:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Chúng ta có sắc đẹp hơn họ, họ không có sắc đẹp bằng chúng ta.”<br>
+<span lang="pi" class="pali">
+‘mayametehi vaṇṇavantatarā, amhehete dubbaṇṇatarā’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Do họ kiêu mạn và kiêu ngạo về sắc đẹp của họ, vị của đất biến mất.<br>
+<span lang="pi" class="pali">
+Tesaṁ vaṇṇātimānapaccayā mānātimānajātikānaṁ rasapathavī antaradhāyi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Khi vị của đất biến mất, họ hội họp lại và kêu than:<br>
+<span lang="pi" class="pali">
+Rasāya pathaviyā antarahitāya sannipatiṁsu. Sannipatitvā anutthuniṁsu:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Ôi vị ngon! Ôi vị ngon!”<br>
+<span lang="pi" class="pali">
+‘aho rasaṁ, aho rasan’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+như ngày nay, khi loài Người có được vị ngon liền nói:<br>
+<span lang="pi" class="pali">
+Tadetarahipi manussā kañcideva surasaṁ labhitvā evamāhaṁsu:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Ôi vị ngon! Ôi vị ngon!”<br>
+<span lang="pi" class="pali">
+‘aho rasaṁ, aho rasan’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Như vậy họ theo văn tự truyền thống của thời xưa mà không biết ý nghĩa của nó.<br>
+<span lang="pi" class="pali">
+Tadeva porāṇaṁ aggaññaṁ akkharaṁ anusaranti, na tvevassa atthaṁ ājānanti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+4. Nấm đất<br>
+<span lang="pi" class="pali">
+4. Bhūmipappaṭakapātubhāva<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Vāseṭṭha, khi vị đất đã biến mất với các hữu tình ấy, thời một loại nấm đất hiện ra.<br>
+<span lang="pi" class="pali">
+Atha kho tesaṁ, vāseṭṭha, sattānaṁ rasāya pathaviyā antarahitāya bhūmipappaṭako pāturahosi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Như hình cây nấm, chúng hiện ra như vậy.<br>
+<span lang="pi" class="pali">
+Seyyathāpi nāma ahicchattako; evameva pāturahosi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Loại nấm ấy có sắc, có hương, có vị. Mầu sắc của loại nấm này giống như đề hồ hay thuần túy như tô.<br>
+<span lang="pi" class="pali">
+So ahosi vaṇṇasampanno gandhasampanno rasasampanno, seyyathāpi nāma sampannaṁ vā sappi sampannaṁ vā navanītaṁ evaṁvaṇṇo ahosi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vị của đất như mật ong thuần tịnh.<br>
+<span lang="pi" class="pali">
+Seyyathāpi nāma khuddamadhuṁ aneḷakaṁ; evamassādo ahosi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Vāseṭṭha, những hữu tình ấy bắt đầu ăn thứ nấm đất.<br>
+<span lang="pi" class="pali">
+Atha kho te, vāseṭṭha, sattā bhūmipappaṭakaṁ upakkamiṁsu paribhuñjituṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Họ thưởng thức nấm đất, lấy nấm đất làm chất ăn, lấy nấm đất làm món ăn trong một thời gian khá lâu.<br>
+<span lang="pi" class="pali">
+Te taṁ paribhuñjantā tambhakkhā tadāhārā ciraṁ dīghamaddhānaṁ aṭṭhaṁsu.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Vāseṭṭha, vì các chúng sanh ấy thưởng thức nấm đất, lấy nấm đất làm chất ăn, lấy nấm đất làm món ăn trong một thời gian khá lâu, nên thân của họ trở thành cứng rắn hơn và sắc đẹp của chúng lại càng sai biệt.<br>
+<span lang="pi" class="pali">
+Yathā yathā kho te, vāseṭṭha, sattā bhūmipappaṭakaṁ paribhuñjantā tambhakkhā tadāhārā ciraṁ dīghamaddhānaṁ aṭṭhaṁsu tathā tathā tesaṁ sattānaṁ bhiyyoso mattāya kharattañceva kāyasmiṁ okkami, vaṇṇavevaṇṇatā ca paññāyittha.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Có hạng hữu tình có sắc đẹp, có hạng hữu tình không có sắc đẹp.<br>
+<span lang="pi" class="pali">
+Ekidaṁ sattā vaṇṇavanto honti, ekidaṁ sattā dubbaṇṇā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ở đây các hữu tình có sắc đẹp khinh các hữu tình không có sắc đẹp:<br>
+<span lang="pi" class="pali">
+Tattha ye te sattā vaṇṇavanto, te dubbaṇṇe satte atimaññanti:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Chúng ta có sắc đẹp hơn họ, họ không có sắc đẹp bằng chúng ta”<br>
+<span lang="pi" class="pali">
+‘mayametehi vaṇṇavantatarā, amhehete dubbaṇṇatarā’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Do họ kiêu mạn và kiêu ngạo về sắc đẹp của họ, nấm đất biến mất.<br>
+<span lang="pi" class="pali">
+Tesaṁ vaṇṇātimānapaccayā mānātimānajātikānaṁ bhūmipappaṭako antaradhāyi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+5. Cỏ và cây leo xuất hiện<br>
+<span lang="pi" class="pali">
+5. Padālatāpātubhāva<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Khi nấm đất biến mất cỏ và cây leo hiện ra. Như loại cây tre, chúng hiện ra như vậy.<br>
+<span lang="pi" class="pali">
+Bhūmipappaṭake antarahite padālatā pāturahosi, seyyathāpi nāma kalambukā; evameva pāturahosi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Loại cây leo này có sắc, có hương, có vị. Mầu sắc của loại cây này giống như đề hồ hay thuần túy như tô.<br>
+<span lang="pi" class="pali">
+Sā ahosi vaṇṇasampannā gandhasampannā rasasampannā, seyyathāpi nāma sampannaṁ vā sappi sampannaṁ vā navanītaṁ evaṁvaṇṇā ahosi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vị của loại cây leo này như mật ong thuần tịnh.<br>
+<span lang="pi" class="pali">
+Seyyathāpi nāma khuddamadhuṁ aneḷakaṁ; evamassādā ahosi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Vāseṭṭha, các hữu tình này bắt đầu thưởng thức loại cây leo này.<br>
+<span lang="pi" class="pali">
+Atha kho te, vāseṭṭha, sattā padālataṁ upakkamiṁsu paribhuñjituṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Chúng bắt đầu thưởng thức loại cây leo, lấy cây leo làm chất ăn, lấy cây leo làm món ăn trong một thời gian khá lâu.<br>
+<span lang="pi" class="pali">
+Te taṁ paribhuñjantā tambhakkhā tadāhārā ciraṁ dīghamaddhānaṁ aṭṭhaṁsu.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Vāseṭṭha, vì những hữu tình này bắt đầu thưởng thức loại cây leo, lấy cây leo làm chất ăn, lấy cây leo làm món ăn trong một thời gian khá lâu nên thân của họ trở thành cứng rắn hơn và sắp đẹp của họ lại càng sai biệt.<br>
+<span lang="pi" class="pali">
+Yathā yathā kho te, vāseṭṭha, sattā padālataṁ paribhuñjantā tambhakkhā tadāhārā ciraṁ dīghamaddhānaṁ aṭṭhaṁsu tathā tathā tesaṁ sattānaṁ bhiyyoso mattāya kharattañceva kāyasmiṁ okkami, vaṇṇavevaṇṇatā ca paññāyittha.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Có hạng hữu tình có sắc đẹp, có hạng hữu tình không có sắc đẹp.<br>
+<span lang="pi" class="pali">
+Ekidaṁ sattā vaṇṇavanto honti, ekidaṁ sattā dubbaṇṇā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ở đây các hữu tình có sắc đẹp khinh các hữu tình không có sắc đẹp:<br>
+<span lang="pi" class="pali">
+Tattha ye te sattā vaṇṇavanto, te dubbaṇṇe satte atimaññanti:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Chúng ta có sắc đẹp hơn họ, họ không có sắc đẹp bằng chúng ta.”<br>
+<span lang="pi" class="pali">
+‘mayametehi vaṇṇavantatarā, amhehete dubbaṇṇatarā’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Do họ kiêu mạn và kiêu ngạo về sắc đẹp của họ, cỏ và cây leo biến mất.<br>
+<span lang="pi" class="pali">
+Tesaṁ vaṇṇātimānapaccayā mānātimānajātikānaṁ padālatā antaradhāyi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Khi cỏ và cây leo biến mất, họ hội họp lại và kêu than:<br>
+<span lang="pi" class="pali">
+Padālatāya antarahitāya sannipatiṁsu. Sannipatitvā anutthuniṁsu:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Ôi, cái này thuộc của chúng ta! Ôi hại thay cho chúng ta, nay cỏ và cây leo đã biến đi!”<br>
+<span lang="pi" class="pali">
+‘ahu vata no, ahāyi vata no padālatā’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+như ngày nay khi loài Người được hỏi cái gì làm cho đau khổ, bèn trả lời:<br>
+<span lang="pi" class="pali">
+Tadetarahipi manussā kenaci dukkhadhammena phuṭṭhā evamāhaṁsu:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Ôi, cái này thuộc của chúng ta! Ôi hại thay cho chúng ta!”<br>
+<span lang="pi" class="pali">
+‘ahu vata no, ahāyi vata no’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Như vậy, họ theo văn tự truyền thống của thời xưa mà không biết ý nghĩa của nó.<br>
+<span lang="pi" class="pali">
+Tadeva porāṇaṁ aggaññaṁ akkharaṁ anusaranti, na tvevassa atthaṁ ājānanti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+6. Lúa xuất hiện<br>
+<span lang="pi" class="pali">
+6. Akaṭṭhapākasālipātubhāva<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Vāseṭṭha, khi các loại cỏ, cây leo biến mất, thời lúa xuất hiện tại các khoảng trống, không có cám, không có vỏ, có mùi thơm và bột trơn nhẵn.<br>
+<span lang="pi" class="pali">
+Atha kho tesaṁ, vāseṭṭha, sattānaṁ padālatāya antarahitāya akaṭṭhapāko sāli pāturahosi akaṇo athuso suddho sugandho taṇḍulapphalo.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Chỗ nào vào buổi chiều họ mang đi để ăn chiều, thời tại chỗ ấy, vào buổi sáng, lúa lại mọc lớn và chín.<br>
+<span lang="pi" class="pali">
+Yaṁ taṁ sāyaṁ sāyamāsāya āharanti, pāto taṁ hoti pakkaṁ paṭivirūḷhaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Chỗ nào vào buổi sáng, họ mang đi để ăn sáng, thời tại chỗ ấy, vào buổi chiều lúa lại mọc lớn và chín.<br>
+<span lang="pi" class="pali">
+Yaṁ taṁ pāto pātarāsāya āharanti, sāyaṁ taṁ hoti pakkaṁ paṭivirūḷhaṁ;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+không có gián đoạn.<br>
+<span lang="pi" class="pali">
+nāpadānaṁ paññāyati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Vāseṭṭha, những hữu tình ấy thưởng thức lúa mọc tại các khoảng trống, lấy lúa làm chất ăn, lấy lúa làm món ăn trong một thời gian khá lâu.<br>
+<span lang="pi" class="pali">
+Atha kho te, vāseṭṭha, sattā akaṭṭhapākaṁ sāliṁ paribhuñjantā tambhakkhā tadāhārā ciraṁ dīghamaddhānaṁ aṭṭhaṁsu.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+7. Giới tính xuất hiện<br>
+<span lang="pi" class="pali">
+7. Itthipurisaliṅgapātubhāva<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Vāseṭṭha, vì các chúng sanh ấy thưởng thức lúa mọc tại khoảng trống, lấy lúa làm chất ăn, lấy lúa làm món ăn trong một thời gian khá lâu, thân hình của họ trở thành cứng rắn hơn và sắp đẹp của họ lại càng sai biệt. Về phái nữ, nữ tánh xuất hiện; về phái nam, nam tánh xuất hiện.<br>
+<span lang="pi" class="pali">
+Yathā yathā kho te, vāseṭṭha, sattā akaṭṭhapākaṁ sāliṁ paribhuñjantā tambhakkhā tadāhārā ciraṁ dīghamaddhānaṁ aṭṭhaṁsu tathā tathā tesaṁ sattānaṁ bhiyyoso mattāya kharattañceva kāyasmiṁ okkami, vaṇṇavevaṇṇatā ca paññāyittha, itthiyā ca itthiliṅgaṁ pāturahosi purisassa ca purisaliṅgaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Phái nữ nhìn phái nam hết sức kỹ lưỡng, phái nam nhìn phái nữ hết sức kỹ lưỡng.<br>
+<span lang="pi" class="pali">
+Itthī ca purisaṁ ativelaṁ upanijjhāyati puriso ca itthiṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vì họ nhìn nhau kỹ lưỡng như vậy nên tình dục khởi lên, ái luyến đối với thân thể bắt đầu.<br>
+<span lang="pi" class="pali">
+Tesaṁ ativelaṁ aññamaññaṁ upanijjhāyataṁ sārāgo udapādi, pariḷāho kāyasmiṁ okkami.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Do sự ái luyến, họ làm các hạnh dâm.<br>
+<span lang="pi" class="pali">
+Te pariḷāhapaccayā methunaṁ dhammaṁ paṭiseviṁsu.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Vāseṭṭha, lúc bấy giờ những chúng sanh ấy thấy làm các hạnh dâm như vậy, người thì quăng bùn, người thì quăng tro, người thì quăng phân bò và nói:<br>
+<span lang="pi" class="pali">
+Ye kho pana te, vāseṭṭha, tena samayena sattā passanti methunaṁ dhammaṁ paṭisevante, aññe paṁsuṁ khipanti, aññe seṭṭhiṁ khipanti, aññe gomayaṁ khipanti:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Hãy chết đi, đồ ô uế! Hãy chết đi, đồ ô uế!<br>
+<span lang="pi" class="pali">
+‘nassa asuci, nassa asucī’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Sao một loài hữu tình lại đối xử với một loài hữu tình khác như vậy?”<br>
+<span lang="pi" class="pali">
+‘Kathañhi nāma satto sattassa evarūpaṁ karissatī’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+như ngày nay, tại một số quốc độ, khi một cô dâu được rước đi, có người quăng bùn, có người quăng tro, có người quăng phân bò.<br>
+<span lang="pi" class="pali">
+Tadetarahipi manussā ekaccesu janapadesu vadhuyā nibbuyhamānāya aññe paṁsuṁ khipanti, aññe seṭṭhiṁ khipanti, aññe gomayaṁ khipanti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Như vậy, chúng theo văn tự truyền thống xưa mà không biết ý nghĩa của nó.<br>
+<span lang="pi" class="pali">
+Tadeva porāṇaṁ aggaññaṁ akkharaṁ anusaranti, na tvevassa atthaṁ ājānanti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+8. Hành dâm<br>
+<span lang="pi" class="pali">
+8. Methunadhammasamācāra<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Vāseṭṭha, lúc bấy giờ việc làm được xem là phi pháp nay được xem là đúng pháp.<br>
+<span lang="pi" class="pali">
+Adhammasammataṁ kho pana, vāseṭṭha, tena samayena hoti, tadetarahi dhammasammataṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Vāseṭṭha, lúc bấy giờ các loài hữu tình ấy hành dâm không được phép vào làng hay xã ấp một tháng hay cả hai tháng.<br>
+<span lang="pi" class="pali">
+Ye kho pana, vāseṭṭha, tena samayena sattā methunaṁ dhammaṁ paṭisevanti, te māsampi dvemāsampi na labhanti gāmaṁ vā nigamaṁ vā pavisituṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vì những hữu tình ấy lúc bấy giờ chỉ trích mau chóng,<br>
+<span lang="pi" class="pali">
+Yato kho te, vāseṭṭha, sattā tasmiṁ asaddhamme ativelaṁ pātabyataṁ āpajjiṁsu.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+vì hành động phi pháp, họ bắt đầu làm lầu, làm nhà để che dấu những hành động phi pháp của họ.<br>
+<span lang="pi" class="pali">
+Atha agārāni upakkamiṁsu kātuṁ tasseva asaddhammassa paṭicchādanatthaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Vāseṭṭha, có loài hữu tình bản tánh biếng nhác tự nghĩ:<br>
+<span lang="pi" class="pali">
+Atha kho, vāseṭṭha, aññatarassa sattassa alasajātikassa etadahosi:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Sao ta lại tự làm ta mỏi mệt bằng cách đi tìm lúa buổi chiều cho buổi ăn chiều, buổi sáng cho buổi ăn sáng?<br>
+<span lang="pi" class="pali">
+‘ambho, kimevāhaṁ vihaññāmi sāliṁ āharanto sāyaṁ sāyamāsāya pāto pātarāsāya.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Sao ta lại không tìm lúa một lần cho cả buổi ăn chiều và buổi ăn sáng?”<br>
+<span lang="pi" class="pali">
+Yannūnāhaṁ sāliṁ āhareyyaṁ sakideva sāyapātarāsāyā’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Vāseṭṭha, loài hữu tình ấy tìm lúa một lần cho cả buổi ăn chiều, cả buổi ăn sáng.<br>
+<span lang="pi" class="pali">
+Atha kho so, vāseṭṭha, satto sāliṁ āhāsi sakideva sāyapātarāsāya.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Một hữu tình khác đến vị hữu tình này và nói:<br>
+<span lang="pi" class="pali">
+Atha kho, vāseṭṭha, aññataro satto yena so satto tenupasaṅkami; upasaṅkamitvā taṁ sattaṁ etadavoca:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Bạn, chúng ta hãy đi tìm lúa!<br>
+<span lang="pi" class="pali">
+‘ehi, bho satta, sālāhāraṁ gamissāmā’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Bạn, tôi đã tìm lúa một lần, cả cho buổi chiều và buổi sáng.<br>
+<span lang="pi" class="pali">
+‘Alaṁ, bho satta, āhato me sāli sakideva sāyapātarāsāyā’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Vāseṭṭha, vị này noi theo vị hữu tình kia, đi tìm lúa một lần đủ cho cả hai ngày. Này Bạn, như vậy là tốt.<br>
+<span lang="pi" class="pali">
+Atha kho so, vāseṭṭha, satto tassa sattassa diṭṭhānugatiṁ āpajjamāno sāliṁ āhāsi sakideva dvīhāya. ‘Evampi kira, bho, sādhū’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Vāseṭṭha, rồi một hữu tình khác đến vị hữu tình ấy và nói:<br>
+<span lang="pi" class="pali">
+Atha kho, vāseṭṭha, aññataro satto yena so satto tenupasaṅkami; upasaṅkamitvā taṁ sattaṁ etadavoca:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Bạn chúng ta hãy đi tìm lúa.<br>
+<span lang="pi" class="pali">
+‘ehi, bho satta, sālāhāraṁ gamissāmā’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Bạn, tôi đã tìm lúa một lần đủ cho cả hai ngày rồi.<br>
+<span lang="pi" class="pali">
+‘Alaṁ, bho satta, āhato me sāli sakideva dvīhāyā’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Vāseṭṭha, vị hữu tình này noi theo gương vị hữu tình kia, liền đi tìm lúa một lần đủ cho bốn ngày. Này Bạn, như vậy là tốt.<br>
+<span lang="pi" class="pali">
+Atha kho so, vāseṭṭha, satto tassa sattassa diṭṭhānugatiṁ āpajjamāno sāliṁ āhāsi sakideva catūhāya, ‘evampi kira, bho, sādhū’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Vāseṭṭha, một vị hữu tình khác lại đến vị hữu tình này và nói:<br>
+<span lang="pi" class="pali">
+Atha kho, vāseṭṭha, aññataro satto yena so satto tenupasaṅkami; upasaṅkamitvā taṁ sattaṁ etadavoca:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Bạn, chúng ta hãy đi tìm lúa!<br>
+<span lang="pi" class="pali">
+‘ehi, bho satta, sālāhāraṁ gamissāmā’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Bạn, tôi đã tìm lúa một lần đủ cho cả bốn ngày!<br>
+<span lang="pi" class="pali">
+‘Alaṁ, bho satta, āhato me sāli sakideva catūhāyā’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Vāseṭṭha, vị hữu tình này noi theo gương vị hữu tình kia, liền đi tìm lúa một lần đủ cho tám ngày. Này Bạn, như vậy là tốt.<br>
+<span lang="pi" class="pali">
+Atha kho so, vāseṭṭha, satto tassa sattassa diṭṭhānugatiṁ āpajjamāno sāliṁ āhāsi sakideva aṭṭhāhāya, ‘evampi kira, bho, sādhū’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Vāseṭṭha, những vị hữu tình kia, bắt đầu tích trữ lúa để ăn,<br>
+<span lang="pi" class="pali">
+Yato kho te, vāseṭṭha, sattā sannidhikārakaṁ sāliṁ upakkamiṁsu paribhuñjituṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+và cám bắt đầu bao bọc hột gạo trơn nhẵn và vỏ lúa bao bọc hột lúa;<br>
+<span lang="pi" class="pali">
+Atha kaṇopi taṇḍulaṁ pariyonandhi, thusopi taṇḍulaṁ pariyonandhi;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+và các cây lúa bị cắt không lớn lên được; và như vậy có sự gián đoạn; và cây lúa mọc lên từng cụm, từng chùm.<br>
+<span lang="pi" class="pali">
+lūnampi nappaṭivirūḷhaṁ, apadānaṁ paññāyittha, saṇḍasaṇḍā sālayo aṭṭhaṁsu.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+9. Phân chia ruộng<br>
+<span lang="pi" class="pali">
+9. Sālivibhāga<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Vāseṭṭha, các loài hữu tình ấy hội họp lại và than phiền:<br>
+<span lang="pi" class="pali">
+Atha kho te, vāseṭṭha, sattā sannipatiṁsu, sannipatitvā anutthuniṁsu:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này các Bạn, các ác pháp đã hiện ra giữa các loài hữu tình.<br>
+<span lang="pi" class="pali">
+‘pāpakā vata, bho, dhammā sattesu pātubhūtā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Chúng ta trước kia do ý sanh, nuôi sống bằng hỷ, tự chiếu hào quang phi hành trên hư không, sống trong sự quang vinh và sống như vậy trong một thời gian khá dài.<br>
+<span lang="pi" class="pali">
+Mayañhi pubbe manomayā ahumhā pītibhakkhā sayaṁpabhā antalikkhacarā subhaṭṭhāyino, ciraṁ dīghamaddhānaṁ aṭṭhamhā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ðối với chúng ta, sau một thời gian khá dài, vị của đất hiện ra. Vị đất này có sắc, có hương và có vị. Chúng ta bắt đầu bẻ đất từng cục bằng tay để ăn vị đất. Vì bắt đầu bẻ đất bằng tay từng cục để ăn, nên hào quang biến mất. Vì hào quang biến mất nên mặt trời, mặt trăng hiện ra. Vì mặt trăng, mặt trời hiện ra nên các sao và chùm sao hiện ra. Vì các sao và chùm sao hiện ra, nên đêm, ngày hiện ra. Vì đêm, ngày hiện ra, nên nửa tháng và tháng hiện ra. Vì nửa tháng và tháng hiện ra, nên thời tiết và năm hiện ra. Chúng ta thưởng thức vị đất, lấy vị đất làm chất ăn, lấy vị đất làm món ăn trong một thời gian khá dài.<br>
+<span lang="pi" class="pali">
+Tesaṁ no amhākaṁ kadāci karahaci dīghassa addhuno accayena rasapathavī udakasmiṁ samatani. Sā ahosi vaṇṇasampannā gandhasampannā rasasampannā. Te mayaṁ rasapathaviṁ hatthehi āluppakārakaṁ upakkamimha paribhuñjituṁ, tesaṁ no rasapathaviṁ hatthehi āluppakārakaṁ upakkamataṁ paribhuñjituṁ sayaṁpabhā antaradhāyi. Sayaṁpabhāya antarahitāya candimasūriyā pāturahesuṁ, candimasūriyesu pātubhūtesu nakkhattāni tārakarūpāni pāturahesuṁ, nakkhattesu tārakarūpesu pātubhūtesu rattindivā paññāyiṁsu, rattindivesu paññāyamānesu māsaḍḍhamāsā paññāyiṁsu. Māsaḍḍhamāsesu paññāyamānesu utusaṁvaccharā paññāyiṁsu. Te mayaṁ rasapathaviṁ paribhuñjantā tambhakkhā tadāhārā ciraṁ dīghamaddhānaṁ aṭṭhamhā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Khi ác bất thiện pháp khởi lên giữa chúng ta, vị đất biến mất. Vì vị đất biến mất, nên nấm đất hiện ra. Nấm đất này có sắc, có hương và có vị. Chúng ta bắt đầu thưởng thức nấm đất ấy, lấy nấm đất làm chất ăn, lấy nấm đất làm món ăn trong một thời gian khá dài.<br>
+<span lang="pi" class="pali">
+Tesaṁ no pāpakānaṁyeva akusalānaṁ dhammānaṁ pātubhāvā rasapathavī antaradhāyi. Rasapathaviyā antarahitāya bhūmipappaṭako pāturahosi. So ahosi vaṇṇasampanno gandhasampanno rasasampanno. Te mayaṁ bhūmipappaṭakaṁ upakkamimha paribhuñjituṁ. Te mayaṁ taṁ paribhuñjantā tambhakkhā tadāhārā ciraṁ dīghamaddhānaṁ aṭṭhamhā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vì các ác, bất thiện pháp này khởi lên giữa chúng ta nên nấm đất biến mất. Vì nấm đất biến mất, nên cỏ và cây leo hiện ra. Cỏ và cây leo này có sắc, có hương và có vị. Chúng ta bắt đầu thưởng thức cỏ và cây leo ấy, lấy cỏ và cây leo làm chất ăn, lấy cỏ và cây leo làm món ăn trong một thời gian khá dài.<br>
+<span lang="pi" class="pali">
+Tesaṁ no pāpakānaṁyeva akusalānaṁ dhammānaṁ pātubhāvā bhūmipappaṭako antaradhāyi. Bhūmipappaṭake antarahite padālatā pāturahosi. Sā ahosi vaṇṇasampannā gandhasampannā rasasampannā. Te mayaṁ padālataṁ upakkamimha paribhuñjituṁ. Te mayaṁ taṁ paribhuñjantā tambhakkhā tadāhārā ciraṁ dīghamaddhānaṁ aṭṭhamhā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vì các ác, bất thiện pháp này xảy ra giữa chúng ta nên cỏ và cây leo biến mất. Vì cỏ và cây leo biến mất, nên lúa mọc tại khoảng trống hiện ra, không có cám, không có vỏ, thuần tịnh, có mùi thơm và hột trơn nhẵn. Chỗ nào vào buổi chiều, chúng ta mang đi để ăn chiều, thời tại chỗ ấy vào buổi sáng lúa lại mọc lớn và chín. Chỗ nào vào buổi sáng, chúng ta mang đi để ăn sáng, thời tại chỗ ấy vào buổi chiều, lúa lại mọc lớn và chín, không có gián đoạn. Chúng ta thưởng thức lúa mọc tại khoảng trống, lấy lúa làm chất ăn, lấy lúa làm món ăn trong một thời gian khá dài.<br>
+<span lang="pi" class="pali">
+Tesaṁ no pāpakānaṁyeva akusalānaṁ dhammānaṁ pātubhāvā padālatā antaradhāyi. Padālatāya antarahitāya akaṭṭhapāko sāli pāturahosi akaṇo athuso suddho sugandho taṇḍulapphalo. Yaṁ taṁ sāyaṁ sāyamāsāya āharāma, pāto taṁ hoti pakkaṁ paṭivirūḷhaṁ. Yaṁ taṁ pāto pātarāsāya āharāma, sāyaṁ taṁ hoti pakkaṁ paṭivirūḷhaṁ. Nāpadānaṁ paññāyittha. Te mayaṁ akaṭṭhapākaṁ sāliṁ paribhuñjantā tambhakkhā tadāhārā ciraṁ dīghamaddhānaṁ aṭṭhamhā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vì các ác, bất thiện pháp ấy khởi lên giữa chúng ta, cám bắt đầu bọc hột lúa trơn nhẵn và vỏ lúa bao bọc hột lúa trơn nhẵn; và các cây lúc bị cắt không lớn lên được; và như vậy có sự gián đoạn. Và các cây lúa mọc lên từng cụm, từng chùm.<br>
+<span lang="pi" class="pali">
+Tesaṁ no pāpakānaṁyeva akusalānaṁ dhammānaṁ pātubhāvā kaṇopi taṇḍulaṁ pariyonandhi, thusopi taṇḍulaṁ pariyonandhi, lūnampi nappaṭivirūḷhaṁ, apadānaṁ paññāyittha, saṇḍasaṇḍā sālayo ṭhitā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vậy nay, chúng ta hãy chia lúa và đắp đê làm bờ ruộng.<br>
+<span lang="pi" class="pali">
+Yannūna mayaṁ sāliṁ vibhajeyyāma, mariyādaṁ ṭhapeyyāmā’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Vāseṭṭha, các loại hữu tình ấy phân chia lúa và đắp đê làm bờ ruộng.<br>
+<span lang="pi" class="pali">
+Atha kho te, vāseṭṭha, sattā sāliṁ vibhajiṁsu, mariyādaṁ ṭhapesuṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Vāseṭṭha, có vị hữu tình, bản tánh biếng nhác, gìn giữ phần của mình, đánh cắp phần của người khác và thưởng thức phần ấy.<br>
+<span lang="pi" class="pali">
+Atha kho, vāseṭṭha, aññataro satto lolajātiko sakaṁ bhāgaṁ parirakkhanto aññataraṁ bhāgaṁ adinnaṁ ādiyitvā paribhuñji.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Người ta bắt người ấy và nói:<br>
+<span lang="pi" class="pali">
+Tamenaṁ aggahesuṁ, gahetvā etadavocuṁ:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Ngươi, Ngươi đã làm ác pháp, gìn giữ phần của mình, đánh cắp phần không cho của người khác và thưởng thức phần ấy.<br>
+<span lang="pi" class="pali">
+‘pāpakaṁ vata, bho satta, karosi, yatra hi nāma sakaṁ bhāgaṁ parirakkhanto aññataraṁ bhāgaṁ adinnaṁ ādiyitvā paribhuñjasi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Nhà Ngươi chớ có làm như vậy nữa.<br>
+<span lang="pi" class="pali">
+Māssu, bho satta, punapi evarūpamakāsī’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Thưa Bạn, vâng! Này Vāseṭṭha, người này vâng theo lời nói của những người ấy.<br>
+<span lang="pi" class="pali">
+‘Evaṁ, bho’ti kho, vāseṭṭha, so satto tesaṁ sattānaṁ paccassosi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Vāseṭṭha, một lần thứ hai…<br>
+<span lang="pi" class="pali">
+Dutiyampi kho, vāseṭṭha, so satto …pe…<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Vāseṭṭha một lần thứ ba, người này gìn giữ phần của mình, đánh cắp phần không cho của người khác và thưởng thức phần ấy.<br>
+<span lang="pi" class="pali">
+tatiyampi kho, vāseṭṭha, so satto sakaṁ bhāgaṁ parirakkhanto aññataraṁ bhāgaṁ adinnaṁ ādiyitvā paribhuñji.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Người ta bắt người này và nói:<br>
+<span lang="pi" class="pali">
+Tamenaṁ aggahesuṁ, gahetvā etadavocuṁ:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Ngươi, Ngươi đã làm điều ác, vì Ngươi gìn giữ phần của mình, đánh cắp phần không cho của người khác và thưởng thức phần ấy.<br>
+<span lang="pi" class="pali">
+‘pāpakaṁ vata, bho satta, karosi, yatra hi nāma sakaṁ bhāgaṁ parirakkhanto aññataraṁ bhāgaṁ adinnaṁ ādiyitvā paribhuñjasi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ngươi chớ có làm như vậy nữa.<br>
+<span lang="pi" class="pali">
+Māssu, bho satta, punapi evarūpamakāsī’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Có người đập anh ta bằng tay, có người đập anh ta bằng đá, có người đập anh ta bằng gậy.<br>
+<span lang="pi" class="pali">
+Aññe pāṇinā pahariṁsu, aññe leḍḍunā pahariṁsu, aññe daṇḍena pahariṁsu.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Vāseṭṭha, bắt đầu như vậy, lấy của không cho xuất hiện, quở trách xuất hiện, nói láo xuất hiện, hình phạt đánh đập xuất hiện.<br>
+<span lang="pi" class="pali">
+Tadagge kho, vāseṭṭha, adinnādānaṁ paññāyati, garahā paññāyati, musāvādo paññāyati, daṇḍādānaṁ paññāyati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+10. Chọn lựa Nhà Vua<br>
+<span lang="pi" class="pali">
+10. Mahāsammatarājā<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Vāseṭṭha, những loài hữu tình ấy hội họp lại và than khóc:<br>
+<span lang="pi" class="pali">
+Atha kho te, vāseṭṭha, sattā sannipatiṁsu, sannipatitvā anutthuniṁsu:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Tôn giả, ác pháp đã khởi lên giữa các loài hữu tình, trong hình thức lấy của không cho xuất hiện, quở trách xuất hiện, nói láo xuất hiện, hình phạt xuất hiện.<br>
+<span lang="pi" class="pali">
+‘pāpakā vata bho dhammā sattesu pātubhūtā, yatra hi nāma adinnādānaṁ paññāyissati, garahā paññāyissati, musāvādo paññāyissati, daṇḍādānaṁ paññāyissati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Chúng ta hãy đề cử một người. Người ấy sẽ tức giận khi đáng phải tức giận, khiển trách khi đáng phải khiển trách, hay tẩn xuất khi đáng phải tẩn xuất?<br>
+<span lang="pi" class="pali">
+Yannūna mayaṁ ekaṁ sattaṁ sammanneyyāma, yo no sammā khīyitabbaṁ khīyeyya, sammā garahitabbaṁ garaheyya, sammā pabbājetabbaṁ pabbājeyya.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Chúng tôi sẽ dành cho Người một phần lúa của chúng tôi.<br>
+<span lang="pi" class="pali">
+Mayaṁ panassa sālīnaṁ bhāgaṁ anuppadassāmā’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Rồi, những loài hữu tính ấy chọn người trong số họ là người hấp dẫn, dễ nhìn, đẹp đẽ, có tiếng tam, và nói:<br>
+<span lang="pi" class="pali">
+Atha kho te, vāseṭṭha, sattā yo nesaṁ satto abhirūpataro ca dassanīyataro ca pāsādikataro ca mahesakkhataro ca taṁ sattaṁ upasaṅkamitvā etadavocuṁ:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Hãy đến đây, thiện hữu, hãy tức giận những kẻ đáng phải tức giận, khiển trách những kẻ đáng phải khiển trách, hay tẩn xuất những kẻ đáng phải tẩn xuất.<br>
+<span lang="pi" class="pali">
+‘ehi, bho satta, sammā khīyitabbaṁ khīya, sammā garahitabbaṁ garaha, sammā pabbājetabbaṁ pabbājehi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Chúng tôi sẽ dành cho Người một phần lúa của chúng tôi.<br>
+<span lang="pi" class="pali">
+Mayaṁ pana te sālīnaṁ bhāgaṁ anuppadassāmā’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Xin vâng, các Tôn giả! Này Vāseṭṭha, vị hữu tình này vâng theo các vị hữu tình kia, tức giận khi đáng tức giận, khiển trách khi đáng khiển trách, tẩn xuất khi đáng tẩn xuất.<br>
+<span lang="pi" class="pali">
+‘Evaṁ, bho’ti kho, vāseṭṭha, so satto tesaṁ sattānaṁ paṭissuṇitvā sammā khīyitabbaṁ khīyi, sammā garahitabbaṁ garahi, sammā pabbājetabbaṁ pabbājesi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Chúng tôi sẽ dành cho Người một phần lúa của chúng tôi.<br>
+<span lang="pi" class="pali">
+Te panassa sālīnaṁ bhāgaṁ anuppadaṁsu.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Vāseṭṭha, được lựa chọn bởi đại chúng, tức là Mahā-sammato. Danh từ Mahā-sammato là danh từ đầu tiên được khởi lên.<br>
+<span lang="pi" class="pali">
+Mahājanasammatoti kho, vāseṭṭha, ‘mahāsammato, mahāsammato’ tveva paṭhamaṁ akkharaṁ upanibbattaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Vāseṭṭha, “Vị chủ của ruộng vườn” tức là Khattiyā, là danh từ thứ hai được khởi lên “Làm cho các người khác hoan hỷ bởi Pháp”, tức là Rāja (vị vua). Rāja là danh từ thứ ba được khởi lên.<br>
+<span lang="pi" class="pali">
+Khettānaṁ adhipatīti kho, vāseṭṭha, ‘khattiyo, khattiyo’ tveva dutiyaṁ akkharaṁ upanibbattaṁ. Dhammena pare rañjetīti kho, vāseṭṭha, ‘rājā, rājā’ tveva tatiyaṁ akkharaṁ upanibbattaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Vāseṭṭha, như vậy là sự khởi lên nguồn gốc giới vức xã hội của Khattiya theo danh từ truyền thống cổ xưa. Nguồn gốc của chúng ta ở giữa những loài hữu tình ấy, không ở ngoài loại nào khác, một cách đúng pháp tắc (dhamma), không phải phi pháp.<br>
+<span lang="pi" class="pali">
+Iti kho, vāseṭṭha, evametassa khattiyamaṇḍalassa porāṇena aggaññena akkharena abhinibbatti ahosi tesaṁyeva sattānaṁ, anaññesaṁ. Sadisānaṁyeva, no asadisānaṁ. Dhammeneva, no adhammena.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Vāseṭṭha, như vậy Pháp là tối thượng ở đời, trong hiện tại và cả cho đời sau.<br>
+<span lang="pi" class="pali">
+Dhammo hi, vāseṭṭha, seṭṭho janetasmiṁ diṭṭhe ceva dhamme abhisamparāyañca.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+11. Giai cấp Bà-la-môn<br>
+<span lang="pi" class="pali">
+11. Brāhmaṇamaṇḍala<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Vāseṭṭha, một số các vị hữu tình suy nghĩ:<br>
+<span lang="pi" class="pali">
+Atha kho tesaṁ, vāseṭṭha, sattānaṁyeva ekaccānaṁ etadahosi:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này các Tôn giả, các ác, bất thiện pháp đã hiện ra giữa các loại hữu tình, như lấy của không cho, khiển trách, nói láo, hình phạt, tẩn xuất.<br>
+<span lang="pi" class="pali">
+‘pāpakā vata, bho, dhammā sattesu pātubhūtā, yatra hi nāma adinnādānaṁ paññāyissati, garahā paññāyissati, musāvādo paññāyissati, daṇḍādānaṁ paññāyissati, pabbājanaṁ paññāyissati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Chúng ta hãy loại bỏ các ác, bất thiện pháp.<br>
+<span lang="pi" class="pali">
+Yannūna mayaṁ pāpake akusale dhamme vāheyyāmā’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Và họ loại bỏ các ác, bất thiện pháp.<br>
+<span lang="pi" class="pali">
+Te pāpake akusale dhamme vāhesuṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Các vị ấy loại bỏ các ác, bất thiện pháp, tức là Brāhmanā (Bà-la-môn), và chữ Brāhmanā là danh từ đầu tiên được khởi lên.<br>
+<span lang="pi" class="pali">
+Pāpake akusale dhamme vāhentīti kho, vāseṭṭha, ‘brāhmaṇā, brāhmaṇā’ tveva paṭhamaṁ akkharaṁ upanibbattaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Những vị nầy lập lên những chòi bằng lá tại các khu rừng và tu thiền trong những nhà chòi bằng lá ấy. Ðối với họ, than đỏ được dập tắt, khói được tiêu tan, cối và chầy rơi ngả nghiêng, buổi chiều lo buổi ăn chiều, buổi sáng lo buổi ăn sáng; họ đi vào làng, vào thị xã, vào kinh đô để khất thực.<br>
+<span lang="pi" class="pali">
+Te araññāyatane paṇṇakuṭiyo karitvā paṇṇakuṭīsu jhāyanti vītaṅgārā vītadhūmā pannamusalā sāyaṁ sāyamāsāya pāto pātarāsāya gāmanigamarājadhāniyo osaranti ghāsamesamānā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Khi họ xin được đồ ăn rồi, họ lại vào các chòi lá trong các khu rừng để tu thiền.<br>
+<span lang="pi" class="pali">
+Te ghāsaṁ paṭilabhitvā punadeva araññāyatane paṇṇakuṭīsu jhāyanti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Các người khác thấy vậy, nói như sau:<br>
+<span lang="pi" class="pali">
+Tamenaṁ manussā disvā evamāhaṁsu:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Này các Tôn giả, những loài hữu tình này lập lên những chòi bằng lá tại các khu rừng và tu thiền trong những chòi bằng lá ấy. Ðối với họ, than đỏ được dập tắt, khói được tiêu tan, cối và chầy rơi ngả nghiêng, buổi chiều lo ăn buổi ăn chiều, buổi sáng lo buổi ăn sáng; họ đi vào làng, vào thị xã, vào kinh đô để khất thực.<br>
+<span lang="pi" class="pali">
+‘ime kho, bho, sattā araññāyatane paṇṇakuṭiyo karitvā paṇṇakuṭīsu jhāyanti, vītaṅgārā vītadhūmā pannamusalā sāyaṁ sāyamāsāya pāto pātarāsāya gāmanigamarājadhāniyo osaranti ghāsamesamānā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Khi xin được đồ ăn rồi, họ lại vào các chòi lá trong khu rừng để tu thiền.<br>
+<span lang="pi" class="pali">
+Te ghāsaṁ paṭilabhitvā punadeva araññāyatane paṇṇakuṭīsu jhāyantī’ti,<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Vāseṭṭha, họ “Jhāyanti”, tu thiền, tức là họ suy tư Jhāyakā. Jhāyakā là danh từ thứ hai được khởi lên.<br>
+<span lang="pi" class="pali">
+jhāyantīti kho, vāseṭṭha, ‘jhāyakā, jhāyakā’ tveva dutiyaṁ akkharaṁ upanibbattaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Vāseṭṭha,, một số loài hữu tình này, không thể tu thiền trong các chòi bằng lá tại khu rừng, liền đi xuống xung quanh làng, xuống xung quanh thị xã để làm sách.<br>
+<span lang="pi" class="pali">
+Tesaṁyeva kho, vāseṭṭha, sattānaṁ ekacce sattā araññāyatane paṇṇakuṭīsu taṁ jhānaṁ anabhisambhuṇamānā gāmasāmantaṁ nigamasāmantaṁ osaritvā ganthe karontā acchanti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Các người khác thấy vậy bèn nói:<br>
+<span lang="pi" class="pali">
+Tamenaṁ manussā disvā evamāhaṁsu:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Này các Tôn giả, những loài hữu tình này, không thể tu thiền trong các chòi bằng lá tại khu rừng, đã đi xuống xung quanh làng, xuống xung quanh thị xã để làm sách. Nay những vị này không tu thiền.”<br>
+<span lang="pi" class="pali">
+‘ime kho, bho, sattā araññāyatane paṇṇakuṭīsu taṁ jhānaṁ anabhisambhuṇamānā gāmasāmantaṁ nigamasāmantaṁ osaritvā ganthe karontā acchanti, na dānime jhāyantī’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Vāseṭṭha, “họ không tu thiền” tức là ajjhāyakā, và ajjhāyakā (các vị lập lại các tập sách Vedā), cũng có nghĩa là những người không tu thiền, là chữ thứ ba được khởi lên.<br>
+<span lang="pi" class="pali">
+Na dānime jhāyantīti kho, vāseṭṭha, ‘ajjhāyakā, ajjhāyakā’ tveva tatiyaṁ akkharaṁ upanibbattaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Vāseṭṭha, thời ấy họ thuộc hạ cấp. Nay họ xem là cao thượng nhất.<br>
+<span lang="pi" class="pali">
+Hīnasammataṁ kho pana, vāseṭṭha, tena samayena hoti, tadetarahi seṭṭhasammataṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Như vậy, này Vāseṭṭha là sự khởi lên nguồn gốc giới vức xã hội của các Bà-la-môn, theo danh từ truyền thống cổ xưa. Nguồn gốc của họ là ở giữa những loài hữu tình ấy, không ở ngoài loại nào khác một cách đúng phép tắc, không phải phi pháp.<br>
+<span lang="pi" class="pali">
+Iti kho, vāseṭṭha, evametassa brāhmaṇamaṇḍalassa porāṇena aggaññena akkharena abhinibbatti ahosi tesaṁyeva sattānaṁ, anaññesaṁ sadisānaṁyeva no asadisānaṁ dhammeneva, no adhammena.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Vāseṭṭha, như vậy Pháp là tối thượng ở đời, trong hiện tại và cả cho đời sau.<br>
+<span lang="pi" class="pali">
+Dhammo hi, vāseṭṭha, seṭṭho janetasmiṁ diṭṭhe ceva dhamme abhisamparāyañca.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+12. Giai cấp Phệ-xá (buôn bán)<br>
+<span lang="pi" class="pali">
+12. Vessamaṇḍala<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Vāseṭṭha, một số loài hữu tình này, theo pháp dâm dục, thiết lập các nghề nghiệp sai khác (Vissuta).<br>
+<span lang="pi" class="pali">
+Tesaṁyeva kho, vāseṭṭha, sattānaṁ ekacce sattā methunaṁ dhammaṁ samādāya visukammante payojesuṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Vāseṭṭha, những ai theo pháp dâm dục, thiết lập ra các nghề nghiệp sai khác, như vậy gọi là Vessā. Danh từ Vessā được khởi lên.<br>
+<span lang="pi" class="pali">
+Methunaṁ dhammaṁ samādāya visukammante payojentīti kho, vāseṭṭha, ‘vessā, vessā’ tveva akkharaṁ upanibbattaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Như vậy, này Vāseṭṭha là sự khởi lên nguồn gốc giới vức xã hội của các Vessā, theo danh từ truyền thống cổ xưa. Nguồn gốc của họ là ở giữa các loài hữu tình ấy, không ở ngoài loại nào khác, một cách đúng phép tắc, không phải phi pháp.<br>
+<span lang="pi" class="pali">
+Iti kho, vāseṭṭha, evametassa vessamaṇḍalassa porāṇena aggaññena akkharena abhinibbatti ahosi tesaññeva sattānaṁ anaññesaṁ sadisānaṁyeva, no asadisānaṁ, dhammeneva no adhammena.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Vāseṭṭha, như vậy Pháp là tối thượng ở đời, trong hiện tại và cả cho đời sau.<br>
+<span lang="pi" class="pali">
+Dhammo hi, vāseṭṭha, seṭṭho janetasmiṁ diṭṭhe ceva dhamme abhisamparāyañca.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+13. Giai cấp Thủ-đà-la<br>
+<span lang="pi" class="pali">
+13. Suddamaṇḍala<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Vāseṭṭha, một số loài hữu tình còn lại lựa chọn săn bắn.<br>
+<span lang="pi" class="pali">
+Tesaññeva kho, vāseṭṭha, sattānaṁ ye te sattā avasesā te luddācārā khuddācārā ahesuṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Những ai sống săn bắn và theo các nghề hèn nhỏ, này Vāseṭṭha, được gọi là Suddā. Và danh từ Suddā được khởi lên.<br>
+<span lang="pi" class="pali">
+Luddācārā khuddācārāti kho, vāseṭṭha, ‘suddā, suddā’ tveva akkharaṁ upanibbattaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Như vậy, này Vāseṭṭha, là sự khởi lên nguồn gốc giới vức xã hội của các Suddā, theo danh từ truyền thống cổ xưa. Nguồn gốc của chúng là ở giữa các loài hữu tình ấy, không ở ngoài loại nào khác, một cách đúng phép tắc, không phải phi pháp.<br>
+<span lang="pi" class="pali">
+Iti kho, vāseṭṭha, evametassa suddamaṇḍalassa porāṇena aggaññena akkharena abhinibbatti ahosi tesaṁyeva sattānaṁ anaññesaṁ, sadisānaṁyeva no asadisānaṁ, dhammeneva, no adhammena.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Vāseṭṭha như vậy Pháp là tối thượng ở đời, trong hiện tại và cả cho đời sau.<br>
+<span lang="pi" class="pali">
+Dhammo hi, vāseṭṭha, seṭṭho janetasmiṁ diṭṭhe ceva dhamme abhisamparāyañca.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Vāseṭṭha, một thời có vị Khattiya (Sát đế lỵ) tự trách pháp của mình, xuất gia, từ bỏ gia đình, sống không gia đình:<br>
+<span lang="pi" class="pali">
+Ahu kho so, vāseṭṭha, samayo, yaṁ khattiyopi sakaṁ dhammaṁ garahamāno agārasmā anagāriyaṁ pabbajati:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Tôi sẽ sống làm người Sa môn”.<br>
+<span lang="pi" class="pali">
+‘samaṇo bhavissāmī’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vị Bà-la-môn, tự trách pháp của mình, xuất gia, từ bỏ gia đình, sống không gia đình: “Tôi sẽ sống làm người Sa môn”.<br>
+<span lang="pi" class="pali">
+Brāhmaṇopi kho, vāseṭṭha …pe…<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vị Vessā, tự trách pháp của mình, xuất gia từ bỏ gia đình, sống không gia đình: “Tôi sẽ sống làm người Sa môn”.<br>
+<span lang="pi" class="pali">
+vessopi kho, vāseṭṭha …pe…<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vị Suddā, tự trách pháp của mình, xuất gia từ bỏ gia đình, sống không gia đình: “Tôi sẽ sống làm người Sa môn”.<br>
+<span lang="pi" class="pali">
+suddopi kho, vāseṭṭha, sakaṁ dhammaṁ garahamāno agārasmā anagāriyaṁ pabbajati: ‘samaṇo bhavissāmī’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Vāseṭṭha, giai cấp Samana (Sa môn) được khởi lên từ bốn giai cấp ấy. Nguồn gốc của Sa môn là ở giữa các loài hữu tình ấy, không ở ngoài loại nào khác, một cách đúng phép tắc, không phải phi pháp.<br>
+<span lang="pi" class="pali">
+Imehi kho, vāseṭṭha, catūhi maṇḍalehi samaṇamaṇḍalassa abhinibbatti ahosi, tesaṁyeva sattānaṁ anaññesaṁ, sadisānaṁyeva no asadisānaṁ, dhammeneva no adhammena.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Vāseṭṭha, như vậy Pháp là tối thượng ở đời, trong hiện tại và cả cho đời sau.<br>
+<span lang="pi" class="pali">
+Dhammo hi, vāseṭṭha, seṭṭho janetasmiṁ diṭṭhe ceva dhamme abhisamparāyañca.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+14. Tà hạnh<br>
+<span lang="pi" class="pali">
+14. Duccaritādikathā<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Vāseṭṭha, vị Khattiya, làm tà hạnh về thân, làm tà hạnh về miệng, làm tà hạnh về ý, có tà kiến. Do tà kiến, tà nghiệp làm nhơn duyên, sau khi thân hoại mạng chung sanh vào khổ giới, ác thú, đọa xứ, địa ngục.<br>
+<span lang="pi" class="pali">
+Khattiyopi kho, vāseṭṭha, kāyena duccaritaṁ caritvā vācāya duccaritaṁ caritvā manasā duccaritaṁ caritvā micchādiṭṭhiko micchādiṭṭhikammasamādāno micchādiṭṭhikammasamādānahetu kāyassa bhedā paraṁ maraṇā apāyaṁ duggatiṁ vinipātaṁ nirayaṁ upapajjati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Vāseṭṭha, vị Bà-la-môn …<br>
+<span lang="pi" class="pali">
+Brāhmaṇopi kho, vāseṭṭha …pe…<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Vāseṭṭha, vị Vessā …<br>
+<span lang="pi" class="pali">
+vessopi kho, vāseṭṭha …<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Vāseṭṭha, vị Suddā …<br>
+<span lang="pi" class="pali">
+suddopi kho, vāseṭṭha …<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Vāseṭṭha, làm tà hạnh về thân, làm tà hạnh về miệng, làm tà hạnh về ý, có tà kiến. Do tà kiến, tà nghiệp làm nhơn duyên, sau khi thân hoại mạng chung, sanh vào khổ giới, ác thú, đọa xứ, địa ngục.<br>
+<span lang="pi" class="pali">
+samaṇopi kho, vāseṭṭha, kāyena duccaritaṁ caritvā vācāya duccaritaṁ caritvā manasā duccaritaṁ caritvā micchādiṭṭhiko micchādiṭṭhikammasamādāno micchādiṭṭhikammasamādānahetu kāyassa bhedā paraṁ maraṇā apāyaṁ duggatiṁ vinipātaṁ nirayaṁ upapajjati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Vāseṭṭha, vị Khattiya làm chánh hạnh về thân, chánh hạnh về miệng, chánh hạnh về ý, có chánh kiến. Do chánh kiến, chánh nghiệp làm nhơn duyên, sau khi thân hoại mạng chung, sanh vào thiện thú, Thiên giới.<br>
+<span lang="pi" class="pali">
+Khattiyopi kho, vāseṭṭha, kāyena sucaritaṁ caritvā vācāya sucaritaṁ caritvā manasā sucaritaṁ caritvā sammādiṭṭhiko sammādiṭṭhikammasamādāno sammādiṭṭhikammasamādānahetu kāyassa bhedā paraṁ maraṇā sugatiṁ saggaṁ lokaṁ upapajjati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Vāseṭṭha, vị Bà-la-môn…<br>
+<span lang="pi" class="pali">
+Brāhmaṇopi kho, vāseṭṭha …pe…<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Vāseṭṭha, vị Sessā…<br>
+<span lang="pi" class="pali">
+vessopi kho, vāseṭṭha …<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Vāseṭṭha, vị Suddā …<br>
+<span lang="pi" class="pali">
+suddopi kho, vāseṭṭha …<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Vāseṭṭha, làm chánh hạnh về thân, chánh hạnh về miệng, chánh hạnh về ý, có chánh kiến. Do chánh kiến, chánh nghiệp làm nhơn duyên, sau khi thân hoại mạng chung, sanh vào thiện thú, Thiên giới.<br>
+<span lang="pi" class="pali">
+samaṇopi kho, vāseṭṭha, kāyena sucaritaṁ caritvā vācāya sucaritaṁ caritvā manasā sucaritaṁ caritvā sammādiṭṭhiko sammādiṭṭhikammasamādāno sammādiṭṭhikammasamādānahetu kāyassa bhedā paraṁ maraṇā sugatiṁ saggaṁ lokaṁ upapajjati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Vāseṭṭha, vị Khattiya, làm hai hạnh về thân, hai hạnh về miệng, hai hạnh về ý, có chánh kiến tà kiến lẫn lộn. Do chánh kiến tà kiến, chánh hạnh tà hạnh lẫn lộn làm nhân duyên, sau khi thân hoại mạng chung, thọ lãnh lạc và khổ thọ.<br>
+<span lang="pi" class="pali">
+Khattiyopi kho, vāseṭṭha, kāyena dvayakārī, vācāya dvayakārī, manasā dvayakārī, vimissadiṭṭhiko vimissadiṭṭhikammasamādāno vimissadiṭṭhikammasamādānahetu kāyassa bhedā paraṁ maraṇā sukhadukkhappaṭisaṁvedī hoti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Vāseṭṭha, vị Bà-la-môn…<br>
+<span lang="pi" class="pali">
+Brāhmaṇopi kho, vāseṭṭha …pe…<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Vāseṭṭha, vị Vessā…<br>
+<span lang="pi" class="pali">
+vessopi kho, vāseṭṭha …<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Vāseṭṭha, vị Suddā,…<br>
+<span lang="pi" class="pali">
+suddopi kho, vāseṭṭha …<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Vāseṭṭha, làm hai hạnh về thân, hai hạnh về miệng, hai hạnh về ý, có chánh kiến, có tà kiến lẫn lộn. Do chánh kiến tà kiến, chánh hạnh tà hạnh lẫn lộn làm nhơn duyên, sau khi thân hoại mạng chung, thọ lãnh lạc và khổ thọ.<br>
+<span lang="pi" class="pali">
+samaṇopi kho, vāseṭṭha, kāyena dvayakārī, vācāya dvayakārī, manasā dvayakārī, vimissadiṭṭhiko vimissadiṭṭhikammasamādāno vimissadiṭṭhikammasamādānahetu kāyassa bhedā paraṁ maraṇā sukhadukkhappaṭisaṁvedī hoti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+15. Phẩm chất đưa tới giác ngộ<br>
+<span lang="pi" class="pali">
+15. Bodhipakkhiyabhāvanā<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Vāseṭṭha, vị Khattiya, chế ngự về thân, chế ngự về miệng, chế ngự về ý, sau khi tu tập Bảy pháp Giác chi đã diệt trừ hoàn toàn (các ác pháp) ngay trong đời hiện tại.<br>
+<span lang="pi" class="pali">
+Khattiyopi kho, vāseṭṭha, kāyena saṁvuto vācāya saṁvuto manasā saṁvuto sattannaṁ bodhipakkhiyānaṁ dhammānaṁ bhāvanamanvāya diṭṭheva dhamme parinibbāyati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Vāseṭṭha, vị Bà-la-môn…<br>
+<span lang="pi" class="pali">
+Brāhmaṇopi kho, vāseṭṭha …pe…<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Vāseṭṭha, vị Vessā…<br>
+<span lang="pi" class="pali">
+vessopi kho, vāseṭṭha …<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Vāseṭṭha, vị Suddā,…<br>
+<span lang="pi" class="pali">
+suddopi kho, vāseṭṭha …<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Vāseṭṭha, chế ngự về thân, chế ngự về miệng, chế ngự về ý, sau khi tu tập Bảy pháp Giác chi đã diệt trừ hoàn toàn (các ác pháp) ngay trong đời hiện tại.<br>
+<span lang="pi" class="pali">
+samaṇopi kho, vāseṭṭha, kāyena saṁvuto vācāya saṁvuto manasā saṁvuto sattannaṁ bodhipakkhiyānaṁ dhammānaṁ bhāvanamanvāya diṭṭheva dhamme parinibbāyati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Vāseṭṭha, trong bốn giai cấp này, vị Tỷ kheo, là bậc A la hán, lậu hoặc đã diệt tận, việc phải làm đã làm, gánh nặng đã đặt xuống, mục tiêu đã đạt tới, hữu kiết sử đã trừ diệt, chánh trí giải thoát. Vị ấy được gọi là tối thượng trong tất cả giai cấp, đúng với Chánh pháp, không phải phi pháp.<br>
+<span lang="pi" class="pali">
+Imesañhi, vāseṭṭha, catunnaṁ vaṇṇānaṁ yo hoti bhikkhu arahaṁ khīṇāsavo vusitavā katakaraṇīyo ohitabhāro anuppattasadattho parikkhīṇabhavasaṁyojano sammadaññāvimutto, so nesaṁ aggamakkhāyati dhammeneva, no adhammena.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Vāseṭṭha, như vậy Pháp là tối thượng ở đời, trong hiện tại và cho cả đời sau.<br>
+<span lang="pi" class="pali">
+Dhammo hi, vāseṭṭha, seṭṭho janetasmiṁ diṭṭhe ceva dhamme abhisamparāyañca.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Vāseṭṭha, bài kệ sau đây được Phạm thiên Sanaṅkumāra (Thường Ðồng hình Phạm thiên) tuyên thuyết:<br>
+<span lang="pi" class="pali">
+Brahmunā pesā, vāseṭṭha, sanaṅkumārena gāthā bhāsitā:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Chúng sanh tin giai cấp, Sát đế lỵ tối thắng. Ai đủ cả trí, đức, Tối thắng giữa Nhân, Thiên.<br>
+<span lang="pi" class="pali">
+‘Khattiyo seṭṭho janetasmiṁ, ye gottapaṭisārino; Vijjācaraṇasampanno, so seṭṭho devamānuse’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Vāseṭṭha, bài kệ này được Phạm thiên Sanaṅkumāra, khéo hát chớ không phải vụng hát, khéo nói chớ không phải vụng nói, đầy đủ ý nghĩa chớ không phải không đầy đủ, được Ta chấp nhận.<br>
+<span lang="pi" class="pali">
+Sā kho panesā, vāseṭṭha, brahmunā sanaṅkumārena gāthā sugītā, no duggītā. Subhāsitā, no dubbhāsitā. Atthasaṁhitā, no anatthasaṁhitā. Anumatā mayā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Vāseṭṭha, Ta cũng nói như sau:<br>
+<span lang="pi" class="pali">
+Ahampi, vāseṭṭha, evaṁ vadāmi—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Chúng sanh tin giai cấp, Sát đế lỵ tối thắng. Ai đủ cả trí, đức, Tối thắng giữa Nhân, Thiên.<br>
+<span lang="pi" class="pali">
+Khattiyo seṭṭho janetasmiṁ, ye gottapaṭisārino; Vijjācaraṇasampanno, so seṭṭho devamānuse”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Thế Tôn thuyết giảng như vậy.<br>
+<span lang="pi" class="pali">
+Idamavoca bhagavā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vāseṭṭha và Bhāradvāja hoan hỷ tín thọ lời giảng Thế Tôn.<br>
+<span lang="pi" class="pali">
+Attamanā vāseṭṭhabhāradvājā bhagavato bhāsitaṁ abhinandunti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Dứt bài kinh Khởi Thế Nhân Bổn<br>
+<span lang="pi" class="pali">
+Aggaññasuttaṁ niṭṭhitaṁ catutthaṁ.<br>
+</span>
+</p>
+
+
+
+<!-- COPY CONTENT SUTTA Ở ĐÂY -->
+
+
+
+<br>
+<p><p style="text-align: right;font-style: italic;">Hoà Thượng Thích Minh Châu dịch Việt</span></p>
+
+
+
+</section>  <!-- End English and Pali -->
+
+
+
+
+
+</section>  <!-- End English and Pali -->
+
+
+
+
+
+</section>  <!-- End English and Pali -->
+<div id="nextprev"><a id="previous-sutta" href="./dn26.html#content"></a><a id="next-sutta" href="./dn28.html#content"></a></div>
+</div>  <!--End Content -->
+</div>  <!-- End Page -->
+
+
+
+
+
+
+<footer>
+					 <!-- End bottom links -->
+</footer>
+
+
+ 
+ <!-- Scripts -->
+
+ <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      if (typeof enablePaliLookup === "function") {
+        enablePaliLookup();
+      } else {
+        console.error("enablePaliLookup is not defined");
+      }
+    });
+  </script>
+
+ <script>
+ // Script to open and close sidebar
+ 	function w3_open() {
+ 	document.getElementById("mySidebar").style.display = "block";
+ 	}
+ 		function w3_close() {
+ 		document.getElementById("mySidebar").style.display = "none";
+ 	}
+ </script>
+ <script>
+ 		var app = document.getElementsByTagName("BODY")[0];
+ 		if (localStorage.lightMode == "dark") {
+ 			app.setAttribute("light-mode", "dark");
+ 	}
+ </script>
+ 
+ <script>
+ 		function toggle_light_mode() {
+ 			var app = document.getElementsByTagName("BODY")[0];
+ 				if (localStorage.lightMode == "dark") {
+ 			localStorage.lightMode = "light";
+ 			app.setAttribute("light-mode", "light");
+ 		} else {
+ 					localStorage.lightMode = "dark";
+ 					app.setAttribute("light-mode", "dark");
+ 	}
+ 		}
+ 
+ 		window.addEventListener("storage", function () {
+ 			if (localStorage.lightMode == "dark") {
+ 				app.setAttribute("light-mode", "dark");
+ 				} else {
+ 				app.setAttribute("light-mode", "light");
+ 		}
+ 		}, false);
+ 
+ </script>
+ <script src="../js/footer.js"></script><script src="../js/dpd_deconstructor.js"></script><script src="../js/dpd_ebts.js"></script><script src="../js/dpd_i2h.js"></script>
+ <script src="/sw.js"></script>
+ </body>
+ </html>

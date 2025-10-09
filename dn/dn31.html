@@ -1,0 +1,1750 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+ 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+ 	<link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+ 	<meta name="viewport" content="width=device-width, initial-scale=1">
+		<!-- Loading manifest -->
+	<link rel="manifest" href="../manifest.json">
+ 	<!-- Loading main and menu stylesheets -->
+ 	<link rel="stylesheet" href="../css/w3.css">
+ 	<link rel="stylesheet" href="../css/css.css">
+ 	<link rel="stylesheet" href="../css/menu.css">
+ 	<script src="../js/jquery-1.10.2.min.js"></script>
+ 	<script src="../js/controlpanel.js"></script>
+ 	<script src="../js/mousetrap.min.js"></script>
+    <script src="../js/pali-lookup-standalone.js"></script>
+
+ <script src="../js/suttaFiles.js"></script>
+<script>
+ // Script to open random Sutta
+ function openRandomSutta() {
+  const randomIndex = Math.floor(Math.random() * suttaFiles.length);
+  const selectedFile = suttaFiles[randomIndex];
+
+  // Get root path of your site 
+  const currentPath = location.pathname;
+  const rootPath = currentPath.split("/").slice(0, -2).join("/") + "/";
+
+  // Redirect to the correct file
+  window.location.href = rootPath + selectedFile;
+}
+</script>
+
+
+</head>
+ <body class="container">
+ <div class="header-background">
+ <!-- Header -->
+ <div class="w3-header w3-content w3-padding w3-left-align bwcontainer">
+ 	<div class="centered">
+ 		<button class="light-mode-button" aria-label="Bật Chế Độ Sáng" onclick="toggle_light_mode()">
+ 			<span></span>
+ 			<span></span>
+ 		</button>
+ 		<span class="box-lbl">Sáng/Tối</span>
+ 	</div> <!-- Centered -->
+ 		<a href="../home/index.html" id="bwlogo"><img src="../images/headerlogo.png" alt="Logo Lời Của Đức Phật" class="w3-image"></a>
+ 		<div class="w3-bar bwcontainer">
+ 			<div id="searchlinks">
+ 			<a href="../home/visearch.html"><span class="w3-bar-item"><i class="fa fa-search"></i>&nbsp;Tìm Tiếng Việt</span></a>
+ 			<a href="../home/palisearch.html"><span class="w3-bar-item"><i class="fa fa-search"></i>&nbsp;Tìm Tiếng Pali</span></a>
+ 			</div><!-- End Searchlinks div -->
+ 			<div class="help"><span><a href="../home/help.html"><img src="../images/help_icon.png" title="Trợ Giúp" alt="Help"></a></span></div>
+ 		</div> <!-- End w3-bar bwcontainer --> 	</div> <!-- End w3-header w3-content w3-padding w3-left-align bwcontainer -->
+ </div> <!-- End header-background -->
+ <!-- Top menu -->
+
+ <div class="w3-main w3-white bwcontainer2">
+ 	<div class="w3-button w3-padding-8 w3-left w3-hide-large" onclick="w3_open()">☰</div>
+ 		<div id="navbar" class="w3-hide-small w3-hide-medium bwcontainer3">
+ 			<ul id="css3menu0">
+ 				<li class="topfirst" id="home"><a href="../home/index.html" class="w3-hide-small">Trang Chủ</a></li>
+  				<li class="topmenu" id="dn"><a href="../dn/dn.html" class="pressed w3-hide-small">Trường Bộ Kinh</a></li>
+ 				<li class="topmenu" id="mn"><a href="../mn/mn.html" class="w3-hide-small">Trung Bộ Kinh</a></li>
+ 				<li class="topmenu" id="sn"><a href="../sn/sn.html" class="w3-hide-small"><i class="fa fa-caret-down"></i>&nbsp;Tương Ưng Bộ Kinh</a>
+ 					<ul>
+ 						<li><a href="../sn/sn01.html" class="w3-hide-small">Tập I - Thiên Có Kệ</a></li>
+ 						<li><a href="../sn/sn02.html" class="w3-hide-small">Tập II - Thiên Nhân Duyên</a></li>
+ 						<li><a href="../sn/sn03.html" class="w3-hide-small">Tập III - Thiên Uẩn</a></li>
+ 						<li><a href="../sn/sn04.html" class="w3-hide-small">Tập IV - Thiên Sáu Xứ</a></li>
+ 						<li><a href="../sn/sn05.html" class="w3-hide-small">Tập V - Thiên Ðại Phẩm</a></li>
+ 					</ul>
+ 				<li class="topmenu" id="an"><a href="../an/an.html" class="w3-hide-small"><i class="fa fa-caret-down"></i>&nbsp;Tăng Chi Bộ Kinh</a>
+ 					<ul>
+ 						<li><a href="../an/an1.html" class="w3-hide-small">Chương Một Pháp</a></li>
+ 						<li><a href="../an/an2.html" class="w3-hide-small">Chương Hai Pháp</a></li>
+ 						<li><a href="../an/an3.html" class="w3-hide-small">Chương Ba Pháp</a></li>
+ 						<li><a href="../an/an4.html" class="w3-hide-small">Chương Bốn Pháp</a></li>
+ 						<li><a href="../an/an5.html" class="w3-hide-small">Chương Năm Pháp</a></li>
+ 						<li><a href="../an/an6.html" class="w3-hide-small">Chương Sáu Pháp</a></li>
+ 						<li><a href="../an/an7.html" class="w3-hide-small">Chương Bảy Pháp</a></li>
+ 						<li><a href="../an/an8.html" class="w3-hide-small">Chương Tám Pháp</a></li>
+ 						<li><a href="../an/an9.html" class="w3-hide-small">Chương Chín Pháp</a></li>
+ 						<li><a href="../an/an10.html" class="w3-hide-small">Chương Mười Pháp</a></li>
+ 						<li><a href="../an/an11.html" class="w3-hide-small">Chương Mười Một Pháp</a></li>
+ 					</ul>
+ 				</li>
+ 				<li class="topmenu" id="kn"><a href="../kn/kn.html" class="w3-hide-small"><i class="fa fa-caret-down"></i>&nbsp;Tiểu Bộ Kinh</a>
+ 					<ul>
+ 						<li><a href="../kp/kp.html" class="w3-hide-small">Kinh Tiểu Tụng</a></li>
+ 						<li><a href="../dhp/dhp.html" class="w3-hide-small">Kinh Pháp Cú</a></li>
+ 						<li><a href="../snp/snp.html" class="w3-hide-small">Kinh Tập</a></li>
+ 						<li><a href="../ud/ud.html" class="w3-hide-small">Kinh Phật Tự Thuyết</a></li>
+ 						<li><a href="../it/it.html" class="w3-hide-small">Kinh Phật Thuyết Như Vậy</a></li>
+ 						<li><a href="../tha/tha.html" class="w3-hide-small">Trưởng Lão Tăng Kệ</a></li>
+ 						<li><a href="../thi/thi.html" class="w3-hide-small">Trưởng Lão Ni Kệ</a></li>
+ 					</ul>
+ 				</li>
+				<li class="toplast" id="rd"><a href="../rd/rd.html" class="w3-hide-small"></i>Kinh Ngẫu Nhiên Theo Nhóm</a>
+ 					</ul>
+ 				</li>
+ 			</ul>
+ 			</div>
+ 		</div> <!--navbar-->
+
+<!-- Sidebar (hidden by default) -->
+ <nav class="w3-sidebar w3-bar-block w3-card w3-border w3-top w3-animate-left w3-hide-large" id="mySidebar">
+ 	<a href="javascript:void(0)" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-times fa-2x red-color"></i>&nbsp;&nbsp;&nbsp;Close</a><!-- Hides the sidebar when clicked -->
+ 		<div class="w3-bar-block w3-white">
+ 			<a href="../home/index.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-home fa-lg"></i>&nbsp;&nbsp;&nbsp;Home</a>
+ 			<a href="../guide/guide.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Guide</a>
+ 			<a href="../dn/dn.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Trường Bộ Kinh</a>
+ 			<a href="../mn/mn.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Trung Bộ Kinh</a>
+ 			<a href="../sn/sn.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Tương Ưng Bộ Kinh</a>
+ 			<a href="../an/an.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Tăng Chi Bộ Kinh
+ 			<a href="../kn/kn.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Tiểu Bộ Kinh</a>
+			<a href="../rd/rd.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>Kinh Ngẫu Nhiên Theo Nhóm</a>
+ 		</div>
+ </nav>
+ 
+ 
+ 
+   <!-- !PAGE CONTENT! --> 
+<div class="w3-main w3-content w3-padding w3-left-align bwcontainer4">
+<div id="content">
+<h2>Dīgha Nikāya – Trường Bộ Kinh</h2>
+<h5><span style="font-style: italic;">Hoà Thượng Thích Minh Châu dịch Việt</span></h5>
+
+</div>
+
+<br>
+ 	<title>         Trường Bộ 31          </title>
+
+
+<p lang="vi" class="vi"; style="text-align: center">
+Trường Bộ 31<br>
+<span lang="pi" class="pali">
+Dīgha Nikāya 31<br>
+</span>
+</p>
+
+<p lang="vi" class="vi"; style="text-align: center">
+Kinh Thiện Sanh<br>
+(Giáo Thọ Thi Ca La Việt)<br>
+<span lang="pi" class="pali">
+Siṅgālasutta<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Như vậy tôi nghe.<br>
+<span lang="pi" class="pali">
+Evaṁ me sutaṁ—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Một thời Thế Tôn sống ở Rājagaha (Vương Xá thành), tại Veḷuvana (Trúc Lâm), Kalandakanivāpa (chỗ tìm ăn của loài sóc).<br>
+<span lang="pi" class="pali">
+ekaṁ samayaṁ bhagavā rājagahe viharati veḷuvane kalandakanivāpe.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Lúc bấy giờ, Singālaka (Thi-ca-la-việt), gia chủ tử, dậy sớm, ra khỏi thành Vương Xá, với áo thấm nước, với tóc thấm nước, chấp tay đảnh lễ các phương hướng—<br>
+<span lang="pi" class="pali">
+Tena kho pana samayena siṅgālako gahapatiputto kālasseva uṭṭhāya rājagahā nikkhamitvā allavattho allakeso pañjaliko puthudisā namassati—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Hướng Ðông, hướng Nam, hướng Tây, hướng Bắc, hướng Hạ, hướng Thượng.<br>
+<span lang="pi" class="pali">
+puratthimaṁ disaṁ dakkhiṇaṁ disaṁ pacchimaṁ disaṁ uttaraṁ disaṁ heṭṭhimaṁ disaṁ uparimaṁ disaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Rồi Thế Tôn buổi sáng đắp y, cầm y bát vào thành Vương Xá khất thực.<br>
+<span lang="pi" class="pali">
+Atha kho bhagavā pubbaṇhasamayaṁ nivāsetvā pattacīvaramādāya rājagahaṁ piṇḍāya pāvisi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Thế Tôn thấy Singālaka, gia chủ tử, dậy sớm, ra khỏi thành Vương Xá, với áo thấm nước, với tóc thấm nước, chấp tay đảnh lễ các phương hướng, hướng Ðông, hướng Nam, hướng Tây, hướng Bắc, hướng Hạ, hướng Thượng.<br>
+<span lang="pi" class="pali">
+Addasā kho bhagavā siṅgālakaṁ gahapatiputtaṁ kālasseva vuṭṭhāya rājagahā nikkhamitvā allavatthaṁ allakesaṁ pañjalikaṁ puthudisā namassantaṁ—puratthimaṁ disaṁ dakkhiṇaṁ disaṁ pacchimaṁ disaṁ uttaraṁ disaṁ heṭṭhimaṁ disaṁ uparimaṁ disaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Thấy vậy Ngài nói với Singālaka, gia chủ tử:<br>
+<span lang="pi" class="pali">
+Disvā siṅgālakaṁ gahapatiputtaṁ etadavoca:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Này Gia chủ tử, vì sao Ngươi dậy sớm, ra khỏi thành Vương Xá, với áo thấm ướt, với tóc thấm ướt chấp tay đảnh lễ các phương hướng, hướng Ðông… hướng Thượng?”<br>
+<span lang="pi" class="pali">
+“kiṁ nu kho tvaṁ, gahapatiputta, kālasseva vuṭṭhāya rājagahā nikkhamitvā allavattho allakeso pañjaliko puthudisā namassasi—puratthimaṁ disaṁ dakkhiṇaṁ disaṁ pacchimaṁ disaṁ uttaraṁ disaṁ heṭṭhimaṁ disaṁ uparimaṁ disan”ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Bạch Thế Tôn, thân phụ con khi gần chết có dặn con:<br>
+<span lang="pi" class="pali">
+“Pitā maṁ, bhante, kālaṁ karonto evaṁ avaca:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Này con thân yêu, hãy đảnh lễ các phương hướng.’<br>
+<span lang="pi" class="pali">
+‘disā, tāta, namasseyyāsī’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Bạch Thế Tôn, con kính tín, cung kính, tôn trọng, đảnh lễ lời nói của thân phụ con, buổi sáng dậy sớm, ra khỏi thành Vương Xá, với áo thấm ướt, với tóc thấm ướt, chấp tay đảnh lễ các phương hướng,—<br>
+<span lang="pi" class="pali">
+So kho ahaṁ, bhante, pituvacanaṁ sakkaronto garuṁ karonto mānento pūjento kālasseva uṭṭhāya rājagahā nikkhamitvā allavattho allakeso pañjaliko puthudisā namassāmi—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+hướng Ðông, hướng Nam, hướng Tây, hướng Bắc, hướng Hạ, hướng Thượng.”<br>
+<span lang="pi" class="pali">
+puratthimaṁ disaṁ dakkhiṇaṁ disaṁ pacchimaṁ disaṁ uttaraṁ disaṁ heṭṭhimaṁ disaṁ uparimaṁ disan”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+1. Sáu Phương<br>
+<span lang="pi" class="pali">
+1. Cha disā<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Này Gia chủ tử, trong luật pháp của bậc Thánh, lễ bái sáu phương không phải như vậy.”<br>
+<span lang="pi" class="pali">
+“Na kho, gahapatiputta, ariyassa vinaye evaṁ cha disā namassitabbā”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Bạch Thế Tôn, trong luật pháp của bậc Thánh, thế nào là lễ bái sáu phương? Bạch Thế Tôn, trong luật pháp của bậc Thánh, đảnh lễ sáu phương phải như thế nào?<br>
+<span lang="pi" class="pali">
+“Yathā kathaṁ pana, bhante, ariyassa vinaye cha disā namassitabbā?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Lành thay! Thế Tôn hãy giảng pháp ấy cho con!”<br>
+<span lang="pi" class="pali">
+Sādhu me, bhante, bhagavā tathā dhammaṁ desetu, yathā ariyassa vinaye cha disā namassitabbā”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Này Gia chủ tử, hãy nghe và suy nghiệm kỹ, Ta sẽ giảng.”<br>
+<span lang="pi" class="pali">
+“Tena hi, gahapatiputta, suṇohi sādhukaṁ manasikarohi bhāsissāmī”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Thưa vâng, bạch Thế Tôn. Singālaka, gia chủ tử vâng lời Thế Tôn.<br>
+<span lang="pi" class="pali">
+“Evaṁ, bhante”ti kho siṅgālako gahapatiputto bhagavato paccassosi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Thế Tôn giảng như sau:<br>
+<span lang="pi" class="pali">
+Bhagavā etadavoca:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Này Gia chủ tử, đối với vị Thánh đệ tử, bốn nghiệp phiền não được diệt trừ, không làm ác nghiệp theo bốn lý do, không theo sáu nguyên nhân để phung phí tài sản. Vị này, nhờ từ bỏ mười bốn ác pháp, trở thành vị che chở sáu phương;<br>
+<span lang="pi" class="pali">
+“Yato kho, gahapatiputta, ariyasāvakassa cattāro kammakilesā pahīnā honti, catūhi ca ṭhānehi pāpakammaṁ na karoti, cha ca bhogānaṁ apāyamukhāni na sevati, so evaṁ cuddasa pāpakāpagato chaddisāpaṭicchādī<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vị này đã thực hành để chiến thắng hai đời, vị này đã chiến thắng đời này và đời sau.<br>
+<span lang="pi" class="pali">
+ubholokavijayāya paṭipanno hoti. Tassa ayañceva loko āraddho hoti paro ca loko.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Sau khi thân hoại mạng chung, vị này sanh ở thiện thú, Thiên giới.<br>
+<span lang="pi" class="pali">
+So kāyassa bhedā paraṁ maraṇā sugatiṁ saggaṁ lokaṁ upapajjati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+2. Bốn Nghiệp Phiền Não<br>
+<span lang="pi" class="pali">
+2. Cattāro kammakilesā<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Thế nào là bốn nghiệp phiền não đã được diệt trừ?<br>
+<span lang="pi" class="pali">
+Katamassa cattāro kammakilesā pahīnā honti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Gia chủ tử, đó là nghiệp phiền não sát sanh, nghiệp phiền não trộm cắp, nghiệp phiền não tà dâm, nghiệp phiền não nói láo.<br>
+<span lang="pi" class="pali">
+Pāṇātipāto kho, gahapatiputta, kammakileso, adinnādānaṁ kammakileso, kāmesumicchācāro kammakileso, musāvādo kammakileso.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Bốn nghiệp phiền não này đã được trừ diệt.”<br>
+<span lang="pi" class="pali">
+Imassa cattāro kammakilesā pahīnā hontī”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Thế Tôn thuyết giảng như vậy.<br>
+<span lang="pi" class="pali">
+Idamavoca bhagavā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Thiện thệ thuyết giảng xong, bậc Ðạo Sư lại giảng thêm:<br>
+<span lang="pi" class="pali">
+Idaṁ vatvāna sugato athāparaṁ etadavoca satthā:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Sát sanh và trộm cắp,<br>
+<span lang="pi" class="pali">
+“Pāṇātipāto adinnādānaṁ,<br>
+</span>
+Lời nói không ngay thật;<br>
+<span lang="pi" class="pali">
+Musāvādo ca vuccati;<br>
+</span>
+Tà dâm với vợ người,<br>
+<span lang="pi" class="pali">
+Paradāragamanañceva,<br>
+</span>
+Bậc trí không khen ngợi.”<br>
+<span lang="pi" class="pali">
+Nappasaṁsanti paṇḍitā”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+3. Bốn Lý Do<br>
+<span lang="pi" class="pali">
+3. Catuṭhānaṁ<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Thế nào là không làm ác nghiệp theo bốn lý do?<br>
+<span lang="pi" class="pali">
+“Katamehi catūhi ṭhānehi pāpakammaṁ na karoti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ác nghiệp làm do tham dục, ác nghiệp làm do sân hận, ác nghiệp làm do ngu si, ác nghiệp làm do sợ hãi.<br>
+<span lang="pi" class="pali">
+Chandāgatiṁ gacchanto pāpakammaṁ karoti, dosāgatiṁ gacchanto pāpakammaṁ karoti, mohāgatiṁ gacchanto pāpakammaṁ karoti, bhayāgatiṁ gacchanto pāpakammaṁ karoti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Gia chủ tử, vì vị Thánh đệ tử không tham dục, không sân hận, không ngu si, không sợ hãi;<br>
+<span lang="pi" class="pali">
+Yato kho, gahapatiputta, ariyasāvako neva chandāgatiṁ gacchati, na dosāgatiṁ gacchati, na mohāgatiṁ gacchati, na bhayāgatiṁ gacchati;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+nên không làm ác nghiệp theo bốn lý do.”<br>
+<span lang="pi" class="pali">
+imehi catūhi ṭhānehi pāpakammaṁ na karotī”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Thế Tôn thuyết giảng như vậy.<br>
+<span lang="pi" class="pali">
+Idamavoca bhagavā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Thiện Thệ thuyết giảng xong, bậc Ðạo Sư lại giảng thêm:<br>
+<span lang="pi" class="pali">
+Idaṁ vatvāna sugato athāparaṁ etadavoca satthā:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Ai phản lại Chánh pháp,<br>
+<span lang="pi" class="pali">
+yo dhammaṁ ativattati;<br>
+</span>
+Vì tham, sân, bố, si,<br>
+<span lang="pi" class="pali">
+“Chandā dosā bhayā mohā,<br>
+</span>
+Thanh danh bị sứt mẻ,<br>
+<span lang="pi" class="pali">
+Nihīyati yaso tassa,<br>
+</span>
+Như mặt trăng đêm khuyết.<br>
+<span lang="pi" class="pali">
+kāḷapakkheva candimā.<br>
+</span>
+Ai không phản Chánh pháp,<br>
+<span lang="pi" class="pali">
+yo dhammaṁ nātivattati;<br>
+</span>
+Vì tham, sân, bố, si,<br>
+<span lang="pi" class="pali">
+Chandā dosā bhayā mohā,<br>
+</span>
+Thanh danh được tròn đủ,<br>
+<span lang="pi" class="pali">
+Āpūrati yaso tassa,<br>
+</span>
+Như mặt trăng đêm đầy.”<br>
+<span lang="pi" class="pali">
+sukkapakkheva candimā”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+4. Sáu Nguyên Nhân Phung Phí Tài Sản<br>
+<span lang="pi" class="pali">
+4. Cha apāyamukhāni<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Thế nào là không theo sáu nguyên nhân phung phí tài sản?<br>
+<span lang="pi" class="pali">
+“Katamāni cha bhogānaṁ apāyamukhāni na sevati?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Gia chủ tử, đam mê các loại rượu là nguyên nhân phung phí tài sản. Du hành đường phố phi thời là nguyên nhân phung phí tài sản. La cà đình đám hí viện là nguyên nhân phung phí tài sản. Ðam mê cờ bạc là nguyên nhân phung phí tài sản. Giao du ác hữu là nguyên nhân phung phí tài sản. Quen thói lười biếng là nguyên nhân phung phí tài sản.<br>
+<span lang="pi" class="pali">
+Surāmerayamajjappamādaṭṭhānānuyogo kho, gahapatiputta, bhogānaṁ apāyamukhaṁ, vikālavisikhācariyānuyogo bhogānaṁ apāyamukhaṁ, samajjābhicaraṇaṁ bhogānaṁ apāyamukhaṁ, jūtappamādaṭṭhānānuyogo bhogānaṁ apāyamukhaṁ, pāpamittānuyogo bhogānaṁ apāyamukhaṁ, ālasyānuyogo bhogānaṁ apāyamukhaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+5. Sáu Hiểm Nguy Của Chất Say<br>
+<span lang="pi" class="pali">
+5. Surāmerayassa cha ādīnavā<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Gia chủ tử, đam mê các loại rượu có sáu nguy hiểm:<br>
+<span lang="pi" class="pali">
+Cha khome, gahapatiputta, ādīnavā surāmerayamajjappamādaṭṭhānānuyoge.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Tài sản hiện tại bị tổn thất, đấu tranh tăng trưởng, bệnh tật dễ xâm nhập, thương tổn danh dự, để lộ âm tàng, và thứ sáu là trí lực tổn hại.<br>
+<span lang="pi" class="pali">
+Sandiṭṭhikā dhanajāni, kalahappavaḍḍhanī, rogānaṁ āyatanaṁ, akittisañjananī, kopīnanidaṁsanī, paññāya dubbalikaraṇītveva chaṭṭhaṁ padaṁ bhavati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Gia chủ tử, đam mê các loại rượu có sau nguy hiểm như vậy.<br>
+<span lang="pi" class="pali">
+Ime kho, gahapatiputta, cha ādīnavā surāmerayamajjappamādaṭṭhānānuyoge.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+6. Sáu Hiểm Nguy Du Hành Đường Phố Phi Thời<br>
+<span lang="pi" class="pali">
+6. Vikālacariyāya cha ādīnavā<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Gia chủ tử, du hành đường phố phi thời có sáu nguy hiểm:<br>
+<span lang="pi" class="pali">
+Cha khome, gahapatiputta, ādīnavā vikālavisikhācariyānuyoge.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Tự mình không được che chở hộ trì, vợ con không được che chở hộ trì, tài sản không được che chở hộ trì, bị tình nghi là tác giả các ác sự, nạn nhân các tin đồn thất thiệt, tự rước vào thân nhiều khổ não.<br>
+<span lang="pi" class="pali">
+Attāpissa agutto arakkhito hoti, puttadāropissa agutto arakkhito hoti, sāpateyyampissa aguttaṁ arakkhitaṁ hoti, saṅkiyo ca hoti pāpakesu ṭhānesu, abhūtavacanañca tasmiṁ rūhati, bahūnañca dukkhadhammānaṁ purakkhato hoti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Gia chủ tử, du hành đường phố phi thời có sáu nguy hiểm như vậy.<br>
+<span lang="pi" class="pali">
+Ime kho, gahapatiputta, cha ādīnavā vikālavisikhācariyānuyoge.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+7. Sáu Hiểm Nguy Nơi Hý Viện<br>
+<span lang="pi" class="pali">
+7. Samajjābhicaraṇassa cha ādīnavā<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Gia chủ tử, la cà đình đám hý viện có sáu nguy hiểm:<br>
+<span lang="pi" class="pali">
+Cha khome, gahapatiputta, ādīnavā samajjābhicaraṇe.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Luôn luôn tìm xem chỗ nào có múa, chỗ nào có ca, chỗ nào có nhạc, chỗ nào có tán tụng, chỗ nào có nhạc tay, chỗ nào có trống.<br>
+<span lang="pi" class="pali">
+Kva naccaṁ, kva gītaṁ, kva vāditaṁ, kva akkhānaṁ, kva pāṇissaraṁ, kva kumbhathunanti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Gia chủ tử, la cà đình đám hý viện có sáu nguy hiểm như vậy.<br>
+<span lang="pi" class="pali">
+Ime kho, gahapatiputta, cha ādīnavā samajjābhicaraṇe.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+8. Sáu Hiểm Nguy Đam Mê Cờ Bạc<br>
+<span lang="pi" class="pali">
+8. Jūtappamādassa cha ādīnavā<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Gia chủ tử, đam mê cờ bạc có sáu nguy hiểm:<br>
+<span lang="pi" class="pali">
+Cha khome, gahapatiputta, ādīnavā jūtappamādaṭṭhānānuyoge.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Nếu thắng thì sanh oán thù, nếu thua thì tâm sanh sầu muộn, tài sản hiện tại bị tổn thất, tại hội trường (pháp đình) lời nói không hiệu lực, bằng hữu đồng liêu khinh miệt, vấn đề cưới gả không được tín nhiệm vì:<br>
+<span lang="pi" class="pali">
+Jayaṁ veraṁ pasavati, jino vittamanusocati, sandiṭṭhikā dhanajāni, sabhāgatassa vacanaṁ na rūhati, mittāmaccānaṁ paribhūto hoti, āvāhavivāhakānaṁ apatthito hoti:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘người đam mê cờ bạc không xứng để có vợ (chồng).’<br>
+<span lang="pi" class="pali">
+‘akkhadhutto ayaṁ purisapuggalo nālaṁ dārabharaṇāyā’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Gia chủ tử, đam mê cờ bạc có sáu nguy hiểm như vậy.<br>
+<span lang="pi" class="pali">
+Ime kho, gahapatiputta, cha ādīnavā jūtappamādaṭṭhānānuyoge.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+9. Sáu Nguy Hiểm Chơi Với Ác Hữu<br>
+<span lang="pi" class="pali">
+9. Pāpamittatāya cha ādīnavā<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Gia chủ tử, thân cận các ác hữu có sáu nguy hiểm:<br>
+<span lang="pi" class="pali">
+Cha khome, gahapatiputta, ādīnavā pāpamittānuyoge.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Những kẻ cờ bạc, loạn hành, nghiện rượu, những kẻ trá ngụy, lường gạt, bạo động là những người bạn, là những thân hữu của người ấy.<br>
+<span lang="pi" class="pali">
+Ye dhuttā, ye soṇḍā, ye pipāsā, ye nekatikā, ye vañcanikā, ye sāhasikā. Tyāssa mittā honti te sahāyā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Gia chủ tử, thân cận ác hữu có sáu nguy hiểm như vậy.<br>
+<span lang="pi" class="pali">
+Ime kho, gahapatiputta, cha ādīnavā pāpamittānuyoge.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+10. Sáu Nguy Hiểm Từ Sự Lười Biếng<br>
+<span lang="pi" class="pali">
+10. Ālasyassa cha ādīnavā<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Gia chủ tử, quen thói lười biếng có sáu nguy hiểm:<br>
+<span lang="pi" class="pali">
+Cha khome, gahapatiputta, ādīnavā ālasyānuyoge.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“quá lạnh”, không làm việc; “quá nóng”, không làm việc; “quá trễ” không làm việc; “quá sớm”, không làm việc; “tôi đói quá”, không làm việc; “tôi quá no”, không làm việc.<br>
+<span lang="pi" class="pali">
+Atisītanti kammaṁ na karoti, atiuṇhanti kammaṁ na karoti, atisāyanti kammaṁ na karoti, atipātoti kammaṁ na karoti, atichātosmīti kammaṁ na karoti, atidhātosmīti kammaṁ na karoti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Trong khi những công việc phải làm lại không làm. Tài sản chưa có không xây dựng lên, tài sản có rồi bị tiêu thất.<br>
+<span lang="pi" class="pali">
+Tassa evaṁ kiccāpadesabahulassa viharato anuppannā ceva bhogā nuppajjanti, uppannā ca bhogā parikkhayaṁ gacchanti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Gia chủ tử, quen thói lười biếng có sáu nguy hiểm như vậy.”<br>
+<span lang="pi" class="pali">
+Ime kho, gahapatiputta, cha ādīnavā ālasyānuyoge”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Thế Tôn thuyết giảng như vậy.<br>
+<span lang="pi" class="pali">
+Idamavoca bhagavā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Thiện Thệ thuyết giảng xong, bậc Ðạo Sư lại giảng thêm:<br>
+<span lang="pi" class="pali">
+Idaṁ vatvāna sugato athāparaṁ etadavoca satthā:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Có bạn gọi bạn rượu,<br>
+<span lang="pi" class="pali">
+“Hoti pānasakhā nāma,<br>
+</span>
+Trong số bạn hữu ấy,<br>
+<span lang="pi" class="pali">
+hoti sammiyasammiyo;<br>
+</span>
+Chỉ một xứng danh bạn.<br>
+<span lang="pi" class="pali">
+Yo ca atthesu jātesu,<br>
+</span>
+Bạn lúc thật hữu sự,<br>
+<span lang="pi" class="pali">
+sahāyo hoti so sakhā.<br>
+</span>
+Ngủ ngày, thông vợ người,<br>
+<span lang="pi" class="pali">
+Ussūraseyyā paradārasevanā,<br>
+</span>
+Ưa đấu tranh, làm hại,<br>
+<span lang="pi" class="pali">
+Verappasavo ca anatthatā ca;<br>
+</span>
+Thân ác hữu, xan tham,<br>
+<span lang="pi" class="pali">
+Pāpā ca mittā sukadariyatā ca,<br>
+</span>
+Sáu sự não hại người.<br>
+<span lang="pi" class="pali">
+Ete cha ṭhānā purisaṁ dhaṁsayanti.<br>
+</span>
+Ác hữu, ác bạn lữ,<br>
+<span lang="pi" class="pali">
+Pāpamitto pāpasakho,<br>
+</span>
+Ác hạnh, hành ác xứ,<br>
+<span lang="pi" class="pali">
+pāpaācāragocaro;<br>
+</span>
+Rơi vào cảnh điêu tàn,<br>
+<span lang="pi" class="pali">
+Asmā lokā paramhā ca,<br>
+</span>
+Ðời này cả đời sau,<br>
+<span lang="pi" class="pali">
+ubhayā dhaṁsate naro.<br>
+</span>
+Cờ bạc và đàn bà,<br>
+Rượu chè, và múa hát<br>
+<span lang="pi" class="pali">
+Akkhitthiyo vāruṇī naccagītaṁ,<br>
+</span>
+Ngủ ngày, đi phi thời<br>
+<span lang="pi" class="pali">
+Divā soppaṁ pāricariyā akāle;<br>
+</span>
+Thân ác hữu, xan tham,<br>
+<span lang="pi" class="pali">
+Pāpā ca mittā sukadariyatā ca,<br>
+</span>
+Sáu sự não hại người.<br>
+<span lang="pi" class="pali">
+Ete cha ṭhānā purisaṁ dhaṁsayanti.<br>
+</span>
+Chơi xúc xắc, uống rượu<br>
+<span lang="pi" class="pali">
+Akkhehi dibbanti suraṁ pivanti,<br>
+</span>
+Theo đuổi đàn bà người,<br>
+<span lang="pi" class="pali">
+Yantitthiyo pāṇasamā paresaṁ;<br>
+</span>
+Thân cận kẻ hạ tiện,<br>
+<span lang="pi" class="pali">
+Nihīnasevī na ca vuddhasevī,<br>
+</span>
+Như trăng trong mùa khuyết.<br>
+<span lang="pi" class="pali">
+Nihīyate kāḷapakkheva cando.<br>
+</span>
+Rượu chè không tiền của,<br>
+<span lang="pi" class="pali">
+Yo vāruṇī addhano akiñcano,<br>
+</span>
+Khao khát, tìm tửu điếm,<br>
+<span lang="pi" class="pali">
+Pipāso pivaṁ papāgato;<br>
+</span>
+Bị chìm trong nợ nần,<br>
+<span lang="pi" class="pali">
+Udakamiva iṇaṁ vigāhati,<br>
+</span>
+Mau chóng tự hại mình,<br>
+<span lang="pi" class="pali">
+Akulaṁ kāhiti khippamattano.<br>
+</span>
+Ai quen thói ngủ ngày,<br>
+<span lang="pi" class="pali">
+Na divā soppasīlena,<br>
+</span>
+Thức trọn suốt đêm trường,<br>
+<span lang="pi" class="pali">
+rattimuṭṭhānadessinā;<br>
+</span>
+Luôn luôn say sướt mướt,<br>
+<span lang="pi" class="pali">
+Niccaṁ mattena soṇḍena,<br>
+</span>
+Không thể sống gia đình.<br>
+<span lang="pi" class="pali">
+sakkā āvasituṁ gharaṁ.<br>
+</span>
+‘Ôi quá lạnh, quá nóng,<br>
+<span lang="pi" class="pali">
+Atisītaṁ atiuṇhaṁ,<br>
+</span>
+Quá chiều, quá trễ giờ,<br>
+<span lang="pi" class="pali">
+atisāyamidaṁ ahu;<br>
+</span>
+Lúc trẻ ham cẩu thả,<br>
+<span lang="pi" class="pali">
+Iti vissaṭṭhakammante,<br>
+</span>
+Tài sản rời bỏ đi;<br>
+<span lang="pi" class="pali">
+atthā accenti māṇave.<br>
+</span>
+Ai xem lạnh và nóng,<br>
+<span lang="pi" class="pali">
+Yodha sītañca uṇhañca,<br>
+</span>
+Nhẹ nhàng hơn ngọn cỏ<br>
+<span lang="pi" class="pali">
+tiṇā bhiyyo na maññati;<br>
+</span>
+Làm mọi công chuyện mình,<br>
+<span lang="pi" class="pali">
+Karaṁ purisakiccāni,<br>
+</span>
+Hạnh phúc không phai tàn.”<br>
+<span lang="pi" class="pali">
+so sukhaṁ na vihāyatī”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+11. Không Phải Bạn<br>
+<span lang="pi" class="pali">
+11. Mittapatirūpaka<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Này Gia chủ từ, có bốn hạng người phải xem không phải bạn, dầu tự cho là bạn:<br>
+<span lang="pi" class="pali">
+“Cattārome, gahapatiputta, amittā mittapatirūpakā veditabbā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Người vật gì cũng lấy phải được xem không phải bạn, dầu tự cho là bạn; người chỉ biết nói giỏi phải được xem không phải bạn, dầu tự cho là bạn; người khéo nịnh hót phải được xem không phải bạn, dầu tự cho là bạn; người tiêu pha xa xỉ phải được xem không phải bạn, dầu tự cho là bạn.<br>
+<span lang="pi" class="pali">
+Aññadatthuharo amitto mittapatirūpako veditabbo, vacīparamo amitto mittapatirūpako veditabbo, anuppiyabhāṇī amitto mittapatirūpako veditabbo, apāyasahāyo amitto mittapatirūpako veditabbo.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Gia chủ tử, có bốn trường hợp người vật gì cũng lấy phải được xem không phải bạn, dầu tự cho là bạn.<br>
+<span lang="pi" class="pali">
+Catūhi kho, gahapatiputta, ṭhānehi aññadatthuharo amitto mittapatirūpako veditabbo.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Người vật gì cũng lấy, cho ít xin nhiều, vì sợ mà làm, làm vì mưu lợi cho mình.<br>
+<span lang="pi" class="pali">
+Aññadatthuharo hoti, appena bahumicchati; bhayassa kiccaṁ karoti, sevati atthakāraṇā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Gia chủ tử, như vậy là bốn trường hợp người vật gì cũng lấy phải được xem không phải bạn, dầu tự cho là bạn.<br>
+<span lang="pi" class="pali">
+Imehi kho, gahapatiputta, catūhi ṭhānehi aññadatthuharo amitto mittapatirūpako veditabbo.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Gia chủ tử, có bốn trường hợp, người chỉ biết nói giỏi phải được xem không phải bạn, dầu tự cho là bạn.<br>
+<span lang="pi" class="pali">
+Catūhi kho, gahapatiputta, ṭhānehi vacīparamo amitto mittapatirūpako veditabbo.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Tỏ lộ thân tình việc đã qua; tỏ lộ thân tình việc chưa đến; mua chuộc cảm tình bằng sáo ngữ; khi có công việc, tự tỏ sự bất lực của mình.<br>
+<span lang="pi" class="pali">
+Atītena paṭisantharati, anāgatena paṭisantharati, niratthakena saṅgaṇhāti, paccuppannesu kiccesu byasanaṁ dasseti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Gia chủ tử, như vậy là bốn trường hợp, người chỉ biết nói giỏi phải được xem không phải bạn, dầu tự cho là bạn.<br>
+<span lang="pi" class="pali">
+Imehi kho, gahapatiputta, catūhi ṭhānehi vacīparamo amitto mittapatirūpako veditabbo.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Gia chủ tử, có bốn trường hợp, kẻ nịnh hót phải được xem không phải bạn, dầu tự cho là bạn.<br>
+<span lang="pi" class="pali">
+Catūhi kho, gahapatiputta, ṭhānehi anuppiyabhāṇī amitto mittapatirūpako veditabbo.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ðồng ý các việc ác; không đồng ý các việc thiện; trước mặt tán thán; sau lưng chỉ trích.<br>
+<span lang="pi" class="pali">
+Pāpakampissa anujānāti, kalyāṇampissa anujānāti, sammukhāssa vaṇṇaṁ bhāsati, parammukhāssa avaṇṇaṁ bhāsati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Gia chủ tử, như vậy là bốn trường hợp kẻ nịnh hót phải được xem không phải bạn, dầu tự cho là bạn.<br>
+<span lang="pi" class="pali">
+Imehi kho, gahapatiputta, catūhi ṭhānehi anuppiyabhāṇī amitto mittapatirūpako veditabbo.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Gia chủ tử, có bốn trường hợp, người tiêu pha xa xỉ phải được xem không phải bạn, dầu tự cho là bạn.<br>
+<span lang="pi" class="pali">
+Catūhi kho, gahapatiputta, ṭhānehi apāyasahāyo amitto mittapatirūpako veditabbo.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Là bạn khi mình đam mê các loại rượu; là bạn khi mình du hành đường phố phi thời; là bạn khi mình la cà đình đám hý viện; là bạn khi mình đam mê cờ bạc.<br>
+<span lang="pi" class="pali">
+Surāmerayamajjappamādaṭṭhānānuyoge sahāyo hoti, vikālavisikhācariyānuyoge sahāyo hoti, samajjābhicaraṇe sahāyo hoti, jūtappamādaṭṭhānānuyoge sahāyo hoti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Gia chủ tử, như vậy có bốn trường hợp, người tiêu pha xa xỉ phải được xem không phải bạn, dầu tự cho là bạn.”<br>
+<span lang="pi" class="pali">
+Imehi kho, gahapatiputta, catūhi ṭhānehi apāyasahāyo amitto mittapatirūpako veditabbo”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Thế Tôn thuyết giảng như vậy.<br>
+<span lang="pi" class="pali">
+Idamavoca bhagavā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Thiện Thệ thuyết giảng xong, bậc Ðạo Sư lại giảng thêm:<br>
+<span lang="pi" class="pali">
+Idaṁ vatvāna sugato athāparaṁ etadavoca satthā:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Người bạn gì cũng lấy,<br>
+<span lang="pi" class="pali">
+“Aññadatthuharo mitto,<br>
+</span>
+Người bạn chỉ nói giỏi,<br>
+<span lang="pi" class="pali">
+yo ca mitto vacīparo;<br>
+</span>
+Người nói lời nịnh hót,<br>
+<span lang="pi" class="pali">
+Anuppiyañca yo āha,<br>
+</span>
+Người tiêu pha xa xỉ.<br>
+<span lang="pi" class="pali">
+apāyesu ca yo sakhā.<br>
+</span>
+Cả bốn, không phải bạn,<br>
+<span lang="pi" class="pali">
+Ete amitte cattāro,<br>
+</span>
+Biết vậy, người trí tránh,<br>
+<span lang="pi" class="pali">
+iti viññāya paṇḍito;<br>
+</span>
+Không thân cận bạn ấy,<br>
+<span lang="pi" class="pali">
+Ārakā parivajjeyya,<br>
+</span>
+Như đường đầy sợ hãi.”<br>
+<span lang="pi" class="pali">
+maggaṁ paṭibhayaṁ yathā”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+12. Bạn Chân Thật<br>
+<span lang="pi" class="pali">
+12. Suhadamitta<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Này Gia chủ tử, bốn loại bạn này phải được xem là bạn chân thật:<br>
+<span lang="pi" class="pali">
+“Cattārome, gahapatiputta, mittā suhadā veditabbā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Người bạn giúp đỡ phải được xem là bạn chân thật; người bạn chung thủy trong khổ cũng như trong vui phải được xem là bạn chân thật; người bạn khuyên điều lợi ích phải được xem là bạn chân thật; người bạn có lòng thương tưởng phải được xem là bạn chân thật.<br>
+<span lang="pi" class="pali">
+Upakāro mitto suhado veditabbo, samānasukhadukkho mitto suhado veditabbo, atthakkhāyī mitto suhado veditabbo, anukampako mitto suhado veditabbo.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Gia chủ tử, có bốn trường hợp, người bạn giúp đỡ phải được xem là bạn chân thật<br>
+<span lang="pi" class="pali">
+Catūhi kho, gahapatiputta, ṭhānehi upakāro mitto suhado veditabbo.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Che chở cho bạn khi bạn vô ý phóng dật, che chở của cải cho bạn khi bạn vô ý phóng dật, là chỗ nương tựa cho bạn khi bạn sợ hãi, khi bạn có công việc sẽ giúp đỡ cho bạn của cải gấp hai lần những gì bạn thiếu.<br>
+<span lang="pi" class="pali">
+Pamattaṁ rakkhati, pamattassa sāpateyyaṁ rakkhati, bhītassa saraṇaṁ hoti, uppannesu kiccakaraṇīyesu taddiguṇaṁ bhogaṁ anuppadeti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Gia chủ tử, như vậy có bốn trường hợp, người bạn giúp đỡ phải được xem là người bạn chân thật.<br>
+<span lang="pi" class="pali">
+Imehi kho, gahapatiputta, catūhi ṭhānehi upakāro mitto suhado veditabbo.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Gia chủ tử, có bốn trường hợp, người bạn chung thủy trong khổ cũng như trong vui phải được xem là người bạn chân thật.<br>
+<span lang="pi" class="pali">
+Catūhi kho, gahapatiputta, ṭhānehi samānasukhadukkho mitto suhado veditabbo.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Nói cho bạn biết điều bí mật của mình; giữ gìn kín điều bí mật của bạn; không bỏ bạn khi bạn gặp khó khăn; dám hy sinh thân mạng vì bạn.<br>
+<span lang="pi" class="pali">
+Guyhamassa ācikkhati, guyhamassa parigūhati, āpadāsu na vijahati, jīvitaṁpissa atthāya pariccattaṁ hoti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Gia chủ tử, như vậy có bốn trường hợp, người bạn chung thủy trong khổ cũng như trong vui phải được xem là người bạn chân thật.<br>
+<span lang="pi" class="pali">
+Imehi kho, gahapatiputta, catūhi ṭhānehi samānasukhadukkho mitto suhado veditabbo.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Gia chủ tử, có bốn trường hợp, người bạn khuyên điều lợi ích phải được xem là người bạn chân thật.<br>
+<span lang="pi" class="pali">
+Catūhi kho, gahapatiputta, ṭhānehi atthakkhāyī mitto suhado veditabbo.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ngăn chận bạn không làm điều ác; khuyến khích bạn làm điều thiện; cho bạn nghe điều bạn chưa nghe; cho bạn biết con đường lên cõi chư Thiên.<br>
+<span lang="pi" class="pali">
+Pāpā nivāreti, kalyāṇe niveseti, assutaṁ sāveti, saggassa maggaṁ ācikkhati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Gia chủ tử, như vậy có bốn trường hợp, người bạn khuyên điều lợi ích phải được xem là người bạn chân thật.<br>
+<span lang="pi" class="pali">
+Imehi kho, gahapatiputta, catūhi ṭhānehi atthakkhāyī mitto suhado veditabbo.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Gia chủ tử, có bốn trường hợp, người bạn thương tưởng phải được xem là người bạn chân thật.<br>
+<span lang="pi" class="pali">
+Catūhi kho, gahapatiputta, ṭhānehi anukampako mitto suhado veditabbo.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Không hoan hỷ khi bạn gặp hoạn nạn; hoan hỷ khi bạn gặp may mắn; ngăn chận những ai nói xấu bạn; khuyến khích những ai tán thán bạn.<br>
+<span lang="pi" class="pali">
+Abhavenassa na nandati, bhavenassa nandati, avaṇṇaṁ bhaṇamānaṁ nivāreti, vaṇṇaṁ bhaṇamānaṁ pasaṁsati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Gia chủ tử, như vậy có bốn trường hợp, người bạn thương tưởng phải được xem là người bạn chân thật.”<br>
+<span lang="pi" class="pali">
+Imehi kho, gahapatiputta, catūhi ṭhānehi anukampako mitto suhado veditabbo”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Thế Tôn thuyết giảng như vậy.<br>
+<span lang="pi" class="pali">
+Idamavoca bhagavā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Thiện thệ thuyết giảng xong, bậc Ðạo Sư lại giảng thêm:<br>
+<span lang="pi" class="pali">
+Idaṁ vatvāna sugato athāparaṁ etadavoca satthā:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Bạn sẵn sàng giúp đỡ,<br>
+<span lang="pi" class="pali">
+“Upakāro ca yo mitto,<br>
+</span>
+Bạn chung thủy khổ vui,<br>
+<span lang="pi" class="pali">
+sukhe dukkhe ca yo sakhā;<br>
+</span>
+Bạn khuyến khích lợi ích,<br>
+<span lang="pi" class="pali">
+Atthakkhāyī ca yo mitto,<br>
+</span>
+Bạn có lòng thương tưởng.<br>
+<span lang="pi" class="pali">
+yo ca mittānukampako.<br>
+</span>
+Biết rõ bốn bạn này,<br>
+<span lang="pi" class="pali">
+Etepi mitte cattāro,<br>
+</span>
+Người trí phục vụ họ,<br>
+<span lang="pi" class="pali">
+iti viññāya paṇḍito;<br>
+</span>
+Trông nom họ cẩn thận,<br>
+<span lang="pi" class="pali">
+Sakkaccaṁ payirupāseyya,<br>
+</span>
+Như mẹ đối con ruột.<br>
+<span lang="pi" class="pali">
+mātā puttaṁva orasaṁ;<br>
+</span>
+Người trí giữ giới luật,<br>
+<span lang="pi" class="pali">
+Paṇḍito sīlasampanno,<br>
+</span>
+Sáng như lửa đồi cao.<br>
+<span lang="pi" class="pali">
+jalaṁ aggīva bhāsati.<br>
+</span>
+Người tích trữ tài sản,<br>
+Như cử chỉ con ong.<br>
+<span lang="pi" class="pali">
+Bhoge saṁharamānassa,<br>
+</span>
+Rong ruổi hút nhị hoa.<br>
+<span lang="pi" class="pali">
+bhamarasseva irīyato;<br>
+</span>
+Tài sản được chồng chất,<br>
+<span lang="pi" class="pali">
+Bhogā sannicayaṁ yanti,<br>
+</span>
+Như ụ mối đùn cao,<br>
+<span lang="pi" class="pali">
+vammikovupacīyati.<br>
+</span>
+Người làm việc như vậy,<br>
+Chất chứa các tài sản,<br>
+<span lang="pi" class="pali">
+Evaṁ bhoge samāhatvā,<br>
+</span>
+Vừa đủ để lợi ích<br>
+Cho chính gia đình mình.<br>
+<span lang="pi" class="pali">
+alamatto kule gihī;<br>
+</span>
+Tài sản cần chia bốn<br>
+<span lang="pi" class="pali">
+Catudhā vibhaje bhoge,<br>
+</span>
+Ðể kết hợp bạn bè:<br>
+<span lang="pi" class="pali">
+sa ve mittāni ganthati.<br>
+</span>
+Một phần mình an hưởng,<br>
+<span lang="pi" class="pali">
+Ekena bhoge bhuñjeyya,<br>
+</span>
+Hai phần dành công việc,<br>
+<span lang="pi" class="pali">
+dvīhi kammaṁ payojaye;<br>
+</span>
+Phần tư, phần để dành,<br>
+<span lang="pi" class="pali">
+Catutthañca nidhāpeyya,<br>
+</span>
+Phòng khó khăn hoạn nạn.”<br>
+<span lang="pi" class="pali">
+āpadāsu bhavissatī”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+13. Hộ Trì Sáu Phương<br>
+<span lang="pi" class="pali">
+13. Chaddisāpaṭicchādanakaṇḍa<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Này Gia chủ tử, vị Thánh đệ tử hộ trì sáu phương như thế nào?<br>
+<span lang="pi" class="pali">
+“Kathañca, gahapatiputta, ariyasāvako chaddisāpaṭicchādī hoti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Gia chủ tử, sáu phương này cần được hiểu như sau:<br>
+<span lang="pi" class="pali">
+Cha imā, gahapatiputta, disā veditabbā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Phương Ðông cần được hiểu là cha mẹ. Phương Nam cần được hiểu là sư trưởng. Phương Tây cần được hiểu là vợ con. Phương Bắc cần được hiểu là bạn bè. Phương Dưới cần được hiểu là tôi tớ, lao công. Phương Trên cần được hiểu là Sa-môn, Bà-la-môn.<br>
+<span lang="pi" class="pali">
+Puratthimā disā mātāpitaro veditabbā, dakkhiṇā disā ācariyā veditabbā, pacchimā disā puttadārā veditabbā, uttarā disā mittāmaccā veditabbā, heṭṭhimā disā dāsakammakarā veditabbā, uparimā disā samaṇabrāhmaṇā veditabbā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Gia chủ tử, có năm trường hợp, người con phải phụng dưỡng cha mẹ như phương Ðông:<br>
+<span lang="pi" class="pali">
+Pañcahi kho, gahapatiputta, ṭhānehi puttena puratthimā disā mātāpitaro paccupaṭṭhātabbā—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Ðược nuôi dưỡng, tôi sẽ nuôi dưỡng lại cha mẹ; tôi sẽ làm bổn phận đối với cha mẹ; tôi sẽ gìn giữ gia đình và truyền thống; tôi bảo vệ tài sản thừa tự; tôi sẽ làm tang lễ khi cha mẹ qua đời.’<br>
+<span lang="pi" class="pali">
+bhato ne bharissāmi, kiccaṁ nesaṁ karissāmi, kulavaṁsaṁ ṭhapessāmi, dāyajjaṁ paṭipajjāmi, atha vā pana petānaṁ kālaṅkatānaṁ dakkhiṇaṁ anuppadassāmīti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Gia chủ tử, được con phụng dưỡng như phương Ðông, theo năm cách như vậy, cha mẹ có lòng thương tưởng đến con theo năm cách.<br>
+<span lang="pi" class="pali">
+Imehi kho, gahapatiputta, pañcahi ṭhānehi puttena puratthimā disā mātāpitaro paccupaṭṭhitā pañcahi ṭhānehi puttaṁ anukampanti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ngăn chận con làm điều ác; khuyến khích con làm điều thiện; dạy con nghề nghiệp, cưới vợ xứng đáng cho con; đúng thời trao của thừa tự cho con.<br>
+<span lang="pi" class="pali">
+Pāpā nivārenti, kalyāṇe nivesenti, sippaṁ sikkhāpenti, patirūpena dārena saṁyojenti, samaye dāyajjaṁ niyyādenti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Gia chủ tử, như vậy là cha mẹ được con phụng dưỡng như phương Ðông theo năm cách và cha mẹ có lòng thương tưởng con theo năm cách.<br>
+<span lang="pi" class="pali">
+Imehi kho, gahapatiputta, pañcahi ṭhānehi puttena puratthimā disā mātāpitaro paccupaṭṭhitā imehi pañcahi ṭhānehi puttaṁ anukampanti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Như vậy phương Ðông được che chở, được trở thành an ổn và thoát khỏi các sự sợ hãi.<br>
+<span lang="pi" class="pali">
+Evamassa esā puratthimā disā paṭicchannā hoti khemā appaṭibhayā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Gia chủ tử, có năm cách, đệ tử phụng dưỡng các bậc sư trưởng như phương Nam:<br>
+<span lang="pi" class="pali">
+Pañcahi kho, gahapatiputta, ṭhānehi antevāsinā dakkhiṇā disā ācariyā paccupaṭṭhātabbā—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ðứng dậy để chào, hầu hạ thầy, hăng hái học tập, tự phục vụ thầy, chú tâm học hỏi nghề nghiệp.<br>
+<span lang="pi" class="pali">
+uṭṭhānena upaṭṭhānena sussusāya pāricariyāya sakkaccaṁ sippapaṭiggahaṇena.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Gia chủ tử, được đệ tử phụng dưỡng như phương Nam theo năm cách như vậy, các bậc sư trưởng có lòng thương tưởng đến các đệ tử theo năm cách:<br>
+<span lang="pi" class="pali">
+Imehi kho, gahapatiputta, pañcahi ṭhānehi antevāsinā dakkhiṇā disā ācariyā paccupaṭṭhitā pañcahi ṭhānehi antevāsiṁ anukampanti—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Huấn luyện đệ tử những gì mình đã được khéo huấn luyến; dạy cho bảo trì những gì mình được khéo bảo trì; dạy cho thuần thục các nghề nghiệp; khen đệ tử với các bạn bè quen thuộc; bảo đảm nghề nghiệp cho đệ tử về mọi mặt.<br>
+<span lang="pi" class="pali">
+suvinītaṁ vinenti, suggahitaṁ gāhāpenti, sabbasippassutaṁ samakkhāyino bhavanti, mittāmaccesu paṭiyādenti, disāsu parittāṇaṁ karonti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Gia chủ tử, như vậy là bậc sư trưởng được đệ tử phụng dưỡng như phương Nam theo năm cách và sư trưởng có lòng thương tưởng đến đệ tử theo năm cách.<br>
+<span lang="pi" class="pali">
+Imehi kho, gahapatiputta, pañcahi ṭhānehi antevāsinā dakkhiṇā disā ācariyā paccupaṭṭhitā imehi pañcahi ṭhānehi antevāsiṁ anukampanti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Như vậy phương Nam được che chở, được trở thành an ổn và thoát khỏi các sự sợ hãi.<br>
+<span lang="pi" class="pali">
+Evamassa esā dakkhiṇā disā paṭicchannā hoti khemā appaṭibhayā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Gia chủ tử, có năm cách, người chồng phải đối xử với vợ như phương Tây:<br>
+<span lang="pi" class="pali">
+Pañcahi kho, gahapatiputta, ṭhānehi sāmikena pacchimā disā bhariyā paccupaṭṭhātabbā—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Kính trọng vợ, không bất kính đối với vợ; trung thành với vợ; giao quyền hành cho vợ; sắm đồ nữ trang với vợ;<br>
+<span lang="pi" class="pali">
+sammānanāya anavamānanāya anaticariyāya issariyavossaggena alaṅkārānuppadānena.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Gia chủ tử, được chồng đối xử như phương Tây theo năm cách như vậy, người vợ có lòng thương tưởng chồng theo năm cách:<br>
+<span lang="pi" class="pali">
+Imehi kho, gahapatiputta, pañcahi ṭhānehi sāmikena pacchimā disā bhariyā paccupaṭṭhitā pañcahi ṭhānehi sāmikaṁ anukampati—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Thi hành tốt đẹp bổn phận của mình; khéo tiếp đón bà con; trung thành với chồng; khéo gìn giữ tài sản của chồng; khéo léo và nhanh nhẹn làm mọi công việc.<br>
+<span lang="pi" class="pali">
+susaṁvihitakammantā ca hoti, saṅgahitaparijanā ca, anaticārinī ca, sambhatañca anurakkhati, dakkhā ca hoti analasā sabbakiccesu.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Gia chủ, người vợ được người chồng đối xử như phương Tây theo năm cách và người vợ có lòng thương tưởng chồng theo năm cách.<br>
+<span lang="pi" class="pali">
+Imehi kho, gahapatiputta, pañcahi ṭhānehi sāmikena pacchimā disā bhariyā paccupaṭṭhitā imehi pañcahi ṭhānehi sāmikaṁ anukampati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Như vậy phương Tây được che chở, được trở thành an ổn và thoát khỏi các sự sợ hãi.<br>
+<span lang="pi" class="pali">
+Evamassa esā pacchimā disā paṭicchannā hoti khemā appaṭibhayā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Gia chủ tử, có năm cách vị thiện nam tử đối xử với bạn bè như phương Bắc:<br>
+<span lang="pi" class="pali">
+Pañcahi kho, gahapatiputta, ṭhānehi kulaputtena uttarā disā mittāmaccā paccupaṭṭhātabbā—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Bố thí, ái ngữ, lợi hành, đồng sự, không lường gạt.<br>
+<span lang="pi" class="pali">
+dānena peyyavajjena atthacariyāya samānattatāya avisaṁvādanatāya.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Gia chủ tử, được vị thiện nam tử đối xử như phương Bắc theo năm cách như vậy, bạn bè có lòng thương kính vị thiện nam tử theo năm cách:<br>
+<span lang="pi" class="pali">
+Imehi kho, gahapatiputta, pañcahi ṭhānehi kulaputtena uttarā disā mittāmaccā paccupaṭṭhitā pañcahi ṭhānehi kulaputtaṁ anukampanti—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Che chở nếu vị thiện nam tử phóng túng; bảo trì tài sản của vị thiện nam tử nếu vị này phóng túng; trở thành chỗ nương tựa khi vị thiện nam tử gặp nguy hiểm; không tránh xa khi vị thiện nam tử gặp khó khăn; kính trọng gia đình của vị thiện nam tử.<br>
+<span lang="pi" class="pali">
+pamattaṁ rakkhanti, pamattassa sāpateyyaṁ rakkhanti, bhītassa saraṇaṁ honti, āpadāsu na vijahanti, aparapajā cassa paṭipūjenti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Như vậy các bạn bè được vị thiện nam tử đối xử như phương Bắc theo năm cách và bạn bè có lòng thương tưởng vị thiện nam tử theo năm cách.<br>
+<span lang="pi" class="pali">
+Imehi kho, gahapatiputta, pañcahi ṭhānehi kulaputtena uttarā disā mittāmaccā paccupaṭṭhitā imehi pañcahi ṭhānehi kulaputtaṁ anukampanti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Như vậy phương Bắc được che chở, được trở thành an ổn và thoát khỏi các sự sợ hãi.<br>
+<span lang="pi" class="pali">
+Evamassa esā uttarā disā paṭicchannā hoti khemā appaṭibhayā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Gia chủ tử, có năm cách một vị Thánh chủ nhân đối xử với hạng nô bộc như phương Dưới:<br>
+<span lang="pi" class="pali">
+Pañcahi kho, gahapatiputta, ṭhānehi ayyirakena heṭṭhimā disā dāsakammakarā paccupaṭṭhātabbā—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Giao việc đúng theo sức lực của họ; lo cho họ ăn uống và tiền lương; điều trị cho họ khi bệnh hoạn; chia xẻ các mỹ vị đặc biệt cho họ; thỉnh thoảng cho họ nghỉ phép.<br>
+<span lang="pi" class="pali">
+yathābalaṁ kammantasaṁvidhānena bhattavetanānuppadānena gilānupaṭṭhānena acchariyānaṁ rasānaṁ saṁvibhāgena samaye vossaggena.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Gia chủ tử, các hàng nô bộc được Thánh chủ nhân đối xử như phương Dưới với năm cách như kia, có lòng thương tưởng đối với vị chủ nhân theo năm cách như sau:<br>
+<span lang="pi" class="pali">
+Imehi kho, gahapatiputta, pañcahi ṭhānehi ayyirakena heṭṭhimā disā dāsakammakarā paccupaṭṭhitā pañcahi ṭhānehi ayyirakaṁ anukampanti—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Dậy trước khi chủ dậy; đi ngủ sau chủ; tự bằng lòng với các vật đã cho; khéo làm các công việc; đem danh tiếng tốt đẹp cho chủ.<br>
+<span lang="pi" class="pali">
+pubbuṭṭhāyino ca honti, pacchā nipātino ca, dinnādāyino ca, sukatakammakarā ca, kittivaṇṇaharā ca.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Gia chủ tử, các hàng nô bộc được vị Thánh chủ nhân đối xử như phương Dưới với năm cách, có lòng thương tưởng đối với Thánh chủ nhân theo năm cách.<br>
+<span lang="pi" class="pali">
+Imehi kho, gahapatiputta, pañcahi ṭhānehi ayyirakena heṭṭhimā disā dāsakammakarā paccupaṭṭhitā imehi pañcahi ṭhānehi ayyirakaṁ anukampanti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Như vậy phương Dưới được che chở, được trở thành an ổn và thoát khỏi các sự sợ hãi.<br>
+<span lang="pi" class="pali">
+Evamassa esā heṭṭhimā disā paṭicchannā hoti khemā appaṭibhayā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Gia chủ tử, có năm cách vị thiện nam tử đối xử với các vị Sa-môn, Bà-la-môn như phương Trên:<br>
+<span lang="pi" class="pali">
+Pañcahi kho, gahapatiputta, ṭhānehi kulaputtena uparimā disā samaṇabrāhmaṇā paccupaṭṭhātabbā—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Có lòng từ trong hành động về thân; có lòng từ trong hành động về khẩu; có lòng từ trong hành động về ý; mở rộng cửa để đón các vị ấy; cúng dường các vị ấy các vật dụng cần thiết.<br>
+<span lang="pi" class="pali">
+mettena kāyakammena mettena vacīkammena mettena manokammena anāvaṭadvāratāya āmisānuppadānena.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Gia chủ tử, các vị Bà-la-môn, Sa-môn được vị thiện nam tử đối xử như phương Trên theo năm cách như vậy, có lòng thương tưởng vị thiện nam tử ấy theo năm cách sau đây:<br>
+<span lang="pi" class="pali">
+Imehi kho, gahapatiputta, pañcahi ṭhānehi kulaputtena uparimā disā samaṇabrāhmaṇā paccupaṭṭhitā chahi ṭhānehi kulaputtaṁ anukampanti—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ngăn họ không làm điều ác; khuyến khích họ làm điều thiện; thương xót họ với tâm từ bi, dạy họ những điều chưa nghe; làm cho thanh tịnh điều đã được nghe; chỉ bày con đường đưa đến cõi Trời.<br>
+<span lang="pi" class="pali">
+pāpā nivārenti, kalyāṇe nivesenti, kalyāṇena manasā anukampanti, assutaṁ sāventi, sutaṁ pariyodāpenti, saggassa maggaṁ ācikkhanti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Gia chủ tử, các vị Sa-môn, Bà-la-môn được thiện nam tử đối xử như phương Trên với năm cách, và các vị Sa-môn, Bà-la-môn có lòng thương tưởng vị thiện nam tử theo năm cách.<br>
+<span lang="pi" class="pali">
+Imehi kho, gahapatiputta, pañcahi ṭhānehi kulaputtena uparimā disā samaṇabrāhmaṇā paccupaṭṭhitā imehi chahi ṭhānehi kulaputtaṁ anukampanti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Như vậy phương Trên được che chở, được trở thành an ổn và thoát khỏi các sự sợ hãi.”<br>
+<span lang="pi" class="pali">
+Evamassa esā uparimā disā paṭicchannā hoti khemā appaṭibhayā”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Thế Tôn thuyết giảng như vậy.<br>
+<span lang="pi" class="pali">
+Idamavoca bhagavā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Thiện thệ thuyết giảng xong, bậc Ðạo Sư lại giảng thêm:<br>
+<span lang="pi" class="pali">
+Idaṁ vatvāna sugato athāparaṁ etadavoca satthā:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Cha mẹ là phương Ðông,<br>
+<span lang="pi" class="pali">
+“Mātāpitā disā pubbā,<br>
+</span>
+Sư trưởng là phương Nam,<br>
+<span lang="pi" class="pali">
+ācariyā dakkhiṇā disā;<br>
+</span>
+Vợ chồng là phương Tây,<br>
+<span lang="pi" class="pali">
+Puttadārā disā pacchā,<br>
+</span>
+Bạn bè là phương Bắc,<br>
+<span lang="pi" class="pali">
+mittāmaccā ca uttarā.<br>
+</span>
+Nô bộc là phương Dưới,<br>
+<span lang="pi" class="pali">
+Dāsakammakarā heṭṭhā,<br>
+</span>
+Sa-môn, Bà-la-môn,<br>
+Có nghĩa là phương Trên.<br>
+<span lang="pi" class="pali">
+uddhaṁ samaṇabrāhmaṇā;<br>
+</span>
+Ðảnh lễ phương hướng ấy.<br>
+<span lang="pi" class="pali">
+Etā disā namasseyya,<br>
+</span>
+Cư sĩ vì gia đình,<br>
+<span lang="pi" class="pali">
+alamatto kule gihī.<br>
+</span>
+Kẻ trí giữ Giới, Luật,<br>
+<span lang="pi" class="pali">
+Paṇḍito sīlasampanno,<br>
+</span>
+Từ tốn và biện tài,<br>
+<span lang="pi" class="pali">
+saṇho ca paṭibhānavā;<br>
+</span>
+Khiêm nhường và nhu thuận,<br>
+<span lang="pi" class="pali">
+Nivātavutti atthaddho,<br>
+</span>
+Nhờ vậy được danh xưng.<br>
+<span lang="pi" class="pali">
+tādiso labhate yasaṁ.<br>
+</span>
+Dậy sớm không biếng nhác,<br>
+<span lang="pi" class="pali">
+Uṭṭhānako analaso,<br>
+</span>
+Bất động giữa hiểm nguy,<br>
+<span lang="pi" class="pali">
+āpadāsu na vedhati;<br>
+</span>
+Người hiền, không phạm giới,<br>
+<span lang="pi" class="pali">
+Acchinnavutti medhāvī,<br>
+</span>
+Nhờ vậy được danh xưng.<br>
+<span lang="pi" class="pali">
+tādiso labhate yasaṁ.<br>
+</span>
+Nhiếp chúng, tạo nên bạn,<br>
+<span lang="pi" class="pali">
+Saṅgāhako mittakaro,<br>
+</span>
+Từ ái, tâm bao dung,<br>
+<span lang="pi" class="pali">
+vadaññū vītamaccharo;<br>
+</span>
+Dẫn đạo, khuyến hóa đạo,<br>
+<span lang="pi" class="pali">
+Netā vinetā anunetā,<br>
+</span>
+Nhờ vậy được danh xưng.<br>
+<span lang="pi" class="pali">
+tādiso labhate yasaṁ.<br>
+</span>
+Bố thí và ái ngữ,<br>
+<span lang="pi" class="pali">
+Dānañca peyyavajjañca,<br>
+</span>
+Lợi hành bất cứ ai,<br>
+<span lang="pi" class="pali">
+atthacariyā ca yā idha;<br>
+</span>
+Ðồng sự trong mọi việc,<br>
+<span lang="pi" class="pali">
+Samānattatā ca dhammesu,<br>
+</span>
+Theo trường hợp xử sự.<br>
+<span lang="pi" class="pali">
+tattha tattha yathārahaṁ;<br>
+</span>
+Chính những nhiếp sự này,<br>
+Khiến thế giới xoay quanh,<br>
+<span lang="pi" class="pali">
+Ete kho saṅgahā loke,<br>
+</span>
+Như bánh xe quay lăn,<br>
+Tiến thẳng về phía trước<br>
+<span lang="pi" class="pali">
+rathassāṇīva yāyato.<br>
+</span>
+Nhiếp sự này vắng mặt,<br>
+<span lang="pi" class="pali">
+Ete ca saṅgahā nāssu,<br>
+</span>
+Không mẹ hay không cha,<br>
+<span lang="pi" class="pali">
+na mātā puttakāraṇā;<br>
+</span>
+Hưởng thọ phần hiếu kính,<br>
+<span lang="pi" class="pali">
+Labhetha mānaṁ pūjaṁ vā,<br>
+</span>
+Những gì con cái làm,<br>
+<span lang="pi" class="pali">
+pitā vā puttakāraṇā.<br>
+</span>
+Ðối với nhiếp pháp này,<br>
+<span lang="pi" class="pali">
+Yasmā ca saṅgahā ete,<br>
+</span>
+Do vậy bậc có trí,<br>
+Quán sát và nắm giữ<br>
+<span lang="pi" class="pali">
+sammapekkhanti paṇḍitā;<br>
+</span>
+Nhờ vậy thành vĩ đại,<br>
+<span lang="pi" class="pali">
+Tasmā mahattaṁ papponti,<br>
+</span>
+Ðược tán thánh, danh xưng.”<br>
+<span lang="pi" class="pali">
+pāsaṁsā ca bhavanti te”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Khi được nghe vậy, Singālaka, gia chủ tử bạch Thế Tôn:<br>
+<span lang="pi" class="pali">
+Evaṁ vutte, siṅgālako gahapatiputto bhagavantaṁ etadavoca:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Thật vi diệu thay, bạch Thế Tôn! Thật vi diệu thay, bạch Thế Tôn!<br>
+<span lang="pi" class="pali">
+“abhikkantaṁ, bhante, abhikkantaṁ, bhante.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Như người dựng đứng lại những gì bị quăng ngã xuống, phơi bày ra những gì bị che kín, chỉ đường cho người bị lạc hướng, đem đèn sáng vào trong bóng tối để những ai có mắt có thể thấy sắc. Cũng vậy, Chánh pháp đã được Thế Tôn dùng nhiều phương tiện trình bày, giải thích.<br>
+<span lang="pi" class="pali">
+Seyyathāpi, bhante, nikkujjitaṁ vā ukkujjeyya, paṭicchannaṁ vā vivareyya, mūḷhassa vā maggaṁ ācikkheyya, andhakāre vā telapajjotaṁ dhāreyya ‘cakkhumanto rūpāni dakkhantī’ti; evamevaṁ bhagavatā anekapariyāyena dhammo pakāsito.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Bạch Thế Tôn, nay con xin quy y Thế Tôn, quy y Pháp và chúng Tỷ-kheo.<br>
+<span lang="pi" class="pali">
+Esāhaṁ, bhante, bhagavantaṁ saraṇaṁ gacchāmi dhammañca bhikkhusaṅghañca.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Mong Thế Tôn nhận con làm đệ tử, từ nay trở đi cho đến mạng chung, con trọn đời quy ngưỡng.”<br>
+<span lang="pi" class="pali">
+Upāsakaṁ maṁ bhagavā dhāretu, ajjatagge pāṇupetaṁ saraṇaṁ gatan”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Dứt bài kinh Giáo Thọ Thi Ca La Việt<br>
+<span lang="pi" class="pali">
+Siṅgālasuttaṁ niṭṭhitaṁ aṭṭhamaṁ.<br>
+</span>
+</p>
+
+
+<!-- COPY CONTENT SUTTA Ở ĐÂY -->
+
+
+
+<br>
+<p><p style="text-align: right;font-style: italic;">Hoà Thượng Thích Minh Châu dịch Việt</span></p>
+
+
+
+</section>  <!-- End English and Pali -->
+
+
+
+
+
+</section>  <!-- End English and Pali -->
+
+
+
+
+
+</section>  <!-- End English and Pali -->
+<div id="nextprev"><a id="previous-sutta" href="./dn30.html#content"></a><a id="next-sutta" href="./dn32.html#content"></a></div>
+</div>  <!--End Content -->
+</div>  <!-- End Page -->
+
+
+
+
+
+
+<footer>
+					 <!-- End bottom links -->
+</footer>
+
+
+ 
+ <!-- Scripts -->
+
+ <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      if (typeof enablePaliLookup === "function") {
+        enablePaliLookup();
+      } else {
+        console.error("enablePaliLookup is not defined");
+      }
+    });
+  </script>
+
+ <script>
+ // Script to open and close sidebar
+ 	function w3_open() {
+ 	document.getElementById("mySidebar").style.display = "block";
+ 	}
+ 		function w3_close() {
+ 		document.getElementById("mySidebar").style.display = "none";
+ 	}
+ </script>
+ <script>
+ 		var app = document.getElementsByTagName("BODY")[0];
+ 		if (localStorage.lightMode == "dark") {
+ 			app.setAttribute("light-mode", "dark");
+ 	}
+ </script>
+ 
+ <script>
+ 		function toggle_light_mode() {
+ 			var app = document.getElementsByTagName("BODY")[0];
+ 				if (localStorage.lightMode == "dark") {
+ 			localStorage.lightMode = "light";
+ 			app.setAttribute("light-mode", "light");
+ 		} else {
+ 					localStorage.lightMode = "dark";
+ 					app.setAttribute("light-mode", "dark");
+ 	}
+ 		}
+ 
+ 		window.addEventListener("storage", function () {
+ 			if (localStorage.lightMode == "dark") {
+ 				app.setAttribute("light-mode", "dark");
+ 				} else {
+ 				app.setAttribute("light-mode", "light");
+ 		}
+ 		}, false);
+ 
+ </script>
+ <script src="../js/footer.js"></script><script src="../js/dpd_deconstructor.js"></script><script src="../js/dpd_ebts.js"></script><script src="../js/dpd_i2h.js"></script>
+ <script src="/sw.js"></script>
+ </body>
+ </html>
