@@ -1,0 +1,1380 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+ 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+ 	<link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+ 	<meta name="viewport" content="width=device-width, initial-scale=1">
+		<!-- Loading manifest -->
+	<link rel="manifest" href="../manifest.json">
+ 	<!-- Loading main and menu stylesheets -->
+ 	<link rel="stylesheet" href="../css/w3.css">
+ 	<link rel="stylesheet" href="../css/css.css">
+ 	<link rel="stylesheet" href="../css/menu.css">
+ 	<script src="../js/jquery-1.10.2.min.js"></script>
+ 	<script src="../js/controlpanel.js"></script>
+ 	<script src="../js/mousetrap.min.js"></script>
+    <script src="../js/pali-lookup-standalone.js"></script>
+
+ <script src="../js/suttaFiles.js"></script>
+<script>
+ // Script to open random Sutta
+ function openRandomSutta() {
+  const randomIndex = Math.floor(Math.random() * suttaFiles.length);
+  const selectedFile = suttaFiles[randomIndex];
+
+  // Get root path of your site 
+  const currentPath = location.pathname;
+  const rootPath = currentPath.split("/").slice(0, -2).join("/") + "/";
+
+  // Redirect to the correct file
+  window.location.href = rootPath + selectedFile;
+}
+</script>
+
+
+</head>
+ <body class="container">
+ <div class="header-background">
+ <!-- Header -->
+ <div class="w3-header w3-content w3-padding w3-left-align bwcontainer">
+ 	<div class="centered">
+ 		<button class="light-mode-button" aria-label="Bật Chế Độ Sáng" onclick="toggle_light_mode()">
+ 			<span></span>
+ 			<span></span>
+ 		</button>
+ 		<span class="box-lbl">Sáng/Tối</span>
+ 	</div> <!-- Centered -->
+ 		<a href="../home/index.html" id="bwlogo"><img src="../images/headerlogo.png" alt="Logo Lời Của Đức Phật" class="w3-image"></a>
+ 		<div class="w3-bar bwcontainer">
+ 			<div id="searchlinks">
+ 			<a href="../home/visearch.html"><span class="w3-bar-item"><i class="fa fa-search"></i>&nbsp;Tìm Tiếng Việt</span></a>
+ 			<a href="../home/palisearch.html"><span class="w3-bar-item"><i class="fa fa-search"></i>&nbsp;Tìm Tiếng Pali</span></a>
+ 			</div><!-- End Searchlinks div -->
+ 			<div class="help"><span><a href="../home/help.html"><img src="../images/help_icon.png" title="Trợ Giúp" alt="Help"></a></span></div>
+ 		</div> <!-- End w3-bar bwcontainer --> 	</div> <!-- End w3-header w3-content w3-padding w3-left-align bwcontainer -->
+ </div> <!-- End header-background -->
+ <!-- Top menu -->
+
+ <div class="w3-main w3-white bwcontainer2">
+ 	<div class="w3-button w3-padding-8 w3-left w3-hide-large" onclick="w3_open()">☰</div>
+ 		<div id="navbar" class="w3-hide-small w3-hide-medium bwcontainer3">
+ 			<ul id="css3menu0">
+ 				<li class="topfirst" id="home"><a href="../home/index.html" class="w3-hide-small">Trang Chủ</a></li>
+  				<li class="topmenu" id="dn"><a href="../dn/dn.html" class="pressed w3-hide-small">Trường Bộ Kinh</a></li>
+ 				<li class="topmenu" id="mn"><a href="../mn/mn.html" class="w3-hide-small">Trung Bộ Kinh</a></li>
+ 				<li class="topmenu" id="sn"><a href="../sn/sn.html" class="w3-hide-small"><i class="fa fa-caret-down"></i>&nbsp;Tương Ưng Bộ Kinh</a>
+ 					<ul>
+ 						<li><a href="../sn/sn01.html" class="w3-hide-small">Tập I - Thiên Có Kệ</a></li>
+ 						<li><a href="../sn/sn02.html" class="w3-hide-small">Tập II - Thiên Nhân Duyên</a></li>
+ 						<li><a href="../sn/sn03.html" class="w3-hide-small">Tập III - Thiên Uẩn</a></li>
+ 						<li><a href="../sn/sn04.html" class="w3-hide-small">Tập IV - Thiên Sáu Xứ</a></li>
+ 						<li><a href="../sn/sn05.html" class="w3-hide-small">Tập V - Thiên Ðại Phẩm</a></li>
+ 					</ul>
+ 				<li class="topmenu" id="an"><a href="../an/an.html" class="w3-hide-small"><i class="fa fa-caret-down"></i>&nbsp;Tăng Chi Bộ Kinh</a>
+ 					<ul>
+ 						<li><a href="../an/an1.html" class="w3-hide-small">Chương Một Pháp</a></li>
+ 						<li><a href="../an/an2.html" class="w3-hide-small">Chương Hai Pháp</a></li>
+ 						<li><a href="../an/an3.html" class="w3-hide-small">Chương Ba Pháp</a></li>
+ 						<li><a href="../an/an4.html" class="w3-hide-small">Chương Bốn Pháp</a></li>
+ 						<li><a href="../an/an5.html" class="w3-hide-small">Chương Năm Pháp</a></li>
+ 						<li><a href="../an/an6.html" class="w3-hide-small">Chương Sáu Pháp</a></li>
+ 						<li><a href="../an/an7.html" class="w3-hide-small">Chương Bảy Pháp</a></li>
+ 						<li><a href="../an/an8.html" class="w3-hide-small">Chương Tám Pháp</a></li>
+ 						<li><a href="../an/an9.html" class="w3-hide-small">Chương Chín Pháp</a></li>
+ 						<li><a href="../an/an10.html" class="w3-hide-small">Chương Mười Pháp</a></li>
+ 						<li><a href="../an/an11.html" class="w3-hide-small">Chương Mười Một Pháp</a></li>
+ 					</ul>
+ 				</li>
+ 				<li class="topmenu" id="kn"><a href="../kn/kn.html" class="w3-hide-small"><i class="fa fa-caret-down"></i>&nbsp;Tiểu Bộ Kinh</a>
+ 					<ul>
+ 						<li><a href="../kp/kp.html" class="w3-hide-small">Kinh Tiểu Tụng</a></li>
+ 						<li><a href="../dhp/dhp.html" class="w3-hide-small">Kinh Pháp Cú</a></li>
+ 						<li><a href="../snp/snp.html" class="w3-hide-small">Kinh Tập</a></li>
+ 						<li><a href="../ud/ud.html" class="w3-hide-small">Kinh Phật Tự Thuyết</a></li>
+ 						<li><a href="../it/it.html" class="w3-hide-small">Kinh Phật Thuyết Như Vậy</a></li>
+ 						<li><a href="../tha/tha.html" class="w3-hide-small">Trưởng Lão Tăng Kệ</a></li>
+ 						<li><a href="../thi/thi.html" class="w3-hide-small">Trưởng Lão Ni Kệ</a></li>
+ 					</ul>
+ 				</li>
+				<li class="toplast" id="rd"><a href="../rd/rd.html" class="w3-hide-small"></i>Kinh Ngẫu Nhiên Theo Nhóm</a>
+ 					</ul>
+ 				</li>
+ 			</ul>
+ 			</div>
+ 		</div> <!--navbar-->
+
+<!-- Sidebar (hidden by default) -->
+ <nav class="w3-sidebar w3-bar-block w3-card w3-border w3-top w3-animate-left w3-hide-large" id="mySidebar">
+ 	<a href="javascript:void(0)" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-times fa-2x red-color"></i>&nbsp;&nbsp;&nbsp;Close</a><!-- Hides the sidebar when clicked -->
+ 		<div class="w3-bar-block w3-white">
+ 			<a href="../home/index.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-home fa-lg"></i>&nbsp;&nbsp;&nbsp;Home</a>
+ 			<a href="../guide/guide.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Guide</a>
+ 			<a href="../dn/dn.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Trường Bộ Kinh</a>
+ 			<a href="../mn/mn.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Trung Bộ Kinh</a>
+ 			<a href="../sn/sn.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Tương Ưng Bộ Kinh</a>
+ 			<a href="../an/an.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Tăng Chi Bộ Kinh
+ 			<a href="../kn/kn.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Tiểu Bộ Kinh</a>
+			<a href="../rd/rd.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>Kinh Ngẫu Nhiên Theo Nhóm</a>
+ 		</div>
+ </nav>
+ 
+ 
+ 
+   <!-- !PAGE CONTENT! --> 
+<div class="w3-main w3-content w3-padding w3-left-align bwcontainer4">
+<div id="content">
+<h2>Majjhima Nikāya - Trung Bộ Kinh</h2>
+<h5><span style="font-style: italic;">Hoà Thượng Thích Minh Châu dịch Việt</span></h5>
+
+</div>
+
+<br>
+ 	<title>        Trung Bộ 50          </title>
+
+<p lang="vi" class="vi"; style="text-align: center">
+Trung Bộ 50<br>
+<span lang="pi" class="pali">
+Majjhima Nikāya 50<br>
+</span>
+</p>
+
+<p lang="vi" class="vi"; style="text-align: center">
+Kinh Hàng Ma<br>
+<span lang="pi" class="pali">
+Māratajjanīyasutta<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Như vầy tôi nghe.<br>
+<span lang="pi" class="pali">
+Evaṁ me sutaṁ—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Một thời Tôn giả Mahāmoggallāna trú giữa dân chúng Bhagga, tại Núi Cá Sấu, rừng Bhesakaḷā, vườn Lộc Uyển.<br>
+<span lang="pi" class="pali">
+ekaṁ samayaṁ āyasmā mahāmoggallāno bhaggesu viharati susumāragire bhesakaḷāvane migadāye.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Lúc bấy giờ, Tôn giả Mahāmoggallāna đang đi kinh hành ngoài trời.<br>
+<span lang="pi" class="pali">
+Tena kho pana samayena āyasmā mahāmoggallāno abbhokāse caṅkamati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Khi ấy Ác ma đi vào bụng Tôn giả Mahāmoggallāna, ở trong bao tử.<br>
+<span lang="pi" class="pali">
+Tena kho pana samayena māro pāpimā āyasmato mahāmoggallānassa kucchigato hoti koṭṭhamanupaviṭṭho.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Rồi Tôn giả Mahāmoggallāna nghĩ như sau:<br>
+<span lang="pi" class="pali">
+Atha kho āyasmato mahāmoggallānassa etadahosi:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Nay sao bụng của Ta lại nặng nặng như có gì chồng chất quá đầy?”<br>
+<span lang="pi" class="pali">
+“kiṁ nu kho me kucchi garugaro viya? Māsācitaṁ maññe”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Rồi Tôn giả Mahāmoggallāna từ chỗ kinh hành bước xuống, đi vào tự viện, và ngồi trên chỗ đã soạn sẵn.<br>
+<span lang="pi" class="pali">
+Atha kho āyasmā mahāmoggallāno caṅkamā orohitvā vihāraṁ pavisitvā paññatte āsane nisīdi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Sau khi ngồi, Tôn giả Mahāmoggallāna tự chánh niệm.<br>
+<span lang="pi" class="pali">
+Nisajja kho āyasmā mahāmoggallāno paccattaṁ yoniso manasākāsi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Tôn giả Mahāmoggallāna thấy Ác ma, sau khi đi vào trong bụng, đang ở trong bao tử.<br>
+<span lang="pi" class="pali">
+Addasā kho āyasmā mahāmoggallāno māraṁ pāpimantaṁ kucchigataṁ koṭṭhamanupaviṭṭhaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Thấy vậy, Tôn giả liền nói với Ác ma:<br>
+<span lang="pi" class="pali">
+Disvāna māraṁ pāpimantaṁ etadavoca:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Hãy đi ra, Ác ma!<br>
+<span lang="pi" class="pali">
+“nikkhama, pāpima;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Hãy đi ra, Ác ma!<br>
+<span lang="pi" class="pali">
+nikkhama, pāpima.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Chớ có phiền nhiễu Như Lai và đệ tử Như Lai.<br>
+<span lang="pi" class="pali">
+Mā tathāgataṁ vihesesi, mā tathāgatasāvakaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Chớ có khiến cho Ngươi bị bất hạnh, đau khổ lâu dài!”<br>
+<span lang="pi" class="pali">
+Mā te ahosi dīgharattaṁ ahitāya dukkhāyā”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Rồi Ác ma suy nghĩ:<br>
+<span lang="pi" class="pali">
+Atha kho mārassa pāpimato etadahosi:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Vị Sa-môn này không biết ta, không thấy ta, lại nói như sau:<br>
+<span lang="pi" class="pali">
+“ajānameva kho maṁ ayaṁ samaṇo apassaṁ evamāha:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Hãy đi ra, Ác ma!<br>
+<span lang="pi" class="pali">
+‘nikkhama, pāpima;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Hãy đi ra Ác ma!<br>
+<span lang="pi" class="pali">
+nikkhama, pāpima.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Chớ có phiền nhiễu Như Lai, và đệ tử Như Lai.<br>
+<span lang="pi" class="pali">
+Mā tathāgataṁ vihesesi, mā tathāgatasāvakaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Chớ có khiến cho Ngươi bị bất hạnh, đau khổ lâu dài”.<br>
+<span lang="pi" class="pali">
+Mā te ahosi dīgharattaṁ ahitāya dukkhāyā’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Chính vị Bổn sư cũng chưa biết ta mau như vậy, làm sao vị đệ tử này có thể biết ta được?””<br>
+<span lang="pi" class="pali">
+Yopissa so satthā sopi maṁ neva khippaṁ jāneyya, kuto pana maṁ ayaṁ sāvako jānissatī”ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Rồi Tôn giả Mahāmoggallāna lại nói với Ác ma như sau:<br>
+<span lang="pi" class="pali">
+Atha kho āyasmā mahāmoggallāno māraṁ pāpimantaṁ etadavoca:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Này Ác ma, ta biết Ngươi. Ðừng có nghĩ rằng:<br>
+<span lang="pi" class="pali">
+“evampi kho tāhaṁ, pāpima, jānāmi, mā tvaṁ maññittho:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Vị ấy không biết ta”.<br>
+<span lang="pi" class="pali">
+‘na maṁ jānātī’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ngươi là Ác ma.<br>
+<span lang="pi" class="pali">
+Māro tvamasi, pāpima;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Ác ma, Ngươi nghĩ như sau:<br>
+<span lang="pi" class="pali">
+tuyhañhi, pāpima, evaṁ hoti:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Vị Sa-môn này không biết ta, không thấy ta, lại nói như sau:<br>
+<span lang="pi" class="pali">
+‘ajānameva kho maṁ ayaṁ samaṇo apassaṁ evamāha—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Hãy đi ra, Ác ma!<br>
+<span lang="pi" class="pali">
+nikkhama, pāpima;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+hãy đi ra Ác ma!<br>
+<span lang="pi" class="pali">
+nikkhama, pāpima.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Chớ có phiền nhiễu Như Lai và đệ tử Như Lai.<br>
+<span lang="pi" class="pali">
+Mā tathāgataṁ vihesesi, mā tathāgatasāvakaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Chớ có khiến cho Ngươi bị bất hạnh, đau khổ lâu dài!”<br>
+<span lang="pi" class="pali">
+Mā te ahosi dīgharattaṁ ahitāya dukkhāyāti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Chính vị Bổn sư cũng không biết ta mau như vậy, làm sao vị đệ tử này có thể biết ta được?”<br>
+<span lang="pi" class="pali">
+Yopissa so satthā sopi maṁ neva khippaṁ jāneyya, kuto pana maṁ ayaṁ sāvako jānissatī’”ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Rồi Ác ma suy nghĩ như sau:<br>
+<span lang="pi" class="pali">
+Atha kho mārassa pāpimato etadahosi:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Vị Sa-môn này biết ta, thấy ta và nói như sau:<br>
+<span lang="pi" class="pali">
+“jānameva kho maṁ ayaṁ samaṇo passaṁ evamāha:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Hãy đi ra, Ác ma!<br>
+<span lang="pi" class="pali">
+‘nikkhama, pāpima;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Hãy đi ra, Ác ma!<br>
+<span lang="pi" class="pali">
+nikkhama, pāpima.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Chớ có phiền nhiễu Như Lai và đệ tử Như Lai.<br>
+<span lang="pi" class="pali">
+Mā tathāgataṁ vihesesi, mā tathāgatasāvakaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Chớ có khiến cho Ngươi bị bất hạnh, đau khổ lâu dài”.<br>
+<span lang="pi" class="pali">
+Mā te ahosi dīgharattaṁ ahitāya dukkhāyā’”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Rồi Ác ma từ miệng Tôn giả Mahāmoggallāna bước ra, và đứng dựa nơi cửa miệng.<br>
+<span lang="pi" class="pali">
+Atha kho māro pāpimā āyasmato mahāmoggallānassa mukhato uggantvā paccaggaḷe aṭṭhāsi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Tôn giả Mahāmoggallāna thấy Ác ma đứng dựa nơi cửa miệng, bèn nói Ác ma:<br>
+<span lang="pi" class="pali">
+Addasā kho āyasmā mahāmoggallāno māraṁ pāpimantaṁ paccaggaḷe ṭhitaṁ; disvāna māraṁ pāpimantaṁ etadavoca:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Ác ma, ở đây, ta cũng thấy Ngươi. Ngươi chớ có nghĩ rằng:<br>
+<span lang="pi" class="pali">
+“etthāpi kho tāhaṁ, pāpima, passāmi; mā tvaṁ maññittho<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Vị ấy không thấy ta”.<br>
+<span lang="pi" class="pali">
+‘na maṁ passatī’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Ác ma, nay Ngươi đang đứng dựa nơi cửa miệng.<br>
+<span lang="pi" class="pali">
+Eso tvaṁ, pāpima, paccaggaḷe ṭhito.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Ác ma, thuở xưa, ta là Ác ma tên là Dūsī, và chị ta tên là Kāḷī.<br>
+<span lang="pi" class="pali">
+Bhūtapubbāhaṁ, pāpima, dūsī nāma māro ahosiṁ, tassa me kāḷī nāma bhaginī.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ngươi là con trai chị ta.<br>
+<span lang="pi" class="pali">
+Tassā tvaṁ putto.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Như vậy Ngươi là cháu ta.<br>
+<span lang="pi" class="pali">
+So me tvaṁ bhāgineyyo ahosi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Ác ma, lúc bấy giờ, Thế Tôn Kakusandha, bậc A-la-hán, Chánh Ðẳng Giác ra đời.<br>
+<span lang="pi" class="pali">
+Tena kho pana, pāpima, samayena kakusandho bhagavā arahaṁ sammāsambuddho loke uppanno hoti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Thế Tôn Kakusandha, bậc A-la-hán,  Chánh Ðẳng Giác có hai vị đệ tử tên là Vidhura, và Sañjīva, hai bậc tối thượng, hai bậc Hiền giả.<br>
+<span lang="pi" class="pali">
+Kakusandhassa kho pana, pāpima, bhagavato arahato sammāsambuddhassa vidhurasañjīvaṁ nāma sāvakayugaṁ ahosi aggaṁ bhaddayugaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Ác ma, đối với các vị đệ tử của Thế Tôn Kakusandha, bậc A-la-hán, Chánh Ðẳng Giác.<br>
+<span lang="pi" class="pali">
+Yāvatā kho pana, pāpima, kakusandhassa bhagavato arahato sammāsambuddhassa sāvakā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+không một ai ở đây có thể bằng Tôn giả Vidhura về thuyết pháp.<br>
+<span lang="pi" class="pali">
+Tesu na ca koci āyasmatā vidhurena samasamo hoti yadidaṁ dhammadesanāya.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Ác ma, vì lý do này, Tôn giả Vidhura được gọi là Vidhura (Vô song).<br>
+<span lang="pi" class="pali">
+Iminā kho evaṁ, pāpima, pariyāyena āyasmato vidhurassa vidhuroteva samaññā udapādi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Còn Tôn giả Sañjīva là vị đi rừng, đi gốc cây, đi các chỗ không người và chứng Diệt thọ tưởng định không khó khăn gì.<br>
+<span lang="pi" class="pali">
+Āyasmā pana, pāpima, sañjīvo araññagatopi rukkhamūlagatopi suññāgāragatopi appakasireneva saññāvedayitanirodhaṁ samāpajjati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Ác ma, thuở xưa, Tôn giả Sañjīva đang ngồi nhập Diệt thọ tưởng định dưới một gốc cây.<br>
+<span lang="pi" class="pali">
+Bhūtapubbaṁ, pāpima, āyasmā sañjīvo aññatarasmiṁ rukkhamūle saññāvedayitanirodhaṁ samāpanno nisinno hoti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Ác ma, các người chăn bò, chăn thú, làm ruộng, các lữ hành thấy Tôn giả Sañjīva đang ngồi nhập Diệt thọ tưởng định dưới một gốc cây, thấy vậy liền nói với nhau như sau:<br>
+<span lang="pi" class="pali">
+Addasaṁsu kho, pāpima, gopālakā pasupālakā kassakā pathāvino āyasmantaṁ sañjīvaṁ aññatarasmiṁ rukkhamūle saññāvedayitanirodhaṁ samāpannaṁ nisinnaṁ; disvāna tesaṁ etadahosi:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Thật vị diệu thay, này các Tôn giả! Thật hy hữu thay, này các Tôn giả!<br>
+<span lang="pi" class="pali">
+‘acchariyaṁ vata bho, abbhutaṁ vata, bho.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vị Sa-môn này chết mà vẫn ngồi.<br>
+<span lang="pi" class="pali">
+Ayaṁ samaṇo nisinnakova kālaṅkato.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Chúng ta hãy hỏa táng ngài!’<br>
+<span lang="pi" class="pali">
+Handa naṁ dahāmā’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Rồi này Ác ma, các người chăn bò, chăn thú, làm ruộng, các lữ hành liền thâu lượm cỏ, củi và phân bò chồng lên thân Tôn giả Sañjīva, đốt lửa và bỏ đi.<br>
+<span lang="pi" class="pali">
+Atha kho te, pāpima, gopālakā pasupālakā kassakā pathāvino tiṇañca kaṭṭhañca gomayañca saṅkaḍḍhitvā āyasmato sañjīvassa kāye upacinitvā aggiṁ datvā pakkamiṁsu.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Ác ma, Tôn giả Sañjīva, sau khi đêm ấy đã tàn, liền xuất định, phủi áo, vào buổi sáng đắp y, cầm y bát vào làng khất thực.<br>
+<span lang="pi" class="pali">
+Atha kho, pāpima, āyasmā sañjīvo tassā rattiyā accayena tāya samāpattiyā vuṭṭhahitvā cīvarāni papphoṭetvā pubbaṇhasamayaṁ nivāsetvā pattacīvaramādāya gāmaṁ piṇḍāya pāvisi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Ác ma, các người chăn bò, chăn thú, làm ruộng, các lữ hành thấy Tôn giả Sañjīva đang đi khất thực, thấy vậy liền nghĩ:<br>
+<span lang="pi" class="pali">
+Addasaṁsu kho te, pāpima, gopālakā pasupālakā kassakā pathāvino āyasmantaṁ sañjīvaṁ piṇḍāya carantaṁ; disvāna nesaṁ etadahosi:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Thật vị diệu thay, này các Tôn giả! Thật hy hữu thay, này các Tôn giả!<br>
+<span lang="pi" class="pali">
+‘acchariyaṁ vata bho, abbhutaṁ vata, bho.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vị Sa-môn này chết mà vẫn ngồi, nay được sống lại”.<br>
+<span lang="pi" class="pali">
+Ayaṁ samaṇo nisinnakova kālaṅkato, svāyaṁ paṭisañjīvito’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Ác ma, vì lý do này, Tôn giả Sañjīva được xưng danh là Sañjīva, Sañjīva.<br>
+<span lang="pi" class="pali">
+Iminā kho evaṁ, pāpima, pariyāyena āyasmato sañjīvassa sañjīvoteva samaññā udapādi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Ác ma, rồi Ác ma Dūsī nghĩ như sau:<br>
+<span lang="pi" class="pali">
+Atha kho, pāpima, dūsissa mārassa etadahosi:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Ta không biết chỗ đến và chỗ đi của các vị Tỷ-kheo có giới hạnh và thiện pháp này.<br>
+<span lang="pi" class="pali">
+‘imesaṁ kho ahaṁ bhikkhūnaṁ sīlavantānaṁ kalyāṇadhammānaṁ neva jānāmi āgatiṁ vā gatiṁ vā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vậy nay ta hãy nhập vào hàng Bà-la-môn gia chủ và nói như sau:<br>
+<span lang="pi" class="pali">
+Yannūnāhaṁ brāhmaṇagahapatike anvāviseyyaṁ—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Hãy đến phỉ báng, mạ lị, thống trách và nhiễu hại các vị Tỷ-kheo có giới hạnh và thiện tánh.<br>
+<span lang="pi" class="pali">
+etha, tumhe bhikkhū sīlavante kalyāṇadhamme akkosatha paribhāsatha rosetha vihesetha.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Do bị phỉ báng, mạ lị, thống trách và nhiễu hại bởi các Người, các vị ấy có thể đổi tâm và như vậy, Ác ma Dūsī mới có dịp để chi phối họ. “<br>
+<span lang="pi" class="pali">
+Appeva nāma tumhehi akkosiyamānānaṁ paribhāsiyamānānaṁ rosiyamānānaṁ vihesiyamānānaṁ siyā cittassa aññathattaṁ, yathā taṁ dūsī māro labhetha otāran’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Rồi Ác Ma Dūsī nhập vào hàng Bà-la-môn gia chủ và nói như sau:<br>
+<span lang="pi" class="pali">
+Atha kho te, pāpima, dūsī māro brāhmaṇagahapatike anvāvisi:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Hãy đến phỉ báng, mạ lị, thống trách và nhiễu hại các vị Tỷ-kheo có giới hạnh và thiện tánh.<br>
+<span lang="pi" class="pali">
+‘etha, tumhe bhikkhū sīlavante kalyāṇadhamme akkosatha paribhāsatha rosetha vihesetha.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Do bị phỉ báng, mạ lị, thống trách và nhiễu hại bởi các Người, các vị ấy có thể đổi tâm và như vậy, Ác ma Dūsī mới có dịp để chi phối họ. “<br>
+<span lang="pi" class="pali">
+Appeva nāma tumhehi akkosiyamānānaṁ paribhāsiyamānānaṁ rosiyamānānaṁ vihesiyamānānaṁ siyā cittassa aññathattaṁ, yathā taṁ dūsī māro labhetha otāran’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Rồi này Ác ma, Ác ma Dūsī nhập vào hàng Bà-la-môn gia chủ và phỉ báng, mạ lị, thống trách và nhiễu hại các vị Tỷ-kheo có giới hạnh và thiện tánh như sau:<br>
+<span lang="pi" class="pali">
+Atha kho te, pāpima, brāhmaṇagahapatikā anvāvisiṭṭhā dūsinā mārena bhikkhū sīlavante kalyāṇadhamme akkosanti paribhāsanti rosenti vihesenti:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Những kẻ trọc đầu, Sa-môn giả hiệu, tiện nô, hắc nô, sanh tự gót chân này. Họ nói: “Chúng tôi tu thiền, chúng tôi tu thiền” và với hai vai thụt xuống, với mặt cúi xuống, mê mê dại dại, tu thiền, mê thiền, si thiền, dại thiền.<br>
+<span lang="pi" class="pali">
+‘ime pana muṇḍakā samaṇakā ibbhā kiṇhā bandhupādāpaccā “jhāyinosmā jhāyinosmā”ti pattakkhandhā adhomukhā madhurakajātā jhāyanti pajjhāyanti nijjhāyanti apajjhāyanti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ví như con cú đậu trên cành cây, khi đang rình chuột; tu thiền, mê thiền, si thiền, dại thiền; cũng vậy, những kẻ trọc đầu, Sa-môn giả hiệu, tiện nô, hắc nô, sanh tự gót chân này. Chúng nói: “Chúng tôi tu thiền, chúng tôi tu thiền”. Và với hai vai thụt xuống, với mặt cúi xuống, mê mê dại dại, tu thiền, mê thiền, si thiền, dại thiền.<br>
+<span lang="pi" class="pali">
+Seyyathāpi nāma ulūko rukkhasākhāyaṁ mūsikaṁ maggayamāno jhāyati pajjhāyati nijjhāyati apajjhāyati; evamevime muṇḍakā samaṇakā ibbhā kiṇhā bandhupādāpaccā “jhāyinosmā jhāyinosmā”ti pattakkhandhā adhomukhā madhurakajātā jhāyanti pajjhāyanti nijjhāyanti apajjhāyanti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ví như con giả can trên bờ sông, khi đang rình cá; tu thiền, mê thiền, si thiền, dại thiền; cũng vậy, những kẻ trọc đầu, Sa-môn giả hiệu, tiện nô, hắc nô, sanh tự gót chân này. Họ nói: “Chúng tôi tu thiền, chúng tôi tu thiền” và với hai vai thụt xuống, với mặt cúi xuống, mê mê dại dại, tu thiền, mê thiền, si thiền, dại thiền.<br>
+<span lang="pi" class="pali">
+Seyyathāpi nāma kotthu nadītīre macche maggayamāno jhāyati pajjhāyati nijjhāyati apajjhāyati; evamevime muṇḍakā samaṇakā ibbhā kiṇhā bandhupādāpaccā “jhāyinosmā jhāyinosmā”ti pattakkhandhā adhomukhā madhurakajātā jhāyanti pajjhāyanti nijjhāyanti apajjhāyanti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ví như con mèo ngồi bên đống rác, khi đang rình chuột; tu thiền, mê thiền, si thiền, dại thiền; cũng vậy, những kẻ trọc đầu, Sa-môn giả hiệu, tiện nô, hắc nô, sanh tự gót chân này. Họ nói: “Chúng tôi tu thiền, chúng tôi tu thiền” và với hai vai thụt xuống, với mặt cúi xuống, mê mê dại dại, tu thiền, mê thiền, si thiền, dại thiền.<br>
+<span lang="pi" class="pali">
+Seyyathāpi nāma biḷāro sandhisamalasaṅkaṭīre mūsikaṁ maggayamāno jhāyati pajjhāyati nijjhāyati apajjhāyati; evamevime muṇḍakā samaṇakā ibbhā kiṇhā bandhupādāpaccā “jhāyinosmā jhāyinosmā”ti pattakkhandhā adhomukhā madhurakajātā jhāyanti pajjhāyanti nijjhāyanti apajjhāyanti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ví như con lừa, gánh nặng được đặt xuống, đang tu thiền, mê thiền, si thiền, dại thiền;<br>
+<span lang="pi" class="pali">
+Seyyathāpi nāma gadrabho vahacchinno sandhisamalasaṅkaṭīre jhāyati pajjhāyati nijjhāyati apajjhāyati;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+cũng vậy, những kẻ trọc đầu, Sa-môn giả hiệu, tiện nô, hắc nô, sanh tự gót chân này. Chúng nói: “Chúng tôi tu thiền, chúng tôi tu thiền”, và với hai vai thụt xuống, với mặt cúi xuống, mê mê dại dại, tu thiền, mê thiền, si thiền, dại thiền”.<br>
+<span lang="pi" class="pali">
+evamevime muṇḍakā samaṇakā ibbhā kiṇhā bandhupādāpaccā “jhāyinosmā jhāyinosmā”ti pattakkhandhā adhomukhā madhurakajātā jhāyanti pajjhāyanti nijjhāyanti apajjhāyantī’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Ác ma lúc bấy giờ, phần lớn những người ấy sau khi thân hoại mạng chung phải sanh vào cõi dữ, ác thú, đọa xứ, địa ngục.<br>
+<span lang="pi" class="pali">
+Ye kho pana, pāpima, tena samayena manussā kālaṁ karonti yebhuyyena kāyassa bhedā paraṁ maraṇā apāyaṁ duggatiṁ vinipātaṁ nirayaṁ upapajjanti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Rồi này Ác ma, Thế Tôn Kakusandha, bậc A-la-hán, Chánh Ðẳng Giác gọi các Tỷ-kheo:<br>
+<span lang="pi" class="pali">
+Atha kho, pāpima, kakusandho bhagavā arahaṁ sammāsambuddho bhikkhū āmantesi:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Này các Tỷ-kheo, những Bà-la-môn gia chủ bị Ác ma Dūsī nhập vào và nói:<br>
+<span lang="pi" class="pali">
+‘anvāviṭṭhā kho, bhikkhave, brāhmaṇagahapatikā dūsinā mārena—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Hãy đến phỉ báng, mạ lị, thống trách và nhiễu hại các Tỷ-kheo có giới hạnh và thiện tánh. Do bị phỉ báng, mạ lị, thống trách và nhiễu hại bởi các Người, các vị ấy có thể đổi tâm, và như vậy Ác ma Dūsī mới có dịp để chi phối họ”.<br>
+<span lang="pi" class="pali">
+etha, tumhe bhikkhū sīlavante kalyāṇadhamme akkosatha paribhāsatha rosetha vihesetha, appeva nāma tumhehi akkosiyamānānaṁ paribhāsiyamānānaṁ rosiyamānānaṁ vihesiyamānānaṁ siyā cittassa aññathattaṁ, yathā taṁ dūsī māro labhetha otāran’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này các Tỷ-kheo, hãy đến biến mãn một phương với tâm câu hữu với từ, rồi an trú, cũng vậy phương thứ hai, cũng vậy phương thứ ba, cũng vậy phương thứ tư. Như vậy cùng khắp thế giới, trên, dưới, bề ngang, hết thảy phương xứ, cùng khắp vô biên giới, an trú biến mãn với tâm câu hữu với từ, quảng đại, vô biên, không hận, không sân.<br>
+<span lang="pi" class="pali">
+Etha, tumhe, bhikkhave, mettāsahagatena cetasā ekaṁ disaṁ pharitvā viharatha, tathā dutiyaṁ, tathā tatiyaṁ, tathā catutthaṁ. Iti uddhamadho tiriyaṁ sabbadhi sabbattatāya sabbāvantaṁ lokaṁ mettāsahagatena cetasā vipulena mahaggatena appamāṇena averena abyābajjhena pharitvā viharatha.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Với tâm câu hữu với bi…<br>
+<span lang="pi" class="pali">
+Karuṇāsahagatena cetasā …pe…<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+với tâm câu hữu với hỷ…,<br>
+<span lang="pi" class="pali">
+muditāsahagatena cetasā …pe…<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+biến mãn một phương với tâm câu hữu với xả, rồi an trú; cũng vậy phương thứ hai, cũng vậy phương thứ ba, cũng vậy phương thứ tư. Như vậy cùng khắp thế giới, trên, dưới, bề ngang, hết thảy phương xứ, cùng khắp vô biên giới, an trú biến mãn với tâm câu hữu với xả, quảng đại, vô biên, không hận, không sân”.<br>
+<span lang="pi" class="pali">
+upekkhāsahagatena cetasā ekaṁ disaṁ pharitvā viharatha, tathā dutiyaṁ, tathā tatiyaṁ, tathā catutthaṁ. Iti uddhamadho tiriyaṁ sabbadhi sabbattatāya sabbāvantaṁ lokaṁ upekkhāsahagatena cetasā vipulena mahaggatena appamāṇena averena abyābajjhena pharitvā viharathā’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Rồi Ác ma, các Tỷ-kheo ấy được Thế Tôn Kakusandha, bậc A-la-hán, Chánh Ðẳng Giác khuyến khích như vậy, khuyến giáo như vậy, đi đến khu rừng, đi đến gốc cây, đi đến các chỗ không vắng, biến mãn một phương với tâm câu hữu với từ rồi an trú; cũng vậy phương thứ hai, cũng vậy phương thứ ba; cũng vậy phương thứ tư. Như vậy cùng khắp thế giới, trên, dưới, bề ngang, hết thảy phương xứ, cùng khắp vô biên giới, an trú biến mãn với tâm câu hữu với từ, quảng đại, vô biên, không hận, không sân.<br>
+<span lang="pi" class="pali">
+Atha kho te, pāpima, bhikkhū kakusandhena bhagavatā arahatā sammāsambuddhena evaṁ ovadiyamānā evaṁ anusāsiyamānā araññagatāpi rukkhamūlagatāpi suññāgāragatāpi mettāsahagatena cetasā ekaṁ disaṁ pharitvā vihariṁsu, tathā dutiyaṁ, tathā tatiyaṁ, tathā catutthaṁ. Iti uddhamadho tiriyaṁ sabbadhi sabbattatāya sabbāvantaṁ lokaṁ mettāsahagatena cetasā vipulena mahaggatena appamāṇena averena abyābajjhena pharitvā vihariṁsu.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Với tâm câu hữu với bi…<br>
+<span lang="pi" class="pali">
+Karuṇāsahagatena cetasā …pe…<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+với tâm câu hữu với hỷ…<br>
+<span lang="pi" class="pali">
+muditāsahagatena cetasā …pe…<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+biến mãn một phương với tâm câu hữu với xả rồi an trú; cũng vậy phương thứ hai, cũng vậy phương thứ ba, cũng vậy phương thứ tư. Như vậy, cùng khắp thế giới, trên, dưới, bề ngang, hết thảy phương xứ, cùng khắp vô biên giới, an trú biến mãn với tâm câu hữu với xả, quảng đại, vô biên, không hận, không sân.<br>
+<span lang="pi" class="pali">
+upekkhāsahagatena cetasā ekaṁ disaṁ pharitvā vihariṁsu, tathā dutiyaṁ, tathā tatiyaṁ, tathā catutthaṁ. Iti uddhamadho tiriyaṁ sabbadhi sabbattatāya sabbāvantaṁ lokaṁ upekkhāsahagatena cetasā vipulena mahaggatena appamāṇena averena abyābajjhena pharitvā vihariṁsu.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Ác ma, rồi Mara Dūsī suy nghĩ như sau:<br>
+<span lang="pi" class="pali">
+Atha kho, pāpima, dūsissa mārassa etadahosi:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Làm như vậy, ta không thể biết chỗ đến hay chỗ đi của các Tỷ-kheo có giới hạnh và thiện tánh. Vậy ta hãy nhập vào các Bà-la-môn gia chủ và nói như sau:<br>
+<span lang="pi" class="pali">
+‘evampi kho ahaṁ karonto imesaṁ bhikkhūnaṁ sīlavantānaṁ kalyāṇadhammānaṁ neva jānāmi āgatiṁ vā gatiṁ vā, yannūnāhaṁ brāhmaṇagahapatike anvāviseyyaṁ:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Hãy đến tán thán, tôn trọng, đảnh lễ, cúng dường các Tỷ-kheo có giới hạnh và thiện tánh này.<br>
+<span lang="pi" class="pali">
+“etha, tumhe bhikkhū sīlavante kalyāṇadhamme sakkarotha garuṁ karotha mānetha pūjetha,<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Do được tán thán, tôn trọng, đảnh lễ, cúng dường, các vị ấy có thể đổi tâm và như vậy, Ác ma Dūsī mới có dịp để chi phối họ”.<br>
+<span lang="pi" class="pali">
+appeva nāma tumhehi sakkariyamānānaṁ garukariyamānānaṁ māniyamānānaṁ pūjiyamānānaṁ siyā cittassa aññathattaṁ, yathā taṁ dūsī māro labhetha otāran”’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Rồi này Ác ma, Ác ma Dūsī nhập vào các Bà-la-môn gia chủ và nói:<br>
+<span lang="pi" class="pali">
+Atha kho te, pāpima, dūsī māro brāhmaṇagahapatike anvāvisi:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Hãy đến tán thán, tôn trọng, đảnh lễ, cúng dường các Tỷ-kheo có giới hạnh và thiện tánh. Những vị này được các Ngươi tán thán, tôn trọng, đảnh lễ, cúng dường có thể đổi tâm, và như vậy Ác ma Dūsī mới có dịp để chi phối họ”.<br>
+<span lang="pi" class="pali">
+‘etha, tumhe bhikkhū sīlavante kalyāṇadhamme sakkarotha garuṁ karotha mānetha pūjetha, appeva nāma tumhehi sakkariyamānānaṁ garukariyamānānaṁ māniyamānānaṁ pūjiyamānānaṁ siyā cittassa aññathattaṁ, yathā taṁ dūsī māro labhetha otāran’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Rồi này Ác ma, những Bà-la-môn gia chủ, bị Ác ma Dūsī xâm nhập, tán thán, tôn trọng, đảnh lễ, cúng dường các Tỷ-kheo có giới hạnh và thiện tánh. Này Ác ma, sau một thời gian những vị này mạng chung và phần lớn sau khi thân hoại mạng chung được sanh lên thiện thú, Thiên giới và đời này.<br>
+<span lang="pi" class="pali">
+Atha kho te, pāpima, brāhmaṇagahapatikā anvāviṭṭhā dūsinā mārena bhikkhū sīlavante kalyāṇadhamme sakkaronti garuṁ karonti mānenti pūjenti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Ác ma, sau một thời gian những vị này mạng chung và phần lớn sau khi thân hoại mạng chung được sanh lên thiện thú, Thiên giới và đời này.<br>
+<span lang="pi" class="pali">
+Ye kho pana, pāpima, tena samayena manussā kālaṁ karonti yebhuyyena kāyassa bhedā paraṁ maraṇā sugatiṁ saggaṁ lokaṁ upapajjanti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Rồi này Ác ma, Thế Tôn Kakusamdha, bậc A-la-hán, Chánh Ðẳng Giác gọi các Tỷ-kheo:<br>
+<span lang="pi" class="pali">
+Atha kho, pāpima, kakusandho bhagavā arahaṁ sammāsambuddho bhikkhū āmantesi:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này các Tỷ-kheo, các Bà-la-môn gia chủ bị Ác ma Dūsī xâm nhập và nói như sau:<br>
+<span lang="pi" class="pali">
+‘anvāviṭṭhā kho, bhikkhave, brāhmaṇagahapatikā dūsinā mārena:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Các Ngươi hãy đến tán thán, tôn trọng, đảnh lễ, cúng dường các Tỷ-kheo có giới hạnh và thiện tánh.<br>
+<span lang="pi" class="pali">
+“etha, tumhe bhikkhū sīlavante kalyāṇadhamme sakkarotha garuṁ karotha mānetha pūjetha,<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Những vị này được các Ngươi tán thán, tôn trọng, đảnh lễ, cúng dường có thể đổi tâm và như vậy Ác ma Dūsī mới có dịp để chi phối họ”.<br>
+<span lang="pi" class="pali">
+appeva nāma tumhehi sakkariyamānānaṁ garukariyamānānaṁ māniyamānānaṁ pūjiyamānānaṁ siyā cittassa aññathattaṁ, yathā taṁ dūsī māro labhetha otāran”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này các Tỷ-kheo, các Ngươi hãy sống quán bất tịnh trên thân, quán tưởng nhàm chán đối với các món ăn, quán tưởng bất khả lạc đối với tất cả thế gian, quán tánh vô thường đối với tất cả hành”.<br>
+<span lang="pi" class="pali">
+Etha, tumhe, bhikkhave, asubhānupassino kāye viharatha, āhāre paṭikūlasaññino, sabbaloke anabhiratisaññino, sabbasaṅkhāresu aniccānupassino’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Và này Ác ma, những Tỷ-kheo ấy được Thế Tôn Kakusandha khuyến khích như vậy, khuyến giáo như vậy, đi đến khu rừng, đi đến gốc cây, đi đến các chỗ trống vắng, sống quán (tánh) bất tịnh trên thân, (quán) tưởng nhàm chán đối với các món ăn, (quán) tưởng bất khả lạc đối với tất cả thế gian, quán tánh vô thường đối với tất cả hành.<br>
+<span lang="pi" class="pali">
+Atha kho te, pāpima, bhikkhū kakusandhena bhagavatā arahatā sammāsambuddhena evaṁ ovadiyamānā evaṁ anusāsiyamānā araññagatāpi rukkhamūlagatāpi suññāgāragatāpi asubhānupassino kāye vihariṁsu, āhāre paṭikūlasaññino, sabbaloke anabhiratisaññino, sabbasaṅkhāresu aniccānupassino.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Rồi này Ác ma, Thế Tôn Kakusandha, bậc A-la-hán, Chánh Ðẳng Giác, buổi sáng đắp y, mang y bát, với Tôn giả Vidhura là thị giả, đi vào làng để khất thực.<br>
+<span lang="pi" class="pali">
+Atha kho, pāpima, kakusandho bhagavā arahaṁ sammāsambuddho pubbaṇhasamayaṁ nivāsetvā pattacīvaramādāya āyasmatā vidhurena pacchāsamaṇena gāmaṁ piṇḍāya pāvisi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Rồi này Ác ma, Ác ma Dūsī nhập vào một đứa trẻ, cầm một hòn đá, đánh trên đầu Tôn giả Vidhura khiến bể đầu.<br>
+<span lang="pi" class="pali">
+Atha kho, pāpima, dūsī māro aññataraṁ kumārakaṁ anvāvisitvā sakkharaṁ gahetvā āyasmato vidhurassa sīse pahāramadāsi; sīsaṁ vobhindi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Rồi này Ác ma, Tôn giả Vidhura với đầu bị bể và với máu chảy, vẫn đi sau lưng Thế Tôn Kakusandha, bậc A-la-hán, Chánh Ðẳng Giác.<br>
+<span lang="pi" class="pali">
+Atha kho, pāpima, āyasmā vidhuro bhinnena sīsena lohitena gaḷantena kakusandhaṁyeva bhagavantaṁ arahantaṁ sammāsambuddhaṁ piṭṭhito piṭṭhito anubandhi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Rồi này Ác ma, Thế Tôn Kakusandha bậc A-la-hán, Chánh Ðẳng Giác nhìn xung quanh với cái nhìn con voi chúa và suy nghĩ như sau:<br>
+<span lang="pi" class="pali">
+Atha kho, pāpima, kakusandho bhagavā arahaṁ sammāsambuddho nāgāpalokitaṁ apalokesi:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Thật vậy, Ác ma Dūsī không biết sự vừa phải”.<br>
+<span lang="pi" class="pali">
+‘na vāyaṁ dūsī māro mattamaññāsī’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Ác ma, khi Thế Tôn nhìn xung quanh, thì Ác ma Dūsī liền từ chỗ ấy từ trần và sinh vào cõi địa ngục.<br>
+<span lang="pi" class="pali">
+Sahāpalokanāya ca pana, pāpima, dūsī māro tamhā ca ṭhānā cavi mahānirayañca upapajji.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Ác ma, địa ngục ấy được ba tên gọi:<br>
+<span lang="pi" class="pali">
+Tassa kho pana, pāpima, mahānirayassa tayo nāmadheyyā honti—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Sáu xúc xứ địa ngục, Thiết qua địa ngục, Biệt thọ khổ địa ngục.<br>
+<span lang="pi" class="pali">
+chaphassāyataniko itipi, saṅkusamāhato itipi, paccattavedaniyo itipi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Rồi các người giữ địa ngục đến ta và nói như sau:<br>
+<span lang="pi" class="pali">
+Atha kho maṁ, pāpima, nirayapālā upasaṅkamitvā etadavocuṁ:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Này Tôn giả, khi cọc sắt sẽ gặp cọc sắt trong tim của Ngươi,<br>
+<span lang="pi" class="pali">
+‘yadā kho te, mārisa, saṅkunā saṅku hadaye samāgaccheyya.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ngươi mới hiểu như sau:<br>
+<span lang="pi" class="pali">
+Atha naṁ tvaṁ jāneyyāsi:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Ta sẽ bị trụng nước sôi một ngàn năm ở địa ngục.”<br>
+<span lang="pi" class="pali">
+“vassasahassaṁ me niraye paccamānassā”’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Và ta, này Ác ma, ta bị trụng nước sôi, trải nhiều năm, nhiều trăm năm, nhiều ngàn năm trong địa ngục.<br>
+<span lang="pi" class="pali">
+So kho ahaṁ, pāpima, bahūni vassāni bahūni vassasatāni bahūni vassasahassāni tasmiṁ mahāniraye apacciṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Trải qua một vạn năm trong đại địa ngục ấy, ta bị nấu sôi và cảm thọ cảm giác gọi là Vutthanima.<br>
+<span lang="pi" class="pali">
+Dasavassasahassāni tasseva mahānirayassa ussade apacciṁ vuṭṭhānimaṁ nāma vedanaṁ vediyamāno.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Do vậy, này Ác ma, thân của ta là như vậy, thân như con người,<br>
+<span lang="pi" class="pali">
+Tassa mayhaṁ, pāpima, evarūpo kāyo hoti, seyyathāpi manussassa.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+và đầu ta là như vậy, đầu như con cá.<br>
+<span lang="pi" class="pali">
+Evarūpaṁ sīsaṁ hoti, seyyathāpi macchassa.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Địa ngục ấy thế nào?<br>
+Nơi Dūsī bị đốt,<br>
+Vì đánh Vidhura,<br>
+Đệ tử Kakusandha.<br>
+<span lang="pi" class="pali">
+Kīdiso nirayo āsi,<br>
+yattha dūsī apaccatha;<br>
+Vidhuraṁ sāvakamāsajja,<br>
+kakusandhañca brāhmaṇaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Có trăm loại cọc sắt,<br>
+Tự cảm thọ riêng biệt,<br>
+Đó là nơi địa ngục,<br>
+Nơi Dūsī bị đốt,<br>
+Vì đánh Vidhura,<br>
+Đệ tử Kakusandha.<br>
+<span lang="pi" class="pali">
+Sataṁ āsi ayosaṅkū,<br>
+sabbe paccattavedanā;<br>
+Īdiso nirayo āsi,<br>
+yattha dūsī apaccatha;<br>
+Vidhuraṁ sāvakamāsajja,<br>
+kakusandhañca brāhmaṇaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Kẻ ác, nếu nhiễu hại,<br>
+Vị tỷ-kheo biết rõ,<br>
+Vị đệ tử của Phật,<br>
+Ngươi rơi vào khổ đau.<br>
+<span lang="pi" class="pali">
+Yo etamabhijānāti,<br>
+bhikkhu buddhassa sāvako;<br>
+Tādisaṁ bhikkhumāsajja,<br>
+kaṇha dukkhaṁ nigacchasi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Với cung điện nhiều kiếp,<br>
+Đứng lên trên giữa Hồ,<br>
+Màu Sa-phia rực rỡ,<br>
+Lấp lánh và toả sáng,<br>
+Thiên nữ múa tại đây,<br>
+Với nhiều màu sặc sỡ.<br>
+<span lang="pi" class="pali">
+Majjhe sarassa tiṭṭhanti,<br>
+vimānā kappaṭṭhāyino;<br>
+Veḷuriyavaṇṇā rucirā,<br>
+accimanto pabhassarā;<br>
+Accharā tattha naccanti,<br>
+puthu nānattavaṇṇiyo.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Kẻ ác, nếu nhiễu hại,<br>
+Vị tỷ-kheo biết rõ,<br>
+Vị đệ tử của Phật,<br>
+Ngươi rơi vào khổ đau.<br>
+<span lang="pi" class="pali">
+Yo etamabhijānāti,<br>
+bhikkhu buddhassa sāvako;<br>
+Tādisaṁ bhikkhumāsajja,<br>
+kaṇha dukkhaṁ nigacchasi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Đức Phật cho Phép ta,<br>
+Lay chuyển Mi-gā Tự,<br>
+Chỉ với ngón Chân Cái,<br>
+Chứng kiến bởi Chư Tăng.<br>
+<span lang="pi" class="pali">
+Yo ve buddhena codito,<br>
+bhikkhu saṅghassa pekkhato;<br>
+Migāramātupāsādaṁ,<br>
+pādaṅguṭṭhena kampayi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Kẻ ác, nếu nhiễu hại,<br>
+Vị tỷ-kheo biết rõ,<br>
+Vị đệ tử của Phật,<br>
+Ngươi rơi vào khổ đau.<br>
+<span lang="pi" class="pali">
+Yo etamabhijānāti,<br>
+bhikkhu buddhassa sāvako;<br>
+Tādisaṁ bhikkhumāsajja,<br>
+kaṇha dukkhaṁ nigacchasi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Với ngón chân thần lực,<br>
+Ta làm cho rung chuyển,<br>
+Cung điện của Đế-Thích,<br>
+Khiến Thiên Chúng kinh ngạc.<br>
+<span lang="pi" class="pali">
+Yo vejayantaṁ pāsādaṁ,<br>
+pādaṅguṭṭhena kampayi;<br>
+Iddhibalenupatthaddho,<br>
+saṁvejesi ca devatā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Kẻ ác, nếu nhiễu hại,<br>
+Vị tỷ-kheo biết rõ,<br>
+Vị đệ tử của Phật,<br>
+Ngươi rơi vào khổ đau.<br>
+<span lang="pi" class="pali">
+Yo etamabhijānāti,<br>
+bhikkhu buddhassa sāvako;<br>
+Tādisaṁ bhikkhumāsajja,<br>
+kaṇha dukkhaṁ nigacchasi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ta hỏi Đức Đế-Thích,<br>
+Tại cung điện Đế-Thích,<br>
+vāsava, ngươi có nhớ,<br>
+Ái tận, đã giải thoát?<br>
+Đế-Thích đã trả lời,<br>
+Sự thật khi được hỏi.<br>
+<span lang="pi" class="pali">
+Yo vejayantapāsāde,<br>
+sakkaṁ so paripucchati;<br>
+Api vāsava jānāsi,<br>
+taṇhākkhayavimuttiyo;<br>
+Tassa sakko viyākāsi,<br>
+pañhaṁ puṭṭho yathātathaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Kẻ ác, nếu nhiễu hại,<br>
+Vị tỷ-kheo biết rõ,<br>
+Vị đệ tử của Phật,<br>
+Ngươi rơi vào khổ đau.<br>
+<span lang="pi" class="pali">
+Yo etamabhijānāti,<br>
+bhikkhu buddhassa sāvako;<br>
+Tādisaṁ bhikkhumāsajja,<br>
+kaṇha dukkhaṁ nigacchasi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ta đã hỏi Phạm Thiên,<br>
+Trước Đại Sảnh Hội Chúng,<br>
+Hiền giả nay vẫn chấp,<br>
+Các tà kiến thuở xưa,<br>
+Có thấy ánh Hào Quang,<br>
+Vượt qua Phạm Thiên Giới.<br>
+<span lang="pi" class="pali">
+Yo brahmaṁ paripucchati,<br>
+sudhammāyābhito sabhaṁ;<br>
+Ajjāpi tyāvuso diṭṭhi,<br>
+yā te diṭṭhi pure ahu;<br>
+Passasi vītivattantaṁ,<br>
+brahmaloke pabhassaraṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vị Phạm Thiên trả lời,<br>
+Sự thật, từng câu một,<br>
+Tôn giả, ta không chấp,<br>
+Tà kiến trong thuở xưa.<br>
+<span lang="pi" class="pali">
+Tassa brahmā viyākāsi,<br>
+anupubbaṁ yathātathaṁ;<br>
+Na me mārisa sā diṭṭhi,<br>
+yā me diṭṭhi pure ahu.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ta thấy ánh Hào Quang,<br>
+Vượt qua Phạm Thiên giới,<br>
+Làm sao ta nói được:<br>
+Ta trường tồn, có ngã.<br>
+<span lang="pi" class="pali">
+Passāmi vītivattantaṁ,<br>
+brahmaloke pabhassaraṁ;<br>
+Sohaṁ ajja kathaṁ vajjaṁ,<br>
+ahaṁ niccomhi sassato.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Kẻ ác, nếu nhiễu hại,<br>
+Vị tỷ-kheo biết rõ,<br>
+Vị đệ tử của Phật,<br>
+Ngươi rơi vào khổ đau.<br>
+<span lang="pi" class="pali">
+Yo etamabhijānāti,<br>
+bhikkhu buddhassa sāvako;<br>
+Tādisaṁ bhikkhumāsajja,<br>
+kaṇha dukkhaṁ nigacchasi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ta chạm đỉnh Me-ru,<br>
+Nhờ thiền để giải thoát,<br>
+Ta đến gặp nhiều người,<br>
+Những vị ở phía Đông.<br>
+<span lang="pi" class="pali">
+Yo mahāmeruno kūṭaṁ,<br>
+vimokkhena aphassayi;<br>
+Vanaṁ pubbavidehānaṁ,<br>
+ye ca bhūmisayā narā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Kẻ ác, nếu nhiễu hại,<br>
+Vị tỷ-kheo biết rõ,<br>
+Vị đệ tử của Phật,<br>
+Ngươi rơi vào khổ đau.<br>
+<span lang="pi" class="pali">
+Yo etamabhijānāti,<br>
+bhikkhu buddhassa sāvako;<br>
+Tādisaṁ bhikkhumāsajja,<br>
+kaṇha dukkhaṁ nigacchasi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Dù cho lửa không nghĩ:<br>
+“Ta đốt cháy kẻ ngu”,<br>
+Kẻ ngu tấn công lửa,<br>
+Bị ngọn lửa đốt cháy.<br>
+<span lang="pi" class="pali">
+Na ve aggi cetayati,<br>
+‘ahaṁ bālaṁ ḍahāmī’ti;<br>
+Bālo ca jalitaṁ aggiṁ,<br>
+āsajja naṁ sa ḍayhati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Cũng vậy, này Ác-Ma,<br>
+Do nhiễu hại Như Lai,<br>
+Ngươi tự đốt cháy mình,<br>
+Như kẻ ngu chạm lửa.<br>
+<span lang="pi" class="pali">
+Evameva tuvaṁ māra,<br>
+āsajja naṁ tathāgataṁ;<br>
+Sayaṁ ḍahissasi attānaṁ,<br>
+bālo aggiṁva samphusaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ngươi đã tạo ác nghiệp,<br>
+Do nhiễu hại Như Lai,<br>
+Ác-Ma ngươi có thấy,<br>
+Ác quả ngươi đã làm.<br>
+<span lang="pi" class="pali">
+Apuññaṁ pasavī māro,<br>
+āsajja naṁ tathāgataṁ;<br>
+Kiṁ nu maññasi pāpima,<br>
+na me pāpaṁ vipaccati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ðiều ác ngươi chất chứa,<br>
+Tích luỹ thật lâu dài,<br>
+Ác-Ma, từ bỏ Phật,<br>
+Chớ vọng tưởng Tỷ-kheo!<br>
+<span lang="pi" class="pali">
+Karoto cīyati pāpaṁ,<br>
+cirarattāya antaka;<br>
+Māra nibbinda buddhamhā,<br>
+āsaṁ mākāsi bhikkhusu.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Tỷ-kheo trách Ác ma,<br>
+Tại rừng Bhesekaḷā,<br>
+Vị Dạ xoa, thất vọng,<br>
+Biến mất tại chỗ ấy.”<br>
+<span lang="pi" class="pali">
+Iti māraṁ atajjesi,<br>
+bhikkhu bhesakaḷāvane;<br>
+Tato so dummano yakkho,<br>
+tatthevantaradhāyathā”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+<span lang="pi" class="vi">
+Māratajjanīyasuttaṁ niṭṭhitaṁ dasamaṁ.<br>
+</span>
+</p>
+
+
+
+<!-- COPY CONTENT SUTTA Ở ĐÂY -->
+
+
+
+<br>
+<p><p style="text-align: right;font-style: italic;">Hoà Thượng Thích Minh Châu dịch Việt</span></p>
+
+
+
+
+
+
+
+
+</section>  <!-- End English and Pali -->
+<div id="nextprev"><a id="previous-sutta" href="./mn49.html#content"></a><a id="next-sutta" href="./mn51.html#content"></a></div>
+</div>  <!--End Content -->
+</div>  <!-- End Page -->
+
+
+
+
+
+
+<footer>
+					 <!-- End bottom links -->
+</footer>
+
+
+ 
+ <!-- Scripts -->
+
+ <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      if (typeof enablePaliLookup === "function") {
+        enablePaliLookup();
+      } else {
+        console.error("enablePaliLookup is not defined");
+      }
+    });
+  </script>
+
+ <script>
+ // Script to open and close sidebar
+ 	function w3_open() {
+ 	document.getElementById("mySidebar").style.display = "block";
+ 	}
+ 		function w3_close() {
+ 		document.getElementById("mySidebar").style.display = "none";
+ 	}
+ </script>
+ <script>
+ 		var app = document.getElementsByTagName("BODY")[0];
+ 		if (localStorage.lightMode == "dark") {
+ 			app.setAttribute("light-mode", "dark");
+ 	}
+ </script>
+ 
+ <script>
+ 		function toggle_light_mode() {
+ 			var app = document.getElementsByTagName("BODY")[0];
+ 				if (localStorage.lightMode == "dark") {
+ 			localStorage.lightMode = "light";
+ 			app.setAttribute("light-mode", "light");
+ 		} else {
+ 					localStorage.lightMode = "dark";
+ 					app.setAttribute("light-mode", "dark");
+ 	}
+ 		}
+ 
+ 		window.addEventListener("storage", function () {
+ 			if (localStorage.lightMode == "dark") {
+ 				app.setAttribute("light-mode", "dark");
+ 				} else {
+ 				app.setAttribute("light-mode", "light");
+ 		}
+ 		}, false);
+ 
+ </script>
+ <script src="../js/footer.js"></script><script src="../js/dpd_deconstructor.js"></script><script src="../js/dpd_ebts.js"></script><script src="../js/dpd_i2h.js"></script>
+ <script src="/sw.js"></script>
+ </body>
+ </html>

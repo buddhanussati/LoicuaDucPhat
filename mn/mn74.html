@@ -1,0 +1,877 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+ 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+ 	<link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+ 	<meta name="viewport" content="width=device-width, initial-scale=1">
+		<!-- Loading manifest -->
+	<link rel="manifest" href="../manifest.json">
+ 	<!-- Loading main and menu stylesheets -->
+ 	<link rel="stylesheet" href="../css/w3.css">
+ 	<link rel="stylesheet" href="../css/css.css">
+ 	<link rel="stylesheet" href="../css/menu.css">
+ 	<script src="../js/jquery-1.10.2.min.js"></script>
+ 	<script src="../js/controlpanel.js"></script>
+ 	<script src="../js/mousetrap.min.js"></script>
+    <script src="../js/pali-lookup-standalone.js"></script>
+
+ <script src="../js/suttaFiles.js"></script>
+<script>
+ // Script to open random Sutta
+ function openRandomSutta() {
+  const randomIndex = Math.floor(Math.random() * suttaFiles.length);
+  const selectedFile = suttaFiles[randomIndex];
+
+  // Get root path of your site 
+  const currentPath = location.pathname;
+  const rootPath = currentPath.split("/").slice(0, -2).join("/") + "/";
+
+  // Redirect to the correct file
+  window.location.href = rootPath + selectedFile;
+}
+</script>
+
+
+</head>
+ <body class="container">
+ <div class="header-background">
+ <!-- Header -->
+ <div class="w3-header w3-content w3-padding w3-left-align bwcontainer">
+ 	<div class="centered">
+ 		<button class="light-mode-button" aria-label="Bật Chế Độ Sáng" onclick="toggle_light_mode()">
+ 			<span></span>
+ 			<span></span>
+ 		</button>
+ 		<span class="box-lbl">Sáng/Tối</span>
+ 	</div> <!-- Centered -->
+ 		<a href="../home/index.html" id="bwlogo"><img src="../images/headerlogo.png" alt="Logo Lời Của Đức Phật" class="w3-image"></a>
+ 		<div class="w3-bar bwcontainer">
+ 			<div id="searchlinks">
+ 			<a href="../home/visearch.html"><span class="w3-bar-item"><i class="fa fa-search"></i>&nbsp;Tìm Tiếng Việt</span></a>
+ 			<a href="../home/palisearch.html"><span class="w3-bar-item"><i class="fa fa-search"></i>&nbsp;Tìm Tiếng Pali</span></a>
+ 			</div><!-- End Searchlinks div -->
+ 			<div class="help"><span><a href="../home/help.html"><img src="../images/help_icon.png" title="Trợ Giúp" alt="Help"></a></span></div>
+ 		</div> <!-- End w3-bar bwcontainer --> 	</div> <!-- End w3-header w3-content w3-padding w3-left-align bwcontainer -->
+ </div> <!-- End header-background -->
+ <!-- Top menu -->
+
+ <div class="w3-main w3-white bwcontainer2">
+ 	<div class="w3-button w3-padding-8 w3-left w3-hide-large" onclick="w3_open()">☰</div>
+ 		<div id="navbar" class="w3-hide-small w3-hide-medium bwcontainer3">
+ 			<ul id="css3menu0">
+ 				<li class="topfirst" id="home"><a href="../home/index.html" class="w3-hide-small">Trang Chủ</a></li>
+  				<li class="topmenu" id="dn"><a href="../dn/dn.html" class="pressed w3-hide-small">Trường Bộ Kinh</a></li>
+ 				<li class="topmenu" id="mn"><a href="../mn/mn.html" class="w3-hide-small">Trung Bộ Kinh</a></li>
+ 				<li class="topmenu" id="sn"><a href="../sn/sn.html" class="w3-hide-small"><i class="fa fa-caret-down"></i>&nbsp;Tương Ưng Bộ Kinh</a>
+ 					<ul>
+ 						<li><a href="../sn/sn01.html" class="w3-hide-small">Tập I - Thiên Có Kệ</a></li>
+ 						<li><a href="../sn/sn02.html" class="w3-hide-small">Tập II - Thiên Nhân Duyên</a></li>
+ 						<li><a href="../sn/sn03.html" class="w3-hide-small">Tập III - Thiên Uẩn</a></li>
+ 						<li><a href="../sn/sn04.html" class="w3-hide-small">Tập IV - Thiên Sáu Xứ</a></li>
+ 						<li><a href="../sn/sn05.html" class="w3-hide-small">Tập V - Thiên Ðại Phẩm</a></li>
+ 					</ul>
+ 				<li class="topmenu" id="an"><a href="../an/an.html" class="w3-hide-small"><i class="fa fa-caret-down"></i>&nbsp;Tăng Chi Bộ Kinh</a>
+ 					<ul>
+ 						<li><a href="../an/an1.html" class="w3-hide-small">Chương Một Pháp</a></li>
+ 						<li><a href="../an/an2.html" class="w3-hide-small">Chương Hai Pháp</a></li>
+ 						<li><a href="../an/an3.html" class="w3-hide-small">Chương Ba Pháp</a></li>
+ 						<li><a href="../an/an4.html" class="w3-hide-small">Chương Bốn Pháp</a></li>
+ 						<li><a href="../an/an5.html" class="w3-hide-small">Chương Năm Pháp</a></li>
+ 						<li><a href="../an/an6.html" class="w3-hide-small">Chương Sáu Pháp</a></li>
+ 						<li><a href="../an/an7.html" class="w3-hide-small">Chương Bảy Pháp</a></li>
+ 						<li><a href="../an/an8.html" class="w3-hide-small">Chương Tám Pháp</a></li>
+ 						<li><a href="../an/an9.html" class="w3-hide-small">Chương Chín Pháp</a></li>
+ 						<li><a href="../an/an10.html" class="w3-hide-small">Chương Mười Pháp</a></li>
+ 						<li><a href="../an/an11.html" class="w3-hide-small">Chương Mười Một Pháp</a></li>
+ 					</ul>
+ 				</li>
+ 				<li class="topmenu" id="kn"><a href="../kn/kn.html" class="w3-hide-small"><i class="fa fa-caret-down"></i>&nbsp;Tiểu Bộ Kinh</a>
+ 					<ul>
+ 						<li><a href="../kp/kp.html" class="w3-hide-small">Kinh Tiểu Tụng</a></li>
+ 						<li><a href="../dhp/dhp.html" class="w3-hide-small">Kinh Pháp Cú</a></li>
+ 						<li><a href="../snp/snp.html" class="w3-hide-small">Kinh Tập</a></li>
+ 						<li><a href="../ud/ud.html" class="w3-hide-small">Kinh Phật Tự Thuyết</a></li>
+ 						<li><a href="../it/it.html" class="w3-hide-small">Kinh Phật Thuyết Như Vậy</a></li>
+ 						<li><a href="../tha/tha.html" class="w3-hide-small">Trưởng Lão Tăng Kệ</a></li>
+ 						<li><a href="../thi/thi.html" class="w3-hide-small">Trưởng Lão Ni Kệ</a></li>
+ 					</ul>
+ 				</li>
+				<li class="toplast" id="rd"><a href="../rd/rd.html" class="w3-hide-small"></i>Kinh Ngẫu Nhiên Theo Nhóm</a>
+ 					</ul>
+ 				</li>
+ 			</ul>
+ 			</div>
+ 		</div> <!--navbar-->
+
+<!-- Sidebar (hidden by default) -->
+ <nav class="w3-sidebar w3-bar-block w3-card w3-border w3-top w3-animate-left w3-hide-large" id="mySidebar">
+ 	<a href="javascript:void(0)" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-times fa-2x red-color"></i>&nbsp;&nbsp;&nbsp;Close</a><!-- Hides the sidebar when clicked -->
+ 		<div class="w3-bar-block w3-white">
+ 			<a href="../home/index.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-home fa-lg"></i>&nbsp;&nbsp;&nbsp;Home</a>
+ 			<a href="../guide/guide.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Guide</a>
+ 			<a href="../dn/dn.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Trường Bộ Kinh</a>
+ 			<a href="../mn/mn.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Trung Bộ Kinh</a>
+ 			<a href="../sn/sn.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Tương Ưng Bộ Kinh</a>
+ 			<a href="../an/an.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Tăng Chi Bộ Kinh
+ 			<a href="../kn/kn.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Tiểu Bộ Kinh</a>
+			<a href="../rd/rd.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>Kinh Ngẫu Nhiên Theo Nhóm</a>
+ 		</div>
+ </nav>
+ 
+ 
+ 
+   <!-- !PAGE CONTENT! --> 
+<div class="w3-main w3-content w3-padding w3-left-align bwcontainer4">
+<div id="content">
+<h2>Majjhima Nikāya - Trung Bộ Kinh</h2>
+<h5><span style="font-style: italic;">Hoà Thượng Thích Minh Châu dịch Việt</span></h5>
+
+</div>
+
+<br>
+ 	<title>        Trung Bộ 74          </title>
+
+<p lang="vi" class="vi"; style="text-align: center">
+Trung Bộ 74<br>
+<span lang="pi" class="pali">
+Majjhima Nikāya 74<br>
+</span>
+</p>
+
+<p lang="vi" class="vi"; style="text-align: center">
+Kinh Trường Trảo<br>
+<span lang="pi" class="pali">
+Dīghanakhasutta<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Như vầy tôi nghe.<br>
+<span lang="pi" class="pali">
+Evaṁ me sutaṁ—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Một thời Thế Tôn ở tại Rājagaha (Vương Xá), trên núi Gijjhakuta (Linh Thứu), trong hang sūkarakhatā.<br>
+<span lang="pi" class="pali">
+ekaṁ samayaṁ bhagavā rājagahe viharati gijjhakūṭe pabbate sūkarakhatāyaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Rồi du sĩ ngoại đạo Dīghanakha (Trường Trảo) đi đến chỗ Thế Tôn, sau khi đến, nói lên những lời chào đón hỏi thăm với Thế Tôn, sau khi nói lên những lời chào đón hỏi thăm thân hữu liền đứng một bên. Ðứng một bên, du sĩ ngoại đạo Dīghanakha nói với Thế Tôn:<br>
+<span lang="pi" class="pali">
+Atha kho dīghanakho paribbājako yena bhagavā tenupasaṅkami; upasaṅkamitvā bhagavatā saddhiṁ sammodi. Sammodanīyaṁ kathaṁ sāraṇīyaṁ vītisāretvā ekamantaṁ aṭṭhāsi. Ekamantaṁ ṭhito kho dīghanakho paribbājako bhagavantaṁ etadavoca:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Tôn giả Gotama, tôi có lý thuyết như sau, tôi có tri kiến như sau: “Tất cả đều không làm cho tôi thích thú”.<br>
+<span lang="pi" class="pali">
+“ahañhi, bho gotama, evaṁvādī evaṁdiṭṭhi: ‘sabbaṁ me nakkhamatī’”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Này Aggivessana, tri kiến: “Tất cả đều không làm cho tôi thích thú”, tri kiến ấy không làm Ông thích thú?<br>
+<span lang="pi" class="pali">
+“Yāpi kho te esā, aggivessana, diṭṭhi: ‘sabbaṁ me nakkhamatī’ti, esāpi te diṭṭhi nakkhamatī”ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Tôn giả Gotama, nếu tri kiến ấy làm tôi thích thú, thời đây cũng giống như vậy, thời đây cũng giống như vậy.”<br>
+<span lang="pi" class="pali">
+“Esā ce me, bho gotama, diṭṭhi khameyya, taṁpassa tādisameva, taṁpassa tādisamevā”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Này Aggivessana, nếu số đông người ở trong đời đã nói như sau:<br>
+<span lang="pi" class="pali">
+“Ato kho te, aggivessana, bahū hi bahutarā lokasmiṁ ye evamāhaṁsu:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Thời đây cũng giống như vậy, thời đây cũng giống như vậy”,<br>
+<span lang="pi" class="pali">
+‘taṁpassa tādisameva, taṁpassa tādisamevā’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+thời họ không từ bỏ tri kiến ấy, họ chấp thủ một tri kiến khác.<br>
+<span lang="pi" class="pali">
+Te tañceva diṭṭhiṁ nappajahanti aññañca diṭṭhiṁ upādiyanti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Aggivessana, nếu thiểu số người ở trong đời đã nói như sau:<br>
+<span lang="pi" class="pali">
+Ato kho te, aggivessana, tanū hi tanutarā lokasmiṁ ye evamāhaṁsu:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Thời đây cũng giống như vậy, thời đây cũng giống như vậy”,<br>
+<span lang="pi" class="pali">
+‘taṁpassa tādisameva, taṁpassa tādisamevā’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+thời họ sẽ từ bỏ tri kiến ấy và không chấp thủ một tri kiến khác.<br>
+<span lang="pi" class="pali">
+Te tañceva diṭṭhiṁ pajahanti aññañca diṭṭhiṁ na upādiyanti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Aggivessana, một số Sa-môn, Bà-la-môn có lý thuyết như sau, có tri kiến như sau:<br>
+<span lang="pi" class="pali">
+Santaggivessana, eke samaṇabrāhmaṇā evaṁvādino evaṁdiṭṭhino:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Tất cả đều làm cho tôi thích thú”.<br>
+<span lang="pi" class="pali">
+‘sabbaṁ me khamatī’ti;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Aggivessana, một số Sa-môn, Bà-la-môn có lý thuyết như sau, có tri kiến như sau:<br>
+<span lang="pi" class="pali">
+santaggivessana, eke samaṇabrāhmaṇā evaṁvādino evaṁdiṭṭhino:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Tất cả đều làm cho tôi không thích thú”.<br>
+<span lang="pi" class="pali">
+‘sabbaṁ me nakkhamatī’ti;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Aggivessana, một số Sa-môn, Bà-la-môn có lý thuyết như sau, có tri kiến như sau:<br>
+<span lang="pi" class="pali">
+santaggivessana, eke samaṇabrāhmaṇā evaṁvādino evaṁdiṭṭhino:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Một phần làm tôi thích thú, một phần làm tôi không thích thú”.<br>
+<span lang="pi" class="pali">
+‘ekaccaṁ me khamati, ekaccaṁ me nakkhamatī’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ở đây, này Aggivessana, một số Sa-môn, Bà-la-môn có lý thuyết như sau, có tri kiến như sau: “Tất cả đều làm cho tôi thích thú,”<br>
+<span lang="pi" class="pali">
+Tatraggivessana, ye te samaṇabrāhmaṇā evaṁvādino evaṁdiṭṭhino: ‘sabbaṁ me khamatī’ti<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+tri kiến này của họ là gần với tham dục, gần với triền phược, gần với hoan lạc, gần với đắm trước, gần với chấp thủ.<br>
+<span lang="pi" class="pali">
+tesamayaṁ diṭṭhi sārāgāya santike, saññogāya santike, abhinandanāya santike, ajjhosānāya santike, upādānāya santike;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ở đây, này Aggivessana, một số Sa-môn, Bà-la-môn có lý thuyết như sau, có tri kiến như sau: “Tất cả đều làm cho tôi không thích thú”,<br>
+<span lang="pi" class="pali">
+tatraggivessana ye te samaṇabrāhmaṇā evaṁvādino evaṁdiṭṭhino: ‘sabbaṁ me nakkhamatī’ti<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+tri kiến này của họ là gần với không tham dục, gần với không phiền trược, gần với không hoan lạc, gần với không chấp thủ.”<br>
+<span lang="pi" class="pali">
+tesamayaṁ diṭṭhi asārāgāya santike, asaññogāya santike, anabhinandanāya santike, anajjhosānāya santike, anupādānāya santike”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Khi được nói vậy, du sĩ ngoại đạo Dīghanakha thưa với Thế Tôn:<br>
+<span lang="pi" class="pali">
+Evaṁ vutte, dīghanakho paribbājako bhagavantaṁ etadavoca:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Tôn giả Gotama tán dương quan điểm của tôi, Tôn giả Gotama hết sức tán dương quan điểm của tôi.”<br>
+<span lang="pi" class="pali">
+“ukkaṁseti me bhavaṁ gotamo diṭṭhigataṁ, samukkaṁseti me bhavaṁ gotamo diṭṭhigatan”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ở đây, này Aggivessana, những Sa-môn, Bà-la-môn nào có lý thuyết như sau, có tri kiến như sau:<br>
+<span lang="pi" class="pali">
+“Tatraggivessana, ye te samaṇabrāhmaṇā evaṁvādino evaṁdiṭṭhino:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Một phần làm tôi thích thú, một phần làm tôi không thích thú”.<br>
+<span lang="pi" class="pali">
+‘ekaccaṁ me khamati, ekaccaṁ me nakkhamatī’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Cái gì trong tri kiến này làm họ thích thú là gần tham dục, gần phiền trược, gần hoan lạc, gần đắm trước, gần chấp thủ.<br>
+<span lang="pi" class="pali">
+Yā hi tesaṁ khamati sāyaṁ diṭṭhi sārāgāya santike, saññogāya santike, abhinandanāya santike, ajjhosānāya santike, upādānāya santike;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Cái gì trong tri kiến này làm họ không thích thú là gần không tham dục, gần không triền phược, gần không hoan lạc, gần không đắm trước, gần không chấp thủ.<br>
+<span lang="pi" class="pali">
+yā hi tesaṁ nakkhamati sāyaṁ diṭṭhi asārāgāya santike, asaññogāya santike, anabhinandanāya santike, anajjhosānāya santike, anupādānāya santike.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ở đây, này Aggivessana, những Sa-môn, Ba la môn có lý thuyết như sau, có tri kiến như sau:<br>
+<span lang="pi" class="pali">
+Tatraggivessana, ye te samaṇabrāhmaṇā evaṁvādino evaṁdiṭṭhino:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Tất cả đều làm tôi thích thú”.<br>
+<span lang="pi" class="pali">
+‘sabbaṁ me khamatī’ti<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ở đây, người có trí suy nghĩ như sau:<br>
+<span lang="pi" class="pali">
+tattha viññū puriso iti paṭisañcikkhati:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Nếu ta nói tri kiến này của ta:<br>
+<span lang="pi" class="pali">
+‘yā kho me ayaṁ diṭṭhi—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Tất cả đều làm tôi thích thú”,<br>
+<span lang="pi" class="pali">
+sabbaṁ me khamatīti,<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+và nếu ta cố chấp, kiên chấp tri kiến này và nói:<br>
+<span lang="pi" class="pali">
+imañce ahaṁ diṭṭhiṁ thāmasā parāmāsā abhinivissa vohareyyaṁ—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Ðây là sự thật, ngoài ra là hư vọng”,<br>
+<span lang="pi" class="pali">
+idameva saccaṁ moghamaññanti;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+như vậy là đối nghịch với hai hạng người:<br>
+<span lang="pi" class="pali">
+dvīhi me assa viggaho—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Sa-môn hay Bà-la-môn nào có lý thuyết như sau, có tri kiến như sau: “Tất cả đều làm cho tôi không thích thú”,<br>
+<span lang="pi" class="pali">
+yo cāyaṁ samaṇo vā brāhmaṇo vā evaṁvādī evaṁdiṭṭhi—sabbaṁ me nakkhamatīti,<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+và Sa-môn hay Bà-la-môn nào có lý thuyết như sau, có tri kiến như sau: “Một phần làm tôi thích thú, một phần làm tôi không thích thú”. Ta sẽ đối nghịch với hai hạng người này.<br>
+<span lang="pi" class="pali">
+yo cāyaṁ samaṇo vā brāhmaṇo vā evaṁvādī evaṁdiṭṭhi—ekaccaṁ me khamati, ekaccaṁ me nakkhamatīti—<br>
+imehi assa dvīhi viggaho.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Khi nào có đối nghịch thời có tranh luận; khi nào có tranh luận thời có chống đối; khi nào có chống đối thời có bực mình”.<br>
+<span lang="pi" class="pali">
+Iti viggahe sati vivādo, vivāde sati vighāto, vighāte sati vihesā’.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Như vậy, vị này vì thấy sự đối nghịch, tranh luận, chống đối và bực mình nên từ bỏ tri kiến này, không chấp thủ tri kiến khác.<br>
+<span lang="pi" class="pali">
+Iti so viggahañca vivādañca vighātañca vihesañca attani sampassamāno tañceva diṭṭhiṁ pajahati aññañca diṭṭhiṁ na upādiyati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Như vậy là sự đoạn trừ những tri kiến này, như vậy là sự hủy bỏ những tri kiến này.<br>
+<span lang="pi" class="pali">
+Evametāsaṁ diṭṭhīnaṁ pahānaṁ hoti, evametāsaṁ diṭṭhīnaṁ paṭinissaggo hoti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ở đây, này Aggivessana, nếu có những Sa-môn, Bà-la-môn nào có lý thuyết như sau, có tri kiến như sau:<br>
+<span lang="pi" class="pali">
+Tatraggivessana, ye te samaṇabrāhmaṇā evaṁvādino evaṁdiṭṭhino:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Tất cả đều làm cho tôi không thích thú”.<br>
+<span lang="pi" class="pali">
+‘sabbaṁ me nakkhamatī’ti<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ở đây, người có trí suy nghĩ như sau:<br>
+<span lang="pi" class="pali">
+tattha viññū puriso iti paṭisañcikkhati:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Nếu ta nói tri kiến này của ta:<br>
+<span lang="pi" class="pali">
+‘yā kho me ayaṁ diṭṭhi—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Tất cả đều làm tôi không thích thú”,<br>
+<span lang="pi" class="pali">
+sabbaṁ me nakkhamatīti,<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+và nếu ta cố chấp, kiên chấp tri kiến này và nói:<br>
+<span lang="pi" class="pali">
+imañce ahaṁ diṭṭhiṁ thāmasā parāmāsā abhinivissa vohareyyaṁ—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Ðây là sự thật, ngoài ra là hư vọng”,<br>
+<span lang="pi" class="pali">
+idameva saccaṁ moghamaññanti;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+thì như vậy, ta đối nghịch với hai hạng người:<br>
+<span lang="pi" class="pali">
+dvīhi me assa viggaho—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Sa-môn hay Bà-la-môn nào có lý thuyết như sau, có tri kiến như sau: “Tất cả đều làm cho tôi thích thú”<br>
+<span lang="pi" class="pali">
+yo cāyaṁ samaṇo vā brāhmaṇo vā evaṁvādī evaṁdiṭṭhi—sabbaṁ me khamatīti,<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+và Sa-môn hay Bà-la-môn nào có lý thuyết như sau, có tri kiến như sau: “Một phần làm tôi thích thú, một phần làm tôi không thích thú”. Ta sẽ đối nghịch với hai hạng người này.<br>
+<span lang="pi" class="pali">
+yo cāyaṁ samaṇo vā brāhmaṇo vā evaṁvādī evaṁdiṭṭhi—ekaccaṁ me khamati ekaccaṁ me nakkhamatīti—<br>
+imehi assa dvīhi viggaho.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Khi nào có đối nghịch thời có tranh luận; khi nào có tranh luận thời có chống đối; khi nào có chống đối thời có bực mình”.<br>
+<span lang="pi" class="pali">
+Iti viggahe sati vivādo, vivāde sati vighāto, vighāte sati vihesā’.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Như vậy, vị này vì thấy sự đối nghịch, tranh luận, chống đối và bực mình, nên từ bỏ tri kiến ấy, không chấp thủ tri kiến khác.<br>
+<span lang="pi" class="pali">
+Iti so viggahañca vivādañca vighātañca vihesañca attani sampassamāno tañceva diṭṭhiṁ pajahati aññañca diṭṭhiṁ na upādiyati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Như vậy là sự đoạn trừ những tri kiến này, như vậy là sự hủy bỏ những tri kiến này.<br>
+<span lang="pi" class="pali">
+Evametāsaṁ diṭṭhīnaṁ pahānaṁ hoti, evametāsaṁ diṭṭhīnaṁ paṭinissaggo hoti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ở đây, này Aggivessana, nếu có những Sa-môn, Bà-la-môn nào có lý thuyết như sau, có tri kiến như sau:<br>
+<span lang="pi" class="pali">
+Tatraggivessana, ye te samaṇabrāhmaṇā evaṁvādino evaṁdiṭṭhino:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Một phần làm tôi thích thú, một phần làm tôi không thích thú”.<br>
+<span lang="pi" class="pali">
+‘ekaccaṁ me khamati, ekaccaṁ me nakkhamatī’ti<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ở đây, người có trí suy nghĩ như sau:<br>
+<span lang="pi" class="pali">
+tattha viññū puriso iti paṭisañcikkhati:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Nếu ta nói tri kiến này của ta:<br>
+<span lang="pi" class="pali">
+‘yā kho me ayaṁ diṭṭhi—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Một phần làm tôi thích thú, một phần làm tôi không thích thú”,<br>
+<span lang="pi" class="pali">
+ekaccaṁ me khamati, ekaccaṁ me nakkhamatīti,<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+và nếu ta cố chấp, kiên chấp tri kiến này và nói:<br>
+<span lang="pi" class="pali">
+imañce ahaṁ diṭṭhiṁ thāmasā parāmāsā abhinivissa vohareyyaṁ—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Ðây là sự thật ngoài ra là hư vọng”,<br>
+<span lang="pi" class="pali">
+idameva saccaṁ moghamaññanti;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+thì như vậy, ta đối nghịch với hai hạng người:<br>
+<span lang="pi" class="pali">
+dvīhi me assa viggaho—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Sa-môn hay Bà-la-môn nào có lý thuyết như sau, có tri kiến như sau: “Tất cả đều làm cho tôi thích thú”<br>
+<span lang="pi" class="pali">
+yo cāyaṁ samaṇo vā brāhmaṇo vā evaṁvādī evaṁdiṭṭhi—sabbaṁ me khamatīti,<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+và Sa-môn hay Bà la-môn này có lý thuyết như sau, có tri kiến như sau: “Tất cả đều làm cho tôi không thích thú”. Ta sẽ đối nghịch với hai hạng người này.<br>
+<span lang="pi" class="pali">
+yo cāyaṁ samaṇo vā brāhmaṇo vā evaṁvādī evaṁdiṭṭhi—sabbaṁ me nakkhamatīti—imehi assa dvīhi viggaho.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Khi nào có đối nghịch thời có tranh luận; khi nào có tranh luận thời có chống đối, khi nào có chống đối thời có bực mình”.<br>
+<span lang="pi" class="pali">
+Iti viggahe sati vivādo, vivāde sati vighāto, vighāte sati vihesā’.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Như vậy, vị này vì thấy sự đối nghịch tranh luận, chống đối và bực mình, nên từ bỏ tri kiến ấy, không chấp thủ tri kiến khác.<br>
+<span lang="pi" class="pali">
+Iti so viggahañca vivādañca vighātañca vihesañca attani sampassamāno tañceva diṭṭhiṁ pajahati aññañca diṭṭhiṁ na upādiyati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Như vậy là sự đoạn trừ những tri kiến này, như vậy là sự hủy bỏ những tri kiến này.<br>
+<span lang="pi" class="pali">
+Evametāsaṁ diṭṭhīnaṁ pahānaṁ hoti, evametāsaṁ diṭṭhīnaṁ paṭinissaggo hoti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Nhưng này Aggivessana, thân này có sắc, do bốn đại thành, do cha mẹ sanh, nhờ cơm cháo nuôi dưỡng, vô thường, biến hoại, phân toái, đoạn tuyệt, hoại diệt, cần phải được quán sát là vô thường, khổ, như bệnh, như cục bướu, như mũi tên, như điều bất hạnh, như bệnh chướng, như kẻ địch, như phá hoại, là không, là vô ngã.<br>
+<span lang="pi" class="pali">
+Ayaṁ kho panaggivessana, kāyo rūpī cātumahābhūtiko mātāpettikasambhavo odanakummāsūpacayo anicca-ucchādana-parimaddana-bhedana-viddhaṁsana-dhammo, aniccato dukkhato rogato gaṇḍato sallato aghato ābādhato parato palokato suññato anattato samanupassitabbo.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Khi vị ấy quán sát thân này là vô thường, khổ, như bệnh, như cục bướu, như mũi tên, như điều bất hạnh, như bệnh chướng, như kẻ địch, như phá hoại, là không, là vô ngã, thời thân, thân dục, thân ái, thân phục tòng được đoạn diệt.<br>
+<span lang="pi" class="pali">
+Tassimaṁ kāyaṁ aniccato dukkhato rogato gaṇḍato sallato aghato ābādhato parato palokato suññato anattato samanupassato yo kāyasmiṁ kāyachando kāyasneho kāyanvayatā sā pahīyati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Aggivessana, có ba thọ này; lạc thọ, khổ thọ, bất khổ bất lạc thọ.<br>
+<span lang="pi" class="pali">
+Tisso kho imā, aggivessana, vedanā—sukhā vedanā, dukkhā vedanā, adukkhamasukhā vedanā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Aggivessana, trong khi cảm giác lạc thọ, chính khi ấy không cảm giác khổ thọ, không cảm giác bất khổ bất lạc thọ chỉ cảm giác lạc thọ.<br>
+<span lang="pi" class="pali">
+Yasmiṁ, aggivessana, samaye sukhaṁ vedanaṁ vedeti, neva tasmiṁ samaye dukkhaṁ vedanaṁ vedeti, na adukkhamasukhaṁ vedanaṁ vedeti; sukhaṁyeva tasmiṁ samaye vedanaṁ vedeti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Aggivessana, trong khi cảm giác khổ thọ, chính khi ấy không cảm giác lạc thọ, không cảm giác bất khổ bất lạc thọ, chỉ cảm giác khổ thọ.<br>
+<span lang="pi" class="pali">
+Yasmiṁ, aggivessana, samaye dukkhaṁ vedanaṁ vedeti, neva tasmiṁ samaye sukhaṁ vedanaṁ vedeti, na adukkhamasukhaṁ vedanaṁ vedeti; dukkhaṁyeva tasmiṁ samaye vedanaṁ vedeti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Aggivessana, trong khi cảm giác bất khổ bất lạc thọ, chính khi ấy không cảm giác lạc thọ, không cảm giác khổ thọ, chỉ cảm giác bất khổ bất lạc thọ.<br>
+<span lang="pi" class="pali">
+Yasmiṁ, aggivessana, samaye adukkhamasukhaṁ vedanaṁ vedeti, neva tasmiṁ samaye sukhaṁ vedanaṁ vedeti, na dukkhaṁ vedanaṁ vedeti; adukkhamasukhaṁyeva tasmiṁ samaye vedanaṁ vedeti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Aggivessana, lạc thọ là vô thường, hữu vi, do duyên sanh, bị đoạn diệt, bị hủy hoại, bị suy tàn, bị tiêu diệt.<br>
+<span lang="pi" class="pali">
+Sukhāpi kho, aggivessana, vedanā aniccā saṅkhatā paṭiccasamuppannā khayadhammā vayadhammā virāgadhammā nirodhadhammā;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Aggivessana, khổ thọ là vô thường, hữu vi, do duyên sanh, bị đoạn diệt, bị hủy hại, bị suy tàn, bị tiêu diệt.<br>
+<span lang="pi" class="pali">
+dukkhāpi kho, aggivessana, vedanā aniccā saṅkhatā paṭiccasamuppannā khayadhammā vayadhammā virāgadhammā nirodhadhammā;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Aggivessana, bất khổ bất lạc thọ là vô thường, hữu vi, do duyên sanh, bị đoạn diệt, bị hủy hoại, bị suy tàn, bị tiêu diệt.<br>
+<span lang="pi" class="pali">
+adukkhamasukhāpi kho, aggivessana, vedanā aniccā saṅkhatā paṭiccasamuppannā khayadhammā vayadhammā virāgadhammā nirodhadhammā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Thấy vậy, này Aggivessana, vị Ða văn Thánh đệ tử yểm ly lạc thọ, yểm ly khổ thọ, yểm ly bất khổ bất lạc thọ. Do yểm ly, vị ấy không có tham dục. Do không tham dục, vị ấy được giải thoát.<br>
+<span lang="pi" class="pali">
+Evaṁ passaṁ, aggivessana, sutavā ariyasāvako sukhāyapi vedanāya nibbindati, dukkhāyapi vedanāya nibbindati, adukkhamasukhāyapi vedanāya nibbindati;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ðối với tự thân đã giải thoát như vậy, khởi lên sự hiểu biết: “Ta đã giải thoát”.<br>
+<span lang="pi" class="pali">
+nibbindaṁ virajjati, virāgā vimuccati. Vimuttasmiṁ, vimuttamiti ñāṇaṁ hoti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vị ấy biết: “Sanh đã diệt, Phạm hạnh đã thành, việc cần làm đã làm. Sau đời hiện tại, không có đời sống nào khác nữa”.<br>
+<span lang="pi" class="pali">
+‘Khīṇā jāti, vusitaṁ brahmacariyaṁ, kataṁ karaṇīyaṁ, nāparaṁ itthattāyā’ti pajānāti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Với tâm giải thoát như vậy, này Aggivessana, Tỷ-kheo không nói thuận theo một ai, không tranh luận với một ai, chỉ nói theo từ ngữ đã được dùng ở đời, không có chấp thủ (từ ngữ ấy).”<br>
+<span lang="pi" class="pali">
+Evaṁ vimuttacitto kho, aggivessana, bhikkhu na kenaci saṁvadati, na kenaci vivadati, yañca loke vuttaṁ tena voharati, aparāmasan”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Lúc bấy giờ Tôn giả Sāriputta (Xá-lợi-phất) đứng sau lưng Thế Tôn và đang quạt Thế Tôn.<br>
+<span lang="pi" class="pali">
+Tena kho pana samayena āyasmā sāriputto bhagavato piṭṭhito ṭhito hoti bhagavantaṁ bījayamāno.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Rồi Tôn giả Sāriputta suy nghĩ như sau:<br>
+<span lang="pi" class="pali">
+Atha kho āyasmato sāriputtassa etadahosi:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Thế Tôn đã thuyết cho chúng ta sự đoạn trừ các pháp ấy nhờ thắng trí. Thiện Thệ đã thuyết cho chúng ta sự tự bỏ các pháp ấy nhờ thắng trí”.<br>
+<span lang="pi" class="pali">
+“tesaṁ tesaṁ kira no bhagavā dhammānaṁ abhiññā pahānamāha, tesaṁ tesaṁ kira no sugato dhammānaṁ abhiññā paṭinissaggamāhā”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Khi Tôn giả Sāriputta suy nghĩ như vậy, tâm (của Tôn giả) được giải thoát các lậu hoặc, không còn chấp thủ.<br>
+<span lang="pi" class="pali">
+Iti hidaṁ āyasmato sāriputtassa paṭisañcikkhato anupādāya āsavehi cittaṁ vimucci.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Còn đối với du sĩ ngoại đạo Dīghanakha, pháp nhãn ly trần, vô cấu được khởi lên:<br>
+<span lang="pi" class="pali">
+Dīghanakhassa pana paribbājakassa virajaṁ vītamalaṁ dhammacakkhuṁ udapādi:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Phàm pháp gì được khởi lên, tất cả pháp ấy được đoạn diệt”.<br>
+<span lang="pi" class="pali">
+“yaṁ kiñci samudayadhammaṁ sabbaṁ taṁ nirodhadhamman”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Rồi du sĩ ngoại đạo Dīghanakha thấy pháp, chứng pháp, ngộ pháp, thể nhập vào pháp, nghi ngờ tiêu trừ, do dự diệt tận, chứng được tự tín, không y cứ nơi người khác đối với đạo pháp của đức Bổn sư, liền bạch Thế Tôn:<br>
+<span lang="pi" class="pali">
+Atha kho dīghanakho paribbājako diṭṭhadhammo pattadhammo viditadhammo pariyogāḷhadhammo tiṇṇavicikiccho vigatakathaṅkatho vesārajjappatto aparappaccayo satthusāsane bhagavantaṁ etadavoca:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Thật vi diệu thay, Tôn giả Gotama! Thật vi diệu thay, Tôn giả Gotama!<br>
+<span lang="pi" class="pali">
+“abhikkantaṁ, bho gotama, abhikkantaṁ, bho gotama.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Như người dựng đứng lại những gì bị quăng ngã xuống, phơi bày ra những gì bị che kín, chỉ đường cho kẻ bị lạc hướng, đem đèn sáng vào trong bóng tối để những ai có mắt có thể thấy sắc; cũng vậy, Chánh pháp đã được Tôn giả Gotama dùng nhiều phương tiện trình bày giải thích.<br>
+<span lang="pi" class="pali">
+Seyyathāpi, bho gotama, nikkujjitaṁ vā ukkujjeyya, paṭicchannaṁ vā vivareyya, mūḷhassa vā maggaṁ ācikkheyya, andhakāre vā telapajjotaṁ dhāreyya: ‘cakkhumanto rūpāni dakkhantī’ti; evameva kho bhotā gotamena anekapariyāyena dhammo pakāsito.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Nay con xin quy y Tôn giả Gotama, quy y Pháp và quy y chúng Tỷ-kheo.<br>
+<span lang="pi" class="pali">
+Esāhaṁ bhavantaṁ gotamaṁ saraṇaṁ gacchāmi dhammañca bhikkhusaṅghañca.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Mong Tôn giả Gotama nhận con làm cư sĩ, từ nay trở đi cho đến mạng chung, con trọn đời quy ngưỡng.”<br>
+<span lang="pi" class="pali">
+Upāsakaṁ maṁ bhavaṁ gotamo dhāretu ajjatagge pāṇupetaṁ saraṇaṁ gatan”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+<span lang="pi" class="vi">
+Dīghanakhasuttaṁ niṭṭhitaṁ catutthaṁ.<br>
+</span>
+</p>
+
+
+
+<!-- COPY CONTENT SUTTA Ở ĐÂY -->
+
+
+
+<br>
+<p><p style="text-align: right;font-style: italic;">Hoà Thượng Thích Minh Châu dịch Việt</span></p>
+
+
+
+
+
+
+
+
+</section>  <!-- End English and Pali -->
+<div id="nextprev"><a id="previous-sutta" href="./mn73.html#content"></a><a id="next-sutta" href="./mn75.html#content"></a></div>
+</div>  <!--End Content -->
+</div>  <!-- End Page -->
+
+
+
+
+
+
+<footer>
+					 <!-- End bottom links -->
+</footer>
+
+
+ 
+ <!-- Scripts -->
+
+ <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      if (typeof enablePaliLookup === "function") {
+        enablePaliLookup();
+      } else {
+        console.error("enablePaliLookup is not defined");
+      }
+    });
+  </script>
+
+ <script>
+ // Script to open and close sidebar
+ 	function w3_open() {
+ 	document.getElementById("mySidebar").style.display = "block";
+ 	}
+ 		function w3_close() {
+ 		document.getElementById("mySidebar").style.display = "none";
+ 	}
+ </script>
+ <script>
+ 		var app = document.getElementsByTagName("BODY")[0];
+ 		if (localStorage.lightMode == "dark") {
+ 			app.setAttribute("light-mode", "dark");
+ 	}
+ </script>
+ 
+ <script>
+ 		function toggle_light_mode() {
+ 			var app = document.getElementsByTagName("BODY")[0];
+ 				if (localStorage.lightMode == "dark") {
+ 			localStorage.lightMode = "light";
+ 			app.setAttribute("light-mode", "light");
+ 		} else {
+ 					localStorage.lightMode = "dark";
+ 					app.setAttribute("light-mode", "dark");
+ 	}
+ 		}
+ 
+ 		window.addEventListener("storage", function () {
+ 			if (localStorage.lightMode == "dark") {
+ 				app.setAttribute("light-mode", "dark");
+ 				} else {
+ 				app.setAttribute("light-mode", "light");
+ 		}
+ 		}, false);
+ 
+ </script>
+ <script src="../js/footer.js"></script><script src="../js/dpd_deconstructor.js"></script><script src="../js/dpd_ebts.js"></script><script src="../js/dpd_i2h.js"></script>
+ <script src="/sw.js"></script>
+ </body>
+ </html>

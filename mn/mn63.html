@@ -1,0 +1,1330 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+ 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+ 	<link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+ 	<meta name="viewport" content="width=device-width, initial-scale=1">
+		<!-- Loading manifest -->
+	<link rel="manifest" href="../manifest.json">
+ 	<!-- Loading main and menu stylesheets -->
+ 	<link rel="stylesheet" href="../css/w3.css">
+ 	<link rel="stylesheet" href="../css/css.css">
+ 	<link rel="stylesheet" href="../css/menu.css">
+ 	<script src="../js/jquery-1.10.2.min.js"></script>
+ 	<script src="../js/controlpanel.js"></script>
+ 	<script src="../js/mousetrap.min.js"></script>
+    <script src="../js/pali-lookup-standalone.js"></script>
+
+ <script src="../js/suttaFiles.js"></script>
+<script>
+ // Script to open random Sutta
+ function openRandomSutta() {
+  const randomIndex = Math.floor(Math.random() * suttaFiles.length);
+  const selectedFile = suttaFiles[randomIndex];
+
+  // Get root path of your site 
+  const currentPath = location.pathname;
+  const rootPath = currentPath.split("/").slice(0, -2).join("/") + "/";
+
+  // Redirect to the correct file
+  window.location.href = rootPath + selectedFile;
+}
+</script>
+
+
+</head>
+ <body class="container">
+ <div class="header-background">
+ <!-- Header -->
+ <div class="w3-header w3-content w3-padding w3-left-align bwcontainer">
+ 	<div class="centered">
+ 		<button class="light-mode-button" aria-label="Bật Chế Độ Sáng" onclick="toggle_light_mode()">
+ 			<span></span>
+ 			<span></span>
+ 		</button>
+ 		<span class="box-lbl">Sáng/Tối</span>
+ 	</div> <!-- Centered -->
+ 		<a href="../home/index.html" id="bwlogo"><img src="../images/headerlogo.png" alt="Logo Lời Của Đức Phật" class="w3-image"></a>
+ 		<div class="w3-bar bwcontainer">
+ 			<div id="searchlinks">
+ 			<a href="../home/visearch.html"><span class="w3-bar-item"><i class="fa fa-search"></i>&nbsp;Tìm Tiếng Việt</span></a>
+ 			<a href="../home/palisearch.html"><span class="w3-bar-item"><i class="fa fa-search"></i>&nbsp;Tìm Tiếng Pali</span></a>
+ 			</div><!-- End Searchlinks div -->
+ 			<div class="help"><span><a href="../home/help.html"><img src="../images/help_icon.png" title="Trợ Giúp" alt="Help"></a></span></div>
+ 		</div> <!-- End w3-bar bwcontainer --> 	</div> <!-- End w3-header w3-content w3-padding w3-left-align bwcontainer -->
+ </div> <!-- End header-background -->
+ <!-- Top menu -->
+
+ <div class="w3-main w3-white bwcontainer2">
+ 	<div class="w3-button w3-padding-8 w3-left w3-hide-large" onclick="w3_open()">☰</div>
+ 		<div id="navbar" class="w3-hide-small w3-hide-medium bwcontainer3">
+ 			<ul id="css3menu0">
+ 				<li class="topfirst" id="home"><a href="../home/index.html" class="w3-hide-small">Trang Chủ</a></li>
+  				<li class="topmenu" id="dn"><a href="../dn/dn.html" class="pressed w3-hide-small">Trường Bộ Kinh</a></li>
+ 				<li class="topmenu" id="mn"><a href="../mn/mn.html" class="w3-hide-small">Trung Bộ Kinh</a></li>
+ 				<li class="topmenu" id="sn"><a href="../sn/sn.html" class="w3-hide-small"><i class="fa fa-caret-down"></i>&nbsp;Tương Ưng Bộ Kinh</a>
+ 					<ul>
+ 						<li><a href="../sn/sn01.html" class="w3-hide-small">Tập I - Thiên Có Kệ</a></li>
+ 						<li><a href="../sn/sn02.html" class="w3-hide-small">Tập II - Thiên Nhân Duyên</a></li>
+ 						<li><a href="../sn/sn03.html" class="w3-hide-small">Tập III - Thiên Uẩn</a></li>
+ 						<li><a href="../sn/sn04.html" class="w3-hide-small">Tập IV - Thiên Sáu Xứ</a></li>
+ 						<li><a href="../sn/sn05.html" class="w3-hide-small">Tập V - Thiên Ðại Phẩm</a></li>
+ 					</ul>
+ 				<li class="topmenu" id="an"><a href="../an/an.html" class="w3-hide-small"><i class="fa fa-caret-down"></i>&nbsp;Tăng Chi Bộ Kinh</a>
+ 					<ul>
+ 						<li><a href="../an/an1.html" class="w3-hide-small">Chương Một Pháp</a></li>
+ 						<li><a href="../an/an2.html" class="w3-hide-small">Chương Hai Pháp</a></li>
+ 						<li><a href="../an/an3.html" class="w3-hide-small">Chương Ba Pháp</a></li>
+ 						<li><a href="../an/an4.html" class="w3-hide-small">Chương Bốn Pháp</a></li>
+ 						<li><a href="../an/an5.html" class="w3-hide-small">Chương Năm Pháp</a></li>
+ 						<li><a href="../an/an6.html" class="w3-hide-small">Chương Sáu Pháp</a></li>
+ 						<li><a href="../an/an7.html" class="w3-hide-small">Chương Bảy Pháp</a></li>
+ 						<li><a href="../an/an8.html" class="w3-hide-small">Chương Tám Pháp</a></li>
+ 						<li><a href="../an/an9.html" class="w3-hide-small">Chương Chín Pháp</a></li>
+ 						<li><a href="../an/an10.html" class="w3-hide-small">Chương Mười Pháp</a></li>
+ 						<li><a href="../an/an11.html" class="w3-hide-small">Chương Mười Một Pháp</a></li>
+ 					</ul>
+ 				</li>
+ 				<li class="topmenu" id="kn"><a href="../kn/kn.html" class="w3-hide-small"><i class="fa fa-caret-down"></i>&nbsp;Tiểu Bộ Kinh</a>
+ 					<ul>
+ 						<li><a href="../kp/kp.html" class="w3-hide-small">Kinh Tiểu Tụng</a></li>
+ 						<li><a href="../dhp/dhp.html" class="w3-hide-small">Kinh Pháp Cú</a></li>
+ 						<li><a href="../snp/snp.html" class="w3-hide-small">Kinh Tập</a></li>
+ 						<li><a href="../ud/ud.html" class="w3-hide-small">Kinh Phật Tự Thuyết</a></li>
+ 						<li><a href="../it/it.html" class="w3-hide-small">Kinh Phật Thuyết Như Vậy</a></li>
+ 						<li><a href="../tha/tha.html" class="w3-hide-small">Trưởng Lão Tăng Kệ</a></li>
+ 						<li><a href="../thi/thi.html" class="w3-hide-small">Trưởng Lão Ni Kệ</a></li>
+ 					</ul>
+ 				</li>
+				<li class="toplast" id="rd"><a href="../rd/rd.html" class="w3-hide-small"></i>Kinh Ngẫu Nhiên Theo Nhóm</a>
+ 					</ul>
+ 				</li>
+ 			</ul>
+ 			</div>
+ 		</div> <!--navbar-->
+
+<!-- Sidebar (hidden by default) -->
+ <nav class="w3-sidebar w3-bar-block w3-card w3-border w3-top w3-animate-left w3-hide-large" id="mySidebar">
+ 	<a href="javascript:void(0)" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-times fa-2x red-color"></i>&nbsp;&nbsp;&nbsp;Close</a><!-- Hides the sidebar when clicked -->
+ 		<div class="w3-bar-block w3-white">
+ 			<a href="../home/index.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-home fa-lg"></i>&nbsp;&nbsp;&nbsp;Home</a>
+ 			<a href="../guide/guide.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Guide</a>
+ 			<a href="../dn/dn.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Trường Bộ Kinh</a>
+ 			<a href="../mn/mn.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Trung Bộ Kinh</a>
+ 			<a href="../sn/sn.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Tương Ưng Bộ Kinh</a>
+ 			<a href="../an/an.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Tăng Chi Bộ Kinh
+ 			<a href="../kn/kn.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Tiểu Bộ Kinh</a>
+			<a href="../rd/rd.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>Kinh Ngẫu Nhiên Theo Nhóm</a>
+ 		</div>
+ </nav>
+ 
+ 
+ 
+   <!-- !PAGE CONTENT! --> 
+<div class="w3-main w3-content w3-padding w3-left-align bwcontainer4">
+<div id="content">
+<h2>Majjhima Nikāya - Trung Bộ Kinh</h2>
+<h5><span style="font-style: italic;">Hoà Thượng Thích Minh Châu dịch Việt</span></h5>
+
+</div>
+
+<br>
+ 	<title>        Trung Bộ 63          </title>
+
+<p lang="vi" class="vi"; style="text-align: center">
+Trung Bộ 63<br>
+<span lang="pi" class="pali">
+Majjhima Nikāya 63<br>
+</span>
+</p>
+
+<p lang="vi" class="vi"; style="text-align: center">
+Tiểu Kinh Mālukya<br>
+<span lang="pi" class="pali">
+Cūḷamālukyasutta<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Như vầy tôi nghe.<br>
+<span lang="pi" class="pali">
+Evaṁ me sutaṁ—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Một thời, Thế Tôn trú ở Sāvatthī, Jetavana, tại tịnh xá ông Anāthapiṇḍika (Cấp Cô Ðộc).<br>
+<span lang="pi" class="pali">
+ekaṁ samayaṁ bhagavā sāvatthiyaṁ viharati jetavane anāthapiṇḍikassa ārāme.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Rồi Tôn giả Māluṅkyaputta, trong khi độc trú tịnh cư, khởi lên sự suy tư như sau:<br>
+<span lang="pi" class="pali">
+Atha kho āyasmato mālukyaputtassa rahogatassa paṭisallīnassa evaṁ cetaso parivitakko udapādi:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Có một số vấn đề này, Thế Tôn không trả lời, bỏ một bên, loại bỏ ra:<br>
+<span lang="pi" class="pali">
+“yānimāni diṭṭhigatāni bhagavatā abyākatāni ṭhapitāni paṭikkhittāni:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Thế giới là thường còn, thế giới là vô thường, thế giới là hữu biên, thế giới là vô biên; sinh mạng này và thân này là một, sinh mạng này và thân này là khác; Như Lai có tồn tại sau khi chết, Như Lai không có tồn tại sau khi chết, Như Lai có tồn tại và không có tồn tại sau khi chết. Như Lai không có tồn tại và không không tồn tại sau khi chết”.<br>
+<span lang="pi" class="pali">
+‘sassato loko’tipi, ‘asassato loko’tipi, ‘antavā loko’tipi, ‘anantavā loko’tipi, ‘taṁ jīvaṁ taṁ sarīran’tipi, ‘aññaṁ jīvaṁ aññaṁ sarīran’tipi, ‘hoti tathāgato paraṁ maraṇā’tipi, ‘na hoti tathāgato paraṁ maraṇā’tipi, ‘hoti ca na ca hoti tathāgato paraṁ maraṇā’tipi, ‘neva hoti na na hoti tathāgato paraṁ maraṇā’tipi—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Thế Tôn không trả lời cho ta những vấn đề ấy.<br>
+<span lang="pi" class="pali">
+tāni me bhagavā na byākaroti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vì Thế Tôn không trả lời cho ta những vấn đề ấy, nên ta không được hài lòng, không được thỏa mãn.<br>
+<span lang="pi" class="pali">
+Yāni me bhagavā na byākaroti taṁ me na ruccati, taṁ me nakkhamati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vậy ta hãy đi đến Thế Tôn, và sẽ hỏi ý nghĩa này.<br>
+<span lang="pi" class="pali">
+Sohaṁ bhagavantaṁ upasaṅkamitvā etamatthaṁ pucchissāmi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Nếu Thế Tôn trả lời cho ta:<br>
+<span lang="pi" class="pali">
+Sace me bhagavā byākarissati:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Thế giới là thường còn, thế giới là vô thường, thế giới là hữu biên, thế giới là vô biên; sinh mạng này và thân này là một, sinh mạng này và thân này là khác; Như Lai có tồn tại sau khi chết, Như Lai không có tồn tại sau khi chết; Như Lai có tồn tại và không có tồn tại sau khi chết, hay Như Lai không có tồn tại và không không tồn tại sau khi chết”,<br>
+<span lang="pi" class="pali">
+‘sassato loko’ti vā ‘asassato loko’ti vā …pe… ‘neva hoti na na hoti tathāgato paraṁ maraṇā’ti vā—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+thời ta sẽ sống Phạm hạnh dưới (sự chỉ dẫn của) Thế Tôn.<br>
+<span lang="pi" class="pali">
+evāhaṁ bhagavati brahmacariyaṁ carissāmi;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Còn nếu Thế Tôn không trả lời cho ta:<br>
+<span lang="pi" class="pali">
+no ce me bhagavā byākarissati:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Thế giới là thường còn, thế giới là vô thường… (như trên)… Như Lai không có tồn tại và không không tồn tại sau khi chết”,<br>
+<span lang="pi" class="pali">
+‘sassato loko’ti vā ‘asassato loko’ti vā …pe… ‘neva hoti na na hoti tathāgato paraṁ maraṇā’ti vā—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+thời ta sẽ bỏ học pháp và hoàn tục.”<br>
+<span lang="pi" class="pali">
+evāhaṁ sikkhaṁ paccakkhāya hīnāyāvattissāmī”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+TRồi Tôn giả Māluṅkyaputta vào buổi chiều, từ Thiền tịnh đứng dậy, đi đến Thế Tôn; sau khi đến, đảnh lễ Thế Tôn rồi ngồi xuống một bên. Sau khi ngồi xuống một bên, Tôn giả Māluṅkyaputta bạch Thế Tôn:<br>
+<span lang="pi" class="pali">
+Atha kho āyasmā mālukyaputto sāyanhasamayaṁ paṭisallānā vuṭṭhito yena bhagavā tenupasaṅkami; upasaṅkamitvā bhagavantaṁ abhivādetvā ekamantaṁ nisīdi. Ekamantaṁ nisinno kho āyasmā mālukyaputto bhagavantaṁ etadavoca:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ở đây, bạch Thế Tôn, trong khi độc trú tịnh cư, con khởi lên ý nghĩ như sau:<br>
+<span lang="pi" class="pali">
+“Idha mayhaṁ, bhante, rahogatassa paṭisallīnassa evaṁ cetaso parivitakko udapādi—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Có một số vấn đề này, Thế Tôn không trả lời, bỏ một bên loại bỏ ra:<br>
+<span lang="pi" class="pali">
+yānimāni diṭṭhigatāni bhagavatā abyākatāni ṭhapitāni paṭikkhittāni:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Thế giới là thường còn, thế giới là vô thường… (như trên)… Như Lai không có tồn tại và không không tồn tại sau khi chết”.<br>
+<span lang="pi" class="pali">
+‘sassato loko’tipi, ‘asassato loko’tipi …pe…‘neva hoti na na hoti tathāgato paraṁ maraṇā’tipi—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Thế Tôn không trả lời cho ta những vấn đề ấy.<br>
+<span lang="pi" class="pali">
+tāni me bhagavā na byākaroti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vì Thế Tôn không trả lời cho ta những vấn đề ấy, nên ta không được hài lòng, không được thỏa mãn.<br>
+<span lang="pi" class="pali">
+Yāni me bhagavā na byākaroti taṁ me na ruccati, taṁ me nakkhamati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vậy ta hãy đi đến Thế Tôn và sẽ hỏi ý nghĩa này.<br>
+<span lang="pi" class="pali">
+Sohaṁ bhagavantaṁ upasaṅkamitvā etamatthaṁ pucchissāmi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Nếu Thế Tôn trả lời cho ta:<br>
+<span lang="pi" class="pali">
+Sace me bhagavā byākarissati:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Thế giới là thường còn, thế giới là vô thường… (như trên)… Như Lai không có tồn tại và không không tồn tại sau khi chết”,<br>
+<span lang="pi" class="pali">
+‘sassato loko’ti vā, ‘asassato loko’ti vā …pe… ‘neva hoti na na hoti tathāgato paraṁ maraṇā’ti vā—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+thời ta sẽ sống Phạm hạnh dưới (sự chỉ dẫn của) Thế Tôn.<br>
+<span lang="pi" class="pali">
+evāhaṁ bhagavati, brahmacariyaṁ carissāmi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Còn nếu Thế Tôn không trả lời cho ta:<br>
+<span lang="pi" class="pali">
+No ce me bhagavā byākarissati:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Thế giới là thường còn, thế giới là vô thường… (như trên)… Như Lai không có tồn tại và không không tồn tại sau khi chết”,<br>
+<span lang="pi" class="pali">
+‘sassato loko’ti vā, ‘asassato loko’ti vā …pe… ‘neva hoti na na hoti tathāgato paraṁ maraṇā’ti vā—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+thời ta sẽ bỏ học pháp và hoàn tục.<br>
+<span lang="pi" class="pali">
+evāhaṁ sikkhaṁ paccakkhāya hīnāyāvattissāmīti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Nếu Thế Tôn biết:<br>
+<span lang="pi" class="pali">
+Sace bhagavā jānāti:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Thế giới là thường còn”, Thế Tôn hãy trả lời cho con: “Thế giới là thường còn”.<br>
+<span lang="pi" class="pali">
+‘sassato loko’ti, ‘sassato loko’ti me bhagavā byākarotu;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Nếu Thế Tôn biết:<br>
+<span lang="pi" class="pali">
+sace bhagavā jānāti:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Thế giới là vô thường”. Thế Tôn hãy trả lời cho con: “Thế giới là vô thường”.<br>
+<span lang="pi" class="pali">
+‘asassato loko’ti, ‘asassato loko’ti me bhagavā byākarotu.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Nếu Thế Tôn không biết:<br>
+<span lang="pi" class="pali">
+No ce bhagavā jānāti:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Thế giới là thường còn” hay “Thế giới là vô thường”, thời không biết, không thấy, hãy thẳng thắn trả lời:<br>
+<span lang="pi" class="pali">
+‘sassato loko’ti vā, ‘asassato loko’ti vā, ajānato kho pana apassato etadeva ujukaṁ hoti yadidaṁ:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Ta không biết, Ta không thấy”.<br>
+<span lang="pi" class="pali">
+‘na jānāmi, na passāmī’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Nếu Thế Tôn biết:<br>
+<span lang="pi" class="pali">
+Sace bhagavā jānāti:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Thế giới là hữu biên”, Thế Tôn hãy trả lời cho con: “Thế giới là hữu biên”.<br>
+<span lang="pi" class="pali">
+‘antavā loko’ti, ‘anantavā loko’ti me bhagavā byākarotu;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Nếu Thế Tôn biết:<br>
+<span lang="pi" class="pali">
+sace bhagavā jānāti:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Thế giới là vô biên”, Thế Tôn hãy trả lời cho con: “Thế giới là vô biên”.<br>
+<span lang="pi" class="pali">
+‘anantavā loko’ti, ‘anantavā loko’ti me bhagavā byākarotu.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Nếu Thế Tôn không biết:<br>
+<span lang="pi" class="pali">
+No ce bhagavā jānāti:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Thế giới là hữu biên” hay “Thế giới là vô biên”, thời không biết, không thấy, hãy thẳng thắn trả lời:<br>
+<span lang="pi" class="pali">
+‘antavā loko’ti vā, ‘anantavā loko’ti vā, ajānato kho pana apassato etadeva ujukaṁ hoti yadidaṁ:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Ta không biết, Ta không thấy”.<br>
+<span lang="pi" class="pali">
+‘na jānāmi, na passāmī’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Nếu Thế Tôn biết:<br>
+<span lang="pi" class="pali">
+Sace bhagavā jānāti:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Sinh mạng này và thân này là một”, Thế Tôn hãy trả lời cho con: “Sinh mạng này và thân này là một”.<br>
+<span lang="pi" class="pali">
+‘taṁ jīvaṁ taṁ sarīran’ti, ‘taṁ jīvaṁ taṁ sarīran’ti me bhagavā byākarotu;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Nếu Thế Tôn biết:<br>
+<span lang="pi" class="pali">
+sace bhagavā jānāti:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Sinh mạng này và thân này là khác,” Thế Tôn hãy trả lời cho con: “Sinh mạng này và thân này là khác”.<br>
+<span lang="pi" class="pali">
+‘aññaṁ jīvaṁ aññaṁ sarīran’ti, ‘aññaṁ jīvaṁ aññaṁ sarīran’ti me bhagavā byākarotu.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Nếu Thế Tôn không biết:<br>
+<span lang="pi" class="pali">
+No ce bhagavā jānāti:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Sinh mạng này và thân này là một” hay “Sinh mạng này và thân này là khác”, thời không biết, không thấy, hãy thẳng thắn trả lời:<br>
+<span lang="pi" class="pali">
+‘taṁ jīvaṁ taṁ sarīran’ti vā, ‘aññaṁ jīvaṁ aññaṁ sarīran’ti vā, ajānato kho pana apassato etadeva ujukaṁ hoti yadidaṁ:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Ta không biết, Ta không thấy”.<br>
+<span lang="pi" class="pali">
+‘na jānāmi, na passāmī’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Nếu Thế Tôn biết:<br>
+<span lang="pi" class="pali">
+Sace bhagavā jānāti:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Như Lai có tồn tại sau khi chết”, Thế Tôn hãy trả lời cho con: “Như Lai có tồn tại sau khi chết”.<br>
+<span lang="pi" class="pali">
+‘hoti tathāgato paraṁ maraṇā’ti, ‘hoti tathāgato paraṁ maraṇā’ti me bhagavā byākarotu;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Nếu Thế Tôn biết:<br>
+<span lang="pi" class="pali">
+sace bhagavā jānāti:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Như Lai không có tồn tại sau khi chết”, Thế Tôn hãy trả lời cho con: “Như Lai không có tồn tại sau khi chết”.<br>
+<span lang="pi" class="pali">
+‘na hoti tathāgato paraṁ maraṇā’ti, ‘na hoti tathāgato paraṁ maraṇā’ti me bhagavā byākarotu.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Nếu Thế Tôn không biết:<br>
+<span lang="pi" class="pali">
+No ce bhagavā jānāti:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Như Lai có tồn tại sau khi chết”, hay “Như Lai không có tồn tại sau khi chết”, thời không biết, không thấy, hãy thẳng thắn trả lời:<br>
+<span lang="pi" class="pali">
+‘hoti tathāgato paraṁ maraṇā’ti vā, ‘na hoti tathāgato paraṁ maraṇā’ti vā, ajānato kho pana apassato etadeva ujukaṁ hoti yadidaṁ:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Ta không biết, Ta không thấy”.<br>
+<span lang="pi" class="pali">
+‘na jānāmi na passāmī’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Nếu Thế Tôn biết:<br>
+<span lang="pi" class="pali">
+Sace bhagavā jānāti:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Như Lai có tồn tại và không tồn tại sau khi chết”, Thế Tôn hãy trả lời cho con: “Như Lai có tồn tại và không tồn tại sau khi chết”.<br>
+<span lang="pi" class="pali">
+‘hoti ca na ca hoti tathāgato paraṁ maraṇā’ti, ‘hoti ca na ca hoti tathāgato paraṁ maraṇā’ti me bhagavā byākarotu;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Nếu Thế Tôn biết:<br>
+<span lang="pi" class="pali">
+sace bhagavā jānāti:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Như Lai không tồn tại và không không tồn tại sau khi chết”, Thế Tôn hãy trả lời cho con: “Như Lai không tồn tại và không không tồn tại sau khi chết”.<br>
+<span lang="pi" class="pali">
+‘neva hoti na na hoti tathāgato paraṁ maraṇā’ti, ‘neva hoti na na hoti tathāgato paraṁ maraṇā’ti me bhagavā byākarotu.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Nếu Thế Tôn không biết:<br>
+<span lang="pi" class="pali">
+No ce bhagavā jānāti:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Như Lai tồn tại và không tồn tại sau khi chết,” hay “Như Lai không tồn tại và không không tồn tại sau khi chết”, thời không biết, không thấy, hãy thẳng thắn trả lời:<br>
+<span lang="pi" class="pali">
+‘hoti ca na ca hoti tathāgato paraṁ maraṇā’ti vā, ‘neva hoti na na hoti tathāgato paraṁ maraṇā’ti vā, ajānato kho pana apassato etadeva ujukaṁ hoti yadidaṁ:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Ta không biết, Ta không thấy”.<br>
+<span lang="pi" class="pali">
+‘na jānāmi, na passāmī’”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Māluṅkyaputta, Ta có nói với Ông:<br>
+<span lang="pi" class="pali">
+“Kiṁ nu tāhaṁ, mālukyaputta, evaṁ avacaṁ:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Māluṅkyaputta, hãy đến và sống Phạm hạnh theo Ta, Ta sẽ trả lời cho Ông:<br>
+<span lang="pi" class="pali">
+‘ehi tvaṁ, mālukyaputta, mayi brahmacariyaṁ cara, ahaṁ te byākarissāmi:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Thế giới là thường còn” hay “Thế giới là vô thường… (như trên)… Như Lai không có tồn tại và không không tồn tại sau khi chết”?<br>
+<span lang="pi" class="pali">
+“sassato loko”ti vā, “asassato loko”ti vā, “antavā loko”ti vā, “anantavā loko”ti vā, “taṁ jīvaṁ taṁ sarīran”ti vā, “aññaṁ jīvaṁ aññaṁ sarīran”ti vā, “hoti tathāgato paraṁ maraṇā”ti vā, “na hoti tathāgato paraṁ maraṇā”ti vā, “hoti ca na ca hoti tathāgato paraṁ maraṇā”ti vā, “neva hoti na na hoti tathāgato paraṁ maraṇā”ti vā’”ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Thưa không, bạch Thế Tôn.”<br>
+<span lang="pi" class="pali">
+“No hetaṁ, bhante”.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Hay Ông có nói với Ta như sau:<br>
+<span lang="pi" class="pali">
+“Tvaṁ vā pana maṁ evaṁ avaca:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Bạch Thế Tôn, con sẽ sống Phạm hạnh theo Thế Tôn, nếu Thế Tôn sẽ trả lời cho con:<br>
+<span lang="pi" class="pali">
+‘ahaṁ, bhante, bhagavati brahmacariyaṁ carissāmi, bhagavā me byākarissati:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Thế giới là thường còn” hay “Thế giới là vô thường… (như trên)… Như Lai không có tồn tại và không không tồn tại sau khi chết”?<br>
+<span lang="pi" class="pali">
+“sassato loko”ti vā, “asassato loko”ti vā, “antavā loko”ti vā, “anantavā loko”ti vā, “taṁ jīvaṁ taṁ sarīran”ti vā, “aññaṁ jīvaṁ aññaṁ sarīran”ti vā, “hoti tathāgato paraṁ maraṇā”ti vā, “na hoti tathāgato paraṁ maraṇā”ti vā, “hoti ca na ca hoti tathāgato paraṁ maraṇā”ti vā, “neva hoti na na hoti tathāgato paraṁ maraṇā”ti vā’”ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Thưa không, bạch Thế Tôn.”<br>
+<span lang="pi" class="pali">
+“No hetaṁ, bhante”.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Như vậy, này Māluṅkyaputta, Ta không nói với Ông:<br>
+<span lang="pi" class="pali">
+“Iti kira, mālukyaputta, nevāhaṁ taṁ vadāmi:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Māluṅkyaputta, hãy đến và sống Phạm hạnh theo Ta và Ta sẽ trả lời cho Ông:<br>
+<span lang="pi" class="pali">
+‘ehi tvaṁ, mālukyaputta, mayi brahmacariyaṁ cara, ahaṁ te byākarissāmi:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Thế giới là thường còn” hay “Thế giới là vô thường… (như trên)… Như Lai không có tồn tại và không không tồn tại sau khi chết”,<br>
+<span lang="pi" class="pali">
+“sassato loko”ti vā, “asassato loko”ti vā …pe… “neva hoti na na hoti tathāgato paraṁ maraṇāti vā”’ti;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+và Ông cũng không nói với Ta:<br>
+<span lang="pi" class="pali">
+napi kira maṁ tvaṁ vadesi:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Bạch Thế Tôn, con sẽ sống Phạm hạnh theo Thế Tôn, nếu Thế Tôn sẽ trả lời cho con:<br>
+<span lang="pi" class="pali">
+‘ahaṁ, bhante, bhagavati brahmacariyaṁ carissāmi, bhagavā me byākarissati:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Thế giới là thường còn” hay “Thế giới là vô thường… (như trên)… Như Lai không có tồn tại và không không tồn tại sau khi chết”.<br>
+<span lang="pi" class="pali">
+“sassato loko”ti vā “asassato loko”ti vā …pe… “neva hoti na na hoti tathāgato paraṁ maraṇā”ti vā’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Sự tình là như vậy, thời này kẻ ngu kia, Ông là ai, và Ông phủ nhận cái gì?<br>
+<span lang="pi" class="pali">
+Evaṁ sante, moghapurisa, ko santo kaṁ paccācikkhasi?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Māluṅkyaputta, nếu có ai nói như sau:<br>
+<span lang="pi" class="pali">
+Yo kho, mālukyaputta, evaṁ vadeyya:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ta sẽ sống Phạm hạnh theo Thế Tôn khi nào Thế Tôn sẽ trả lời cho ta:<br>
+<span lang="pi" class="pali">
+‘na tāvāhaṁ bhagavati brahmacariyaṁ carissāmi yāva me bhagavā na byākarissati:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Thế giới là thường còn” hay “Thế giới là vô thường… (như trên)… Như Lai không có tồn tại và không không tồn tại sau khi chết”,<br>
+<span lang="pi" class="pali">
+“sassato loko”ti vā, “asassato loko”ti vā …pe… “neva hoti na na hoti tathāgato paraṁ maraṇā”ti vā’ti,<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+thời này Māluṅkyaputta, người ấy sẽ chết và vẫn không được Như Lai trả lời.<br>
+<span lang="pi" class="pali">
+abyākatameva taṁ, mālukyaputta, tathāgatena assa, atha so puggalo kālaṁ kareyya.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Māluṅkyaputta, ví như một người bị mũi tên bắn, mũi tên được tẩm thuốc độc rất dày.<br>
+<span lang="pi" class="pali">
+Seyyathāpi, mālukyaputta, puriso sallena viddho assa savisena gāḷhapalepanena.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Bạn bè và bà con huyết thống của người ấy mời một vị y sĩ khoa mổ xẻ đến săn sóc.<br>
+<span lang="pi" class="pali">
+Tassa mittāmaccā ñātisālohitā bhisakkaṁ sallakattaṁ upaṭṭhapeyyuṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Nhưng người ấy lại nói:<br>
+<span lang="pi" class="pali">
+So evaṁ vadeyya:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Tôi sẽ không rút mũi tên này ra khi nào tôi chưa biết được người đã bắn tôi thuộc giòng hoàng tộc, hay Bà-la-môn, hay buôn bán, hay người làm công”.<br>
+<span lang="pi" class="pali">
+‘na tāvāhaṁ imaṁ sallaṁ āharissāmi yāva na taṁ purisaṁ jānāmi yenamhi viddho, khattiyo vā brāhmaṇo vā vesso vā suddo vā’ti;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Người ấy có thể nói như sau:<br>
+<span lang="pi" class="pali">
+so evaṁ vadeyya:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Tôi sẽ không rút mũi tên này ra khi nào tôi chưa biết được người đã bắn tôi tên là gì, tộc tánh là gì?”<br>
+<span lang="pi" class="pali">
+‘na tāvāhaṁ imaṁ sallaṁ āharissāmi yāva na taṁ purisaṁ jānāmi yenamhi viddho, evaṁnāmo evaṅgotto iti vā’ti;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Người ấy có thể nói như sau:<br>
+<span lang="pi" class="pali">
+so evaṁ vadeyya:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Tôi sẽ không rút mũi tên này ra khi nào tôi chưa biết được người đã bắn tôi là cao hay thấp, hay người bậc trung”.<br>
+<span lang="pi" class="pali">
+‘na tāvāhaṁ imaṁ sallaṁ āharissāmi yāva na taṁ purisaṁ jānāmi yenamhi viddho, dīgho vā rasso vā majjhimo vā’ti;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Người ấy có thể nói như sau:<br>
+<span lang="pi" class="pali">
+so evaṁ vadeyya:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Tôi sẽ không rút mũi tên này ra khi nào tôi chưa biết được người đã bắn tôi là da đen, da sẫm hay da vàng”.<br>
+<span lang="pi" class="pali">
+‘na tāvāhaṁ imaṁ sallaṁ āharissāmi yāva na taṁ purisaṁ jānāmi yenamhi viddho, kāḷo vā sāmo vā maṅguracchavī vā’ti;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Người ấy có thể nói như sau:<br>
+<span lang="pi" class="pali">
+so evaṁ vadeyya:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Tôi sẽ không rút mũi tên này ra khi nào tôi chưa biết được người đã bắn tôi thuộc làng nào, thuộc thị trấn nào, thuộc thành phố nào”.<br>
+<span lang="pi" class="pali">
+‘na tāvāhaṁ imaṁ sallaṁ āharissāmi yāva na taṁ purisaṁ jānāmi yenamhi viddho, amukasmiṁ gāme vā nigame vā nagare vā’ti;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Người ấy có thể nói như sau:<br>
+<span lang="pi" class="pali">
+so evaṁ vadeyya:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Tôi sẽ không rút mũi tên này ra khi nào tôi chưa biết cái cung mà tôi bị bắn, cái cung ấy thuộc loại cung thông thường hay loại cung nỏ”.<br>
+<span lang="pi" class="pali">
+‘na tāvāhaṁ imaṁ sallaṁ āharissāmi yāva na taṁ dhanuṁ jānāmi yenamhi viddho, yadi vā cāpo yadi vā kodaṇḍo’ti;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Người ấy có thể nói như sau:<br>
+<span lang="pi" class="pali">
+so evaṁ vadeyya:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Tôi sẽ không rút mũi tên này ra khi nào tôi chưa biết được dây cung mà tôi bị bắn, dây cung ấy làm bằng cây leo, hay cây lau, hay một thứ gân, hay một thứ dây gai, hay một thứ cây có nhựa”.<br>
+<span lang="pi" class="pali">
+‘na tāvāhaṁ imaṁ sallaṁ āharissāmi yāva na taṁ jiyaṁ jānāmi yāyamhi viddho, yadi vā akkassa yadi vā saṇhassa yadi vā nhārussa yadi vā maruvāya yadi vā khīrapaṇṇino’ti;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Người ấy có thể nói như sau:<br>
+<span lang="pi" class="pali">
+so evaṁ vadeyya:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Tôi sẽ không rút mũi tên này ra khi nào tôi chưa biết cái tên mà tôi bị bắn, cái tên ấy thuộc một loại cây lau này hay cây lau khác”.<br>
+<span lang="pi" class="pali">
+‘na tāvāhaṁ imaṁ sallaṁ āharissāmi yāva na taṁ kaṇḍaṁ jānāmi yenamhi viddho, yadi vā gacchaṁ yadi vā ropiman’ti;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Người ấy có thể nói như sau:<br>
+<span lang="pi" class="pali">
+so evaṁ vadeyya:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Tôi sẽ không rút mũi tên này ra khi nào tôi chưa biết cái tên mà tôi bị bắn, mũi tên ấy có kết lông gì, hoặc lông con kên, hoặc lông con cò, hoặc lông con ó, hoặc lông con công, hoặc lông một loại két”.<br>
+<span lang="pi" class="pali">
+‘na tāvāhaṁ imaṁ sallaṁ āharissāmi yāva na taṁ kaṇḍaṁ jānāmi yenamhi viddho, yassa pattehi vājitaṁ yadi vā gijjhassa yadi vā kaṅkassa yadi vā kulalassa yadi vā morassa yadi vā sithilahanuno’ti;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Người ấy có thể nói như sau:<br>
+<span lang="pi" class="pali">
+so evaṁ vadeyya:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Tôi sẽ không rút mũi tên này ra khi nào tôi chưa biết cái tên mà tôi bị bắn, cái tên ấy được cuốn (parikkhittam) bởi loại gân nào, hoặc là gân bò cái, hoặc là gân trâu, hoặc là gân nai, hoặc là gân lừa”.<br>
+<span lang="pi" class="pali">
+‘na tāvāhaṁ imaṁ sallaṁ āharissāmi yāva na taṁ kaṇḍaṁ jānāmi yenamhi viddho, yassa nhārunā parikkhittaṁ yadi vā gavassa yadi vā mahiṁsassa yadi vā bheravassa yadi vā semhārassā’ti;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Người ấy có thể nói như sau:<br>
+<span lang="pi" class="pali">
+so evaṁ vadeyya:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Tôi sẽ không rút mũi tên này ra khi nào tôi chưa biết cái tên mà tôi bị bắn, cái tên ấy thuộc loại tên nhọn, hay thuộc loại tên móc, hay thuộc loại tên như đầu sào, hay thuộc loại tên như răng bò, hay thuộc loại tên như kẽm gai”.<br>
+<span lang="pi" class="pali">
+‘na tāvāhaṁ imaṁ sallaṁ āharissāmi yāva na taṁ sallaṁ jānāmi yenamhi viddho, yadi vā sallaṁ yadi vā khurappaṁ yadi vā vekaṇḍaṁ yadi vā nārācaṁ yadi vā vacchadantaṁ yadi vā karavīrapattan’ti—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Māluṅkyaputta, người ấy sẽ chết và vẫn không được biết gì.<br>
+<span lang="pi" class="pali">
+aññātameva taṁ, mālukyaputta, tena purisena assa, atha so puriso kālaṁ kareyya.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Cũng vậy, này Māluṅkyaputta, ai nói như sau:<br>
+<span lang="pi" class="pali">
+Evameva kho, mālukyaputta, yo evaṁ vadeyya:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Ta sẽ sống Phạm hạnh theo Thế Tôn khi nào Thế Tôn trả lời cho ta:<br>
+<span lang="pi" class="pali">
+‘na tāvāhaṁ bhagavati brahmacariyaṁ carissāmi yāva me bhagavā na byākarissati:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Thế giới là thường còn” hay “thế giới là vô thường… (như trên)… Như Lai không có tồn tại và không không tồn tại sau khi chết”,<br>
+<span lang="pi" class="pali">
+“sassato loko”ti vā “asassato loko”ti vā …pe… “neva hoti na na hoti tathāgato paraṁ maraṇā”ti vā’ti—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+thời này Māluṅkyaputta, người ấy sẽ chết và vẫn không được Như Lai trả lời.<br>
+<span lang="pi" class="pali">
+abyākatameva taṁ, mālukyaputta, tathāgatena assa, atha so puggalo kālaṁ kareyya.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Māluṅkyaputta, đời sống Phạm hạnh không thể nói là tùy thuộc với quan điểm “Thế giới là thường còn”.<br>
+<span lang="pi" class="pali">
+‘Sassato loko’ti, mālukyaputta, diṭṭhiyā sati brahmacariyavāso abhavissāti, evaṁ no.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Māluṅkyaputta, đời sống Phạm hạnh không thể nói là tùy thuộc với quan điểm “Thế giới là vô thường”.<br>
+<span lang="pi" class="pali">
+‘Asassato loko’ti, mālukyaputta, diṭṭhiyā sati brahmacariyavāso abhavissāti, evampi no.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Māluṅkyaputta, dầu cho có quan điểm “Thế giới là thường còn”, hay dầu cho có quan điểm “Thế giới là vô thường”, thời vẫn có sanh, có già, có chết, có sầu, bi, khổ, ưu, não,<br>
+<span lang="pi" class="pali">
+‘Sassato loko’ti vā, mālukyaputta, diṭṭhiyā sati, ‘asassato loko’ti vā diṭṭhiyā sati attheva jāti, atthi jarā, atthi maraṇaṁ, santi soka-parideva-dukkha-domanassa-upāyāsā;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+mà Ta giảng dạy sự đoạn trừ ngay trong hiện tại.<br>
+<span lang="pi" class="pali">
+yesāhaṁ diṭṭheva dhamme nighātaṁ paññapemi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Māluṅkyaputta, đời sống Phạm hạnh không thể nói là tùy thuộc với quan điểm “Thế giới là hữu biên”.<br>
+<span lang="pi" class="pali">
+‘Antavā loko’ti, mālukyaputta, diṭṭhiyā sati brahmacariyavāso abhavissāti, evaṁ no.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Māluṅkyaputta, đời sống Phạm hạnh không thể nói là tùy thuộc với quan điểm “Thế giới là vô biên”.<br>
+<span lang="pi" class="pali">
+‘Anantavā loko’ti, mālukyaputta, diṭṭhiyā sati brahmacariyavāso abhavissāti, evampi no.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Māluṅkyaputta, dầu cho có quan điểm “Thế giới là hữu biên”, hay dầu cho có quan điểm “Thế giới là vô biên”, thời vẫn có sanh, có già, có chết, có sầu, bi, khổ, ưu, não<br>
+<span lang="pi" class="pali">
+‘Antavā loko’ti vā, mālukyaputta, diṭṭhiyā sati, ‘anantavā loko’ti vā diṭṭhiyā sati attheva jāti, atthi jarā, atthi maraṇaṁ, santi soka-parideva-dukkha-domanassa-upāyāsā;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+mà Ta giảng dạy sự đoạn trừ ngay trong hiện tại.<br>
+<span lang="pi" class="pali">
+yesāhaṁ diṭṭheva dhamme nighātaṁ paññapemi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Māluṅkyaputta, đời sống Phạm hạnh không thể nói là tùy thuộc quan điểm “Sinh mạng này và thân này là một”.<br>
+<span lang="pi" class="pali">
+‘Taṁ jīvaṁ taṁ sarīran’ti, mālukyaputta, diṭṭhiyā sati brahmacariyavāso abhavissāti, evaṁ no.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Māluṅkyaputta, đời sống Phạm hạnh không thể nói là tùy thuộc quan điểm “Sinh mạng này và thân này là khác”.<br>
+<span lang="pi" class="pali">
+‘Aññaṁ jīvaṁ aññaṁ sarīran’ti, mālukyaputta, diṭṭhiyā sati brahmacariyavāso abhavissāti, evampi no.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Māluṅkyaputta, dầu cho có quan điểm “Sinh mạng này và thân này là một”, hay dầu cho có quan điểm “Sinh mạng này và thân này là khác”, thời vẫn có sanh, có già, có chết, có sầu, bi, khổ, ưu, não mà Ta giảng dạy sự đoạn trừ ngay trong hiện tại.<br>
+<span lang="pi" class="pali">
+‘Taṁ jīvaṁ taṁ sarīran’ti vā, mālukyaputta, diṭṭhiyā sati, ‘aññaṁ jīvaṁ aññaṁ sarīran’ti vā diṭṭhiyā sati attheva jāti …pe… nighātaṁ paññapemi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Māluṅkyaputta, đời sống Phạm hạnh không thể nói là tùy thuộc quan điểm “Như Lai có tồn tại sau khi chết”.<br>
+<span lang="pi" class="pali">
+‘Hoti tathāgato paraṁ maraṇā’ti, mālukyaputta, diṭṭhiyā sati brahmacariyavāso abhavissāti, evaṁ no.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Māluṅkyaputta, đời sống Phạm hạnh không thể nói là tùy thuộc quan điểm “Như Lai không có tồn tại sau khi chết”.<br>
+<span lang="pi" class="pali">
+‘Na hoti tathāgato paraṁ maraṇā’ti, mālukyaputta, diṭṭhiyā sati brahmacariyavāso abhavissāti, evampi no.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Māluṅkyaputta, dầu cho có quan điểm “Như Lai có tồn tại sau khi chết” hay dầu cho có quan điểm “Như Lai không có tồn tại sau khi chết”, thời vẫn có sanh, có già, có chết, có sầu, bi, khổ, ưu, não mà Ta giảng dạy sự đoạn trừ ngay trong hiện tại.<br>
+<span lang="pi" class="pali">
+‘Hoti tathāgato paraṁ maraṇā’ti vā, mālukyaputta, diṭṭhiyā sati, ‘na hoti tathāgato paraṁ maraṇā’ti vā diṭṭhiyā sati attheva jāti …pe… yesāhaṁ diṭṭheva dhamme nighātaṁ paññapemi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Māluṅkyaputta, đời sống Phạm hạnh không thể nói là tùy thuộc vào quan điểm “Như Lai có tồn tại và không tồn tại sau khi chết”.<br>
+<span lang="pi" class="pali">
+‘Hoti ca na ca hoti tathāgato paraṁ maraṇā’ti, mālukyaputta, diṭṭhiyā sati brahmacariyavāso abhavissāti, evaṁ no.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Māluṅkyaputta, đời sống Phạm hạnh không thể nói là tùy thuộc với quan điểm “Như Lai không có tồn tại và không không tồn tại sau khi chết”.<br>
+<span lang="pi" class="pali">
+‘Neva hoti na na hoti tathāgato paraṁ maraṇā’ti, mālukyaputta, diṭṭhiyā sati brahmacariyavāso abhavissāti, evampi no.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Māluṅkyaputta, dầu cho có quan điểm “Như Lai có tồn tại và không có tồn tại sau khi chết”, hay dầu cho có quan điểm “Như Lai không có tồn tại và không không tồn tại sau khi chết”, thời vẫn có sanh, có già, có chết, có sầu, bi, khổ, ưu, não<br>
+<span lang="pi" class="pali">
+‘Hoti ca na ca hoti tathāgato paraṁ maraṇā’ti, mālukyaputta, diṭṭhiyā sati, ‘neva hoti na na hoti tathāgato paraṁ maraṇā’ti vā diṭṭhiyā sati attheva jāti …pe…<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+mà Ta giảng dạy sự đoạn trừ ngay trong hiện tại”.<br>
+<span lang="pi" class="pali">
+yesāhaṁ diṭṭheva dhamme nighātaṁ paññapemi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Do vậy, này Māluṅkyaputta, hãy thọ trì là không trả lời những gì Ta không trả lời.<br>
+<span lang="pi" class="pali">
+Tasmātiha, mālukyaputta, abyākatañca me abyākatato dhāretha;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Hãy thọ trì là có trả lời những gì Ta có trả lời.<br>
+<span lang="pi" class="pali">
+byākatañca me byākatato dhāretha.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Và này Māluṅkyaputta, điều gì Ta không trả lời?<br>
+<span lang="pi" class="pali">
+Kiñca, mālukyaputta, mayā abyākataṁ?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Thế giới là thường còn”, này Māluṅkyaputta là điều Ta không trả lời.<br>
+<span lang="pi" class="pali">
+‘Sassato loko’ti mālukyaputta, mayā abyākataṁ;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Thế giới là vô thường” là điều Ta không trả lời.<br>
+<span lang="pi" class="pali">
+‘asassato loko’ti—mayā abyākataṁ;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Thế giới là hữu biên” là điều Ta không trả lời.<br>
+<span lang="pi" class="pali">
+‘antavā loko’ti—mayā abyākataṁ;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Thế giới là vô biên” là điều Ta không trả lời.<br>
+<span lang="pi" class="pali">
+‘anantavā loko’ti—mayā abyākataṁ;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Sinh mạng này và thân này là một” là điều Ta không trả lời.<br>
+<span lang="pi" class="pali">
+‘taṁ jīvaṁ taṁ sarīran’ti—mayā abyākataṁ;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Sinh mạng này và thân này khác” là điều Ta không trả lời.<br>
+<span lang="pi" class="pali">
+‘aññaṁ jīvaṁ aññaṁ sarīran’ti—mayā abyākataṁ;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Như Lai có tồn tại sau khi chết” là điều Ta không trả lời.<br>
+<span lang="pi" class="pali">
+‘hoti tathāgato paraṁ maraṇā’ti—mayā abyākataṁ;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Như Lai không có tồn tại sau khi chết” là điều Ta không trả lời.<br>
+<span lang="pi" class="pali">
+‘na hoti tathāgato paraṁ maraṇā’ti—mayā abyākataṁ;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Như Lai có tồn tại và không tồn tại sau khi chết” là điều Ta không trả lời.<br>
+<span lang="pi" class="pali">
+‘hoti ca na ca hoti tathāgato paraṁ maraṇā’ti—mayā abyākataṁ;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Như Lai không có tồn tại và không không tồn tại sau khi chết” là điều Ta không trả lời.<br>
+<span lang="pi" class="pali">
+‘neva hoti na na hoti tathāgato paraṁ maraṇā’ti—mayā abyākataṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Và này Māluṅkyaputta, vì sao điều ấy Ta không trả lời?<br>
+<span lang="pi" class="pali">
+Kasmā cetaṁ, mālukyaputta, mayā abyākataṁ?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Māluṅkyaputta, vì điều ấy không liên hệ đến mục đích, điều ấy không phải là căn bản Phạm hạnh, điều ấy không đưa đến yểm ly, ly tham, đoạn diệt, an tịnh, thắng trí, giác ngộ, Niết-bàn,<br>
+<span lang="pi" class="pali">
+Na hetaṁ, mālukyaputta, atthasaṁhitaṁ na ādibrahmacariyakaṁ na nibbidāya na virāgāya na nirodhāya na upasamāya na abhiññāya na sambodhāya na nibbānāya saṁvattati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+cho nên điều ấy Ta không trả lời.<br>
+<span lang="pi" class="pali">
+Tasmā taṁ mayā abyākataṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Và này Māluṅkyaputta, điều gì Ta trả lời?<br>
+<span lang="pi" class="pali">
+Kiñca, mālukyaputta, mayā byākataṁ?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Ðây là khổ”, này Māluṅkyaputta là điều Ta trả lời”.<br>
+<span lang="pi" class="pali">
+‘Idaṁ dukkhan’ti, mālukyaputta, mayā byākataṁ;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Ðây là khổ tập” là điều Ta trả lời.<br>
+<span lang="pi" class="pali">
+‘ayaṁ dukkhasamudayo’ti—mayā byākataṁ;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Ðây là khổ diệt” là điều Ta trả lời.<br>
+<span lang="pi" class="pali">
+‘ayaṁ dukkhanirodho’ti—mayā byākataṁ;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Ðây là con đường đưa đến khổ diệt” là điều Ta trả lời.<br>
+<span lang="pi" class="pali">
+‘ayaṁ dukkhanirodhagāminī paṭipadā’ti—mayā byākataṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Và này Māluṅkyaputta,vì sao điều ấy Ta trả lời?<br>
+<span lang="pi" class="pali">
+Kasmā cetaṁ, mālukyaputta, mayā byākataṁ?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Māluṅkyaputta, vì điều ấy có liên hệ đến mục đích, điều ấy là căn bản Phạm hạnh, điều ấy đưa đến yểm ly, ly tham, đoạn diệt, an tịnh, thắng trí, giác ngộ, Niết-bàn,<br>
+<span lang="pi" class="pali">
+Etañhi, mālukyaputta, atthasaṁhitaṁ etaṁ ādibrahmacariyakaṁ nibbidāya virāgāya nirodhāya upasamāya abhiññāya sambodhāya nibbānāya saṁvattati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+vì vậy điều ấy Ta trả lời.<br>
+<span lang="pi" class="pali">
+Tasmā taṁ mayā byākataṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Do vậy, này Māluṅkyaputta, hãy thọ trì là không trả lời những điều Ta không trả lời.<br>
+<span lang="pi" class="pali">
+Tasmātiha, mālukyaputta, abyākatañca me abyākatato dhāretha;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Hãy thọ trì là trả lời những điều Ta có trả lời.”<br>
+<span lang="pi" class="pali">
+byākatañca me byākatato dhārethā”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Thế Tôn thuyết giảng như vậy.<br>
+<span lang="pi" class="pali">
+Idamavoca bhagavā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Tôn giả Māluṅkyaputta hoan hỷ tín thọ lời Thế Tôn dạy.<br>
+<span lang="pi" class="pali">
+Attamano āyasmā mālukyaputto bhagavato bhāsitaṁ abhinandīti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+<span lang="pi" class="vi">
+Cūḷamālukyasuttaṁ niṭṭhitaṁ tatiyaṁ.<br>
+</span>
+</p>
+
+
+
+<!-- COPY CONTENT SUTTA Ở ĐÂY -->
+
+
+
+<br>
+<p><p style="text-align: right;font-style: italic;">Hoà Thượng Thích Minh Châu dịch Việt</span></p>
+
+
+
+
+
+
+
+
+</section>  <!-- End English and Pali -->
+<div id="nextprev"><a id="previous-sutta" href="./mn62.html#content"></a><a id="next-sutta" href="./mn64.html#content"></a></div>
+</div>  <!--End Content -->
+</div>  <!-- End Page -->
+
+
+
+
+
+
+<footer>
+					 <!-- End bottom links -->
+</footer>
+
+
+ 
+ <!-- Scripts -->
+
+ <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      if (typeof enablePaliLookup === "function") {
+        enablePaliLookup();
+      } else {
+        console.error("enablePaliLookup is not defined");
+      }
+    });
+  </script>
+
+ <script>
+ // Script to open and close sidebar
+ 	function w3_open() {
+ 	document.getElementById("mySidebar").style.display = "block";
+ 	}
+ 		function w3_close() {
+ 		document.getElementById("mySidebar").style.display = "none";
+ 	}
+ </script>
+ <script>
+ 		var app = document.getElementsByTagName("BODY")[0];
+ 		if (localStorage.lightMode == "dark") {
+ 			app.setAttribute("light-mode", "dark");
+ 	}
+ </script>
+ 
+ <script>
+ 		function toggle_light_mode() {
+ 			var app = document.getElementsByTagName("BODY")[0];
+ 				if (localStorage.lightMode == "dark") {
+ 			localStorage.lightMode = "light";
+ 			app.setAttribute("light-mode", "light");
+ 		} else {
+ 					localStorage.lightMode = "dark";
+ 					app.setAttribute("light-mode", "dark");
+ 	}
+ 		}
+ 
+ 		window.addEventListener("storage", function () {
+ 			if (localStorage.lightMode == "dark") {
+ 				app.setAttribute("light-mode", "dark");
+ 				} else {
+ 				app.setAttribute("light-mode", "light");
+ 		}
+ 		}, false);
+ 
+ </script>
+ <script src="../js/footer.js"></script><script src="../js/dpd_deconstructor.js"></script><script src="../js/dpd_ebts.js"></script><script src="../js/dpd_i2h.js"></script>
+ <script src="/sw.js"></script>
+ </body>
+ </html>

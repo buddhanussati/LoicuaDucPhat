@@ -1,0 +1,1608 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+ 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+ 	<link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+ 	<meta name="viewport" content="width=device-width, initial-scale=1">
+		<!-- Loading manifest -->
+	<link rel="manifest" href="../manifest.json">
+ 	<!-- Loading main and menu stylesheets -->
+ 	<link rel="stylesheet" href="../css/w3.css">
+ 	<link rel="stylesheet" href="../css/css.css">
+ 	<link rel="stylesheet" href="../css/menu.css">
+ 	<script src="../js/jquery-1.10.2.min.js"></script>
+ 	<script src="../js/controlpanel.js"></script>
+ 	<script src="../js/mousetrap.min.js"></script>
+    <script src="../js/pali-lookup-standalone.js"></script>
+
+ <script src="../js/suttaFiles.js"></script>
+<script>
+ // Script to open random Sutta
+ function openRandomSutta() {
+  const randomIndex = Math.floor(Math.random() * suttaFiles.length);
+  const selectedFile = suttaFiles[randomIndex];
+
+  // Get root path of your site 
+  const currentPath = location.pathname;
+  const rootPath = currentPath.split("/").slice(0, -2).join("/") + "/";
+
+  // Redirect to the correct file
+  window.location.href = rootPath + selectedFile;
+}
+</script>
+
+
+</head>
+ <body class="container">
+ <div class="header-background">
+ <!-- Header -->
+ <div class="w3-header w3-content w3-padding w3-left-align bwcontainer">
+ 	<div class="centered">
+ 		<button class="light-mode-button" aria-label="Bật Chế Độ Sáng" onclick="toggle_light_mode()">
+ 			<span></span>
+ 			<span></span>
+ 		</button>
+ 		<span class="box-lbl">Sáng/Tối</span>
+ 	</div> <!-- Centered -->
+ 		<a href="../home/index.html" id="bwlogo"><img src="../images/headerlogo.png" alt="Logo Lời Của Đức Phật" class="w3-image"></a>
+ 		<div class="w3-bar bwcontainer">
+ 			<div id="searchlinks">
+ 			<a href="../home/visearch.html"><span class="w3-bar-item"><i class="fa fa-search"></i>&nbsp;Tìm Tiếng Việt</span></a>
+ 			<a href="../home/palisearch.html"><span class="w3-bar-item"><i class="fa fa-search"></i>&nbsp;Tìm Tiếng Pali</span></a>
+ 			</div><!-- End Searchlinks div -->
+ 			<div class="help"><span><a href="../home/help.html"><img src="../images/help_icon.png" title="Trợ Giúp" alt="Help"></a></span></div>
+ 		</div> <!-- End w3-bar bwcontainer --> 	</div> <!-- End w3-header w3-content w3-padding w3-left-align bwcontainer -->
+ </div> <!-- End header-background -->
+ <!-- Top menu -->
+
+ <div class="w3-main w3-white bwcontainer2">
+ 	<div class="w3-button w3-padding-8 w3-left w3-hide-large" onclick="w3_open()">☰</div>
+ 		<div id="navbar" class="w3-hide-small w3-hide-medium bwcontainer3">
+ 			<ul id="css3menu0">
+ 				<li class="topfirst" id="home"><a href="../home/index.html" class="w3-hide-small">Trang Chủ</a></li>
+  				<li class="topmenu" id="dn"><a href="../dn/dn.html" class="pressed w3-hide-small">Trường Bộ Kinh</a></li>
+ 				<li class="topmenu" id="mn"><a href="../mn/mn.html" class="w3-hide-small">Trung Bộ Kinh</a></li>
+ 				<li class="topmenu" id="sn"><a href="../sn/sn.html" class="w3-hide-small"><i class="fa fa-caret-down"></i>&nbsp;Tương Ưng Bộ Kinh</a>
+ 					<ul>
+ 						<li><a href="../sn/sn01.html" class="w3-hide-small">Tập I - Thiên Có Kệ</a></li>
+ 						<li><a href="../sn/sn02.html" class="w3-hide-small">Tập II - Thiên Nhân Duyên</a></li>
+ 						<li><a href="../sn/sn03.html" class="w3-hide-small">Tập III - Thiên Uẩn</a></li>
+ 						<li><a href="../sn/sn04.html" class="w3-hide-small">Tập IV - Thiên Sáu Xứ</a></li>
+ 						<li><a href="../sn/sn05.html" class="w3-hide-small">Tập V - Thiên Ðại Phẩm</a></li>
+ 					</ul>
+ 				<li class="topmenu" id="an"><a href="../an/an.html" class="w3-hide-small"><i class="fa fa-caret-down"></i>&nbsp;Tăng Chi Bộ Kinh</a>
+ 					<ul>
+ 						<li><a href="../an/an1.html" class="w3-hide-small">Chương Một Pháp</a></li>
+ 						<li><a href="../an/an2.html" class="w3-hide-small">Chương Hai Pháp</a></li>
+ 						<li><a href="../an/an3.html" class="w3-hide-small">Chương Ba Pháp</a></li>
+ 						<li><a href="../an/an4.html" class="w3-hide-small">Chương Bốn Pháp</a></li>
+ 						<li><a href="../an/an5.html" class="w3-hide-small">Chương Năm Pháp</a></li>
+ 						<li><a href="../an/an6.html" class="w3-hide-small">Chương Sáu Pháp</a></li>
+ 						<li><a href="../an/an7.html" class="w3-hide-small">Chương Bảy Pháp</a></li>
+ 						<li><a href="../an/an8.html" class="w3-hide-small">Chương Tám Pháp</a></li>
+ 						<li><a href="../an/an9.html" class="w3-hide-small">Chương Chín Pháp</a></li>
+ 						<li><a href="../an/an10.html" class="w3-hide-small">Chương Mười Pháp</a></li>
+ 						<li><a href="../an/an11.html" class="w3-hide-small">Chương Mười Một Pháp</a></li>
+ 					</ul>
+ 				</li>
+ 				<li class="topmenu" id="kn"><a href="../kn/kn.html" class="w3-hide-small"><i class="fa fa-caret-down"></i>&nbsp;Tiểu Bộ Kinh</a>
+ 					<ul>
+ 						<li><a href="../kp/kp.html" class="w3-hide-small">Kinh Tiểu Tụng</a></li>
+ 						<li><a href="../dhp/dhp.html" class="w3-hide-small">Kinh Pháp Cú</a></li>
+ 						<li><a href="../snp/snp.html" class="w3-hide-small">Kinh Tập</a></li>
+ 						<li><a href="../ud/ud.html" class="w3-hide-small">Kinh Phật Tự Thuyết</a></li>
+ 						<li><a href="../it/it.html" class="w3-hide-small">Kinh Phật Thuyết Như Vậy</a></li>
+ 						<li><a href="../tha/tha.html" class="w3-hide-small">Trưởng Lão Tăng Kệ</a></li>
+ 						<li><a href="../thi/thi.html" class="w3-hide-small">Trưởng Lão Ni Kệ</a></li>
+ 					</ul>
+ 				</li>
+				<li class="toplast" id="rd"><a href="../rd/rd.html" class="w3-hide-small"></i>Kinh Ngẫu Nhiên Theo Nhóm</a>
+ 					</ul>
+ 				</li>
+ 			</ul>
+ 			</div>
+ 		</div> <!--navbar-->
+
+<!-- Sidebar (hidden by default) -->
+ <nav class="w3-sidebar w3-bar-block w3-card w3-border w3-top w3-animate-left w3-hide-large" id="mySidebar">
+ 	<a href="javascript:void(0)" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-times fa-2x red-color"></i>&nbsp;&nbsp;&nbsp;Close</a><!-- Hides the sidebar when clicked -->
+ 		<div class="w3-bar-block w3-white">
+ 			<a href="../home/index.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-home fa-lg"></i>&nbsp;&nbsp;&nbsp;Home</a>
+ 			<a href="../guide/guide.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Guide</a>
+ 			<a href="../dn/dn.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Trường Bộ Kinh</a>
+ 			<a href="../mn/mn.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Trung Bộ Kinh</a>
+ 			<a href="../sn/sn.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Tương Ưng Bộ Kinh</a>
+ 			<a href="../an/an.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Tăng Chi Bộ Kinh
+ 			<a href="../kn/kn.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Tiểu Bộ Kinh</a>
+			<a href="../rd/rd.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>Kinh Ngẫu Nhiên Theo Nhóm</a>
+ 		</div>
+ </nav>
+ 
+ 
+ 
+   <!-- !PAGE CONTENT! --> 
+<div class="w3-main w3-content w3-padding w3-left-align bwcontainer4">
+<div id="content">
+<h2>Majjhima Nikāya - Trung Bộ Kinh</h2>
+<h5><span style="font-style: italic;">Hoà Thượng Thích Minh Châu dịch Việt</span></h5>
+
+</div>
+
+<br>
+ 	<title>        Trung Bộ 76          </title>
+
+<p lang="vi" class="vi"; style="text-align: center">
+Trung Bộ 76<br>
+<span lang="pi" class="pali">
+Majjhima Nikāya 76<br>
+</span>
+</p>
+
+<p lang="vi" class="vi"; style="text-align: center">
+Kinh Sandaka<br>
+<span lang="pi" class="pali">
+Sandakasutta<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Như vầy tôi nghe.<br>
+<span lang="pi" class="pali">
+Evaṁ me sutaṁ—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Một thời Thế Tôn trú ở Kosambī (Kiều-thưởng-di), tại tu viện Ghosita (Cù-sư-la).<br>
+<span lang="pi" class="pali">
+ekaṁ samayaṁ bhagavā kosambiyaṁ viharati ghositārāme.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Lúc bấy giờ, du sĩ Sandaka trú ở hang gần Kosambī với đại chúng du sĩ, khoảng độ năm trăm du sĩ.<br>
+<span lang="pi" class="pali">
+Tena kho pana samayena sandako paribbājako pilakkhaguhāyaṁ paṭivasati mahatiyā paribbājakaparisāya saddhiṁ pañcamattehi paribbājakasatehi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Rồi Tôn giả Ānanda, vào buổi chiều, từ Thiền tịnh độc cư đứng dậy, và nói với các Tỷ-kheo:<br>
+<span lang="pi" class="pali">
+Atha kho āyasmā ānando sāyanhasamayaṁ paṭisallānā vuṭṭhito bhikkhū āmantesi:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Chư Hiền, chúng ta hãy đi đến Hồ Devakata để xem hang.”<br>
+<span lang="pi" class="pali">
+“āyāmāvuso, yena devakatasobbho tenupasaṅkamissāma guhādassanāyā”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Thưa vâng, Hiền giả,” Các Tỷ-kheo ấy vâng đáp Tôn giả Ānanda.<br>
+<span lang="pi" class="pali">
+“Evamāvuso”ti kho te bhikkhū āyasmato ānandassa paccassosuṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Rồi Tôn giả Ānanda với một số đông Tỷ-kheo đi đến Hồ Devakata.<br>
+<span lang="pi" class="pali">
+Atha kho āyasmā ānando sambahulehi bhikkhūhi saddhiṁ yena devakatasobbho tenupasaṅkami.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Lúc bấy giờ, du sĩ Sandaka ngồi với đại chúng du sĩ đang lớn tiếng, cao tiếng, to tiếng bàn luận nhiều vấn đề phù phiếm như:<br>
+<span lang="pi" class="pali">
+Tena kho pana samayena sandako paribbājako mahatiyā paribbājakaparisāya saddhiṁ nisinno hoti unnādiniyā uccāsaddamahāsaddāya anekavihitaṁ tiracchānakathaṁ kathentiyā, seyyathidaṁ—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+câu chuyện về vua chúa, câu chuyện về ăn trộm, câu chuyện về đại thần, câu chuyện về binh lính, các câu chuyện hãi hùng, câu chuyện về chiến tranh, câu chuyện về đồ ăn, câu chuyện về đồ uống, câu chuyện về đồ mặc, câu chuyện về giường nằm, câu chuyện về vòng hoa, câu chuyện về hương liệu, câu chuyện về bà con, câu chuyện về xe cộ, câu chuyện về làng xóm, câu chuyện về thị trấn, câu chuyện về thành phố, câu chuyện về quốc độ, câu chuyện về đàn bà, câu chuyện về vị anh hùng, câu chuyện bên lề đường, câu chuyện tại chỗ lấy nước, câu chuyện về người đã chết, các câu chuyện tạp thoại, câu chuyện về hiện trạng của thế giới, hiện trạng của đại dương, câu chuyện về hiện hữu và không hiện hữu.<br>
+<span lang="pi" class="pali">
+rājakathaṁ corakathaṁ mahāmattakathaṁ senākathaṁ bhayakathaṁ yuddhakathaṁ annakathaṁ pānakathaṁ vatthakathaṁ sayanakathaṁ mālākathaṁ gandhakathaṁ ñātikathaṁ yānakathaṁ gāmakathaṁ nigamakathaṁ nagarakathaṁ janapadakathaṁ itthikathaṁ sūrakathaṁ visikhākathaṁ kumbhaṭṭhānakathaṁ pubbapetakathaṁ nānattakathaṁ lokakkhāyikaṁ samuddakkhāyikaṁ itibhavābhavakathaṁ iti vā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Du sĩ Sandaka thấy Tôn giả Ānanda từ xa đi đến,<br>
+<span lang="pi" class="pali">
+Addasā kho sandako paribbājako āyasmantaṁ ānandaṁ dūratova āgacchantaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+thấy vậy liền khuyến cáo chúng của mình:<br>
+<span lang="pi" class="pali">
+Disvāna sakaṁ parisaṁ saṇṭhāpesi:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Các Tôn giả hãy nhỏ tiếng! Các Tôn giả hãy lặng tiếng!<br>
+<span lang="pi" class="pali">
+“appasaddā bhonto hontu, mā bhonto saddamakattha;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Nay đệ tử của Sa-môn Gotama, Sa-môn Ānanda đang đến.<br>
+<span lang="pi" class="pali">
+ayaṁ samaṇassa gotamassa sāvako āgacchati samaṇo ānando.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Khi nào các đệ tử của Sa-môn Gotama trú ở Kosambi, thời Sa-môn Ānanda này là một vị trong những vị ấy.<br>
+<span lang="pi" class="pali">
+Yāvatā kho pana samaṇassa gotamassa sāvakā kosambiyaṁ paṭivasanti, ayaṁ tesaṁ aññataro samaṇo ānando.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Các Tôn giả ấy ưa mến trầm lặng, tu tập trong trầm lặng, tán thán trầm lặng,<br>
+<span lang="pi" class="pali">
+Appasaddakāmā kho pana te āyasmanto appasaddavinītā appasaddassa vaṇṇavādino;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+nếu biết chúng này trầm lặng, có thể ghé tại đây.”<br>
+<span lang="pi" class="pali">
+appeva nāma appasaddaṁ parisaṁ viditvā upasaṅkamitabbaṁ maññeyyā”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Rồi các du sĩ ấy đều im lặng.<br>
+<span lang="pi" class="pali">
+Atha kho te paribbājakā tuṇhī ahesuṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Tôn giả Ānanda đến chỗ du sĩ Sandaka.<br>
+<span lang="pi" class="pali">
+Atha kho āyasmā ānando yena sandako paribbājako tenupasaṅkami.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Du sĩ Sandaka thưa với Tôn giả Ānanda:<br>
+<span lang="pi" class="pali">
+Atha kho sandako paribbājako āyasmantaṁ ānandaṁ etadavoca:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Hãy đến, Tôn giả Ānanda! Thiện lai, Tôn giả Ānanda!<br>
+<span lang="pi" class="pali">
+“etu kho bhavaṁ ānando, svāgataṁ bhoto ānandassa.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ðã lâu Tôn giả Ānanda mới tạo cơ hội này, nghĩa là đến đây.<br>
+<span lang="pi" class="pali">
+Cirassaṁ kho bhavaṁ ānando imaṁ pariyāyamakāsi yadidaṁ idhāgamanāya.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Tôn giả Ānanda hãy ngồi, đây là chỗ ngồi đã soạn sẵn.”<br>
+<span lang="pi" class="pali">
+Nisīdatu bhavaṁ ānando, idamāsanaṁ paññattan”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Tôn giả Ānanda ngồi trên chỗ đã soạn sẵn.<br>
+<span lang="pi" class="pali">
+Nisīdi kho āyasmā ānando paññatte āsane.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Du sĩ Sandaka lấy một ghế thấp khác rồi ngồi xuống một bên.<br>
+<span lang="pi" class="pali">
+Sandakopi kho paribbājako aññataraṁ nīcaṁ āsanaṁ gahetvā ekamantaṁ nisīdi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Tôn giả Ānanda nói với du sĩ Sandaka đang ngồi một bên:<br>
+<span lang="pi" class="pali">
+Ekamantaṁ nisinnaṁ kho sandakaṁ paribbājakaṁ āyasmā ānando etadavoca:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Này Sandaka, nay các vị hội họp nhau ở đây, đang bàn vấn đề gì? Và câu chuyện gì giữa các vị bị gián đoạn?”<br>
+<span lang="pi" class="pali">
+“kāya nuttha, sandaka, etarahi kathāya sannisinnā, kā ca pana vo antarākathā vippakatā”ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Tôn giả Ānanda, hãy gác một bên vấn đề chúng tôi đang hội họp bàn luận.<br>
+<span lang="pi" class="pali">
+“Tiṭṭhatesā, bho ānanda, kathā yāya mayaṁ etarahi kathāya sannisinnā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Lát nữa Tôn giả Ānanda nghe lại cũng không khó khăn gì.<br>
+<span lang="pi" class="pali">
+Nesā bhoto ānandassa kathā dullabhā bhavissati pacchāpi savanāya.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Lành thay, nếu được Tôn giả Ānanda thuyết cho pháp thoại vị Ðạo sư của mình.”<br>
+<span lang="pi" class="pali">
+Sādhu vata bhavantaṁyeva ānandaṁ paṭibhātu sake ācariyake dhammīkathā”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Vậy này Sandaka, hãy nghe và khéo tác ý, tôi sẽ giảng.”<br>
+<span lang="pi" class="pali">
+“Tena hi, sandaka, suṇāhi, sādhukaṁ manasi karohi, bhāsissāmī”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Thưa vâng, Tôn giả.” Du sĩ Sandaka vâng đáp Tôn giả Ānanda.<br>
+<span lang="pi" class="pali">
+“Evaṁ, bho”ti kho sandako paribbājako āyasmato ānandassa paccassosi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Tôn giả Ānanda nói như sau:<br>
+<span lang="pi" class="pali">
+Āyasmā ānando etadavoca:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Này Sandaka, bốn pháp phi phạm hạnh trú này, do Thế Tôn, bậc Tri Giả, Kiến Giả, Bậc A-la-hán, Chánh Ðẳng Giác tuyên bố, và bốn pháp bất an phạm hạnh cũng được tuyên bố. Ở đây, người có trí không thể tự mình sống Phạm hạnh và nếu sống, thời không thể thành đạt chánh đạo, pháp và chí thiện.”<br>
+<span lang="pi" class="pali">
+“cattārome, sandaka, tena bhagavatā jānatā passatā arahatā sammāsambuddhena abrahmacariyavāsā akkhātā cattāri ca anassāsikāni brahmacariyāni akkhātāni, yattha viññū puriso sasakkaṁ brahmacariyaṁ na vaseyya, vasanto ca nārādheyya ñāyaṁ dhammaṁ kusalan”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Tôn giả Ānanda, bốn pháp phi phạm hạnh trú do Thế Tôn, bậc Tri Giả, Kiến Giả, bậc A-la-hán, Chánh Ðẳng Giác tuyên bố, và ở đây người có trí không thể tự mình sống Phạm hạnh, và nếu sống, thời không thể thành đạt chánh đạo, pháp và chí thiện; bốn pháp phi phạm hạnh trú ấy là gì?”<br>
+<span lang="pi" class="pali">
+“Katame pana te, bho ānanda, tena bhagavatā jānatā passatā arahatā sammāsambuddhena cattāro abrahmacariyavāsā akkhātā, yattha viññū puriso sasakkaṁ brahmacariyaṁ na vaseyya, vasanto ca nārādheyya ñāyaṁ dhammaṁ kusalan”ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Ở đây, này Sandaka, có vị Ðạo sư có thuyết lý như sau, có quan điểm như sau:<br>
+<span lang="pi" class="pali">
+“Idha, sandaka, ekacco satthā evaṁvādī hoti evaṁdiṭṭhi:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Không có bố thí, không có lễ hy sinh, không có tế tự, không có quả dị thục các nghiệp thiện ác, không có đời này, không có đời khác, không có mẹ, không có cha, không có loại hóa sanh, ở đời không có những vị Sa-môn, Bà-la-môn chánh hướng, chánh hạnh, sau khi đã tự mình giác ngộ với thắng trí tuyên bố về đời này và đời sau.<br>
+<span lang="pi" class="pali">
+‘natthi dinnaṁ, natthi yiṭṭhaṁ, natthi hutaṁ, natthi sukatadukkaṭānaṁ kammānaṁ phalaṁ vipāko, natthi ayaṁ loko, natthi paroloko, natthi mātā, natthi pitā, natthi sattā opapātikā, natthi loke samaṇabrāhmaṇā sammaggatā sammāpaṭipannā ye imañca lokaṁ parañca lokaṁ sayaṁ abhiññā sacchikatvā pavedenti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Con người này do bốn đại họp thành, khi mệnh chung, địa đại quy nhập địa giới, thủy đại quy nhập thủy giới, hỏa đại quy nhập hỏa giới, phong đại quy nhập phong giới, các căn nhập vào hư không.<br>
+<span lang="pi" class="pali">
+Cātumahābhūtiko ayaṁ puriso yadā kālaṁ karoti, pathavī pathavīkāyaṁ anupeti anupagacchati, āpo āpokāyaṁ anupeti anupagacchati, tejo tejokāyaṁ anupeti anupagacchati, vāyo vāyokāyaṁ anupeti anupagacchati, ākāsaṁ indriyāni saṅkamanti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Bốn người, gánh quan tài với người nằm trong quan tài là năm, gánh người chết mang đi, đến chỗ hỏa táng và thốt ra những lời kể lể, đặc tánh của người chết.<br>
+<span lang="pi" class="pali">
+Āsandipañcamā purisā mataṁ ādāya gacchanti, yāvāḷāhanā padāni paññāyanti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Các xương thành màu xám như chim bồ câu,<br>
+<span lang="pi" class="pali">
+Kāpotakāni aṭṭhīni bhavanti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+và những vật cúng dường trở thành tro bụi.<br>
+<span lang="pi" class="pali">
+Bhassantā āhutiyo;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Chỉ có người ngu mới tán dương bố thí,<br>
+<span lang="pi" class="pali">
+dattupaññattaṁ yadidaṁ dānaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+lời nói của họ trống không, giả dối, vô ích khi họ chấp thuyết “có sự hiện hữu (Atthikavada)”.<br>
+<span lang="pi" class="pali">
+Tesaṁ tucchā musā vilāpo ye keci atthikavādaṁ vadanti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Kẻ ngu cũng như người trí, sau khi thân hoại mạng chung sẽ đoạn diệt, tiêu thất, không còn tồn tại sau khi chết”.<br>
+<span lang="pi" class="pali">
+Bāle ca paṇḍite ca kāyassa bhedā ucchijjanti vinassanti na honti paraṁ maraṇā’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ở đây, này Sandaka, người có trí suy tư như sau:<br>
+<span lang="pi" class="pali">
+Tatra, sandaka, viññū puriso iti paṭisañcikkhati:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Vị Tôn sư này, thuyết lý như vầy, quan điểm như vầy:<br>
+<span lang="pi" class="pali">
+‘ayaṁ kho bhavaṁ satthā evaṁvādī evaṁdiṭṭhi—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Không có bố thí, không có lễ hy sinh … , không còn tồn tại sau khi chết”.<br>
+<span lang="pi" class="pali">
+natthi dinnaṁ, natthi yiṭṭhaṁ, natthi hutaṁ, natthi sukatadukkaṭānaṁ kammānaṁ phalaṁ vipāko, natthi ayaṁ loko, natthi paroloko, natthi mātā, natthi pitā, natthi sattā opapātikā, natthi loke samaṇabrāhmaṇā sammaggatā sammāpaṭipannā ye imañca lokaṁ parañca lokaṁ sayaṁ abhiññā sacchikatvā pavedenti. Cātumahābhūtiko ayaṁ puriso yadā kālaṁ karoti, pathavī pathavīkāyaṁ anupeti anupagacchati, āpo āpokāyaṁ anupeti anupagacchati, tejo tejokāyaṁ anupeti anupagacchati, vāyo vāyokāyaṁ anupeti anupagacchati, ākāsaṁ indriyāni saṅkamanti. Āsandipañcamā purisā mataṁ ādāya gacchanti, yāvāḷāhanā padāni paññāyanti. Kāpotakāni aṭṭhīni bhavanti. Bhassantā āhutiyo; dattupaññattaṁ yadidaṁ dānaṁ. Tesaṁ tucchā musā vilāpo ye keci atthikavādaṁ vadanti. Bāle ca paṇḍite ca kāyassa bhedā ucchijjanti vinassanti na honti paraṁ maraṇā’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Nếu vị Tôn sư này nói đúng sự thật, thời cái gì đã làm ở đây không phải ta làm, cái gì được sống ở đây không phải ta sống, nhưng cả hai chúng ta ở đây đều đồng đẳng khi chứng Sa-môn quả, và ta không có nói: “Cả hai chúng ta, sau khi thân hoại mạng chung, sẽ bị đoạn diệt, tiêu thất, sẽ không hiện hữu sau khi chết”.<br>
+<span lang="pi" class="pali">
+Sace imassa bhoto satthuno saccaṁ vacanaṁ, akatena me ettha kataṁ, avusitena me ettha vusitaṁ. Ubhopi mayaṁ ettha samasamā sāmaññaṁ pattā, yo cāhaṁ na vadāmi ‘ubho kāyassa bhedā ucchijjissāma, vinassissāma, na bhavissāma paraṁ maraṇā’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Thật sự là quá độ hạnh lõa thể, trọc đầu, tinh tấn ngồi chõ hỏ, nhổ lông tóc của vị Tôn sư này; trong khi ta sống trong gia đình được con cái bao bọc đoanh vây, thọ dụng chiên-đàn Kasi, mang dùng vòng hoa, hương liệu phấn sáp, hưởng thọ vàng bạc, và trong đời sau ta sẽ đồng đẳng với vị Tôn sư này về chỗ thọ sanh.<br>
+<span lang="pi" class="pali">
+Atirekaṁ kho panimassa bhoto satthuno naggiyaṁ muṇḍiyaṁ ukkuṭikappadhānaṁ kesamassulocanaṁ, yohaṁ puttasambādhasayanaṁ ajjhāvasanto kāsikacandanaṁ paccanubhonto mālāgandhavilepanaṁ dhārento jātarūparajataṁ sādiyanto iminā bhotā satthārā samasamagatiko bhavissāmi abhisamparāyaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Như vậy, ta biết gì, thấy gì mà ta sẽ sống Phạm hạnh dưới vị Ðạo sư này?”<br>
+<span lang="pi" class="pali">
+Sohaṁ kiṁ jānanto kiṁ passanto imasmiṁ satthari brahmacariyaṁ carissāmi?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vị ấy sau khi biết phi phạm hạnh trú này,<br>
+<span lang="pi" class="pali">
+‘So abrahmacariyavāso ayan’ti—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+yểm ly hạnh ấy và bỏ đi.<br>
+<span lang="pi" class="pali">
+iti viditvā tasmā brahmacariyā nibbijja pakkamati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Như vậy, này Sandaka, là phi phạm hạnh trú thứ nhất, được Thế Tôn, bậc Tri Giả, Kiến Giả, bậc A-la-hán, Chánh Ðẳng Giác tuyên bố và ở đây người có trí không thể tự mình sống theo hạnh ấy, và nếu sống, thời không thể thành đạt chánh đạo, pháp và chí thiện.<br>
+<span lang="pi" class="pali">
+Ayaṁ kho, sandaka, tena bhagavatā jānatā passatā arahatā sammāsambuddhena paṭhamo abrahmacariyavāso akkhāto yattha viññū puriso sasakkaṁ brahmacariyaṁ na vaseyya, vasanto ca nārādheyya ñāyaṁ dhammaṁ kusalaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Lại nữa, này Sandaka, ở đây có vị Ðạo sư có thuyết lý như sau, có quan điểm như sau:<br>
+<span lang="pi" class="pali">
+Puna caparaṁ, sandaka, idhekacco satthā evaṁvādī hoti evaṁdiṭṭhi:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Tự làm hay khiến người làm, chém giết hay khiến người chém giết, đốt nấu hay khiến người đốt nấu, gây phiền muộn, hay khiến người gây phiền muộn, gây áo não hay khiến người gây áo não, tự mình gây sợ hãi hay khiến người gây sợ hãi, sát sanh, lấy của không cho, phá cửa nhà mà vào, cướp đoạt, đánh cướp một nhà lẻ loi, chận đường cướp giựt, tư thông vợ người, nói láo, hành động như vậy không có tội ác.<br>
+<span lang="pi" class="pali">
+‘karoto kārayato chindato chedāpayato pacato pācāpayato socayato socāpayato kilamato kilamāpayato phandato phandāpayato pāṇamatipātayato adinnaṁ ādiyato sandhiṁ chindato nillopaṁ harato ekāgārikaṁ karoto paripanthe tiṭṭhato paradāraṁ gacchato musā bhaṇato karoto na karīyati pāpaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Nếu lấy một bánh xe sắc bén giết hại tất cả chúng sanh trên cõi đất này, làm thành một đống thịt, thành một chồng thịt, cũng không vì vậy mà có tội ác, gây ra tội ác.<br>
+<span lang="pi" class="pali">
+Khurapariyantena cepi cakkena yo imissā pathaviyā pāṇe ekaṁ maṁsakhalaṁ ekaṁ maṁsapuñjaṁ kareyya, natthi tatonidānaṁ pāpaṁ, natthi pāpassa āgamo.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Nếu đi trên bờ phía Nam sông Hằng giết hại, tàn sát, chém giết, khiến người chém giết, đốt nấu, khiến người đốt nấu, cũng không vì vậy có tội ác, gây ra tội ác.<br>
+<span lang="pi" class="pali">
+Dakkhiṇañcepi gaṅgāya tīraṁ gaccheyya hananto ghātento chindanto chedāpento pacanto pacāpento, natthi tatonidānaṁ pāpaṁ, natthi pāpassa āgamo.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Nếu đi trên bờ phía Bắc sông Hằng bố thí, khiến người bố thí, tế lễ, khiến người tế lễ, cũng không vì vậy có phước báo, tạo nên phước báo.<br>
+<span lang="pi" class="pali">
+Uttarañcepi gaṅgāya tīraṁ gaccheyya dadanto dāpento yajanto yajāpento, natthi tatonidānaṁ puññaṁ, natthi puññassa āgamo.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Bố thí, tự điều phục, tự chế ngự, nói thật không có công đức, không tạo nên công đức”.<br>
+<span lang="pi" class="pali">
+Dānena damena saṁyamena saccavajjena natthi puññaṁ, natthi puññassa āgamo’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ở đây, này Sandaka, người có trí suy tư như sau:<br>
+<span lang="pi" class="pali">
+Tatra, sandaka, viññū puriso iti paṭisañcikkhati:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Vị Tôn sư này, có thuyết lý như vầy, có quan điểm như vầy:<br>
+<span lang="pi" class="pali">
+‘ayaṁ kho bhavaṁ satthā evaṁvādī evaṁdiṭṭhi—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Tự làm, khiến người làm, … , không tạo nên công đức”.<br>
+<span lang="pi" class="pali">
+karoto kārayato chindato chedāpayato pacato pācāpayato socato socāpayato kilamato kilamāpayato phandato phandāpayato pāṇamatipātayato adinnaṁ ādiyato sandhiṁ chindato nillopaṁ harato ekāgārikaṁ karoto paripanthe tiṭṭhato paradāraṁ gacchato musā bhaṇato karoto na karīyati pāpaṁ khurapariyantena cepi cakkena yo imissā pathaviyā pāṇe ekaṁ maṁsakhalaṁ ekaṁ maṁsapuñjaṁ kareyya, natthi tatonidānaṁ pāpaṁ, natthi pāpassa āgamo. Dakkhiṇañcepi gaṅgāya tīraṁ gaccheyya hananto ghātento chindanto chedāpento pacanto pacāpento, natthi tatonidānaṁ pāpaṁ, natthi pāpassa āgamo. Uttarañcepi gaṅgāya tīraṁ gaccheyya dadanto dāpento yajanto yajāpento, natthi tatonidānaṁ puññaṁ, natthi puññassa āgamo. Dānena damena saṁyamena saccavajjena natthi puññaṁ, natthi puññassa āgamo’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Nếu vị Tôn sư này nói đúng sự thật, thời cái gì đã làm ở đây không phải ta làm, cái gì được sống ở đây không phải ta sống; nhưng cả hai chúng ta ở đây đều đồng đẳng khi chứng Sa-môn quả, và ta không có nói: “Hành động của cả hai chúng ta không tạo ra tội ác”. Thật sự là quá độ… mà ta sẽ sống Phạm hạnh dưới vị Ðạo sư này?”<br>
+<span lang="pi" class="pali">
+Sace imassa bhoto satthuno saccaṁ vacanaṁ, akatena me ettha kataṁ, avusitena me ettha vusitaṁ. Ubhopi mayaṁ ettha samasamā sāmaññaṁ pattā, yo cāhaṁ na vadāmi ‘ubhinnaṁ kurutaṁ na karīyati pāpan’ti. Atirekaṁ kho panimassa bhoto satthuno naggiyaṁ muṇḍiyaṁ ukkuṭikappadhānaṁ kesamassulocanaṁ, yohaṁ puttasambādhasayanaṁ ajjhāvasanto kāsikacandanaṁ paccanubhonto mālāgandhavilepanaṁ dhārento jātarūparajataṁ sādiyanto iminā bhotā satthārā samasamagatiko bhavissāmi abhisamparāyaṁ. Sohaṁ kiṁ jānanto kiṁ passanto imasmiṁ satthari brahmacariyaṁ carissāmi?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Vị ấy sau khi biết phi phạm hạnh trú này’,<br>
+<span lang="pi" class="pali">
+‘So abrahmacariyavāso ayan’ti<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+yểm ly hạnh ấy và bỏ đi.<br>
+<span lang="pi" class="pali">
+iti viditvā tasmā brahmacariyā nibbijja pakkamati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Như vậy, này Sandaka, là phi phạm hạnh trú thứ hai, được Thế Tôn, bậc Tri Giả, Kiến Giả, bậc A-la-hán, Chánh Ðẳng Giác đã tuyên bố và ở đây người có trí không thể tự mình sống theo hạnh ấy, và nếu sống, thời không thể thành đạt chánh đạo, pháp và chí thiện.<br>
+<span lang="pi" class="pali">
+Ayaṁ kho, sandaka, tena bhagavatā jānatā passatā arahatā sammāsambuddhena dutiyo abrahmacariyavāso akkhāto yattha viññū puriso sasakkaṁ brahmacariyaṁ na vaseyya, vasanto ca nārādheyya ñāyaṁ dhammaṁ kusalaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Lại nữa, này Sandaka, ở đây, có vị Ðạo sư có thuyết lý như vậy, có quan điểm như vầy:<br>
+<span lang="pi" class="pali">
+Puna caparaṁ, sandaka, idhekacco satthā evaṁvādī hoti evaṁdiṭṭhi:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Không có nhân, không có duyên, các loài hữu tình bị nhiễm ô;<br>
+<span lang="pi" class="pali">
+‘natthi hetu, natthi paccayo sattānaṁ saṅkilesāya;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+không có nhân, không có duyên, các loài hữu tình sẽ bị nhiễm ô.<br>
+<span lang="pi" class="pali">
+ahetū appaccayā sattā saṅkilissanti;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Không có nhân, không có duyên, các loài hữu tình được thanh tịnh,<br>
+<span lang="pi" class="pali">
+natthi hetu, natthi paccayo sattānaṁ visuddhiyā;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+không nhân không duyên, các loài hữu tình sẽ được thanh tịnh.<br>
+<span lang="pi" class="pali">
+ahetū appaccayā sattā visujjhanti;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Không có lực, không có tinh tấn, không có nhân lực, không có cố gắng của người.<br>
+<span lang="pi" class="pali">
+natthi balaṁ, natthi vīriyaṁ, natthi purisathāmo, natthi purisaparakkamo;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Tất cả loài hữu tình, tất cả chúng sanh, tất cả sanh loại, tất cả sinh mạng đều không tự tại, không lực, không tinh tấn. Họ bị dắt dẫn chi phối bởi định mệnh, bởi sự trùng hợp, bởi tự tánh. Họ hưởng thọ khổ lạc, y theo sáu sanh loại”.<br>
+<span lang="pi" class="pali">
+sabbe sattā sabbe pāṇā sabbe bhūtā sabbe jīvā avasā abalā avīriyā niyatisaṅgatibhāvapariṇatā chasvevābhijātīsu sukhadukkhaṁ paṭisaṁvedentī’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ở đây, này Sandaka, người có trí suy tư như sau:<br>
+<span lang="pi" class="pali">
+Tatra, sandaka, viññū puriso iti paṭisañcikkhati:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Vị Tôn sư này có thuyết lý như vầy, có quan điểm như vầy:<br>
+<span lang="pi" class="pali">
+‘ayaṁ kho bhavaṁ satthā evaṁvādī evaṁdiṭṭhi—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Không có nhân, không có duyên, …. Họ hưởng thọ khổ lạc, y theo sáu sanh loại”.<br>
+<span lang="pi" class="pali">
+natthi hetu, natthi paccayo sattānaṁ saṅkilesāya, ahetū appaccayā sattā saṅkilissanti. Natthi hetu natthi paccayo sattānaṁ visuddhiyā, ahetū appaccayā sattā visujjhanti. Natthi balaṁ, natthi vīriyaṁ, natthi purisathāmo, natthi purisaparakkamo, sabbe sattā sabbe pāṇā sabbe bhūtā sabbe jīvā avasā abalā avīriyā niyatisaṅgatibhāvapariṇatā chasvevābhijātīsu sukhadukkhaṁ paṭisaṁvedentī’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Nếu vị Tôn sư này nói đúng sự thật, thời cái gì đã làm ở đây không phải ta làm, cái gì được sống ở đây không phải ta sống, nhưng cả hai chúng ta ở đây đều đồng đẳng khi chứng Sa-môn quả, và ta không có nói: “Cả hai chúng tôi, không có nhân, không có duyên sẽ được thanh tịnh”. Thật sự là quá độ… mà ta sẽ sống theo hạnh ấy dưới vị Ðạo sư này?”<br>
+<span lang="pi" class="pali">
+Sace imassa bhoto satthuno saccaṁ vacanaṁ, akatena me ettha kataṁ, avusitena me ettha vusitaṁ. Ubhopi mayaṁ ettha samasamā sāmaññaṁ pattā, yo cāhaṁ na vadāmi ‘ubho ahetū appaccayā visujjhissāmā’ti. Atirekaṁ kho panimassa bhoto satthuno naggiyaṁ muṇḍiyaṁ ukkuṭikappadhānaṁ kesamassulocanaṁ, yohaṁ puttasambādhasayanaṁ ajjhāvasanto kāsikacandanaṁ paccanubhonto mālāgandhavilepanaṁ dhārento jātarūparajataṁ sādiyanto iminā bhotā satthārā samasamagatiko bhavissāmi abhisamparāyaṁ. Sohaṁ kiṁ jānanto kiṁ passanto imasmiṁ satthari brahmacariyaṁ carissāmi?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vị ấy sau khi biết phi phạm hạnh trú này,<br>
+<span lang="pi" class="pali">
+‘So abrahmacariyavāso ayan’ti—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+yểm ly hạnh ấy và bỏ đi.<br>
+<span lang="pi" class="pali">
+iti viditvā tasmā brahmacariyā nibbijja pakkamati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Như vậy, này Sandaka, là phi phạm hạnh trú thứ ba, được Thế Tôn, bậc Tri Giả, Kiến Giả, bậc A-la-hán, Chánh Ðẳng Giác tuyên bố, và ở đây người có trí không thể tự mình sống theo hạnh ấy, và nếu sống thời không thể thành đạt chánh đạo, pháp và chí thiện.<br>
+<span lang="pi" class="pali">
+Ayaṁ kho, sandaka, tena bhagavatā jānatā passatā arahatā sammāsambuddhena tatiyo abrahmacariyavāso akkhāto yattha viññū puriso sasakkaṁ brahmacariyaṁ na vaseyya, vasanto ca nārādheyya ñāyaṁ dhammaṁ kusalaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Lại nữa, này Sandaka, ở đây có vị Ðạo sư có thuyết lý như vầy, có quan điểm như vầy:<br>
+<span lang="pi" class="pali">
+Puna caparaṁ, sandaka, idhekacco satthā evaṁvādī hoti evaṁdiṭṭhi:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Có bảy thân này không bị làm ra, không làm ra, không bị sáng tạo, không sáng tạo, không sanh sản, thường tại như đảnh núi, đứng thẳng như trụ đá.<br>
+<span lang="pi" class="pali">
+‘sattime kāyā akaṭā akaṭavidhā animmitā animmātā vañjhā kūṭaṭṭhā esikaṭṭhāyiṭṭhitā,<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Chúng bất động, không chuyển biến, không xâm hại nhau. Chúng không thể ảnh hưởng đến lạc hay khổ với nhau, hoặc cả khổ và lạc.<br>
+<span lang="pi" class="pali">
+te na iñjanti na vipariṇamanti na aññamaññaṁ byābādhenti nālaṁ aññamaññassa sukhāya vā dukkhāya vā sukhadukkhāya vā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Thế nào là bảy?<br>
+<span lang="pi" class="pali">
+Katame satta?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ðịa thân, thủy thân, hỏa thân, phong thân, khổ, lạc, và thứ bảy là mạn.<br>
+<span lang="pi" class="pali">
+Pathavīkāyo āpokāyo tejokāyo vāyokāyo sukhe dukkhe jīve sattame—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Bảy thân này không bị làm ra, không làm ra, không bị sáng tạo, không sáng tạo, không sanh sản, thường tại như đỉnh núi, đứng thẳng như trụ đá.<br>
+<span lang="pi" class="pali">
+ime sattakāyā akaṭā akaṭavidhā animmitā animmātā vañjhā kūṭaṭṭhā esikaṭṭhāyiṭṭhitā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Chúng bất động, không chuyển biến, không xâm hại nhau. Chúng không thể ảnh hưởng đến lạc hay khổ với nhau, hoặc cả khổ và lạc.<br>
+<span lang="pi" class="pali">
+Te na iñjanti na vipariṇamanti na aññamaññaṁ byābādhenti. Nālaṁ aññamaññassa sukhāya vā dukkhāya vā sukhadukkhāya vā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ở đây, không có người giết hại hoặc người bị giết hại, người nghe hoặc người nói, người biết hoặc người khiến cho biết.<br>
+<span lang="pi" class="pali">
+Tattha natthi hantā vā ghātetā vā sotā vā sāvetā vā viññātā vā viññāpetā vā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+khi có một ai dùng lưỡi kiếm sắc bén chém đầu, thời không ai tước đoạt sanh mạng của ai cả.<br>
+<span lang="pi" class="pali">
+Yopi tiṇhena satthena sīsaṁ chindati, na koci kañci jīvitā voropeti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Lưỡi kiếm chỉ rơi vào giữa bảy thân mà thôi.<br>
+<span lang="pi" class="pali">
+Sattannaṁ tveva kāyānamantarena satthaṁ vivaramanupatati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Có tất cả là 14 trăm ngàn chủng loại thác sanh, lại có thêm 60 một trăm và 6 một trăm. Có 5 một trăm loại nghiệp và có 5 nghiệp (theo 5 căn), lại có 3 nghiệp (về thân, khẩu, ý), lại có toàn nghiệp (thân và khẩu), bán nghiệp (ý), có 62 đạo, 62 trung kiếp, 6 giai cấp, 8 nhân địa; 4900 sanh nghiệp, 4900 kẻ du hành, 4900 chỗ ở của loài Naga, 2000 căn, 3000 cảnh địa ngục, 36 trần giới, 7 tưởng thai, 7 vô tưởng thai, 7 tiết thai (sanh từ đốt, hay ly hệ thai) 7 loài Thiên, 7 loài Người, 7 loài Quỷ, 7 hồ nước, 7 pavutas (núi hay hồ nhỏ), 7000 pavutas, 700 papatas (vực thẳm), 7 mộng, 700 mộng có 8.400.000 đại kiếp, trong thời gian ấy kẻ ngu và người trí, sau khi lưu chuyển, luân hồi, sẽ trừ tận khổ đau.<br>
+<span lang="pi" class="pali">
+Cuddasa kho panimāni yonipamukhasatasahassāni saṭṭhi ca satāni cha ca satāni pañca ca kammuno satāni pañca ca kammāni tīṇi ca kammāni, kamme ca aḍḍhakamme ca, dvaṭṭhipaṭipadā, dvaṭṭhantarakappā, chaḷābhijātiyo, aṭṭha purisabhūmiyo, ekūnapaññāsa ājīvakasate, ekūnapaññāsa paribbājakasate, ekūnapaññāsa nāgāvāsasate, vīse indriyasate, tiṁse nirayasate, chattiṁsa rajodhātuyo, satta saññīgabbhā, satta asaññīgabbhā, satta nigaṇṭhigabbhā, satta devā, satta mānusā, satta pesācā, satta sarā, satta pavuṭā, satta papātā, satta papātasatāni, satta supinā, satta supinasatāni, cullāsīti mahākappino satasahassāni, yāni bāle ca paṇḍite ca sandhāvitvā saṁsaritvā dukkhassantaṁ karissanti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Không có lời nguyện: “Với giới này, với giới cấm này, với khổ hạnh này, hay với Phạm hạnh này, tôi sẽ làm cho chín muồi những nghiệp chưa được thuần thục, hoặc trừ diệt những nghiệp đã được thuần thục, bởi những nhẫn thọ liên tục không thể đo lường, khổ và lạc với những vật đo lường, trong luân hồi không có tăng giảm, không có cao thấp.<br>
+<span lang="pi" class="pali">
+Tattha natthi imināhaṁ sīlena vā vatena vā tapena vā brahmacariyena vā aparipakkaṁ vā kammaṁ paripācessāmi, paripakkaṁ vā kammaṁ phussa phussa byantiṁ karissāmīti. Hevaṁ natthi doṇamite sukhadukkhe pariyantakate saṁsāre, natthi hāyanavaḍḍhane, natthi ukkaṁsāvakaṁse.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ví như cuộn chỉ được tung ra sẽ được kéo dài đến một mức độ nào đó.<br>
+<span lang="pi" class="pali">
+Seyyathāpi nāma suttaguḷe khitte nibbeṭhiyamānameva paleti;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Cũng như vậy, kẻ ngu và người trí, sau khi lưu chuyển luân hồi sẽ chấm dứt khổ đau”.<br>
+<span lang="pi" class="pali">
+evameva bāle ca paṇḍite ca sandhāvitvā saṁsaritvā dukkhassantaṁ karissantī’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ở đây, này Sandaka, người có trí suy tư như sau:<br>
+<span lang="pi" class="pali">
+Tatra, sandaka, viññū puriso iti paṭisañcikkhati:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Vị Tôn sư này có lý thuyết như vầy, có quan điểm như vầy:<br>
+<span lang="pi" class="pali">
+‘ayaṁ kho bhavaṁ satthā evaṁvādī evaṁdiṭṭhi—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Có bảy thân này… sẽ chấm dứt khổ đau”.<br>
+<span lang="pi" class="pali">
+sattime kāyā akaṭā akaṭavidhā animmitā animmātā vañjhā kūṭaṭṭhā esikaṭṭhāyiṭṭhitā. Te na iñjanti na vipariṇamanti na aññamaññaṁ byābādhenti. Nālaṁ aññamaññassa sukhāya vā dukkhāya vā sukhadukkhāya vā. Katame satta? Pathavīkāyo āpokāyo tejokāyo vāyokāyo sukhe dukkhe jīve sattame—ime satta kāyā akaṭā akaṭavidhā animmitā animmātā vañjhā kūṭaṭṭhā esikaṭṭhāyiṭṭhitā. Te na iñjanti na vipariṇamanti na aññamaññaṁ byābādhenti. Nālaṁ aññamaññassa sukhāya vā dukkhāya vā sukhadukkhāya vā. Tattha natthi hantā vā ghātetā vā sotā vā sāvetā vā viññātā vā viññāpetā vā. Yopi tiṇhena satthena sīsaṁ chindati, na koci kañci jīvitā voropeti. Sattannaṁ tveva kāyānamantarena satthaṁ vivaramanupatati. Cuddasa kho panimāni yonipamukhasatasahassāni saṭṭhi ca satāni cha ca satāni pañca ca kammuno satāni pañca ca kammāni tīṇi ca kammāni, kamme ca aḍḍhakamme ca, dvaṭṭhipaṭipadā, dvaṭṭhantarakappā, chaḷābhijātiyo, aṭṭha purisabhūmiyo, ekūnapaññāsa ājīvakasate, ekūnapaññāsa paribbājakasate, ekūnapaññāsa nāgāvāsasate, vīse indriyasate, tiṁse nirayasate, chattiṁsa rajodhātuyo, satta saññīgabbhā, satta asaññīgabbhā, satta nigaṇṭhigabbhā, satta devā, satta mānusā, satta pesācā, satta sarā, satta pavuṭā, satta papātā, satta papātasatāni, satta supinā, satta supinasatāni, cullāsīti mahākappino satasahassāni, yāni bāle ca paṇḍite ca sandhāvitvā saṁsaritvā dukkhassantaṁ karissanti. Tattha natthi imināhaṁ sīlena vā vatena vā tapena vā brahmacariyena vā aparipakkaṁ vā kammaṁ paripācessāmi, paripakkaṁ vā kammaṁ phussa phussa byantiṁ karissāmīti, hevaṁ natthi doṇamite sukhadukkhe pariyantakate saṁsāre, natthi hāyanavaḍḍhane, natthi ukkaṁsāvakaṁse. Seyyathāpi nāma suttaguḷe khitte nibbeṭhiyamānameva paleti; evameva bāle ca paṇḍite ca sandhāvitvā saṁsaritvā dukkhassantaṁ karissantī’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Nếu vị Tôn sư này nói đúng sự thật, thời cái gì đã làm ở đây không phải ta làm, cái gì được sống ở đây không phải ta sống.<br>
+<span lang="pi" class="pali">
+Sace pana imassa bhoto satthuno saccaṁ vacanaṁ, akatena me ettha kataṁ, avusitena me ettha vusitaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Nhưng cả hai chúng ta ở đây đều đồng đẳng khi chứng Sa-môn quả, và ta không có nói: “Cả hai chúng tôi, sau khi lưu chuyển luân hồi sẽ chấm dứt khổ đau”.<br>
+<span lang="pi" class="pali">
+Ubhopi mayaṁ ettha samasamā sāmaññaṁ pattā, yo cāhaṁ na vadāmi ‘ubho sandhāvitvā saṁsaritvā dukkhassantaṁ karissāmā’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Thật sự là quá độ hạnh lõa thể, trọc đầu, tinh tấn ngồi chõ hỏ, nhổ lông tóc của vị Tôn sư này, trong khi ta sống trong gia đình, được con cái bao bọc đoanh vây, thọ dụng chiên-đàn Kasi, mang dùng vòng hoa, hương liệu, phấn sáp, hưởng thọ vàng bạc, và trong đời sau ta sẽ đồng đẳng với vị Tôn sư này về chỗ thọ sanh.<br>
+<span lang="pi" class="pali">
+Atirekaṁ kho panimassa bhoto satthuno naggiyaṁ muṇḍiyaṁ ukkuṭikappadhānaṁ kesamassulocanaṁ, yohaṁ puttasambādhasayanaṁ ajjhāvasanto kāsikacandanaṁ paccanubhonto mālāgandhavilepanaṁ dhārento jātarūparajataṁ sādiyanto iminā bhotā satthārā samasamagatiko bhavissāmi abhisamparāyaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Như vậy ta biết gì, ta thấy gì mà ta sẽ sống theo hạnh ấy với vị Ðạo sư này?”<br>
+<span lang="pi" class="pali">
+Sohaṁ kiṁ jānanto kiṁ passanto imasmiṁ satthari brahmacariyaṁ carissāmi?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vị ấy sau khi biết phi phạm hạnh trú này,<br>
+<span lang="pi" class="pali">
+‘So abrahmacariyavāso ayan’ti—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+yểm ly theo hạnh ấy và bỏ đi.<br>
+<span lang="pi" class="pali">
+iti viditvā tasmā brahmacariyā nibbijja pakkamati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Như vậy, này Sandaka, là phi phạm hạnh trú thứ tư, được Thế Tôn, bậc Tri Giả, Kiến Giả, bậc A la hán, Chánh Ðẳng Giác tuyên bố, và ở đây người có trí không thể tự mình sống theo hạnh ấy, và nếu sống, thời không thể thành đạt chánh đạo, pháp, và chí thiện.<br>
+<span lang="pi" class="pali">
+Ayaṁ kho, sandaka, tena bhagavatā jānatā passatā arahatā sammāsambuddhena catuttho abrahmacariyavāso akkhāto yattha viññū puriso sasakkaṁ brahmacariyaṁ na vaseyya, vasanto ca nārādheyya ñāyaṁ dhammaṁ kusalaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Sandaka, bốn phi phạm hạnh trú này được Thế Tôn, bậc Tri Giả, Kiến Giả, bậc A-la-hán, Chánh Ðẳng Giác tuyên bố, và ở đây, người có trí không thể tự mình sống theo hạnh ấy, và nếu sống, thời không thể thành đạt chánh lý, pháp, và chí thiện.”<br>
+<span lang="pi" class="pali">
+Ime kho te, sandaka, tena bhagavatā jānatā passatā arahatā sammāsambuddhena cattāro abrahmacariyavāsā akkhātā yattha viññū puriso sasakkaṁ brahmacariyaṁ na vaseyya, vasanto ca nārādheyya ñāyaṁ dhammaṁ kusalan”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Thật vi diệu thay, Tôn giả Ānanda! Thật hy hữu thay, Tôn giả Ānanda!<br>
+<span lang="pi" class="pali">
+“Acchariyaṁ, bho ānanda, abbhutaṁ, bho ānanda.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Bốn phi phạm hạnh trú này đã được Thế Tôn, bậc Tri Giả, Kiến Giả, bậc A-la-hán, Chánh Ðẳng Giác tuyên bố là phi phạm hạnh trú, và ở đây, người có trí không thể tự mình sống theo hạnh ấy, và nếu sống, thời không thể thành đạt chánh lý, pháp, và chí thiện.<br>
+<span lang="pi" class="pali">
+Yāvañcidaṁ tena bhagavatā jānatā passatā arahatā sammāsambuddhena cattāro abrahmacariyavāsāva samānā ‘abrahmacariyavāsā’ti akkhātā yattha viññū puriso sasakkaṁ brahmacariyaṁ na vaseyya, vasanto ca nārādheyya ñāyaṁ dhammaṁ kusalanti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Tôn giả Ānanda, thế nào là bốn pháp bất an phạm hạnh được Thế Tôn, bậc Tri Giả, Kiến Giả, bậc A-la-hán, Chánh Ðẳng Giác tuyên bố, và ở đây người có trí không thể tự mình sống theo hạnh ấy, và nếu sống, thời không thể thành đạt chánh đạo, pháp, và chí thiện?”<br>
+<span lang="pi" class="pali">
+Katamāni pana tāni, bho ānanda, tena bhagavatā jānatā passatā arahatā sammāsambuddhena cattāri anassāsikāni brahmacariyāni akkhātāni yattha viññū puriso sasakkaṁ brahmacariyaṁ na vaseyya, vasanto ca nārādheyya ñāyaṁ dhammaṁ kusalan”ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Ở đây, này Sandaka, có bậc Ðạo sư nhứt thiết tri, nhứt thiết kiến, tự xem đã chứng được tri kiến hoàn toàn:<br>
+<span lang="pi" class="pali">
+“Idha, sandaka, ekacco satthā sabbaññū sabbadassāvī aparisesaṁ ñāṇadassanaṁ paṭijānāti:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Khi ta đi, ta đứng, ta ngủ và ta thức, tri, kiến được an trú ở trong ta, liên tục, không gián đoạn”.<br>
+<span lang="pi" class="pali">
+‘carato ca me tiṭṭhato ca suttassa ca jāgarassa ca satataṁ samitaṁ ñāṇadassanaṁ paccupaṭṭhitan’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vị ấy đi vào một nhà trống, không nhận được đồ ăn khất thực, và con chó cắn vị ấy, vị ấy gặp voi dữ, gặp người dữ, gặp bò dữ, và vị ấy hỏi tên và họ một người đàn bà, một người đàn ông, và hỏi tên những con đường của làng, của trị trấn.<br>
+<span lang="pi" class="pali">
+So suññampi agāraṁ pavisati, piṇḍampi na labhati, kukkuropi ḍaṁsati, caṇḍenapi hatthinā samāgacchati, caṇḍenapi assena samāgacchati, caṇḍenapi goṇena samāgacchati, itthiyāpi purisassapi nāmampi gottampi pucchati, gāmassapi nigamassapi nāmampi maggampi pucchati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vị ấy được hỏi: “Sao như thế này?”, và trả lời: “Ta phải vào một nhà trống, do vậy ta đã vào; ta phải không nhận được đồ ăn khất thực, do vậy ta đã không nhận được đồ ăn khất thực. Có người phải bị chó cắn, do vậy ta đã bị chó cắn. Có người phải gặp voi dữ, do vậy ta đã gặp; phải gặp ngựa dữ, do vậy ta đã gặp, phải gặp bò dữ, do vậy ta đã gặp. Có người phải hỏi tên và họ một người đàn bà, một người đàn ông, do vậy ta đã hỏi. Có người phải hỏi tên những con đường của làng, của thị trấn, do vậy ta đã hỏi”.<br>
+<span lang="pi" class="pali">
+So ‘kimidan’ti puṭṭho samāno ‘suññaṁ me agāraṁ pavisitabbaṁ ahosi’, tena pāvisiṁ; ‘piṇḍampi aladdhabbaṁ ahosi’, tena nālatthaṁ; ‘kukkurena ḍaṁsitabbaṁ ahosi’, tenamhi daṭṭho; ‘caṇḍena hatthinā samāgantabbaṁ ahosi’, tena samāgamiṁ; ‘caṇḍena assena samāgantabbaṁ ahosi’, tena samāgamiṁ; ‘caṇḍena goṇena samāgantabbaṁ ahosi’, tena samāgamiṁ; ‘itthiyāpi purisassapi nāmampi gottampi pucchitabbaṁ ahosi’, tena pucchiṁ; ‘gāmassapi nigamassapi nāmampi maggampi pucchitabbaṁ ahosi’, tena pucchinti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ở đây, này Sandaka, người có trí suy tư như sau:<br>
+<span lang="pi" class="pali">
+Tatra, sandaka, viññū puriso iti paṭisañcikkhati:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Vị Tôn sư này là nhất thiết tri, nhứt thiết kiến … , do vậy ta đã hỏi”.<br>
+<span lang="pi" class="pali">
+‘ayaṁ kho bhavaṁ satthā sabbaññū sabbadassāvī aparisesaṁ ñāṇadassanaṁ paṭijānāti …pe… ‘gāmassapi nigamassapi nāmampi maggampi pucchitabbaṁ ahosi, tena pucchin’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vị ấy sau khi biết: “Hạnh này là bất an”, nên yểm ly hạnh ấy và bỏ đi.<br>
+<span lang="pi" class="pali">
+So ‘anassāsikaṁ idaṁ brahmacariyan’ti—iti viditvā tasmā brahmacariyā nibbijja pakkamati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Sandaka, đây là bất an phạm hạnh thứ nhất, được Thế Tôn, bậc Tri Giả, Kiến Giả, bậc A-la-hán, Chánh Ðẳng Giác tuyên bố, và ở đây người có trí không thể tự mình sống theo hạnh ấy, và nếu sống, thời không thể thành đạt chánh đạo, pháp và chí thiện.<br>
+<span lang="pi" class="pali">
+Idaṁ kho, sandaka, tena bhagavatā jānatā passatā arahatā sammāsambuddhena paṭhamaṁ anassāsikaṁ brahmacariyaṁ akkhātaṁ yattha viññū puriso sasakkaṁ brahmacariyaṁ na vaseyya, vasanto ca nārādheyya ñāyaṁ dhammaṁ kusalaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Lại nữa, này Sandaka, ở đây, có vị Ðạo sư y cứ truyền thuyết, xem truyền thuyết là chân thật,<br>
+<span lang="pi" class="pali">
+Puna caparaṁ, sandaka, idhekacco satthā anussaviko hoti anussavasacco.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+vị này thuyết pháp theo truyền thuyết, theo tương truyền và truyền thống, theo uy tín Thánh tạng.<br>
+<span lang="pi" class="pali">
+So anussavena itihitihaparamparāya piṭakasampadāya dhammaṁ deseti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Sandaka, nếu vị Ðạo sư y cứ truyền thuyết, xem truyền thuyết là chân thật, vị ấy có phần khéo nhớ, có phần không khéo nhớ, khi thì như thế này, khi thì như thế khác.<br>
+<span lang="pi" class="pali">
+Anussavikassa kho pana, sandaka, satthuno anussavasaccassa sussutampi hoti dussutampi hoti tathāpi hoti aññathāpi hoti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ở đây, này Sandaka, người có trí suy tư:<br>
+<span lang="pi" class="pali">
+Tatra, sandaka, viññū puriso iti paṭisañcikkhati:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Vị Tôn sư này y cứ truyền thuyết, xem truyền thuyết là chơn thật, vị này thuyết pháp theo truyền thuyết, theo tương truyền và truyền thống, theo uy tín Thánh tạng.<br>
+<span lang="pi" class="pali">
+‘ayaṁ kho bhavaṁ satthā anussaviko anussavasacco so anussavena itihitihaparamparāya piṭakasampadāya dhammaṁ deseti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Nếu vị Ðạo sư y cứ truyền thuyết, xem truyền thuyết là chơn thật, vị ấy có phần khéo nhớ, có phần không khéo nhớ, khi thì như thế này, khi thì như thế khác.<br>
+<span lang="pi" class="pali">
+Anussavikassa kho pana satthuno anussavasaccassa sussutampi hoti dussutampi hoti tathāpi hoti aññathāpi hoti’.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vị ấy sau khi biết: “Hạnh này là bất an”, nên yểm ly hạnh ấy và bỏ đi.<br>
+<span lang="pi" class="pali">
+So ‘anassāsikaṁ idaṁ brahmacariyan’ti—iti viditvā tasmā brahmacariyā nibbijja pakkamati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Sandaka, đây là bất an phạm hạnh thứ hai, được Thế Tôn, bậc Tri Giả, Kiến Giả, bậc A-la-hán, Chánh Ðẳng Giác tuyên bố, và ở đây người có trí không thể tự mình sống theo hạnh ấy, và nếu sống, thời không thể thành đạt chánh đạo, pháp, và chí thiện.<br>
+<span lang="pi" class="pali">
+Idaṁ kho, sandaka, tena bhagavatā jānatā passatā arahatā sammāsambuddhena dutiyaṁ anassāsikaṁ brahmacariyaṁ akkhātaṁ yattha viññū puriso sasakkaṁ brahmacariyaṁ na vaseyya, vasanto ca nārādheyya ñāyaṁ dhammaṁ kusalaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Lại nữa, này Sandaka, ở đây có vị Ðạo sư là nhà lý luận, là nhà suy luận.<br>
+<span lang="pi" class="pali">
+Puna caparaṁ, sandaka, idhekacco satthā takkī hoti vīmaṁsī.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Do sự đả phá của lý luận và y cứ theo suy luận, vị này thuyết pháp theo nguyên tắc tự mình sáng tác.<br>
+<span lang="pi" class="pali">
+So takkapariyāhataṁ vīmaṁsānucaritaṁ sayampaṭibhānaṁ dhammaṁ deseti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Sandaka, nếu vị Ðạo sư là nhà lý luận, là nhà suy luận, vị ấy có phần khéo lý luận, có phần không khéo lý luận, khi thì như thế này, khi thì như thế khác.<br>
+<span lang="pi" class="pali">
+Takkissa kho pana, sandaka, satthuno vīmaṁsissa sutakkitampi hoti duttakkitampi hoti tathāpi hoti aññathāpi hoti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ở đây, này Sandaka, người có trí suy nghĩ:<br>
+<span lang="pi" class="pali">
+Tatra, sandaka, viññū puriso iti paṭisañcikkhati:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Vị Tôn sư này là nhà lý luận, là nhà suy luận.<br>
+<span lang="pi" class="pali">
+‘ayaṁ kho bhavaṁ satthā takkī vīmaṁsī.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Do sự đả phá của lý luận và y cứ theo suy luận, vị này thuyết pháp theo nguyên tắc tự mình sáng tác.<br>
+<span lang="pi" class="pali">
+So takkapariyāhataṁ vīmaṁsānucaritaṁ sayampaṭibhānaṁ dhammaṁ deseti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Nếu vị Ðạo sư là nhà lý luận, là nhà suy luận, vị ấy có phần khéo lý luận, có phần không khéo lý luận, khi thì như thế này, khi thì như thế khác.<br>
+<span lang="pi" class="pali">
+Takkissa kho pana satthuno vīmaṁsissa sutakkitampi hoti duttakkitampi hoti tathāpi hoti aññathāpi hoti’.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vị ấy sau khi biết: “Hạnh này là bất an”, nên yểm ly hạnh ấy và bỏ đi.<br>
+<span lang="pi" class="pali">
+So ‘anassāsikaṁ idaṁ brahmacariyan’ti—iti viditvā tasmā brahmacariyā nibbijja pakkamati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Sandaka đây là bất an phạm hạnh thứ ba, được Thế Tôn, bậc Tri Giả, Kiến Giả, bậc A-la-hán, Chánh Ðẳng Giác tuyên bố, và ở đây người có trí không thể tự mình sống theo hạnh ấy, và nếu sống, thì không thể thành đạt chánh lý, pháp, và chí thiện.<br>
+<span lang="pi" class="pali">
+Idaṁ kho, sandaka, tena bhagavatā jānatā passatā arahatā sammāsambuddhena tatiyaṁ anassāsikaṁ brahmacariyaṁ akkhātaṁ yattha viññū puriso sasakkaṁ brahmacariyaṁ na vaseyya, vasanto ca nārādheyya ñāyaṁ dhammaṁ kusalaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Lại nữa, này Sandaka, ở đây có vị Ðạo sư là người đần độn, là người ngu si.<br>
+<span lang="pi" class="pali">
+Puna caparaṁ, sandaka, idhekacco satthā mando hoti momūho.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vì đần độn ngu si, khi được hỏi về vấn đề này, vấn đề khác, vị ấy dùng những lời ngụy biện trườn uốn như con lươn:<br>
+<span lang="pi" class="pali">
+So mandattā momūhattā tattha tattha pañhaṁ puṭṭho samāno vācāvikkhepaṁ āpajjati amarāvikkhepaṁ:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Theo tôi không phải như vậy, theo tôi không phải như kia, theo tôi không khác như thế, theo tôi không phải như thế, theo tôi không không phải như thế”.<br>
+<span lang="pi" class="pali">
+‘evantipi me no, tathātipi me no, aññathātipi me no, notipi me no, no notipi me no’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ở đây, này Sandaka, người có trí suy tư:<br>
+<span lang="pi" class="pali">
+Tatra, sandaka, viññū puriso iti paṭisañcikkhati:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Vị Tôn sư này là người đần độn, là người ngu si …, theo tôi không phải như thế”.<br>
+<span lang="pi" class="pali">
+‘ayaṁ kho bhavaṁ satthā mando momūho. So mandattā momūhattā tattha tattha pañhaṁ puṭṭho samāno vācāvikkhepaṁ āpajjati amarāvikkhepaṁ—evantipi me no, tathātipi me no, aññathātipi me no, notipi me no, no notipi me no’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vị ấy sau khi biết: “Hạnh này là bất an”, nên yểm ly hạnh ấy và bỏ đi.<br>
+<span lang="pi" class="pali">
+So ‘anassāsikaṁ idaṁ brahmacariyan’ti—iti viditvā tasmā brahmacariyā nibbijja pakkamati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Sandaka, đây là bất an phạm hạnh thứ tư, được Thế Tôn, bậc Tri Giả, Kiến Giả, bậc A-la-hán, Chánh Ðẳng Giác tuyên bố, và ở đây người có trí không thể tự mình sống theo hạnh ấy, và nếu sống, thì không thể thành đạt chánh đạo, pháp và chí thiện.<br>
+<span lang="pi" class="pali">
+Idaṁ kho, sandaka, tena bhagavatā jānatā passatā arahatā sammāsambuddhena catutthaṁ anassāsikaṁ brahmacariyaṁ akkhātaṁ yattha viññū puriso sasakkaṁ brahmacariyaṁ na vaseyya, vasanto ca nārādheyya ñāyaṁ dhammaṁ kusalaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Sandaka, bốn bất an phạm hạnh này được Thế Tôn, bậc Tri Giả, Kiến Giả, bậc A-la-hán, Chánh Ðẳng Giác tuyên bố, và ở đây người có trí không thể tự mình sống theo hạnh ấy, và nếu sống, thì không thể thành đạt chánh lý, pháp và chí thiện.”<br>
+<span lang="pi" class="pali">
+Imāni kho tāni, sandaka, tena bhagavatā jānatā passatā arahatā sammāsambuddhena cattāri anassāsikāni brahmacariyāni akkhātāni yattha viññū puriso sasakkaṁ brahmacariyaṁ na vaseyya, vasanto ca nārādheyya ñāyaṁ dhammaṁ kusalan”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Thật vi diệu thay, Tôn giả Ānanda! Thật hy hữu thay, Tôn giả Ānanda!<br>
+<span lang="pi" class="pali">
+“Acchariyaṁ, bho ānanda, abbhutaṁ, bho ānanda.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Bốn pháp bất an phạm hạnh này đã được Thế Tôn, bậc Tri Giả, Kiến Giả, bậc A-la-hán, Chánh Ðẳng Giác tuyên bố là bất an phạm hạnh, và ở đây người trí không thể tự mình sống theo hạnh ấy, và nếu sống, thì không thể thành đạt chánh lý, pháp, và chí thiện.<br>
+<span lang="pi" class="pali">
+Yāvañcidaṁ tena bhagavatā jānatā passatā arahatā sammāsambuddhena cattāri anassāsikāneva brahmacariyāni anassāsikāni brahmacariyānīti akkhātāni yattha viññū puriso sasakkaṁ brahmacariyaṁ na vaseyya, vasanto ca nārādheyya ñāyaṁ dhammaṁ kusalaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Thưa Tôn giả Ānanda, vị Ðạo sư ấy dạy những gì, tuyên bố những gì, mà ở đây, người có trí có thể tự mình sống Phạm hạnh, và khi sống, có thể thành đạt chánh lý, pháp, và chí thiện?”<br>
+<span lang="pi" class="pali">
+So pana, bho ānanda, satthā kiṁ vādī kiṁ akkhāyī yattha viññū puriso sasakkaṁ brahmacariyaṁ vaseyya, vasanto ca ārādheyya ñāyaṁ dhammaṁ kusalan”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Ở đây, này Sandaka, Như Lai xuất hiện ở đời là bậc A-la-hán, Chánh Biến Tri, Minh Hạnh Túc, Thiện Thệ, Thế Gian Giải, Vô Thượng Sĩ, Ðiều Ngự Trượng Phu, Thiên Nhân Sư, Phật, Thế Tôn. Như Lai sau khi riêng tự chứng ngộ với thượng trí, thế giới này là Thiên giới, Ma giới, Phạm thiên giới, gồm cả thế giới này với Sa-môn, Bà-la-môn, Thiên, Nhơn, lại tuyên bố điều Ngài đã chứng ngộ. Ngài thuyết pháp sơ thiện, trung thiện, hậu thiện, đầy đủ văn nghĩa, Ngài truyền dạy Phạm hạnh hoàn toàn đầy đủ thanh tịnh.<br>
+</p>
+
+<p lang="vi" class="vi">
+Người gia trưởng hay con người gia trưởng, hay một người sanh ở giai cấp (hạ tiện) nghe pháp ấy, sau khi nghe pháp, người ấy sanh lòng tín ngưỡng Như Lai. Khi có lòng tín ngưỡng ấy, người ấy suy nghĩ: “Ðời sống gia đình đầy những triền phược, con đường đầy những bụi đời. Ðời sống xuất gia phóng khoáng như hư không. Thật không dễ gì cho một người sống ở gia đình có thể sống theo Phạm hạnh hoàn toàn đầy đủ, hoàn toàn thanh tịnh, trắng bạch như vỏ ốc. Vậy ta nên cạo bỏ râu tóc, đắp áo cà-sa, xuất gia, từ bỏ gia đình, sống không gia đình”. Một thời gian sau, người ấy bỏ tài sản nhỏ, hay bỏ tài sản lớn, bỏ bà con quyến thuộc nhỏ, hay bỏ bà con quyến thuộc lớn, cạo bỏ râu tóc, đắp áo cà-sa, và xuất gia, từ bỏ gia đình, sống không gia đình.<br>
+</p>
+
+<p lang="vi" class="vi">
+Vị ấy xuất gia như vậy, hành trì các học giới và hạnh sống các Tỷ-kheo, từ bỏ sát sanh, tránh xa sát sanh, bỏ trượng, bỏ kiếm, biết xấu hổ, sợ hãi, có lòng từ, sống thương xót đến hạnh phúc tất cả chúng sanh và loài hữu tình. Vị ấy từ bỏ lấy của không cho, tránh xa lấy của không cho, chỉ mong những vật đã cho, tự sống thanh tịnh, không có trộm cướp. Vị ấy từ bỏ đời sống không Phạm hạnh, sống theo Phạm hạnh, sống đời sống viễn ly, tránh xa dâm dục hạ liệt.<br>
+</p>
+
+<p lang="vi" class="vi">
+Vị ấy từ bỏ nói láo, nói những lời chân thật, liên hệ đến sự thật, chắc chắn, đáng tin cậy, không lường gạt đời. Vị ấy từ bỏ nói hai lưỡi, tránh xa nói hai lưỡi, nghe điều gì ở chỗ này, không đến chỗ kia nói để sanh chia rẽ ở những người này; nghe điều gì ở chỗ kia, không đi nói với những người này để sanh chuyện chia rẽ ở những người kia. Như vậy, vị ấy sống hòa hợp những kẻ ly gián, khuyến khích những kẻ hòa hợp, hoan hỷ trong hòa hợp, thích thú trong hòa hợp, hân hoan trong hòa hợp, nói những lời đưa đến hòa hợp. Vị ấy từ bỏ nói độc ác, tránh xa lời nói độc ác, nói những lời nói dịu hiền, đẹp tai, dễ thương, thông cảm đến tâm, tao nhã, đẹp lòng nhiều người; vị ấy nói những lời nói như vậy. Vị ấy từ bỏ lời nói phù phiếm, tránh xa lời nói phù phiếm, nói đúng thời, nói chân thật, nói có ý nghĩa, nói pháp, nói luật, nói những lời đáng được gìn giữ, những lời hợp thời, hợp lý, có mạch lạc hệ thống, có ích lợi.<br>
+</p>
+
+<p lang="vi" class="vi">
+Vị ấy từ bỏ không làm hại đến các hạt giống và các loại cây cỏ, dùng một ngày một bữa, không ăn ban đêm; từ bỏ các món ăn phi thời; từ bỏ không đi xem múa, hát, nhạc, các cuộc trình diễn; từ bỏ không dùng vòng hoa, hương liệu, dầu thoa, trang sức, và các thời trang; từ bỏ không dùng giường cao và giường lớn; từ bỏ không nhận vàng và bạc; từ bỏ không nhận các hạt sống; từ bỏ không nhận thịt sống, từ bỏ không nhận đàn bà con gái; từ bỏ không nhận nô tỳ gái và trai; từ bỏ không nhận cừu và dê; từ bỏ không nhận gia cầm và heo; từ bỏ không nhận voi, bò, ngựa và ngựa cái; từ bỏ không nhận ruộng nương đất đai; từ bỏ không dùng người làm môi giới hoặc tự mình làm môi giới; từ bỏ không buôn bán; từ bỏ các sự gian lận bằng cân, tiền bạc và đo lường; từ bỏ các tà hạnh như hối lộ, gian trá, lừa đảo; từ bỏ không làm thương tổn, sát hại, câu thúc, bức đoạt, trộm cắp, cướp phá.<br>
+</p>
+
+<p lang="vi" class="vi">
+Vị ấy sống biết đủ, bằng lòng với tấm y để che thân với đồ ăn khất thực để nuôi sống, đi tại chỗ nào cũng mang theo y và bình bát. Như con chim bay đến chỗ nào cũng mang theo hai cánh, cũng vậy, Tỷ-kheo bằng lòng với tấm y để che thân, với đồ ăn khất thực để nuôi bụng, đi tại chỗ nào cũng mang theo. Vị ấy thành tựu Thánh giới uẩn này, nội tâm hưởng lạc thọ không khuyết phạm.<br>
+</p>
+
+<p lang="vi" class="vi">
+Khi mắt thấy sắc, vị ấy không nắm giữ tướng chung, không nắm giữ tướng riêng. Những nguyên nhân gì, vì con mắt không được chế ngự, khiến tham ái, ưu bi, các ác, bất thiện pháp khởi lên, vị ấy tự chế ngự các nguyên nhân ấy, hộ trì con mắt, thực hành sự hộ trì con mắt. Khi tai nghe tiếng… mũi ngửi hương… lưỡi nếm vị… thân cảm xúc… ý nhận thức các pháp, vị ấy không nắm giữ tướng chung, không nắm giữ tướng riêng, những nguyên nhân gì, vì ý căn không được chế ngự, khiến tham ái, ưu bi, các ác bất thiện pháp khởi lên, vị ấy chế ngự nguyên nhân ấy, hộ trì ý căn, thực hành sự hộ trì ý căn. Vị ấy thành tựu Thánh hộ trì các căn này, nội tâm hưởng lạc thọ không uế nhiễm.<br>
+</p>
+
+<p lang="vi" class="vi">
+Vị ấy khi đi tới, khi đi lui đều tỉnh giác; khi nhìn thẳng, khi nhìn quanh đều tỉnh giác; khi co tay, khi duỗi tay đều tỉnh giác; khi mang y kép, bình bát, thượng y đều tỉnh giác; khi ăn, uống, nhai, nuốt đều tỉnh giác; khi đi đại tiện, tiểu tiện đều tỉnh giác; khi đi, đứng, ngồi, nằm, thức, nói, yên lặng đều tỉnh giác.<br>
+</p>
+
+<p lang="vi" class="vi">
+Vị ấy thành tựu Thánh giới uẩn này, thành tựu Thánh hộ trì các căn này, thành tựu Thánh chánh niệm tỉnh giác này, lựa một trú xứ thanh vắng, như khu rừng, gốc cây, khe núi, hang đá, bãi tha ma, lùm cây ngoài trời, đống rơm.<br>
+</p>
+
+<p lang="vi" class="vi">
+Sau khi ăn xong và đi khất thực trở về, vị ấy ngồi kiết-già, lưng thẳng tại chỗ nói trên, và an trú chánh niệm trước mặt. Vị ấy từ bỏ dục tham ở đời, sống với tâm thoát ly dục tham, gột rửa tâm hết dục tham. Từ bỏ sân hận, vị ấy sống với tâm không sân hận, lòng từ mẫn thương xót tất cả chúng sanh hữu tình, gột rửa tâm hết sân hận. Từ bỏ hôn trầm thụy miên, vị ấy sống thoát ly hôn trầm thụy miên, với tâm tưởng hướng về ánh sáng, chánh niệm tỉnh giác, gột rửa tâm hết hôn trầm thụy miên. Từ bỏ trạo cử, hối quá, vị ấy sống không trạo cử, nội tâm trầm lặng, gột rửa tâm hết trạo cử, hối quá. Từ bỏ nghi ngờ, vị ấy sống thoát khỏi nghi ngờ, không phân vân lưỡng lự, gột rửa tâm hết nghi ngờ đối với thiện pháp.<br>
+</p>
+
+<p lang="vi" class="vi">
+<span lang="pi" class="pali">
+“Idha, sandaka, tathāgato loke uppajjati arahaṁ sammāsambuddho vijjācaraṇasampanno sugato lokavidū anuttaro purisadammasārathi satthā devamanussānaṁ buddho bhagavā …pe…<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Sau khi trừ bỏ năm triền cái này, các pháp làm tâm cấu uế, làm trí tuệ trở thành yếu ớt<br>
+<span lang="pi" class="pali">
+so ime pañca nīvaraṇe pahāya cetaso upakkilese paññāya dubbalīkaraṇe<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+vị ấy ly dục, ly bất thiện pháp, chứng đạt và an trú Sơ thiền, một trạng thái hỷ lạc do ly dục sanh, với tầm, với tứ.<br>
+<span lang="pi" class="pali">
+vivicceva kāmehi vivicca akusalehi dhammehi savitakkaṁ savicāraṁ vivekajaṁ pītisukhaṁ paṭhamaṁ jhānaṁ upasampajja viharati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Sandaka, nếu một đệ tử chứng được ưu thắng đặc thù như vậy dưới một vị Ðạo sư, thời ở đây người có trí có thể tự mình sống Phạm hạnh, và khi sống có thể thành đạt chánh đạo, pháp, và chí thiện.<br>
+<span lang="pi" class="pali">
+Yasmiṁ kho, sandaka, satthari sāvako evarūpaṁ uḷāravisesaṁ adhigacchati tattha viññū puriso sasakkaṁ brahmacariyaṁ vaseyya, vasanto ca ārādheyya ñāyaṁ dhammaṁ kusalaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Lại nữa, này Sandaka, vị Tỷ-kheo diệt tầm và tứ, chứng đạt và an trú Nhị thiền…<br>
+<span lang="pi" class="pali">
+Puna caparaṁ, sandaka, bhikkhu vitakkavicārānaṁ vūpasamā …pe… dutiyaṁ jhānaṁ upasampajja viharati.<br>
+Yasmiṁ kho, sandaka, satthari sāvako evarūpaṁ uḷāravisesaṁ adhigacchati tattha viññū puriso sasakkaṁ brahmacariyaṁ vaseyya, vasanto ca ārādheyya ñāyaṁ dhammaṁ kusalaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+chứng đạt và an trú Tam thiền…<br>
+<span lang="pi" class="pali">
+Puna caparaṁ, sandaka, bhikkhu pītiyā ca virāgā upekkhako ca viharati …pe… tatiyaṁ jhānaṁ upasampajja viharati. Yasmiṁ kho, sandaka, satthari sāvako evarūpaṁ uḷāravisesaṁ adhigacchati tattha viññū puriso sasakkaṁ brahmacariyaṁ vaseyya, vasanto ca ārādheyya ñāyaṁ dhammaṁ kusalaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+… chứng đạt và an trú Tứ thiền.<br>
+<span lang="pi" class="pali">
+Puna caparaṁ, sandaka, bhikkhu sukhassa ca pahānā …pe… catutthaṁ jhānaṁ upasampajja viharati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Sandaka, nếu một đệ tử chiếm được ưu thắng đặc thù như vậy dưới một Ðạo sư… thành đạt chánh đạo, pháp, và chí thiện.<br>
+<span lang="pi" class="pali">
+Yasmiṁ kho, sandaka, satthari sāvako evarūpaṁ uḷāravisesaṁ adhigacchati tattha viññū puriso sasakkaṁ brahmacariyaṁ vaseyya, vasanto ca ārādheyya ñāyaṁ dhammaṁ kusalaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Với tâm định tĩnh, thanh tịnh, trong sáng, không cấu nhiễm, không phiền não, nhu nhuyễn, dễ sử dụng, vững chắc, bất động như vậy, vị ấy, hướng tâm đến túc mạng trí.<br>
+<span lang="pi" class="pali">
+So evaṁ samāhite citte parisuddhe pariyodāte anaṅgaṇe vigatūpakkilese mudubhūte kammaniye ṭhite āneñjappatte pubbenivāsānussatiñāṇāya cittaṁ abhininnāmeti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vị ấy nhớ đến các đời sống quá khứ, như một đời, hai đời … như vậy, vị ấy nhớ đến nhiều đời sống quá khứ cùng với các nét đại cương và các chi tiết.<br>
+<span lang="pi" class="pali">
+So anekavihitaṁ pubbenivāsaṁ anussarati, seyyathidaṁ—ekampi jātiṁ dvepi jātiyo …pe… iti sākāraṁ sauddesaṁ anekavihitaṁ pubbenivāsaṁ anussarati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Sandaka, nếu một đệ tử chiếm được ưu thắng đặc thù như vậy dưới một vị Ðạo sư … thành đạt chánh đạo, pháp, và chí thiện.<br>
+<span lang="pi" class="pali">
+Yasmiṁ kho, sandaka, satthari sāvako evarūpaṁ uḷāravisesaṁ adhigacchati tattha viññū puriso sasakkaṁ brahmacariyaṁ vaseyya, vasanto ca ārādheyya ñāyaṁ dhammaṁ kusalaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Với tâm định tĩnh, thanh tịnh, trong sáng, không cấu nhiễm, không phiền não, nhu nhuyễn, dễ sử dụng, vững chắc, bất động như vậy, vị ấy hướng tâm đến trí tuệ về sanh tử của chúng sanh.<br>
+<span lang="pi" class="pali">
+So evaṁ samāhite citte parisuddhe pariyodāte anaṅgaṇe vigatūpakkilese mudubhūte kammaniye ṭhite āneñjappatte sattānaṁ cutūpapātañāṇāya cittaṁ abhininnāmeti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vị ấy với thiên nhãn thuần tịnh, siêu nhân, thấy sự sống và chết của chúng sanh. Vị ấy biết rõ rằng, chúng sanh người hạ liệt kẻ cao sang, người đẹp đẽ kẻ thô xấu, người may mắn kẻ bất hạnh… đều do hạnh nghiệp của họ.<br>
+<span lang="pi" class="pali">
+So dibbena cakkhunā visuddhena atikkantamānusakena satte passati cavamāne upapajjamāne hīne paṇīte suvaṇṇe dubbaṇṇe sugate duggate …pe… yathākammūpage satte pajānāti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Sandaka nếu một đệ tử chứng được ưu thắng đặc thù như vậy dưới một vị Ðạo sư… thành đạt chánh đạo, pháp và chí thiện.<br>
+<span lang="pi" class="pali">
+Yasmiṁ kho, sandaka, satthari sāvako evarūpaṁ uḷāravisesaṁ adhigacchati tattha viññū puriso sasakkaṁ brahmacariyaṁ vaseyya, vasanto ca ārādheyya ñāyaṁ dhammaṁ kusalaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Với tâm định tĩnh thanh tịnh, trong sáng, không cấu nhiễm, không phiền não, nhu nhuyễn, dễ sử dụng, vững chắc, bất động như vậy, vị ấy hướng tâm đến lậu tận trí.<br>
+<span lang="pi" class="pali">
+So evaṁ samāhite citte parisuddhe pariyodāte anaṅgaṇe vigatūpakkilese mudubhūte kammaniye ṭhite āneñjappatte āsavānaṁ khayañāṇāya cittaṁ abhininnāmeti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vị ấy như thật biết: “Ðây là Khổ”…<br>
+<span lang="pi" class="pali">
+So ‘idaṁ dukkhan’ti yathābhūtaṁ pajānāti, ‘ayaṁ dukkhasamudayo’ti yathābhūtaṁ pajānāti, ‘ayaṁ dukkhanirodho’ti yathābhūtaṁ pajānāti, ‘ayaṁ dukkhanirodhagāminī paṭipadā’ti yathābhūtaṁ pajānāti;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+… vị ấy như thật biết: “Ðây là con đường đưa đến lậu hoặc diệt”.<br>
+<span lang="pi" class="pali">
+‘ime āsavā’ti yathābhūtaṁ pajānāti, ‘ayaṁ āsavasamudayo’ti yathābhūtaṁ pajānāti, ‘ayaṁ āsavanirodho’ti yathābhūtaṁ pajānāti, ‘ayaṁ āsavanirodhagāminī paṭipadā’ti yathābhūtaṁ pajānāti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vị ấy do biết vậy, do thấy vậy, tâm được giải thoát khỏi dục lậu, tâm được giải thoát khỏi hữu lậu, tâm được giải thoát khỏi vô minh lậu.<br>
+<span lang="pi" class="pali">
+Tassa evaṁ jānato evaṁ passato kāmāsavāpi cittaṁ vimuccati, bhavāsavāpi cittaṁ vimuccati, avijjāsavāpi cittaṁ vimuccati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ðối với tự thân đã giải thoát như vậy, khởi lên sự hiểu biết: “Ta đã giải thoát”.<br>
+<span lang="pi" class="pali">
+Vimuttasmiṁ vimuttamiti ñāṇaṁ hoti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vị ấy biết: “Sanh đã diệt, Phạm hạnh đã thành, việc cần làm đã làm; sau đời hiện tại, không có đời sống nào khác nữa”.<br>
+<span lang="pi" class="pali">
+‘Khīṇā jāti, vusitaṁ brahmacariyaṁ, kataṁ karaṇīyaṁ, nāparaṁ itthattāyā’ti pajānāti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Sandaka, nếu một đệ tử chứng được ưu thắng đặc thù như vậy dưới một Ðạo sư nào, thời ở đây người có trí có thể tự mình sống Phạm hạnh, và khi sống có thể thành đạt chánh đạo, pháp, và chí thiện.”<br>
+<span lang="pi" class="pali">
+Yasmiṁ kho, sandaka, satthari sāvako evarūpaṁ uḷāravisesaṁ adhigacchati tattha viññū puriso sasakkaṁ brahmacariyaṁ vaseyya, vasanto ca ārādheyya ñāyaṁ dhammaṁ kusalan”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Nhưng, thưa Tôn giả Ānanda, một Tỷ-kheo nào là bậc A-la-hán, các lậu đã tận, tu hành thành mãn, các việc nên làm đã làm, đã đặt gánh nặng xuống, đã thành đạt lý tưởng, đã tận trừ hữu kiết sử, đã giải thoát nhờ chánh trí, vị Tỷ-kheo ấy có thể thọ dụng các dục vọng không?”<br>
+<span lang="pi" class="pali">
+“Yo pana so, bho ānanda, bhikkhu arahaṁ khīṇāsavo vusitavā katakaraṇīyo ohitabhāro anuppattasadattho parikkhīṇabhavasaṁyojano sammadaññā vimutto paribhuñjeyya so kāme”ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Này Sandaka, vị Tỷ-kheo nào là bậc A-la-hán, các lậu đã tận, tu hành thành mãn, các việc nên làm đã làm, đã đặt gánh nặng xuống, đã thành đạt lý tưởng, đã tận trừ hữu kiết sử, đã giải thoát nhờ chánh trí, vị ấy không thể vi phạm năm điều:<br>
+<span lang="pi" class="pali">
+“Yo so, sandaka, bhikkhu arahaṁ khīṇāsavo vusitavā katakaraṇīyo ohitabhāro anuppattasadattho parikkhīṇabhavasaṁyojano sammadaññāvimutto, abhabbo so pañcaṭṭhānāni ajjhācarituṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vị Tỷ-kheo, các lậu đã tận không có thể cố ý sát hại mạng sống chúng sanh; vị Tỷ-kheo các lậu đã tận không có thể lấy của không cho, được gọi là ăn trộm; vị Tỷ-kheo các lậu đã tận không có thể hành dâm dục; vị Tỷ-kheo các lậu đã tận không có thể cố ý nói láo; vị Tỷ-kheo các lậu đã tận không có thể hưởng thọ các dục đối với các vật được tàng trữ như trước khi còn tại gia.<br>
+<span lang="pi" class="pali">
+Abhabbo khīṇāsavo bhikkhu sañcicca pāṇaṁ jīvitā voropetuṁ, abhabbo khīṇāsavo bhikkhu adinnaṁ theyyasaṅkhātaṁ ādātuṁ, abhabbo khīṇāsavo bhikkhu methunaṁ dhammaṁ paṭisevetuṁ, abhabbo khīṇāsavo bhikkhu sampajānamusā bhāsituṁ, abhabbo khīṇāsavo bhikkhu sannidhikārakaṁ kāme paribhuñjituṁ, seyyathāpi pubbe agāriyabhūto.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Sandaka, một vị Tỷ-kheo nào là bậc A-la-hán, các lậu đã tận, tu hành thành mãn, các việc nên làm đã làm, đã đặt gánh nặng xuống, đã thành đạt lý tưởng, đã tận trừ hữu kiết sử, đã giải thoát nhờ chánh trí, vị ấy không có thể vi phạm năm điều này.”<br>
+<span lang="pi" class="pali">
+Yo so, sandaka, bhikkhu arahaṁ khīṇāsavo vusitavā katakaraṇīyo ohitabhāro anuppattasadattho parikkhīṇabhavasaṁyojano sammadaññāvimutto, abhabbo so imāni pañcaṭṭhānāni ajjhācaritun”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Thưa Tôn giả Ānanda, vị Tỷ-kheo nào là bậc A-la-hán, các lậu đã tận, tu hành thành mãn, các việc nên làm đã làm, đã đặt gánh nặng xuống, đã thành đạt lý tưởng, đã tận trừ hữu kiết sử, đã giải thoát nhờ chánh trí, khi vị ấy đi, đứng, ngủ và thức, có phải tri kiến vị ấy được an trú một cách liên tục, không gián đoạn:<br>
+<span lang="pi" class="pali">
+“Yo pana so, bho ānanda, bhikkhu arahaṁ khīṇāsavo vusitavā katakaraṇīyo ohitabhāro anuppattasadattho parikkhīṇabhavasaṁyojano sammadaññāvimutto tassa carato ceva tiṭṭhato ca suttassa ca jāgarassa ca satataṁ samitaṁ ñāṇadassanaṁ paccupaṭṭhitaṁ:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Các lậu hoặc của ta đã được đoạn tận’”?<br>
+<span lang="pi" class="pali">
+‘khīṇā me āsavā’”ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Này Sandaka, tôi sẽ cho Ông một ví dụ,<br>
+<span lang="pi" class="pali">
+“Tena hi, sandaka, upamaṁ te karissāmi;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+nhờ ví dụ ở đây, một số người có trí sẽ biết ý nghĩa câu nói.<br>
+<span lang="pi" class="pali">
+upamāyapidhekacce viññū purisā bhāsitassa atthaṁ ājānanti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ví như, này Sandaka, một người tay chân bị chặt;<br>
+<span lang="pi" class="pali">
+Seyyathāpi, sandaka, purisassa hatthapādā chinnā;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+khi người ấy đi, đứng, ngủ và thức, tay chân bị chặt một cách liên tục, không gián đoạn, và khi người ấy suy tư về vấn đề này, người ấy biết:<br>
+<span lang="pi" class="pali">
+tassa carato ceva tiṭṭhato ca suttassa ca jāgarassa ca satataṁ samitaṁ jānāti: ‘chinnā me hatthapādā’ti, udāhu paccavekkhamāno jānāti:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Tay chân của ta bị chặt”.<br>
+<span lang="pi" class="pali">
+‘chinnā me hatthapādā’”ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Thưa Tôn giả Ānanda, người ấy không biết tay chân bị chặt một cách liên tục, không gián đoạn:<br>
+<span lang="pi" class="pali">
+“Na kho, bho ānanda, so puriso satataṁ samitaṁ jānāti: ‘chinnā me hatthapādā’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+và khi người ấy xem xét về vấn đề này, người ấy biết:<br>
+<span lang="pi" class="pali">
+Api ca kho pana naṁ paccavekkhamāno jānāti:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Tay chân của ta bị chặt”.<br>
+<span lang="pi" class="pali">
+‘chinnā me hatthapādā’”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Cũng vậy, này Sandaka, vị Tỷ-kheo nào là bậc A-la-hán, các lậu đã tận, tu hành thành mãn, các việc nên làm đã làm, đã đặt gánh nặng xuống, đã thành đạt lý tưởng, đã tận trừ hữu kiết sử, đã giải thoát nhờ chánh trí, khi vị ấy đi, đứng, ngủ và thức, ‘các lậu hoặc được đoạn tận’ một cách liên tục, không gián đoạn, và khi vị ấy xem xét về vấn đề này, vị ấy biết:<br>
+<span lang="pi" class="pali">
+“Evameva kho, sandaka, yo so bhikkhu arahaṁ khīṇāsavo vusitavā katakaraṇīyo ohitabhāro anuppattasadattho parikkhīṇabhavasaṁyojano sammadaññāvimutto tassa carato ceva tiṭṭhato ca suttassa ca jāgarassa ca satataṁ samitaṁ ñāṇadassanaṁ na paccupaṭṭhitaṁ: ‘khīṇā me āsavā’ti; api ca kho pana naṁ paccavekkhamāno jānāti:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Các lậu hoặc của ta đã được đoạn tận”.<br>
+<span lang="pi" class="pali">
+‘khīṇā me āsavā’”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Nhưng thưa Tôn giả Ānanda, có bao nhiêu vị lãnh đạo tối thắng trong Pháp và Luật này?”<br>
+<span lang="pi" class="pali">
+“Kīvabahukā pana, bho ānanda, imasmiṁ dhammavinaye niyyātāro”ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Này Sandaka, không phải chỉ có một trăm, hai trăm, ba trăm, bốn trăm, năm trăm, mà còn nhiều vị lãnh đạo tối thắng hơn nữa trong Pháp và Luật này.”<br>
+<span lang="pi" class="pali">
+“Na kho, sandaka, ekaṁyeva sataṁ na dve satāni na tīṇi satāni na cattāri satāni na pañca satāni, atha kho bhiyyova ye imasmiṁ dhammavinaye niyyātāro”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Thật vi diệu thay, Tôn giả Ānanda! Thật hy hữu thay, Tôn giả Ānanda!<br>
+<span lang="pi" class="pali">
+“Acchariyaṁ, bho ānanda, abbhutaṁ, bho ānanda.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Không có sự tự tán thán pháp của mình, không có sự hủy báng pháp của người khác, nhưng cả hai sự thuyết pháp với các hành trì (ayatane) và rất nhiều vị lãnh đạo tối thắng như vậy đã được thấy (ở đây).<br>
+<span lang="pi" class="pali">
+Na ca nāma sadhammokkaṁsanā bhavissati, na paradhammavambhanā, āyatane ca dhammadesanā tāva bahukā ca niyyātāro paññāyissanti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Còn các tà mạn ngoại đạo này là những đứa con của người mẹ không con, họ tự tán thán, khen mình chê người, và họ chỉ có ba vị lãnh đạo tối thắng, tức là:<br>
+<span lang="pi" class="pali">
+Ime panājīvakā puttamatāya puttā attānañceva ukkaṁsenti, pare ca vambhenti tayo ceva niyyātāro paññapenti, seyyathidaṁ—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Nanda Vaccha, Kisa Saṅkicca và Makkhali Gosāla.”<br>
+<span lang="pi" class="pali">
+nandaṁ vacchaṁ, kisaṁ saṅkiccaṁ, makkhaliṁ gosālan”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Rồi du sĩ Sandaka nói với đồ chúng của mình:<br>
+<span lang="pi" class="pali">
+Atha kho sandako paribbājako sakaṁ parisaṁ āmantesi:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Chư Tôn giả, hãy đi và sống Phạm hạnh dưới Sa-môn Gotama,<br>
+<span lang="pi" class="pali">
+“carantu bhonto samaṇe gotame brahmacariyavāso.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+tuy rằng nay không có dễ gì cho chúng ta từ bỏ quyền lợi, tôn kính và danh tiếng.”<br>
+<span lang="pi" class="pali">
+Na dāni sukaraṁ amhehi lābhasakkārasiloke pariccajitun”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Như vậy, du sĩ Sandaka đã đưa đồ chúng của mình sống Phạm hạnh dưới Sa-môn Gotama.<br>
+<span lang="pi" class="pali">
+Iti hidaṁ sandako paribbājako sakaṁ parisaṁ uyyojesi bhagavati brahmacariyeti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+<span lang="pi" class="vi">
+Sandakasuttaṁ niṭṭhitaṁ chaṭṭhaṁ.<br>
+</span>
+</p>
+
+
+
+<!-- COPY CONTENT SUTTA Ở ĐÂY -->
+
+
+
+<br>
+<p><p style="text-align: right;font-style: italic;">Hoà Thượng Thích Minh Châu dịch Việt</span></p>
+
+
+
+
+
+
+
+
+</section>  <!-- End English and Pali -->
+<div id="nextprev"><a id="previous-sutta" href="./mn75.html#content"></a><a id="next-sutta" href="./mn77.html#content"></a></div>
+</div>  <!--End Content -->
+</div>  <!-- End Page -->
+
+
+
+
+
+
+<footer>
+					 <!-- End bottom links -->
+</footer>
+
+
+ 
+ <!-- Scripts -->
+
+ <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      if (typeof enablePaliLookup === "function") {
+        enablePaliLookup();
+      } else {
+        console.error("enablePaliLookup is not defined");
+      }
+    });
+  </script>
+
+ <script>
+ // Script to open and close sidebar
+ 	function w3_open() {
+ 	document.getElementById("mySidebar").style.display = "block";
+ 	}
+ 		function w3_close() {
+ 		document.getElementById("mySidebar").style.display = "none";
+ 	}
+ </script>
+ <script>
+ 		var app = document.getElementsByTagName("BODY")[0];
+ 		if (localStorage.lightMode == "dark") {
+ 			app.setAttribute("light-mode", "dark");
+ 	}
+ </script>
+ 
+ <script>
+ 		function toggle_light_mode() {
+ 			var app = document.getElementsByTagName("BODY")[0];
+ 				if (localStorage.lightMode == "dark") {
+ 			localStorage.lightMode = "light";
+ 			app.setAttribute("light-mode", "light");
+ 		} else {
+ 					localStorage.lightMode = "dark";
+ 					app.setAttribute("light-mode", "dark");
+ 	}
+ 		}
+ 
+ 		window.addEventListener("storage", function () {
+ 			if (localStorage.lightMode == "dark") {
+ 				app.setAttribute("light-mode", "dark");
+ 				} else {
+ 				app.setAttribute("light-mode", "light");
+ 		}
+ 		}, false);
+ 
+ </script>
+ <script src="../js/footer.js"></script><script src="../js/dpd_deconstructor.js"></script><script src="../js/dpd_ebts.js"></script><script src="../js/dpd_i2h.js"></script>
+ <script src="/sw.js"></script>
+ </body>
+ </html>

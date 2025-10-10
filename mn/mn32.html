@@ -1,0 +1,1309 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+ 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+ 	<link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+ 	<meta name="viewport" content="width=device-width, initial-scale=1">
+		<!-- Loading manifest -->
+	<link rel="manifest" href="../manifest.json">
+ 	<!-- Loading main and menu stylesheets -->
+ 	<link rel="stylesheet" href="../css/w3.css">
+ 	<link rel="stylesheet" href="../css/css.css">
+ 	<link rel="stylesheet" href="../css/menu.css">
+ 	<script src="../js/jquery-1.10.2.min.js"></script>
+ 	<script src="../js/controlpanel.js"></script>
+ 	<script src="../js/mousetrap.min.js"></script>
+    <script src="../js/pali-lookup-standalone.js"></script>
+
+ <script src="../js/suttaFiles.js"></script>
+<script>
+ // Script to open random Sutta
+ function openRandomSutta() {
+  const randomIndex = Math.floor(Math.random() * suttaFiles.length);
+  const selectedFile = suttaFiles[randomIndex];
+
+  // Get root path of your site 
+  const currentPath = location.pathname;
+  const rootPath = currentPath.split("/").slice(0, -2).join("/") + "/";
+
+  // Redirect to the correct file
+  window.location.href = rootPath + selectedFile;
+}
+</script>
+
+
+</head>
+ <body class="container">
+ <div class="header-background">
+ <!-- Header -->
+ <div class="w3-header w3-content w3-padding w3-left-align bwcontainer">
+ 	<div class="centered">
+ 		<button class="light-mode-button" aria-label="Bật Chế Độ Sáng" onclick="toggle_light_mode()">
+ 			<span></span>
+ 			<span></span>
+ 		</button>
+ 		<span class="box-lbl">Sáng/Tối</span>
+ 	</div> <!-- Centered -->
+ 		<a href="../home/index.html" id="bwlogo"><img src="../images/headerlogo.png" alt="Logo Lời Của Đức Phật" class="w3-image"></a>
+ 		<div class="w3-bar bwcontainer">
+ 			<div id="searchlinks">
+ 			<a href="../home/visearch.html"><span class="w3-bar-item"><i class="fa fa-search"></i>&nbsp;Tìm Tiếng Việt</span></a>
+ 			<a href="../home/palisearch.html"><span class="w3-bar-item"><i class="fa fa-search"></i>&nbsp;Tìm Tiếng Pali</span></a>
+ 			</div><!-- End Searchlinks div -->
+ 			<div class="help"><span><a href="../home/help.html"><img src="../images/help_icon.png" title="Trợ Giúp" alt="Help"></a></span></div>
+ 		</div> <!-- End w3-bar bwcontainer --> 	</div> <!-- End w3-header w3-content w3-padding w3-left-align bwcontainer -->
+ </div> <!-- End header-background -->
+ <!-- Top menu -->
+
+ <div class="w3-main w3-white bwcontainer2">
+ 	<div class="w3-button w3-padding-8 w3-left w3-hide-large" onclick="w3_open()">☰</div>
+ 		<div id="navbar" class="w3-hide-small w3-hide-medium bwcontainer3">
+ 			<ul id="css3menu0">
+ 				<li class="topfirst" id="home"><a href="../home/index.html" class="w3-hide-small">Trang Chủ</a></li>
+  				<li class="topmenu" id="dn"><a href="../dn/dn.html" class="pressed w3-hide-small">Trường Bộ Kinh</a></li>
+ 				<li class="topmenu" id="mn"><a href="../mn/mn.html" class="w3-hide-small">Trung Bộ Kinh</a></li>
+ 				<li class="topmenu" id="sn"><a href="../sn/sn.html" class="w3-hide-small"><i class="fa fa-caret-down"></i>&nbsp;Tương Ưng Bộ Kinh</a>
+ 					<ul>
+ 						<li><a href="../sn/sn01.html" class="w3-hide-small">Tập I - Thiên Có Kệ</a></li>
+ 						<li><a href="../sn/sn02.html" class="w3-hide-small">Tập II - Thiên Nhân Duyên</a></li>
+ 						<li><a href="../sn/sn03.html" class="w3-hide-small">Tập III - Thiên Uẩn</a></li>
+ 						<li><a href="../sn/sn04.html" class="w3-hide-small">Tập IV - Thiên Sáu Xứ</a></li>
+ 						<li><a href="../sn/sn05.html" class="w3-hide-small">Tập V - Thiên Ðại Phẩm</a></li>
+ 					</ul>
+ 				<li class="topmenu" id="an"><a href="../an/an.html" class="w3-hide-small"><i class="fa fa-caret-down"></i>&nbsp;Tăng Chi Bộ Kinh</a>
+ 					<ul>
+ 						<li><a href="../an/an1.html" class="w3-hide-small">Chương Một Pháp</a></li>
+ 						<li><a href="../an/an2.html" class="w3-hide-small">Chương Hai Pháp</a></li>
+ 						<li><a href="../an/an3.html" class="w3-hide-small">Chương Ba Pháp</a></li>
+ 						<li><a href="../an/an4.html" class="w3-hide-small">Chương Bốn Pháp</a></li>
+ 						<li><a href="../an/an5.html" class="w3-hide-small">Chương Năm Pháp</a></li>
+ 						<li><a href="../an/an6.html" class="w3-hide-small">Chương Sáu Pháp</a></li>
+ 						<li><a href="../an/an7.html" class="w3-hide-small">Chương Bảy Pháp</a></li>
+ 						<li><a href="../an/an8.html" class="w3-hide-small">Chương Tám Pháp</a></li>
+ 						<li><a href="../an/an9.html" class="w3-hide-small">Chương Chín Pháp</a></li>
+ 						<li><a href="../an/an10.html" class="w3-hide-small">Chương Mười Pháp</a></li>
+ 						<li><a href="../an/an11.html" class="w3-hide-small">Chương Mười Một Pháp</a></li>
+ 					</ul>
+ 				</li>
+ 				<li class="topmenu" id="kn"><a href="../kn/kn.html" class="w3-hide-small"><i class="fa fa-caret-down"></i>&nbsp;Tiểu Bộ Kinh</a>
+ 					<ul>
+ 						<li><a href="../kp/kp.html" class="w3-hide-small">Kinh Tiểu Tụng</a></li>
+ 						<li><a href="../dhp/dhp.html" class="w3-hide-small">Kinh Pháp Cú</a></li>
+ 						<li><a href="../snp/snp.html" class="w3-hide-small">Kinh Tập</a></li>
+ 						<li><a href="../ud/ud.html" class="w3-hide-small">Kinh Phật Tự Thuyết</a></li>
+ 						<li><a href="../it/it.html" class="w3-hide-small">Kinh Phật Thuyết Như Vậy</a></li>
+ 						<li><a href="../tha/tha.html" class="w3-hide-small">Trưởng Lão Tăng Kệ</a></li>
+ 						<li><a href="../thi/thi.html" class="w3-hide-small">Trưởng Lão Ni Kệ</a></li>
+ 					</ul>
+ 				</li>
+				<li class="toplast" id="rd"><a href="../rd/rd.html" class="w3-hide-small"></i>Kinh Ngẫu Nhiên Theo Nhóm</a>
+ 					</ul>
+ 				</li>
+ 			</ul>
+ 			</div>
+ 		</div> <!--navbar-->
+
+<!-- Sidebar (hidden by default) -->
+ <nav class="w3-sidebar w3-bar-block w3-card w3-border w3-top w3-animate-left w3-hide-large" id="mySidebar">
+ 	<a href="javascript:void(0)" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-times fa-2x red-color"></i>&nbsp;&nbsp;&nbsp;Close</a><!-- Hides the sidebar when clicked -->
+ 		<div class="w3-bar-block w3-white">
+ 			<a href="../home/index.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-home fa-lg"></i>&nbsp;&nbsp;&nbsp;Home</a>
+ 			<a href="../guide/guide.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Guide</a>
+ 			<a href="../dn/dn.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Trường Bộ Kinh</a>
+ 			<a href="../mn/mn.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Trung Bộ Kinh</a>
+ 			<a href="../sn/sn.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Tương Ưng Bộ Kinh</a>
+ 			<a href="../an/an.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Tăng Chi Bộ Kinh
+ 			<a href="../kn/kn.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Tiểu Bộ Kinh</a>
+			<a href="../rd/rd.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>Kinh Ngẫu Nhiên Theo Nhóm</a>
+ 		</div>
+ </nav>
+ 
+ 
+ 
+   <!-- !PAGE CONTENT! --> 
+<div class="w3-main w3-content w3-padding w3-left-align bwcontainer4">
+<div id="content">
+<h2>Majjhima Nikāya - Trung Bộ Kinh</h2>
+<h5><span style="font-style: italic;">Hoà Thượng Thích Minh Châu dịch Việt</span></h5>
+
+</div>
+
+<br>
+ 	<title>        Trung Bộ 32          </title>
+
+<p lang="vi" class="vi"; style="text-align: center">
+Trung Bộ 32<br>
+<span lang="pi" class="pali">
+Majjhima Nikāya 32<br>
+</span>
+</p>
+
+<p lang="vi" class="vi"; style="text-align: center">
+Đại Kinh Rừng Sừng Bò<br>
+<span lang="pi" class="pali">
+Mahāgosiṅgasutta<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Như vầy tôi nghe.<br>
+<span lang="pi" class="pali">
+Evaṁ me sutaṁ—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Một thời Thế Tôn ở tại khu vườn trong rừng Gosiṅga có nhiều cây ta-la cùng với một số đông Thượng Tọa đệ tử nổi tiếng như Tôn giả Sāriputta (Xá-lợi-phất) Tôn giả Mahāmoggallāna (Ðại Mục-kiền-liên), Tôn giả Mahākassapa (Ðại Ca-diếp), Tôn giả Anuruddha (A-na-luật-đà), Tôn giả Revata (Ly-bà-đa), Tôn giả Ānanda (A-nan) cùng với một số Thượng Tọa đệ tử nổi tiếng khác.<br>
+<span lang="pi" class="pali">
+ekaṁ samayaṁ bhagavā gosiṅgasālavanadāye viharati sambahulehi abhiññātehi abhiññātehi therehi sāvakehi saddhiṁ—āyasmatā ca sāriputtena āyasmatā ca mahāmoggallānena āyasmatā ca mahākassapena āyasmatā ca anuruddhena āyasmatā ca revatena āyasmatā ca ānandena, aññehi ca abhiññātehi abhiññātehi therehi sāvakehi saddhiṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Rồi Tôn giả Mahāmoggallāna vào buổi chiều, sau khi tham thiền đứng dậy, đi đến chỗ Tôn giả Mahākassapa ở, sau khi đến bèn nói với Tôn giả Mahākassapa:<br>
+<span lang="pi" class="pali">
+Atha kho āyasmā mahāmoggallāno sāyanhasamayaṁ paṭisallānā vuṭṭhito yenāyasmā mahākassapo tenupasaṅkami; upasaṅkamitvā āyasmantaṁ mahākassapaṁ etadavoca:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Hiền giả Kassapa, chúng ta hãy đến chỗ Tôn giả Sāriputta để nghe pháp.”<br>
+<span lang="pi" class="pali">
+“āyāmāvuso, kassapa, yenāyasmā sāriputto tenupasaṅkamissāma dhammassavanāyā”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Thưa vâng, Hiền giả,” Tôn giả Mahākassapa vâng đáp Tôn giả Mahāmoggallāna.<br>
+<span lang="pi" class="pali">
+“Evamāvuso”ti kho āyasmā mahākassapo āyasmato mahāmoggallānassa paccassosi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Rồi Tôn giả Mahāmoggallāna, Tôn giả Mahākassapa và Tôn giả Anuruddha đi đến chỗ Tôn giả Sāriputta để nghe pháp.<br>
+<span lang="pi" class="pali">
+Atha kho āyasmā ca mahāmoggallāno āyasmā ca mahākassapo āyasmā ca anuruddho yenāyasmā sāriputto tenupasaṅkamiṁsu dhammassavanāya.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Tôn giả Ānanda thấy Tôn giả Mahāmoggallāna, Tôn giả Mahākassapa và Tôn giả Anuruddha đi đến chỗ Tôn giả Sāriputta để nghe pháp,<br>
+<span lang="pi" class="pali">
+Addasā kho āyasmā ānando āyasmantañca mahāmoggallānaṁ āyasmantañca mahākassapaṁ āyasmantañca anuruddhaṁ yenāyasmā sāriputto tenupasaṅkamante dhammassavanāya.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+sau khi thấy vậy liền đi đến chỗ Tôn giả Revata và nói với Tôn giả Revata:<br>
+<span lang="pi" class="pali">
+Disvāna yenāyasmā revato tenupasaṅkami; upasaṅkamitvā āyasmantaṁ revataṁ etadavoca:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Hiền giả Revata, các bậc Thượng nhân như vậy đã đến chỗ Tôn giả Sāriputta để nghe pháp. Này Hiền giả Revata, chúng ta hãy đi đến chỗ Tôn giả Sāriputta để nghe pháp.<br>
+<span lang="pi" class="pali">
+“upasaṅkamantā kho amū, āvuso revata, sappurisā yenāyasmā sāriputto tena dhammassavanāya.<br>
+Āyāmāvuso revata, yenāyasmā sāriputto tenupasaṅkamissāma dhammassavanāyā”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Thưa vâng, Hiền giả. Tôn giả Revata vâng đáp Tôn giả Ānanda.<br>
+<span lang="pi" class="pali">
+“Evamāvuso”ti kho āyasmā revato āyasmato ānandassa paccassosi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Rồi Tôn giả Revata và Tôn giả Ānanda đi đến chỗ Tôn giả Sāriputta để nghe pháp.<br>
+<span lang="pi" class="pali">
+Atha kho āyasmā ca revato āyasmā ca ānando yenāyasmā sāriputto tenupasaṅkamiṁsu dhammassavanāya.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Tôn giả Sāriputta thấy Tôn giả Revata, Tôn giả Ānanda từ xa đi đến,<br>
+<span lang="pi" class="pali">
+Addasā kho āyasmā sāriputto āyasmantañca revataṁ āyasmantañca ānandaṁ dūratova āgacchante.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+sau khi thấy bèn nói với Tôn giả Ānanda:<br>
+<span lang="pi" class="pali">
+Disvāna āyasmantaṁ ānandaṁ etadavoca:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Tôn giả Ānanda hãy đến đây,<br>
+<span lang="pi" class="pali">
+“etu kho āyasmā ānando.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+thiện lai, Tôn giả Ānanda, vị thị giả Thế Tôn, vị hầu cận Thế Tôn.<br>
+<span lang="pi" class="pali">
+Svāgataṁ āyasmato ānandassa bhagavato upaṭṭhākassa bhagavato santikāvacarassa.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Hiền giả Ānanda, khả ái thay khu rừng Gosiṅga! Ðêm rằm sáng trăng, cây Ta-la trổ hoa cùng khắp, hương trời như được tỏa rộng khắp nơi.<br>
+<span lang="pi" class="pali">
+Ramaṇīyaṁ, āvuso ānanda, gosiṅgasālavanaṁ, dosinā ratti, sabbaphāliphullā sālā, dibbā, maññe, gandhā sampavanti;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Hiền giả Ānanda, hạng Tỷ-kheo nào có thể làm chói sáng khu rừng Gosiṅga?”<br>
+<span lang="pi" class="pali">
+kathaṁrūpena, āvuso ānanda, bhikkhunā gosiṅgasālavanaṁ sobheyyā”ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Ở đây, này Hiền giả Sāriputta, Tỷ-kheo nghe nhiều, gìn giữ điều đã nghe, tích tụ điều đã nghe. Những pháp sơ thiện, trung thiện, hậu thiện, văn nghĩa cụ túc, nói lên phạm hạnh hoàn toàn thanh tịnh, những pháp ấy được vị ấy nghe nhiều và gìn giữ kỹ, được lập lại lớn tiếng, được ý tư duy, được tri kiến khéo quán sát;<br>
+<span lang="pi" class="pali">
+“Idhāvuso sāriputta, bhikkhu bahussuto hoti sutadharo sutasannicayo. Ye te dhammā ādikalyāṇā majjhekalyāṇā pariyosānakalyāṇā sātthā sabyañjanā; kevalaparipuṇṇaṁ parisuddhaṁ brahmacariyaṁ abhivadanti, tathārūpāssa dhammā bahussutā honti, dhātā, vacasā paricitā, manasānupekkhitā, diṭṭhiyā suppaṭividdhā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+vị ấy thuyết pháp cho bốn hội chúng với văn cú viên dung, lưu loát, với mục đích đoạn trừ mọi tùy miên.<br>
+<span lang="pi" class="pali">
+So catassannaṁ parisānaṁ dhammaṁ deseti parimaṇḍalehi padabyañjanehi anuppabandhehi anusayasamugghātāya.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Hiền giả Sāriputta, hạng Tỷ-kheo này có thể làm sáng chói khu rừng Gosiṅga.”<br>
+<span lang="pi" class="pali">
+Evarūpena kho, āvuso sāriputta, bhikkhunā gosiṅgasālavanaṁ sobheyyā”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Khi nghe nói vậy, Tôn giả Sāriputta nói với Tôn giả Revata:<br>
+<span lang="pi" class="pali">
+Evaṁ vutte, āyasmā sāriputto āyasmantaṁ revataṁ etadavoca:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Này Hiền giả Revata, Tôn giả Ānanda đã trả lời theo sự giải thích của mình.<br>
+<span lang="pi" class="pali">
+“byākataṁ kho, āvuso revata, āyasmatā ānandena yathāsakaṁ paṭibhānaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ở đây, nay chúng tôi hỏi Tôn giả Revata:<br>
+<span lang="pi" class="pali">
+Tattha dāni mayaṁ āyasmantaṁ revataṁ pucchāma:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Hiền giả Revata, khả ái thay ngôi rừng Gosiṅga, đêm rằm sáng trăng, cây Ta-la trổ hoa cùng khắp, hương trời như được tỏa rộng khắp nơi. Này Hiền giả Revata, hạng Tỷ-kheo nào làm sáng chói khu rừng Gosiṅga?<br>
+<span lang="pi" class="pali">
+‘ramaṇīyaṁ, āvuso revata, gosiṅgasālavanaṁ, dosinā ratti, sabbaphāliphullā sālā, dibbā, maññe, gandhā sampavanti; kathaṁrūpena, āvuso revata, bhikkhunā gosiṅgasālavanaṁ sobheyyā’”ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Ở đây, này Hiền giả Sāriputta, Tỷ-kheo ưa thích đời sống tịnh cư, vui thú đời sống tịnh cư, nội tâm tu pháp, tịnh chỉ, không gián đoạn thiền định, thành tựu quán hạnh, luôn luôn lui tới các chỗ không tịch.<br>
+<span lang="pi" class="pali">
+“Idhāvuso sāriputta, bhikkhu paṭisallānārāmo hoti paṭisallānarato, ajjhattaṁ cetosamathamanuyutto anirākatajjhāno, vipassanāya samannāgato, brūhetā suññāgārānaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Hiền giả Sāriputta, hạng Tỷ-kheo này có thể làm sáng chói khu rừng Gosiṅga.”<br>
+<span lang="pi" class="pali">
+Evarūpena kho, āvuso sāriputta, bhikkhunā gosiṅgasālavanaṁ sobheyyā”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Khi nghe nói vậy, Tôn giả Sāriputta nói với Tôn giả Anuruddha:<br>
+<span lang="pi" class="pali">
+Evaṁ vutte, āyasmā sāriputto āyasmantaṁ anuruddhaṁ etadavoca:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Này Hiền giả Anuruddha, Tôn giả Revata đã trả lời theo sự giải thích của mình.<br>
+<span lang="pi" class="pali">
+“byākataṁ kho, āvuso anuruddha, āyasmatā revatena yathāsakaṁ paṭibhānaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ở đây, nay chúng tôi hỏi Tôn giả Anuruddha:<br>
+<span lang="pi" class="pali">
+Tattha dāni mayaṁ āyasmantaṁ anuruddhaṁ pucchāma:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Hiền giả Anuruddha, khả ái thay ngôi rừng Gosiṅga, đêm rằm sáng trăng, cây Ta-la trổ hoa cùng khắp, hương trời như được tỏa rộng khắp nơi. Này Hiền giả Anuruddha, hạng Tỷ-kheo nào làm sáng chói khu rừng Gosiṅga?<br>
+<span lang="pi" class="pali">
+‘ramaṇīyaṁ, āvuso anuruddha, gosiṅgasālavanaṁ, dosinā ratti, sabbaphāliphullā sālā, dibbā, maññe, gandhā sampavanti; kathaṁrūpena, āvuso anuruddha, bhikkhunā gosiṅgasālavanaṁ sobheyyā’”ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Ở đây, này Hiền giả Sāriputta, Tỷ-kheo, với thiên nhãn thanh tịnh, siêu nhiên, quán sát ngàn thế giới.<br>
+<span lang="pi" class="pali">
+“Idhāvuso sāriputta, bhikkhu dibbena cakkhunā visuddhena atikkantamānusakena sahassaṁ lokānaṁ voloketi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Hiền giả Sāriputta, ví như một người có mắt lên trên đỉnh một ngôi lầu tốt đẹp, quán sát một ngàn đường vòng xung quanh.<br>
+<span lang="pi" class="pali">
+Seyyathāpi, āvuso sāriputta, cakkhumā puriso uparipāsādavaragato sahassaṁ nemimaṇḍalānaṁ volokeyya;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Cũng vậy, này Hiền giả Sāriputta, Tỷ-kheo, với thiên nhãn thanh tịnh, siêu nhiên, quán sát ngàn thế giới.<br>
+<span lang="pi" class="pali">
+evameva kho, āvuso sāriputta, bhikkhu dibbena cakkhunā visuddhena atikkantamānusakena sahassaṁ lokānaṁ voloketi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Hiền giả Sāriputta, hạng Tỷ-kheo như vậy có thể làm sáng chói khu rừng Gosiṅga.”<br>
+<span lang="pi" class="pali">
+Evarūpena kho, āvuso sāriputta, bhikkhunā gosiṅgasālavanaṁ sobheyyā”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Khi nghe nói vậy, Tôn giả Sāriputta nói với Tôn giả Mahākassapa:<br>
+<span lang="pi" class="pali">
+Evaṁ vutte, āyasmā sāriputto āyasmantaṁ mahākassapaṁ etadavoca:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Này Hiền giả Kassapa, Tôn giả Anuruddha đã trả lời theo sự giải thích của mình.<br>
+<span lang="pi" class="pali">
+“byākataṁ kho, āvuso kassapa, āyasmatā anuruddhena yathāsakaṁ paṭibhānaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ở đây, nay chúng tôi hỏi Tôn giả Kassapa: ”<br>
+<span lang="pi" class="pali">
+Tattha dāni mayaṁ āyasmantaṁ mahākassapaṁ pucchāma:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Hiền giả Kassapa, khả ái thay ngôi rừng Gosiṅga! Ðêm rằm sáng trăng, cây Ta-la trổ hoa cùng khắp, hương trời như được tỏa rộng khắp nơi. Này Hiền giả Kassapa, hạng Tỷ-kheo nào làm sáng chói khu rừng Gosiṅga?<br>
+<span lang="pi" class="pali">
+‘ramaṇīyaṁ, āvuso kassapa, gosiṅgasālavanaṁ, dosinā ratti, sabbaphāliphullā sālā, dibbā, maññe, gandhā sampavanti; kathaṁrūpena, āvuso kassapa, bhikkhunā gosiṅgasālavanaṁ sobheyyā’”ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Ở đây, này Hiền giả Sāriputta, Tỷ-kheo, tự mình sống ở rừng núi và tán thán đời sống ở rừng núi, tự mình sống khất thực, và tán thán đời sống khất thực, tự mình mặc y phấn tảo và tán thán hạnh mặc y phấn tảo, tự mình sống với ba y và tán thán hạnh ba y, tự mình sống thiểu dục và tán thán hạnh thiểu dục, tự mình sống biết đủ và tán thán hạnh biết đủ, tự mình sống độc cư và tán thán hạnh sống độc cư, tự mình sống không nhiễm thế tục và tán thán hạnh không nhiễm thế tục, tự mình tinh cần, tinh tấn và tán thán hạn tinh cần, tinh tấn, tự mình thành tựu giới hạnh và tán thán sự thành tựu giới hạnh, tự mình thành tựu Thiền định và tán thán sự thành tựu thiền định, tự mình thành tựu trí tuệ và tán thán sự thành tựu trí tuệ, tự mình thành tựu giải thoát và tán thán sự thành tựu giải thoát, tự mình thành tựu giải thoát tri kiến và tán thán sự thành tựu giải thoát tri kiến.<br>
+<span lang="pi" class="pali">
+“Idhāvuso sāriputta, bhikkhu attanā ca āraññiko hoti āraññikattassa ca vaṇṇavādī, attanā ca piṇḍapātiko hoti piṇḍapātikattassa ca vaṇṇavādī, attanā ca paṁsukūliko hoti paṁsukūlikattassa ca vaṇṇavādī, attanā ca tecīvariko hoti tecīvarikattassa ca vaṇṇavādī, attanā ca appiccho hoti appicchatāya ca vaṇṇavādī, attanā ca santuṭṭho hoti santuṭṭhiyā ca vaṇṇavādī, attanā ca pavivitto hoti pavivekassa ca vaṇṇavādī, attanā ca asaṁsaṭṭho hoti asaṁsaggassa ca vaṇṇavādī, attanā ca āraddhavīriyo hoti vīriyārambhassa ca vaṇṇavādī, attanā ca sīlasampanno hoti sīlasampadāya ca vaṇṇavādī, attanā ca samādhisampanno hoti samādhisampadāya ca vaṇṇavādī, attanā ca paññāsampanno hoti paññāsampadāya ca vaṇṇavādī, attanā ca vimuttisampanno hoti vimuttisampadāya ca vaṇṇavādī, attanā ca vimuttiñāṇadassanasampanno hoti vimuttiñāṇadassanasampadāya ca vaṇṇavādī.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Hiền giả Sāriputta, hạng Tỷ-kheo như vậy có thể làm sáng chói khu rừng Gosiṅga.”<br>
+<span lang="pi" class="pali">
+Evarūpena kho, āvuso sāriputta, bhikkhunā gosiṅgasālavanaṁ sobheyyā”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Khi nghe nói vậy, Tôn giả Sāriputta nói Tôn giả Mahāmoggallāna:<br>
+<span lang="pi" class="pali">
+Evaṁ vutte, āyasmā sāriputto āyasmantaṁ mahāmoggallānaṁ etadavoca:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Hiền giả Moggallāna, Tôn giả Mahākassapa đã trả lời theo sự giải thích của mình.<br>
+<span lang="pi" class="pali">
+“byākataṁ kho, āvuso moggallāna, āyasmatā mahākassapena yathāsakaṁ paṭibhānaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ở đây, nay chúng tôi hỏi Tôn giả MahaMoggallāna:”<br>
+<span lang="pi" class="pali">
+Tattha dāni mayaṁ āyasmantaṁ mahāmoggallānaṁ pucchāma:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Hiền giả Moggallāna, khả ái thay khu rừng Gosiṅga! Ðêm rằm sáng trăng, cây Ta-la trổ hoa cùng khắp, hương trời như được tỏa rộng khắp nơi. Này Hiền giả Moggallāna, hạng Tỷ-kheo nào có thể làm sáng chói khu rừng Gosiṅga?<br>
+<span lang="pi" class="pali">
+‘ramaṇīyaṁ, āvuso moggallāna, gosiṅgasālavanaṁ, dosinā ratti, sabbaphāliphullā sālā, dibbā, maññe, gandhā sampavanti; kathaṁrūpena, āvuso moggallāna, bhikkhunā gosiṅgasālavanaṁ sobheyyā’”ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Ở đây, này Hiền giả Sāriputta, hai Tỷ-kheo đàm luận về Abhidhamma (A-tỳ-đàm). Các vị ấy hỏi nhau câu hỏi, và khi được hỏi, các vị trả lời được với nhau chớ không dừng lại vì không trả lời được, và cuộc đàm luận về pháp được tiếp tục.<br>
+<span lang="pi" class="pali">
+“Idhāvuso sāriputta, dve bhikkhū abhidhammakathaṁ kathenti, te aññamaññaṁ pañhaṁ pucchanti, aññamaññassa pañhaṁ puṭṭhā vissajjenti, no ca saṁsādenti, dhammī ca nesaṁ kathā pavattinī hoti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Hiền giả Sāriputta, hạng Tỷ-kheo như vậy có thể làm sáng chói khu rừng Gosiṅga?”<br>
+<span lang="pi" class="pali">
+Evarūpena kho, āvuso sāriputta, bhikkhunā gosiṅgasālavanaṁ sobheyyā”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Rồi Tôn giả MahaMoggallāna nói với Tôn giả Sāriputta:<br>
+<span lang="pi" class="pali">
+Atha kho āyasmā mahāmoggallāno āyasmantaṁ sāriputtaṁ etadavoca:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Hiền giả Sāriputta, chúng tôi đã trả lời theo sự giải thích của chúng tôi.<br>
+<span lang="pi" class="pali">
+“byākataṁ kho, āvuso sāriputta, amhehi sabbeheva yathāsakaṁ paṭibhānaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ở đây, nay chúng tôi hỏi Tôn giả Sāriputta:<br>
+<span lang="pi" class="pali">
+Tattha dāni mayaṁ āyasmantaṁ sāriputtaṁ pucchāma:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Hiền giả Sāriputta, khả ái thay, khu rừng Gosiṅga! Ðêm rằm sáng trăng, cây Ta-la trổ hoa cùng khắp, hương trời như được tỏa rộng khắp nơi.<br>
+<span lang="pi" class="pali">
+‘ramaṇīyaṁ, āvuso sāriputta, gosiṅgasālavanaṁ, dosinā ratti, sabbaphāliphullā sālā, dibbā, maññe, gandhā sampavanti;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Hiền giả Sāriputta, hạng Tỷ-kheo nào có thể làm sáng chói khu rừng Gosiṅga?”<br>
+<span lang="pi" class="pali">
+kathaṁrūpena, āvuso sāriputta, bhikkhunā gosiṅgasālavanaṁ sobheyyā’”ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Ở đây, này Hiền giả Moggallāna, Tỷ-kheo điều phục được tâm, không phải Tỷ-kheo không điều phục được tâm.<br>
+<span lang="pi" class="pali">
+“Idhāvuso moggallāna, bhikkhu cittaṁ vasaṁ vatteti, no ca bhikkhu cittassa vasena vattati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+An trú quả nào vị ấy muốn an trú vào buổi sáng, vị ấy an trú quả ấy vào buổi sáng;<br>
+<span lang="pi" class="pali">
+So yāya vihārasamāpattiyā ākaṅkhati pubbaṇhasamayaṁ viharituṁ, tāya vihārasamāpattiyā pubbaṇhasamayaṁ viharati;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+an trú quả nào vị ấy muốn an trú vào buổi trưa, vị ấy an trú quả ấy buổi trưa;<br>
+<span lang="pi" class="pali">
+yāya vihārasamāpattiyā ākaṅkhati majjhanhikasamayaṁ viharituṁ, tāya vihārasamāpattiyā majjhanhikasamayaṁ viharati;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+an trú quả nào vị ấy muốn an trú vào buổi chiều, vị ấy an trú quả ấy vào buổi chiều.<br>
+<span lang="pi" class="pali">
+yāya vihārasamāpattiyā ākaṅkhati sāyanhasamayaṁ viharituṁ, tāya vihārasamāpattiyā sāyanhasamayaṁ viharati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Hiền giả Moggallāna, ví như một vị vua hay vị đại thần của vua có một tủ áo đựng đầy những áo có nhiều màu sắc khác nhau.<br>
+<span lang="pi" class="pali">
+Seyyathāpi, āvuso moggallāna, rañño vā rājamahāmattassa vā nānārattānaṁ dussānaṁ dussakaraṇḍako pūro assa.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Cặp áo nào nhà vua muốn mặc vào buổi sáng, nhà vua mặc cặp áo ấy vào buổi sáng;<br>
+<span lang="pi" class="pali">
+So yaññadeva dussayugaṁ ākaṅkheyya pubbaṇhasamayaṁ pārupituṁ, taṁ tadeva dussayugaṁ pubbaṇhasamayaṁ pārupeyya;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+cặp áo nào nhà vua muốn mặc vào buổi trưa, nhà vua mặc cặp áo ấy vào buổi trưa;<br>
+<span lang="pi" class="pali">
+yaññadeva dussayugaṁ ākaṅkheyya majjhanhikasamayaṁ pārupituṁ, taṁ tadeva dussayugaṁ majjhanhikasamayaṁ pārupeyya;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+cặp áo nào nhà vua muốn mặc vào buổi chiều, nhà vua mặc cặp áo ấy vào buổi chiều.<br>
+<span lang="pi" class="pali">
+yaññadeva dussayugaṁ ākaṅkheyya sāyanhasamayaṁ pārupituṁ, taṁ tadeva dussayugaṁ sāyanhasamayaṁ pārupeyya.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Cũng vậy, này Hiền giả Moggallāna, Tỷ-kheo điều phục được tâm, không phải Tỷ-kheo không điều phục được tâm.<br>
+<span lang="pi" class="pali">
+Evameva kho, āvuso moggallāna, bhikkhu cittaṁ vasaṁ vatteti, no ca bhikkhu cittassa vasena vattati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+An trú quả nào Tỷ-kheo ấy muốn an trú vào buổi sáng, vị ấy an trú quả ấy vào buổi sáng;<br>
+<span lang="pi" class="pali">
+So yāya vihārasamāpattiyā ākaṅkhati pubbaṇhasamayaṁ viharituṁ, tāya vihārasamāpattiyā pubbaṇhasamayaṁ viharati;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+an trú quả nào Tỷ-kheo ấy muốn an trú vào buổi trưa, vị ấy an trú quả ấy vào buổi trưa;<br>
+<span lang="pi" class="pali">
+yāya vihārasamāpattiyā ākaṅkhati majjhanhikasamayaṁ viharituṁ, tāya vihārasamāpattiyā majjhanhikasamayaṁ viharati;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+an trú quả nào vị Tỷ-kheo ấy muốn an trú vào buổi chiều, vị ấy an trú quả ấy vào buổi chiều.<br>
+<span lang="pi" class="pali">
+yāya vihārasamāpattiyā ākaṅkhati sāyanhasamayaṁ viharituṁ, tāya vihārasamāpattiyā sāyanhasamayaṁ viharati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Hiền giả Moggallāna, hạng Tỷ-kheo như vậy có thể làm sáng chói khu rừng Gosiṅga.”<br>
+<span lang="pi" class="pali">
+Evarūpena kho, āvuso moggallāna, bhikkhunā gosiṅgasālavanaṁ sobheyyā”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Rồi Tôn giả Sāriputta nói với các Tôn giả ấy:<br>
+<span lang="pi" class="pali">
+Atha kho āyasmā sāriputto te āyasmante etadavoca:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Này chư Hiền, chúng ta đã trả lời theo sự giải thích của chúng ta.<br>
+<span lang="pi" class="pali">
+“byākataṁ kho, āvuso, amhehi sabbeheva yathāsakaṁ paṭibhānaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Chư Hiền, chúng ta hãy đi đến chỗ Thế Tôn ở và thuật lại vấn đề này cho Thế Tôn rõ.<br>
+<span lang="pi" class="pali">
+Āyāmāvuso, yena bhagavā tenupasaṅkamissāma; upasaṅkamitvā etamatthaṁ bhagavato ārocessāma.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Thế Tôn trả lời chúng ta như thế nào, chúng ta sẽ như vậy thọ trì.”<br>
+<span lang="pi" class="pali">
+Yathā no bhagavā byākarissati tathā naṁ dhāressāmā”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Thưa vâng, Hiền giả,” Các Tôn giả ấy vâng đáp Tôn giả Sāriputta.<br>
+<span lang="pi" class="pali">
+“Evamāvuso”ti kho te āyasmanto āyasmato sāriputtassa paccassosuṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Rồi những Tôn giả ấy đi đến chỗ Thế Tôn ở, sau khi đến, đảnh lễ Thế Tôn và ngồi xuống một bên. Sau khi ngồi xuống một bên, Tôn giả Sāriputta bạch Thế Tôn:<br>
+<span lang="pi" class="pali">
+Atha kho te āyasmanto yena bhagavā tenupasaṅkamiṁsu; upasaṅkamitvā bhagavantaṁ abhivādetvā ekamantaṁ nisīdiṁsu. Ekamantaṁ nisinno kho āyasmā sāriputto bhagavantaṁ etadavoca:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ở đây, bạch Thế Tôn, Tôn giả Revata và Tôn giả Ānanda đến tại chỗ con ở để nghe pháp. Bạch Thế Tôn, con thấy Tôn giả Revata và Tôn giả Ānanda từ xa đi đến; “idha, bhante, āyasmā ca revato āyasmā ca ānando yenāhaṁ tenupasaṅkamiṁsu dhammassavanāya.<br>
+<span lang="pi" class="pali">
+Addasaṁ kho ahaṁ, bhante, āyasmantañca revataṁ āyasmantañca ānandaṁ dūratova āgacchante.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+thấy vậy, con nói với Tôn giả Ānanda:<br>
+<span lang="pi" class="pali">
+Disvāna āyasmantaṁ ānandaṁ etadavocaṁ:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Tôn giả Ānanda, hãy đến đây,<br>
+<span lang="pi" class="pali">
+‘etu kho āyasmā ānando.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+thiện lai Tôn giả Ānanda, vị thị giả Thế Tôn, vị hầu cận Thế Tôn.<br>
+<span lang="pi" class="pali">
+Svāgataṁ āyasmato ānandassa bhagavato upaṭṭhākassa bhagavato santikāvacarassa.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Này Hiền giả Ānanda, khả ái thay khu rừng Gosiṅga! Ðếm rằm sáng trăng, cây ta-la trổ hoa cùng khắp, hương trời như được tỏa rộng khắp nơi.<br>
+<span lang="pi" class="pali">
+Ramaṇīyaṁ, āvuso ānanda, gosiṅgasālavanaṁ, dosinā ratti, sabbaphāliphullā sālā, dibbā, maññe, gandhā sampavanti;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Hiền giả Ānanda, hạng Tỷ-kheo nào có thể làm sáng chói khu rừng Gosiṅga?’<br>
+<span lang="pi" class="pali">
+kathaṁrūpena, āvuso ānanda, bhikkhunā gosiṅgasālavanaṁ sobheyyā’ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Bạch Thế Tôn, được hỏi vậy, Tôn giả Ānanda trả lời với con như sau:<br>
+<span lang="pi" class="pali">
+Evaṁ vutte, bhante, āyasmā ānando maṁ etadavoca:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Ở đây, Hiền giả Sāriputta, Tỷ-kheo nghe nhiều, gìn giữ điều đã nghe, tích tụ điều đã nghe. Những pháp sơ thiện, trung thiện, hậu thiện, văn nghĩa cụ túc, nói lên phạm hạnh hoàn toàn thanh tịnh, những pháp ấy được vị ấy nghe nhiều và giữ gìn kỹ, được lập lại lớn tiếng, được ý tư duy, được tri kiến khéo quán sát. Vị ấy thuyết pháp cho bốn hội chúng với văn cú viên dung, lưu loát, với mục đích đoạn trừ mọi tùy miên.<br>
+<span lang="pi" class="pali">
+‘idhāvuso, sāriputta, bhikkhu bahussuto hoti sutadharo …pe… anusayasamugghātāya.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Hiền giả Sāriputta, hạng Tỷ-kheo này có thể làm sáng chói khu rừng Gosiṅga.’<br>
+<span lang="pi" class="pali">
+Evarūpena kho, āvuso sāriputta, bhikkhunā gosiṅgasālavanaṁ sobheyyā’”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Lành thay, lành thay, Sāriputta!<br>
+<span lang="pi" class="pali">
+“Sādhu sādhu, sāriputta.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Nếu trả lời cho được chơn chánh, Ānanda phải trả lời như vậy.<br>
+<span lang="pi" class="pali">
+Yathā taṁ ānandova sammā byākaramāno byākareyya.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Sāriputta, Ānanda là bậc đa văn, gìn giữ điều đã nghe, tích tụ điều đã nghe. Những pháp sơ thiện, trung thiện, hậu thiện, văn nghĩa cụ túc, nói lên phạm hạnh hoàn toàn thanh tịnh, những pháp ấy được vị ấy nghe nhiều và gìn giữ kỹ, được lập lại lớn tiếng, được ý tư duy, được tri kiến khéo quán sát.<br>
+<span lang="pi" class="pali">
+Ānando hi, sāriputta, bahussuto sutadharo sutasannicayo. Ye te dhammā ādikalyāṇā majjhekalyāṇā pariyosānakalyāṇā sātthā sabyañjanā; kevalaparipuṇṇaṁ parisuddhaṁ brahmacariyaṁ abhivadanti, tathārūpāssa dhammā bahussutā honti, dhātā, vacasā paricitā, manasānupekkhitā, diṭṭhiyā suppaṭividdhā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vị ấy thuyết pháp cho bốn hội chúng, với văn cú viên dung lưu loát, với mục đích đoạn trừ mọi tùy miên.”<br>
+<span lang="pi" class="pali">
+So catassannaṁ parisānaṁ dhammaṁ deseti parimaṇḍalehi padabyañjanehi anuppabandhehi anusayasamugghātāyā”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Bạch Thế Tôn khi nghe nói vậy, con nói với Tôn giả Revata:<br>
+<span lang="pi" class="pali">
+“Evaṁ vutte, ahaṁ, bhante, āyasmantaṁ revataṁ etadavocaṁ:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Hiền giả Revata, Tôn giả Ānanda, đã trả lời theo sự giải thích của mình.<br>
+<span lang="pi" class="pali">
+‘byākataṁ kho, āvuso revata, āyasmatā ānandena yathāsakaṁ paṭibhānaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ở đây, nay chúng tôi hỏi Tôn giả Revata:<br>
+<span lang="pi" class="pali">
+Tattha dāni mayaṁ āyasmantaṁ revataṁ pucchāma—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Hiền giả Revata, khả ái thay ngôi rừng Gosiṅga… (như trên)…<br>
+<span lang="pi" class="pali">
+ramaṇīyaṁ, āvuso revata, gosiṅgasālavanaṁ, dosinā ratti, sabbaphāliphullā sālā, dibbā maññe gandhā sampavanti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Hiền giả Revata, hạng Tỷ-kheo nào có thể làm sáng chói khu rừng Gosiṅga.’<br>
+<span lang="pi" class="pali">
+Kathaṁrūpena, āvuso revata, bhikkhunā gosiṅgasālavanaṁ sobheyyā’ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Bạch Thế Tôn khi nghe nói vậy, con nói với Tôn giả Revata:<br>
+<span lang="pi" class="pali">
+Evaṁ vutte, bhante, āyasmā revato maṁ etadavoca:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Ở đây, này Hiền giả Sāriputta, Tỷ-kheo ưa thích đời sống tịnh cư, vui thú đời sống tịnh cư, nội tâm tu tập tịnh chỉ, không gián đoạn thiền định, thành tựu quán hạnh, luôn luôn lui tới các chỗ không tịch.<br>
+<span lang="pi" class="pali">
+‘idhāvuso sāriputta, bhikkhu paṭisallānārāmo hoti paṭisallānarato, ajjhattaṁ cetosamathamanuyutto, anirākatajjhāno, vipassanāya samannāgato, brūhetā suññāgārānaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Hiền giả Sāriputta, hạng Tỷ-kheo này có thể làm sáng chói khu rừng Gosiṅga.’”<br>
+<span lang="pi" class="pali">
+Evarūpena kho, āvuso sāriputta, bhikkhunā gosiṅgasālavanaṁ sobheyyā’”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Lành thay, lành thay, Sāriputta!<br>
+<span lang="pi" class="pali">
+“Sādhu sādhu, sāriputta.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Nếu trả lời cho được chơn chánh, Revata phải trả lời như vậy.<br>
+<span lang="pi" class="pali">
+Yathā taṁ revatova sammā byākaramāno byākareyya.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Sāriputta, Revata ưa thích đời sống tịnh cư, vui thú đời sống tịnh cư, nội tâm tu tập tịnh chỉ, không gián đoạn thiền định, thành tựu quán hạnh, luôn luôn lui tới các chỗ không tịch.”<br>
+<span lang="pi" class="pali">
+Revato hi, sāriputta, paṭisallānārāmo paṭisallānarato, ajjhattaṁ cetosamathamanuyutto anirākatajjhāno, vipassanāya samannāgato brūhetā suññāgārānan”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Bạch Thế Tôn, khi được nói vậy, con nói với Tôn giả Anuruddha như sau:<br>
+<span lang="pi" class="pali">
+“Evaṁ vutte, ahaṁ, bhante, āyasmantaṁ anuruddhaṁ etadavocaṁ:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Hiền giả Anuruddha, Tôn giả Revata đã trả lời theo sự giải thích của mình. …Này Hiền giả Anuruddha, hạng Tỷ-kheo nào làm sáng chói khu rừng Gosiṅga?’<br>
+<span lang="pi" class="pali">
+‘byākataṁ kho, āvuso anuruddha, āyasmatā revatena …pe… kathaṁrūpena, āvuso anuruddha, bhikkhunā gosiṅgasālavanaṁ sobheyyā’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Bạch Thế Tôn, được nói vậy, Tôn giả Anuruddha nói với con:<br>
+<span lang="pi" class="pali">
+Evaṁ vutte, bhante, āyasmā anuruddho maṁ etadavoca:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Này Hiền giả Sāriputta, ở đây, Tỷ-kheo với thiên nhãn thanh tịnh siêu nhiên, quán sát ngàn thế giới. Này Hiền giả Sāriputta, ví như một người có mắt, lên trên đỉnh một ngôi lầu tốt đẹp rồi quán sát một ngàn đường vòng xung quanh.<br>
+<span lang="pi" class="pali">
+‘idhāvuso sāriputta, bhikkhu dibbena cakkhunā visuddhena atikkantamānusakena sahassaṁ lokānaṁ voloketi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Cũng vậy, này Hiền giả Sāriputta, Tỷ-Kheo với thiên nhãn thanh tịnh siêu nhiên quán sát ngàn thế giới.<br>
+<span lang="pi" class="pali">
+Seyyathāpi, āvuso sāriputta, cakkhumā puriso …pe…<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Hiền giả Sāriputta, hạng Tỷ-kheo như vậy có thể làm sáng chói khu rừng Gosiṅga.’”<br>
+<span lang="pi" class="pali">
+evarūpena kho, āvuso sāriputta, bhikkhunā gosiṅgasālavanaṁ sobheyyā’”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Lành thay, lành thay, Sāriputta! Nếu trả lời cho được chơn chánh, Anuruddha phải trả lời như vậy.<br>
+<span lang="pi" class="pali">
+“Sādhu sādhu, sāriputta, yathā taṁ anuruddhova sammā byākaramāno byākareyya.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Sāriputta, chính Anuruddha với thiên nhãn thanh tịnh siêu nhiên quán sát ngàn thế giới.”<br>
+<span lang="pi" class="pali">
+Anuruddho hi, sāriputta, dibbena cakkhunā visuddhena atikkantamānusakena sahassaṁ lokānaṁ voloketī”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Bạch Thế Tôn, được nói vậy, con nói với Tôn giả Mahākassapa:<br>
+<span lang="pi" class="pali">
+“Evaṁ vutte, ahaṁ, bhante, āyasmantaṁ mahākassapaṁ etadavocaṁ:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Hiền giả Kassapa, Tôn giả Anuruddha đã trả lời theo sự giải thích của mình. Ở đây, nay chúng tôi hỏi Tôn giả Kassapa: Khả ái thay ngôi rừng Gosiṅga!… (như trên)…<br>
+<span lang="pi" class="pali">
+‘byākataṁ kho, āvuso kassapa, āyasmatā anuruddhena yathāsakaṁ paṭibhānaṁ. Tattha dāni mayaṁ āyasmantaṁ mahākassapaṁ pucchāma …pe…<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Hiền giả Kassapa, hạng Tỷ-kheo nào làm sáng chói khu rừng Gosiṅga?’<br>
+<span lang="pi" class="pali">
+kathaṁrūpena kho, āvuso kassapa, bhikkhunā gosiṅgasālavanaṁ sobheyyā’ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Bạch Thế Tôn, được nói vậy, Tôn giả Mahakassapa nói với con:<br>
+<span lang="pi" class="pali">
+Evaṁ vutte, bhante, āyasmā mahākassapo maṁ etadavoca:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ở đây, này Hiền giả Sāriputta, Tỷ-kheo tự mình sống ở rừng núi và tán thán đời sống ở rừng núi, tự mình sống khất thực và tán thán đời sống khất thực, tự mình mặc y phấn tảo và tán thán hạnh mặc y phấn tảo, tự mình sống với ba y và tán thán hạnh ba y, tự mình sống thiểu dục và tán thán hạnh thiểu dục, tự mình sống biết đủ và tán thán hạnh biết đủ, tự mình sống độc cư và tán thán hạnh độc cư, tự mình sống không nhiễm thế tục và tán thán hạnh không nhiễm thế tục, tự mình tinh cần, tinh tấn và tán thán hạnh tinh cần, tinh tấn, tự mình thành tựu giới hạnh và tán thán sự thành tựu giới hạnh, tự mình thành tựu thiền định và tán thán sự thành tựu thiền định, tự mình thành tựu trí tuệ và tán thán sự thành tựu trí tuệ, tự mình giải thoát và tán thán sự thành tựu giải thoát, tự mình thành tựu giải thoát tri kiến và tán thán sự thành tựu giải thoát tri kiến.<br>
+<span lang="pi" class="pali">
+‘idhāvuso sāriputta, bhikkhu attanā ca āraññiko hoti āraññikattassa ca vaṇṇavādī, attanā ca piṇḍapātiko hoti …pe… attanā ca paṁsukūliko hoti …pe… attanā ca tecīvariko hoti …pe… attanā ca appiccho hoti …pe… attanā ca santuṭṭho hoti …pe… attanā ca pavivitto hoti …pe… attanā ca asaṁsaṭṭho hoti …pe… attanā ca āraddhavīriyo hoti …pe… attanā ca sīlasampanno hoti …pe… attanā ca samādhisampanno hoti …pe… attanā ca paññāsampanno hoti … attanā ca vimuttisampanno hoti … attanā ca vimuttiñāṇadassanasampanno hoti vimuttiñāṇadassanasampadāya ca vaṇṇavādī.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Hiền giả Sāriputta, hạng Tỷ-kheo ấy có thể làm sáng chói khu rừng Gosiṅga’”<br>
+<span lang="pi" class="pali">
+Evarūpena kho, āvuso sāriputta, bhikkhunā gosiṅgasālavanaṁ sobheyyā’”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Lành thay Sāriputta! Nếu trả lời cho được chân chánh, Kassapa phải trả lời như vậy.<br>
+<span lang="pi" class="pali">
+“Sādhu sādhu, sāriputta. Yathā taṁ kassapova sammā byākaramāno byākareyya.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Sāriputta, Kassapa tự mình sống ở rừng núi và tán thán đời sống ở rừng núi … tự mình thành tựu giải thoát tri kiến và tán thán sự thành tựu giải thoát tri kiến.”<br>
+<span lang="pi" class="pali">
+Kassapo hi, sāriputta, attanā ca āraññiko āraññikattassa ca vaṇṇavādī, attanā ca piṇḍapātiko piṇḍapātikattassa ca vaṇṇavādī, attanā ca paṁsukūliko paṁsukūlikattassa ca vaṇṇavādī, attanā ca tecīvariko tecīvarikattassa ca vaṇṇavādī, attanā ca appiccho appicchatāya ca vaṇṇavādī, attanā ca santuṭṭho santuṭṭhiyā ca vaṇṇavādī, attanā ca pavivitto pavivekassa ca vaṇṇavādī, attanā ca asaṁsaṭṭho asaṁsaggassa ca vaṇṇavādī, attanā ca āraddhavīriyo vīriyārambhassa ca vaṇṇavādī, attanā ca sīlasampanno sīlasampadāya ca vaṇṇavādī, attanā ca samādhisampanno samādhisampadāya ca vaṇṇavādī, attanā ca paññāsampanno paññāsampadāya ca vaṇṇavādī, attanā ca vimuttisampanno vimuttisampadāya ca vaṇṇavādī, attanā ca vimuttiñāṇadassanasampanno vimuttiñāṇadassanasampadāya ca vaṇṇavādī”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Bạch Thế Tôn, được nói vậy, con nói với Tôn giả Mahāmoggallāna:<br>
+<span lang="pi" class="pali">
+“Evaṁ vutte, ahaṁ bhante āyasmantaṁ mahāmoggallānaṁ etadavocaṁ:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Hiền giả Moggallāna, Tôn giả Mahākassapa đã trả lời theo sự giải thích của mình. Ở đây, nay chúng tôi hỏi Tôn giả Mahāmoggallāna: Này Hiền giả Moggallāna, khả ái thay khu rưng Gosiṅga!…<br>
+<span lang="pi" class="pali">
+‘byākataṁ kho, āvuso moggallāna, āyasmatā mahākassapena yathāsakaṁ paṭibhānaṁ. Tattha dāni mayaṁ āyasmantaṁ mahāmoggallānaṁ pucchāma …pe…<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Hiền giả Moggallāna, hạng Tỷ-kheo nào có thể làm sáng chói khu rừng Gosiṅga?’<br>
+<span lang="pi" class="pali">
+kathaṁrūpena, āvuso moggallāna, bhikkhunā gosiṅgasālavanaṁ sobheyyā’ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Bạch Thế Tôn, được nói vậy, Tôn giả Mahāmoggallāna nói với con:<br>
+<span lang="pi" class="pali">
+Evaṁ vutte, bhante, āyasmā mahāmoggallāno maṁ etadavoca:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Ở đây, này Hiền giả Sāriputta, hai Tỷ-kheo đàm luận về Abhidhamma (A-tỳ-đàm). Họ hỏi nhau câu hỏi, và khi được hỏi, họ trả lời được với nhau, chớ không dừng lại vì không trả lời được, và cuộc đàm luận về pháp của họ được tiếp tục.<br>
+<span lang="pi" class="pali">
+‘idhāvuso sāriputta, dve bhikkhū abhidhammakathaṁ kathenti. Te aññamaññaṁ pañhaṁ pucchanti, aññamaññassa pañhaṁ puṭṭhā vissajjenti, no ca saṁsādenti, dhammī ca nesaṁ kathā pavattinī hoti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Hiền giả Sāriputta, hạng Tỷ-kheo như vậy có thể làm sáng chói khu rừng Gosiṅga.’”<br>
+<span lang="pi" class="pali">
+Evarūpena kho, āvuso sāriputta, bhikkhunā gosiṅgasālavanaṁ sobheyyā’”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Lành thay Sāriputta! Nếu trả lời cho được chơn chánh, Moggallāna phải trả lời như vậy.<br>
+<span lang="pi" class="pali">
+“Sādhu sādhu, sāriputta, yathā taṁ moggallānova sammā byākaramāno byākareyya.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Sāriputta, Moggallāna là bậc thuyết về Chánh pháp.”<br>
+<span lang="pi" class="pali">
+Moggallāno hi, sāriputta, dhammakathiko”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ðược nói vậy, Tôn giả Mahāmoggallāna bạch Thế Tôn:<br>
+<span lang="pi" class="pali">
+Evaṁ vutte, āyasmā mahāmoggallāno bhagavantaṁ etadavoca:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Bạch Thế Tôn, con nói với Tôn giả Sāriputta, như sau:<br>
+<span lang="pi" class="pali">
+“atha khvāhaṁ, bhante, āyasmantaṁ sāriputtaṁ etadavocaṁ:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Hiền giả Sāriputta, chúng tôi đã trả lời theo sự giải thích của chúng tôi.<br>
+<span lang="pi" class="pali">
+‘byākataṁ kho, āvuso sāriputta, amhehi sabbeheva yathāsakaṁ paṭibhānaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ở đây, nay chúng tôi hỏi Tôn giả Sāriputta:<br>
+<span lang="pi" class="pali">
+Tattha dāni mayaṁ āyasmantaṁ sāriputtaṁ pucchāma—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Hiền giả Sāriputta, khả ái thay khu rừng Gosiṅga! Ðêm rằm sáng trăng, cây ta-la trổ hoa cùng khắp, hương trời như tỏa rộng khắp nơi.<br>
+<span lang="pi" class="pali">
+ramaṇīyaṁ, āvuso sāriputta, gosiṅgasālavanaṁ, dosinā ratti, sabbaphāliphullā sālā, dibbā, maññe, gandhā sampavanti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Hiền giả Sāriputta, hạng Tỷ-kheo nào có thể làm sáng chói khu rừng Gosiṅga?’<br>
+<span lang="pi" class="pali">
+Kathaṁrūpena, āvuso sāriputta, bhikkhunā gosiṅgasālavanaṁ sobheyyā’ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Bạch Thế Tôn, được nói vậy, Tôn giả Sāriputta nói với con:<br>
+<span lang="pi" class="pali">
+Evaṁ vutte, bhante, āyasmā sāriputto maṁ etadavoca:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Ở đây, này Hiền giả Moggallāna, Tỷ-kheo điều phục được tâm, không phải Tỷ-kheo không điều phục được tâm.<br>
+<span lang="pi" class="pali">
+‘idhāvuso moggallāna, bhikkhu cittaṁ vasaṁ vatteti no ca bhikkhu cittassa vasena vattati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+An trú quả nào vị ấy muốn an trú vào buổi sáng, vị ấy an trú quả ấy vào buổi sáng;<br>
+<span lang="pi" class="pali">
+So yāya vihārasamāpattiyā ākaṅkhati pubbaṇhasamayaṁ viharituṁ, tāya vihārasamāpattiyā pubbaṇhasamayaṁ viharati;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+an trú quả nào vị ấy an trú vào buổi trưa, vị ấy an trú quả ấy vào buổi trưa;<br>
+<span lang="pi" class="pali">
+yāya vihārasamāpattiyā ākaṅkhati majjhanhikasamayaṁ viharituṁ, tāya vihārasamāpattiyā majjhanhikasamayaṁ viharati;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+an trú quả nào vị ấy muốn an trú vào buổi chiều, vị ấy an trú quả ấy vào buổi chiều.<br>
+<span lang="pi" class="pali">
+yāya vihārasamāpattiyā ākaṅkhati sāyanhasamayaṁ viharituṁ, tāya vihārasamāpattiyā sāyanhasamayaṁ viharati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Hiền giả Moggallāna, ví như một vị vua hay vị đại thần của vua có một tủ áo đựng đầy những áo có nhiều màu sắc khác nhau.<br>
+<span lang="pi" class="pali">
+Seyyathāpi, āvuso moggallāna, rañño vā rājamahāmattassa vā nānārattānaṁ dussānaṁ dussakaraṇḍako pūro assa.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Cặp áo nào nhà vua muốn mặc vào buổi sáng, nhà vua mặc cặp áo ấy vào buổi sáng;<br>
+<span lang="pi" class="pali">
+So yaññadeva dussayugaṁ ākaṅkheyya pubbaṇhasamayaṁ pārupituṁ, taṁ tadeva dussayugaṁ pubbaṇhasamayaṁ pārupeyya;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+cặp áo nào nhà vua muốn mặc vào buổi trưa, nhà vua mặc cặp áo ấy vào buổi trưa;<br>
+<span lang="pi" class="pali">
+yaññadeva dussayugaṁ ākaṅkheyya majjhanhikasamayaṁ pārupituṁ, taṁ tadeva dussayugaṁ majjhanhikasamayaṁ pārupeyya;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+cặp áo nào nhà vua muốn mặc vào buổi chiều, nhà vua mặc cặp áo ấy vào buổi chiều.<br>
+<span lang="pi" class="pali">
+yaññadeva dussayugaṁ ākaṅkheyya sāyanhasamayaṁ pārupituṁ, taṁ tadeva dussayugaṁ sāyanhasamayaṁ pārupeyya.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Cũng vậy, này Hiền giả Moggallāna, Tỷ-kheo điều phục được tâm, không phải Tỷ-kheo không điều phục được tâm.<br>
+<span lang="pi" class="pali">
+Evameva kho, āvuso moggallāna, bhikkhu cittaṁ vasaṁ vatteti, no ca bhikkhu cittassa vasena vattati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+An trú quả nào Tỷ-kheo ấy muốn an trú vào buổi sáng, Tỷ-kheo ấy an trú quả ấy vào buổi sáng;<br>
+<span lang="pi" class="pali">
+So yāya vihārasamāpattiyā ākaṅkhati pubbaṇhasamayaṁ viharituṁ, tāya vihārasamāpattiyā pubbaṇhasamayaṁ viharati;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+an trú quả nào vị ấy muốn an trú vào buổi trưa, vị ấy an trú quả ấy vào buổi trưa;<br>
+<span lang="pi" class="pali">
+yāya vihārasamāpattiyā ākaṅkhati majjhanhikasamayaṁ viharituṁ, tāya vihārasamāpattiyā majjhanhikasamayaṁ viharati;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+an trú quả nào vị ấy muốn an trú vào buổi chiều, vị ấy an trú quả ấy vào buổi chiều.<br>
+<span lang="pi" class="pali">
+yāya vihārasamāpattiyā ākaṅkhati sāyanhasamayaṁ viharituṁ, tāya vihārasamāpattiyā sāyanhasamayaṁ viharati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Hiền giả Moggallāna, hạng Tỷ-kheo như vậy có thể làm sáng chói khu rừng Gosiṅga?’”<br>
+<span lang="pi" class="pali">
+Evarūpena kho, āvuso moggallāna, bhikkhunā gosiṅgasālavanaṁ sobheyyā’”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Lành thay, lành thay, Moggallāna!<br>
+<span lang="pi" class="pali">
+“Sādhu sādhu, moggallāna.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Nếu trả lời cho được chơn chánh, Sāriputta phải trả lời như vậy.<br>
+<span lang="pi" class="pali">
+Yathā taṁ sāriputtova sammā byākaramāno byākareyya.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Moggallāna, Sāriputta điều phục được tâm, không phải Sāriputta không điều phục được tâm.<br>
+<span lang="pi" class="pali">
+Sāriputto hi, moggallāna, cittaṁ vasaṁ vatteti no ca sāriputto cittassa vasena vattati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+An trú quả nào vị ấy muốn an trú vào buổi sáng, vị ấy an trú quả ấy vào buổi sáng;<br>
+<span lang="pi" class="pali">
+So yāya vihārasamāpattiyā ākaṅkhati pubbaṇhasamayaṁ viharituṁ, tāya vihārasamāpattiyā pubbaṇhasamayaṁ viharati;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+an trú quả nào vị ấy muốn an trú vào buổi trưa, vị ấy an trú quả ấy vào buổi trưa;<br>
+<span lang="pi" class="pali">
+yāya vihārasamāpattiyā ākaṅkhati majjhanhikasamayaṁ viharituṁ, tāya vihārasamāpattiyā majjhanhikasamayaṁ viharati;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+an trú quả nào vị ấy muốn an trú vào buổi chiều, vị ấy an trú quả ấy vào buổi chiều.”<br>
+<span lang="pi" class="pali">
+yāya vihārasamāpattiyā ākaṅkhati sāyanhasamayaṁ viharituṁ, tāya vihārasamāpattiyā sāyanhasamayaṁ viharatī”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Khi được nói vậy, Tôn giả Sāriputta bạch Thế Tôn:<br>
+<span lang="pi" class="pali">
+Evaṁ vutte, āyasmā sāriputto bhagavantaṁ etadavoca:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Bạch Thế Tôn, vị nào đã khéo trả lời (câu hỏi được đặt ra)?”<br>
+<span lang="pi" class="pali">
+“kassa nu kho, bhante, subhāsitan”ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Này Sāriputta, tất cả đều lần lượt khéo trả lời.<br>
+<span lang="pi" class="pali">
+“Sabbesaṁ vo, sāriputta, subhāsitaṁ pariyāyena.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Và này các Ông hãy nghe Ta nói hạng Tỷ-kheo nào có thể làm sáng chói khu rừng Gosiṅga?<br>
+<span lang="pi" class="pali">
+Api ca mamapi suṇātha yathārūpena bhikkhunā gosiṅgasālavanaṁ sobheyya.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ở đây, này Sāriputta, Tỷ-kheo, sau buổi ăn, sau khi đi khất thực về, ngồi kiết-già, lưng thẳng, đặt niệm trước mặt, và nghĩ rằng:<br>
+<span lang="pi" class="pali">
+Idha, sāriputta, bhikkhu pacchābhattaṁ piṇḍapātapaṭikkanto nisīdati pallaṅkaṁ ābhujitvā ujuṁ kāyaṁ paṇidhāya parimukhaṁ satiṁ upaṭṭhapetvā:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Ta sẽ không bỏ ngồi kiết-già này cho đến khi tâm của ta được khéo giải thoát các lậu hoặc, không có chấp thủ”.<br>
+<span lang="pi" class="pali">
+‘na tāvāhaṁ imaṁ pallaṅkaṁ bhindissāmi yāva me nānupādāya āsavehi cittaṁ vimuccissatī’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Sāriputta, hạng Tỷ-kheo như vậy có thể làm sáng chói khu rừng Gosiṅga.”<br>
+<span lang="pi" class="pali">
+Evarūpena kho, sāriputta, bhikkhunā gosiṅgasālavanaṁ sobheyyā”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Thế Tôn thuyết giảng như vậy.<br>
+<span lang="pi" class="pali">
+Idamavoca bhagavā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Các Tôn giả ấy hoan hỷ, tín thọ lời Thế Tôn dạy.<br>
+<span lang="pi" class="pali">
+Attamanā te āyasmanto bhagavato bhāsitaṁ abhinandunti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+<span lang="pi" class="vi">
+Mahāgosiṅgasuttaṁ niṭṭhitaṁ dutiyaṁ.<br>
+</span>
+</p>
+
+
+<!-- COPY CONTENT SUTTA Ở ĐÂY -->
+
+
+
+<br>
+<p><p style="text-align: right;font-style: italic;">Hoà Thượng Thích Minh Châu dịch Việt</span></p>
+
+
+
+
+
+
+
+
+</section>  <!-- End English and Pali -->
+<div id="nextprev"><a id="previous-sutta" href="./mn31.html#content"></a><a id="next-sutta" href="./mn33.html#content"></a></div>
+</div>  <!--End Content -->
+</div>  <!-- End Page -->
+
+
+
+
+
+
+<footer>
+					 <!-- End bottom links -->
+</footer>
+
+
+ 
+ <!-- Scripts -->
+
+ <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      if (typeof enablePaliLookup === "function") {
+        enablePaliLookup();
+      } else {
+        console.error("enablePaliLookup is not defined");
+      }
+    });
+  </script>
+
+ <script>
+ // Script to open and close sidebar
+ 	function w3_open() {
+ 	document.getElementById("mySidebar").style.display = "block";
+ 	}
+ 		function w3_close() {
+ 		document.getElementById("mySidebar").style.display = "none";
+ 	}
+ </script>
+ <script>
+ 		var app = document.getElementsByTagName("BODY")[0];
+ 		if (localStorage.lightMode == "dark") {
+ 			app.setAttribute("light-mode", "dark");
+ 	}
+ </script>
+ 
+ <script>
+ 		function toggle_light_mode() {
+ 			var app = document.getElementsByTagName("BODY")[0];
+ 				if (localStorage.lightMode == "dark") {
+ 			localStorage.lightMode = "light";
+ 			app.setAttribute("light-mode", "light");
+ 		} else {
+ 					localStorage.lightMode = "dark";
+ 					app.setAttribute("light-mode", "dark");
+ 	}
+ 		}
+ 
+ 		window.addEventListener("storage", function () {
+ 			if (localStorage.lightMode == "dark") {
+ 				app.setAttribute("light-mode", "dark");
+ 				} else {
+ 				app.setAttribute("light-mode", "light");
+ 		}
+ 		}, false);
+ 
+ </script>
+ <script src="../js/footer.js"></script><script src="../js/dpd_deconstructor.js"></script><script src="../js/dpd_ebts.js"></script><script src="../js/dpd_i2h.js"></script>
+ <script src="/sw.js"></script>
+ </body>
+ </html>

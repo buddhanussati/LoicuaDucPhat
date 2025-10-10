@@ -1,0 +1,1399 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+ 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+ 	<link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+ 	<meta name="viewport" content="width=device-width, initial-scale=1">
+		<!-- Loading manifest -->
+	<link rel="manifest" href="../manifest.json">
+ 	<!-- Loading main and menu stylesheets -->
+ 	<link rel="stylesheet" href="../css/w3.css">
+ 	<link rel="stylesheet" href="../css/css.css">
+ 	<link rel="stylesheet" href="../css/menu.css">
+ 	<script src="../js/jquery-1.10.2.min.js"></script>
+ 	<script src="../js/controlpanel.js"></script>
+ 	<script src="../js/mousetrap.min.js"></script>
+    <script src="../js/pali-lookup-standalone.js"></script>
+
+ <script src="../js/suttaFiles.js"></script>
+<script>
+ // Script to open random Sutta
+ function openRandomSutta() {
+  const randomIndex = Math.floor(Math.random() * suttaFiles.length);
+  const selectedFile = suttaFiles[randomIndex];
+
+  // Get root path of your site 
+  const currentPath = location.pathname;
+  const rootPath = currentPath.split("/").slice(0, -2).join("/") + "/";
+
+  // Redirect to the correct file
+  window.location.href = rootPath + selectedFile;
+}
+</script>
+
+
+</head>
+ <body class="container">
+ <div class="header-background">
+ <!-- Header -->
+ <div class="w3-header w3-content w3-padding w3-left-align bwcontainer">
+ 	<div class="centered">
+ 		<button class="light-mode-button" aria-label="Bật Chế Độ Sáng" onclick="toggle_light_mode()">
+ 			<span></span>
+ 			<span></span>
+ 		</button>
+ 		<span class="box-lbl">Sáng/Tối</span>
+ 	</div> <!-- Centered -->
+ 		<a href="../home/index.html" id="bwlogo"><img src="../images/headerlogo.png" alt="Logo Lời Của Đức Phật" class="w3-image"></a>
+ 		<div class="w3-bar bwcontainer">
+ 			<div id="searchlinks">
+ 			<a href="../home/visearch.html"><span class="w3-bar-item"><i class="fa fa-search"></i>&nbsp;Tìm Tiếng Việt</span></a>
+ 			<a href="../home/palisearch.html"><span class="w3-bar-item"><i class="fa fa-search"></i>&nbsp;Tìm Tiếng Pali</span></a>
+ 			</div><!-- End Searchlinks div -->
+ 			<div class="help"><span><a href="../home/help.html"><img src="../images/help_icon.png" title="Trợ Giúp" alt="Help"></a></span></div>
+ 		</div> <!-- End w3-bar bwcontainer --> 	</div> <!-- End w3-header w3-content w3-padding w3-left-align bwcontainer -->
+ </div> <!-- End header-background -->
+ <!-- Top menu -->
+
+ <div class="w3-main w3-white bwcontainer2">
+ 	<div class="w3-button w3-padding-8 w3-left w3-hide-large" onclick="w3_open()">☰</div>
+ 		<div id="navbar" class="w3-hide-small w3-hide-medium bwcontainer3">
+ 			<ul id="css3menu0">
+ 				<li class="topfirst" id="home"><a href="../home/index.html" class="w3-hide-small">Trang Chủ</a></li>
+  				<li class="topmenu" id="dn"><a href="../dn/dn.html" class="pressed w3-hide-small">Trường Bộ Kinh</a></li>
+ 				<li class="topmenu" id="mn"><a href="../mn/mn.html" class="w3-hide-small">Trung Bộ Kinh</a></li>
+ 				<li class="topmenu" id="sn"><a href="../sn/sn.html" class="w3-hide-small"><i class="fa fa-caret-down"></i>&nbsp;Tương Ưng Bộ Kinh</a>
+ 					<ul>
+ 						<li><a href="../sn/sn01.html" class="w3-hide-small">Tập I - Thiên Có Kệ</a></li>
+ 						<li><a href="../sn/sn02.html" class="w3-hide-small">Tập II - Thiên Nhân Duyên</a></li>
+ 						<li><a href="../sn/sn03.html" class="w3-hide-small">Tập III - Thiên Uẩn</a></li>
+ 						<li><a href="../sn/sn04.html" class="w3-hide-small">Tập IV - Thiên Sáu Xứ</a></li>
+ 						<li><a href="../sn/sn05.html" class="w3-hide-small">Tập V - Thiên Ðại Phẩm</a></li>
+ 					</ul>
+ 				<li class="topmenu" id="an"><a href="../an/an.html" class="w3-hide-small"><i class="fa fa-caret-down"></i>&nbsp;Tăng Chi Bộ Kinh</a>
+ 					<ul>
+ 						<li><a href="../an/an1.html" class="w3-hide-small">Chương Một Pháp</a></li>
+ 						<li><a href="../an/an2.html" class="w3-hide-small">Chương Hai Pháp</a></li>
+ 						<li><a href="../an/an3.html" class="w3-hide-small">Chương Ba Pháp</a></li>
+ 						<li><a href="../an/an4.html" class="w3-hide-small">Chương Bốn Pháp</a></li>
+ 						<li><a href="../an/an5.html" class="w3-hide-small">Chương Năm Pháp</a></li>
+ 						<li><a href="../an/an6.html" class="w3-hide-small">Chương Sáu Pháp</a></li>
+ 						<li><a href="../an/an7.html" class="w3-hide-small">Chương Bảy Pháp</a></li>
+ 						<li><a href="../an/an8.html" class="w3-hide-small">Chương Tám Pháp</a></li>
+ 						<li><a href="../an/an9.html" class="w3-hide-small">Chương Chín Pháp</a></li>
+ 						<li><a href="../an/an10.html" class="w3-hide-small">Chương Mười Pháp</a></li>
+ 						<li><a href="../an/an11.html" class="w3-hide-small">Chương Mười Một Pháp</a></li>
+ 					</ul>
+ 				</li>
+ 				<li class="topmenu" id="kn"><a href="../kn/kn.html" class="w3-hide-small"><i class="fa fa-caret-down"></i>&nbsp;Tiểu Bộ Kinh</a>
+ 					<ul>
+ 						<li><a href="../kp/kp.html" class="w3-hide-small">Kinh Tiểu Tụng</a></li>
+ 						<li><a href="../dhp/dhp.html" class="w3-hide-small">Kinh Pháp Cú</a></li>
+ 						<li><a href="../snp/snp.html" class="w3-hide-small">Kinh Tập</a></li>
+ 						<li><a href="../ud/ud.html" class="w3-hide-small">Kinh Phật Tự Thuyết</a></li>
+ 						<li><a href="../it/it.html" class="w3-hide-small">Kinh Phật Thuyết Như Vậy</a></li>
+ 						<li><a href="../tha/tha.html" class="w3-hide-small">Trưởng Lão Tăng Kệ</a></li>
+ 						<li><a href="../thi/thi.html" class="w3-hide-small">Trưởng Lão Ni Kệ</a></li>
+ 					</ul>
+ 				</li>
+				<li class="toplast" id="rd"><a href="../rd/rd.html" class="w3-hide-small"></i>Kinh Ngẫu Nhiên Theo Nhóm</a>
+ 					</ul>
+ 				</li>
+ 			</ul>
+ 			</div>
+ 		</div> <!--navbar-->
+
+<!-- Sidebar (hidden by default) -->
+ <nav class="w3-sidebar w3-bar-block w3-card w3-border w3-top w3-animate-left w3-hide-large" id="mySidebar">
+ 	<a href="javascript:void(0)" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-times fa-2x red-color"></i>&nbsp;&nbsp;&nbsp;Close</a><!-- Hides the sidebar when clicked -->
+ 		<div class="w3-bar-block w3-white">
+ 			<a href="../home/index.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-home fa-lg"></i>&nbsp;&nbsp;&nbsp;Home</a>
+ 			<a href="../guide/guide.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Guide</a>
+ 			<a href="../dn/dn.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Trường Bộ Kinh</a>
+ 			<a href="../mn/mn.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Trung Bộ Kinh</a>
+ 			<a href="../sn/sn.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Tương Ưng Bộ Kinh</a>
+ 			<a href="../an/an.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Tăng Chi Bộ Kinh
+ 			<a href="../kn/kn.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Tiểu Bộ Kinh</a>
+			<a href="../rd/rd.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>Kinh Ngẫu Nhiên Theo Nhóm</a>
+ 		</div>
+ </nav>
+ 
+ 
+ 
+   <!-- !PAGE CONTENT! --> 
+<div class="w3-main w3-content w3-padding w3-left-align bwcontainer4">
+<div id="content">
+<h2>Majjhima Nikāya - Trung Bộ Kinh</h2>
+<h5><span style="font-style: italic;">Hoà Thượng Thích Minh Châu dịch Việt</span></h5>
+
+</div>
+
+<br>
+ 	<title>        Trung Bộ 83          </title>
+
+<p lang="vi" class="vi"; style="text-align: center">
+Trung Bộ 83<br>
+<span lang="pi" class="pali">
+Majjhima Nikāya 83<br>
+</span>
+</p>
+
+<p lang="vi" class="vi"; style="text-align: center">
+Kinh Maghadeva<br>
+<span lang="pi" class="pali">
+Maghadevasutta<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Như vầy tôi nghe.<br>
+<span lang="pi" class="pali">
+Evaṁ me sutaṁ—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Một thời Thế Tôn trú ở Mithilā (Di-tát-la), tại rừng khu Rừng xoài Maghadeva.<br>
+<span lang="pi" class="pali">
+ekaṁ samayaṁ bhagavā mithilāyaṁ viharati maghadevaambavane.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Rồi Thế Tôn mỉm cười khi đến tại một địa điểm.<br>
+<span lang="pi" class="pali">
+Atha kho bhagavā aññatarasmiṁ padese sitaṁ pātvākāsi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Tôn giả Ānanda liền suy nghĩ:<br>
+<span lang="pi" class="pali">
+Atha kho āyasmato ānandassa etadahosi:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Do nhân gì, do duyên gì, Thế Tôn lại mỉm cười?<br>
+<span lang="pi" class="pali">
+“ko nu kho hetu, ko paccayo bhagavato sitassa pātukammāya?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Không phải không có lý do khiến Thế Tôn mỉm cười”.<br>
+<span lang="pi" class="pali">
+Na akāraṇena tathāgatā sitaṁ pātukarontī”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Rồi Tôn giả Ānanda, đắp y phía một bên vai, chắp tay vái chào Thế Tôn và bạch Thế Tôn:<br>
+<span lang="pi" class="pali">
+Atha kho āyasmā ānando ekaṁsaṁ cīvaraṁ katvā yena bhagavā tenañjaliṁ paṇāmetvā bhagavantaṁ etadavoca:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Bạch Thế Tôn, do nhân gì, do duyên gì Thế Tôn lại mỉm cười?<br>
+<span lang="pi" class="pali">
+“ko nu kho, bhante, hetu, ko paccayo bhagavato sitassa pātukammāya?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Không phải không lý do khiến Thế Tôn mỉm cười.”<br>
+<span lang="pi" class="pali">
+Na akāraṇena tathāgatā sitaṁ pātukarontī”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Thuở xưa, này Ānanda, vị vua chính nước Mithilā này tên là Makhadeva, là vị pháp vương như pháp, kiên trì trên pháp, vị Ðại vương thực hành Chánh pháp, giữa các Bà-la-môn, gia chủ, giữa thị dân và thôn dân,<br>
+<span lang="pi" class="pali">
+“Bhūtapubbaṁ, ānanda, imissāyeva mithilāyaṁ rājā ahosi maghadevo nāma dhammiko dhammarājā dhamme ṭhito mahārājā; dhammaṁ carati brāhmaṇagahapatikesu negamesu ceva jānapadesu ca;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+hành trì lễ Uposatha (Bố-tát) vào các ngày 14, ngày 15 và ngày mồng 8.<br>
+<span lang="pi" class="pali">
+uposathañca upavasati cātuddasiṁ pañcadasiṁ aṭṭhamiñca pakkhassa.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Rồi này Ānanda, vua Makhadeva sau nhiều năm, nhiều trăm năm, nhiều ngàn năm, bảo người thợ cạo tóc:<br>
+<span lang="pi" class="pali">
+Atha kho, ānanda, rājā maghadevo bahūnaṁ vassānaṁ bahūnaṁ vassasatānaṁ bahūnaṁ vassasahassānaṁ accayena kappakaṁ āmantesi:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Này Thợ cạo tóc, khi nào Ông thấy trên đầu ta, có mọc tóc bạc, hãy báo cho ta biết’.<br>
+<span lang="pi" class="pali">
+‘yadā me, samma kappaka, passeyyāsi sirasmiṁ palitāni jātāni, atha me āroceyyāsī’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Thưa vâng, tâu Ðại vương,’ này Ānanda, người thợ cạo tóc vâng đáp vua Makhadeva.<br>
+<span lang="pi" class="pali">
+‘Evaṁ, devā’ti kho, ānanda, kappako rañño maghadevassa paccassosi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Ānanda, sau nhiều năm, nhiều trăm năm, nhiều ngàn năm, người thợ cạo tóc thấy trên đầu vua Makhadeva có sanh tóc bạc, thấy vậy liền tâu vua Makhadeva:<br>
+<span lang="pi" class="pali">
+Addasā kho, ānanda, kappako bahūnaṁ vassānaṁ bahūnaṁ vassasatānaṁ bahūnaṁ vassasahassānaṁ accayena rañño maghadevassa sirasmiṁ palitāni jātāni. Disvāna rājānaṁ maghadevaṁ etadavoca:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Các Thiên sứ đã hiện ra cho Ðại vương. Tóc bạc đã được thấy mọc ra trên đầu.’<br>
+<span lang="pi" class="pali">
+‘pātubhūtā kho devassa devadūtā, dissanti sirasmiṁ palitāni jātānī’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Vậy này Thợ cạo tóc, hãy khéo nhổ những sợi tóc bạc ấy với cái nhíp, và đặt chúng trên bàn tay của ta.’<br>
+<span lang="pi" class="pali">
+‘Tena hi, samma kappaka, tāni palitāni sādhukaṁ saṇḍāsena uddharitvā mama añjalismiṁ patiṭṭhāpehī’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Thưa vâng, tâu Ðại vương,’ này Ānanda, người thợ cạo tóc vâng đáp vua Makhadeva, sau khi khéo nhổ những sợi tóc bạc ấy với cái nhíp, đặt chúng trên bàn tay của vua Makhadeva.<br>
+<span lang="pi" class="pali">
+‘Evaṁ, devā’ti kho, ānanda, kappako rañño maghadevassa paṭissutvā tāni palitāni sādhukaṁ saṇḍāsena uddharitvā rañño maghadevassa añjalismiṁ patiṭṭhāpesi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Rồi này Ānanda, vua Makhadeva, sau khi cho người thợ cạo tóc một lương ấp như một ân tứ, liền cho gọi hoàng tử con đầu và nói:<br>
+<span lang="pi" class="pali">
+Atha kho, ānanda, rājā maghadevo kappakassa gāmavaraṁ datvā jeṭṭhaputtaṁ kumāraṁ āmantāpetvā etadavoca:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Này Hoàng tử thân yêu, các Thiên sứ đã hiện ra cho ta,<br>
+<span lang="pi" class="pali">
+‘pātubhūtā kho me, tāta kumāra, devadūtā;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+tóc bạc đã được thấy mọc ra trên đầu.<br>
+<span lang="pi" class="pali">
+dissanti sirasmiṁ palitāni jātāni;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ta đã hưởng thọ các dục lạc thế gian,<br>
+<span lang="pi" class="pali">
+bhuttā kho pana me mānusakā kāmā;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+nay đã đến thời đi tìm kiếm các thiên lạc.<br>
+<span lang="pi" class="pali">
+samayo dibbe kāme pariyesituṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Hãy đến đây, này Hoàng tử thân yêu, hãy trị vì quốc độ này.<br>
+<span lang="pi" class="pali">
+Ehi tvaṁ, tāta kumāra, imaṁ rajjaṁ paṭipajja.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Sau khi cạo bỏ râu tóc, đắp áo cà-sa, ta sẽ xuất gia, từ bỏ gia đình, sống không gia đình.<br>
+<span lang="pi" class="pali">
+Ahaṁ pana kesamassuṁ ohāretvā kāsāyāni vatthāni acchādetvā agārasmā anagāriyaṁ pabbajissāmi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Và này Hoàng tử thân yêu, khi nào con thấy tóc bạc mọc ra trên đầu, thời hãy cho người thợ cạo tóc một lương ấp như một ân tứ, sau khi khéo giao lại quốc gia cho hoàng tử con đầu, sau khi cạo bỏ râu tóc, đắp áo cà-sa, hãy xuất gia, từ bỏ gia đình, sống không gia đình.<br>
+<span lang="pi" class="pali">
+Tena hi, tāta kumāra, yadā tvampi passeyyāsi sirasmiṁ palitāni jātāni, atha kappakassa gāmavaraṁ datvā jeṭṭhaputtaṁ kumāraṁ sādhukaṁ rajje samanusāsitvā kesamassuṁ ohāretvā kāsāyāni vatthāni acchādetvā agārasmā anagāriyaṁ pabbajeyyāsi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Truyền thống tốt đẹp này do ta thiết lập, con phải tiếp tục duy trì, con chớ thành người tối hậu sau ta.<br>
+<span lang="pi" class="pali">
+Yena me idaṁ kalyāṇaṁ vattaṁ nihitaṁ anuppavatteyyāsi, mā kho me tvaṁ antimapuriso ahosi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Hoàng tử thân yêu, khi hai người còn tồn tại, và có sự đứt đoạn của truyền thống này, thời người nào làm cho đứt đoạn, người ấy là người tối hậu.<br>
+<span lang="pi" class="pali">
+Yasmiṁ kho, tāta kumāra, purisayuge vattamāne evarūpassa kalyāṇassa vattassa samucchedo hoti so tesaṁ antimapuriso hoti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vậy này Hoàng tử thân yêu, ta nói với con:<br>
+<span lang="pi" class="pali">
+Taṁ tāhaṁ, tāta kumāra, evaṁ vadāmi—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Truyền thống tốt đẹp này do ta thiết lập, con phải tiếp tục duy trì. Con chớ thành người tối hậu sau ta”.<br>
+<span lang="pi" class="pali">
+yena me idaṁ kalyāṇaṁ vattaṁ nihitaṁ anuppavatteyyāsi, mā kho me tvaṁ antimapuriso ahosī’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Rồi này Ānanda, vua Makhadeva, sau khi cho người thợ cạo tóc một lương ấp như là một ân tứ, sau khi khéo giao quốc gia cho hoàng tử con đầu, chính tại rừng xoài Makhadeva này, sau khi cạo bỏ râu tóc, đắp áo cà-sa, vua Makhadeva đã xuất gia.<br>
+<span lang="pi" class="pali">
+Atha kho, ānanda, rājā maghadevo kappakassa gāmavaraṁ datvā jeṭṭhaputtaṁ kumāraṁ sādhukaṁ rajje samanusāsitvā imasmiṁyeva maghadevaambavane kesamassuṁ ohāretvā kāsāyāni vatthāni acchādetvā agārasmā anagāriyaṁ pabbaji.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vị này an trú, biến mãn một phương với tâm thấm nhuần lòng từ; cũng vậy phương thứ hai, cũng vậy phương thứ ba, cũng vậy phương thứ tư. Như vậy cùng khắp thế giới, trên dưới bề ngang, hết thảy phương xứ, cùng khắp vô biên giới, vị ấy an trú, biến mãn với tâm thấm nhuần lòng từ, quảng đại, vô biên, không hận, không sân.<br>
+<span lang="pi" class="pali">
+So mettāsahagatena cetasā ekaṁ disaṁ pharitvā vihāsi, tathā dutiyaṁ, tathā tatiyaṁ, tathā catutthaṁ; iti uddhamadho tiriyaṁ sabbadhi sabbattatāya sabbāvantaṁ lokaṁ mettāsahagatena cetasā vipulena mahaggatena appamāṇena averena abyābajjhena pharitvā vihāsi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Với tâm thấm nhuần lòng bi…<br>
+<span lang="pi" class="pali">
+Karuṇāsahagatena cetasā …<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+với tâm thấm nhuần lòng hỷ,…<br>
+<span lang="pi" class="pali">
+muditāsahagatena cetasā …<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+an trú biến mãn một phương với tâm thấm nhuần lòng xả; cũng vậy phương thứ hai, cũng vậy phương thứ ba, cũng vậy phương thứ tư, như vậy cùng khắp thế giới, trên, dưới, bề ngang, hết thảy phương xứ, cùng khắp vô biên giới, vị ấy an trú biến mãn với tâm thấm nhuần lòng xả, quảng đại, vô biên, không hận, không sân.<br>
+<span lang="pi" class="pali">
+upekkhāsahagatena cetasā ekaṁ disaṁ pharitvā vihāsi, tathā dutiyaṁ, tathā tatiyaṁ, tathā catutthaṁ; iti uddhamadho tiriyaṁ sabbadhi sabbattatāya sabbāvantaṁ lokaṁ upekkhāsahagatena cetasā vipulena mahaggatena appamāṇena averena abyābajjhena pharitvā vihāsi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Nhưng này Ānanda, vua Makhadeva, 84.000 năm, đã chơi trò chơi của hoàng tử, 84.000 năm, đã trị vì như một phó vương; 84.000năm, đã chấp chánh như một quốc vương; 84.000 năm, chính tại ngôi rừng xoài Makhadeva này, sau khi cạo bỏ râu tóc, đắp áo cà-sa đã xuất gia, từ bỏ gia đình, sống không gia đình, sống theo Phạm hạnh.<br>
+<span lang="pi" class="pali">
+Rājā kho panānanda, maghadevo caturāsītivassasahassāni kumārakīḷitaṁ kīḷi, caturāsītivassasahassāni oparajjaṁ kāresi, caturāsītivassasahassāni rajjaṁ kāresi, caturāsītivassasahassāni imasmiṁyeva maghadevaambavane agārasmā anagāriyaṁ pabbajito brahmacariyamacari.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vị này, sau khi tụ tập bốn Phạm trú, khi thân hoại mạng chung, được sanh lên Phạm thiên giới.<br>
+<span lang="pi" class="pali">
+So cattāro brahmavihāre bhāvetvā kāyassa bhedā paraṁ maraṇā brahmalokūpago ahosi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Rồi này Ānanda, con vua Makhadeva, sau nhiều năm, nhiều trăm năm, nhiều ngàn năm cho gọi người thợ cạo tóc:<br>
+<span lang="pi" class="pali">
+Atha kho rañño, ānanda, maghadevassa putto bahūnaṁ vassānaṁ bahūnaṁ vassasatānaṁ bahūnaṁ vassasahassānaṁ accayena kappakaṁ āmantesi:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Này thợ cạo tóc, khi nào Ông thấy trên đầu Ta có mọc tóc bạc, hãy báo cho ta biết.’<br>
+<span lang="pi" class="pali">
+‘yadā me, samma kappaka, passeyyāsi sirasmiṁ palitāni jātāni, atha kho āroceyyāsī’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Thưa vâng, tâu Ðại vương’, này Ānanda, người thợ cạo tóc vâng đáp con vua Makhadeva.<br>
+<span lang="pi" class="pali">
+‘Evaṁ, devā’ti kho, ānanda, kappako rañño maghadevassa puttassa paccassosi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Ānanda, sau nhiều năm, nhiều trăm năm, nhiều ngàn năm, người thợ cạo tóc thấy trên đầu con vua Makhadeva có sanh tóc bạc,<br>
+<span lang="pi" class="pali">
+Addasā kho, ānanda, kappako bahūnaṁ vassānaṁ bahūnaṁ vassasatānaṁ bahūnaṁ vassasahassānaṁ accayena rañño maghadevassa puttassa sirasmiṁ palitāni jātāni.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+thấy vậy liền tâu với con vua Makhadeva:<br>
+<span lang="pi" class="pali">
+Disvāna rañño maghadevassa puttaṁ etadavoca:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Các Thiên sứ đã hiện ra cho Ðại vương.<br>
+<span lang="pi" class="pali">
+‘pātubhūtā kho devassa devadūtā;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Tóc bạc đã được thấy mọc ra trên đầu.’<br>
+<span lang="pi" class="pali">
+dissanti sirasmiṁ palitāni jātānī’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Vậy này thợ cạo tóc, hãy khéo nhổ những sợi tóc bạc ấy với cái nhíp, và đặt chúng trên bàn tay của ta’.<br>
+<span lang="pi" class="pali">
+‘Tena hi, samma kappaka, tāni palitāni sādhukaṁ saṇḍāsena uddharitvā mama añjalismiṁ patiṭṭhāpehī’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Thưa vâng, tâu Ðại vương’, này Ānanda, người thợ cạo tóc vâng đáp con vua Makhadeva, sau khi khéo nhổ những sợi tóc bạc ấy với cái nhíp, đặt chúng trên bàn tay của con vua Makhadeva.<br>
+<span lang="pi" class="pali">
+‘Evaṁ, devā’ti kho, ānanda, kappako rañño maghadevassa puttassa paṭissutvā tāni palitāni sādhukaṁ saṇḍāsena uddharitvā rañño maghadevassa puttassa añjalismiṁ patiṭṭhāpesi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Rồi này Ānanda, con vua Makhadeva, sau khi cho người thợ cạo tóc một lương ấp như một ân tứ, liền cho gọi vị hoàng tử con đầu và nói:<br>
+<span lang="pi" class="pali">
+Atha kho, ānanda, rañño maghadevassa putto kappakassa gāmavaraṁ datvā jeṭṭhaputtaṁ kumāraṁ āmantāpetvā etadavoca:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Hoàng tử thân yêu, các Thiên sứ đã hiện ra cho ta,<br>
+<span lang="pi" class="pali">
+‘pātubhūtā kho me, tāta kumāra, devadūtā;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+tóc bạc đã thấy sanh ra trên đầu.<br>
+<span lang="pi" class="pali">
+dissanti sirasmiṁ palitāni jātāni;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ta đã hưởng thọ dục lạc thế gian,<br>
+<span lang="pi" class="pali">
+bhuttā kho pana me mānusakā kāmā;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+nay đã đến thời đi tìm kiếm các thiên lạc.<br>
+<span lang="pi" class="pali">
+samayo dibbe kāme pariyesituṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Hãy đến đây, này Hoàng tử thân yêu, hãy trị vì quốc độ này.<br>
+<span lang="pi" class="pali">
+Ehi tvaṁ, tāta kumāra, imaṁ rajjaṁ paṭipajja.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Sau khi cạo bỏ râu tóc, đắp áo cà-sa, ta sẽ xuất gia, từ bỏ gia đình, sống không gia đình.<br>
+<span lang="pi" class="pali">
+Ahaṁ pana kesamassuṁ ohāretvā kāsāyāni vatthāni acchādetvā agārasmā anagāriyaṁ pabbajissāmi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Và nay, này Hoàng tử thân yêu, khi nào con thấy tóc bạc mọc ra trên đầu, thời hãy cho người thợ cạo tóc một lương ấp như một ân tứ, sau khi khéo giao lại quốc gia này cho vị hoàng tử con đầu, sau khi cạo bỏ râu tóc, đắp áo cà-sa, hãy xuất gia, từ bỏ gia đình, sống không gia đình.<br>
+<span lang="pi" class="pali">
+Tena hi, tāta kumāra, yadā tvampi passeyyāsi sirasmiṁ palitāni jātāni, atha kappakassa gāmavaraṁ datvā jeṭṭhaputtaṁ kumāraṁ sādhukaṁ rajje samanusāsitvā kesamassuṁ ohāretvā kāsāyāni vatthāni acchādetvā agārasmā anagāriyaṁ pabbajeyyāsi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Truyền thống tốt đẹp này do ta thiết lập, con phải tiếp tục duy trì, chớ thành người tối hậu sau ta.<br>
+<span lang="pi" class="pali">
+Yena me idaṁ kalyāṇaṁ vattaṁ nihitaṁ anuppavatteyyāsi, mā kho me tvaṁ antimapuriso ahosi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Hoàng tử thân yêu, khi hai người còn tồn tại, và có sự đứt đoạn của truyền thống này, thời người nào làm cho đứt đoạn, người ấy là người tối hậu.<br>
+<span lang="pi" class="pali">
+Yasmiṁ kho, tāta kumāra, purisayuge vattamāne evarūpassa kalyāṇassa vattassa samucchedo hoti so tesaṁ antimapuriso hoti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vậy này Hoàng tử thân yêu, ta nói với con:<br>
+<span lang="pi" class="pali">
+Taṁ tāhaṁ, tāta kumāra, evaṁ vadāmi—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Truyền thống tốt đẹp này do ta thiết lập, con phải tiếp tục duy trì. Con chớ thành người tối hậu sau ta”.<br>
+<span lang="pi" class="pali">
+yena me idaṁ kalyāṇaṁ vattaṁ nihitaṁ anuppavatteyyāsi, mā kho me tvaṁ antimapuriso ahosī’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Rồi này Ānanda, con vua Makhadeva, sau khi cho người thợ cạo tóc một lương ấp như một ân tứ, sau khi khéo giao quốc gia cho vị hoàng tử con đầu, chính tại rừng xoài này, con vua Makhadeva, sau khi cạo bỏ râu tóc, đắp áo cà-sa, đã xuất gia.<br>
+<span lang="pi" class="pali">
+Atha kho, ānanda, rañño maghadevassa putto kappakassa gāmavaraṁ datvā jeṭṭhaputtaṁ kumāraṁ sādhukaṁ rajje samanusāsitvā imasmiṁyeva maghadevaambavane kesamassuṁ ohāretvā kāsāyāni vatthāni acchādetvā agārasmā anagāriyaṁ pabbaji.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+vị này an trú, biến mãn một phương với tâm thấm nhuần lòng từ; cũng vậy phương thứ hai, cũng vậy, phương thứ ba, cũng vậy, phương thứ tư. Như vậy cùng khắp thế giới, trên, dưới, bề ngang, hết thảy phương xứ, cùng khắp vô biên giới, vị ấy an trú biến mãn với tâm thấm nhuần lòng từ, quảng đại vô biên, không hận, không sân.<br>
+<span lang="pi" class="pali">
+So mettāsahagatena cetasā ekaṁ disaṁ pharitvā vihāsi, tathā dutiyaṁ, tathā tatiyaṁ, tathā catutthaṁ; iti uddhamadho tiriyaṁ sabbadhi sabbattatāya sabbāvantaṁ lokaṁ mettāsahagatena cetasā vipulena mahaggatena appamāṇena averena abyābajjhena pharitvā vihāsi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Với tâm thấm nhuần lòng bi…<br>
+<span lang="pi" class="pali">
+Karuṇāsahagatena cetasā …<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Với tâm thấm nhuần lòng hỷ…<br>
+<span lang="pi" class="pali">
+muditāsahagatena cetasā …<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+an trú biến mãn một phương với tâm thấm nhuần lòng xả; cũng vậy phương thứ hai, cũng vậy phương thứ ba, cũng vậy phương thứ tư. Như vậy cùng khắp thế giới, trên dưới bề ngang, hết thảy phương xứ, cùng khắp vô biên giới, vị ấy an trú biến mãn với tâm thấm nhuần lòng xả, quảng đại, vô biên, không hận, không sân.<br>
+<span lang="pi" class="pali">
+upekkhāsahagatena cetasā ekaṁ disaṁ pharitvā vihāsi, tathā dutiyaṁ, tathā tatiyaṁ, tathā catutthaṁ; iti uddhamadho tiriyaṁ sabbadhi sabbattatāya sabbāvantaṁ lokaṁ upekkhāsahagatena cetasā vipulena mahaggatena appamāṇena averena abyābajjhena pharitvā vihāsi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Nhưng này Ānanda, con vua Makhadeva tám vạn bốn ngàn năm, đã chơi trò chơi của hoàng tử; tám vạn bốn ngàn năm, đã trị vì như một phó vương; tám vạn bốn ngàn năm, đã chấp chánh như một quốc vương; tám vạn bốn ngàn năm, chính tại ngôi rừng xoài này, con vua Makhadeva sau khi cạo bỏ râu tóc, đắp áo cà-sa, đã xuất gia, từ bỏ gia đình, sống không gia đình, sống theo Phạm hạnh.<br>
+<span lang="pi" class="pali">
+Rañño kho panānanda, maghadevassa putto caturāsītivassasahassāni kumārakīḷitaṁ kīḷi, caturāsītivassasahassāni oparajjaṁ kāresi, caturāsītivassasahassāni rajjaṁ kāresi, caturāsītivassasahassāni imasmiṁyeva maghadevaambavane agārasmā anagāriyaṁ pabbajito brahmacariyamacari.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vị này, sau khi tu tập bốn Phạm trú, khi thân hoại mạng chung, được sanh lên Phạm thiên giới.<br>
+<span lang="pi" class="pali">
+So cattāro brahmavihāre bhāvetvā kāyassa bhedā paraṁ maraṇā brahmalokūpago ahosi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Rồi này Ānanda, các tử tôn của vua Makhadeva truyền nối tiếp tục vua ấy, sau 84.000 năm làm vương tộc (Khattiya), chính tại ngôi rừng xoài Makhadeva này, sau khi cạo bỏ râu tóc, đắp áo cà-sa, đã xuất gia, từ bỏ gia đình, sống không gia đình.<br>
+<span lang="pi" class="pali">
+Rañño kho panānanda, maghadevassa puttapaputtakā tassa paramparā caturāsītirājasahassāni imasmiṁyeva maghadevaambavane kesamassuṁ ohāretvā kāsāyāni vatthāni acchādetvā agārasmā anagāriyaṁ pabbajiṁsu.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+các vị ấy biến mãn một phương với tâm thấm nhuần lòng từ và an trú; cũng vậy phương thứ hai, cũng vậy phương thứ ba, cũng vậy phương thứ tư. Như vậy cùng khắp thế giới, trên dưới bề ngang, hết thảy phương xứ, cùng khắp biên giới, vị ấy an trú biến mãn với tâm thấm nhuần lòng từ, quảng đại, vô biên, không hận, không sân.<br>
+<span lang="pi" class="pali">
+Te mettāsahagatena cetasā ekaṁ disaṁ pharitvā vihariṁsu, tathā dutiyaṁ, tathā tatiyaṁ, tathā catutthaṁ; iti uddhamadho tiriyaṁ sabbadhi sabbattatāya sabbāvantaṁ lokaṁ mettāsahagatena cetasā vipulena mahaggatena appamāṇena averena abyābajjhena pharitvā vihariṁsu.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Với tâm thấm nhuần lòng bi…<br>
+<span lang="pi" class="pali">
+Karuṇāsahagatena cetasā …<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Với tâm thấm nhuần lòng hỷ…<br>
+<span lang="pi" class="pali">
+muditāsahagatena cetasā …<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+an trú, biến mãn một phương với tâm thấm nhuần lòng xả; cũng vậy phương thứ hai, cũng vậy phương thứ ba, cũng vậy phương thứ tư. Như vậy cùng khắp thế giới, trên, dưới, bề ngang, hết thảy phương xứ, cùng khắp vô biên giới, những vị ấy an trú biến mãn với tâm thấm nhuần lòng xả, quảng đại, vô biên, không hận, không sân.<br>
+<span lang="pi" class="pali">
+upekkhāsahagatena cetasā ekaṁ disaṁ pharitvā vihariṁsu, tathā dutiyaṁ, tathā tatiyaṁ, tathā catutthaṁ; iti uddhamadho tiriyaṁ sabbadhi sabbattatāya sabbāvantaṁ lokaṁ upekkhāsahagatena cetasā vipulena mahaggatena appamāṇena averena abyābajjhena pharitvā vihariṁsu.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vị ấy 84.000 năm đã chơi trò chơi của hoàng tử, 84.000 năm, đã trị vì như một phó vương; 84.000 năm, đã chấp chánh như một quốc vương; 84.000 năm, chính tại ngôi rừng xoài Makhadeva này, sau khi cạo bỏ râu tóc, đắp áo cà-sa, đã xuất gia, từ bỏ gia đình, sống không gia đình, sống theo Phạm hạnh.<br>
+<span lang="pi" class="pali">
+Caturāsītivassasahassāni kumārakīḷitaṁ kīḷiṁsu, caturāsītivassasahassāni oparajjaṁ kāresuṁ, caturāsītivassasahassāni rajjaṁ kāresuṁ, caturāsītivassasahassāni imasmiṁyeva maghadevaambavane agārasmā anagāriyaṁ pabbajitā brahmacariyamacariṁsu.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Các vị ấy, sau khi tu tập bốn Phạm trú, khi thân hoại mạng chung, được sanh lên Phạm thiên giới.<br>
+<span lang="pi" class="pali">
+Te cattāro brahmavihāre bhāvetvā kāyassa bhedā paraṁ maraṇā brahmalokūpagā ahesuṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Nimi là vị cuối cùng của các vị vua ấy, là vị pháp vương như pháp, kiên trì trên pháp, vị đại vương thực hành Chánh pháp giữa các Bà-la-môn, gia chủ, giữa thị dân và thôn dân,<br>
+<span lang="pi" class="pali">
+Nimi tesaṁ rājā pacchimako ahosi dhammiko dhammarājā dhamme ṭhito mahārājā; dhammaṁ carati brāhmaṇagahapatikesu negamesu ceva jānapadesu ca;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+hành trì lễ Uposatha (Bố-tát) vào các ngày 14, ngày 15 và ngày mồng 8.<br>
+<span lang="pi" class="pali">
+uposathañca upavasati cātuddasiṁ pañcadasiṁ aṭṭhamiñca pakkhassa.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Thuở xưa, này Ānanda, khi chư Thiên ở Tavatimsa (Tam thập tam thiên) ngồi hội họp với nhau tại giảng đường Thiện Pháp (Sudhamma), cuộc đối thoại sau đây được khởi lên:<br>
+<span lang="pi" class="pali">
+Bhūtapubbaṁ, ānanda, devānaṁ tāvatiṁsānaṁ sudhammāyaṁ sabhāyaṁ sannisinnānaṁ sannipatitānaṁ ayamantarākathā udapādi:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Thật hạnh phúc thay cho dân chúng Videha, thật tốt đẹp thay cho dân chúng Videha,<br>
+<span lang="pi" class="pali">
+‘lābhā vata, bho, videhānaṁ, suladdhaṁ vata, bho, videhānaṁ,<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+được vua Nimi là vị pháp vương như pháp, kiên trì trên pháp, vị Ðại vương thực hành Chánh pháp giữa các Bà-la-môn, gia chủ, giữa thị dân và thôn dân,<br>
+<span lang="pi" class="pali">
+yesaṁ nimi rājā dhammiko dhammarājā dhamme ṭhito mahārājā; dhammaṁ carati brāhmaṇagahapatikesu negamesu ceva jānapadesu ca;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+hành trì lễ Uposatha (Bố-tát) vào các ngày 14, ngày 15 và ngày mồng 8″.<br>
+<span lang="pi" class="pali">
+uposathañca upavasati cātuddasiṁ pañcadasiṁ aṭṭhamiñca pakkhassā’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Rồi này Ānanda, Thiên chủ Sakka nói với chư Thiên ở cõi trời Ba mươi ba:<br>
+<span lang="pi" class="pali">
+Atha kho, ānanda, sakko devānamindo deve tāvatiṁse āmantesi:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Chư Khanh, chư Khanh có muốn yết kiến vua Nimi không?’<br>
+<span lang="pi" class="pali">
+‘iccheyyātha no tumhe, mārisā, nimiṁ rājānaṁ daṭṭhun’ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Thưa Thiên chủ, chúng tôi muốn yết kiến vua Nimi.’<br>
+<span lang="pi" class="pali">
+‘Icchāma mayaṁ, mārisa, nimiṁ rājānaṁ daṭṭhun’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Lúc bấy giờ, vua Nimi trong ngày rằm lễ Bố-Tát (Uposatha), đã gội đầu, giữ trai giới đang ngồi trên lầu cung điện.<br>
+<span lang="pi" class="pali">
+Tena kho pana, ānanda, samayena nimi rājā tadahuposathe pannarase sīsaṁnhāto uposathiko uparipāsādavaragato nisinno hoti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Rồi này Ānanda, Thiên chủ Sakka, như nhà lực sĩ duỗi bàn tay đang co lại, hay co lại bàn tay đang duỗi ra; cũng vậy, Thiên chủ biến mất giữa chư Thiên cõi trời Ba mươi ba, và hiện ra trước mặt vua Nimi.<br>
+<span lang="pi" class="pali">
+Atha kho, ānanda, sakko devānamindo—seyyathāpi nāma balavā puriso samiñjitaṁ vā bāhaṁ pasāreyya, pasāritaṁ vā bāhaṁ samiñjeyya; evameva—devesu tāvatiṁsesu antarahito nimissa rañño pamukhe pāturahosi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Rồi này Ānanda, Thiên chủ Sakka nói với vua Nimi:<br>
+<span lang="pi" class="pali">
+Atha kho, ānanda, sakko devānamindo nimiṁ rājānaṁ etadavoca:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Tâu Ðại vương, thật hạnh phúc thay cho Ðại vương, thật tốt lành thay cho Ðại vương!<br>
+<span lang="pi" class="pali">
+‘lābhā te, mahārāja, suladdhaṁ te, mahārāja.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Tâu Ðại vương, chư Thiên ở cõi trời Ba mươi ba đang ngồi tại giảng đường Thiện Pháp tán thán Ðại vương và nói:<br>
+<span lang="pi" class="pali">
+Devā, mahārāja, tāvatiṁsā sudhammāyaṁ sabhāyaṁ kittayamānarūpā sannisinnā:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Thật hạnh phúc thay cho dân chúng Videha… và ngày mồng 8”.<br>
+<span lang="pi" class="pali">
+“lābhā vata, bho, videhānaṁ, suladdhaṁ vata, bho, videhānaṁ, yesaṁ nimi rājā dhammiko dhammarājā dhamme ṭhito mahārājā; dhammaṁ carati brāhmaṇagahapatikesu negamesu ceva jānapadesu ca; uposathañca upavasati cātuddasiṁ pañcadasiṁ aṭṭhamiñca pakkhassā”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Tâu Ðại vương, chư Thiên ở cõi trời Ba mươi ba muốn yết kiến Ðại vương.<br>
+<span lang="pi" class="pali">
+Devā te, mahārāja, tāvatiṁsā dassanakāmā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Tâu Ðại vương, tôi sẽ gởi cho Ðại vương một cỗ xe có ngàn ngựa kéo,<br>
+<span lang="pi" class="pali">
+Tassa te ahaṁ, mahārāja, sahassayuttaṁ ājaññarathaṁ pahiṇissāmi;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ðại vương hãy cưỡi thiên xa ấy, chớ có sợ hãi!’<br>
+<span lang="pi" class="pali">
+abhiruheyyāsi, mahārāja, dibbaṁ yānaṁ avikampamāno’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Ānanda, vua Nimi im lặng nhận lời.<br>
+<span lang="pi" class="pali">
+Adhivāsesi kho, ānanda, nimi rājā tuṇhībhāvena.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Rồi này Ānanda, Thiên chủ Sakka, sau khi biết được vua Nimi đã nhận lời, như nhà lực sĩ … liền biến mất và hiện ra giữa chư Thiên ở cõi trời Ba mươi ba.<br>
+<span lang="pi" class="pali">
+Atha kho, ānanda, sakko devānamindo nimissa rañño adhivāsanaṁ viditvā—seyyathāpi nāma balavā puriso samiñjitaṁ vā bāhaṁ pasāreyya, pasāritaṁ vā bāhaṁ samiñjeyya; evameva—nimissa rañño pamukhe antarahito devesu tāvatiṁsesu pāturahosi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Rồi này Ānanda, Thiên chủ Sakka gọi người đánh xe Mātali và nói:<br>
+<span lang="pi" class="pali">
+Atha kho, ānanda, sakko devānamindo mātaliṁ saṅgāhakaṁ āmantesi:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Này Mātali, sau khi thắng cỗ xe có ngàn ngựa kéo hãy đi đến vua Nimi và nói:<br>
+<span lang="pi" class="pali">
+‘ehi tvaṁ, samma mātali, sahassayuttaṁ ājaññarathaṁ yojetvā nimiṁ rājānaṁ upasaṅkamitvā evaṁ vadehi—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Tâu Ðại vương, đây là cỗ xe có ngàn ngựa kéo do Thiên chủ Sakka gửi đến cho Ðại vương.<br>
+<span lang="pi" class="pali">
+ayaṁ te, mahārāja, sahassayutto ājaññaratho sakkena devānamindena pesito;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ðại vương hãy cưỡi thiên xa, chớ có sợ hãi!’<br>
+<span lang="pi" class="pali">
+abhiruheyyāsi, mahārāja, dibbaṁ yānaṁ avikampamāno’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Thưa vâng, Tôn giả’, người đánh xe Mātali vâng đáp Thiên chủ Sakka, cho thắng cỗ xe có ngàn ngựa kéo, đi đến vua Nimi và thưa:<br>
+<span lang="pi" class="pali">
+‘Evaṁ, bhaddantavā’ti kho, ānanda, mātali saṅgāhako sakkassa devānamindassa paṭissutvā sahassayuttaṁ ājaññarathaṁ yojetvā nimiṁ rājānaṁ upasaṅkamitvā etadavoca:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Tâu Ðại vương, đây là cỗ xe có ngàn ngựa kéo do Thiên chủ Sakka gửi đến cho Ðại vương.<br>
+<span lang="pi" class="pali">
+‘ayaṁ te, mahārāja, sahassayutto ājaññaratho sakkena devānamindena pesito;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ðại vương hãy cưỡi thiên xa, chớ có sợ hãi!<br>
+<span lang="pi" class="pali">
+abhiruha, mahārāja, dibbaṁ yānaṁ avikampamāno.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Và tâu Ðại vương, con sẽ dẫn Ðại vương đi đường nào? Con đường do đó các nghiệp ác đưa đến sự cảm thọ quả báo các nghiệp ác hay con đường do đó các thiện nghiệp đưa đến sự cảm thọ quả báo các thiện nghiệp?”.<br>
+<span lang="pi" class="pali">
+Api ca, mahārāja, katamena taṁ Nimi, yena vā pāpakammā pāpakānaṁ kammānaṁ vipākaṁ paṭisaṁvedenti, yena vā kalyāṇakammā kalyāṇakammānaṁ vipākaṁ paṭisaṁvedentī’ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Này Mātali, hãy đưa Ta đi, cả hai con đường.’<br>
+<span lang="pi" class="pali">
+‘Ubhayeneva maṁ, mātali, nehī’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Và này Ānanda, người đánh xe Mātali đưa vua Nimi đến giảng đường Sudhamma (Thiện Pháp).<br>
+<span lang="pi" class="pali">
+Sampavesesi kho, ānanda, mātali, saṅgāhako nimiṁ rājānaṁ sudhammaṁ sabhaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Ānanda, Thiên chủ Sakka thấy vua Nimi đường xa đi đến, sau khi thấy vậy,<br>
+<span lang="pi" class="pali">
+Addasā kho, ānanda, sakko devānamindo nimiṁ rājānaṁ dūratova āgacchantaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+liền nói với vua Nimi:<br>
+<span lang="pi" class="pali">
+Disvāna nimiṁ rājānaṁ etadavoca:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Hãy đến, tâu Ðại vương;<br>
+<span lang="pi" class="pali">
+‘ehi kho, mahārāja.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+thiện lai, tâu Ðại vương.<br>
+<span lang="pi" class="pali">
+Svāgataṁ, mahārāja.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Tâu Ðại vương, chư Thiên ở cõi trời Ba mươi ba ngồi ở giảng đường Sudhamma, tán thán Ðại vương như sau: “Thật là hạnh phúc… và ngày mồng 8”.<br>
+<span lang="pi" class="pali">
+Devā te dassanakāmā, mahārāja, tāvatiṁsā sudhammāyaṁ sabhāyaṁ kittayamānarūpā sannisinnā: “lābhā vata, bho, videhānaṁ, suladdhaṁ vata, bho, videhānaṁ, yesaṁ nimi rājā dhammiko dhammarājā dhamme ṭhito mahārājā; dhammaṁ carati brāhmaṇagahapatikesu negamesu ceva jānapadesu ca; uposathañca upavasati cātuddasiṁ pañcadasiṁ aṭṭhamiñca pakkhassā”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Tâu Ðại vương, chư Thiên ở cõi trời Ba mươi ba muốn yết kiến Ðại vương.<br>
+<span lang="pi" class="pali">
+Devā te, mahārāja, tāvatiṁsā dassanakāmā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Tâu Ðại vương, hãy hoan lạc với thiên uy lực giữa chư Thiên’.<br>
+<span lang="pi" class="pali">
+Abhirama, mahārāja, devesu devānubhāvenā’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Thôi vừa rồi, Tôn giả. Hãy đưa tôi về Mithilā,<br>
+<span lang="pi" class="pali">
+‘Alaṁ, mārisa, tattheva maṁ Mithilāṁ paṭinetu.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+tại đấy tôi sẽ sống theo Chánh pháp giữa các vị Bà-la-môn, gia chủ,<br>
+<span lang="pi" class="pali">
+Tathāhaṁ dhammaṁ carissāmi brāhmaṇagahapatikesu negamesu ceva jānapadesu ca;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+và giữa các thị dân và thôn dân và thọ trì trai giới vào các ngày 14, ngày 15 và ngày mồng 8′.<br>
+<span lang="pi" class="pali">
+uposathañca upavasāmi cātuddasiṁ pañcadasiṁ aṭṭhamiñca pakkhassā’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Rồi này Ānanda, Thiên chủ Sakka nói với người đánh xe Mātali:<br>
+<span lang="pi" class="pali">
+Atha kho, ānanda, sakko devānamindo mātaliṁ saṅgāhakaṁ āmantesi:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Này Mātali, sau khi thắng cỗ xe có ngàn ngựa kéo, hãy đưa vua Nimi về tại Mithilā.’<br>
+<span lang="pi" class="pali">
+‘ehi tvaṁ, samma mātali, sahassayuttaṁ ājaññarathaṁ yojetvā nimiṁ rājānaṁ tattheva Mithilāṁ paṭinehī’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Thưa vâng, Tôn giả,’ này Ānanda, người đánh xe Mātali vâng đáp Thiên chủ Sakka, thắng cỗ xe có ngàn ngựa kéo, và đưa vua Nimi về Mithilā.<br>
+<span lang="pi" class="pali">
+‘Evaṁ, bhaddantavā’ti kho, ānanda, mātali saṅgāhako sakkassa devānamindassa paṭissutvā sahassayuttaṁ ājaññarathaṁ yojetvā nimiṁ rājānaṁ tattheva Mithilāṁ paṭinesi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ở đây, này Ānanda, vua Nimi sống như pháp giữa các Bà-la-môn, gia chủ và giữa thị dân và thôn dân, thọ trì trai giới vào các ngày 14, ngày 15 và ngày mồng 8.<br>
+<span lang="pi" class="pali">
+Tatra sudaṁ, ānanda, nimi rājā dhammaṁ carati brāhmaṇagahapatikesu negamesu ceva jānapadesu ca, uposathañca upavasati cātuddasiṁ pañcadasiṁ aṭṭhamiñca pakkhassāti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Và này Ānanda, sau nhiều năm, nhiều trăm năm, nhiều ngàn năm; vua Nimi gọi người thợ cạo tóc:<br>
+<span lang="pi" class="pali">
+Atha kho, ānanda, nimi rājā bahūnaṁ vassānaṁ bahūnaṁ vassasatānaṁ bahūnaṁ vassasahassānaṁ accayena kappakaṁ āmantesi:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Này Thợ cạo tóc, khi nào Ông thấy trên đầu ta có mọc tóc bạc, hãy báo cho ta biết.’<br>
+<span lang="pi" class="pali">
+‘yadā me, samma kappaka, passeyyāsi sirasmiṁ palitāni jātāni, atha me āroceyyāsī’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Thưa vâng, tâu Ðại vương’, này Ānanda, người thợ cạo tóc vâng đáp vua Nimi.<br>
+<span lang="pi" class="pali">
+‘Evaṁ, devā’ti kho, ānanda, kappako nimissa rañño paccassosi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Ānanda, sau nhiều năm, nhiều trăm năm, nhiều ngàn năm, người thợ cạo tóc thấy trên đầu vua Nimi có mọc tóc bạc,<br>
+<span lang="pi" class="pali">
+Addasā kho, ānanda, kappako bahūnaṁ vassānaṁ bahūnaṁ vassasatānaṁ bahūnaṁ vassasahassānaṁ accayena nimissa rañño sirasmiṁ palitāni jātāni.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+thấy vậy liền tâu với vua Nimi:<br>
+<span lang="pi" class="pali">
+Disvāna nimiṁ rājānaṁ etadavoca:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Các Thiên sứ đã hiện cho Ðại vương.<br>
+<span lang="pi" class="pali">
+‘pātubhūtā kho devassa devadūtā;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Tóc bạc đã được thấy mọc ra trên đầu<br>
+<span lang="pi" class="pali">
+dissanti sirasmiṁ palitāni jātānī’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Vậy này Thợ cạo tóc, hãy khéo nhổ những sợi tóc bạc ấy với cái nhíp, và đặt chúng trên bàn tay của ta.’<br>
+<span lang="pi" class="pali">
+‘Tena hi, samma kappaka, tāni palitāni sādhukaṁ saṇḍāsena uddharitvā mama añjalismiṁ patiṭṭhāpehī’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Thưa vâng, tâu Ðại vương’, này Ānanda, người thợ cạo tóc vâng đáp vua Nimi, sau khi khéo nhổ những sợi tóc bạc ấy với cái nhíp, đặt chúng trên bàn tay vua Nimi.<br>
+<span lang="pi" class="pali">
+‘Evaṁ, devā’ti kho, ānanda, kappako nimissa rañño paṭissutvā tāni palitāni sādhukaṁ saṇḍāsena uddharitvā nimissa rañño añjalismiṁ patiṭṭhāpesi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Rồi này Ānanda, vua Nimi, sau khi cho người thợ cạo tóc một lương ấp như một ân tứ, liền cho gọi vị hoàng tử con đầu và nói:<br>
+<span lang="pi" class="pali">
+Atha kho, ānanda, nimi rājā kappakassa gāmavaraṁ datvā jeṭṭhaputtaṁ kumāraṁ āmantāpetvā etadavoca:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Hoàng tử thân yêu, các Thiên sứ đã hiện ra cho ta,<br>
+<span lang="pi" class="pali">
+‘pātubhūtā kho me, tāta kumāra, devadūtā;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+tóc bạc đã được thấy mọc ra trên đầu.<br>
+<span lang="pi" class="pali">
+dissanti sirasmiṁ palitāni jātāni;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ta đã hưởng thọ các dục lạc thế gian,<br>
+<span lang="pi" class="pali">
+bhuttā kho pana me mānusakā kāmā;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+nay đã đến thời đi tìm kiếm các thiên lạc.<br>
+<span lang="pi" class="pali">
+samayo dibbe kāme pariyesituṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Hãy đến đây, Hoàng tử thân yêu, hãy trị vì quốc độ này.<br>
+<span lang="pi" class="pali">
+Ehi tvaṁ, tāta kumāra, imaṁ rajjaṁ paṭipajja.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Sau khi cạo bỏ râu tóc, đắp áo cà-sa, ta sẽ xuất gia, từ bỏ gia đình, sống không gia đình.<br>
+<span lang="pi" class="pali">
+Ahaṁ pana kesamassuṁ ohāretvā kāsāyāni vatthāni acchādetvā agārasmā anagāriyaṁ pabbajissāmi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Và này Hoàng tử thân yêu, khi nào con thấy tóc bạc mọc ra trên đầu, thời hãy cho người thợ cạo tóc một lương ấp như một ân tứ, sau khi khéo giao lại quốc gia cho vị hoàng tử con đầu, sau khi cạo bỏ râu tóc, đắp áo cà-sa, hãy xuất gia, từ bỏ gia đình, sống không gia đình.<br>
+<span lang="pi" class="pali">
+Tena hi, tāta kumāra, yadā tvampi passeyyāsi sirasmiṁ palitāni jātāni, atha kappakassa gāmavaraṁ datvā jeṭṭhaputtaṁ kumāraṁ sādhukaṁ rajje samanusāsitvā kesamassuṁ ohāretvā kāsāyāni vatthāni acchādetvā agārasmā anagāriyaṁ pabbajeyyāsi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Truyền thống tốt đẹp này do ta thiết lập, con phải tiếp tục duy trì, con chớ thành người tối hậu sau ta.<br>
+<span lang="pi" class="pali">
+Yena me idaṁ kalyāṇaṁ vattaṁ nihitaṁ anuppavatteyyāsi, mā kho me tvaṁ antimapuriso ahosi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Hoàng tử thân yêu, khi hai người còn tồn tại, và có sự đứt đoạn của truyền thống này, thời người nào làm cho đứt đoạn, người ấy là người tối hậu.<br>
+<span lang="pi" class="pali">
+Yasmiṁ kho, tāta kumāra, purisayuge vattamāne evarūpassa kalyāṇassa vattassa samucchedo hoti so tesaṁ antimapuriso hoti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Hoàng tử thân yêu, ta nói với con:<br>
+<span lang="pi" class="pali">
+Taṁ tāhaṁ, tāta kumāra, evaṁ vadāmi:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Truyền thống tốt đẹp này do ta thiết lập, con phải tiếp tục duy trì. Con chớ thành người tối hậu sau ta.”<br>
+<span lang="pi" class="pali">
+“yena me idaṁ kalyāṇaṁ vattaṁ nihitaṁ anuppavatteyyāsi, mā kho me tvaṁ antimapuriso ahosī”’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Rồi này Ānanda, vua Nimi, sau khi cho người thợ cạo tóc một lương ấp như là một ân tứ, sau khi khéo giao quốc gia cho vị Hoàng tử con đầu, chính tại rừng xoài Makhadeva này, sau khi cạo bỏ râu tóc, đắp áo cà-sa, đã xuất gia.<br>
+<span lang="pi" class="pali">
+Atha kho, ānanda, nimi rājā kappakassa gāmavaraṁ datvā jeṭṭhaputtaṁ kumāraṁ sādhukaṁ rajje samanusāsitvā imasmiṁyeva maghadevaambavane kesamassuṁ ohāretvā kāsāyāni vatthāni acchādetvā agārasmā anagāriyaṁ pabbaji.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+vị này an trú, biến mãn một phương với tâm thấm nhuần lòng từ; cũng vậy phương thứ hai, cũng vậy phương thứ ba, cũng vậy phương thứ tư. Như vậy cùng khắp thế giới, trên, dưới, bề ngang, hết thảy phương xứ, cùng khắp vô biên giới, vị ấy an trú, biến mãn với tâm thấm nhuần lòng từ, quảng đại vô biên, không hận, không sân.<br>
+<span lang="pi" class="pali">
+So mettāsahagatena cetasā ekaṁ disaṁ pharitvā vihāsi, tathā dutiyaṁ, tathā tatiyaṁ, tathā catutthaṁ; iti uddhamadho tiriyaṁ sabbadhi sabbattatāya sabbāvantaṁ lokaṁ mettāsahagatena cetasā vipulena mahaggatena appamāṇena averena abyābajjhena pharitvā vihāsi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Với tâm thấm nhuần lòng bi…<br>
+<span lang="pi" class="pali">
+Karuṇāsahagatena cetasā …<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Với tâm thấm nhuần lòng hỷ…<br>
+<span lang="pi" class="pali">
+muditāsahagatena cetasā …<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+an trú biến mãn mọt phương với tâm thấm nhuần lòng xả; cũng vậy phương thứ hai, cũng vậy phương thứ ba, cũng vậy phương thứ tư. Như vậy cùng khắp thế giới, trên, dưới, bề ngang, hết thảy phương xứ, cùng khắp vô biên giới, vị ấy an trú biến mãn với tâm thấm nhuần lòng xả, quảng đại vô biên, không hận, không sân.<br>
+<span lang="pi" class="pali">
+upekkhāsahagatena cetasā ekaṁ disaṁ pharitvā vihāsi, tathā dutiyaṁ, tathā tatiyaṁ, tathā catutthaṁ; iti uddhamadho tiriyaṁ sabbadhi sabbattatāya sabbāvantaṁ lokaṁ upekkhāsahagatena cetasā vipulena mahaggatena appamāṇena averena abyābajjhena pharitvā vihāsi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Nhưng này Ānanda, vua Nimi, 84.000 năm, đã chơi trò chơi của hoàng tử; 84.000 năm, đã trị vì như phó vương; 84.000 năm, đã chấp chánh như một quốc vương; 84.000 năm, chính tại ngôi rừng xoài Makhadeva này, sau khi cạo bỏ râu tóc, đắp áo cà-sa, đã xuất gia, từ bỏ gia đình, sống không gia đình, sống theo Phạm hạnh.<br>
+<span lang="pi" class="pali">
+Nimi kho panānanda, rājā caturāsītivassasahassāni kumārakīḷitaṁ kīḷi, caturāsītivassasahassāni oparajjaṁ kāresi, caturāsītivassasahassāni rajjaṁ kāresi, caturāsītivassasahassāni imasmiṁyeva maghadevaambavane agārasmā anagāriyaṁ pabbajito brahmacariyamacari.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vị này, sau khi tu tập bốn Phạm trú, khi thân hoại mạng chung, được sanh lên Phạm thiên giới.<br>
+<span lang="pi" class="pali">
+So cattāro brahmavihāre bhāvetvā kāyassa bhedā paraṁ maraṇā brahmalokūpago ahosi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Nhưng này Ānanda, người con của vua Nimi tên là Kaḷārajanaka.<br>
+<span lang="pi" class="pali">
+Nimissa kho panānanda, rañño kaḷārajanako nāma putto ahosi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vị này không xuất gia, từ bỏ gia đình, sống không gia đình.<br>
+<span lang="pi" class="pali">
+Na so agārasmā anagāriyaṁ pabbaji.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vị này đã cắt đứt truyền thống tốt đẹp ấy.<br>
+<span lang="pi" class="pali">
+So taṁ kalyāṇaṁ vattaṁ samucchindi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vị này là người tối hậu của các vị ấy.<br>
+<span lang="pi" class="pali">
+So tesaṁ antimapuriso ahosi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Ānanda, rất có thể Ông nghĩ như sau:<br>
+<span lang="pi" class="pali">
+Siyā kho pana te, ānanda, evamassa:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Trong thời ấy, vua Makhadeva, vị đã thiết lập truyền thống tốt đẹp ấy là một vị khác”.<br>
+<span lang="pi" class="pali">
+‘añño nūna tena samayena rājā maghadevo ahosi, yena taṁ kalyāṇaṁ vattaṁ nihitan’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Nhưng này Ānanda, chớ có hiểu như vậy.<br>
+<span lang="pi" class="pali">
+Na kho panetaṁ, ānanda, evaṁ daṭṭhabbaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Trong thời ấy, ta là Makhadeva.<br>
+<span lang="pi" class="pali">
+Ahaṁ tena samayena rājā maghadevo ahosiṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ta đã thiết lập truyền thống tốt đẹp ấy. Dân chúng đến sau cho rằng truyền thống tốt đẹp ấy được Ta thiết lập.<br>
+<span lang="pi" class="pali">
+Ahaṁ taṁ kalyāṇaṁ vattaṁ nihiniṁ, mayā taṁ kalyāṇaṁ vattaṁ nihitaṁ; pacchimā janatā anuppavattesi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Nhưng này Ānanda, truyền thống tốt đẹp ấy không đưa đến yểm ly, ly tham, đoạn diệt, tịch tịnh, thượng trí, giác ngộ, Niết-bàn, chỉ đưa đến Phạm thiên giới.<br>
+<span lang="pi" class="pali">
+Taṁ kho panānanda, kalyāṇaṁ vattaṁ na nibbidāya na virāgāya na nirodhāya na upasamāya na abhiññāya na sambodhāya na nibbānāya saṁvattati, yāvadeva brahmalokūpapattiyā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Nhưng  giờ, này Ānanda, truyền thống tốt đẹp được Ta thiết lập, và truyền thống ấy đưa đến yểm ly, ly tham, đoạn diệt, tịch tịnh, thượng trí, giác ngộ, Niết-bàn.<br>
+<span lang="pi" class="pali">
+Idaṁ kho panānanda, etarahi mayā kalyāṇaṁ vattaṁ nihitaṁ ekantanibbidāya virāgāya nirodhāya upasamāya abhiññāya sambodhāya nibbānāya saṁvattati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+và này Ānanda, nay thế nào là truyền thống tốt đẹp được Ta thiết lập, và truyền thống ấy đưa đến yểm ly, ly tham, đoạn diệt, tịch tịnh, thượng trí, giác ngộ, Niết-bàn?<br>
+<span lang="pi" class="pali">
+Katamañcānanda, etarahi mayā kalyāṇaṁ vattaṁ nihitaṁ ekantanibbidāya virāgāya nirodhāya upasamāya abhiññāya sambodhāya nibbānāya saṁvattati?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Chính là Thánh đạo Tám ngành này, tức là:<br>
+<span lang="pi" class="pali">
+Ayameva ariyo aṭṭhaṅgiko maggo, seyyathidaṁ—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Chánh tri kiến, Chánh tư duy, Chánh ngữ, Chánh nghiệp, Chánh mạng, Chánh tinh tấn, Chánh niệm, Chánh định.<br>
+<span lang="pi" class="pali">
+sammādiṭṭhi, sammāsaṅkappo, sammāvācā, sammākammanto, sammāājīvo, sammāvāyāmo, sammāsati, sammāsamādhi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Ānanda, đây là truyền thống tốt đẹp được Ta thiết lập, và truyền thống ấy đưa đến yểm ly, ly tham, đoạn diệt, tịch tịnh, thắng trí, giác ngộ, Niết-bàn.<br>
+<span lang="pi" class="pali">
+Idaṁ kho, ānanda, etarahi mayā kalyāṇaṁ vattaṁ nihitaṁ ekantanibbidāya virāgāya nirodhāya upasamāya abhiññāya sambodhāya nibbānāya saṁvattati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Ānanda, về vấn đề này, Ta nói như sau:<br>
+<span lang="pi" class="pali">
+Taṁ vo ahaṁ, ānanda, evaṁ vadāmi:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Truyền thống tốt đẹp này do Ta thiết lập, hãy tiếp tục duy trì. Các Ông chớ có thành người tối hậu sau Ta”.<br>
+<span lang="pi" class="pali">
+‘yena me idaṁ kalyāṇaṁ vattaṁ nihitaṁ anuppavatteyyātha, mā kho me tumhe antimapurisā ahuvattha’.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Ānanda, khi hai người còn tồn tại, và có sự đứt đoạn của truyền thống này, thời người nào làm cho đứt đoạn, người ấy là người tối hậu.<br>
+<span lang="pi" class="pali">
+Yasmiṁ kho, ānanda, purisayuge vattamāne evarūpassa kalyāṇassa vattassa samucchedo hoti so tesaṁ antimapuriso hoti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vậy này Ānanda, Ta nói với Ông:<br>
+<span lang="pi" class="pali">
+Taṁ vo ahaṁ, ānanda, evaṁ vadāmi:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Truyền thống tốt đẹp này do Ta thiết lập, các Ông hãy tiếp tục duy trì. Các Ông chớ có thành người tối hậu sau Ta”.<br>
+<span lang="pi" class="pali">
+‘yena me idaṁ kalyāṇaṁ vattaṁ nihitaṁ anuppavatteyyātha, mā kho me tumhe antimapurisā ahuvatthā’”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Thế Tôn thuyết giảng như vậy.<br>
+<span lang="pi" class="pali">
+Idamavoca bhagavā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Tôn giả Ānanda hoan hỷ tín thọ lời Thế Tôn dạy.<br>
+<span lang="pi" class="pali">
+Attamano āyasmā ānando bhagavato bhāsitaṁ abhinandīti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+<span lang="pi" class="vi">
+Maghadevasuttaṁ niṭṭhitaṁ tatiyaṁ.<br>
+</span>
+</p>
+
+
+<!-- COPY CONTENT SUTTA Ở ĐÂY -->
+
+
+
+<br>
+<p><p style="text-align: right;font-style: italic;">Hoà Thượng Thích Minh Châu dịch Việt</span></p>
+
+
+
+
+
+
+
+
+</section>  <!-- End English and Pali -->
+<div id="nextprev"><a id="previous-sutta" href="./mn82.html#content"></a><a id="next-sutta" href="./mn84.html#content"></a></div>
+</div>  <!--End Content -->
+</div>  <!-- End Page -->
+
+
+
+
+
+
+<footer>
+					 <!-- End bottom links -->
+</footer>
+
+
+ 
+ <!-- Scripts -->
+
+ <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      if (typeof enablePaliLookup === "function") {
+        enablePaliLookup();
+      } else {
+        console.error("enablePaliLookup is not defined");
+      }
+    });
+  </script>
+
+ <script>
+ // Script to open and close sidebar
+ 	function w3_open() {
+ 	document.getElementById("mySidebar").style.display = "block";
+ 	}
+ 		function w3_close() {
+ 		document.getElementById("mySidebar").style.display = "none";
+ 	}
+ </script>
+ <script>
+ 		var app = document.getElementsByTagName("BODY")[0];
+ 		if (localStorage.lightMode == "dark") {
+ 			app.setAttribute("light-mode", "dark");
+ 	}
+ </script>
+ 
+ <script>
+ 		function toggle_light_mode() {
+ 			var app = document.getElementsByTagName("BODY")[0];
+ 				if (localStorage.lightMode == "dark") {
+ 			localStorage.lightMode = "light";
+ 			app.setAttribute("light-mode", "light");
+ 		} else {
+ 					localStorage.lightMode = "dark";
+ 					app.setAttribute("light-mode", "dark");
+ 	}
+ 		}
+ 
+ 		window.addEventListener("storage", function () {
+ 			if (localStorage.lightMode == "dark") {
+ 				app.setAttribute("light-mode", "dark");
+ 				} else {
+ 				app.setAttribute("light-mode", "light");
+ 		}
+ 		}, false);
+ 
+ </script>
+ <script src="../js/footer.js"></script><script src="../js/dpd_deconstructor.js"></script><script src="../js/dpd_ebts.js"></script><script src="../js/dpd_i2h.js"></script>
+ <script src="/sw.js"></script>
+ </body>
+ </html>

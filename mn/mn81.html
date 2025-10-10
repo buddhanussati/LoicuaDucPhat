@@ -1,0 +1,1574 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+ 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+ 	<link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+ 	<meta name="viewport" content="width=device-width, initial-scale=1">
+		<!-- Loading manifest -->
+	<link rel="manifest" href="../manifest.json">
+ 	<!-- Loading main and menu stylesheets -->
+ 	<link rel="stylesheet" href="../css/w3.css">
+ 	<link rel="stylesheet" href="../css/css.css">
+ 	<link rel="stylesheet" href="../css/menu.css">
+ 	<script src="../js/jquery-1.10.2.min.js"></script>
+ 	<script src="../js/controlpanel.js"></script>
+ 	<script src="../js/mousetrap.min.js"></script>
+    <script src="../js/pali-lookup-standalone.js"></script>
+
+ <script src="../js/suttaFiles.js"></script>
+<script>
+ // Script to open random Sutta
+ function openRandomSutta() {
+  const randomIndex = Math.floor(Math.random() * suttaFiles.length);
+  const selectedFile = suttaFiles[randomIndex];
+
+  // Get root path of your site 
+  const currentPath = location.pathname;
+  const rootPath = currentPath.split("/").slice(0, -2).join("/") + "/";
+
+  // Redirect to the correct file
+  window.location.href = rootPath + selectedFile;
+}
+</script>
+
+
+</head>
+ <body class="container">
+ <div class="header-background">
+ <!-- Header -->
+ <div class="w3-header w3-content w3-padding w3-left-align bwcontainer">
+ 	<div class="centered">
+ 		<button class="light-mode-button" aria-label="Bật Chế Độ Sáng" onclick="toggle_light_mode()">
+ 			<span></span>
+ 			<span></span>
+ 		</button>
+ 		<span class="box-lbl">Sáng/Tối</span>
+ 	</div> <!-- Centered -->
+ 		<a href="../home/index.html" id="bwlogo"><img src="../images/headerlogo.png" alt="Logo Lời Của Đức Phật" class="w3-image"></a>
+ 		<div class="w3-bar bwcontainer">
+ 			<div id="searchlinks">
+ 			<a href="../home/visearch.html"><span class="w3-bar-item"><i class="fa fa-search"></i>&nbsp;Tìm Tiếng Việt</span></a>
+ 			<a href="../home/palisearch.html"><span class="w3-bar-item"><i class="fa fa-search"></i>&nbsp;Tìm Tiếng Pali</span></a>
+ 			</div><!-- End Searchlinks div -->
+ 			<div class="help"><span><a href="../home/help.html"><img src="../images/help_icon.png" title="Trợ Giúp" alt="Help"></a></span></div>
+ 		</div> <!-- End w3-bar bwcontainer --> 	</div> <!-- End w3-header w3-content w3-padding w3-left-align bwcontainer -->
+ </div> <!-- End header-background -->
+ <!-- Top menu -->
+
+ <div class="w3-main w3-white bwcontainer2">
+ 	<div class="w3-button w3-padding-8 w3-left w3-hide-large" onclick="w3_open()">☰</div>
+ 		<div id="navbar" class="w3-hide-small w3-hide-medium bwcontainer3">
+ 			<ul id="css3menu0">
+ 				<li class="topfirst" id="home"><a href="../home/index.html" class="w3-hide-small">Trang Chủ</a></li>
+  				<li class="topmenu" id="dn"><a href="../dn/dn.html" class="pressed w3-hide-small">Trường Bộ Kinh</a></li>
+ 				<li class="topmenu" id="mn"><a href="../mn/mn.html" class="w3-hide-small">Trung Bộ Kinh</a></li>
+ 				<li class="topmenu" id="sn"><a href="../sn/sn.html" class="w3-hide-small"><i class="fa fa-caret-down"></i>&nbsp;Tương Ưng Bộ Kinh</a>
+ 					<ul>
+ 						<li><a href="../sn/sn01.html" class="w3-hide-small">Tập I - Thiên Có Kệ</a></li>
+ 						<li><a href="../sn/sn02.html" class="w3-hide-small">Tập II - Thiên Nhân Duyên</a></li>
+ 						<li><a href="../sn/sn03.html" class="w3-hide-small">Tập III - Thiên Uẩn</a></li>
+ 						<li><a href="../sn/sn04.html" class="w3-hide-small">Tập IV - Thiên Sáu Xứ</a></li>
+ 						<li><a href="../sn/sn05.html" class="w3-hide-small">Tập V - Thiên Ðại Phẩm</a></li>
+ 					</ul>
+ 				<li class="topmenu" id="an"><a href="../an/an.html" class="w3-hide-small"><i class="fa fa-caret-down"></i>&nbsp;Tăng Chi Bộ Kinh</a>
+ 					<ul>
+ 						<li><a href="../an/an1.html" class="w3-hide-small">Chương Một Pháp</a></li>
+ 						<li><a href="../an/an2.html" class="w3-hide-small">Chương Hai Pháp</a></li>
+ 						<li><a href="../an/an3.html" class="w3-hide-small">Chương Ba Pháp</a></li>
+ 						<li><a href="../an/an4.html" class="w3-hide-small">Chương Bốn Pháp</a></li>
+ 						<li><a href="../an/an5.html" class="w3-hide-small">Chương Năm Pháp</a></li>
+ 						<li><a href="../an/an6.html" class="w3-hide-small">Chương Sáu Pháp</a></li>
+ 						<li><a href="../an/an7.html" class="w3-hide-small">Chương Bảy Pháp</a></li>
+ 						<li><a href="../an/an8.html" class="w3-hide-small">Chương Tám Pháp</a></li>
+ 						<li><a href="../an/an9.html" class="w3-hide-small">Chương Chín Pháp</a></li>
+ 						<li><a href="../an/an10.html" class="w3-hide-small">Chương Mười Pháp</a></li>
+ 						<li><a href="../an/an11.html" class="w3-hide-small">Chương Mười Một Pháp</a></li>
+ 					</ul>
+ 				</li>
+ 				<li class="topmenu" id="kn"><a href="../kn/kn.html" class="w3-hide-small"><i class="fa fa-caret-down"></i>&nbsp;Tiểu Bộ Kinh</a>
+ 					<ul>
+ 						<li><a href="../kp/kp.html" class="w3-hide-small">Kinh Tiểu Tụng</a></li>
+ 						<li><a href="../dhp/dhp.html" class="w3-hide-small">Kinh Pháp Cú</a></li>
+ 						<li><a href="../snp/snp.html" class="w3-hide-small">Kinh Tập</a></li>
+ 						<li><a href="../ud/ud.html" class="w3-hide-small">Kinh Phật Tự Thuyết</a></li>
+ 						<li><a href="../it/it.html" class="w3-hide-small">Kinh Phật Thuyết Như Vậy</a></li>
+ 						<li><a href="../tha/tha.html" class="w3-hide-small">Trưởng Lão Tăng Kệ</a></li>
+ 						<li><a href="../thi/thi.html" class="w3-hide-small">Trưởng Lão Ni Kệ</a></li>
+ 					</ul>
+ 				</li>
+				<li class="toplast" id="rd"><a href="../rd/rd.html" class="w3-hide-small"></i>Kinh Ngẫu Nhiên Theo Nhóm</a>
+ 					</ul>
+ 				</li>
+ 			</ul>
+ 			</div>
+ 		</div> <!--navbar-->
+
+<!-- Sidebar (hidden by default) -->
+ <nav class="w3-sidebar w3-bar-block w3-card w3-border w3-top w3-animate-left w3-hide-large" id="mySidebar">
+ 	<a href="javascript:void(0)" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-times fa-2x red-color"></i>&nbsp;&nbsp;&nbsp;Close</a><!-- Hides the sidebar when clicked -->
+ 		<div class="w3-bar-block w3-white">
+ 			<a href="../home/index.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-home fa-lg"></i>&nbsp;&nbsp;&nbsp;Home</a>
+ 			<a href="../guide/guide.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Guide</a>
+ 			<a href="../dn/dn.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Trường Bộ Kinh</a>
+ 			<a href="../mn/mn.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Trung Bộ Kinh</a>
+ 			<a href="../sn/sn.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Tương Ưng Bộ Kinh</a>
+ 			<a href="../an/an.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Tăng Chi Bộ Kinh
+ 			<a href="../kn/kn.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Tiểu Bộ Kinh</a>
+			<a href="../rd/rd.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>Kinh Ngẫu Nhiên Theo Nhóm</a>
+ 		</div>
+ </nav>
+ 
+ 
+ 
+   <!-- !PAGE CONTENT! --> 
+<div class="w3-main w3-content w3-padding w3-left-align bwcontainer4">
+<div id="content">
+<h2>Majjhima Nikāya - Trung Bộ Kinh</h2>
+<h5><span style="font-style: italic;">Hoà Thượng Thích Minh Châu dịch Việt</span></h5>
+
+</div>
+
+<br>
+ 	<title>        Trung Bộ 81          </title>
+
+<p lang="vi" class="vi"; style="text-align: center">
+Trung Bộ 81<br>
+<span lang="pi" class="pali">
+Majjhima Nikāya 81<br>
+</span>
+</p>
+
+<p lang="vi" class="vi"; style="text-align: center">
+Kinh Ghaṭīkāra<br>
+<span lang="pi" class="pali">
+Ghaṭikārasutta<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Như vầy tôi nghe.<br>
+<span lang="pi" class="pali">
+Evaṁ me sutaṁ—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Một thời Thế Tôn đi du hành giữa dân chúng Kosala với đại chúng Tỷ-kheo.<br>
+<span lang="pi" class="pali">
+ekaṁ samayaṁ bhagavā kosalesu cārikaṁ carati mahatā bhikkhusaṅghena saddhiṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Rồi Thế Tôn bước xuống bên lề đường, đến tại một địa điểm rồi mỉm cười.<br>
+<span lang="pi" class="pali">
+Atha kho bhagavā maggā okkamma aññatarasmiṁ padese sitaṁ pātvākāsi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Tôn giả Ānanda suy nghĩ:<br>
+<span lang="pi" class="pali">
+Atha kho āyasmato ānandassa etadahosi:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Do nhân gì, do duyên gì, Thế Tôn lại mỉm cười?<br>
+<span lang="pi" class="pali">
+“ko nu kho hetu, ko paccayo bhagavato sitassa pātukammāya?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Không phải không lý do, Như Lai lại mỉm cười”.<br>
+<span lang="pi" class="pali">
+Na akāraṇena tathāgatā sitaṁ pātukarontī”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Rồi Tôn giả Ānanda đắp y về phía một bên vai, chấp tay hướng đến Thế Tôn và bạch Thế Tôn:<br>
+<span lang="pi" class="pali">
+Atha kho āyasmā ānando ekaṁsaṁ cīvaraṁ katvā yena bhagavā tenañjaliṁ paṇāmetvā bhagavantaṁ etadavoca:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Bạch Thế Tôn, do nhân gì, do duyên gì Thế Tôn lại mỉm cười?<br>
+<span lang="pi" class="pali">
+“ko nu kho, bhante, hetu, ko paccayo bhagavato sitassa pātukammāya?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Không phải không lý do, Như Lai lại mỉm cười.”<br>
+<span lang="pi" class="pali">
+Na akāraṇena tathāgatā sitaṁ pātukarontī”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Thuở xưa này Ānanda, tại địa điểm này là một thị trấn tên là Vebhaliṅga, phồn thịnh, giàu có và dân cư đông đúc.<br>
+<span lang="pi" class="pali">
+“Bhūtapubbaṁ, ānanda, imasmiṁ padese vegaḷiṅgaṁ nāma gāmanigamo ahosi iddho ceva phīto ca bahujano ākiṇṇamanusso.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Ānanda, Thế Tôn Kassapa, bậc A-la-hán, Chánh Ðẳng Giác sống ở đây, dựa vào thị trấn Vebhaliṅga.<br>
+<span lang="pi" class="pali">
+Vegaḷiṅgaṁ kho, ānanda, gāmanigamaṁ kassapo bhagavā arahaṁ sammāsambuddho upanissāya vihāsi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ở đây, này Ānanda, là tu viện của Thế Tôn Kassapa, bậc A-la-hán, Chánh Ðẳng Giác.<br>
+<span lang="pi" class="pali">
+Idha sudaṁ, ānanda, kassapassa bhagavato arahato sammāsambuddhassa ārāmo ahosi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Chính tại đây, này Ānanda, Thế Tôn Kassapa, bậc A-la-hán, Chánh Ðẳng Giác ngồi giảng dạy cho chúng Tỷ-kheo.”<br>
+<span lang="pi" class="pali">
+Idha sudaṁ, ānanda, kassapo bhagavā arahaṁ sammāsambuddho nisinnako bhikkhusaṅghaṁ ovadatī”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Rồi Tôn giả Ānanda gấp tư y sanghati (tăng-già-lê), trải ra rồi bạch Thế Tôn:<br>
+<span lang="pi" class="pali">
+Atha kho āyasmā ānando catugguṇaṁ saṅghāṭiṁ paññapetvā bhagavantaṁ etadavoca:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Bạch Thế Tôn, thỉnh Thế Tôn ngồi xuống.<br>
+<span lang="pi" class="pali">
+“tena hi, bhante, bhagavā nisīdatu ettha.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Chính tại địa điểm này, hai bậc A-la-hán, Chánh Ðẳng Giác sẽ sử dụng.”<br>
+<span lang="pi" class="pali">
+Ayaṁ bhūmipadeso dvīhi arahantehi sammāsambuddhehi paribhutto bhavissatī”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Thế Tôn ngồi xuống trên chỗ đã soạn sẵn.<br>
+<span lang="pi" class="pali">
+Nisīdi bhagavā paññatte āsane.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Sau khi ngồi, Thế Tôn nói với Tôn giả Ānanda:<br>
+<span lang="pi" class="pali">
+Nisajja kho bhagavā āyasmantaṁ ānandaṁ āmantesi:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Thuở xưa, này Ānanda, tại địa điểm này là thị trấn tên Vebhaliṅga, phồn thịnh, giàu có và dân cư đông đúc.<br>
+<span lang="pi" class="pali">
+“Bhūtapubbaṁ, ānanda, imasmiṁ padese vegaḷiṅgaṁ nāma gāmanigamo ahosi iddho ceva phīto ca bahujano ākiṇṇamanusso.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Ānanda, Thế Tôn Kassapa, bậc A-la-hán, Chánh Ðẳng Giác đã sống dựa vào thị trấn Vebhaliṅga.<br>
+<span lang="pi" class="pali">
+Vegaḷiṅgaṁ kho, ānanda, gāmanigamaṁ kassapo bhagavā arahaṁ sammāsambuddho upanissāya vihāsi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Chính tại đây, này Ānanda, là tu viện của Thế Tôn Kassapa, bậc A-la-hán, Chánh Ðẳng Giác.<br>
+<span lang="pi" class="pali">
+Idha sudaṁ, ānanda, kassapassa bhagavato arahato sammāsambuddhassa ārāmo ahosi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Chính tại đây, này Ānanda, Thế Tôn Kassapa, bậc A-la-hán, Chánh Ðẳng Giác ngồi giảng dạy cho chúng Tỷ-kheo.<br>
+<span lang="pi" class="pali">
+Idha sudaṁ, ānanda, kassapo bhagavā arahaṁ sammāsambuddho nisinnako bhikkhusaṅghaṁ ovadati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Ānanda, chính tại thị trấn Vebhaliṅga, có người thợ làm đồ gốm tên là Ghaṭīkāra, người này là người đàn tín của Thế Tôn Kassapa, bậc A-la-hán, Chánh Ðẳng Giác, vị đàn tín đệ nhất.<br>
+<span lang="pi" class="pali">
+Vegaḷiṅge kho, ānanda, gāmanigame ghaṭikāro nāma kumbhakāro kassapassa bhagavato arahato sammāsambuddhassa upaṭṭhāko ahosi aggupaṭṭhāko.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Thanh niên Jotipāla là người bạn chí thân của thợ gốm Ghaṭīkāra.<br>
+<span lang="pi" class="pali">
+Ghaṭikārassa kho, ānanda, kumbhakārassa jotipālo nāma māṇavo sahāyo ahosi piyasahāyo.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Rồi này Ānanda, thợ gốm Ghaṭīkāra nói với thanh niên Jotipāla:<br>
+<span lang="pi" class="pali">
+Atha kho, ānanda, ghaṭikāro kumbhakāro jotipālaṁ māṇavaṁ āmantesi:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Này bạn Jotipāla, chúng ta hãy đi. Chúng ta hãy đi đến yết kiến Thế Tôn Kassapa, bậc A-la-hán, Chánh Ðẳng Giác.<br>
+<span lang="pi" class="pali">
+‘āyāma, samma jotipāla, kassapaṁ bhagavantaṁ arahantaṁ sammāsambuddhaṁ dassanāya upasaṅkamissāma.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Thật là tốt lành cho tôi được đến yết kiến Thế Tôn, bậc A-la-hán, Chánh Ðẳng Giác ấy”.<br>
+<span lang="pi" class="pali">
+Sādhusammatañhi me tassa bhagavato dassanaṁ arahato sammāsambuddhassā’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Khi nghe nói vậy, này Ānanda, thanh niên Jotipāla nói với thợ gốm Ghaṭīkāra:<br>
+<span lang="pi" class="pali">
+Evaṁ vutte, ānanda, jotipālo māṇavo ghaṭikāraṁ kumbhakāraṁ etadavoca:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Thôi vừa rồi, bạn Ghaṭīkāra,<br>
+<span lang="pi" class="pali">
+‘alaṁ, samma ghaṭikāra.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+yết kiến Sa-môn trọc đầu như vậy để làm gì?’<br>
+<span lang="pi" class="pali">
+Kiṁ pana tena muṇḍakena samaṇakena diṭṭhenā’ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Lần thứ hai, này Ānanda…<br>
+<span lang="pi" class="pali">
+Dutiyampi kho, ānanda …pe…<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Lần thứ ba, này Ānanda, thợ gốm Ghaṭīkāra nói với thanh niên Jotipāla:<br>
+<span lang="pi" class="pali">
+tatiyampi kho, ānanda, ghaṭikāro kumbhakāro jotipālaṁ māṇavaṁ etadavoca:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Này bạn Jotipāla, chúng ta hãy đi. Chúng ta hãy đi đến yết kiến Thế Tôn Kassapa, bậc A-la-hán, Chánh Ðẳng Giác.<br>
+<span lang="pi" class="pali">
+‘āyāma, samma jotipāla, kassapaṁ bhagavantaṁ arahantaṁ sammāsambuddhaṁ dassanāya upasaṅkamissāma.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Thật là tốt lành cho tôi được đến yết kiến Thế Tôn, bậc A-la-hán, Chánh Ðẳng Giác ấy.’<br>
+<span lang="pi" class="pali">
+Sādhusammatañhi me tassa bhagavato dassanaṁ arahato sammāsambuddhassā’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Lần thứ ba này Ānanda, thanh niên Jotipāla nói với thợ gốm Ghaṭīkāra:<br>
+<span lang="pi" class="pali">
+Tatiyampi kho, ānanda, jotipālo māṇavo ghaṭikāraṁ kumbhakāraṁ etadavoca:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Thôi vừa rồi, bạn Ghaṭīkāra,<br>
+<span lang="pi" class="pali">
+‘alaṁ, samma ghaṭikāra.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+yết kiến Sa-môn trọc đầu như vậy để làm gì?’<br>
+<span lang="pi" class="pali">
+Kiṁ pana tena muṇḍakena samaṇakena diṭṭhenā’ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Vậy này bạn Jotipāla, hãy cầm đồ gãi lưng và bột tắm, chúng ta hãy đi đến sông để tắm’.<br>
+<span lang="pi" class="pali">
+‘Tena hi, samma jotipāla, sottisināniṁ ādāya nadiṁ gamissāma sināyitun’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Thưa bạn, vâng,’ này Ānanda, thanh niên Jotipāla vâng đáp thợ gốm Ghaṭīkāra như vậy.<br>
+<span lang="pi" class="pali">
+‘Evaṁ, sammā’ti kho, ānanda, jotipālo māṇavo ghaṭikārassa kumbhakārassa paccassosi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Thợ gốm Ghaṭīkāra và thanh niên Jotipāla lấy đồ gãi lưng và bột tắm, đi đến sông để tắm.<br>
+<span lang="pi" class="pali">
+Atha kho, ānanda, ghaṭikāro ca kumbhakāro jotipālo ca māṇavo sottisināniṁ ādāya nadiṁ agamaṁsu sināyituṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Rồi này Ānanda, thợ gốm Ghaṭīkāra nói với thanh niên Jotipāla:<br>
+<span lang="pi" class="pali">
+Atha kho, ānanda, ghaṭikāro kumbhakāro jotipālaṁ māṇavaṁ āmantesi:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Này bạn Jotipāla, chỗ này cách tu viện Thế Tôn Kassapa, bậc A-la-hán, Chánh Ðẳng Giác không bao xa.<br>
+<span lang="pi" class="pali">
+‘ayaṁ, samma jotipāla, kassapassa bhagavato arahato sammāsambuddhassa avidūre ārāmo.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này bạn Jotipāla, chúng ta hãy đi. Chúng ta hãy đi đến yết kiến Thế Tôn Kassapa, bậc A-la-hán, Chánh Ðẳng Giác.<br>
+<span lang="pi" class="pali">
+Āyāma, samma jotipāla, kassapaṁ bhagavantaṁ arahantaṁ sammāsambuddhaṁ dassanāya upasaṅkamissāma.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Thật là tốt lành cho tôi được đến yết kiến Thế Tôn, bậc A-la-hán, Chánh Ðẳng Giác ấy’.<br>
+<span lang="pi" class="pali">
+Sādhusammatañhi me tassa bhagavato dassanaṁ arahato sammāsambuddhassā’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Khi nghe nói vậy, này Ānanda, thanh niên Jotipāla nói với thợ gốm Ghaṭīkāra:<br>
+<span lang="pi" class="pali">
+Evaṁ vutte, ānanda, jotipālo māṇavo ghaṭikāraṁ kumbhakāraṁ etadavoca:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Thôi vừa rồi, bạn Ghaṭīkāra,<br>
+<span lang="pi" class="pali">
+‘alaṁ, samma ghaṭikāra.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+yết kiến Sa-môn trọc đầu như vậy để làm gì?’<br>
+<span lang="pi" class="pali">
+Kiṁ pana tena muṇḍakena samaṇakena diṭṭhenā’ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Lần thứ hai, này Ānanda, …<br>
+<span lang="pi" class="pali">
+Dutiyampi kho, ānanda …pe…<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+lần thứ ba này Ānanda, thợ gốm Ghaṭīkāra nói với thanh niên Jotipāla:<br>
+<span lang="pi" class="pali">
+tatiyampi kho, ānanda, ghaṭikāro kumbhakāro jotipālaṁ māṇavaṁ etadavoca:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Này bạn Jotipāla, chỗ này cách tu viện của Thế Tôn Kassapa, bậc A-la-hán, Chánh Ðẳng Giác không bao xa.<br>
+<span lang="pi" class="pali">
+‘ayaṁ, samma jotipāla, kassapassa bhagavato arahato sammāsambuddhassa avidūre ārāmo.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này bạn Jotipāla, chúng ta hãy đi. Chúng ta hãy đi đến yết kiến Thế Tôn Kassapa, bậc A-la-hán, Chánh Ðẳng Giác.<br>
+<span lang="pi" class="pali">
+Āyāma, samma jotipāla, kassapaṁ bhagavantaṁ arahantaṁ sammāsambuddhaṁ dassanāya upasaṅkamissāma.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Thật là tốt lành cho tôi được yết kiến Thế Tôn Kassapa, bậc A-la-hán, Chánh Ðẳng Giác ấy”.<br>
+<span lang="pi" class="pali">
+Sādhusammatañhi me tassa bhagavato dassanaṁ arahato sammāsambuddhassā’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Lần thứ ba, này Ānanda, thanh niên Jotipāla nói với thợ gốm Ghaṭīkāra:<br>
+<span lang="pi" class="pali">
+Tatiyampi kho, ānanda, jotipālo māṇavo ghaṭikāraṁ kumbhakāraṁ etadavoca:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Thôi vừa rồi, bạn Ghaṭīkāra,<br>
+<span lang="pi" class="pali">
+‘alaṁ, samma ghaṭikāra.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+yết kiến Sa-môn trọc đầu như vậy để làm gì?’<br>
+<span lang="pi" class="pali">
+Kiṁ pana tena muṇḍakena samaṇakena diṭṭhenā’ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Rồi này Ānanda, thợ gốm Ghaṭīkāra nắm lấy thanh niên Jotipāla ở nơi cổ tay áo và nói:<br>
+<span lang="pi" class="pali">
+Atha kho, ānanda, ghaṭikāro kumbhakāro jotipālaṁ māṇavaṁ ovaṭṭikāyaṁ parāmasitvā etadavoca:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Này bạn Jotipāla, chỗ này cách tu viện Thế Tôn Kassapa, bậc A-la-hán, Chánh Ðẳng Giác không bao xa.<br>
+<span lang="pi" class="pali">
+‘ayaṁ, samma jotipāla, kassapassa bhagavato arahato sammāsambuddhassa avidūre ārāmo.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này bạn Jotipāla, chúng ta hãy đi. Chúng ta hãy đi đến yết kiến Thế Tôn Kassapa, bậc A-la-hán, Chánh Ðẳng Giác.<br>
+<span lang="pi" class="pali">
+Āyāma, samma jotipāla, kassapaṁ bhagavantaṁ arahantaṁ sammāsambuddhaṁ dassanāya upasaṅkamissāma.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Thật là tốt lành cho tôi được yết kiến Thế Tôn Kassapa, bậc A-la-hán, Chánh Ðẳng Giác ấy’.<br>
+<span lang="pi" class="pali">
+Sādhusammatañhi me tassa bhagavato dassanaṁ arahato sammāsambuddhassā’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Rồi này Ānanda, sau khi gỡ thoát cổ áo, thanh niên Jotipāla nói với thợ gốm Ghaṭīkāra:<br>
+<span lang="pi" class="pali">
+Atha kho, ānanda, jotipālo māṇavo ovaṭṭikaṁ vinivaṭṭetvā ghaṭikāraṁ kumbhakāraṁ etadavoca:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Thôi vừa rồi, bạn Ghaṭīkāra,<br>
+<span lang="pi" class="pali">
+‘alaṁ, samma ghaṭikāra.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+yết kiến vị Sa-môn đầu trọc ấy để làm gì?’<br>
+<span lang="pi" class="pali">
+Kiṁ pana tena muṇḍakena samaṇakena diṭṭhenā’ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Rồi thợ gốm Ghaṭīkāra nắm lấy tóc vừa mới tắm xong của thanh niên Jotipāla và nói:<br>
+<span lang="pi" class="pali">
+Atha kho, ānanda, ghaṭikāro kumbhakāro jotipālaṁ māṇavaṁ sīsaṁnhātaṁ kesesu parāmasitvā etadavoca:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Này bạn Jotipāla, chỗ này cách tu viện của Thế Tôn Kassapa, bậc A-la-hán, Chánh Ðẳng Giác không bao xa.<br>
+<span lang="pi" class="pali">
+‘ayaṁ, samma jotipāla, kassapassa bhagavato arahato sammāsambuddhassa avidūre ārāmo.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này bạn Jotipāla chúng ta hãy đi, chúng ta hãy đi đến yết kiến Thế Tôn Kassapa, bậc A-la-hán, Chánh Ðẳng Giác.<br>
+<span lang="pi" class="pali">
+Āyāma, samma jotipāla, kassapaṁ bhagavantaṁ arahantaṁ sammāsambuddhaṁ dassanāya upasaṅkamissāma.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Thật là tốt lành cho tôi được yết kiến Thế Tôn Kassapa, bậc A-la-hán, Chánh Ðẳng Giác’.<br>
+<span lang="pi" class="pali">
+Sādhusammatañhi me tassa bhagavato dassanaṁ arahato sammāsambuddhassā’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Rồi này Ānanda, thanh niên Jotipāla suy nghĩ như sau:<br>
+<span lang="pi" class="pali">
+Atha kho, ānanda, jotipālassa māṇavassa etadahosi:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Thật là vi diệu! Thật là hy hữu!<br>
+<span lang="pi" class="pali">
+‘acchariyaṁ vata bho, abbhutaṁ vata bho.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Thợ gốm Ghaṭīkāra tuy sanh thuộc hạ cấp, lại dám nghĩ có thể nắm lấy tóc của ta, dầu ta vừa mới gội đầu,<br>
+<span lang="pi" class="pali">
+Yatra hi nāmāyaṁ ghaṭikāro kumbhakāro ittarajacco samāno amhākaṁ sīsaṁnhātānaṁ kesesu parāmasitabbaṁ maññissati;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+chắc việc này không phải là tầm thường’,<br>
+<span lang="pi" class="pali">
+na vatidaṁ kira orakaṁ maññe bhavissatī’ti;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+rồi nói với thợ gốm Ghaṭīkāra:<br>
+<span lang="pi" class="pali">
+ghaṭikāraṁ kumbhakāraṁ etadavoca:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Này bạn Ghaṭīkāra, có thật sự là cần thiết không?’<br>
+<span lang="pi" class="pali">
+‘yāvatādohipi, samma ghaṭikārā’ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Này bạn Jotipāla, thật sự là cần thiết.<br>
+<span lang="pi" class="pali">
+‘Yāvatādohipi, samma jotipāla.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Thật là tốt lành cho tôi được yết kiến Thế Tôn Kassapa, bậc A-la-hán, Chánh Ðẳng Giác.’<br>
+<span lang="pi" class="pali">
+Tathā hi pana me sādhusammataṁ tassa bhagavato dassanaṁ arahato sammāsambuddhassā’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Vậy bạn Ghaṭīkāra, hãy thả (tay) ra. Chúng ta sẽ đi.’<br>
+<span lang="pi" class="pali">
+‘Tena hi, samma ghaṭikāra, muñca; gamissāmā’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Rồi này Ānanda, thợ gốm Ghaṭīkāra và thanh niên Jotipāla cùng đi đến Thế Tôn Kassapa, bậc A-la-hán, Chánh Ðẳng Giác. Sau khi đến, thợ gốm Ghaṭīkāra đảnh lễ Thế Tôn Kassapa, bậc A-la-hán, Chánh Ðẳng Giác rồi ngồi xuống một bên. Còn thanh niên Jotipāla thời nói lên những lời cháo đón hỏi thăm với Thế Tôn Kassapa, bậc A-la-hán, Chánh Ðẳng Giác, sau khi nói lên những lời chào đón hỏi thăm thân hữu, rồi ngồi xuống một bên.<br>
+<span lang="pi" class="pali">
+Atha kho, ānanda, ghaṭikāro ca kumbhakāro jotipālo ca māṇavo yena kassapo bhagavā arahaṁ sammāsambuddho tenupasaṅkamiṁsu; upasaṅkamitvā ghaṭikāro kumbhakāro kassapaṁ bhagavantaṁ arahantaṁ sammāsambuddhaṁ abhivādetvā ekamantaṁ nisīdi. Jotipālo pana māṇavo kassapena bhagavatā arahatā sammāsambuddhena saddhiṁ sammodi. Sammodanīyaṁ kathaṁ sāraṇīyaṁ vītisāretvā ekamantaṁ nisīdi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ngồi một bên, này Ānanda, thợ gốm Ghaṭīkāra bạch Thế Tôn Kassapa, bậc A-la-hán, Chánh Ðẳng Giác:<br>
+<span lang="pi" class="pali">
+Ekamantaṁ nisinno kho, ānanda, ghaṭikāro kumbhakāro kassapaṁ bhagavantaṁ arahantaṁ sammāsambuddhaṁ etadavoca:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Bạch Thế Tôn, đây là thanh niên Jotipāla, bạn của con, bạn thân tình của con.<br>
+<span lang="pi" class="pali">
+‘ayaṁ me, bhante, jotipālo māṇavo sahāyo piyasahāyo.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Mong Thế Tôn thuyết pháp cho bạn con’.<br>
+<span lang="pi" class="pali">
+Imassa bhagavā dhammaṁ desetū’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Rồi này Ānanda, Thế Tôn Kassapa, bậc A-la-hán, Chánh Ðẳng Giác, với pháp thoại khích lệ làm cho thích thú, làm cho phấn khởi, làm cho hoan hỷ thợ gốm Ghaṭīkāra và thanh niên Jotipāla.<br>
+<span lang="pi" class="pali">
+Atha kho, ānanda, kassapo bhagavā arahaṁ sammāsambuddho ghaṭikārañca kumbhakāraṁ jotipālañca māṇavaṁ dhammiyā kathāya sandassesi samādapesi samuttejesi sampahaṁsesi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Rồi này Ānanda, thợ gốm Ghaṭīkāra và thanh niên Jotipāla, sau khi được Thế Tôn Kassapa, bậc A-la-hán, Chánh Ðẳng Giác với pháp thoại, khích lệ, làm cho thích thú, phấn khởi, hoan hỷ, sau khi hoan hỷ tín thọ lời dạy Thế Tôn Kassapa, bậc A-la-hán, Chánh Ðẳng Giác, từ chỗ ngồi đứng dậy, đảnh lễ Thế Tôn Kassapa, bậc A-la-hán, Chánh Ðẳng Giác, thân bên hữu hướng về Ngài rồi ra đi.<br>
+<span lang="pi" class="pali">
+Atha kho, ānanda, ghaṭikāro ca kumbhakāro jotipālo ca māṇavo kassapena bhagavatā arahatā sammāsambuddhena dhammiyā kathāya sandassitā samādapitā samuttejitā sampahaṁsitā kassapassa bhagavato arahato sammāsambuddhassa bhāsitaṁ abhinanditvā anumoditvā uṭṭhāyāsanā kassapaṁ bhagavantaṁ arahantaṁ sammāsambuddhaṁ abhivādetvā padakkhiṇaṁ katvā pakkamiṁsu.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Rồi này Ānanda, thanh niên Jotipāla nói với thợ gốm Ghaṭīkāra:<br>
+<span lang="pi" class="pali">
+Atha kho, ānanda, jotipālo māṇavo ghaṭikāraṁ kumbhakāraṁ etadavoca:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Này bạn Ghaṭīkāra, khi nghe pháp này, vì sao bạn không xuất gia?’<br>
+<span lang="pi" class="pali">
+‘imaṁ nu tvaṁ, samma ghaṭikāra, dhammaṁ suṇanto atha ca pana agārasmā anagāriyaṁ na pabbajissasī’ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Này bạn Jotipāla, bạn không biết tôi sao? Tôi phải nuôi dưỡng cha mẹ già và mù lòa.’<br>
+<span lang="pi" class="pali">
+‘Nanu maṁ, samma jotipāla, jānāsi, andhe jiṇṇe mātāpitaro posemī’ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Vậy này bạn Ghaṭīkāra, tôi sẽ xuất gia từ bỏ gia đình, sống không gia đình’.<br>
+<span lang="pi" class="pali">
+‘Tena hi, samma ghaṭikāra, ahaṁ agārasmā anagāriyaṁ pabbajissāmī’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Rồi này Ānanda, thợ gốm Ghaṭīkāra và thanh niên Jotipāla đi đến Thế Tôn Kassapa, bậc A-la-hán, Chánh Ðẳng Giác, sau khi đến đảnh lễ Thế Tôn Kassapa, bậc A-la-hán, Chánh Ðẳng Giác, rồi ngồi xuống một bên. Ngồi xuống một bên, này Ānanda, thợ gốm Ghaṭīkāra bạch Thế Tôn Kassapa, bậc A-la-hán, Chánh Ðẳng Giác:<br>
+<span lang="pi" class="pali">
+Atha kho, ānanda, ghaṭikāro ca kumbhakāro jotipālo ca māṇavo yena kassapo bhagavā arahaṁ sammāsambuddho tenupasaṅkamiṁsu; upasaṅkamitvā kassapaṁ bhagavantaṁ arahantaṁ sammāsambuddhaṁ abhivādetvā ekamantaṁ nisīdiṁsu. Ekamantaṁ nisinno kho, ānanda, ghaṭikāro kumbhakāro kassapaṁ bhagavantaṁ arahantaṁ sammāsambuddhaṁ etadavoca:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Bạch Thế Tôn, đây là thanh niên Jotipāla, bạn của con, bạn thân tình của con.<br>
+<span lang="pi" class="pali">
+‘ayaṁ me, bhante, jotipālo māṇavo sahāyo piyasahāyo.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Mong Thế Tôn xuất gia cho bạn con’.<br>
+<span lang="pi" class="pali">
+Imaṁ bhagavā pabbājetū’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Và này Ānanda, thanh niên Jotipāla được Thế Tôn Kassapa, bậc A-la-hán, Chánh Ðẳng Giác cho xuất gia, cho thọ đại giới.<br>
+<span lang="pi" class="pali">
+Alattha kho, ānanda, jotipālo māṇavo kassapassa bhagavato arahato sammāsambuddhassa santike pabbajjaṁ, alattha upasampadaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Rồi này Ānanda, Thế Tôn Kassapa, bậc A-la-hán, Chánh Ðẳng Giác, sau khi thanh niên Jotipāla xuất gia chưa bao lâu, sau nửa tháng, sau khi ở tại Vebhaliṅga lâu cho đến khi thấy tự thỏa mãn, liền du hành đi đến Baranasi.<br>
+<span lang="pi" class="pali">
+Atha kho, ānanda, kassapo bhagavā arahaṁ sammāsambuddho acirūpasampanne jotipāle māṇave aḍḍhamāsupasampanne vegaḷiṅge yathābhirantaṁ viharitvā yena bārāṇasī tena cārikaṁ pakkāmi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ngài tuần tự du hành và đến tại Baranasi (Ba-la-nại).<br>
+<span lang="pi" class="pali">
+Anupubbena cārikaṁ caramāno yena bārāṇasī tadavasari.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Rồi này Ānanda, Thế Tôn Kassapa, bậc A-la-hán, Chành Ðẳng Giác trú tại Baranasi, ở Isipatana, vườn Lộc Uyển.<br>
+<span lang="pi" class="pali">
+Tatra sudaṁ, ānanda, kassapo bhagavā arahaṁ sammāsambuddho bārāṇasiyaṁ viharati isipatane migadāye.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Ānanda, Kiki, vua xứ Kasi được nghe như sau: “Thế Tôn Kassapa, bậc A-la-hán, Chánh Ðẳng Giác đã đến Baranasi, trú tại Baranasi, Isipatana, vườn Lộc Uyển.<br>
+<span lang="pi" class="pali">
+Assosi kho, ānanda, kikī kāsirājā: ‘kassapo kira bhagavā arahaṁ sammāsambuddho bārāṇasiṁ anuppatto bārāṇasiyaṁ viharati isipatane migadāye’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Rồi này Ānanda, Kiki, vua nước Kasi cho thắng các cỗ xe tối thù thắng, sau khi tự mình leo lên một cỗ xe thù thắng với các cỗ xe thù thắng đi ra khỏi thành Baranasi với đại uy vệ của nhà vua để yết kiến Thế Tôn Kassapa, bậc A-la-hán, Chánh Ðẳng Giác.<br>
+<span lang="pi" class="pali">
+Atha kho, ānanda, kikī kāsirājā bhadrāni bhadrāni yānāni yojāpetvā bhadraṁ yānaṁ abhiruhitvā bhadrehi bhadrehi yānehi bārāṇasiyā niyyāsi mahaccarājānubhāvena kassapaṁ bhagavantaṁ arahantaṁ sammāsambuddhaṁ dassanāya.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vua đi xe cho đến chỗ nào còn đi được xe, rồi xuống xe đi bộ, đi đến chỗ Thế Tôn Kassapa, bậc A-la-hán, Chánh Ðẳng Giác. Sau khi đến, đảnh lễ Thế Tôn Kassapa, bậc A-la-hán, Chánh Ðẳng Giác, vua ngồi xuống một bên.<br>
+<span lang="pi" class="pali">
+Yāvatikā yānassa bhūmi yānena gantvā yānā paccorohitvā pattikova yena kassapo bhagavā arahaṁ sammāsambuddho tenupasaṅkami; upasaṅkamitvā kassapaṁ bhagavantaṁ arahantaṁ sammāsambuddhaṁ abhivādetvā ekamantaṁ nisīdi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Ānanda, Thế Tôn Kassapa, bậc A-la-hán, Chánh Ðẳng Giác với pháp thoại, khích lệ, làm cho thích thú, làm cho phấn khởi, làm cho hoan hỷ Kiki, vua xứ Kasi, đang ngồi một bên.<br>
+<span lang="pi" class="pali">
+Ekamantaṁ nisinnaṁ kho, ānanda, kikiṁ kāsirājānaṁ kassapo bhagavā arahaṁ sammāsambuddho dhammiyā kathāya sandassesi samādapesi samuttejesi sampahaṁsesi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Rồi Kiki, vua xứ Kasi, sau khi được Thế Tôn Kassapa, bậc A-la-hán, Chánh Ðẳng Giác với pháp thoại khích lệ, làm cho thích thú, làm cho phấn khởi, làm cho hoan hỷ, liền bạch Thế Tôn Kassapa, bậc A-la-hán, Chánh Ðẳng Giác:<br>
+<span lang="pi" class="pali">
+Atha kho, ānanda, kikī kāsirājā kassapena bhagavatā arahatā sammāsambuddhena dhammiyā kathāya sandassito samādapito samuttejito sampahaṁsito kassapaṁ bhagavantaṁ arahantaṁ sammāsambuddhaṁ etadavoca:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Bạch Thế Tôn, mong Thế Tôn nhận lời con mời ngày mai đến dùng cơm với chúng Tỷ-kheo’.<br>
+<span lang="pi" class="pali">
+‘adhivāsetu me, bhante, bhagavā svātanāya bhattaṁ saddhiṁ bhikkhusaṅghenā’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Và này Ānanda, Thế Tôn Kassapa, bậc A-la-hán, Chánh Ðẳng Giác im lặng nhận lời.<br>
+<span lang="pi" class="pali">
+Adhivāsesi kho, ānanda, kassapo bhagavā arahaṁ sammāsambuddho tuṇhībhāvena.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Rồi này Ānanda, sau khi được biết Thế Tôn Kassapa, bậc A-la-hán, Chánh Ðẳng Giác đã nhận lời, Kiki, vua xứ Kasi, từ chỗ ngồi đứng dậy, đảnh lễ Thế Tôn Kassapa, bậc A-la-hán, Chánh Ðẳng Giác, thân bên hữu hướng về Ngài rồi ra đi.<br>
+<span lang="pi" class="pali">
+Atha kho, ānanda, kikī kāsirājā kassapassa bhagavato sammāsambuddhassa adhivāsanaṁ viditvā uṭṭhāyāsanā kassapaṁ bhagavantaṁ arahantaṁ sammāsambuddhaṁ abhivādetvā padakkhiṇaṁ katvā pakkāmi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Và này Ānanda, Kiki, vua xứ Kasi, sau khi đêm ấy đã mãn, tại trú xứ của mình, cho bày biện các món ăn thượng vị, loại cứng và loại mềm, cơm vàng khô, các loại cari, các hột đen được gạn bỏ, và các món ăn gia vị, rồi báo thời giờ cho Thế Tôn Kassapa, bậc A-la-hán, Chánh Ðẳng Giác được biết:<br>
+<span lang="pi" class="pali">
+Atha kho, ānanda, kikī kāsirājā tassā rattiyā accayena sake nivesane paṇītaṁ khādanīyaṁ bhojanīyaṁ paṭiyādāpetvā paṇḍupuṭakassa sālino vigatakāḷakaṁ anekasūpaṁ anekabyañjanaṁ, kassapassa bhagavato arahato sammāsambuddhassa kālaṁ ārocāpesi:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Bạch Thế Tôn giờ đã đến, cơm đã sẵn sàng.’<br>
+<span lang="pi" class="pali">
+‘kālo, bhante, niṭṭhitaṁ bhattan’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Rồi này Ānanda, Thế Tôn Kassapa, bậc A-la-hán, Chánh Ðẳng Giác vào buổi sáng đắp y, cầm y bát, đi đến trú xứ của Kiki, vua xứ Kasi, sau khi đến, liền ngồi trên chỗ đã soạn sẵn cùng với chúng Tỷ-kheo.<br>
+<span lang="pi" class="pali">
+Atha kho, ānanda, kassapo bhagavā arahaṁ sammāsambuddho pubbaṇhasamayaṁ nivāsetvā pattacīvaramādāya yena kikissa kāsirañño nivesanaṁ tenupasaṅkami; upasaṅkamitvā paññatte āsane nisīdi saddhiṁ bhikkhusaṅghena.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Rồi này Ānanda, Kiki, vua xứ Kasi tự tay thân hầu và làm cho thỏa mãn chúng Tỷ-kheo với đức Phật là vị cầm đầu, các món ăn thượng vị, loại cứng và loại mềm.<br>
+<span lang="pi" class="pali">
+Atha kho, ānanda, kikī kāsirājā buddhappamukhaṁ bhikkhusaṅghaṁ paṇītena khādanīyena bhojanīyena sahatthā santappesi sampavāresi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Rồi này Ānanda, Kiki, vua xứ Kasi, khi Thế Tôn Kassapa, bậc A-la-hán, Chánh Ðẳng Giác đã ăn xong, tay đã rời khỏi bát, lấy một ghế thấp rồi ngồi xuống một bên.<br>
+<span lang="pi" class="pali">
+Atha kho, ānanda, kikī kāsirājā kassapaṁ bhagavantaṁ arahantaṁ sammāsambuddhaṁ bhuttāviṁ onītapattapāṇiṁ aññataraṁ nīcaṁ āsanaṁ gahetvā ekamantaṁ nisīdi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ngồi xuống một bên, này Ānanda, Kiki, vua xứ Kasi, bạch Thế Tôn Kassapa, bậc A-la-hán, Chánh Ðẳng Giác:<br>
+<span lang="pi" class="pali">
+Ekamantaṁ nisinno kho, ānanda, kikī kāsirājā kassapaṁ bhagavantaṁ arahantaṁ sammāsambuddhaṁ etadavoca:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Bạch Thế Tôn, mong Thế Tôn nhận lời mời của con an cư mùa mưa tại Baranasi;<br>
+<span lang="pi" class="pali">
+‘adhivāsetu me, bhante, bhagavā bārāṇasiyaṁ vassāvāsaṁ;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+sẽ có sự cúng dường như vậy cho chúng Tỷ-kheo.’<br>
+<span lang="pi" class="pali">
+evarūpaṁ saṅghassa upaṭṭhānaṁ bhavissatī’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Thôi vừa rồi, Ðại vương,<br>
+<span lang="pi" class="pali">
+‘Alaṁ, mahārāja.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ta đã nhận lời an cư mùa mưa rồi.’<br>
+<span lang="pi" class="pali">
+Adhivuttho me vassāvāso’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Lần thứ hai, này Ānanda,…<br>
+<span lang="pi" class="pali">
+Dutiyampi kho, ānanda …<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Lần thứ ba, này Ānanda, Kiki, vua xứ Kasi, bạch Thế Tôn Kassapa, bậc A-la-hán, Chánh Ðẳng Giác:<br>
+<span lang="pi" class="pali">
+tatiyampi kho, ānanda, kikī kāsirājā kassapaṁ bhagavantaṁ arahantaṁ sammāsambuddhaṁ etadavoca:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Bạch Thế Tôn, mong Thế Tôn nhận lời mời của con, an cư mùa mưa tại Baranasi;<br>
+<span lang="pi" class="pali">
+‘adhivāsetu me, bhante, bhagavā bārāṇasiyaṁ vassāvāsaṁ;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+sẽ có sự cúng dường như vậy cho chúng Tỷ-kheo.’<br>
+<span lang="pi" class="pali">
+evarūpaṁ saṅghassa upaṭṭhānaṁ bhavissatī’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Thôi vừa rồi, Ðại vương,<br>
+<span lang="pi" class="pali">
+‘Alaṁ, mahārāja.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ta đã nhận lời an cư trong mùa mưa rồi.’<br>
+<span lang="pi" class="pali">
+Adhivuttho me vassāvāso’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Rồi này Ānanda, Kiki, vua xứ Kasi, suy nghĩ như sau: “Thế Tôn Kassapa, bậc A-la-hán, Chánh Ðẳng Giác không nhận lời mời của ta an cư mùa mưa ở Baranasi”, vì vậy cảm thấy thất vọng, ưu phiền.<br>
+<span lang="pi" class="pali">
+Atha kho, ānanda, kikissa kāsirañño ‘na me kassapo bhagavā arahaṁ sammāsambuddho adhivāseti bārāṇasiyaṁ vassāvāsan’ti ahudeva aññathattaṁ, ahu domanassaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Rồi này Ānanda, Kiki, vua xứ Kasi, bạch Thế Tôn Kassapa, bậc A-la-hán, Chánh Ðẳng Giác:<br>
+<span lang="pi" class="pali">
+Atha kho, ānanda, kikī kāsirājā kassapaṁ bhagavantaṁ arahantaṁ sammāsambuddhaṁ etadavoca:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Bạch Thế Tôn, Thế Tôn có người đàn tín hộ trì hơn con?’<br>
+<span lang="pi" class="pali">
+‘atthi nu kho, bhante, añño koci mayā upaṭṭhākataro’ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Ðại vương, có một thị trấn tên là Vebhaliṅga.<br>
+<span lang="pi" class="pali">
+‘Atthi, mahārāja, vegaḷiṅgaṁ nāma gāmanigamo.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Tại đấy có thợ gốm tên là Ghaṭīkāra.<br>
+<span lang="pi" class="pali">
+Tattha ghaṭikāro nāma kumbhakāro;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Người ấy là đàn tín hộ trì của Ta, một đàn tín hộ trì tối thượng.<br>
+<span lang="pi" class="pali">
+so me upaṭṭhāko aggupaṭṭhāko.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ðại vương, Ðại vương có nghĩ như sau: “Thế Tôn Kassapa, bậc A-la-hán, Chánh Ðẳng Giác không nhận lời mời của ta an cư mùa mưa ở Baranasi”, do vậy, Ðại vương cảm thấy thất vọng, ưu phiền.<br>
+<span lang="pi" class="pali">
+Tuyhaṁ kho pana, mahārāja, na me kassapo bhagavā arahaṁ sammāsambuddho adhivāseti bārāṇasiyaṁ vassāvāsanti attheva aññathattaṁ, atthi domanassaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Nhưng thợ gốm Ghaṭīkāra không có như vậy, và không sợ như vậy.<br>
+<span lang="pi" class="pali">
+Tayidaṁ ghaṭikārassa kumbhakārassa natthi ca na ca bhavissati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Ðại vương, thợ gốm Ghaṭīkāra đã quy y Phật, quy y Pháp, quy y Tăng.<br>
+<span lang="pi" class="pali">
+Ghaṭikāro kho, mahārāja, kumbhakāro buddhaṁ saraṇaṁ gato, dhammaṁ saraṇaṁ gato, saṅghaṁ saraṇaṁ gato.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Ðại vương, thợ gốm Ghaṭīkāra từ bỏ sát sanh, từ bỏ lấy của không cho, từ bỏ tà dâm, từ bỏ nói láo, từ bỏ rượu men, rượu nấu.<br>
+<span lang="pi" class="pali">
+Ghaṭikāro kho, mahārāja, kumbhakāro pāṇātipātā paṭivirato, adinnādānā paṭivirato, kāmesumicchācārā paṭivirato, musāvādā paṭivirato, surāmerayamajjapamādaṭṭhānā paṭivirato.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Ðại vương, thợ gốm Ghaṭīkāra thành tựu lòng tin bất thối chuyển đối với Phật, đối với Pháp, đối với Tăng, thành tựu các giới được bậc Thánh ái lạc.<br>
+<span lang="pi" class="pali">
+Ghaṭikāro kho, mahārāja, kumbhakāro buddhe aveccappasādena samannāgato, dhamme aveccappasādena samannāgato, saṅghe aveccappasādena samannāgato, ariyakantehi sīlehi samannāgato.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Ðại vương, thợ gốm Ghaṭīkāra không có nghi ngờ đối với Khổ, không có nghi ngờ đối với Khổ tập, không có nghi ngờ đối với Khổ diệt, không có nghi ngờ đối với Con Ðường đưa đến khổ diệt.<br>
+<span lang="pi" class="pali">
+Ghaṭikāro kho, mahārāja, kumbhakāro dukkhe nikkaṅkho, dukkhasamudaye nikkaṅkho, dukkhanirodhe nikkaṅkho, dukkhanirodhagāminiyā paṭipadāya nikkaṅkho.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Ðại vương, thợ gốm Ghaṭīkāra, ăn một ngày một bữa, sống Phạm hạnh, có giới hạnh, theo thiện pháp.<br>
+<span lang="pi" class="pali">
+Ghaṭikāro kho, mahārāja, kumbhakāro ekabhattiko brahmacārī sīlavā kalyāṇadhammo.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Ðại vương, thợ gốm Ghaṭīkāra từ bỏ ngọc và vàng, không có vàng và bạc.<br>
+<span lang="pi" class="pali">
+Ghaṭikāro kho, mahārāja, kumbhakāro nikkhittamaṇisuvaṇṇo apetajātarūparajato.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Ðại vương, thợ gốm Ghaṭīkāra không có tự tay đào đất hay đào với cái cuốc.<br>
+<span lang="pi" class="pali">
+Ghaṭikāro kho, mahārāja, kumbhakāro pannamusalo na sahatthā pathaviṁ khaṇati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vị này vui lòng làm thành ghè bát với đất lấy từ bờ đê bị sập xuống hay do chuột và chó đào lên, và nói như sau:<br>
+<span lang="pi" class="pali">
+Yaṁ hoti kūlapaluggaṁ vā mūsikukkaro vā taṁ kājena āharitvā bhājanaṁ karitvā evamāha:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Ở đây, nếu ai muốn, hãy bỏ vào từng nhúm các loại gạo có vỏ, từng nhúm các loại đậu que (mugga), từng nhúm các loại đậu hột (kalaya), và có thể lấy cái gì mình muốn”.<br>
+<span lang="pi" class="pali">
+“ettha yo icchati taṇḍulapaṭibhastāni vā muggapaṭibhastāni vā kaḷāyapaṭibhastāni vā nikkhipitvā yaṁ icchati taṁ haratū”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Ðại vương, thợ gốm Ghaṭīkāra nuôi dưỡng cha mẹ già và mù lòa.<br>
+<span lang="pi" class="pali">
+Ghaṭikāro kho, mahārāja, kumbhakāro andhe jiṇṇe mātāpitaro poseti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Ðại vương, thợ gốm Ghaṭīkāra sau khi đoạn trừ năm hạ phần kiết sử, được hóa sanh, nhập Niết-bàn từ chỗ ấy, không phải trở lui đời này nữa.<br>
+<span lang="pi" class="pali">
+Ghaṭikāro kho, mahārāja, kumbhakāro pañcannaṁ orambhāgiyānaṁ saṁyojanānaṁ parikkhayā opapātiko tattha parinibbāyī anāvattidhammo tasmā lokā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Một thời, này Ðại vương, Ta ở tại thị trấn Vebhaliṅga.<br>
+<span lang="pi" class="pali">
+Ekamidāhaṁ, mahārāja, samayaṁ vegaḷiṅge nāma gāmanigame viharāmi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Rồi này Ðại vương, Ta vào buổi sáng đắp y, cầm y bát, đi đến cha mẹ của thợ gốm Ghaṭīkāra, sau khi đến nói với cha mẹ thợ gốm Ghaṭīkāra như sau:<br>
+<span lang="pi" class="pali">
+Atha khvāhaṁ, mahārāja, pubbaṇhasamayaṁ nivāsetvā pattacīvaramādāya yena ghaṭikārassa kumbhakārassa mātāpitaro tenupasaṅkamiṁ; upasaṅkamitvā ghaṭikārassa kumbhakārassa mātāpitaro etadavocaṁ:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Người thợ làm đồ gốm đi đâu?”<br>
+<span lang="pi" class="pali">
+“handa ko nu kho ayaṁ bhaggavo gato”ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Bạch Thế Tôn, người đàn tín hộ trì cho Thế Tôn đã đi khỏi và có dặn như sau: Hãy lấy cơm từ nơi nồi, hãy lấy đồ ăn từ nơi chảo mà dùng”<br>
+<span lang="pi" class="pali">
+“Nikkhanto kho te, bhante, upaṭṭhāko antokumbhiyā odanaṁ gahetvā pariyogā sūpaṁ gahetvā paribhuñjā”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Rồi Ta, này Ðại vương, sau khi lấy cơm từ nơi nồi, lấy đồ ăn từ nơi chảo, ăn xong, từ chỗ ngồi đứng dậy rồi đi.<br>
+<span lang="pi" class="pali">
+Atha khvāhaṁ, mahārāja, kumbhiyā odanaṁ gahetvā pariyogā sūpaṁ gahetvā paribhuñjitvā uṭṭhāyāsanā pakkamiṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Rồi này Ðại vương, thợ gốm Ghaṭīkāra đi đến cha mẹ, sau khi đến, nói với cha mẹ như sau:<br>
+<span lang="pi" class="pali">
+Atha kho, mahārāja, ghaṭikāro kumbhakāro yena mātāpitaro tenupasaṅkami; upasaṅkamitvā mātāpitaro etadavoca:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Ai đã lấy cơm từ nơi nồi, lấy đồ ăn từ nơi chảo, ăn xong, từ chỗ ngồi đứng dậy rồi đi?”<br>
+<span lang="pi" class="pali">
+“ko kumbhiyā odanaṁ gahetvā pariyogā sūpaṁ gahetvā paribhuñjitvā uṭṭhāyāsanā pakkanto”ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Này con, Thế Tôn Kassapa, bậc A-la-hán, Chánh Ðẳng Giác, sau khi lấy cơm từ nơi nồi, lấy đồ ăn từ nơi chảo, ăn xong, từ chỗ ngồi đứng dậy rồi đi.”<br>
+<span lang="pi" class="pali">
+“Kassapo, tāta, bhagavā arahaṁ sammāsambuddho kumbhiyā odanaṁ gahetvā pariyogā sūpaṁ gahetvā paribhuñjitvā uṭṭhāyāsanā pakkanto”ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Rồi này Ðại vương, thợ gốm Ghaṭīkāra suy nghĩ như sau:<br>
+<span lang="pi" class="pali">
+Atha kho, mahārāja, ghaṭikārassa kumbhakārassa etadahosi:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Thật là lợi ích cho ta, thật là khéo lợi ích cho ta, đã được Thế Tôn Kassapa, bậc A-la-hán, Chánh Ðẳng Giác tin tưởng ta như vậy”.<br>
+<span lang="pi" class="pali">
+“lābhā vata me, suladdhaṁ vata me, yassa me kassapo bhagavā arahaṁ sammāsambuddho evaṁ abhivissattho”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Rồi này Ðại vương, cho đến nửa tháng, hỷ lạc không rời khỏi thợ gốm Ghaṭīkāra, hay cho đến một tuần (không rời khỏi) cha mẹ (người thợ gốm).<br>
+<span lang="pi" class="pali">
+Atha kho, mahārāja, ghaṭikāraṁ kumbhakāraṁ aḍḍhamāsaṁ pītisukhaṁ na vijahati, sattāhaṁ mātāpitūnaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Một thời, này Ðại vương, Ta ở tại thị trấn Vebhaliṅga.<br>
+<span lang="pi" class="pali">
+Ekamidāhaṁ, mahārāja, samayaṁ tattheva vegaḷiṅge nāma gāmanigame viharāmi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Rồi này Ðại vương, Ta vào buổi sáng đắp y, cầm y bát, đi đến cha mẹ của thợ gốm Ghaṭīkāra, sau khi đến nói với cha mẹ thợ gốm Ghaṭīkāra như sau:<br>
+<span lang="pi" class="pali">
+Atha khvāhaṁ, mahārāja, pubbaṇhasamayaṁ nivāsetvā pattacīvaramādāya yena ghaṭikārassa kumbhakārassa mātāpitaro tenupasaṅkamiṁ; upasaṅkamitvā ghaṭikārassa kumbhakārassa mātāpitaro etadavocaṁ:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Người thợ làm đồ gốm đi đâu?”<br>
+<span lang="pi" class="pali">
+“handa ko nu kho ayaṁ bhaggavo gato”ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Bạch Thế Tôn, người đàn tín hộ trì cho Thế Tôn đã đi khỏi và có dặn như sau: Hãy lấy cháo từ nơi nồi, hãy lấy đồ ăn từ nơi chảo mà dùng.”<br>
+<span lang="pi" class="pali">
+“Nikkhanto kho te, bhante, upaṭṭhāko anto kaḷopiyā kummāsaṁ gahetvā pariyogā sūpaṁ gahetvā paribhuñjā”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Rồi Ta, này Ðại vương, sau khi lấy cháo từ nơi nồi, lấy đồ ăn từ nơi chảo, ăn xong, từ chỗ ngồi đứng dậy rồi đi.<br>
+<span lang="pi" class="pali">
+Atha khvāhaṁ, mahārāja, kaḷopiyā kummāsaṁ gahetvā pariyogā sūpaṁ gahetvā paribhuñjitvā uṭṭhāyāsanā pakkamiṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Rồi này Ðại vương, thợ gốm Ghaṭīkāra đi đến cha mẹ, sau khi đến, nói với cha mẹ như sau:<br>
+<span lang="pi" class="pali">
+Atha kho, mahārāja, ghaṭikāro kumbhakāro yena mātāpitaro tenupasaṅkami; upasaṅkamitvā mātāpitaro etadavoca:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Ai đã lấy cháo từ nơi nồi, lấy đồ ăn từ nơi chảo, ăn xong, từ chỗ ngồi đứng dậy rồi đi?”<br>
+<span lang="pi" class="pali">
+“ko kaḷopiyā kummāsaṁ gahetvā pariyogā sūpaṁ gahetvā paribhuñjitvā uṭṭhāyāsanā pakkanto”ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Này con, Thế Tôn Kassapa, bậc A-la-hán, Chánh Ðẳng Giác, sau khi lấy cháo từ nơi nồi, lấy đồ ăn từ nơi chảo, ăn xong, từ chỗ ngồi đứng dậy rồi đi.”<br>
+<span lang="pi" class="pali">
+“Kassapo, tāta, bhagavā arahaṁ sammāsambuddho kaḷopiyā kummāsaṁ gahetvā pariyogā sūpaṁ gahetvā paribhuñjitvā uṭṭhāyāsanā pakkanto”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Rồi này Ðại vương, thợ gốm Ghaṭīkāra suy nghĩ như sau:<br>
+<span lang="pi" class="pali">
+Atha kho, mahārāja, ghaṭikārassa kumbhakārassa etadahosi:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Thật là lợi ích cho ta, thật là khéo lợi ích cho ta, đã được Thế Tôn Kassapa, bậc A-la-hán, Chánh Ðẳng Giác tin tưởng ta như vậy”.<br>
+<span lang="pi" class="pali">
+“lābhā vata me, suladdhaṁ vata me, yassa me kassapo bhagavā arahaṁ sammāsambuddho evaṁ abhivissattho”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Rồi này Ðại vương, cho đến nửa tháng, hỷ lạc không rời khỏi thợ gốm Ghaṭīkāra, hay cho đến một tuần (không rời khỏi) cha mẹ (người thợ gốm).<br>
+<span lang="pi" class="pali">
+Atha kho, mahārāja, ghaṭikāraṁ kumbhakāraṁ aḍḍhamāsaṁ pītisukhaṁ na vijahati, sattāhaṁ mātāpitūnaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Một thời, này Ðại Vương, ta trú ở thị trấn Vebhaliṅga.<br>
+<span lang="pi" class="pali">
+Ekamidāhaṁ, mahārāja, samayaṁ tattheva vegaḷiṅge nāma gāmanigame viharāmi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Lúc bấy giờ, các cốc bị mưa dột.<br>
+<span lang="pi" class="pali">
+Tena kho pana samayena kuṭi ovassati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Ðại vương, rồi ta gọi các Tỷ-kheo:<br>
+<span lang="pi" class="pali">
+Atha khvāhaṁ, mahārāja, bhikkhū āmantesiṁ:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Hãy đi, này các Tỷ-kheo, và xem tại nhà của thợ gốm Ghaṭīkāra có cỏ hay không?”<br>
+<span lang="pi" class="pali">
+“gacchatha, bhikkhave, ghaṭikārassa kumbhakārassa nivesane tiṇaṁ jānāthā”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Khi được nghe nói vậy, này Ðại vương, các Tỷ-kheo bạch với Ta:<br>
+<span lang="pi" class="pali">
+Evaṁ vutte, mahārāja, te bhikkhū maṁ etadavocuṁ:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Bạch Thế Tôn, tại nhà của thợ gốm Ghaṭīkāra không có cỏ, nhưng nhà người ấy có mái cỏ.”<br>
+<span lang="pi" class="pali">
+“natthi kho, bhante, ghaṭikārassa kumbhakārassa nivesane tiṇaṁ, atthi ca khvāssa āvesane tiṇacchadanan”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Này các Tỷ-kheo, hãy đi và rút cỏ từ ngôi nhà thợ gốm Ghaṭīkāra.”<br>
+<span lang="pi" class="pali">
+“Gacchatha, bhikkhave, ghaṭikārassa kumbhakārassa āvesanaṁ uttiṇaṁ karothā”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Rồi này Ðại vương, các Tỷ-kheo ấy rút cỏ từ ngôi nhà thợ gốm Ghaṭīkāra.<br>
+<span lang="pi" class="pali">
+Atha kho te, mahārāja, bhikkhū ghaṭikārassa kumbhakārassa āvesanaṁ uttiṇamakaṁsu.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Ðại vương, cha mẹ thợ gốm Ghaṭīkāra nói với các Tỷ-kheo ấy:<br>
+<span lang="pi" class="pali">
+Atha kho, mahārāja, ghaṭikārassa kumbhakārassa mātāpitaro te bhikkhū etadavocuṁ:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Quý vị là ai lại rút cỏ ngôi nhà?”<br>
+<span lang="pi" class="pali">
+“ke āvesanaṁ uttiṇaṁ karontī”ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Này Ðại tỷ, ngôi nhà của Thế Tôn Kassapa, bậc A-la-hán, Chánh Ðẳng Giác bị mưa dột.”<br>
+<span lang="pi" class="pali">
+“Bhikkhū, bhagini, kassapassa bhagavato arahato sammāsambuddhassa kuṭi ovassatī”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Hãy lấy đi, chư Hiền giả! Hãy lấy đi, chư Hiền giả!”<br>
+<span lang="pi" class="pali">
+“Haratha, bhante, haratha, bhadramukhā”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Rồi này Ðại vương, thợ gốm Ghaṭīkāra đi đến cha mẹ, sau khi đến thưa với cha mẹ như sau:<br>
+<span lang="pi" class="pali">
+Atha kho, mahārāja, ghaṭikāro kumbhakāro yena mātāpitaro tenupasaṅkami; upasaṅkamitvā mātāpitaro etadavoca:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Những ai đã rút cỏ khỏi ngôi nhà?”<br>
+<span lang="pi" class="pali">
+“ke āvesanaṁ uttiṇamakaṁsū”ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Này Con, các Tỷ-kheo có nói: Ngôi nhà của Thế Tôn Kassapa, bậc A-la-hán, Chánh Ðẳng Giác bị mưa dột.”<br>
+<span lang="pi" class="pali">
+“Bhikkhū, tāta, kassapassa kira bhagavato arahato sammāsambuddhassa kuṭi ovassatī”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Rồi này Ðại vương, thợ gốm Ghaṭīkāra suy nghĩ như sau:<br>
+<span lang="pi" class="pali">
+Atha kho, mahārāja, ghaṭikārassa kumbhakārassa etadahosi:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Thật là lợi ích cho ta, thật là khéo lợi ích cho ta đã được Thế Tôn Kassapa, bậc A-la-hán, Chánh Ðẳng Giác tin tưởng ta như vậy”.<br>
+<span lang="pi" class="pali">
+“lābhā vata me, suladdhaṁ vata me, yassa me kassapo bhagavā arahaṁ sammāsambuddho evaṁ abhivissattho”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Rồi này Ðại vương, cho đến nửa tháng, hỷ lạc không rời khỏi thợ gốm Ghaṭīkāra, hay cho đến một tuần, (không rời khỏi) cha mẹ thợ gốm.<br>
+<span lang="pi" class="pali">
+Atha kho, mahārāja, ghaṭikāraṁ kumbhakāraṁ aḍḍhamāsaṁ pītisukhaṁ na vijahati, sattāhaṁ mātāpitūnaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Rồi suốt cả ba tháng trời, ngôi nhà đứng lấy bầu trời làm mái, nhưng không có mưa rơi vào.<br>
+<span lang="pi" class="pali">
+Atha kho, mahārāja, āvesanaṁ sabbantaṁ temāsaṁ ākāsacchadanaṁ aṭṭhāsi, na devotivassi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Và như vậy, này Ðại vương, là người thợ gốm Ghaṭīkāra.’<br>
+<span lang="pi" class="pali">
+Evarūpo ca, mahārāja, ghaṭikāro kumbhakāro’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Lợi ích thay, bạch Thế Tôn, cho thợ gốm Ghaṭīkāra; thật khéo lợi ích thay, bạch Thế Tôn cho thợ gốm Ghaṭīkāra, đã được Thế Tôn Kassapa, bậc A-la-hán, Chánh Ðẳng Giác tin tưởng!’.<br>
+<span lang="pi" class="pali">
+‘Lābhā, bhante, ghaṭikārassa kumbhakārassa, suladdhā, bhante, ghaṭikārassa kumbhakārassa yassa bhagavā evaṁ abhivissattho’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Rồi này Ānanda, Kiki, vua xứ Kasi, cho người đưa đến thợ gốm Ghaṭīkāra, khoảng năm trăm xe gạo có vỏ, gạo vàng khô và các món đồ ăn.<br>
+<span lang="pi" class="pali">
+Atha kho, ānanda, kikī kāsirājā ghaṭikārassa kumbhakārassa pañcamattāni taṇḍulavāhasatāni pāhesi paṇḍupuṭakassa sālino tadupiyañca sūpeyyaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Rồi này Ānanda, những người nhà vua cử đi đến thợ gốm Ghaṭīkāra và nói:<br>
+<span lang="pi" class="pali">
+Atha kho te, ānanda, rājapurisā ghaṭikāraṁ kumbhakāraṁ upasaṅkamitvā etadavocuṁ:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Này Tôn giả, năm trăm xe gạo có vỏ, gạo vàng khô và các món đồ ăn này, do Kiki, vua xứ Kasi,<br>
+<span lang="pi" class="pali">
+‘imāni kho, bhante, pañcamattāni taṇḍulavāhasatāni kikinā kāsirājena pahitāni paṇḍupuṭakassa sālino tadupiyañca sūpeyyaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+gởi đến cho Tôn giả, mong Tôn giả hãy nhận lấy.’<br>
+<span lang="pi" class="pali">
+Tāni, bhante, paṭiggaṇhathā’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Nhà vua rất nhiều phận sự, rất nhiều việc cần phải làm.<br>
+<span lang="pi" class="pali">
+‘Rājā kho bahukicco bahukaraṇīyo.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Thật là vừa đủ cho tôi,<br>
+<span lang="pi" class="pali">
+Alaṁ me.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+được nhà vua nghĩ đến như thế này.’<br>
+<span lang="pi" class="pali">
+Raññova hotū’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Ānanda, rất có thể Ông suy nghĩ như sau:<br>
+<span lang="pi" class="pali">
+Siyā kho pana te, ānanda, evamassa:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Lúc bây giờ, thanh niên Jotipāla có thể là một người khác”.<br>
+<span lang="pi" class="pali">
+‘añño nūna tena samayena jotipālo māṇavo ahosī’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Nhưng này Ānanda, chớ có nghĩ như vậy.<br>
+<span lang="pi" class="pali">
+Na kho panetaṁ, ānanda, evaṁ daṭṭhabbaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Lúc bấy giờ, Ta chính là thanh niên Jotipāla.”<br>
+<span lang="pi" class="pali">
+Ahaṁ tena samayena jotipālo māṇavo ahosin”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Thế Tôn thuyết giảng như vậy.<br>
+<span lang="pi" class="pali">
+Idamavoca bhagavā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Tôn giả Ānanda hoan hỷ tín thọ lời Thế Tôn dạy.<br>
+<span lang="pi" class="pali">
+Attamano āyasmā ānando bhagavato bhāsitaṁ abhinandīti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+<span lang="pi" class="vi">
+Ghaṭikārasuttaṁ niṭṭhitaṁ paṭhamaṁ.<br>
+</span>
+</p>
+
+
+<!-- COPY CONTENT SUTTA Ở ĐÂY -->
+
+
+
+<br>
+<p><p style="text-align: right;font-style: italic;">Hoà Thượng Thích Minh Châu dịch Việt</span></p>
+
+
+
+
+
+
+
+
+</section>  <!-- End English and Pali -->
+<div id="nextprev"><a id="previous-sutta" href="./mn80.html#content"></a><a id="next-sutta" href="./mn82.html#content"></a></div>
+</div>  <!--End Content -->
+</div>  <!-- End Page -->
+
+
+
+
+
+
+<footer>
+					 <!-- End bottom links -->
+</footer>
+
+
+ 
+ <!-- Scripts -->
+
+ <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      if (typeof enablePaliLookup === "function") {
+        enablePaliLookup();
+      } else {
+        console.error("enablePaliLookup is not defined");
+      }
+    });
+  </script>
+
+ <script>
+ // Script to open and close sidebar
+ 	function w3_open() {
+ 	document.getElementById("mySidebar").style.display = "block";
+ 	}
+ 		function w3_close() {
+ 		document.getElementById("mySidebar").style.display = "none";
+ 	}
+ </script>
+ <script>
+ 		var app = document.getElementsByTagName("BODY")[0];
+ 		if (localStorage.lightMode == "dark") {
+ 			app.setAttribute("light-mode", "dark");
+ 	}
+ </script>
+ 
+ <script>
+ 		function toggle_light_mode() {
+ 			var app = document.getElementsByTagName("BODY")[0];
+ 				if (localStorage.lightMode == "dark") {
+ 			localStorage.lightMode = "light";
+ 			app.setAttribute("light-mode", "light");
+ 		} else {
+ 					localStorage.lightMode = "dark";
+ 					app.setAttribute("light-mode", "dark");
+ 	}
+ 		}
+ 
+ 		window.addEventListener("storage", function () {
+ 			if (localStorage.lightMode == "dark") {
+ 				app.setAttribute("light-mode", "dark");
+ 				} else {
+ 				app.setAttribute("light-mode", "light");
+ 		}
+ 		}, false);
+ 
+ </script>
+ <script src="../js/footer.js"></script><script src="../js/dpd_deconstructor.js"></script><script src="../js/dpd_ebts.js"></script><script src="../js/dpd_i2h.js"></script>
+ <script src="/sw.js"></script>
+ </body>
+ </html>

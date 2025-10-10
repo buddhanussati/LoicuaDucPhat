@@ -1,0 +1,1279 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+ 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+ 	<link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+ 	<meta name="viewport" content="width=device-width, initial-scale=1">
+		<!-- Loading manifest -->
+	<link rel="manifest" href="../manifest.json">
+ 	<!-- Loading main and menu stylesheets -->
+ 	<link rel="stylesheet" href="../css/w3.css">
+ 	<link rel="stylesheet" href="../css/css.css">
+ 	<link rel="stylesheet" href="../css/menu.css">
+ 	<script src="../js/jquery-1.10.2.min.js"></script>
+ 	<script src="../js/controlpanel.js"></script>
+ 	<script src="../js/mousetrap.min.js"></script>
+    <script src="../js/pali-lookup-standalone.js"></script>
+
+ <script src="../js/suttaFiles.js"></script>
+<script>
+ // Script to open random Sutta
+ function openRandomSutta() {
+  const randomIndex = Math.floor(Math.random() * suttaFiles.length);
+  const selectedFile = suttaFiles[randomIndex];
+
+  // Get root path of your site 
+  const currentPath = location.pathname;
+  const rootPath = currentPath.split("/").slice(0, -2).join("/") + "/";
+
+  // Redirect to the correct file
+  window.location.href = rootPath + selectedFile;
+}
+</script>
+
+
+</head>
+ <body class="container">
+ <div class="header-background">
+ <!-- Header -->
+ <div class="w3-header w3-content w3-padding w3-left-align bwcontainer">
+ 	<div class="centered">
+ 		<button class="light-mode-button" aria-label="Bật Chế Độ Sáng" onclick="toggle_light_mode()">
+ 			<span></span>
+ 			<span></span>
+ 		</button>
+ 		<span class="box-lbl">Sáng/Tối</span>
+ 	</div> <!-- Centered -->
+ 		<a href="../home/index.html" id="bwlogo"><img src="../images/headerlogo.png" alt="Logo Lời Của Đức Phật" class="w3-image"></a>
+ 		<div class="w3-bar bwcontainer">
+ 			<div id="searchlinks">
+ 			<a href="../home/visearch.html"><span class="w3-bar-item"><i class="fa fa-search"></i>&nbsp;Tìm Tiếng Việt</span></a>
+ 			<a href="../home/palisearch.html"><span class="w3-bar-item"><i class="fa fa-search"></i>&nbsp;Tìm Tiếng Pali</span></a>
+ 			</div><!-- End Searchlinks div -->
+ 			<div class="help"><span><a href="../home/help.html"><img src="../images/help_icon.png" title="Trợ Giúp" alt="Help"></a></span></div>
+ 		</div> <!-- End w3-bar bwcontainer --> 	</div> <!-- End w3-header w3-content w3-padding w3-left-align bwcontainer -->
+ </div> <!-- End header-background -->
+ <!-- Top menu -->
+
+ <div class="w3-main w3-white bwcontainer2">
+ 	<div class="w3-button w3-padding-8 w3-left w3-hide-large" onclick="w3_open()">☰</div>
+ 		<div id="navbar" class="w3-hide-small w3-hide-medium bwcontainer3">
+ 			<ul id="css3menu0">
+ 				<li class="topfirst" id="home"><a href="../home/index.html" class="w3-hide-small">Trang Chủ</a></li>
+  				<li class="topmenu" id="dn"><a href="../dn/dn.html" class="pressed w3-hide-small">Trường Bộ Kinh</a></li>
+ 				<li class="topmenu" id="mn"><a href="../mn/mn.html" class="w3-hide-small">Trung Bộ Kinh</a></li>
+ 				<li class="topmenu" id="sn"><a href="../sn/sn.html" class="w3-hide-small"><i class="fa fa-caret-down"></i>&nbsp;Tương Ưng Bộ Kinh</a>
+ 					<ul>
+ 						<li><a href="../sn/sn01.html" class="w3-hide-small">Tập I - Thiên Có Kệ</a></li>
+ 						<li><a href="../sn/sn02.html" class="w3-hide-small">Tập II - Thiên Nhân Duyên</a></li>
+ 						<li><a href="../sn/sn03.html" class="w3-hide-small">Tập III - Thiên Uẩn</a></li>
+ 						<li><a href="../sn/sn04.html" class="w3-hide-small">Tập IV - Thiên Sáu Xứ</a></li>
+ 						<li><a href="../sn/sn05.html" class="w3-hide-small">Tập V - Thiên Ðại Phẩm</a></li>
+ 					</ul>
+ 				<li class="topmenu" id="an"><a href="../an/an.html" class="w3-hide-small"><i class="fa fa-caret-down"></i>&nbsp;Tăng Chi Bộ Kinh</a>
+ 					<ul>
+ 						<li><a href="../an/an1.html" class="w3-hide-small">Chương Một Pháp</a></li>
+ 						<li><a href="../an/an2.html" class="w3-hide-small">Chương Hai Pháp</a></li>
+ 						<li><a href="../an/an3.html" class="w3-hide-small">Chương Ba Pháp</a></li>
+ 						<li><a href="../an/an4.html" class="w3-hide-small">Chương Bốn Pháp</a></li>
+ 						<li><a href="../an/an5.html" class="w3-hide-small">Chương Năm Pháp</a></li>
+ 						<li><a href="../an/an6.html" class="w3-hide-small">Chương Sáu Pháp</a></li>
+ 						<li><a href="../an/an7.html" class="w3-hide-small">Chương Bảy Pháp</a></li>
+ 						<li><a href="../an/an8.html" class="w3-hide-small">Chương Tám Pháp</a></li>
+ 						<li><a href="../an/an9.html" class="w3-hide-small">Chương Chín Pháp</a></li>
+ 						<li><a href="../an/an10.html" class="w3-hide-small">Chương Mười Pháp</a></li>
+ 						<li><a href="../an/an11.html" class="w3-hide-small">Chương Mười Một Pháp</a></li>
+ 					</ul>
+ 				</li>
+ 				<li class="topmenu" id="kn"><a href="../kn/kn.html" class="w3-hide-small"><i class="fa fa-caret-down"></i>&nbsp;Tiểu Bộ Kinh</a>
+ 					<ul>
+ 						<li><a href="../kp/kp.html" class="w3-hide-small">Kinh Tiểu Tụng</a></li>
+ 						<li><a href="../dhp/dhp.html" class="w3-hide-small">Kinh Pháp Cú</a></li>
+ 						<li><a href="../snp/snp.html" class="w3-hide-small">Kinh Tập</a></li>
+ 						<li><a href="../ud/ud.html" class="w3-hide-small">Kinh Phật Tự Thuyết</a></li>
+ 						<li><a href="../it/it.html" class="w3-hide-small">Kinh Phật Thuyết Như Vậy</a></li>
+ 						<li><a href="../tha/tha.html" class="w3-hide-small">Trưởng Lão Tăng Kệ</a></li>
+ 						<li><a href="../thi/thi.html" class="w3-hide-small">Trưởng Lão Ni Kệ</a></li>
+ 					</ul>
+ 				</li>
+				<li class="toplast" id="rd"><a href="../rd/rd.html" class="w3-hide-small"></i>Kinh Ngẫu Nhiên Theo Nhóm</a>
+ 					</ul>
+ 				</li>
+ 			</ul>
+ 			</div>
+ 		</div> <!--navbar-->
+
+<!-- Sidebar (hidden by default) -->
+ <nav class="w3-sidebar w3-bar-block w3-card w3-border w3-top w3-animate-left w3-hide-large" id="mySidebar">
+ 	<a href="javascript:void(0)" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-times fa-2x red-color"></i>&nbsp;&nbsp;&nbsp;Close</a><!-- Hides the sidebar when clicked -->
+ 		<div class="w3-bar-block w3-white">
+ 			<a href="../home/index.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-home fa-lg"></i>&nbsp;&nbsp;&nbsp;Home</a>
+ 			<a href="../guide/guide.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Guide</a>
+ 			<a href="../dn/dn.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Trường Bộ Kinh</a>
+ 			<a href="../mn/mn.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Trung Bộ Kinh</a>
+ 			<a href="../sn/sn.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Tương Ưng Bộ Kinh</a>
+ 			<a href="../an/an.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Tăng Chi Bộ Kinh
+ 			<a href="../kn/kn.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Tiểu Bộ Kinh</a>
+			<a href="../rd/rd.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>Kinh Ngẫu Nhiên Theo Nhóm</a>
+ 		</div>
+ </nav>
+ 
+ 
+ 
+   <!-- !PAGE CONTENT! --> 
+<div class="w3-main w3-content w3-padding w3-left-align bwcontainer4">
+<div id="content">
+<h2>Majjhima Nikāya - Trung Bộ Kinh</h2>
+<h5><span style="font-style: italic;">Hoà Thượng Thích Minh Châu dịch Việt</span></h5>
+
+</div>
+
+<br>
+ 	<title>         Trung Bộ 8
+          </title>
+
+<p lang="vi" class="vi"; style="text-align: center">
+Trung Bộ 8<br>
+<span lang="pi" class="pali">
+Majjhima Nikāya 8<br>
+</span>
+</p>
+
+<p lang="vi" class="vi"; style="text-align: center">
+Kinh Đoạn Giảm<br>
+<span lang="pi" class="pali">
+Sallekhasutta<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Như vầy tôi nghe.<br>
+<span lang="pi" class="pali">
+Evaṁ me sutaṁ—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Một thời Thế Tôn ở Sāvatthī (Xá-vệ), tại Jetavana (Kỳ-đà Lâm), vườn ông Anāthapiṇḍika (Cấp Cô Ðộc).<br>
+<span lang="pi" class="pali">
+ekaṁ samayaṁ bhagavā sāvatthiyaṁ viharati jetavane anāthapiṇḍikassa ārāme.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Lúc bấy giờ, Tôn giả Mahācunda, vào buổi chiều từ chỗ độc cư Thiền tịnh đứng dậy, đến tại chỗ Thế Tôn, đảnh lễ Ngài rồi ngồi xuống một bên. Sau khi ngồi xuống một bên, Tôn giả Mahācunda bạch Thế Tôn:<br>
+<span lang="pi" class="pali">
+Atha kho āyasmā mahācundo sāyanhasamayaṁ paṭisallānā vuṭṭhito yena bhagavā tenupasaṅkami; upasaṅkamitvā bhagavantaṁ abhivādetvā ekamantaṁ nisīdi. Ekamantaṁ nisinno kho āyasmā mahācundo bhagavantaṁ etadavoca:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Bạch Thế Tôn, có những loại sở kiến này khởi lên trên đời, hoặc liên hệ đến ngã luận, hoặc liên hệ đến thế giới luận.<br>
+<span lang="pi" class="pali">
+“yā imā, bhante, anekavihitā diṭṭhiyo loke uppajjanti— attavādapaṭisaṁyuttā vā lokavādapaṭisaṁyuttā vā—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Bạch Thế Tôn, đối với một Tỷ-kheo, có tác ý ngay từ ban đầu, thời có thể đoạn trừ những sở kiến ấy hay không, có thể xả ly những sở kiến ấy hay không?”<br>
+<span lang="pi" class="pali">
+ādimeva nu kho, bhante, bhikkhuno manasikaroto evametāsaṁ diṭṭhīnaṁ pahānaṁ hoti, evametāsaṁ diṭṭhīnaṁ paṭinissaggo hotī”ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Này Cunda, những loại sở kiến này khởi lên trên đời, hoặc liên hệ đến ngã luận, hoặc liên hệ đến thế giới luận, chỗ nào những sở kiến này tiềm ẩn, và chỗ nào những sở kiến này hiện hành, chỉ có cách như thật quán sát chúng với trí tuệ rằng:<br>
+<span lang="pi" class="pali">
+“Yā imā, cunda, anekavihitā diṭṭhiyo loke uppajjanti—attavādapaṭisaṁyuttā vā lokavādapaṭisaṁyuttā vā—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Cái này không phải của tôi, cái này không phải là tôi, cái này không phải tự ngã của tôi”, có vậy thời có sự đoạn trừ những sở kiến ấy, có sự xả ly những sở kiến ấy.<br>
+<span lang="pi" class="pali">
+yattha cetā diṭṭhiyo uppajjanti yattha ca anusenti yattha ca samudācaranti taṁ ‘netaṁ mama, nesohamasmi, na me so attā’ti—evametaṁ yathābhūtaṁ sammappaññā passato evametāsaṁ diṭṭhīnaṁ pahānaṁ hoti, evametāsaṁ diṭṭhīnaṁ paṭinissaggo hoti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Cunda, sự kiện này xảy ra khi ở đây một Tỷ-kheo ly dục, ly bất thiện pháp, chứng và trú Thiền thứ nhất, một trạng thái hỷ lạc do ly dục sanh, với tầm với tứ.<br>
+<span lang="pi" class="pali">
+Ṭhānaṁ kho panetaṁ, cunda, vijjati yaṁ idhekacco bhikkhu vivicceva kāmehi vivicca akusalehi dhammehi savitakkaṁ savicāraṁ vivekajaṁ pītisukhaṁ paṭhamaṁ jhānaṁ upasampajja vihareyya.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vị ấy có thể nghĩ: “Ta sống với hạnh đoạn giảm”.<br>
+<span lang="pi" class="pali">
+Tassa evamassa: ‘sallekhena viharāmī’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Cunda, các (quả chứng) ấy không gọi là đoạn giảm trong giới luật của bậc Thánh. Chúng được gọi là hiện tại lạc trú trong giới luật của bậc Thánh.<br>
+<span lang="pi" class="pali">
+Na kho panete, cunda, ariyassa vinaye sallekhā vuccanti. Diṭṭhadhammasukhavihārā ete ariyassa vinaye vuccanti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Cunda, sự kiện này xảy ra khi ở đây, một Tỷ-kheo diệt tầm và tứ, chứng và trú Thiền thứ hai, một trạng thái hỷ lạc do định sanh, không tầm không tứ, nội tỉnh nhất tâm.<br>
+<span lang="pi" class="pali">
+Ṭhānaṁ kho panetaṁ, cunda, vijjati yaṁ idhekacco bhikkhu vitakkavicārānaṁ vūpasamā ajjhattaṁ sampasādanaṁ cetaso ekodibhāvaṁ avitakkaṁ avicāraṁ samādhijaṁ pītisukhaṁ dutiyaṁ jhānaṁ upasampajja vihareyya.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vị ấy có thể nghĩ: “Ta sống với hạnh đoạn giảm”.<br>
+<span lang="pi" class="pali">
+Tassa evamassa: ‘sallekhena viharāmī’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Cunda, các (quả chứng) ấy không gọi là đoạn giảm trong giới luật của bậc Thánh. Chúng được gọi là hiện tại lạc trú trong giới luật của bậc Thánh.<br>
+<span lang="pi" class="pali">
+Na kho panete, cunda, ariyassa vinaye sallekhā vuccanti. Diṭṭhadhammasukhavihārā ete ariyassa vinaye vuccanti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Cunda, sự kiện này xảy ra khi ở đây, một Tỷ-kheo ly hỷ trú xả, chánh niệm tỉnh giác, thân cảm sự lạc thọ mà các bậc Thánh gọi là xả niệm lạc trú, chứng và trú Thiền thứ ba.<br>
+<span lang="pi" class="pali">
+Ṭhānaṁ kho panetaṁ, cunda, vijjati yaṁ idhekacco bhikkhu pītiyā ca virāgā upekkhako ca vihareyya, sato ca sampajāno sukhañca kāyena paṭisaṁvedeyya, yaṁ taṁ ariyā ācikkhanti: ‘upekkhako satimā sukhavihārī’ti tatiyaṁ jhānaṁ upasampajja vihareyya.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vị ấy có thể nghĩ “Ta sống với hạnh đoạn giảm”.<br>
+<span lang="pi" class="pali">
+Tassa evamassa: ‘sallekhena viharāmī’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Cunda, các (quả chứng) ấy không gọi là đoạn giảm trong giới luật của bậc Thánh. Chúng được gọi là hiện tại lạc trú trong giới luật của bậc Thánh.<br>
+<span lang="pi" class="pali">
+Na kho panete, cunda, ariyassa vinaye sallekhā vuccanti. Diṭṭhadhammasukhavihārā ete ariyassa vinaye vuccanti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Cunda, sự kiện này xảy ra, khi một Tỷ-kheo xả lạc xả khổ, diệt hỷ ưu đã cảm thọ trước, chứng và trú Thiền thứ tư, không khổ không lạc, xả niệm thanh tịnh.<br>
+<span lang="pi" class="pali">
+Ṭhānaṁ kho panetaṁ, cunda, vijjati yaṁ idhekacco bhikkhu sukhassa ca pahānā dukkhassa ca pahānā pubbeva somanassadomanassānaṁ atthaṅgamā adukkhamasukhaṁ upekkhāsatipārisuddhiṁ catutthaṁ jhānaṁ upasampajja vihareyya.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vị ấy có thể nghĩ: “Ta sống với hạnh đoạn giảm”.<br>
+<span lang="pi" class="pali">
+Tassa evamassa: ‘sallekhena viharāmī’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Cunda, các (quả chứng) ấy không gọi là đoạn giảm trong giới luật của bậc Thánh. Chúng được gọi là hiện tại lạc trú trong giới luật của bậc Thánh.<br>
+<span lang="pi" class="pali">
+Na kho panete, cunda, ariyassa vinaye sallekhā vuccanti. Diṭṭhadhammasukhavihārā ete ariyassa vinaye vuccanti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Cunda, sự kiện này xảy ra, khi một Tỷ-kheo vượt lên mọi sắc tưởng, diệt trừ mọi chướng ngại tưởng, không tác ý đối với dị tưởng. Tỷ-kheo nghĩ rằng: “Hư không là vô biên”, chứng và trú Không vô biên xứ.<br>
+<span lang="pi" class="pali">
+Ṭhānaṁ kho panetaṁ, cunda, vijjati yaṁ idhekacco bhikkhu sabbaso rūpasaññānaṁ samatikkamā, paṭighasaññānaṁ atthaṅgamā, nānattasaññānaṁ amanasikārā, ‘ananto ākāso’ti ākāsānañcāyatanaṁ upasampajja vihareyya.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vị ấy có thể tự nghĩ: “Ta sống với hạnh đoạn giảm”.<br>
+<span lang="pi" class="pali">
+Tassa evamassa: ‘sallekhena viharāmī’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Cunda, các (quả chứng) ấy không gọi là đoạn giảm trong giới luật của bậc Thánh. Chúng được gọi là tịch tịnh trú trong giới luật của bậc Thánh.<br>
+<span lang="pi" class="pali">
+Na kho panete, cunda, ariyassa vinaye sallekhā vuccanti. Santā ete vihārā ariyassa vinaye vuccanti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Cunda, sự kiện này xảy ra, khi một Tỷ-kheo vượt lên mọi Không vô biên xứ, nghĩ rằng: “Thức là vô biên”, chứng và trú Thức vô biên xứ.<br>
+<span lang="pi" class="pali">
+Ṭhānaṁ kho panetaṁ, cunda, vijjati yaṁ idhekacco bhikkhu sabbaso ākāsānañcāyatanaṁ samatikkamma ‘anantaṁ viññāṇan’ti viññāṇañcāyatanaṁ upasampajja vihareyya.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vị ấy có thể nghĩ: “Ta sống với hạnh đoạn giảm”.<br>
+<span lang="pi" class="pali">
+Tassa evamassa: ‘sallekhena viharāmī’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Cunda, các (quả chứng) ấy không gọi là đoạn giảm trong giới luật của bậc Thánh. Chúng được gọi là tịch tịnh trú trong giới luật của bậc Thánh.<br>
+<span lang="pi" class="pali">
+Na kho panete, cunda, ariyassa vinaye sallekhā vuccanti. Santā ete vihārā ariyassa vinaye vuccanti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Cunda, sự kiện này xảy ra, khi một Tỷ-kheo vượt lên mọi Thức vô biên xứ, nghĩ rằng: “Không có vật gì”, chứng và trú Vô sở hữu xứ.<br>
+<span lang="pi" class="pali">
+Ṭhānaṁ kho panetaṁ, cunda, vijjati yaṁ idhekacco bhikkhu sabbaso viññāṇañcāyatanaṁ samatikkamma ‘natthi kiñcī’ti ākiñcaññāyatanaṁ upasampajja vihareyya.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vị ấy có thể nghĩ: “Ta sống với hạnh đoạn giảm”.<br>
+<span lang="pi" class="pali">
+Tassa evamassa: ‘sallekhena viharāmī’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Cunda, các (quả chứng) ấy không gọi là đoạn giảm trong giới luật của bậc Thánh. Chúng được gọi là tịch tịnh trú trong giới luật của bậc Thánh.<br>
+<span lang="pi" class="pali">
+Na kho panete, cunda, ariyassa vinaye sallekhā vuccanti. Santā ete vihārā ariyassa vinaye vuccanti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Cunda, sự kiện này xảy ra, khi một Tỷ-kheo vượt lên mọi Vô sở hữu xứ, chứng và trú Phi tưởng phi phi tưởng xứ.<br>
+<span lang="pi" class="pali">
+Ṭhānaṁ kho panetaṁ, cunda, vijjati yaṁ idhekacco bhikkhu sabbaso ākiñcaññāyatanaṁ samatikkamma nevasaññānāsaññāyatanaṁ upasampajja vihareyya.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vị ấy có thể nghĩ: “Ta sống với hạnh đoạn giảm”.<br>
+<span lang="pi" class="pali">
+Tassa evamassa: ‘sallekhena viharāmī’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Cunda, các (quả chứng) ấy không gọi là đoạn giảm trong giới luật của bậc Thánh. Chúng được gọi là tịch tịnh trú trong giới luật của bậc Thánh.<br>
+<span lang="pi" class="pali">
+Na kho panete, cunda, ariyassa vinaye sallekhā vuccanti. Santā ete vihārā ariyassa vinaye vuccanti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+1. Cách thức đoạn giảm<br>
+<span lang="pi" class="pali">
+1. Sallekhapariyāya<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Cunda, ở đây đoạn giảm được các Người thực hiện khi các Người nghĩ:<br>
+<span lang="pi" class="pali">
+Idha kho pana vo, cunda, sallekho karaṇīyo.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Những kẻ khác có thể là những người làm hại, chúng ta ở đây không thể là những người làm hại”, như vậy đoạn giảm được thực hiện.<br>
+<span lang="pi" class="pali">
+‘Pare vihiṁsakā bhavissanti, mayamettha avihiṁsakā bhavissāmā’ti sallekho karaṇīyo.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Những kẻ khác có thể sát sanh, chúng ta ở đây sẽ từ bỏ sát sanh”, như vậy đoạn giảm được thực hiện.<br>
+<span lang="pi" class="pali">
+‘Pare pāṇātipātī bhavissanti, mayamettha pāṇātipātā paṭiviratā bhavissāmā’ti sallekho karaṇīyo.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Những kẻ khác có thể lấy của không cho, chúng ta ở đây sẽ từ bỏ lấy của không cho”, như vậy đoạn giảm được thực hiện.<br>
+<span lang="pi" class="pali">
+‘Pare adinnādāyī bhavissanti, mayamettha adinnādānā paṭiviratā bhavissāmā’ti sallekho karaṇīyo.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Những kẻ khác có thể không phạm hạnh, chúng ta ở đây sẽ sống phạm hạnh”, như vậy… (như trên)… thực hiện.<br>
+<span lang="pi" class="pali">
+‘Pare abrahmacārī bhavissanti, mayamettha brahmacārī bhavissāmā’ti sallekho karaṇīyo.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Những kẻ khác có thể nói láo, chúng ta ở đây sẽ từ bỏ nói láo”, …(như trên)…<br>
+<span lang="pi" class="pali">
+‘Pare musāvādī bhavissanti, mayamettha musāvādā paṭiviratā bhavissāmā’ti sallekho karaṇīyo.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Những kẻ khác có thể nói hai lưỡi, chúng ta ở đây sẽ từ bỏ nói hai lưỡi”, …(như trên)…<br>
+<span lang="pi" class="pali">
+‘Pare pisuṇavācā bhavissanti, mayamettha pisuṇāya vācāya paṭiviratā bhavissāmā’ti sallekho karaṇīyo.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Những kẻ khác có thể nói lời độc ác”, chúng ta ở đây sẽ từ bỏ nói lời độc ác”, …(như trên)…<br>
+<span lang="pi" class="pali">
+‘Pare pharusavācā bhavissanti, mayamettha pharusāya vācāya paṭiviratā bhavissāmā’ti sallekho karaṇīyo.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Những kẻ khác có thể nói lời phù phiếm, chúng ta ở đây sẽ từ bỏ nói lời phù phiếm”, …(như trên)…<br>
+<span lang="pi" class="pali">
+‘Pare samphappalāpī bhavissanti, mayamettha samphappalāpā paṭiviratā bhavissāmā’ti sallekho karaṇīyo.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Những kẻ khác có thể tham dục, chúng ta ở đây không tham dục”, …(như trên)…<br>
+<span lang="pi" class="pali">
+‘Pare abhijjhālū bhavissanti, mayamettha anabhijjhālū bhavissāmā’ti sallekho karaṇīyo.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Những kẻ khác có thể có sân tâm, chúng ta ở đây sẽ không có sân tâm”, …(như trên)…<br>
+<span lang="pi" class="pali">
+‘Pare byāpannacittā bhavissanti, mayamettha abyāpannacittā bhavissāmā’ti sallekho karaṇīyo.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Những kẻ khác có thể có tà kiến, chúng ta ở đây sẽ có chánh kiến, …(như trên)…<br>
+<span lang="pi" class="pali">
+‘Pare micchādiṭṭhī bhavissanti, mayamettha sammādiṭṭhī bhavissāmā’ti sallekho karaṇīyo.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Những kẻ khác có thể có tà tư duy, chúng ta ở đây sẽ có chánh tư duy”, …(như trên)…<br>
+<span lang="pi" class="pali">
+‘Pare micchāsaṅkappā bhavissanti, mayamettha sammāsaṅkappā bhavissāmā’ti sallekho karaṇīyo.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Những kẻ khác có thể có tà ngữ, chúng ta ở đây sẽ có chánh ngữ”, …(như trên)…<br>
+<span lang="pi" class="pali">
+‘Pare micchāvācā bhavissanti, mayamettha sammāvācā bhavissāmā’ti sallekho karaṇīyo.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Những kẻ khác có thể có tà nghiệp, chúng ta ở đây sẽ có chánh nghiệp”, …(như trên)…<br>
+<span lang="pi" class="pali">
+‘Pare micchākammantā bhavissanti, mayamettha sammākammantā bhavissāmā’ti sallekho karaṇīyo.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Những kẻ khác có thể có tà mạng, chúng ta ở đây sẽ có chánh mạng”, …(như trên)…<br>
+<span lang="pi" class="pali">
+‘Pare micchāājīvā bhavissanti, mayamettha sammāājīvā bhavissāmā’ti sallekho karaṇīyo.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Những kẻ khác có thể có tà tinh tấn, chúng ta ở đây sẽ có chánh tinh tấn”, …(như trên)…<br>
+<span lang="pi" class="pali">
+‘Pare micchāvāyāmā bhavissanti, mayamettha sammāvāyāmā bhavissāmā’ti sallekho karaṇīyo.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Những kẻ khác có thể có tà niệm, chúng ta ở đây sẽ có chánh niệm”, …(như trên)…<br>
+<span lang="pi" class="pali">
+‘Pare micchāsatī bhavissanti, mayamettha sammāsatī bhavissāmā’ti sallekho karaṇīyo.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Những kẻ khác có thể có tà định, chúng ta ở đây sẽ có chánh định”, …(như trên)…<br>
+<span lang="pi" class="pali">
+‘Pare micchāsamādhi bhavissanti, mayamettha sammāsamādhī bhavissāmā’ti sallekho karaṇīyo.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Những kẻ khác có thể có tà trí, chúng ta ở đây sẽ có chánh trí”, …(như trên)…<br>
+<span lang="pi" class="pali">
+‘Pare micchāñāṇī bhavissanti, mayamettha sammāñāṇī bhavissāmā’ti sallekho karaṇīyo.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Những kẻ khác có thể có tà giải thoát, chúng ta ở đây sẽ có chánh giải thoát”, …(như trên)…<br>
+<span lang="pi" class="pali">
+‘Pare micchāvimuttī bhavissanti, mayamettha sammāvimuttī bhavissāmā’ti sallekho karaṇīyo.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Những kẻ khác có thể bị hôn trầm thụy miên chi phối, chúng ta ở đây sẽ không có hôn trầm thụy miên chi phối”, …(như trên)…<br>
+<span lang="pi" class="pali">
+‘Pare thinamiddhapariyuṭṭhitā bhavissanti, mayamettha vigatathinamiddhā bhavissāmā’ti sallekho karaṇīyo.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Những kẻ khác có thể có trạo hối, chúng ta ở đây sẽ không có trạo hối”, … (như trên)…<br>
+<span lang="pi" class="pali">
+‘Pare uddhatā bhavissanti, mayamettha anuddhatā bhavissāmā’ti sallekho karaṇīyo.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Những kẻ khác có thể nghi hoặc, chúng ta ở đây sẽ trừ diệt nghi hoặc”, …(như trên)…<br>
+<span lang="pi" class="pali">
+‘Pare vicikicchī bhavissanti, mayamettha tiṇṇavicikicchā bhavissāmā’ti sallekho karaṇīyo.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Những kẻ khác có thể phẫn nộ, chúng ta ở đây sẽ không có phẫn nộ”, …(như trên)…<br>
+<span lang="pi" class="pali">
+‘Pare kodhanā bhavissanti, mayamettha akkodhanā bhavissāmā’ti sallekho karaṇīyo.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Những kẻ khác có thể oán hận, chúng ta ở đây sẽ không có oán hận”, …(như trên)…<br>
+<span lang="pi" class="pali">
+‘Pare upanāhī bhavissanti, mayamettha anupanāhī bhavissāmā’ti sallekho karaṇīyo.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Những kẻ khác có thể hư ngụy, chúng ta ở đây sẽ không hư ngụy”, …(như trên)…<br>
+<span lang="pi" class="pali">
+‘Pare makkhī bhavissanti, mayamettha amakkhī bhavissāmā’ti sallekho karaṇīyo.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Những kẻ khác có thể não hại, chúng ta ở đây sẽ không não hại”, …(như trên)…<br>
+<span lang="pi" class="pali">
+‘Pare paḷāsī bhavissanti, mayamettha apaḷāsī bhavissāmā’ti sallekho karaṇīyo.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Những kẻ khác có thể tật đố, chúng ta ở đây sẽ không tật đố”, …(như trên)…<br>
+<span lang="pi" class="pali">
+‘Pare issukī bhavissanti, mayamettha anissukī bhavissāmā’ti sallekho karaṇīyo.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Những kẻ khác có thể xan tham, chúng ta ở đây sẽ không xan tham”, …(như trên)…<br>
+<span lang="pi" class="pali">
+‘Pare maccharī bhavissanti, mayamettha amaccharī bhavissāmā’ti sallekho karaṇīyo.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Những kẻ khác có thể man trá, chúng ta ở đây sẽ không man trá,… (như trên)…<br>
+<span lang="pi" class="pali">
+‘Pare saṭhā bhavissanti, mayamettha asaṭhā bhavissāmā’ti sallekho karaṇīyo.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Những kẻ khác có thể khi cuống, chúng ta ở đây sẽ không khi cuống”,… (như trên)…<br>
+<span lang="pi" class="pali">
+‘Pare māyāvī bhavissanti, mayamettha amāyāvī bhavissāmā’ti sallekho karaṇīyo.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Những kẻ khác có thể ngoan cố, chúng ta ở đây không thể ngoan cố”,… (như trên)…<br>
+<span lang="pi" class="pali">
+‘Pare thaddhā bhavissanti, mayamettha atthaddhā bhavissāmā’ti sallekho karaṇīyo.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Những kẻ khác có thể cấp tháo, chúng ta ở đây không thể cấp tháo”,… (như trên)…<br>
+<span lang="pi" class="pali">
+‘Pare atimānī bhavissanti, mayamettha anatimānī bhavissāmā’ti sallekho karaṇīyo.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Những kẻ khác có thể khó nói (nan thuyết), chúng ta ở đây sẽ dễ nói”,… (như trên)…<br>
+<span lang="pi" class="pali">
+‘Pare dubbacā bhavissanti, mayamettha suvacā bhavissāmā’ti sallekho karaṇīyo.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Những kẻ khác có thể là ác hữu, chúng ta ở đây sẽ là thiện hữu”,… (như trên)…<br>
+<span lang="pi" class="pali">
+‘Pare pāpamittā bhavissanti, mayamettha kalyāṇamittā bhavissāmā’ti sallekho karaṇīyo.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Những kẻ khác có thể phóng dật, chúng ta ở đây sẽ không phóng dật”,… (như trên)…<br>
+<span lang="pi" class="pali">
+‘Pare pamattā bhavissanti, mayamettha appamattā bhavissāmā’ti sallekho karaṇīyo.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Những kẻ khác có thể là bất tín, chúng ta ở đây sẽ có tín tâm”,… (như trên)…<br>
+<span lang="pi" class="pali">
+‘Pare assaddhā bhavissanti, mayamettha saddhā bhavissāmā’ti sallekho karaṇīyo.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Những kẻ khác có thể không xấu hổ, chúng ta ở đây sẽ có xấu hổ”,… (như trên)…<br>
+<span lang="pi" class="pali">
+‘Pare ahirikā bhavissanti, mayamettha hirimanā bhavissāmā’ti sallekho karaṇīyo.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Những kẻ khác có thể không sợ hãi, chúng ta ở đây sẽ có sợ hãi”,… (như trên)…<br>
+<span lang="pi" class="pali">
+‘Pare anottāpī bhavissanti, mayamettha ottāpī bhavissāmā’ti sallekho karaṇīyo.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Những kẻ khác có thể nghe ít, chúng ta ở đây sẽ nghe nhiều”… (như trên)…<br>
+<span lang="pi" class="pali">
+‘Pare appassutā bhavissanti, mayamettha bahussutā bhavissāmā’ti sallekho karaṇīyo.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Những kẻ khác có thể biếng nhác, chúng ta ở đây sẽ siêng năng”,… (như trên)…<br>
+<span lang="pi" class="pali">
+‘Pare kusītā bhavissanti, mayamettha āraddhavīriyā bhavissāmā’ti sallekho karaṇīyo.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Những kẻ khác có thể thất niệm, chúng ta ở đây sẽ an trú niệm”,… (như trên)…<br>
+<span lang="pi" class="pali">
+‘Pare muṭṭhassatī bhavissanti, mayamettha upaṭṭhitassatī bhavissāmā’ti sallekho karaṇīyo.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Những kẻ khác có thể liệt tuệ, chúng ta ở đây thành tựu tuệ”,… (như trên)…<br>
+<span lang="pi" class="pali">
+‘Pare duppaññā bhavissanti, mayamettha paññāsampannā bhavissāmā’ti sallekho karaṇīyo.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Những kẻ khác có thể nhiễm thế tục, cố chấp tư kiến, tánh khó hành xả, chúng ta ở đây sẽ không nhiễm thế tục, không cố chấp tư kiến, tánh dễ hành xả”, như vậy đoạn giảm được thực hiện.<br>
+<span lang="pi" class="pali">
+‘Pare sandiṭṭhiparāmāsī ādhānaggāhī duppaṭinissaggī bhavissanti, mayamettha asandiṭṭhiparāmāsī anādhānaggāhī suppaṭinissaggī bhavissāmā’ti sallekho karaṇīyo.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+2. Khởi tâm<br>
+<span lang="pi" class="pali">
+2. Cittupapādapariyāya<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Cunda, Ta nói rằng sự khởi tâm rất có lợi ích cho các thiện pháp, còn nói gì thân nghiệp, khẩu nghiệp phù hợp (với tâm ý). Do vậy, này Cunda:<br>
+<span lang="pi" class="pali">
+Cittuppādampi kho ahaṁ, cunda, kusalesu dhammesu bahukāraṁ vadāmi, ko pana vādo kāyena vācāya anuvidhīyanāsu.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Những kẻ khác có thể làm hại, chúng ta ở đây sẽ không làm hại”, cần phải khởi tâm như vậy.<br>
+<span lang="pi" class="pali">
+Tasmātiha, cunda, ‘pare vihiṁsakā bhavissanti, mayamettha avihiṁsakā bhavissāmā’ti cittaṁ uppādetabbaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Những kẻ khác có thể sát sanh, chúng ta ở đây sẽ từ bỏ sát sanh”, cần phải khởi tâm như vậy… (như trên)…<br>
+<span lang="pi" class="pali">
+‘Pare pāṇātipātī bhavissanti, mayamettha pāṇātipātā paṭiviratā bhavissāmā’ti cittaṁ uppādetabbaṁ …pe…<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Những kẻ khác có thể nhiễm thế tục, cố chấp tư kiến, tánh khó hành xả, chúng ta ở đây sẽ không nhiễm thế tục, không cố chấp tư kiến, tánh dễ hành xả”, cần phải phát tâm như vậy.<br>
+<span lang="pi" class="pali">
+‘pare sandiṭṭhiparāmāsī ādhānaggāhī duppaṭinissaggī bhavissanti, mayamettha asandiṭṭhiparāmāsī anādhānaggāhī suppaṭinissaggī bhavissāmā’ti cittaṁ uppādetabbaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+3. Từ bỏ<br>
+<span lang="pi" class="pali">
+3. Parikkamanapariyāya<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Cunda, giống như một con đường không bằng phẳng, có một con đường bằng phẳng khác đối trị.<br>
+<span lang="pi" class="pali">
+Seyyathāpi, cunda, visamo maggo assa, tassa añño samo maggo parikkamanāya;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Cunda, giống như một bến nước không bằng phẳng, có một bến nước bằng phẳng khác đối trị. Cũng vậy này Cunda:<br>
+<span lang="pi" class="pali">
+seyyathā vā pana, cunda, visamaṁ titthaṁ assa, tassa aññaṁ samaṁ titthaṁ parikkamanāya;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ðối với con người làm hại, có sự không làm hại đối trị. Ðối với con người sát sanh, có từ bỏ sát sanh đối trị. Ðối với con người lấy của không cho, có từ bỏ lấy của không cho đối trị. … không phạm hạnh, có phạm hạnh…; nói láo, có từ bỏ nói láo…; nói hai lưỡi, có từ bỏ nói hai lưỡi…; nói ác khẩu, có từ bỏ nói ác khẩu; nói phù phiếm, có từ bỏ nói phù phiếm…;… tham dục, có không tham dục…;… sân tâm, có không sân tâm…;<br>
+<span lang="pi" class="pali">
+evameva kho, cunda, vihiṁsakassa purisapuggalassa avihiṁsā hoti parikkamanāya, pāṇātipātissa purisapuggalassa pāṇātipātā veramaṇī hoti parikkamanāya, adinnādāyissa purisapuggalassa adinnādānā veramaṇī hoti parikkamanāya, abrahmacārissa purisapuggalassa abrahmacariyā veramaṇī hoti parikkamanāya, musāvādissa purisapuggalassa musāvādā veramaṇī hoti parikkamanāya, pisuṇavācassa purisapuggalassa pisuṇāya vācāya veramaṇī hoti parikkamanāya, pharusavācassa purisapuggalassa pharusāya vācāya veramaṇī hoti parikkamanāya, samphappalāpissa purisapuggalassa samphappalāpā veramaṇī hoti parikkamanāya, abhijjhālussa purisapuggalassa anabhijjhā hoti parikkamanāya, byāpannacittassa purisapuggalassa abyāpādo hoti parikkamanāya.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+… tà kiến, có chánh kiến…;… tà tư duy, có chánh tư duy…;… tà ngữ, có chánh ngữ…;… tà nghiệp, có chánh nghiệp…;… tà mạng, có chánh mạng…;… tà tinh tấn, có chánh tinh tấn…;… tà niệm, có chánh niệm…;… tà định, có chánh định…;… tà trí, có chánh trí…;… tà giải thoát, có chánh giải thoát…;<br>
+<span lang="pi" class="pali">
+Micchādiṭṭhissa purisapuggalassa sammādiṭṭhi hoti parikkamanāya, micchāsaṅkappassa purisapuggalassa sammāsaṅkappo hoti parikkamanāya, micchāvācassa purisapuggalassa sammāvācā hoti parikkamanāya, micchākammantassa purisapuggalassa sammākammanto hoti parikkamanāya, micchāājīvassa purisapuggalassa sammāājīvo hoti parikkamanāya, micchāvāyāmassa purisapuggalassa sammāvāyāmo hoti parikkamanāya, micchāsatissa purisapuggalassa sammāsati hoti parikkamanāya, micchāsamādhissa purisapuggalassa sammāsamādhi hoti parikkamanāya, micchāñāṇissa purisapuggalassa sammāñāṇaṁ hoti parikkamanāya, micchāvimuttissa purisapuggalassa sammāvimutti hoti parikkamanāya.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+… bị hôn trầm thụy miên chi phối, có không bị hôn trầm thụy miên chi phối…;… trạo hối, có không trạo hối…;… nghi hoặc, có trừ diệt nghi hoặc…;… phẫn nộ, có không phẫn nộ…;… oán hận, có không oán hận…;… hư ngụy, có không hư ngụy…;… não hại, có không não hại…;… tật đố, có không tật đố…;… xan tham, có không xan tham…;… man trá, có không man trá…;… khi cuống, có không khi cuống…;… ngoan cố, có không ngoan cố… cấp tháo, có không cấp tháo…;… khó nói, có không khó nói…;… ác hữu, có thiện hữu…;… phóng dật, có không phóng dật…;… bất tín, có tín tâm…;… không xấu hổ, có xấu hổ…;… không sợ hãi, có sợ hãi…;… nghe ít, có nghe nhiều…;… biếng nhác, có siêng năng…;… thất niệm, có an trú niệm…;… liệt tuệ, có thành tựu tuệ … Ðối với con người nhiễm thế tục, cố chấp tư kiến, tánh khó hành xả, có không nhiễm thế tục, không cố chấp tư kiến, tánh dễ hành xả đối trị.<br>
+<span lang="pi" class="pali">
+Thinamiddhapariyuṭṭhitassa purisapuggalassa vigatathinamiddhatā hoti parikkamanāya, uddhatassa purisapuggalassa anuddhaccaṁ hoti parikkamanāya, vicikicchissa purisapuggalassa tiṇṇavicikicchatā hoti parikkamanāya, kodhanassa purisapuggalassa akkodho hoti parikkamanāya, upanāhissa purisapuggalassa anupanāho hoti parikkamanāya, makkhissa purisapuggalassa amakkho hoti parikkamanāya, paḷāsissa purisapuggalassa apaḷāso hoti parikkamanāya, issukissa purisapuggalassa anissukitā hoti parikkamanāya, maccharissa purisapuggalassa amacchariyaṁ hoti parikkamanāya, saṭhassa purisapuggalassa asāṭheyyaṁ hoti parikkamanāya, māyāvissa purisapuggalassa amāyā hoti parikkamanāya, thaddhassa purisapuggalassa atthaddhiyaṁ hoti parikkamanāya, atimānissa purisapuggalassa anatimāno hoti parikkamanāya, dubbacassa purisapuggalassa sovacassatā hoti parikkamanāya, pāpamittassa purisapuggalassa kalyāṇamittatā hoti parikkamanāya, pamattassa purisapuggalassa appamādo hoti parikkamanāya, assaddhassa purisapuggalassa saddhā hoti parikkamanāya, ahirikassa purisapuggalassa hirī hoti parikkamanāya, anottāpissa purisapuggalassa ottappaṁ hoti parikkamanāya, appassutassa purisapuggalassa bāhusaccaṁ hoti parikkamanāya, kusītassa purisapuggalassa vīriyārambho hoti parikkamanāya, muṭṭhassatissa purisapuggalassa upaṭṭhitassatitā hoti parikkamanāya, duppaññassa purisapuggalassa paññāsampadā hoti parikkamanāya, sandiṭṭhiparāmāsi-ādhānaggāhi-duppaṭinissaggissa purisapuggalassa asandiṭṭhiparāmāsi-anādhānaggāhi-suppaṭinissaggitā hoti parikkamanāya.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+4. Hướng thượng<br>
+<span lang="pi" class="pali">
+4. Uparibhāgapariyāya<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Cunda, ví như các bất thiện pháp, tất cả đều hướng hạ, còn các thiện pháp, tất cả đều hướng thượng. Cũng vậy, này Cunda:<br>
+<span lang="pi" class="pali">
+Seyyathāpi, cunda, ye keci akusalā dhammā sabbe te adhobhāgaṅgamanīyā, ye keci kusalā dhammā sabbe te uparibhāgaṅgamanīyā;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Con người không làm hại, hướng thượng đối với người làm hại, con người từ bỏ sát sanh, hướng thượng đối với người sát sanh. Con người từ bỏ lấy của không cho, hướng thượng đối với người lấy của không cho …<br>
+<span lang="pi" class="pali">
+evameva kho, cunda, vihiṁsakassa purisapuggalassa avihiṁsā hoti uparibhāgāya, pāṇātipātissa purisapuggalassa pāṇātipātā veramaṇī hoti uparibhāgāya …pe…<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Con người không nhiễm thế tục, không cố chấp tư kiến, tánh dễ hành xả, hướng thượng đối với người nhiễm thế tục, cố chấp tư kiến, tánh khó hành xả.<br>
+<span lang="pi" class="pali">
+sandiṭṭhiparāmāsi-ādhānaggāhi-duppaṭinissaggissa purisapuggalassa asandiṭṭhiparāmāsi-anādhānaggāhi-suppaṭinissaggitā hoti uparibhāgāya.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+5. Pháp môn giải thoát<br>
+<span lang="pi" class="pali">
+5. Parinibbānapariyāya<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Cunda, con người tự mình bị rơi vào bùn lầy có thể kéo lên một người bị rơi vào bùn lầy, sự tình ấy không thể xảy ra.<br>
+<span lang="pi" class="pali">
+So vata, cunda, attanā palipapalipanno paraṁ palipapalipannaṁ uddharissatīti netaṁ ṭhānaṁ vijjati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Cunda, con người tự mình không rơi vào bùn lầy, có thể kéo lên một người bị rơi vào bùn lầy, sự tình ấy có thể xảy ra.<br>
+<span lang="pi" class="pali">
+So vata, cunda, attanā apalipapalipanno paraṁ palipapalipannaṁ uddharissatīti ṭhānametaṁ vijjati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Cunda, con người tự mình không được nhiếp phục, không được huấn luyện, không được hoàn toàn giải thoát, tự mình có thể nhiếp phục, huấn luyện và hoàn toàn giải thoát người khác, sự tình ấy không thể xảy ra.<br>
+<span lang="pi" class="pali">
+So vata, cunda, attanā adanto avinīto aparinibbuto paraṁ damessati vinessati parinibbāpessatīti netaṁ ṭhānaṁ vijjati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Một người được nhiếp phục, được huấn luyện, được hoàn toàn giải thoát, tự mình có thể nhiếp phục, huấn luyện, hoàn toàn giải thoát người khác, sự tình ấy có thể xảy ra.<br>
+<span lang="pi" class="pali">
+So vata, cunda, attanā danto vinīto parinibbuto paraṁ damessati vinessati parinibbāpessatīti ṭhānametaṁ vijjati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Cũng vậy, Cunda, đối với người làm hại, không làm hại đưa đến hoàn toàn giải thoát; đối với con người sát sanh, từ bỏ sát sanh đưa đến hoàn toàn giải thoát.<br>
+<span lang="pi" class="pali">
+Evameva kho, cunda, vihiṁsakassa purisapuggalassa avihiṁsā hoti parinibbānāya, pāṇātipātissa purisapuggalassa pāṇātipātā veramaṇī hoti parinibbānāya.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ðối với con người lấy của không cho, từ bỏ lấy của không cho đưa đến hoàn toàn giải thoát.<br>
+<span lang="pi" class="pali">
+Adinnādāyissa purisapuggalassa adinnādānā veramaṇī hoti parinibbānāya.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ðối với con người không phạm hạnh, sống phạm hạnh …<br>
+<span lang="pi" class="pali">
+Abrahmacārissa purisapuggalassa abrahmacariyā veramaṇī hoti parinibbānāya.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+đối với con người nói láo, từ bỏ nói láo …<br>
+<span lang="pi" class="pali">
+Musāvādissa purisapuggalassa musāvādā veramaṇī hoti parinibbānāya.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+đối với con người nói hai lưỡi, từ bỏ nói hai lưỡi …<br>
+<span lang="pi" class="pali">
+Pisuṇavācassa purisapuggalassa pisuṇāya vācāya veramaṇī hoti parinibbānāya.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+đối với con người ác khẩu, từ bỏ nói ác khẩu …<br>
+<span lang="pi" class="pali">
+Pharusavācassa purisapuggalassa pharusāya vācāya veramaṇī hoti parinibbānāya.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+đối với con người nói phù phiếm, từ bỏ nói phù phiếm …<br>
+<span lang="pi" class="pali">
+Samphappalāpissa purisapuggalassa samphappalāpā veramaṇī hoti parinibbānāya.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+đối với con người có tham dục, không tham dục …<br>
+<span lang="pi" class="pali">
+Abhijjhālussa purisapuggalassa anabhijjhā hoti parinibbānāya.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+đối với con người có sân tâm, không sân tâm …<br>
+<span lang="pi" class="pali">
+Byāpannacittassa purisapuggalassa abyāpādo hoti parinibbānāya.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+đối với con người có tà kiến, chánh kiến …<br>
+<span lang="pi" class="pali">
+Micchādiṭṭhissa purisapuggalassa sammādiṭṭhi hoti parinibbānāya.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+đối với con người có tà tư duy, chánh tư duy…<br>
+<span lang="pi" class="pali">
+Micchāsaṅkappassa purisapuggalassa sammāsaṅkappo hoti parinibbānāya.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+đối với con người có tà ngữ, chánh ngữ…<br>
+<span lang="pi" class="pali">
+Micchāvācassa purisapuggalassa sammāvācā hoti parinibbānāya.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+đối với con người có tà nghiệp, chánh nghiệp…<br>
+<span lang="pi" class="pali">
+Micchākammantassa purisapuggalassa sammākammanto hoti parinibbānāya.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+đối với con người có tà mạng, chánh mạng…<br>
+<span lang="pi" class="pali">
+Micchāājīvassa purisapuggalassa sammāājīvo hoti parinibbānāya.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+đối với con người có tà tinh tấn, chánh tinh tấn…<br>
+<span lang="pi" class="pali">
+Micchāvāyāmassa purisapuggalassa sammāvāyāmo hoti parinibbānāya.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+đối với con người có tà niệm, chánh niệm…<br>
+<span lang="pi" class="pali">
+Micchāsatissa purisapuggalassa sammāsati hoti parinibbānāya.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+đối với con người có tà định, chánh định…<br>
+<span lang="pi" class="pali">
+Micchāsamādhissa purisapuggalassa sammāsamādhi hoti parinibbānāya.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+đối với con người có tà trí, chánh trí…<br>
+<span lang="pi" class="pali">
+Micchāñāṇissa purisapuggalassa sammāñāṇaṁ hoti parinibbānāya.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+đối với con người có tà giải thoát, chánh giải thoát…<br>
+<span lang="pi" class="pali">
+Micchāvimuttissa purisapuggalassa sammāvimutti hoti parinibbānāya.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+đối với con người bị hôn trầm thụy miên chi phối, không bị hôn trầm thụy miên chi phối…<br>
+<span lang="pi" class="pali">
+Thinamiddhapariyuṭṭhitassa purisapuggalassa vigatathinamiddhatā hoti parinibbānāya.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+đối với con người trạo hối, không trạo hối…<br>
+<span lang="pi" class="pali">
+Uddhatassa purisapuggalassa anuddhaccaṁ hoti parinibbānāya.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+đối với con người nghi hoặc, không nghi hoặc…<br>
+<span lang="pi" class="pali">
+Vicikicchissa purisapuggalassa tiṇṇavicikicchatā hoti parinibbānāya.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+đối với con người phẫn nộ, không phẫn nộ…<br>
+<span lang="pi" class="pali">
+Kodhanassa purisapuggalassa akkodho hoti parinibbānāya.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+đối với con người oán hận, không oán hận…<br>
+<span lang="pi" class="pali">
+Upanāhissa purisapuggalassa anupanāho hoti parinibbānāya.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+đối với con người hư ngụy, không hư ngụy…<br>
+<span lang="pi" class="pali">
+Makkhissa purisapuggalassa amakkho hoti parinibbānāya.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+đối với con người não hại, không não hại…<br>
+<span lang="pi" class="pali">
+Paḷāsissa purisapuggalassa apaḷāso hoti parinibbānāya.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+đối với con người tật đố, không tật đố…<br>
+<span lang="pi" class="pali">
+Issukissa purisapuggalassa anissukitā hoti parinibbānāya.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+đối với con người xan tham, không xan tham…<br>
+<span lang="pi" class="pali">
+Maccharissa purisapuggalassa amacchariyaṁ hoti parinibbānāya.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+đối với con người man trá, không man trá…<br>
+<span lang="pi" class="pali">
+Saṭhassa purisapuggalassa asāṭheyyaṁ hoti parinibbānāya.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+đối với con người khi cuống, không khi cuống…<br>
+<span lang="pi" class="pali">
+Māyāvissa purisapuggalassa amāyā hoti parinibbānāya.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+đối với con người ngoan cố, không ngoan cố….<br>
+<span lang="pi" class="pali">
+Thaddhassa purisapuggalassa atthaddhiyaṁ hoti parinibbānāya.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+đối với con người cấp tháo, không cấp tháo …<br>
+<span lang="pi" class="pali">
+Atimānissa purisapuggalassa anatimāno hoti parinibbānāya.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+đối với con người khó nói, dễ nói…<br>
+<span lang="pi" class="pali">
+Dubbacassa purisapuggalassa sovacassatā hoti parinibbānāya.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+đối với con người ác hữu, thiện hữu..<br>
+<span lang="pi" class="pali">
+Pāpamittassa purisapuggalassa kalyāṇamittatā hoti parinibbānāya.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+đối với con người phóng dật, không phóng dật…<br>
+<span lang="pi" class="pali">
+Pamattassa purisapuggalassa appamādo hoti parinibbānāya.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+đối với con người bất tín, tín tâm…<br>
+<span lang="pi" class="pali">
+Assaddhassa purisapuggalassa saddhā hoti parinibbānāya.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+đối với con người không xấu hổ, có xấu hổ…<br>
+<span lang="pi" class="pali">
+Ahirikassa purisapuggalassa hirī hoti parinibbānāya.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+đối với con người không sợ hãi, có sợ hãi…<br>
+<span lang="pi" class="pali">
+Anottāpissa purisapuggalassa ottappaṁ hoti parinibbānāya.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+đối với con người nghe ít, nghe nhiều…<br>
+<span lang="pi" class="pali">
+Appassutassa purisapuggalassa bāhusaccaṁ hoti parinibbānāya.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+đối với con người biếng nhác, siêng năng…<br>
+<span lang="pi" class="pali">
+Kusītassa purisapuggalassa vīriyārambho hoti parinibbānāya.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+đối với con người thất niệm, an trú niệm…<br>
+<span lang="pi" class="pali">
+Muṭṭhassatissa purisapuggalassa upaṭṭhitassatitā hoti parinibbānāya.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+đối với con người liệt tuệ, thành tựu trí tuệ…<br>
+<span lang="pi" class="pali">
+Duppaññassa purisapuggalassa paññāsampadā hoti parinibbānāya.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ðối với con người nhiễm thế tục, cố chấp tư kiến, tánh khó hành xả, không nhiễm thế tục, không cố chấp tư kiến, tánh dễ hành xả, đưa đến hoàn toàn giải thoát.<br>
+<span lang="pi" class="pali">
+Sandiṭṭhiparāmāsi-ādhānaggāhi-duppaṭinissaggissa purisapuggalassa asandiṭṭhiparāmāsi-anādhānaggāhi-suppaṭinissaggitā hoti parinibbānāya.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Cunda, như vậy Ta đã giảng pháp môn đoạn giảm, đã giảng pháp môn khởi tâm, đã giảng pháp môn đối trị, đã giảng pháp môn hướng thượng, đã giảng pháp môn giải thoát hoàn toàn.<br>
+<span lang="pi" class="pali">
+Iti kho, cunda, desito mayā sallekhapariyāyo, desito cittuppādapariyāyo, desito parikkamanapariyāyo, desito uparibhāgapariyāyo, desito parinibbānapariyāyo.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Cunda, những gì bậc Ðạo Sư phải làm, vì hạnh phúc, vì lòng thương tưởng đệ tử, những việc ấy Ta đã làm, vì lòng thương tưởng cho các Người.<br>
+<span lang="pi" class="pali">
+Yaṁ kho, cunda, satthārā karaṇīyaṁ sāvakānaṁ hitesinā anukampakena anukampaṁ upādāya, kataṁ vo taṁ mayā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Cunda, đây là những gốc cây, đây là những nhà không tịnh. Này Cunda, hãy Thiền định, chớ có phóng dật, chớ có hối tiếc về sau. Ðó là lời giáo huấn của Ta cho các Người.”<br>
+<span lang="pi" class="pali">
+Etāni, cunda, rukkhamūlāni, etāni suññāgārāni, jhāyatha, cunda, mā pamādattha, mā pacchāvippaṭisārino ahuvattha—ayaṁ kho amhākaṁ anusāsanī”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Thế Tôn thuyết giảng như vậy.<br>
+<span lang="pi" class="pali">
+Idamavoca bhagavā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Tôn giả Mahācunda hoan hỷ, tín thọ lời dạy của Thế Tôn.<br>
+<span lang="pi" class="pali">
+Attamano āyasmā mahācundo bhagavato bhāsitaṁ abhinandīti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Bốn mươi mục đã giải,<br>
+Được chia thành năm phần,<br>
+Kinh này là “đoạn giảm”,<br>
+Sâu thẳm như Đại Dương.<br>
+<span lang="pi" class="pali">
+Catuttālīsapadā vuttā,<br>
+sandhayo pañca desitā;<br>
+Sallekho nāma suttanto,<br>
+gambhīro sāgarūpamoti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+<span lang="pi" class="vi">
+Sallekhasuttaṁ niṭṭhitaṁ aṭṭhamaṁ.<br>
+</span>
+</p>
+
+
+<!-- COPY CONTENT SUTTA Ở ĐÂY -->
+
+
+
+<br>
+<p><p style="text-align: right;font-style: italic;">Hoà Thượng Thích Minh Châu dịch Việt</span></p>
+
+
+
+</section>  <!-- End English and Pali -->
+
+
+
+
+
+</section>  <!-- End English and Pali -->
+
+
+
+
+
+</section>  <!-- End English and Pali -->
+
+
+
+
+
+</section>  <!-- End English and Pali -->
+<div id="nextprev"><a id="previous-sutta" href="./mn7.html#content"></a><a id="next-sutta" href="./mn9.html#content"></a></div>
+</div>  <!--End Content -->
+</div>  <!-- End Page -->
+
+
+
+
+
+
+<footer>
+					 <!-- End bottom links -->
+</footer>
+
+
+ 
+ <!-- Scripts -->
+
+ <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      if (typeof enablePaliLookup === "function") {
+        enablePaliLookup();
+      } else {
+        console.error("enablePaliLookup is not defined");
+      }
+    });
+  </script>
+
+ <script>
+ // Script to open and close sidebar
+ 	function w3_open() {
+ 	document.getElementById("mySidebar").style.display = "block";
+ 	}
+ 		function w3_close() {
+ 		document.getElementById("mySidebar").style.display = "none";
+ 	}
+ </script>
+ <script>
+ 		var app = document.getElementsByTagName("BODY")[0];
+ 		if (localStorage.lightMode == "dark") {
+ 			app.setAttribute("light-mode", "dark");
+ 	}
+ </script>
+ 
+ <script>
+ 		function toggle_light_mode() {
+ 			var app = document.getElementsByTagName("BODY")[0];
+ 				if (localStorage.lightMode == "dark") {
+ 			localStorage.lightMode = "light";
+ 			app.setAttribute("light-mode", "light");
+ 		} else {
+ 					localStorage.lightMode = "dark";
+ 					app.setAttribute("light-mode", "dark");
+ 	}
+ 		}
+ 
+ 		window.addEventListener("storage", function () {
+ 			if (localStorage.lightMode == "dark") {
+ 				app.setAttribute("light-mode", "dark");
+ 				} else {
+ 				app.setAttribute("light-mode", "light");
+ 		}
+ 		}, false);
+ 
+ </script>
+ <script src="../js/footer.js"></script><script src="../js/dpd_deconstructor.js"></script><script src="../js/dpd_ebts.js"></script><script src="../js/dpd_i2h.js"></script>
+ <script src="/sw.js"></script>
+ </body>
+ </html>

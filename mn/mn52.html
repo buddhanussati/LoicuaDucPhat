@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+ 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+ 	<link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+ 	<meta name="viewport" content="width=device-width, initial-scale=1">
+		<!-- Loading manifest -->
+	<link rel="manifest" href="../manifest.json">
+ 	<!-- Loading main and menu stylesheets -->
+ 	<link rel="stylesheet" href="../css/w3.css">
+ 	<link rel="stylesheet" href="../css/css.css">
+ 	<link rel="stylesheet" href="../css/menu.css">
+ 	<script src="../js/jquery-1.10.2.min.js"></script>
+ 	<script src="../js/controlpanel.js"></script>
+ 	<script src="../js/mousetrap.min.js"></script>
+    <script src="../js/pali-lookup-standalone.js"></script>
+
+ <script src="../js/suttaFiles.js"></script>
+<script>
+ // Script to open random Sutta
+ function openRandomSutta() {
+  const randomIndex = Math.floor(Math.random() * suttaFiles.length);
+  const selectedFile = suttaFiles[randomIndex];
+
+  // Get root path of your site 
+  const currentPath = location.pathname;
+  const rootPath = currentPath.split("/").slice(0, -2).join("/") + "/";
+
+  // Redirect to the correct file
+  window.location.href = rootPath + selectedFile;
+}
+</script>
+
+
+</head>
+ <body class="container">
+ <div class="header-background">
+ <!-- Header -->
+ <div class="w3-header w3-content w3-padding w3-left-align bwcontainer">
+ 	<div class="centered">
+ 		<button class="light-mode-button" aria-label="Bật Chế Độ Sáng" onclick="toggle_light_mode()">
+ 			<span></span>
+ 			<span></span>
+ 		</button>
+ 		<span class="box-lbl">Sáng/Tối</span>
+ 	</div> <!-- Centered -->
+ 		<a href="../home/index.html" id="bwlogo"><img src="../images/headerlogo.png" alt="Logo Lời Của Đức Phật" class="w3-image"></a>
+ 		<div class="w3-bar bwcontainer">
+ 			<div id="searchlinks">
+ 			<a href="../home/visearch.html"><span class="w3-bar-item"><i class="fa fa-search"></i>&nbsp;Tìm Tiếng Việt</span></a>
+ 			<a href="../home/palisearch.html"><span class="w3-bar-item"><i class="fa fa-search"></i>&nbsp;Tìm Tiếng Pali</span></a>
+ 			</div><!-- End Searchlinks div -->
+ 			<div class="help"><span><a href="../home/help.html"><img src="../images/help_icon.png" title="Trợ Giúp" alt="Help"></a></span></div>
+ 		</div> <!-- End w3-bar bwcontainer --> 	</div> <!-- End w3-header w3-content w3-padding w3-left-align bwcontainer -->
+ </div> <!-- End header-background -->
+ <!-- Top menu -->
+
+ <div class="w3-main w3-white bwcontainer2">
+ 	<div class="w3-button w3-padding-8 w3-left w3-hide-large" onclick="w3_open()">☰</div>
+ 		<div id="navbar" class="w3-hide-small w3-hide-medium bwcontainer3">
+ 			<ul id="css3menu0">
+ 				<li class="topfirst" id="home"><a href="../home/index.html" class="w3-hide-small">Trang Chủ</a></li>
+  				<li class="topmenu" id="dn"><a href="../dn/dn.html" class="pressed w3-hide-small">Trường Bộ Kinh</a></li>
+ 				<li class="topmenu" id="mn"><a href="../mn/mn.html" class="w3-hide-small">Trung Bộ Kinh</a></li>
+ 				<li class="topmenu" id="sn"><a href="../sn/sn.html" class="w3-hide-small"><i class="fa fa-caret-down"></i>&nbsp;Tương Ưng Bộ Kinh</a>
+ 					<ul>
+ 						<li><a href="../sn/sn01.html" class="w3-hide-small">Tập I - Thiên Có Kệ</a></li>
+ 						<li><a href="../sn/sn02.html" class="w3-hide-small">Tập II - Thiên Nhân Duyên</a></li>
+ 						<li><a href="../sn/sn03.html" class="w3-hide-small">Tập III - Thiên Uẩn</a></li>
+ 						<li><a href="../sn/sn04.html" class="w3-hide-small">Tập IV - Thiên Sáu Xứ</a></li>
+ 						<li><a href="../sn/sn05.html" class="w3-hide-small">Tập V - Thiên Ðại Phẩm</a></li>
+ 					</ul>
+ 				<li class="topmenu" id="an"><a href="../an/an.html" class="w3-hide-small"><i class="fa fa-caret-down"></i>&nbsp;Tăng Chi Bộ Kinh</a>
+ 					<ul>
+ 						<li><a href="../an/an1.html" class="w3-hide-small">Chương Một Pháp</a></li>
+ 						<li><a href="../an/an2.html" class="w3-hide-small">Chương Hai Pháp</a></li>
+ 						<li><a href="../an/an3.html" class="w3-hide-small">Chương Ba Pháp</a></li>
+ 						<li><a href="../an/an4.html" class="w3-hide-small">Chương Bốn Pháp</a></li>
+ 						<li><a href="../an/an5.html" class="w3-hide-small">Chương Năm Pháp</a></li>
+ 						<li><a href="../an/an6.html" class="w3-hide-small">Chương Sáu Pháp</a></li>
+ 						<li><a href="../an/an7.html" class="w3-hide-small">Chương Bảy Pháp</a></li>
+ 						<li><a href="../an/an8.html" class="w3-hide-small">Chương Tám Pháp</a></li>
+ 						<li><a href="../an/an9.html" class="w3-hide-small">Chương Chín Pháp</a></li>
+ 						<li><a href="../an/an10.html" class="w3-hide-small">Chương Mười Pháp</a></li>
+ 						<li><a href="../an/an11.html" class="w3-hide-small">Chương Mười Một Pháp</a></li>
+ 					</ul>
+ 				</li>
+ 				<li class="topmenu" id="kn"><a href="../kn/kn.html" class="w3-hide-small"><i class="fa fa-caret-down"></i>&nbsp;Tiểu Bộ Kinh</a>
+ 					<ul>
+ 						<li><a href="../kp/kp.html" class="w3-hide-small">Kinh Tiểu Tụng</a></li>
+ 						<li><a href="../dhp/dhp.html" class="w3-hide-small">Kinh Pháp Cú</a></li>
+ 						<li><a href="../snp/snp.html" class="w3-hide-small">Kinh Tập</a></li>
+ 						<li><a href="../ud/ud.html" class="w3-hide-small">Kinh Phật Tự Thuyết</a></li>
+ 						<li><a href="../it/it.html" class="w3-hide-small">Kinh Phật Thuyết Như Vậy</a></li>
+ 						<li><a href="../tha/tha.html" class="w3-hide-small">Trưởng Lão Tăng Kệ</a></li>
+ 						<li><a href="../thi/thi.html" class="w3-hide-small">Trưởng Lão Ni Kệ</a></li>
+ 					</ul>
+ 				</li>
+				<li class="toplast" id="rd"><a href="../rd/rd.html" class="w3-hide-small"></i>Kinh Ngẫu Nhiên Theo Nhóm</a>
+ 					</ul>
+ 				</li>
+ 			</ul>
+ 			</div>
+ 		</div> <!--navbar-->
+
+<!-- Sidebar (hidden by default) -->
+ <nav class="w3-sidebar w3-bar-block w3-card w3-border w3-top w3-animate-left w3-hide-large" id="mySidebar">
+ 	<a href="javascript:void(0)" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-times fa-2x red-color"></i>&nbsp;&nbsp;&nbsp;Close</a><!-- Hides the sidebar when clicked -->
+ 		<div class="w3-bar-block w3-white">
+ 			<a href="../home/index.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-home fa-lg"></i>&nbsp;&nbsp;&nbsp;Home</a>
+ 			<a href="../guide/guide.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Guide</a>
+ 			<a href="../dn/dn.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Trường Bộ Kinh</a>
+ 			<a href="../mn/mn.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Trung Bộ Kinh</a>
+ 			<a href="../sn/sn.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Tương Ưng Bộ Kinh</a>
+ 			<a href="../an/an.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Tăng Chi Bộ Kinh
+ 			<a href="../kn/kn.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Tiểu Bộ Kinh</a>
+			<a href="../rd/rd.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>Kinh Ngẫu Nhiên Theo Nhóm</a>
+ 		</div>
+ </nav>
+ 
+ 
+ 
+   <!-- !PAGE CONTENT! --> 
+<div class="w3-main w3-content w3-padding w3-left-align bwcontainer4">
+<div id="content">
+<h2>Majjhima Nikāya - Trung Bộ Kinh</h2>
+<h5><span style="font-style: italic;">Hoà Thượng Thích Minh Châu dịch Việt</span></h5>
+
+</div>
+
+<br>
+ 	<title>        Trung Bộ 52          </title>
+
+<p lang="vi" class="vi"; style="text-align: center">
+Trung Bộ 52<br>
+<span lang="pi" class="pali">
+Majjhima Nikāya 52<br>
+</span>
+</p>
+
+<p lang="vi" class="vi"; style="text-align: center">
+Kinh Bát Thành<br>
+<span lang="pi" class="pali">
+Aṭṭhakanāgarasutta<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Như vầy tôi nghe.<br>
+<span lang="pi" class="pali">
+Evaṁ me sutaṁ—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Một thời Tôn giả Ānanda trú ở Vesālī (Tỳ-xá-ly), tại một ngôi làng nhỏ ở Beluva.<br>
+<span lang="pi" class="pali">
+ekaṁ samayaṁ āyasmā ānando vesāliyaṁ viharati beluvagāmake.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Lúc bấy giờ gia chủ Dasama, người ở thành Atthaka đến tại Pāṭaliputta (thành Ba-la-lị-phất) có công việc.<br>
+<span lang="pi" class="pali">
+Tena kho pana samayena dasamo gahapati aṭṭhakanāgaro pāṭaliputtaṁ anuppatto hoti kenacideva karaṇīyena.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Rồi gia chủ Dasama, người ở thành Atthaka (Bát thành) đi đến Kukkutarama (Kê Viên), đến một Tỷ-kheo, đảnh lễ vị này, rồi ngồi xuống một bên. Sau khi ngồi xuống một bên, gia chủ Dasama, người ở thành Atthaka thưa với Tỷ-kheo ấy:<br>
+<span lang="pi" class="pali">
+Atha kho dasamo gahapati aṭṭhakanāgaro yena kukkuṭārāmo yena aññataro bhikkhu tenupasaṅkami; upasaṅkamitvā taṁ bhikkhuṁ abhivādetvā ekamantaṁ nisīdi. Ekamantaṁ nisinno kho dasamo gahapati aṭṭhakanāgaro taṁ bhikkhuṁ etadavoca:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Bạch Tôn giả, Tôn giả Ānanda nay an trú ở đâu?<br>
+<span lang="pi" class="pali">
+“kahaṁ nu kho, bhante, āyasmā ānando etarahi viharati?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Chúng con muốn gặp Tôn giả Ānanda.”<br>
+<span lang="pi" class="pali">
+Dassanakāmā hi mayaṁ taṁ āyasmantaṁ ānandan”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Này Gia chủ, Tôn giả Ānanda nay ở Vesālī, tại ngôi làng nhỏ Beluva.”<br>
+<span lang="pi" class="pali">
+“Eso, gahapati, āyasmā ānando vesāliyaṁ viharati beluvagāmake”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Rồi gia chủ Dasama, người ở thành Atthaka, sau khi làm xong công việc ở Pāṭaliputta, liền đi đến Vesālī, ấp Beluvagamaka, đến Tôn giả Ānanda, sau khi đến, đảnh lễ Tôn giả Ānanda rồi ngồi xuống một bên. Sau khi ngồi xuống một bên, gia chủ Dasama người ở thành Atthaka thưa với Tôn giả Ānanda:<br>
+<span lang="pi" class="pali">
+Atha kho dasamo gahapati aṭṭhakanāgaro pāṭaliputte taṁ karaṇīyaṁ tīretvā yena vesālī yena beluvagāmako yenāyasmā ānando tenupasaṅkami; upasaṅkamitvā āyasmantaṁ ānandaṁ abhivādetvā ekamantaṁ nisīdi. Ekamantaṁ nisinno kho dasamo gahapati aṭṭhakanāgaro āyasmantaṁ ānandaṁ etadavoca:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Bạch Tôn giả Ānanda, có pháp độc nhất gì do Thế Tôn, bậc Tri Giả, Kiến Giả, bậc A-la-hán, Chánh Ðẳng Giác tuyên bố, nếu có Tỷ-kheo nào không phóng dật, nhiệt tâm, tinh cần sống hành trì pháp ấy, thời tâm chưa giải thoát của vị ấy được giải thoát, hay các lậu hoặc chưa được đoạn trừ đi đến đoạn trừ, hay pháp an ổn khỏi các ách phược chưa được chứng đạt được chứng đạt?”<br>
+<span lang="pi" class="pali">
+“atthi nu kho, bhante ānanda, tena bhagavatā jānatā passatā arahatā sammāsambuddhena ekadhammo akkhāto yattha bhikkhuno appamattassa ātāpino pahitattassa viharato avimuttañceva cittaṁ vimuccati, aparikkhīṇā ca āsavā parikkhayaṁ gacchanti, ananuppattañca anuttaraṁ yogakkhemaṁ anupāpuṇātī”ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Này Gia chủ, có pháp độc nhất, do Thế Tôn, bậc Tri Giả, Kiến Giả, bậc A-la-hán, Chánh Ðẳng Giác tuyên bố, nếu có Tỷ-kheo nào không phóng dật, nhiệt tâm, tinh cần, sống hành trì pháp ấy, thời tâm chưa giải thoát của vị ấy được giải thoát, và các lậu hoặc chưa được đoạn trừ đi đến đoạn trừ, và pháp vô thượng an ổn khỏi các ách phược chưa được chứng đạt được chứng đạt.”<br>
+<span lang="pi" class="pali">
+“Atthi kho, gahapati, tena bhagavatā jānatā passatā arahatā sammāsambuddhena ekadhammo akkhāto, yattha bhikkhuno appamattassa ātāpino pahitattassa viharato avimuttañceva cittaṁ vimuccati, aparikkhīṇā ca āsavā parikkhayaṁ gacchanti, ananuppattañca anuttaraṁ yogakkhemaṁ anupāpuṇātī”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“ABạch Tôn giả Ānanda, pháp độc nhất ấy là gì, do Thế Tôn, bậc Tri Giả, Kiến Giả, bậc A-la-hán, Chánh Ðẳng Giác tuyên bố, nếu có Tỷ-kheo nào không phóng dật, nhiệt tâm, tinh cần, sống hành trì pháp ấy, thời tâm chưa giải thoát của vị ấy được giải thoát, và các lậu hoặc chưa được đoạn trừ đi đến đoạn trừ, và pháp vô thượng an ổn khỏi các ách phược chưa được chứng đạt được chứng đạt?”<br>
+<span lang="pi" class="pali">
+“Katamo pana, bhante ānanda, tena bhagavatā jānatā passatā arahatā sammāsambuddhena ekadhammo akkhāto, yattha bhikkhuno appamattassa ātāpino pahitattassa viharato avimuttañceva cittaṁ vimuccati, aparikkhīṇā ca āsavā parikkhayaṁ gacchanti, ananuppattañca anuttaraṁ yogakkhemaṁ anupāpuṇātī”ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Ở đây, này Gia chủ, Tỷ-kheo ly dục, ly bất thiện pháp chứng và trú Thiền thứ nhất, một trạng thái hỷ lạc do ly dục sanh, có tầm, có tứ.<br>
+<span lang="pi" class="pali">
+“Idha, gahapati, bhikkhu vivicceva kāmehi vivicca akusalehi dhammehi savitakkaṁ savicāraṁ vivekajaṁ pītisukhaṁ paṭhamaṁ jhānaṁ upasampajja viharati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vị ấy suy tư và được biết:<br>
+<span lang="pi" class="pali">
+So iti paṭisañcikkhati:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Sơ Thiền này là pháp hữu vi, do suy tư tác thành.<br>
+<span lang="pi" class="pali">
+‘idampi kho paṭhamaṁ jhānaṁ abhisaṅkhataṁ abhisañcetayitaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Phàm sự vật gì là pháp hữu vi, do suy tư tác thành, thời sự vật ấy là vô thường, chịu sự đoạn diệt”.<br>
+<span lang="pi" class="pali">
+Yaṁ kho pana kiñci abhisaṅkhataṁ abhisañcetayitaṁ tadaniccaṁ nirodhadhamman’ti pajānāti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vị ấy vững trú ở đây, đoạn trừ được các lậu hoặc.<br>
+<span lang="pi" class="pali">
+So tattha ṭhito āsavānaṁ khayaṁ pāpuṇāti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Và nếu các lậu hoặc chưa được đoạn trừ, do tham luyến pháp này, do hoan hỷ pháp này, vị ấy đoạn trừ được năm hạ phần kiết sử, được hóa sanh, nhập Niết-bàn tại cảnh giới ấy, khỏi phải trở lui đời này.<br>
+<span lang="pi" class="pali">
+No ce āsavānaṁ khayaṁ pāpuṇāti, teneva dhammarāgena tāya dhammanandiyā pañcannaṁ orambhāgiyānaṁ saṁyojanānaṁ parikkhayā opapātiko hoti tattha parinibbāyī anāvattidhammo tasmā lokā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Gia chủ, như vậy là pháp độc nhất, do Thế Tôn, bậc Tri Giả, Kiến Giả, bậc A-la-hán, Chánh Ðẳng Giác tuyên bố, nên Tỷ-kheo nào không phóng dật, nhiệt tâm, tinh cần, sống hành trì pháp ấy, thời tâm vị ấy chưa giải thoát được giải thoát, và các lậu hoặc chưa được đoạn trừ đi đến đoạn trừ, và pháp vô thượng an ổn khỏi các ách phược chưa được chứng đạt được chứng đạt.<br>
+<span lang="pi" class="pali">
+Ayampi kho, gahapati, tena bhagavatā jānatā passatā arahatā sammāsambuddhena ekadhammo akkhāto, yattha bhikkhuno appamattassa ātāpino pahitattassa viharato avimuttañceva cittaṁ vimuccati, aparikkhīṇā ca āsavā parikkhayaṁ gacchanti, ananuppattañca anuttaraṁ yogakkhemaṁ anupāpuṇāti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Lại nữa, này Gia chủ, vị Tỷ-kheo diệt tầm và tứ, chứng và trú Thiền thứ hai, một trạng thái hỷ lạc do định sanh, không tầm không tứ, nội tĩnh nhất tâm,<br>
+<span lang="pi" class="pali">
+Puna caparaṁ, gahapati, bhikkhu vitakkavicārānaṁ vūpasamā ajjhattaṁ sampasādanaṁ …pe… dutiyaṁ jhānaṁ upasampajja viharati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+vị ấy suy tư và được biết:<br>
+<span lang="pi" class="pali">
+So iti paṭisañcikkhati:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Thiền thứ hai này là pháp hữu vi, do suy tư tác thành. Phàm sự vật gì là pháp hữu vi, do suy tư tác thành, thời sự vật ấy là vô thường, chịu sự đoạn diệt”. Vị ấy vững trú ở đây, đoạn trừ được các lậu hoặc. Và nếu các lậu hoặc chưa được đoạn trừ, do tham luyến pháp này, do hoan hỷ pháp này, vị ấy đoạn trừ được năm hạ phần kiết sử, được hóa sanh, nhập Niết-bàn tại cảnh giới ấy, khỏi phải trở lui đời này. Này Gia chủ, như vậy là pháp độc nhất do Thế Tôn, bậc Tri Giả, Kiến Giả, bậc A-la-hán, Chánh Ðẳng Giác tuyên bố. Nếu Tỷ-kheo nào không phóng dật, nhiệt tâm, tinh cần, sống hành trì pháp ấy, thời tâm vị ấy chưa giải thoát được giải thoát, và các lậu hoặc chưa được đoạn trừ đi đến đoạn trừ, và pháp vô thượng an ổn khỏi các ách phược chưa chứng đạt được chứng đạt.<br>
+<span lang="pi" class="pali">
+‘idampi kho dutiyaṁ jhānaṁ abhisaṅkhataṁ abhisañcetayitaṁ …pe… anuttaraṁ yogakkhemaṁ anupāpuṇāti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Lại nữa, này Gia chủ, Tỷ-kheo ly hỷ trú xả, chánh niệm tỉnh giác, thân cảm sự lạc thọ mà bậc Thánh gọi là xả niệm lạc trú, chứng và an trú Thiền thứ ba. Vị ấy suy tư và được biết: “Thiền thứ ba này là pháp hữu vi, do suy tư tác thành. Phàm sự vật gì là pháp hữu vi, do suy tư tác thành, thời sự vật ấy là vô thường, chịu sự đoạn diệt”. Vị ấy vững trú ở đây, đoạn trừ được các lậu hoặc. Và nếu các lậu hoặc chưa được đoạn trừ, do tham luyến pháp này, do hoan hỷ pháp này, vị ấy đoạn trừ được năm hạ phần kiết sử, được hóa sanh, nhập Niết-bàn tại cảnh giới ấy, khỏi phải trở lui đời này. Này Gia chủ, như vậy là pháp độc nhất do Thế Tôn, bậc Tri Giả, Kiến Giả, bậc A-la-hán, Chánh Ðẳng Giác tuyên bố. Nếu Tỷ-kheo nào không phóng dật, nhiệt tâm, tinh cần, sống hành trì pháp ấy, thời tâm vị ấy chưa giải thoát được giải thoát, và các lậu hoặc chưa được đoạn trừ đi đến đoạn trừ, và pháp vô thượng an ổn khỏi các ách phược chưa chứng đạt được chứng đạt.<br>
+<span lang="pi" class="pali">
+Puna caparaṁ, gahapati, bhikkhu pītiyā ca virāgā …pe… tatiyaṁ jhānaṁ upasampajja viharati. So iti paṭisañcikkhati: ‘idampi kho tatiyaṁ jhānaṁ abhisaṅkhataṁ abhisañcetayitaṁ …pe… anuttaraṁ yogakkhemaṁ anupāpuṇāti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Lại nữa, này Gia chủ, Tỷ-kheo xả lạc, xả khổ, diệt hỷ ưu đã cảm thọ trước, chứng và trú Thiền thứ tư, không khổ không lạc, xả niệm thanh tịnh. Vị ấy suy tư và được biết: “Thiền thứ tư này là pháp hữu vi, do suy tư tác thành. Phàm sự vật gì là pháp hữu vi, do suy tư tác thành thời sự vật ấy là vô thường, chịu sự đoạn diệt”. Vị ấy vững trú ở đây, đoạn trừ được các lậu hoặc. Và nếu các lậu hoặc chưa được đoạn trừ, do tham luyến pháp này, do hoan hỷ pháp này, vị ấy đoạn trừ được năm hạ phần kiết sử, được hóa sanh, nhập Niết-bàn tại cảnh giới ấy, khỏi phải trở lui đời này. Này Gia chủ, như vậy là pháp độc nhất do Thế Tôn, bậc Tri Giả, Kiến Giả, bậc A-la-hán, Chánh Ðẳng Giác tuyên bố. Nếu Tỷ-kheo nào không phóng dật, nhiệt tâm, tinh cần, sống hành trì pháp ấy, thời tâm vị ấy chưa giải thoát được giải thoát, và các lậu hoặc chưa được đoạn trừ đi đến đoạn trừ, và pháp vô thượng an ổn khỏi các ách phược chưa chứng đạt được chứng đạt.<br>
+<span lang="pi" class="pali">
+Puna caparaṁ, gahapati, bhikkhu sukhassa ca pahānā …pe… catutthaṁ jhānaṁ upasampajja viharati. So iti paṭisañcikkhati: ‘idampi kho catutthaṁ jhānaṁ abhisaṅkhataṁ abhisañcetayitaṁ …pe… anuttaraṁ yogakkhemaṁ anupāpuṇāti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Lại nữa, này Gia chủ, Tỷ-kheo an trú biến mãn một phương với tâm câu hữu với từ; cũng vậy phương thứ hai, cũng vậy phương thứ ba, cũng vậy phương thứ tư. Như vậy cùng khắp thế giới, trên dưới bề ngang, hết thảy phương xứ, cùng khắp vô biên giới, vị ấy an trú biến mãn với tâm câu hữu với từ, quảng đại, vô biên, không hận, không sân.<br>
+<span lang="pi" class="pali">
+Puna caparaṁ, gahapati, bhikkhu mettāsahagatena cetasā ekaṁ disaṁ pharitvā viharati, tathā dutiyaṁ, tathā tatiyaṁ, tathā catutthaṁ. Iti uddhamadho tiriyaṁ sabbadhi sabbattatāya sabbāvantaṁ lokaṁ mettāsahagatena cetasā vipulena mahaggatena appamāṇena averena abyābajjhena pharitvā viharati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vị ấy suy tư và được biết:<br>
+<span lang="pi" class="pali">
+So iti paṭisañcikkhati:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Từ tâm giải thoát này là pháp hữu vi, do suy tư tác thành.<br>
+<span lang="pi" class="pali">
+‘ayampi kho mettācetovimutti abhisaṅkhatā abhisañcetayitā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Phàm sự vật gì là pháp hữu vi, do suy tư tác thành, thời sự vật ấy là vô thường, chịu sự đoạn diệt”.<br>
+<span lang="pi" class="pali">
+Yaṁ kho pana kiñci abhisaṅkhataṁ abhisañcetayitaṁ tadaniccaṁ nirodhadhamman’ti pajānāti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vị ấy do vững trú ở đây, đoạn trừ được các lậu hoặc. Và nếu các lậu hoặc chưa được đoạn trừ, do tham luyến pháp này, do hoan hỷ pháp này, vị ấy đoạn trừ được năm hạ phần kiết sử, được hóa sanh, nhập Niết-bàn tại cảnh giới ấy, khỏi phải trở lui đời này. Này Gia chủ, như vậy là pháp độc nhất do Thế Tôn, bậc Tri Giả, Kiến Giả, bậc A-la-hán, Chánh Ðẳng Giác tuyên bố. Nếu Tỷ-kheo nào không phóng dật, nhiệt tâm, tinh cần, sống hành trì pháp ấy, thời tâm vị ấy chưa giải thoát được giải thoát, và các lậu hoặc chưa được đoạn trừ đi đến đoạn trừ, và pháp vô thượng an ổn khỏi các ách phược chưa chứng đạt được chứng đạt.<br>
+<span lang="pi" class="pali">
+So tattha ṭhito …pe… anuttaraṁ yogakkhemaṁ anupāpuṇāti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Lại nữa, này Gia chủ, Tỷ-kheo an trú, biến mãn một phương với tâm câu hữu với bi…<br>
+<span lang="pi" class="pali">
+Puna caparaṁ, gahapati, bhikkhu karuṇāsahagatena cetasā …pe…<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Với tâm câu hữu với hỷ…<br>
+<span lang="pi" class="pali">
+muditāsahagatena cetasā …pe…<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+với tâm câu hữu với xả; cũng vậy phương thứ hai, cũng vậy phương thứ ba, cũng vậy phương thứ tư. Như vậy cùng khắp thế giới, trên dưới, bề ngang, hết thảy phương xứ, cùng khắp vô biên giới, vị ấy an trú biến mãn với tâm câu hữu với xả, quảng đại, vô biên, không hận, không sân.<br>
+<span lang="pi" class="pali">
+upekkhāsahagatena cetasā ekaṁ disaṁ pharitvā viharati, tathā dutiyaṁ, tathā tatiyaṁ, tathā catutthaṁ. Iti uddhamadho tiriyaṁ sabbadhi sabbattatāya sabbāvantaṁ lokaṁ upekkhāsahagatena cetasā vipulena mahaggatena appamāṇena averena abyābajjhena pharitvā viharati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vị ấy suy tư và được biết:<br>
+<span lang="pi" class="pali">
+So iti paṭisañcikkhati:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Xả tâm giải thoát này là pháp hữu vi, do suy tư tác thành.<br>
+<span lang="pi" class="pali">
+‘ayampi kho upekkhācetovimutti abhisaṅkhatā abhisañcetayitā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Phàm sự việc gì là pháp hữu vi, do suy tư tác thành, thời sự vật ấy là vô thường, chịu sự đoạn diệt”.<br>
+<span lang="pi" class="pali">
+Yaṁ kho pana kiñci abhisaṅkhataṁ abhisañcetayitaṁ tadaniccaṁ nirodhadhamman’ti pajānāti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vị ấy vững trú ở đây, đoạn trừ được các lậu hoặc. Và nếu các lậu hoặc chưa được đoạn trừ, do tham luyến pháp này, do hoan hỷ pháp này, vị ấy đoạn trừ được năm hạ phần kiết sử, được hóa sanh, nhập Niết-bàn tại cảnh giới ấy, khỏi phải trở lui đời này. Này Gia chủ, như vậy là pháp độc nhất do Thế Tôn, bậc Tri Giả, Kiến Giả, bậc A-la-hán, Chánh Ðẳng Giác tuyên bố. Nếu Tỷ-kheo nào không phóng dật, nhiệt tâm, tinh cần, sống hành trì pháp ấy, thời tâm vị ấy chưa giải thoát được giải thoát, và các lậu hoặc chưa được đoạn trừ đi đến đoạn trừ, và pháp vô thượng an ổn khỏi các ách phược chưa chứng đạt được chứng đạt.<br>
+<span lang="pi" class="pali">
+So tattha ṭhito …pe… anuttaraṁ yogakkhemaṁ anupāpuṇāti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Lại nữa, này Gia chủ, Tỷ-kheo vượt lên mọi sắc tưởng, diệt trừ mọi chướng ngại tưởng, không tác ý đối với dị tưởng, Tỷ-kheo nghĩ rằng: “Hư không là vô biên”, chứng và trú Không vô biên xứ.<br>
+<span lang="pi" class="pali">
+Puna caparaṁ, gahapati, bhikkhu sabbaso rūpasaññānaṁ samatikkamā paṭighasaññānaṁ atthaṅgamā nānattasaññānaṁ amanasikārā ‘ananto ākāso’ti ākāsānañcāyatanaṁ upasampajja viharati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vị này suy tư và được biết:<br>
+<span lang="pi" class="pali">
+So iti paṭisañcikkhati:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Không vô biên xứ định này là pháp hữu vi, do suy tư tác thành.<br>
+<span lang="pi" class="pali">
+‘ayampi kho ākāsānañcāyatanasamāpatti abhisaṅkhatā abhisañcetayitā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Phàm sự vật gì là pháp hữu vi, do suy tư tác thành, thời sự vật ấy là vô thường, chịu sự đoạn diệt”.<br>
+<span lang="pi" class="pali">
+Yaṁ kho pana kiñci abhisaṅkhataṁ abhisañcetayitaṁ tadaniccaṁ nirodhadhamman’ti pajānāti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vị ấy vững trú ở đây, đoạn trừ được các lậu hoặc. Và nếu các lậu hoặc chưa được đoạn trừ, do tham luyến pháp này, do hoan hỷ pháp này, vị ấy đoạn trừ được năm hạ phần kiết sử, được hóa sanh, nhập Niết-bàn tại cảnh giới ấy, khỏi phải trở lui đời này. Này Gia chủ, như vậy là pháp độc nhất do Thế Tôn, bậc Tri Giả, Kiến Giả, bậc A-la-hán, Chánh Ðẳng Giác tuyên bố. Nếu Tỷ-kheo nào không phóng dật, nhiệt tâm, tinh cần, sống hành trì pháp ấy, thời tâm vị ấy chưa giải thoát được giải thoát, và các lậu hoặc chưa được đoạn trừ đi đến đoạn trừ, và pháp vô thượng an ổn khỏi các ách phược chưa chứng đạt được chứng đạt.<br>
+<span lang="pi" class="pali">
+So tattha ṭhito …pe… anuttaraṁ yogakkhemaṁ anupāpuṇāti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Lại nữa, này Gia chủ, Tỷ-kheo vượt lên mọi Không vô biên xứ, nghĩ rằng: “Thức là vô biên”, chứng và trú Thức vô biên xứ.<br>
+<span lang="pi" class="pali">
+Puna caparaṁ, gahapati, bhikkhu sabbaso ākāsānañcāyatanaṁ samatikkamma ‘anantaṁ viññāṇan’ti viññāṇañcāyatanaṁ upasampajja viharati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vị này suy tư và được biết:<br>
+<span lang="pi" class="pali">
+So iti paṭisañcikkhati:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Thức vô biên xứ định này là pháp hữu vi do suy tư tác thành.<br>
+<span lang="pi" class="pali">
+‘ayampi kho viññāṇañcāyatanasamāpatti abhisaṅkhatā abhisañcetayitā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Phàm sự vật gì là pháp hữu vi, do suy tư tác thành, thời sự vật ấy là vô thường chịu sự đoạn diệt”.<br>
+<span lang="pi" class="pali">
+Yaṁ kho pana kiñci abhisaṅkhataṁ abhisañcetayitaṁ tadaniccaṁ nirodhadhamman’ti pajānāti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vị ấy vững trú ở đây, đoạn trừ được các lậu hoặc. Và nếu các lậu hoặc chưa được đoạn trừ, do tham luyến pháp này, do hoan hỷ pháp này, vị ấy đoạn trừ được năm hạ phần kiết sử, được hóa sanh, nhập Niết-bàn tại cảnh giới ấy, khỏi phải trở lui đời này. Này Gia chủ, như vậy là pháp độc nhất do Thế Tôn, bậc Tri Giả, Kiến Giả, bậc A-la-hán, Chánh Ðẳng Giác tuyên bố. Nếu Tỷ-kheo nào không phóng dật, nhiệt tâm, tinh cần, sống hành trì pháp ấy, thời tâm vị ấy chưa giải thoát được giải thoát, và các lậu hoặc chưa được đoạn trừ đi đến đoạn trừ, và pháp vô thượng an ổn khỏi các ách phược chưa chứng đạt được chứng đạt.<br>
+<span lang="pi" class="pali">
+So tattha ṭhito …pe… anuttaraṁ yogakkhemaṁ anupāpuṇāti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Lại nữa, này Gia chủ, Tỷ-kheo vượt lên mọi Thức vô biên xứ, nghĩ rằng: “Không có vật gì”, chứng và trú Vô sở hữu xứ.<br>
+<span lang="pi" class="pali">
+Puna caparaṁ, gahapati, bhikkhu sabbaso viññāṇañcāyatanaṁ samatikkamma ‘natthi kiñcī’ti ākiñcaññāyatanaṁ upasampajja viharati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vị này suy tư và được biết:<br>
+<span lang="pi" class="pali">
+So iti paṭisañcikkhati:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Vô sở hữu xứ định này là pháp hữu vi, do suy tư tác thành.<br>
+<span lang="pi" class="pali">
+‘ayampi kho ākiñcaññāyatanasamāpatti abhisaṅkhatā abhisañcetayitā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Phàm sự vật gì là pháp hữu vi, do suy tư tác thành thời sự vật ấy là vô thường, chịu sự đoạn diệt”.<br>
+<span lang="pi" class="pali">
+Yaṁ kho pana kiñci abhisaṅkhataṁ abhisañcetayitaṁ tadaniccaṁ nirodhadhamman’ti pajānāti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vị ấy vững trú ở đây, đoạn trừ được các lậu hoặc.<br>
+<span lang="pi" class="pali">
+So tattha ṭhito āsavānaṁ khayaṁ pāpuṇāti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Và nếu các lậu hoặc chưa được đoạn trừ, do tham luyến pháp này, do hoan hỷ pháp này, vị ấy đoạn trừ được năm hạ phần kiết sử, được hóa sanh, nhập Niết-bàn tại cảnh giới ấy, khỏi phải trở lui đời này.<br>
+<span lang="pi" class="pali">
+No ce āsavānaṁ khayaṁ pāpuṇāti, teneva dhammarāgena tāya dhammanandiyā pañcannaṁ orambhāgiyānaṁ saṁyojanānaṁ parikkhayā opapātiko hoti tattha parinibbāyī anāvattidhammo tasmā lokā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Gia chủ, như vậy là pháp độc nhất, do Thế Tôn bậc Tri Giả, Kiến Giả, bậc A-la-hán, Chánh Ðẳng Giác tuyên bố. Nếu Tỷ-kheo nào, không phóng dật, nhiệt tâm, tinh cần, sống hành trì pháp ấy, thời tâm vị ấy chưa giải thoát, được giải thoát, và các lậu hoặc chưa được đoạn trừ đi đến đoạn trừ, pháp vô thượng an ổn khỏi các ách phược chưa được chứng đạt được chứng đạt.”<br>
+<span lang="pi" class="pali">
+Ayampi kho, gahapati, tena bhagavatā jānatā passatā arahatā sammāsambuddhena ekadhammo akkhāto yattha bhikkhuno appamattassa ātāpino pahitattassa viharato avimuttañceva cittaṁ vimuccati, aparikkhīṇā ca āsavā parikkhayaṁ gacchanti, ananuppattañca anuttaraṁ yogakkhemaṁ anupāpuṇātī”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Khi được nghe nói vậy, Gia chủ Dasama, người ở thành Atthaka bạch Tôn giả Ānanda:<br>
+<span lang="pi" class="pali">
+Evaṁ vutte, dasamo gahapati aṭṭhakanāgaro āyasmantaṁ ānandaṁ etadavoca:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Bạch Tôn giả Ānanda, như người tìm một kho tàng cất dấu, trong một lúc tìm được mười một kho tàng cất dấu.<br>
+<span lang="pi" class="pali">
+“seyyathāpi, bhante ānanda, puriso ekaṁva nidhimukhaṁ gavesanto sakideva ekādasa nidhimukhāni adhigaccheyya;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Cũng vậy, bạch Tôn giả, con đi tìm một pháp môn bất tử mà được nghe một lần mười một pháp môn bất tử.<br>
+<span lang="pi" class="pali">
+evameva kho ahaṁ, bhante, ekaṁ amatadvāraṁ gavesanto sakideva ekādasa amatadvārāni alatthaṁ bhāvanāya.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Bạch Tôn giả, như ngôi nhà người ta có đến mười một cửa, khi ngôi nhà bị cháy, thì chỉ do một cửa người ta cũng có thể thoát ra một cách an toàn.<br>
+<span lang="pi" class="pali">
+Seyyathāpi, bhante, purisassa agāraṁ ekādasadvāraṁ, so tasmiṁ agāre āditte ekamekenapi dvārena sakkuṇeyya attānaṁ sotthiṁ kātuṁ;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Cũng vậy, bạch Tôn giả, chỉ với một cửa bất tử trong mười một cửa bất tử này, con có thể đạt được sự an toàn cho con.<br>
+<span lang="pi" class="pali">
+evameva kho ahaṁ, bhante, imesaṁ ekādasannaṁ amatadvārānaṁ ekamekenapi amatadvārena sakkuṇissāmi attānaṁ sotthiṁ kātuṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Bạch Tôn giả, đệ tử các ngoại đạo này sẽ tìm cầu tiền của cúng dường cho vị thầy của mình, sao con lại không cúng dường cho Tôn giả Ānanda?”<br>
+<span lang="pi" class="pali">
+Imehi nāma, bhante, aññatitthiyā ācariyassa ācariyadhanaṁ pariyesissanti, kimaṅgaṁ panāhaṁ āyasmato ānandassa pūjaṁ na karissāmī”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Rồi gia chủ Dasama, người ở thành Atthaka cho mời họp Tỷ-kheo Tăng ở Pāṭaliputta và Vesālī, tự tay mời ăn và làm cho thỏa mãn với các món ăn thượng vị loại cứng và loại mềm.<br>
+<span lang="pi" class="pali">
+Atha kho dasamo gahapati aṭṭhakanāgaro pāṭaliputtakañca vesālikañca bhikkhusaṅghaṁ sannipātetvā paṇītena khādanīyena bhojanīyena sahatthā santappesi sampavāresi,<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Dâng đến mỗi Tỷ-kheo, mỗi vị một cặp y, dâng cho Tôn giả Ānanda ba y và xây dựng một Tăng xá trị giá năm trăm đồng tiền vàng (hay có năm trăm Tăng phòng) cho Tôn giả Ānanda.<br>
+<span lang="pi" class="pali">
+ekamekañca bhikkhuṁ paccekaṁ dussayugena acchādesi, āyasmantañca ānandaṁ ticīvarena acchādesi, āyasmato ca ānandassa pañcasatavihāraṁ kārāpesīti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+<span lang="pi" class="vi">
+Aṭṭhakanāgarasuttaṁ niṭṭhitaṁ dutiyaṁ.<br>
+</span>
+</p>
+
+
+
+<!-- COPY CONTENT SUTTA Ở ĐÂY -->
+
+
+
+<br>
+<p><p style="text-align: right;font-style: italic;">Hoà Thượng Thích Minh Châu dịch Việt</span></p>
+
+
+
+
+
+
+
+
+</section>  <!-- End English and Pali -->
+<div id="nextprev"><a id="previous-sutta" href="./mn51.html#content"></a><a id="next-sutta" href="./mn53.html#content"></a></div>
+</div>  <!--End Content -->
+</div>  <!-- End Page -->
+
+
+
+
+
+
+<footer>
+					 <!-- End bottom links -->
+</footer>
+
+
+ 
+ <!-- Scripts -->
+
+ <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      if (typeof enablePaliLookup === "function") {
+        enablePaliLookup();
+      } else {
+        console.error("enablePaliLookup is not defined");
+      }
+    });
+  </script>
+
+ <script>
+ // Script to open and close sidebar
+ 	function w3_open() {
+ 	document.getElementById("mySidebar").style.display = "block";
+ 	}
+ 		function w3_close() {
+ 		document.getElementById("mySidebar").style.display = "none";
+ 	}
+ </script>
+ <script>
+ 		var app = document.getElementsByTagName("BODY")[0];
+ 		if (localStorage.lightMode == "dark") {
+ 			app.setAttribute("light-mode", "dark");
+ 	}
+ </script>
+ 
+ <script>
+ 		function toggle_light_mode() {
+ 			var app = document.getElementsByTagName("BODY")[0];
+ 				if (localStorage.lightMode == "dark") {
+ 			localStorage.lightMode = "light";
+ 			app.setAttribute("light-mode", "light");
+ 		} else {
+ 					localStorage.lightMode = "dark";
+ 					app.setAttribute("light-mode", "dark");
+ 	}
+ 		}
+ 
+ 		window.addEventListener("storage", function () {
+ 			if (localStorage.lightMode == "dark") {
+ 				app.setAttribute("light-mode", "dark");
+ 				} else {
+ 				app.setAttribute("light-mode", "light");
+ 		}
+ 		}, false);
+ 
+ </script>
+ <script src="../js/footer.js"></script><script src="../js/dpd_deconstructor.js"></script><script src="../js/dpd_ebts.js"></script><script src="../js/dpd_i2h.js"></script>
+ <script src="/sw.js"></script>
+ </body>
+ </html>

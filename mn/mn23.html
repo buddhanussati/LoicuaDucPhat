@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+ 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+ 	<link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+ 	<meta name="viewport" content="width=device-width, initial-scale=1">
+		<!-- Loading manifest -->
+	<link rel="manifest" href="../manifest.json">
+ 	<!-- Loading main and menu stylesheets -->
+ 	<link rel="stylesheet" href="../css/w3.css">
+ 	<link rel="stylesheet" href="../css/css.css">
+ 	<link rel="stylesheet" href="../css/menu.css">
+ 	<script src="../js/jquery-1.10.2.min.js"></script>
+ 	<script src="../js/controlpanel.js"></script>
+ 	<script src="../js/mousetrap.min.js"></script>
+    <script src="../js/pali-lookup-standalone.js"></script>
+
+ <script src="../js/suttaFiles.js"></script>
+<script>
+ // Script to open random Sutta
+ function openRandomSutta() {
+  const randomIndex = Math.floor(Math.random() * suttaFiles.length);
+  const selectedFile = suttaFiles[randomIndex];
+
+  // Get root path of your site 
+  const currentPath = location.pathname;
+  const rootPath = currentPath.split("/").slice(0, -2).join("/") + "/";
+
+  // Redirect to the correct file
+  window.location.href = rootPath + selectedFile;
+}
+</script>
+
+
+</head>
+ <body class="container">
+ <div class="header-background">
+ <!-- Header -->
+ <div class="w3-header w3-content w3-padding w3-left-align bwcontainer">
+ 	<div class="centered">
+ 		<button class="light-mode-button" aria-label="Bật Chế Độ Sáng" onclick="toggle_light_mode()">
+ 			<span></span>
+ 			<span></span>
+ 		</button>
+ 		<span class="box-lbl">Sáng/Tối</span>
+ 	</div> <!-- Centered -->
+ 		<a href="../home/index.html" id="bwlogo"><img src="../images/headerlogo.png" alt="Logo Lời Của Đức Phật" class="w3-image"></a>
+ 		<div class="w3-bar bwcontainer">
+ 			<div id="searchlinks">
+ 			<a href="../home/visearch.html"><span class="w3-bar-item"><i class="fa fa-search"></i>&nbsp;Tìm Tiếng Việt</span></a>
+ 			<a href="../home/palisearch.html"><span class="w3-bar-item"><i class="fa fa-search"></i>&nbsp;Tìm Tiếng Pali</span></a>
+ 			</div><!-- End Searchlinks div -->
+ 			<div class="help"><span><a href="../home/help.html"><img src="../images/help_icon.png" title="Trợ Giúp" alt="Help"></a></span></div>
+ 		</div> <!-- End w3-bar bwcontainer --> 	</div> <!-- End w3-header w3-content w3-padding w3-left-align bwcontainer -->
+ </div> <!-- End header-background -->
+ <!-- Top menu -->
+
+ <div class="w3-main w3-white bwcontainer2">
+ 	<div class="w3-button w3-padding-8 w3-left w3-hide-large" onclick="w3_open()">☰</div>
+ 		<div id="navbar" class="w3-hide-small w3-hide-medium bwcontainer3">
+ 			<ul id="css3menu0">
+ 				<li class="topfirst" id="home"><a href="../home/index.html" class="w3-hide-small">Trang Chủ</a></li>
+  				<li class="topmenu" id="dn"><a href="../dn/dn.html" class="pressed w3-hide-small">Trường Bộ Kinh</a></li>
+ 				<li class="topmenu" id="mn"><a href="../mn/mn.html" class="w3-hide-small">Trung Bộ Kinh</a></li>
+ 				<li class="topmenu" id="sn"><a href="../sn/sn.html" class="w3-hide-small"><i class="fa fa-caret-down"></i>&nbsp;Tương Ưng Bộ Kinh</a>
+ 					<ul>
+ 						<li><a href="../sn/sn01.html" class="w3-hide-small">Tập I - Thiên Có Kệ</a></li>
+ 						<li><a href="../sn/sn02.html" class="w3-hide-small">Tập II - Thiên Nhân Duyên</a></li>
+ 						<li><a href="../sn/sn03.html" class="w3-hide-small">Tập III - Thiên Uẩn</a></li>
+ 						<li><a href="../sn/sn04.html" class="w3-hide-small">Tập IV - Thiên Sáu Xứ</a></li>
+ 						<li><a href="../sn/sn05.html" class="w3-hide-small">Tập V - Thiên Ðại Phẩm</a></li>
+ 					</ul>
+ 				<li class="topmenu" id="an"><a href="../an/an.html" class="w3-hide-small"><i class="fa fa-caret-down"></i>&nbsp;Tăng Chi Bộ Kinh</a>
+ 					<ul>
+ 						<li><a href="../an/an1.html" class="w3-hide-small">Chương Một Pháp</a></li>
+ 						<li><a href="../an/an2.html" class="w3-hide-small">Chương Hai Pháp</a></li>
+ 						<li><a href="../an/an3.html" class="w3-hide-small">Chương Ba Pháp</a></li>
+ 						<li><a href="../an/an4.html" class="w3-hide-small">Chương Bốn Pháp</a></li>
+ 						<li><a href="../an/an5.html" class="w3-hide-small">Chương Năm Pháp</a></li>
+ 						<li><a href="../an/an6.html" class="w3-hide-small">Chương Sáu Pháp</a></li>
+ 						<li><a href="../an/an7.html" class="w3-hide-small">Chương Bảy Pháp</a></li>
+ 						<li><a href="../an/an8.html" class="w3-hide-small">Chương Tám Pháp</a></li>
+ 						<li><a href="../an/an9.html" class="w3-hide-small">Chương Chín Pháp</a></li>
+ 						<li><a href="../an/an10.html" class="w3-hide-small">Chương Mười Pháp</a></li>
+ 						<li><a href="../an/an11.html" class="w3-hide-small">Chương Mười Một Pháp</a></li>
+ 					</ul>
+ 				</li>
+ 				<li class="topmenu" id="kn"><a href="../kn/kn.html" class="w3-hide-small"><i class="fa fa-caret-down"></i>&nbsp;Tiểu Bộ Kinh</a>
+ 					<ul>
+ 						<li><a href="../kp/kp.html" class="w3-hide-small">Kinh Tiểu Tụng</a></li>
+ 						<li><a href="../dhp/dhp.html" class="w3-hide-small">Kinh Pháp Cú</a></li>
+ 						<li><a href="../snp/snp.html" class="w3-hide-small">Kinh Tập</a></li>
+ 						<li><a href="../ud/ud.html" class="w3-hide-small">Kinh Phật Tự Thuyết</a></li>
+ 						<li><a href="../it/it.html" class="w3-hide-small">Kinh Phật Thuyết Như Vậy</a></li>
+ 						<li><a href="../tha/tha.html" class="w3-hide-small">Trưởng Lão Tăng Kệ</a></li>
+ 						<li><a href="../thi/thi.html" class="w3-hide-small">Trưởng Lão Ni Kệ</a></li>
+ 					</ul>
+ 				</li>
+				<li class="toplast" id="rd"><a href="../rd/rd.html" class="w3-hide-small"></i>Kinh Ngẫu Nhiên Theo Nhóm</a>
+ 					</ul>
+ 				</li>
+ 			</ul>
+ 			</div>
+ 		</div> <!--navbar-->
+
+<!-- Sidebar (hidden by default) -->
+ <nav class="w3-sidebar w3-bar-block w3-card w3-border w3-top w3-animate-left w3-hide-large" id="mySidebar">
+ 	<a href="javascript:void(0)" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-times fa-2x red-color"></i>&nbsp;&nbsp;&nbsp;Close</a><!-- Hides the sidebar when clicked -->
+ 		<div class="w3-bar-block w3-white">
+ 			<a href="../home/index.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-home fa-lg"></i>&nbsp;&nbsp;&nbsp;Home</a>
+ 			<a href="../guide/guide.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Guide</a>
+ 			<a href="../dn/dn.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Trường Bộ Kinh</a>
+ 			<a href="../mn/mn.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Trung Bộ Kinh</a>
+ 			<a href="../sn/sn.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Tương Ưng Bộ Kinh</a>
+ 			<a href="../an/an.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Tăng Chi Bộ Kinh
+ 			<a href="../kn/kn.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Tiểu Bộ Kinh</a>
+			<a href="../rd/rd.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>Kinh Ngẫu Nhiên Theo Nhóm</a>
+ 		</div>
+ </nav>
+ 
+ 
+ 
+   <!-- !PAGE CONTENT! --> 
+<div class="w3-main w3-content w3-padding w3-left-align bwcontainer4">
+<div id="content">
+<h2>Majjhima Nikāya - Trung Bộ Kinh</h2>
+<h5><span style="font-style: italic;">Hoà Thượng Thích Minh Châu dịch Việt</span></h5>
+
+</div>
+
+<br>
+ 	<title>        Trung Bộ 23           </title>
+
+
+<p lang="vi" class="vi"; style="text-align: center">
+ Trung Bộ 23<br>
+<span lang="pi" class="pali">
+Majjhima Nikāya 23<br>
+</span>
+</p>
+
+<p lang="vi" class="vi"; style="text-align: center">
+Kinh Gò Mối<br>
+<span lang="pi" class="pali">
+Vammikasutta<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Như vầy tôi nghe.<br>
+<span lang="pi" class="pali">
+Evaṁ me sutaṁ—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Một thời Thế Tôn ở Sāvatthī, tại Jetavana, vườn ông Anāthapiṇḍika. Lúc bấy giờ, Tôn giả Kumara Kassapa trú tại Hắc Lâm (Rừng Đen).<br>
+<span lang="pi" class="pali">
+ekaṁ samayaṁ bhagavā sāvatthiyaṁ viharati jetavane anāthapiṇḍikassa ārāme. Tena kho pana samayena āyasmā kumārakassapo andhavane viharati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Rồi một vị Thiên, đêm đã gần tàn, với hào quang rực rỡ chiếu sáng toàn thể Hắc Lâm, đến chỗ Tôn giả Kumara Kassapa ở, sau khi đến, bèn đứng một bên. Sau khi đứng một bên, vị Thiên ấy nói với Tôn giả Kumara Kassapa:<br>
+<span lang="pi" class="pali">
+Atha kho aññatarā devatā abhikkantāya rattiyā abhikkantavaṇṇā kevalakappaṁ andhavanaṁ obhāsetvā yenāyasmā kumārakassapo tenupasaṅkami; upasaṅkamitvā ekamantaṁ aṭṭhāsi. Ekamantaṁ ṭhitā kho sā devatā āyasmantaṁ kumārakassapaṁ etadavoca:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Tỷ-kheo, Tỷ-kheo! Gò mối này ban đêm phun khói, ban ngày chiếu sáng.<br>
+<span lang="pi" class="pali">
+“Bhikkhu bhikkhu, ayaṁ vammiko rattiṁ dhūmāyati, divā pajjalati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Một Bà-la-môn nói như sau: “Này kẻ trí, hãy cầm gươm và đào lên”.<br>
+<span lang="pi" class="pali">
+Brāhmaṇo evamāha: ‘abhikkhaṇa, sumedha, satthaṁ ādāyā’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Người có trí cầm gươm đào lên, thấy một then cửa: “Thưa Tôn giả, một then cửa”.<br>
+<span lang="pi" class="pali">
+Abhikkhaṇanto sumedho satthaṁ ādāya addasa laṅgiṁ: ‘laṅgī, bhadante’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vị Bà-la-môn nói: “Này kẻ trí, hãy lấy then cửa lên; cầm gươm đào thêm”.<br>
+<span lang="pi" class="pali">
+Brāhmaṇo evamāha: ‘ukkhipa laṅgiṁ; abhikkhaṇa, sumedha, satthaṁ ādāyā’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Người có trí cầm gươm đào lên, thấy con nhái: “Thưa Tôn giả, một con nhái”.<br>
+<span lang="pi" class="pali">
+Abhikkhaṇanto sumedho satthaṁ ādāya addasa uddhumāyikaṁ: ‘Uddhumāyikā, bhadante’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vị Bà-la-môn nói: “Này kẻ trí, hãy đem con nhái lên; cầm gươm đào thêm”.<br>
+<span lang="pi" class="pali">
+Brāhmaṇo evamāha: ‘ukkhipa uddhumāyikaṁ; abhikkhaṇa, sumedha, satthaṁ ādāyā’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Người có trí cầm gươm đào lên, thấy con đường hai ngã: “Thưa Tôn giả, một con đường hai ngã”.<br>
+<span lang="pi" class="pali">
+Abhikkhaṇanto sumedho satthaṁ ādāya addasa dvidhāpathaṁ. ‘Dvidhāpatho, bhadante’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vị Bà-la-môn nói: “Này kẻ trí hãy lấy con đường hai ngã lên; cầm gươm đào thêm”.<br>
+<span lang="pi" class="pali">
+Brāhmaṇo evamāha: ‘ukkhipa dvidhāpathaṁ; abhikkhaṇa, sumedha, satthaṁ ādāyā’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Người có trí cầm gươm đào lên, thấy một đồ lọc sữa: “Thưa Tôn giả, một đồ lọc sữa”.<br>
+<span lang="pi" class="pali">
+Abhikkhaṇanto sumedho satthaṁ ādāya addasa caṅgavāraṁ. ‘Caṅgavāro, bhadante’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vị Bà-la-môn nói: “Hãy lấy đồ lọc sữa lên; cầm gươm đào thêm”.<br>
+<span lang="pi" class="pali">
+Brāhmaṇo evamāha: ‘ukkhipa caṅgavāraṁ; abhikkhaṇa, sumedha, satthaṁ ādāyā’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Người có trí cầm gươm đào lên, thấy một con rùa: “Thưa Tôn giả, một con rùa”.<br>
+<span lang="pi" class="pali">
+Abhikkhaṇanto sumedho satthaṁ ādāya addasa kummaṁ: ‘Kummo, bhadante’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vị Bà-la-môn nói: “Này kẻ trí, hãy lấy con rùa lên; cầm gươm đào thêm”.<br>
+<span lang="pi" class="pali">
+Brāhmaṇo evamāha: ‘ukkhipa kummaṁ; abhikkhaṇa, sumedha, satthaṁ ādāyā’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Người có trí cầm gươm đào lên, thấy một con dao phay: “Thưa Tôn giả, một con dao phay”.<br>
+<span lang="pi" class="pali">
+Abhikkhaṇanto sumedho satthaṁ ādāya addasa asisūnaṁ: ‘Asisūnā, bhadante’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vị Bà-la-môn nói: “Này kẻ trí, hãy lấy con dao phay lên; cầm gươm đào thêm”.<br>
+<span lang="pi" class="pali">
+Brāhmaṇo evamāha: ‘ukkhipa asisūnaṁ; abhikkhaṇa, sumedha, satthaṁ ādāyā’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Người có trí cầm gươm đào lên, thấy một miếng thịt: “Thưa Tôn giả một miếng thịt”.<br>
+<span lang="pi" class="pali">
+Abhikkhaṇanto sumedho satthaṁ ādāya addasa maṁsapesiṁ: ‘Maṁsapesi, bhadante’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vị Bà-la-môn nói: “Này kẻ trí, hãy lấy miếng thịt lên; cầm gươm đào thêm”.<br>
+<span lang="pi" class="pali">
+Brāhmaṇo evamāha: ‘ukkhipa maṁsapesiṁ; abhikkhaṇa, sumedha, satthaṁ ādāyā’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Người có trí cầm gươm đào lên, thấy con rắn hổ: “Thưa Tôn giả, con rắn hổ”.<br>
+<span lang="pi" class="pali">
+Abhikkhaṇanto sumedho satthaṁ ādāya addasa nāgaṁ: ‘Nāgo, bhadante’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vị Bà-la-môn nói: “Hãy để con rắn hổ yên, chớ đụng chạm con rắn hổ, hãy đảnh lễ con rắn hổ”.<br>
+<span lang="pi" class="pali">
+Brāhmaṇo evamāha: ‘tiṭṭhatu nāgo, mā nāgaṁ ghaṭṭesi; namo karohi nāgassā’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Tỷ-kheo, hãy đến chỗ Thế Tôn ở và hỏi những câu hỏi ấy. Thế Tôn trả lời Tôn giả như thế nào, hãy như vậy thọ trì.<br>
+<span lang="pi" class="pali">
+Ime kho tvaṁ, bhikkhu, pañhe bhagavantaṁ upasaṅkamitvā puccheyyāsi, yathā ca te bhagavā byākaroti tathā naṁ dhāreyyāsi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Tỷ-kheo, Ta không thấy ai trên cõi đời, với chư Thiên, các Ma vương, với Phạm thiên, các chúng Sa-môn và Bà-la-môn, chư Thiên và loài Người có thể hướng tâm để trả lời những câu hỏi ấy, trừ Như Lai, đệ tử Như Lai hay những ai đã được nghe hai vị này.”<br>
+<span lang="pi" class="pali">
+Nāhaṁ taṁ, bhikkhu, passāmi sadevake loke samārake sabrahmake sassamaṇabrāhmaṇiyā pajāya sadevamanussāya, yo imesaṁ pañhānaṁ veyyākaraṇena cittaṁ ārādheyya aññatra tathāgatena vā, tathāgatasāvakena vā, ito vā pana sutvā”ti—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vị Thiên ấy nói như vậy. Sau khi nói xong như vậy, vị ấy biến mất ở nơi đây.<br>
+<span lang="pi" class="pali">
+Idamavoca sā devatā. Idaṁ vatvā tatthevantaradhāyi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Rồi Tôn giả Kumara Kassapa, sau khi đêm ấy đã mãn, đến tại chỗ Thế Tôn ở, sau khi đến xong, đảnh lễ Thế Tôn và ngồi xuống một bên. Sau khi ngồi xuống một bên, Tôn giả Kumara Kassapa bạch Thế Tôn:<br>
+<span lang="pi" class="pali">
+Atha kho āyasmā kumārakassapo tassā rattiyā accayena yena bhagavā tenupasaṅkami; upasaṅkamitvā bhagavantaṁ abhivādetvā ekamantaṁ nisīdi. Ekamantaṁ nisinno kho āyasmā kumārakassapo bhagavantaṁ etadavoca:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Bạch Thế Tôn, đêm nay, một vị Thiên, đêm đã gần tàn, với hào quang rực rỡ chiếu sáng toàn thể Andhavana, đến chỗ con ở, sau khi đến liền đứng một bên. Khi đứng một bên, vị Thiên ấy nói với con:<br>
+<span lang="pi" class="pali">
+“imaṁ, bhante, rattiṁ aññatarā devatā abhikkantāya rattiyā abhikkantavaṇṇā kevalakappaṁ andhavanaṁ obhāsetvā yenāhaṁ tenupasaṅkami; upasaṅkamitvā ekamantaṁ aṭṭhāsi. Ekamantaṁ ṭhitā kho, bhante, sā devatā maṁ etadavoca:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Tỷ-kheo, Tỷ-kheo! Gò mối này, ban đêm phun khói, ban ngày chiếu sáng.<br>
+<span lang="pi" class="pali">
+‘bhikkhu bhikkhu, ayaṁ vammiko rattiṁ dhūmāyati, divā pajjalati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Một vị Bà-la-môn nói như sau: “Này kẻ trí, hãy cầm gươm đào lên”.<br>
+<span lang="pi" class="pali">
+Brāhmaṇo evamāha: “abhikkhaṇa, sumedha, satthaṁ ādāyā”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Người có trí cầm gươm, đào lên thấy một then cửa… (như trên)… đệ tử Như Lai hay những ai đã được nghe hai vị này”.<br>
+<span lang="pi" class="pali">
+Abhikkhaṇanto sumedho satthaṁ ādāya …pe… ito vā pana sutvā’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Bạch Thế Tôn, vị Thiên ấy nói như vậy, nói xong liền biến mất tại chỗ ấy.<br>
+<span lang="pi" class="pali">
+Idamavoca, bhante, sā devatā. Idaṁ vatvā tatthevantaradhāyi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Bạch Thế Tôn, gò mối là gì, cái gì phun khói ban đêm, cái gì chiếu sáng ban ngày, ai là Bà-la-môn, ai là người có trí, cái gì là cây gươm, cái gì là đào lên, cái gì là then cửa, cái gì là con nhái, cái gì là con đường hai ngã, cái gì là đồ lọc sữa, cái gì là con rùa, cái gì là con dao phay, cái gì là miếng thịt, cái gì là con rắn hổ?”<br>
+<span lang="pi" class="pali">
+Ko nu kho, bhante, vammiko, kā rattiṁ dhūmāyanā, kā divā pajjalanā, ko brāhmaṇo, ko sumedho, kiṁ satthaṁ, kiṁ abhikkhaṇaṁ, kā laṅgī, kā uddhumāyikā, ko dvidhāpatho, kiṁ caṅgavāraṁ, ko kummo, kā asisūnā, kā maṁsapesi, ko nāgo”ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Này Tỷ-kheo, gò mối là đồng nghĩa với cái thân do bốn đại thành, do cha mẹ sanh, nhờ cơm cháo nuôi dưỡng, vô thường, biến hoại, phấn toái, đoạn tuyệt, hoại diệt.<br>
+<span lang="pi" class="pali">
+“‘Vammiko’ti kho, bhikkhu, imassetaṁ cātumahābhūtikassa kāyassa adhivacanaṁ, mātāpettikasambhavassa odanakummāsūpacayassa anicca-ucchādana-parimaddana-bhedana-viddhaṁsana-dhammassa.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Tỷ-kheo, cái gì thuộc về công việc ban ngày, ban đêm suy tầm, suy nghĩ, như vậy là ban đêm phun khói.<br>
+<span lang="pi" class="pali">
+Yaṁ kho, bhikkhu, divā kammante ārabbha rattiṁ anuvitakketi anuvicāreti—ayaṁ rattiṁ dhūmāyanā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Tỷ-kheo, cái gì sau khi suy tầm, suy tư ban đêm, ban ngày đem ra thực hành, về thân, về lời nói, về ý, như vậy là ban ngày chói sáng.<br>
+<span lang="pi" class="pali">
+Yaṁ kho, bhikkhu, rattiṁ anuvitakketvā anuvicāretvā divā kammante payojeti kāyena vācāya manasā—ayaṁ divā pajjalanā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Tỷ-kheo, Bà-la-môn là đồng nghĩa với Như Lai, bậc A-la-hán, Chánh Ðẳng Giác.<br>
+<span lang="pi" class="pali">
+‘Brāhmaṇo’ti kho, bhikkhu, tathāgatassetaṁ adhivacanaṁ arahato sammāsambuddhassa.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Tỷ-kheo, người có trí là đồng nghĩa với Tỷ-kheo hữu học.<br>
+<span lang="pi" class="pali">
+‘Sumedho’ti kho, bhikkhu, sekkhassetaṁ bhikkhuno adhivacanaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Tỷ-kheo, cái gươm là đồng nghĩa với trí tuệ của bậc Thánh.<br>
+<span lang="pi" class="pali">
+‘Satthan’ti kho, bhikkhu, ariyāyetaṁ paññāya adhivacanaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Tỷ-kheo, đào lên là đồng nghĩa với tinh tấn, tinh cần.<br>
+<span lang="pi" class="pali">
+‘Abhikkhaṇan’ti kho, bhikkhu, vīriyārambhassetaṁ adhivacanaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Tỷ-kheo, cái then cửa là đồng nghĩa với vô minh;<br>
+<span lang="pi" class="pali">
+‘Laṅgī’ti kho, bhikkhu, avijjāyetaṁ adhivacanaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+đem then cửa lên là từ bỏ vô minh này;<br>
+<span lang="pi" class="pali">
+Ukkhipa laṅgiṁ, pajaha avijjaṁ;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+kẻ có trí, cầm gươm đào lên là ý nghĩa này.<br>
+<span lang="pi" class="pali">
+abhikkhaṇa, sumedha, satthaṁ ādāyāti ayametassa attho.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Tỷ-kheo, con nhái là đồng nghĩa với phẫn nộ hiềm hận;<br>
+<span lang="pi" class="pali">
+‘Uddhumāyikā’ti kho, bhikkhu, kodhūpāyāsassetaṁ adhivacanaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+đem con nhái lên là từ bỏ phẫn nộ hiềm hận này;<br>
+<span lang="pi" class="pali">
+Ukkhipa uddhumāyikaṁ, pajaha kodhūpāyāsaṁ;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+kẻ có trí cầm gươm đào lên là ý nghĩa này.<br>
+<span lang="pi" class="pali">
+abhikkhaṇa, sumedha, satthaṁ ādāyāti ayametassa attho.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Tỷ-kheo, con đường hai ngã là đồng nghĩa với nghi hoặc;<br>
+<span lang="pi" class="pali">
+‘Dvidhāpatho’ti kho, bhikkhu, vicikicchāyetaṁ adhivacanaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+đem con đường hai ngã lên là từ bỏ nghi hoặc này;<br>
+<span lang="pi" class="pali">
+Ukkhipa dvidhāpathaṁ, pajaha vicikicchaṁ;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+kẻ có trí cầm gươm đào lên là ý nghĩa này.<br>
+<span lang="pi" class="pali">
+abhikkhaṇa, sumedha, satthaṁ ādāyāti ayametassa attho.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Tỷ-kheo, đồ lọc sữa là đồng nghĩa với năm triền cái:<br>
+<span lang="pi" class="pali">
+‘Caṅgavāran’ti kho, bhikkhu, pañcannetaṁ nīvaraṇānaṁ adhivacanaṁ, seyyathidaṁ—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+dục tham triền cái, sân triền cái, hôn trầm thụy miên triền cái, trạo cử hối quá triền cái, nghi hoặc triền cái;<br>
+<span lang="pi" class="pali">
+kāmacchanda-nīvaraṇassa, byāpāda-nīvaraṇassa, thinamiddha-nīvaraṇassa, uddhaccakukkucca-nīvaraṇassa, vicikicchā-nīvaraṇassa.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+đem  đồ lọc sữa lên là từ bỏ năm triền cái này;<br>
+<span lang="pi" class="pali">
+Ukkhipa caṅgavāraṁ, pajaha pañca nīvaraṇe;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+kẻ có trí cầm gươm đào lên là ý nghĩa này.<br>
+<span lang="pi" class="pali">
+abhikkhaṇa, sumedha, satthaṁ ādāyāti ayametassa attho.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Tỷ-kheo, con rùa là đồng nghĩa với năm thủ uẩn, tức là<br>
+<span lang="pi" class="pali">
+‘Kummo’ti kho, bhikkhu, pañcannetaṁ upādānakkhandhānaṁ adhivacanaṁ, seyyathidaṁ—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+sắc thủ uẩn, thọ thủ uẩn, tưởng thủ uẩn, hành thủ uẩn, thức thủ uẩn;<br>
+<span lang="pi" class="pali">
+rūpupādānakkhandhassa, vedanupādānakkhandhassa, saññupādānakkhandhassa, saṅkhārupādānakkhandhassa, viññāṇupādānakkhandhassa.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+đem con rùa lên là từ bỏ năm thủ uẩn này;<br>
+<span lang="pi" class="pali">
+Ukkhipa kummaṁ, pajaha pañcupādānakkhandhe;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+kẻ có trí cầm gươm đào lên là ý nghĩa này.<br>
+<span lang="pi" class="pali">
+abhikkhaṇa, sumedha, satthaṁ ādāyāti ayametassa attho.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Tỷ-kheo, con dao phay là đồng nghĩa với năm dục trưởng dưỡng, tức là<br>
+<span lang="pi" class="pali">
+‘Asisūnā’ti kho, bhikkhu, pañcannetaṁ kāmaguṇānaṁ adhivacanaṁ—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+các sắc do mắt nhận thức, khả ái, khả hỷ, khả lạc, khả ý, kích thích lòng dục, hấp dẫn.<br>
+<span lang="pi" class="pali">
+cakkhuviññeyyānaṁ rūpānaṁ iṭṭhānaṁ kantānaṁ manāpānaṁ piyarūpānaṁ kāmūpasaṁhitānaṁ rajanīyānaṁ,<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Các tiếng do tai nhận thức …<br>
+<span lang="pi" class="pali">
+sotaviññeyyānaṁ saddānaṁ …pe…<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Các hương do mũi nhận thức …<br>
+<span lang="pi" class="pali">
+ghānaviññeyyānaṁ gandhānaṁ …pe…<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Các vị do lưỡi nhận thức …<br>
+<span lang="pi" class="pali">
+jivhāviññeyyānaṁ rasānaṁ …pe…<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Các xúc do thân cảm xúc, khả ái, khả hỷ, khả lạc, khả ý, kích thích lòng dục, hấp dẫn;<br>
+<span lang="pi" class="pali">
+kāyaviññeyyānaṁ phoṭṭhabbānaṁ iṭṭhānaṁ kantānaṁ manāpānaṁ piyarūpānaṁ kāmūpasaṁhitānaṁ rajanīyānaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+lấy con dao phay lên là từ bỏ năm dục trưởng dưỡng này,<br>
+<span lang="pi" class="pali">
+Ukkhipa asisūnaṁ, pajaha pañca kāmaguṇe;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+kẻ có trí, cầm gươm đào lên là ý nghĩa này.<br>
+<span lang="pi" class="pali">
+abhikkhaṇa, sumedha, satthaṁ ādāyāti ayametassa attho.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Tỷ-kheo, miếng thịt là đồng nghĩa với hỷ tham;<br>
+<span lang="pi" class="pali">
+‘Maṁsapesī’ti kho, bhikkhu, nandīrāgassetaṁ adhivacanaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+lấy miếng thịt lên là từ bỏ hỷ tham này;<br>
+<span lang="pi" class="pali">
+Ukkhipa maṁsapesiṁ, pajaha nandīrāgaṁ;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+kẻ có trí, cầm gươm đào lên là ý nghĩa này.<br>
+<span lang="pi" class="pali">
+abhikkhaṇa, sumedha, satthaṁ ādāyāti ayametassa attho.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Tỷ-kheo, con rắn hổ là đồng nghĩa với vị Tỷ-kheo đã diệt trừ các lậu hoặc;<br>
+<span lang="pi" class="pali">
+‘Nāgo’ti kho, bhikkhu, khīṇāsavassetaṁ bhikkhuno adhivacanaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+hãy để con rắn hổ yên, chớ đụng chạm con rắn hổ, hãy đảnh lễ con rắn hổ, là ý nghĩa này.<br>
+<span lang="pi" class="pali">
+Tiṭṭhatu nāgo, mā nāgaṁ ghaṭṭesi; namo karohi nāgassāti ayametassa attho”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Thế Tôn thuyết giảng như vậy. Tỷ-kheo ấy hoan hỷ, tín thọ lời Thế Tôn dạy.<br>
+<span lang="pi" class="pali">
+Idamavoca bhagavā. Attamano āyasmā kumārakassapo bhagavato bhāsitaṁ abhinandīti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+<span lang="pi" class="vi">
+Vammikasuttaṁ niṭṭhitaṁ tatiyaṁ.<br>
+</span>
+</p>
+
+<!-- COPY CONTENT SUTTA Ở ĐÂY -->
+
+
+
+<br>
+<p><p style="text-align: right;font-style: italic;">Hoà Thượng Thích Minh Châu dịch Việt</span></p>
+
+
+
+
+
+
+
+
+</section>  <!-- End English and Pali -->
+<div id="nextprev"><a id="previous-sutta" href="./mn22.html#content"></a><a id="next-sutta" href="./mn24.html#content"></a></div>
+</div>  <!--End Content -->
+</div>  <!-- End Page -->
+
+
+
+
+
+
+<footer>
+					 <!-- End bottom links -->
+</footer>
+
+
+ 
+ <!-- Scripts -->
+
+ <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      if (typeof enablePaliLookup === "function") {
+        enablePaliLookup();
+      } else {
+        console.error("enablePaliLookup is not defined");
+      }
+    });
+  </script>
+
+ <script>
+ // Script to open and close sidebar
+ 	function w3_open() {
+ 	document.getElementById("mySidebar").style.display = "block";
+ 	}
+ 		function w3_close() {
+ 		document.getElementById("mySidebar").style.display = "none";
+ 	}
+ </script>
+ <script>
+ 		var app = document.getElementsByTagName("BODY")[0];
+ 		if (localStorage.lightMode == "dark") {
+ 			app.setAttribute("light-mode", "dark");
+ 	}
+ </script>
+ 
+ <script>
+ 		function toggle_light_mode() {
+ 			var app = document.getElementsByTagName("BODY")[0];
+ 				if (localStorage.lightMode == "dark") {
+ 			localStorage.lightMode = "light";
+ 			app.setAttribute("light-mode", "light");
+ 		} else {
+ 					localStorage.lightMode = "dark";
+ 					app.setAttribute("light-mode", "dark");
+ 	}
+ 		}
+ 
+ 		window.addEventListener("storage", function () {
+ 			if (localStorage.lightMode == "dark") {
+ 				app.setAttribute("light-mode", "dark");
+ 				} else {
+ 				app.setAttribute("light-mode", "light");
+ 		}
+ 		}, false);
+ 
+ </script>
+ <script src="../js/footer.js"></script><script src="../js/dpd_deconstructor.js"></script><script src="../js/dpd_ebts.js"></script><script src="../js/dpd_i2h.js"></script>
+ <script src="/sw.js"></script>
+ </body>
+ </html>

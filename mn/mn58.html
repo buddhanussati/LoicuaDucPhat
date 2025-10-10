@@ -1,0 +1,882 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+ 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+ 	<link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+ 	<meta name="viewport" content="width=device-width, initial-scale=1">
+		<!-- Loading manifest -->
+	<link rel="manifest" href="../manifest.json">
+ 	<!-- Loading main and menu stylesheets -->
+ 	<link rel="stylesheet" href="../css/w3.css">
+ 	<link rel="stylesheet" href="../css/css.css">
+ 	<link rel="stylesheet" href="../css/menu.css">
+ 	<script src="../js/jquery-1.10.2.min.js"></script>
+ 	<script src="../js/controlpanel.js"></script>
+ 	<script src="../js/mousetrap.min.js"></script>
+    <script src="../js/pali-lookup-standalone.js"></script>
+
+ <script src="../js/suttaFiles.js"></script>
+<script>
+ // Script to open random Sutta
+ function openRandomSutta() {
+  const randomIndex = Math.floor(Math.random() * suttaFiles.length);
+  const selectedFile = suttaFiles[randomIndex];
+
+  // Get root path of your site 
+  const currentPath = location.pathname;
+  const rootPath = currentPath.split("/").slice(0, -2).join("/") + "/";
+
+  // Redirect to the correct file
+  window.location.href = rootPath + selectedFile;
+}
+</script>
+
+
+</head>
+ <body class="container">
+ <div class="header-background">
+ <!-- Header -->
+ <div class="w3-header w3-content w3-padding w3-left-align bwcontainer">
+ 	<div class="centered">
+ 		<button class="light-mode-button" aria-label="Bật Chế Độ Sáng" onclick="toggle_light_mode()">
+ 			<span></span>
+ 			<span></span>
+ 		</button>
+ 		<span class="box-lbl">Sáng/Tối</span>
+ 	</div> <!-- Centered -->
+ 		<a href="../home/index.html" id="bwlogo"><img src="../images/headerlogo.png" alt="Logo Lời Của Đức Phật" class="w3-image"></a>
+ 		<div class="w3-bar bwcontainer">
+ 			<div id="searchlinks">
+ 			<a href="../home/visearch.html"><span class="w3-bar-item"><i class="fa fa-search"></i>&nbsp;Tìm Tiếng Việt</span></a>
+ 			<a href="../home/palisearch.html"><span class="w3-bar-item"><i class="fa fa-search"></i>&nbsp;Tìm Tiếng Pali</span></a>
+ 			</div><!-- End Searchlinks div -->
+ 			<div class="help"><span><a href="../home/help.html"><img src="../images/help_icon.png" title="Trợ Giúp" alt="Help"></a></span></div>
+ 		</div> <!-- End w3-bar bwcontainer --> 	</div> <!-- End w3-header w3-content w3-padding w3-left-align bwcontainer -->
+ </div> <!-- End header-background -->
+ <!-- Top menu -->
+
+ <div class="w3-main w3-white bwcontainer2">
+ 	<div class="w3-button w3-padding-8 w3-left w3-hide-large" onclick="w3_open()">☰</div>
+ 		<div id="navbar" class="w3-hide-small w3-hide-medium bwcontainer3">
+ 			<ul id="css3menu0">
+ 				<li class="topfirst" id="home"><a href="../home/index.html" class="w3-hide-small">Trang Chủ</a></li>
+  				<li class="topmenu" id="dn"><a href="../dn/dn.html" class="pressed w3-hide-small">Trường Bộ Kinh</a></li>
+ 				<li class="topmenu" id="mn"><a href="../mn/mn.html" class="w3-hide-small">Trung Bộ Kinh</a></li>
+ 				<li class="topmenu" id="sn"><a href="../sn/sn.html" class="w3-hide-small"><i class="fa fa-caret-down"></i>&nbsp;Tương Ưng Bộ Kinh</a>
+ 					<ul>
+ 						<li><a href="../sn/sn01.html" class="w3-hide-small">Tập I - Thiên Có Kệ</a></li>
+ 						<li><a href="../sn/sn02.html" class="w3-hide-small">Tập II - Thiên Nhân Duyên</a></li>
+ 						<li><a href="../sn/sn03.html" class="w3-hide-small">Tập III - Thiên Uẩn</a></li>
+ 						<li><a href="../sn/sn04.html" class="w3-hide-small">Tập IV - Thiên Sáu Xứ</a></li>
+ 						<li><a href="../sn/sn05.html" class="w3-hide-small">Tập V - Thiên Ðại Phẩm</a></li>
+ 					</ul>
+ 				<li class="topmenu" id="an"><a href="../an/an.html" class="w3-hide-small"><i class="fa fa-caret-down"></i>&nbsp;Tăng Chi Bộ Kinh</a>
+ 					<ul>
+ 						<li><a href="../an/an1.html" class="w3-hide-small">Chương Một Pháp</a></li>
+ 						<li><a href="../an/an2.html" class="w3-hide-small">Chương Hai Pháp</a></li>
+ 						<li><a href="../an/an3.html" class="w3-hide-small">Chương Ba Pháp</a></li>
+ 						<li><a href="../an/an4.html" class="w3-hide-small">Chương Bốn Pháp</a></li>
+ 						<li><a href="../an/an5.html" class="w3-hide-small">Chương Năm Pháp</a></li>
+ 						<li><a href="../an/an6.html" class="w3-hide-small">Chương Sáu Pháp</a></li>
+ 						<li><a href="../an/an7.html" class="w3-hide-small">Chương Bảy Pháp</a></li>
+ 						<li><a href="../an/an8.html" class="w3-hide-small">Chương Tám Pháp</a></li>
+ 						<li><a href="../an/an9.html" class="w3-hide-small">Chương Chín Pháp</a></li>
+ 						<li><a href="../an/an10.html" class="w3-hide-small">Chương Mười Pháp</a></li>
+ 						<li><a href="../an/an11.html" class="w3-hide-small">Chương Mười Một Pháp</a></li>
+ 					</ul>
+ 				</li>
+ 				<li class="topmenu" id="kn"><a href="../kn/kn.html" class="w3-hide-small"><i class="fa fa-caret-down"></i>&nbsp;Tiểu Bộ Kinh</a>
+ 					<ul>
+ 						<li><a href="../kp/kp.html" class="w3-hide-small">Kinh Tiểu Tụng</a></li>
+ 						<li><a href="../dhp/dhp.html" class="w3-hide-small">Kinh Pháp Cú</a></li>
+ 						<li><a href="../snp/snp.html" class="w3-hide-small">Kinh Tập</a></li>
+ 						<li><a href="../ud/ud.html" class="w3-hide-small">Kinh Phật Tự Thuyết</a></li>
+ 						<li><a href="../it/it.html" class="w3-hide-small">Kinh Phật Thuyết Như Vậy</a></li>
+ 						<li><a href="../tha/tha.html" class="w3-hide-small">Trưởng Lão Tăng Kệ</a></li>
+ 						<li><a href="../thi/thi.html" class="w3-hide-small">Trưởng Lão Ni Kệ</a></li>
+ 					</ul>
+ 				</li>
+				<li class="toplast" id="rd"><a href="../rd/rd.html" class="w3-hide-small"></i>Kinh Ngẫu Nhiên Theo Nhóm</a>
+ 					</ul>
+ 				</li>
+ 			</ul>
+ 			</div>
+ 		</div> <!--navbar-->
+
+<!-- Sidebar (hidden by default) -->
+ <nav class="w3-sidebar w3-bar-block w3-card w3-border w3-top w3-animate-left w3-hide-large" id="mySidebar">
+ 	<a href="javascript:void(0)" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-times fa-2x red-color"></i>&nbsp;&nbsp;&nbsp;Close</a><!-- Hides the sidebar when clicked -->
+ 		<div class="w3-bar-block w3-white">
+ 			<a href="../home/index.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-home fa-lg"></i>&nbsp;&nbsp;&nbsp;Home</a>
+ 			<a href="../guide/guide.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Guide</a>
+ 			<a href="../dn/dn.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Trường Bộ Kinh</a>
+ 			<a href="../mn/mn.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Trung Bộ Kinh</a>
+ 			<a href="../sn/sn.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Tương Ưng Bộ Kinh</a>
+ 			<a href="../an/an.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Tăng Chi Bộ Kinh
+ 			<a href="../kn/kn.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Tiểu Bộ Kinh</a>
+			<a href="../rd/rd.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>Kinh Ngẫu Nhiên Theo Nhóm</a>
+ 		</div>
+ </nav>
+ 
+ 
+ 
+   <!-- !PAGE CONTENT! --> 
+<div class="w3-main w3-content w3-padding w3-left-align bwcontainer4">
+<div id="content">
+<h2>Majjhima Nikāya - Trung Bộ Kinh</h2>
+<h5><span style="font-style: italic;">Hoà Thượng Thích Minh Châu dịch Việt</span></h5>
+
+</div>
+
+<br>
+ 	<title>        Trung Bộ 58          </title>
+
+<p lang="vi" class="vi"; style="text-align: center">
+Trung Bộ 58<br>
+<span lang="pi" class="pali">
+Majjhima Nikāya 58<br>
+</span>
+</p>
+
+<p lang="vi" class="vi"; style="text-align: center">
+Kinh Vương Tử Vô-Uý<br>
+<span lang="pi" class="pali">
+Abhayarājakumārasutta<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Như vầy tôi nghe.<br>
+<span lang="pi" class="pali">
+Evaṁ me sutaṁ—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Một thời Thế Tôn ở tại Rājagaha (Vương Xá), Veluvana (Trúc Lâm), Kalandakanivāpa (chỗ nuôi các con sóc).<br>
+<span lang="pi" class="pali">
+ekaṁ samayaṁ bhagavā rājagahe viharati veḷuvane kalandakanivāpe.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Rồi Vương tử Abhaya (Vô Úy) đi đến Nigantha Nataputta, sau khi đến đảnh lễ Nigantha Nataputta rồi ngồi xuống một bên. Nigantha Nataputta nói với Vương tử Abhaya đang ngồi một bên:<br>
+<span lang="pi" class="pali">
+Atha kho abhayo rājakumāro yena nigaṇṭho nāṭaputto tenupasaṅkami; upasaṅkamitvā nigaṇṭhaṁ nāṭaputtaṁ abhivādetvā ekamantaṁ nisīdi. Ekamantaṁ nisinnaṁ kho abhayaṁ rājakumāraṁ nigaṇṭho nāṭaputto etadavoca:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Này Vương tử, Vương tử hãy đi đến luận chiến với Sa-môn Gotama,<br>
+<span lang="pi" class="pali">
+“ehi tvaṁ, rājakumāra, samaṇassa gotamassa vādaṁ āropehi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+và nhờ vậy tiếng đồn tốt đẹp sau đây được truyền đi cho Vương tử:<br>
+<span lang="pi" class="pali">
+Evaṁ te kalyāṇo kittisaddo abbhuggacchissati:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Sa-môn Gotama có thần lực như vậy, có uy lực như vậy, đã bị Vương tử Abhaya luận chiến.’”<br>
+<span lang="pi" class="pali">
+‘abhayena rājakumārena samaṇassa gotamassa evaṁ mahiddhikassa evaṁ mahānubhāvassa vādo āropito’”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Thưa Tôn giả, làm thế nào con có thể luận chiến Sa-môn Gotama có thần lực như vậy, có uy lực như vậy?”<br>
+<span lang="pi" class="pali">
+“Yathā kathaṁ panāhaṁ, bhante, samaṇassa gotamassa evaṁ mahiddhikassa evaṁ mahānubhāvassa vādaṁ āropessāmī”ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Này Vương tử, hãy đi đến Sa-môn Gotama, sau khi đến hãy nói với Sa-môn Gotama, sau khi đến hãy nói với Sa-môn Gotama như sau:<br>
+<span lang="pi" class="pali">
+“Ehi tvaṁ, rājakumāra, yena samaṇo gotamo tenupasaṅkama; upasaṅkamitvā samaṇaṁ gotamaṁ evaṁ vadehi:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Bạch Thế Tôn, Như Lai có thể nói lời nói, do lời nói ấy những người khác không ưa, không thích chăng?’<br>
+<span lang="pi" class="pali">
+‘bhāseyya nu kho, bhante, tathāgato taṁ vācaṁ yā sā vācā paresaṁ appiyā amanāpā’ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Nếu Sa-môn Gotama được Vương tử hỏi như vậy và trả lời như sau:<br>
+<span lang="pi" class="pali">
+Sace te samaṇo gotamo evaṁ puṭṭho evaṁ byākaroti:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Này Vương tử, Như Lai có thể nói lời nói, do lời nói ấy những người khác không ưa, không thích”,<br>
+<span lang="pi" class="pali">
+‘bhāseyya, rājakumāra, tathāgato taṁ vācaṁ yā sā vācā paresaṁ appiyā amanāpā’ti,<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+thời Vương tử hãy nói với Sa-môn Gotama:<br>
+<span lang="pi" class="pali">
+tamenaṁ tvaṁ evaṁ vadeyyāsi:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Bạch Thế Tôn, nếu xử sự như vậy thời có gì sai khác giữa kẻ phàm phu và Ngài?<br>
+<span lang="pi" class="pali">
+‘atha kiñcarahi te, bhante, puthujjanena nānākaraṇaṁ?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Kẻ phàm phu có thể nói lời nói, do lời nói ấy những người khác không ưa, không thích”.<br>
+<span lang="pi" class="pali">
+Puthujjanopi hi taṁ vācaṁ bhāseyya yā sā vācā paresaṁ appiyā amanāpā’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Còn nếu Sa-môn Gotama được Vương tử hỏi như vậy và trả lời như sau:<br>
+<span lang="pi" class="pali">
+Sace pana te samaṇo gotamo evaṁ puṭṭho evaṁ byākaroti:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Này Vương tử, Như Lai không có thể nói lời nói, do lời nói ấy những người khác không ưa, không thích”,<br>
+<span lang="pi" class="pali">
+‘na, rājakumāra, tathāgato taṁ vācaṁ bhāseyya yā sā vācā paresaṁ appiyā amanāpā’ti,<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+thời Vương tử hãy nói với Sa-môn Gotama:<br>
+<span lang="pi" class="pali">
+tamenaṁ tvaṁ evaṁ vadeyyāsi:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Bạch Thế Tôn, nếu xử sự như vậy, thời vì sao Devadatta được Ngài trả lời như sau:<br>
+<span lang="pi" class="pali">
+‘atha kiñcarahi te, bhante, devadatto byākato:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Devadatta phải đọa vào đọa xứ, Devadatta phải đọa vào địa ngục, Devadatta phải đọa trong một kiếp, Devadatta không thể nào cứu chữa được?”?<br>
+<span lang="pi" class="pali">
+“āpāyiko devadatto, nerayiko devadatto, kappaṭṭho devadatto, atekiccho devadatto”ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Và do Ngài nói những lời như vậy, Devadatta phẫn nộ, không hoan hỷ”.<br>
+<span lang="pi" class="pali">
+Tāya ca pana te vācāya devadatto kupito ahosi anattamano’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Vương tử, Sa-môn Gotama khi bị Vương tử hỏi câu hỏi hai móc như vậy, sẽ không có thể nhả ra, cũng không có thể nuốt vào.<br>
+<span lang="pi" class="pali">
+Imaṁ kho te, rājakumāra, samaṇo gotamo ubhatokoṭikaṁ pañhaṁ puṭṭho samāno neva sakkhiti uggilituṁ na sakkhiti ogilituṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ví như một móc sắt bị móc vào cổ họng một người nào, người ấy không có thể nhả ra, cũng không có thể nuốt vào được.”<br>
+<span lang="pi" class="pali">
+Seyyathāpi nāma purisassa ayosiṅghāṭakaṁ kaṇṭhe vilaggaṁ, so neva sakkuṇeyya uggilituṁ na sakkuṇeyya ogilituṁ;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Cũng vậy, này Vương tử, Sa-môn Gotama khi bị Vương tử hỏi câu hỏi hai móc như vậy, sẽ không có thể nhả ra, cũng không có thể nuốt vào.”<br>
+<span lang="pi" class="pali">
+evameva kho te, rājakumāra, samaṇo gotamo imaṁ ubhatokoṭikaṁ pañhaṁ puṭṭho samāno neva sakkhiti uggilituṁ na sakkhiti ogilitun”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Thưa vâng, Tôn giả,” Vương tử Abhaya vâng đáp Nigantha Nataputta, từ chỗ ngồi đứng dậy, đảnh lễ Nigantha Nataputta, thân bên hữu hướng về ông rồi đi đến Thế Tôn. Sau khi đến, liền đảnh lễ Thế Tôn và ngồi xuống một bên.<br>
+<span lang="pi" class="pali">
+“Evaṁ, bhante”ti kho abhayo rājakumāro nigaṇṭhassa nāṭaputtassa paṭissutvā uṭṭhāyāsanā nigaṇṭhaṁ nāṭaputtaṁ abhivādetvā padakkhiṇaṁ katvā yena bhagavā tenupasaṅkami; upasaṅkamitvā bhagavantaṁ abhivādetvā ekamantaṁ nisīdi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vương tử Abhaya đang ngồi một bên, nhìn mặt trời rồi suy nghĩ:<br>
+<span lang="pi" class="pali">
+Ekamantaṁ nisinnassa kho abhayassa rājakumārassa sūriyaṁ ulloketvā etadahosi:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Hôm nay, không phải thời để luận chiến với Sa-môn Gotama.<br>
+<span lang="pi" class="pali">
+“akālo kho ajja bhagavato vādaṁ āropetuṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ngày mai, ta sẽ luận chiến với Sa-môn Gotama tại nhà của ta,” liền bạch Thế Tôn:<br>
+<span lang="pi" class="pali">
+Sve dānāhaṁ sake nivesane bhagavato vādaṁ āropessāmī”ti bhagavantaṁ etadavoca:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Bạch Thế Tôn, ngày mai mong Thế Tôn nhận lời dùng cơm, cùng ba Tỷ-kheo khác với Ngài là người thứ tư.<br>
+<span lang="pi" class="pali">
+“adhivāsetu me, bhante, bhagavā svātanāya attacatuttho bhattan”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Thế Tôn im lặng nhận lời.<br>
+<span lang="pi" class="pali">
+Adhivāsesi bhagavā tuṇhībhāvena.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Rồi Vương tử Abhaya, sau khi biết Thế Tôn đã nhận lời, liền từ chỗ ngồi đứng dậy, đảnh lễ Thế Tôn, thân bên hữu hướng về Ngài rồi ra đi.<br>
+<span lang="pi" class="pali">
+Atha kho abhayo rājakumāro bhagavato adhivāsanaṁ viditvā uṭṭhāyāsanā bhagavantaṁ abhivādetvā padakkhiṇaṁ katvā pakkāmi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Thế Tôn, sau khi đêm ấy đã mãn, vào buổi sáng đắp y, cầm theo y bát, đi đến chỗ của Vương tử Abhaya, sau khi đến liền ngồi trên chỗ đã soạn sẵn.<br>
+<span lang="pi" class="pali">
+Atha kho bhagavā tassā rattiyā accayena pubbaṇhasamayaṁ nivāsetvā pattacīvaramādāya yena abhayassa rājakumārassa nivesanaṁ tenupasaṅkami; upasaṅkamitvā paññatte āsane nisīdi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Rồi Vương tử Abhaya tự tay mời mọc, làm cho Thế Tôn thỏa mãn với những món ăn thượng vị, loại cứng và loại mềm.<br>
+<span lang="pi" class="pali">
+Atha kho abhayo rājakumāro bhagavantaṁ paṇītena khādanīyena bhojanīyena sahatthā santappesi sampavāresi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vương tử Abhaya chờ cho Thế Tôn sau khi đã dùng xong, tay đã rời khỏi bát, liền lấy một ghế thấp khác rồi ngồi xuống một bên.<br>
+<span lang="pi" class="pali">
+Atha kho abhayo rājakumāro bhagavantaṁ bhuttāviṁ onītapattapāṇiṁ aññataraṁ nīcaṁ āsanaṁ gahetvā ekamantaṁ nisīdi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Sau khi ngồi một bên, Vương tử Abhaya bạch Thế Tôn:<br>
+<span lang="pi" class="pali">
+Ekamantaṁ nisinno kho abhayo rājakumāro bhagavantaṁ etadavoca:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Bạch Thế Tôn, Như Lai có thể nói những lời, do những lời ấy người khác không ưa, không thích chăng?”<br>
+<span lang="pi" class="pali">
+“bhāseyya nu kho, bhante, tathāgato taṁ vācaṁ yā sā vācā paresaṁ appiyā amanāpā”ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Này Vương tử, phải chăng ở đây, (câu hỏi) có dụng ý một chiều.”<br>
+<span lang="pi" class="pali">
+“Na khvettha, rājakumāra, ekaṁsenā”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Bạch Thế Tôn, các vị Nigantha đã bị bại ở đây rồi.”<br>
+<span lang="pi" class="pali">
+“Ettha, bhante, anassuṁ nigaṇṭhā”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Này Vương tử, vì sao Vương tử lại nói như vầy:<br>
+<span lang="pi" class="pali">
+“Kiṁ pana tvaṁ, rājakumāra, evaṁ vadesi:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Bạch Thế Tôn, các vị Nigantha đã bị bại ở đây rồi”?<br>
+<span lang="pi" class="pali">
+‘ettha, bhante, anassuṁ nigaṇṭhā’”ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Bạch Thế Tôn, ở đây, con đi đến Nigantha Nataputta, sau khi đến con đảnh lễ Nigantha Nataputta rồi ngồi xuống một bên. Bạch Thế Tôn, Nigantha Nataputta nói với con đang ngồi một bên:<br>
+<span lang="pi" class="pali">
+“Idhāhaṁ, bhante, yena nigaṇṭho nāṭaputto tenupasaṅkami; upasaṅkamitvā nigaṇṭhaṁ nāṭaputtaṁ abhivādetvā ekamantaṁ nisīdiṁ. Ekamantaṁ nisinnaṁ kho maṁ, bhante, nigaṇṭho nāṭaputto etadavoca:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Này Vương tử, Vương tử hãy đi đến luận chiến với Sa-môn Gotama, và nhờ vậy tiếng đồn tốt đẹp sau đây được truyền đi cho Vương tử:<br>
+<span lang="pi" class="pali">
+‘ehi tvaṁ, rājakumāra, samaṇassa gotamassa vādaṁ āropehi. Evaṁ te kalyāṇo kittisaddo abbhuggacchissati—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Sa-môn Gotama có thần lực như vậy, có uy lực như vậy, đã bị Vương tử Abhaya luận chiến”.<br>
+<span lang="pi" class="pali">
+abhayena rājakumārena samaṇassa gotamassa evaṁ mahiddhikassa evaṁ mahānubhāvassa vādo āropito’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Bạch Thế Tôn, khi được nói vậy, con thưa với Nigantha Nataputta:<br>
+<span lang="pi" class="pali">
+Evaṁ vutte, ahaṁ, bhante, nigaṇṭhaṁ nāṭaputtaṁ etadavocaṁ:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Thưa Tôn giả, nhưng làm thế nào, tôi có thể luận chiến với Sa-môn Gotama, một vị có thần lực như vậy, có uy lực như vậy?”<br>
+<span lang="pi" class="pali">
+‘yathā kathaṁ panāhaṁ, bhante, samaṇassa gotamassa evaṁ mahiddhikassa evaṁ mahānubhāvassa vādaṁ āropessāmī’ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Này Vương tử, hãy đi đến Sa-môn Gotama, sau khi đến hãy nói với Sa-môn Gotama như sau:<br>
+<span lang="pi" class="pali">
+‘Ehi tvaṁ, rājakumāra, yena samaṇo gotamo tenupasaṅkama; upasaṅkamitvā samaṇaṁ gotamaṁ evaṁ vadehi:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Bạch Thế Tôn, Như Lai có thể nói lời nói, do lời nói ấy, những người khác không ưa, không thích chăng?”<br>
+<span lang="pi" class="pali">
+“bhāseyya nu kho, bhante, tathāgato taṁ vācaṁ yā sā vācā paresaṁ appiyā amanāpā”ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Nếu Sa-môn Gotama được Vương tử hỏi như vậy và trả lời như sau:<br>
+<span lang="pi" class="pali">
+Sace te samaṇo gotamo evaṁ puṭṭho evaṁ byākaroti:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Này Vương tử, Như Lai có thể nói lời nói, do lời nói ấy, những người khác không ưa, không thích”,<br>
+<span lang="pi" class="pali">
+“bhāseyya, rājakumāra, tathāgato taṁ vācaṁ yā sā vācā paresaṁ appiyā amanāpā”ti,<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+thời Vương tử hãy nói với Sa-môn Gotama:<br>
+<span lang="pi" class="pali">
+tamenaṁ tvaṁ evaṁ vadeyyāsi:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Bạch Thế Tôn, nếu xử sự như vậy, thời có gì sai khác giữa kẻ phàm phu với Ngài?<br>
+<span lang="pi" class="pali">
+“atha kiñcarahi te, bhante, puthujjanena nānākaraṇaṁ?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Kẻ phàm phu có thể nói lời nói, do lời nói ấy, những người khác không ưa, không thích”.<br>
+<span lang="pi" class="pali">
+Puthujjanopi hi taṁ vācaṁ bhāseyya yā sā vācā paresaṁ appiyā amanāpā”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Còn nếu Sa-môn Gotama được Vương tử hỏi như vậy và trả lời như sau:<br>
+<span lang="pi" class="pali">
+Sace pana te samaṇo gotamo evaṁ puṭṭho evaṁ byākaroti:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Này Vương tử, Như Lai không có thể nói lời nói, do lời nói ấy những người khác không ưa, không thích”, thời Vương tử hãy nói với Sa-môn Gotama:<br>
+<span lang="pi" class="pali">
+“na, rājakumāra, tathāgato taṁ vācaṁ bhāseyya yā sā vācā paresaṁ appiyā amanāpā”ti, tamenaṁ tvaṁ evaṁ vadeyyāsi—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Bạch Thế Tôn, nếu xử sự như vậy, thời vì sao Devadatta được Ngài trả lời như sau:<br>
+<span lang="pi" class="pali">
+atha kiñcarahi te, bhante, devadatto byākato:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Devadatta phải đọa vào đọa xứ, Devadatta phải đọa vào địa ngục, Devadatta phải đọa trong một kiếp, Devadatta không thể nào cứu chữa được?<br>
+<span lang="pi" class="pali">
+“āpāyiko devadatto, nerayiko devadatto, kappaṭṭho devadatto, atekiccho devadatto”ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Và vì Ngài nói những lời như vậy, Devadatta phẫn nộ, không hoan hỷ”.<br>
+<span lang="pi" class="pali">
+Tāya ca pana te vācāya devadatto kupito ahosi anattamano’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Vương tử, Sa-môn Gotama, khi bị Vương tử hỏi câu hỏi hai móc như vậy, sẽ không thể nhả ra, cũng không thể nuốt vào.<br>
+<span lang="pi" class="pali">
+Imaṁ kho te, rājakumāra, samaṇo gotamo ubhatokoṭikaṁ pañhaṁ puṭṭho samāno neva sakkhiti uggilituṁ na sakkhiti ogilituṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ví như một móc sắt bị mắc vào cổ họng của một người nào, người ấy không có thể nhả ra, cũng không có thể nuốt vào được.<br>
+<span lang="pi" class="pali">
+Seyyathāpi nāma purisassa ayosiṅghāṭakaṁ kaṇṭhe vilaggaṁ, so neva sakkuṇeyya uggilituṁ na sakkuṇeyya ogilituṁ;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Cũng vậy, này Vương tử, Sa-môn Gotama, khi bị Vương tử hỏi câu hỏi hai móc như vậy, sẽ không có thể nhả ra, cũng không có thể nuốt vào”.<br>
+<span lang="pi" class="pali">
+evameva kho te, rājakumāra, samaṇo gotamo imaṁ ubhatokoṭikaṁ pañhaṁ puṭṭho samāno neva sakkhiti uggilituṁ na sakkhiti ogilitun”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Lúc bấy giờ, có đứa con nít ngây thơ nằm giữa trên đầu gối của Vương tử Abhaya.<br>
+<span lang="pi" class="pali">
+Tena kho pana samayena daharo kumāro mando uttānaseyyako abhayassa rājakumārassa aṅke nisinno hoti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Rồi Thế Tôn nói với Vương tử Abhaya:<br>
+<span lang="pi" class="pali">
+Atha kho bhagavā abhayaṁ rājakumāraṁ etadavoca:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Này Vương tử, Vương tử nghĩ thế nào?<br>
+<span lang="pi" class="pali">
+“Taṁ kiṁ maññasi, rājakumāra,<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Nếu đứa con nít này, do sự vô ý của Vương tử, hay do sự vô ý của người vú hầu, thọc một cái que hay nuốt một hòn đá vào trong miệng, vậy Vương tử phải làm gì?”<br>
+<span lang="pi" class="pali">
+sacāyaṁ kumāro tuyhaṁ vā pamādamanvāya dhātiyā vā pamādamanvāya kaṭṭhaṁ vā kaṭhalaṁ vā mukhe āhareyya, kinti naṁ kareyyāsī”ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Bạch Thế Tôn, con phải móc cho ra.<br>
+<span lang="pi" class="pali">
+“Āhareyyassāhaṁ, bhante.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Bạch Thế Tôn, nếu con không thể móc ra lập tức, thời với tay trái con nắm đầu nó lại, với tay mặt lấy ngón tay làm như cái móc, con sẽ móc cho vật ấy ra, dầu có phải chảy máu.<br>
+<span lang="pi" class="pali">
+Sace, bhante, na sakkuṇeyyaṁ ādikeneva āhattuṁ, vāmena hatthena sīsaṁ pariggahetvā dakkhiṇena hatthena vaṅkaṅguliṁ karitvā salohitampi āhareyyaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vì sao vậy?<br>
+<span lang="pi" class="pali">
+Taṁ kissa hetu?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Bạch Thế Tôn, vì con có lòng thương tưởng đứa trẻ.”<br>
+<span lang="pi" class="pali">
+Atthi me, bhante, kumāre anukampā”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Cũng vậy, này Vương tử, lời nói nào Như Lai biết không như thật, không như chân, không tương ứng với mục đích, và lời nói ấy khiến những người khác không ưa, không thích, thời Như Lai không nói lời nói ấy.<br>
+<span lang="pi" class="pali">
+“Evameva kho, rājakumāra, yaṁ tathāgato vācaṁ jānāti abhūtaṁ atacchaṁ anatthasaṁhitaṁ sā ca paresaṁ appiyā amanāpā, na taṁ tathāgato vācaṁ bhāsati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Lời nói nào Như Lai biết là như thật, như chân, không tương ứng với mục đích, và lời nói ấy khiến những người khác không ưa, không thích, thời Như Lai không nói lời nói ấy.<br>
+<span lang="pi" class="pali">
+Yampi tathāgato vācaṁ jānāti bhūtaṁ tacchaṁ anatthasaṁhitaṁ sā ca paresaṁ appiyā amanāpā, tampi tathāgato vācaṁ na bhāsati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Và lời nói nào Như Lai biết là như thật, như chân, tương ứng với mục đích, và lời nói ấy khiến những người khác không ưa, không thích, Như Lai ở đây biết thời giải thích lời nói ấy.<br>
+<span lang="pi" class="pali">
+Yañca kho tathāgato vācaṁ jānāti bhūtaṁ tacchaṁ atthasaṁhitaṁ sā ca paresaṁ appiyā amanāpā, tatra kālaññū tathāgato hoti tassā vācāya veyyākaraṇāya.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Lời nói nào Như Lai biết là không như thật, không như chân, không tương ứng với mục đích, và lời nói ấy khiến những người khác ưa thích, Như Lại không nói lời nói ấy.<br>
+<span lang="pi" class="pali">
+Yaṁ tathāgato vācaṁ jānāti abhūtaṁ atacchaṁ anatthasaṁhitaṁ sā ca paresaṁ piyā manāpā, na taṁ tathāgato vācaṁ bhāsati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Lời nói nào Như Lai biết là như thật, như chân, không tương ứng với mục đích, và lời nói ấy khiến những người khác ưa và thích, Như Lai không nói lời nói ấy.<br>
+<span lang="pi" class="pali">
+Yampi tathāgato vācaṁ jānāti bhūtaṁ tacchaṁ anatthasaṁhitaṁ sā ca paresaṁ piyā manāpā tampi tathāgato vācaṁ na bhāsati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Và lời nói nào Như Lai biết là như thật, như chân, tương ứng với mục đích, và lời nói ấy khiến những người khác ưa và thích, ở đây, Như Lai biết thời giải thích lời nói ấy.<br>
+<span lang="pi" class="pali">
+Yañca tathāgato vācaṁ jānāti bhūtaṁ tacchaṁ atthasaṁhitaṁ sā ca paresaṁ piyā manāpā, tatra kālaññū tathāgato hoti tassā vācāya veyyākaraṇāya.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vì sao vậy?<br>
+<span lang="pi" class="pali">
+Taṁ kissa hetu?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Vương tử, Như Lai có lòng thương tưởng đối với các loài hữu tình.”<br>
+<span lang="pi" class="pali">
+Atthi, rājakumāra, tathāgatassa sattesu anukampā”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Bạch Thế Tôn, những Sát-đế-lị có trí, những Bà-la-môn có trí, những Gia chủ có trí, những Sa-môn có trí này, sau khi soạn sẵn câu hỏi, đến Như Lai và hỏi:<br>
+<span lang="pi" class="pali">
+“Yeme, bhante, khattiyapaṇḍitāpi brāhmaṇapaṇḍitāpi gahapatipaṇḍitāpi samaṇapaṇḍitāpi pañhaṁ abhisaṅkharitvā tathāgataṁ upasaṅkamitvā pucchanti,<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Bạch Thế Tôn, không hiểu Thế Tôn có suy nghĩ trước trong trí như sau: “Nếu có những ai đến Ta và hỏi như vậy, được hỏi như vậy, Ta sẽ trả lời như vậy”, hay Như Lai trả lời ngay (tại chỗ)?”<br>
+<span lang="pi" class="pali">
+pubbeva nu kho, etaṁ, bhante, bhagavato cetaso parivitakkitaṁ hoti ‘ye maṁ upasaṅkamitvā evaṁ pucchissanti tesāhaṁ evaṁ puṭṭho evaṁ byākarissāmī’ti, udāhu ṭhānasovetaṁ tathāgataṁ paṭibhātī”ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Này Vương tử, nay ở đây Ta sẽ hỏi Vương tử, nếu Vương tử hoan hỷ, hãy trả lời câu hỏi ấy.<br>
+<span lang="pi" class="pali">
+“Tena hi, rājakumāra, taññevettha paṭipucchissāmi, yathā te khameyya tathā naṁ byākareyyāsi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Vương tử, Vương tử nghĩ như thế nào?<br>
+<span lang="pi" class="pali">
+Taṁ kiṁ maññasi, rājakumāra,<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vương tử có giỏi về các bộ phận sai biệt một cái xe không?”<br>
+<span lang="pi" class="pali">
+kusalo tvaṁ rathassa aṅgapaccaṅgānan”ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Thưa vâng, bạch Thế Tôn, con có giỏi về các bộ phận sai biệt một cái xe.”<br>
+<span lang="pi" class="pali">
+“Evaṁ, bhante, kusalo ahaṁ rathassa aṅgapaccaṅgānan”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Này Vương tử, Vương tử nghĩ thế nào?<br>
+<span lang="pi" class="pali">
+“Taṁ kiṁ maññasi, rājakumāra,<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Nếu có những người đến Vương tử và hỏi như sau:<br>
+<span lang="pi" class="pali">
+ye taṁ upasaṅkamitvā evaṁ puccheyyuṁ:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Bộ phận này của cái xe tên gọi là gì?”,<br>
+<span lang="pi" class="pali">
+‘kiṁ nāmidaṁ rathassa aṅgapaccaṅgan’ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+không hiểu Vương Tử có suy nghĩ trước trong trí như sau: ‘Nếu có những ai đến ta, và hỏi ta như vậy, ta sẽ trả lời cho họ như vậy’, hay là Vương tử trả lời ngay (tại chỗ)?”<br>
+<span lang="pi" class="pali">
+Pubbeva nu kho te etaṁ cetaso parivitakkitaṁ assa ‘ye maṁ upasaṅkamitvā evaṁ pucchissanti tesāhaṁ evaṁ puṭṭho evaṁ byākarissāmī’ti, udāhu ṭhānasovetaṁ paṭibhāseyyā”ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Bạch Thế Tôn, vì con là người đánh xe nổi tiếng, rất giỏi về các bộ phận sai biệt trong một cái xe nên con sẽ trả lời ngay (tại chỗ).<br>
+<span lang="pi" class="pali">
+“Ahañhi, bhante, rathiko saññāto kusalo rathassa aṅgapaccaṅgānaṁ. Sabbāni me rathassa aṅgapaccaṅgāni suviditāni. Ṭhānasovetaṁ maṁ paṭibhāseyyā”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Cũng vậy, này Vương tử, những Sát-đế-lỵ có trí, những Bà-la-môn có trí, những Gia chủ có trí, những Sa-môn có trí này, sau khi soạn sẵn câu hỏi, đến Như Lai và hỏi, Như Lai sẽ trả lời ngay (tại chỗ).<br>
+<span lang="pi" class="pali">
+“Evameva kho, rājakumāra, ye te khattiyapaṇḍitāpi brāhmaṇapaṇḍitāpi gahapatipaṇḍitāpi samaṇapaṇḍitāpi pañhaṁ abhisaṅkharitvā tathāgataṁ upasaṅkamitvā pucchanti, ṭhānasovetaṁ tathāgataṁ paṭibhāti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vì sao vậy?<br>
+<span lang="pi" class="pali">
+Taṁ kissa hetu?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Vương tử, pháp giới (Dhammadhatu) đã được Như Lai khéo biết. Và vì Như Lai khéo biết pháp giới nên Như Lai trả lời ngay (tại chỗ).”<br>
+<span lang="pi" class="pali">
+Sā hi, rājakumāra, tathāgatassa dhammadhātu suppaṭividdhā yassā dhammadhātuyā suppaṭividdhattā ṭhānasovetaṁ tathāgataṁ paṭibhātī”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Khi được nói vậy, Vương tử Abhaya bạch Thế Tôn:<br>
+<span lang="pi" class="pali">
+Evaṁ vutte, abhayo rājakumāro bhagavantaṁ etadavoca:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Thật vi diệu thay, bạch Thế Tôn! Thật vi diệu thay, bạch Thế Tôn! Bạch Thế Tôn, như người dựng đứng lại những gì bị quăng ngã xuống, phơi bày ra những gì bị che kín, chỉ đường cho kẻ đi lạc hướng, đem đèn sáng vào trong bóng tối để những ai có mắt có thể thấy sắc. Cũng vậy, Chánh pháp đã được Thế Tôn dùng nhiều phương tiện trình bày. Nay con quy y Thế Tôn, quy y Pháp và quy y chúng Tỷ-kheo Tăng.<br>
+<span lang="pi" class="pali">
+“abhikkantaṁ, bhante, abhikkantaṁ, bhante …pe…<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Mong Thế Tôn nhận con làm cư sĩ, từ nay cho đến mạng chung, con trọn đời quy ngưỡng.”<br>
+<span lang="pi" class="pali">
+ajjatagge pāṇupetaṁ saraṇaṁ gatan”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+<span lang="pi" class="vi">
+Abhayarājakumārasuttaṁ niṭṭhitaṁ aṭṭhamaṁ.<br>
+</span>
+</p>
+
+
+
+<!-- COPY CONTENT SUTTA Ở ĐÂY -->
+
+
+
+<br>
+<p><p style="text-align: right;font-style: italic;">Hoà Thượng Thích Minh Châu dịch Việt</span></p>
+
+
+
+
+
+
+
+
+</section>  <!-- End English and Pali -->
+<div id="nextprev"><a id="previous-sutta" href="./mn57.html#content"></a><a id="next-sutta" href="./mn59.html#content"></a></div>
+</div>  <!--End Content -->
+</div>  <!-- End Page -->
+
+
+
+
+
+
+<footer>
+					 <!-- End bottom links -->
+</footer>
+
+
+ 
+ <!-- Scripts -->
+
+ <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      if (typeof enablePaliLookup === "function") {
+        enablePaliLookup();
+      } else {
+        console.error("enablePaliLookup is not defined");
+      }
+    });
+  </script>
+
+ <script>
+ // Script to open and close sidebar
+ 	function w3_open() {
+ 	document.getElementById("mySidebar").style.display = "block";
+ 	}
+ 		function w3_close() {
+ 		document.getElementById("mySidebar").style.display = "none";
+ 	}
+ </script>
+ <script>
+ 		var app = document.getElementsByTagName("BODY")[0];
+ 		if (localStorage.lightMode == "dark") {
+ 			app.setAttribute("light-mode", "dark");
+ 	}
+ </script>
+ 
+ <script>
+ 		function toggle_light_mode() {
+ 			var app = document.getElementsByTagName("BODY")[0];
+ 				if (localStorage.lightMode == "dark") {
+ 			localStorage.lightMode = "light";
+ 			app.setAttribute("light-mode", "light");
+ 		} else {
+ 					localStorage.lightMode = "dark";
+ 					app.setAttribute("light-mode", "dark");
+ 	}
+ 		}
+ 
+ 		window.addEventListener("storage", function () {
+ 			if (localStorage.lightMode == "dark") {
+ 				app.setAttribute("light-mode", "dark");
+ 				} else {
+ 				app.setAttribute("light-mode", "light");
+ 		}
+ 		}, false);
+ 
+ </script>
+ <script src="../js/footer.js"></script><script src="../js/dpd_deconstructor.js"></script><script src="../js/dpd_ebts.js"></script><script src="../js/dpd_i2h.js"></script>
+ <script src="/sw.js"></script>
+ </body>
+ </html>

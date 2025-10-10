@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+ 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+ 	<link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+ 	<meta name="viewport" content="width=device-width, initial-scale=1">
+		<!-- Loading manifest -->
+	<link rel="manifest" href="../manifest.json">
+ 	<!-- Loading main and menu stylesheets -->
+ 	<link rel="stylesheet" href="../css/w3.css">
+ 	<link rel="stylesheet" href="../css/css.css">
+ 	<link rel="stylesheet" href="../css/menu.css">
+ 	<script src="../js/jquery-1.10.2.min.js"></script>
+ 	<script src="../js/controlpanel.js"></script>
+ 	<script src="../js/mousetrap.min.js"></script>
+    <script src="../js/pali-lookup-standalone.js"></script>
+
+ <script src="../js/suttaFiles.js"></script>
+<script>
+ // Script to open random Sutta
+ function openRandomSutta() {
+  const randomIndex = Math.floor(Math.random() * suttaFiles.length);
+  const selectedFile = suttaFiles[randomIndex];
+
+  // Get root path of your site 
+  const currentPath = location.pathname;
+  const rootPath = currentPath.split("/").slice(0, -2).join("/") + "/";
+
+  // Redirect to the correct file
+  window.location.href = rootPath + selectedFile;
+}
+</script>
+
+
+</head>
+ <body class="container">
+ <div class="header-background">
+ <!-- Header -->
+ <div class="w3-header w3-content w3-padding w3-left-align bwcontainer">
+ 	<div class="centered">
+ 		<button class="light-mode-button" aria-label="Bật Chế Độ Sáng" onclick="toggle_light_mode()">
+ 			<span></span>
+ 			<span></span>
+ 		</button>
+ 		<span class="box-lbl">Sáng/Tối</span>
+ 	</div> <!-- Centered -->
+ 		<a href="../home/index.html" id="bwlogo"><img src="../images/headerlogo.png" alt="Logo Lời Của Đức Phật" class="w3-image"></a>
+ 		<div class="w3-bar bwcontainer">
+ 			<div id="searchlinks">
+ 			<a href="../home/visearch.html"><span class="w3-bar-item"><i class="fa fa-search"></i>&nbsp;Tìm Tiếng Việt</span></a>
+ 			<a href="../home/palisearch.html"><span class="w3-bar-item"><i class="fa fa-search"></i>&nbsp;Tìm Tiếng Pali</span></a>
+ 			</div><!-- End Searchlinks div -->
+ 			<div class="help"><span><a href="../home/help.html"><img src="../images/help_icon.png" title="Trợ Giúp" alt="Help"></a></span></div>
+ 		</div> <!-- End w3-bar bwcontainer --> 	</div> <!-- End w3-header w3-content w3-padding w3-left-align bwcontainer -->
+ </div> <!-- End header-background -->
+ <!-- Top menu -->
+
+ <div class="w3-main w3-white bwcontainer2">
+ 	<div class="w3-button w3-padding-8 w3-left w3-hide-large" onclick="w3_open()">☰</div>
+ 		<div id="navbar" class="w3-hide-small w3-hide-medium bwcontainer3">
+ 			<ul id="css3menu0">
+ 				<li class="topfirst" id="home"><a href="../home/index.html" class="w3-hide-small">Trang Chủ</a></li>
+  				<li class="topmenu" id="dn"><a href="../dn/dn.html" class="pressed w3-hide-small">Trường Bộ Kinh</a></li>
+ 				<li class="topmenu" id="mn"><a href="../mn/mn.html" class="w3-hide-small">Trung Bộ Kinh</a></li>
+ 				<li class="topmenu" id="sn"><a href="../sn/sn.html" class="w3-hide-small"><i class="fa fa-caret-down"></i>&nbsp;Tương Ưng Bộ Kinh</a>
+ 					<ul>
+ 						<li><a href="../sn/sn01.html" class="w3-hide-small">Tập I - Thiên Có Kệ</a></li>
+ 						<li><a href="../sn/sn02.html" class="w3-hide-small">Tập II - Thiên Nhân Duyên</a></li>
+ 						<li><a href="../sn/sn03.html" class="w3-hide-small">Tập III - Thiên Uẩn</a></li>
+ 						<li><a href="../sn/sn04.html" class="w3-hide-small">Tập IV - Thiên Sáu Xứ</a></li>
+ 						<li><a href="../sn/sn05.html" class="w3-hide-small">Tập V - Thiên Ðại Phẩm</a></li>
+ 					</ul>
+ 				<li class="topmenu" id="an"><a href="../an/an.html" class="w3-hide-small"><i class="fa fa-caret-down"></i>&nbsp;Tăng Chi Bộ Kinh</a>
+ 					<ul>
+ 						<li><a href="../an/an1.html" class="w3-hide-small">Chương Một Pháp</a></li>
+ 						<li><a href="../an/an2.html" class="w3-hide-small">Chương Hai Pháp</a></li>
+ 						<li><a href="../an/an3.html" class="w3-hide-small">Chương Ba Pháp</a></li>
+ 						<li><a href="../an/an4.html" class="w3-hide-small">Chương Bốn Pháp</a></li>
+ 						<li><a href="../an/an5.html" class="w3-hide-small">Chương Năm Pháp</a></li>
+ 						<li><a href="../an/an6.html" class="w3-hide-small">Chương Sáu Pháp</a></li>
+ 						<li><a href="../an/an7.html" class="w3-hide-small">Chương Bảy Pháp</a></li>
+ 						<li><a href="../an/an8.html" class="w3-hide-small">Chương Tám Pháp</a></li>
+ 						<li><a href="../an/an9.html" class="w3-hide-small">Chương Chín Pháp</a></li>
+ 						<li><a href="../an/an10.html" class="w3-hide-small">Chương Mười Pháp</a></li>
+ 						<li><a href="../an/an11.html" class="w3-hide-small">Chương Mười Một Pháp</a></li>
+ 					</ul>
+ 				</li>
+ 				<li class="topmenu" id="kn"><a href="../kn/kn.html" class="w3-hide-small"><i class="fa fa-caret-down"></i>&nbsp;Tiểu Bộ Kinh</a>
+ 					<ul>
+ 						<li><a href="../kp/kp.html" class="w3-hide-small">Kinh Tiểu Tụng</a></li>
+ 						<li><a href="../dhp/dhp.html" class="w3-hide-small">Kinh Pháp Cú</a></li>
+ 						<li><a href="../snp/snp.html" class="w3-hide-small">Kinh Tập</a></li>
+ 						<li><a href="../ud/ud.html" class="w3-hide-small">Kinh Phật Tự Thuyết</a></li>
+ 						<li><a href="../it/it.html" class="w3-hide-small">Kinh Phật Thuyết Như Vậy</a></li>
+ 						<li><a href="../tha/tha.html" class="w3-hide-small">Trưởng Lão Tăng Kệ</a></li>
+ 						<li><a href="../thi/thi.html" class="w3-hide-small">Trưởng Lão Ni Kệ</a></li>
+ 					</ul>
+ 				</li>
+				<li class="toplast" id="rd"><a href="../rd/rd.html" class="w3-hide-small"></i>Kinh Ngẫu Nhiên Theo Nhóm</a>
+ 					</ul>
+ 				</li>
+ 			</ul>
+ 			</div>
+ 		</div> <!--navbar-->
+
+<!-- Sidebar (hidden by default) -->
+ <nav class="w3-sidebar w3-bar-block w3-card w3-border w3-top w3-animate-left w3-hide-large" id="mySidebar">
+ 	<a href="javascript:void(0)" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-times fa-2x red-color"></i>&nbsp;&nbsp;&nbsp;Close</a><!-- Hides the sidebar when clicked -->
+ 		<div class="w3-bar-block w3-white">
+ 			<a href="../home/index.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-home fa-lg"></i>&nbsp;&nbsp;&nbsp;Home</a>
+ 			<a href="../guide/guide.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Guide</a>
+ 			<a href="../dn/dn.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Trường Bộ Kinh</a>
+ 			<a href="../mn/mn.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Trung Bộ Kinh</a>
+ 			<a href="../sn/sn.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Tương Ưng Bộ Kinh</a>
+ 			<a href="../an/an.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Tăng Chi Bộ Kinh
+ 			<a href="../kn/kn.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Tiểu Bộ Kinh</a>
+			<a href="../rd/rd.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>Kinh Ngẫu Nhiên Theo Nhóm</a>
+ 		</div>
+ </nav>
+ 
+ 
+ 
+   <!-- !PAGE CONTENT! --> 
+<div class="w3-main w3-content w3-padding w3-left-align bwcontainer4">
+<div id="content">
+<h2>Majjhima Nikāya - Trung Bộ Kinh</h2>
+<h5><span style="font-style: italic;">Hoà Thượng Thích Minh Châu dịch Việt</span></h5>
+
+</div>
+
+<br>
+ 	<title>        Trung Bộ 71          </title>
+
+<p lang="vi" class="vi"; style="text-align: center">
+Trung Bộ 71<br>
+<span lang="pi" class="pali">
+Majjhima Nikāya 71<br>
+</span>
+</p>
+
+<p lang="vi" class="vi"; style="text-align: center">
+Kinh Vacchagotta Về Tam Minh<br>
+<span lang="pi" class="pali">
+Tevijjavacchasutta<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Như vầy tôi nghe.<br>
+<span lang="pi" class="pali">
+Evaṁ me sutaṁ—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Một thời Thế Tôn ở Vesālī (Tỳ-xá-ly) rừng Ðại Lâm, tại Giảng đường Trùng Các.<br>
+<span lang="pi" class="pali">
+ekaṁ samayaṁ bhagavā vesāliyaṁ viharati mahāvane kūṭāgārasālāyaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Lúc bấy giờ, du sĩ ngoại đạo Vacchagotta ở tại Tự Viện Độc Liên, vườn các du sĩ ngoại đạo.<br>
+<span lang="pi" class="pali">
+Tena kho pana samayena vacchagotto paribbājako ekapuṇḍarīke paribbājakārāme paṭivasati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Thế Tôn buổi sáng đắp y, cầm y bát, đi vào Vesālī để khất thực.<br>
+<span lang="pi" class="pali">
+Atha kho bhagavā pubbaṇhasamayaṁ nivāsetvā pattacīvaramādāya vesāliṁ piṇḍāya pāvisi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Rồi Thế Tôn suy nghĩ như sau:<br>
+<span lang="pi" class="pali">
+Atha kho bhagavato etadahosi:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Nay còn quá sớm để đi vào Vesālī khất thực.<br>
+<span lang="pi" class="pali">
+“atippago kho tāva vesāliyaṁ piṇḍāya carituṁ;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ta hãy đi đến Tự Viện Độc Liên, vườn các du sĩ ngoại đạo, đi đến du sĩ ngoại đạo Vacchagotta”.<br>
+<span lang="pi" class="pali">
+yannūnāhaṁ yena ekapuṇḍarīko paribbājakārāmo yena vacchagotto paribbājako tenupasaṅkameyyan”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Rồi Thế Tôn đi đến Tự Viện Độc Liên, vườn các du sĩ ngoại đạo, đi đến du sĩ ngoại đạo Vacchagotta.<br>
+<span lang="pi" class="pali">
+Atha kho bhagavā yena ekapuṇḍarīko paribbājakārāmo yena vacchagotto paribbājako tenupasaṅkami.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Du sĩ ngoại đạo Vacchagotta thấy Thế Tôn từ đằng xa đi đến, khi thấy vậy, liền nói với Thế Tôn:<br>
+<span lang="pi" class="pali">
+Addasā kho vacchagotto paribbājako bhagavantaṁ dūratova āgacchantaṁ. Disvāna bhagavantaṁ etadavoca:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Bạch Thế Tôn, Thế Tôn hãy đến;<br>
+<span lang="pi" class="pali">
+“Etu kho, bhante, bhagavā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+bạch Thế Tôn, thiện lai, bạch Thế Tôn!<br>
+<span lang="pi" class="pali">
+Svāgataṁ, bhante, bhagavato.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Bạch Thế Tôn, đã từ lâu, Thế Tôn mới có dịp này, tức là đến tại đây, bạch Thế Tôn, mời Thế Tôn ngồi. Ðây là chỗ đã soạn sẵn.”<br>
+<span lang="pi" class="pali">
+Cirassaṁ kho, bhante, bhagavā imaṁ pariyāyamakāsi yadidaṁ idhāgamanāya. Nisīdatu, bhante, bhagavā idamāsanaṁ paññattan”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Thế Tôn ngồi trên ghế đã soạn sẵn.<br>
+<span lang="pi" class="pali">
+Nisīdi bhagavā paññatte āsane.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Du sĩ ngoại đạo Vacchagotta lấy một ghế thấp khác và ngồi xuống một bên.<br>
+<span lang="pi" class="pali">
+Vacchagottopi kho paribbājako aññataraṁ nīcaṁ āsanaṁ gahetvā ekamantaṁ nisīdi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Sau khi ngồi xuống một bên, du sĩ Vacchagotta bạch Thế Tôn:<br>
+<span lang="pi" class="pali">
+Ekamantaṁ nisinno kho vacchagotto paribbājako bhagavantaṁ etadavoca:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Bạch Thế Tôn, con nghe như sau:<br>
+<span lang="pi" class="pali">
+“sutaṁ metaṁ, bhante:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Sa-môn Gotama là bậc nhứt thiết trí, là bậc nhứt thiết kiến. Ngài tự cho là có tri kiến hoàn toàn:<br>
+<span lang="pi" class="pali">
+‘samaṇo gotamo sabbaññū sabbadassāvī, aparisesaṁ ñāṇadassanaṁ paṭijānāti,<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Khi Ta đi, khi Ta đứng, khi Ta ngủ và khi Ta thức, tri kiến luôn luôn tồn tại, liên tục”‘.<br>
+<span lang="pi" class="pali">
+carato ca me tiṭṭhato ca suttassa ca jāgarassa ca satataṁ samitaṁ ñāṇadassanaṁ paccupaṭṭhitan’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Bạch Thế Tôn, những ai nói như sau: “Sa-môn Gotama là bậc nhứt thiết trí, là bậc nhứt thiết kiến. Ngài tự cho là có tri kiến hoàn toàn: “Khi Ta đi, khi Ta đứng, khi Ta ngủ và khi Ta thức, tri kiến luôn luôn tồn tại liên tục”. Bạch Thế Tôn, những vị ấy nói về Thế Tôn có đúng với điều đã được nói, những vị ấy không vu khống Thế Tôn với điều không thực, nhưng đã giải thích về Thế Tôn đúng pháp và tùy pháp, và không một đồng pháp hành nào nói lời đúng pháp có thể lấy cớ để quở trách?<br>
+<span lang="pi" class="pali">
+Ye te, bhante, evamāhaṁsu: ‘samaṇo gotamo sabbaññū sabbadassāvī, aparisesaṁ ñāṇadassanaṁ paṭijānāti, carato ca me tiṭṭhato ca suttassa ca jāgarassa ca satataṁ samitaṁ ñāṇadassanaṁ paccupaṭṭhitan’ti, kacci te, bhante, bhagavato vuttavādino, na ca bhagavantaṁ abhūtena abbhācikkhanti, dhammassa cānudhammaṁ byākaronti, na ca koci sahadhammiko vādānuvādo gārayhaṁ ṭhānaṁ āgacchatī”ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Vaccha, những ai nói như sau: ‘Sa-môn Gotama là bậc nhứt thiết trí, là bậc nhứt thiết kiến. Ngài tự cho là có tri kiến hoàn toàn: “Khi Ta đi, khi Ta đứng, khi Ta ngủ và khi Ta thức, tri kiến luôn luôn tồn tại, liên tục”‘. Thì đấy là họ nói về Ta không đúng với điều đã được nói, họ đã vu khống Ta với điều không thực, hư ngụy.<br>
+<span lang="pi" class="pali">
+“Ye te, vaccha, evamāhaṁsu: ‘samaṇo gotamo sabbaññū sabbadassāvī, aparisesaṁ ñāṇadassanaṁ paṭijānāti, carato ca me tiṭṭhato ca suttassa ca jāgarassa ca satataṁ samitaṁ ñāṇadassanaṁ paccupaṭṭhitan’ti, na me te vuttavādino, abbhācikkhanti ca pana maṁ asatā abhūtenā”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Phải giải thích như thế nào, bạch Thế Tôn, chúng con mới nói về Thế Tôn đúng với điều đã được nói, chúng con không vu khống Thế Tôn với điều không thực, chúng con mới giải thích về Thế Tôn đúng pháp và tùy pháp; và không một đồng pháp hành nào nói lời đúng pháp có thể lấy cớ để quở trách?”<br>
+<span lang="pi" class="pali">
+“Kathaṁ byākaramānā pana mayaṁ, bhante, vuttavādino ceva bhagavato assāma, na ca bhagavantaṁ abhūtena abbhācikkheyyāma, dhammassa cānudhammaṁ byākareyyāma, na ca koci sahadhammiko vādānuvādo gārayhaṁ ṭhānaṁ āgaccheyyā”ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ông phải giải thích: “Sa-môn Gotama là bậc có ba minh (tevijja)”, thì này Vaccha, Ông mới là người nói về Thế Tôn đúng với điều đã được nói, mới không vu khống Thế Tôn với điều không thực, mới giải thích về Thế Tôn đúng pháp và tùy pháp, và mới không có một đồng pháp hành nào nói lời đúng pháp có thể lấy cớ để quở trách.<br>
+<span lang="pi" class="pali">
+“‘Tevijjo samaṇo gotamo’ti kho, vaccha, byākaramāno vuttavādī ceva me assa, na ca maṁ abhūtena abbhācikkheyya, dhammassa cānudhammaṁ byākareyya, na ca koci sahadhammiko vādānuvādo gārayhaṁ ṭhānaṁ āgaccheyya.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Vaccha, khi nào Ta muốn, Ta sẽ nhớ đến nhiều đời sống quá khứ, như:<br>
+<span lang="pi" class="pali">
+Ahañhi, vaccha, yāvadeva ākaṅkhāmi anekavihitaṁ pubbenivāsaṁ anussarāmi,<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+một đời, hai đời, ba đời, bốn đời, năm đời, hai mươi đời, bốn mươi đời, năm mươi đời, một trăm đời, một ngàn đời, một trăm ngàn đời, nhiều hoại kiếp, nhiều thành kiếp. Ta nhớ rằng: “Tại chỗ kia, ta có tên như thế này, dòng họ như thế này, giai cấp như thế này, ăn uống như thế này, thọ khổ lạc như thế này, tuổi thọ đến mức như thế này. Sau khi tại chỗ kia, ta được sanh ra tại chỗ nọ. Tại chỗ ấy, ta có tên như thế này, dòng họ như thế này, giai cấp như thế này, ăn uống như thế này, thọ khổ lạc như thế này, tuổi thọ đến mức như thế này. Sau khi chết tại chỗ nọ, ta được sanh ra ở đây”. Như vậy Ta sẽ nhớ đến những đời sống quá khứ, cùng với các nét đại cương và các chi tiết.<br>
+<span lang="pi" class="pali">
+seyyathidaṁ—ekampi jātiṁ dvepi jātiyo …pe… iti sākāraṁ sauddesaṁ anekavihitaṁ pubbenivāsaṁ anussarāmi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Vaccha, nếu Ta muốn, với thiên nhãn thuần tịnh, siêu nhân, Ta thấy sự sống chết của chúng sanh, người hạ liệt kẻ cao sang, người đẹp đẽ kẻ thô xấu, người may mắn kẻ bất hạnh đều do hạnh nghiệp của họ. Ta nghĩ rằng: “Thật sự những vị chúng sanh này thành tựu những ác hạnh về thân, thành tựu những ác hạnh về lời nói, thành tựu những ác hạnh về ý, phỉ báng các bậc Thánh, theo tà kiến, tạo các nghiệp theo tà kiến. Những người này, sau khi thân hoại mạng chung, phải sanh vào cõi dữ, ác thú, đọa xứ, địa ngục. Còn những vị chúng sanh này thành tựu những thiện hạnh về thân, thành tựu những thiện hạnh về lời nói, thành tựu những thiện hạnh về ý, không phỉ báng các bậc Thánh, theo chánh kiến, tạo các nghiệp theo chánh kiến, những người này, sau khi thân hoại mạng chung, được sanh lên các thiện thú, Thiên giới, trên đời này”. Như vậy, Ta với thiên nhãn thuần tịnh, siêu nhân, thấy sự sống chết của chúng sanh. Ta tuệ tri rõ rằng chúng sanh, người hạ liệt kẻ cao sang, người đẹp đẽ kẻ thô xấu, người may mắn kẻ bất hạnh đều do hạnh nghiệp của họ.<br>
+<span lang="pi" class="pali">
+Ahañhi, vaccha, yāvadeva ākaṅkhāmi dibbena cakkhunā visuddhena atikkantamānusakena satte passāmi cavamāne upapajjamāne hīne paṇīte suvaṇṇe dubbaṇṇe sugate duggate …pe… yathākammūpage satte pajānāmi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Vaccha, với sự đoạn diệt các lậu hoặc, Ta ngay trong hiện tại, tự mình với thượng trí chứng ngộ, chứng đạt và an trú, vô lậu tâm giải thoát, tuệ giải thoát.<br>
+<span lang="pi" class="pali">
+Ahañhi, vaccha, āsavānaṁ khayā anāsavaṁ cetovimuttiṁ paññāvimuttiṁ diṭṭheva dhamme sayaṁ abhiññā sacchikatvā upasampajja viharāmi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Và với sự giải thích: “Sa-môn Gotama là bậc có ba minh”, này Vaccha, người ấy mới là người nói về Thế Tôn đúng với điều đã được nói, mới không vu khống Thế Tôn với điều không thực, mới giải thích về Thế Tôn đúng pháp và tùy pháp, và mới không có một vị đồng hành pháp nào nói lời đúng pháp có thể lấy cớ để quở trách.<br>
+<span lang="pi" class="pali">
+‘Tevijjo samaṇo gotamo’ti kho, vaccha, byākaramāno vuttavādī ceva me assa, na ca maṁ abhūtena abbhācikkheyya, dhammassa cānudhammaṁ byākareyya, na ca koci sahadhammiko vādānuvādo gārayhaṁ ṭhānaṁ āgaccheyyā”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Khi được nói vậy, du sĩ Vacchagotta bạch Thế Tôn:<br>
+<span lang="pi" class="pali">
+Evaṁ vutte, vacchagotto paribbājako bhagavantaṁ etadavoca:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Tôn giả Gotama, có thể có vị tại gia nào không đoạn trừ kiết sử tại gia mà khi thân hoại mạng chung lại có thể đoạn tận khổ đau?”<br>
+<span lang="pi" class="pali">
+“atthi nu kho, bho gotama, koci gihī gihisaṁyojanaṁ appahāya kāyassa bhedā dukkhassantakaro”ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Này Vaccha, không có người tại gia nào không đoạn trừ kiết sử tại gia mà khi thân hoại mạng chung lại có thể đoạn tận khổ đau.”<br>
+<span lang="pi" class="pali">
+“Natthi kho, vaccha, koci gihī gihisaṁyojanaṁ appahāya kāyassa bhedā dukkhassantakaro”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Tôn giả Gotama, có thể có người tại gia nào không đoạn trừ kiết sử tại gia mà khi thân hoại mạng chung lại có thể sanh Thiên?”<br>
+<span lang="pi" class="pali">
+“Atthi pana, bho gotama, koci gihī gihisaṁyojanaṁ appahāya kāyassa bhedā saggūpago”ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Không phải chỉ một trăm, này Vaccha, không phải hai trăm, không phải ba trăm, không phải bốn trăm, không phải năm trăm, nhưng nhiều hơn như vậy là những người tại gia không đoạn trừ kiết sử tại gia mà khi thân hoại lại có thể sanh Thiên.”<br>
+<span lang="pi" class="pali">
+“Na kho, vaccha, ekaṁyeva sataṁ na dve satāni na tīṇi satāni na cattāri satāni na pañca satāni, atha kho bhiyyova ye gihī gihisaṁyojanaṁ appahāya kāyassa bhedā saggūpagā”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Tôn giả Gotama, có hạng tà mạng ngoại đạo nào, sau khi thân hoại mạng chung có thể diệt tận khổ đau?”<br>
+<span lang="pi" class="pali">
+“Atthi nu kho, bho gotama, koci ājīvako kāyassa bhedā dukkhassantakaro”ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Này Vaccha, không có một tà mạng ngoại đạo nào, sau khi thân hoại mạng chung có thể diệt tận khổ đau.”<br>
+<span lang="pi" class="pali">
+“Natthi kho, vaccha, koci ājīvako kāyassa bhedā dukkhassantakaro”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Tôn giả Gotama, có hạng tà mạng ngoại đạo nào, sau khi thân hoại mạng chung có thể sanh Thiên?”<br>
+<span lang="pi" class="pali">
+“Atthi pana, bho gotama, koci ājīvako kāyassa bhedā saggūpago”ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Này Vaccha, dầu cho ta có nhớ đến 91 kiếp, Ta không biết một tà mạng ngoại đạo nào đã sanh Thiên, trừ một vị,<br>
+<span lang="pi" class="pali">
+“Ito kho so, vaccha, ekanavuto kappo yamahaṁ anussarāmi, nābhijānāmi kañci ājīvakaṁ saggūpagaṁ aññatra ekena;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+và vị này thuyết về nghiệp và thuyết về tác dụng của nghiệp.”<br>
+<span lang="pi" class="pali">
+sopāsi kammavādī kiriyavādī”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Sự việc là như vậy, Tôn giả Gotama, thời ngoại đạo giới này (titthayatanan) là trống không cho đến vấn đề sanh Thiên.”<br>
+<span lang="pi" class="pali">
+“Evaṁ sante, bho gotama, suññaṁ aduṁ titthāyatanaṁ antamaso saggūpagenapī”ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Sự việc là như vậy, này Vaccha, thời ngoại đạo giới này là trống không cho đến vấn đề sanh Thiên.”<br>
+<span lang="pi" class="pali">
+“Evaṁ, vaccha, suññaṁ aduṁ titthāyatanaṁ antamaso saggūpagenapī”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Thế Tôn thuyết giảng như vậy.<br>
+<span lang="pi" class="pali">
+Idamavoca bhagavā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Du sĩ ngoại đạo Vacchagotta hoan hỷ tín thọ lời Thế Tôn dạy.<br>
+<span lang="pi" class="pali">
+Attamano vacchagotto paribbājako bhagavato bhāsitaṁ abhinandīti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+<span lang="pi" class="vi">
+Tevijjavacchasuttaṁ niṭṭhitaṁ paṭhamaṁ.<br>
+</span>
+</p>
+
+
+<!-- COPY CONTENT SUTTA Ở ĐÂY -->
+
+
+
+<br>
+<p><p style="text-align: right;font-style: italic;">Hoà Thượng Thích Minh Châu dịch Việt</span></p>
+
+
+
+
+
+
+
+
+</section>  <!-- End English and Pali -->
+<div id="nextprev"><a id="previous-sutta" href="./mn70.html#content"></a><a id="next-sutta" href="./mn72.html#content"></a></div>
+</div>  <!--End Content -->
+</div>  <!-- End Page -->
+
+
+
+
+
+
+<footer>
+					 <!-- End bottom links -->
+</footer>
+
+
+ 
+ <!-- Scripts -->
+
+ <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      if (typeof enablePaliLookup === "function") {
+        enablePaliLookup();
+      } else {
+        console.error("enablePaliLookup is not defined");
+      }
+    });
+  </script>
+
+ <script>
+ // Script to open and close sidebar
+ 	function w3_open() {
+ 	document.getElementById("mySidebar").style.display = "block";
+ 	}
+ 		function w3_close() {
+ 		document.getElementById("mySidebar").style.display = "none";
+ 	}
+ </script>
+ <script>
+ 		var app = document.getElementsByTagName("BODY")[0];
+ 		if (localStorage.lightMode == "dark") {
+ 			app.setAttribute("light-mode", "dark");
+ 	}
+ </script>
+ 
+ <script>
+ 		function toggle_light_mode() {
+ 			var app = document.getElementsByTagName("BODY")[0];
+ 				if (localStorage.lightMode == "dark") {
+ 			localStorage.lightMode = "light";
+ 			app.setAttribute("light-mode", "light");
+ 		} else {
+ 					localStorage.lightMode = "dark";
+ 					app.setAttribute("light-mode", "dark");
+ 	}
+ 		}
+ 
+ 		window.addEventListener("storage", function () {
+ 			if (localStorage.lightMode == "dark") {
+ 				app.setAttribute("light-mode", "dark");
+ 				} else {
+ 				app.setAttribute("light-mode", "light");
+ 		}
+ 		}, false);
+ 
+ </script>
+ <script src="../js/footer.js"></script><script src="../js/dpd_deconstructor.js"></script><script src="../js/dpd_ebts.js"></script><script src="../js/dpd_i2h.js"></script>
+ <script src="/sw.js"></script>
+ </body>
+ </html>

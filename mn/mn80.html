@@ -1,0 +1,875 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+ 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+ 	<link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+ 	<meta name="viewport" content="width=device-width, initial-scale=1">
+		<!-- Loading manifest -->
+	<link rel="manifest" href="../manifest.json">
+ 	<!-- Loading main and menu stylesheets -->
+ 	<link rel="stylesheet" href="../css/w3.css">
+ 	<link rel="stylesheet" href="../css/css.css">
+ 	<link rel="stylesheet" href="../css/menu.css">
+ 	<script src="../js/jquery-1.10.2.min.js"></script>
+ 	<script src="../js/controlpanel.js"></script>
+ 	<script src="../js/mousetrap.min.js"></script>
+    <script src="../js/pali-lookup-standalone.js"></script>
+
+ <script src="../js/suttaFiles.js"></script>
+<script>
+ // Script to open random Sutta
+ function openRandomSutta() {
+  const randomIndex = Math.floor(Math.random() * suttaFiles.length);
+  const selectedFile = suttaFiles[randomIndex];
+
+  // Get root path of your site 
+  const currentPath = location.pathname;
+  const rootPath = currentPath.split("/").slice(0, -2).join("/") + "/";
+
+  // Redirect to the correct file
+  window.location.href = rootPath + selectedFile;
+}
+</script>
+
+
+</head>
+ <body class="container">
+ <div class="header-background">
+ <!-- Header -->
+ <div class="w3-header w3-content w3-padding w3-left-align bwcontainer">
+ 	<div class="centered">
+ 		<button class="light-mode-button" aria-label="Bật Chế Độ Sáng" onclick="toggle_light_mode()">
+ 			<span></span>
+ 			<span></span>
+ 		</button>
+ 		<span class="box-lbl">Sáng/Tối</span>
+ 	</div> <!-- Centered -->
+ 		<a href="../home/index.html" id="bwlogo"><img src="../images/headerlogo.png" alt="Logo Lời Của Đức Phật" class="w3-image"></a>
+ 		<div class="w3-bar bwcontainer">
+ 			<div id="searchlinks">
+ 			<a href="../home/visearch.html"><span class="w3-bar-item"><i class="fa fa-search"></i>&nbsp;Tìm Tiếng Việt</span></a>
+ 			<a href="../home/palisearch.html"><span class="w3-bar-item"><i class="fa fa-search"></i>&nbsp;Tìm Tiếng Pali</span></a>
+ 			</div><!-- End Searchlinks div -->
+ 			<div class="help"><span><a href="../home/help.html"><img src="../images/help_icon.png" title="Trợ Giúp" alt="Help"></a></span></div>
+ 		</div> <!-- End w3-bar bwcontainer --> 	</div> <!-- End w3-header w3-content w3-padding w3-left-align bwcontainer -->
+ </div> <!-- End header-background -->
+ <!-- Top menu -->
+
+ <div class="w3-main w3-white bwcontainer2">
+ 	<div class="w3-button w3-padding-8 w3-left w3-hide-large" onclick="w3_open()">☰</div>
+ 		<div id="navbar" class="w3-hide-small w3-hide-medium bwcontainer3">
+ 			<ul id="css3menu0">
+ 				<li class="topfirst" id="home"><a href="../home/index.html" class="w3-hide-small">Trang Chủ</a></li>
+  				<li class="topmenu" id="dn"><a href="../dn/dn.html" class="pressed w3-hide-small">Trường Bộ Kinh</a></li>
+ 				<li class="topmenu" id="mn"><a href="../mn/mn.html" class="w3-hide-small">Trung Bộ Kinh</a></li>
+ 				<li class="topmenu" id="sn"><a href="../sn/sn.html" class="w3-hide-small"><i class="fa fa-caret-down"></i>&nbsp;Tương Ưng Bộ Kinh</a>
+ 					<ul>
+ 						<li><a href="../sn/sn01.html" class="w3-hide-small">Tập I - Thiên Có Kệ</a></li>
+ 						<li><a href="../sn/sn02.html" class="w3-hide-small">Tập II - Thiên Nhân Duyên</a></li>
+ 						<li><a href="../sn/sn03.html" class="w3-hide-small">Tập III - Thiên Uẩn</a></li>
+ 						<li><a href="../sn/sn04.html" class="w3-hide-small">Tập IV - Thiên Sáu Xứ</a></li>
+ 						<li><a href="../sn/sn05.html" class="w3-hide-small">Tập V - Thiên Ðại Phẩm</a></li>
+ 					</ul>
+ 				<li class="topmenu" id="an"><a href="../an/an.html" class="w3-hide-small"><i class="fa fa-caret-down"></i>&nbsp;Tăng Chi Bộ Kinh</a>
+ 					<ul>
+ 						<li><a href="../an/an1.html" class="w3-hide-small">Chương Một Pháp</a></li>
+ 						<li><a href="../an/an2.html" class="w3-hide-small">Chương Hai Pháp</a></li>
+ 						<li><a href="../an/an3.html" class="w3-hide-small">Chương Ba Pháp</a></li>
+ 						<li><a href="../an/an4.html" class="w3-hide-small">Chương Bốn Pháp</a></li>
+ 						<li><a href="../an/an5.html" class="w3-hide-small">Chương Năm Pháp</a></li>
+ 						<li><a href="../an/an6.html" class="w3-hide-small">Chương Sáu Pháp</a></li>
+ 						<li><a href="../an/an7.html" class="w3-hide-small">Chương Bảy Pháp</a></li>
+ 						<li><a href="../an/an8.html" class="w3-hide-small">Chương Tám Pháp</a></li>
+ 						<li><a href="../an/an9.html" class="w3-hide-small">Chương Chín Pháp</a></li>
+ 						<li><a href="../an/an10.html" class="w3-hide-small">Chương Mười Pháp</a></li>
+ 						<li><a href="../an/an11.html" class="w3-hide-small">Chương Mười Một Pháp</a></li>
+ 					</ul>
+ 				</li>
+ 				<li class="topmenu" id="kn"><a href="../kn/kn.html" class="w3-hide-small"><i class="fa fa-caret-down"></i>&nbsp;Tiểu Bộ Kinh</a>
+ 					<ul>
+ 						<li><a href="../kp/kp.html" class="w3-hide-small">Kinh Tiểu Tụng</a></li>
+ 						<li><a href="../dhp/dhp.html" class="w3-hide-small">Kinh Pháp Cú</a></li>
+ 						<li><a href="../snp/snp.html" class="w3-hide-small">Kinh Tập</a></li>
+ 						<li><a href="../ud/ud.html" class="w3-hide-small">Kinh Phật Tự Thuyết</a></li>
+ 						<li><a href="../it/it.html" class="w3-hide-small">Kinh Phật Thuyết Như Vậy</a></li>
+ 						<li><a href="../tha/tha.html" class="w3-hide-small">Trưởng Lão Tăng Kệ</a></li>
+ 						<li><a href="../thi/thi.html" class="w3-hide-small">Trưởng Lão Ni Kệ</a></li>
+ 					</ul>
+ 				</li>
+				<li class="toplast" id="rd"><a href="../rd/rd.html" class="w3-hide-small"></i>Kinh Ngẫu Nhiên Theo Nhóm</a>
+ 					</ul>
+ 				</li>
+ 			</ul>
+ 			</div>
+ 		</div> <!--navbar-->
+
+<!-- Sidebar (hidden by default) -->
+ <nav class="w3-sidebar w3-bar-block w3-card w3-border w3-top w3-animate-left w3-hide-large" id="mySidebar">
+ 	<a href="javascript:void(0)" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-times fa-2x red-color"></i>&nbsp;&nbsp;&nbsp;Close</a><!-- Hides the sidebar when clicked -->
+ 		<div class="w3-bar-block w3-white">
+ 			<a href="../home/index.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-home fa-lg"></i>&nbsp;&nbsp;&nbsp;Home</a>
+ 			<a href="../guide/guide.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Guide</a>
+ 			<a href="../dn/dn.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Trường Bộ Kinh</a>
+ 			<a href="../mn/mn.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Trung Bộ Kinh</a>
+ 			<a href="../sn/sn.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Tương Ưng Bộ Kinh</a>
+ 			<a href="../an/an.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Tăng Chi Bộ Kinh
+ 			<a href="../kn/kn.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Tiểu Bộ Kinh</a>
+			<a href="../rd/rd.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>Kinh Ngẫu Nhiên Theo Nhóm</a>
+ 		</div>
+ </nav>
+ 
+ 
+ 
+   <!-- !PAGE CONTENT! --> 
+<div class="w3-main w3-content w3-padding w3-left-align bwcontainer4">
+<div id="content">
+<h2>Majjhima Nikāya - Trung Bộ Kinh</h2>
+<h5><span style="font-style: italic;">Hoà Thượng Thích Minh Châu dịch Việt</span></h5>
+
+</div>
+
+<br>
+ 	<title>        Trung Bộ 80          </title>
+
+<p lang="vi" class="vi"; style="text-align: center">
+Trung Bộ 80<br>
+<span lang="pi" class="pali">
+Majjhima Nikāya 80<br>
+</span>
+</p>
+
+<p lang="vi" class="vi"; style="text-align: center">
+Kinh Vekhanasa<br>
+<span lang="pi" class="pali">
+Vekhanasasutta<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Như vầy tôi nghe.<br>
+<span lang="pi" class="pali">
+Evaṁ me sutaṁ—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Một thời Thế Tôn ở tại Sāvatthī (Xá-vệ) , Jetavana (Kỳ-đà Lâm), tịnh xá ông Anāthapiṇḍika (Cấp Cô Ðộc).<br>
+<span lang="pi" class="pali">
+ekaṁ samayaṁ bhagavā sāvatthiyaṁ viharati jetavane anāthapiṇḍikassa ārāme.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Rồi du sĩ Vekhanassa đi đến chỗ Thế Tôn ở, sau khi đến, nói lên những lời chào đón hỏi thăm với Thế Tôn.<br>
+<span lang="pi" class="pali">
+Atha kho vekhanaso paribbājako yena bhagavā tenupasaṅkami; upasaṅkamitvā bhagavatā saddhiṁ sammodi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+sau khi nói lên những lời chào đón hỏi thăm thân hữu, liền đứng một bên.<br>
+<span lang="pi" class="pali">
+Sammodanīyaṁ kathaṁ sāraṇīyaṁ vītisāretvā ekamantaṁ aṭṭhāsi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ðứng một bên, du sĩ Vekhanassa thốt lên lời cảm hứng sau đây trước mặt Thế Tôn:<br>
+<span lang="pi" class="pali">
+Ekamantaṁ ṭhito kho vekhanaso paribbājako bhagavato santike udānaṁ udānesi:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Sắc này là tối thượng, sắc này là tối thượng.”<br>
+<span lang="pi" class="pali">
+“ayaṁ paramo vaṇṇo, ayaṁ paramo vaṇṇo”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Nhưng này Kaccāna, sao Ông lại nói như sau:<br>
+<span lang="pi" class="pali">
+“Kiṁ pana tvaṁ, kaccāna, evaṁ vadesi:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Sắc này là tối thượng, sắc này là tối thượng’?<br>
+<span lang="pi" class="pali">
+‘ayaṁ paramo vaṇṇo, ayaṁ paramo vaṇṇo’ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Nhưng này Kaccāna, sắc tối thượng này là gì?”<br>
+<span lang="pi" class="pali">
+Katamo, kaccāna, so paramo vaṇṇo”ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Tôn giả Gotama, sắc nào không có một sắc khác cao thượng hơn, hay thù thắng hơn, sắc này là tối thượng.”<br>
+<span lang="pi" class="pali">
+“Yasmā, bho gotama, vaṇṇā añño vaṇṇo uttaritaro vā paṇītataro vā natthi so paramo vaṇṇo”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Nhưng này Kaccāna, sắc ấy là sắc gì mà không có sắc khác cao thượng hơn hay thù thắng hơn?”<br>
+<span lang="pi" class="pali">
+“Katamo pana so, kaccāna, vaṇṇo yasmā vaṇṇā añño vaṇṇo uttaritaro vā paṇītataro vā natthī”ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Tôn giả Gotama, sắc nào không có sắc khác cao thượng hơn hay thù thắng hơn, sắc ấy là tối thượng.”<br>
+<span lang="pi" class="pali">
+“Yasmā, bho gotama, vaṇṇā añño vaṇṇo uttaritaro vā paṇītataro vā natthi so paramo vaṇṇo”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Này Kaccāna, lời giải thích của Ông chỉ dài như vậy, Ông phải giải thích rộng rãi thêm. Nếu Ông nói:<br>
+<span lang="pi" class="pali">
+“Dīghāpi kho te esā, kaccāna, phareyya:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Tôn giả Gotama, sắc nào không có sắc khác cao thượng hơn hay thù thắng hơn, sắc ấy là tối thượng”, thời Ông không chỉ rõ sắc ấy.<br>
+<span lang="pi" class="pali">
+‘yasmā, bho gotama, vaṇṇā añño vaṇṇo uttaritaro vā paṇītataro vā natthi so paramo vaṇṇo’ti vadesi, tañca vaṇṇaṁ na paññapesi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Kaccāna, ví như có người nói:<br>
+<span lang="pi" class="pali">
+Seyyathāpi, kaccāna, puriso evaṁ vadeyya:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Tôi yêu và luyến ái một cô gái đẹp trong nước này”.<br>
+<span lang="pi" class="pali">
+‘ahaṁ yā imasmiṁ janapade janapadakalyāṇī, taṁ icchāmi taṁ kāmemī’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Có người hỏi:<br>
+<span lang="pi" class="pali">
+Tamenaṁ evaṁ vadeyyuṁ:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Này bạn, cô gái đẹp mà bạn yêu và luyến ái ấy, Bạn có biết là người giai cấp nào; là Sát-đế-lị, hay Bà-la-môn, hay Phệ-xá, hay Thủ-đà?”<br>
+<span lang="pi" class="pali">
+‘ambho purisa, yaṁ tvaṁ janapadakalyāṇiṁ icchasi kāmesi, jānāsi taṁ janapadakalyāṇiṁ—khattiyī vā brāhmaṇī vā vessī vā suddī vā’ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Khi được hỏi, người ấy trả lời không biết.<br>
+<span lang="pi" class="pali">
+Iti puṭṭho ‘no’ti vadeyya.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Có người hỏi:<br>
+<span lang="pi" class="pali">
+Tamenaṁ evaṁ vadeyyuṁ:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Này bạn, cô gái đẹp bạn yêu và luyến ái ấy, bạn có biết tên gì, họ gì, lớn người, thấp người hay bậc trung? Da đen sẫm, da ngăm ngăm đen hay da hồng hào? Ở tại làng nào, thị trấn nào hay thành phố nào?”<br>
+<span lang="pi" class="pali">
+‘ambho purisa, yaṁ tvaṁ janapadakalyāṇiṁ icchasi kāmesi, jānāsi taṁ janapadakalyāṇiṁ evaṁnāmā evaṅgottāti vāti …pe… dīghā vā rassā vā majjhimā vā kāḷī vā sāmā vā maṅguracchavī vāti … amukasmiṁ gāme vā nigame vā nagare vā’ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Khi được hỏi vậy, người ấy trả lời không biết.<br>
+<span lang="pi" class="pali">
+Iti puṭṭho ‘no’ti vadeyya.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Có người hỏi:<br>
+<span lang="pi" class="pali">
+Tamenaṁ evaṁ vadeyyuṁ:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Này bạn, như vậy có phải bạn yêu và luyến ái một người bạn không biết, không thấy?”<br>
+<span lang="pi" class="pali">
+‘ambho purisa, yaṁ tvaṁ na jānāsi na passasi, taṁ tvaṁ icchasi kāmesī’ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ðược hỏi vậy, vị ấy trả lời phải.<br>
+<span lang="pi" class="pali">
+Iti puṭṭho ‘āmā’ti vadeyya.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Kaccāna, Ông nghĩ thế nào?<br>
+<span lang="pi" class="pali">
+Taṁ kiṁ maññasi, kaccāna,<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Sự tình là như vậy, thời lời nói của người có phải là không có hiệu năng không?”<br>
+<span lang="pi" class="pali">
+nanu evaṁ sante tassa purisassa appāṭihīrakataṁ bhāsitaṁ sampajjatī”ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Bạch Tôn giả Gotama, sự tình là như vậy, thời lời nói của người ấy thật sự là không có hiệu năng.”<br>
+<span lang="pi" class="pali">
+“Addhā kho, bho gotama, evaṁ sante tassa purisassa appāṭihīrakataṁ bhāsitaṁ sampajjatī”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Cũng vậy, này Kaccāna, khi Ông nói: ‘Tôn giả Gotama, khi sắc nào không có một sắc khác cao thượng hơn, hay thù thắng hơn, sắc ấy là tối thượng’, thời Ông không chỉ rõ sắc ấy.<br>
+<span lang="pi" class="pali">
+“Evameva kho tvaṁ, kaccāna, ‘yasmā, bho gotama, vaṇṇā añño vaṇṇo uttaritaro vā paṇītataro vā natthi so paramo vaṇṇo’ti vadesi; tañca vaṇṇaṁ na paññapesī”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Ví như, thưa Tôn giả Gotama, một hòn lưu ly bảo châu, đẹp đẽ, trong suốt, có tám mặt, khéo dũa, khéo mài được đặt trên một tấm màn màu nhạt, tự nó sáng lên, chói lên, bừng sáng lên. Với sắc như vây, tự ngã là không có bệnh, sau khi chết.”<br>
+<span lang="pi" class="pali">
+“Seyyathāpi, bho gotama, maṇi veḷuriyo subho jātimā aṭṭhaṁso suparikammakato paṇḍukambale nikkhitto bhāsate ca tapate ca virocati ca, evaṁ vaṇṇo attā hoti arogo paraṁ maraṇā”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Này Kaccāna, Ông nghĩ thế nào?<br>
+<span lang="pi" class="pali">
+“Taṁ kiṁ maññasi, kaccāna,<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Một hòn lưu ly bảo châu đẹp đẽ, trong suốt, có tám mặt, khéo dũa khéo mài, được đặt trên một tấm màn màu nhạt, tự nó sáng lên, chói lên, bừng sáng lên, hay con sâu đom đóm trong đêm tối mịt mù, giữa hai quang sắc này, quang sắc nào vi diệu hơn và thù thắng hơn?”<br>
+<span lang="pi" class="pali">
+yo vā maṇi veḷuriyo subho jātimā aṭṭhaṁso suparikammakato paṇḍukambale nikkhitto bhāsate ca tapate ca virocati ca, yo vā rattandhakāratimisāya kimi khajjopanako imesaṁ ubhinnaṁ vaṇṇānaṁ katamo vaṇṇo abhikkantataro ca paṇītataro cā”ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Thưa Tôn giả Gotama, con sâu đom đóm trong đêm đen tối mịt mù này vi diệu hơn và thù thắng hơn giữa hai quang sắc.”<br>
+<span lang="pi" class="pali">
+“Yvāyaṁ, bho gotama, rattandhakāratimisāya kimi khajjopanako, ayaṁ imesaṁ ubhinnaṁ vaṇṇānaṁ abhikkantataro ca paṇītataro cā”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Này Kaccāna, Ông nghĩ thế nào?<br>
+<span lang="pi" class="pali">
+“Taṁ kiṁ maññasi, kaccāna,<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Con sâu đom đóm trong đêm đen tối mù hay ngọn đèn dầu trong đêm đen tối mù, giữa hai quang sắc này, quang sắc nào vi diệu hơn và thù thắng hơn?”<br>
+<span lang="pi" class="pali">
+yo vā rattandhakāratimisāya kimi khajjopanako, yo vā rattandhakāratimisāya telappadīpo, imesaṁ ubhinnaṁ vaṇṇānaṁ katamo vaṇṇo abhikkantataro ca paṇītataro cā”ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Thưa Tôn giả Gotama, ngọn đèn dầu trong đêm đen tối mù, quang sắc ngọn đèn dầu này vi diệu hơn và thù thắng hơn giữa hai quang sắc.”<br>
+<span lang="pi" class="pali">
+“Yvāyaṁ, bho gotama, rattandhakāratimisāya telappadīpo, ayaṁ imesaṁ ubhinnaṁ vaṇṇānaṁ abhikkantataro ca paṇītataro cā”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Này Kaccāna, Ông nghĩ thế nào?<br>
+<span lang="pi" class="pali">
+“Taṁ kiṁ maññasi, kaccāna,<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ngọn đèn dầu trong đêm đen tối mù, hay là một đống lửa lớn trong đêm đen tối mù, giữa hai quang sắc này, quang sắc nào vi diệu hơn và thù thắng hơn?”<br>
+<span lang="pi" class="pali">
+yo vā rattandhakāratimisāya telappadīpo, yo vā rattandhakāratimisāya mahāaggikkhandho, imesaṁ ubhinnaṁ vaṇṇānaṁ katamo vaṇṇo abhikkantataro ca paṇītataro cā”ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Thưa Tôn giả Gotama, đống lửa lớn trong đêm đen tối mù, quang sắc này vi diệu hơn và thù thắng hơn giữa hai quang sắc.”<br>
+<span lang="pi" class="pali">
+“Yvāyaṁ, bho gotama, rattandhakāratimisāya mahāaggikkhandho, ayaṁ imesaṁ ubhinnaṁ vaṇṇānaṁ abhikkantataro ca paṇītataro cā”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Này Kaccāna, Ông nghĩ thế nào?<br>
+<span lang="pi" class="pali">
+“Taṁ kiṁ maññasi, kaccāna,<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ðống lửa lớn trong đêm đen tối mù hay ngôi sao mai trong sáng không mây vào lúc bình minh, giữa hai quang sắc này, quang sắc nào vi diệu hơn và thù thắng hơn?”<br>
+<span lang="pi" class="pali">
+yo vā rattandhakāratimisāya mahāaggikkhandho, yā vā rattiyā paccūsasamayaṁ viddhe vigatavalāhake deve osadhitārakā, imesaṁ ubhinnaṁ vaṇṇānaṁ katamo vaṇṇo abhikkantataro ca paṇītataro cā”ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Thưa Tôn giả Gotama, ngôi sao trong sáng không mây vào lúc bình minh, quang sắc này vi diệu hơn và thù thắng hơn giữa hai quang sắc.”<br>
+<span lang="pi" class="pali">
+“Yvāyaṁ, bho gotama, rattiyā paccūsasamayaṁ viddhe vigatavalāhake deve osadhitārakā, ayaṁ imesaṁ ubhinnaṁ vaṇṇānaṁ abhikkantataro ca paṇītataro cā”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Này Kaccāna, Ông nghĩ thế nào?<br>
+<span lang="pi" class="pali">
+“Taṁ kiṁ maññasi, kaccāna,<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ngôi (sao Thái Bạch) sao mai trong bầu trời trong sáng, không mây, trong lúc bình minh hay là mặt trăng trong khi đứng bóng, trong một bầu trời trong sáng, không mây vào lúc nửa đêm, trong ngày Uposatha (Bố-tát) vào ngày Rằm. Giữa hai quang sắc này, quang sắc nào vi diệu hơn và thù thắng hơn?”<br>
+<span lang="pi" class="pali">
+yā vā rattiyā paccūsasamayaṁ viddhe vigatavalāhake deve osadhitārakā, yo vā tadahuposathe pannarase viddhe vigatavalāhake deve abhido aḍḍharattasamayaṁ cando, imesaṁ ubhinnaṁ vaṇṇānaṁ katamo vaṇṇo abhikkantataro ca paṇītataro cā”ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Thưa Tôn giả Gotama, mặt trăng trong khi đứng bóng, trong một bầu trời quang đãng, không mây, vào lúc nửa đêm, trong ngày Uposatha (Bố-tát) vào ngày Rằm, quang sắc này vi diệu hơn và thù thắng hơn giữa hai quang sắc.”<br>
+<span lang="pi" class="pali">
+“Yvāyaṁ, bho gotama, tadahuposathe pannarase viddhe vigatavalāhake deve abhido aḍḍharattasamayaṁ cando, ayaṁ imesaṁ ubhinnaṁ vaṇṇānaṁ abhikkantataro ca paṇītataro cā”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Này Kaccāna, Ông nghĩ thế nào?<br>
+<span lang="pi" class="pali">
+“Taṁ kiṁ maññasi, kaccāna,<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Mặt trăng trong khi đứng bóng, trong một bầu trời quang đãng không mây, vào lúc nửa đêm, trong ngày Uposatha (Bố-tát) vào ngày Rằm, hay là mặt trời trong lúc đứng bóng, trong một bầu trời quang đãng không mây, vào lúc giữa trưa, trong tháng cuối mùa mưa về mùa thu, giữa hai quang sắc này, quang sắc nào vi diệu hơn và thù thắng hơn?”<br>
+<span lang="pi" class="pali">
+yo vā tadahuposathe pannarase viddhe vigatavalāhake deve abhido aḍḍharattasamayaṁ cando, yo vā vassānaṁ pacchime māse saradasamaye viddhe vigatavalāhake deve abhido majjhanhikasamayaṁ sūriyo, imesaṁ ubhinnaṁ vaṇṇānaṁ katamo vaṇṇo abhikkantataro ca paṇītataro cā”ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Thưa Tôn giả Gotama, mặt trời trong lúc đứng bóng, trong một bầu trời quang đãng không mây, vào lúc giữa trưa, trong tháng cuối mùa mưa về mùa thu, quang sắc này vi diệu hơn và thù thắng hơn.<br>
+<span lang="pi" class="pali">
+“Yvāyaṁ, bho gotama, vassānaṁ pacchime māse saradasamaye viddhe vigatavalāhake deve abhido majjhanhikasamayaṁ sūriyo—ayaṁ imesaṁ ubhinnaṁ vaṇṇānaṁ abhikkantataro ca paṇītataro cā”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Này Kaccāna, hơn tất cả quang sắc ấy có rất nhiều, rất nhiều chư Thiên, mà ánh sáng của những mặt trăng, mặt trời này không thể chiếu sáng.<br>
+<span lang="pi" class="pali">
+“Ato kho te, kaccāna, bahū hi bahutarā devā ye imesaṁ candimasūriyānaṁ ābhā nānubhonti, tyāhaṁ pajānāmi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ta biết những chư Thiên ấy và Ta không nói:<br>
+<span lang="pi" class="pali">
+Atha ca panāhaṁ na vadāmi:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Không có một quang sắc nào vi diệu hơn và thù thắng hơn quang sắc ấy”.<br>
+<span lang="pi" class="pali">
+‘yasmā vaṇṇā añño vaṇṇo uttaritaro ca paṇītataro ca natthī’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Còn Ông, này Kaccāna, Ông lại nói: “Quang sắc này thấp kém hơn, yếu đuối hơn quang sắc con sâu đom đóm, quang sắc ấy là tối thắng”, và Ông không chỉ rõ quang sắc ấy.<br>
+<span lang="pi" class="pali">
+Atha ca pana tvaṁ, kaccāna, ‘yvāyaṁ vaṇṇo kiminā khajjopanakena nihīnataro ca patikiṭṭhataro ca so paramo vaṇṇo’ti vadesi; tañca vaṇṇaṁ na paññapesi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Kaccāna, có năm dục trưởng dưỡng này.<br>
+<span lang="pi" class="pali">
+Pañca kho ime, kaccāna, kāmaguṇā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Thế nào là năm?<br>
+<span lang="pi" class="pali">
+Katame pañca?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Các sắc có mắt nhận thức, khả ái, khả lạc, khả ý, khả hỷ, liên hệ đến dục, hấp dẫn;<br>
+<span lang="pi" class="pali">
+Cakkhuviññeyyā rūpā iṭṭhā kantā manāpā piyarūpā kāmūpasaṁhitā rajanīyā,<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+các tiếng do tai nhận thức…<br>
+<span lang="pi" class="pali">
+sotaviññeyyā saddā …pe…<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+các hương do mũi nhận thức…<br>
+<span lang="pi" class="pali">
+ghānaviññeyyā gandhā …<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+các vị do lưỡi nhận thức…<br>
+<span lang="pi" class="pali">
+jivhāviññeyyā rasā …<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+các xúc do thân nhận thức, khả ái, khả lạc, khả ý, khả hỷ, liên hệ đến dục, hấp dẫn.<br>
+<span lang="pi" class="pali">
+kāyaviññeyyā phoṭṭhabbā iṭṭhā kantā manāpā piyarūpā kāmūpasaṁhitā rajanīyā—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Kaccāna, những pháp này là năm dục trưởng dưỡng.<br>
+<span lang="pi" class="pali">
+ime kho, kaccāna, pañca kāmaguṇā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Kaccāna, lạc và hỷ nào khởi lên, duyên với năm dục trưởng dưỡng này, được gọi là dục lạc.<br>
+<span lang="pi" class="pali">
+Yaṁ kho, kaccāna, ime pañca kāmaguṇe paṭicca uppajjati sukhaṁ somanassaṁ idaṁ vuccati kāmasukhaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Như vậy, bởi vì có dục, nên có dục lạc; từ nơi dục lạc, dục tối thượng lạc được gọi ở đây là tối thượng.”<br>
+<span lang="pi" class="pali">
+Iti kāmehi kāmasukhaṁ, kāmasukhā kāmaggasukhaṁ tattha aggamakkhāyatī”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ðược nghe nói vậy, du sĩ Vekhanassa bạch Thế Tôn:<br>
+<span lang="pi" class="pali">
+Evaṁ vutte, vekhanaso paribbājako bhagavantaṁ etadavoca:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Thật vi diệu thay, bạch Thế Tôn! Thật hy hữu thay, bạch Thế Tôn!<br>
+<span lang="pi" class="pali">
+“acchariyaṁ, bho gotama, abbhutaṁ, bho gotama.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Tôn giả Gotama đã khéo nói như sau:<br>
+<span lang="pi" class="pali">
+Yāva subhāsitañcidaṁ bhotā gotamena:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Bởi vì có dục, nên có dục lạc; từ nơi dục lạc, dục tối thượng lạc được gọi ở đây là tối thượng’”.<br>
+<span lang="pi" class="pali">
+‘kāmehi kāmasukhaṁ, kāmasukhā kāmaggasukhaṁ tattha aggamakkhāyatī’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Thưa Tôn giả Gotama, bởi vì có dục nên có dục lạc; từ nơi dục lạc, dục tối thượng lạc được gọi ở đây là tối thượng’”.<br>
+<span lang="pi" class="pali">
+‘Kāmehi, bho gotama, kāmasukhaṁ, kāmasukhā kāmaggasukhaṁ, tattha aggamakkhāyatī’”ti<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Này Kaccāna, ông là người thuộc chấp kiến khác, thuộc kham nhẫn khác, thuộc mục đích khác, thuộc tu tập khác, thuộc Ðạo sư khác; cái này thật khó cho Ông có thể hiểu được:<br>
+<span lang="pi" class="pali">
+“dujjānaṁ kho etaṁ, kaccāna, tayā aññadiṭṭhikena aññakhantikena aññarucikena aññatrayogena aññatrācariyakena—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+về dục, hay dục lạc, hay dục tối thượng lạc.<br>
+<span lang="pi" class="pali">
+kāmā vā kāmasukhaṁ vā kāmaggasukhaṁ vā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Kaccāna, nhưng đối với Tỷ-kheo là bậc A-la-hán, các lậu hoặc đã tận, tu hành thành mãn, đã làm những việc cần làm, đã đặt gánh nặng xuống, đã đạt được mục đích, đã đoạn trừ hữu kiết sử, đã giải thoát nhờ chánh trí, những vị ấy biết:<br>
+<span lang="pi" class="pali">
+Ye kho te, kaccāna, bhikkhū arahanto khīṇāsavā vusitavanto katakaraṇīyā ohitabhārā anuppattasadatthā parikkhīṇabhavasaṁyojanā sammadaññāvimuttā te kho etaṁ jāneyyuṁ—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Dục, dục lạc, hay dục tối thượng lạc”.<br>
+<span lang="pi" class="pali">
+kāmā vā kāmasukhaṁ vā kāmaggasukhaṁ vā”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Khi được nghe nói vậy, du sĩ Vekhanassa, phẫn nộ và bất mãn, mắng nhiếc cả Thế Tôn, miệt thị cả Thế Tôn và nói:<br>
+<span lang="pi" class="pali">
+Evaṁ vutte, vekhanaso paribbājako kupito anattamano bhagavantaṁyeva khuṁsento bhagavantaṁyeva vambhento bhagavantaṁyeva vadamāno:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Sa-môn Gotama sẽ bị đọa lạc.” và du sĩ Vekhanassa thưa Thế Tôn:<br>
+<span lang="pi" class="pali">
+“samaṇo gotamo pāpito bhavissatī”ti bhagavantaṁ etadavoca:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Nhưng như vậy, ở đây, có một số Sa-môn, Bà-la-môn không biết về quá khứ, không thấy về tương lai, nhưng các vị ấy tự cho:<br>
+<span lang="pi" class="pali">
+“evameva panidhekacce samaṇabrāhmaṇā ajānantā pubbantaṁ, apassantā aparantaṁ atha ca pana<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Sanh đã diệt, Phạm hạnh đã thành, những việc nên làm đã làm, từ nay không trở lại đời sống này nữa’.<br>
+<span lang="pi" class="pali">
+‘khīṇā jāti, vusitaṁ brahmacariyaṁ, kataṁ karaṇīyaṁ, nāparaṁ itthattāyāti—pajānāmā’ti—paṭijānanti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Lời nói như vậy của họ tự chứng tỏ là đáng cười, tự chứng tỏ là nói suông, tự chứng tỏ là trống không, tự chứng tỏ là hư vọng.”<br>
+<span lang="pi" class="pali">
+Tesamidaṁ bhāsitaṁ hassakaṁyeva sampajjati, nāmakaṁyeva sampajjati, rittakaṁyeva sampajjati, tucchakaṁyeva sampajjatī”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Này Kaccāna, những Sa-môn, Bà-la-môn nào không biết về quá khứ, không thấy được tương lai, nhưng tự cho là ta biết:<br>
+<span lang="pi" class="pali">
+“Ye kho te, kaccāna, samaṇabrāhmaṇā ajānantā pubbantaṁ, apassantā aparantaṁ,<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Sanh đã tận, Phạm hạnh đã thành, các việc nên làm đã làm, không còn trở lui đời này nữa’,<br>
+<span lang="pi" class="pali">
+‘khīṇā jāti, vusitaṁ brahmacariyaṁ, kataṁ karaṇīyaṁ, nāparaṁ itthattāyāti—pajānāmā’ti—paṭijānanti;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+lời phủ nhận chỉ trích như vậy về họ là hợp pháp.<br>
+<span lang="pi" class="pali">
+tesaṁ soyeva sahadhammiko niggaho hoti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Nhưng này Kaccāna, hãy bỏ qua quá khứ, hãy bỏ qua tương lai.<br>
+<span lang="pi" class="pali">
+Api ca, kaccāna, tiṭṭhatu pubbanto, tiṭṭhatu aparanto.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Hãy đến, người có trí không gian trá, không xảo quyệt, chơn trực và nói như sau: “Ta giảng dạy, ta thuyết pháp”.<br>
+<span lang="pi" class="pali">
+Etu viññū puriso asaṭho amāyāvī ujujātiko, ahamanusāsāmi ahaṁ dhammaṁ desemi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Nếu thực hành theo điều đã dạy, thời không bao lâu người ấy tự biết mình, tự thấy mình:<br>
+<span lang="pi" class="pali">
+Yathānusiṭṭhaṁ tathā paṭipajjamāno nacirasseva sāmaññeva ñassati sāmaṁ dakkhiti—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Như vậy thật sự là đã giải thoát khỏi sự ràng buộc chánh, tức là sự ràng buộc của vô minh”.<br>
+<span lang="pi" class="pali">
+evaṁ kira sammā bandhanā vippamokkho hoti, yadidaṁ avijjā bandhanā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ví như, này Kaccāna, một đứa trẻ, bé nhỏ, yếu ớt, nằm ngửa, bị trói buộc nơi cổ với năm trói buộc, rất có thể làm bằng dây.<br>
+<span lang="pi" class="pali">
+Seyyathāpi, kaccāna, daharo kumāro mando uttānaseyyako kaṇṭhapañcamehi bandhanehi baddho assa suttabandhanehi;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Sau khi nó lớn lên, sau khi các căn nó thuần thục, nó được giải thoát khỏi các trói buộc ấy, khi không còn trói buộc nữa, nó biết: “Ta được giải thoát”.<br>
+<span lang="pi" class="pali">
+tassa vuddhimanvāya indriyānaṁ paripākamanvāya tāni bandhanāni mucceyyuṁ; so mokkhomhīti kho jāneyya no ca bandhanaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Cũng vậy, này Kaccāna, hãy đến người có trí không gian trá, không xảo quyệt, chơn trực và nói như sau: “Ta giảng dạy, ta thuyết pháp”.<br>
+<span lang="pi" class="pali">
+Evameva kho, kaccāna, etu viññū puriso asaṭho amāyāvī ujujātiko, ahamanusāsāmi, ahaṁ dhammaṁ desemi;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Nếu thực hành theo điều đã dạy, thời không bao lâu người ấy tự biết mình, tự thấy mình:<br>
+<span lang="pi" class="pali">
+yathānusiṭṭhaṁ tathā paṭipajjamāno nacirasseva sāmaññeva ñassati, sāmaṁ dakkhiti:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Như vậy thật sự là đã giải thoát khỏi sự ràng buộc chánh, tức là sự ràng buộc của vô minh”.<br>
+<span lang="pi" class="pali">
+‘evaṁ kira sammā bandhanā vippamokkho hoti, yadidaṁ avijjā bandhanā’”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Khi được nghe nói vậy, du sĩ Vekhanassa bạch Thế Tôn:<br>
+<span lang="pi" class="pali">
+Evaṁ vutte, vekhanaso paribbājako bhagavantaṁ etadavoca:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Thật vi diệu thay, Tôn giả Gotama! Thật vi diệu thay, Tôn giả Gotama! Như người dựng đứng lại những gì bị quăng ngã xuống, phơi bày ra những gì bị che kín, chỉ đường cho những người bị lạc hướng, đem đèn sáng vào trong bóng tối để những ai có mắt có thể thấy sắc; cũng vậy, Chánh pháp đã được Tôn giả Gotama dùng nhiều phương tiện trình bày giải thích. Con xin quy y Thế Tôn, quy y Pháp và quy y Tỷ-kheo Tăng.<br>
+<span lang="pi" class="pali">
+“abhikkantaṁ, bho gotama …pe…<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Xin Thế Tôn nhận con làm đệ tử, từ nay cho đến mạng chung, con trọn đời quy ngưỡng.”<br>
+<span lang="pi" class="pali">
+upāsakaṁ maṁ bhavaṁ gotamo dhāretu ajjatagge pāṇupetaṁ saraṇaṁ gatan”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+<span lang="pi" class="vi">
+Vekhanasasuttaṁ niṭṭhitaṁ dasamaṁ.<br>
+</span>
+</p>
+
+
+
+<!-- COPY CONTENT SUTTA Ở ĐÂY -->
+
+
+
+<br>
+<p><p style="text-align: right;font-style: italic;">Hoà Thượng Thích Minh Châu dịch Việt</span></p>
+
+
+
+
+
+
+
+
+</section>  <!-- End English and Pali -->
+<div id="nextprev"><a id="previous-sutta" href="./mn79.html#content"></a><a id="next-sutta" href="./mn81.html#content"></a></div>
+</div>  <!--End Content -->
+</div>  <!-- End Page -->
+
+
+
+
+
+
+<footer>
+					 <!-- End bottom links -->
+</footer>
+
+
+ 
+ <!-- Scripts -->
+
+ <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      if (typeof enablePaliLookup === "function") {
+        enablePaliLookup();
+      } else {
+        console.error("enablePaliLookup is not defined");
+      }
+    });
+  </script>
+
+ <script>
+ // Script to open and close sidebar
+ 	function w3_open() {
+ 	document.getElementById("mySidebar").style.display = "block";
+ 	}
+ 		function w3_close() {
+ 		document.getElementById("mySidebar").style.display = "none";
+ 	}
+ </script>
+ <script>
+ 		var app = document.getElementsByTagName("BODY")[0];
+ 		if (localStorage.lightMode == "dark") {
+ 			app.setAttribute("light-mode", "dark");
+ 	}
+ </script>
+ 
+ <script>
+ 		function toggle_light_mode() {
+ 			var app = document.getElementsByTagName("BODY")[0];
+ 				if (localStorage.lightMode == "dark") {
+ 			localStorage.lightMode = "light";
+ 			app.setAttribute("light-mode", "light");
+ 		} else {
+ 					localStorage.lightMode = "dark";
+ 					app.setAttribute("light-mode", "dark");
+ 	}
+ 		}
+ 
+ 		window.addEventListener("storage", function () {
+ 			if (localStorage.lightMode == "dark") {
+ 				app.setAttribute("light-mode", "dark");
+ 				} else {
+ 				app.setAttribute("light-mode", "light");
+ 		}
+ 		}, false);
+ 
+ </script>
+ <script src="../js/footer.js"></script><script src="../js/dpd_deconstructor.js"></script><script src="../js/dpd_ebts.js"></script><script src="../js/dpd_i2h.js"></script>
+ <script src="/sw.js"></script>
+ </body>
+ </html>

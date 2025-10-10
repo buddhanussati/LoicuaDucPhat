@@ -1,0 +1,1449 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+ 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+ 	<link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+ 	<meta name="viewport" content="width=device-width, initial-scale=1">
+		<!-- Loading manifest -->
+	<link rel="manifest" href="../manifest.json">
+ 	<!-- Loading main and menu stylesheets -->
+ 	<link rel="stylesheet" href="../css/w3.css">
+ 	<link rel="stylesheet" href="../css/css.css">
+ 	<link rel="stylesheet" href="../css/menu.css">
+ 	<script src="../js/jquery-1.10.2.min.js"></script>
+ 	<script src="../js/controlpanel.js"></script>
+ 	<script src="../js/mousetrap.min.js"></script>
+    <script src="../js/pali-lookup-standalone.js"></script>
+
+ <script src="../js/suttaFiles.js"></script>
+<script>
+ // Script to open random Sutta
+ function openRandomSutta() {
+  const randomIndex = Math.floor(Math.random() * suttaFiles.length);
+  const selectedFile = suttaFiles[randomIndex];
+
+  // Get root path of your site 
+  const currentPath = location.pathname;
+  const rootPath = currentPath.split("/").slice(0, -2).join("/") + "/";
+
+  // Redirect to the correct file
+  window.location.href = rootPath + selectedFile;
+}
+</script>
+
+
+</head>
+ <body class="container">
+ <div class="header-background">
+ <!-- Header -->
+ <div class="w3-header w3-content w3-padding w3-left-align bwcontainer">
+ 	<div class="centered">
+ 		<button class="light-mode-button" aria-label="Bật Chế Độ Sáng" onclick="toggle_light_mode()">
+ 			<span></span>
+ 			<span></span>
+ 		</button>
+ 		<span class="box-lbl">Sáng/Tối</span>
+ 	</div> <!-- Centered -->
+ 		<a href="../home/index.html" id="bwlogo"><img src="../images/headerlogo.png" alt="Logo Lời Của Đức Phật" class="w3-image"></a>
+ 		<div class="w3-bar bwcontainer">
+ 			<div id="searchlinks">
+ 			<a href="../home/visearch.html"><span class="w3-bar-item"><i class="fa fa-search"></i>&nbsp;Tìm Tiếng Việt</span></a>
+ 			<a href="../home/palisearch.html"><span class="w3-bar-item"><i class="fa fa-search"></i>&nbsp;Tìm Tiếng Pali</span></a>
+ 			</div><!-- End Searchlinks div -->
+ 			<div class="help"><span><a href="../home/help.html"><img src="../images/help_icon.png" title="Trợ Giúp" alt="Help"></a></span></div>
+ 		</div> <!-- End w3-bar bwcontainer --> 	</div> <!-- End w3-header w3-content w3-padding w3-left-align bwcontainer -->
+ </div> <!-- End header-background -->
+ <!-- Top menu -->
+
+ <div class="w3-main w3-white bwcontainer2">
+ 	<div class="w3-button w3-padding-8 w3-left w3-hide-large" onclick="w3_open()">☰</div>
+ 		<div id="navbar" class="w3-hide-small w3-hide-medium bwcontainer3">
+ 			<ul id="css3menu0">
+ 				<li class="topfirst" id="home"><a href="../home/index.html" class="w3-hide-small">Trang Chủ</a></li>
+  				<li class="topmenu" id="dn"><a href="../dn/dn.html" class="pressed w3-hide-small">Trường Bộ Kinh</a></li>
+ 				<li class="topmenu" id="mn"><a href="../mn/mn.html" class="w3-hide-small">Trung Bộ Kinh</a></li>
+ 				<li class="topmenu" id="sn"><a href="../sn/sn.html" class="w3-hide-small"><i class="fa fa-caret-down"></i>&nbsp;Tương Ưng Bộ Kinh</a>
+ 					<ul>
+ 						<li><a href="../sn/sn01.html" class="w3-hide-small">Tập I - Thiên Có Kệ</a></li>
+ 						<li><a href="../sn/sn02.html" class="w3-hide-small">Tập II - Thiên Nhân Duyên</a></li>
+ 						<li><a href="../sn/sn03.html" class="w3-hide-small">Tập III - Thiên Uẩn</a></li>
+ 						<li><a href="../sn/sn04.html" class="w3-hide-small">Tập IV - Thiên Sáu Xứ</a></li>
+ 						<li><a href="../sn/sn05.html" class="w3-hide-small">Tập V - Thiên Ðại Phẩm</a></li>
+ 					</ul>
+ 				<li class="topmenu" id="an"><a href="../an/an.html" class="w3-hide-small"><i class="fa fa-caret-down"></i>&nbsp;Tăng Chi Bộ Kinh</a>
+ 					<ul>
+ 						<li><a href="../an/an1.html" class="w3-hide-small">Chương Một Pháp</a></li>
+ 						<li><a href="../an/an2.html" class="w3-hide-small">Chương Hai Pháp</a></li>
+ 						<li><a href="../an/an3.html" class="w3-hide-small">Chương Ba Pháp</a></li>
+ 						<li><a href="../an/an4.html" class="w3-hide-small">Chương Bốn Pháp</a></li>
+ 						<li><a href="../an/an5.html" class="w3-hide-small">Chương Năm Pháp</a></li>
+ 						<li><a href="../an/an6.html" class="w3-hide-small">Chương Sáu Pháp</a></li>
+ 						<li><a href="../an/an7.html" class="w3-hide-small">Chương Bảy Pháp</a></li>
+ 						<li><a href="../an/an8.html" class="w3-hide-small">Chương Tám Pháp</a></li>
+ 						<li><a href="../an/an9.html" class="w3-hide-small">Chương Chín Pháp</a></li>
+ 						<li><a href="../an/an10.html" class="w3-hide-small">Chương Mười Pháp</a></li>
+ 						<li><a href="../an/an11.html" class="w3-hide-small">Chương Mười Một Pháp</a></li>
+ 					</ul>
+ 				</li>
+ 				<li class="topmenu" id="kn"><a href="../kn/kn.html" class="w3-hide-small"><i class="fa fa-caret-down"></i>&nbsp;Tiểu Bộ Kinh</a>
+ 					<ul>
+ 						<li><a href="../kp/kp.html" class="w3-hide-small">Kinh Tiểu Tụng</a></li>
+ 						<li><a href="../dhp/dhp.html" class="w3-hide-small">Kinh Pháp Cú</a></li>
+ 						<li><a href="../snp/snp.html" class="w3-hide-small">Kinh Tập</a></li>
+ 						<li><a href="../ud/ud.html" class="w3-hide-small">Kinh Phật Tự Thuyết</a></li>
+ 						<li><a href="../it/it.html" class="w3-hide-small">Kinh Phật Thuyết Như Vậy</a></li>
+ 						<li><a href="../tha/tha.html" class="w3-hide-small">Trưởng Lão Tăng Kệ</a></li>
+ 						<li><a href="../thi/thi.html" class="w3-hide-small">Trưởng Lão Ni Kệ</a></li>
+ 					</ul>
+ 				</li>
+				<li class="toplast" id="rd"><a href="../rd/rd.html" class="w3-hide-small"></i>Kinh Ngẫu Nhiên Theo Nhóm</a>
+ 					</ul>
+ 				</li>
+ 			</ul>
+ 			</div>
+ 		</div> <!--navbar-->
+
+<!-- Sidebar (hidden by default) -->
+ <nav class="w3-sidebar w3-bar-block w3-card w3-border w3-top w3-animate-left w3-hide-large" id="mySidebar">
+ 	<a href="javascript:void(0)" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-times fa-2x red-color"></i>&nbsp;&nbsp;&nbsp;Close</a><!-- Hides the sidebar when clicked -->
+ 		<div class="w3-bar-block w3-white">
+ 			<a href="../home/index.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-home fa-lg"></i>&nbsp;&nbsp;&nbsp;Home</a>
+ 			<a href="../guide/guide.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Guide</a>
+ 			<a href="../dn/dn.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Trường Bộ Kinh</a>
+ 			<a href="../mn/mn.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Trung Bộ Kinh</a>
+ 			<a href="../sn/sn.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Tương Ưng Bộ Kinh</a>
+ 			<a href="../an/an.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Tăng Chi Bộ Kinh
+ 			<a href="../kn/kn.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Tiểu Bộ Kinh</a>
+			<a href="../rd/rd.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>Kinh Ngẫu Nhiên Theo Nhóm</a>
+ 		</div>
+ </nav>
+ 
+ 
+ 
+   <!-- !PAGE CONTENT! --> 
+<div class="w3-main w3-content w3-padding w3-left-align bwcontainer4">
+<div id="content">
+<h2>Majjhima Nikāya - Trung Bộ Kinh</h2>
+<h5><span style="font-style: italic;">Hoà Thượng Thích Minh Châu dịch Việt</span></h5>
+
+</div>
+
+<br>
+ 	<title>        Trung Bộ 68          </title>
+
+<p lang="vi" class="vi"; style="text-align: center">
+Trung Bộ 68<br>
+<span lang="pi" class="pali">
+Majjhima Nikāya 68<br>
+</span>
+</p>
+
+<p lang="vi" class="vi"; style="text-align: center">
+Kinh Naḷakapāna<br>
+<span lang="pi" class="pali">
+Naḷakapānasutta<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Như vầy tôi nghe.<br>
+<span lang="pi" class="pali">
+Evaṁ me sutaṁ—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Một thời Thế Tôn trú giữa dân chúng Kosala (Câu-tát-la) tại Naḷakapāna, rừng Cây Lửa (Cây Giềng Giềng).<br>
+<span lang="pi" class="pali">
+ekaṁ samayaṁ bhagavā kosalesu viharati naḷakapāne palāsavane.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Lúc bấy giờ nhiều Thiện gia nam tử có danh tiếng, vì lòng tin Thế Tôn, đã xuất gia, từ bỏ gia đình, sống không gia đình, như:<br>
+<span lang="pi" class="pali">
+Tena kho pana samayena sambahulā abhiññātā abhiññātā kulaputtā bhagavantaṁ uddissa saddhā agārasmā anagāriyaṁ pabbajitā honti—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Tôn giả Anuruddha (A-na-luật-đà), Tôn giả Bhaddiya, Tôn giả Kimbila, Tôn giả Bhagu, Tôn giả Koṇḍañña, Tôn giả Revata, Tôn giả Ānanda và một số Thiện gia nam tử danh tiếng khác.<br>
+<span lang="pi" class="pali">
+āyasmā ca anuruddho, āyasmā ca bhaddiyo, āyasmā ca kimilo, āyasmā ca bhagu, āyasmā ca koṇḍañño, āyasmā ca revato, āyasmā ca ānando, aññe ca abhiññātā abhiññātā kulaputtā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Lúc bấy giờ, Thế Tôn ngồi ở giữa trời, có chúng Tỷ-kheo vây quanh.<br>
+<span lang="pi" class="pali">
+Tena kho pana samayena bhagavā bhikkhusaṅghaparivuto abbhokāse nisinno hoti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Rồi Thế Tôn nhân vì các Thiện gia nam tử ấy, bảo các Tỷ-kheo:<br>
+<span lang="pi" class="pali">
+Atha kho bhagavā te kulaputte ārabbha bhikkhū āmantesi:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Này các Tỷ-kheo, các Thiện gia nam tử ấy vì lòng tin Ta đã xuất gia, từ bỏ gia đình, sống không gia đình. Này các Tỷ-kheo, các Tỷ-kheo ấy có hoan hỷ trong Phạm hạnh không?”<br>
+<span lang="pi" class="pali">
+“ye te, bhikkhave, kulaputtā mamaṁ uddissa saddhā agārasmā anagāriyaṁ pabbajitā, kacci te, bhikkhave, bhikkhū abhiratā brahmacariye”ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Khi được nói vậy, các Tỷ-kheo ấy giữ im lặng.<br>
+<span lang="pi" class="pali">
+Evaṁ vutte, te bhikkhū tuṇhī ahesuṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Lần thứ hai, rồi Thế Tôn, nhân vì các Thiện gia nam tử ấy, bảo các Tỷ-kheo:<br>
+<span lang="pi" class="pali">
+Dutiyampi kho bhagavā te kulaputte ārabbha bhikkhū āmantesi:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này các Tỷ-kheo, các Thiện gia nam tử ấy vì lòng tin Ta đã xuất gia, từ bỏ gia đình, sống không gia đình. Này các Tỷ-kheo, các Tỷ-kheo ấy có hoan hỷ trong Phạm hạnh không?<br>
+<span lang="pi" class="pali">
+“ye te, bhikkhave, kulaputtā mamaṁ uddissa saddhā agārasmā anagāriyaṁ pabbajitā, kacci te, bhikkhave, bhikkhū abhiratā brahmacariye”ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Cho đến lần thứ hai, các Tỷ-kheo ấy giữ im lặng.<br>
+<span lang="pi" class="pali">
+Dutiyampi kho te bhikkhū tuṇhī ahesuṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Lần thứ ba, rồi Thế Tôn, nhân vì các Thiện gia nam tử ấy, bảo các Tỷ-kheo:<br>
+<span lang="pi" class="pali">
+Tatiyampi kho bhagavā te kulaputte ārabbha bhikkhū āmantesi:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này các Tỷ-kheo, các Thiện gia nam tử ấy vì lòng tin Ta đã xuất gia, từ bỏ gia đình, sống không gia đình. Này các Tỷ-kheo, các Tỷ-kheo ấy có hoan hỷ trong Phạm hạnh không?<br>
+<span lang="pi" class="pali">
+“ye te, bhikkhave, kulaputtā mamaṁ uddissa saddhā agārasmā anagāriyaṁ pabbajitā, kacci te, bhikkhave, bhikkhū abhiratā brahmacariye”ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Cho đến lần thứ ba, các Tỷ-kheo ấy giữ im lặng.<br>
+<span lang="pi" class="pali">
+Tatiyampi kho te bhikkhū tuṇhī ahesuṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Rồi Thế Tôn suy nghĩ như sau:<br>
+<span lang="pi" class="pali">
+Atha kho bhagavato etadahosi:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Nay Ta hãy hỏi các Thiện gia nam tử ấy”.<br>
+<span lang="pi" class="pali">
+“yannūnāhaṁ te kulaputte puccheyyan”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Rồi Thế Tôn bảo Tôn giả Anuruddha:<br>
+<span lang="pi" class="pali">
+Atha kho bhagavā āyasmantaṁ anuruddhaṁ āmantesi:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Này các Anuruddha, các Ông có hoan hỷ trong phạm hạnh không?”<br>
+<span lang="pi" class="pali">
+“kacci tumhe, anuruddhā, abhiratā brahmacariye”ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Bạch Thế Tôn, thật sự chúng con hoan hỷ trong Phạm hạnh.”<br>
+<span lang="pi" class="pali">
+“Taggha mayaṁ, bhante, abhiratā brahmacariye”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Lành thay, lành thay, các Anuruddha.<br>
+<span lang="pi" class="pali">
+“Sādhu sādhu, anuruddhā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này các Anuruddha, thật xứng đáng cho các Ông, những Thiện gia nam tử, vì lòng tin xuất gia, từ bỏ gia đình, sống không gia đình, các Ông có hoan hỷ trong Phạm hạnh.<br>
+<span lang="pi" class="pali">
+Etaṁ kho, anuruddhā, tumhākaṁ patirūpaṁ kulaputtānaṁ saddhā agārasmā anagāriyaṁ pabbajitānaṁ yaṁ tumhe abhirameyyātha brahmacariye.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này các Anuruddha, trong khi các Ông với tuổi trẻ tốt đẹp, trong tuổi thanh xuân, với tóc đen nhánh, có thể hưởng thụ các dục lạc, thời các Ông, này các Anuruddha, với tuổi trẻ tốt đẹp, trong tuổi thanh xuân, với tóc đen nhánh, lại xuất gia, từ bỏ gia đình, sống không gia đình.<br>
+<span lang="pi" class="pali">
+Yena tumhe, anuruddhā, bhadrena yobbanena samannāgatā paṭhamena vayasā susukāḷakesā kāme paribhuñjeyyātha tena tumhe, anuruddhā, bhadrenapi yobbanena samannāgatā paṭhamena vayasā susukāḷakesā agārasmā anagāriyaṁ pabbajitā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này các Anuruddha, các Ông không vì mệnh lệnh của vua mà xuất gia, từ bỏ gia đình, sống không gia đình. Các Ông không vì mệnh lệnh của kẻ ăn trộm mà xuất gia, từ bỏ gia đình, sống không gia đình. Các Ông không vì nợ nần, không vì sợ hãi, không vì mất nghề sinh sống mà xuất gia, từ bỏ gia đình, sống không gia đình.<br>
+<span lang="pi" class="pali">
+Te ca kho pana tumhe, anuruddhā, neva rājābhinītā agārasmā anagāriyaṁ pabbajitā, na corābhinītā agārasmā anagāriyaṁ pabbajitā, na iṇaṭṭā agārasmā anagāriyaṁ pabbajitā, na bhayaṭṭā agārasmā anagāriyaṁ pabbajitā, nājīvikāpakatā agārasmā anagāriyaṁ pabbajitā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Nhưng có phải với tư tưởng như sau: ‘Ta bị sanh, già, chết, sầu, bi, khổ, não áp bức, bị khổ áp bức, bị khổ chi phối.<br>
+<span lang="pi" class="pali">
+Api ca khomhi otiṇṇo jātiyā jarāya maraṇena sokehi paridevehi dukkhehi domanassehi upāyāsehi, dukkhotiṇṇo dukkhapareto;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Tuy vậy, ta mong có thể thấy được sự chấm dứt toàn bộ khổ uẩn này’ mà các Ông, này các Anuruddha, vì lòng tin, xuất gia từ bỏ gia đình, sống không gia đình?”<br>
+<span lang="pi" class="pali">
+appeva nāma imassa kevalassa dukkhakkhandhassa antakiriyā paññāyethāti—nanu tumhe, anuruddhā, evaṁ saddhā agārasmā anagāriyaṁ pabbajitā”ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Thưa vâng, bạch Thế Tôn.”<br>
+<span lang="pi" class="pali">
+“Evaṁ, bhante”.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Và xuất gia như vậy, này các Anuruddha, người Thiện gia nam tử cần phải làm gì?<br>
+<span lang="pi" class="pali">
+“Evaṁ pabbajitena ca pana, anuruddhā, kulaputtena kimassa karaṇīyaṁ?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này các Anuruddha, ly dục, ly bất thiện pháp. Nếu không chứng được hỷ lạc hay một trạng thái khác an tịnh hơn, thời dục tham xâm chiếm tâm và an trú, sân xâm chiếm tâm và an trú, hôn trầm thụy miên, trạo cử, hối quá, nghi hoặc, bất lạc, giải đãi xâm chiếm tâm và an trú.<br>
+<span lang="pi" class="pali">
+Vivekaṁ, anuruddhā, kāmehi vivekaṁ akusalehi dhammehi pītisukhaṁ nādhigacchati aññaṁ vā tato santataraṁ, tassa abhijjhāpi cittaṁ pariyādāya tiṭṭhati, byāpādopi cittaṁ pariyādāya tiṭṭhati, thinamiddhampi cittaṁ pariyādāya tiṭṭhati uddhaccakukkuccampi cittaṁ pariyādāya tiṭṭhati, vicikicchāpi cittaṁ pariyādāya tiṭṭhati, aratīpi cittaṁ pariyādāya tiṭṭhati, tandīpi cittaṁ pariyādāya tiṭṭhati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này các Anuruddha, khi chưa ly dục, chưa ly bất thiện pháp, vị ấy không chứng được hỷ lạc hay một trạng thái khác an tịnh hơn.<br>
+<span lang="pi" class="pali">
+Vivekaṁ, anuruddhā, kāmehi vivekaṁ akusalehi dhammehi pītisukhaṁ nādhigacchati aññaṁ vā tato santataraṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này các Anuruddha, ly dục, ly bất thiện pháp, vị ấy chứng được hỷ lạc hay một trạng thái khác an tịnh hơn, thời dục tham không xâm chiếm tâm và an trú, sân không xâm chiếm tâm và an trú, hôn trầm thụy miên, trạo cử hối quá, nghi hoặc, bất lạc, giải đãi không xâm chiếm tâm và an trú.<br>
+<span lang="pi" class="pali">
+Vivekaṁ, anuruddhā, kāmehi vivekaṁ akusalehi dhammehi pītisukhaṁ adhigacchati aññaṁ vā tato santataraṁ, tassa abhijjhāpi cittaṁ na pariyādāya tiṭṭhati, byāpādopi cittaṁ na pariyādāya tiṭṭhati, thinamiddhampi cittaṁ na pariyādāya tiṭṭhati, uddhaccakukkuccampi cittaṁ na pariyādāya tiṭṭhati, vicikicchāpi cittaṁ na pariyādāya tiṭṭhati, aratīpi cittaṁ na pariyādāya tiṭṭhati, tandīpi cittaṁ na pariyādāya tiṭṭhati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này các Anuruddha, ly dục, ly bất thiện pháp, vị ấy chứng được hỷ lạc hay một trạng thái khác an tịnh hơn.<br>
+<span lang="pi" class="pali">
+Vivekaṁ, anuruddhā, kāmehi vivekaṁ akusalehi dhammehi pītisukhaṁ adhigacchati aññaṁ vā tato santataraṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này các Anuruddha, các Ông nghĩ về Ta như thế nào?<br>
+<span lang="pi" class="pali">
+Kinti vo, anuruddhā, mayi hoti:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Các lậu hoặc nào liên hệ đến phiền não sanh khởi hậu hữu, đáng sợ hãi, đưa đến quả khổ di thục, hướng đến sanh, già, chết trong tương lai, các lậu hoặc ấy chưa được Như Lai đoạn trừ.<br>
+<span lang="pi" class="pali">
+‘ye āsavā saṅkilesikā ponobbhavikā sadarā dukkhavipākā āyatiṁ jātijarāmaraṇiyā, appahīnā te tathāgatassa;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Do vậy, Như Lai sau khi suy tư phân tích, thọ dụng một pháp; sau khi suy tư phân tích, nhẫn thọ một pháp; sau khi suy tư phân tích, từ bỏ một pháp, sau khi suy tư phân tích, đoạn trừ một pháp?’”<br>
+<span lang="pi" class="pali">
+tasmā tathāgato saṅkhāyekaṁ paṭisevati, saṅkhāyekaṁ adhivāseti, saṅkhāyekaṁ parivajjeti, saṅkhāyekaṁ vinodetī’”ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Bạch Thế Tôn, chúng con không có nghĩ như vậy về Thế Tôn:<br>
+<span lang="pi" class="pali">
+“Na kho no, bhante, bhagavati evaṁ hoti:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Các lậu hoặc nào liên hệ đến phiền não, sanh khởi hậu hữu, đáng sợ hãi, đưa đến quả khổ dị thục, hướng đến sanh, già, chết trong tương lai, các lậu hoặc ấy chưa được Như Lai đoạn trừ.<br>
+<span lang="pi" class="pali">
+‘ye āsavā saṅkilesikā ponobbhavikā sadarā dukkhavipākā āyatiṁ jātijarāmaraṇiyā, appahīnā te tathāgatassa;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Do vậy, Như Lai sau khi suy tư phân tích, thọ dụng một pháp; sau khi suy tư phân tích, nhẫn thọ một pháp; sau khi suy tư phân tích, từ bỏ một pháp; sau khi suy tư phân tích, đoạn trừ một pháp”.<br>
+<span lang="pi" class="pali">
+tasmā tathāgato saṅkhāyekaṁ paṭisevati, saṅkhāyekaṁ adhivāseti, saṅkhāyekaṁ parivajjeti, saṅkhāyekaṁ vinodetī’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Bạch Thế Tôn, chúng con nghĩ về Thế Tôn như sau:<br>
+<span lang="pi" class="pali">
+Evaṁ kho no, bhante, bhagavati hoti:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Các lậu hoặc nào liên hệ đến phiền não, sanh khởi hậu hữu, đáng sợ hãi, đưa đến quả khổ dị thục, hướng đến sanh, già, chết trong tương lai, các lậu hoặc ấy đã được Như Lai đoạn trừ.<br>
+<span lang="pi" class="pali">
+‘ye āsavā saṅkilesikā ponobbhavikā sadarā dukkhavipākā āyatiṁ jātijarāmaraṇiyā, pahīnā te tathāgatassa;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Do vậy, Như Lai sau khi suy tư phân tích, thọ dụng một pháp; sau khi suy tư phân tích, nhẫn thọ một pháp, sau khi suy tư phân tích, từ bỏ một pháp; sau khi suy tư phân tích, đoạn trừ một pháp.’”<br>
+<span lang="pi" class="pali">
+tasmā tathāgato saṅkhāyekaṁ paṭisevati, saṅkhāyekaṁ adhivāseti, saṅkhāyekaṁ parivajjeti, saṅkhāyekaṁ vinodetī’”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Lành thay, lành thay, này các Anuruddha!<br>
+<span lang="pi" class="pali">
+“Sādhu sādhu, anuruddhā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Các lậu hoặc liên hệ đến phiền não, sanh khởi hậu hữu, đáng sợ hãi, đưa đến quả khổ dị thục, hướng đến sanh, già, chết trong tương lai đã được Như Lai đoạn trừ, cắt tận gốc rễ, làm cho như thân cây tala không thể sanh lại, không thể sanh khởi trong tương lai.<br>
+<span lang="pi" class="pali">
+Tathāgatassa, anuruddhā, ye āsavā saṅkilesikā ponobbhavikā sadarā dukkhavipākā āyatiṁ jātijarāmaraṇiyā, pahīnā te ucchinnamūlā tālāvatthukatā anabhāvaṅkatā āyatiṁ anuppādadhammā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ví như, này các Anuruddha, cây Tāla (Thốt Nốt) ngọn cây đã bị chặt đứt, không thể lớn lên nữa,<br>
+<span lang="pi" class="pali">
+Seyyathāpi, anuruddhā, tālo matthakacchinno abhabbo punavirūḷhiyā;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+cũng vậy này các Anuruddha, các lậu hoặc liên hệ đến phiền não đã được Như Lai đoạn trừ, cắt tận gốc rễ, làm cho như thân cây tala không thể sanh lại, không thể sanh khởi trong tương lai.<br>
+<span lang="pi" class="pali">
+evameva kho, anuruddhā, tathāgatassa ye āsavā saṅkilesikā ponobbhavikā sadarā dukkhavipākā āyatiṁ jātijarāmaraṇiyā, pahīnā te ucchinnamūlā tālāvatthukatā anabhāvaṅkatā āyatiṁ anuppādadhammā;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Do vậy, Như Lai sau khi suy tư phân tích, thọ dụng một pháp; sau khi suy tư phân tích, nhẫn thọ một pháp; sau khi suy tư phân tích, từ bỏ một pháp; sau khi suy tư phân tích, đoạn trừ một pháp.<br>
+<span lang="pi" class="pali">
+tasmā tathāgato saṅkhāyekaṁ paṭisevati, saṅkhāyekaṁ adhivāseti, saṅkhāyekaṁ parivajjeti, saṅkhāyekaṁ vinodeti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này các Anuruddha, các Ông nghĩ thế nào?<br>
+<span lang="pi" class="pali">
+Taṁ kiṁ maññasi, anuruddhā,<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Do thấy mục đích đặc biệt nào, Như Lai giải thích sự tái sanh của các đệ tử đã từ trần, đã mệnh chung, nói rằng:<br>
+<span lang="pi" class="pali">
+kaṁ atthavasaṁ sampassamāno tathāgato sāvake abbhatīte kālaṅkate upapattīsu byākaroti:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Vị này tái sanh ở chỗ này, vị này tái sanh ở chỗ này?’”<br>
+<span lang="pi" class="pali">
+‘asu amutra upapanno; asu amutra upapanno’”ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Bạch Thế Tôn, đối với chúng con, các pháp dựa Thế Tôn làm căn bản, hướng Thế Tôn làm lãnh đạo, nương tựa Thế Tôn làm y cứ. Bạch Thế Tôn, tốt lành thay nếu Thế Tôn thuyết giảng cho ý nghĩa này. Sau khi được nghe Thế Tôn, các Tỷ-kheo sẽ thọ trì.”<br>
+<span lang="pi" class="pali">
+“Bhagavaṁmūlakā no, bhante, dhammā bhagavaṁnettikā bhagavaṁpaṭisaraṇā. Sādhu vata, bhante, bhagavantaṁyeva paṭibhātu etassa bhāsitassa attho. Bhagavato sutvā bhikkhū dhāressantī”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Này các Anuruddha, Như Lai không vì mục đích lường gạt quần chúng, không vì mục đích nịnh hót quần chúng, không vì mục đích lợi lộc, trọng vọng, danh xưng, quyền lợi vật chất, không vì với ý nghĩ: Như vậy quần chúng sẽ biết Ta”; mà Như Lai giải thích sự tái sanh các vị đệ tử đã từ trần đã mệnh chung, nói rằng:  cho các vị ấy.<br>
+<span lang="pi" class="pali">
+“Na kho, anuruddhā, tathāgato janakuhanatthaṁ na janalapanatthaṁ na lābhasakkārasilokānisaṁsatthaṁ na ‘iti maṁ jano jānātū’ti sāvake abbhatīte kālaṅkate upapattīsu byākaroti:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Vị này tái sanh ở chỗ này, vị này tái sanh ở chỗ này”.<br>
+<span lang="pi" class="pali">
+‘asu amutra upapanno, asu amutra upapanno’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Và này các Anuruddha, có những Thiện gia nam tử có tin tưởng với tín thọ cao thượng, với hoan hỷ cao thượng,<br>
+<span lang="pi" class="pali">
+Santi ca kho, anuruddhā, kulaputtā saddhā uḷāravedā uḷārapāmojjā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+sau khi được nghe như vậy, sẽ chú tâm trên như thật (Tathata).<br>
+<span lang="pi" class="pali">
+Te taṁ sutvā tadatthāya cittaṁ upasaṁharanti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Như vậy, này các Anuruddha, là hạnh phúc, là an lạc lâu đời<br>
+<span lang="pi" class="pali">
+Tesaṁ taṁ, anuruddhā, hoti dīgharattaṁ hitāya sukhāya.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ở đây, này các Anuruddha, Tỷ-kheo có nghe:<br>
+<span lang="pi" class="pali">
+Idhānuruddhā, bhikkhu suṇāti:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Tỷ-kheo với tên như thế này đã mệnh chung.<br>
+<span lang="pi" class="pali">
+‘itthannāmo bhikkhu kālaṅkato;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Thế Tôn có tuyên bố về vị này:<br>
+<span lang="pi" class="pali">
+so bhagavatā byākato—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Vị ấy an trú chánh trí”.<br>
+<span lang="pi" class="pali">
+aññāya saṇṭhahī’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vị Tôn giả ấy đã được thấy hay đã được nghe:<br>
+<span lang="pi" class="pali">
+So kho panassa āyasmā sāmaṁ diṭṭho vā hoti anussavassuto vā:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Tôn giả này có giới hạnh như vậy, Tôn giả này có pháp như vậy, Tôn giả này có trí tuệ như vậy, Tôn giả này có an trú như vậy, Tôn giả này có giải thoát như vậy”.<br>
+<span lang="pi" class="pali">
+‘evaṁsīlo so āyasmā ahosi itipi, evaṁdhammo so āyasmā ahosi itipi, evaṁpañño so āyasmā ahosi itipi, evaṁvihārī so āyasmā ahosi itipi, evaṁvimutto so āyasmā ahosi itipī’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Tỷ-kheo khi nhớ đến lòng tin, giới hạnh, đa văn, bố thí và trí tuệ của vị kia, bèn chú tâm trên như thật.<br>
+<span lang="pi" class="pali">
+So tassa saddhañca sīlañca sutañca cāgañca paññañca anussaranto tadatthāya cittaṁ upasaṁharati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Như vậy, này các Anuruddha, Tỷ-kheo được sống lạc trú.<br>
+<span lang="pi" class="pali">
+Evampi kho, anuruddhā, bhikkhuno phāsuvihāro hoti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ở đây, này các Anuruddha, Tỷ-kheo có nghe:<br>
+<span lang="pi" class="pali">
+Idhānuruddhā, bhikkhu suṇāti:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Tỷ-kheo với tên như thế này, đã mệnh chung.<br>
+<span lang="pi" class="pali">
+‘itthannāmo bhikkhu kālaṅkato;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Thế Tôn có tuyên bố về vị này:<br>
+<span lang="pi" class="pali">
+so bhagavatā byākato—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Sau khi đoạn trừ năm hạ phần kiết sử vị ấy được hóa sanh, nhập Niết-bàn tại chỗ ấy, không còn phải trở lui ở đời này nữa”.<br>
+<span lang="pi" class="pali">
+pañcannaṁ orambhāgiyānaṁ saṁyojanānaṁ parikkhayā opapātiko tattha parinibbāyī anāvattidhammo tasmā lokā’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Tôn giả ấy đã được thấy hay đã được nghe:<br>
+<span lang="pi" class="pali">
+So kho panassa āyasmā sāmaṁ diṭṭho vā hoti anussavassuto vā:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Tôn giả này có giới hạnh như vậy, Tôn giả này có pháp như vậy …   có trí tuệ như vậy,… có an trú như vậy, Tôn giả này có giải thoát như vậy”.<br>
+<span lang="pi" class="pali">
+‘evaṁsīlo so āyasmā ahosi itipi, evaṁdhammo …pe… evaṁpañño … evaṁvihārī … evaṁvimutto so āyasmā ahosi itipī’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Tỷ-kheo khi nhớ đến lòng tin …  và trí tuệ của vị kia, bèn chú tâm trên như thật.<br>
+<span lang="pi" class="pali">
+So tassa saddhañca sīlañca sutañca cāgañca paññañca anussaranto tadatthāya cittaṁ upasaṁharati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Như vậy, này các Anuruddha, Tỷ-kheo được sống lạc trú.<br>
+<span lang="pi" class="pali">
+Evampi kho, anuruddhā, bhikkhuno phāsuvihāro hoti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ở đây, này các Anuruddha, Tỷ-kheo có nghe:<br>
+<span lang="pi" class="pali">
+Idhānuruddhā, bhikkhu suṇāti:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Tỷ-kheo với tâm như thế này đã mệnh chung.<br>
+<span lang="pi" class="pali">
+‘itthannāmo bhikkhu kālaṅkato;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Thế Tôn có tuyên bố về vị này:<br>
+<span lang="pi" class="pali">
+so bhagavatā byākato—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Sau khi diệt trừ ba kiết sử, sau khi làm cho nhẹ bớt tham, sân, si, vị ấy chứng Nhất Lai, chỉ phải trở lui đời này một lần nữa rồi sẽ diệt tận khổ đau”.<br>
+<span lang="pi" class="pali">
+tiṇṇaṁ saṁyojanānaṁ parikkhayā rāgadosamohānaṁ tanuttā sakadāgāmī sakideva imaṁ lokaṁ āgantvā dukkhassantaṁ karissatī’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Tôn giả ấy đã được thấy hay đã được nghe:<br>
+<span lang="pi" class="pali">
+So kho panassa āyasmā sāmaṁ diṭṭho vā hoti anussavassuto vā:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Tôn giả này có giới hạnh như vậy… Tôn giả này có giải thoát như vậy”.<br>
+<span lang="pi" class="pali">
+‘evaṁsīlo so āyasmā ahosi itipi, evaṁdhammo …pe… evaṁpañño … evaṁvihārī … evaṁvimutto so āyasmā ahosi itipī’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Tỷ-kheo khi nhớ đến lòng tin, giới, đa văn, bố thí và trí tuệ của vị kia, bèn chú tâm trên như thật.<br>
+<span lang="pi" class="pali">
+So tassa saddhañca sīlañca sutañca cāgañca paññañca anussaranto tadatthāya cittaṁ upasaṁharati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Như vậy, này các Anuruddha, Tỷ-kheo được sống lạc trú.<br>
+<span lang="pi" class="pali">
+Evampi kho, anuruddhā, bhikkhuno phāsuvihāro hoti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ở đây, này các Anurudha, Tỷ-kheo có nghe:<br>
+<span lang="pi" class="pali">
+Idhānuruddhā, bhikkhu suṇāti:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Tỷ-kheo với tên như thế này đã mệnh chung.<br>
+<span lang="pi" class="pali">
+‘itthannāmo bhikkhu kālaṅkato;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Thế Tôn có tuyên bố về vị này:<br>
+<span lang="pi" class="pali">
+so bhagavatā byākato—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Sau khi diệt trừ ba kiết sử, chứng quả Dự lưu, không còn bị đọa lạc, chắc chắn chứng được chánh giác”.<br>
+<span lang="pi" class="pali">
+tiṇṇaṁ saṁyojanānaṁ parikkhayā sotāpanno avinipātadhammo niyato sambodhiparāyaṇo’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Tôn giả ấy đã được thấy hay đã được nghe:<br>
+<span lang="pi" class="pali">
+So kho panassa āyasmā sāmaṁ diṭṭho vā hoti anussavassuto vā:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Tôn giả này có giới hạnh như vậy … Tôn giả này có giải thoát như vậy”.<br>
+<span lang="pi" class="pali">
+‘evaṁsīlo so āyasmā ahosi itipi, evaṁdhammo …pe… evaṁpañño … evaṁvihārī … evaṁvimutto so āyasmā ahosi itipī’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Tỷ-kheo khi nhớ đến lòng tin … và trí tuệ của vị kia, bèn chú tâm trên như thật.<br>
+<span lang="pi" class="pali">
+So tassa saddhañca sīlañca sutañca cāgañca paññañca anussaranto tadatthāya cittaṁ upasaṁharati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Như vậy, này các Anuruddha, Tỷ-kheo được sống lạc trú.<br>
+<span lang="pi" class="pali">
+Evampi kho, anuruddhā, bhikkhuno phāsuvihāro hoti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ở đây, này các Anuruddha, Tỷ-kheo-ni có nghe:<br>
+<span lang="pi" class="pali">
+Idhānuruddhā, bhikkhunī suṇāti:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Tỷ-kheo-ni với tên như thế này đã mệnh chung.<br>
+<span lang="pi" class="pali">
+‘itthannāmā bhikkhunī kālaṅkatā;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Thế Tôn có tuyên bố về vị này:<br>
+<span lang="pi" class="pali">
+sā bhagavatā byākatā—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Vị ấy an trú chánh trí”.<br>
+<span lang="pi" class="pali">
+aññāya saṇṭhahī’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Tôn ni ấy đã được thấy hay đã được nghe:<br>
+<span lang="pi" class="pali">
+Sā kho panassā bhaginī sāmaṁ diṭṭhā vā hoti anussavassutā vā:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Tôn ni này có giới hạnh như vậy, Tôn ni này có pháp như vậy, Tôn ni này có an trú như vậy, Tôn ni này có giải thoát như vậy.<br>
+<span lang="pi" class="pali">
+‘evaṁsīlā sā bhaginī ahosi itipi, evaṁdhammā sā bhaginī ahosi itipi, evaṁpaññā sā bhaginī ahosi itipi, evaṁvihārinī sā bhaginī ahosi itipi, evaṁvimuttā sā bhaginī ahosi itipī’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Tỷ-kheo-ni khi nhớ đến lòng tin … khi nhớ đến trí tuệ của vị kia, bèn chú tâm trên như thật.<br>
+<span lang="pi" class="pali">
+Sā tassā saddhañca sīlañca sutañca cāgañca paññañca anussarantī tadatthāya cittaṁ upasaṁharati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Như vậy, này các Anuruddha, Tỷ-kheo-ni được sống lạc trú.<br>
+<span lang="pi" class="pali">
+Evampi kho, anuruddhā, bhikkhuniyā phāsuvihāro hoti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ở đây, này các Anuruddha, Tỷ-kheo-ni có nghe:<br>
+<span lang="pi" class="pali">
+Idhānuruddhā, bhikkhunī suṇāti:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Tỷ-kheo-ni với tên như thế này đã mệnh chung.<br>
+<span lang="pi" class="pali">
+‘itthannāmā bhikkhunī kālaṅkatā;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Thế Tôn có tuyên bố về vị này:<br>
+<span lang="pi" class="pali">
+sā bhagavatā byākatā—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Sau khi đoạn trừ năm hạ phần kiết sử, vị ấy được hóa sanh, nhập Niết-bàn tại chỗ ấy, không còn phải trở lui ở đời này nữa”.<br>
+<span lang="pi" class="pali">
+pañcannaṁ orambhāgiyānaṁ saṁyojanānaṁ parikkhayā opapātikā tattha parinibbāyinī anāvattidhammā tasmā lokā’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Tôn ni ấy đã được thấy hay đã được nghe:<br>
+<span lang="pi" class="pali">
+Sā kho panassā bhaginī sāmaṁ diṭṭhā vā hoti anussavassutā vā:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Tôn ni này có giới hạnh như vậy … Tôn ni này có giải thoát như vậy”.<br>
+<span lang="pi" class="pali">
+‘evaṁsīlā sā bhaginī ahosi itipi, evaṁdhammā …pe… evaṁpaññā … evaṁvihārinī … evaṁvimuttā sā bhaginī ahosi itipī’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Tỷ-kheo-ni nhớ đến lòng tin … và trí tuệ của vị kia, bèn chú tâm trên như thật.<br>
+<span lang="pi" class="pali">
+Sā tassā saddhañca sīlañca sutañca cāgañca paññañca anussarantī tadatthāya cittaṁ upasaṁharati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Như vậy, này các Anuruddha, Tỷ-kheo-ni được sống lạc trú.<br>
+<span lang="pi" class="pali">
+Evampi kho, anuruddhā, bhikkhuniyā phāsuvihāro hoti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ở đây, này các Anuruddha, vị Tỷ-kheo-ni có nghe:<br>
+<span lang="pi" class="pali">
+Idhānuruddhā, bhikkhunī suṇāti:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Tỷ-kheo-ni với tên như thế này đã mệnh chung.<br>
+<span lang="pi" class="pali">
+‘itthannāmā bhikkhunī kālaṅkatā;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Thế Tôn có tuyên bố về vị này:<br>
+<span lang="pi" class="pali">
+sā bhagavatā byākatā—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Sau khi diệt trừ ba kiết sử, sau khi làm cho nhẹ bớt tham, sân, si, vị ấy chứng Nhứt lai, chỉ phải trở lui đời này một lần nữa rồi sẽ diệt tận khổ đau”.<br>
+<span lang="pi" class="pali">
+tiṇṇaṁ saṁyojanānaṁ parikkhayā rāgadosamohānaṁ tanuttā sakadāgāminī sakideva imaṁ lokaṁ āgantvā dukkhassantaṁ karissatī’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Tôn ni ấy đã được thấy hay đã được nghe:<br>
+<span lang="pi" class="pali">
+Sā kho panassā bhaginī sāmaṁ diṭṭhā vā hoti anussavassutā vā:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Tôn ni này có giới hạnh như vậy…Tôn ni này có giải thoát như vậy”.<br>
+<span lang="pi" class="pali">
+‘evaṁsīlā sā bhaginī ahosi itipi, evaṁdhammā …pe… evaṁpaññā … evaṁvihārinī … evaṁvimuttā sā bhaginī ahosi itipī’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Tỷ-kheo-ni khi nhớ đến lòng tin… và trí tuệ của vị kia, bèn chú tâm trên như thật.<br>
+<span lang="pi" class="pali">
+Sā tassā saddhañca sīlañca sutañca cāgañca paññañca anussarantī tadatthāya cittaṁ upasaṁharati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Như vậy, này các Anuruddha, Tỷ-kheo-ni được sống lạc trú.<br>
+<span lang="pi" class="pali">
+Evampi kho, anuruddhā, bhikkhuniyā phāsuvihāro hoti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ở đây, này các Anuruddha, Tỷ-kheo-ni có nghe:<br>
+<span lang="pi" class="pali">
+Idhānuruddhā, bhikkhunī suṇāti:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Tỷ-kheo-ni với tên như thế này đã mệnh chung.<br>
+<span lang="pi" class="pali">
+‘itthannāmā bhikkhunī kālaṅkatā;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Thế Tôn có tuyên bố về vị này:<br>
+<span lang="pi" class="pali">
+sā bhagavatā byākatā—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Sau khi diệt trừ ba kiết sử, chứng quả Dự lưu, không còn bị đọa lạc, chắc chắn chứng được chánh giác”.<br>
+<span lang="pi" class="pali">
+tiṇṇaṁ saṁyojanānaṁ parikkhayā sotāpannā avinipātadhammā niyatā sambodhiparāyaṇā’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Tôn ni ấy đã được thấy hay đã được nghe:<br>
+<span lang="pi" class="pali">
+Sā kho panassā bhaginī sāmaṁ diṭṭhā vā hoti anussavassutā vā:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Tôn ni này có giới hạnh như vậy … Tôn ni này có giải thoát như vậy”.<br>
+<span lang="pi" class="pali">
+‘evaṁsīlā sā bhaginī ahosi itipi, evaṁdhammā … evaṁpaññā … evaṁvihārinī … evaṁvimuttā sā bhaginī ahosi itipī’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Tỷ-kheo-ni khi nhớ đến lòng tin… và trí tuệ của vị kia, bèn chú tâm trên như thật.<br>
+<span lang="pi" class="pali">
+Sā tassā saddhañca sīlañca sutañca cāgañca paññañca anussarantī tadatthāya cittaṁ upasaṁharati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Như vậy, này các Anuruddha, Tỷ-kheo-ni được sống lạc trú.<br>
+<span lang="pi" class="pali">
+Evampi kho, anuruddhā, bhikkhuniyā phāsuvihāro hoti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ở đây, này các Anuruddha, nam cư sĩ có nghe:<br>
+<span lang="pi" class="pali">
+Idhānuruddhā, upāsako suṇāti:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Nam cư sĩ với tên như thế này đã mệnh chung.<br>
+<span lang="pi" class="pali">
+‘itthannāmo upāsako kālaṅkato;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Thế Tôn có tuyên bố về vị này:<br>
+<span lang="pi" class="pali">
+so bhagavatā byākato—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Sau khi đoạn trừ năm hạ phần kiết sử, vị ấy được hóa sanh, nhập Niết-bàn tại chỗ ấy, không còn phải trở lui đời này nữa”.<br>
+<span lang="pi" class="pali">
+pañcannaṁ orambhāgiyānaṁ saṁyojanānaṁ parikkhayā opapātiko tattha parinibbāyī anāvattidhammo tasmā lokā’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Tôn giả ấy đã được thấy hay được nghe:<br>
+<span lang="pi" class="pali">
+So kho panassa āyasmā sāmaṁ diṭṭho vā hoti anussavassuto vā:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Tôn giả này có giới hạnh như vậy… có pháp như vậy… có trí tuệ như vậy… có an trú như vậy… Tôn giả này có giải thoát như vậy”.<br>
+<span lang="pi" class="pali">
+‘evaṁsīlo so āyasmā ahosi itipi, evaṁdhammo so āyasmā ahosi itipi, evaṁpañño so āyasmā ahosi itipi, evaṁvihārī so āyasmā ahosi itipi, evaṁvimutto so āyasmā ahosi itipī’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Nam cư sĩ khi nhớ đến lòng tin… và trí tuệ của vị kia, liền chú tâm trên như thật.<br>
+<span lang="pi" class="pali">
+So tassa saddhañca sutañca cāgañca paññañca anussaranto tadatthāya cittaṁ upasaṁharati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Như vậy, này các Anuruddha, nam cư sĩ được sống lạc trú.<br>
+<span lang="pi" class="pali">
+Evampi kho, anuruddhā, upāsakassa phāsuvihāro hoti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ở đây, này các Anuruddha, nam cư sĩ có nghe:<br>
+<span lang="pi" class="pali">
+Idhānuruddhā, upāsako suṇāti:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Nam cư sĩ với tên như thế này đã mệnh chung.<br>
+<span lang="pi" class="pali">
+‘itthannāmo upāsako kālaṅkato;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Thế Tôn có tuyên bố về vị này:<br>
+<span lang="pi" class="pali">
+so bhagavatā byākato—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Sau khi diệt trừ ba kiết sử, sau khi làm cho nhẹ bớt tham, sân, si, vị ấy chứng Nhất lai, chỉ phải trở lui đời này một lần nữa rồi sẽ diệt tận khổ đau”.<br>
+<span lang="pi" class="pali">
+tiṇṇaṁ saṁyojanānaṁ parikkhayā rāgadosamohānaṁ tanuttā sakadāgāmī sakideva imaṁ lokaṁ āgantvā dukkhassantaṁ karissatī’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Tôn giả ấy đã được thấy hay đã được nghe:<br>
+<span lang="pi" class="pali">
+So kho panassa āyasmā sāmaṁ diṭṭho vā hoti anussavassuto vā:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Tôn giả này có giới hạnh như vậy … Tôn giả này có giải thoát như vậy”.<br>
+<span lang="pi" class="pali">
+‘evaṁsīlo so āyasmā ahosi itipi, evaṁdhammo … evaṁpañño … evaṁvihārī … evaṁvimutto so āyasmā ahosi itipī’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Nam cư sĩ, khi nhớ đến lòng tin …  và trí tuệ của vị kia, bèn chú tâm trên như thật.<br>
+<span lang="pi" class="pali">
+So tassa saddhañca sīlañca sutañca cāgañca paññañca anussaranto tadatthāya cittaṁ upasaṁharati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Như vậy, này các Anuruddha, nam cư sĩ được sống lạc trú.<br>
+<span lang="pi" class="pali">
+Evampi kho, anuruddhā, upāsakassa phāsuvihāro hoti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ở đây, này các Anuruddha, nam cư sĩ có nghe:<br>
+<span lang="pi" class="pali">
+Idhānuruddhā, upāsako suṇāti:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Nam cư sĩ với tên như thế này đã mệnh chung.<br>
+<span lang="pi" class="pali">
+‘itthannāmo upāsako kālaṅkato;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Thế Tôn có tuyên bố về vị này:<br>
+<span lang="pi" class="pali">
+so bhagavatā byākato—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Sau khi diệt trừ ba kiết sử, chứng quả Dự lưu, không còn bị đọa lạc, chắc chắn chứng được chánh giác”.<br>
+<span lang="pi" class="pali">
+tiṇṇaṁ saṁyojanānaṁ parikkhayā sotāpanno avinipātadhammo niyato sambodhiparāyaṇo’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Tôn giả ấy đã được thấy hay đã được nghe:<br>
+<span lang="pi" class="pali">
+So kho panassa āyasmā sāmaṁ diṭṭho vā hoti anussavassuto vā:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Tôn giả này có giới hạnh như vậy… có giải thoát như vậy.<br>
+<span lang="pi" class="pali">
+‘evaṁsīlo so āyasmā ahosi itipi, evaṁdhammo … evaṁpañño … evaṁvihārī … evaṁvimutto so āyasmā ahosi itipī’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Tôn giả ấy khi nhớ đến lòng tin… và trí tuệ của vị kia, bèn chú tâm trên như thật.<br>
+<span lang="pi" class="pali">
+So tassa saddhañca sīlañca sutañca cāgañca paññañca anussaranto tadatthāya cittaṁ upasaṁharati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Như vậy, này các Anuruddha, nam cư sĩ được sống lạc trú.<br>
+<span lang="pi" class="pali">
+Evampi kho, anuruddhā upāsakassa phāsuvihāro hoti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ở đây, này các Anuruddha, nữ cư sĩ có nghe:<br>
+<span lang="pi" class="pali">
+Idhānuruddhā, upāsikā suṇāti:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Nữ cư sĩ với tên như thế này đã mệnh chung.<br>
+<span lang="pi" class="pali">
+‘itthannāmā upāsikā kālaṅkatā;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Thế Tôn có tuyên bố về vị này:<br>
+<span lang="pi" class="pali">
+sā bhagavatā byākatā—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Sau khi đoạn trừ năm hạ phần kiết sử, vị ấy được hóa sanh, nhập Niết-bàn tại chỗ ấy, không còn phải trở lui ở đời này nữa”.<br>
+<span lang="pi" class="pali">
+pañcannaṁ orambhāgiyānaṁ saṁyojanānaṁ parikkhayā opapātikā tattha parinibbāyinī anāvattidhammā tasmā lokā’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Nữ nhân ấy đã được thấy hay đã được nghe:<br>
+<span lang="pi" class="pali">
+Sā kho panassā bhaginī sāmaṁ diṭṭhā vā hoti anussavassutā vā:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Nữ nhân này có giới hạnh như vậy… có pháp như vậy… có trí tuệ như vậy… có an trú như vậy… nữ nhân này có giải thoát như vậy”.<br>
+<span lang="pi" class="pali">
+‘evaṁsīlā sā bhaginī ahosi itipi, evaṁdhammā … evaṁpaññā … evaṁvihārinī … evaṁvimuttā sā bhaginī ahosi itipī’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Nữ cư sĩ, khi nhớ đến lòng tin… và trí tuệ của vị kia, liền chú tâm trên sự thật.<br>
+<span lang="pi" class="pali">
+Sā tassā saddhañca sīlañca sutañca cāgañca paññañca anussarantī tadatthāya cittaṁ upasaṁharati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Như vậy, này các Anuruddha, nữ cư sĩ được sống lạc trú.<br>
+<span lang="pi" class="pali">
+Evampi kho, anuruddhā, upāsikāya phāsuvihāro hoti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ở đây, này các Anurudha nữ cư sĩ có nghe:<br>
+<span lang="pi" class="pali">
+Idhānuruddhā, upāsikā suṇāti:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Nữ cư sĩ với tên như thế này đã mệnh chung.<br>
+<span lang="pi" class="pali">
+‘itthannāmā upāsikā kālaṅkatā;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Thế Tôn có tuyên bố về vị này:<br>
+<span lang="pi" class="pali">
+sā bhagavatā byākatā—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Sau khi diệt trừ ba kiết sử, sau khi làm cho nhẹ bớt tham, sân, si, vị ấy chứng Nhất lai, chỉ phải trở lui đời này một lần nữa, rồi sẽ diệt tận khổ đau”.<br>
+<span lang="pi" class="pali">
+tiṇṇaṁ saṁyojanānaṁ parikkhayā rāgadosamohānaṁ tanuttā sakadāgāminī sakideva imaṁ lokaṁ āgantvā dukkhassantaṁ karissatī’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Nữ nhân ấy đã được thấy hay đã được nghe:<br>
+<span lang="pi" class="pali">
+Sā kho panassā bhaginī sāmaṁ diṭṭhā vā hoti anussavassutā vā:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Nữ nhân này có giới hạnh như vậy … nữ nhân này có giải thoát như vậy”.<br>
+<span lang="pi" class="pali">
+‘evaṁsīlā sā bhaginī ahosi itipi, evaṁdhammā … evaṁpaññā … evaṁvihārinī … evaṁvimuttā sā bhaginī ahosi itipī’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Nữ cư sĩ, khi nhớ đến lòng tin … và trí tuệ của vị kia, bèn chú tâm trên như thật.<br>
+<span lang="pi" class="pali">
+Sā tassā saddhañca sīlañca sutañca cāgañca paññañca anussarantī tadatthāya cittaṁ upasaṁharati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Như vậy, này các Anuruddha, nữ cư sĩ được sống lạc trú.<br>
+<span lang="pi" class="pali">
+Evampi kho, anuruddhā, upāsikāya phāsuvihāro hoti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ở đây, này các Anuruddha, nữ cư sĩ có nghe:<br>
+<span lang="pi" class="pali">
+Idhānuruddhā, upāsikā suṇāti:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Nữ cư sĩ với tên như thế này đã mệnh chung.<br>
+<span lang="pi" class="pali">
+‘itthannāmā upāsikā kālaṅkatā;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Thế Tôn có tuyên bố về vị này:<br>
+<span lang="pi" class="pali">
+sā bhagavatā byākatā—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Sau khi diệt trừ ba kiết sử, chứng quả Dự lưu, không còn bị đọa lạc, chắc chắn được chánh giác”.<br>
+<span lang="pi" class="pali">
+tiṇṇaṁ saṁyojanānaṁ parikkhayā sotāpannā avinipātadhammā niyatā sambodhiparāyaṇā’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Nữ nhân ấy đã được thấy hay đã được nghe.<br>
+<span lang="pi" class="pali">
+Sā kho panassā bhaginī sāmaṁ diṭṭhā vā hoti anussavassutā vā:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Nữ nhân này có giới hạnh như vậy, nữ nhân này có pháp như vậy, nữ nhân này có trí tuệ như vậy, nữ nhân này có an trú như vậy, nữ nhân này có giải thoát như vậy”.<br>
+<span lang="pi" class="pali">
+‘evaṁsīlā sā bhaginī ahosi itipi, evaṁdhammā sā bhaginī ahosi itipi, evaṁpaññā sā bhaginī ahosi itipi, evaṁvihārinī sā bhaginī ahosi itipi, evaṁvimuttā sā bhaginī ahosi itipī’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Nữ nhân ấy khi nhớ đến lòng tin, giới hạnh, sự đa văn, bố thí và trí tuệ của vị kia, bèn chú tâm trên như thật.<br>
+<span lang="pi" class="pali">
+Sā tassā saddhañca sīlañca sutañca cāgañca paññañca anussarantī tadatthāya cittaṁ upasaṁharati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Như vậy, này các Anuruddha, nữ cư sĩ được sống lạc trú.<br>
+<span lang="pi" class="pali">
+Evampi kho, anuruddhā, upāsikāya phāsuvihāro hoti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Như vậy, này các Anuruddha, Như Lại không vì mục đích lường gạt quần chúng, không vì mục đích nịnh hót quần chúng, không vì mục đích được lợi lộc, trọng vọng, danh xưng, quyền lợi vật chất, không vì với ý nghĩ:<br>
+<span lang="pi" class="pali">
+Iti kho, anuruddhā, tathāgato na janakuhanatthaṁ na janalapanatthaṁ na lābhasakkārasilokānisaṁsatthaṁ na ‘iti maṁ jano jānātū’ti sāvake abbhatīte kālaṅkate upapattīsu byākaroti:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Như vậy quần chúng sẽ biết Ta”, mà Như Lai giải thích sự tái sanh của các đệ tử đã từ trần, đã mệnh chung, nói rằng: “Vị này tái sanh ở chỗ này, vị này tái sanh ở chỗ này”.<br>
+<span lang="pi" class="pali">
+‘asu amutra upapanno, asu amutra upapanno’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Và này các Anuruddha, có những Thiện gia nam tử có tin tưởng, với tín thọ cao thượng, với hoan hỷ cao thượng,<br>
+<span lang="pi" class="pali">
+Santi ca kho, anuruddhā, kulaputtā saddhā uḷāravedā uḷārapāmojjā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+sau khi được nghe như vậy, sẽ chú tâm trên như thật.<br>
+<span lang="pi" class="pali">
+Te taṁ sutvā tadatthāya cittaṁ upasaṁharanti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Như vậy, này các Anuruddha, là hạnh phúc, là an lạc lâu đời cho các vị ấy.”<br>
+<span lang="pi" class="pali">
+Tesaṁ taṁ, anuruddhā, hoti dīgharattaṁ hitāya sukhāyā”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Thế Tôn thuyết giảng như vậy.<br>
+<span lang="pi" class="pali">
+Idamavoca bhagavā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Tôn giả Anurudda hoan hỷ tín thọ lời Thế Tôn dạy.<br>
+<span lang="pi" class="pali">
+Attamano āyasmā anuruddho bhagavato bhāsitaṁ abhinandīti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+<span lang="pi" class="vi">
+Naḷakapānasuttaṁ niṭṭhitaṁ aṭṭhamaṁ.<br>
+</span>
+</p>
+
+
+
+<!-- COPY CONTENT SUTTA Ở ĐÂY -->
+
+
+
+<br>
+<p><p style="text-align: right;font-style: italic;">Hoà Thượng Thích Minh Châu dịch Việt</span></p>
+
+
+
+
+
+
+
+
+</section>  <!-- End English and Pali -->
+<div id="nextprev"><a id="previous-sutta" href="./mn67.html#content"></a><a id="next-sutta" href="./mn69.html#content"></a></div>
+</div>  <!--End Content -->
+</div>  <!-- End Page -->
+
+
+
+
+
+
+<footer>
+					 <!-- End bottom links -->
+</footer>
+
+
+ 
+ <!-- Scripts -->
+
+ <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      if (typeof enablePaliLookup === "function") {
+        enablePaliLookup();
+      } else {
+        console.error("enablePaliLookup is not defined");
+      }
+    });
+  </script>
+
+ <script>
+ // Script to open and close sidebar
+ 	function w3_open() {
+ 	document.getElementById("mySidebar").style.display = "block";
+ 	}
+ 		function w3_close() {
+ 		document.getElementById("mySidebar").style.display = "none";
+ 	}
+ </script>
+ <script>
+ 		var app = document.getElementsByTagName("BODY")[0];
+ 		if (localStorage.lightMode == "dark") {
+ 			app.setAttribute("light-mode", "dark");
+ 	}
+ </script>
+ 
+ <script>
+ 		function toggle_light_mode() {
+ 			var app = document.getElementsByTagName("BODY")[0];
+ 				if (localStorage.lightMode == "dark") {
+ 			localStorage.lightMode = "light";
+ 			app.setAttribute("light-mode", "light");
+ 		} else {
+ 					localStorage.lightMode = "dark";
+ 					app.setAttribute("light-mode", "dark");
+ 	}
+ 		}
+ 
+ 		window.addEventListener("storage", function () {
+ 			if (localStorage.lightMode == "dark") {
+ 				app.setAttribute("light-mode", "dark");
+ 				} else {
+ 				app.setAttribute("light-mode", "light");
+ 		}
+ 		}, false);
+ 
+ </script>
+ <script src="../js/footer.js"></script><script src="../js/dpd_deconstructor.js"></script><script src="../js/dpd_ebts.js"></script><script src="../js/dpd_i2h.js"></script>
+ <script src="/sw.js"></script>
+ </body>
+ </html>

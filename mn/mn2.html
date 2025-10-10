@@ -1,0 +1,1101 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+ 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+ 	<link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+ 	<meta name="viewport" content="width=device-width, initial-scale=1">
+		<!-- Loading manifest -->
+	<link rel="manifest" href="../manifest.json">
+ 	<!-- Loading main and menu stylesheets -->
+ 	<link rel="stylesheet" href="../css/w3.css">
+ 	<link rel="stylesheet" href="../css/css.css">
+ 	<link rel="stylesheet" href="../css/menu.css">
+ 	<script src="../js/jquery-1.10.2.min.js"></script>
+ 	<script src="../js/controlpanel.js"></script>
+ 	<script src="../js/mousetrap.min.js"></script>
+    <script src="../js/pali-lookup-standalone.js"></script>
+
+ <script src="../js/suttaFiles.js"></script>
+<script>
+ // Script to open random Sutta
+ function openRandomSutta() {
+  const randomIndex = Math.floor(Math.random() * suttaFiles.length);
+  const selectedFile = suttaFiles[randomIndex];
+
+  // Get root path of your site 
+  const currentPath = location.pathname;
+  const rootPath = currentPath.split("/").slice(0, -2).join("/") + "/";
+
+  // Redirect to the correct file
+  window.location.href = rootPath + selectedFile;
+}
+</script>
+
+
+</head>
+ <body class="container">
+ <div class="header-background">
+ <!-- Header -->
+ <div class="w3-header w3-content w3-padding w3-left-align bwcontainer">
+ 	<div class="centered">
+ 		<button class="light-mode-button" aria-label="Bật Chế Độ Sáng" onclick="toggle_light_mode()">
+ 			<span></span>
+ 			<span></span>
+ 		</button>
+ 		<span class="box-lbl">Sáng/Tối</span>
+ 	</div> <!-- Centered -->
+ 		<a href="../home/index.html" id="bwlogo"><img src="../images/headerlogo.png" alt="Logo Lời Của Đức Phật" class="w3-image"></a>
+ 		<div class="w3-bar bwcontainer">
+ 			<div id="searchlinks">
+ 			<a href="../home/visearch.html"><span class="w3-bar-item"><i class="fa fa-search"></i>&nbsp;Tìm Tiếng Việt</span></a>
+ 			<a href="../home/palisearch.html"><span class="w3-bar-item"><i class="fa fa-search"></i>&nbsp;Tìm Tiếng Pali</span></a>
+ 			</div><!-- End Searchlinks div -->
+ 			<div class="help"><span><a href="../home/help.html"><img src="../images/help_icon.png" title="Trợ Giúp" alt="Help"></a></span></div>
+ 		</div> <!-- End w3-bar bwcontainer --> 	</div> <!-- End w3-header w3-content w3-padding w3-left-align bwcontainer -->
+ </div> <!-- End header-background -->
+ <!-- Top menu -->
+
+ <div class="w3-main w3-white bwcontainer2">
+ 	<div class="w3-button w3-padding-8 w3-left w3-hide-large" onclick="w3_open()">☰</div>
+ 		<div id="navbar" class="w3-hide-small w3-hide-medium bwcontainer3">
+ 			<ul id="css3menu0">
+ 				<li class="topfirst" id="home"><a href="../home/index.html" class="w3-hide-small">Trang Chủ</a></li>
+  				<li class="topmenu" id="dn"><a href="../dn/dn.html" class="pressed w3-hide-small">Trường Bộ Kinh</a></li>
+ 				<li class="topmenu" id="mn"><a href="../mn/mn.html" class="w3-hide-small">Trung Bộ Kinh</a></li>
+ 				<li class="topmenu" id="sn"><a href="../sn/sn.html" class="w3-hide-small"><i class="fa fa-caret-down"></i>&nbsp;Tương Ưng Bộ Kinh</a>
+ 					<ul>
+ 						<li><a href="../sn/sn01.html" class="w3-hide-small">Tập I - Thiên Có Kệ</a></li>
+ 						<li><a href="../sn/sn02.html" class="w3-hide-small">Tập II - Thiên Nhân Duyên</a></li>
+ 						<li><a href="../sn/sn03.html" class="w3-hide-small">Tập III - Thiên Uẩn</a></li>
+ 						<li><a href="../sn/sn04.html" class="w3-hide-small">Tập IV - Thiên Sáu Xứ</a></li>
+ 						<li><a href="../sn/sn05.html" class="w3-hide-small">Tập V - Thiên Ðại Phẩm</a></li>
+ 					</ul>
+ 				<li class="topmenu" id="an"><a href="../an/an.html" class="w3-hide-small"><i class="fa fa-caret-down"></i>&nbsp;Tăng Chi Bộ Kinh</a>
+ 					<ul>
+ 						<li><a href="../an/an1.html" class="w3-hide-small">Chương Một Pháp</a></li>
+ 						<li><a href="../an/an2.html" class="w3-hide-small">Chương Hai Pháp</a></li>
+ 						<li><a href="../an/an3.html" class="w3-hide-small">Chương Ba Pháp</a></li>
+ 						<li><a href="../an/an4.html" class="w3-hide-small">Chương Bốn Pháp</a></li>
+ 						<li><a href="../an/an5.html" class="w3-hide-small">Chương Năm Pháp</a></li>
+ 						<li><a href="../an/an6.html" class="w3-hide-small">Chương Sáu Pháp</a></li>
+ 						<li><a href="../an/an7.html" class="w3-hide-small">Chương Bảy Pháp</a></li>
+ 						<li><a href="../an/an8.html" class="w3-hide-small">Chương Tám Pháp</a></li>
+ 						<li><a href="../an/an9.html" class="w3-hide-small">Chương Chín Pháp</a></li>
+ 						<li><a href="../an/an10.html" class="w3-hide-small">Chương Mười Pháp</a></li>
+ 						<li><a href="../an/an11.html" class="w3-hide-small">Chương Mười Một Pháp</a></li>
+ 					</ul>
+ 				</li>
+ 				<li class="topmenu" id="kn"><a href="../kn/kn.html" class="w3-hide-small"><i class="fa fa-caret-down"></i>&nbsp;Tiểu Bộ Kinh</a>
+ 					<ul>
+ 						<li><a href="../kp/kp.html" class="w3-hide-small">Kinh Tiểu Tụng</a></li>
+ 						<li><a href="../dhp/dhp.html" class="w3-hide-small">Kinh Pháp Cú</a></li>
+ 						<li><a href="../snp/snp.html" class="w3-hide-small">Kinh Tập</a></li>
+ 						<li><a href="../ud/ud.html" class="w3-hide-small">Kinh Phật Tự Thuyết</a></li>
+ 						<li><a href="../it/it.html" class="w3-hide-small">Kinh Phật Thuyết Như Vậy</a></li>
+ 						<li><a href="../tha/tha.html" class="w3-hide-small">Trưởng Lão Tăng Kệ</a></li>
+ 						<li><a href="../thi/thi.html" class="w3-hide-small">Trưởng Lão Ni Kệ</a></li>
+ 					</ul>
+ 				</li>
+				<li class="toplast" id="rd"><a href="../rd/rd.html" class="w3-hide-small"></i>Kinh Ngẫu Nhiên Theo Nhóm</a>
+ 					</ul>
+ 				</li>
+ 			</ul>
+ 			</div>
+ 		</div> <!--navbar-->
+
+<!-- Sidebar (hidden by default) -->
+ <nav class="w3-sidebar w3-bar-block w3-card w3-border w3-top w3-animate-left w3-hide-large" id="mySidebar">
+ 	<a href="javascript:void(0)" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-times fa-2x red-color"></i>&nbsp;&nbsp;&nbsp;Close</a><!-- Hides the sidebar when clicked -->
+ 		<div class="w3-bar-block w3-white">
+ 			<a href="../home/index.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-home fa-lg"></i>&nbsp;&nbsp;&nbsp;Home</a>
+ 			<a href="../guide/guide.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Guide</a>
+ 			<a href="../dn/dn.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Trường Bộ Kinh</a>
+ 			<a href="../mn/mn.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Trung Bộ Kinh</a>
+ 			<a href="../sn/sn.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Tương Ưng Bộ Kinh</a>
+ 			<a href="../an/an.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Tăng Chi Bộ Kinh
+ 			<a href="../kn/kn.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Tiểu Bộ Kinh</a>
+			<a href="../rd/rd.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>Kinh Ngẫu Nhiên Theo Nhóm</a>
+ 		</div>
+ </nav>
+ 
+ 
+ 
+   <!-- !PAGE CONTENT! --> 
+<div class="w3-main w3-content w3-padding w3-left-align bwcontainer4">
+<div id="content">
+<h2>Majjhima Nikāya - Trung Bộ Kinh</h2>
+<h5><span style="font-style: italic;">Hoà Thượng Thích Minh Châu dịch Việt</span></h5>
+
+</div>
+
+<br>
+ 	<title>          Trung Bộ 2          </title>
+
+
+<p lang="vi" class="vi"; style="text-align: center">
+ Trung Bộ 2<br>
+<span lang="pi" class="pali">
+Majjhima Nikāya 2<br>
+</span>
+</p>
+
+<p lang="vi" class="vi"; style="text-align: center">
+<span lang="pi" class="pali">
+Sabbāsava Sutta<br>
+</span>
+Kinh Tất Cả Các Lậu Hoặc<br>
+</p>
+
+<p lang="vi" class="vi">
+Mở Đầu<br>
+Như vầy tôi nghe.<br>
+<span lang="pi" class="pali">
+Evaṁ me sutaṁ—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Một thời Thế Tôn ở Savatthi (Xá-vệ), tại Jetavana (Kỳ-đà Lâm), vườn ông Anāthapiṇḍika (Cấp Cô Ðộc).<br>
+<span lang="pi" class="pali">
+ekaṁ samayaṁ bhagavā sāvatthiyaṁ viharati jetavane anāthapiṇḍikassa ārāme.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Khi ở tại chỗ ấy, Thế Tôn gọi các Tỷ-kheo:<br>
+<span lang="pi" class="pali">
+Tatra kho bhagavā bhikkhū āmantesi:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Này các Tỷ-kheo!”<br>
+<span lang="pi" class="pali">
+“bhikkhavo”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Bạch Thế Tôn”, các Tỷ-kheo ấy vâng đáp Thế Tôn.<br>
+<span lang="pi" class="pali">
+“Bhadante”ti te bhikkhū bhagavato paccassosuṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Thế Tôn nói:<br>
+<span lang="pi" class="pali">
+Bhagavā etadavoca:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Này các Tỷ-kheo, Ta sẽ giảng cho các Người pháp môn phòng hộ tất cả lậu hoặc”.<br>
+<span lang="pi" class="pali">
+“sabbāsavasaṁvarapariyāyaṁ vo, bhikkhave, desessāmi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Hãy nghe và khéo tác ý. Ta sẽ nói”.<br>
+<span lang="pi" class="pali">
+Taṁ suṇātha, sādhukaṁ manasi karotha, bhāsissāmī”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Thưa vâng, bạch Thế Tôn”.<br>
+<span lang="pi" class="pali">
+“Evaṁ, bhante”ti kho te bhikkhū bhagavato paccassosuṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Thế Tôn nói như sau:<br>
+<span lang="pi" class="pali">
+Bhagavā etadavoca:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Tóm Lược<br>
+– Này các Tỷ-kheo, Ta giảng sự diệt tận các lậu hoặc cho người biết, cho người thấy, không phải cho người không biết, cho người không thấy.<br>
+<span lang="pi" class="pali">
+“Jānato ahaṁ, bhikkhave, passato āsavānaṁ khayaṁ vadāmi, no ajānato no apassato.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Và này các Tỷ-kheo, thế nào là sự diệt tận các lậu hoặc cho người biết, cho người thấy?<br>
+<span lang="pi" class="pali">
+Kiñca, bhikkhave, jānato kiñca passato āsavānaṁ khayaṁ vadāmi?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+có như lý tác ý và không như lý tác ý.<br>
+<span lang="pi" class="pali">
+Yoniso ca manasikāraṁ ayoniso ca manasikāraṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này các Tỷ-kheo, do không như lý tác ý, các lậu hoặc chưa sanh được sanh khởi, và các lậu hoặc đã sanh được tăng trưởng.<br>
+<span lang="pi" class="pali">
+Ayoniso, bhikkhave, manasikaroto anuppannā ceva āsavā uppajjanti, uppannā ca āsavā pavaḍḍhanti;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này các Tỷ-kheo, do như lý tác ý, các lậu hoặc chưa sanh không sanh khởi, và các lậu hoặc đã sanh được trừ diệt.<br>
+<span lang="pi" class="pali">
+yoniso ca kho, bhikkhave, manasikaroto anuppannā ceva āsavā na uppajjanti, uppannā ca āsavā pahīyanti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này các Tỷ-kheo, có những lậu hoặc phải do tri kiến được đoạn trừ, có những lậu hoặc phải do phòng hộ được đoạn trừ, có những lậu hoặc phải do thọ dụng được đoạn trừ, có những lậu hoặc phải do kham nhẫn được đoạn trừ, có những lậu hoặc phải do tránh né được đoạn trừ, có những lậu hoặc phải do trừ diệt được đoạn trừ, có những lậu hoặc phải do tu tập được đoạn trừ.<br>
+<span lang="pi" class="pali">
+Atthi, bhikkhave, āsavā dassanā pahātabbā, atthi āsavā saṁvarā pahātabbā, atthi āsavā paṭisevanā pahātabbā, atthi āsavā adhivāsanā pahātabbā, atthi āsavā parivajjanā pahātabbā, atthi āsavā vinodanā pahātabbā, atthi āsavā bhāvanā pahātabbā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Các Lậu Hoặc do Tri Kiến Được Đoạn Trừ<br>
+<span lang="pi" class="pali">
+Dassaāpahātabbaāsava<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này các Tỷ-kheo, và thế nào là các lậu hoặc phải do tri kiến được đoạn trừ?<br>
+<span lang="pi" class="pali">
+Katame ca, bhikkhave, āsavā dassanā pahātabbā?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này các Tỷ-kheo, ở đây có kẻ phàm phu ít nghe, không được thấy các bậc Thánh, không thuần thục pháp các bậc Thánh, không tu tập pháp các bậc Thánh, không được thấy các bậc Chơn nhơn, không thuần thục pháp các bậc Chơn nhơn, không tu tập pháp các bậc Chơn nhơn, không tuệ tri các pháp cần phải tác ý, không tuệ tri các pháp không cần phải tác ý;<br>
+<span lang="pi" class="pali">
+Idha, bhikkhave, assutavā puthujjano ariyānaṁ adassāvī ariyadhammassa akovido ariyadhamme avinīto, sappurisānaṁ adassāvī sappurisadhammassa akovido sappurisadhamme avinīto—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+vị này vì không tuệ tri các pháp cần phải tác ý, vì không tuệ tri các pháp không cần phải tác ý<br>
+<span lang="pi" class="pali">
+manasikaraṇīye dhamme nappajānāti, amanasikaraṇīye dhamme nappajānāti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+nên tác ý các pháp không cần phải tác ý và không tác ý các pháp cần phải tác ý.<br>
+<span lang="pi" class="pali">
+So manasikaraṇīye dhamme appajānanto amanasikaraṇīye dhamme appajānanto, ye dhammā na manasikaraṇīyā, te dhamme manasi karoti, ye dhammā manasikaraṇīyā te dhamme na manasi karoti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này các Tỷ-kheo, và thế nào là các pháp không cần phải tác ý mà vị ấy tác ý?<br>
+<span lang="pi" class="pali">
+Katame ca, bhikkhave, dhammā na manasikaraṇīyā ye dhamme manasi karoti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này các Tỷ-kheo, nghĩa là các pháp do vị ấy tác ý mà dục lậu chưa sanh được sanh khởi, hay dục lậu đã sanh được tăng trưởng;<br>
+<span lang="pi" class="pali">
+Yassa, bhikkhave, dhamme manasikaroto anuppanno vā kāmāsavo uppajjati, uppanno vā kāmāsavo pavaḍḍhati;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+hay hữu lậu chưa sanh được sanh khởi, hay hữu lậu đã sanh được tăng trưởng,<br>
+<span lang="pi" class="pali">
+anuppanno vā bhavāsavo uppajjati, uppanno vā bhavāsavo pavaḍḍhati;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+hay vô minh lậu chưa sanh được sanh khởi, hay vô minh lậu đã sanh được tăng trưởng.<br>
+<span lang="pi" class="pali">
+anuppanno vā avijjāsavo uppajjati, uppanno vā avijjāsavo pavaḍḍhati—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Những pháp ấy là những pháp không cần phải tác ý mà vị ấy tác ý.<br>
+<span lang="pi" class="pali">
+ime dhammā na manasikaraṇīyā ye dhamme manasi karoti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này các Tỷ-kheo, và thế nào là các pháp cần phải tác ý mà vị ấy không tác ý?<br>
+<span lang="pi" class="pali">
+Katame ca, bhikkhave, dhammā manasikaraṇīyā ye dhamme na manasi karoti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này các Tỷ-kheo, nghĩa là các pháp do vị ấy tác ý mà dục lậu chưa sanh không sanh khởi, hay dục lậu đã sanh được trừ diệt,<br>
+<span lang="pi" class="pali">
+Yassa, bhikkhave, dhamme manasikaroto anuppanno vā kāmāsavo na uppajjati, uppanno vā kāmāsavo pahīyati;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+hay hữu lậu chưa sanh không sanh khởi, hay hữu lậu đã sanh được trừ diệt,<br>
+<span lang="pi" class="pali">
+anuppanno vā bhavāsavo na uppajjati, uppanno vā bhavāsavo pahīyati;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+hay vô minh lậu chưa sanh không sanh khởi, hay vô minh lậu đã sanh được trừ diệt.<br>
+<span lang="pi" class="pali">
+anuppanno vā avijjāsavo na uppajjati, uppanno vā avijjāsavo pahīyati—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Những pháp ấy là những pháp cần phải tác ý mà các vị ấy không tác ý.<br>
+<span lang="pi" class="pali">
+ime dhammā manasikaraṇīyā ye dhamme na manasi karoti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Do vị ấy tác ý các pháp không nên tác ý, do vị ấy không tác ý các pháp cần phải tác ý, nên các lậu hoặc chưa sanh được sanh khởi, và các lậu hoặc đã sanh được tăng trưởng.<br>
+<span lang="pi" class="pali">
+Tassa amanasikaraṇīyānaṁ dhammānaṁ manasikārā manasikaraṇīyānaṁ dhammānaṁ amanasikārā anuppannā ceva āsavā uppajjanti uppannā ca āsavā pavaḍḍhanti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vị ấy không như lý tác ý như sau:<br>
+<span lang="pi" class="pali">
+So evaṁ ayoniso manasi karoti:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Ta có mặt trong thời quá khứ, hay ta không có mặt trong thời quá khứ? Ta có mặt trong thời quá khứ như thế nào? Ta có mặt trong thời quá khứ hình vóc như thế nào? Trước kia ta là gì và ta đã có mặt như thế nào trong thời quá khứ?<br>
+<span lang="pi" class="pali">
+‘ahosiṁ nu kho ahaṁ atītamaddhānaṁ? Na nu kho ahosiṁ atītamaddhānaṁ? Kiṁ nu kho ahosiṁ atītamaddhānaṁ? Kathaṁ nu kho ahosiṁ atītamaddhānaṁ? Kiṁ hutvā kiṁ ahosiṁ nu kho ahaṁ atītamaddhānaṁ?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ta sẽ có mặt trong thời vị lai hay ta sẽ không có mặt trong thời vị lai? Ta sẽ có mặt trong thời vị lai như thế nào? Ta sẽ có mặt trong thời vị lai, hình vóc như thế nào? Trước kia ta là gì và ta sẽ có mặt như thế nào trong thời vị lai?’<br>
+<span lang="pi" class="pali">
+Bhavissāmi nu kho ahaṁ anāgatamaddhānaṁ? Na nu kho bhavissāmi anāgatamaddhānaṁ? Kiṁ nu kho bhavissāmi anāgatamaddhānaṁ? Kathaṁ nu kho bhavissāmi anāgatamaddhānaṁ? Kiṁ hutvā kiṁ bhavissāmi nu kho ahaṁ anāgatamaddhānan’ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Hay nay vị ấy có nghi ngờ về mình trong thời hiện tại:<br>
+<span lang="pi" class="pali">
+Etarahi vā paccuppannamaddhānaṁ ajjhattaṁ kathaṅkathī hoti:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Ta có mặt hay ta không có mặt? Ta có mặt như thế nào? Ta có mặt hình vóc như thế nào? Chúng sanh này từ đâu đến? Và rồi nó sẽ đi đâu?”.<br>
+<span lang="pi" class="pali">
+‘ahaṁ nu khosmi? No nu khosmi? Kiṁ nu khosmi? Kathaṁ nu khosmi? Ayaṁ nu kho satto kuto āgato? So kuhiṁ gāmī bhavissatī’ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Với người không như lý tác ý như vậy, một trong sáu tà kiến này khởi lên:<br>
+<span lang="pi" class="pali">
+Tassa evaṁ ayoniso manasikaroto channaṁ diṭṭhīnaṁ aññatarā diṭṭhi uppajjati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+1. “Ta có tự ngã”, tà kiến này khởi lên với người ấy như thật, như chơn;<br>
+<span lang="pi" class="pali">
+‘Atthi me attā’ti vā assa saccato thetato diṭṭhi uppajjati;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+2. “Ta không có tự ngã”, tà kiến này khởi lên với người ấy như thật như chơn;<br>
+<span lang="pi" class="pali">
+‘natthi me attā’ti vā assa saccato thetato diṭṭhi uppajjati;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+3. “Do tự mình, ta tưởng tri ta có tự ngã”, tà kiến này khởi lên với người ấy như thật, như chơn;<br>
+<span lang="pi" class="pali">
+‘attanāva attānaṁ sañjānāmī’ti vā assa saccato thetato diṭṭhi uppajjati;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+4. “Do tự mình, ta tưởng tri ta không có tự ngã”, tà kiến này khởi lên với người ấy như thật, như chơn.<br>
+<span lang="pi" class="pali">
+‘attanāva anattānaṁ sañjānāmī’ti vā assa saccato thetato diṭṭhi uppajjati;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+5. “Không do tự mình, ta tưởng tri ta có tự ngã”, tà kiến này khởi lên với người ấy như thật, như chơn;<br>
+<span lang="pi" class="pali">
+‘anattanāva attānaṁ sañjānāmī’ti vā assa saccato thetato diṭṭhi uppajjati;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+hay tà kiến này khởi lên với người ấy:<br>
+<span lang="pi" class="pali">
+atha vā panassa evaṁ diṭṭhi hoti:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+6. “Chính tự ngã của ta nói, cảm giác, hưởng thọ quả báo các nghiệp thiện ác đã làm chỗ này, chỗ kia, chính tự ngã ấy của ta là thường trú, thường hằng, hằng tồn, không chuyển biến, và sẽ vĩnh viễn tồn tại”.<br>
+<span lang="pi" class="pali">
+‘yo me ayaṁ attā vado vedeyyo tatra tatra kalyāṇapāpakānaṁ kammānaṁ vipākaṁ paṭisaṁvedeti so kho pana me ayaṁ attā nicco dhuvo sassato avipariṇāmadhammo sassatisamaṁ tatheva ṭhassatī’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này các Tỷ-kheo, như vậy gọi là tà kiến, kiến trù lâm, kiến hoang vu, kiến hý luận, kiến tranh chấp, kiến kiết phược.<br>
+<span lang="pi" class="pali">
+Idaṁ vuccati, bhikkhave, diṭṭhigataṁ diṭṭhigahanaṁ diṭṭhikantāraṁ diṭṭhivisūkaṁ diṭṭhivipphanditaṁ diṭṭhisaṁyojanaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này các Tỷ-kheo, trói buộc bởi kiến kiết sử, kẻ phàm phu ít nghe không được giải thoát khỏi sanh, già, chết, sầu, bi, khổ, ưu, não.<br>
+<span lang="pi" class="pali">
+Diṭṭhisaṁyojanasaṁyutto, bhikkhave, assutavā puthujjano na parimuccati jātiyā jarāya maraṇena sokehi paridevehi dukkhehi domanassehi upāyāsehi;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ta nói kẻ ấy không thoát khỏi khổ đau.<br>
+<span lang="pi" class="pali">
+‘na parimuccati dukkhasmā’ti vadāmi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này các Tỷ-kheo, và vị Thánh đệ tử nghe nhiều, được thấy các bậc Thánh, thuần thục pháp các bậc Thánh, tu tập pháp các bậc Thánh; được thấy các bậc Chơn nhơn, thuần thục pháp các bậc Chơn nhơn, tu tập pháp các bậc Chơn nhơn, tuệ tri các pháp cần phải tác ý, tuệ tri các pháp không cần phải tác ý.<br>
+<span lang="pi" class="pali">
+Sutavā ca kho, bhikkhave, ariyasāvako—<br>
+ariyānaṁ dassāvī ariyadhammassa kovido ariyadhamme suvinīto, sappurisānaṁ dassāvī sappurisadhammassa kovido sappurisadhamme suvinīto—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vị này, nhờ tuệ tri các pháp cần phải tác ý, nhờ tuệ tri các pháp không cần phải tác ý,<br>
+<span lang="pi" class="pali">
+manasikaraṇīye dhamme pajānāti amanasikaraṇīye dhamme pajānāti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+nên không tác ý các pháp không cần phải tác ý và tác ý các pháp cần phải tác ý.<br>
+<span lang="pi" class="pali">
+So manasikaraṇīye dhamme pajānanto amanasikaraṇīye dhamme pajānanto ye dhammā na manasikaraṇīyā te dhamme na manasi karoti, ye dhammā manasikaraṇīyā te dhamme manasi karoti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Và này các Tỷ-kheo, thế nào là các pháp không cần phải tác ý và vị này không tác ý?<br>
+<span lang="pi" class="pali">
+Katame ca, bhikkhave, dhammā na manasikaraṇīyā ye dhamme na manasi karoti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này các Tỷ-kheo, những pháp nào do vị ấy tác ý mà dục lậu chưa sanh được sanh khởi, hay dục lậu đã sanh được tăng trưởng;<br>
+<span lang="pi" class="pali">
+Yassa, bhikkhave, dhamme manasikaroto anuppanno vā kāmāsavo uppajjati, uppanno vā kāmāsavo pavaḍḍhati;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+hay hữu lậu chưa sanh được sanh khởi, hay hữu lậu đã sanh được tăng trưởng;<br>
+<span lang="pi" class="pali">
+anuppanno vā bhavāsavo uppajjati, uppanno vā bhavāsavo pavaḍḍhati;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+hay vô minh lậu chưa sanh được sanh khởi, hay vô minh lậu đã sanh được tăng trưởng.<br>
+<span lang="pi" class="pali">
+anuppanno vā avijjāsavo uppajjati, uppanno vā avijjāsavo pavaḍḍhati—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ðó là những pháp không nên tác ý và vị ấy không tác ý.<br>
+<span lang="pi" class="pali">
+ime dhammā na manasikaraṇīyā, ye dhamme na manasi karoti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Và này các Tỷ-kheo, thế nào là các pháp cần phải tác ý và vị ấy tác ý?<br>
+<span lang="pi" class="pali">
+Katame ca, bhikkhave, dhammā manasikaraṇīyā ye dhamme manasi karoti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này các Tỷ-kheo, những pháp nào do vị ấy tác ý mà dục lậu chưa sanh không sanh khởi, hay dục lậu đã sanh được trừ diệt;<br>
+<span lang="pi" class="pali">
+Yassa, bhikkhave, dhamme manasikaroto anuppanno vā kāmāsavo na uppajjati, uppanno vā kāmāsavo pahīyati;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+hay hữu lậu chưa sanh không sanh khởi, hay hữu lậu đã sanh được trừ diệt;<br>
+<span lang="pi" class="pali">
+anuppanno vā bhavāsavo na uppajjati, uppanno vā bhavāsavo pahīyati;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+hay vô minh lậu chưa sanh không sanh khởi, hay vô minh lậu đã sanh được trừ diệt,<br>
+<span lang="pi" class="pali">
+anuppanno vā avijjāsavo na uppajjati, uppanno vā avijjāsavo pahīyati—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+đó là những pháp cần phải tác ý và vị ấy tác ý.<br>
+<span lang="pi" class="pali">
+me dhammā manasikaraṇīyā ye dhamme manasi karoti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Nhờ vị ấy không tác ý các pháp không cần phải tác ý, tác ý các pháp cần phải tác ý nên các lậu hoặc chưa sanh không sanh khởi và các lậu hoặc đã sanh được trừ diệt.<br>
+<span lang="pi" class="pali">
+Tassa amanasikaraṇīyānaṁ dhammānaṁ amanasikārā manasikaraṇīyānaṁ dhammānaṁ manasikārā anuppannā ceva āsavā na uppajjanti, uppannā ca āsavā pahīyanti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vị ấy như lý tác ý: “Ðây là khổ”, như lý tác ý: “Ðây là khổ tập”, như lý tác ý: “Ðây là khổ diệt”, như lý tác ý: “Ðây là con đường đưa đến khổ diệt”.<br>
+<span lang="pi" class="pali">
+So ‘idaṁ dukkhan’ti yoniso manasi karoti, ‘ayaṁ dukkhasamudayo’ti yoniso manasi karoti, ‘ayaṁ dukkhanirodho’ti yoniso manasi karoti, ‘ayaṁ dukkhanirodhagāminī paṭipadā’ti yoniso manasi karoti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Nhờ vị ấy tác ý như vậy, ba kiết sử được trừ diệt:<br>
+<span lang="pi" class="pali">
+Tassa evaṁ yoniso manasikaroto tīṇi saṁyojanāni pahīyanti—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+thân kiến, nghi, giới cấm thủ.<br>
+<span lang="pi" class="pali">
+sakkāyadiṭṭhi, vicikicchā, sīlabbataparāmāso.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này các Tỷ-kheo, các pháp ấy được gọi là các lậu hoặc phải do tri kiến được đoạn trừ.<br>
+<span lang="pi" class="pali">
+Ime vuccanti, bhikkhave, āsavā dassanā pahātabbā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Các Lậu Hoặc Phải Do Phòng Hộ Được Đoạn Trừ<br>
+<span lang="pi" class="pali">
+Saṁvarāpahātabbaāsava<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Và này các Tỷ-kheo, thế nào là các lậu hoặc phải do phòng hộ được đoạn trừ?<br>
+<span lang="pi" class="pali">
+Katame ca, bhikkhave, āsavā saṁvarā pahātabbā?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ở đây, có Tỷ-kheo như lý giác sát, sống phòng hộ với sự phòng hộ mắt.<br>
+<span lang="pi" class="pali">
+Idha, bhikkhave, bhikkhu paṭisaṅkhā yoniso cakkhundriyasaṁvarasaṁvuto viharati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này các Tỷ-kheo, nếu Tỷ-kheo ấy sống không phòng hộ với sự phòng hộ mắt, các lậu hoặc tàn hại và nhiệt não có thể khởi lên. Nếu sống phòng hộ với sự phòng hộ mắt, các lậu hoặc tàn hại và nhiệt não ấy không còn nữa.<br>
+<span lang="pi" class="pali">
+Yañhissa, bhikkhave, cakkhundriyasaṁvaraṁ asaṁvutassa viharato uppajjeyyuṁ āsavā vighātapariḷāhā, cakkhundriyasaṁvaraṁ saṁvutassa viharato evaṁsa te āsavā vighātapariḷāhā na honti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vị ấy như lý giác sát, sống phòng hộ với sự phòng hộ lỗ tai.<br>
+<span lang="pi" class="pali">
+Paṭisaṅkhā yoniso sotindriyasaṁvarasaṁvuto viharati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này các Tỷ-kheo, nếu Tỷ-kheo ấy sống không phòng hộ với sự phòng hộ lỗ tai, các lậu hoặc tàn hại và nhiệt não có thể khởi lên. Nếu sống phòng hộ với sự phòng hộ lỗ tai, các lậu hoặc tàn hại và nhiệt não ấy không còn nữa.<br>
+<span lang="pi" class="pali">
+Yañhissa, bhikkhave, sotindriyasaṁvaraṁ asaṁvutassa viharato uppajjeyyuṁ āsavā vighātapariḷāhā, sotindriyasaṁvaraṁ saṁvutassa viharato evaṁsa te āsavā vighātapariḷāhā na honti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vị ấy như lý giác sát, sống phòng hộ với sự phòng hộ lỗ mũi.<br>
+<span lang="pi" class="pali">
+Paṭisaṅkhā yoniso ghānindriyasaṁvarasaṁvuto viharati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này các Tỷ-kheo, nếu Tỷ-kheo ấy sống không phòng hộ với sự phòng hộ lỗ mũi, các lậu hoặc tàn hại và nhiệt não có thể khởi lên. Nếu sống phòng hộ với sự phòng hộ lỗ mũi, các lậu hoặc tàn hại và nhiệt não ấy không còn nữa.<br>
+<span lang="pi" class="pali">
+Yañhissa, bhikkhave, ghānindriyasaṁvaraṁ asaṁvutassa viharato uppajjeyyuṁ āsavā vighātapariḷāhā, ghānindriyasaṁvaraṁ saṁvutassa viharato evaṁsa te āsavā vighātapariḷāhā na honti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vị ấy như lý giác sát, sống phòng hộ với sự phòng hộ lưỡi.<br>
+<span lang="pi" class="pali">
+Paṭisaṅkhā yoniso jivhindriyasaṁvarasaṁvuto viharati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này các Tỷ-kheo, nếu Tỷ-kheo ấy sống không phòng hộ với sự phòng hộ lưỡi, các lậu hoặc tàn hại và nhiệt não có thể khởi lên. Nếu sống phòng hộ với sự phòng hộ lưỡi, các lậu hoặc tàn hại và nhiệt não ấy không còn nữa.<br>
+<span lang="pi" class="pali">
+Yañhissa, bhikkhave, jivhindriyasaṁvaraṁ asaṁvutassa viharato uppajjeyyuṁ āsavā vighātapariḷāhā, jivhindriyasaṁvaraṁ saṁvutassa viharato evaṁsa te āsavā vighātapariḷāhā na honti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vị ấy như lý giác sát, sống phòng hộ với sự phòng hộ thân.<br>
+<span lang="pi" class="pali">
+Paṭisaṅkhā yoniso kāyindriyasaṁvarasaṁvuto viharati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này các Tỷ-kheo, nếu Tỷ-kheo ấy sống không phòng hộ với sự phòng hộ thân, các lậu hoặc tàn hại và nhiệt não có thể khởi lên. Nếu sống phòng hộ với sự phòng hộ thân, các lậu hoặc tàn hại và nhiệt não ấy không còn nữa.<br>
+<span lang="pi" class="pali">
+Yañhissa, bhikkhave, kāyindriyasaṁvaraṁ asaṁvutassa viharato uppajjeyyuṁ āsavā vighātapariḷāhā, kāyindriyasaṁvaraṁ saṁvutassa viharato evaṁsa te āsavā vighātapariḷāhā na honti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vị ấy như lý giác sát, sống phòng hộ với sự phòng hộ ý.<br>
+<span lang="pi" class="pali">
+Paṭisaṅkhā yoniso manindriyasaṁvarasaṁvuto viharati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này các Tỷ-kheo, nếu Tỷ-kheo ấy sống không phòng hộ với sự phòng hộ ý, các lậu hoặc tàn hại và nhiệt não ấy có thể khởi lên. Nếu sống phòng hộ ý, các lậu hoặc tàn hại và nhiệt não ấy không còn nữa.<br>
+<span lang="pi" class="pali">
+Yañhissa, bhikkhave, manindriyasaṁvaraṁ asaṁvutassa viharato uppajjeyyuṁ āsavā vighātapariḷāhā, manindriyasaṁvaraṁ saṁvutassa viharato evaṁsa te āsavā vighātapariḷāhā na honti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này các Tỷ-kheo, nếu Tỷ-kheo ấy sống không phòng hộ với sự phòng hộ, các lậu hoặc tàn hại và nhiệt não ấy có thể khởi lên. Nếu sống phòng hộ, các lậu hoặc tàn hại và nhiệt não ấy không còn nữa.<br>
+<span lang="pi" class="pali">
+Yañhissa, bhikkhave, saṁvaraṁ asaṁvutassa viharato uppajjeyyuṁ āsavā vighātapariḷāhā, saṁvaraṁ saṁvutassa viharato evaṁsa te āsavā vighātapariḷāhā na honti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Các Lậu Hoặc Phải Do Thọ Dụng Được Đoạn Trừ<br>
+<span lang="pi" class="pali">
+Paṭisevanāpahātabbaāsava<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Và này các Tỷ-kheo, thế nào là các lậu hoặc phải do thọ dụng được đoạn trừ?<br>
+<span lang="pi" class="pali">
+Katame ca, bhikkhave, āsavā paṭisevanā pahātabbā?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này các Tỷ-kheo, ở đây, Tỷ-kheo như lý giác sát, thọ dụng y phục,<br>
+<span lang="pi" class="pali">
+Idha, bhikkhave, bhikkhu paṭisaṅkhā yoniso cīvaraṁ paṭisevati:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+chỉ để ngăn ngừa lạnh, ngăn ngừa nóng, ngăn ngừa sự xúc chạm của ruồi, muỗi, gió, sức nóng mặt trời, các loài bò sát, chỉ với mục đích che đậy sự trần truồng.<br>
+<span lang="pi" class="pali">
+‘yāvadeva sītassa paṭighātāya, uṇhassa paṭighātāya, ḍaṁsamakasavātātapasarīsapasamphassānaṁ paṭighātāya, yāvadeva hirikopīnappaṭicchādanatthaṁ’.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vị ấy như lý giác sát, thọ dụng món ăn khất thực:<br>
+<span lang="pi" class="pali">
+Paṭisaṅkhā yoniso piṇḍapātaṁ paṭisevati:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+không phải để vui đùa, không phải để đam mê, không phải để trang sức, không phải để tự làm đẹp mình, mà chỉ để thân này được sống lâu và được bảo dưỡng, để thân này khỏi bị thương hại, để hỗ trợ phạm hạnh, nghĩ rằng: “Như vậy, ta diệt trừ các cảm thọ cũ và không cho khởi lên các cảm thọ mới, và ta sẽ không có lỗi lầm, sống được an ổn”.<br>
+<span lang="pi" class="pali">
+‘neva davāya, na madāya, na maṇḍanāya, na vibhūsanāya, yāvadeva imassa kāyassa ṭhitiyā yāpanāya, vihiṁsūparatiyā, brahmacariyānuggahāya, iti purāṇañca vedanaṁ paṭihaṅkhāmi navañca vedanaṁ na uppādessāmi, yātrā ca me bhavissati anavajjatā ca phāsuvihāro ca’.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vị ấy như lý giác sát, thọ dụng sàng tọa,<br>
+<span lang="pi" class="pali">
+Paṭisaṅkhā yoniso senāsanaṁ paṭisevati:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+chỉ để ngăn ngừa lạnh, ngăn ngừa nóng, ngăn ngừa sự xúc chạm của ruồi, muỗi, gió, sức nóng mặt trời, các loại bò sát, chỉ để giải trừ nguy hiểm của thời tiết, chỉ với mục đích sống độc cư an tịnh.<br>
+<span lang="pi" class="pali">
+‘yāvadeva sītassa paṭighātāya, uṇhassa paṭighātāya, ḍaṁsamakasavātātapasarīsapasamphassānaṁ paṭighātāya, yāvadeva utuparissayavinodanapaṭisallānārāmatthaṁ’.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vị ấy như lý giác sát thọ dụng dược phẩm trị bệnh,<br>
+<span lang="pi" class="pali">
+Paṭisaṅkhā yoniso gilānappaccayabhesajjaparikkhāraṁ paṭisevati:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+chỉ để ngăn chặn các cảm giác khổ thống đã sanh, để được ly khổ hoàn toàn.<br>
+<span lang="pi" class="pali">
+‘yāvadeva uppannānaṁ veyyābādhikānaṁ vedanānaṁ paṭighātāya, abyābajjhaparamatāya’.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này các Tỷ-kheo, nếu vị ấy không thọ dụng như vậy, các lậu hoặc tàn hại và nhiệt não có thể khởi lên. Nếu vị ấy thọ dụng như vậy, các lậu hoặc tàn hại và nhiệt não ấy không còn nữa.<br>
+<span lang="pi" class="pali">
+Yañhissa, bhikkhave, appaṭisevato uppajjeyyuṁ āsavā vighātapariḷāhā, paṭisevato evaṁsa te āsavā vighātapariḷāhā na honti<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này các Tỷ-kheo, các pháp ấy được gọi là các lậu hoặc phải do thọ dụng được đoạn trừ.<br>
+<span lang="pi" class="pali">
+Ime vuccanti, bhikkhave, āsavā paṭisevanā pahātabbā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Các Lậu Hoặc Phải Do Kham Nhẫn Được Đoạn Trừ<br>
+<span lang="pi" class="pali">
+Adhivāsanāpahātabbaāsava<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Và này các Tỷ-kheo, thế nào là các lậu hoặc phải do kham nhẫn được đoạn trừ?<br>
+<span lang="pi" class="pali">
+Katame ca, bhikkhave, āsavā adhivāsanā pahātabbā?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này các Tỷ-kheo, ở đây, có Tỷ-kheo như lý giác sát, kham nhẫn lạnh, nóng, đói, khát, sự xúc chạm của ruồi, muỗi, gió, sức nóng mặt trời, các loài bò sát; kham nhẫn những cách nói mạ lị phỉ báng. Vị ấy có tánh kham nhẫn các cảm thọ về thân, những cảm thọ thống khổ, khốc liệt, đau nhói, nhức nhối, không sung sướng, không thích thú, chết điếng người.<br>
+<span lang="pi" class="pali">
+Idha, bhikkhave, bhikkhu paṭisaṅkhā yoniso khamo hoti sītassa uṇhassa, jighacchāya pipāsāya. Ḍaṁsamakasavātātapasarīsapasamphassānaṁ, duruttānaṁ durāgatānaṁ vacanapathānaṁ, uppannānaṁ sārīrikānaṁ vedanānaṁ dukkhānaṁ tibbānaṁ kharānaṁ kaṭukānaṁ asātānaṁ amanāpānaṁ pāṇaharānaṁ adhivāsakajātiko hoti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này các Tỷ-kheo, nếu vị ấy không kham nhẫn như vậy, các lậu hoặc tàn hại và nhiệt não có thể khởi lên. Nếu vị ấy kham nhẫn như vậy, các lậu hoặc tàn hại và nhiệt não ấy không còn nữa.<br>
+<span lang="pi" class="pali">
+Yañhissa, bhikkhave, anadhivāsayato uppajjeyyuṁ āsavā vighātapariḷāhā, adhivāsayato evaṁsa te āsavā vighātapariḷāhā na honti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này các Tỷ-kheo, các pháp ấy được gọi là các lậu hoặc phải do kham nhẫn được đoạn trừ.<br>
+<span lang="pi" class="pali">
+Ime vuccanti, bhikkhave, āsavā adhivāsanā pahātabbā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Các Lậu Hoặc Phải Do Tránh Né Được Đoạn Trừ<br>
+<span lang="pi" class="pali">
+Parivajjanāpahātabbaāsava<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Và này các Tỷ-kheo, thế nào là các lậu hoặc phải do tránh né được đoạn trừ?<br>
+<span lang="pi" class="pali">
+Katame ca, bhikkhave, āsavā parivajjanā pahātabbā?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này các Tỷ-kheo, ở đây, Tỷ-kheo như lý giác sát tránh né voi dữ, tránh né ngựa dữ, tránh né bò dữ, tránh né chó dữ, rắn, khúc cây, gai góc, hố sâu, vực núi, ao nước nhớp, vũng nước.<br>
+<span lang="pi" class="pali">
+Idha, bhikkhave, bhikkhu paṭisaṅkhā yoniso caṇḍaṁ hatthiṁ parivajjeti, caṇḍaṁ assaṁ parivajjeti, caṇḍaṁ goṇaṁ parivajjeti, caṇḍaṁ kukkuraṁ parivajjeti, ahiṁ khāṇuṁ kaṇṭakaṭṭhānaṁ sobbhaṁ papātaṁ candanikaṁ oḷigallaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Có những chỗ ngồi không xứng đáng ngồi, những trú xứ không nên lai vãng, những bạn bè ác độc mà nếu giao du thì bị các vị đồng phạm hạnh có trí nghi ngờ, khinh thường; vị ấy như lý giác sát tránh né chỗ ngồi không xứng đáng ấy, trú xứ không nên lai vãng ấy và các bạn độc ác ấy.<br>
+<span lang="pi" class="pali">
+Yathārūpe anāsane nisinnaṁ yathārūpe agocare carantaṁ yathārūpe pāpake mitte bhajantaṁ viññū sabrahmacārī pāpakesu ṭhānesu okappeyyuṁ, so tañca anāsanaṁ tañca agocaraṁ te ca pāpake mitte paṭisaṅkhā yoniso parivajjeti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này các Tỷ-kheo, nếu vị ấy không tránh né như vậy, các lậu hoặc tàn hại và nhiệt não ấy có thể khởi lên. Nếu vị ấy tránh né như vậy, các lậu hoặc tàn hại và nhiệt não ấy không còn nữa.<br>
+<span lang="pi" class="pali">
+Yañhissa, bhikkhave, aparivajjayato uppajjeyyuṁ āsavā vighātapariḷāhā, parivajjayato evaṁsa te āsavā vighātapariḷāhā na honti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này các Tỷ-kheo, các pháp ấy được gọi là các lậu hoặc phải do tránh né được đoạn trừ.<br>
+<span lang="pi" class="pali">
+Ime vuccanti, bhikkhave, āsavā parivajjanā pahātabbā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Các Lậu Hoặc Phải Do Trừ Diệt Được Đoạn Trừ<br>
+<span lang="pi" class="pali">
+Vinodanāpahātabbaāsava<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Và này các Tỷ-kheo, thế nào là các lậu hoặc phải do trừ diệt được đoạn trừ?<br>
+<span lang="pi" class="pali">
+Katame ca, bhikkhave, āsavā vinodanā pahātabbā?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này các Tỷ-kheo, ở đây, Tỷ-kheo như lý giác sát không có chấp nhận dục niệm đã khởi lên, từ bỏ, trừ diệt, diệt tận, không cho tồn tại (dục niệm ấy); không có chấp nhận sân niệm đã khởi lên, từ bỏ, trừ diệt, diệt tận, không cho tồn tại (sân niệm ấy); không có chấp nhận hại niệm đã khởi lên, từ bỏ, trừ diệt, diệt tận, không cho tồn tại (hại niệm ấy); không chấp nhận các ác bất thiện pháp luôn luôn khởi lên, từ bỏ, trừ diệt, diệt tận, không cho tồn tại (các ác bất thiện pháp ấy).<br>
+<span lang="pi" class="pali">
+Idha, bhikkhave, bhikkhu paṭisaṅkhā yoniso uppannaṁ kāmavitakkaṁ nādhivāseti pajahati vinodeti byantīkaroti anabhāvaṁ gameti, uppannaṁ byāpādavitakkaṁ …pe… uppannaṁ vihiṁsāvitakkaṁ …pe… uppannuppanne pāpake akusale dhamme nādhivāseti pajahati vinodeti byantīkaroti anabhāvaṁ gameti.<br>
+Idha, bhikkhave, bhikkhu paṭisaṅkhā yoniso uppannaṁ kāmavitakkaṁ nādhivāseti pajahati vinodeti byantīkaroti anabhāvaṁ gameti, uppannaṁ byāpādavitakkaṁ nādhivāseti pajahati vinodeti byantīkaroti anabhāvaṁ gameti, uppannaṁ vihiṁsāvitakkaṁ nādhivāseti pajahati vinodeti byantīkaroti anabhāvaṁ gameti, uppannuppanne pāpake akusale dhamme nādhivāseti pajahati vinodeti byantīkaroti anabhāvaṁ gameti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này các Tỷ-kheo, nếu vị ấy không trừ diệt như vậy, các lậu hoặc tàn hại và nhiệt não ấy có thể khởi lên. Nếu vị ấy trừ diệt như vậy, các lậu hoặc tàn hại và nhiệt não ấy không còn nữa.<br>
+<span lang="pi" class="pali">
+Yañhissa, bhikkhave, avinodayato uppajjeyyuṁ āsavā vighātapariḷāhā, vinodayato evaṁsa te āsavā vighātapariḷāhā na honti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này các Tỷ-kheo, các pháp ấy được gọi là các lậu hoặc phải do trừ diệt được đoạn diệt.<br>
+<span lang="pi" class="pali">
+Ime vuccanti, bhikkhave, āsavā vinodanā pahātabbā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Các Lậu Hoặc Phải Do Tu Tập Được Đoạn Trừ<br>
+<span lang="pi" class="pali">
+Bhāvanāpahātabbaāsava<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Và này các Tỷ-kheo, thế nào là các lậu hoặc phải do tu tập được đoạn trừ?<br>
+<span lang="pi" class="pali">
+Katame ca, bhikkhave, āsavā bhāvanā pahātabbā?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này các Tỷ-kheo, ở đây, Tỷ-kheo như lý giác sát tu tập niệm giác chi, niệm giác chi này y viễn ly, y ly tham, y đoạn diệt, hướng đến từ bỏ;<br>
+<span lang="pi" class="pali">
+Idha, bhikkhave, bhikkhu paṭisaṅkhā yoniso satisambojjhaṅgaṁ bhāveti vivekanissitaṁ virāganissitaṁ nirodhanissitaṁ vossaggapariṇāmiṁ;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này các Tỷ-kheo, ở đây, Tỷ-kheo như lý giác sát tu tập trạch pháp giác chi, trạch pháp giác chi này y viễn ly, y ly tham, y đoạn diệt, hướng đến từ bỏ;<br>
+<span lang="pi" class="pali">
+Idha, bhikkhave, bhikkhu paṭisaṅkhā yoniso dhammavicayasambojjhaṅgaṁ bhāveti vivekanissitaṁ virāganissitaṁ nirodhanissitaṁ vossaggapariṇāmiṁ;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này các Tỷ-kheo, ở đây, Tỷ-kheo như lý giác sát tu tập tinh tấn giác chi, tinh tấn giác chi này y viễn ly, y ly tham, y đoạn diệt, hướng đến từ bỏ;<br>
+<span lang="pi" class="pali">
+Idha, bhikkhave, bhikkhu paṭisaṅkhā yoniso vīriyasambojjhaṅgaṁ bhāveti vivekanissitaṁ virāganissitaṁ nirodhanissitaṁ vossaggapariṇāmiṁ;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này các Tỷ-kheo, ở đây, Tỷ-kheo như lý giác sát tu tập hỷ giác chi, hỷ giác chi này y viễn ly, y ly tham, y đoạn diệt, hướng đến từ bỏ;<br>
+<span lang="pi" class="pali">
+Idha, bhikkhave, bhikkhu paṭisaṅkhā yoniso pītisambojjhaṅgaṁ bhāveti vivekanissitaṁ virāganissitaṁ nirodhanissitaṁ vossaggapariṇāmiṁ;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này các Tỷ-kheo, ở đây, Tỷ-kheo như lý giác sát tu tập khinh an giác chi, khinh an giác chi này y viễn ly, y ly tham, y đoạn diệt, hướng đến từ bỏ;<br>
+<span lang="pi" class="pali">
+Idha, bhikkhave, bhikkhu paṭisaṅkhā yoniso passaddhisambojjhaṅgaṁ bhāveti vivekanissitaṁ virāganissitaṁ nirodhanissitaṁ vossaggapariṇāmiṁ;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này các Tỷ-kheo, ở đây, Tỷ-kheo như lý giác sát tu tập định giác chi, định giác chi này y viễn ly, y ly tham, y đoạn diệt, hướng đến từ bỏ;<br>
+<span lang="pi" class="pali">
+Idha, bhikkhave, bhikkhu paṭisaṅkhā yoniso samādhisambojjhaṅgaṁ bhāveti vivekanissitaṁ virāganissitaṁ nirodhanissitaṁ vossaggapariṇāmiṁ;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này các Tỷ-kheo, ở đây, Tỷ-kheo như lý giác sát tu tập xả giác chi, xả giác chi này y viễn ly, y ly tham, y đoạn diệt, hướng đến từ bỏ;8<br>
+<span lang="pi" class="pali">
+Idha, bhikkhave, bhikkhu paṭisaṅkhā yoniso upekkhāsambojjhaṅgaṁ bhāveti vivekanissitaṁ virāganissitaṁ nirodhanissitaṁ vossaggapariṇāmiṁ;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này các Tỷ-kheo, nếu vị ấy không tu tập như vậy, các lậu hoặc tàn hại và nhiệt não ấy có thể khởi lên. Nếu vị ấy tu tập như vậy, các lậu hoặc tàn hại và nhiệt não ấy không còn nữa.<br>
+<span lang="pi" class="pali">
+Yañhissa, bhikkhave, abhāvayato uppajjeyyuṁ āsavā vighātapariḷāhā, bhāvayato evaṁsa te āsavā vighātapariḷāhā na honti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này các Tỷ-kheo, các pháp ấy được gọi là các lậu hoặc phải do tu tập được đoạn trừ.<br>
+<span lang="pi" class="pali">
+Ime vuccanti, bhikkhave, āsavā bhāvanā pahātabbā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Kết Luận<br>
+Này các Tỷ-kheo, đối với Tỷ-kheo những lậu hoặc nào phải do tri kiến được đoạn trừ đã được tri kiến đoạn trừ, những lậu hoặc nào phải do phòng hộ được đoạn trừ đã được phòng hộ đoạn trừ, những lậu hoặc nào phải do thọ dụng được đoạn trừ đã được thọ dụng đoạn trừ, những lậu hoặc nào phải do kham nhẫn được đoạn trừ đã được kham nhẫn đoạn trừ, những lậu hoặc nào phải do tránh né được đoạn trừ đã được tránh né đoạn trừ, những lậu hoặc nào phải do trừ diệt được đoạn trừ đã được trừ diệt đoạn trừ, những lậu hoặc nào phải do tu tập được đoạn trừ đã được tu tập đoạn trừ;<br>
+<span lang="pi" class="pali">
+Yato kho, bhikkhave, bhikkhuno ye āsavā dassanā pahātabbā te dassanā pahīnā honti, ye āsavā saṁvarā pahātabbā te saṁvarā pahīnā honti, ye āsavā paṭisevanā pahātabbā te paṭisevanā pahīnā honti, ye āsavā adhivāsanā pahātabbā te adhivāsanā pahīnā honti, ye āsavā parivajjanā pahātabbā te parivajjanā pahīnā honti, ye āsavā vinodanā pahātabbā te vinodanā pahīnā honti, ye āsavā bhāvanā pahātabbā te bhāvanā pahīnā honti;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+này các Tỷ-kheo, Tỷ-kheo ấy được gọi là đã sống phòng hộ với sự phòng hộ tất cả lậu hoặc, đã đoạn diệt khát ái, đã thoát ly kiết sử, đã chánh quán kiêu mạn, đã diệt tận khổ đau.<br>
+<span lang="pi" class="pali">
+ayaṁ vuccati, bhikkhave: ‘bhikkhu sabbāsavasaṁvarasaṁvuto viharati, acchecchi taṇhaṁ, vivattayi saṁyojanaṁ, sammā mānābhisamayā antamakāsi dukkhassā’”ti<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Thế Tôn thuyết giảng như vậy.<br>
+<span lang="pi" class="pali">
+Idamavoca bhagavā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Các Tỷ-kheo ấy hoan hỷ, tín thọ lời dạy của Thế Tôn.<br>
+<span lang="pi" class="pali">
+Attamanā te bhikkhū bhagavato bhāsitaṁ abhinandunti.<br>
+</span>
+</p>
+
+
+
+<!-- COPY CONTENT SUTTA Ở ĐÂY -->
+
+
+
+<br>
+<p><p style="text-align: right;font-style: italic;">Hoà Thượng Thích Minh Châu dịch Việt</span></p>
+
+
+
+</section>  <!-- End English and Pali -->
+<div id="nextprev"><a id="previous-sutta" href="./mn1.html#content"></a><a id="next-sutta" href="./mn3.html#content"></a></div>
+</div>  <!--End Content -->
+</div>  <!-- End Page -->
+
+
+
+
+
+
+<footer>
+					 <!-- End bottom links -->
+</footer>
+
+
+ 
+ <!-- Scripts -->
+
+ <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      if (typeof enablePaliLookup === "function") {
+        enablePaliLookup();
+      } else {
+        console.error("enablePaliLookup is not defined");
+      }
+    });
+  </script>
+
+ <script>
+ // Script to open and close sidebar
+ 	function w3_open() {
+ 	document.getElementById("mySidebar").style.display = "block";
+ 	}
+ 		function w3_close() {
+ 		document.getElementById("mySidebar").style.display = "none";
+ 	}
+ </script>
+ <script>
+ 		var app = document.getElementsByTagName("BODY")[0];
+ 		if (localStorage.lightMode == "dark") {
+ 			app.setAttribute("light-mode", "dark");
+ 	}
+ </script>
+ 
+ <script>
+ 		function toggle_light_mode() {
+ 			var app = document.getElementsByTagName("BODY")[0];
+ 				if (localStorage.lightMode == "dark") {
+ 			localStorage.lightMode = "light";
+ 			app.setAttribute("light-mode", "light");
+ 		} else {
+ 					localStorage.lightMode = "dark";
+ 					app.setAttribute("light-mode", "dark");
+ 	}
+ 		}
+ 
+ 		window.addEventListener("storage", function () {
+ 			if (localStorage.lightMode == "dark") {
+ 				app.setAttribute("light-mode", "dark");
+ 				} else {
+ 				app.setAttribute("light-mode", "light");
+ 		}
+ 		}, false);
+ 
+ </script>
+ <script src="../js/footer.js"></script><script src="../js/dpd_deconstructor.js"></script><script src="../js/dpd_ebts.js"></script><script src="../js/dpd_i2h.js"></script>
+ <script src="/sw.js"></script>
+ </body>
+ </html>
