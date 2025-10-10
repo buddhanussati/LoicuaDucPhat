@@ -41,7 +41,7 @@ vietnamese_markers = [
 ]
 
 # Whole-word Vietnamese terms
-vietnamese_words = ['con', 'trai', 'vua', 'xong', 'Con', 'kinh', 'Kinh', 'trong', 'hay', 'cho', 'tham', 'nay', 'khi', 'sanh', 'thanh', 'cao', 'mai', 'sinh', 'ai', 'chung', 'chia', 'trung', 'sau', 'thay', 'minh', 'danh', 'oai', 'nghi', 'hai', 'ngang', 'qua', 'ra', 'sai', 'xin']
+vietnamese_words = ['con', 'trai', 'vua', 'xong', 'Con', 'kinh', 'Kinh', 'trong', 'hay', 'cho', 'tham', 'nay', 'khi', 'sanh', 'thanh', 'cao', 'mai', 'sinh', 'ai', 'chung', 'chia', 'trung', 'sau', 'thay', 'minh', 'danh', 'oai', 'nghi', 'hai', 'ngang', 'qua', 'sai', 'xin']
 
 def is_vietnamese(line):
     # Check for any diacritic character
