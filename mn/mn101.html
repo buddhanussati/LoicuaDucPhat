@@ -1,0 +1,2395 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+ 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+ 	<link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+ 	<meta name="viewport" content="width=device-width, initial-scale=1">
+		<!-- Loading manifest -->
+	<link rel="manifest" href="../manifest.json">
+ 	<!-- Loading main and menu stylesheets -->
+ 	<link rel="stylesheet" href="../css/w3.css">
+ 	<link rel="stylesheet" href="../css/css.css">
+ 	<link rel="stylesheet" href="../css/menu.css">
+ 	<script src="../js/jquery-1.10.2.min.js"></script>
+ 	<script src="../js/controlpanel.js"></script>
+ 	<script src="../js/mousetrap.min.js"></script>
+    <script src="../js/pali-lookup-standalone.js"></script>
+
+ <script src="../js/suttaFiles.js"></script>
+<script>
+ // Script to open random Sutta
+ function openRandomSutta() {
+  const randomIndex = Math.floor(Math.random() * suttaFiles.length);
+  const selectedFile = suttaFiles[randomIndex];
+
+  // Get root path of your site 
+  const currentPath = location.pathname;
+  const rootPath = currentPath.split("/").slice(0, -2).join("/") + "/";
+
+  // Redirect to the correct file
+  window.location.href = rootPath + selectedFile;
+}
+</script>
+
+
+</head>
+ <body class="container">
+ <div class="header-background">
+ <!-- Header -->
+ <div class="w3-header w3-content w3-padding w3-left-align bwcontainer">
+ 	<div class="centered">
+ 		<button class="light-mode-button" aria-label="Bật Chế Độ Sáng" onclick="toggle_light_mode()">
+ 			<span></span>
+ 			<span></span>
+ 		</button>
+ 		<span class="box-lbl">Sáng/Tối</span>
+ 	</div> <!-- Centered -->
+ 		<a href="../home/index.html" id="bwlogo"><img src="../images/headerlogo.png" alt="Logo Lời Của Đức Phật" class="w3-image"></a>
+ 		<div class="w3-bar bwcontainer">
+ 			<div id="searchlinks">
+ 			<a href="../home/visearch.html"><span class="w3-bar-item"><i class="fa fa-search"></i>&nbsp;Tìm Tiếng Việt</span></a>
+ 			<a href="../home/palisearch.html"><span class="w3-bar-item"><i class="fa fa-search"></i>&nbsp;Tìm Tiếng Pali</span></a>
+ 			</div><!-- End Searchlinks div -->
+ 			<div class="help"><span><a href="../home/help.html"><img src="../images/help_icon.png" title="Trợ Giúp" alt="Help"></a></span></div>
+ 		</div> <!-- End w3-bar bwcontainer --> 	</div> <!-- End w3-header w3-content w3-padding w3-left-align bwcontainer -->
+ </div> <!-- End header-background -->
+ <!-- Top menu -->
+
+ <div class="w3-main w3-white bwcontainer2">
+ 	<div class="w3-button w3-padding-8 w3-left w3-hide-large" onclick="w3_open()">☰</div>
+ 		<div id="navbar" class="w3-hide-small w3-hide-medium bwcontainer3">
+ 			<ul id="css3menu0">
+ 				<li class="topfirst" id="home"><a href="../home/index.html" class="w3-hide-small">Trang Chủ</a></li>
+  				<li class="topmenu" id="dn"><a href="../dn/dn.html" class="pressed w3-hide-small">Trường Bộ Kinh</a></li>
+ 				<li class="topmenu" id="mn"><a href="../mn/mn.html" class="w3-hide-small">Trung Bộ Kinh</a></li>
+ 				<li class="topmenu" id="sn"><a href="../sn/sn.html" class="w3-hide-small"><i class="fa fa-caret-down"></i>&nbsp;Tương Ưng Bộ Kinh</a>
+ 					<ul>
+ 						<li><a href="../sn/sn01.html" class="w3-hide-small">Tập I - Thiên Có Kệ</a></li>
+ 						<li><a href="../sn/sn02.html" class="w3-hide-small">Tập II - Thiên Nhân Duyên</a></li>
+ 						<li><a href="../sn/sn03.html" class="w3-hide-small">Tập III - Thiên Uẩn</a></li>
+ 						<li><a href="../sn/sn04.html" class="w3-hide-small">Tập IV - Thiên Sáu Xứ</a></li>
+ 						<li><a href="../sn/sn05.html" class="w3-hide-small">Tập V - Thiên Ðại Phẩm</a></li>
+ 					</ul>
+ 				<li class="topmenu" id="an"><a href="../an/an.html" class="w3-hide-small"><i class="fa fa-caret-down"></i>&nbsp;Tăng Chi Bộ Kinh</a>
+ 					<ul>
+ 						<li><a href="../an/an1.html" class="w3-hide-small">Chương Một Pháp</a></li>
+ 						<li><a href="../an/an2.html" class="w3-hide-small">Chương Hai Pháp</a></li>
+ 						<li><a href="../an/an3.html" class="w3-hide-small">Chương Ba Pháp</a></li>
+ 						<li><a href="../an/an4.html" class="w3-hide-small">Chương Bốn Pháp</a></li>
+ 						<li><a href="../an/an5.html" class="w3-hide-small">Chương Năm Pháp</a></li>
+ 						<li><a href="../an/an6.html" class="w3-hide-small">Chương Sáu Pháp</a></li>
+ 						<li><a href="../an/an7.html" class="w3-hide-small">Chương Bảy Pháp</a></li>
+ 						<li><a href="../an/an8.html" class="w3-hide-small">Chương Tám Pháp</a></li>
+ 						<li><a href="../an/an9.html" class="w3-hide-small">Chương Chín Pháp</a></li>
+ 						<li><a href="../an/an10.html" class="w3-hide-small">Chương Mười Pháp</a></li>
+ 						<li><a href="../an/an11.html" class="w3-hide-small">Chương Mười Một Pháp</a></li>
+ 					</ul>
+ 				</li>
+ 				<li class="topmenu" id="kn"><a href="../kn/kn.html" class="w3-hide-small"><i class="fa fa-caret-down"></i>&nbsp;Tiểu Bộ Kinh</a>
+ 					<ul>
+ 						<li><a href="../kp/kp.html" class="w3-hide-small">Kinh Tiểu Tụng</a></li>
+ 						<li><a href="../dhp/dhp.html" class="w3-hide-small">Kinh Pháp Cú</a></li>
+ 						<li><a href="../snp/snp.html" class="w3-hide-small">Kinh Tập</a></li>
+ 						<li><a href="../ud/ud.html" class="w3-hide-small">Kinh Phật Tự Thuyết</a></li>
+ 						<li><a href="../it/it.html" class="w3-hide-small">Kinh Phật Thuyết Như Vậy</a></li>
+ 						<li><a href="../tha/tha.html" class="w3-hide-small">Trưởng Lão Tăng Kệ</a></li>
+ 						<li><a href="../thi/thi.html" class="w3-hide-small">Trưởng Lão Ni Kệ</a></li>
+ 					</ul>
+ 				</li>
+				<li class="toplast" id="rd"><a href="../rd/rd.html" class="w3-hide-small"></i>Kinh Ngẫu Nhiên Theo Nhóm</a>
+ 					</ul>
+ 				</li>
+ 			</ul>
+ 			</div>
+ 		</div> <!--navbar-->
+
+<!-- Sidebar (hidden by default) -->
+ <nav class="w3-sidebar w3-bar-block w3-card w3-border w3-top w3-animate-left w3-hide-large" id="mySidebar">
+ 	<a href="javascript:void(0)" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-times fa-2x red-color"></i>&nbsp;&nbsp;&nbsp;Close</a><!-- Hides the sidebar when clicked -->
+ 		<div class="w3-bar-block w3-white">
+ 			<a href="../home/index.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-home fa-lg"></i>&nbsp;&nbsp;&nbsp;Home</a>
+ 			<a href="../guide/guide.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Guide</a>
+ 			<a href="../dn/dn.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Trường Bộ Kinh</a>
+ 			<a href="../mn/mn.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Trung Bộ Kinh</a>
+ 			<a href="../sn/sn.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Tương Ưng Bộ Kinh</a>
+ 			<a href="../an/an.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Tăng Chi Bộ Kinh
+ 			<a href="../kn/kn.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Tiểu Bộ Kinh</a>
+			<a href="../rd/rd.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>Kinh Ngẫu Nhiên Theo Nhóm</a>
+ 		</div>
+ </nav>
+ 
+ 
+ 
+   <!-- !PAGE CONTENT! --> 
+<div class="w3-main w3-content w3-padding w3-left-align bwcontainer4">
+<div id="content">
+<h2>Majjhima Nikāya - Trung Bộ Kinh</h2>
+<h5><span style="font-style: italic;">Hoà Thượng Thích Minh Châu dịch Việt</span></h5>
+
+</div>
+
+<br>
+ 	<title>        Trung Bộ 101          </title>
+
+<p lang="vi" class="vi"; style="text-align: center">
+Trung Bộ 101<br>
+<span lang="pi" class="pali">
+Majjhima Nikāya 101<br>
+</span>
+</p>
+
+
+
+<p lang="vi" class="vi"; style="text-align: center">
+Kinh Devadaha<br>
+<span lang="pi" class="pali">
+Devadahasutta<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Như vầy tôi nghe.<br>
+<span lang="pi" class="pali">
+Evaṁ me sutaṁ—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Một thời Thế Tôn trú ở giữa các Sakka (Thích ca). Devadaha là một thị trấn các Sakka.<br>
+<span lang="pi" class="pali">
+ekaṁ samayaṁ bhagavā sakkesu viharati devadahaṁ nāma sakyānaṁ nigamo.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Tại đấy, Thế Tôn gọi các Tỷ-kheo: “Này các Tỷ-kheo”.<br>
+<span lang="pi" class="pali">
+Tatra kho bhagavā bhikkhū āmantesi: “bhikkhavo”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Thưa vâng, bạch Thế Tôn”, các Tỷ-kheo ấy vâng đáp Thế Tôn. Thế Tôn nói như sau:<br>
+<span lang="pi" class="pali">
+“Bhadante”ti te bhikkhū bhagavato paccassosuṁ. Bhagavā etadavoca:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Này các Tỷ-kheo, có một số Sa-môn, Bà-la-môn có lý thuyết như sau, có tri kiến như sau:<br>
+<span lang="pi" class="pali">
+“santi, bhikkhave, eke samaṇabrāhmaṇā evaṁvādino evaṁdiṭṭhino:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Phàm cảm giác gì con người này lãnh thọ, lạc thọ, khổ thọ hay bất khổ bất lạc thọ, tất cả đều do nhân các nghiệp quá khứ;<br>
+<span lang="pi" class="pali">
+‘yaṁ kiñcāyaṁ purisapuggalo paṭisaṁvedeti sukhaṁ vā dukkhaṁ vā adukkhamasukhaṁ vā, sabbaṁ taṁ pubbekatahetu.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+với sự đốt cháy, đoạn diệt các nghiệp quá khứ, với sự không tạo tác các nghiệp mới, sẽ không có diễn tiến đến tương lai.<br>
+<span lang="pi" class="pali">
+Iti purāṇānaṁ kammānaṁ tapasā byantībhāvā, navānaṁ kammānaṁ akaraṇā, āyatiṁ anavassavo;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Do không có diễn tiến đến tương lai, nghiệp đoạn diệt; do nghiệp đoạn diệt, khổ được đoạn diệt; do khổ đoạn diệt, cảm thọ được đoạn diệt; do cảm thọ được đoạn diệt, tất cả khổ sẽ diệt tận’.<br>
+<span lang="pi" class="pali">
+āyatiṁ anavassavā kammakkhayo; kammakkhayā dukkhakkhayo; dukkhakkhayā vedanākkhayo; vedanākkhayā sabbaṁ dukkhaṁ nijjiṇṇaṁ bhavissatī’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Nầy các Tỷ-kheo, lý thuyết các Nigantha (Ni kiền tử) là vậy.<br>
+<span lang="pi" class="pali">
+Evaṁvādino, bhikkhave, nigaṇṭhā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Nầy các Tỷ-kheo, Ta nói như vậy, Ta đi đến các Nigantha và nói như sau:<br>
+<span lang="pi" class="pali">
+Evaṁvādāhaṁ, bhikkhave, nigaṇṭhe upasaṅkamitvā evaṁ vadāmi:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Chư Hiền Nigantha, có đúng sự thật chăng, các Ông có lý thuyết như sau, có tri kiến như sau:<br>
+<span lang="pi" class="pali">
+‘saccaṁ kira tumhe, āvuso nigaṇṭhā, evaṁvādino evaṁdiṭṭhino—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Phàm cảm giác gì con người này lãnh thọ, lạc thọ, khổ thọ hay bất khổ bất lạc thọ, tất cả đều do nhân các nghiệp quá khứ; với sự đốt cháy, đoạn diệt các nghiệp quá khứ, với sự không tạo tác các nghiệp mới, sẽ không có diễn tiến đến tương lai. Do không có diễn tiến đến tương lai, nghiệp được đoạn diệt, do nghiệp đoạn diệt khổ được đoạn diệt; do khổ đoạn diệt, cảm thọ được đoạn diệt; do cảm thọ được đoạn diệt, tất cả khổ sẽ được diệt tận?’<br>
+<span lang="pi" class="pali">
+yaṁ kiñcāyaṁ purisapuggalo paṭisaṁvedeti sukhaṁ vā dukkhaṁ vā adukkhamasukhaṁ vā, sabbaṁ taṁ pubbekatahetu. Iti purāṇānaṁ kammānaṁ tapasā byantībhāvā, navānaṁ kammānaṁ akaraṇā, āyatiṁ anavassavo; āyatiṁ anavassavā kammakkhayo; kammakkhayā dukkhakkhayo; dukkhakkhayā vedanākkhayo; vedanākkhayā sabbaṁ dukkhaṁ nijjiṇṇaṁ bhavissatī’ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này các Tỷ-kheo, nếu các Nigantha ấy, khi được Ta hỏi, tự nhận có nói như vậy, Ta liền nói như sau:<br>
+<span lang="pi" class="pali">
+Te ca me, bhikkhave, nigaṇṭhā evaṁ puṭṭhā ‘āmā’ti paṭijānanti. Tyāhaṁ evaṁ vadāmi:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Chư Hiền Nigantha, các Ông có biết: Trong quá khứ, chúng tôi có hiện hữu, chúng tôi không hiện hữu?’<br>
+<span lang="pi" class="pali">
+‘kiṁ pana tumhe, āvuso nigaṇṭhā, jānātha—ahuvamheva mayaṁ pubbe, na nāhuvamhā’ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Thưa Hiền giả, không như vậy.’<br>
+<span lang="pi" class="pali">
+‘No hidaṁ, āvuso’.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Chư Hiền Nigantha, các Ông có biết: Trong quá khứ, chúng tôi có tạo ác nghiệp, chúng tôi không tạo ác nghiệp?’<br>
+<span lang="pi" class="pali">
+‘Kiṁ pana tumhe, āvuso nigaṇṭhā, jānātha—akaramheva mayaṁ pubbe pāpakammaṁ, na nākaramhā’ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Thưa Hiền giả, không như vậy.’<br>
+<span lang="pi" class="pali">
+‘No hidaṁ, āvuso’.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Chư Hiền Nigantha, các ông có biết: “Chúng tôi có tạo ác nghiệp như thế này hay như thế kia?’<br>
+<span lang="pi" class="pali">
+‘Kiṁ pana tumhe, āvuso nigaṇṭhā, jānātha—evarūpaṁ vā evarūpaṁ vā pāpakammaṁ akaramhā’ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Thưa Hiền giả, không như vậy.’<br>
+<span lang="pi" class="pali">
+‘No hidaṁ, āvuso’.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Chư Hiền Nigantha, các ông có biết:<br>
+<span lang="pi" class="pali">
+‘Kiṁ pana tumhe, āvuso nigaṇṭhā, jānātha—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Khổ mức độ như thế này đã được diệt tận hay khổ mức độ như thế này cần phải được diệt tận, hay với sự diệt tận khổ mức độ như thế này, tất cả khổ sẽ được diệt tận?’<br>
+<span lang="pi" class="pali">
+ettakaṁ vā dukkhaṁ nijjiṇṇaṁ, ettakaṁ vā dukkhaṁ nijjīretabbaṁ, ettakamhi vā dukkhe nijjiṇṇe sabbaṁ dukkhaṁ nijjiṇṇaṁ bhavissatī’ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Thưa Hiền giả, không như vậy.’<br>
+<span lang="pi" class="pali">
+‘No hidaṁ, āvuso’.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Chư Hiền Nigantha, các Ông có biết: Sự đoạn tận các bất thiện pháp ngay trong hiện tại hay sự thành tựu các thiện pháp?’<br>
+<span lang="pi" class="pali">
+‘Kiṁ pana tumhe, āvuso nigaṇṭhā, jānātha—diṭṭheva dhamme akusalānaṁ dhammānaṁ pahānaṁ, kusalānaṁ dhammānaṁ upasampadan’ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Thưa Hiền giả, không như vậy.’<br>
+<span lang="pi" class="pali">
+‘No hidaṁ, āvuso’.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Chư Hiền Nigantha, như các Ông đã nói, các Ông không biết:<br>
+<span lang="pi" class="pali">
+‘Iti kira tumhe, āvuso nigaṇṭhā, na jānātha—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Trong quá khứ, chúng tôi có hiện hữu, chúng tôi không hiện hữu;<br>
+<span lang="pi" class="pali">
+ahuvamheva mayaṁ pubbe, na nāhuvamhāti, na jānātha—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+các Ông không biết: Trong quá khứ, chúng tôi có tạo ác nghiệp, chúng tôi không tạo ác nghiệp;<br>
+<span lang="pi" class="pali">
+akaramheva mayaṁ pubbe pāpakammaṁ, na nākaramhāti, na jānātha—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+các Ông không biết: Chúng tôi có tạo ác nghiệp như thế này, hay như thế kia;<br>
+<span lang="pi" class="pali">
+evarūpaṁ vā evarūpaṁ vā pāpakammaṁ akaramhāti, na jānātha—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+các Ông không biết: Khổ mức độ như thế này đã được diệt tận, khổ mức độ như thế này cần phải được diệt tận, hay với sự diệt tận khổ mức độ như thế này, tất cả khổ sẽ được diệt tận;<br>
+<span lang="pi" class="pali">
+ettakaṁ vā dukkhaṁ nijjiṇṇaṁ, ettakaṁ vā dukkhaṁ nijjīretabbaṁ, ettakamhi vā dukkhe nijjiṇṇe sabbaṁ dukkhaṁ nijjiṇṇaṁ bhavissatīti, na jānātha—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+các Ông không biết: Sự đoạn tận các bất thiện pháp ngay trong hiện tại hay sự thành tựu các thiện pháp;<br>
+<span lang="pi" class="pali">
+diṭṭheva dhamme akusalānaṁ dhammānaṁ pahānaṁ, kusalānaṁ dhammānaṁ upasampadaṁ;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+sự tình là như vậy, thời có hợp lý chăng, khi các Tôn giả Nigantha lại trả lời:<br>
+<span lang="pi" class="pali">
+evaṁ sante āyasmantānaṁ nigaṇṭhānaṁ na kallamassa veyyākaraṇāya:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Phàm cảm giác gì con người này lãnh thọ, lạc thọ, khổ thọ hay bất khổ bất lạc thọ, tất cả đều do nhân các nghiệp quá khứ, với sự đốt cháy, đoạn diệt các nghiệp quá khứ, với sự không tạo các nghiệp mới, sẽ không có diễn tiến đến tương lai.<br>
+<span lang="pi" class="pali">
+“yaṁ kiñcāyaṁ purisapuggalo paṭisaṁvedeti sukhaṁ vā dukkhaṁ vā adukkhamasukhaṁ vā, sabbaṁ taṁ pubbekatahetu. Iti purāṇānaṁ kammānaṁ tapasā byantībhāvā, navānaṁ kammānaṁ akaraṇā, āyatiṁ anavassavo;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Do không có diễn tiến đến tương lai, nghiệp được đoạn diệt; do nghiệp được đoạn diệt, khổ được đoạn diệt; do khổ đoạn diệt, cảm thọ được đoạn diệt; do cảm thọ được đoạn diệt tất cả khổ thọ sẽ được diệt tận?”<br>
+<span lang="pi" class="pali">
+āyatiṁ anavassavā kammakkhayo; kammakkhayā dukkhakkhayo; dukkhakkhayā vedanākkhayo; vedanākkhayā sabbaṁ dukkhaṁ nijjiṇṇaṁ bhavissatī”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Chư Hiền Nigantha, nếu các Ông được biết:<br>
+<span lang="pi" class="pali">
+Sace pana tumhe, āvuso nigaṇṭhā, jāneyyātha—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Trong quá khứ, chúng tôi có hiện hữu, chúng tôi không hiện hữu;<br>
+<span lang="pi" class="pali">
+ahuvamheva mayaṁ pubbe, na nāhuvamhāti, jāneyyātha—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+các Ông được biết: Trong quá khứ, chúng tôi có tạo ác nghiệp, chúng tôi không tạo ác nghiệp;<br>
+<span lang="pi" class="pali">
+akaramheva mayaṁ pubbe pāpakammaṁ, na nākaramhāti, jāneyyātha—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+các Ông được biết: Chúng tôi có tạo ác nghiệp như thế này, hay như thế kia;<br>
+<span lang="pi" class="pali">
+evarūpaṁ vā evarūpaṁ vā pāpakammaṁ akaramhāti, jāneyyātha—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+các Ông được biết: Khổ mức độ như thế này đã được diệt tận, hay khổ mức độ như thế này cần phải được diệt tận, hay với sự diệt tận khổ mức độ như thế này, tất cả khổ sẽ được diệt tận;<br>
+<span lang="pi" class="pali">
+ettakaṁ vā dukkhaṁ nijjiṇṇaṁ, ettakaṁ vā dukkhaṁ nijjīretabbaṁ, ettakamhi vā dukkhe nijjiṇṇe sabbaṁ dukkhaṁ nijjiṇṇaṁ bhavissatīti, jāneyyātha—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+các Ông được biết: Sự đoạn tận các bất thiện pháp ngay trong hiện tại hay sự thành tựu các thiện pháp;<br>
+<span lang="pi" class="pali">
+diṭṭheva dhamme akusalānaṁ dhammānaṁ pahānaṁ, kusalānaṁ dhammānaṁ upasampadaṁ;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+sự tình là như vậy, thời thật là hợp lý khi các Tôn giả Nigantha trả lời:<br>
+<span lang="pi" class="pali">
+evaṁ sante āyasmantānaṁ nigaṇṭhānaṁ kallamassa veyyākaraṇāya:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Phàm cảm giác gì con người này lãnh thọ, lạc thọ, khổ thọ hay bất khổ bất lạc thọ, tất cả đều do nhân các nghiệp quá khứ với sự đốt cháy, đoạn diệt các nghiệp quá khứ; với sự không tạo các nghiệp mới, sẽ không có diễn tiến đến tương lai.<br>
+<span lang="pi" class="pali">
+“yaṁ kiñcāyaṁ purisapuggalo paṭisaṁvedeti sukhaṁ vā dukkhaṁ vā adukkhamasukhaṁ vā, sabbaṁ taṁ pubbekatahetu. Iti purāṇānaṁ kammānaṁ tapasā byantībhāvā, navānaṁ kammānaṁ akaraṇā, āyatiṁ anavassavo;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Do không có diễn tiến đến tương lai, nghiệp được đoạn diệt; do nghiệp đoạn diệt, khổ được đoạn diệt; do khổ đoạn diệt, cảm thọ được đoạn diệt, do cảm thọ được đoạn diệt, tất cả khổ sẽ được diệt tận”.<br>
+<span lang="pi" class="pali">
+āyatiṁ anavassavā kammakkhayo; kammakkhayā dukkhakkhayo; dukkhakkhayā vedanākkhayo; vedanākkhayā sabbaṁ dukkhaṁ nijjiṇṇaṁ bhavissatī”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Chư Hiền Nigantha, ví như một người bị mũi tên bắn, mũi tên được tẩm thuốc độc rất dày.<br>
+<span lang="pi" class="pali">
+Seyyathāpi, āvuso nigaṇṭhā, puriso sallena viddho assa savisena gāḷhūpalepanena;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Người ấy do nhân cảm xúc mũi tên, thọ lãnh các cảm giác đau đớn, cực khổ, thống khổ.<br>
+<span lang="pi" class="pali">
+so sallassapi vedhanahetu dukkhā tibbā kaṭukā vedanā vediyeyya.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Bạn bè, bà con huyết thống của người ấy mời một y sĩ giải phẫu đến.<br>
+<span lang="pi" class="pali">
+Tassa mittāmaccā ñātisālohitā bhisakkaṁ sallakattaṁ upaṭṭhāpeyyuṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vị y sĩ giải phẫu lấy dao cắt rộng miệng vết thương.<br>
+<span lang="pi" class="pali">
+Tassa so bhisakko sallakatto satthena vaṇamukhaṁ parikanteyya;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Người ấy do nhân dao cắt miệng vết thương, thọ lãnh các cảm giác đau đớn, cực khổ, thống khổ.<br>
+<span lang="pi" class="pali">
+so satthenapi vaṇamukhassa parikantanahetu dukkhā tibbā kaṭukā vedanā vediyeyya.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vị y sĩ giải phẫu ấy dò tìm mũi tên với vật dụng dò tìm.<br>
+<span lang="pi" class="pali">
+Tassa so bhisakko sallakatto esaniyā sallaṁ eseyya;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Người ấy do nhân bị dò tìm mũi tên với vật dụng dò tìm, thọ lãnh các cảm giác đau đớn, cực khổ, thống khổ.<br>
+<span lang="pi" class="pali">
+so esaniyāpi sallassa esanāhetu dukkhā tibbā kaṭukā vedanā vediyeyya.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vị y sĩ giải phẫu rút mũi tên ra khỏi người ấy.<br>
+<span lang="pi" class="pali">
+Tassa so bhisakko sallakatto sallaṁ abbuheyya;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Người ấy do nhân được rút mũi tên, thọ lãnh các cảm giác đau đớn, cực khổ, thống khổ.<br>
+<span lang="pi" class="pali">
+so sallassapi abbuhanahetu dukkhā tibbā kaṭukā vedanā vediyeyya.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vị y sĩ giải phẫu ấy cho đốt miệng vết thương với than đỏ (hay đắp miệng vết thương với vải nóng như than đỏ).<br>
+<span lang="pi" class="pali">
+Tassa so bhisakko sallakatto agadaṅgāraṁ vaṇamukhe odaheyya;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Người ấy do nhân miệng vết thương bị than đỏ đốt, thọ lãnh các cảm giác đau đớn, cực khổ, thống khổ.<br>
+<span lang="pi" class="pali">
+so agadaṅgārassapi vaṇamukhe odahanahetu dukkhā tibbā kaṭukā vedanā vediyeyya.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Sau một thời gian, khi da đã bắt đầu lành trên miệng vết thương, người ấy không bệnh, an lạc, tự do, tự tại, và đi vào chỗ nào người ấy muốn.<br>
+<span lang="pi" class="pali">
+So aparena samayena rūḷhena vaṇena sañchavinā arogo assa sukhī serī sayaṁvasī yena kāmaṅgamo.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Người ấy suy nghĩ như sau:<br>
+<span lang="pi" class="pali">
+Tassa evamassa:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Trước kia ta bị mũi tên bắn, mũi tên được tẩm thuốc độc rất dày.<br>
+<span lang="pi" class="pali">
+“ahaṁ kho pubbe sallena viddho ahosiṁ savisena gāḷhūpalepanena.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Do nhân cảm xúc mũi tên, ta thọ lãnh các cảm giác đau đớn, cực khổ, thống khổ.<br>
+<span lang="pi" class="pali">
+Sohaṁ sallassapi vedhanahetu dukkhā tibbā kaṭukā vedanā vediyiṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Bạn bè, bà con huyết thống của ta có mời một y sĩ giải phẫu đến.<br>
+<span lang="pi" class="pali">
+Tassa me mittāmaccā ñātisālohitā bhisakkaṁ sallakattaṁ upaṭṭhapesuṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vị y sĩ giải phẫu ấy lấy dao cắt rộng miệng vết thương.<br>
+<span lang="pi" class="pali">
+Tassa me so bhisakko sallakatto satthena vaṇamukhaṁ parikanti;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ta do nhân dao cắt rộng miệng vết thương thọ lãnh các cảm giác đau đớn, cực khổ, thống khổ.<br>
+<span lang="pi" class="pali">
+sohaṁ satthenapi vaṇamukhassa parikantanahetu dukkhā tibbā kaṭukā vedanā vediyiṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vị y sĩ giải phẫu ấy dò tìm mũi tên với vật dụng dò tìm.<br>
+<span lang="pi" class="pali">
+Tassa me so bhisakko sallakatto esaniyā sallaṁ esi;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Do nhân bị dò tìm mũi tên với vật dụng dò tìm ta thọ lãnh các cảm giác đau đớn, cực khổ, thống khổ.<br>
+<span lang="pi" class="pali">
+so ahaṁ esaniyāpi sallassa esanāhetu dukkhā tibbā kaṭukā vedanā vediyiṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vị y sĩ giải phẫu ấy rút mũi tên ra khỏi ta.<br>
+<span lang="pi" class="pali">
+Tassa me so bhisakko sallakatto sallaṁ abbuhi;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Do nhân được rút mũi tên, ta thọ lãnh các cảm giác đau đớn, cực khổ, thống khổ.<br>
+<span lang="pi" class="pali">
+sohaṁ sallassapi abbuhanahetu dukkhā tibbā kaṭukā vedanā vediyiṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vị y sĩ giải phẫu ấy cho đốt miệng vết thương với than đỏ (hay đắp miệng vết thương với vải nóng như than đỏ).<br>
+<span lang="pi" class="pali">
+Tassa me so bhisakko sallakatto agadaṅgāraṁ vaṇamukhe odahi;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Do nhân miệng vết thương bị than đỏ đốt, ta thọ lãnh các cảm giác đau đớn, cực khổ, thống khổ.<br>
+<span lang="pi" class="pali">
+sohaṁ agadaṅgārassapi vaṇamukhe odahanahetu dukkhā tibbā kaṭukā vedanā vediyiṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Nay da đã bắt đầu lành trên miệng vết thương, ta không bệnh, an lạc, tự do, tự tại, và đi chỗ nào ta muốn”.<br>
+<span lang="pi" class="pali">
+Somhi etarahi rūḷhena vaṇena sañchavinā arogo sukhī serī sayaṁvasī yena kāmaṅgamo”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Như vậy, này chư Hiền Nigantha, nếu các Ông được biết:<br>
+<span lang="pi" class="pali">
+Evameva kho, āvuso nigaṇṭhā, sace tumhe jāneyyātha—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Trong quá khứ, chúng tôi hiện hữu, chúng tôi không hiện hữu;<br>
+<span lang="pi" class="pali">
+ahuvamheva mayaṁ pubbe, na nāhuvamhāti, jāneyyātha—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+các Ông được biết: Trong quá khứ, chúng tôi có tạo ác nghiệp, chúng tôi không tạo ác nghiệp,<br>
+<span lang="pi" class="pali">
+akaramheva mayaṁ pubbe pāpakammaṁ, na nākaramhāti, jāneyyātha—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+các Ông được biết: Chúng tôi có tạo ác nghiệp, như thế này hay như thế kia,<br>
+<span lang="pi" class="pali">
+evarūpaṁ vā evarūpaṁ vā pāpakammaṁ akaramhāti, jāneyyātha—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+các Ông được biết: Khổ mức độ như thế này đã được diệt tận, hay khổ mức độ như thế này cần phải được diệt tận; hay với sự diệt tận khổ mức độ như thế này, tất cả khổ sẽ được diệt tận;<br>
+<span lang="pi" class="pali">
+ettakaṁ vā dukkhaṁ nijjiṇṇaṁ, ettakaṁ vā dukkhaṁ nijjīretabbaṁ, ettakamhi vā dukkhe nijjiṇṇe sabbaṁ dukkhaṁ nijjiṇṇaṁ bhavissatīti, jāneyyātha—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+các Ông được biết: Sự đoạn tận các bất thiện pháp ngay trong hiện tại hay sự thành tựu các thiện pháp;<br>
+<span lang="pi" class="pali">
+diṭṭheva dhamme akusalānaṁ dhammānaṁ pahānaṁ, kusalānaṁ dhammānaṁ upasampadaṁ;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+sự tình là như vậy, thời thật là hợp lý khi các Tôn giả Nigantha trả lời:<br>
+<span lang="pi" class="pali">
+evaṁ sante āyasmantānaṁ nigaṇṭhānaṁ kallamassa veyyākaraṇāya:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Phàm cảm giác gì con người này lãnh thọ, lạc thọ, khổ thọ, hay bất khổ bất lạc thọ, tất cả đều do nhân các nghiệp quá khứ; với sự đốt cháy, đoạn diệt các nghiệp quá khứ, với sự không tạo tác các nghiệp mới, sẽ không có diễn tiến đến tương lai.<br>
+<span lang="pi" class="pali">
+“yaṁ kiñcāyaṁ purisapuggalo paṭisaṁvedeti sukhaṁ vā dukkhaṁ vā adukkhamasukhaṁ vā, sabbaṁ taṁ pubbekatahetu. Iti purāṇānaṁ kammānaṁ tapasā byantībhāvā, navānaṁ kammānaṁ akaraṇā, āyatiṁ anavassavo;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Do không có diễn tiến đến tương lai, nghiệp được đoạn diệt; do nghiệp đoạn diệt, khổ được đoạn diệt; do khổ đoạn diệt, cảm thọ được đoạn diệt; do cảm thọ được đoạn diệt, tất cả khổ sẽ được diệt tận”.<br>
+<span lang="pi" class="pali">
+āyatiṁ anavassavā kammakkhayo; kammakkhayā dukkhakkhayo; dukkhakkhayā vedanākkhayo; vedanākkhayā sabbaṁ dukkhaṁ nijjiṇṇaṁ bhavissatī”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Chư Hiền Nigantha, và vì rằng các Ông không được biết:<br>
+<span lang="pi" class="pali">
+Yasmā ca kho tumhe, āvuso nigaṇṭhā, na jānātha—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Trong quá khứ, chúng tôi có hiện hữu, chúng tôi không hiện hữu;<br>
+<span lang="pi" class="pali">
+ahuvamheva mayaṁ pubbe, na nāhuvamhāti, na jānātha—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+các Ông không được biết: Chúng tôi có tạo ác nghiệp, chúng tôi không tạo ác nghiệp;<br>
+<span lang="pi" class="pali">
+akaramheva mayaṁ pubbe pāpakammaṁ, na nākaramhāti, na jānātha—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+các Ông không được biết: Chúng tôi có tạo ác nghiệp như thế này, hay như thế kia;<br>
+<span lang="pi" class="pali">
+evarūpaṁ vā evarūpaṁ vā pāpakammaṁ akaramhāti, na jānātha—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+các Ông không được biết: Khổ mức độ như thế này đã được diệt tận, hay khổ mức độ như thế này cần phải được diệt tận, hay với sự diệt tận khổ mức độ như thế này, tất cả khổ sẽ được diệt tận;<br>
+<span lang="pi" class="pali">
+ettakaṁ vā dukkhaṁ nijjiṇṇaṁ, ettakaṁ vā dukkhaṁ nijjīretabbaṁ, ettakamhi vā dukkhe nijjiṇṇe sabbaṁ dukkhaṁ nijjiṇṇaṁ bhavissatīti, na jānātha—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+các Ông không được biết: Sự đoạn tận các bất thiện pháp ngay trong hiện tại hay sự thành tựu các thiện pháp;<br>
+<span lang="pi" class="pali">
+diṭṭheva dhamme akusalānaṁ dhammānaṁ pahānaṁ, kusalānaṁ dhammānaṁ upasampadaṁ;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+thời thật là không hợp lý khi các Tôn giả Nigantha trả lời:<br>
+<span lang="pi" class="pali">
+tasmā āyasmantānaṁ nigaṇṭhānaṁ na kallamassa veyyākaraṇāya:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Phàm cảm giác gì con người lãnh thọ, lạc thọ, khổ thọ, hay bất khổ bất lạc thọ, tất cả đều do nhân các nghiệp quá khứ; với sự đốt cháy, đoạn diệt các nghiệp quá khứ; với sự không tạo các nghiệp mới, sẽ không có diễn tiến đến tương lai.<br>
+<span lang="pi" class="pali">
+“yaṁ kiñcāyaṁ purisapuggalo paṭisaṁvedeti sukhaṁ vā dukkhaṁ vā adukkhamasukhaṁ vā, sabbaṁ taṁ pubbekatahetu. Iti purāṇānaṁ kammānaṁ tapasā byantībhāvā, navānaṁ kammānaṁ akaraṇā, āyatiṁ anavassavo;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Do không có diễn tiến đến tương lai, nghiệp được đoạn diệt; do nghiệp đoạn diệt, khổ được đoạn diệt; do khổ đoạn diệt, cảm thọ được đoạn diệt; do cảm thọ được đoạn diệt, tất cả khổ sẽ được diệt tận”.<br>
+<span lang="pi" class="pali">
+āyatiṁ anavassavā kammakkhayo; kammakkhayā dukkhakkhayo; dukkhakkhayā vedanākkhayo; vedanākkhayā sabbaṁ dukkhaṁ nijjiṇṇaṁ bhavissatī”’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này các Tỷ-kheo, khi được nói vậy, các Nigantha ấy nói với Ta:<br>
+<span lang="pi" class="pali">
+Evaṁ vutte, bhikkhave, te nigaṇṭhā maṁ etadavocuṁ:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Thưa Hiền giả, Nigantha Nataputta là bậc toàn tri, toàn kiến, tự xưng là có tri kiến toàn diện như sau.<br>
+<span lang="pi" class="pali">
+‘nigaṇṭho, āvuso, nāṭaputto sabbaññū sabbadassāvī, aparisesaṁ ñāṇadassanaṁ paṭijānāti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Dầu ta có đi, có đứng, có ngủ và có thức, tri kiến luôn luôn được tồn tại liên tục ở nơi ta”.<br>
+<span lang="pi" class="pali">
+“Carato ca me tiṭṭhato ca suttassa ca jāgarassa ca satataṁ samitaṁ ñāṇadassanaṁ paccupaṭṭhitan”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vị ấy nói như sau:<br>
+<span lang="pi" class="pali">
+So evamāha:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Này các Nigantha, nếu xưa kia các Ông có làm ác nghiệp, hãy làm cho nghiệp ấy tiêu mòn bằng khổ hạnh thống khổ này.<br>
+<span lang="pi" class="pali">
+“atthi kho vo, āvuso nigaṇṭhā, pubbeva pāpakammaṁ kataṁ, taṁ imāya kaṭukāya dukkarakārikāya nijjīretha,<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Chính do hộ trì thân, hộ trì lời nói, hộ trì ý ở đây, ngay trong hiện tại nên không làm các nghiệp trong tương lai.<br>
+<span lang="pi" class="pali">
+yaṁ panettha etarahi kāyena saṁvutā vācāya saṁvutā manasā saṁvutā taṁ āyatiṁ pāpakammassa akaraṇaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Với sự đốt cháy, đoạn diệt các nghiệp quá khứ, với sự không tạo các nghiệp mới, sẽ không có diễn tiến đến tương lai.<br>
+<span lang="pi" class="pali">
+Iti purāṇānaṁ kammānaṁ tapasā byantībhāvā, navānaṁ kammānaṁ akaraṇā, āyatiṁ anavassavo;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Do không có diễn tiến đến tương lai, nghiệp được đoạn diệt; do nghiệp đoạn diệt, khổ được đoạn diệt; do khổ đoạn diệt, cảm thọ được đoạn diệt; do cảm thọ được đoạn diệt, tất cả khổ sẽ được diệt tận”.<br>
+<span lang="pi" class="pali">
+āyatiṁ anavassavā kammakkhayo; kammakkhayā dukkhakkhayo; dukkhakkhayā vedanākkhayo; vedanākkhayā sabbaṁ dukkhaṁ nijjiṇṇaṁ bhavissatī”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Và vì chúng tôi chấp nhận và chúng tôi kham nhẫn điều ấy, nên chúng tôi được hoan hỷ’.<br>
+<span lang="pi" class="pali">
+Tañca panamhākaṁ ruccati ceva khamati ca, tena camhā attamanā’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Khi được nói vậy, này các Tỷ-kheo, Ta nói với các vị Nigantha ấy:<br>
+<span lang="pi" class="pali">
+Evaṁ vutte, ahaṁ, bhikkhave, te nigaṇṭhe etadavocaṁ:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Chư Hiền Nigantha, có năm pháp này, ngay trong hiện tại có hai quả báo. Thế nào là năm?<br>
+<span lang="pi" class="pali">
+‘pañca kho ime, āvuso nigaṇṭhā, dhammā diṭṭheva dhamme dvidhāvipākā. Katame pañca?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Tín, hỷ, tùy văn, thẩm định lý do (akaraparivitakka), kham nhẫn chấp thọ (tà) kiến.<br>
+<span lang="pi" class="pali">
+Saddhā, ruci, anussavo, ākāraparivitakko, diṭṭhinijjhānakkhanti—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này chư Hiền Nigantha, năm pháp này ngay trong hiện tại có hai quả báo.<br>
+<span lang="pi" class="pali">
+ime kho, āvuso nigaṇṭhā, pañca dhammā diṭṭheva dhamme dvidhāvipākā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ở đây, thế nào là lòng tin các Tôn giả Nigantha ấy đối với bậc Ðạo sư trong quá khứ? Thế nào là sự hoan hỷ, thế nào là sự tùy văn, thế nào là thẩm định lý do, thế nào là kham nhẫn chấp thọ (tà) kiến các vị ấy?’<br>
+<span lang="pi" class="pali">
+Tatrāyasmantānaṁ nigaṇṭhānaṁ kā atītaṁse satthari saddhā, kā ruci, ko anussavo, ko ākāraparivitakko, kā diṭṭhinijjhānakkhantī’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này các Tỷ-kheo, nói như vậy, Ta không thấy một câu trả lời hợp pháp nào giữa các vị Nigantha.<br>
+<span lang="pi" class="pali">
+Evaṁvādī kho ahaṁ, bhikkhave, nigaṇṭhesu na kañci sahadhammikaṁ vādapaṭihāraṁ samanupassāmi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Và lại nữa này các Tỷ-kheo, Ta nói với các vị Nigantha ấy như sau:<br>
+<span lang="pi" class="pali">
+Puna caparāhaṁ, bhikkhave, te nigaṇṭhe evaṁ vadāmi:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Chư Hiền Nigantha, các Ông nghĩ thế nào?<br>
+<span lang="pi" class="pali">
+‘taṁ kiṁ maññatha, āvuso nigaṇṭhā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Khi các Ông tha thiết tinh tấn, tha thiết tinh cần, khi ấy có phải các Ông thọ lãnh những cảm giác thống khổ, đột khởi, đau đớn, cực khổ, thống khổ?<br>
+<span lang="pi" class="pali">
+Yasmiṁ vo samaye tibbo upakkamo hoti tibbaṁ padhānaṁ, tibbā tasmiṁ samaye opakkamikā dukkhā tibbā kaṭukā vedanā vediyetha;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Còn trong khi các Ông không tha thiết tinh tấn, không tha thiết tinh cần, khi ấy có phải các Ông không thọ lãnh những cảm giác thống khổ, đột khởi, đau đớn, cực khổ, thống khổ?’<br>
+<span lang="pi" class="pali">
+yasmiṁ pana vo samaye na tibbo upakkamo hoti na tibbaṁ padhānaṁ, na tibbā tasmiṁ samaye opakkamikā dukkhā tibbā kaṭukā vedanā vediyethā’ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Thưa Hiền giả Gotama, khi chúng tôi tha thiết tinh tấn, tha thiết tinh cần, khi ấy chúng tôi thọ lãnh những cảm giác thống khổ, đột khởi, đau đớn, cực khổ, thống khổ.<br>
+<span lang="pi" class="pali">
+‘Yasmiṁ no, āvuso gotama, samaye tibbo upakkamo hoti tibbaṁ padhānaṁ, tibbā tasmiṁ samaye opakkamikā dukkhā tibbā kaṭukā vedanā vediyāma;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Còn trong khi chúng tôi không tha thiết tinh tấn, không tha thiết tinh cần, khi ấy chúng tôi không thọ lãnh những cảm giác thống khổ, đột khởi, đau đớn, cực khổ, thống khổ.’<br>
+<span lang="pi" class="pali">
+yasmiṁ pana no samaye na tibbo upakkamo hoti na tibbaṁ padhānaṁ, na tibbā tasmiṁ samaye opakkamikā dukkhā tibbā kaṭukā vedanā vediyāmā’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Như vậy, này chư Hiền Nigantha, khi các Ông tha thiết tinh tấn, tha thiết tinh cần, khi ấy các Ông thọ lãnh những cảm giác thống khổ, đột khởi, đau đớn, cực khổ, thống khổ.<br>
+<span lang="pi" class="pali">
+‘Iti kira, āvuso nigaṇṭhā, yasmiṁ vo samaye tibbo upakkamo hoti tibbaṁ padhānaṁ, tibbā tasmiṁ samaye opakkamikā dukkhā tibbā kaṭukā vedanā vediyetha;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Còn trong khi các Ông không tha thiết tinh tấn, không tha thiết tinh cần, khi ấy các Ông không thọ lãnh những cảm giác thống khổ, đột khởi, đau đớn, cực khổ, thống khổ.<br>
+<span lang="pi" class="pali">
+yasmiṁ pana vo samaye na tibbo upakkamo hoti na tibbaṁ padhānaṁ, na tibbā tasmiṁ samaye opakkamikā dukkhā tibbā kaṭukā vedanā vediyetha.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Sự tình là như vậy, thời thật là hợp lý khi các Tôn giả Nigantha trả lời:<br>
+<span lang="pi" class="pali">
+Evaṁ sante āyasmantānaṁ nigaṇṭhānaṁ na kallamassa veyyākaraṇāya:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Phàm cảm giác gì con người này lãnh thọ, lạc thọ, khổ thọ, hay bất khổ bất lạc thọ, tất cả đều do nhân các nghiệp quá khứ; với sự đốt cháy, đoạn diệt các nghiệp quá khứ, với sự không tạo các nghiệp mới, sẽ không có diễn tiến đến tương lai.<br>
+<span lang="pi" class="pali">
+“yaṁ kiñcāyaṁ purisapuggalo paṭisaṁvedeti sukhaṁ vā dukkhaṁ vā adukkhamasukhaṁ vā, sabbaṁ taṁ pubbekatahetu. Iti purāṇānaṁ kammānaṁ tapasā byantībhāvā, navānaṁ kammānaṁ akaraṇā, āyatiṁ anavassavo;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Do không có diễn tiến đến tương lai, nghiệp được đoạn diệt; do nghiệp được đoạn diệt, khổ được đoạn diệt; do khổ đoạn diệt, cảm thọ được đoạn diệt; do cảm thọ được đoạn diệt, tất cả khổ sẽ được diệt tận”.<br>
+<span lang="pi" class="pali">
+āyatiṁ anavassavā kammakkhayo; kammakkhayā dukkhakkhayo; dukkhakkhayā vedanākkhayo; vedanākkhayā sabbaṁ dukkhaṁ nijjiṇṇaṁ bhavissatī”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này chư Hiền Nigantha, nếu trong khi các Ông tha thiết tinh tấn, tha thiết tinh cần, khi ấy các cảm giác thống khổ, đột khởi, đau đớn, cực khổ, thống khổ được tồn tại.<br>
+<span lang="pi" class="pali">
+Sace, āvuso nigaṇṭhā, yasmiṁ vo samaye tibbo upakkamo hoti tibbaṁ padhānaṁ, na tibbā tasmiṁ samaye opakkamikā dukkhā tibbā kaṭukā vedanā vediyetha;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Còn trong khi các Ông không tha thiết tinh tấn, không tha thiết tinh cần, khi ấy các cảm giác thống khổ, đột khởi, đau đớn, cực khổ, thống khổ cũng được tồn tại.<br>
+<span lang="pi" class="pali">
+yasmiṁ pana vo samaye na tibbo upakkamo hoti na tibbaṁ padhānaṁ, tibbā tasmiṁ samaye opakkamikā dukkhā tibbā kaṭukā vedanā vediyetha;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Sự tình là như vậy, thời thật là hợp lý khi các Tôn giả Nigantha trả lời:<br>
+<span lang="pi" class="pali">
+evaṁ sante āyasmantānaṁ nigaṇṭhānaṁ kallamassa veyyākaraṇāya:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Phàm cảm giác gì con người này lãnh thọ, lạc thọ, khổ thọ, hay bất khổ bất lạc thọ, tất cả đều do nhân các nghiệp quá khứ, với sự đốt cháy, đoạn diệt các nghiệp quá khứ… (như trên)… tất cả khổ được diệt tận”.<br>
+<span lang="pi" class="pali">
+“yaṁ kiñcāyaṁ purisapuggalo paṭisaṁvedeti sukhaṁ vā dukkhaṁ vā adukkhamasukhaṁ vā, sabbaṁ taṁ pubbekatahetu. Iti purāṇānaṁ kammānaṁ tapasā byantībhāvā, navānaṁ kammānaṁ akaraṇā, āyatiṁ anavassavo; āyatiṁ anavassavā kammakkhayo; kammakkhayā dukkhakkhayo; dukkhakkhayā vedanākkhayo; vedanākkhayā sabbaṁ dukkhaṁ nijjiṇṇaṁ bhavissatī”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Và vì rằng, chư Hiền Nigantha, trong khi các Ông tha thiết tinh tấn, tha thiết tinh cần, khi ấy các Ông lãnh thọ những cảm giác thống khổ, đột khởi, đau đớn, cực khổ thống khổ, còn trong khi các Ông không tha thiết tinh tấn, không tha thiết tinh cần, khi ấy các Ông không lãnh thọ những cảm giác thống khổ, đột khởi, đau đớn, cực khổ, thống khổ.<br>
+<span lang="pi" class="pali">
+Yasmā ca kho, āvuso nigaṇṭhā, yasmiṁ vo samaye tibbo upakkamo hoti tibbaṁ padhānaṁ, tibbā tasmiṁ samaye opakkamikā dukkhā tibbā kaṭukā vedanā vediyetha; yasmiṁ pana vo samaye na tibbo upakkamo hoti na tibbaṁ padhānaṁ, na tibbā tasmiṁ samaye opakkamikā dukkhā tibbā kaṭukā vedanā vediyetha;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Như vậy, thật chính các Ông trong khi lãnh thọ những cảm giác thống khổ, đột khởi, đau đớn, cực khổ, thống khổ, tự bị lừa dối bởi vô minh, vô trí, ngu muội, khi các Ông nói:<br>
+<span lang="pi" class="pali">
+te tumhe sāmaṁyeva opakkamikā dukkhā tibbā kaṭukā vedanā vedayamānā avijjā aññāṇā sammohā vipaccetha:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Phàm cảm giác gì con người này lãnh thọ, lạc thọ, khổ thọ, hay bất khổ bất lạc thọ, tất cả đều do nhân các nghiệp quá khứ; với sự đốt cháy, đoạn diệt các nghiệp quá khứ, với sự không tạo tác các nghiệp mới, sẽ không có diễn tiến đến tương lai.<br>
+<span lang="pi" class="pali">
+“yaṁ kiñcāyaṁ purisapuggalo paṭisaṁvedeti sukhaṁ vā dukkhaṁ vā adukkhamasukhaṁ vā, sabbaṁ taṁ pubbekatahetu. Iti purāṇānaṁ kammānaṁ tapasā byantībhāvā, navānaṁ kammānaṁ akaraṇā, āyatiṁ anavassavo;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Do không có diễn tiến đến tương lai, nghiệp được đoạn diệt; do nghiệp được đoạn diệt, khổ được đoạn diệt; do khổ được đoạn diệt; cảm thọ được đoạn diệt; do cảm thọ được đoạn diệt, tất cả khổ sẽ được diệt tận”.<br>
+<span lang="pi" class="pali">
+āyatiṁ anavassavā kammakkhayo; kammakkhayā dukkhakkhayo; dukkhakkhayā vedanākkhayo; vedanākkhayā sabbaṁ dukkhaṁ nijjiṇṇaṁ bhavissatī”’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này các Tỷ-kheo, nói như vậy, Ta không thấy một câu trả lời hợp lý nào giữa các vị Nigantha. Và lại nữa, này các Tỷ-kheo, Ta nói với các vị Nigantha ấy như sau:<br>
+<span lang="pi" class="pali">
+Evaṁvādīpi kho ahaṁ, bhikkhave, nigaṇṭhesu na kañci sahadhammikaṁ vādapaṭihāraṁ samanupassāmi. Puna caparāhaṁ, bhikkhave, te nigaṇṭhe evaṁ vadāmi:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Chư Hiền Nigantha, các ông nghĩ thế nào? Có thể được chăng: Mong rằng nghiệp được thọ quả hiện tại này, do tinh tấn, hay do tinh cần có thể khiến được thọ quả tương lai?’<br>
+<span lang="pi" class="pali">
+‘taṁ kiṁ maññathāvuso nigaṇṭhā, yamidaṁ kammaṁ diṭṭhadhammavedanīyaṁ taṁ upakkamena vā padhānena vā samparāyavedanīyaṁ hotūti labbhametan’ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Thưa không vậy, Hiền giả.’<br>
+<span lang="pi" class="pali">
+‘No hidaṁ, āvuso’.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Có thể được chăng: Mong rằng nghiệp được thọ quả tương lai này do tinh tấn hay do tinh cần có thể khiến được thọ quả hiện tại?’<br>
+<span lang="pi" class="pali">
+‘Yaṁ panidaṁ kammaṁ samparāyavedanīyaṁ taṁ upakkamena vā padhānena vā diṭṭhadhammavedanīyaṁ hotūti labbhametan’ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Thưa không vậy, Hiền giả.’<br>
+<span lang="pi" class="pali">
+‘No hidaṁ, āvuso’.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Chư Hiền Nigantha, các Ông nghĩ thế nào? Có thể được chăng: Mong rằng nghiệp được lãnh lạc thọ này, do tinh tấn hay tinh cần có thể được lãnh khổ thọ?’<br>
+<span lang="pi" class="pali">
+‘Taṁ kiṁ maññathāvuso nigaṇṭhā, yamidaṁ kammaṁ sukhavedanīyaṁ taṁ upakkamena vā padhānena vā dukkhavedanīyaṁ hotūti labbhametan’ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Thưa không vậy, Hiền giả.’<br>
+<span lang="pi" class="pali">
+‘No hidaṁ, āvuso’.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Có thể được chăng: Mong rằng nghiệp được lãnh khổ thọ này, do tinh tấn hay tinh cần có thể được lãnh lạc thọ?’<br>
+<span lang="pi" class="pali">
+‘Yaṁ panidaṁ kammaṁ dukkhavedanīyaṁ taṁ upakkamena vā padhānena vā sukhavedanīyaṁ hotūti labbhametan’ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Thưa không vậy, Hiền giả.’<br>
+<span lang="pi" class="pali">
+‘No hidaṁ, āvuso’.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Chư Hiền Nigantha, các Ông nghĩ thế nào? Có thể được chăng: Mong rằng nghiệp mà quả lãnh thọ đã được thuần thục này do tinh tấn hay tinh cần, có thể trở thành không thuần thục?’<br>
+<span lang="pi" class="pali">
+‘Taṁ kiṁ maññathāvuso nigaṇṭhā, yamidaṁ kammaṁ paripakkavedanīyaṁ taṁ upakkamena vā padhānena vā aparipakkavedanīyaṁ hotūti labbhametan’ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Thưa không vậy, Hiền giả.’<br>
+<span lang="pi" class="pali">
+‘No hidaṁ, āvuso’.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Có thể được chăng: Mong rằng nghiệp mà quả lãnh thọ chưa được thuần thục này, do tinh tấn hay tinh cần, có thể trở thành thuần thục?’<br>
+<span lang="pi" class="pali">
+‘Yaṁ panidaṁ kammaṁ aparipakkavedanīyaṁ taṁ upakkamena vā padhānena vā paripakkavedanīyaṁ hotūti labbhametan’ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Thưa không vậy, Hiền giả.’<br>
+<span lang="pi" class="pali">
+‘No hidaṁ, āvuso’.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Chư Hiền Nigantha, các Ông nghĩ thế nào? Có thể được chăng: Mong rằng nghiệp đa sở thọ này do tinh tấn hay tinh cần trở thành thiểu sở thọ?’<br>
+<span lang="pi" class="pali">
+‘Taṁ kiṁ maññathāvuso nigaṇṭhā, yamidaṁ kammaṁ bahuvedanīyaṁ taṁ upakkamena vā padhānena vā appavedanīyaṁ hotūti labbhametan’ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Thưa không vậy, Hiền giả.’<br>
+<span lang="pi" class="pali">
+‘No hidaṁ, āvuso’.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Có thể nói được chăng: Mong rằng nghiệp thiểu sở thọ này do tinh tấn hay do tinh cần trở thành đã sở thọ?’<br>
+<span lang="pi" class="pali">
+‘Yaṁ panidaṁ kammaṁ appavedanīyaṁ taṁ upakkamena vā padhānena vā bahuvedanīyaṁ hotūti labbhametan’ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Thưa không vậy, Hiền giả.’<br>
+<span lang="pi" class="pali">
+‘No hidaṁ, āvuso’.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Chư Hiền Nigantha, các Ông nghĩ thế nào? Có thể được chăng: Mong rằng nghiệp có sở thọ này do tinh tấn hay tinh cần trở thành nghiệp không có sở thọ?’<br>
+<span lang="pi" class="pali">
+‘Taṁ kiṁ maññathāvuso nigaṇṭhā, yamidaṁ kammaṁ savedanīyaṁ taṁ upakkamena vā padhānena vā avedanīyaṁ hotūti labbhametan’ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Thưa không vậy, Hiền giả.’<br>
+<span lang="pi" class="pali">
+‘No hidaṁ, āvuso’.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Có thể được chăng: Mong rằng nghiệp không có sở thọ này, do tinh tấn hay tinh cần trở thành nghiệp có sở thọ?’<br>
+<span lang="pi" class="pali">
+‘Yaṁ panidaṁ kammaṁ avedanīyaṁ taṁ upakkamena vā padhānena vā savedanīyaṁ hotūti labbhametan’ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Thưa không vậy, Hiền giả.’<br>
+<span lang="pi" class="pali">
+‘No hidaṁ, āvuso’.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Như vậy, này chư Hiền Nigantha, không thể được: “Mong rằng nghiệp được thọ quả hiện tại này, do tinh tấn hay tinh cần trở thành nghiệp được thọ quả tương lai”. Không thể được: “Mong rằng nghiệp được thọ quả tương lai này, do tinh tấn hay do tinh cần, trở thành nghiệp được thọ quả hiện tại”. Không thể được: “Mong rằng nghiệp được lãnh lạc thọ này, do tinh tấn hay tinh cần trở thành nghiệp được lãnh khổ thọ”. Không thể được: “Mong rằng nghiệp được lãnh khổ thọ này, do tinh tấn hay tinh cần trở thành nghiệp được lãnh lạc thọ”. Không thể được: “Mong rằng nghiệp mà quả lãnh thọ đã được thành thục này, do tinh tấn hay tinh cần có thể trở thành không thành thục”. Không thể được: “Mong rằng nghiệp mà quả lãnh thọ không thành thục này, do tinh tấn hay tinh cần có trở thành thành thục”. Không thể được: “Mong rằng nghiệp đa sở thọ này do tinh tấn hay tinh cần, trở thành thiểu sở thọ”. Không thể được: “Mong rằng nghiệp thiểu sở thọ này, do tinh tấn hay tinh cần trở thành đa sở thọ”. Không thể được: “Mong rằng nghiệp không có sở thọ này, do tinh tấn hay tinh cần trở thành có sở thọ”. Không thể được: “Mong rằng nghiệp có sở thọ này, do tinh tấn hay tinh cần trở thành không có sở thọ”.<br>
+<span lang="pi" class="pali">
+‘Iti kira, āvuso nigaṇṭhā, yamidaṁ kammaṁ diṭṭhadhammavedanīyaṁ taṁ upakkamena vā padhānena vā samparāyavedanīyaṁ hotūti alabbhametaṁ, yaṁ panidaṁ kammaṁ samparāyavedanīyaṁ taṁ upakkamena vā padhānena vā diṭṭhadhammavedanīyaṁ hotūti alabbhametaṁ, yamidaṁ kammaṁ sukhavedanīyaṁ taṁ upakkamena vā padhānena vā dukkhavedanīyaṁ hotūti alabbhametaṁ, yamidaṁ kammaṁ dukkhavedanīyaṁ taṁ upakkamena vā padhānena vā sukhavedanīyaṁ hotūti alabbhametaṁ, yamidaṁ kammaṁ paripakkavedanīyaṁ taṁ upakkamena vā padhānena vā aparipakkavedanīyaṁ hotūti alabbhametaṁ, yamidaṁ kammaṁ aparipakkavedanīyaṁ taṁ upakkamena vā padhānena vā paripakkavedanīyaṁ hotūti alabbhametaṁ, yamidaṁ kammaṁ bahuvedanīyaṁ taṁ upakkamena vā padhānena vā appavedanīyaṁ hotūti alabbhametaṁ, yamidaṁ kammaṁ appavedanīyaṁ taṁ upakkamena vā padhānena vā bahuvedanīyaṁ hotūti alabbhametaṁ, yamidaṁ kammaṁ savedanīyaṁ taṁ upakkamena vā padhānena vā avedanīyaṁ hotūti alabbhametaṁ, yamidaṁ kammaṁ avedanīyaṁ taṁ upakkamena vā padhānena vā savedanīyaṁ hotūti alabbhametaṁ;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Sự tình là như vậy, thời sự tinh tấn của các Tôn giả Nigantha là không có kết quả, sự tinh cần của họ là không có kết quả’.<br>
+<span lang="pi" class="pali">
+evaṁ sante āyasmantānaṁ nigaṇṭhānaṁ aphalo upakkamo hoti, aphalaṁ padhānaṁ’.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này các Tỷ-kheo, các Nigantha nói như vậy.<br>
+<span lang="pi" class="pali">
+Evaṁvādī, bhikkhave, nigaṇṭhā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này các Tỷ-kheo, mười thuyết tùy thuyết hợp pháp do các Nigantha đã nói như vậy đưa đến sự chỉ trích.<br>
+<span lang="pi" class="pali">
+Evaṁvādīnaṁ, bhikkhave, nigaṇṭhānaṁ dasa sahadhammikā vādānuvādā gārayhaṁ ṭhānaṁ āgacchanti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này các Tỷ-kheo, nếu các hữu tình do nhân các việc làm quá khứ, lãnh thọ lạc khổ; thời này các Tỷ-kheo, các Nigantha thật sự đã làm những ác hạnh trong thời quá khứ, nên nay họ phải lãnh thọ những cảm giác đau đớn, cực khổ, thống khổ như vậy.<br>
+<span lang="pi" class="pali">
+Sace, bhikkhave, sattā pubbekatahetu sukhadukkhaṁ paṭisaṁvedenti; addhā, bhikkhave, nigaṇṭhā pubbe dukkaṭakammakārino yaṁ etarahi evarūpā dukkhā tibbā kaṭukā vedanā vediyanti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này các Tỷ-kheo, nếu các hữu tình do nhân một vị Tạo hóa tạo ra lãnh thọ những cảm giác lạc khổ; thời này các Tỷ-kheo, các Nigantha thật sự được tạo ra bởi một vị Tạo hóa ác độc, vì rằng nay họ lãnh thọ những cảm giác đau đớn, cực khổ, thống khổ.<br>
+<span lang="pi" class="pali">
+Sace, bhikkhave, sattā issaranimmānahetu sukhadukkhaṁ paṭisaṁvedenti; addhā, bhikkhave, nigaṇṭhā pāpakena issarena nimmitā yaṁ etarahi evarūpā dukkhā tibbā kaṭukā vedanā vediyanti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Như vậy, này các Tỷ-kheo, nếu các hữu tình do nhân kết hợp các điều kiện (sangatibhava), thọ lãnh lạc khổ; thời này các Tỷ-kheo, các Nigantha thật sự bị ác kết hợp, vì rằng nay họ lãnh thọ những cảm giác đau đớn, cực khổ, thống khổ như vậy.<br>
+<span lang="pi" class="pali">
+Sace, bhikkhave, sattā saṅgatibhāvahetu sukhadukkhaṁ paṭisaṁvedenti; addhā, bhikkhave, nigaṇṭhā pāpasaṅgatikā yaṁ etarahi evarūpā dukkhā tibbā kaṭukā vedanā vediyanti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này các Tỷ-kheo, nếu các loài hữu tình do nhân sanh loại (ahbijati) lãnh thọ những cảm giác lạc khổ; thời này các Tỷ-kheo, các Nigantha thật sự bị ác sinh loại, vì rằng nay họ lãnh thọ những cảm giác đau đớn, cực khổ, thống khổ như vậy.<br>
+<span lang="pi" class="pali">
+Sace, bhikkhave, sattā abhijātihetu sukhadukkhaṁ paṭisaṁvedenti; addhā, bhikkhave, nigaṇṭhā pāpābhijātikā yaṁ etarahi evarūpā dukkhā tibbā kaṭukā vedanā vediyanti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này các Tỷ-kheo, nếu các hữu tình do nhân tinh tấn hiện tại, thọ lãnh lạc khổ; thời này các Tỷ-kheo, các Nigantha thật sự đã tạo ác tinh tấn hiện tại, vì rằng nay họ lãnh thọ những cảm giác đau đớn, cực khổ, thống khổ.<br>
+<span lang="pi" class="pali">
+Sace, bhikkhave, sattā diṭṭhadhammūpakkamahetu sukhadukkhaṁ paṭisaṁvedenti; addhā, bhikkhave, nigaṇṭhā evarūpā diṭṭhadhammūpakkamā yaṁ etarahi evarūpā dukkhā tibbā kaṭukā vedanā vediyanti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này các Tỷ-kheo, nếu các hữu tình do nhân việc làm quá khứ thọ lãnh lạc khổ, các Nigantha đáng bị chỉ trích. Nếu các hữu tình không do nhân việc làm quá khứ thọ lãnh lạc khổ, các Nigantha đáng bị chỉ trích.<br>
+<span lang="pi" class="pali">
+Sace, bhikkhave, sattā pubbekatahetu sukhadukkhaṁ paṭisaṁvedenti, gārayhā nigaṇṭhā; no ce sattā pubbekatahetu sukhadukkhaṁ paṭisaṁvedenti, gārayhā nigaṇṭhā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này các Tỷ-kheo, nếu các hữu tình do nhân được một vị Tạo hóa tạo ra thọ lãnh lạc khổ, các Nigantha đáng bị chỉ trích. Nếu các hữu tình không do nhân được một vị Tạo hóa tạo ra thọ lãnh lạc khổ, các Nigantha đáng bị chỉ trích.<br>
+<span lang="pi" class="pali">
+Sace, bhikkhave, sattā issaranimmānahetu sukhadukkhaṁ paṭisaṁvedenti, gārayhā nigaṇṭhā; no ce sattā issaranimmānahetu sukhadukkhaṁ paṭisaṁvedenti, gārayhā nigaṇṭhā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này các Tỷ-kheo, nếu các hữu tình do nhân kết hợp các điều kiện thọ lãnh lạc khổ, các Nigantha đáng bị chỉ trích. Nếu các hữu tình không do nhân kết hợp các điều kiện thọ lãnh lạc khổ các Nigantha đáng bị chỉ trích.<br>
+<span lang="pi" class="pali">
+Sace, bhikkhave, sattā saṅgatibhāvahetu sukhadukkhaṁ paṭisaṁvedenti, gārayhā nigaṇṭhā; no ce sattā saṅgatibhāvahetu sukhadukkhaṁ paṭisaṁvedenti, gārayhā nigaṇṭhā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này các Tỷ-kheo, nếu các hữu tình do nhân sanh loại thọ lãnh lạc khổ, các Nigantha đáng bị chỉ trích. Nếu các hữu tình không do nhân sanh loại thọ lãnh lạc khổ, các Nigantha đáng bị chỉ trích.<br>
+<span lang="pi" class="pali">
+Sace, bhikkhave, sattā abhijātihetu sukhadukkhaṁ paṭisaṁvedenti, gārayhā nigaṇṭhā; no ce sattā abhijātihetu sukhadukkhaṁ paṭisaṁvedenti, gārayhā nigaṇṭhā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này các Tỷ-kheo, nếu các hữu tình do nhân tinh cần hiện tại thọ lãnh lạc khổ, các Nigantha đáng bị chỉ trích. Nếu các hữu tình không do nhân tinh cần hiện tại thọ lãnh lạc khổ, các Nigantha đáng bị chỉ trích.<br>
+<span lang="pi" class="pali">
+Sace, bhikkhave, sattā diṭṭhadhammūpakkamahetu sukhadukkhaṁ paṭisaṁvedenti, gārayhā nigaṇṭhā; no ce sattā diṭṭhadhammūpakkamahetu sukhadukkhaṁ paṭisaṁvedenti, gārayhā nigaṇṭhā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này các Tỷ-kheo, các Nigantha nói như vậy.<br>
+<span lang="pi" class="pali">
+Evaṁvādī, bhikkhave, nigaṇṭhā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này các Tỷ-kheo, mười thuyết tùy thuyết hợp pháp các Nigantha đã nói như vậy đưa đến sự chỉ trích.<br>
+<span lang="pi" class="pali">
+Evaṁvādīnaṁ, bhikkhave, nigaṇṭhānaṁ ime dasa sahadhammikā vādānuvādā gārayhaṁ ṭhānaṁ āgacchanti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Như vậy, này các Tỷ-kheo, sự tinh tấn của các Nigantha là không có kết quả, sự tinh cần của họ là không có kết quả.<br>
+<span lang="pi" class="pali">
+Evaṁ kho, bhikkhave, aphalo upakkamo hoti, aphalaṁ padhānaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Và này các Tỷ-kheo, thế nào là sự tinh tấn có kết quả?<br>
+<span lang="pi" class="pali">
+Kathañca, bhikkhave, saphalo upakkamo hoti, saphalaṁ padhānaṁ?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ở đây, này các Tỷ-kheo, vị Tỷ-kheo không để cho tự ngã chưa bị nhiếp phục, bị đau khổ nhiếp phục và không từ bỏ lạc thọ hợp pháp, và không để lạc thọ ấy chi phối.<br>
+<span lang="pi" class="pali">
+Idha, bhikkhave, bhikkhu na heva anaddhabhūtaṁ attānaṁ dukkhena addhabhāveti, dhammikañca sukhaṁ na pariccajati, tasmiñca sukhe anadhimucchito hoti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vị ấy biết như sau:<br>
+<span lang="pi" class="pali">
+So evaṁ pajānāti:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Trong khi ta tinh cần chống lại nguyên nhân đau khổ này, do chống lại nguyên nhân đau khổ, ta không có tham dục. Nhưng trong khi ta xả đối với nguyên nhân đau khổ này, trong khi tu tập xả, ta không có tham dục’.<br>
+<span lang="pi" class="pali">
+‘imassa kho me dukkhanidānassa saṅkhāraṁ padahato saṅkhārappadhānā virāgo hoti, imassa pana me dukkhanidānassa ajjhupekkhato upekkhaṁ bhāvayato virāgo hotī’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Khi vị Tỷ-kheo tinh cần chống lại nguyên nhân đau khổ, do tinh cần chống lại nguyên nhân đau khổ, vị ấy không có tham dục.<br>
+<span lang="pi" class="pali">
+So yassa hi khvāssa dukkhanidānassa saṅkhāraṁ padahato saṅkhārappadhānā virāgo hoti, saṅkhāraṁ tattha padahati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Do vậy, ở đây, vị ấy tinh cần chống lại nguyên nhân đau khổ. Nhưng trong khi vị ấy xả đối với nguyên nhân đau khổ, trong khi tu tập xả, vị ấy không có tham dục.<br>
+<span lang="pi" class="pali">
+Yassa panassa dukkhanidānassa ajjhupekkhato upekkhaṁ bhāvayato virāgo hoti, upekkhaṁ tattha bhāveti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Do vậy, ở đây, vị ấy tu tập xả. Trong khi vị ấy tinh cần chống lại nguyên nhân đau khổ ấy, do tinh cần chống lại nguyên nhân, vị ấy không có tham dục.<br>
+<span lang="pi" class="pali">
+Tassa tassa dukkhanidānassa saṅkhāraṁ padahato saṅkhārappadhānā virāgo hoti—evampissa taṁ dukkhaṁ nijjiṇṇaṁ hoti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Như vậy sự đau khổ ấy đối với vị ấy được diệt tận. Trong khi vị ấy xả đối với nguyên nhân đau khổ ấy, trong khi tu tập xả, vị ấy không có tham dục. Như vậy sự đau khổ ấy đối với vị ấy được diệt tận.<br>
+<span lang="pi" class="pali">
+Tassa tassa dukkhanidānassa ajjhupekkhato upekkhaṁ bhāvayato virāgo hoti—evampissa taṁ dukkhaṁ nijjiṇṇaṁ hoti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này các Tỷ-kheo, ví như một người luyến ái một nữ nhân, tâm tư say đắm, nhiệt tình ái mộ, nhiệt tình luyến mộ.<br>
+<span lang="pi" class="pali">
+Seyyathāpi, bhikkhave, puriso itthiyā sāratto paṭibaddhacitto tibbacchando tibbāpekkho.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Người ấy thấy nữ nhân này đứng với một người đàn ông khác, nói chuyện, đùa giỡn và cười cợt.<br>
+<span lang="pi" class="pali">
+So taṁ itthiṁ passeyya aññena purisena saddhiṁ santiṭṭhantiṁ sallapantiṁ sañjagghantiṁ saṁhasantiṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này các Tỷ-kheo, các Ông nghĩ thế nào?<br>
+<span lang="pi" class="pali">
+Taṁ kiṁ maññatha, bhikkhave,<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Người ấy, khi thấy nữ nhân này đứng với một người đàn ông khác, nói chuyện, đùa giỡn và cười cợt, có sanh sầu, bi, khổ, ưu, não không?”<br>
+<span lang="pi" class="pali">
+api nu tassa purisassa amuṁ itthiṁ disvā aññena purisena saddhiṁ santiṭṭhantiṁ sallapantiṁ sañjagghantiṁ saṁhasantiṁ uppajjeyyuṁ sokaparidevadukkhadomanassūpāyāsā”ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Thưa có vậy, bạch Thế Tôn”. “Vì sao vậy?”<br>
+<span lang="pi" class="pali">
+“Evaṁ, bhante”. “Taṁ kissa hetu”?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Vì rằng người ấy luyến ái nữ nhân kia, tâm tư say đắm, nhiệt tình ái mộ, nhiệt tình luyến mộ.<br>
+<span lang="pi" class="pali">
+“Amu hi, bhante, puriso amussā itthiyā sāratto paṭibaddhacitto tibbacchando tibbāpekkho.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Do vậy, người ấy khi thấy nữ nhân kia đứng với một người đàn ông khác, nói chuyện, đùa giỡn và cười cợt, nên sanh sầu, bi, khổ, ưu, não.<br>
+<span lang="pi" class="pali">
+Tasmā taṁ itthiṁ disvā aññena purisena saddhiṁ santiṭṭhantiṁ sallapantiṁ sañjagghantiṁ saṁhasantiṁ uppajjeyyuṁ soka-parideva-dukkha-domanassa-upāyāsā”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Nhưng này các Tỷ-kheo, người ấy có thể suy nghĩ như sau:<br>
+<span lang="pi" class="pali">
+“Atha kho, bhikkhave, tassa purisassa evamassa:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Ta luyến ái nữ nhân này, tâm tư say đắm, nhiệt tình ái mộ, nhiệt tình luyến mộ.<br>
+<span lang="pi" class="pali">
+‘ahaṁ kho amussā itthiyā sāratto paṭibaddhacitto tibbacchando tibbāpekkho.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Khi ta thấy nữ nhân này đứng với một người đàn ông khác, nói chuyện đùa giỡn và cười cợt, ta sanh sầu, bi, khổ, ưu, não.<br>
+<span lang="pi" class="pali">
+Tassa me amuṁ itthiṁ disvā aññena purisena saddhiṁ santiṭṭhantiṁ sallapantiṁ sañjagghantiṁ saṁhasantiṁ uppajjanti soka-parideva-dukkha-domanassa-upāyāsā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vậy ta hãy bỏ lòng tham luyến đối với nữ nhân này’.<br>
+<span lang="pi" class="pali">
+Yannūnāhaṁ yo me amussā itthiyā chandarāgo taṁ pajaheyyan’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Rồi người ấy bỏ lòng tham luyến đối với nữ nhân kia.<br>
+<span lang="pi" class="pali">
+So yo amussā itthiyā chandarāgo taṁ pajaheyya.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Sau một thời gian, người ấy thấy nữ nhân kia đứng với một người đàn ông khác, nói chuyện, đùa giỡn và cười cợt.<br>
+<span lang="pi" class="pali">
+So taṁ itthiṁ passeyya aparena samayena aññena purisena saddhiṁ santiṭṭhantiṁ sallapantiṁ sañjagghantiṁ saṁhasantiṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này các Tỷ-kheo, các Ông nghĩ thế nào?<br>
+<span lang="pi" class="pali">
+Taṁ kiṁ maññatha, bhikkhave,<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Người ấy khi thấy nữ nhân kia đứng với một người đàn ông khác, nói chuyện, đùa giỡn và cười cợt, có sanh sầu, bi, khổ, ưu não, không?”<br>
+<span lang="pi" class="pali">
+api nu tassa purisassa amuṁ itthiṁ disvā aññena purisena saddhiṁ santiṭṭhantiṁ sallapantiṁ sañjagghantiṁ saṁhasantiṁ uppajjeyyuṁ soka-parideva-dukkha-domanassa-upāyāsā”ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Bạch Thế Tôn, không”. “Vì sao vậy?”<br>
+<span lang="pi" class="pali">
+“No hetaṁ, bhante”. “Taṁ kissa hetu”?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Bạch Thế Tôn vì rằng, người này đối với nữ nhân kia không còn tham luyến. Do vậy, khi thấy nữ nhân kia đứng với một người đàn ông khác, nói chuyện, đùa giỡn và cười cợt, người ấy không sanh sầu bi, khổ, ưu, não.”<br>
+<span lang="pi" class="pali">
+“Amu hi, bhante, puriso amussā itthiyā virāgo. Tasmā taṁ itthiṁ disvā aññena purisena saddhiṁ santiṭṭhantiṁ sallapantiṁ sañjagghantiṁ saṁhasantiṁ na uppajjeyyuṁ soka-parideva-dukkha-domanassa-upāyāsā”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Cũng vậy, này các Tỷ-kheo, một người không để cho tự ngã chưa bị nhiếp phục, bị đau khổ nhiếp phục và không từ bỏ lạc thọ hợp pháp, và không để lạc thọ ấy chi phối.<br>
+<span lang="pi" class="pali">
+“Evameva kho, bhikkhave, bhikkhu na heva anaddhabhūtaṁ attānaṁ dukkhena addhabhāveti, dhammikañca sukhaṁ na pariccajati, tasmiñca sukhe anadhimucchito hoti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vị ấy biết như sau:<br>
+<span lang="pi" class="pali">
+So evaṁ pajānāti:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Trong khi ta tinh cần chống lại nguyên nhân đau khổ này, do chống lại nguyên nhân đau khổ, ta không có tham dục. Nhưng trong khi ta xả đối với nguyên nhân đau khổ này, trong khi tu tập xả, ta không có tham dục’.<br>
+<span lang="pi" class="pali">
+‘imassa kho me dukkhanidānassa saṅkhāraṁ padahato saṅkhārappadhānā virāgo hoti, imassa pana me dukkhanidānassa ajjhupekkhato upekkhaṁ bhāvayato virāgo hotī’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Khi vị ấy tinh cần chống lại nguyên nhân đau khổ, do tinh cần chống lại nguyên nhân đau khổ, vị ấy không có tham dục. Do vậy, ở đây, vị ấy tinh cần chống lại nguyên nhân đau khổ. Nhưng trong khi vị ấy xả đối với nguyên nhân đau khổ, trong khi tu tập xả, vị ấy không có tham dục. Do vậy, ở đây, vị ấy tu tập xả.<br>
+<span lang="pi" class="pali">
+So yassa hi khvāssa dukkhanidānassa saṅkhāraṁ padahato saṅkhārappadhānā virāgo hoti, saṅkhāraṁ tattha padahati; yassa panassa dukkhanidānassa ajjhupekkhato upekkhaṁ bhāvayato virāgo hoti, upekkhaṁ tattha bhāveti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Trong khi vị ấy tinh cần chống lại nguyên nhân đau khổ ấy, do tinh cần chống lại nguyên nhân, vị ấy không có tham dục.<br>
+<span lang="pi" class="pali">
+Tassa tassa dukkhanidānassa saṅkhāraṁ padahato saṅkhārappadhānā virāgo hoti—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Như vậy, sự đau khổ đối với vị ấy được diệt tận.<br>
+<span lang="pi" class="pali">
+evampissa taṁ dukkhaṁ nijjiṇṇaṁ hoti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Trong khi vị ấy xả đối với nguyên nhân đau khổ ấy, trong khi tu tập xả, vị ấy không có tham dục.<br>
+<span lang="pi" class="pali">
+Tassa tassa dukkhanidānassa ajjhupekkhato upekkhaṁ bhāvayato virāgo hoti—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Như vậy, sự đau khổ đối với vị ấy được diệt tận.<br>
+<span lang="pi" class="pali">
+evampissa taṁ dukkhaṁ nijjiṇṇaṁ hoti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Như vậy, này các Tỷ-kheo, là sự tinh tấn có kết quả, sự tinh cần có kết quả.<br>
+<span lang="pi" class="pali">
+Evampi, bhikkhave, saphalo upakkamo hoti, saphalaṁ padhānaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Lại nữa, này các Tỷ-kheo, vị Tỷ-kheo lại suy nghĩ như sau:<br>
+<span lang="pi" class="pali">
+Puna caparaṁ, bhikkhave, bhikkhu iti paṭisañcikkhati:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Khi ta trú vào lạc, bất thiện pháp tăng trưởng, thiện pháp giảm thiểu.<br>
+<span lang="pi" class="pali">
+‘yathāsukhaṁ kho me viharato akusalā dhammā abhivaḍḍhanti, kusalā dhammā parihāyanti;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Nhưng khi ta tinh cần dùng đau khổ chống với tự ngã, các bất thiện pháp giảm thiểu, các thiện pháp tăng trưởng.<br>
+<span lang="pi" class="pali">
+dukkhāya pana me attānaṁ padahato akusalā dhammā parihāyanti, kusalā dhammā abhivaḍḍhanti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vậy ta hãy tinh cần dùng đau khổ chống với tự ngã’.<br>
+<span lang="pi" class="pali">
+Yannūnāhaṁ dukkhāya attānaṁ padaheyyan’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vị ấy tinh cần dùng đau khổ chống với tự ngã.<br>
+<span lang="pi" class="pali">
+So dukkhāya attānaṁ padahati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Do tinh cần dùng đau khổ chống với tự ngã, các bất thiện pháp giảm thiểu, các thiện pháp tăng trưởng.<br>
+<span lang="pi" class="pali">
+Tassa dukkhāya attānaṁ padahato akusalā dhammā parihāyanti kusalā dhammā abhivaḍḍhanti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vị ấy sau một thời gian, không tinh cần dùng đau khổ chống với tự ngã. Vì sao vậy?<br>
+<span lang="pi" class="pali">
+So na aparena samayena dukkhāya attānaṁ padahati. Taṁ kissa hetu?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vì mục đích vị Tỷ-kheo ấy tinh cần dùng đau khổ chống với tự ngã đã thành tựu.<br>
+<span lang="pi" class="pali">
+Yassa hi so, bhikkhave, bhikkhu atthāya dukkhāya attānaṁ padaheyya svāssa attho abhinipphanno hoti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Do vậy, sau một thời gian vị ấy không tinh cần dùng đau khổ chống với tự ngã.<br>
+<span lang="pi" class="pali">
+Tasmā na aparena samayena dukkhāya attānaṁ padahati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ví như, này các Tỷ-kheo, một người làm tên, hơ nóng và đốt nóng thân tên giữa hai ngọn lửa, khiến thân tên được thẳng và dễ uốn nắn.<br>
+<span lang="pi" class="pali">
+Seyyathāpi, bhikkhave, usukāro tejanaṁ dvīsu alātesu ātāpeti paritāpeti ujuṁ karoti kammaniyaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Nhưng này các Tỷ-kheo, khi thân tên của người làm tên, đã được hơ nóng và đốt nóng giữa hai ngọn lửa trở thành thẳng và dễ uốn nắn, người ấy sau một thời gian không còn hơ nóng và đốt nóng thân tên giữa hai ngọn lửa, khiến thân tên được thẳng và dễ uốn nắn.<br>
+<span lang="pi" class="pali">
+Yato kho, bhikkhave, usukārassa tejanaṁ dvīsu alātesu ātāpitaṁ hoti paritāpitaṁ ujuṁ kataṁ kammaniyaṁ, na so taṁ aparena samayena usukāro tejanaṁ dvīsu alātesu ātāpeti paritāpeti ujuṁ karoti kammaniyaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vì sao vậy?<br>
+<span lang="pi" class="pali">
+Taṁ kissa hetu?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vì mục đích người làm tên ấy hơ nóng và đốt nóng thân tên giữa hai ngọn lửa, khiến thân tên được thẳng và dễ uốn nắn đã được thành tựu.<br>
+<span lang="pi" class="pali">
+Yassa hi so, bhikkhave, atthāya usukāro tejanaṁ dvīsu alātesu ātāpeyya paritāpeyya ujuṁ kareyya kammaniyaṁ svāssa attho abhinipphanno hoti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Do vậy, sau một thời gian, người ấy không còn hơ nóng, đốt nóng thân tên giữa hai ngọn lửa để trở thành thẳng và dễ uốn nắn.<br>
+<span lang="pi" class="pali">
+Tasmā na aparena samayena usukāro tejanaṁ dvīsu alātesu ātāpeti paritāpeti ujuṁ karoti kammaniyaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Cũng vậy, này các Tỷ-kheo, vị Tỷ-kheo ấy suy nghĩ như sau:<br>
+<span lang="pi" class="pali">
+Evameva kho, bhikkhave, bhikkhu iti paṭisañcikkhati:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Khi ta trú vào lạc, bất thiện pháp tăng trưởng, thiện pháp giảm thiểu.<br>
+<span lang="pi" class="pali">
+‘yathāsukhaṁ kho me viharato akusalā dhammā abhivaḍḍhanti, kusalā dhammā parihāyanti;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Nhưng khi ta tinh cần dùng đau khổ chống với tự ngã, các bất thiện pháp giảm thiểu, các thiện pháp tăng trưởng.<br>
+<span lang="pi" class="pali">
+dukkhāya pana me attānaṁ padahato akusalā dhammā parihāyanti, kusalā dhammā abhivaḍḍhanti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vậy ta hãy tinh cần dùng đau khổ chống với tự ngã’.<br>
+<span lang="pi" class="pali">
+Yannūnāhaṁ dukkhāya attānaṁ padaheyyan’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vị ấy tinh cần dùng đau khổ chống với tự ngã.<br>
+<span lang="pi" class="pali">
+So dukkhāya attānaṁ padahati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Do tinh cần dùng đau khổ chống với tự ngã, các bất thiện pháp giảm thiểu, các thiện pháp tăng trưởng.<br>
+<span lang="pi" class="pali">
+Tassa dukkhāya attānaṁ padahato akusalā dhammā parihāyanti, kusalā dhammā abhivaḍḍhanti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vị ấy sau một thời gian, không tinh cần dùng đau khổ chống với tự ngã. Vì sao vậy?<br>
+<span lang="pi" class="pali">
+So na aparena samayena dukkhāya attānaṁ padahati. Taṁ kissa hetu?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vì mục đích vị Tỷ-kheo ấy tinh cần dùng đau khổ chống với tự ngã đã thành tựu.<br>
+<span lang="pi" class="pali">
+Yassa hi so, bhikkhave, bhikkhu atthāya dukkhāya attānaṁ padaheyya svāssa attho abhinipphanno hoti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Do vậy, sau một thời gian, vị ấy không tinh cần dùng đau khổ chống với tự ngã.<br>
+<span lang="pi" class="pali">
+Tasmā na aparena samayena dukkhāya attānaṁ padahati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Như vậy, này các Tỷ-kheo, là sự tinh cần có kết quả.<br>
+<span lang="pi" class="pali">
+Evampi, bhikkhave, saphalo upakkamo hoti, saphalaṁ padhānaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Lại nữa, này các Tỷ-kheo, ở đây, Như Lai sanh ra ở đời, bậc A-la-hán, Chánh Ðẳng giác, Minh Hạnh Túc, Thiện Thệ, Thế Gian Giải, Vô Thượng Sĩ, Ðiều Ngự Trượng Phu, Thiên Nhân Sư, Phật, Thế Tôn.<br>
+<span lang="pi" class="pali">
+Puna caparaṁ, bhikkhave, idha tathāgato loke uppajjati arahaṁ sammāsambuddho vijjācaraṇasampanno sugato lokavidū anuttaro purisadammasārathi satthā devamanussānaṁ buddho bhagavā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Như Lai sau khi riêng tự chứng ngộ với thượng trí, thế giới này là Thiên giới, Ma giới, Phạm thiên giới, gồm cả thế giới này với Sa-môn, Bà-la-môn, Thiên, Nhơn, lại tuyên bố điều Ngài đã chứng ngộ.<br>
+<span lang="pi" class="pali">
+So imaṁ lokaṁ sadevakaṁ samārakaṁ sabrahmakaṁ sassamaṇabrāhmaṇiṁ pajaṁ sadevamanussaṁ sayaṁ abhiññā sacchikatvā pavedeti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ngài thuyết pháp sơ thiện, trung thiện, hậu thiện, đầy đủ văn nghĩa, Ngài truyền dạy Phạm hạnh hoàn toàn đầy đủ thanh tịnh.<br>
+<span lang="pi" class="pali">
+So dhammaṁ deseti ādikalyāṇaṁ majjhekalyāṇaṁ pariyosānakalyāṇaṁ sātthaṁ sabyañjanaṁ, kevalaparipuṇṇaṁ parisuddhaṁ brahmacariyaṁ pakāseti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Người gia trưởng hay con người gia trưởng, hay một người sanh ở giai cấp (hạ tiện) nghe pháp ấy, sau khi nghe pháp, người ấy sanh lòng tín ngưỡng Như Lai.<br>
+<span lang="pi" class="pali">
+Taṁ dhammaṁ suṇāti gahapati vā gahapatiputto vā aññatarasmiṁ vā kule paccājāto. So taṁ dhammaṁ sutvā tathāgate saddhaṁ paṭilabhati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Khi có lòng tín ngưỡng ấy, người ấy suy nghĩ:<br>
+<span lang="pi" class="pali">
+So tena saddhāpaṭilābhena samannāgato iti paṭisañcikkhati:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Ðời sống gia đình đầy những triền phược, con đường đầy những bụi đời.<br>
+<span lang="pi" class="pali">
+‘sambādho gharāvāso rajāpatho, abbhokāso pabbajjā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ðời sống xuất gia phóng khoáng như hư không. Thật không dễ gì cho một người sống ở gia đình có thể sống theo Phạm hạnh hoàn toàn đầy đủ, hoàn toàn thanh tịnh, trắng bạch như vỏ ốc.<br>
+<span lang="pi" class="pali">
+Nayidaṁ sukaraṁ agāraṁ ajjhāvasatā ekantaparipuṇṇaṁ ekantaparisuddhaṁ saṅkhalikhitaṁ brahmacariyaṁ carituṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vậy ta nên cạo bỏ râu tóc, đắp áo cà-sa, xuất gia, từ bỏ gia đình, sống không gia đình’.<br>
+<span lang="pi" class="pali">
+Yannūnāhaṁ kesamassuṁ ohāretvā kāsāyāni vatthāni acchādetvā agārasmā anagāriyaṁ pabbajeyyan’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Một thời gian sau, người ấy bỏ tài sản nhỏ, hay bỏ tài sản lớn, bỏ bà con quyến thuộc nhỏ, hay bỏ bà con quyến thuộc lớn, cạo bỏ râu tóc, đắp áo cà-sa, và xuất gia, từ bỏ gia đình, sống không gia đình.<br>
+<span lang="pi" class="pali">
+So aparena samayena appaṁ vā bhogakkhandhaṁ pahāya mahantaṁ vā bhogakkhandhaṁ pahāya, appaṁ vā ñātiparivaṭṭaṁ pahāya mahantaṁ vā ñātiparivaṭṭaṁ pahāya kesamassuṁ ohāretvā kāsāyāni vatthāni acchādetvā agārasmā anagāriyaṁ pabbajati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vị ấy xuất gia như vậy, hành trì các học giới và hạnh sống các Tỷ-kheo, từ bỏ sát sanh, tránh xa sát sanh, bỏ trượng, bỏ kiếm, biết xấu hổ, sợ hãi, có lòng từ, sống thương xót đến hạnh phúc tất cả chúng sanh và loài hữu tình.<br>
+<span lang="pi" class="pali">
+So evaṁ pabbajito samāno bhikkhūnaṁ sikkhāsājīvasamāpanno pāṇātipātaṁ pahāya pāṇātipātā paṭivirato hoti nihitadaṇḍo nihitasattho, lajjī dayāpanno sabbapāṇabhūtahitānukampī viharati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vị ấy từ bỏ lấy của không cho, tránh xa lấy của không cho, chỉ mong những vật đã cho, tự sống thanh tịnh, không có trộm cướp.<br>
+<span lang="pi" class="pali">
+Adinnādānaṁ pahāya adinnādānā paṭivirato hoti dinnādāyī dinnapāṭikaṅkhī, athenena sucibhūtena attanā viharati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vị ấy từ bỏ đời sống không Phạm hạnh, sống theo Phạm hạnh, sống đời sống viễn ly, tránh xa dâm dục hạ liệt.<br>
+<span lang="pi" class="pali">
+Abrahmacariyaṁ pahāya brahmacārī hoti ārācārī virato methunā gāmadhammā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vị ấy từ bỏ nói láo, nói những lời chân thật, liên hệ đến sự thật, chắc chắn, đáng tin cậy, không lường gạt đời.<br>
+<span lang="pi" class="pali">
+Musāvādaṁ pahāya musāvādā paṭivirato hoti saccavādī saccasandho theto paccayiko avisaṁvādako lokassa.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vị ấy từ bỏ nói hai lưỡi, tránh xa nói hai lưỡi, nghe điều gì ở chỗ này, không đến chỗ kia nói để sanh chia rẽ ở những người này; nghe điều gì ở chỗ kia, không đi nói với những người này để sanh chuyện chia rẽ ở những người kia. Như vậy, vị ấy sống hòa hợp những kẻ ly gián, khuyến khích những kẻ hòa hợp, hoan hỷ trong hòa hợp, thích thú trong hòa hợp, hân hoan trong hòa hợp, nói những lời đưa đến hòa hợp.<br>
+<span lang="pi" class="pali">
+Pisuṇaṁ vācaṁ pahāya pisuṇāya vācāya paṭivirato hoti; ito sutvā na amutra akkhātā imesaṁ bhedāya, amutra vā sutvā na imesaṁ akkhātā amūsaṁ bhedāya—iti bhinnānaṁ vā sandhātā sahitānaṁ vā anuppadātā samaggārāmo samaggarato samagganandī samaggakaraṇiṁ vācaṁ bhāsitā hoti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vị ấy từ bỏ nói lời độc ác, tránh xa lời nói độc ác, nói những lời nói dịu hiền, đẹp tai, dễ thương, thông cảm đến tâm, tao nhã, đẹp lòng nhiều người; vị ấy nói những lời nói như vậy.<br>
+<span lang="pi" class="pali">
+Pharusaṁ vācaṁ pahāya pharusāya vācāya paṭivirato hoti; yā sā vācā nelā kaṇṇasukhā pemanīyā hadayaṅgamā porī bahujanakantā bahujanamanāpā tathārūpiṁ vācaṁ bhāsitā hoti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vị ấy từ bỏ lời nói phù phiếm, tránh xa lời nói phù phiếm, nói đúng thời, nói chân thật, nói có ý nghĩa, nói pháp, nói luật, nói những lời đáng được gìn giữ, những lời hợp thời, hợp lý, có mạch lạc hệ thống, có ích lợi.<br>
+<span lang="pi" class="pali">
+Samphappalāpaṁ pahāya samphappalāpā paṭivirato hoti kālavādī bhūtavādī atthavādī dhammavādī vinayavādī, nidhānavatiṁ vācaṁ bhāsitā kālena sāpadesaṁ pariyantavatiṁ atthasaṁhitaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vị ấy từ bỏ không làm hại đến các hạt giống và các loại cây cỏ,<br>
+<span lang="pi" class="pali">
+So bījagāmabhūtagāmasamārambhā paṭivirato hoti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+dùng một ngày một bữa, không ăn ban đêm; từ bỏ các món ăn phi thời;<br>
+<span lang="pi" class="pali">
+Ekabhattiko hoti rattūparato virato vikālabhojanā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+từ bỏ không đi xem múa, hát, nhạc, các cuộc trình diễn;<br>
+<span lang="pi" class="pali">
+Naccagītavāditavisūkadassanā paṭivirato hoti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+từ bỏ không dùng vòng hoa, hương liệu, dầu thoa, trang sức, và các thời trang;<br>
+<span lang="pi" class="pali">
+Mālā-gandha-vilepana-dhāraṇa-maṇḍana-vibhūsanaṭṭhānā paṭivirato hoti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+từ bỏ không dùng giường cao và giường lớn;<br>
+<span lang="pi" class="pali">
+Uccāsayanamahāsayanā paṭivirato hoti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+từ bỏ không nhận vàng và bạc;<br>
+<span lang="pi" class="pali">
+Jātarūparajatapaṭiggahaṇā paṭivirato hoti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+từ bỏ không nhận các hạt sống;<br>
+<span lang="pi" class="pali">
+Āmakadhaññapaṭiggahaṇā paṭivirato hoti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+từ bỏ không nhận thịt sống,<br>
+<span lang="pi" class="pali">
+Āmakamaṁsapaṭiggahaṇā paṭivirato hoti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+từ bỏ không nhận đàn bà con gái;<br>
+<span lang="pi" class="pali">
+Itthikumārikapaṭiggahaṇā paṭivirato hoti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+từ bỏ không nhận nô tỳ gái và trai;<br>
+<span lang="pi" class="pali">
+Dāsidāsapaṭiggahaṇā paṭivirato hoti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+từ bỏ không nhận cừu và dê;<br>
+<span lang="pi" class="pali">
+Ajeḷakapaṭiggahaṇā paṭivirato hoti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+từ bỏ không nhận gia cầm và heo;<br>
+<span lang="pi" class="pali">
+Kukkuṭasūkarapaṭiggahaṇā paṭivirato hoti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+từ bỏ không nhận voi, bò, ngựa và ngựa cái;<br>
+<span lang="pi" class="pali">
+Hatthigavassavaḷavapaṭiggahaṇā paṭivirato hoti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+từ bỏ không nhận ruộng nương đất đai;<br>
+<span lang="pi" class="pali">
+Khettavatthupaṭiggahaṇā paṭivirato hoti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+từ bỏ không dùng người làm môi giới hoặc tự mình làm môi giới;<br>
+<span lang="pi" class="pali">
+Dūteyyapahiṇagamanānuyogā paṭivirato hoti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+từ bỏ không buôn bán;<br>
+<span lang="pi" class="pali">
+Kayavikkayā paṭivirato hoti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+từ bỏ các sự gian lận bằng cân, tiền bạc và đo lường;<br>
+<span lang="pi" class="pali">
+Tulākūṭakaṁsakūṭamānakūṭā paṭivirato hoti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+từ bỏ các tà hạnh như hối lộ, gian trá, lừa đảo;<br>
+<span lang="pi" class="pali">
+Ukkoṭanavañcananikatisāciyogā paṭivirato hoti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+từ bỏ không làm thương tổn, sát hại, câu thúc, bức đoạt, trộm cắp, cướp phá.<br>
+<span lang="pi" class="pali">
+Chedana-vadha-bandhana-viparāmosa-ālopa-sahasākārā paṭivirato hoti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vị ấy sống biết đủ, bằng lòng với tấm y để che thân với đồ ăn khất thực để nuôi sống, đi tại chỗ nào cũng mang theo (y và bình bát).<br>
+<span lang="pi" class="pali">
+So santuṭṭho hoti kāyaparihārikena cīvarena, kucchiparihārikena piṇḍapātena. So yena yeneva pakkamati samādāyeva pakkamati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Như con chim bay đến chỗ nào cũng mang theo hai cánh;<br>
+<span lang="pi" class="pali">
+Seyyathāpi nāma pakkhī sakuṇo yena yeneva ḍeti sapattabhārova ḍeti;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+cũng vậy, Tỷ-kheo bằng lòng với tấm y để che thân, với đồ ăn khất thực để nuôi sống, đi tại chỗ nào cũng mang theo.<br>
+<span lang="pi" class="pali">
+evameva bhikkhu santuṭṭho hoti kāyaparihārikena cīvarena, kucchiparihārikena piṇḍapātena; so yena yeneva pakkamati samādāyeva pakkamati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vị ấy thành tựu Thánh giới uẩn này, nội tâm hưởng lạc thọ không khuyết phạm.<br>
+<span lang="pi" class="pali">
+So iminā ariyena sīlakkhandhena samannāgato ajjhattaṁ anavajjasukhaṁ paṭisaṁvedeti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Khi mắt thấy sắc, vị ấy không nắm giữ tướng chung, không nắm giữ tướng riêng.<br>
+<span lang="pi" class="pali">
+So cakkhunā rūpaṁ disvā na nimittaggāhī hoti nānubyañjanaggāhī.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Những nguyên nhân gì, vì con mắt không được chế ngự, khiến tham ái, ưu bi, các ác, bất thiện pháp khởi lên, vị ấy tự chế ngự các nguyên nhân ấy, hộ trì con mắt, thực hành sự hộ trì con mắt.<br>
+<span lang="pi" class="pali">
+Yatvādhikaraṇamenaṁ cakkhundriyaṁ asaṁvutaṁ viharantaṁ abhijjhādomanassā pāpakā akusalā dhammā anvāssaveyyuṁ tassa saṁvarāya paṭipajjati, rakkhati cakkhundriyaṁ, cakkhundriye saṁvaraṁ āpajjati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Khi tai nghe tiếng…<br>
+<span lang="pi" class="pali">
+Sotena saddaṁ sutvā …pe…<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+mũi ngửi hương…<br>
+<span lang="pi" class="pali">
+ghānena gandhaṁ ghāyitvā …pe…<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+lưỡi nếm vị…<br>
+<span lang="pi" class="pali">
+jivhāya rasaṁ sāyitvā …pe…<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+thân cảm xúc…<br>
+<span lang="pi" class="pali">
+kāyena phoṭṭhabbaṁ phusitvā …pe…<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+ý nhận thức các pháp, vị ấy không nắm giữ tướng chung, không nắm giữ tướng riêng.<br>
+<span lang="pi" class="pali">
+manasā dhammaṁ viññāya na nimittaggāhī hoti nānubyañjanaggāhī.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+những nguyên nhân gì, vì ý căn không được chế ngự, khiến tham ái, ưu bi, các ác bất thiện pháp khởi lên, vị ấy chế ngự nguyên nhân ấy, hộ trì ý căn, thực hành sự hộ trì ý căn.<br>
+<span lang="pi" class="pali">
+Yatvādhikaraṇamenaṁ manindriyaṁ asaṁvutaṁ viharantaṁ abhijjhādomanassā pāpakā akusalā dhammā anvāssaveyyuṁ tassa saṁvarāya paṭipajjati, rakkhati manindriyaṁ, manindriye saṁvaraṁ āpajjati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vị ấy thành tựu Thánh hộ trì các căn này, nội tâm hưởng lạc thọ không uế nhiễm.<br>
+<span lang="pi" class="pali">
+So iminā ariyena indriyasaṁvarena samannāgato ajjhattaṁ abyāsekasukhaṁ paṭisaṁvedeti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vị ấy khi đi tới, khi đi lui đều tỉnh giác; khi nhìn thẳng, khi nhìn quanh đều tỉnh giác; khi co tay, khi duỗi tay đều tỉnh giác; khi mang y kép, bình bát, thượng y đều tỉnh giác; khi ăn, uống, nhai, nuốt đều tỉnh giác; khi đi đại tiện, tiểu tiện đều tỉnh giác; khi đi, đứng, ngồi, nằm, thức, nói, yên lặng đều tỉnh giác.<br>
+<span lang="pi" class="pali">
+So abhikkante paṭikkante sampajānakārī hoti, ālokite vilokite sampajānakārī hoti, samiñjite pasārite sampajānakārī hoti, saṅghāṭipattacīvaradhāraṇe sampajānakārī hoti, asite pīte khāyite sāyite sampajānakārī hoti, uccārapassāvakamme sampajānakārī hoti, gate ṭhite nisinne sutte jāgarite bhāsite tuṇhībhāve sampajānakārī hoti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vị ấy thành tựu Thánh giới uẩn này, thành tựu Thánh hộ trì các căn này, thành tựu Thánh chánh niệm tỉnh giác này, lựa một trú xứ thanh vắng, như khu rừng, gốc cây, khe núi, hang đá, bãi tha ma, lùm cây ngoài trời, đống rơm.<br>
+<span lang="pi" class="pali">
+So iminā ca ariyena sīlakkhandhena samannāgato, imāya ca ariyāya santuṭṭhiyā samannāgato, iminā ca ariyena indriyasaṁvarena samannāgato, iminā ca ariyena satisampajaññena samannāgato vivittaṁ senāsanaṁ bhajati araññaṁ rukkhamūlaṁ pabbataṁ kandaraṁ giriguhaṁ susānaṁ vanapatthaṁ abbhokāsaṁ palālapuñjaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Sau khi ăn xong và đi khất thực trở về, vị ấy ngồi kiết-già, lưng thẳng tại chỗ nói trên, và an trú chánh niệm trước mặt.<br>
+<span lang="pi" class="pali">
+So pacchābhattaṁ piṇḍapātapaṭikkanto nisīdati pallaṅkaṁ ābhujitvā, ujuṁ kāyaṁ paṇidhāya, parimukhaṁ satiṁ upaṭṭhapetvā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vị ấy từ bỏ dục tham ở đời, sống với tâm thoát ly dục tham, gột rửa tâm hết dục tham.<br>
+<span lang="pi" class="pali">
+So abhijjhaṁ loke pahāya vigatābhijjhena cetasā viharati, abhijjhāya cittaṁ parisodheti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Từ bỏ sân hận, vị ấy sống với tâm không sân hận, lòng từ mẫn thương xót tất cả chúng sanh hữu tình, gột rửa tâm hết sân hận.<br>
+<span lang="pi" class="pali">
+Byāpādapadosaṁ pahāya abyāpannacitto viharati sabbapāṇabhūtahitānukampī, byāpādapadosā cittaṁ parisodheti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Từ bỏ hôn trầm thụy miên, vị ấy sống thoát ly hôn trầm thụy miên, với tâm tưởng hướng về ánh sáng, chánh niệm tỉnh giác, gột rửa tâm hết hôn trầm thụy miên.<br>
+<span lang="pi" class="pali">
+Thinamiddhaṁ pahāya vigatathinamiddho viharati ālokasaññī sato sampajāno, thinamiddhā cittaṁ parisodheti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Từ bỏ trạo cử, hối quá, vị ấy sống không trạo cử, nội tâm trầm lặng, gột rửa tâm hết trạo cử, hối quá.<br>
+<span lang="pi" class="pali">
+Uddhaccakukkuccaṁ pahāya anuddhato viharati ajjhattaṁ vūpasantacitto, uddhaccakukkuccā cittaṁ parisodheti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Từ bỏ nghi ngờ, vị ấy sống thoát khỏi nghi ngờ, không phân vân lưỡng lự, gột rửa tâm hết nghi ngờ đối với thiện pháp.<br>
+<span lang="pi" class="pali">
+Vicikicchaṁ pahāya tiṇṇavicikiccho viharati akathaṅkathī kusalesu dhammesu, vicikicchāya cittaṁ parisodheti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vị ấy, từ bỏ năm triền cái làm cho tâm ô uế, làm cho trí tuệ muội lược này, ly dục, ly bất thiện pháp, chứng và trú thiền thứ nhất, một trạng thái hỷ lạc do ly dục sanh, có tầm, có tứ.<br>
+<span lang="pi" class="pali">
+So ime pañca nīvaraṇe pahāya cetaso upakkilese paññāya dubbalīkaraṇe vivicceva kāmehi vivicca akusalehi dhammehi savitakkaṁ savicāraṁ vivekajaṁ pītisukhaṁ paṭhamaṁ jhānaṁ upasampajja viharati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Như vậy, này các Tỷ-kheo, là sự tinh tấn có kết quả, là sự tinh cần có kết quả.<br>
+<span lang="pi" class="pali">
+Evampi, bhikkhave, saphalo upakkamo hoti, saphalaṁ padhānaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Và lại nữa, này các Tỷ-kheo, vị Tỷ-kheo diệt tầm và tứ, chứng và trú thiền thứ hai, một trạng thái hỷ lạc do định sanh, không tầm, không tứ, nội tĩnh nhứt tâm.<br>
+<span lang="pi" class="pali">
+Puna caparaṁ, bhikkhave, bhikkhu vitakkavicārānaṁ vūpasamā ajjhattaṁ sampasādanaṁ cetaso ekodibhāvaṁ avitakkaṁ avicāraṁ samādhijaṁ pītisukhaṁ dutiyaṁ jhānaṁ upasampajja viharati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Như vậy, này các Tỷ-kheo, là sự tinh tấn có kết quả, là sự tinh cần có kết quả.<br>
+<span lang="pi" class="pali">
+Evampi, bhikkhave, saphalo upakkamo hoti, saphalaṁ padhānaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Và lại nữa này các Tỷ-kheo, vị Tỷ-kheo ly hỷ trú xả, chánh niệm tỉnh giác, thân cảm sự lạc thọ mà các bậc Thánh gọi là xả niệm lạc trú, chứng và trú thiền thứ ba.<br>
+<span lang="pi" class="pali">
+Puna caparaṁ, bhikkhave, bhikkhu pītiyā ca virāgā upekkhako ca viharati sato ca sampajāno, sukhañca kāyena paṭisaṁvedeti. Yaṁ taṁ ariyā ācikkhanti: ‘upekkhako satimā sukhavihārī’ti tatiyaṁ jhānaṁ upasampajja viharati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Như vậy, này các Tỷ-kheo, là sự tinh tấn có kết quả, là sự tinh cần có kết quả.<br>
+<span lang="pi" class="pali">
+Evampi, bhikkhave, saphalo upakkamo hoti, saphalaṁ padhānaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Và lại nữa này các Tỷ-kheo, vị Tỷ-kheo xả lạc, xả khổ, diệt hỷ ưu đã cảm thọ trước, chứng và trú Thiền thứ tư, không khổ, không lạc, xả niệm thanh tịnh.<br>
+<span lang="pi" class="pali">
+Puna caparaṁ, bhikkhave, bhikkhu sukhassa ca pahānā dukkhassa ca pahānā, pubbeva somanassadomanassānaṁ atthaṅgamā, adukkhamasukhaṁ upekkhāsatipārisuddhiṁ catutthaṁ jhānaṁ upasampajja viharati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Như vậy, này các Tỷ-kheo, là sự tinh tấn có kết quả, là sự tinh cần có kết quả.<br>
+<span lang="pi" class="pali">
+Evampi, bhikkhave, saphalo upakkamo hoti, saphalaṁ padhānaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Với tâm định tĩnh, thuần tịnh, trong sáng, không cấu nhiễm, không phiền não, nhu nhuyến, dễ sử dụng, vững chắc, bất động như vậy, vị ấy hướng tâm đến túc mạng trí.<br>
+<span lang="pi" class="pali">
+So evaṁ samāhite citte parisuddhe pariyodāte anaṅgaṇe vigatūpakkilese mudubhūte kammaniye ṭhite āneñjappatte pubbenivāsānussatiñāṇāya cittaṁ abhininnāmeti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vị ấy nhớ đến các đời sống quá khứ, như một đời, hai đời, ba đời, bốn đời, năm đời, hai mươi đời, bốn mươi đời, năm mươi đời, một trăm đời, một ngàn đời, một trăm ngàn đời, nhiều hoại kiếp, nhiều thành kiếp. Vị ấy nhớ rằng: “Tại chỗ kia, ta có tên như thế này, dòng họ như thế này, giai cấp như thế này, ăn uống như thế này, thọ khổ lạc như thế này, tuổi thọ đến mức như thế này. Sau khi tại chỗ kia, ta được sanh ra tại chỗ nọ. Tại chỗ ấy, ta có tên như thế này, dòng họ như thế này, giai cấp như thế này, ăn uống như thế này, thọ khổ lạc như thế này, tuổi thọ đến mức như thế này. Sau khi chết tại chỗ nọ, ta được sanh ra ở đây”. Như vậy vị ấy nhớ đến những đời sống quá khứ, cũng với các nét đại cương và các chi tiết.<br>
+<span lang="pi" class="pali">
+So anekavihitaṁ pubbenivāsaṁ anussarati, seyyathidaṁ—ekampi jātiṁ dvepi jātiyo tissopi jātiyo catassopi jātiyo pañcapi jātiyo dasapi jātiyo vīsampi jātiyo tiṁsampi jātiyo cattālīsampi jātiyo paññāsampi jātiyo jātisatampi jātisahassampi jātisatasahassampi anekepi saṁvaṭṭakappe anekepi vivaṭṭakappe anekepi saṁvaṭṭavivaṭṭakappe: ‘amutrāsiṁ evaṁnāmo evaṅgotto evaṁvaṇṇo evamāhāro evaṁsukhadukkhappaṭisaṁvedī evamāyupariyanto, so tato cuto amutra udapādiṁ; tatrāpāsiṁ evaṁnāmo evaṅgotto evaṁvaṇṇo evamāhāro evaṁsukhadukkhappaṭisaṁvedī evamāyupariyanto, so tato cuto idhūpapanno’ti. Iti sākāraṁ sauddesaṁ anekavihitaṁ pubbenivāsaṁ anussarati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Như vậy, này các Tỷ-kheo, là sự tinh tấn có kết quả, là sự tinh cần có kết quả.<br>
+<span lang="pi" class="pali">
+Evampi, bhikkhave, saphalo upakkamo hoti, saphalaṁ padhānaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Với tâm định tĩnh, thuần tịnh, trong sáng, không cấu nhiễm, không phiền não, nhu nhuyến, dễ sử dụng, vững chắc, bất động như vậy, vị ấy hướng tâm đến sanh tử trí của chúng sanh.<br>
+<span lang="pi" class="pali">
+So evaṁ samāhite citte parisuddhe pariyodāte anaṅgaṇe vigatūpakkilese mudubhūte kammaniye ṭhite āneñjappatte sattānaṁ cutūpapātañāṇāya cittaṁ abhininnāmeti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vị ấy với thiên nhãn thuần tịnh, siêu nhân, thấy sự sống và chết của chúng sanh. Vị ấy tuệ tri rõ rằng chúng sanh người hạ liệt kẻ cao sang, người đẹp đẽ kẻ thô xấu, người may mắn kẻ bất hạnh đều do hạnh nghiệp của họ. Vị ấy nghĩ rằng: “Thật sự những vị chúng sanh này thành tựu những ác hạnh về thân, thành tựu những ác hạnh về lời nói, thành tựu những ác hạnh về ý, phỉ báng các bậc Thánh, theo tà kiến, tạo các nghiệp theo tà kiến. Những người này, sau khi thân hoại mạng chung, phải sanh vào cõi dữ, ác thú, đọa xứ, địa ngục. Còn những vị chúng sanh này thành tựu những thiện hạnh về thân, thành tựu những thiện hạnh về lời nói, thành tựu những thiện hạnh về ý, không phỉ báng các bậc Thánh, theo chánh kiến, tạo các nghiệp theo chánh kiến, những người này, sau khi thân hoại mạng chung, được sanh lên các thiện thú, Thiên giới, trên đời này. Như vậy, vị ấy với thiên nhãn thuần tịnh, siêu nhân, thấy sự sống chết của chúng sanh. Vị ấy tuệ tri rõ rằng chúng sanh, người hạ liệt kẻ cao sang, người đẹp đẽ kẻ thô xấu, người may mắn kẻ bất hạnh đều do hạnh nghiệp của họ.<br>
+<span lang="pi" class="pali">
+So dibbena cakkhunā visuddhena atikkantamānusakena satte passati cavamāne upapajjamāne hīne paṇīte suvaṇṇe dubbaṇṇe, sugate duggate yathākammūpage satte pajānāti: ‘ime vata bhonto sattā kāyaduccaritena samannāgatā vacīduccaritena samannāgatā manoduccaritena samannāgatā ariyānaṁ upavādakā micchādiṭṭhikā micchādiṭṭhikammasamādānā, te kāyassa bhedā paraṁ maraṇā apāyaṁ duggatiṁ vinipātaṁ nirayaṁ upapannā. Ime vā pana bhonto sattā kāyasucaritena samannāgatā vacīsucaritena samannāgatā manosucaritena samannāgatā ariyānaṁ anupavādakā sammādiṭṭhikā sammādiṭṭhikammasamādānā, te kāyassa bhedā paraṁ maraṇā sugatiṁ saggaṁ lokaṁ upapannā’ti. Iti dibbena cakkhunā visuddhena atikkantamānusakena satte passati cavamāne upapajjamāne hīne paṇīte suvaṇṇe dubbaṇṇe, sugate duggate yathākammūpage satte pajānāti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Như vậy, này các Tỷ-kheo, là sự tinh tấn có kết quả, là sự tinh cần có kết quả.<br>
+<span lang="pi" class="pali">
+Evampi, bhikkhave, saphalo upakkamo hoti, saphalaṁ padhānaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Với tâm định tĩnh, thanh tịnh, trong sáng, không cấu nhiễm, không phiền não, nhu nhuyến, dễ sử dụng, vững chắc, bất động như vậy, vị ấy hướng tâm đến lậu tận trí.<br>
+<span lang="pi" class="pali">
+So evaṁ samāhite citte parisuddhe pariyodāte anaṅgaṇe vigatūpakkilese mudubhūte kammaniye ṭhite āneñjappatte āsavānaṁ khayañāṇāya cittaṁ abhininnāmeti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vị ấy tuệ tri như thật: “Ðây là Khổ”, tuệ tri như thật: “Ðây là Khổ tập”, tuệ tri như thật: “Ðây là Khổ diệt”, tuệ tri như thật: “Ðây là Con Ðường đưa đến khổ diệt”;<br>
+<span lang="pi" class="pali">
+So ‘idaṁ dukkhan’ti yathābhūtaṁ pajānāti, ‘ayaṁ dukkhasamudayo’ti yathābhūtaṁ pajānāti, ‘ayaṁ dukkhanirodho’ti yathābhūtaṁ pajānāti, ‘ayaṁ dukkhanirodhagāminī paṭipadā’ti yathābhūtaṁ pajānāti;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+tuệ tri như thật: “Ðây là những lậu hoặc”, tuệ tri như thật: “Ðây là nguyên nhân của các lậu hoặc”, tuệ tri như thật: “Ðây là sự diệt trừ các lậu hoặc”, tuệ tri như thật: “Ðây là Con Ðường đưa đến sự diệt trừ các lậu hoặc”.<br>
+<span lang="pi" class="pali">
+‘ime āsavā’ti yathābhūtaṁ pajānāti, ‘ayaṁ āsavasamudayo’ti yathābhūtaṁ pajānāti, ‘ayaṁ āsavanirodho’ti yathābhūtaṁ pajānāti, ‘ayaṁ āsavanirodhagāminī paṭipadā’ti yathābhūtaṁ pajānāti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Nhờ biết như vậy, thấy như vậy, tâm vị ấy thoát khỏi dục lậu, thoát khỏi hữu lậu, thoát khỏi vô minh lậu.<br>
+<span lang="pi" class="pali">
+Tassa evaṁ jānato evaṁ passato kāmāsavāpi cittaṁ vimuccati, bhavāsavāpi cittaṁ vimuccati, avijjāsavāpi cittaṁ vimuccati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ðối với tự thân đã giải thoát như vậy khởi lên sự hiểu biết: “Ta đã giải thoát”.<br>
+<span lang="pi" class="pali">
+Vimuttasmiṁ vimuttamiti ñāṇaṁ hoti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vị ấy tuệ tri: “Sanh đã tận, phạm hạnh đã thành, việc cần làm đã làm; sau đời hiện tại, không có trở lui đời sống này nữa”.<br>
+<span lang="pi" class="pali">
+‘Khīṇā jāti, vusitaṁ brahmacariyaṁ, kataṁ karaṇīyaṁ, nāparaṁ itthattāyā’ti pajānāti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Như vậy, này các Tỷ-kheo là sự tinh tấn có kết quả, là sự tinh cần có kết quả.<br>
+<span lang="pi" class="pali">
+Evampi kho, bhikkhave, saphalo upakkamo hoti, saphalaṁ padhānaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này các Tỷ-kheo, Như Lai nói như vậy.<br>
+<span lang="pi" class="pali">
+Evaṁvādī, bhikkhave, tathāgatā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này các Tỷ-kheo, mười thuyết tùy thuyết hợp pháp của Như Lai đã nói như vậy đưa đến sự tán thán.<br>
+<span lang="pi" class="pali">
+Evaṁvādīnaṁ, bhikkhave, tathāgatānaṁ dasa sahadhammikā pāsaṁsaṭṭhānā āgacchanti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này các Tỷ-kheo, nếu các hữu tình do nhân các việc đã làm trong quá khứ thọ lãnh lạc khổ, thời này các Tỷ-kheo, Như Lai thật sự đã làm những thiện hạnh trong thời quá khứ nên nay mới thọ lãnh vô lậu lạc thọ như vậy.<br>
+<span lang="pi" class="pali">
+Sace, bhikkhave, sattā pubbekatahetu sukhadukkhaṁ paṭisaṁvedenti; addhā, bhikkhave, tathāgato pubbe sukatakammakārī yaṁ etarahi evarūpā anāsavā sukhā vedanā vedeti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này các Tỷ-kheo, nếu các hữu tình do nhân một vị Tạo hóa tạo ra, thọ lãnh lạc khổ, thời này các Tỷ-kheo, Như Lai thật sự được tạo ra bởi một vị Tạo hóa hiền thiện, nên nay mới thọ lãnh vô lậu lạc thọ như vậy.<br>
+<span lang="pi" class="pali">
+Sace, bhikkhave, sattā issaranimmānahetu sukhadukkhaṁ paṭisaṁvedenti; addhā, bhikkhave, tathāgato bhaddakena issarena nimmito yaṁ etarahi evarūpā anāsavā sukhā vedanā vedeti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này các Tỷ-kheo, nếu các hữu tình do nhân kết hợp các điều kiện, thọ lãnh lạc khổ, thời này các Tỷ-kheo, Như Lai thật sự được thiện kết hợp, nên nay mới thọ lãnh vô lậu lạc thọ như vậy.<br>
+<span lang="pi" class="pali">
+Sace, bhikkhave, sattā saṅgatibhāvahetu sukhadukkhaṁ paṭisaṁvedenti; addhā, bhikkhave, tathāgato kalyāṇasaṅgatiko yaṁ etarahi evarūpā anāsavā sukhā vedanā vedeti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này các Tỷ-kheo, nếu các hữu tình do nhân sanh loại, thọ lãnh lạc khổ, thời này các Tỷ-kheo, Như Lai thật sự được thiện sanh loại, nên nay thọ lãnh vô lậu lạc thọ như vậy.<br>
+<span lang="pi" class="pali">
+Sace, bhikkhave, sattā abhijātihetu sukhadukkhaṁ paṭisaṁvedenti; addhā, bhikkhave, tathāgato kalyāṇābhijātiko yaṁ etarahi evarūpā anāsavā sukhā vedanā vedeti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này các Tỷ-kheo, nếu các hữu tình do nhân tinh tấn hiện tại thọ lãnh lạc khổ, thời này các Tỷ-kheo, Như Lai thật sự đã tạo thiện tinh tấn hiện tại, vì rằng nay thọ lãnh vô lậu lạc thọ như vậy.<br>
+<span lang="pi" class="pali">
+Sace, bhikkhave, sattā diṭṭhadhammūpakkamahetu sukhadukkhaṁ paṭisaṁvedenti; addhā, bhikkhave, tathāgato kalyāṇadiṭṭhadhammūpakkamo yaṁ etarahi evarūpā anāsavā sukhā vedanā vedeti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này các Tỷ-kheo, nếu các hữu tình do nhân hành động quá khứ thọ lãnh lạc khổ, Như Lai đáng được tán thán. Nếu các hữu tình không do nhân hành động quá khứ thọ lãnh lạc khổ, Như Lai đáng được tán thán.<br>
+<span lang="pi" class="pali">
+Sace, bhikkhave, sattā pubbekatahetu sukhadukkhaṁ paṭisaṁvedenti, pāsaṁso tathāgato; no ce sattā pubbekatahetu sukhadukkhaṁ paṭisaṁvedenti, pāsaṁso tathāgato.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này các Tỷ-kheo, nếu các hữu tình do nhân được một vị Tạo hóa tạo ra, thọ lãnh lạc khổ, Như Lai đáng được tán thán. Nếu các hữu tình không do nhân được một vị Tạo hóa tạo ra, thọ lãnh lạc khổ, Như Lai đáng được tán thán.<br>
+<span lang="pi" class="pali">
+Sace, bhikkhave, sattā issaranimmānahetu sukhadukkhaṁ paṭisaṁvedenti, pāsaṁso tathāgato; no ce sattā issaranimmānahetu sukhadukkhaṁ paṭisaṁvedenti, pāsaṁso tathāgato.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này các Tỷ-kheo, nếu các hữu tình do nhân kết hợp các điều kiện thọ lãnh lạc khổ, Như Lai đáng được tán thán. Nếu các hữu tình không do nhân các điều kiện kết hợp thọ lãnh lạc thọ khổ thọ, Như Lai đáng được tán thán.<br>
+<span lang="pi" class="pali">
+Sace, bhikkhave, sattā saṅgatibhāvahetu sukhadukkhaṁ paṭisaṁvedenti, pāsaṁso tathāgato; no ce sattā saṅgatibhāvahetu sukhadukkhaṁ paṭisaṁvedenti, pāsaṁso tathāgato.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này các Tỷ-kheo, nếu các hữu tình do nhân sanh loại thọ lãnh lạc khổ, Như Lai đáng được tán thán. Nếu các hữu tình, không do nhân sanh loại thọ lãnh lạc khổ, Như Lai đáng được tán thán.<br>
+<span lang="pi" class="pali">
+Sace, bhikkhave, sattā abhijātihetu sukhadukkhaṁ paṭisaṁvedenti, pāsaṁso tathāgato; no ce sattā abhijātihetu sukhadukkhaṁ paṭisaṁvedenti, pāsaṁso tathāgato.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này các Tỷ-kheo, nếu các hữu tình do nhân tinh cần hiện tại thọ lãnh lạc khổ, Như Lai đáng được tán thán. Nếu các hữu tình, không do nỗ lực trong hiện tại thọ lãnh lạc khổ, Như Lai đáng được tán thán.<br>
+<span lang="pi" class="pali">
+Sace, bhikkhave, sattā diṭṭhadhammūpakkamahetu sukhadukkhaṁ paṭisaṁvedenti, pāsaṁso tathāgato; no ce sattā diṭṭhadhammūpakkamahetu sukhadukkhaṁ paṭisaṁvedenti, pāsaṁso tathāgato.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này các Tỷ-kheo, Như Lai nói như vậy.<br>
+<span lang="pi" class="pali">
+Evaṁvādī, bhikkhave, tathāgatā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này các Tỷ-kheo, mười thuyết tùy thuyết hợp pháp này Như Lai đã nói như vậy đưa đến sự tán thán.”<br>
+<span lang="pi" class="pali">
+Evaṁvādīnaṁ, bhikkhave, tathāgatānaṁ ime dasa sahadhammikā pāsaṁsaṭṭhānā āgacchantī”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Thế Tôn thuyết giảng như vậy.<br>
+<span lang="pi" class="pali">
+Idamavoca bhagavā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Các Tỷ-kheo hoan hỷ tín thọ lời Thế Tôn dạy.<br>
+<span lang="pi" class="pali">
+Attamanā te bhikkhū bhagavato bhāsitaṁ abhinandunti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+<span lang="pi" class="vi">
+Devadahasuttaṁ niṭṭhitaṁ paṭhamaṁ.<br>
+</span>
+</p>
+
+
+<!-- COPY CONTENT SUTTA Ở ĐÂY -->
+
+
+
+<br>
+<p><p style="text-align: right;font-style: italic;">Hoà Thượng Thích Minh Châu dịch Việt</span></p>
+
+
+
+
+
+
+
+
+</section>  <!-- End English and Pali -->
+<div id="nextprev"><a id="previous-sutta" href="./mn100.html#content"></a><a id="next-sutta" href="./mn102.html#content"></a></div>
+</div>  <!--End Content -->
+</div>  <!-- End Page -->
+
+
+
+
+
+
+<footer>
+					 <!-- End bottom links -->
+</footer>
+
+
+ 
+ <!-- Scripts -->
+
+ <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      if (typeof enablePaliLookup === "function") {
+        enablePaliLookup();
+      } else {
+        console.error("enablePaliLookup is not defined");
+      }
+    });
+  </script>
+
+ <script>
+ // Script to open and close sidebar
+ 	function w3_open() {
+ 	document.getElementById("mySidebar").style.display = "block";
+ 	}
+ 		function w3_close() {
+ 		document.getElementById("mySidebar").style.display = "none";
+ 	}
+ </script>
+ <script>
+ 		var app = document.getElementsByTagName("BODY")[0];
+ 		if (localStorage.lightMode == "dark") {
+ 			app.setAttribute("light-mode", "dark");
+ 	}
+ </script>
+ 
+ <script>
+ 		function toggle_light_mode() {
+ 			var app = document.getElementsByTagName("BODY")[0];
+ 				if (localStorage.lightMode == "dark") {
+ 			localStorage.lightMode = "light";
+ 			app.setAttribute("light-mode", "light");
+ 		} else {
+ 					localStorage.lightMode = "dark";
+ 					app.setAttribute("light-mode", "dark");
+ 	}
+ 		}
+ 
+ 		window.addEventListener("storage", function () {
+ 			if (localStorage.lightMode == "dark") {
+ 				app.setAttribute("light-mode", "dark");
+ 				} else {
+ 				app.setAttribute("light-mode", "light");
+ 		}
+ 		}, false);
+ 
+ </script>
+ <script src="../js/footer.js"></script><script src="../js/dpd_deconstructor.js"></script><script src="../js/dpd_ebts.js"></script><script src="../js/dpd_i2h.js"></script>
+ <script src="/sw.js"></script>
+ </body>
+ </html>

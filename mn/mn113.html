@@ -1,0 +1,1561 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+ 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+ 	<link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+ 	<meta name="viewport" content="width=device-width, initial-scale=1">
+		<!-- Loading manifest -->
+	<link rel="manifest" href="../manifest.json">
+ 	<!-- Loading main and menu stylesheets -->
+ 	<link rel="stylesheet" href="../css/w3.css">
+ 	<link rel="stylesheet" href="../css/css.css">
+ 	<link rel="stylesheet" href="../css/menu.css">
+ 	<script src="../js/jquery-1.10.2.min.js"></script>
+ 	<script src="../js/controlpanel.js"></script>
+ 	<script src="../js/mousetrap.min.js"></script>
+    <script src="../js/pali-lookup-standalone.js"></script>
+
+ <script src="../js/suttaFiles.js"></script>
+<script>
+ // Script to open random Sutta
+ function openRandomSutta() {
+  const randomIndex = Math.floor(Math.random() * suttaFiles.length);
+  const selectedFile = suttaFiles[randomIndex];
+
+  // Get root path of your site 
+  const currentPath = location.pathname;
+  const rootPath = currentPath.split("/").slice(0, -2).join("/") + "/";
+
+  // Redirect to the correct file
+  window.location.href = rootPath + selectedFile;
+}
+</script>
+
+
+</head>
+ <body class="container">
+ <div class="header-background">
+ <!-- Header -->
+ <div class="w3-header w3-content w3-padding w3-left-align bwcontainer">
+ 	<div class="centered">
+ 		<button class="light-mode-button" aria-label="Bật Chế Độ Sáng" onclick="toggle_light_mode()">
+ 			<span></span>
+ 			<span></span>
+ 		</button>
+ 		<span class="box-lbl">Sáng/Tối</span>
+ 	</div> <!-- Centered -->
+ 		<a href="../home/index.html" id="bwlogo"><img src="../images/headerlogo.png" alt="Logo Lời Của Đức Phật" class="w3-image"></a>
+ 		<div class="w3-bar bwcontainer">
+ 			<div id="searchlinks">
+ 			<a href="../home/visearch.html"><span class="w3-bar-item"><i class="fa fa-search"></i>&nbsp;Tìm Tiếng Việt</span></a>
+ 			<a href="../home/palisearch.html"><span class="w3-bar-item"><i class="fa fa-search"></i>&nbsp;Tìm Tiếng Pali</span></a>
+ 			</div><!-- End Searchlinks div -->
+ 			<div class="help"><span><a href="../home/help.html"><img src="../images/help_icon.png" title="Trợ Giúp" alt="Help"></a></span></div>
+ 		</div> <!-- End w3-bar bwcontainer --> 	</div> <!-- End w3-header w3-content w3-padding w3-left-align bwcontainer -->
+ </div> <!-- End header-background -->
+ <!-- Top menu -->
+
+ <div class="w3-main w3-white bwcontainer2">
+ 	<div class="w3-button w3-padding-8 w3-left w3-hide-large" onclick="w3_open()">☰</div>
+ 		<div id="navbar" class="w3-hide-small w3-hide-medium bwcontainer3">
+ 			<ul id="css3menu0">
+ 				<li class="topfirst" id="home"><a href="../home/index.html" class="w3-hide-small">Trang Chủ</a></li>
+  				<li class="topmenu" id="dn"><a href="../dn/dn.html" class="pressed w3-hide-small">Trường Bộ Kinh</a></li>
+ 				<li class="topmenu" id="mn"><a href="../mn/mn.html" class="w3-hide-small">Trung Bộ Kinh</a></li>
+ 				<li class="topmenu" id="sn"><a href="../sn/sn.html" class="w3-hide-small"><i class="fa fa-caret-down"></i>&nbsp;Tương Ưng Bộ Kinh</a>
+ 					<ul>
+ 						<li><a href="../sn/sn01.html" class="w3-hide-small">Tập I - Thiên Có Kệ</a></li>
+ 						<li><a href="../sn/sn02.html" class="w3-hide-small">Tập II - Thiên Nhân Duyên</a></li>
+ 						<li><a href="../sn/sn03.html" class="w3-hide-small">Tập III - Thiên Uẩn</a></li>
+ 						<li><a href="../sn/sn04.html" class="w3-hide-small">Tập IV - Thiên Sáu Xứ</a></li>
+ 						<li><a href="../sn/sn05.html" class="w3-hide-small">Tập V - Thiên Ðại Phẩm</a></li>
+ 					</ul>
+ 				<li class="topmenu" id="an"><a href="../an/an.html" class="w3-hide-small"><i class="fa fa-caret-down"></i>&nbsp;Tăng Chi Bộ Kinh</a>
+ 					<ul>
+ 						<li><a href="../an/an1.html" class="w3-hide-small">Chương Một Pháp</a></li>
+ 						<li><a href="../an/an2.html" class="w3-hide-small">Chương Hai Pháp</a></li>
+ 						<li><a href="../an/an3.html" class="w3-hide-small">Chương Ba Pháp</a></li>
+ 						<li><a href="../an/an4.html" class="w3-hide-small">Chương Bốn Pháp</a></li>
+ 						<li><a href="../an/an5.html" class="w3-hide-small">Chương Năm Pháp</a></li>
+ 						<li><a href="../an/an6.html" class="w3-hide-small">Chương Sáu Pháp</a></li>
+ 						<li><a href="../an/an7.html" class="w3-hide-small">Chương Bảy Pháp</a></li>
+ 						<li><a href="../an/an8.html" class="w3-hide-small">Chương Tám Pháp</a></li>
+ 						<li><a href="../an/an9.html" class="w3-hide-small">Chương Chín Pháp</a></li>
+ 						<li><a href="../an/an10.html" class="w3-hide-small">Chương Mười Pháp</a></li>
+ 						<li><a href="../an/an11.html" class="w3-hide-small">Chương Mười Một Pháp</a></li>
+ 					</ul>
+ 				</li>
+ 				<li class="topmenu" id="kn"><a href="../kn/kn.html" class="w3-hide-small"><i class="fa fa-caret-down"></i>&nbsp;Tiểu Bộ Kinh</a>
+ 					<ul>
+ 						<li><a href="../kp/kp.html" class="w3-hide-small">Kinh Tiểu Tụng</a></li>
+ 						<li><a href="../dhp/dhp.html" class="w3-hide-small">Kinh Pháp Cú</a></li>
+ 						<li><a href="../snp/snp.html" class="w3-hide-small">Kinh Tập</a></li>
+ 						<li><a href="../ud/ud.html" class="w3-hide-small">Kinh Phật Tự Thuyết</a></li>
+ 						<li><a href="../it/it.html" class="w3-hide-small">Kinh Phật Thuyết Như Vậy</a></li>
+ 						<li><a href="../tha/tha.html" class="w3-hide-small">Trưởng Lão Tăng Kệ</a></li>
+ 						<li><a href="../thi/thi.html" class="w3-hide-small">Trưởng Lão Ni Kệ</a></li>
+ 					</ul>
+ 				</li>
+				<li class="toplast" id="rd"><a href="../rd/rd.html" class="w3-hide-small"></i>Kinh Ngẫu Nhiên Theo Nhóm</a>
+ 					</ul>
+ 				</li>
+ 			</ul>
+ 			</div>
+ 		</div> <!--navbar-->
+
+<!-- Sidebar (hidden by default) -->
+ <nav class="w3-sidebar w3-bar-block w3-card w3-border w3-top w3-animate-left w3-hide-large" id="mySidebar">
+ 	<a href="javascript:void(0)" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-times fa-2x red-color"></i>&nbsp;&nbsp;&nbsp;Close</a><!-- Hides the sidebar when clicked -->
+ 		<div class="w3-bar-block w3-white">
+ 			<a href="../home/index.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-home fa-lg"></i>&nbsp;&nbsp;&nbsp;Home</a>
+ 			<a href="../guide/guide.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Guide</a>
+ 			<a href="../dn/dn.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Trường Bộ Kinh</a>
+ 			<a href="../mn/mn.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Trung Bộ Kinh</a>
+ 			<a href="../sn/sn.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Tương Ưng Bộ Kinh</a>
+ 			<a href="../an/an.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Tăng Chi Bộ Kinh
+ 			<a href="../kn/kn.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Tiểu Bộ Kinh</a>
+			<a href="../rd/rd.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>Kinh Ngẫu Nhiên Theo Nhóm</a>
+ 		</div>
+ </nav>
+ 
+ 
+ 
+   <!-- !PAGE CONTENT! --> 
+<div class="w3-main w3-content w3-padding w3-left-align bwcontainer4">
+<div id="content">
+<h2>Majjhima Nikāya - Trung Bộ Kinh</h2>
+<h5><span style="font-style: italic;">Hoà Thượng Thích Minh Châu dịch Việt</span></h5>
+
+</div>
+
+<br>
+ 	<title>        Trung Bộ 113          </title>
+
+<p lang="vi" class="vi"; style="text-align: center">
+Trung Bộ 113<br>
+<span lang="pi" class="pali">
+Majjhima Nikāya 113<br>
+</span>
+</p>
+
+<p lang="vi" class="vi"; style="text-align: center">
+Bậc Chân Nhân<br>
+<span lang="pi" class="pali">
+Sappurisasutta<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Như vầy tôi nghe.<br>
+<span lang="pi" class="pali">
+Evaṁ me sutaṁ—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Một thời Thế Tôn trú ở Sāvatthī, Jetavana, tại tịnh xá ông Anāthapiṇḍika (Cấp-Cô-Ðộc). Ở đây, Thế Tôn gọi các Tỷ-kheo: “Này các Tỷ-kheo!”<br>
+<span lang="pi" class="pali">
+ekaṁ samayaṁ bhagavā sāvatthiyaṁ viharati jetavane anāthapiṇḍikassa ārāme. Tatra kho bhagavā bhikkhū āmantesi: “bhikkhavo”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Thưa vâng, bạch Thế Tôn”. Các Tỷ-kheo ấy vâng đáp Thế Tôn. Thế Tôn nói như sau:<br>
+<span lang="pi" class="pali">
+“Bhadante”ti te bhikkhū bhagavato paccassosuṁ. Bhagavā etadavoca:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Này các Tỷ-kheo, Ta sẽ giảng cho các Ông Chân nhân pháp và phi Chân nhân pháp. Các Ông hãy nghe và suy nghiệm kỹ, Ta sẽ giảng.”<br>
+<span lang="pi" class="pali">
+“sappurisadhammañca vo, bhikkhave, desessāmi asappurisadhammañca. Taṁ suṇātha, sādhukaṁ manasi karotha, bhāsissāmī”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Thưa vâng, bạch Thế Tôn”. Các Tỷ-kheo ấy vâng đáp Thế Tôn. Thế Tôn giảng như sau:<br>
+<span lang="pi" class="pali">
+“Evaṁ, bhante”ti kho te bhikkhū bhagavato paccassosuṁ. Bhagavā etadavoca:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Này các Tỷ-kheo, thế nào là phi Chân nhân pháp?<br>
+<span lang="pi" class="pali">
+“Katamo ca, bhikkhave, asappurisadhammo?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ở đây, này các Tỷ-kheo, có người phi Chân nhân xuất gia từ một gia đình cao sang.<br>
+<span lang="pi" class="pali">
+Idha, bhikkhave, asappuriso uccākulā pabbajito hoti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Người ấy suy nghĩ như sau:<br>
+<span lang="pi" class="pali">
+So iti paṭisañcikkhati:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Ta xuất gia từ một gia đình cao sang. Còn các Tỷ-kheo này không xuất gia từ một gia đình cao sang’.<br>
+<span lang="pi" class="pali">
+‘ahaṁ khomhi uccākulā pabbajito, ime panaññe bhikkhū na uccākulā pabbajitā’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vì người ấy thuộc gia đình cao sang nên khen mình chê người.<br>
+<span lang="pi" class="pali">
+So tāya uccākulīnatāya attānukkaṁseti, paraṁ vambheti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Như vậy, này các Tỷ-kheo, là phi Chân nhân pháp.<br>
+<span lang="pi" class="pali">
+Ayaṁ, bhikkhave, asappurisadhammo.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Và này các Tỷ-kheo, người Chân nhân suy nghĩ như sau:<br>
+<span lang="pi" class="pali">
+Sappuriso ca kho, bhikkhave, iti paṭisañcikkhati:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Không phải vì thuộc một gia đình cao sang mà các tham pháp đi đến đoạn trừ, hay các sân pháp đi đến đoạn trừ, hay các si pháp đi đến đoạn trừ.<br>
+<span lang="pi" class="pali">
+‘na kho uccākulīnatāya lobhadhammā vā parikkhayaṁ gacchanti, dosadhammā vā parikkhayaṁ gacchanti, mohadhammā vā parikkhayaṁ gacchanti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Nếu một người xuất gia, không phải từ một gia đình cao sang, và người ấy hành trì đúng pháp và thuận pháp, hành trì chơn chánh, hành trì thuận pháp, thời ở đây, người ấy được kính trọng, ở đây, người ấy được tán thán’.<br>
+<span lang="pi" class="pali">
+No cepi uccākulā pabbajito hoti; so ca hoti dhammānudhammappaṭipanno sāmīcippaṭipanno anudhammacārī, so tattha pujjo, so tattha pāsaṁso’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Người ấy, sau khi lấy đạo lộ làm chánh yếu, không khen mình chê người vì tự mình thuộc vào gia đình cao sang.<br>
+<span lang="pi" class="pali">
+So paṭipadaṁyeva antaraṁ karitvā tāya uccākulīnatāya nevattānukkaṁseti na paraṁ vambheti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Như vậy, này các Tỷ-kheo, là Chân nhân pháp.<br>
+<span lang="pi" class="pali">
+Ayaṁ, bhikkhave, sappurisadhammo.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Lại nữa, này các Tỷ-kheo, một người phi Chân nhân xuất gia từ một gia đình lớn …<br>
+<span lang="pi" class="pali">
+Puna caparaṁ, bhikkhave, asappuriso mahākulā pabbajito hoti …pe…<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+xuất gia từ một gia đình đại phú …<br>
+<span lang="pi" class="pali">
+mahābhogakulā pabbajito hoti …pe…<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+xuất gia từ một gia đình quý phái.<br>
+<span lang="pi" class="pali">
+uḷārabhogakulā pabbajito hoti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Người ấy suy nghĩ như sau:<br>
+<span lang="pi" class="pali">
+So iti paṭisañcikkhati:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Ta xuất gia từ một gia đình quý phái, còn các Tỷ-kheo này không xuất gia từ một gia đình quý phái’.<br>
+<span lang="pi" class="pali">
+‘ahaṁ khomhi uḷārabhogakulā pabbajito, ime panaññe bhikkhū na uḷārabhogakulā pabbajitā’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vì người ấy thuộc gia đình quý phái, nên khen mình chê người.<br>
+<span lang="pi" class="pali">
+So tāya uḷārabhogatāya attānukkaṁseti, paraṁ vambheti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Như vậy, này các Tỷ-kheo, là phi Chân nhân pháp.<br>
+<span lang="pi" class="pali">
+Ayampi, bhikkhave, asappurisadhammo.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Và này các Tỷ-kheo, người Chân nhân suy nghĩ như sau:<br>
+<span lang="pi" class="pali">
+Sappuriso ca kho, bhikkhave, iti paṭisañcikkhati:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Không phải vì thuộc về một gia đình quý phái mà các tham pháp đi đến đoạn trừ, hay các sân pháp đi đến đoạn trừ, hay các si pháp đi đến đoạn trừ.<br>
+<span lang="pi" class="pali">
+‘na kho uḷārabhogatāya lobhadhammā vā parikkhayaṁ gacchanti, dosadhammā vā parikkhayaṁ gacchanti, mohadhammā vā parikkhayaṁ gacchanti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Nếu một người xuất gia không phải từ một gia đình quý phái và người ấy hành trì đúng pháp và thuận pháp, hành trì chơn chánh, hành trì thuận pháp, thời ở đây, người ấy được kính trọng, ở đây, người ấy được tán thán’.<br>
+<span lang="pi" class="pali">
+No cepi uḷārabhogakulā pabbajito hoti; so ca hoti dhammānudhammappaṭipanno sāmīcippaṭipanno anudhammacārī, so tattha pujjo, so tattha pāsaṁso’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Người ấy, sau khi lấy đạo lộ làm chính yếu, không khen mình chê người vì tự mình thuộc vào gia đình quý phái.<br>
+<span lang="pi" class="pali">
+So paṭipadaṁyeva antaraṁ karitvā tāya uḷārabhogatāya nevattānukkaṁseti, na paraṁ vambheti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Như vậy, này các Tỷ-kheo, là Chân nhân pháp.<br>
+<span lang="pi" class="pali">
+Ayampi, bhikkhave, sappurisadhammo.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Lại nữa, này các Tỷ-kheo, có người phi Chân nhân được nhiều người biết, có danh xưng.<br>
+<span lang="pi" class="pali">
+Puna caparaṁ, bhikkhave, asappuriso ñāto hoti yasassī.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Người ấy suy nghĩ như sau:<br>
+<span lang="pi" class="pali">
+So iti paṭisañcikkhati:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Ta được nhiều người biết, có danh xưng, còn các Tỷ-kheo này được ít người biết đến, không được trọng vọng’.<br>
+<span lang="pi" class="pali">
+‘ahaṁ khomhi ñāto yasassī, ime panaññe bhikkhū appaññātā appesakkhā’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vì người ấy tự mình được nhiều người biết đến nên khen mình chê người.<br>
+<span lang="pi" class="pali">
+So tena ñattena attānukkaṁseti, paraṁ vambheti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Như vậy, này các Tỷ-kheo, là phi Chân nhân pháp.<br>
+<span lang="pi" class="pali">
+Ayampi, bhikkhave, asappurisadhammo.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Và này các Tỷ-kheo, người Chân Nhân suy nghĩ như sau:<br>
+<span lang="pi" class="pali">
+Sappuriso ca kho, bhikkhave, iti paṭisañcikkhati:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Không phải vì mình được nhiều người biết đến mà các tham pháp đi đến đoạn trừ, hay sân pháp đi đến đoạn trừ, hay các si pháp đi đến đoạn trừ.<br>
+<span lang="pi" class="pali">
+‘na kho ñattena lobhadhammā vā parikkhayaṁ gacchanti, dosadhammā vā parikkhayaṁ gacchanti, mohadhammā vā parikkhayaṁ gacchanti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Nếu một người xuất gia không được nhiều người biết, không có danh xưng, và người ấy hành trì đúng pháp và thuận pháp, hành trì chơn chánh, hành trì thuận pháp, thời ở đây, người ấy được kính trọng, ở đây, người ấy được tán thán’.<br>
+<span lang="pi" class="pali">
+No cepi ñāto hoti yasassī; so ca hoti dhammānudhammappaṭipanno sāmīcippaṭipanno anudhammacārī, so tattha pujjo, so tattha pāsaṁso’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Người ấy, sau khi lấy đạo lộ làm chính yếu, không khen mình chê người vì tự mình được nhiều người biết và có danh xưng.<br>
+<span lang="pi" class="pali">
+So paṭipadaṁyeva antaraṁ karitvā tena ñattena nevattānukkaṁseti, na paraṁ vambheti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Như vậy, này các Tỷ-kheo, là Chân nhân pháp.<br>
+<span lang="pi" class="pali">
+Ayampi, bhikkhave, sappurisadhammo.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Lại nữa, này các Tỷ-kheo, có người phi Chân nhân được các vật (cúng dường) như y phục, đồ ăn khất thực, sàng tọa, y liệu trị bệnh.<br>
+<span lang="pi" class="pali">
+Puna caparaṁ, bhikkhave, asappuriso lābhī hoti cīvara-piṇḍapāta-senāsana-gilānappaccaya-bhesajja-parikkhārānaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Người ấy suy nghĩ như sau:<br>
+<span lang="pi" class="pali">
+So iti paṭisañcikkhati:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Ta nhận được các vật (cúng dường) như y phục, các đồ ăn khất thực, sàng tọa, y liệu trị bệnh, còn các Tỷ-kheo này không nhận được y phục, các đồ ăn khất thực, sàng tọa, y liệu trị bệnh’.<br>
+<span lang="pi" class="pali">
+‘ahaṁ khomhi lābhī cīvara-piṇḍapāta-senāsana-gilānappaccaya-bhesajja-parikkhārānaṁ, ime panaññe bhikkhū na lābhino cīvara-piṇḍapāta-senāsana-gilānappaccaya-bhesajja-parikkhārānan’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vì người ấy thâu nhận được như vậy nên khen mình chê người.<br>
+<span lang="pi" class="pali">
+So tena lābhena attānukkaṁseti, paraṁ vambheti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Như vậy, này các Tỷ-kheo là phi Chân nhân pháp.<br>
+<span lang="pi" class="pali">
+Ayampi, bhikkhave, asappurisadhammo.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Và này các Tỷ-kheo, người Chân nhân suy nghĩ như sau:<br>
+<span lang="pi" class="pali">
+Sappuriso ca kho, bhikkhave, iti paṭisañcikkhati:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Không phải vì tự mình nhận được các vật (cúng dường như) y phục, các đồ ăn khất thực, sàng tọa, y liệu trị bịnh mà các tham pháp đi đến đoạn trừ, hay các sân pháp đi đến đoạn trừ, hay các si pháp đi đến đoạn trừ.<br>
+<span lang="pi" class="pali">
+‘na kho lābhena lobhadhammā vā parikkhayaṁ gacchanti, dosadhammā vā parikkhayaṁ gacchanti, mohadhammā vā parikkhayaṁ gacchanti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Nếu một người xuất gia không nhận được các vật (cúng dường như) y phục, các đồ ăn khất thực, sàng tọa, y liệu trị bệnh và người ấy hành trì đúng pháp và thuận pháp hành, trì chơn chánh, hành trì thuận pháp, thời ở đây, người ấy được kính trọng, ở đây, người ấy được tán thán’.<br>
+<span lang="pi" class="pali">
+No cepi lābhī hoti cīvara-piṇḍapāta-senāsana-gilānappaccaya-bhesajja-parikkhārānaṁ; so ca hoti dhammānudhammappaṭipanno sāmīcippaṭipanno anudhammacārī, so tattha pujjo, so tattha pāsaṁso’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Người ấy, sau khi lấy đạo lộ làm chánh yếu, không khen mình chê người, vì tự mình được thâu nhận như vậy.<br>
+<span lang="pi" class="pali">
+So paṭipadaṁyeva antaraṁ karitvā tena lābhena nevattānukkaṁseti, na paraṁ vambheti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Như vậy, này các Tỷ-kheo, là Chân nhân pháp.<br>
+<span lang="pi" class="pali">
+Ayampi, bhikkhave, sappurisadhammo.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Lại nữa, này các Tỷ-kheo, có người phi Chân nhân là người nghe nhiều.<br>
+<span lang="pi" class="pali">
+Puna caparaṁ, bhikkhave, asappuriso bahussuto hoti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Người ấy suy nghĩ như sau: ‘Ta là người nghe nhiều, còn các Tỷ-kheo này không nghe nhiều’.<br>
+<span lang="pi" class="pali">
+So iti paṭisañcikkhati: ‘ahaṁ khomhi bahussuto, ime panaññe bhikkhū na bahussutā’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Người ấy do được nghe nhiều nên khen mình chê người.<br>
+<span lang="pi" class="pali">
+So tena bāhusaccena attānukkaṁseti, paraṁ vambheti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Như vậy, này các Tỷ-kheo, là phi Chân nhân pháp.<br>
+<span lang="pi" class="pali">
+Ayampi, bhikkhave, asappurisadhammo.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Và này các Tỷ-kheo, Người Chân nhân suy nghĩ như sau:<br>
+<span lang="pi" class="pali">
+Sappuriso ca kho, bhikkhave, iti paṭisañcikkhati:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Không phải vì nghe nhiều mà các tham pháp đi đến đoạn trừ, hay các sân pháp đi đến đoạn trừ, hay các si pháp đi đến đoạn trừ. Nếu có người không nghe nhiều và người ấy hành trì đúng pháp và thuận pháp, hành trì chơn chánh, hành trì thuận pháp, thời ở đây, người ấy được kính trọng, ở đây, người ấy được tán thán’.<br>
+<span lang="pi" class="pali">
+‘na kho bāhusaccena lobhadhammā vā parikkhayaṁ gacchanti, dosadhammā vā parikkhayaṁ gacchanti, mohadhammā vā parikkhayaṁ gacchanti. No cepi bahussuto hoti; so ca hoti dhammānudhammappaṭipanno sāmīcippaṭipanno anudhammacārī, so tattha pujjo, so tattha pāsaṁso’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Người ấy, sau khi lấy đạo lộ làm chánh yếu, không khen mình chê người, vì tự mình được nghe nhiều.<br>
+<span lang="pi" class="pali">
+So paṭipadaṁyeva antaraṁ karitvā tena bāhusaccena nevattānukkaṁseti, na paraṁ vambheti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Như vậy, này các Tỷ-kheo, là Chân nhân pháp.<br>
+<span lang="pi" class="pali">
+Ayampi, bhikkhave, sappurisadhammo.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Lại nữa, này các Tỷ-kheo, có người phi Chân nhân là bậc trì luật.<br>
+<span lang="pi" class="pali">
+Puna caparaṁ, bhikkhave, asappuriso vinayadharo hoti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Người ấy suy nghĩ như sau:<br>
+<span lang="pi" class="pali">
+So iti paṭisañcikkhati:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Ta là bậc trì luật, còn các Tỷ-kheo này không là bậc trì luật’.<br>
+<span lang="pi" class="pali">
+‘ahaṁ khomhi vinayadharo, ime panaññe bhikkhū na vinayadharā’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Do tự mình trì luật, người ấy khen mình chê người.<br>
+<span lang="pi" class="pali">
+So tena vinayadharattena attānukkaṁseti, paraṁ vambheti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Như vậy, này các Tỷ-kheo, là phi Chân nhân pháp.<br>
+<span lang="pi" class="pali">
+Ayampi, bhikkhave, asappurisadhammo.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Và này các Tỷ-kheo, người Chân nhân suy nghĩ như sau:<br>
+<span lang="pi" class="pali">
+Sappuriso ca kho, bhikkhave, iti paṭisañcikkhati:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Không phải vì tự mình là bậc trì luật mà các tham pháp đi đến đoạn trừ hay các sân pháp đi đến đoạn trừ hay các si pháp đi đến đoạn trừ. Nếu có người không phải là bậc trì luật, những người này hành trì đúng pháp và thuận pháp, hành trì chơn chánh, hành trì thuận pháp, thời ở đây, người ấy được kính trọng, ở đây, người ấy được tán thán’.<br>
+<span lang="pi" class="pali">
+‘na kho vinayadharattena lobhadhammā vā parikkhayaṁ gacchanti, dosadhammā vā parikkhayaṁ gacchanti, mohadhammā vā parikkhayaṁ gacchanti. No cepi vinayadharo hoti; so ca hoti dhammānudhammappaṭipanno sāmīcippaṭipanno anudhammacārī, so tattha pujjo, so tattha pāsaṁso’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Người ấy sau khi lấy đạo lộ làm chánh yếu, không khen mình chê người vì tự mình là bậc trì luật.<br>
+<span lang="pi" class="pali">
+So paṭipadaṁyeva antaraṁ karitvā tena vinayadharattena nevattānukkaṁseti, na paraṁ vambheti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Như vậy, này các Tỷ-kheo, là Chân nhân pháp.<br>
+<span lang="pi" class="pali">
+Ayampi, bhikkhave, sappurisadhammo.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Lại nữa, này các Tỷ-kheo, có người phi Chân nhân là người thuyết pháp.<br>
+<span lang="pi" class="pali">
+Puna caparaṁ, bhikkhave, asappuriso dhammakathiko hoti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Người ấy suy nghĩ như sau:<br>
+<span lang="pi" class="pali">
+So iti paṭisañcikkhati:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Ta là người thuyết pháp, còn các Tỷ-kheo này không phải là người thuyết pháp’.<br>
+<span lang="pi" class="pali">
+‘ahaṁ khomhi dhammakathiko, ime panaññe bhikkhū na dhammakathikā’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vì tự mình là người thuyết pháp, nên người ấy khen mình chê người.<br>
+<span lang="pi" class="pali">
+So tena dhammakathikattena attānukkaṁseti, paraṁ vambheti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Như vậy, này các Tỷ-kheo, là phi Chân nhân pháp.<br>
+<span lang="pi" class="pali">
+Ayampi, bhikkhave, asappurisadhammo.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Và người Chân nhân, này các Tỷ-kheo suy nghĩ như sau:<br>
+<span lang="pi" class="pali">
+Sappuriso ca kho, bhikkhave, iti paṭisañcikkhati:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Không phải do tự mình là bậc thuyết pháp mà các tham pháp đi đến đoạn trừ, hay các sân pháp đi đến đoạn trừ, hay các si pháp đi đến đoạn trừ. Nếu một người không phải là người thuyết pháp, nhưng hành trì đúng pháp, và thuận pháp, hành trì chơn chánh, hành trì thuận pháp, thời ở đây người ấy được kính trọng, ở đây, người ấy được tán thán’.<br>
+<span lang="pi" class="pali">
+‘na kho dhammakathikattena lobhadhammā vā parikkhayaṁ gacchanti, dosadhammā vā parikkhayaṁ gacchanti, mohadhammā vā parikkhayaṁ gacchanti. No cepi dhammakathiko hoti; so ca hoti dhammānudhammappaṭipanno sāmīcippaṭipanno anudhammacārī, so tattha pujjo, so tattha pāsaṁso’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Người ấy, sau khi lấy đạo lộ làm chánh yếu, không khen mình chê người vì tự mình là bậc thuyết pháp.<br>
+<span lang="pi" class="pali">
+So paṭipadaṁyeva antaraṁ karitvā tena dhammakathikattena nevattānukkaṁseti, na paraṁ vambheti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Như vậy, này các Tỷ-kheo, là Chân nhân pháp.<br>
+<span lang="pi" class="pali">
+Ayampi, bhikkhave, sappurisadhammo.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Lại nữa, này các Tỷ-kheo, có người phi Chân nhân là người theo hạnh sống ở núi rừng.<br>
+<span lang="pi" class="pali">
+Puna caparaṁ, bhikkhave, asappuriso āraññiko hoti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Người ấy suy nghĩ như sau:<br>
+<span lang="pi" class="pali">
+So iti paṭisañcikkhati:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Ta là người theo hạnh sống ở rừng núi, còn các Tỷ-kheo này không theo hạnh sống ở rừng núi’.<br>
+<span lang="pi" class="pali">
+‘ahaṁ khomhi āraññiko ime panaññe bhikkhū na āraññikā’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Người ấy vì tự mình theo hạnh sống ở rừng núi nên khen mình chê người.<br>
+<span lang="pi" class="pali">
+So tena āraññikattena attānukkaṁseti, paraṁ vambheti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Như vậy, này các Tỷ-kheo, là phi Chân nhân pháp.<br>
+<span lang="pi" class="pali">
+Ayampi, bhikkhave, asappurisadhammo.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Và người Chân nhân, này các Tỷ-kheo, suy nghĩ như sau:<br>
+<span lang="pi" class="pali">
+Sappuriso ca kho, bhikkhave, iti paṭisañcikkhati:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Không phải vì tự mình theo hạnh sống ở rừng núi mà các tham pháp đi đến đoạn trừ, hay các sân pháp đi đến đoạn trừ, hay các si pháp đi đến đoạn trừ. Nếu một người không theo hạnh sống ở rừng núi, nhưng hành trì đúng pháp và thuận pháp, hành trì chơn chánh, hành trì thuận pháp, thời ở đây, người ấy được kính trọng, ở đây, người ấy được tán thán’.<br>
+<span lang="pi" class="pali">
+‘na kho āraññikattena lobhadhammā vā parikkhayaṁ gacchanti, dosadhammā vā parikkhayaṁ gacchanti, mohadhammā vā parikkhayaṁ gacchanti. No cepi āraññiko hoti; so ca hoti dhammānudhammappaṭipanno sāmīcippaṭipanno anudhammacārī, so tattha pujjo, so tattha pāsaṁso’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Người ấy, sau khi lấy đạo lộ làm chánh yếu, không khen mình chê người, vì tự mình theo hạnh sống ở rừng núi.<br>
+<span lang="pi" class="pali">
+So paṭipadaṁyeva antaraṁ karitvā tena āraññikattena nevattānukkaṁseti, na paraṁ vambheti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Như vậy, này các Tỷ-kheo, là Chân nhân pháp.<br>
+<span lang="pi" class="pali">
+Ayampi, bhikkhave, sappurisadhammo.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Lại nữa, này các Tỷ-kheo, có người phi Chân nhân theo hạnh mặc phấn tảo y.<br>
+<span lang="pi" class="pali">
+Puna caparaṁ, bhikkhave, asappuriso paṁsukūliko hoti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Người ấy suy nghĩ như sau:<br>
+<span lang="pi" class="pali">
+So iti paṭisañcikkhati:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Ta là người theo hạnh mặc phấn tảo y. Còn các Tỷ-kheo này không là người theo hạnh mặc phấn tảo y’.<br>
+<span lang="pi" class="pali">
+‘ahaṁ khomhi paṁsukūliko, ime panaññe bhikkhū na paṁsukūlikā’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Người này do tự mình theo hạnh mặc phấn tảo y nên khen mình chê người.<br>
+<span lang="pi" class="pali">
+So tena paṁsukūlikattena attānukkaṁseti, paraṁ vambheti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Như vậy, này các Tỷ-kheo, là phi Chân nhân pháp.<br>
+<span lang="pi" class="pali">
+Ayampi, bhikkhave, asappurisadhammo.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Và người Chân nhân, này các Tỷ-kheo, suy nghĩ như sau:<br>
+<span lang="pi" class="pali">
+Sappuriso ca kho, bhikkhave, iti paṭisañcikkhati:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Không phải vì tự mình theo hạnh mặc phấn tảo y mà các tham pháp đi đến đoạn trừ, hay các sân pháp đi đến đoạn trừ, hay các si pháp đi đến đoạn trừ. Nếu một người không theo hạnh mặc phấn tảo y, nhưng người ấy hành trì đúng pháp và thuận pháp, hành trì chơn chánh, hành trì thuận pháp, thời ở đây, người ấy được kính trọng, ở đây, người ấy được tán thán’.<br>
+<span lang="pi" class="pali">
+‘na kho paṁsukūlikattena lobhadhammā vā parikkhayaṁ gacchanti, dosadhammā vā parikkhayaṁ gacchanti, mohadhammā vā parikkhayaṁ gacchanti. No cepi paṁsukūliko hoti; so ca hoti dhammānudhammappaṭipanno sāmīcippaṭipanno anudhammacārī, so tattha pujjo, so tattha pāsaṁso’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Người ấy, sau khi lấy đạo lộ làm chánh yếu, không khen mình chê người vì tự mình mặc phấn tảo y.<br>
+<span lang="pi" class="pali">
+So paṭipadaṁyeva antaraṁ karitvā tena paṁsukūlikattena nevattānukkaṁseti, na paraṁ vambheti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Như vậy, này các Tỷ-kheo, là Chân nhân pháp.<br>
+<span lang="pi" class="pali">
+Ayampi, bhikkhave, sappurisadhammo.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Lại nữa, này các Tỷ-kheo, có người phi Chân nhân là người theo hạnh khất thực.<br>
+<span lang="pi" class="pali">
+Puna caparaṁ, bhikkhave, asappuriso piṇḍapātiko hoti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Người ấy suy nghĩ như sau:<br>
+<span lang="pi" class="pali">
+So iti paṭisañcikkhati:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Ta theo hạnh khất thực, còn các Tỷ-kheo này không theo hạnh khất thực’.<br>
+<span lang="pi" class="pali">
+‘ahaṁ khomhi piṇḍapātiko, ime panaññe bhikkhū na piṇḍapātikā’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Người ấy, do tự mình theo hạnh khất thực nên khen mình chê người.<br>
+<span lang="pi" class="pali">
+So tena piṇḍapātikattena attānukkaṁseti, paraṁ vambheti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Như vậy, này các Tỷ-kheo, là phi Chân nhân pháp.<br>
+<span lang="pi" class="pali">
+Ayampi, bhikkhave, asappurisadhammo.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Và người Chân nhân, này các Tỷ-kheo, suy nghĩ như sau:<br>
+<span lang="pi" class="pali">
+Sappuriso ca kho, bhikkhave, iti paṭisañcikkhati:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Không phải vì tự mình theo hạnh khất thực mà các tham pháp đi đến đoạn trừ, hay các sân pháp đi đến đoạn trừ, hay các si pháp đi đến đoạn trừ. Nếu một người không theo hạnh khất thực, nhưng người ấy hành trì đúng pháp và thuận pháp, hành trì chơn chánh, hành trì thuận pháp, thời ở đây, người ấy được kính trọng, ở đây, người ấy được tán thán’.<br>
+<span lang="pi" class="pali">
+‘na kho piṇḍapātikattena lobhadhammā vā parikkhayaṁ gacchanti, dosadhammā vā parikkhayaṁ gacchanti, mohadhammā vā parikkhayaṁ gacchanti. No cepi piṇḍapātiko hoti; so ca hoti dhammānudhammappaṭipanno sāmīcippaṭipanno anudhammacārī, so tattha pujjo, so tattha pāsaṁso’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Người ấy, sau khi lấy đạo lộ làm chánh yếu, không khen mình chê người, vì tự mình theo hạnh khất thực.<br>
+<span lang="pi" class="pali">
+So paṭipadaṁyeva antaraṁ karitvā tena piṇḍapātikattena nevattānukkaṁseti, na paraṁ vambheti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Như vậy, này các Tỷ-kheo, là Chân nhân pháp.<br>
+<span lang="pi" class="pali">
+Ayampi, bhikkhave, sappurisadhammo.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Lại nữa, này các Tỷ-kheo, một người phi Chân nhân theo hạnh sống dưới gốc cây.<br>
+<span lang="pi" class="pali">
+Puna caparaṁ, bhikkhave, asappuriso rukkhamūliko hoti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Người ấy suy nghĩ như sau:<br>
+<span lang="pi" class="pali">
+So iti paṭisañcikkhati:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Ta là người theo hạnh sống dưới gốc cây, còn các Tỷ-kheo này không theo hạnh sống dưới gốc cây’.<br>
+<span lang="pi" class="pali">
+‘ahaṁ khomhi rukkhamūliko, ime panaññe bhikkhū na rukkhamūlikā’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Người ấy, do tự mình theo hạnh sống dưới gốc cây nên khen mình chê người.<br>
+<span lang="pi" class="pali">
+So tena rukkhamūlikattena attānukkaṁseti, paraṁ vambheti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Như vậy, này các Tỷ-kheo, là phi Chân nhân pháp.<br>
+<span lang="pi" class="pali">
+Ayampi, bhikkhave, asappurisadhammo.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Và người Chân nhân, này các Tỷ-kheo, suy nghĩ như sau:<br>
+<span lang="pi" class="pali">
+Sappuriso ca kho, bhikkhave, iti paṭisañcikkhati:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Không phải vì tự mình theo hạnh sống dưới gốc cây mà các tham pháp đi đến đoạn trừ, hay các sân pháp đi đến đoạn trừ, hay các si pháp đi đến đoạn trừ. Nếu một người không theo hạnh sống dưới gốc cây, nhưng người ấy hành trì đúng pháp và thuận pháp, hành trì chơn chánh và hành trì thuận pháp, thời ở đây, người ấy được kính trọng, ở đây, người ấy được tán thán’.<br>
+<span lang="pi" class="pali">
+‘na kho rukkhamūlikattena lobhadhammā vā parikkhayaṁ gacchanti, dosadhammā vā parikkhayaṁ gacchanti, mohadhammā vā parikkhayaṁ gacchanti. No cepi rukkhamūliko hoti; so ca hoti dhammānudhammappaṭipanno sāmīcippaṭipanno anudhammacārī, so tattha pujjo, so tattha pāsaṁso’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Người ấy, sau khi lấy đạo lộ làm chánh yếu, không khen mình chê người vì tự mình theo hạnh sống dưới gốc cây.<br>
+<span lang="pi" class="pali">
+So paṭipadaṁyeva antaraṁ karitvā tena rukkhamūlikattena nevattānukkaṁseti, na paraṁ vambheti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Như vậy, này các Tỷ-kheo, là Chân nhân pháp.<br>
+<span lang="pi" class="pali">
+Ayampi, bhikkhave, sappurisadhammo.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Lại nữa, này các Tỷ-kheo, có người phi Chân nhân theo hạnh sống tại nghĩa địa …<br>
+<span lang="pi" class="pali">
+Puna caparaṁ, bhikkhave, asappuriso sosāniko hoti …pe…<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+theo hạnh sống ngoài trời …<br>
+<span lang="pi" class="pali">
+abbhokāsiko hoti …<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+theo hạnh thường ngồi (không nằm) …<br>
+<span lang="pi" class="pali">
+nesajjiko hoti …pe…<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Theo hạnh ngồi tại chỗ mời …<br>
+<span lang="pi" class="pali">
+yathāsanthatiko hoti …pe…<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+theo hạnh chỉ ăn một lần ngồi.<br>
+<span lang="pi" class="pali">
+ekāsaniko hoti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Người ấy suy nghĩ như sau:<br>
+<span lang="pi" class="pali">
+So iti paṭisañcikkhati:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Ta theo hạnh chỉ ăn một lần ngồi, còn các Tỷ-kheo này không theo hạnh chỉ ăn một lần ngồi’.<br>
+<span lang="pi" class="pali">
+‘ahaṁ khomhi ekāsaniko, ime panaññe bhikkhū na ekāsanikā’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Do tự mình theo hạnh chỉ ăn một lần ngồi nên khen mình chê người.<br>
+<span lang="pi" class="pali">
+So tena ekāsanikattena attānukkaṁseti, paraṁ vambheti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Như vậy, này các Tỷ-kheo, là phi Chân nhân pháp.<br>
+<span lang="pi" class="pali">
+Ayampi, bhikkhave, asappurisadhammo.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Và người Chân nhân, này các Tỷ-kheo, suy nghĩ như sau:<br>
+<span lang="pi" class="pali">
+Sappuriso ca kho, bhikkhave, iti paṭisañcikkhati:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Không phải vì mình theo hạnh chỉ ăn một lần ngồi mà các tham pháp đi đến đoạn trừ, hay các sân pháp đi đến đoạn trừ, hay các si pháp đi đến đoạn trừ.<br>
+<span lang="pi" class="pali">
+‘na kho ekāsanikattena lobhadhammā vā parikkhayaṁ gacchanti, dosadhammā vā parikkhayaṁ gacchanti, mohadhammā vā parikkhayaṁ gacchanti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Nếu một người không theo hạnh chỉ ăn một lần, nhưng hành trì đúng pháp và thuận pháp, hành trì chơn chánh, hành trì thuận pháp, thời ở đây, người ấy được kính trọng, ở đây, người ấy được tán thán’.<br>
+<span lang="pi" class="pali">
+No cepi ekāsaniko hoti; so ca hoti dhammānudhammappaṭipanno sāmīcippaṭipanno anudhammacārī, so tattha pujjo, so tattha pāsaṁso’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Người ấy, sau khi lấy đạo lộ làm chánh yếu, không khen mình chê người vì tự mình sống chỉ ăn một lần ngồi.<br>
+<span lang="pi" class="pali">
+So paṭipadaṁyeva antaraṁ karitvā tena ekāsanikattena nevattānukkaṁseti, na paraṁ vambheti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Như vậy, này các Tỷ-kheo, là Chân nhân pháp.<br>
+<span lang="pi" class="pali">
+Ayampi, bhikkhave, sappurisadhammo.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Lại nữa, này các Tỷ-kheo, có người phi Chân nhân ly dục, ly bất thiện pháp, chứng và trú sơ Thiền, một trạng thái hỷ lạc do ly dục sanh, có tâm có tứ.<br>
+<span lang="pi" class="pali">
+Puna caparaṁ, bhikkhave, asappuriso vivicceva kāmehi vivicca akusalehi dhammehi savitakkaṁ savicāraṁ vivekajaṁ pītisukhaṁ paṭhamaṁ jhānaṁ upasampajja viharati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Người ấy suy nghĩ như sau:<br>
+<span lang="pi" class="pali">
+So iti paṭisañcikkhati:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Ta là người chứng được sơ Thiền, các người Tỷ-kheo này không chứng được sơ Thiền’.<br>
+<span lang="pi" class="pali">
+‘ahaṁ khomhi paṭhamajjhānasamāpattiyā lābhī, ime panaññe bhikkhū paṭhamajjhānasamāpattiyā na lābhino’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Người ấy do tự mình chứng được sơ Thiền nên khen mình chê người.<br>
+<span lang="pi" class="pali">
+So tāya paṭhamajjhānasamāpattiyā attānukkaṁseti, paraṁ vambheti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Như vậy, này các Tỷ-kheo, là phi Chân nhân pháp.<br>
+<span lang="pi" class="pali">
+Ayampi, bhikkhave, asappurisadhammo.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Và người Chân nhân, này các Tỷ-kheo, suy nghĩ như sau:<br>
+<span lang="pi" class="pali">
+Sappuriso ca kho, bhikkhave, iti paṭisañcikkhati:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Ðịnh sơ Thiền, tự tánh là vô tham ái, Thế Tôn đã nói như vậy.<br>
+<span lang="pi" class="pali">
+‘paṭhamajjhānasamāpattiyāpi kho atammayatā vuttā bhagavatā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Những ai nghĩ thế này, thế khác, thời tự tánh liền đổi khác’.<br>
+<span lang="pi" class="pali">
+Yena yena hi maññanti tato taṁ hoti aññathā’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Người ấy sau khi lấy vô tham ái làm chánh yếu, không khen mình chê người vì chứng được định sơ Thiền.<br>
+<span lang="pi" class="pali">
+So atammayataññeva antaraṁ karitvā tāya paṭhamajjhānasamāpattiyā nevattānukkaṁseti, na paraṁ vambheti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Như vậy, này các Tỷ-kheo, là Chân nhân pháp.<br>
+<span lang="pi" class="pali">
+Ayampi, bhikkhave, sappurisadhammo.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Lại nữa, này các Tỷ-kheo, có người phi Chân nhân pháp diệt tầm và tứ, chứng và trú Thiền thứ hai, một trạng thái hỷ lạc do định sanh, không tầm không tứ, nội tĩnh nhứt tâm …<br>
+<span lang="pi" class="pali">
+Puna caparaṁ, bhikkhave, asappuriso vitakkavicārānaṁ vūpasamā ajjhattaṁ sampasādanaṁ cetaso ekodibhāvaṁ avitakkaṁ avicāraṁ samādhijaṁ pītisukhaṁ dutiyaṁ jhānaṁ …pe…<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Thiền thứ ba …<br>
+<span lang="pi" class="pali">
+tatiyaṁ jhānaṁ …<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+chứng và trú Thiền thứ tư.<br>
+<span lang="pi" class="pali">
+catutthaṁ jhānaṁ upasampajja viharati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Người ấy suy nghĩ như sau:<br>
+<span lang="pi" class="pali">
+So iti paṭisañcikkhati:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Ta chứng đắc định Thiền thứ tư, còn các Tỷ-kheo này không chứng đắc định Thiền thứ tư’.<br>
+<span lang="pi" class="pali">
+‘ahaṁ khomhi catutthajjhānasamāpattiyā lābhī, ime panaññe bhikkhū catutthajjhānasamāpattiyā na lābhino’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Người ấy vì chứng đắc định Thiền thứ tư ấy nên khen mình chê người.<br>
+<span lang="pi" class="pali">
+So tāya catutthajjhānasamāpattiyā attānukkaṁseti, paraṁ vambheti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Như vậy, này các Tỷ-kheo, là phi Chân nhân pháp.<br>
+<span lang="pi" class="pali">
+Ayampi, bhikkhave, asappurisadhammo.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Và người Chân nhân, này các Tỷ-kheo, suy nghĩ như sau:<br>
+<span lang="pi" class="pali">
+Sappuriso ca kho, bhikkhave, iti paṭisañcikkhati:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Ðịnh Thiền thứ tư, tánh là vô tham ái. Thế Tôn đã nói như vậy.<br>
+<span lang="pi" class="pali">
+‘catutthajjhānasamāpattiyāpi kho atammayatā vuttā bhagavatā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Những ai nghĩ thế này, thế khác, thời tự tánh liền đổi khác’.<br>
+<span lang="pi" class="pali">
+Yena yena hi maññanti tato taṁ hoti aññathā’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Người ấy sau khi lấy vô tham ái làm chánh yếu, không khen mình chê người vì chứng đắc định Thiền thứ tư.<br>
+<span lang="pi" class="pali">
+So atammayataññeva antaraṁ karitvā tāya catutthajjhānasamāpattiyā nevattānukkaṁseti, na paraṁ vambheti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Như vậy, này các Tỷ-kheo, là Chân nhân pháp.<br>
+<span lang="pi" class="pali">
+Ayampi, bhikkhave, sappurisadhammo.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Lại nữa, này các Tỷ-kheo, có người phi Chân nhân vượt lên mọi sắc tưởng, diệt trừ mọi chướng ngại tưởng, không tác ý đối với dị tưởng, người ấy nghĩ rằng: ‘Hư không là vô biên’, chứng và trú Không vô biên xứ.<br>
+<span lang="pi" class="pali">
+Puna caparaṁ, bhikkhave, asappuriso sabbaso rūpasaññānaṁ samatikkamā paṭighasaññānaṁ atthaṅgamā nānattasaññānaṁ amanasikārā ‘ananto ākāso’ti ākāsānañcāyatanaṁ upasampajja viharati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Người ấy suy nghĩ như sau:<br>
+<span lang="pi" class="pali">
+So iti paṭisañcikkhati:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Ta chứng được định Không vô biên xứ, còn các Tỷ-kheo này không chứng được định Không vô biên xứ’.<br>
+<span lang="pi" class="pali">
+‘ahaṁ khomhi ākāsānañcāyatana-samāpattiyā lābhī, ime panaññe bhikkhū ākāsānañcāyatana-samāpattiyā na lābhino’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Người ấy, vì chứng được định Không vô biên xứ ấy, nên khen mình chê người.<br>
+<span lang="pi" class="pali">
+So tāya ākāsānañcāyatana-samāpattiyā attānukkaṁseti, paraṁ vambheti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Như vậy, này các Tỷ-kheo, là phi Chân nhân pháp.<br>
+<span lang="pi" class="pali">
+Ayampi, bhikkhave, asappurisadhammo.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Và người Chân nhân, này các Tỷ-kheo, suy nghĩ như sau:<br>
+<span lang="pi" class="pali">
+Sappuriso ca kho, bhikkhave, iti paṭisañcikkhati:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Ðịnh Không vô biên, xứ tự tánh là vô tham ái. Thế Tôn đã nói như vậy.<br>
+<span lang="pi" class="pali">
+‘ākāsānañcāyatanasamāpattiyāpi kho atammayatā vuttā bhagavatā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Những ai nghĩ như thế này, thế khác, thời tự tánh liền đổi khác’.<br>
+<span lang="pi" class="pali">
+Yena yena hi maññanti tato taṁ hoti aññathā’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Người ấy sau khi lấy vô tham ái làm chính yếu, không khen mình chê người vì chứng được định Không vô biên xứ.<br>
+<span lang="pi" class="pali">
+So atammayataññeva antaraṁ karitvā tāya ākāsānañcāyatanasamāpattiyā nevattānukkaṁseti, na paraṁ vambheti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Như vậy, này các Tỷ-kheo, là Chân nhân pháp.<br>
+<span lang="pi" class="pali">
+Ayampi, bhikkhave, sappurisadhammo.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Lại nữa, này các Tỷ-kheo, có người phi Chân nhân, vượt lên Không vô biên xứ, nghĩ rằng: ‘Thức là vô biên’, chứng và trú Thức vô biên xứ.<br>
+<span lang="pi" class="pali">
+Puna caparaṁ, bhikkhave, asappuriso sabbaso ākāsānañcāyatanaṁ samatikkamma ‘anantaṁ viññāṇan’ti viññāṇañcāyatanaṁ upasampajja viharati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Người ấy suy nghĩ như sau:<br>
+<span lang="pi" class="pali">
+So iti paṭisañcikkhati:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Ta chứng được định Thức vô biên xứ, còn các Tỷ-kheo này không chứng được định Thức vô biên xứ’.<br>
+<span lang="pi" class="pali">
+‘ahaṁ khomhi viññāṇañcāyatanasamāpattiyā lābhī, ime panaññe bhikkhū viññāṇañcāyatana-samāpattiyā na lābhino’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Người ấy vì chứng được định Thức vô biên xứ ấy nên khen mình chê người.<br>
+<span lang="pi" class="pali">
+So tāya viññāṇañcāyatanasamāpattiyā attānukkaṁseti, paraṁ vambheti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Như vậy, này các Tỷ-kheo, là phi Chân nhân pháp.<br>
+<span lang="pi" class="pali">
+Ayampi, bhikkhave, asappurisadhammo.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Và người Chân nhân, này các Tỷ-kheo, suy nghĩ như sau:<br>
+<span lang="pi" class="pali">
+Sappuriso ca kho, bhikkhave, iti paṭisañcikkhati:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Ðịnh Thức vô biên xứ tự tánh là vô tham ái. Thế Tôn đã nói như vậy.<br>
+<span lang="pi" class="pali">
+‘viññāṇañcāyatanasamāpattiyāpi kho atammayatā vuttā bhagavatā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Những ai nghĩ thế này, thế khác, thời tự tánh liền đổi khác’.<br>
+<span lang="pi" class="pali">
+Yena yena hi maññanti tato taṁ hoti aññathā’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Người ấy sau khi lấy vô tham ái làm chính yếu, không khen mình chê người vì chứng được định Thức vô biên xứ.<br>
+<span lang="pi" class="pali">
+So atammayataññeva antaraṁ karitvā tāya viññāṇañcāyatanasamāpattiyā nevattānukkaṁseti, na paraṁ vambheti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Như vậy, này các Tỷ-kheo, là Chân nhân pháp.<br>
+<span lang="pi" class="pali">
+Ayampi, bhikkhave, sappurisadhammo.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Lại nữa, này các Tỷ-kheo, có người phi Chân nhân vượt lên một cách hoàn toàn Thức vô biên xứ, nghĩ rằng: ‘Không có sở hữu’, chứng và trú Vô sở hữu xứ.<br>
+<span lang="pi" class="pali">
+Puna caparaṁ, bhikkhave, asappuriso sabbaso viññāṇañcāyatanaṁ samatikkamma ‘natthi kiñcī’ti ākiñcaññāyatanaṁ upasampajja viharati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Người ấy suy nghĩ như sau:<br>
+<span lang="pi" class="pali">
+So iti paṭisañcikkhati:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Ta chứng được định Vô sở hữu xứ, còn các Tỷ-kheo này không chứng được định Vô sở hữu xứ’.<br>
+<span lang="pi" class="pali">
+‘ahaṁ khomhi ākiñcaññāyatanasamāpattiyā lābhī, ime panaññe bhikkhū ākiñcaññāyatanasamāpattiyā na lābhino’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Người ấy, vì chứng được định Vô sở hữu xứ ấy, nên khen mình chê người.<br>
+<span lang="pi" class="pali">
+So tāya ākiñcaññāyatanasamāpattiyā attānukkaṁseti, paraṁ vambheti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Như vậy, này các Tỷ-kheo, là phi Chân nhân pháp.<br>
+<span lang="pi" class="pali">
+Ayampi, bhikkhave, asappurisadhammo.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Và người Chân nhân, này các Tỷ-kheo, suy nghĩ như sau:<br>
+<span lang="pi" class="pali">
+Sappuriso ca kho, bhikkhave, iti paṭisañcikkhati:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Ðịnh Vô sở hữu xứ tự tánh là vô tham ái. Thế Tôn đã nói như vậy.<br>
+<span lang="pi" class="pali">
+‘ākiñcaññāyatanasamāpattiyāpi kho atammayatā vuttā bhagavatā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Những ai nghĩ thế này, thế khác, thời tự tánh liền đổi khác’.<br>
+<span lang="pi" class="pali">
+Yena yena hi maññanti tato taṁ hoti aññathā’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Người ấy sau khi lấy vô tham ái làm chánh yếu, không khen mình chê người vì chứng được định Vô sở hữu xứ.<br>
+<span lang="pi" class="pali">
+So atammayataññeva antaraṁ karitvā tāya ākiñcaññāyatanasamāpattiyā nevattānukkaṁseti, na paraṁ vambheti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Như vậy, này các Tỷ-kheo, là Chân nhân pháp.<br>
+<span lang="pi" class="pali">
+Ayampi, bhikkhave, sappurisadhammo.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Lại nữa, này các Tỷ-kheo, có người phi Chân nhân vượt lên Vô sở hữu xứ, chứng và trú Phi tưởng phi phi tưởng xứ.<br>
+<span lang="pi" class="pali">
+Puna caparaṁ, bhikkhave, asappuriso sabbaso ākiñcaññāyatanaṁ samatikkamma nevasaññānāsaññāyatanaṁ upasampajja viharati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Người ấy suy nghĩ như sau:<br>
+<span lang="pi" class="pali">
+So iti paṭisañcikkhati:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Ta chứng được định Phi tưởng phi phi tưởng xứ, còn các Tỷ-kheo này không chứng được định Phi tưởng phi phi tưởng xứ’.<br>
+<span lang="pi" class="pali">
+‘ahaṁ khomhi nevasaññānāsaññāyatanasamāpattiyā lābhī, ime panaññe bhikkhū nevasaññānāsaññāyatanasamāpattiyā na lābhino’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Người ấy vì chứng được định Phi tưởng phi phi tưởng xứ ấy nên khen mình chê người.<br>
+<span lang="pi" class="pali">
+So tāya nevasaññānāsaññāyatanasamāpattiyā attānukkaṁseti, paraṁ vambheti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Như vậy, này các Tỷ-kheo, là phi Chân nhân pháp.<br>
+<span lang="pi" class="pali">
+Ayampi, bhikkhave, asappurisadhammo.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Và người Chân nhân, này các Tỷ-kheo, suy nghĩ như sau:<br>
+<span lang="pi" class="pali">
+Sappuriso ca kho, bhikkhave, iti paṭisañcikkhati:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Ðịnh Phi tưởng phi phi tưởng xứ tự tánh là vô tham ái. Thế Tôn đã nói như vậy.<br>
+<span lang="pi" class="pali">
+‘nevasaññānāsaññāyatanasamāpattiyāpi kho atammayatā vuttā bhagavatā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Những ai nghĩ thế này, thế khác, thời tự tánh liền đổi khác’.<br>
+<span lang="pi" class="pali">
+Yena yena hi maññanti tato taṁ hoti aññathā’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Người ấy sau khi lấy vô tham ái làm chánh yếu, không khen mình chê người vì định Phi tưởng phi phi tưởng xứ.<br>
+<span lang="pi" class="pali">
+So atammayataññeva antaraṁ karitvā tāya nevasaññānāsaññāyatanasamāpattiyā nevattānukkaṁseti, na paraṁ vambheti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Như vậy, này các Tỷ-kheo, là Chân nhân pháp.<br>
+<span lang="pi" class="pali">
+Ayampi, bhikkhave, sappurisadhammo.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Lại nữa, này các Tỷ-kheo, người Chân nhân sau khi vượt lên Phi tưởng phi phi tưởng xứ, chứng và trú Diệt thọ tưởng định, sau khi thấy với trí tuệ, các lậu hoặc của vị này được đoạn trừ.<br>
+<span lang="pi" class="pali">
+Puna caparaṁ, bhikkhave, sappuriso sabbaso nevasaññānāsaññāyatanaṁ samatikkamma saññāvedayitanirodhaṁ upasampajja viharati. Paññāya cassa disvā āsavā parikkhīṇā honti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này các Tỷ-kheo, Tỷ-kheo này không nghĩ mình là bất cứ vật gì, không nghĩ đến bất cứ chỗ nào, không nghĩ đến bất cứ vì sự việc gì.”<br>
+<span lang="pi" class="pali">
+Ayaṁ, bhikkhave, bhikkhu na kiñci maññati, na kuhiñci maññati, na kenaci maññatī”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Thế Tôn thuyết giảng như vậy. Các Tỷ-kheo hoan hỷ tín thọ lời Thế Tôn dạy.<br>
+<span lang="pi" class="pali">
+Idamavoca bhagavā. Attamanā te bhikkhū bhagavato bhāsitaṁ abhinandunti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+<span lang="pi" class="vi">
+Sappurisasuttaṁ niṭṭhitaṁ tatiyaṁ.<br>
+</span>
+</p>
+
+
+
+<!-- COPY CONTENT SUTTA Ở ĐÂY -->
+
+
+
+<br>
+<p><p style="text-align: right;font-style: italic;">Hoà Thượng Thích Minh Châu dịch Việt</span></p>
+
+
+
+
+
+
+
+
+</section>  <!-- End English and Pali -->
+<div id="nextprev"><a id="previous-sutta" href="./mn112.html#content"></a><a id="next-sutta" href="./mn114.html#content"></a></div>
+</div>  <!--End Content -->
+</div>  <!-- End Page -->
+
+
+
+
+
+
+<footer>
+					 <!-- End bottom links -->
+</footer>
+
+
+ 
+ <!-- Scripts -->
+
+ <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      if (typeof enablePaliLookup === "function") {
+        enablePaliLookup();
+      } else {
+        console.error("enablePaliLookup is not defined");
+      }
+    });
+  </script>
+
+ <script>
+ // Script to open and close sidebar
+ 	function w3_open() {
+ 	document.getElementById("mySidebar").style.display = "block";
+ 	}
+ 		function w3_close() {
+ 		document.getElementById("mySidebar").style.display = "none";
+ 	}
+ </script>
+ <script>
+ 		var app = document.getElementsByTagName("BODY")[0];
+ 		if (localStorage.lightMode == "dark") {
+ 			app.setAttribute("light-mode", "dark");
+ 	}
+ </script>
+ 
+ <script>
+ 		function toggle_light_mode() {
+ 			var app = document.getElementsByTagName("BODY")[0];
+ 				if (localStorage.lightMode == "dark") {
+ 			localStorage.lightMode = "light";
+ 			app.setAttribute("light-mode", "light");
+ 		} else {
+ 					localStorage.lightMode = "dark";
+ 					app.setAttribute("light-mode", "dark");
+ 	}
+ 		}
+ 
+ 		window.addEventListener("storage", function () {
+ 			if (localStorage.lightMode == "dark") {
+ 				app.setAttribute("light-mode", "dark");
+ 				} else {
+ 				app.setAttribute("light-mode", "light");
+ 		}
+ 		}, false);
+ 
+ </script>
+ <script src="../js/footer.js"></script><script src="../js/dpd_deconstructor.js"></script><script src="../js/dpd_ebts.js"></script><script src="../js/dpd_i2h.js"></script>
+ <script src="/sw.js"></script>
+ </body>
+ </html>

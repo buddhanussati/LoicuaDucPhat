@@ -1,0 +1,813 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+ 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+ 	<link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+ 	<meta name="viewport" content="width=device-width, initial-scale=1">
+		<!-- Loading manifest -->
+	<link rel="manifest" href="../manifest.json">
+ 	<!-- Loading main and menu stylesheets -->
+ 	<link rel="stylesheet" href="../css/w3.css">
+ 	<link rel="stylesheet" href="../css/css.css">
+ 	<link rel="stylesheet" href="../css/menu.css">
+ 	<script src="../js/jquery-1.10.2.min.js"></script>
+ 	<script src="../js/controlpanel.js"></script>
+ 	<script src="../js/mousetrap.min.js"></script>
+    <script src="../js/pali-lookup-standalone.js"></script>
+
+ <script src="../js/suttaFiles.js"></script>
+<script>
+ // Script to open random Sutta
+ function openRandomSutta() {
+  const randomIndex = Math.floor(Math.random() * suttaFiles.length);
+  const selectedFile = suttaFiles[randomIndex];
+
+  // Get root path of your site 
+  const currentPath = location.pathname;
+  const rootPath = currentPath.split("/").slice(0, -2).join("/") + "/";
+
+  // Redirect to the correct file
+  window.location.href = rootPath + selectedFile;
+}
+</script>
+
+
+</head>
+ <body class="container">
+ <div class="header-background">
+ <!-- Header -->
+ <div class="w3-header w3-content w3-padding w3-left-align bwcontainer">
+ 	<div class="centered">
+ 		<button class="light-mode-button" aria-label="Bật Chế Độ Sáng" onclick="toggle_light_mode()">
+ 			<span></span>
+ 			<span></span>
+ 		</button>
+ 		<span class="box-lbl">Sáng/Tối</span>
+ 	</div> <!-- Centered -->
+ 		<a href="../home/index.html" id="bwlogo"><img src="../images/headerlogo.png" alt="Logo Lời Của Đức Phật" class="w3-image"></a>
+ 		<div class="w3-bar bwcontainer">
+ 			<div id="searchlinks">
+ 			<a href="../home/visearch.html"><span class="w3-bar-item"><i class="fa fa-search"></i>&nbsp;Tìm Tiếng Việt</span></a>
+ 			<a href="../home/palisearch.html"><span class="w3-bar-item"><i class="fa fa-search"></i>&nbsp;Tìm Tiếng Pali</span></a>
+ 			</div><!-- End Searchlinks div -->
+ 			<div class="help"><span><a href="../home/help.html"><img src="../images/help_icon.png" title="Trợ Giúp" alt="Help"></a></span></div>
+ 		</div> <!-- End w3-bar bwcontainer --> 	</div> <!-- End w3-header w3-content w3-padding w3-left-align bwcontainer -->
+ </div> <!-- End header-background -->
+ <!-- Top menu -->
+
+ <div class="w3-main w3-white bwcontainer2">
+ 	<div class="w3-button w3-padding-8 w3-left w3-hide-large" onclick="w3_open()">☰</div>
+ 		<div id="navbar" class="w3-hide-small w3-hide-medium bwcontainer3">
+ 			<ul id="css3menu0">
+ 				<li class="topfirst" id="home"><a href="../home/index.html" class="w3-hide-small">Trang Chủ</a></li>
+  				<li class="topmenu" id="dn"><a href="../dn/dn.html" class="pressed w3-hide-small">Trường Bộ Kinh</a></li>
+ 				<li class="topmenu" id="mn"><a href="../mn/mn.html" class="w3-hide-small">Trung Bộ Kinh</a></li>
+ 				<li class="topmenu" id="sn"><a href="../sn/sn.html" class="w3-hide-small"><i class="fa fa-caret-down"></i>&nbsp;Tương Ưng Bộ Kinh</a>
+ 					<ul>
+ 						<li><a href="../sn/sn01.html" class="w3-hide-small">Tập I - Thiên Có Kệ</a></li>
+ 						<li><a href="../sn/sn02.html" class="w3-hide-small">Tập II - Thiên Nhân Duyên</a></li>
+ 						<li><a href="../sn/sn03.html" class="w3-hide-small">Tập III - Thiên Uẩn</a></li>
+ 						<li><a href="../sn/sn04.html" class="w3-hide-small">Tập IV - Thiên Sáu Xứ</a></li>
+ 						<li><a href="../sn/sn05.html" class="w3-hide-small">Tập V - Thiên Ðại Phẩm</a></li>
+ 					</ul>
+ 				<li class="topmenu" id="an"><a href="../an/an.html" class="w3-hide-small"><i class="fa fa-caret-down"></i>&nbsp;Tăng Chi Bộ Kinh</a>
+ 					<ul>
+ 						<li><a href="../an/an1.html" class="w3-hide-small">Chương Một Pháp</a></li>
+ 						<li><a href="../an/an2.html" class="w3-hide-small">Chương Hai Pháp</a></li>
+ 						<li><a href="../an/an3.html" class="w3-hide-small">Chương Ba Pháp</a></li>
+ 						<li><a href="../an/an4.html" class="w3-hide-small">Chương Bốn Pháp</a></li>
+ 						<li><a href="../an/an5.html" class="w3-hide-small">Chương Năm Pháp</a></li>
+ 						<li><a href="../an/an6.html" class="w3-hide-small">Chương Sáu Pháp</a></li>
+ 						<li><a href="../an/an7.html" class="w3-hide-small">Chương Bảy Pháp</a></li>
+ 						<li><a href="../an/an8.html" class="w3-hide-small">Chương Tám Pháp</a></li>
+ 						<li><a href="../an/an9.html" class="w3-hide-small">Chương Chín Pháp</a></li>
+ 						<li><a href="../an/an10.html" class="w3-hide-small">Chương Mười Pháp</a></li>
+ 						<li><a href="../an/an11.html" class="w3-hide-small">Chương Mười Một Pháp</a></li>
+ 					</ul>
+ 				</li>
+ 				<li class="topmenu" id="kn"><a href="../kn/kn.html" class="w3-hide-small"><i class="fa fa-caret-down"></i>&nbsp;Tiểu Bộ Kinh</a>
+ 					<ul>
+ 						<li><a href="../kp/kp.html" class="w3-hide-small">Kinh Tiểu Tụng</a></li>
+ 						<li><a href="../dhp/dhp.html" class="w3-hide-small">Kinh Pháp Cú</a></li>
+ 						<li><a href="../snp/snp.html" class="w3-hide-small">Kinh Tập</a></li>
+ 						<li><a href="../ud/ud.html" class="w3-hide-small">Kinh Phật Tự Thuyết</a></li>
+ 						<li><a href="../it/it.html" class="w3-hide-small">Kinh Phật Thuyết Như Vậy</a></li>
+ 						<li><a href="../tha/tha.html" class="w3-hide-small">Trưởng Lão Tăng Kệ</a></li>
+ 						<li><a href="../thi/thi.html" class="w3-hide-small">Trưởng Lão Ni Kệ</a></li>
+ 					</ul>
+ 				</li>
+				<li class="toplast" id="rd"><a href="../rd/rd.html" class="w3-hide-small"></i>Kinh Ngẫu Nhiên Theo Nhóm</a>
+ 					</ul>
+ 				</li>
+ 			</ul>
+ 			</div>
+ 		</div> <!--navbar-->
+
+<!-- Sidebar (hidden by default) -->
+ <nav class="w3-sidebar w3-bar-block w3-card w3-border w3-top w3-animate-left w3-hide-large" id="mySidebar">
+ 	<a href="javascript:void(0)" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-times fa-2x red-color"></i>&nbsp;&nbsp;&nbsp;Close</a><!-- Hides the sidebar when clicked -->
+ 		<div class="w3-bar-block w3-white">
+ 			<a href="../home/index.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-home fa-lg"></i>&nbsp;&nbsp;&nbsp;Home</a>
+ 			<a href="../guide/guide.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Guide</a>
+ 			<a href="../dn/dn.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Trường Bộ Kinh</a>
+ 			<a href="../mn/mn.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Trung Bộ Kinh</a>
+ 			<a href="../sn/sn.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Tương Ưng Bộ Kinh</a>
+ 			<a href="../an/an.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Tăng Chi Bộ Kinh
+ 			<a href="../kn/kn.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Tiểu Bộ Kinh</a>
+			<a href="../rd/rd.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>Kinh Ngẫu Nhiên Theo Nhóm</a>
+ 		</div>
+ </nav>
+ 
+ 
+ 
+   <!-- !PAGE CONTENT! --> 
+<div class="w3-main w3-content w3-padding w3-left-align bwcontainer4">
+<div id="content">
+<h2>Majjhima Nikāya - Trung Bộ Kinh</h2>
+<h5><span style="font-style: italic;">Hoà Thượng Thích Minh Châu dịch Việt</span></h5>
+
+</div>
+
+<br>
+ 	<title>        Trung Bộ 121          </title>
+
+<p lang="vi" class="vi"; style="text-align: center">
+Trung Bộ 121<br>
+<span lang="pi" class="pali">
+Majjhima Nikāya 121<br>
+</span>
+</p>
+
+
+<p lang="vi" class="vi"; style="text-align: center">
+Tiểu Kinh Về Tánh Không<br>
+<span lang="pi" class="pali">
+Cūḷasuññatasutta<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Như vầy tôi nghe.<br>
+<span lang="pi" class="pali">
+Evaṁ me sutaṁ—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Một thời Thế Tôn trú ở Sāvatthī (Xá-vệ), tại Ðông Viên, lâu đài của Mẹ của Migāra.<br>
+<span lang="pi" class="pali">
+ekaṁ samayaṁ bhagavā sāvatthiyaṁ viharati pubbārāme migāramātupāsāde.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Rồi Tôn giả Ānanda, vào buổi chiều, từ Thiền tịnh độc cư đứng dậy, đi đến Thế Tôn, sau khi đến đảnh lễ Thế Tôn, rồi ngồi xuống một bên, Tôn giả Ānanda bạch Thế Tôn:<br>
+<span lang="pi" class="pali">
+Atha kho āyasmā ānando sāyanhasamayaṁ paṭisallānā vuṭṭhito yena bhagavā tenupasaṅkami; upasaṅkamitvā bhagavantaṁ abhivādetvā ekamantaṁ nisīdi. Ekamantaṁ nisinno kho āyasmā ānando bhagavantaṁ etadavoca:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Một thời, bạch Thế Tôn, Thế Tôn trú giữa các Sakka (Thích-ca). Nagaraka là tên một thị trấn của các Sakka.<br>
+<span lang="pi" class="pali">
+“Ekamidaṁ, bhante, samayaṁ bhagavā sakkesu viharati nagarakaṁ nāma sakyānaṁ nigamo.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Tại đấy, bạch Thế Tôn, con được nghe trước mặt Thế Tôn, con được ghi nhớ trước mặt Thế Tôn như sau:<br>
+<span lang="pi" class="pali">
+Tattha me, bhante, bhagavato sammukhā sutaṁ, sammukhā paṭiggahitaṁ:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Này Ānanda, Ta nhờ an trú vào tánh không, nên nay an trú rất nhiều’.<br>
+<span lang="pi" class="pali">
+‘suññatāvihārenāhaṁ, ānanda, etarahi bahulaṁ viharāmī’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Phải chăng, bạch Thế Tôn, điều con đã nghe là nghe đúng, ghi nhớ đúng, tác ý đúng, thọ trì đúng?”<br>
+<span lang="pi" class="pali">
+Kacci metaṁ, bhante, sussutaṁ suggahitaṁ sumanasikataṁ sūpadhāritan”ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Thật vậy, này Ānanda, điều Ông đã nghe là nghe đúng, ghi nhớ đúng, tác ý đúng, thọ trì đúng.<br>
+<span lang="pi" class="pali">
+“Taggha te etaṁ, ānanda, sussutaṁ suggahitaṁ sumanasikataṁ sūpadhāritaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Thuở xưa và nay, này Ānanda, Ta nhờ an trú vào tánh không, nên nay an trú rất nhiều.<br>
+<span lang="pi" class="pali">
+Pubbepāhaṁ, ānanda, etarahipi suññatāvihārena bahulaṁ viharāmi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ví như, này Ānanda, lâu đài Lộc Mẫu này không có voi, bò, ngựa, ngựa cái, không có vàng và bạc, không có đàn bà, đàn ông tụ hội, và chỉ có một cái tánh không phải không, tức là sự nhất trí (ekattam) do duyên chúng Tỷ-kheo;<br>
+<span lang="pi" class="pali">
+Seyyathāpi, ānanda, ayaṁ migāramātupāsādo suñño hatthigavassavaḷavena, suñño jātarūparajatena, suñño itthipurisasannipātena atthi cevidaṁ asuññataṁ yadidaṁ—bhikkhusaṅghaṁ paṭicca ekattaṁ;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+cũng vậy, này Ānanda, Tỷ-kheo không tác ý thôn tưởng, không tác ý nhơn tưởng, chỉ tác ý sự nhất trí, do duyên lâm tưởng.<br>
+<span lang="pi" class="pali">
+evameva kho, ānanda, bhikkhu amanasikaritvā gāmasaññaṁ, amanasikaritvā manussasaññaṁ, araññasaññaṁ paṭicca manasi karoti ekattaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Tâm của vị ấy được thích thú hân hoan, an trú, hướng đến lâm tưởng.<br>
+<span lang="pi" class="pali">
+Tassa araññasaññāya cittaṁ pakkhandati pasīdati santiṭṭhati adhimuccati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vị ấy tuệ tri như sau:<br>
+<span lang="pi" class="pali">
+So evaṁ pajānāti:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Các ưu phiền do duyên thôn tưởng không có mặt ở đây; các ưu phiền do duyên nhân tưởng không có mặt ở đây. Và chỉ có một ưu phiền này, tức là sự nhất trí do duyên lâm tưởng’.<br>
+<span lang="pi" class="pali">
+‘ye assu darathā gāmasaññaṁ paṭicca tedha na santi, ye assu darathā manussasaññaṁ paṭicca tedha na santi, atthi cevāyaṁ darathamattā yadidaṁ—araññasaññaṁ paṭicca ekattan’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vị ấy tuệ tri: ‘Loại tưởng này không có thôn tưởng’. Vị ấy tuệ tri: ‘Loại tưởng này không có nhân tưởng’. Và chỉ có một cái này không phải không, tức là ‘sự nhất trí (ekattam) do duyên lâm tưởng’.<br>
+<span lang="pi" class="pali">
+So ‘suññamidaṁ saññāgataṁ gāmasaññāyā’ti pajānāti, ‘suññamidaṁ saññāgataṁ manussasaññāyā’ti pajānāti, ‘atthi cevidaṁ asuññataṁ yadidaṁ—araññasaññaṁ paṭicca ekattan’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Và cái gì không có mặt ở đây, vị ấy xem cái ấy là không có. Nhưng đối với cái còn lại, ở đây, vị ấy tuệ tri: ‘Cái kia có, cái này có’.<br>
+<span lang="pi" class="pali">
+Iti yañhi kho tattha na hoti tena taṁ suññaṁ samanupassati, yaṁ pana tattha avasiṭṭhaṁ hoti taṁ ‘santamidaṁ atthī’ti pajānāti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Như vậy, này Ānanda, cái này đối với vị ấy là như vậy, thật có, không điên đảo, sự thực hiện hoàn toàn thanh tịnh, không tánh.<br>
+<span lang="pi" class="pali">
+Evampissa esā, ānanda, yathābhuccā avipallatthā parisuddhā suññatāvakkanti bhavati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Lại nữa, này các Tỷ-kheo, Tỷ-kheo không tác ý nhân tưởng, không tác ý lâm tưởng, chỉ tác ý sự nhất trí do duyên địa tưởng.<br>
+<span lang="pi" class="pali">
+Puna caparaṁ, ānanda, bhikkhu amanasikaritvā manussasaññaṁ, amanasikaritvā araññasaññaṁ, pathavīsaññaṁ paṭicca manasi karoti ekattaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Tâm vị ấy được thích thú, hân hoan, an trú, hướng đến địa tưởng.<br>
+<span lang="pi" class="pali">
+Tassa pathavīsaññāya cittaṁ pakkhandati pasīdati santiṭṭhati adhimuccati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ví như, này Ānanda, tấm da con bò đực được căng thẳng trên một trăm cọc gỗ, đặc tánh tấm da được đoạn trừ (vigatavasika);<br>
+<span lang="pi" class="pali">
+Seyyathāpi, ānanda, āsabhacammaṁ saṅkusatena suvihataṁ vigatavalikaṁ;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+cũng vậy, này Ānanda, Tỷ-kheo, không tác ý đối với tất cả vật gì trên đất này: đất khô và vùng lầy, sông và vùng lầy, các cây có thân và có gai, núi và đất bằng, vị ấy tác ý sự nhất trí do duyên địa tưởng.<br>
+<span lang="pi" class="pali">
+evameva kho, ānanda, bhikkhu yaṁ imissā pathaviyā ukkūlavikkūlaṁ nadīviduggaṁ khāṇukaṇṭakaṭṭhānaṁ pabbatavisamaṁ taṁ sabbaṁ amanasikaritvā pathavīsaññaṁ paṭicca manasi karoti ekattaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Tâm vị ấy được thích thú, hân hoan, an trú, hướng đến địa tưởng.<br>
+<span lang="pi" class="pali">
+Tassa pathavīsaññāya cittaṁ pakkhandati pasīdati santiṭṭhati adhimuccati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vị ấy tuệ tri như sau:<br>
+<span lang="pi" class="pali">
+So evaṁ pajānāti:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Các ưu phiền do duyên nhân tưởng không có mặt ở đây; các ưu phiền do duyên lâm tưởng không có mặt ở đây. Và chỉ có một ưu phiền này, sự nhất trí do duyên địa tưởng’.<br>
+<span lang="pi" class="pali">
+‘ye assu darathā manussasaññaṁ paṭicca tedha na santi, ye assu darathā araññasaññaṁ paṭicca tedha na santi, atthi cevāyaṁ darathamattā yadidaṁ—pathavīsaññaṁ paṭicca ekattan’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vị ấy tuệ tri: ‘Loại tưởng này không có nhơn tưởng’. Vị ấy tuệ tri: ‘Loại tưởng này không có lâm tưởng, và chỉ có một cái này không phải không, tức là sự nhất trí do duyên địa tưởng’.<br>
+<span lang="pi" class="pali">
+So ‘suññamidaṁ saññāgataṁ manussasaññāyā’ti pajānāti, ‘suññamidaṁ saññāgataṁ araññasaññāyā’ti pajānāti, ‘atthi cevidaṁ asuññataṁ yadidaṁ—pathavīsaññaṁ paṭicca ekattan’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Và cái gì không có mặt ở đây, vị ấy xem cái ấy là không có. Nhưng đối với cái còn lại, ở đây vị ấy tuệ tri: ‘Cái kia có, cái này có’.<br>
+<span lang="pi" class="pali">
+Iti yañhi kho tattha na hoti tena taṁ suññaṁ samanupassati, yaṁ pana tattha avasiṭṭhaṁ hoti taṁ ‘santamidaṁ atthī’ti pajānāti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Ānanda, cái này đối với vị ấy là như vậy, thật có, không điên đảo, sự thực hiện hoàn toàn thanh tịnh, không tánh.<br>
+<span lang="pi" class="pali">
+Evampissa esā, ānanda, yathābhuccā avipallatthā parisuddhā suññatāvakkanti bhavati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Lại nữa, này Ānanda, Tỷ-kheo không tác ý lâm tưởng, không tác ý địa tưởng, tác ý sự nhất trí do duyên Không vô biên xứ.<br>
+<span lang="pi" class="pali">
+Puna caparaṁ, ānanda, bhikkhu amanasikaritvā araññasaññaṁ, amanasikaritvā pathavīsaññaṁ, ākāsānañcāyatanasaññaṁ paṭicca manasi karoti ekattaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Tâm vị ấy được thích thú, hân hoan, an trú, hướng đến Không vô biên xứ.<br>
+<span lang="pi" class="pali">
+Tassa ākāsānañcāyatanasaññāya cittaṁ pakkhandati pasīdati santiṭṭhati adhimuccati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vị ấy tuệ tri như sau:<br>
+<span lang="pi" class="pali">
+So evaṁ pajānāti:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Các ưu phiền, do duyên lâm tưởng không có mặt ở đây; các ưu phiền do duyên địa tưởng không có mặt ở đây.<br>
+<span lang="pi" class="pali">
+‘ye assu darathā araññasaññaṁ paṭicca tedha na santi, ye assu darathā pathavīsaññaṁ paṭicca tedha na santi, atthi cevāyaṁ darathamattā yadidaṁ—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Và chỉ có một ưu phiền này, tức là sự nhất trí do duyên Không vô biên xứ tưởng’.<br>
+<span lang="pi" class="pali">
+ākāsānañcāyatanasaññaṁ paṭicca ekattan’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vị ấy tuệ tri: ‘Loại tưởng này không có lâm tưởng’. Vị ấy tuệ tri: ‘Loại tưởng này không có địa tưởng, và chỉ có một cái này không phải không, tức là sự nhất trí do duyên Không vô biên xứ tưởng’.<br>
+<span lang="pi" class="pali">
+So ‘suññamidaṁ saññāgataṁ araññasaññāyā’ti pajānāti, ‘suññamidaṁ saññāgataṁ pathavīsaññāyā’ti pajānāti, ‘atthi cevidaṁ asuññataṁ yadidaṁ—ākāsānañcāyatanasaññaṁ paṭicca ekattan’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Và cái gì không có mặt ở đây, vị ấy xem cái ấy là không có. Nhưng đối với cái còn lại, ở đây vị ấy biết: ‘Cái kia có, cái này có’.<br>
+<span lang="pi" class="pali">
+Iti yañhi kho tattha na hoti tena taṁ suññaṁ samanupassati, yaṁ pana tattha avasiṭṭhaṁ hoti taṁ ‘santamidaṁ atthī’ti pajānāti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Ānanda, cái này đối với vị ấy là như vậy, thật có, không điên đảo, sự thực hiện hoàn toàn thanh tịnh, không tánh.<br>
+<span lang="pi" class="pali">
+Evampissa esā, ānanda, yathābhuccā avipallatthā parisuddhā suññatāvakkanti bhavati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Lại nữa, này Ānanda, Tỷ-kheo không tác ý địa tưởng, không tác ý Không vô biên xứ tưởng, chỉ tác ý sự nhất trí do duyên Thức vô biên xứ.<br>
+<span lang="pi" class="pali">
+Puna caparaṁ, ānanda, bhikkhu amanasikaritvā pathavīsaññaṁ, amanasikaritvā ākāsānañcāyatanasaññaṁ, viññāṇañcāyatanasaññaṁ paṭicca manasi karoti ekattaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Tâm vị ấy được thích thú, hân hoan, an trú, hướng đến Thức vô biên xứ.<br>
+<span lang="pi" class="pali">
+Tassa viññāṇañcāyatanasaññāya cittaṁ pakkhandati pasīdati santiṭṭhati adhimuccati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vị ấy tuệ tri như sau:<br>
+<span lang="pi" class="pali">
+So evaṁ pajānāti:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Các ưu phiền do duyên địa tưởng không có mặt ở đây; các ưu phiền do duyên Không vô biên xứ tưởng không có mặt ở đây. Và chỉ có một ưu phiền này, tức là sự nhất trí do duyên Thức vô biên xứ tưởng’.<br>
+<span lang="pi" class="pali">
+‘ye assu darathā pathavīsaññaṁ paṭicca tedha na santi, ye assu darathā ākāsānañcāyatanasaññaṁ paṭicca tedha na santi, atthi cevāyaṁ darathamattā yadidaṁ—viññāṇañcāyatanasaññaṁ paṭicca ekattan’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vị ấy tuệ tri: ‘Loại tưởng này không có địa tưởng’. Vị ấy tuệ tri: ‘Loại tưởng này không có Không vô biên xứ tưởng, và chỉ có một cái này không phải không, tức là sự nhất trí do duyên Thức vô biên xứ tưởng’.<br>
+<span lang="pi" class="pali">
+So ‘suññamidaṁ saññāgataṁ pathavīsaññāyā’ti pajānāti, ‘suññamidaṁ saññāgataṁ ākāsānañcāyatanasaññāyā’ti pajānāti, ‘atthi cevidaṁ asuññataṁ yadidaṁ—viññāṇañcāyatanasaññaṁ paṭicca ekattan’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Và cái gì không có mặt ở đây, vị ấy xem cái ấy là không có. Nhưng đối với cái còn lại, ở đây vị ấy tuệ tri: ‘Cái kia có, cái này có’.<br>
+<span lang="pi" class="pali">
+Iti yañhi kho tattha na hoti tena taṁ suññaṁ samanupassati, yaṁ pana tattha avasiṭṭhaṁ hoti taṁ ‘santamidaṁ atthī’ti pajānāti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Ānanda, cái này đối với vị ấy là như vậy, thật có, không điên đảo, sự thực hiện hoàn toàn thanh tịnh, không tánh.<br>
+<span lang="pi" class="pali">
+Evampissa esā, ānanda, yathābhuccā avipallatthā parisuddhā suññatāvakkanti bhavati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Lại nữa, này Ānanda, Tỷ-kheo không tác ý Không vô biên xứ tưởng, không tác ý Thức vô biên xứ tưởng, chỉ tác ý sự nhất trí do duyên Vô sở hữu xứ tưởng.<br>
+<span lang="pi" class="pali">
+Puna caparaṁ, ānanda, bhikkhu amanasikaritvā ākāsānañcāyatanasaññaṁ, amanasikaritvā viññāṇañcāyatanasaññaṁ, ākiñcaññāyatanasaññaṁ paṭicca manasi karoti ekattaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Tâm vị ấy được thích thú, hân hoan, an trú, hướng đến Vô sở hữu xứ.<br>
+<span lang="pi" class="pali">
+Tassa ākiñcaññāyatanasaññāya cittaṁ pakkhandati pasīdati santiṭṭhati adhimuccati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vị ấy tuệ tri như sau:<br>
+<span lang="pi" class="pali">
+So evaṁ pajānāti:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Các ưu phiền do duyên Không vô biên xứ tưởng không có mặt ở đây; các ưu phiền do duyên Thức vô biên xứ tưởng không có mặt ở đây. Và chỉ có một ưu phiền này, tức là sự nhất trí do duyên Vô sở hữu xứ tưởng’.<br>
+<span lang="pi" class="pali">
+‘ye assu darathā ākāsānañcāyatanasaññaṁ paṭicca tedha na santi, ye assu darathā viññāṇañcāyatanasaññaṁ paṭicca tedha na santi, atthi cevāyaṁ darathamattā yadidaṁ—ākiñcaññāyatanasaññaṁ paṭicca ekattan’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vị ấy tuệ tri: ‘Loại tưởng này không có Không vô biên xứ tưởng’. Vị ấy tuệ tri: ‘Loại tưởng này không có Thức vô biên xứ tưởng, và chỉ có một cái này không phải không, tức là sự nhất trí do duyên Vô sở hữu xứ tưởng’.<br>
+<span lang="pi" class="pali">
+So ‘suññamidaṁ saññāgataṁ ākāsānañcāyatanasaññāyā’ti pajānāti, ‘suññamidaṁ saññāgataṁ viññāṇañcāyatanasaññāyā’ti pajānāti, ‘atthi cevidaṁ asuññataṁ yadidaṁ—ākiñcaññāyatanasaññaṁ paṭicca ekattan’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Và cái gì không có mặt ở đây, vị ấy xem cái ấy là không có. Nhưng đối với cái còn lại, ở đây, vị ấy tuệ tri: ‘Cái kia có, cái này có’.<br>
+<span lang="pi" class="pali">
+Iti yañhi kho tattha na hoti tena taṁ suññaṁ samanupassati, yaṁ pana tattha avasiṭṭhaṁ hoti taṁ ‘santamidaṁ atthī’ti pajānāti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Ānanda, cái này đối với vị ấy là như vậy, thật có, không điên đảo, sự thực hiện hoàn toàn thanh tịnh, không tánh.<br>
+<span lang="pi" class="pali">
+Evampissa esā, ānanda, yathābhuccā avipallatthā parisuddhā suññatāvakkanti bhavati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Lại nữa, này Ānanda, Tỷ-kheo không tác ý Thức vô biên xứ tưởng, không tác ý Vô sở hữu xứ tưởng, chỉ tác ý sự nhất trí do duyên Phi tưởng phi phi tưởng xứ tưởng.<br>
+<span lang="pi" class="pali">
+Puna caparaṁ, ānanda bhikkhu amanasikaritvā viññāṇañcāyatanasaññaṁ, amanasikaritvā ākiñcaññāyatanasaññaṁ, nevasaññānāsaññāyatanasaññaṁ paṭicca manasi karoti ekattaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Tâm vị ấy được thích thú, hân hoan, an trú, hướng đến Phi tưởng phi phi tưởng xứ.<br>
+<span lang="pi" class="pali">
+Tassa nevasaññānāsaññāyatanasaññāya cittaṁ pakkhandati pasīdati santiṭṭhati adhimuccati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vị ấy biết như sau:<br>
+<span lang="pi" class="pali">
+So evaṁ pajānāti:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Các ưu phiền do duyên Thức vô biên xứ tưởng không có mặt ở đây; các ưu phiền do duyên Vô sở hữu xứ tưởng không có mặt ở đây. Và chỉ có một ưu phiền này, tức là sự nhất trí do duyên Phi tưởng phi phi tưởng xứ tưởng’.<br>
+<span lang="pi" class="pali">
+‘ye assu darathā viññāṇañcāyatanasaññaṁ paṭicca tedha na santi, ye assu darathā ākiñcaññāyatanasaññaṁ paṭicca tedha na santi, atthi cevāyaṁ darathamattā yadidaṁ—nevasaññānāsaññāyatanasaññaṁ paṭicca ekattan’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vị ấy tuệ tri: ‘Loại tưởng này không có Thức vô biên xứ tưởng’.  Vị ấy tuệ tri: ‘Loại tưởng này không có Vô sở hữu xứ tưởng, và chỉ có một cái này không phải không, tức là sự nhất trí do duyên Phi tưởng phi phi tưởng xứ tưởng’.<br>
+<span lang="pi" class="pali">
+So ‘suññamidaṁ saññāgataṁ viññāṇañcāyatanasaññāyā’ti pajānāti, ‘suññamidaṁ saññāgataṁ ākiñcaññāyatanasaññāyā’ti pajānāti, ‘atthi cevidaṁ asuññataṁ yadidaṁ—nevasaññānāsaññāyatanasaññaṁ paṭicca ekattan’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Và cái gì không có mặt ở đây, vị ấy xem cái ấy là không có. Nhưng đối với cái còn lại, ở đây, vị ấy tuệ tri: ‘Cái kia có, cái này có’.<br>
+<span lang="pi" class="pali">
+Iti yañhi kho tattha na hoti tena taṁ suññaṁ samanupassati, yaṁ pana tattha avasiṭṭhaṁ hoti taṁ ‘santamidaṁ atthī’ti pajānāti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Ānanda, cái này đối với vị ấy là như vậy, thật có, không điên đảo, sự thực hiện hoàn toàn thanh tịnh, không tánh.<br>
+<span lang="pi" class="pali">
+Evampissa esā, ānanda, yathābhuccā avipallatthā parisuddhā suññatāvakkanti bhavati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Lại nữa, này Ānanda, Tỷ-kheo không tác ý Vô sở hữu xứ tưởng, không có tác ý Phi tưởng phi phi tưởng xứ tưởng, tác ý sự nhất trí do duyên Vô tướng tâm định.<br>
+<span lang="pi" class="pali">
+Puna caparaṁ, ānanda, bhikkhu amanasikaritvā ākiñcaññāyatanasaññaṁ, amanasikaritvā nevasaññānāsaññāyatanasaññaṁ, animittaṁ cetosamādhiṁ paṭicca manasi karoti ekattaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Tâm vị ấy được thích thú, hân hoan, an trú, hướng đến Vô tướng tâm định.<br>
+<span lang="pi" class="pali">
+Tassa animitte cetosamādhimhi cittaṁ pakkhandati pasīdati santiṭṭhati adhimuccati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vị ấy tuệ tri như sau:<br>
+<span lang="pi" class="pali">
+So evaṁ pajānāti:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Các ưu phiền do duyên Vô sở hữu xứ tưởng không có mặt ở đây; các ưu phiền do duyên Phi tưởng phi phi tưởng xứ tưởng không có mặt ở đây. Và chỉ có một ưu phiền này, tức là sáu nhập duyên mạng, duyên với thân này’.<br>
+<span lang="pi" class="pali">
+‘ye assu darathā ākiñcaññāyatanasaññaṁ paṭicca tedha na santi, ye assu darathā nevasaññānāsaññāyatanasaññaṁ paṭicca tedha na santi, atthi cevāyaṁ darathamattā yadidaṁ—imameva kāyaṁ paṭicca saḷāyatanikaṁ jīvitapaccayā’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vị ấy tuệ tri: ‘Loại tưởng này không có Vô sở hữu xứ tưởng’. Vị ấy tuệ tri: ‘Loại tưởng này không có Phi tưởng phi phi tưởng xứ tưởng. Và chỉ có một cái này không phải không, tức là sáu nhập duyên mạng, duyên với thân này’.<br>
+<span lang="pi" class="pali">
+So ‘suññamidaṁ saññāgataṁ ākiñcaññāyatanasaññāyā’ti pajānāti, ‘suññamidaṁ saññāgataṁ nevasaññānāsaññāyatanasaññāyā’ti pajānāti, ‘atthi cevidaṁ asuññataṁ yadidaṁ—imameva kāyaṁ paṭicca saḷāyatanikaṁ jīvitapaccayā’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Và cái gì không có mặt ở đây, vị ấy xem cái ấy là không có. Nhưng đối với cái còn lại, ở đây vị ấy tuệ tri: ‘Cái kia có, cái này có’.<br>
+<span lang="pi" class="pali">
+Iti yañhi kho tattha na hoti tena taṁ suññaṁ samanupassati, yaṁ pana tattha avasiṭṭhaṁ hoti taṁ ‘santamidaṁ atthī’ti pajānāti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Ānanda, cái này đối với vị ấy là như vậy, thật có, không điên đảo, sự thực hiện hoàn toàn thanh tịnh, không tánh.<br>
+<span lang="pi" class="pali">
+Evampissa esā, ānanda, yathābhuccā avipallatthā parisuddhā suññatāvakkanti bhavati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Lại nữa, này Ānanda, vị Tỷ-kheo không tác ý Vô sở hữu xứ tưởng, không tác ý Phi tưởng phi phi tưởng xứ tưởng, tác ý sự nhứt trí do duyên Vô tướng tâm định.<br>
+<span lang="pi" class="pali">
+Puna caparaṁ, ānanda, bhikkhu amanasikaritvā ākiñcaññāyatanasaññaṁ, amanasikaritvā nevasaññānāsaññāyatanasaññaṁ, animittaṁ cetosamādhiṁ paṭicca manasi karoti ekattaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Tâm vị ấy được thích thú, hân hoan, an trú, hướng đến Vô tướng tâm định.<br>
+<span lang="pi" class="pali">
+Tassa animitte cetosamādhimhi cittaṁ pakkhandati pasīdati santiṭṭhati adhimuccati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vị ấy tuệ tri như sau:<br>
+<span lang="pi" class="pali">
+So evaṁ pajānāti:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Vô tướng tâm định này thuộc hữu vi, do tâm tư tạo nên.’<br>
+<span lang="pi" class="pali">
+‘ayampi kho animitto cetosamādhi abhisaṅkhato abhisañcetayito’.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Phàm cái gì thuộc hữu vi, do tâm tư tạo nên, cái ấy là vô thường, chịu sự đoạn diệt’, vị ấy tuệ tri như vậy.<br>
+<span lang="pi" class="pali">
+‘Yaṁ kho pana kiñci abhisaṅkhataṁ abhisañcetayitaṁ tadaniccaṁ nirodhadhamman’ti pajānāti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Do vị ấy tuệ tri như vậy, thấy như vậy, tâm được giải thoát khỏi dục lậu, tâm được giải thoát khỏi hữu lậu, tâm được giải thoát khỏi vô minh lậu.<br>
+<span lang="pi" class="pali">
+Tassa evaṁ jānato evaṁ passato kāmāsavāpi cittaṁ vimuccati, bhavāsavāpi cittaṁ vimuccati, avijjāsavāpi cittaṁ vimuccati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Trong sự giải thoát, là sự hiểu biết (nana) rằng đã được giải thoát.<br>
+<span lang="pi" class="pali">
+Vimuttasmiṁ vimuttamiti ñāṇaṁ hoti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vị ấy tuệ tri: “Sanh đã tận, Phạm hạnh đã thành, những việc nên làm đã làm, không còn phải trở lại trạng thái này nữa”.<br>
+<span lang="pi" class="pali">
+‘Khīṇā jāti, vusitaṁ brahmacariyaṁ, kataṁ karaṇīyaṁ, nāparaṁ itthattāyā’ti pajānāti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vị ấy tuệ tri:<br>
+<span lang="pi" class="pali">
+So evaṁ pajānāti:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Các ưu phiền do duyên dục lậu không có mặt ở đây; các ưu phiền do duyên hữu lậu không có mặt có ở đây; các ưu phiền do duyên vô minh lậu không có mặt ở đây. Và chỉ ở một ưu phiền này, tức là sáu nhập duyên mạng, duyên với thân này’.<br>
+<span lang="pi" class="pali">
+‘ye assu darathā kāmāsavaṁ paṭicca tedha na santi, ye assu darathā bhavāsavaṁ paṭicca tedha na santi, ye assu darathā avijjāsavaṁ paṭicca tedha na santi, atthi cevāyaṁ darathamattā yadidaṁ—imameva kāyaṁ paṭicca saḷāyatanikaṁ jīvitapaccayā’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vị ấy tuệ tri: ‘Loại tưởng này không có dục lậu’. Vị ấy tuệ tri: ‘Loại tưởng này không có hữu lậu’. Vị ấy tuệ tri: ‘Loại tưởng này không có vô minh lậu. Và chỉ có một cái này không phải không, tức là sáu nhập duyên mạng, duyên với thân này’.<br>
+<span lang="pi" class="pali">
+So ‘suññamidaṁ saññāgataṁ kāmāsavenā’ti pajānāti, ‘suññamidaṁ saññāgataṁ bhavāsavenā’ti pajānāti, ‘suññamidaṁ saññāgataṁ avijjāsavenā’ti pajānāti, ‘atthi cevidaṁ asuññataṁ yadidaṁ—imameva kāyaṁ paṭicca saḷāyatanikaṁ jīvitapaccayā’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Và cái gì không có mặt ở đây, vị ấy xem cái ấy là không có. Nhưng đối với cái còn lại, ở đây vị ấy biết: ‘Cái kia có, cái này có’.<br>
+<span lang="pi" class="pali">
+Iti yañhi kho tattha na hoti tena taṁ suññaṁ samanupassati, yaṁ pana tattha avasiṭṭhaṁ hoti taṁ ‘santamidaṁ atthī’ti pajānāti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Ānanda, cái này đối với vị ấy là như vậy, thật có, không điên đảo, sự thực hiện hoàn toàn thanh tịnh, không tánh.<br>
+<span lang="pi" class="pali">
+Evampissa esā, ānanda, yathābhuccā avipallatthā parisuddhā paramānuttarā suññatāvakkanti bhavati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Ānanda, phàm có những Sa-môn hay Bà-la-môn nào trong quá khứ sau khi chứng đạt, đã an trú cứu cánh vô thượng thanh tịnh Không tánh (Sunnatam), tất cả các vị ấy sau khi chứng đạt đều chỉ an trú cứu cánh vô thượng thanh tịnh Không tánh này.<br>
+<span lang="pi" class="pali">
+Yepi hi keci, ānanda, atītamaddhānaṁ samaṇā vā brāhmaṇā vā parisuddhaṁ paramānuttaraṁ suññataṁ upasampajja vihariṁsu, sabbe te imaṁyeva parisuddhaṁ paramānuttaraṁ suññataṁ upasampajja vihariṁsu.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Ānanda, phàm có những Sa-môn hay Bà-la-môn nào trong tương lai, sau khi chứng đạt sẽ an trú cứu cánh vô thượng thanh tịnh Không tánh, tất cả các vị ấy sau khi chứng đạt đều sẽ an trú cứu cánh vô thượng thanh tịnh Không tánh này.<br>
+<span lang="pi" class="pali">
+Yepi hi keci, ānanda, anāgatamaddhānaṁ samaṇā vā brāhmaṇā vā parisuddhaṁ paramānuttaraṁ suññataṁ upasampajja viharissanti, sabbe te imaṁyeva parisuddhaṁ paramānuttaraṁ suññataṁ upasampajja viharissanti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Ānanda, phàm có những Sa-môn hay Bà-la-môn nào trong hiện tại, sau khi chứng đạt và an trú cứu cánh vô thượng thanh tịnh Không tánh, tất cả các vị ấy sau khi chứng đạt nếu an trú cứu cánh vô thượng thanh tịnh Không tánh này.<br>
+<span lang="pi" class="pali">
+Yepi hi keci, ānanda, etarahi samaṇā vā brāhmaṇā vā parisuddhaṁ paramānuttaraṁ suññataṁ upasampajja viharanti, sabbe te imaṁyeva parisuddhaṁ paramānuttaraṁ suññataṁ upasampajja viharanti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Do vậy, này Ānanda, ‘sau khi chứng đạt Ta sẽ an trú cứu cánh vô thượng thanh tịnh Không tánh’.<br>
+<span lang="pi" class="pali">
+Tasmātiha, ānanda, ‘parisuddhaṁ paramānuttaraṁ suññataṁ upasampajja viharissāmā’ti—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Như vậy, này Ānanda, các Ông cần phải học tập.”<br>
+<span lang="pi" class="pali">
+evañhi vo, ānanda, sikkhitabban”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Thế Tôn thuyết giảng như vậy. Tôn giả Ānanda hoan hỷ tín thọ lời Thế Tôn dạy.<br>
+<span lang="pi" class="pali">
+Idamavoca bhagavā. Attamano āyasmā ānando bhagavato bhāsitaṁ abhinandīti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+<span lang="pi" class="vi">
+Cūḷasuññatasuttaṁ niṭṭhitaṁ paṭhamaṁ.<br>
+</span>
+</p>
+
+
+
+<!-- COPY CONTENT SUTTA Ở ĐÂY -->
+
+
+
+<br>
+<p><p style="text-align: right;font-style: italic;">Hoà Thượng Thích Minh Châu dịch Việt</span></p>
+
+
+
+
+
+
+
+
+</section>  <!-- End English and Pali -->
+<div id="nextprev"><a id="previous-sutta" href="./mn120.html#content"></a><a id="next-sutta" href="./mn122.html#content"></a></div>
+</div>  <!--End Content -->
+</div>  <!-- End Page -->
+
+
+
+
+
+
+<footer>
+					 <!-- End bottom links -->
+</footer>
+
+
+ 
+ <!-- Scripts -->
+
+ <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      if (typeof enablePaliLookup === "function") {
+        enablePaliLookup();
+      } else {
+        console.error("enablePaliLookup is not defined");
+      }
+    });
+  </script>
+
+ <script>
+ // Script to open and close sidebar
+ 	function w3_open() {
+ 	document.getElementById("mySidebar").style.display = "block";
+ 	}
+ 		function w3_close() {
+ 		document.getElementById("mySidebar").style.display = "none";
+ 	}
+ </script>
+ <script>
+ 		var app = document.getElementsByTagName("BODY")[0];
+ 		if (localStorage.lightMode == "dark") {
+ 			app.setAttribute("light-mode", "dark");
+ 	}
+ </script>
+ 
+ <script>
+ 		function toggle_light_mode() {
+ 			var app = document.getElementsByTagName("BODY")[0];
+ 				if (localStorage.lightMode == "dark") {
+ 			localStorage.lightMode = "light";
+ 			app.setAttribute("light-mode", "light");
+ 		} else {
+ 					localStorage.lightMode = "dark";
+ 					app.setAttribute("light-mode", "dark");
+ 	}
+ 		}
+ 
+ 		window.addEventListener("storage", function () {
+ 			if (localStorage.lightMode == "dark") {
+ 				app.setAttribute("light-mode", "dark");
+ 				} else {
+ 				app.setAttribute("light-mode", "light");
+ 		}
+ 		}, false);
+ 
+ </script>
+ <script src="../js/footer.js"></script><script src="../js/dpd_deconstructor.js"></script><script src="../js/dpd_ebts.js"></script><script src="../js/dpd_i2h.js"></script>
+ <script src="/sw.js"></script>
+ </body>
+ </html>

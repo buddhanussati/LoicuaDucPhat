@@ -1,0 +1,939 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+ 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+ 	<link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+ 	<meta name="viewport" content="width=device-width, initial-scale=1">
+		<!-- Loading manifest -->
+	<link rel="manifest" href="../manifest.json">
+ 	<!-- Loading main and menu stylesheets -->
+ 	<link rel="stylesheet" href="../css/w3.css">
+ 	<link rel="stylesheet" href="../css/css.css">
+ 	<link rel="stylesheet" href="../css/menu.css">
+ 	<script src="../js/jquery-1.10.2.min.js"></script>
+ 	<script src="../js/controlpanel.js"></script>
+ 	<script src="../js/mousetrap.min.js"></script>
+    <script src="../js/pali-lookup-standalone.js"></script>
+
+ <script src="../js/suttaFiles.js"></script>
+<script>
+ // Script to open random Sutta
+ function openRandomSutta() {
+  const randomIndex = Math.floor(Math.random() * suttaFiles.length);
+  const selectedFile = suttaFiles[randomIndex];
+
+  // Get root path of your site 
+  const currentPath = location.pathname;
+  const rootPath = currentPath.split("/").slice(0, -2).join("/") + "/";
+
+  // Redirect to the correct file
+  window.location.href = rootPath + selectedFile;
+}
+</script>
+
+
+</head>
+ <body class="container">
+ <div class="header-background">
+ <!-- Header -->
+ <div class="w3-header w3-content w3-padding w3-left-align bwcontainer">
+ 	<div class="centered">
+ 		<button class="light-mode-button" aria-label="Bật Chế Độ Sáng" onclick="toggle_light_mode()">
+ 			<span></span>
+ 			<span></span>
+ 		</button>
+ 		<span class="box-lbl">Sáng/Tối</span>
+ 	</div> <!-- Centered -->
+ 		<a href="../home/index.html" id="bwlogo"><img src="../images/headerlogo.png" alt="Logo Lời Của Đức Phật" class="w3-image"></a>
+ 		<div class="w3-bar bwcontainer">
+ 			<div id="searchlinks">
+ 			<a href="../home/visearch.html"><span class="w3-bar-item"><i class="fa fa-search"></i>&nbsp;Tìm Tiếng Việt</span></a>
+ 			<a href="../home/palisearch.html"><span class="w3-bar-item"><i class="fa fa-search"></i>&nbsp;Tìm Tiếng Pali</span></a>
+ 			</div><!-- End Searchlinks div -->
+ 			<div class="help"><span><a href="../home/help.html"><img src="../images/help_icon.png" title="Trợ Giúp" alt="Help"></a></span></div>
+ 		</div> <!-- End w3-bar bwcontainer --> 	</div> <!-- End w3-header w3-content w3-padding w3-left-align bwcontainer -->
+ </div> <!-- End header-background -->
+ <!-- Top menu -->
+
+ <div class="w3-main w3-white bwcontainer2">
+ 	<div class="w3-button w3-padding-8 w3-left w3-hide-large" onclick="w3_open()">☰</div>
+ 		<div id="navbar" class="w3-hide-small w3-hide-medium bwcontainer3">
+ 			<ul id="css3menu0">
+ 				<li class="topfirst" id="home"><a href="../home/index.html" class="w3-hide-small">Trang Chủ</a></li>
+  				<li class="topmenu" id="dn"><a href="../dn/dn.html" class="pressed w3-hide-small">Trường Bộ Kinh</a></li>
+ 				<li class="topmenu" id="mn"><a href="../mn/mn.html" class="w3-hide-small">Trung Bộ Kinh</a></li>
+ 				<li class="topmenu" id="sn"><a href="../sn/sn.html" class="w3-hide-small"><i class="fa fa-caret-down"></i>&nbsp;Tương Ưng Bộ Kinh</a>
+ 					<ul>
+ 						<li><a href="../sn/sn01.html" class="w3-hide-small">Tập I - Thiên Có Kệ</a></li>
+ 						<li><a href="../sn/sn02.html" class="w3-hide-small">Tập II - Thiên Nhân Duyên</a></li>
+ 						<li><a href="../sn/sn03.html" class="w3-hide-small">Tập III - Thiên Uẩn</a></li>
+ 						<li><a href="../sn/sn04.html" class="w3-hide-small">Tập IV - Thiên Sáu Xứ</a></li>
+ 						<li><a href="../sn/sn05.html" class="w3-hide-small">Tập V - Thiên Ðại Phẩm</a></li>
+ 					</ul>
+ 				<li class="topmenu" id="an"><a href="../an/an.html" class="w3-hide-small"><i class="fa fa-caret-down"></i>&nbsp;Tăng Chi Bộ Kinh</a>
+ 					<ul>
+ 						<li><a href="../an/an1.html" class="w3-hide-small">Chương Một Pháp</a></li>
+ 						<li><a href="../an/an2.html" class="w3-hide-small">Chương Hai Pháp</a></li>
+ 						<li><a href="../an/an3.html" class="w3-hide-small">Chương Ba Pháp</a></li>
+ 						<li><a href="../an/an4.html" class="w3-hide-small">Chương Bốn Pháp</a></li>
+ 						<li><a href="../an/an5.html" class="w3-hide-small">Chương Năm Pháp</a></li>
+ 						<li><a href="../an/an6.html" class="w3-hide-small">Chương Sáu Pháp</a></li>
+ 						<li><a href="../an/an7.html" class="w3-hide-small">Chương Bảy Pháp</a></li>
+ 						<li><a href="../an/an8.html" class="w3-hide-small">Chương Tám Pháp</a></li>
+ 						<li><a href="../an/an9.html" class="w3-hide-small">Chương Chín Pháp</a></li>
+ 						<li><a href="../an/an10.html" class="w3-hide-small">Chương Mười Pháp</a></li>
+ 						<li><a href="../an/an11.html" class="w3-hide-small">Chương Mười Một Pháp</a></li>
+ 					</ul>
+ 				</li>
+ 				<li class="topmenu" id="kn"><a href="../kn/kn.html" class="w3-hide-small"><i class="fa fa-caret-down"></i>&nbsp;Tiểu Bộ Kinh</a>
+ 					<ul>
+ 						<li><a href="../kp/kp.html" class="w3-hide-small">Kinh Tiểu Tụng</a></li>
+ 						<li><a href="../dhp/dhp.html" class="w3-hide-small">Kinh Pháp Cú</a></li>
+ 						<li><a href="../snp/snp.html" class="w3-hide-small">Kinh Tập</a></li>
+ 						<li><a href="../ud/ud.html" class="w3-hide-small">Kinh Phật Tự Thuyết</a></li>
+ 						<li><a href="../it/it.html" class="w3-hide-small">Kinh Phật Thuyết Như Vậy</a></li>
+ 						<li><a href="../tha/tha.html" class="w3-hide-small">Trưởng Lão Tăng Kệ</a></li>
+ 						<li><a href="../thi/thi.html" class="w3-hide-small">Trưởng Lão Ni Kệ</a></li>
+ 					</ul>
+ 				</li>
+				<li class="toplast" id="rd"><a href="../rd/rd.html" class="w3-hide-small"></i>Kinh Ngẫu Nhiên Theo Nhóm</a>
+ 					</ul>
+ 				</li>
+ 			</ul>
+ 			</div>
+ 		</div> <!--navbar-->
+
+<!-- Sidebar (hidden by default) -->
+ <nav class="w3-sidebar w3-bar-block w3-card w3-border w3-top w3-animate-left w3-hide-large" id="mySidebar">
+ 	<a href="javascript:void(0)" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-times fa-2x red-color"></i>&nbsp;&nbsp;&nbsp;Close</a><!-- Hides the sidebar when clicked -->
+ 		<div class="w3-bar-block w3-white">
+ 			<a href="../home/index.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-home fa-lg"></i>&nbsp;&nbsp;&nbsp;Home</a>
+ 			<a href="../guide/guide.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Guide</a>
+ 			<a href="../dn/dn.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Trường Bộ Kinh</a>
+ 			<a href="../mn/mn.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Trung Bộ Kinh</a>
+ 			<a href="../sn/sn.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Tương Ưng Bộ Kinh</a>
+ 			<a href="../an/an.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Tăng Chi Bộ Kinh
+ 			<a href="../kn/kn.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Tiểu Bộ Kinh</a>
+			<a href="../rd/rd.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>Kinh Ngẫu Nhiên Theo Nhóm</a>
+ 		</div>
+ </nav>
+ 
+ 
+ 
+   <!-- !PAGE CONTENT! --> 
+<div class="w3-main w3-content w3-padding w3-left-align bwcontainer4">
+<div id="content">
+<h2>Majjhima Nikāya - Trung Bộ Kinh</h2>
+<h5><span style="font-style: italic;">Hoà Thượng Thích Minh Châu dịch Việt</span></h5>
+
+</div>
+
+<br>
+ 	<title>        Trung Bộ 151          </title>
+
+<p lang="vi" class="vi"; style="text-align: center">
+Trung Bộ 151<br>
+<span lang="pi" class="pali">
+Majjhima Nikāya 151<br>
+</span>
+</p>
+
+
+<p lang="vi" class="vi"; style="text-align: center">
+Kinh Khất Thực Thanh Tịnh<br>
+<span lang="pi" class="pali">
+Piṇḍapātapārisuddhisutta<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Như vầy tôi nghe.<br>
+<span lang="pi" class="pali">
+Evaṁ me sutaṁ—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Một thời, Thế Tôn ở Rājagaha (Vương Xá), Veluvana (Trúc lâm), tại chỗ nuôi dưỡng sóc (Kalandakanivapa).<br>
+<span lang="pi" class="pali">
+ekaṁ samayaṁ bhagavā rājagahe viharati veḷuvane kalandakanivāpe.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Rồi Tôn giả Sāriputta vào buổi chiều, từ Thiền tịnh độc cư đứng dậy, đi đến Thế Tôn, sau khi đến đảnh lễ Thế Tôn rồi ngồi xuống một bên. Thế Tôn nói với Tôn giả Sāriputta đang ngồi một bên:<br>
+<span lang="pi" class="pali">
+Atha kho āyasmā sāriputto sāyanhasamayaṁ paṭisallānā vuṭṭhito yena bhagavā tenupasaṅkami; upasaṅkamitvā bhagavantaṁ abhivādetvā ekamantaṁ nisīdi. Ekamantaṁ nisinnaṁ kho āyasmantaṁ sāriputtaṁ bhagavā etadavoca:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Này Sāriputta, các căn của Ông rất sáng suốt, sắc da của Ông thanh tịnh trong sáng. Này Sāriputta, Ông nay đang phần lớn an trú với loại an trú nào?<br>
+<span lang="pi" class="pali">
+“Vippasannāni kho te, sāriputta, indriyāni, parisuddho chavivaṇṇo pariyodāto. Katamena kho tvaṁ, sāriputta, vihārena etarahi bahulaṁ viharasī”ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Bạch Thế Tôn, con nay đang phần lớn an trú với Không trú”.<br>
+<span lang="pi" class="pali">
+“Suññatāvihārena kho ahaṁ, bhante, etarahi bahulaṁ viharāmī”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Lành thay, lành thay! Này Sāriputta, Ông nay đang phần lớn an trú với sự an trú của bậc Ðại nhân.<br>
+<span lang="pi" class="pali">
+“Sādhu sādhu, sāriputta. Mahāpurisavihārena kira tvaṁ, sāriputta, etarahi bahulaṁ viharasi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Sāriputta, sự an trú của bậc Ðại nhân tức là không tánh.<br>
+<span lang="pi" class="pali">
+Mahāpurisavihāro eso, sāriputta, yadidaṁ—suññatā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Do vậy, này Sāriputta, nếu Tỷ-kheo ước mong rằng:<br>
+<span lang="pi" class="pali">
+Tasmātiha, sāriputta, bhikkhu sace ākaṅkheyya:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Mong rằng tôi nay phần lớn an trú với sự an trú không tánh’, thời này Sāriputta, Tỷ-kheo ấy cần phải suy tư như sau:<br>
+<span lang="pi" class="pali">
+‘suññatāvihārena bahulaṁ vihareyyan’ti, tena, sāriputta, bhikkhunā iti paṭisañcikkhitabbaṁ:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Trên con đường ta đã đi vào làng để khất thực, tại trú xứ ta đã đi khất thực, và trên con đường từ làng ta đi khất thực trở về, tại chỗ ấy, đối với các sắc do mắt nhận thức, có khởi lên ở nơi ta dục, tham, sân si, hay hận tâm không?’<br>
+<span lang="pi" class="pali">
+‘yena cāhaṁ maggena gāmaṁ piṇḍāya pāvisiṁ, yasmiñca padese piṇḍāya acariṁ, yena ca maggena gāmato piṇḍāya paṭikkamiṁ, atthi nu kho me tattha cakkhuviññeyyesu rūpesu chando vā rāgo vā doso vā moho vā paṭighaṁ vāpi cetaso’ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Sāriputta, nếu Tỷ-kheo sau khi tư duy biết rằng:<br>
+<span lang="pi" class="pali">
+Sace, sāriputta, bhikkhu paccavekkhamāno evaṁ jānāti:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Trên con đường ta đã đi vào làng để khất thực, tại trú xứ ta đã đi khất thực và trên con đường từ làng ta đi khất thực trở về, đối với các sắc do mắt nhận thức, có khởi lên nơi ta dục, tham, sân, si hay hận tâm’, thời này Sāriputta, Tỷ-kheo ấy phải tinh tấn đoạn tận các ác bất thiện pháp ấy.<br>
+<span lang="pi" class="pali">
+‘yena cāhaṁ maggena gāmaṁ piṇḍāya pāvisiṁ, yasmiñca padese piṇḍāya acariṁ, yena ca maggena gāmato piṇḍāya paṭikkamiṁ, atthi me tattha cakkhuviññeyyesu rūpesu chando vā rāgo vā doso vā moho vā paṭighaṁ vāpi cetaso’ti, tena, sāriputta, bhikkhunā tesaṁyeva pāpakānaṁ akusalānaṁ dhammānaṁ pahānāya vāyamitabbaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Nhưng này Sāriputta, nếu Tỷ-kheo trong khi suy tư được biết như sau:<br>
+<span lang="pi" class="pali">
+Sace pana, sāriputta, bhikkhu paccavekkhamāno evaṁ jānāti:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Trên con đường ta đã đi … ta đi khất thực trở về, đối với các sắc do mắt nhận thức, không có khởi lên nơi dục, tham, sân, si hay hận tâm’, thời này Sāriputta, Tỷ-kheo ấy phải an trú với hỷ và hân hoan ngày đêm tu học trong các thiện pháp.<br>
+<span lang="pi" class="pali">
+‘yena cāhaṁ maggena gāmaṁ piṇḍāya pāvisiṁ, yasmiñca padese piṇḍāya acariṁ, yena ca maggena gāmato piṇḍāya paṭikkamiṁ, natthi me tattha cakkhuviññeyyesu rūpesu chando vā rāgo vā doso vā moho vā paṭighaṁ vāpi cetaso’ti, tena, sāriputta, bhikkhunā teneva pītipāmojjena vihātabbaṁ ahorattānusikkhinā kusalesu dhammesu.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Lại nữa, này Sāriputta, Tỷ-kheo cần phải suy tư như sau:<br>
+<span lang="pi" class="pali">
+Puna caparaṁ, sāriputta, bhikkhunā iti paṭisañcikkhitabbaṁ:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Trên con đường ta đã đi… , ta đi khất thực trở về, đối với các tiếng do tai nhận thức,…<br>
+<span lang="pi" class="pali">
+‘yena cāhaṁ maggena gāmaṁ piṇḍāya pāvisiṁ, yasmiñca padese piṇḍāya acariṁ, yena ca maggena gāmato piṇḍāya paṭikkamiṁ, atthi nu kho me tattha sotaviññeyyesu saddesu …pe…<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+đối với các hương do mũi nhận thức,…<br>
+<span lang="pi" class="pali">
+ghānaviññeyyesu gandhesu …<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+đối với cácvị do lưỡi nhận thức,…<br>
+<span lang="pi" class="pali">
+jivhāviññeyyesu rasesu …<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+đối với các xúc do thân nhận thức,…<br>
+<span lang="pi" class="pali">
+kāyaviññeyyesu phoṭṭhabbesu …<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+đối với các pháp do ý nhận thức, có khởi lên dục, tham, sân, si hay hận tâm không?’<br>
+<span lang="pi" class="pali">
+manoviññeyyesu dhammesu chando vā rāgo vā doso vā moho vā paṭighaṁ vāpi cetaso’ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Sāriputta, nếu Tỷ-kheo trong khi suy tư được biết như sau:<br>
+<span lang="pi" class="pali">
+Sace, sāriputta, bhikkhu paccavekkhamāno evaṁ jānāti:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Trên con đường ta đã đi… , ta đi khất thực trở về, đối với các tiếng do tai nhận thức,… đối với các hương do mũi nhận thức,… đối với các vị do lưỡi nhận thức,… đối với các xúc do thân nhận thức,… đối với các pháp do ý nhận thức, có khởi lên nơi ta dục, tham, sân, si, hay hận tâm’, thời này Sāriputta, Tỷ-kheo ấy phải tinh tấn đoạn tận các ác bất thiện pháp ấy.<br>
+<span lang="pi" class="pali">
+‘yena cāhaṁ maggena gāmaṁ piṇḍāya pāvisiṁ, yasmiñca padese piṇḍāya acariṁ, yena ca maggena gāmato piṇḍāya paṭikkamiṁ, atthi me tattha manoviññeyyesu dhammesu chando vā rāgo vā doso vā moho vā paṭighaṁ vāpi cetaso’ti, tena, sāriputta, bhikkhunā tesaṁyeva pāpakānaṁ akusalānaṁ dhammānaṁ pahānāya vāyamitabbaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Nhưng này Sāriputta, nếu Tỷ-kheo trong khi suy tư được biết như sau:<br>
+<span lang="pi" class="pali">
+Sace pana, sāriputta, bhikkhu paccavekkhamāno evaṁ jānāti:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Trên con đường ta đã đi…, ta đi khất thực trở về, đối với các tiếng do tai nhận thức,… đối với các hương do mũi nhận thức,… đối với các vị do lưỡi nhận thức,… đối với các xúc do thân nhận thức,… đối với các pháp do ý nhận thức, không có khởi lên nơi ta dục, tham, sân, si hay hận tâm’, thời này Sāriputta, Tỷ-kheo ấy phải an trú với hỷ và hân hoan ngày đêm tu học trong các thiện pháp.<br>
+<span lang="pi" class="pali">
+‘yena cāhaṁ maggena gāmaṁ piṇḍāya pāvisiṁ, yasmiñca padese piṇḍāya acariṁ, yena ca maggena gāmato piṇḍāya paṭikkamiṁ, natthi me tattha manoviññeyyesu dhammesu chando vā rāgo vā doso vā moho vā paṭighaṁ vāpi cetaso’ti, tena, sāriputta, bhikkhunā teneva pītipāmojjena vihātabbaṁ ahorattānusikkhinā kusalesu dhammesu.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Lại nữa, này Sāriputta, Tỷ-kheo cần phải suy tư như sau:<br>
+<span lang="pi" class="pali">
+Puna caparaṁ, sāriputta, bhikkhunā iti paṭisañcikkhitabbaṁ:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Ta đã đoạn tận năm dục trưởng dưỡng chưa?’<br>
+<span lang="pi" class="pali">
+‘pahīnā nu kho me pañca kāmaguṇā’ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Sāriputta, nếu Tỷ-kheo, trong khi suy tư được biết như sau:<br>
+<span lang="pi" class="pali">
+Sace, sāriputta, bhikkhu paccavekkhamāno evaṁ jānāti:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Ta chưa đoạn tận năm dục trưởng dưỡng’, thời này Sāriputta, Tỷ-kheo ấy phải tinh tấn đoạn tận năm dục trưởng dưỡng.<br>
+<span lang="pi" class="pali">
+‘appahīnā kho me pañca kāmaguṇā’ti, tena, sāriputta, bhikkhunā pañcannaṁ kāmaguṇānaṁ pahānāya vāyamitabbaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Nhưng nếu, này Sāriputta, Tỷ-kheo trong khi suy tư được biết như sau:<br>
+<span lang="pi" class="pali">
+Sace pana, sāriputta, bhikkhu paccavekkhamāno evaṁ jānāti:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Ta đã đoạn tận năm dục trưởng dưỡng’, thời này Sāriputta, Tỷ-kheo ấy phải an trú với hỷ và hân hoan ngày đêm tu học trong các thiện pháp.<br>
+<span lang="pi" class="pali">
+‘pahīnā kho me pañca kāmaguṇā’ti, tena, sāriputta, bhikkhunā teneva pītipāmojjena vihātabbaṁ ahorattānusikkhinā kusalesu dhammesu.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Lại nữa, này Sāriputta, Tỷ-kheo cần phải suy tư như sau:<br>
+<span lang="pi" class="pali">
+Puna caparaṁ, sāriputta, bhikkhunā iti paṭisañcikkhitabbaṁ:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Ta đã đoạn tận năm triền cái chưa?’<br>
+<span lang="pi" class="pali">
+‘pahīnā nu kho me pañca nīvaraṇā’ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Nếu, này Sāriputta, trong khi suy tư, Tỷ-kheo được biết như sau:<br>
+<span lang="pi" class="pali">
+Sace, sāriputta, bhikkhu paccavekkhamāno evaṁ jānāti:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Ta chưa đoạn tận năm triền cái’, thời này Sāriputta, Tỷ-kheo ấy phải tinh tấn đoạn tận năm triền cái.<br>
+<span lang="pi" class="pali">
+‘appahīnā kho me pañca nīvaraṇā’ti, tena, sāriputta, bhikkhunā pañcannaṁ nīvaraṇānaṁ pahānāya vāyamitabbaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Nhưng nếu, này Sāriputta, Tỷ-kheo trong khi suy tư được biết như sau:<br>
+<span lang="pi" class="pali">
+Sace pana, sāriputta, bhikkhu paccavekkhamāno evaṁ jānāti:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Ta đã đoạn tận năm triền cái’, thời này Sāriputta, Tỷ-kheo ấy phải an trú với hỷ và hân hoan ngày đêm tu học trong các thiện pháp.<br>
+<span lang="pi" class="pali">
+‘pahīnā kho me pañca nīvaraṇā’ti, tena, sāriputta, bhikkhunā teneva pītipāmojjena vihātabbaṁ ahorattānusikkhinā kusalesu dhammesu.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Lại nữa, này Sāriputta, Tỷ-kheo cần phải suy tư:<br>
+<span lang="pi" class="pali">
+Puna caparaṁ, sāriputta, bhikkhunā iti paṭisañcikkhitabbaṁ:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Ta có liễu tri năm thủ uẩn chưa?’<br>
+<span lang="pi" class="pali">
+‘pariññātā nu kho me pañcupādānakkhandhā’ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Sāriputta, nếu trong khi suy tư, Tỷ-kheo được biết như sau:<br>
+<span lang="pi" class="pali">
+Sace, sāriputta, bhikkhu paccavekkhamāno evaṁ jānāti:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Ta chưa có liễu tri năm thủ uẩn’, thời này Sāriputta, Tỷ-kheo ấy cần phải tinh tán liễu tri năm thủ uẩn.<br>
+<span lang="pi" class="pali">
+‘apariññātā kho me pañcupādānakkhandhā’ti, tena, sāriputta, bhikkhunā pañcannaṁ upādānakkhandhānaṁ pariññāya vāyamitabbaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Nhưng nếu, này Sāriputta, trong khi suy tư, Tỷ-kheo ấy được biết như sau:<br>
+<span lang="pi" class="pali">
+Sace pana, sāriputta, bhikkhu paccavekkhamāno evaṁ jānāti:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Ta đã liễu tri năm thủ uẩn’, thời này Sāriputta, vị Tỷ-kheo ấy phải an trú với hỷ và hân hoan ngày đêm tu học trong các thiện pháp.<br>
+<span lang="pi" class="pali">
+‘pariññātā kho me pañcupādānakkhandhā’ti, tena, sāriputta, bhikkhunā teneva pītipāmojjena vihātabbaṁ ahorattānusikkhinā kusalesu dhammesu.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Lại nữa, này Sāriputta, Tỷ-kheo cần phải suy tư như sau:<br>
+<span lang="pi" class="pali">
+Puna caparaṁ, sāriputta, bhikkhunā iti paṭisañcikkhitabbaṁ:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Ta đã tu tập bốn niệm xứ chưa?’<br>
+<span lang="pi" class="pali">
+‘bhāvitā nu kho me cattāro satipaṭṭhānā’ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Sāriputta, nếu trong khi suy tư, Tỷ-kheo được biết:<br>
+<span lang="pi" class="pali">
+Sace, sāriputta, bhikkhu paccavekkhamāno evaṁ jānāti:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Ta chưa tu tập bốn niệm xứ’, thời này Sāriputta, vị Tỷ-kheo cần phải tinh tấn tu tập bốn niệm xứ.<br>
+<span lang="pi" class="pali">
+‘abhāvitā kho me cattāro satipaṭṭhānā’ti, tena, sāriputta, bhikkhunā catunnaṁ satipaṭṭhānānaṁ bhāvanāya vāyamitabbaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Nhưng nếu, này Sāriputta, trong khi suy tư, Tỷ-kheo được biết như sau:<br>
+<span lang="pi" class="pali">
+Sace pana, sāriputta, bhikkhu paccavekkhamāno evaṁ jānāti:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Ta đã tu tập bốn niệm xứ’, thời này Sāriputta, Tỷ-kheo ấy cần phải an trú với hỷ và hân hoan ngày đêm tu học trong các thiện pháp.<br>
+<span lang="pi" class="pali">
+‘bhāvitā kho me cattāro satipaṭṭhānā’ti, tena, sāriputta, bhikkhunā teneva pītipāmojjena vihātabbaṁ ahorattānusikkhinā kusalesu dhammesu.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Lại nữa, này Sāriputta, Tỷ-kheo cần phải suy tư:<br>
+<span lang="pi" class="pali">
+Puna caparaṁ, sāriputta, bhikkhunā iti paṭisañcikkhitabbaṁ:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Ta đã tu tập bốn chánh cần chưa? “<br>
+<span lang="pi" class="pali">
+‘bhāvitā nu kho me cattāro sammappadhānā’ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Nếu Tỷ-kheo, này Sāriputta, trong khi suy tư được biết như sau:<br>
+<span lang="pi" class="pali">
+Sace, sāriputta, bhikkhu paccavekkhamāno evaṁ jānāti:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Ta chưa tu tập tứ chánh cần’, thời này Sāriputta, Tỷ-kheo ấy cần phải tinh tấn tu tập tứ chánh cần.<br>
+<span lang="pi" class="pali">
+‘abhāvitā kho me cattāro sammappadhānā’ti, tena, sāriputta, bhikkhunā catunnaṁ sammappadhānānaṁ bhāvanāya vāyamitabbaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Nếu Tỷ-kheo, này Sāriputta, trong khi suy tư được biết như sau:<br>
+<span lang="pi" class="pali">
+Sace pana, sāriputta, bhikkhu paccavekkhamāno evaṁ jānāti:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Ta đã tu tập tứ chánh cần’, thời này Sāriputta, Tỷ-kheo ấy cần phải an trú trong hỷ và hân hoan ngày đêm tu học trong các thiện pháp.<br>
+<span lang="pi" class="pali">
+‘bhāvitā kho me cattāro sammappadhānā’ti, tena, sāriputta, bhikkhunā teneva pītipāmojjena vihātabbaṁ ahorattānusikkhinā kusalesu dhammesu.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Lại nữa, này Sāriputta, Tỷ-kheo cần phải suy tư:<br>
+<span lang="pi" class="pali">
+Puna caparaṁ, sāriputta, bhikkhunā iti paṭisañcikkhitabbaṁ:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Ta đã tu tập bốn như ý túc chưa?”<br>
+<span lang="pi" class="pali">
+‘bhāvitā nu kho me cattāro iddhipādā’ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Nếu Tỷ-kheo, này Sāriputta, trong khi suy tư được biết như sau:<br>
+<span lang="pi" class="pali">
+Sace, sāriputta, bhikkhu paccavekkhamāno evaṁ jānāti:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Ta chưa tu tập tứ như ý túc’, thời này Sāriputta, Tỷ-kheo ấy cần phải tinh tấn tu tập tứ như ý túc.<br>
+<span lang="pi" class="pali">
+‘abhāvitā kho me cattāro iddhipādā’ti, tena, sāriputta, bhikkhunā catunnaṁ iddhipādānaṁ bhāvanāya vāyamitabbaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Nếu Tỷ-kheo, này Sāriputta, trong khi suy tư được biết như sau:<br>
+<span lang="pi" class="pali">
+Sace pana, sāriputta, bhikkhu paccavekkhamāno evaṁ jānāti:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Ta đã tu tập tứ như ý túc’, thời này Sāriputta, Tỷ-kheo ấy cần phải an trú trong hỷ và hân hoan ngày đêm tu học trong các thiện pháp.<br>
+<span lang="pi" class="pali">
+‘bhāvitā kho me cattāro iddhipādā’ti, tena, sāriputta, bhikkhunā teneva pītipāmojjena vihātabbaṁ ahorattānusikkhinā kusalesu dhammesu.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Lại nữa, này Sāriputta, Tỷ-kheo cần phải suy tư:<br>
+<span lang="pi" class="pali">
+Puna caparaṁ, sāriputta, bhikkhunā iti paṭisañcikkhitabbaṁ:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Ta đã tu tập năm căn chưa?’<br>
+<span lang="pi" class="pali">
+‘bhāvitāni nu kho me pañcindriyānī’ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Nếu Tỷ-kheo, này Sāriputta, trong khi suy tư được biết như sau:<br>
+<span lang="pi" class="pali">
+Sace, sāriputta, bhikkhu paccavekkhamāno evaṁ jānāti:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Ta chưa tu tập Năm căn’, thời này Sāriputta, Tỷ-kheo ấy cần phải tinh tấn tu tập Năm căn.<br>
+<span lang="pi" class="pali">
+‘abhāvitāni kho me pañcindriyānī’ti, tena, sāriputta, bhikkhunā pañcannaṁ indriyānaṁ bhāvanāya vāyamitabbaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Nếu Tỷ-kheo, này Sāriputta, trong khi suy tư được biết như sau:<br>
+<span lang="pi" class="pali">
+Sace pana, sāriputta, bhikkhu paccavekkhamāno evaṁ jānāti:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Ta đã tu tập năm căn’, thời này Sāriputta, Tỷ-kheo ấy cần phải an trú trong hỷ và hân hoan ngày đêm tu học trong các thiện pháp.<br>
+<span lang="pi" class="pali">
+‘bhāvitāni kho me pañcindriyānī’ti, tena, sāriputta, bhikkhunā teneva pītipāmojjena vihātabbaṁ ahorattānusikkhinā kusalesu dhammesu.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Nhưng nếu, này Sāriputta, Tỷ-kheo trong khi suy tư được biết như sau:<br>
+<span lang="pi" class="pali">
+Puna caparaṁ, sāriputta, bhikkhunā iti paṭisañcikkhitabbaṁ:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Ta đã tu tập năm lực chưa?’<br>
+<span lang="pi" class="pali">
+‘bhāvitāni nu kho me pañca balānī’ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Nếu Tỷ-kheo, này Sāriputta, trong khi suy tư được biết như sau:<br>
+<span lang="pi" class="pali">
+Sace, sāriputta, bhikkhu paccavekkhamāno evaṁ jānāti:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Ta chưa tu tập năm lực’, thời này Sāriputta, Tỷ-kheo ấy cần phải tinh tấn tu tập năm lực.<br>
+<span lang="pi" class="pali">
+‘abhāvitāni kho me pañca balānī’ti, tena, sāriputta, bhikkhunā pañcannaṁ balānaṁ bhāvanāya vāyamitabbaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Nếu Tỷ-kheo, này Sāriputta, trong khi suy tư được biết như sau:<br>
+<span lang="pi" class="pali">
+Sace pana, sāriputta, bhikkhu paccavekkhamāno evaṁ jānāti:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Ta đã tu tập năm lực’, thời này Sāriputta, Tỷ-kheo ấy cần phải an trú trong hỷ và hân hoan ngày đêm tu học trong các thiện pháp.<br>
+<span lang="pi" class="pali">
+‘bhāvitāni kho me pañca balānī’ti, tena, sāriputta, bhikkhunā teneva pītipāmojjena vihātabbaṁ ahorattānusikkhinā kusalesu dhammesu.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Lại nữa, này Sāriputta, Tỷ-kheo cần phải suy tư:<br>
+<span lang="pi" class="pali">
+Puna caparaṁ, sāriputta, bhikkhunā iti paṭisañcikkhitabbaṁ:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Ta đã tu tập bảy giác chi chưa?”<br>
+<span lang="pi" class="pali">
+‘bhāvitā nu kho me satta bojjhaṅgā’ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Lại nữa, này Sāriputta, Tỷ-kheo cần phải suy tư như sau:<br>
+<span lang="pi" class="pali">
+Sace, sāriputta, bhikkhu paccavekkhamāno evaṁ jānāti:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Ta chưa tu tập bảy giác chi’, thời này Sāriputta, Tỷ-kheo ấy cần phải tinh tấn tu tập Bảy giác chi.<br>
+<span lang="pi" class="pali">
+‘abhāvitā kho me satta bojjhaṅgā’ti, tena, sāriputta, bhikkhunā sattannaṁ bojjhaṅgānaṁ bhāvanāya vāyamitabbaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Nếu Tỷ-kheo, này Sāriputta, trong khi suy tư được biết như sau:<br>
+<span lang="pi" class="pali">
+Sace pana, sāriputta, bhikkhu paccavekkhamāno evaṁ jānāti:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Ta đã tu tập bảy giác chi’, thời này Sāriputta, Tỷ-kheo ấy cần phải an trú trong hỷ và hân hoan ngày đêm tu học trong các thiện pháp.<br>
+<span lang="pi" class="pali">
+‘bhāvitā kho me satta bojjhaṅgā’ti, tena, sāriputta, bhikkhunā teneva pītipāmojjena vihātabbaṁ ahorattānusikkhinā kusalesu dhammesu.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Lại nữa, này Sāriputta, Tỷ-kheo cần phải suy tư:<br>
+<span lang="pi" class="pali">
+Puna caparaṁ, sāriputta, bhikkhunā iti paṭisañcikkhitabbaṁ:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Ta đã tu tập Thánh đạo Tám ngành chưa?’<br>
+<span lang="pi" class="pali">
+‘bhāvito nu kho me ariyo aṭṭhaṅgiko maggo’ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Nếu Tỷ-kheo, này Sāriputta, trong khi suy tư được biết như sau:<br>
+<span lang="pi" class="pali">
+Sace, sāriputta, bhikkhu paccavekkhamāno evaṁ jānāti:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Ta chưa tu tập Thánh đạo Tám ngành’, thời này Sāriputta, Tỷ-kheo ấy cần phải tinh tấn tu tập Thánh đạo Tám ngành.<br>
+<span lang="pi" class="pali">
+‘abhāvito kho me ariyo aṭṭhaṅgiko maggo’ti, tena, sāriputta, bhikkhunā ariyassa aṭṭhaṅgikassa maggassa bhāvanāya vāyamitabbaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Nếu Tỷ-kheo, này Sāriputta, trong khi suy tư được biết như sau:<br>
+<span lang="pi" class="pali">
+Sace pana, sāriputta, bhikkhu paccavekkhamāno evaṁ jānāti:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Ta đã tu tập Thánh đạo Tám ngành’, thời này Sāriputta, Tỷ-kheo ấy cần phải an trú trong hỷ và hân hoan ngày đêm tu học trong các thiện pháp.<br>
+<span lang="pi" class="pali">
+‘bhāvito kho me ariyo aṭṭhaṅgiko maggo’ti, tena, sāriputta, bhikkhunā teneva pītipāmojjena vihātabbaṁ ahorattānusikkhinā kusalesu dhammesu.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Lại nữa, này Sāriputta, Tỷ-kheo cần phải suy tư: ‘Ta đã tu tập Chỉ và Quán chưa?’<br>
+<span lang="pi" class="pali">
+Puna caparaṁ, sāriputta, bhikkhunā iti paṭisañcikkhitabbaṁ: ‘bhāvitā nu kho me samatho ca vipassanā cā’ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Nếu Tỷ-kheo, này Sāriputta, trong khi suy tư được biết như sau:<br>
+<span lang="pi" class="pali">
+Sace, sāriputta, bhikkhu paccavekkhamāno evaṁ jānāti:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Ta chưa tu tập Chỉ và Quán’, thời này Sāriputta, Tỷ-kheo ấy cần phải tinh tấn tu tập Chỉ và Quán.<br>
+<span lang="pi" class="pali">
+‘abhāvitā kho me samatho ca vipassanā cā’ti, tena, sāriputta, bhikkhunā samathavipassanānaṁ bhāvanāya vāyamitabbaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Nhưng nếu, này các Tỷ-kheo, Tỷ-kheo trong khi suy tư được biết như sau:<br>
+<span lang="pi" class="pali">
+Sace pana, sāriputta, bhikkhu paccavekkhamāno evaṁ jānāti:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Ta đã tu tập Chỉ và Quán’, thời này Sāriputta, Tỷ-kheo ấy cần phải an trú với hỷ và hân hoan ngày đêm tu học trong các thiện pháp.<br>
+<span lang="pi" class="pali">
+‘bhāvitā kho me samatho ca vipassanā cā’ti, tena, sāriputta, bhikkhunā teneva pītipāmojjena vihātabbaṁ ahorattānusikkhinā kusalesu dhammesu.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Lại nữa, này Sāriputta, Tỷ-kheo cần phải suy tư như sau: ‘Ta đã chứng ngộ minh và giải thoát chưa?’<br>
+<span lang="pi" class="pali">
+Puna caparaṁ, sāriputta, bhikkhunā iti paṭisañcikkhitabbaṁ: ‘sacchikatā nu kho me vijjā ca vimutti cā’ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Nếu Tỷ-kheo, này Sāriputta, trong khi suy tư được biết như sau:<br>
+<span lang="pi" class="pali">
+Sace, sāriputta, bhikkhu paccavekkhamāno evaṁ jānāti:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Ta chưa chứng ngộ minh và giải thoát’, thời này Sāriputta, Tỷ-kheo ấy cần phải tinh tấn tu tập minh và giải thoát.<br>
+<span lang="pi" class="pali">
+‘asacchikatā kho me vijjā ca vimutti cā’ti, tena, sāriputta, bhikkhunā vijjāya vimuttiyā sacchikiriyāya vāyamitabbaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Nhưng nếu, này Sāriputta, Tỷ-kheo trong khi suy tư được biết như sau:<br>
+<span lang="pi" class="pali">
+Sace pana, sāriputta, bhikkhu paccavekkhamāno evaṁ jānāti:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Ta đã chứng ngộ minh và giải thoát’, thời này Sāriputta, Tỷ-kheo ấy cần phải an trú với hỷ và hân hoan ngày đêm tu học trong các thiện pháp.<br>
+<span lang="pi" class="pali">
+‘sacchikatā kho me vijjā ca vimutti cā’ti, tena, sāriputta, bhikkhunā teneva pītipāmojjena vihātabbaṁ ahorattānusikkhinā kusalesu dhammesu.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Sāriputta, những Sa-môn hay Bà-la-môn nào trong thời quá khứ đã làm cho khất thực được thanh tịnh, tất cả những vị ấy đã làm cho khất thực được thanh tịnh bằng cách suy tư, suy tư như vậy.<br>
+<span lang="pi" class="pali">
+Ye hi keci, sāriputta, atītamaddhānaṁ samaṇā vā brāhmaṇā vā piṇḍapātaṁ parisodhesuṁ, sabbe te evameva paccavekkhitvā paccavekkhitvā piṇḍapātaṁ parisodhesuṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Sāriputta, những Sa-môn hay Bà-la-môn nào trong thời gian tương lai sẽ làm cho khất thực được thanh tịnh, tất cả những vị ấy sẽ làm cho khất thực được thanh tịnh, bằng cách suy tư, suy tư như vậy.<br>
+<span lang="pi" class="pali">
+Yepi hi keci, sāriputta, anāgatamaddhānaṁ samaṇā vā brāhmaṇā vā piṇḍapātaṁ parisodhessanti, sabbe te evameva paccavekkhitvā paccavekkhitvā piṇḍapātaṁ parisodhessanti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Và này Sāriputta, những Sa-môn, Bà-la-môn nào trong thời hiện tại, làm cho khất thực được thanh tịnh, tất cả những vị ấy đã làm cho khất thực được thanh tịnh, bằng cách suy tư, suy tư như vậy.<br>
+<span lang="pi" class="pali">
+Yepi hi keci, sāriputta, etarahi samaṇā vā brāhmaṇā vā piṇḍapātaṁ parisodhenti, sabbe te evameva paccavekkhitvā paccavekkhitvā piṇḍapātaṁ parisodhenti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vậy này Sāriputta, các Ông cần phải học tập như sau: ‘Sau khi suy tư, suy tư, chúng ta sẽ làm cho khất thực được thanh tịnh’.<br>
+<span lang="pi" class="pali">
+Tasmātiha, sāriputta, ‘paccavekkhitvā paccavekkhitvā piṇḍapātaṁ parisodhessāmā’ti—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Sāriputta, các Ông phải tu tập như vậy.<br>
+<span lang="pi" class="pali">
+evañhi vo, sāriputta, sikkhitabban”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Thế Tôn thuyết giảng như vậy. Tôn giả Sāriputta hoan hỷ tín thọ lời Thế Tôn dạy.<br>
+<span lang="pi" class="pali">
+Idamavoca bhagavā. Attamano āyasmā sāriputto bhagavato bhāsitaṁ abhinandīti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+<span lang="pi" class="vi">
+Piṇḍapātapārisuddhisuttaṁ niṭṭhitaṁ navamaṁ.<br>
+</span>
+</p>
+
+
+
+<!-- COPY CONTENT SUTTA Ở ĐÂY -->
+
+
+
+<br>
+<p><p style="text-align: right;font-style: italic;">Hoà Thượng Thích Minh Châu dịch Việt</span></p>
+
+
+
+
+
+
+
+
+</section>  <!-- End English and Pali -->
+<div id="nextprev"><a id="previous-sutta" href="./mn150.html#content"></a><a id="next-sutta" href="./mn152.html#content"></a></div>
+</div>  <!--End Content -->
+</div>  <!-- End Page -->
+
+
+
+
+
+
+<footer>
+					 <!-- End bottom links -->
+</footer>
+
+
+ 
+ <!-- Scripts -->
+
+ <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      if (typeof enablePaliLookup === "function") {
+        enablePaliLookup();
+      } else {
+        console.error("enablePaliLookup is not defined");
+      }
+    });
+  </script>
+
+ <script>
+ // Script to open and close sidebar
+ 	function w3_open() {
+ 	document.getElementById("mySidebar").style.display = "block";
+ 	}
+ 		function w3_close() {
+ 		document.getElementById("mySidebar").style.display = "none";
+ 	}
+ </script>
+ <script>
+ 		var app = document.getElementsByTagName("BODY")[0];
+ 		if (localStorage.lightMode == "dark") {
+ 			app.setAttribute("light-mode", "dark");
+ 	}
+ </script>
+ 
+ <script>
+ 		function toggle_light_mode() {
+ 			var app = document.getElementsByTagName("BODY")[0];
+ 				if (localStorage.lightMode == "dark") {
+ 			localStorage.lightMode = "light";
+ 			app.setAttribute("light-mode", "light");
+ 		} else {
+ 					localStorage.lightMode = "dark";
+ 					app.setAttribute("light-mode", "dark");
+ 	}
+ 		}
+ 
+ 		window.addEventListener("storage", function () {
+ 			if (localStorage.lightMode == "dark") {
+ 				app.setAttribute("light-mode", "dark");
+ 				} else {
+ 				app.setAttribute("light-mode", "light");
+ 		}
+ 		}, false);
+ 
+ </script>
+ <script src="../js/footer.js"></script><script src="../js/dpd_deconstructor.js"></script><script src="../js/dpd_ebts.js"></script><script src="../js/dpd_i2h.js"></script>
+ <script src="/sw.js"></script>
+ </body>
+ </html>

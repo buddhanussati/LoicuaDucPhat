@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+ 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+ 	<link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+ 	<meta name="viewport" content="width=device-width, initial-scale=1">
+		<!-- Loading manifest -->
+	<link rel="manifest" href="../manifest.json">
+ 	<!-- Loading main and menu stylesheets -->
+ 	<link rel="stylesheet" href="../css/w3.css">
+ 	<link rel="stylesheet" href="../css/css.css">
+ 	<link rel="stylesheet" href="../css/menu.css">
+ 	<script src="../js/jquery-1.10.2.min.js"></script>
+ 	<script src="../js/controlpanel.js"></script>
+ 	<script src="../js/mousetrap.min.js"></script>
+    <script src="../js/pali-lookup-standalone.js"></script>
+
+ <script src="../js/suttaFiles.js"></script>
+<script>
+ // Script to open random Sutta
+ function openRandomSutta() {
+  const randomIndex = Math.floor(Math.random() * suttaFiles.length);
+  const selectedFile = suttaFiles[randomIndex];
+
+  // Get root path of your site 
+  const currentPath = location.pathname;
+  const rootPath = currentPath.split("/").slice(0, -2).join("/") + "/";
+
+  // Redirect to the correct file
+  window.location.href = rootPath + selectedFile;
+}
+</script>
+
+
+</head>
+ <body class="container">
+ <div class="header-background">
+ <!-- Header -->
+ <div class="w3-header w3-content w3-padding w3-left-align bwcontainer">
+ 	<div class="centered">
+ 		<button class="light-mode-button" aria-label="Bật Chế Độ Sáng" onclick="toggle_light_mode()">
+ 			<span></span>
+ 			<span></span>
+ 		</button>
+ 		<span class="box-lbl">Sáng/Tối</span>
+ 	</div> <!-- Centered -->
+ 		<a href="../home/index.html" id="bwlogo"><img src="../images/headerlogo.png" alt="Logo Lời Của Đức Phật" class="w3-image"></a>
+ 		<div class="w3-bar bwcontainer">
+ 			<div id="searchlinks">
+ 			<a href="../home/visearch.html"><span class="w3-bar-item"><i class="fa fa-search"></i>&nbsp;Tìm Tiếng Việt</span></a>
+ 			<a href="../home/palisearch.html"><span class="w3-bar-item"><i class="fa fa-search"></i>&nbsp;Tìm Tiếng Pali</span></a>
+ 			</div><!-- End Searchlinks div -->
+ 			<div class="help"><span><a href="../home/help.html"><img src="../images/help_icon.png" title="Trợ Giúp" alt="Help"></a></span></div>
+ 		</div> <!-- End w3-bar bwcontainer --> 	</div> <!-- End w3-header w3-content w3-padding w3-left-align bwcontainer -->
+ </div> <!-- End header-background -->
+ <!-- Top menu -->
+
+ <div class="w3-main w3-white bwcontainer2">
+ 	<div class="w3-button w3-padding-8 w3-left w3-hide-large" onclick="w3_open()">☰</div>
+ 		<div id="navbar" class="w3-hide-small w3-hide-medium bwcontainer3">
+ 			<ul id="css3menu0">
+ 				<li class="topfirst" id="home"><a href="../home/index.html" class="w3-hide-small">Trang Chủ</a></li>
+  				<li class="topmenu" id="dn"><a href="../dn/dn.html" class="pressed w3-hide-small">Trường Bộ Kinh</a></li>
+ 				<li class="topmenu" id="mn"><a href="../mn/mn.html" class="w3-hide-small">Trung Bộ Kinh</a></li>
+ 				<li class="topmenu" id="sn"><a href="../sn/sn.html" class="w3-hide-small"><i class="fa fa-caret-down"></i>&nbsp;Tương Ưng Bộ Kinh</a>
+ 					<ul>
+ 						<li><a href="../sn/sn01.html" class="w3-hide-small">Tập I - Thiên Có Kệ</a></li>
+ 						<li><a href="../sn/sn02.html" class="w3-hide-small">Tập II - Thiên Nhân Duyên</a></li>
+ 						<li><a href="../sn/sn03.html" class="w3-hide-small">Tập III - Thiên Uẩn</a></li>
+ 						<li><a href="../sn/sn04.html" class="w3-hide-small">Tập IV - Thiên Sáu Xứ</a></li>
+ 						<li><a href="../sn/sn05.html" class="w3-hide-small">Tập V - Thiên Ðại Phẩm</a></li>
+ 					</ul>
+ 				<li class="topmenu" id="an"><a href="../an/an.html" class="w3-hide-small"><i class="fa fa-caret-down"></i>&nbsp;Tăng Chi Bộ Kinh</a>
+ 					<ul>
+ 						<li><a href="../an/an1.html" class="w3-hide-small">Chương Một Pháp</a></li>
+ 						<li><a href="../an/an2.html" class="w3-hide-small">Chương Hai Pháp</a></li>
+ 						<li><a href="../an/an3.html" class="w3-hide-small">Chương Ba Pháp</a></li>
+ 						<li><a href="../an/an4.html" class="w3-hide-small">Chương Bốn Pháp</a></li>
+ 						<li><a href="../an/an5.html" class="w3-hide-small">Chương Năm Pháp</a></li>
+ 						<li><a href="../an/an6.html" class="w3-hide-small">Chương Sáu Pháp</a></li>
+ 						<li><a href="../an/an7.html" class="w3-hide-small">Chương Bảy Pháp</a></li>
+ 						<li><a href="../an/an8.html" class="w3-hide-small">Chương Tám Pháp</a></li>
+ 						<li><a href="../an/an9.html" class="w3-hide-small">Chương Chín Pháp</a></li>
+ 						<li><a href="../an/an10.html" class="w3-hide-small">Chương Mười Pháp</a></li>
+ 						<li><a href="../an/an11.html" class="w3-hide-small">Chương Mười Một Pháp</a></li>
+ 					</ul>
+ 				</li>
+ 				<li class="topmenu" id="kn"><a href="../kn/kn.html" class="w3-hide-small"><i class="fa fa-caret-down"></i>&nbsp;Tiểu Bộ Kinh</a>
+ 					<ul>
+ 						<li><a href="../kp/kp.html" class="w3-hide-small">Kinh Tiểu Tụng</a></li>
+ 						<li><a href="../dhp/dhp.html" class="w3-hide-small">Kinh Pháp Cú</a></li>
+ 						<li><a href="../snp/snp.html" class="w3-hide-small">Kinh Tập</a></li>
+ 						<li><a href="../ud/ud.html" class="w3-hide-small">Kinh Phật Tự Thuyết</a></li>
+ 						<li><a href="../it/it.html" class="w3-hide-small">Kinh Phật Thuyết Như Vậy</a></li>
+ 						<li><a href="../tha/tha.html" class="w3-hide-small">Trưởng Lão Tăng Kệ</a></li>
+ 						<li><a href="../thi/thi.html" class="w3-hide-small">Trưởng Lão Ni Kệ</a></li>
+ 					</ul>
+ 				</li>
+				<li class="toplast" id="rd"><a href="../rd/rd.html" class="w3-hide-small"></i>Kinh Ngẫu Nhiên Theo Nhóm</a>
+ 					</ul>
+ 				</li>
+ 			</ul>
+ 			</div>
+ 		</div> <!--navbar-->
+
+<!-- Sidebar (hidden by default) -->
+ <nav class="w3-sidebar w3-bar-block w3-card w3-border w3-top w3-animate-left w3-hide-large" id="mySidebar">
+ 	<a href="javascript:void(0)" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-times fa-2x red-color"></i>&nbsp;&nbsp;&nbsp;Close</a><!-- Hides the sidebar when clicked -->
+ 		<div class="w3-bar-block w3-white">
+ 			<a href="../home/index.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-home fa-lg"></i>&nbsp;&nbsp;&nbsp;Home</a>
+ 			<a href="../guide/guide.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Guide</a>
+ 			<a href="../dn/dn.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Trường Bộ Kinh</a>
+ 			<a href="../mn/mn.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Trung Bộ Kinh</a>
+ 			<a href="../sn/sn.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Tương Ưng Bộ Kinh</a>
+ 			<a href="../an/an.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Tăng Chi Bộ Kinh
+ 			<a href="../kn/kn.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Tiểu Bộ Kinh</a>
+			<a href="../rd/rd.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>Kinh Ngẫu Nhiên Theo Nhóm</a>
+ 		</div>
+ </nav>
+ 
+ 
+ 
+   <!-- !PAGE CONTENT! --> 
+<div class="w3-main w3-content w3-padding w3-left-align bwcontainer4">
+<div id="content">
+<h2>Majjhima Nikāya - Trung Bộ Kinh</h2>
+<h5><span style="font-style: italic;">Hoà Thượng Thích Minh Châu dịch Việt</span></h5>
+
+</div>
+
+<br>
+ 	<title>        Trung Bộ 124          </title>
+
+<p lang="vi" class="vi"; style="text-align: center">
+Trung Bộ 124<br>
+<span lang="pi" class="pali">
+Majjhima Nikāya 124<br>
+</span>
+</p>
+
+
+
+<p lang="vi" class="vi"; style="text-align: center">
+Kinh Bakkula<br>
+<span lang="pi" class="pali">
+Bākulasutta<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Như vầy tôi nghe.<br>
+<span lang="pi" class="pali">
+Evaṁ me sutaṁ—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Một thời Tôn giả Bakkula trú ở Vương Xá, Trúc Lâm, tại chỗ nuôi dưỡng các loài sóc.<br>
+<span lang="pi" class="pali">
+ekaṁ samayaṁ āyasmā bākulo rājagahe viharati veḷuvane kalandakanivāpe.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Rồi lõa thể Kassapa, một người bạn trước kia của Tôn giả Bakkula khi còn là cư sĩ, đi đến Tôn giả Bakkula, sau khi đến, nói lên với Tôn giả Bakkula những lời chào đón hỏi thăm; sau khi nói lên những lời chào đón hỏi thăm thân hữu rồi ngồi xuống một bên. Ngồi xuống một bên, lõa thể Kassapa nói với Tôn giả Bakkula:<br>
+<span lang="pi" class="pali">
+Atha kho acelakassapo āyasmato bākulassa purāṇagihisahāyo yenāyasmā bākulo tenupasaṅkami; upasaṅkamitvā āyasmatā bākulena saddhiṁ sammodi. Sammodanīyaṁ kathaṁ sāraṇīyaṁ vītisāretvā ekamantaṁ nisīdi. Ekamantaṁ nisinno kho acelakassapo āyasmantaṁ bākulaṁ etadavoca:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Này Hiền giả Bakkula, hiền giả xuất gia đã bao lâu?”<br>
+<span lang="pi" class="pali">
+“Kīvaciraṁ pabbajitosi, āvuso bākulā”ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Ðã được tám mươi năm, này Hiền giả, từ khi tôi xuất gia.”<br>
+<span lang="pi" class="pali">
+“Asīti me, āvuso, vassāni pabbajitassā”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Hiền giả Bakkula, trong tám mươi năm ấy, đã bao nhiêu lần, Hiền giả hành dâm dục?”<br>
+<span lang="pi" class="pali">
+“Imehi pana te, āvuso bākula, asītiyā vassehi katikkhattuṁ methuno dhammo paṭisevito”ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Hiền giả Kassapa, chớ có hỏi tôi như vậy:<br>
+<span lang="pi" class="pali">
+“Na kho maṁ, āvuso kassapa, evaṁ pucchitabbaṁ:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Hiền giả Kassapa, trong tám mươi năm ấy, đã bao nhiều lần Hiền giả hành dâm dục?’<br>
+<span lang="pi" class="pali">
+‘imehi pana te, āvuso bākula, asītiyā vassehi katikkhattuṁ methuno dhammo paṭisevito’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Hiền giả Kassapa, hãy hỏi tôi như sau:<br>
+<span lang="pi" class="pali">
+Evañca kho maṁ, āvuso kassapa, pucchitabbaṁ:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Hiền giả Bakkula, trong tám mươi năm ấy, đã bao nhiêu lần Hiền giả khởi lên dục tưởng’?”<br>
+<span lang="pi" class="pali">
+‘imehi pana te, āvuso bākula, asītiyā vassehi katikkhattuṁ kāmasaññā uppannapubbā’”ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Hiền giả Bakkula, trong tám mươi năm ấy, đã bao nhiêu lần, Hiền giả khởi lên dục tưởng?”<br>
+<span lang="pi" class="pali">
+(…)<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Hiền giả Kassapa, trong tám mươi năm từ khi tôi xuất gia, tôi không bao giờ nhận thấy có dục tưởng khởi lên.”<br>
+<span lang="pi" class="pali">
+“Asīti me, āvuso, vassāni pabbajitassa nābhijānāmi kāmasaññaṁ uppannapubbaṁ”.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Vì rằng Tôn giả Bakkula trong tám mươi năm không nhận thấy có dục tưởng khởi lên, chúng tôi thọ trì sự việc này là một hy hữu, một vị tằng hữu của Tôn giả Bakkula.”<br>
+<span lang="pi" class="pali">
+“Yampāyasmā bākulo asītiyā vassehi nābhijānāti kāmasaññaṁ uppannapubbaṁ idampi mayaṁ āyasmato bākulassa acchariyaṁ abbhutadhammaṁ dhārema”.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Này Hiền giả, trong tám mươi năm từ khi tôi xuất gia, tôi không bao giờ nhận thấy có sân tưởng, hại tưởng khởi lên.”<br>
+<span lang="pi" class="pali">
+“Asīti me, āvuso, vassāni pabbajitassa nābhijānāmi byāpādasaññaṁ …pe… vihiṁsāsaññaṁ uppannapubbaṁ”.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Vì rằng Tôn giả Bakkula trong tám mươi năm không nhận thấy có sân tưởng, hại tưởng khởi lên, chúng tôi thọ trì sự việc này là một hy hữu, một vị tằng hữu của Tôn giả Bakkula.”<br>
+<span lang="pi" class="pali">
+“Yampāyasmā bākulo asītiyā vassehi nābhijānāti vihiṁsāsaññaṁ uppannapubbaṁ, idampi mayaṁ āyasmato bākulassa acchariyaṁ abbhutadhammaṁ dhārema”.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Này Hiền giả, trong tám mươi năm từ khi tôi xuất gia, tôi không nhận thấy dục tầm nào khởi lên.”<br>
+<span lang="pi" class="pali">
+“Asīti me, āvuso, vassāni pabbajitassa nābhijānāmi kāmavitakkaṁ uppannapubbaṁ”.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Vì rằng Tôn giả… một vị tằng hữu của Tôn giả Bakkula.”<br>
+<span lang="pi" class="pali">
+“Yampāyasmā bākulo asītiyā vassehi nābhijānāti kāmavitakkaṁ uppannapubbaṁ, idampi mayaṁ āyasmato bākulassa acchariyaṁ abbhutadhammaṁ dhārema”.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Này Hiền giả, trong tám mươi năm từ khi tôi xuất gia, tôi không nhận thấy sân tầm, hại tầm, nào khởi lên.”<br>
+<span lang="pi" class="pali">
+“Asīti me, āvuso, vassāni pabbajitassa nābhijānāmi byāpādavitakkaṁ …pe… vihiṁsāvitakkaṁ uppannapubbaṁ”.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Vì rằng Tôn giả… một vị tằng hữu của Tôn giả Bakkula.”<br>
+<span lang="pi" class="pali">
+“Yampāyasmā bākulo asītiyā vassehi nābhijānāti vihiṁsāvitakkaṁ uppannapubbaṁ, idampi mayaṁ āyasmato bākulassa acchariyaṁ abbhutadhammaṁ dhārema”.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Này Hiền giả, trong tám mươi năm từ khi tôi xuất gia, tôi không nhận thấy có thâu nhận y của cư sĩ.<br>
+<span lang="pi" class="pali">
+“Asīti me, āvuso, vassāni pabbajitassa nābhijānāmi gahapaticīvaraṁ sāditā”.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Vì rằng Tôn giả.. một vị tằng hữu của Tôn giả Bakkula.”<br>
+<span lang="pi" class="pali">
+“Yampāyasmā bākulo asītiyā vassehi nābhijānāti gahapaticīvaraṁ sāditā, idampi mayaṁ āyasmato bākulassa acchariyaṁ abbhutadhammaṁ dhārema”.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Này Hiền giả, trong tám mươi năm từ khi tôi xuất gia, tôi không nhận thấy có cắt y với con dao.”<br>
+<span lang="pi" class="pali">
+“Asīti me, āvuso, vassāni pabbajitassa nābhijānāmi satthena cīvaraṁ chinditā”.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Vì rằng Tôn giả… một vị tằng hữu của Tôn giả Bakkula.”<br>
+<span lang="pi" class="pali">
+“Yampāyasmā bākulo asītiyā vassehi nābhijānāti satthena cīvaraṁ chinditā …pe… dhārema”.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Này Hiền giả, trong tám mươi năm từ khi tôi xuất gia, tôi không nhận thấy có may y với cây kim.<br>
+<span lang="pi" class="pali">
+“Asīti me, āvuso, vassāni pabbajitassa nābhijānāmi sūciyā cīvaraṁ sibbitā …pe…<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Hiền giả, trong tám mươi năm trừ khi tôi xuất gia, tôi không nhận thấy có nhuộm y với thuốc nhuộm<br>
+<span lang="pi" class="pali">
+nābhijānāmi rajanena cīvaraṁ rajitā …<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Hiền giả, trong tám mươi năm từ khi tôi xuất gia, tôi không nhận thấy có may y kathina.<br>
+<span lang="pi" class="pali">
+nābhijānāmi kathine cīvaraṁ sibbitā …<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Hiền giả, trong tám mươi năm từ khi tôi xuất gia, tôi không nhận thấy có may y cho các vị đồng Phạm hạnh…<br>
+<span lang="pi" class="pali">
+nābhijānāmi sabrahmacārīnaṁ cīvarakamme vicāritā …<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+có nhận lời mời ăn…<br>
+<span lang="pi" class="pali">
+nābhijānāmi nimantanaṁ sāditā …<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+có khởi lên tâm như sau:<br>
+<span lang="pi" class="pali">
+nābhijānāmi evarūpaṁ cittaṁ uppannapubbaṁ:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Mong rằng có người mời tôi ăn’ …<br>
+<span lang="pi" class="pali">
+‘aho vata maṁ koci nimanteyyā’ti …<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Hiền giả, trong tám mươi năm từ khi tôi xuất gia, tôi không nhận thấy có ngồi trong nhà..<br>
+<span lang="pi" class="pali">
+nābhijānāmi antaraghare nisīditā …<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+có ngồi ăn trong nhà…<br>
+<span lang="pi" class="pali">
+nābhijānāmi antaraghare bhuñjitā …<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+có ghi nhận chi tiết các tướng đặc biệt của nữ nhân…<br>
+<span lang="pi" class="pali">
+nābhijānāmi mātugāmassa anubyañjanaso nimittaṁ gahetā …<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+có thuyết pháp cho nữ nhân cho đến câu kệ bốn câu…<br>
+<span lang="pi" class="pali">
+nābhijānāmi mātugāmassa dhammaṁ desitā antamaso catuppadampi gāthaṁ …<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+có đi đến trú phòng Tỷ-kheo-ni…<br>
+<span lang="pi" class="pali">
+nābhijānāmi bhikkhunupassayaṁ upasaṅkamitā …<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+có thuyết pháp cho Tỷ-kheo-ni….<br>
+<span lang="pi" class="pali">
+nābhijānāmi bhikkhuniyā dhammaṁ desitā …<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Tôi không nhận thấy có thuyết pháp cho học pháp nữ…<br>
+<span lang="pi" class="pali">
+nābhijānāmi sikkhamānāya dhammaṁ desitā …<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Tôi không nhận thấy có thuyết pháp cho Sa-di-ni …<br>
+<span lang="pi" class="pali">
+nābhijānāmi sāmaṇeriyā dhammaṁ desitā …<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Hiền giả, trong tám mươi năm từ khi tôi xuất gia, tôi không bao giờ nhận thấy có xuất gia (cho ai)…<br>
+<span lang="pi" class="pali">
+nābhijānāmi pabbājetā …<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+có thọ đại giới (cho ai)…<br>
+<span lang="pi" class="pali">
+nābhijānāmi upasampādetā …<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+có nhận làm y chỉ (cho ai)…<br>
+<span lang="pi" class="pali">
+nābhijānāmi nissayaṁ dātā …<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+tôi không bao giờ nhận thấy có Sa-di hầu hạ…<br>
+<span lang="pi" class="pali">
+nābhijānāmi sāmaṇeraṁ upaṭṭhāpetā …<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+có tắm trong nhà tắm…<br>
+<span lang="pi" class="pali">
+nābhijānāmi jantāghare nhāyitā …<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+có tắm thoa bột Cuṇṇa …<br>
+<span lang="pi" class="pali">
+nābhijānāmi cuṇṇena nhāyitā …<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+có nhờ đồng Phạm hạnh xoa bóp chân tay…<br>
+<span lang="pi" class="pali">
+nābhijānāmi sabrahmacārīgattaparikamme vicāritā …<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+tôi không bao giờ nhận thấy có bệnh khởi lên, dầu cho một chốc lát…<br>
+<span lang="pi" class="pali">
+nābhijānāmi ābādhaṁ uppannapubbaṁ, antamaso gaddūhanamattampi …<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+có mang theo y dược cho đến một miếng nhỏ từ cây a-li-lặc vàng (haritakikhanda)…<br>
+<span lang="pi" class="pali">
+nābhijānāmi bhesajjaṁ upaharitā, antamaso haritakikhaṇḍampi …<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+nằm dựa đầu …<br>
+<span lang="pi" class="pali">
+nābhijānāmi apassenakaṁ apassayitā …<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+nằm dài xuống giường.”<br>
+<span lang="pi" class="pali">
+nābhijānāmi seyyaṁ kappetā”.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Vì rằng Tôn giả.. một vị tằng hữu của Tôn giả Bakkula.”<br>
+<span lang="pi" class="pali">
+“Yampāyasmā …pe… dhārema”.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Này Hiền giả, trong tám mươi năm từ khi tôi xuất gia, tôi không nhận thấy có đi an cư mùa mưa tại trú xứ gần làng.”<br>
+<span lang="pi" class="pali">
+“Asīti me, āvuso, vassāni pabbajitassa nābhijānāmi gāmantasenāsane vassaṁ upagantā”.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Vì rằng Tôn giả Bakkula, trong tám mươi năm không nhận thấy có đi an cư mùa mưa tại trú xứ gần làng, chúng tôi thọ trì sự việc này là một hy hữu, một vị tằng hữu của Tôn giả Bakkula.”<br>
+<span lang="pi" class="pali">
+“Yampāyasmā bākulo asītiyā vassehi nābhijānāti gāmantasenāsane vassaṁ upagantā, idampi mayaṁ āyasmato bākulassa acchariyaṁ abbhutadhammaṁ dhārema”.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Vừa đúng trong bảy ngày, này Hiền giả, còn uế nhiễm, tôi đã ăn đồ ăn của nội địa, rồi đến ngày thứ tám, chánh trí khởi lên.<br>
+<span lang="pi" class="pali">
+“Sattāhameva kho ahaṁ, āvuso, saraṇo raṭṭhapiṇḍaṁ bhuñjiṁ; atha aṭṭhamiyaṁ aññā udapādi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vì rằng Tôn giả Bakkula vừa đúng trong bảy ngày, còn uế nhiễm, đã ăn đồ ăn của nội địa, rồi đến ngày thứ tám chánh trí khởi lên, chúng tôi thọ trì sự việc này là một hy hữu, một vị tằng hữu của Tôn giả Bakkula.<br>
+<span lang="pi" class="pali">
+Yampāyasmā bākulo sattāhameva saraṇo raṭṭhapiṇḍaṁ bhuñji; atha aṭṭhamiyaṁ aññā udapādi idampi mayaṁ āyasmato bākulassa acchariyaṁ abbhutadhammaṁ dhārema.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Thưa Hiền giả Bakkula, hãy cho tôi xuất gia trong Pháp và Luật này, hãy cho tôi thọ đại giới.”<br>
+<span lang="pi" class="pali">
+Labheyyāhaṁ, āvuso bākula, imasmiṁ dhammavinaye pabbajjaṁ, labheyyaṁ upasampadan”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Rồi lõa thể Kassapa được xuất gia trong Pháp và Luật này, được thọ đại giới.<br>
+<span lang="pi" class="pali">
+Alattha kho acelakassapo imasmiṁ dhammavinaye pabbajjaṁ, alattha upasampadaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Thọ đại giới không bao lâu, Tôn giả Kassapa, an trú độc cư, viễn ly, không phóng dật, nhiệt tâm, tinh cần, không bao lâu với thượng trí tự mình chứng ngộ, chứng đắc và an trú ngay trong hiện tại vô thượng cứu cánh Phạm hạnh mà vì mục đích ấy các Thiện nam tử chân chánh xuất gia, từ bỏ gia đình, sống không gia đình hướng đến.<br>
+<span lang="pi" class="pali">
+Acirūpasampanno panāyasmā kassapo eko vūpakaṭṭho appamatto ātāpī pahitatto viharanto nacirasseva—yassatthāya kulaputtā sammadeva agārasmā anagāriyaṁ pabbajanti, tadanuttaraṁ—brahmacariyapariyosānaṁ diṭṭheva dhamme sayaṁ abhiññā sacchikatvā upasampajja vihāsi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vị ấy biết “Sanh đã tận, Phạm hạnh đã thành, những gì cần làm đã làm, không còn trở lại trạng thái này nữa”.<br>
+<span lang="pi" class="pali">
+“Khīṇā jāti, vusitaṁ brahmacariyaṁ, kataṁ karaṇīyaṁ, nāparaṁ itthattāyā”ti abbhaññāsi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Và Tôn giả Kassapa trở thành một A-la-hán nữa.<br>
+<span lang="pi" class="pali">
+Aññataro kho panāyasmā kassapo arahataṁ ahosi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Rồi Tôn giả Bakkula, sau một thời gian, cầm chìa khóa, đi từ trú xứ này đến trú xứ khác và nói như sau:<br>
+<span lang="pi" class="pali">
+Atha kho āyasmā bākulo aparena samayena avāpuraṇaṁ ādāya vihārena vihāraṁ upasaṅkamitvā evamāha:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Chư Tôn giả hãy đi ra! Chư Tôn giả hãy đi ra! Hôm nay tôi sẽ nhập Niết-bàn.”<br>
+<span lang="pi" class="pali">
+“abhikkamathāyasmanto, abhikkamathāyasmanto. Ajja me parinibbānaṁ bhavissatī”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Vì rằng Tôn giả Bakkula cầm chìa khóa, đi từ trú xứ này đến trú xứ khác và nói như sau: ‘Chư Tôn giả hãy đi ra! Chư Tôn giả hãy đi ra! Hôm nay tôi sẽ nhập Niết-bàn’; chúng tôi thọ trì sự việc này là một hy hữu, một vị tằng hữu của Tôn giả Bakkula.”<br>
+<span lang="pi" class="pali">
+“Yampāyasmā bākulo avāpuraṇaṁ ādāya vihārena vihāraṁ upasaṅkamitvā evamāha: ‘abhikkamathāyasmanto, abhikkamathāyasmanto; ajja me parinibbānaṁ bhavissatī’ti, idampi mayaṁ āyasmato bākulassa acchariyaṁ abbhutadhammaṁ dhārema”.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Rồi Tôn giả Bakkula ngồi giữa chúng Tỷ-kheo nhập Niết-bàn.<br>
+<span lang="pi" class="pali">
+Āyasmā bākulo majjhe bhikkhusaṅghassa nisinnakova parinibbāyi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Vì rằng Tôn giả Bakkula ngồi giữa chúng Tỷ-kheo nhập Niết-bàn, chúng tôi thọ trì sự việc này là một hy hữu, một vị tằng hữu của Tôn giả Bakkula.”<br>
+<span lang="pi" class="pali">
+“Yampāyasmā bākulo majjhe bhikkhusaṅghassa nisinnakova parinibbāyi, idampi mayaṁ āyasmato bākulassa acchariyaṁ abbhutadhammaṁ dhāremā”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+<span lang="pi" class="vi">
+Bākulasuttaṁ niṭṭhitaṁ catutthaṁ.<br>
+</span>
+</p>
+
+
+
+<!-- COPY CONTENT SUTTA Ở ĐÂY -->
+
+
+
+<br>
+<p><p style="text-align: right;font-style: italic;">Hoà Thượng Thích Minh Châu dịch Việt</span></p>
+
+
+
+
+
+
+
+
+</section>  <!-- End English and Pali -->
+<div id="nextprev"><a id="previous-sutta" href="./mn123.html#content"></a><a id="next-sutta" href="./mn125.html#content"></a></div>
+</div>  <!--End Content -->
+</div>  <!-- End Page -->
+
+
+
+
+
+
+<footer>
+					 <!-- End bottom links -->
+</footer>
+
+
+ 
+ <!-- Scripts -->
+
+ <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      if (typeof enablePaliLookup === "function") {
+        enablePaliLookup();
+      } else {
+        console.error("enablePaliLookup is not defined");
+      }
+    });
+  </script>
+
+ <script>
+ // Script to open and close sidebar
+ 	function w3_open() {
+ 	document.getElementById("mySidebar").style.display = "block";
+ 	}
+ 		function w3_close() {
+ 		document.getElementById("mySidebar").style.display = "none";
+ 	}
+ </script>
+ <script>
+ 		var app = document.getElementsByTagName("BODY")[0];
+ 		if (localStorage.lightMode == "dark") {
+ 			app.setAttribute("light-mode", "dark");
+ 	}
+ </script>
+ 
+ <script>
+ 		function toggle_light_mode() {
+ 			var app = document.getElementsByTagName("BODY")[0];
+ 				if (localStorage.lightMode == "dark") {
+ 			localStorage.lightMode = "light";
+ 			app.setAttribute("light-mode", "light");
+ 		} else {
+ 					localStorage.lightMode = "dark";
+ 					app.setAttribute("light-mode", "dark");
+ 	}
+ 		}
+ 
+ 		window.addEventListener("storage", function () {
+ 			if (localStorage.lightMode == "dark") {
+ 				app.setAttribute("light-mode", "dark");
+ 				} else {
+ 				app.setAttribute("light-mode", "light");
+ 		}
+ 		}, false);
+ 
+ </script>
+ <script src="../js/footer.js"></script><script src="../js/dpd_deconstructor.js"></script><script src="../js/dpd_ebts.js"></script><script src="../js/dpd_i2h.js"></script>
+ <script src="/sw.js"></script>
+ </body>
+ </html>

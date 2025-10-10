@@ -1,0 +1,1414 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+ 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+ 	<link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+ 	<meta name="viewport" content="width=device-width, initial-scale=1">
+		<!-- Loading manifest -->
+	<link rel="manifest" href="../manifest.json">
+ 	<!-- Loading main and menu stylesheets -->
+ 	<link rel="stylesheet" href="../css/w3.css">
+ 	<link rel="stylesheet" href="../css/css.css">
+ 	<link rel="stylesheet" href="../css/menu.css">
+ 	<script src="../js/jquery-1.10.2.min.js"></script>
+ 	<script src="../js/controlpanel.js"></script>
+ 	<script src="../js/mousetrap.min.js"></script>
+    <script src="../js/pali-lookup-standalone.js"></script>
+
+ <script src="../js/suttaFiles.js"></script>
+<script>
+ // Script to open random Sutta
+ function openRandomSutta() {
+  const randomIndex = Math.floor(Math.random() * suttaFiles.length);
+  const selectedFile = suttaFiles[randomIndex];
+
+  // Get root path of your site 
+  const currentPath = location.pathname;
+  const rootPath = currentPath.split("/").slice(0, -2).join("/") + "/";
+
+  // Redirect to the correct file
+  window.location.href = rootPath + selectedFile;
+}
+</script>
+
+
+</head>
+ <body class="container">
+ <div class="header-background">
+ <!-- Header -->
+ <div class="w3-header w3-content w3-padding w3-left-align bwcontainer">
+ 	<div class="centered">
+ 		<button class="light-mode-button" aria-label="Bật Chế Độ Sáng" onclick="toggle_light_mode()">
+ 			<span></span>
+ 			<span></span>
+ 		</button>
+ 		<span class="box-lbl">Sáng/Tối</span>
+ 	</div> <!-- Centered -->
+ 		<a href="../home/index.html" id="bwlogo"><img src="../images/headerlogo.png" alt="Logo Lời Của Đức Phật" class="w3-image"></a>
+ 		<div class="w3-bar bwcontainer">
+ 			<div id="searchlinks">
+ 			<a href="../home/visearch.html"><span class="w3-bar-item"><i class="fa fa-search"></i>&nbsp;Tìm Tiếng Việt</span></a>
+ 			<a href="../home/palisearch.html"><span class="w3-bar-item"><i class="fa fa-search"></i>&nbsp;Tìm Tiếng Pali</span></a>
+ 			</div><!-- End Searchlinks div -->
+ 			<div class="help"><span><a href="../home/help.html"><img src="../images/help_icon.png" title="Trợ Giúp" alt="Help"></a></span></div>
+ 		</div> <!-- End w3-bar bwcontainer --> 	</div> <!-- End w3-header w3-content w3-padding w3-left-align bwcontainer -->
+ </div> <!-- End header-background -->
+ <!-- Top menu -->
+
+ <div class="w3-main w3-white bwcontainer2">
+ 	<div class="w3-button w3-padding-8 w3-left w3-hide-large" onclick="w3_open()">☰</div>
+ 		<div id="navbar" class="w3-hide-small w3-hide-medium bwcontainer3">
+ 			<ul id="css3menu0">
+ 				<li class="topfirst" id="home"><a href="../home/index.html" class="w3-hide-small">Trang Chủ</a></li>
+  				<li class="topmenu" id="dn"><a href="../dn/dn.html" class="pressed w3-hide-small">Trường Bộ Kinh</a></li>
+ 				<li class="topmenu" id="mn"><a href="../mn/mn.html" class="w3-hide-small">Trung Bộ Kinh</a></li>
+ 				<li class="topmenu" id="sn"><a href="../sn/sn.html" class="w3-hide-small"><i class="fa fa-caret-down"></i>&nbsp;Tương Ưng Bộ Kinh</a>
+ 					<ul>
+ 						<li><a href="../sn/sn01.html" class="w3-hide-small">Tập I - Thiên Có Kệ</a></li>
+ 						<li><a href="../sn/sn02.html" class="w3-hide-small">Tập II - Thiên Nhân Duyên</a></li>
+ 						<li><a href="../sn/sn03.html" class="w3-hide-small">Tập III - Thiên Uẩn</a></li>
+ 						<li><a href="../sn/sn04.html" class="w3-hide-small">Tập IV - Thiên Sáu Xứ</a></li>
+ 						<li><a href="../sn/sn05.html" class="w3-hide-small">Tập V - Thiên Ðại Phẩm</a></li>
+ 					</ul>
+ 				<li class="topmenu" id="an"><a href="../an/an.html" class="w3-hide-small"><i class="fa fa-caret-down"></i>&nbsp;Tăng Chi Bộ Kinh</a>
+ 					<ul>
+ 						<li><a href="../an/an1.html" class="w3-hide-small">Chương Một Pháp</a></li>
+ 						<li><a href="../an/an2.html" class="w3-hide-small">Chương Hai Pháp</a></li>
+ 						<li><a href="../an/an3.html" class="w3-hide-small">Chương Ba Pháp</a></li>
+ 						<li><a href="../an/an4.html" class="w3-hide-small">Chương Bốn Pháp</a></li>
+ 						<li><a href="../an/an5.html" class="w3-hide-small">Chương Năm Pháp</a></li>
+ 						<li><a href="../an/an6.html" class="w3-hide-small">Chương Sáu Pháp</a></li>
+ 						<li><a href="../an/an7.html" class="w3-hide-small">Chương Bảy Pháp</a></li>
+ 						<li><a href="../an/an8.html" class="w3-hide-small">Chương Tám Pháp</a></li>
+ 						<li><a href="../an/an9.html" class="w3-hide-small">Chương Chín Pháp</a></li>
+ 						<li><a href="../an/an10.html" class="w3-hide-small">Chương Mười Pháp</a></li>
+ 						<li><a href="../an/an11.html" class="w3-hide-small">Chương Mười Một Pháp</a></li>
+ 					</ul>
+ 				</li>
+ 				<li class="topmenu" id="kn"><a href="../kn/kn.html" class="w3-hide-small"><i class="fa fa-caret-down"></i>&nbsp;Tiểu Bộ Kinh</a>
+ 					<ul>
+ 						<li><a href="../kp/kp.html" class="w3-hide-small">Kinh Tiểu Tụng</a></li>
+ 						<li><a href="../dhp/dhp.html" class="w3-hide-small">Kinh Pháp Cú</a></li>
+ 						<li><a href="../snp/snp.html" class="w3-hide-small">Kinh Tập</a></li>
+ 						<li><a href="../ud/ud.html" class="w3-hide-small">Kinh Phật Tự Thuyết</a></li>
+ 						<li><a href="../it/it.html" class="w3-hide-small">Kinh Phật Thuyết Như Vậy</a></li>
+ 						<li><a href="../tha/tha.html" class="w3-hide-small">Trưởng Lão Tăng Kệ</a></li>
+ 						<li><a href="../thi/thi.html" class="w3-hide-small">Trưởng Lão Ni Kệ</a></li>
+ 					</ul>
+ 				</li>
+				<li class="toplast" id="rd"><a href="../rd/rd.html" class="w3-hide-small"></i>Kinh Ngẫu Nhiên Theo Nhóm</a>
+ 					</ul>
+ 				</li>
+ 			</ul>
+ 			</div>
+ 		</div> <!--navbar-->
+
+<!-- Sidebar (hidden by default) -->
+ <nav class="w3-sidebar w3-bar-block w3-card w3-border w3-top w3-animate-left w3-hide-large" id="mySidebar">
+ 	<a href="javascript:void(0)" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-times fa-2x red-color"></i>&nbsp;&nbsp;&nbsp;Close</a><!-- Hides the sidebar when clicked -->
+ 		<div class="w3-bar-block w3-white">
+ 			<a href="../home/index.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-home fa-lg"></i>&nbsp;&nbsp;&nbsp;Home</a>
+ 			<a href="../guide/guide.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Guide</a>
+ 			<a href="../dn/dn.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Trường Bộ Kinh</a>
+ 			<a href="../mn/mn.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Trung Bộ Kinh</a>
+ 			<a href="../sn/sn.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Tương Ưng Bộ Kinh</a>
+ 			<a href="../an/an.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Tăng Chi Bộ Kinh
+ 			<a href="../kn/kn.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Tiểu Bộ Kinh</a>
+			<a href="../rd/rd.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>Kinh Ngẫu Nhiên Theo Nhóm</a>
+ 		</div>
+ </nav>
+ 
+ 
+ 
+   <!-- !PAGE CONTENT! --> 
+<div class="w3-main w3-content w3-padding w3-left-align bwcontainer4">
+<div id="content">
+<h2>Majjhima Nikāya - Trung Bộ Kinh</h2>
+<h5><span style="font-style: italic;">Hoà Thượng Thích Minh Châu dịch Việt</span></h5>
+
+</div>
+
+<br>
+ 	<title>        Trung Bộ 105          </title>
+
+<p lang="vi" class="vi"; style="text-align: center">
+Trung Bộ 105<br>
+<span lang="pi" class="pali">
+Majjhima Nikāya 105<br>
+</span>
+</p>
+
+
+<p lang="vi" class="vi"; style="text-align: center">
+Kinh Sunakkhatta<br>
+<span lang="pi" class="pali">
+Sunakkhattasutta<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Như vầy tôi nghe.<br>
+<span lang="pi" class="pali">
+Evaṁ me sutaṁ—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Một thời Thế Tôn trú tại Vesālī (Tỳ-xá-ly), ở Ðại Lâm, tại Trùng Các giảng đường (Kutagarasala).<br>
+<span lang="pi" class="pali">
+ekaṁ samayaṁ bhagavā vesāliyaṁ viharati mahāvane kūṭāgārasālāyaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Lúc bấy giờ nhiều Tỷ-kheo, trước mặt Thế Tôn tuyên bố đã chứng trí giác:<br>
+<span lang="pi" class="pali">
+Tena kho pana samayena sambahulehi bhikkhūhi bhagavato santike aññā byākatā hoti:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Chúng tôi biết rằng sanh đã tận, Phạm hạnh đã thành, những điều nên làm đã làm, không còn trở lại trạng thái này nữa”.<br>
+<span lang="pi" class="pali">
+“‘khīṇā jāti, vusitaṁ brahmacariyaṁ, kataṁ karaṇīyaṁ, nāparaṁ itthattāyā’ti pajānāmā”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Sunakkhatta Licchaviputta (Thiện Tinh Ly-xa Tử) được nghe:<br>
+<span lang="pi" class="pali">
+Assosi kho sunakkhatto licchaviputto:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Nhiều Tỷ-kheo, trước mặt Thế Tôn tuyên bố đã chứng trí giác:<br>
+<span lang="pi" class="pali">
+“sambahulehi kira bhikkhūhi bhagavato santike aññā byākatā hoti:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Chúng tôi biết rằng sanh đã tận, Phạm hạnh đã thành, những điều nên làm đã làm, không còn trở lại trạng thái này nữa’”.<br>
+<span lang="pi" class="pali">
+‘khīṇā jāti, vusitaṁ brahmacariyaṁ, kataṁ karaṇīyaṁ, nāparaṁ itthattāyāti pajānāmā’”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Rồi Sunakkhatta Licchaviputta đi đến chỗ Thế Tôn, sau khi đến, đảnh lễ Thế Tôn rồi ngồi xuống một bên. Ngồi xuống một bên, Sunakkhatta Licchaviputta bạch Thế Tôn:<br>
+<span lang="pi" class="pali">
+Atha kho sunakkhatto licchaviputto yena bhagavā tenupasaṅkami; upasaṅkamitvā bhagavantaṁ abhivādetvā ekamantaṁ nisīdi. Ekamantaṁ nisinno kho sunakkhatto licchaviputto bhagavantaṁ etadavoca:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Bạch Thế Tôn, con có được nghe như sau:<br>
+<span lang="pi" class="pali">
+“sutaṁ metaṁ, bhante:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Nhiều Tỷ-kheo, trước mặt Thế Tôn tuyên bố đã chứng trí giác:<br>
+<span lang="pi" class="pali">
+‘sambahulehi kira bhikkhūhi bhagavato santike aññā byākatā—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Chúng tôi biết rằng sanh đã tận, Phạm hạnh đã thành, những điều nên làm đã làm, không còn trở lại trạng thái này nữa’”.<br>
+<span lang="pi" class="pali">
+khīṇā jāti, vusitaṁ brahmacariyaṁ, kataṁ karaṇīyaṁ, nāparaṁ itthattāyāti pajānāmā’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Bạch Thế Tôn, không biết các Tỷ-kheo ấy đã tuyên bố một cách chơn chánh chứng trí giác, hay ở đây có một số Tỷ-kheo, vì tăng thượng mạn đã tuyên bố chứng trí giác?<br>
+<span lang="pi" class="pali">
+Ye te, bhante, bhikkhū bhagavato santike aññaṁ byākaṁsu: ‘khīṇā jāti, vusitaṁ brahmacariyaṁ, kataṁ karaṇīyaṁ, nāparaṁ itthattāyāti pajānāmā’ti, kacci te, bhante, bhikkhū sammadeva aññaṁ byākaṁsu udāhu santetthekacce bhikkhū adhimānena aññaṁ byākaṁsū”ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Này Sunakkhatta, những vị Tỷ-kheo trước mặt Ta đã tuyên bố chứng trí giác:<br>
+<span lang="pi" class="pali">
+“Ye te, sunakkhatta, bhikkhū mama santike aññaṁ byākaṁsu:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Chúng tôi biết rằng, sanh đã tận, Phạm hạnh đã thành, những việc nên làm đã làm, không còn trở lại trạng thái này nữa’.<br>
+<span lang="pi" class="pali">
+‘khīṇā jāti, vusitaṁ brahmacariyaṁ, kataṁ karaṇīyaṁ, nāparaṁ itthattāyāti pajānāmā’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ở đây, có một số Tỷ-kheo đã chơn chánh tuyên bố chứng trí giác; nhưng ở đây, cũng có một số Tỷ-kheo chính vì tăng thượng mạn, đã tuyên bố chứng trí giác.<br>
+<span lang="pi" class="pali">
+Santetthekacce bhikkhū sammadeva aññaṁ byākaṁsu, santi panidhekacce bhikkhū adhimānenapi aññaṁ byākaṁsu.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ở đây, này Sunakkhatta, những vị Tỷ-kheo nào đã chơn chánh tuyên bố chứng trí giác, thời đối với các vị ấy, thật là đúng như vậy.<br>
+<span lang="pi" class="pali">
+Tatra, sunakkhatta, ye te bhikkhū sammadeva aññaṁ byākaṁsu tesaṁ taṁ tatheva hoti;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Nhưng đối với các vị Tỷ-kheo nào, vì tăng thượng mạn đã tuyên bố chứng tri giác, ở đây, này Sunakkhatta, Như Lai nghĩ như sau:<br>
+<span lang="pi" class="pali">
+ye pana te bhikkhū adhimānena aññaṁ byākaṁsu tatra, sunakkhatta, tathāgatassa evaṁ hoti:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Ta hãy thuyết pháp cho những vị ấy’.<br>
+<span lang="pi" class="pali">
+‘dhammaṁ nesaṁ desessan’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Và như vậy, ở đây, này Sunakkhatta, Như Lai suy nghĩ:<br>
+<span lang="pi" class="pali">
+Evañcettha, sunakkhatta, tathāgatassa hoti:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Ta hãy thuyết pháp cho những vị ấy’.<br>
+<span lang="pi" class="pali">
+‘dhammaṁ nesaṁ desessan’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Nhưng ở đây, nếu có một số người ngu si, bày đặt câu hỏi, đến hỏi Như Lai;<br>
+<span lang="pi" class="pali">
+Atha ca panidhekacce moghapurisā pañhaṁ abhisaṅkharitvā abhisaṅkharitvā tathāgataṁ upasaṅkamitvā pucchanti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+ở đây, này Sunakkhatta, Như Lai suy nghĩ như sau:<br>
+<span lang="pi" class="pali">
+Tatra, sunakkhatta, yampi tathāgatassa evaṁ hoti:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Ta hãy thuyết pháp cho những người ấy’. Như Lai suy nghĩ như vậy, không có làm khác.<br>
+<span lang="pi" class="pali">
+‘dhammaṁ nesaṁ desessan’ti tassapi hoti aññathattan”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Nay đã đúng thời để thuyết pháp, bạch Thế Tôn! Nay đã đúng thời để thuyết pháp, bạch Thiện Thệ!<br>
+<span lang="pi" class="pali">
+“Etassa bhagavā kālo, etassa sugata kālo,<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Thế Tôn thuyết pháp như thế nào, sau khi nghe Thế Tôn xong, các Tỷ-kheo sẽ thọ trì.”<br>
+<span lang="pi" class="pali">
+yaṁ bhagavā dhammaṁ deseyya. Bhagavato sutvā bhikkhū dhāressantī”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Vậy này Sunakkhatta, hãy nghe và khéo tác ý kỹ, Ta sẽ giảng.”<br>
+<span lang="pi" class="pali">
+“Tena hi, sunakkhatta, suṇāhi, sādhukaṁ manasi karohi; bhāsissāmī”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Thưa vâng, bạch Thế Tôn”. Sunakkhatta Licchaviputta vâng đáp Thế Tôn. Thế Tôn nói như sau:<br>
+<span lang="pi" class="pali">
+“Evaṁ, bhante”ti kho sunakkhatto licchaviputto bhagavato paccassosi. Bhagavā etadavoca—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Sunakkhatta, có năm dục trưởng dưỡng này. Thế nào là năm?<br>
+<span lang="pi" class="pali">
+Pañca kho ime, sunakkhatta, kāmaguṇā. Katame pañca?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Các sắc do mắt nhận thức, khả ái, khả hỷ, khả lạc, khả ý, liên hệ đến dục, hấp dẫn;<br>
+<span lang="pi" class="pali">
+Cakkhuviññeyyā rūpā iṭṭhā kantā manāpā piyarūpā kāmūpasaṁhitā rajanīyā,<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+các tiếng do tai nhận thức… ;<br>
+<span lang="pi" class="pali">
+sotaviññeyyā saddā …pe…<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+các hương do mũi nhận thức… ;<br>
+<span lang="pi" class="pali">
+ghānaviññeyyā gandhā …<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+các vị do lưỡi nhận thức… ;<br>
+<span lang="pi" class="pali">
+jivhāviññeyyā rasā …<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+các xúc do thân cảm xúc khả ái, khả hỷ, khả lạc, khả ý, liên hệ đến dục, hấp dẫn.<br>
+<span lang="pi" class="pali">
+kāyaviññeyyā phoṭṭhabbā iṭṭhā kantā manāpā piyarūpā kāmūpasaṁhitā rajanīyā—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Sunakkhatta, những pháp này là năm dục trưởng dưỡng.<br>
+<span lang="pi" class="pali">
+ime kho, sunakkhatta, pañca kāmaguṇā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Nhưng này Sunakkhatta, sự tình này xảy ra khi ở đây có số người thiên nặng về vật chất thế gian.<br>
+<span lang="pi" class="pali">
+Ṭhānaṁ kho panetaṁ, sunakkhatta, vijjati yaṁ idhekacco purisapuggalo lokāmisādhimutto assa.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ðối với người thiên nặng về vật chất thế gian, này Sunakkhatta, câu chuyện (thích hợp với người ấy) phải tùy thuộc như thế nào để phù hợp với điều người ấy suy tầm và suy tư, và người ấy chỉ giao thiệp với người nào người ấy thích thú.<br>
+<span lang="pi" class="pali">
+Lokāmisādhimuttassa kho, sunakkhatta, purisapuggalassa tappatirūpī ceva kathā saṇṭhāti, tadanudhammañca anuvitakketi, anuvicāreti, tañca purisaṁ bhajati, tena ca vittiṁ āpajjati;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Nhưng nếu câu chuyện chỉ nói liên hệ đến bất động, thời người ấy không nghe, không lóng tai, và tâm không an trú vào trí giác. Và người ấy không giao thiệp với người mà người ấy không thích thú.<br>
+<span lang="pi" class="pali">
+āneñjapaṭisaṁyuttāya ca pana kathāya kacchamānāya na sussūsati, na sotaṁ odahati, na aññā cittaṁ upaṭṭhāpeti, na ca taṁ purisaṁ bhajati, na ca tena vittiṁ āpajjati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ví như, này Sunakkhatta, có người đã lâu không trú ở trong làng hay thị trấn của mình,<br>
+<span lang="pi" class="pali">
+Seyyathāpi, sunakkhatta, puriso sakamhā gāmā vā nigamā vā ciravippavuttho assa.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+và có thể thấy một người vừa mới từ làng ấy hay thị trấn ấy lại.<br>
+<span lang="pi" class="pali">
+So aññataraṁ purisaṁ passeyya tamhā gāmā vā nigamā vā acirapakkantaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Người này sẽ hỏi người ấy về sự an ninh của làng hay thị trấn ấy, về đồ ăn uống sung túc và về ít bệnh tật,<br>
+<span lang="pi" class="pali">
+So taṁ purisaṁ tassa gāmassa vā nigamassa vā khematañca subhikkhatañca appābādhatañca puccheyya;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+và người ấy sẽ nói cho người này biết về sự an ổn của làng hay thị trấn ấy, về đồ ăn uống sung túc và về ít bệnh tật.<br>
+<span lang="pi" class="pali">
+tassa so puriso tassa gāmassa vā nigamassa vā khematañca subhikkhatañca appābādhatañca saṁseyya.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Sunakkhatta, Ông nghĩ thế nào?<br>
+<span lang="pi" class="pali">
+Taṁ kiṁ maññasi, sunakkhatta,<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Có phải người này sẽ nghe người kia, lóng tai, tâm an trú vào trí giác và người này sẽ giao thiệp với người ấy mà người này thích thú?”<br>
+<span lang="pi" class="pali">
+api nu so puriso tassa purisassa sussūseyya, sotaṁ odaheyya, aññā cittaṁ upaṭṭhāpeyya, tañca purisaṁ bhajeyya, tena ca vittiṁ āpajjeyyā”ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Thưa phải vậy, bạch Thế Tôn.”<br>
+<span lang="pi" class="pali">
+“Evaṁ, bhante”.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Cũng vậy, này Sunakkhatta, sự tình này xảy ra khi ở đây có số người thiên nặng về vật chất thế gian.<br>
+<span lang="pi" class="pali">
+“Evameva kho, sunakkhatta, ṭhānametaṁ vijjati yaṁ idhekacco purisapuggalo lokāmisādhimutto assa.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ðối với người thiên nặng về vật chất thế gian, này Sunakkhatta, câu chuyện thích hợp với người ấy phải tùy thuộc như thế nào để phù hợp với điều người ấy suy tầm và suy tư, và người ấy chỉ giao thiệp với người mà người ấy thích thú.<br>
+<span lang="pi" class="pali">
+Lokāmisādhimuttassa kho, sunakkhatta, purisapuggalassa tappatirūpī ceva kathā saṇṭhāti, tadanudhammañca anuvitakketi, anuvicāreti, tañca purisaṁ bhajati, tena ca vittiṁ āpajjati;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Nhưng nếu câu chuyện chỉ nói liên hệ đến Bất động, thời người ấy không nghe, không lóng tai và tâm không an trú vào thượng trí, và người ấy không giao thiệp với người mà người ấy không thích thú.<br>
+<span lang="pi" class="pali">
+āneñjapaṭisaṁyuttāya ca pana kathāya kacchamānāya na sussūsati, na sotaṁ odahati, na aññā cittaṁ upaṭṭhāpeti, na ca taṁ purisaṁ bhajati, na ca tena vittiṁ āpajjati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Người ấy cần được hiểu như vầy: ‘Là hạng người thiên nặng về vật chất thế gian’.<br>
+<span lang="pi" class="pali">
+So evamassa veditabbo: ‘āneñjasaṁyojanena hi kho visaṁyutto lokāmisādhimutto purisapuggalo’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Sunakkhatta, sự tình này xảy ra, khi một số người thiên nặng về Bất động.<br>
+<span lang="pi" class="pali">
+Ṭhānaṁ kho panetaṁ, sunakkhatta, vijjati yaṁ idhekacco purisapuggalo āneñjādhimutto assa.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ðối với người thiên nặng về Bất động, này Sunakkhatta, câu chuyện thích hợp (với người ấy) phải tùy thuộc như thế nào để phù hợp với điều người ấy suy tầm và suy tư, và người ấy chỉ giao thiệp với người mà người ấy thích thú.<br>
+<span lang="pi" class="pali">
+Āneñjādhimuttassa kho, sunakkhatta, purisapuggalassa tappatirūpī ceva kathā saṇṭhāti, tadanudhammañca anuvitakketi, anuvicāreti, tañca purisaṁ bhajati, tena ca vittiṁ āpajjati;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Nhưng nếu câu chuyện chỉ nói liên hệ đến vật chất thế gian, thời người ấy không nghe, không lóng tai và tâm không an trú vào thượng trí, và người ấy không giao thiệp với người mà người ấy không thích thú.<br>
+<span lang="pi" class="pali">
+lokāmisapaṭisaṁyuttāya ca pana kathāya kacchamānāya na sussūsati, na sotaṁ odahati, na aññā cittaṁ upaṭṭhāpeti, na ca taṁ purisaṁ bhajati, na ca tena vittiṁ āpajjati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ví như, này Sunakkhatta, một lá vàng khô đã rời khỏi cành, không còn xanh trở lại;<br>
+<span lang="pi" class="pali">
+Seyyathāpi, sunakkhatta, paṇḍupalāso bandhanā pavutto abhabbo haritattāya;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+cũng vậy, này Sunakkhatta, đối với hạng người thiên nặng về Bất động, đã rời khỏi kiết sử vật chất thế gian.<br>
+<span lang="pi" class="pali">
+evameva kho, sunakkhatta, āneñjādhimuttassa purisapuggalassa ye lokāmisasaṁyojane se pavutte.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Người ấy cần được hiểu như sau:<br>
+<span lang="pi" class="pali">
+So evamassa veditabbo:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Ðây là hạng người không liên hệ với kiết sử vật chất thế gian, thiên nặng về Bất động’.<br>
+<span lang="pi" class="pali">
+‘lokāmisasaṁyojanena hi kho visaṁyutto āneñjādhimutto purisapuggalo’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Sunakkhatta, sự tình này xảy ra. Ở đây, có một số người thiên nặng về Vô sở hữu.<br>
+<span lang="pi" class="pali">
+Ṭhānaṁ kho panetaṁ, sunakkhatta, vijjati yaṁ idhekacco purisapuggalo ākiñcaññāyatanādhimutto assa.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ðối với người thiên nặng về Vô sở hữu, này Sunakkhatta, câu chuyện thích hợp với người ấy phải tùy thuộc như thế nào để phù hợp với điều người ấy suy tầm và suy tư, và người ấy chỉ giao thiệp với người mà người ấy thích thú.<br>
+<span lang="pi" class="pali">
+Ākiñcaññāyatanādhimuttassa kho, sunakkhatta, purisapuggalassa tappatirūpī ceva kathā saṇṭhāti, tadanudhammañca anuvitakketi, anuvicāreti, tañca purisaṁ bhajati, tena ca vittiṁ āpajjati;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Nhưng nếu câu chuyện chỉ nói liên hệ đến Bất động, thời người ấy không nghe, không lóng tai, và tâm không an trú vào trí giác, và người ấy không giao thiệp với người mà người ấy không thích thú.<br>
+<span lang="pi" class="pali">
+āneñjapaṭisaṁyuttāya ca pana kathāya kacchamānāya na sussūsati, na sotaṁ odahati, na aññā cittaṁ upaṭṭhāpeti, na ca taṁ purisaṁ bhajati, na ca tena vittiṁ āpajjati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ví như, này Sunakkhatta, một hòn đá bị vỡ làm đôi không thể nối liền lại được;<br>
+<span lang="pi" class="pali">
+Seyyathāpi, sunakkhatta, puthusilā dvedhābhinnā appaṭisandhikā hoti;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+cũng vậy, này Sunakkhatta, đối với hạng người thiên nặng về Vô sở hữu, đã bị chặt đứt khỏi kiết sử Bất động,<br>
+<span lang="pi" class="pali">
+evameva kho, sunakkhatta, ākiñcaññāyatanādhimuttassa purisapuggalassa ye āneñjasaṁyojane se bhinne.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+người ấy cần được hiểu như sau:<br>
+<span lang="pi" class="pali">
+So evamassa veditabbo:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Ðây là hạng người không liên hệ với kiết sử Bất động, thiên nặng về Vô sở hữu’.<br>
+<span lang="pi" class="pali">
+‘āneñjasaṁyojanena hi kho visaṁyutto ākiñcaññāyatanādhimutto purisapuggalo’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Sunakkhatta, sự tình này xảy ra. Ở đây, có một số người thiên nặng về Phi tưởng phi phi tưởng xứ.<br>
+<span lang="pi" class="pali">
+Ṭhānaṁ kho panetaṁ, sunakkhatta, vijjati yaṁ idhekacco purisapuggalo nevasaññānāsaññāyatanādhimutto assa.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ðối với người thiên nặng về Phi tưởng phi phi tưởng xứ, này Sunakkhatta, câu chuyện thích hợp với người ấy phải tùy thuộc như thế nào để phù hợp với điều người ấy suy tầm và suy tư, và người ấy chỉ giao thiệp với người mà người ấy thích thú.<br>
+<span lang="pi" class="pali">
+Nevasaññānāsaññāyatanādhimuttassa kho, sunakkhatta, purisapuggalassa tappatirūpī ceva kathā saṇṭhāti, tadanudhammañca anuvitakketi, anuvicāreti, tañca purisaṁ bhajati, tena ca vittiṁ āpajjati;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Nhưng nếu câu chuyện chỉ nói liên hệ đến Vô sở hữu xứ, thời người ấy không nghe, không lóng tai, và tâm không an trú vào trí giác, và người ấy không giao thiệp với người mà người ấy không thích thú.<br>
+<span lang="pi" class="pali">
+ākiñcaññāyatanapaṭisaṁyuttāya ca pana kathāya kacchamānāya na sussūsati, na sotaṁ odahati, na aññā cittaṁ upaṭṭhāpeti, na ca taṁ purisaṁ bhajati, na ca tena vittiṁ āpajjati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ví như, này Sunakkhatta, một người đã ăn các món ăn mỹ vị và đã quăng bỏ.<br>
+<span lang="pi" class="pali">
+Seyyathāpi, sunakkhatta, puriso manuññabhojanaṁ bhuttāvī chaḍḍeyya.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Sunakkhatta, Ông nghĩ thế nào?<br>
+<span lang="pi" class="pali">
+Taṁ kiṁ maññasi, sunakkhatta,<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Người ấy có ưa ăn lại món ăn ấy không?”<br>
+<span lang="pi" class="pali">
+api nu tassa purisassa tasmiṁ bhatte puna bhottukamyatā assā”ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Bạch Thế Tôn không”. “Vì sao vậy?”<br>
+<span lang="pi" class="pali">
+“No hetaṁ, bhante”. “Taṁ kissa hetu”?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Vì rằng, bạch Thế Tôn, món ăn ấy được xem là ghê tởm rồi.”<br>
+<span lang="pi" class="pali">
+“Aduñhi, bhante, bhattaṁ paṭikūlasammatan”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Cũng vậy, này Sunakkhatta, đối với hạng người thiên nặng về Phi tưởng phi phi tưởng xứ, đã để một bên kiết sử Vô sở hữu xứ.<br>
+<span lang="pi" class="pali">
+“Evameva kho, sunakkhatta, nevasaññānāsaññāyatanādhimuttassa purisapuggalassa ye ākiñcaññāyatanasaṁyojane se vante.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Người ấy cần được hiểu như sau:<br>
+<span lang="pi" class="pali">
+So evamassa veditabbo:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Ðây là hạng người không liên hệ với kiết sử Vô sở hữu xứ, thiên nặng về Phi tưởng phi phi tưởng xứ’.<br>
+<span lang="pi" class="pali">
+‘ākiñcaññāyatanasaṁyojanena hi kho visaṁyutto nevasaññānāsaññāyatanādhimutto purisapuggalo’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Sunakkhatta sự tình này xảy ra, khi ở đây, có số người thiên nặng về chánh Niết-bàn.<br>
+<span lang="pi" class="pali">
+Ṭhānaṁ kho panetaṁ, sunakkhatta, vijjati yaṁ idhekacco purisapuggalo sammā nibbānādhimutto assa.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ðối với hạng người thiên nặng về chánh Niết-bàn, này Sunakkhatta, câu chuyện thích hợp với người ấy phải tùy thuộc như thế nào để phù hợp với điều người ấy suy tầm và suy tư, và người ấy chỉ giao thiệp với người mà người ấy thích thú.<br>
+<span lang="pi" class="pali">
+Sammā nibbānādhimuttassa kho, sunakkhatta, purisapuggalassa tappatirūpī ceva kathā saṇṭhāti, tadanudhammañca anuvitakketi, anuvicāreti, tañca purisaṁ bhajati, tena ca vittiṁ āpajjati;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Nhưng nếu câu chuyện chỉ nói liên hệ đến Phi tưởng phi phi tưởng xứ, thời người ấy không nghe, không lóng tai, và tâm không an trú vào trí giác. Và người ấy không giao thiệp với người mà người mà ấy không thích.<br>
+<span lang="pi" class="pali">
+nevasaññānāsaññāyatanapaṭisaṁyuttāya ca pana kathāya kacchamānāya na sussūsati, na sotaṁ odahati, na aññā cittaṁ upaṭṭhāpeti, na ca taṁ purisaṁ bhajati, na ca tena vittiṁ āpajjati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ví như, này Sunakkhatta, cây tala ngọn cây đã bị chặt đứt không thể lớn được nữa;<br>
+<span lang="pi" class="pali">
+Seyyathāpi, sunakkhatta, tālo matthakacchinno abhabbo puna viruḷhiyā;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+cũng vậy, này Sunakkhatta, đối với hạng người thiên nặng về chánh Niết-bàn, đã cắt đứt kiết sử Phi tưởng phi phi tưởng xứ, đã cắt đứt từ rễ, làm cho như cây tala không thể tái sanh, không thể khởi lên lại trong tương lai.<br>
+<span lang="pi" class="pali">
+evameva kho, sunakkhatta, sammā nibbānādhimuttassa purisapuggalassa ye nevasaññānāsaññāyatanasaṁyojane se ucchinnamūle tālāvatthukate anabhāvaṅkate āyatiṁ anuppādadhamme.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Người ấy cần phải được hiểu như sau:<br>
+<span lang="pi" class="pali">
+So evamassa veditabbo:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Ðây là hạng người không liên hệ với kiết sử Phi tưởng phi phi tưởng xứ, thiên nặng về chánh Niết-bàn’.<br>
+<span lang="pi" class="pali">
+‘nevasaññānāsaññāyatanasaṁyojanena hi kho visaṁyutto sammā nibbānādhimutto purisapuggalo’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Sunakkhatta, sự tình này xảy ra, khi ở đây, có một số người suy nghĩ như sau:<br>
+<span lang="pi" class="pali">
+Ṭhānaṁ kho panetaṁ, sunakkhatta, vijjati yaṁ idhekaccassa bhikkhuno evamassa:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Tham ái được vị Sa-môn gọi là mũi tên. Thuốc độc vô minh làm não hại con người với dục, tham, sân.<br>
+<span lang="pi" class="pali">
+‘taṇhā kho sallaṁ samaṇena vuttaṁ, avijjāvisadoso, chandarāgabyāpādena ruppati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Mũi tên tham ái đã được ta đoạn diệt; thuốc độc vô minh đã được trừ khử; ta thiên nặng về chánh Niết-bàn’.<br>
+<span lang="pi" class="pali">
+Taṁ me taṇhāsallaṁ pahīnaṁ, apanīto avijjāvisadoso, sammā nibbānādhimuttohamasmī’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vị ấy có thể tự hào với mục đích hiện tại.<br>
+<span lang="pi" class="pali">
+Evaṁmāni assa atathaṁ samānaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vị ấy có thể truy cầu những gì không thích hợp với khuynh hướng chánh Niết-bàn, mắt vị ấy có thể truy cầu sắc không thích hợp, tai có thể truy cầu tiếng không thích hợp, mũi có thể truy cầu hương không thích hợp, lưỡi có thể truy cầu vị không thích hợp, thân có thể truy cầu xúc không thích hợp, ý có thể truy cầu pháp không thích hợp.<br>
+<span lang="pi" class="pali">
+So yāni sammā nibbānādhimuttassa asappāyāni tāni anuyuñjeyya; asappāyaṁ cakkhunā rūpadassanaṁ anuyuñjeyya, asappāyaṁ sotena saddaṁ anuyuñjeyya, asappāyaṁ ghānena gandhaṁ anuyuñjeyya, asappāyaṁ jivhāya rasaṁ anuyuñjeyya, asappāyaṁ kāyena phoṭṭhabbaṁ anuyuñjeyya, asappāyaṁ manasā dhammaṁ anuyuñjeyya.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Khi mắt truy cầu sắc không thích hợp, tai truy cầu tiếng không thích hợp, mũi truy cầu hương không thích hợp, lưỡi truy cầu vị không thích hợp, thân truy cầu xúc không thích hợp, ý truy cầu pháp không thích hợp, thời tham dục nhiễu loạn tâm vị ấy.<br>
+<span lang="pi" class="pali">
+Tassa asappāyaṁ cakkhunā rūpadassanaṁ anuyuttassa, asappāyaṁ sotena saddaṁ anuyuttassa, asappāyaṁ ghānena gandhaṁ anuyuttassa, asappāyaṁ jivhāya rasaṁ anuyuttassa, asappāyaṁ kāyena phoṭṭhabbaṁ anuyuttassa, asappāyaṁ manasā dhammaṁ anuyuttassa rāgo cittaṁ anuddhaṁseyya.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vị ấy do tâm bị tham dục nhiễu loạn đi đến chết hay đi đến khổ gần như chết.<br>
+<span lang="pi" class="pali">
+So rāgānuddhaṁsitena cittena maraṇaṁ vā nigaccheyya maraṇamattaṁ vā dukkhaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ví như, này Sunakkhatta, một người bị mũi tên bắn, tên ấy có tẩm thuốc độc rất dày.<br>
+<span lang="pi" class="pali">
+Seyyathāpi, sunakkhatta, puriso sallena viddho assa savisena gāḷhūpalepanena.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Bạn bè thân hữu, bà con huyết thống người ấy cho mời một y sĩ giải phẫu.<br>
+<span lang="pi" class="pali">
+Tassa mittāmaccā ñātisālohitā bhisakkaṁ sallakattaṁ upaṭṭhāpeyyuṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vị y sĩ giải phẫu ấy có thể cắt xung quanh miệng vết thương với con dao; sau khi cắt xung quanh miệng vết thương với con dao, vị y sĩ giải phẫu có thể dò tìm mũi tên với một vật dụng dò tìm. Sau khi dò tìm mũi tên với một vật dụng dò tìm, y sĩ có thể rút mũi tên ra.<br>
+<span lang="pi" class="pali">
+Tassa so bhisakko sallakatto satthena vaṇamukhaṁ parikanteyya. Satthena vaṇamukhaṁ parikantitvā esaniyā sallaṁ eseyya.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Y sĩ có thể trừ khử hết thuốc độc, còn để lại một ít nhưng nghĩ không có thuốc độc nào còn lại,<br>
+<span lang="pi" class="pali">
+Esaniyā sallaṁ esitvā sallaṁ abbuheyya, apaneyya visadosaṁ saupādisesaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+y sĩ nói như sau:<br>
+<span lang="pi" class="pali">
+Saupādisesoti jānamāno so evaṁ vadeyya:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Này Hiền giả, mũi tên của Bạn đã được rút ra, thuốc độc đã được trừ khử, không còn dư tàn, và không còn gì nguy hiểm nữa cho Bạn.<br>
+<span lang="pi" class="pali">
+‘ambho purisa, ubbhataṁ kho te sallaṁ, apanīto visadoso saupādiseso. Analañca te antarāyāya.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+nhưng Bạn phải chỉ ăn các đồ ăn thích hợp, và hãy gìn giữ, nếu ăn đồ ăn không thích hợp, vết thương của Bạn sẽ làm mủ lại.<br>
+<span lang="pi" class="pali">
+Sappāyāni ceva bhojanāni bhuñjeyyāsi, mā te asappāyāni bhojanāni bhuñjato vaṇo assāvī assa.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+và thường thường phải cho rửa vết thương, thường thường phải xức thuốc cho miệng vết thương. Trong khi thường thường cho rửa vết thương, thường thường xức thuốc cho miệng vết thương, chớ có để máu cũ đóng khô trên miệng vết thương.<br>
+<span lang="pi" class="pali">
+Kālena kālañca vaṇaṁ dhoveyyāsi, kālena kālaṁ vaṇamukhaṁ ālimpeyyāsi, mā te na kālena kālaṁ vaṇaṁ dhovato na kālena kālaṁ vaṇamukhaṁ ālimpato pubbalohitaṁ vaṇamukhaṁ pariyonandhi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+và hãy cẩn thận khi đi ra giữa gió và nắng; hãy cẩn thận khi đi ra giữa gió và nắng, nếu không, bụi và nhớp có thể nhiễu hại miệng vết thương.<br>
+<span lang="pi" class="pali">
+Mā ca vātātape cārittaṁ anuyuñji, mā te vātātape cārittaṁ anuyuttassa rajosūkaṁ vaṇamukhaṁ anuddhaṁsesi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Và này Bạn, nếu Bạn chăm sóc vết thương, thời vết thương sẽ được lành’.<br>
+<span lang="pi" class="pali">
+Vaṇānurakkhī ca, ambho purisa, vihareyyāsi vaṇasāropī’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Người ấy suy nghĩ như sau:<br>
+<span lang="pi" class="pali">
+Tassa evamassa:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Mũi tên đã được rút khỏi (thân) ta, nọc độc đã được trừ khử, không còn dư tàn.<br>
+<span lang="pi" class="pali">
+‘ubbhataṁ kho me sallaṁ, apanīto visadoso anupādiseso.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+và ta đã thoát khỏi nguy hiểm’.<br>
+<span lang="pi" class="pali">
+Analañca me antarāyāyā’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Và người ấy ăn những đồ ăn không thích hợp. Vì người ấy ăn những đồ ăn không thích hợp, nên vết thương làm mủ lại.<br>
+<span lang="pi" class="pali">
+So asappāyāni ceva bhojanāni bhuñjeyya. Tassa asappāyāni bhojanāni bhuñjato vaṇo assāvī assa.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Và thường thường người ấy không rửa vết thương, thường thường không xức thuốc miệng vết thương. Vì người ấy thường thường không rửa vết thương, vì người ấy thường thường không xức thuốc miệng vết thương, nên máu cũ đông lại trên miệng vết thương.<br>
+<span lang="pi" class="pali">
+Na ca kālena kālaṁ vaṇaṁ dhoveyya, na ca kālena kālaṁ vaṇamukhaṁ ālimpeyya. Tassa na kālena kālaṁ vaṇaṁ dhovato, na kālena kālaṁ vaṇamukhaṁ ālimpato pubbalohitaṁ vaṇamukhaṁ pariyonandheyya.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Và người ấy thường hay đi giữa gió và nắng. Do người ấy thường hay đi giữa gió và nắng, bụi và nhớp nhiễu hại miệng vết thương;<br>
+<span lang="pi" class="pali">
+Vātātape ca cārittaṁ anuyuñjeyya. Tassa vātātape cārittaṁ anuyuttassa rajosūkaṁ vaṇamukhaṁ anuddhaṁseyya.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+và vì người ấy không chăm sóc vết thương nên vết thương không được lành.<br>
+<span lang="pi" class="pali">
+Na ca vaṇānurakkhī vihareyya na vaṇasāropī.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vì người ấy làm chính những việc không thích hợp, và do thuốc độc được trừ khử nhưng còn dư tàn, do cả hai điều ấy nên miệng vết thương có thể lở to hơn trước.<br>
+<span lang="pi" class="pali">
+Tassa imissā ca asappāyakiriyāya, asuci visadoso apanīto saupādiseso tadubhayena vaṇo puthuttaṁ gaccheyya.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Do vết thương lở to, người ấy có thể đi đến chết hay đau khổ gần như chết.<br>
+<span lang="pi" class="pali">
+So puthuttaṁ gatena vaṇena maraṇaṁ vā nigaccheyya maraṇamattaṁ vā dukkhaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Cũng vậy, này Sunakkhatta, sự kiện này xảy ra, khi ở đây một số Tỷ-kheo nghĩ như sau:<br>
+<span lang="pi" class="pali">
+Evameva kho, sunakkhatta, ṭhānametaṁ vijjati yaṁ idhekaccassa bhikkhuno evamassa:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Tham ái được bậc Sa-môn gọi là mũi tên, thuốc độc vô minh làm não hại (con người) với dục, tham, sân.<br>
+<span lang="pi" class="pali">
+‘taṇhā kho sallaṁ samaṇena vuttaṁ, avijjāvisadoso chandarāgabyāpādena ruppati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Mũi tên tham ái đã được ta đoạn diệt; thuốc độc vô minh đã được trừ khử. Ta thiên nặng về chánh Niết-bàn’.<br>
+<span lang="pi" class="pali">
+Taṁ me taṇhāsallaṁ pahīnaṁ, apanīto avijjāvisadoso, sammā nibbānādhimuttohamasmī’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vị ấy có thể tự hào với mục đích hiện tại.<br>
+<span lang="pi" class="pali">
+Evaṁmāni assa atathaṁ samānaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vị ấy có thể truy cầu những gì không thích hợp với khuynh hướng chánh Niết-bàn. Mắt có thể truy cầu sắc không thích hợp, tai có thể truy cầu tiếng không thích hợp, mũi có thể truy cầu hương không thích hợp, lưỡi có thể truy cầu vị không thích hợp, thân có thể truy cầu xúc không thích hợp, ý có thể truy cầu pháp không thích hợp.<br>
+<span lang="pi" class="pali">
+So yāni sammā nibbānādhimuttassa asappāyāni tāni anuyuñjeyya, asappāyaṁ cakkhunā rūpadassanaṁ anuyuñjeyya, asappāyaṁ sotena saddaṁ anuyuñjeyya, asappāyaṁ ghānena gandhaṁ anuyuñjeyya, asappāyaṁ jivhāya rasaṁ anuyuñjeyya, asappāyaṁ kāyena phoṭṭhabbaṁ anuyuñjeyya, asappāyaṁ manasā dhammaṁ anuyuñjeyya.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Khi mắt truy cầu sắc không thích hợp, tai truy cầu tiếng không thích hợp, mũi truy cầu hương không thích hợp, lưỡi truy cầu vị không thích hợp, thân truy cầu xúc không thích hợp, ý truy cầu pháp không thích hợp, thời tham dục nhiễu loạn tâm vị ấy.<br>
+<span lang="pi" class="pali">
+Tassa asappāyaṁ cakkhunā rūpadassanaṁ anuyuttassa, asappāyaṁ sotena saddaṁ anuyuttassa, asappāyaṁ ghānena gandhaṁ anuyuttassa, asappāyaṁ jivhāya rasaṁ anuyuttassa, asappāyaṁ kāyena phoṭṭhabbaṁ anuyuttassa, asappāyaṁ manasā dhammaṁ anuyuttassa rāgo cittaṁ anuddhaṁseyya.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vị ấy do tham dục nhiễu loạn tâm, đi đến chết hay đi đến khổ gần như chết.<br>
+<span lang="pi" class="pali">
+So rāgānuddhaṁsitena cittena maraṇaṁ vā nigaccheyya maraṇamattaṁ vā dukkhaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Như vậy, này Sunakkhatta, là chết trong giới luật của bậc Thánh, khi vị ấy từ bỏ tu tập, trở về hoàn tục,<br>
+<span lang="pi" class="pali">
+Maraṇañhetaṁ, sunakkhatta, ariyassa vinaye yo sikkhaṁ paccakkhāya hīnāyāvattati;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+và như vậy, này Sunakkhatta, là khổ như chết, khi vị ấy phạm một ô uế tội nào.<br>
+<span lang="pi" class="pali">
+maraṇamattañhetaṁ, sunakkhatta, dukkhaṁ yaṁ aññataraṁ saṅkiliṭṭhaṁ āpattiṁ āpajjati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Sunakkhatta, sự tình này xảy ra, khi ở đây một số Tỷ-kheo suy nghĩ như sau:<br>
+<span lang="pi" class="pali">
+Ṭhānaṁ kho panetaṁ, sunakkhatta, vijjati yaṁ idhekaccassa bhikkhuno evamassa:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Tham ái được bậc Sa-môn gọi là mũi tên, thuốc độc vô minh làm não hại con người với dục, tham, sân.<br>
+<span lang="pi" class="pali">
+‘taṇhā kho sallaṁ samaṇena vuttaṁ, avijjāvisadoso chandarāgabyāpādena ruppati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Mũi tên tham ái đã được ta đoạn diệt, thuốc độc vô minh đã được trừ khử. Ta thiên nặng về chánh Niết-bàn’.<br>
+<span lang="pi" class="pali">
+Taṁ me taṇhāsallaṁ pahīnaṁ, apanīto avijjāvisadoso, sammā nibbānādhimuttohamasmī’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Chính vì thiên nặng về chánh Niết-bàn, vị ấy không truy cầu những gì không thích hợp với khuynh hướng thiên nặng về Niết-bàn, mắt không truy cầu sắc không thích hợp, tai không truy cầu tiếng không thích hợp, mũi không truy cầu hương không thích hợp, lưỡi không truy cầu vị không thích hợp, thân không truy cầu xúc không thích hợp, ý không truy cầu pháp không thích hợp.<br>
+<span lang="pi" class="pali">
+Sammā nibbānādhimuttasseva sato so yāni sammā nibbānādhimuttassa asappāyāni tāni nānuyuñjeyya, asappāyaṁ cakkhunā rūpadassanaṁ nānuyuñjeyya, asappāyaṁ sotena saddaṁ nānuyuñjeyya, asappāyaṁ ghānena gandhaṁ nānuyuñjeyya, asappāyaṁ jivhāya rasaṁ nānuyuñjeyya, asappāyaṁ kāyena phoṭṭhabbaṁ nānuyuñjeyya, asappāyaṁ manasā dhammaṁ nānuyuñjeyya.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vì mắt vị ấy không truy cầu sắc không thích hợp, vì tai không truy cầu tiếng không thích hợp, vì mũi không truy cầu hương không thích hợp, vì lưỡi không truy cầu vị không thích hợp, vì thân không truy cầu xúc không thích hợp, vì ý không truy cầu pháp không thích hợp, nên tham dục không nhiễu loạn tâm, vì tham dục không nhiễu loạn tâm; nên vị ấy không đi đến chết hay đi đến khổ gần như chết.<br>
+<span lang="pi" class="pali">
+Tassa asappāyaṁ cakkhunā rūpadassanaṁ nānuyuttassa, asappāyaṁ sotena saddaṁ nānuyuttassa, asappāyaṁ ghānena gandhaṁ nānuyuttassa, asappāyaṁ jivhāya rasaṁ nānuyuttassa, asappāyaṁ kāyena phoṭṭhabbaṁ nānuyuttassa, asappāyaṁ manasā dhammaṁ nānuyuttassa rāgo cittaṁ nānuddhaṁseyya. So na rāgānuddhaṁsitena cittena neva maraṇaṁ vā nigaccheyya na maraṇamattaṁ vā dukkhaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ví như, này Sunakkhatta, một người bị tên bắn, và mũi tên bị tẩm thuốc độc rất dày.<br>
+<span lang="pi" class="pali">
+Seyyathāpi, sunakkhatta, puriso sallena viddho assa savisena gāḷhūpalepanena.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Bạn bè thân hữu, bà con huyết thống người ấy cho mời một y sĩ giải phẫu.<br>
+<span lang="pi" class="pali">
+Tassa mittāmaccā ñātisālohitā bhisakkaṁ sallakattaṁ upaṭṭhāpeyyuṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vị y sĩ giải phẫu ấy có thể cắt xung quanh miệng vết thương với con dao; sau khi cắt xung quanh miệng vết thương với con dao, vị y sĩ giải phẫu có thể dò tìm tên với một vật dụng dò tìm. Sau khi dò tìm mũi tên với một vật dụng dò tìm, y sĩ có thể rút mũi tên ra… Y sĩ có thể trừ khử hết thuốc độc không còn để dư lại và biết rằng không còn để dư lại.<br>
+<span lang="pi" class="pali">
+Tassa so bhisakko sallakatto satthena vaṇamukhaṁ parikanteyya. Satthena vaṇamukhaṁ parikantitvā esaniyā sallaṁ eseyya. Esaniyā sallaṁ esitvā sallaṁ abbuheyya, apaneyya visadosaṁ anupādisesaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vị ấy nói như sau:<br>
+<span lang="pi" class="pali">
+Anupādisesoti jānamāno so evaṁ vadeyya:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Này Bạn, mũi tên của Bạn đã được rút ra, thuốc độc đã được trừ khử, không có dư tàn, nhưng vẫn còn nguy hiểm cho Bạn.<br>
+<span lang="pi" class="pali">
+‘ambho purisa, ubbhataṁ kho te sallaṁ, apanīto visadoso anupādiseso. Analañca te antarāyāya.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Và Bạn hãy ăn những đồ ăn thích hợp, chớ ăn những đồ ăn không thích hợp khiến vết thương có thể làm mủ;<br>
+<span lang="pi" class="pali">
+Sappāyāni ceva bhojanāni bhuñjeyyāsi, mā te asappāyāni bhojanāni bhuñjato vaṇo assāvī assa.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+và thường thường hãy rửa vết thương, thường thường hãy xức thuốc miệng vết thương, thường thường rửa vết thương, thường thường xức thuốc miệng vết thương, chớ để máu cũ đóng khô lại trên miệng vết thương.<br>
+<span lang="pi" class="pali">
+Kālena kālañca vaṇaṁ dhoveyyāsi, kālena kālaṁ vaṇamukhaṁ ālimpeyyāsi. Mā te na kālena kālaṁ vaṇaṁ dhovato na kālena kālaṁ vaṇamukhaṁ ālimpato pubbalohitaṁ vaṇamukhaṁ pariyonandhi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Và chớ có đi ra giữa gió và nắng; đi ra giữa gió và nắng, chớ để bụi và nhớp làm nhiễu hại miệng vết thương,<br>
+<span lang="pi" class="pali">
+Mā ca vātātape cārittaṁ anuyuñji, mā te vātātape cārittaṁ anuyuttassa rajosūkaṁ vaṇamukhaṁ anuddhaṁsesi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+hãy sống gìn giữ vết thương, này Bạn, và vết thương sẽ lành’.<br>
+<span lang="pi" class="pali">
+Vaṇānurakkhī ca, ambho purisa, vihareyyāsi vaṇasāropī’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Người ấy suy nghĩ như sau:<br>
+<span lang="pi" class="pali">
+Tassa evamassa:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Mũi tên đã được rút ra khỏi ta, thuốc độc đã được trừ khử, không có dư tàn.<br>
+<span lang="pi" class="pali">
+‘ubbhataṁ kho me sallaṁ, apanīto visadoso anupādiseso.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Và ta chưa thoát khỏi nguy hiểm’.<br>
+<span lang="pi" class="pali">
+Analañca me antarāyāyā’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Và vị ấy có thể chỉ ăn các đồ ăn thích hợp. Do chỉ ăn các đồ ăn thích hợp miệng vết thương có thể không làm mủ.<br>
+<span lang="pi" class="pali">
+So sappāyāni ceva bhojanāni bhuñjeyya. Tassa sappāyāni bhojanāni bhuñjato vaṇo na assāvī assa.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Và thường thường vị ấy có thể rửa vết thương, thường thường có thể xức thuốc miệng vết thương. Do thường thường rửa vết thương, do thường thường xức thuốc miệng vết thương, máu cũ không có thể đóng khô lại trên miệng vết thương.<br>
+<span lang="pi" class="pali">
+Kālena kālañca vaṇaṁ dhoveyya, kālena kālaṁ vaṇamukhaṁ ālimpeyya. Tassa kālena kālaṁ vaṇaṁ dhovato kālena kālaṁ vaṇamukhaṁ ālimpato na pubbalohitaṁ vaṇamukhaṁ pariyonandheyya.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Người ấy không sốt sắng đi giữa gió và nắng. Do người ấy không sốt sắng đi giữa gió và nắng, bụi và nhớp không có thể nhiễu hại miệng vết thương và người ấy sống gìn giữ vết thương, và vết thương được lành.<br>
+<span lang="pi" class="pali">
+Na ca vātātape cārittaṁ anuyuñjeyya. Tassa vātātape cārittaṁ ananuyuttassa rajosūkaṁ vaṇamukhaṁ nānuddhaṁseyya. Vaṇānurakkhī ca vihareyya vaṇasāropī.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vì người ấy chỉ làm những điều thích hợp và vì thuốc độc được trừ khử không còn dư tàn, do hai nhân duyên ấy vết thương được khép kín lại.<br>
+<span lang="pi" class="pali">
+Tassa imissā ca sappāyakiriyāya asu ca visadoso apanīto anupādiseso tadubhayena vaṇo viruheyya.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Khi vết thương được da che kín lại, người ấy không đi đến chết hay không đi đến khổ gần như chết.<br>
+<span lang="pi" class="pali">
+So ruḷhena vaṇena sañchavinā neva maraṇaṁ vā nigaccheyya na maraṇamattaṁ vā dukkhaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Cũng vậy, này Sunakkhatta, sự kiện này xảy ra, khi ở đây một số Tỷ-kheo suy nghĩ như sau:<br>
+<span lang="pi" class="pali">
+Evameva kho, sunakkhatta, ṭhānametaṁ vijjati yaṁ idhekaccassa bhikkhuno evamassa:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Tham ái được bậc Sa-môn gọi là mũi tên, thuốc độc vô minh làm não hại con người với dục, tham, sân.<br>
+<span lang="pi" class="pali">
+‘taṇhā kho sallaṁ samaṇena vuttaṁ, avijjāvisadoso chandarāgabyāpādena ruppati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Mũi tên tham ái đã được ta đoạn diệt … không có truy cầu những gì không thích hợp.<br>
+<span lang="pi" class="pali">
+Taṁ me taṇhāsallaṁ pahīnaṁ, apanīto avijjāvisadoso, sammā nibbānādhimuttohamasmī’ti. Sammā nibbānādhimuttasseva sato so yāni sammā nibbānādhimuttassa asappāyāni tāni nānuyuñjeyya, asappāyaṁ cakkhunā rūpadassanaṁ nānuyuñjeyya, asappāyaṁ sotena saddaṁ nānuyuñjeyya, asappāyaṁ ghānena gandhaṁ nānuyuñjeyya, asappāyaṁ jivhāya rasaṁ nānuyuñjeyya, asappāyaṁ kāyena phoṭṭhabbaṁ nānuyuñjeyya, asappāyaṁ manasā dhammaṁ nānuyuñjeyya.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Mắt không truy cầu sắc không thích hợp, tai không truy cầu tiếng không thích hợp, mũi không truy cầu hương không thích hợp, lưỡi không truy cầu vị không thích hợp, thân không truy cầu xúc không thích hợp, ý không truy cầu pháp không thích hợp. Do mắt người ấy không truy cầu sắc không thích hợp, do tai không truy cầu tiếng không thích hợp, do mũi không truy cầu hương không thích hợp, do lưỡi không truy cầu vị không thích hợp, do thân không truy cầu xúc không thích hợp, do ý không truy cầu pháp không thích hợp, tham dục có thể không nhiễu hại tâm.<br>
+<span lang="pi" class="pali">
+Tassa asappāyaṁ cakkhunā rūpadassanaṁ nānuyuttassa, asappāyaṁ sotena saddaṁ nānuyuttassa, asappāyaṁ ghānena gandhaṁ nānuyuttassa, asappāyaṁ jivhāya rasaṁ nānuyuttassa, asappāyaṁ kāyena phoṭṭhabbaṁ nānuyuttassa, asappāyaṁ manasā dhammaṁ nānuyuttassa, rāgo cittaṁ nānuddhaṁseyya.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Do tâm không bị tham dục nhiễu hại, nên người ấy không đi đến chết, hay không đi đến khổ gần như chết.<br>
+<span lang="pi" class="pali">
+So na rāgānuddhaṁsitena cittena neva maraṇaṁ vā nigaccheyya na maraṇamattaṁ vā dukkhaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Sunakkhatta, Ta nói ví dụ này với mục đích làm sáng tỏ ý nghĩa.<br>
+<span lang="pi" class="pali">
+Upamā kho me ayaṁ, sunakkhatta, katā atthassa viññāpanāya.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Nghĩa ở đây như sau:<br>
+<span lang="pi" class="pali">
+Ayaṁyevettha attho—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vết thương, này Sunakkhatta, là đồng nghĩa với sáu xúc xứ (phassayatana);<br>
+<span lang="pi" class="pali">
+vaṇoti kho, sunakkhatta, channetaṁ ajjhattikānaṁ āyatanānaṁ adhivacanaṁ;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+thuốc độc, này Sunakkhatta, là đồng nghĩa với vô minh;<br>
+<span lang="pi" class="pali">
+visadosoti kho, sunakkhatta, avijjāyetaṁ adhivacanaṁ;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+mũi tên, này Sunakkhatta, là đồng nghĩa với ái;<br>
+<span lang="pi" class="pali">
+sallanti kho, sunakkhatta, taṇhāyetaṁ adhivacanaṁ;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+vật dụng dò tìm, này Sunakkhatta, là đồng nghĩa với niệm;<br>
+<span lang="pi" class="pali">
+esanīti kho, sunakkhatta, satiyāyetaṁ adhivacanaṁ;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+con dao, này Sunakkhatta, là đồng nghĩa với Thánh trí tuệ.<br>
+<span lang="pi" class="pali">
+satthanti kho, sunakkhatta, ariyāyetaṁ paññāya adhivacanaṁ;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vị y sĩ giải phẫu, này Sunakkhatta, là đồng nghĩa với Như Lai, bậc A-la-hán, Chánh Ðẳng Giác.<br>
+<span lang="pi" class="pali">
+bhisakko sallakattoti kho, sunakkhatta, tathāgatassetaṁ adhivacanaṁ arahato sammāsambuddhassa.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Thật vậy, này Sunakkhatta, Tỷ-kheo tự mình phòng hộ đối với sáu xúc xứ, nghĩ rằng: ‘Sanh y (Upadhi) là căn bản của khổ’.<br>
+<span lang="pi" class="pali">
+So vata, sunakkhatta, bhikkhu chasu phassāyatanesu saṁvutakārī ‘upadhi dukkhassa mūlan’ti—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+sau khi biết như vậy, vị ấy trở thành vô sanh y, giải thoát nhờ đoạn diệt sanh y. Vị ấy còn chú thân của mình trên sanh y hay để tâm đến sanh y, sự tình như vậy không xảy ra.<br>
+<span lang="pi" class="pali">
+iti viditvā nirupadhi upadhisaṅkhaye vimutto upadhismiṁ vā kāyaṁ upasaṁharissati cittaṁ vā uppādessatīti—netaṁ ṭhānaṁ vijjati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ví như, này Sunakkhatta, một chén uống nước bằng đồng, đẹp đẽ và hương thơm, và chén ấy lại tẩm thuốc độc.<br>
+<span lang="pi" class="pali">
+Seyyathāpi, sunakkhatta, āpānīyakaṁso vaṇṇasampanno gandhasampanno rasasampanno; so ca kho visena saṁsaṭṭho.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Rồi một người đến, muốn sống, muốn không chết, muốn lạc, yếm ly khổ.<br>
+<span lang="pi" class="pali">
+Atha puriso āgaccheyya jīvitukāmo amaritukāmo sukhakāmo dukkhapaṭikūlo.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Sunakkhatta, Ông nghĩ thế nào?<br>
+<span lang="pi" class="pali">
+Taṁ kiṁ maññasi, sunakkhatta,<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Người ấy có uống chén bằng đồng này không, nếu người ấy biết:<br>
+<span lang="pi" class="pali">
+api nu so puriso amuṁ āpānīyakaṁsaṁ piveyya yaṁ jaññā:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Sau khi tôi uống từ đây, tôi sẽ đi đến chết hoặc đi đến gần như chết?’<br>
+<span lang="pi" class="pali">
+‘imāhaṁ pivitvā maraṇaṁ vā nigacchāmi maraṇamattaṁ vā dukkhan’”ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Thưa không, bạch Thế Tôn.”<br>
+<span lang="pi" class="pali">
+“No hetaṁ, bhante”.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Cũng vậy, này Sunakkhatta, Tỷ-kheo ấy chắc chắn phòng hộ đối với sáu xúc xứ: ‘Sanh y là căn bản của đau khổ’,<br>
+<span lang="pi" class="pali">
+“Evameva kho, sunakkhatta, so vata bhikkhu chasu phassāyatanesu saṁvutakārī ‘upadhi dukkhassa mūlan’ti—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+sau khi biết vậy, vị ấy trở thành vô sanh y, giải thoát nhờ đoạn diệt sanh y. Còn chú thân của vị ấy trên sanh y, để tâm đến sanh y, sự tình như vậy không xảy ra.<br>
+<span lang="pi" class="pali">
+iti viditvā nirupadhi upadhisaṅkhaye vimutto upadhismiṁ vā kāyaṁ upasaṁharissati cittaṁ vā uppādessatīti—netaṁ ṭhānaṁ vijjati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ví như, này Sunakkhatta, một con rắn độc hết sức độc hại, và có một người đến, muốn sống, muốn không chết, muốn lạc, yếm ly khổ.<br>
+<span lang="pi" class="pali">
+Seyyathāpi, sunakkhatta, āsīviso ghoraviso. Atha puriso āgaccheyya jīvitukāmo amaritukāmo sukhakāmo dukkhapaṭikūlo.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Sunakkhatta, Ông nghĩ thế nào?<br>
+<span lang="pi" class="pali">
+Taṁ kiṁ maññasi, sunakkhatta,<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Người ấy có đưa tay hay gót chân cho con rắn độc hại này không, nếu người ấy biết:<br>
+<span lang="pi" class="pali">
+api nu so puriso amussa āsīvisassa ghoravisassa hatthaṁ vā aṅguṭṭhaṁ vā dajjā yaṁ jaññā:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Nếu ta bị con rắn này cắn, ta sẽ đi đến chết hay khổ gần như chết?’”<br>
+<span lang="pi" class="pali">
+‘imināhaṁ daṭṭho maraṇaṁ vā nigacchāmi maraṇamattaṁ vā dukkhan’”ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Thưa không, bạch Thế Tôn.”<br>
+<span lang="pi" class="pali">
+“No hetaṁ, bhante”.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Cũng vậy, này Sunakkhatta, Tỷ-kheo ấy chắc chắn phòng hộ sáu xúc xứ, ‘sanh y là căn bản đau khổ’:<br>
+<span lang="pi" class="pali">
+“Evameva kho, sunakkhatta, so vata bhikkhu chasu phassāyatanesu saṁvutakārī ‘upadhi dukkhassa mūlan’ti—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+sau khi biết vậy, vị ấy trở thành vô sanh y, giải thoát nhờ đoạn diệt sanh y. Còn chú thân của vị ấy trên sanh y, hay để tâm đến sanh y, sự tình như vậy không xảy ra.<br>
+<span lang="pi" class="pali">
+iti viditvā nirupadhi upadhisaṅkhaye vimutto upadhismiṁ vā kāyaṁ upasaṁharissati cittaṁ vā uppādessatīti—netaṁ ṭhānaṁ vijjatī”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Thế Tôn thuyết giảng như vậy. Sunakkhatta Licchaviputta hoan hỷ tín thọ lời Thế Tôn dạy.<br>
+<span lang="pi" class="pali">
+Idamavoca bhagavā. Attamano sunakkhatto licchaviputto bhagavato bhāsitaṁ abhinandīti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+<span lang="pi" class="vi">
+Sunakkhattasuttaṁ niṭṭhitaṁ pañcamaṁ.<br>
+</span>
+</p>
+
+
+<!-- COPY CONTENT SUTTA Ở ĐÂY -->
+
+
+
+<br>
+<p><p style="text-align: right;font-style: italic;">Hoà Thượng Thích Minh Châu dịch Việt</span></p>
+
+
+
+
+
+
+
+
+</section>  <!-- End English and Pali -->
+<div id="nextprev"><a id="previous-sutta" href="./mn104.html#content"></a><a id="next-sutta" href="./mn106.html#content"></a></div>
+</div>  <!--End Content -->
+</div>  <!-- End Page -->
+
+
+
+
+
+
+<footer>
+					 <!-- End bottom links -->
+</footer>
+
+
+ 
+ <!-- Scripts -->
+
+ <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      if (typeof enablePaliLookup === "function") {
+        enablePaliLookup();
+      } else {
+        console.error("enablePaliLookup is not defined");
+      }
+    });
+  </script>
+
+ <script>
+ // Script to open and close sidebar
+ 	function w3_open() {
+ 	document.getElementById("mySidebar").style.display = "block";
+ 	}
+ 		function w3_close() {
+ 		document.getElementById("mySidebar").style.display = "none";
+ 	}
+ </script>
+ <script>
+ 		var app = document.getElementsByTagName("BODY")[0];
+ 		if (localStorage.lightMode == "dark") {
+ 			app.setAttribute("light-mode", "dark");
+ 	}
+ </script>
+ 
+ <script>
+ 		function toggle_light_mode() {
+ 			var app = document.getElementsByTagName("BODY")[0];
+ 				if (localStorage.lightMode == "dark") {
+ 			localStorage.lightMode = "light";
+ 			app.setAttribute("light-mode", "light");
+ 		} else {
+ 					localStorage.lightMode = "dark";
+ 					app.setAttribute("light-mode", "dark");
+ 	}
+ 		}
+ 
+ 		window.addEventListener("storage", function () {
+ 			if (localStorage.lightMode == "dark") {
+ 				app.setAttribute("light-mode", "dark");
+ 				} else {
+ 				app.setAttribute("light-mode", "light");
+ 		}
+ 		}, false);
+ 
+ </script>
+ <script src="../js/footer.js"></script><script src="../js/dpd_deconstructor.js"></script><script src="../js/dpd_ebts.js"></script><script src="../js/dpd_i2h.js"></script>
+ <script src="/sw.js"></script>
+ </body>
+ </html>

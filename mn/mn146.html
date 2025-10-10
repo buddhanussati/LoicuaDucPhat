@@ -1,0 +1,2234 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+ 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+ 	<link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+ 	<meta name="viewport" content="width=device-width, initial-scale=1">
+		<!-- Loading manifest -->
+	<link rel="manifest" href="../manifest.json">
+ 	<!-- Loading main and menu stylesheets -->
+ 	<link rel="stylesheet" href="../css/w3.css">
+ 	<link rel="stylesheet" href="../css/css.css">
+ 	<link rel="stylesheet" href="../css/menu.css">
+ 	<script src="../js/jquery-1.10.2.min.js"></script>
+ 	<script src="../js/controlpanel.js"></script>
+ 	<script src="../js/mousetrap.min.js"></script>
+    <script src="../js/pali-lookup-standalone.js"></script>
+
+ <script src="../js/suttaFiles.js"></script>
+<script>
+ // Script to open random Sutta
+ function openRandomSutta() {
+  const randomIndex = Math.floor(Math.random() * suttaFiles.length);
+  const selectedFile = suttaFiles[randomIndex];
+
+  // Get root path of your site 
+  const currentPath = location.pathname;
+  const rootPath = currentPath.split("/").slice(0, -2).join("/") + "/";
+
+  // Redirect to the correct file
+  window.location.href = rootPath + selectedFile;
+}
+</script>
+
+
+</head>
+ <body class="container">
+ <div class="header-background">
+ <!-- Header -->
+ <div class="w3-header w3-content w3-padding w3-left-align bwcontainer">
+ 	<div class="centered">
+ 		<button class="light-mode-button" aria-label="Bật Chế Độ Sáng" onclick="toggle_light_mode()">
+ 			<span></span>
+ 			<span></span>
+ 		</button>
+ 		<span class="box-lbl">Sáng/Tối</span>
+ 	</div> <!-- Centered -->
+ 		<a href="../home/index.html" id="bwlogo"><img src="../images/headerlogo.png" alt="Logo Lời Của Đức Phật" class="w3-image"></a>
+ 		<div class="w3-bar bwcontainer">
+ 			<div id="searchlinks">
+ 			<a href="../home/visearch.html"><span class="w3-bar-item"><i class="fa fa-search"></i>&nbsp;Tìm Tiếng Việt</span></a>
+ 			<a href="../home/palisearch.html"><span class="w3-bar-item"><i class="fa fa-search"></i>&nbsp;Tìm Tiếng Pali</span></a>
+ 			</div><!-- End Searchlinks div -->
+ 			<div class="help"><span><a href="../home/help.html"><img src="../images/help_icon.png" title="Trợ Giúp" alt="Help"></a></span></div>
+ 		</div> <!-- End w3-bar bwcontainer --> 	</div> <!-- End w3-header w3-content w3-padding w3-left-align bwcontainer -->
+ </div> <!-- End header-background -->
+ <!-- Top menu -->
+
+ <div class="w3-main w3-white bwcontainer2">
+ 	<div class="w3-button w3-padding-8 w3-left w3-hide-large" onclick="w3_open()">☰</div>
+ 		<div id="navbar" class="w3-hide-small w3-hide-medium bwcontainer3">
+ 			<ul id="css3menu0">
+ 				<li class="topfirst" id="home"><a href="../home/index.html" class="w3-hide-small">Trang Chủ</a></li>
+  				<li class="topmenu" id="dn"><a href="../dn/dn.html" class="pressed w3-hide-small">Trường Bộ Kinh</a></li>
+ 				<li class="topmenu" id="mn"><a href="../mn/mn.html" class="w3-hide-small">Trung Bộ Kinh</a></li>
+ 				<li class="topmenu" id="sn"><a href="../sn/sn.html" class="w3-hide-small"><i class="fa fa-caret-down"></i>&nbsp;Tương Ưng Bộ Kinh</a>
+ 					<ul>
+ 						<li><a href="../sn/sn01.html" class="w3-hide-small">Tập I - Thiên Có Kệ</a></li>
+ 						<li><a href="../sn/sn02.html" class="w3-hide-small">Tập II - Thiên Nhân Duyên</a></li>
+ 						<li><a href="../sn/sn03.html" class="w3-hide-small">Tập III - Thiên Uẩn</a></li>
+ 						<li><a href="../sn/sn04.html" class="w3-hide-small">Tập IV - Thiên Sáu Xứ</a></li>
+ 						<li><a href="../sn/sn05.html" class="w3-hide-small">Tập V - Thiên Ðại Phẩm</a></li>
+ 					</ul>
+ 				<li class="topmenu" id="an"><a href="../an/an.html" class="w3-hide-small"><i class="fa fa-caret-down"></i>&nbsp;Tăng Chi Bộ Kinh</a>
+ 					<ul>
+ 						<li><a href="../an/an1.html" class="w3-hide-small">Chương Một Pháp</a></li>
+ 						<li><a href="../an/an2.html" class="w3-hide-small">Chương Hai Pháp</a></li>
+ 						<li><a href="../an/an3.html" class="w3-hide-small">Chương Ba Pháp</a></li>
+ 						<li><a href="../an/an4.html" class="w3-hide-small">Chương Bốn Pháp</a></li>
+ 						<li><a href="../an/an5.html" class="w3-hide-small">Chương Năm Pháp</a></li>
+ 						<li><a href="../an/an6.html" class="w3-hide-small">Chương Sáu Pháp</a></li>
+ 						<li><a href="../an/an7.html" class="w3-hide-small">Chương Bảy Pháp</a></li>
+ 						<li><a href="../an/an8.html" class="w3-hide-small">Chương Tám Pháp</a></li>
+ 						<li><a href="../an/an9.html" class="w3-hide-small">Chương Chín Pháp</a></li>
+ 						<li><a href="../an/an10.html" class="w3-hide-small">Chương Mười Pháp</a></li>
+ 						<li><a href="../an/an11.html" class="w3-hide-small">Chương Mười Một Pháp</a></li>
+ 					</ul>
+ 				</li>
+ 				<li class="topmenu" id="kn"><a href="../kn/kn.html" class="w3-hide-small"><i class="fa fa-caret-down"></i>&nbsp;Tiểu Bộ Kinh</a>
+ 					<ul>
+ 						<li><a href="../kp/kp.html" class="w3-hide-small">Kinh Tiểu Tụng</a></li>
+ 						<li><a href="../dhp/dhp.html" class="w3-hide-small">Kinh Pháp Cú</a></li>
+ 						<li><a href="../snp/snp.html" class="w3-hide-small">Kinh Tập</a></li>
+ 						<li><a href="../ud/ud.html" class="w3-hide-small">Kinh Phật Tự Thuyết</a></li>
+ 						<li><a href="../it/it.html" class="w3-hide-small">Kinh Phật Thuyết Như Vậy</a></li>
+ 						<li><a href="../tha/tha.html" class="w3-hide-small">Trưởng Lão Tăng Kệ</a></li>
+ 						<li><a href="../thi/thi.html" class="w3-hide-small">Trưởng Lão Ni Kệ</a></li>
+ 					</ul>
+ 				</li>
+				<li class="toplast" id="rd"><a href="../rd/rd.html" class="w3-hide-small"></i>Kinh Ngẫu Nhiên Theo Nhóm</a>
+ 					</ul>
+ 				</li>
+ 			</ul>
+ 			</div>
+ 		</div> <!--navbar-->
+
+<!-- Sidebar (hidden by default) -->
+ <nav class="w3-sidebar w3-bar-block w3-card w3-border w3-top w3-animate-left w3-hide-large" id="mySidebar">
+ 	<a href="javascript:void(0)" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-times fa-2x red-color"></i>&nbsp;&nbsp;&nbsp;Close</a><!-- Hides the sidebar when clicked -->
+ 		<div class="w3-bar-block w3-white">
+ 			<a href="../home/index.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-home fa-lg"></i>&nbsp;&nbsp;&nbsp;Home</a>
+ 			<a href="../guide/guide.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Guide</a>
+ 			<a href="../dn/dn.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Trường Bộ Kinh</a>
+ 			<a href="../mn/mn.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Trung Bộ Kinh</a>
+ 			<a href="../sn/sn.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Tương Ưng Bộ Kinh</a>
+ 			<a href="../an/an.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Tăng Chi Bộ Kinh
+ 			<a href="../kn/kn.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Tiểu Bộ Kinh</a>
+			<a href="../rd/rd.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>Kinh Ngẫu Nhiên Theo Nhóm</a>
+ 		</div>
+ </nav>
+ 
+ 
+ 
+   <!-- !PAGE CONTENT! --> 
+<div class="w3-main w3-content w3-padding w3-left-align bwcontainer4">
+<div id="content">
+<h2>Majjhima Nikāya - Trung Bộ Kinh</h2>
+<h5><span style="font-style: italic;">Hoà Thượng Thích Minh Châu dịch Việt</span></h5>
+
+</div>
+
+<br>
+ 	<title>        Trung Bộ 146          </title>
+
+<p lang="vi" class="vi"; style="text-align: center">
+Trung Bộ 146<br>
+<span lang="pi" class="pali">
+Majjhima Nikāya 146<br>
+</span>
+</p>
+
+
+<p lang="vi" class="vi"; style="text-align: center">
+Kinh Giáo Giới Nandaka<br>
+<span lang="pi" class="pali">
+Nandakovādasutta<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Như vầy tôi nghe.<br>
+<span lang="pi" class="pali">
+Evaṁ me sutaṁ—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Một thời, Thế Tôn trú ở Sāvatthī (Xá-vệ), Jetavana (Kỳ-đà-lâm), tại tinh xá ông Anāthapiṇḍika (Cấp Cô Ðộc).<br>
+<span lang="pi" class="pali">
+ekaṁ samayaṁ bhagavā sāvatthiyaṁ viharati jetavane anāthapiṇḍikassa ārāme.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Rồi Mahāpajāpatī Gotamī cùng với khoảng năm trăm Tỷ-kheo-ni đi đến bên Thế Tôn; sau khi đến đảnh lễ Thế Tôn rồi đứng một bên. Ðứng một bên, Mahāpajāpatī Gotamī bạch Thế Tôn:<br>
+<span lang="pi" class="pali">
+Atha kho mahāpajāpatigotamī pañcamattehi bhikkhunisatehi saddhiṁ yena bhagavā tenupasaṅkami; upasaṅkamitvā bhagavantaṁ abhivādetvā ekamantaṁ aṭṭhāsi. Ekamantaṁ ṭhitā kho mahāpajāpatigotamī bhagavantaṁ etadavoca:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Bạch Thế Tôn, Thế Tôn hãy giáo giới cho Tỷ-kheo-ni!<br>
+<span lang="pi" class="pali">
+“ovadatu, bhante, bhagavā bhikkhuniyo;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Bạch Thế Tôn, Thế Tôn hãy giảng dạy cho Tỷ-kheo-ni!<br>
+<span lang="pi" class="pali">
+anusāsatu, bhante, bhagavā bhikkhuniyo;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Bạch Thế Tôn, Thế Tôn hãy thuyết pháp cho Tỷ-kheo-ni!”<br>
+<span lang="pi" class="pali">
+karotu, bhante, bhagavā bhikkhunīnaṁ dhammiṁ kathan”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Lúc bấy giờ, các Thượng tọa (Trưởng lão) Tỷ-kheo thay phiên giáo giới Tỷ-kheo-ni.<br>
+<span lang="pi" class="pali">
+Tena kho pana samayena therā bhikkhū bhikkhuniyo ovadanti pariyāyena.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Nhưng Tôn giả Nandaka không muốn thay phiên giáo giới Tỷ-kheo-ni.<br>
+<span lang="pi" class="pali">
+Āyasmā nandako na icchati bhikkhuniyo ovadituṁ pariyāyena.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Rồi Thế Tôn cho gọi Tôn giả Ānanda và nói:<br>
+<span lang="pi" class="pali">
+Atha kho bhagavā āyasmantaṁ ānandaṁ āmantesi:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Này Ānanda, hôm nay đến phiên ai giáo giới Tỷ-kheo-ni?”<br>
+<span lang="pi" class="pali">
+“kassa nu kho, ānanda, ajja pariyāyo bhikkhuniyo ovadituṁ pariyāyenā”ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Bạch Thế Tôn, chính là phiên của Nandaka thay phiên giáo giới Tỷ-kheo-ni.<br>
+<span lang="pi" class="pali">
+“Sabbeheva, bhante, kato pariyāyo bhikkhuniyo ovadituṁ pariyāyena.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Bạch Thế Tôn, Tôn giả Nandaka không muốn thay phiên giáo giới Tỷ-kheo-ni”.<br>
+<span lang="pi" class="pali">
+Ayaṁ, bhante, āyasmā nandako na icchati bhikkhuniyo ovadituṁ pariyāyenā”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Rồi Thế Tôn cho gọi Tôn giả Nandaka:<br>
+<span lang="pi" class="pali">
+Atha kho bhagavā āyasmantaṁ nandakaṁ āmantesi:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Này Nandaka, hãy giáo giới Tỷ-kheo-ni!<br>
+<span lang="pi" class="pali">
+“ovada, nandaka, bhikkhuniyo;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Nandaka, hãy giảng dạy Tỷ-kheo-ni!<br>
+<span lang="pi" class="pali">
+anusāsa, nandaka, bhikkhuniyo;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Bà-la-môn, hãy thuyết pháp cho Tỷ-kheo-ni!”<br>
+<span lang="pi" class="pali">
+karohi tvaṁ, brāhmaṇa, bhikkhunīnaṁ dhammiṁ kathan”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Thưa vâng, bạch Thế Tôn”.Tôn giả Nandaka ấy vâng đáp Thế Tôn, vào buổi sáng đắp y, cầm y bát, đi vào Sāvatthī để khất thực.<br>
+<span lang="pi" class="pali">
+“Evaṁ, bhante”ti kho āyasmā nandako bhagavato paṭissutvā pubbaṇhasamayaṁ nivāsetvā pattacīvaramādāya sāvatthiṁ piṇḍāya pāvisi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Sau khi khất thực ở Sāvatthī xong, sau buổi ăn, trên con đường khất thực trở về, không có người thứ hai cùng đi, đi đến Rajakarama (Vương Tự).<br>
+<span lang="pi" class="pali">
+Sāvatthiyaṁ piṇḍāya caritvā pacchābhattaṁ piṇḍapātapaṭikkanto attadutiyo yena rājakārāmo tenupasaṅkami.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Các Tỷ-kheo-ni ấy thấy Tôn giả Nandaka từ xa đi đến, sau khi thấy liền sửa soạn chỗ ngồi và sắp đặt nước rửa chân.<br>
+<span lang="pi" class="pali">
+Addasaṁsu kho tā bhikkhuniyo āyasmantaṁ nandakaṁ dūratova āgacchantaṁ. Disvāna āsanaṁ paññāpesuṁ, udakañca pādānaṁ upaṭṭhapesuṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Tôn giả Nandaka ngồi trên chỗ ngồi đã soạn sẵn;<br>
+<span lang="pi" class="pali">
+Nisīdi kho āyasmā nandako paññatte āsane.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+sau khi ngồi, liền rửa chân.<br>
+<span lang="pi" class="pali">
+Nisajja pāde pakkhālesi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Các Tỷ-kheo-ni ấy sau khi đảnh lễ Tôn giả Nandaka, liền ngồi xuống một bên.<br>
+<span lang="pi" class="pali">
+Tāpi kho bhikkhuniyo āyasmantaṁ nandakaṁ abhivādetvā ekamantaṁ nisīdiṁsu.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Tôn giả Nandaka nói với các Tỷ-kheo-ni đang ngồi một bên:<br>
+<span lang="pi" class="pali">
+Ekamantaṁ nisinnā kho tā bhikkhuniyo āyasmā nandako etadavoca:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Các Hiền tỷ, sẽ có cuộc luận thuyết bằng cách đặt câu hỏi.<br>
+<span lang="pi" class="pali">
+“paṭipucchakathā kho, bhaginiyo, bhavissati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ở đây, những ai biết, hãy trả lời: ‘Tôi biết’. Những ai không biết, hãy trả lời: ‘Tôi không biết’.<br>
+<span lang="pi" class="pali">
+Tattha ājānantīhi: ‘ājānāmā’ tissa vacanīyaṁ, na ājānantīhi: ‘na ājānāmā’ tissa vacanīyaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Nếu có ai nghi ngờ hay nghi hoặc, ở đây, ta cần được hỏi như sau: ‘Thưa Tôn giả, sự việc này là thế nào? Ý nghĩa việc này là gì’?”<br>
+<span lang="pi" class="pali">
+Yassā vā panassa kaṅkhā vā vimati vā ahameva tattha paṭipucchitabbo: ‘idaṁ, bhante, kathaṁ; imassa kvattho’”ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Thưa Tôn giả, cho đến đây, chúng con rất hoan hỷ và thỏa mãn với Tôn giả Nandaka, vì rằng Tôn giả đã mời chúng con (hỏi)”.<br>
+<span lang="pi" class="pali">
+“Ettakenapi mayaṁ, bhante, ayyassa nandakassa attamanā abhiraddhā yaṁ no ayyo nandako pavāretī”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Các Hiền tỷ, các Hiền tỷ nghĩ thế nào? Mắt là thường hay vô thường?”<br>
+<span lang="pi" class="pali">
+“Taṁ kiṁ maññatha, bhaginiyo, cakkhu niccaṁ vā aniccaṁ vā”ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Thưa Tôn giả, vô thường”.<br>
+<span lang="pi" class="pali">
+“Aniccaṁ, bhante”.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Cái gì vô thường, là khổ hay lạc?”<br>
+<span lang="pi" class="pali">
+“Yaṁ panāniccaṁ dukkhaṁ vā taṁ sukhaṁ vā”ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Thưa Tôn giả, là khổ.”<br>
+<span lang="pi" class="pali">
+“Dukkhaṁ, bhante”.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Cái gì vô thường, khổ, chịu sự biến hoại, thời có hợp lý chăng khi xem cái ấy: ‘Cái này là của tôi, cái này là tôi, cái này là tự ngã của tôi’?”<br>
+<span lang="pi" class="pali">
+“Yaṁ panāniccaṁ dukkhaṁ vipariṇāmadhammaṁ, kallaṁ nu taṁ samanupassituṁ: ‘etaṁ mama, esohamasmi, eso me attā’”ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Thưa không vậy, Tôn giả.”<br>
+<span lang="pi" class="pali">
+“No hetaṁ, bhante”.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Các Hiền tỷ, các Hiền tỷ nghĩ thế nào?<br>
+<span lang="pi" class="pali">
+“Taṁ kiṁ maññatha, bhaginiyo,<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Tai là thường hay vô thường?”<br>
+<span lang="pi" class="pali">
+sotaṁ niccaṁ vā aniccaṁ vā”ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Thưa Tôn giả, vô thường …<br>
+<span lang="pi" class="pali">
+“Aniccaṁ, bhante …pe…<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Mũi là thường hay vô thường?”<br>
+<span lang="pi" class="pali">
+ghānaṁ niccaṁ vā aniccaṁ vā”ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Thưa Tôn giả, vô thường ….<br>
+<span lang="pi" class="pali">
+“Aniccaṁ, bhante” …<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Lưỡi là thường hay vô thường?”<br>
+<span lang="pi" class="pali">
+“jivhā niccā vā aniccā vā”ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Thưa Tôn giả, vô thường” …<br>
+<span lang="pi" class="pali">
+“Aniccā, bhante” …<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Thân là thường hay vô thường”?<br>
+<span lang="pi" class="pali">
+“kāyo nicco vā anicco vā”ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Thưa Tôn giả, vô thường” …<br>
+<span lang="pi" class="pali">
+“Anicco, bhante” …<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Ý là thường hay vô thường?”<br>
+<span lang="pi" class="pali">
+“mano nicco vā anicco vā”ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Thưa Tôn giả, vô thường”.<br>
+<span lang="pi" class="pali">
+“Anicco, bhante”.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Cái gì vô thường, là khổ hay lạc?”<br>
+<span lang="pi" class="pali">
+“Yaṁ panāniccaṁ dukkhaṁ vā taṁ sukhaṁ vā”ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Thưa Tôn giả, là khổ”.<br>
+<span lang="pi" class="pali">
+“Dukkhaṁ, bhante”.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Cái gì vô thường, khổ, chịu sự biến hoại, thời có hợp lý chăng khi quán cái ấy: ‘Cái này là của tôi, cái này là tôi, cái này là tự ngã của tôi’?”<br>
+<span lang="pi" class="pali">
+“Yaṁ panāniccaṁ dukkhaṁ vipariṇāmadhammaṁ, kallaṁ nu taṁ samanupassituṁ: ‘etaṁ mama, esohamasmi, eso me attā’”ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Thưa không vậy, Tôn giả”. “Vì sao vậy?”<br>
+<span lang="pi" class="pali">
+“No hetaṁ, bhante”. “Taṁ kissa hetu”?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Trước đây, thưa Tôn giả, chúng con đã khéo thấy như chơn, với chánh trí tuệ rằng: ‘Sáu nội xứ này là vô thường’.”<br>
+<span lang="pi" class="pali">
+“Pubbeva no etaṁ, bhante, yathābhūtaṁ sammappaññāya sudiṭṭhaṁ: ‘itipime cha ajjhattikā āyatanā aniccā’”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Lành thay, lành thay, các Hiền tỷ!<br>
+<span lang="pi" class="pali">
+“Sādhu sādhu, bhaginiyo.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Chính phải là như vậy, là cái nhìn như chơn, với chánh trí tuệ của vị Thánh đệ tử.<br>
+<span lang="pi" class="pali">
+Evañhetaṁ, bhaginiyo, hoti ariyasāvakassa yathābhūtaṁ sammappaññāya passato.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Chư Hiền tỷ, các Hiền tỷ nghĩ thế nào? Sắc là thường hay vô thường?”<br>
+<span lang="pi" class="pali">
+Taṁ kiṁ maññatha, bhaginiyo, rūpā niccā vā aniccā vā”ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Thưa Tôn giả, vô thường”.<br>
+<span lang="pi" class="pali">
+“Aniccā, bhante”.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Cái gì vô thường, là khổ hay lạc?”<br>
+<span lang="pi" class="pali">
+“Yaṁ panāniccaṁ dukkhaṁ vā taṁ sukhaṁ vā”ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Thưa Tôn giả, là khổ”.<br>
+<span lang="pi" class="pali">
+“Dukkhaṁ, bhante”.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Cái gì vô thường, khổ, chịu sự biến hoại, thời có hợp lý chăng khi quán cái ấy: ‘Cái này là của tôi, cái này là tôi, cái này là tự ngã của tôi’?”<br>
+<span lang="pi" class="pali">
+“Yaṁ panāniccaṁ dukkhaṁ vipariṇāmadhammaṁ, kallaṁ nu taṁ samanupassituṁ: ‘etaṁ mama, esohamasmi, eso me attā’”ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Thưa không vậy, Tôn giả”.<br>
+<span lang="pi" class="pali">
+“No hetaṁ, bhante”.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Chư Hiền tỷ, các Hiền tỷ nghĩ thế nào?<br>
+<span lang="pi" class="pali">
+“Taṁ kiṁ maññatha, bhaginiyo,<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Tiếng là thường hay vô thường?”<br>
+<span lang="pi" class="pali">
+saddā niccā vā aniccā vā”ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Thưa Tôn giả, vô thường …<br>
+<span lang="pi" class="pali">
+“Aniccā, bhante …pe…<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Hương là thường hay vô thường?”<br>
+<span lang="pi" class="pali">
+gandhā niccā vā aniccā vā”ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Thưa Tôn giả, vô thường”…<br>
+<span lang="pi" class="pali">
+“Aniccā, bhante” …<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Vị là thường hay vô thường?”<br>
+<span lang="pi" class="pali">
+“rasā niccā vā aniccā vā”ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Thưa Tôn giả, vô thường”…<br>
+<span lang="pi" class="pali">
+“Aniccā, bhante” …<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Xúc là thường hay vô thường?”<br>
+<span lang="pi" class="pali">
+“phoṭṭhabbā niccā vā aniccā vā”ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Thưa Tôn giả, vô thường”…<br>
+<span lang="pi" class="pali">
+“Aniccā, bhante” …<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Pháp là thường hay vô thường?”<br>
+<span lang="pi" class="pali">
+“dhammā niccā vā aniccā vā”ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Thưa Tôn giả, vô thường”.<br>
+<span lang="pi" class="pali">
+“Aniccā, bhante”.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Cái gì vô thường là khổ hay lạc?”<br>
+<span lang="pi" class="pali">
+“Yaṁ panāniccaṁ dukkhaṁ vā taṁ sukhaṁ vā”ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Thưa Tôn giả, là khổ”.<br>
+<span lang="pi" class="pali">
+“Dukkhaṁ, bhante”.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Cái gì vô thường, khổ, chịu sự biến hoại, thời có hợp lý chăng khi quán cái ấy: ‘Cái này là của tôi, cái này là tôi, cái này là tự ngã của tôi’?”<br>
+<span lang="pi" class="pali">
+“Yaṁ panāniccaṁ dukkhaṁ vipariṇāmadhammaṁ, kallaṁ nu taṁ samanupassituṁ: ‘etaṁ mama, esohamasmi, eso me attā’”ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Thưa không vậy, Tôn giả”. “Vì sao vậy?”<br>
+<span lang="pi" class="pali">
+“No hetaṁ, bhante”. “Taṁ kissa hetu”?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Trước đây, thưa Tôn giả, chúng con đã khéo thấy như chơn, với chánh trí tuệ rằng: ‘Sáu ngoại xứ này là vô thường’.”<br>
+<span lang="pi" class="pali">
+“Pubbeva no etaṁ, bhante, yathābhūtaṁ sammappaññāya sudiṭṭhaṁ: ‘itipime cha bāhirā āyatanā aniccā’”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Lành thay, lành thay, các Hiền tỷ!<br>
+<span lang="pi" class="pali">
+“Sādhu sādhu, bhaginiyo.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Chính phải là như vậy, là cái nhìn như chơn, với chánh trí tuệ của vị Thánh đệ tử.<br>
+<span lang="pi" class="pali">
+Evañhetaṁ, bhaginiyo, hoti ariyasāvakassa yathābhūtaṁ sammappaññāya passato.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Chư Hiền tỷ, các Hiền tỷ nghĩ thế nào?<br>
+<span lang="pi" class="pali">
+Taṁ kiṁ maññatha, bhaginiyo,<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Nhãn thức là thường hay vô thường?”<br>
+<span lang="pi" class="pali">
+cakkhuviññāṇaṁ niccaṁ vā aniccaṁ vā”ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Thưa Tôn giả, vô thường”.<br>
+<span lang="pi" class="pali">
+“Aniccaṁ, bhante”.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Cái gì vô thường, là khổ hay lạc?”<br>
+<span lang="pi" class="pali">
+“Yaṁ panāniccaṁ dukkhaṁ vā taṁ sukhaṁ vā”ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Thưa Tôn giả, là khổ.”<br>
+<span lang="pi" class="pali">
+“Dukkhaṁ, bhante”.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Cái gì vô thường, khổ, chịu sự biến hoại, thời có hợp lý chăng khi quán cái ấy: ‘Cái này là của tôi, cái này là tôi, cái này là tự ngã của tôi’?”<br>
+<span lang="pi" class="pali">
+“Yaṁ panāniccaṁ dukkhaṁ vipariṇāmadhammaṁ, kallaṁ nu taṁ samanupassituṁ: ‘etaṁ mama, esohamasmi, eso me attā’”ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Thưa không vậy, Tôn giả”.<br>
+<span lang="pi" class="pali">
+“No hetaṁ, bhante”.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Này các Hiền tỷ, nhĩ thức là thường hay vô thường?”<br>
+<span lang="pi" class="pali">
+“Taṁ kiṁ maññatha, bhaginiyo, sotaviññāṇaṁ niccaṁ vā aniccaṁ vā”ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Thưa Tôn giả, vô thường”.<br>
+<span lang="pi" class="pali">
+“Aniccaṁ, bhante …pe…<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Tỷ thức là thường hay vô thường?”<br>
+<span lang="pi" class="pali">
+ghānaviññāṇaṁ niccaṁ vā aniccaṁ vā”ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Thưa Tôn giả, vô thường”…<br>
+<span lang="pi" class="pali">
+“Aniccaṁ, bhante” …<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Thiệt thức là thường hay vô thường?”<br>
+<span lang="pi" class="pali">
+“jivhāviññāṇaṁ niccaṁ vā aniccaṁ vā”ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Thưa Tôn giả, vô thường”…<br>
+<span lang="pi" class="pali">
+“Aniccaṁ, bhante” …<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Thân thức là thường hay vô thường?”<br>
+<span lang="pi" class="pali">
+“kāyaviññāṇaṁ niccaṁ vā aniccaṁ vā”ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Thưa Tôn giả, vô thường”…<br>
+<span lang="pi" class="pali">
+“Aniccaṁ, bhante” …<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Ý thức là thường hay vô thường?”<br>
+<span lang="pi" class="pali">
+“manoviññāṇaṁ niccaṁ vā aniccaṁ vā”ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Thưa Tôn giả, vô thường”.<br>
+<span lang="pi" class="pali">
+“Aniccaṁ, bhante”.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Cái gì vô thường, là khổ hay lạc?”<br>
+<span lang="pi" class="pali">
+“Yaṁ panāniccaṁ dukkhaṁ vā taṁ sukhaṁ vāti”?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Thưa Tôn giả, là khổ.”<br>
+<span lang="pi" class="pali">
+“Dukkhaṁ, bhante”.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Cái gì vô thường, khổ, chịu sự biến hoại, thời có hợp lý chăng khi quán cái ấy: ‘Cái này là của tôi, cái này là tôi, cái này là tự ngã của tôi’?”<br>
+<span lang="pi" class="pali">
+“Yaṁ panāniccaṁ dukkhaṁ vipariṇāmadhammaṁ, kallaṁ nu taṁ samanupassituṁ: ‘etaṁ mama, esohamasmi, eso me attā’”ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Thưa không vậy, Tôn giả”. “Vì sao vậy?”<br>
+<span lang="pi" class="pali">
+“No hetaṁ, bhante”. “Taṁ kissa hetu”?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Trước đây, thưa Tôn giả, chúng con đã khéo thấy như chơn, với chánh trí tuệ rằng: ‘Sáu thức thân này là vô thường’.”<br>
+<span lang="pi" class="pali">
+“Pubbeva no etaṁ, bhante, yathābhūtaṁ sammappaññāya sudiṭṭhaṁ: ‘itipime cha viññāṇakāyā aniccā’”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Lành thay, lành thay, chư Hiền tỷ!<br>
+<span lang="pi" class="pali">
+“Sādhu sādhu, bhaginiyo.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Chính phải là như vậy, là cái nhìn như chơn, với chánh trí tuệ của vị Thánh đệ tử.<br>
+<span lang="pi" class="pali">
+Evañhetaṁ, bhaginiyo, hoti ariyasāvakassa yathābhūtaṁ sammappaññāya passato.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ví như, chư Hiền tỷ, một ngọn đèn dầu được đốt cháy; dầu là vô thường, chịu sự biến hoại; bấc là vô thường, chịu sự biến hoại; ngọn lửa là vô thường, chịu sự biến hoại; ánh sáng là vô thường, chịu sự biến hoại.<br>
+<span lang="pi" class="pali">
+Seyyathāpi, bhaginiyo, telappadīpassa jhāyato telampi aniccaṁ vipariṇāmadhammaṁ, vaṭṭipi aniccā vipariṇāmadhammā, accipi aniccā vipariṇāmadhammā, ābhāpi aniccā vipariṇāmadhammā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Chư Hiền tỷ, nếu có ai nói rằng:<br>
+<span lang="pi" class="pali">
+Yo nu kho, bhaginiyo, evaṁ vadeyya:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Ngọn đèn dầu này được đốt cháy; dầu là vô thường, chịu sự biến hoại; bấc là vô thường, chịu sự biến hoại; ngọn lửa là vô thường, chịu sự biến hoại;<br>
+<span lang="pi" class="pali">
+‘amussa telappadīpassa jhāyato telampi aniccaṁ vipariṇāmadhammaṁ, vaṭṭipi aniccā vipariṇāmadhammā, accipi aniccā vipariṇāmadhammā;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+nhưng ánh sáng ấy là thường còn, thường trú, thường hằng không chịu sự biến hoại’;<br>
+<span lang="pi" class="pali">
+yā ca khvāssa ābhā sā niccā dhuvā sassatā avipariṇāmadhammā’ti;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+chư Hiền tỷ, nói như vậy là có nói chân chánh không?”<br>
+<span lang="pi" class="pali">
+sammā nu kho so, bhaginiyo, vadamāno vadeyyā”ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Thưa không vậy, Tôn giả”. “Vì sao vậy? “<br>
+<span lang="pi" class="pali">
+“No hetaṁ, bhante”. “Taṁ kissa hetu”?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Thưa Tôn giả, ngọn đèn dầu này được đốt cháy; dầu là vô thường, chịu sự biến hoại; bấc cũng là vô thường, chịu sự biến hoại; ngọn lửa cũng là vô thường, chịu sự biến hoại.<br>
+<span lang="pi" class="pali">
+“Amussa hi, bhante, telappadīpassa jhāyato telampi aniccaṁ vipariṇāmadhammaṁ, vaṭṭipi aniccā vipariṇāmadhammā, accipi aniccā vipariṇāmadhammā;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Còn nói gì đến ánh sáng, cũng là vô thường, chịu sự biến hoại!”<br>
+<span lang="pi" class="pali">
+pagevassa ābhā aniccā vipariṇāmadhammā”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Như vậy là phải, này các Hiền tỷ! Nếu có ai nói như sau:<br>
+<span lang="pi" class="pali">
+“Evameva kho, bhaginiyo, yo nu kho evaṁ vadeyya:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Sáu ngoại xứ này là vô thường, và do duyên sáu ngoại xứ này, tôi có cảm thọ, lạc thọ, khổ thọ hay bất khổ bất lạc thọ; cảm thọ ấy là thường còn, thường trú, thường hằng, không chịu sự biến hoại’;<br>
+<span lang="pi" class="pali">
+‘cha khome ajjhattikā āyatanā aniccā; yañca kho cha ajjhattike āyatane paṭicca paṭisaṁvedeti sukhaṁ vā dukkhaṁ vā adukkhamasukhaṁ vā taṁ niccaṁ dhuvaṁ sassataṁ avipariṇāmadhamman’ti;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+này các Hiền tỷ, người ấy có nói một cách chân chánh không?”<br>
+<span lang="pi" class="pali">
+sammā nu kho so, bhaginiyo, vadamāno vadeyyā”ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Thưa không, thưa Tôn giả”. “Vì sao vậy?”<br>
+<span lang="pi" class="pali">
+“No hetaṁ, bhante”. “Taṁ kissa hetu”?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Thưa Tôn giả, do duyên cái này, cái này cảm thọ như thế này, như thế này khởi lên.<br>
+<span lang="pi" class="pali">
+“Tajjaṁ tajjaṁ, bhante, paccayaṁ paṭicca tajjā tajjā vedanā uppajjanti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Do diệt các duyên như thế này, như thế này, các cảm thọ như thế này, như thế này cũng biến diệt”.<br>
+<span lang="pi" class="pali">
+Tajjassa tajjassa paccayassa nirodhā tajjā tajjā vedanā nirujjhantī”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Lành thay, lành thay, các Hiền tỷ!<br>
+<span lang="pi" class="pali">
+“Sādhu sādhu, bhaginiyo.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Chính phải là như vậy, là cái nhìn như chơn với chánh trí tuệ của vị Thánh đệ tử.<br>
+<span lang="pi" class="pali">
+Evañhetaṁ, bhaginiyo, hoti ariyasāvakassa yathābhūtaṁ sammappaññāya passato.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ví như, này các Hiền tỷ, có cây to lớn đứng thẳng, có lõi cây, với rễ vô thường, chịu sự biến hoại, với thân cây vô thường, chịu sự biến hoại, với cành lá vô thường, chịu sự biến hoại, với bóng cây vô thường, chịu sự biến hoại.<br>
+<span lang="pi" class="pali">
+Seyyathāpi, bhaginiyo, mahato rukkhassa tiṭṭhato sāravato mūlampi aniccaṁ vipariṇāmadhammaṁ, khandhopi anicco vipariṇāmadhammo, sākhāpalāsampi aniccaṁ vipariṇāmadhammaṁ, chāyāpi aniccā vipariṇāmadhammā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Nếu có người nói như sau:<br>
+<span lang="pi" class="pali">
+Yo nu kho, bhaginiyo, evaṁ vadeyya:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Có cây lớn đứng thẳng có lõi cây này, với rễ vô thường, chịu sự biến hoại, với thân cây vô thường, chịu sự biến hoại, với cành lá vô thường, chịu sự biến hoại, nhưng bóng mát của cây ấy là thường còn, thường trú, thường hằng, không chịu biến hoại’;<br>
+<span lang="pi" class="pali">
+‘amussa mahato rukkhassa tiṭṭhato sāravato mūlampi aniccaṁ vipariṇāmadhammaṁ, khandhopi anicco vipariṇāmadhammo, sākhāpalāsampi aniccaṁ vipariṇāmadhammaṁ, yā ca khvāssa chāyā sā niccā dhuvā sassatā avipariṇāmadhammā’ti;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+này các Hiền tỷ, người ấy có nói một cách chân chánh không?”<br>
+<span lang="pi" class="pali">
+sammā nu kho so, bhaginiyo, vadamāno vadeyyā”ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Thưa không, thưa Tôn giả”. “Vì sao vậy?”<br>
+<span lang="pi" class="pali">
+“No hetaṁ, bhante”. “Taṁ kissa hetu”?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Thưa Tôn giả, cây to lớn đứng thẳng có lõi cây này, có rễ vô thường, chịu sự biến hoại, có thân cây vô thường; chịu sự biến hoại, có cành lá vô thường, chịu sự biến hoại.<br>
+<span lang="pi" class="pali">
+“Amussa hi, bhante, mahato rukkhassa tiṭṭhato sāravato mūlampi aniccaṁ vipariṇāmadhammaṁ, khandhopi anicco vipariṇāmadhammo, sākhāpalāsampi aniccaṁ vipariṇāmadhammaṁ;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Còn nói gì đến bóng mát, cũng là vô thường, chịu sự biến hoại!”<br>
+<span lang="pi" class="pali">
+pagevassa chāyā aniccā vipariṇāmadhammā”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Như vậy là phải, này chư Hiền tỷ! Nếu có ai nói như sau:<br>
+<span lang="pi" class="pali">
+“Evameva kho, bhaginiyo, yo nu kho evaṁ vadeyya:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Sáu nội xứ này là vô thường, và do duyên sáu ngoại xứ này tôi cảm thọ, lạc thọ, khổ thọ hay bất khổ bất lạc thọ; cảm thọ ấy là thường còn, thường trú, thường hằng, không chịu sự biến hoại’;<br>
+<span lang="pi" class="pali">
+‘cha khome bāhirā āyatanā aniccā. Yañca kho cha bāhire āyatane paṭicca paṭisaṁvedeti sukhaṁ vā dukkhaṁ vā adukkhamasukhaṁ vā taṁ niccaṁ dhuvaṁ sassataṁ avipariṇāmadhamman’ti;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+này các Hiền tỷ, người ấy có nói chân chánh không?”<br>
+<span lang="pi" class="pali">
+sammā nu kho so, bhaginiyo, vadamāno vadeyyā”ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Thưa không, thưa Tôn giả”. “Vì sao vậy?”<br>
+<span lang="pi" class="pali">
+“No hetaṁ, bhante”. “Taṁ kissa hetu”?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Thưa Tôn giả, do duyên cái này, cái này, cảm thọ như thế này, như thế này khởi lên.<br>
+<span lang="pi" class="pali">
+“Tajjaṁ tajjaṁ, bhante, paccayaṁ paṭicca tajjā tajjā vedanā uppajjanti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Do diệt các duyên như thế này, như thế này, các cảm thọ như thế này, như thế này cũng biến diệt”.<br>
+<span lang="pi" class="pali">
+Tajjassa tajjassa paccayassa nirodhā tajjā tajjā vedanā nirujjhantī”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Lành thay, lành thay, chư Hiền tỷ!<br>
+<span lang="pi" class="pali">
+“Sādhu sādhu, bhaginiyo.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Chính phải là như vậy, là cái nhìn như chơn với chánh trí tuệ của vị Thánh đệ tử.<br>
+<span lang="pi" class="pali">
+Evañhetaṁ, bhaginiyo, hoti ariyasāvakassa yathābhūtaṁ sammappaññāya passato.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ví như, này các Hiền tỷ, một người đồ tể giết bò thiện xảo hay người đệ tử; sau khi giết con bò, cắt con bò với con dao sắc bén của người đồ tể giết bò, mà không hư hại phần thịt ở trong, không hư hại phần da ngoài, rồi với con dao sắc bén của người đồ tể giết bò, cắt đứt, cắt đoạn, cắt tiệt mọi dây thịt phía trong; dây gân phía trong, dây khớp xương phía trong; sau khi cắt đứt, cắt đoạn, cắt tiệt và sau khi lột da ngoài, lại bao trùm con bò ấy với chính da bò ấy rồi nói:<br>
+<span lang="pi" class="pali">
+Seyyathāpi, bhaginiyo, dakkho goghātako vā goghātakantevāsī vā gāviṁ vadhitvā tiṇhena govikantanena gāviṁ saṅkanteyya anupahacca antaraṁ maṁsakāyaṁ anupahacca bāhiraṁ cammakāyaṁ. Yaṁ yadeva tattha antarā vilimaṁsaṁ antarā nhāru antarā bandhanaṁ taṁ tadeva tiṇhena govikantanena sañchindeyya saṅkanteyya sampakanteyya samparikanteyya. Sañchinditvā saṅkantitvā sampakantitvā samparikantitvā vidhunitvā bāhiraṁ cammakāyaṁ teneva cammena taṁ gāviṁ paṭicchādetvā evaṁ vadeyya:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Con bò này đã được dính liền với da này như trước’;<br>
+<span lang="pi" class="pali">
+‘tathevāyaṁ gāvī saṁyuttā imināva cammenā’ti;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+này các Hiền tỷ, nói như vậy có nói một cách chơn chánh không?”<br>
+<span lang="pi" class="pali">
+sammā nu kho so, bhaginiyo, vadamāno vadeyyā”ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Thưa không, thưa Tôn giả”. “Vì sao vậy?”<br>
+<span lang="pi" class="pali">
+“No hetaṁ, bhante”. “Taṁ kissa hetu”?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Dầu cho, thưa Tôn giả, người đồ tể giết bò thiện xảo ấy hay người đệ tử sau khi giết con bò … lại bao trùm con bò ấy với chính da bò ấy lại có thể nói như sau:<br>
+<span lang="pi" class="pali">
+“Amu hi, bhante, dakkho goghātako vā goghātakantevāsī vā gāviṁ vadhitvā tiṇhena govikantanena gāviṁ saṅkanteyya anupahacca antaraṁ maṁsakāyaṁ anupahacca bāhiraṁ cammakāyaṁ. Yaṁ yadeva tattha antarā vilimaṁsaṁ antarā nhāru antarā bandhanaṁ taṁ tadeva tiṇhena govikantanena sañchindeyya saṅkanteyya sampakanteyya samparikanteyya. Sañchinditvā saṅkantitvā sampakantitvā samparikantitvā vidhunitvā bāhiraṁ cammakāyaṁ teneva cammena taṁ gāviṁ paṭicchādetvā kiñcāpi so evaṁ vadeyya:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Con bò này đã được dính liền với da này như trước’,<br>
+<span lang="pi" class="pali">
+‘tathevāyaṁ gāvī saṁyuttā imināva cammenā’ti;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+con bò này đã bị lột ra khỏi da ấy”.<br>
+<span lang="pi" class="pali">
+atha kho sā gāvī visaṁyuttā teneva cammenā”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Ta làm ví dụ này, này các Hiền tỷ, là để nêu rõ ý nghĩa. Ở đây, ý nghĩa này như sau;<br>
+<span lang="pi" class="pali">
+“Upamā kho me ayaṁ, bhaginiyo, katā atthassa viññāpanāya. Ayamevettha attho;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Chư Hiền tỷ, ‘thịt ở trong’ là đồng nghĩa với sáu nội xứ.<br>
+<span lang="pi" class="pali">
+‘antarā maṁsakāyo’ti kho, bhaginiyo, channetaṁ ajjhattikānaṁ āyatanānaṁ adhivacanaṁ;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Chư Hiền tỷ, ‘da ở ngoài’ là đồng nghĩa với sáu ngoại xứ,<br>
+<span lang="pi" class="pali">
+‘bāhiro cammakāyo’ti kho, bhaginiyo, channetaṁ bāhirānaṁ āyatanānaṁ adhivacanaṁ;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Chư Hiền tỷ, ‘dây thịt phía trong, dây gân phía trong, dây khớp xương phía trong’ là đồng nghĩa với dục hỷ và tham.<br>
+<span lang="pi" class="pali">
+‘antarā vilimaṁsaṁ, antarā nhāru, antarā bandhanan’ti kho, bhaginiyo, nandīrāgassetaṁ adhivacanaṁ;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Chư Hiền tỷ, ‘con dao đồ tể giết bò sắc bén’ là đồng nghĩa với Thánh trí tuệ.<br>
+<span lang="pi" class="pali">
+‘tiṇhaṁ govikantanan’ti kho, bhaginiyo, ariyāyetaṁ paññāya adhivacanaṁ;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Với Thánh trí tuệ này cắt đứt, cắt đoạn, cắt tiệt nội phiền não, nội kiết sử, nội triền phược.<br>
+<span lang="pi" class="pali">
+yāyaṁ ariyā paññā antarā kilesaṁ antarā saṁyojanaṁ antarā bandhanaṁ sañchindati saṅkantati sampakantati samparikantati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Chư Hiền tỷ, có bảy giác chi, do tu tập, làm cho sung mãn bảy giác chi này, vị Tỷ-kheo với sự đoạn tận các lậu hoặc, tự mình chứng tri ngay trong hiện tại với thượng trí; chứng đạt và an trú, vô lậu tâm giải thoát, tuệ giải thoát. Thế nào là bảy?<br>
+<span lang="pi" class="pali">
+Satta kho panime, bhaginiyo, bojjhaṅgā, yesaṁ bhāvitattā bahulīkatattā bhikkhu āsavānaṁ khayā anāsavaṁ cetovimuttiṁ paññāvimuttiṁ diṭṭheva dhamme sayaṁ abhiññā sacchikatvā upasampajja viharati. Katame satta?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ở đây, chư Hiền tỷ, Tỷ-kheo tu tập niệm giác chi, y chỉ viễn ly, y chỉ ly tham, y chỉ đoạn diệt, hướng đến từ bỏ;<br>
+<span lang="pi" class="pali">
+Idha, bhaginiyo, bhikkhu satisambojjhaṅgaṁ bhāveti vivekanissitaṁ virāganissitaṁ nirodhanissitaṁ vossaggapariṇāmiṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+tu tập trạch pháp giác chi, …<br>
+<span lang="pi" class="pali">
+Dhammavicayasambojjhaṅgaṁ bhāveti …pe…<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+tu tập tinh tấn giác chi, …<br>
+<span lang="pi" class="pali">
+vīriyasambojjhaṅgaṁ bhāveti …<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+tu tập hỷ giác chi, …<br>
+<span lang="pi" class="pali">
+pītisambojjhaṅgaṁ bhāveti …<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+tu tập khinh an giác chi, …<br>
+<span lang="pi" class="pali">
+passaddhisambojjhaṅgaṁ bhāveti …<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+tu tập định giác chi, …<br>
+<span lang="pi" class="pali">
+samādhisambojjhaṅgaṁ bhāveti …<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+tu tập xả giác chi, y chỉ viễn ly, y chỉ ly tham, y chỉ đoạn diệt, hướng đến từ bỏ.<br>
+<span lang="pi" class="pali">
+upekkhāsambojjhaṅgaṁ bhāveti vivekanissitaṁ virāganissitaṁ nirodhanissitaṁ vossaggapariṇāmiṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Chư Hiền tỷ, bảy giác chi này, do tu tập, làm cho sung mãn, Tỷ-kheo với sự đoạn tận các lậu hoặc, sau khi tự mình chứng tri ngay trong hiện tại, với thượng trí chứng đạt và an trú vô lậu tâm giải thoát, tuệ giải thoát.”<br>
+<span lang="pi" class="pali">
+Ime kho, bhaginiyo, satta bojjhaṅgā, yesaṁ bhāvitattā bahulīkatattā bhikkhu āsavānaṁ khayā anāsavaṁ cetovimuttiṁ paññāvimuttiṁ diṭṭheva dhamme sayaṁ abhiññā sacchikatvā upasampajja viharatī”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Rồi Tôn giả Nandaka, sau khi giáo giới các Tỷ-kheo ni ấy với lời giáo giới, liền cho giải tán: “Chư Hiền tỷ, hãy đi về, giờ đã đến rồi”.<br>
+<span lang="pi" class="pali">
+Atha kho āyasmā nandako tā bhikkhuniyo iminā ovādena ovaditvā uyyojesi: “gacchatha, bhaginiyo; kālo”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Rồi các Tỷ-kheo ni ấy, sau khi hoan hỷ tín thọ lời Tôn giả Nandaka dạy, từ chỗ ngồi đứng dậy, đảnh lễ Tôn giả Nandaka, thân phía hữu hướng về Tôn giả, rồi đi đến Thế Tôn; sau khi đến đảnh lễ Thế Tôn rồi đứng một bên. Thế Tôn nói với các Tỷ-kheo-ni ấy đang đứng một bên:<br>
+<span lang="pi" class="pali">
+Atha kho tā bhikkhuniyo āyasmato nandakassa bhāsitaṁ abhinanditvā anumoditvā uṭṭhāyāsanā āyasmantaṁ nandakaṁ abhivādetvā padakkhiṇaṁ katvā yena bhagavā tenupasaṅkamiṁsu; upasaṅkamitvā bhagavantaṁ abhivādetvā ekamantaṁ aṭṭhaṁsu. Ekamantaṁ ṭhitā kho tā bhikkhuniyo bhagavā etadavoca:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Này các Tỷ-kheo-ni, hãy đi. Giờ đã đến rồi”.<br>
+<span lang="pi" class="pali">
+“gacchatha, bhikkhuniyo; kālo”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Rồi các Tỷ-kheo-ni ấy, sau khi đảnh lễ Thế Tôn, thân phía hữu hướng về Ngài rồi ra đi.<br>
+<span lang="pi" class="pali">
+Atha kho tā bhikkhuniyo bhagavantaṁ abhivādetvā padakkhiṇaṁ katvā pakkamiṁsu.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Rồi Thế Tôn, sau khi các Tỷ-kheo-ni ấy ra đi không bao lâu, gọi các vị Tỷ-kheo và nói:<br>
+<span lang="pi" class="pali">
+Atha kho bhagavā acirapakkantīsu tāsu bhikkhunīsu bhikkhū āmantesi:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Này các Tỷ-kheo, ví như vào ngày Bố-tát, ngày mười bốn, quần chúng không có nghi ngờ hay nghi hoặc rằng mặt trăng là không tròn hay mặt trăng là tròn vì khi ấy mặt trăng chưa tròn;<br>
+<span lang="pi" class="pali">
+“seyyathāpi, bhikkhave, tadahuposathe cātuddase na hoti bahuno janassa kaṅkhā vā vimati vā: ‘ūno nu kho cando, puṇṇo nu kho cando’ti, atha kho ūno cando tveva hoti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+cũng vậy, này các Tỷ-kheo, dầu cho các Tỷ-kheo-ni ấy hoan hỷ với bài thuyết pháp của Nandaka, nhưng tâm trí của họ chưa được thỏa mãn”.<br>
+<span lang="pi" class="pali">
+Evameva kho, bhikkhave, tā bhikkhuniyo nandakassa dhammadesanāya attamanā honti no ca kho paripuṇṇasaṅkappā”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Rồi Thế Tôn nói với Tôn giả Nandaka:<br>
+<span lang="pi" class="pali">
+Atha kho bhagavā āyasmantaṁ nandakaṁ āmantesi:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Vậy này Nandaka, ngày mai, Ông sẽ giáo giới cho các Tỷ-kheo-ni ấy với bài giáo giới”.<br>
+<span lang="pi" class="pali">
+“tena hi tvaṁ, nandaka, svepi tā bhikkhuniyo tenevovādena ovadeyyāsī”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Thưa vâng, bạch Thế Tôn”. Tôn giả Nandaka vâng đáp Thế Tôn.<br>
+<span lang="pi" class="pali">
+“Evaṁ, bhante”ti kho āyasmā nandako bhagavato paccassosi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Rồi Tôn giả Nandaka, sau khi đêm ấy đã mãn, vào buổi sáng đắp y, cầm y bát, đi vào Sāvatthī (Xá-vệ) để khất thực.<br>
+<span lang="pi" class="pali">
+Atha kho āyasmā nandako tassā rattiyā accayena pubbaṇhasamayaṁ nivāsetvā pattacīvaramādāya sāvatthiṁ piṇḍāya pāvisi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Sau khi đi khất thực ở Sāvatthī xong, sau buổi ăn, trên con đường đi khất thực trở về, tự thân một mình đi đến Rajarama. Các vị Tỷ-kheo-ni ấy thấy Tôn giả Nandaka từ xa đi lại; sau khi thấy, liền sửa soạn chỗ ngồi và sắp đặt nước rửa chân. Tôn giả Nandaka ngồi trên chỗ đã soạn sẵn; sau khi ngồi, liền rửa chân. Các vị Tỷ-kheo-ni ấy đảnh lễ Tôn giả Nandaka rồi ngồi xuống một bên. Tôn giả Nandaka nói với các Tỷ-kheo-ni ấy đang ngồi một bên:<br>
+<span lang="pi" class="pali">
+Sāvatthiyaṁ piṇḍāya caritvā pacchābhattaṁ piṇḍapātapaṭikkanto attadutiyo yena rājakārāmo tenupasaṅkami. Addasaṁsu kho tā bhikkhuniyo āyasmantaṁ nandakaṁ dūratova āgacchantaṁ. Disvāna āsanaṁ paññāpesuṁ, udakañca pādānaṁ upaṭṭhapesuṁ. Nisīdi kho āyasmā nandako paññatte āsane. Nisajja pāde pakkhālesi. Tāpi kho bhikkhuniyo āyasmantaṁ nandakaṁ abhivādetvā ekamantaṁ nisīdiṁsu. Ekamantaṁ nisinnā kho tā bhikkhuniyo āyasmā nandako etadavoca:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Các Hiền tỷ, sẽ có cuộc luận thuyết bằng cách đặt câu hỏi.<br>
+<span lang="pi" class="pali">
+“paṭipucchakathā kho, bhaginiyo, bhavissati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ở đây, những ai biết hãy trả lời: ‘Tôi biết’. Những ai không biết, hãy trả lời ‘Tôi không biết’.<br>
+<span lang="pi" class="pali">
+Tattha ājānantīhi ‘ājānāmā’ tissa vacanīyaṁ, na ājānantīhi ‘na ājānāmā’ tissa vacanīyaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Nếu ai có nghi ngờ hay do dự, ở đây, ta cần được hỏi như sau: ‘Thưa Tôn giả, sự việc này là thế nào? Ý nghĩa việc này là gì?’”<br>
+<span lang="pi" class="pali">
+Yassā vā panassa kaṅkhā vā vimati vā, ahameva tattha paṭipucchitabbo: ‘idaṁ, bhante, kathaṁ; imassa kvattho’”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Thưa Tôn giả, cho đến đây, chúng con rất hoan hỷ và thỏa mãn với Tôn giả Nandaka, vì rằng Tôn giả đã mời chúng con (hỏi)!”<br>
+<span lang="pi" class="pali">
+“Ettakenapi mayaṁ, bhante, ayyassa nandakassa attamanā abhiraddhā yaṁ no ayyo nandako pavāretī”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Chư Hiền tỷ, các Hiền tỷ nghĩ thế nào? Mắt là thường hay vô thường?<br>
+<span lang="pi" class="pali">
+“Taṁ kiṁ maññatha, bhaginiyo, cakkhu niccaṁ vā aniccaṁ vā”ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Thưa Tôn giả, vô thường”.<br>
+<span lang="pi" class="pali">
+“Aniccaṁ, bhante”.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Cái gì vô thường, là khổ hay lạc?”<br>
+<span lang="pi" class="pali">
+“Yaṁ panāniccaṁ dukkhaṁ vā taṁ sukhaṁ vā”ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Thưa Tôn giả, là khổ.”<br>
+<span lang="pi" class="pali">
+“Dukkhaṁ, bhante”.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Cái gì vô thường, khổ, chịu sự biến hoại, thời có hợp lý chăng khi xem cái ấy: ‘Cái này là của tôi, cái này là tôi, cái này là tự ngã của tôi’?”<br>
+<span lang="pi" class="pali">
+“Yaṁ panāniccaṁ dukkhaṁ vipariṇāmadhammaṁ, kallaṁ nu taṁ samanupassituṁ: ‘etaṁ mama, esohamasmi, eso me attā’”ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Thưa không vậy, Tôn giả”.<br>
+<span lang="pi" class="pali">
+“No hetaṁ, bhante”.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Các Hiền tỷ, các Hiền tỷ nghĩ thế nào? Tai là thường hay vô thường?”<br>
+<span lang="pi" class="pali">
+“Taṁ kiṁ maññatha, bhaginiyo, sotaṁ niccaṁ vā aniccaṁ vā”ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Thưa Tôn giả, vô thường”.<br>
+<span lang="pi" class="pali">
+“Aniccaṁ, bhante …pe…<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Mũi là thường hay vô thường?”<br>
+<span lang="pi" class="pali">
+ghānaṁ niccaṁ vā aniccaṁ vā”ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Thưa Tôn giả, vô thường”.<br>
+<span lang="pi" class="pali">
+“Aniccaṁ, bhante …<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Lưỡi là thường hay vô thường?…<br>
+<span lang="pi" class="pali">
+jivhā …<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Thân là thường hay vô thường?…<br>
+<span lang="pi" class="pali">
+kāyo …<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ý là thường hay vô thường?”<br>
+<span lang="pi" class="pali">
+mano nicco vā anicco vā”ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Thưa Tôn giả, vô thường”.<br>
+<span lang="pi" class="pali">
+“Anicco, bhante”.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Cái gì vô thường, là khổ hay lạc?”<br>
+<span lang="pi" class="pali">
+“Yaṁ panāniccaṁ dukkhaṁ vā taṁ sukhaṁ vā”ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Thưa Tôn giả, là khổ”.<br>
+<span lang="pi" class="pali">
+“Dukkhaṁ, bhante”.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Cái gì vô thường, khổ, chịu sự biến hoại, thời có hợp lý chăng khi quán cái ấy: ‘Cái này là của tôi, cái này là tôi, cái này là tự ngã của tôi’?”<br>
+<span lang="pi" class="pali">
+“Yaṁ panāniccaṁ dukkhaṁ vipariṇāmadhammaṁ, kallaṁ nu taṁ samanupassituṁ: ‘etaṁ mama, esohamasmi, eso me attā’”ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Thưa không vậy, Tôn giả”. “Vì sao vậy?”<br>
+<span lang="pi" class="pali">
+“No hetaṁ, bhante”. “Taṁ kissa hetu”?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Trước đây, thưa Tôn giả, chúng con đã khéo thấy như chơn, với chánh trí tuệ rằng: ‘Sáu nội xứ này là vô thường’.”<br>
+<span lang="pi" class="pali">
+“Pubbeva no etaṁ, bhante, yathābhūtaṁ sammappaññāya sudiṭṭhaṁ: ‘itipime cha ajjhattikā āyatanā aniccā’”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Lành thay, lành thay, các Hiền tỷ!<br>
+<span lang="pi" class="pali">
+“Sādhu sādhu, bhaginiyo.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Chính phải là như vậy, là cái nhìn như chơn, với chánh trí tuệ của vị Thánh đệ tử.<br>
+<span lang="pi" class="pali">
+Evañhetaṁ, bhaginiyo, hoti ariyasāvakassa yathābhūtaṁ sammappaññāya passato.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Chư Hiền tỷ, các Hiền tỷ nghĩ thế nào? Sắc là thường hay vô thường?”<br>
+<span lang="pi" class="pali">
+Taṁ kiṁ maññatha, bhaginiyo, rūpā niccā vā aniccā vā”ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Thưa Tôn giả, vô thường.”<br>
+<span lang="pi" class="pali">
+“Aniccā, bhante”.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Cái gì vô thường, là khổ hay lạc?”<br>
+<span lang="pi" class="pali">
+“Yaṁ panāniccaṁ dukkhaṁ vā taṁ sukhaṁ vā”ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Thưa Tôn giả, là khổ.”<br>
+<span lang="pi" class="pali">
+“Dukkhaṁ, bhante”.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Cái gì vô thường, khổ, chịu sự biến hoại, thời có hợp lý chăng khi quán cái ấy: ‘Cái này là của tôi, cái này là tôi, cái này là tự ngã của tôi’?”<br>
+<span lang="pi" class="pali">
+“Yaṁ panāniccaṁ dukkhaṁ vipariṇāmadhammaṁ, kallaṁ nu taṁ samanupassituṁ: ‘etaṁ mama, esohamasmi, eso me attā’”ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Thưa không vậy, Tôn giả”.<br>
+<span lang="pi" class="pali">
+“No hetaṁ, bhante”.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Chư Hiền tỷ, các Hiền tỷ nghĩ thế nào? Tiếng là thường hay vô thường?”<br>
+<span lang="pi" class="pali">
+“Taṁ kiṁ maññatha, bhaginiyo, saddā niccā vā aniccā vā”ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Thưa Tôn giả, vô thường …<br>
+<span lang="pi" class="pali">
+“Aniccā, bhante …pe…<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Hương là thường hay vô thường?”<br>
+<span lang="pi" class="pali">
+gandhā niccā vā aniccā vā”ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Thưa Tôn giả, vô thường …<br>
+<span lang="pi" class="pali">
+“Aniccā, bhante …<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vị là thường hay vô thường?”<br>
+<span lang="pi" class="pali">
+rasā niccā vā aniccā vā”ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Thưa Tôn giả, vô thường …<br>
+<span lang="pi" class="pali">
+“Aniccā, bhante …<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Xúc là thường hay vô thường?”<br>
+<span lang="pi" class="pali">
+phoṭṭhabbā niccā vā aniccā vā”ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Thưa Tôn giả, vô thường …<br>
+<span lang="pi" class="pali">
+“Aniccā, bhante …<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Pháp là thường hay vô thường?”<br>
+<span lang="pi" class="pali">
+dhammā niccā vā aniccā vā”ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Thưa Tôn giả, vô thường.”<br>
+<span lang="pi" class="pali">
+“Aniccā, bhante”.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Cái gì vô thường, là khổ hay lạc?”<br>
+<span lang="pi" class="pali">
+“Yaṁ panāniccaṁ dukkhaṁ vā taṁ sukhaṁ vā”ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Thưa Tôn giả, là khổ.”<br>
+<span lang="pi" class="pali">
+“Dukkhaṁ, bhante”.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Cái gì vô thường, khổ, chịu sự biến hoại, thời có hợp lý chăng khi quán cái ấy: ‘Cái này là của tôi, cái này là tôi, cái này là tự ngã của tôi’?”<br>
+<span lang="pi" class="pali">
+“Yaṁ panāniccaṁ dukkhaṁ vipariṇāmadhammaṁ, kallaṁ nu taṁ samanupassituṁ: ‘etaṁ mama, esohamasmi, eso me attā’”ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Thưa không vậy, Tôn giả”. “Vì sao vậy?”<br>
+<span lang="pi" class="pali">
+“No hetaṁ, bhante”.“Taṁ kissa hetu”?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Trước đây, thưa Tôn giả, chúng con đã khéo thấy như chơn, với chánh trí tuệ rằng: ‘Sáu ngoại xứ này là vô thường’.”<br>
+<span lang="pi" class="pali">
+“Pubbeva no etaṁ, bhante, yathābhūtaṁ sammappaññāya sudiṭṭhaṁ: ‘itipime cha bāhirā āyatanā aniccā’”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Lành thay, lành thay, các Hiền tỷ!<br>
+<span lang="pi" class="pali">
+“Sādhu sādhu, bhaginiyo.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Chính phải là như vậy, là cái nhìn như chơn, với chánh trí tuệ của vị Thánh đệ tử.<br>
+<span lang="pi" class="pali">
+Evañhetaṁ, bhaginiyo, hoti ariyasāvakassa yathābhūtaṁ sammappaññāya passato.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Chư Hiền tỷ, các Hiền tỷ nghĩ thế nào? Nhãn thức là thường hay vô thường?<br>
+<span lang="pi" class="pali">
+Taṁ kiṁ maññatha, bhaginiyo, cakkhuviññāṇaṁ niccaṁ vā aniccaṁ vā”ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Thưa Tôn giả, vô thường …<br>
+<span lang="pi" class="pali">
+“Aniccaṁ, bhante …pe…<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này các Hiền tỷ, nhĩ thức là thường hay vô thường?”<br>
+<span lang="pi" class="pali">
+sotaviññāṇaṁ niccaṁ vā aniccaṁ vā”ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Thưa Tôn giả, vô thường …<br>
+<span lang="pi" class="pali">
+“Aniccaṁ, bhante …<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Tỷ thức là thường hay vô thường?”<br>
+<span lang="pi" class="pali">
+ghānaviññāṇaṁ niccaṁ vā aniccaṁ vā”ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Thưa Tôn giả, vô thường …<br>
+<span lang="pi" class="pali">
+“Aniccaṁ, bhante …<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Thiệt thức là thường hay vô thường?”<br>
+<span lang="pi" class="pali">
+jivhāviññāṇaṁ niccaṁ vā aniccaṁ vā”ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Thưa Tôn giả, vô thường …<br>
+<span lang="pi" class="pali">
+“Aniccaṁ, bhante …<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Thân thức là thường hay vô thường?”<br>
+<span lang="pi" class="pali">
+kāyaviññāṇaṁ niccaṁ vā aniccaṁ vā”ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Thưa Tôn giả, vô thường …<br>
+<span lang="pi" class="pali">
+“Aniccaṁ, bhante …<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ý thức là thường hay vô thường?”<br>
+<span lang="pi" class="pali">
+manoviññāṇaṁ niccaṁ vā aniccaṁ vā”ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Thưa Tôn giả, vô thường.”<br>
+<span lang="pi" class="pali">
+“Aniccaṁ, bhante”.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Cái gì vô thường, là khổ hay lạc?”<br>
+<span lang="pi" class="pali">
+“Yaṁ panāniccaṁ dukkhaṁ vā taṁ sukhaṁ vā”ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Thưa Tôn giả, là khổ”.<br>
+<span lang="pi" class="pali">
+“Dukkhaṁ, bhante”.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Cái gì vô thường, khổ, chịu sự biến hoại, thời có hợp lý chăng khi quán cái ấy: ‘Cái này là của tôi, cái này là tôi, cái này là tự ngã của tôi’?”<br>
+<span lang="pi" class="pali">
+“Yaṁ panāniccaṁ dukkhaṁ vipariṇāmadhammaṁ, kallaṁ nu taṁ samanupassituṁ: ‘etaṁ mama, esohamasmi, eso me attā’”ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Thưa không vậy, Tôn giả”. “Vì sao vậy?”<br>
+<span lang="pi" class="pali">
+“No hetaṁ, bhante”. “Taṁ kissa hetu”?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Trước đây, thưa Tôn giả, chúng con đã khéo thấy như chơn, với chánh trí tuệ rằng: ‘Sáu thức thân này là vô thường’.”<br>
+<span lang="pi" class="pali">
+“Pubbeva no etaṁ, bhante, yathābhūtaṁ sammappaññāya sudiṭṭhaṁ: ‘itipime cha viññāṇakāyā aniccā’”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Lành thay, lành thay, chư Hiền tỷ!<br>
+<span lang="pi" class="pali">
+“Sādhu sādhu, bhaginiyo.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Chính phải là như vậy, là cái nhìn như chơn, với chánh trí tuệ của vị Thánh đệ tử.<br>
+<span lang="pi" class="pali">
+Evañhetaṁ, bhaginiyo, hoti ariyasāvakassa yathābhūtaṁ sammappaññāya passato.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ví như, chư Hiền tỷ, một ngọn đèn dầu được đốt cháy; dầu là vô thường, chịu sự biến hoại; bấc là vô thường, chịu sự biến hoại; ngọn lửa là vô thường, chịu sự biến hoại; ánh sáng là vô thường, chịu sự biến hoại. Chư Hiền tỷ, nếu có ai nói rằng:<br>
+<span lang="pi" class="pali">
+Seyyathāpi, bhaginiyo, telappadīpassa jhāyato telampi aniccaṁ vipariṇāmadhammaṁ, vaṭṭipi aniccā vipariṇāmadhammā, accipi aniccā vipariṇāmadhammā, ābhāpi aniccā vipariṇāmadhammā. Yo nu kho, bhaginiyo, evaṁ vadeyya:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Ngọn đèn dầu này được đốt cháy; dầu là vô thường, chịu sự biến hoại; bấc là vô thường, chịu sự biến hoại; ngọn lửa là vô thường, chịu sự biến hoại; nhưng ánh sáng ấy là thường còn, thường trú, thường hằng không chịu sự biến hoại”;<br>
+<span lang="pi" class="pali">
+‘amussa telappadīpassa jhāyato telampi aniccaṁ vipariṇāmadhammaṁ, vaṭṭipi aniccā vipariṇāmadhammā, accipi aniccā vipariṇāmadhammā; yā ca khvāssa ābhā sā niccā dhuvā sassatā avipariṇāmadhammā’ti;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+chư Hiền tỷ, nói như vậy là có nói chân chánh không?”<br>
+<span lang="pi" class="pali">
+sammā nu kho so, bhaginiyo, vadamāno vadeyyā”ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Thưa không vậy, Tôn giả”. “Vì sao vậy?”<br>
+<span lang="pi" class="pali">
+“No hetaṁ, bhante”. “Taṁ kissa hetu”?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Thưa Tôn giả, ngọn đèn dầu này được đốt cháy; dầu là vô thường, chịu sự biến hoại; bấc cũng là vô thường, chịu sự biến hoại; ngọn lửa cũng là vô thường, chịu sự biến hoại. Còn nói gì đến ánh sáng, cũng là vô thường, chịu sự biến hoại!”<br>
+<span lang="pi" class="pali">
+“Amussa hi, bhante, telappadīpassa jhāyato telampi aniccaṁ vipariṇāmadhammaṁ, vaṭṭipi aniccā vipariṇāmadhammā, accipi aniccā vipariṇāmadhammā; pagevassa ābhā aniccā vipariṇāmadhammā”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Như vậy là phải, này các Hiền tỷ! Nếu có ai nói như sau:<br>
+<span lang="pi" class="pali">
+“Evameva kho, bhaginiyo, yo nu kho evaṁ vadeyya:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Sáu ngoại xứ này là vô thường, và do duyên sáu ngoại xứ này, tôi có cảm thọ, lạc thọ, khổ thọ hay bất khổ bất lạc thọ; cảm thọ ấy là thường còn, thường trú, thường hằng, không chịu sự biến hoại’;<br>
+<span lang="pi" class="pali">
+‘cha khome ajjhattikā āyatanā aniccā. Yañca kho cha ajjhattike āyatane paṭicca paṭisaṁvedeti sukhaṁ vā dukkhaṁ vā adukkhamasukhaṁ vā taṁ niccaṁ dhuvaṁ sassataṁ avipariṇāmadhamman’ti;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+này các Hiền tỷ, người ấy có nói một cách chân chánh không?”<br>
+<span lang="pi" class="pali">
+sammā nu kho so, bhaginiyo, vadamāno vadeyyā”ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Thưa không, thưa Tôn giả”. “Vì sao vậy?”<br>
+<span lang="pi" class="pali">
+“No hetaṁ, bhante”. “Taṁ kissa hetu”?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Thưa Tôn giả, do duyên cái này, cái này cảm thọ như thế này, như thế này khởi lên.<br>
+<span lang="pi" class="pali">
+“Tajjaṁ tajjaṁ, bhante, paccayaṁ paṭicca tajjā tajjā vedanā uppajjanti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Do diệt các duyên như thế này, như thế này, các cảm thọ như thế này, như thế này cũng biến diệt”.<br>
+<span lang="pi" class="pali">
+Tajjassa tajjassa paccayassa nirodhā tajjā tajjā vedanā nirujjhantī”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Lành thay, lành thay, các Hiền tỷ!<br>
+<span lang="pi" class="pali">
+“Sādhu sādhu, bhaginiyo.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Chính phải là như vậy, là cái nhìn như chơn với chánh trí tuệ của vị Thánh đệ tử.<br>
+<span lang="pi" class="pali">
+Evañhetaṁ, bhaginiyo, hoti ariyasāvakassa yathābhūtaṁ sammappaññāya passato.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ví như, này các Hiền tỷ, có cây to lớn đứng thẳng, có lõi cây, với rễ vô thường, chịu sự biến hoại, với thân cây vô thường, chịu sự biến hoại, với cành lá vô thường, chịu sự biến hoại, với bóng cây vô thường, chịu sự biến hoại. Nếu có người nói như sau:<br>
+<span lang="pi" class="pali">
+Seyyathāpi, bhaginiyo, mahato rukkhassa tiṭṭhato sāravato mūlampi aniccaṁ vipariṇāmadhammaṁ, khandhopi anicco vipariṇāmadhammo, sākhāpalāsampi aniccaṁ vipariṇāmadhammaṁ, chāyāpi aniccā vipariṇāmadhammā. Yo nu kho, bhaginiyo, evaṁ vadeyya:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Có cây lớn đứng thẳng có lõi cây này, với rễ vô thường, chịu sự biến hoại, với thân cây vô thường, chịu sự biến hoại, với cành lá vô thường, chịu sự biến hoại, nhưng bóng mát của cây ấy là thường còn, thường trú, thường hằng, không chịu biến hoại’;<br>
+<span lang="pi" class="pali">
+‘amussa mahato rukkhassa tiṭṭhato sāravato mūlampi aniccaṁ vipariṇāmadhammaṁ, khandhopi anicco vipariṇāmadhammo, sākhāpalāsampi aniccaṁ vipariṇāmadhammaṁ; yā ca khvāssa chāyā sā niccā dhuvā sassatā avipariṇāmadhammā’ti;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+này các Hiền tỷ, người ấy có nói một cách chân chánh không?”<br>
+<span lang="pi" class="pali">
+sammā nu kho so bhaginiyo, vadamāno vadeyyā”ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Thưa không, thưa Tôn giả”. “Vì sao vậy?”<br>
+<span lang="pi" class="pali">
+“No hetaṁ, bhante”. “Taṁ kissa hetu”?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Thưa Tôn giả, cây to lớn đứng thẳng có lõi cây này, có rễ vô thường, chịu sự biến hoại, có thân cây vô thường; chịu sự biến hoại, có cành lá vô thường, chịu sự biến hoại. Còn nói gì đến bóng mát, cũng là vô thường, chịu sự biến hoại!”<br>
+<span lang="pi" class="pali">
+“Amussa hi, bhante, mahato rukkhassa tiṭṭhato sāravato mūlampi aniccaṁ vipariṇāmadhammaṁ, khandhopi anicco vipariṇāmadhammo, sākhāpalāsampi aniccaṁ vipariṇāmadhammaṁ; pagevassa chāyā aniccā vipariṇāmadhammā”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Như vậy là phải, này chư Hiền tỷ! Nếu có ai nói như sau:<br>
+<span lang="pi" class="pali">
+“Evameva kho, bhaginiyo, yo nu kho evaṁ vadeyya:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Sáu nội xứ này là vô thường, và do duyên sáu ngoại xứ này tôi cảm thọ, lạc thọ, khổ thọ hay bất khổ bất lạc thọ; cảm thọ ấy là thường còn, thường trú, thường hằng, không chịu sự biến hoại’;<br>
+<span lang="pi" class="pali">
+‘cha khome bāhirā āyatanā aniccā. Yañca kho bāhire āyatane paṭicca paṭisaṁvedeti sukhaṁ vā dukkhaṁ vā adukkhamasukhaṁ vā taṁ niccaṁ dhuvaṁ sassataṁ avipariṇāmadhamman’ti;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+này các Hiền tỷ, người ấy có nói chân chánh không?”<br>
+<span lang="pi" class="pali">
+sammā nu kho so, bhaginiyo, vadamāno vadeyyā”ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Thưa không, thưa Tôn giả”. “Vì sao vậy?”<br>
+<span lang="pi" class="pali">
+“No hetaṁ, bhante”. “Taṁ kissa hetu”?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Thưa Tôn giả, do duyên cái này, cái này, cảm thọ như thế này, như thế này khởi lên. Do diệt các duyên như thế này, như thế này, các cảm thọ như thế này, như thế này cũng biến diệt”.<br>
+<span lang="pi" class="pali">
+“Tajjaṁ tajjaṁ, bhante, paccayaṁ paṭicca tajjā tajjā vedanā uppajjanti. Tajjassa tajjassa paccayassa nirodhā tajjā tajjā vedanā nirujjhantī”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Lành thay, lành thay, chư Hiền tỷ!<br>
+<span lang="pi" class="pali">
+“Sādhu sādhu, bhaginiyo.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Chính phải là như vậy, là cái nhìn như chơn với chánh trí tuệ của vị Thánh đệ tử.<br>
+<span lang="pi" class="pali">
+Evañhetaṁ, bhaginiyo, hoti ariyasāvakassa yathābhūtaṁ sammappaññāya passato.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ví như, này các Hiền tỷ, một người đồ tể giết bò thiện xảo hay người đệ tử; sau khi giết con bò, cắt con bò với con dao sắc bén của người đồ tể giết bò, mà không hư hại phần thịt ở trong, không hư hại phần da ngoài, rồi với con dao sắc bén của người đồ tể giết bò, cắt đứt, cắt đoạn, cắt tiệt mọi dây thịt phía trong; dây gân phía trong, dây khớp xương phía trong; sau khi cắt đứt, cắt đoạn, cắt tiệt và sau khi lột da ngoài, lại bao trùm con bò ấy với chính da bò ấy rồi nói:<br>
+<span lang="pi" class="pali">
+Seyyathāpi, bhaginiyo, dakkho goghātako vā goghātakantevāsī vā gāviṁ vadhitvā tiṇhena govikantanena gāviṁ saṅkanteyya anupahacca antaraṁ maṁsakāyaṁ anupahacca bāhiraṁ cammakāyaṁ. Yaṁ yadeva tattha antarā vilimaṁsaṁ antarā nhāru antarā bandhanaṁ taṁ tadeva tiṇhena govikantanena sañchindeyya saṅkanteyya sampakanteyya samparikanteyya. Sañchinditvā saṅkantitvā sampakantitvā samparikantitvā vidhunitvā bāhiraṁ cammakāyaṁ teneva cammena taṁ gāviṁ paṭicchādetvā evaṁ vadeyya:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Con bò này đã được dính liền với da này như trước’;<br>
+<span lang="pi" class="pali">
+‘tathevāyaṁ gāvī saṁyuttā imināva cammenā’ti;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+này các Hiền tỷ, nói như vậy có nói một cách chơn chánh không?”<br>
+<span lang="pi" class="pali">
+sammā nu kho so, bhaginiyo, vadamāno vadeyyā”ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Thưa không, thưa Tôn giả”. “Vì sao vậy?”<br>
+<span lang="pi" class="pali">
+“No hetaṁ, bhante”. “Taṁ kissa hetu”?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Dầu cho, thưa Tôn giả, người đồ tể giết bò thiện xảo ấy hay người đệ tử sau khi giết con bò … lại bao trùm con bò ấy với chính da bò ấy lại có thể nói như sau:<br>
+<span lang="pi" class="pali">
+“Amu hi, bhante, dakkho goghātako vā goghātakantevāsī vā gāviṁ vadhitvā tiṇhena govikantanena gāviṁ saṅkanteyya anupahacca antaraṁ maṁsakāyaṁ anupahacca bāhiraṁ cammakāyaṁ. Yaṁ yadeva tattha antarā vilimaṁsaṁ antarā nhāru antarā bandhanaṁ taṁ tadeva tiṇhena govikantanena sañchindeyya saṅkanteyya sampakanteyya samparikanteyya. Sañchinditvā saṅkantitvā sampakantitvā samparikantitvā vidhunitvā bāhiraṁ cammakāyaṁ teneva cammena taṁ gāviṁ paṭicchādetvā kiñcāpi so evaṁ vadeyya:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Con bò này đã được dính liền với da này như trước’, con bò này đã bị lột ra khỏi da ấy.”<br>
+<span lang="pi" class="pali">
+‘tathevāyaṁ gāvī saṁyuttā imināva cammenā’ti; atha kho sā gāvī visaṁyuttā teneva cammenā”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Ta làm ví dụ này, này các Hiền tỷ, là để nêu rõ ý nghĩa. Ở đây, ý nghĩa này như sau:<br>
+<span lang="pi" class="pali">
+“Upamā kho me ayaṁ, bhaginiyo, katā atthassa viññāpanāya ayamevettha attho.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Chư Hiền tỷ, ‘thịt ở trong’ là đồng nghĩa với sáu nội xứ.<br>
+<span lang="pi" class="pali">
+‘Antarā maṁsakāyo’ti kho, bhaginiyo, channetaṁ ajjhattikānaṁ āyatanānaṁ adhivacanaṁ;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Chư Hiền tỷ, ‘da ở ngoài’ là đồng nghĩa với sáu ngoại xứ,<br>
+<span lang="pi" class="pali">
+‘bāhiro cammakāyo’ti kho, bhaginiyo, channetaṁ bāhirānaṁ āyatanānaṁ adhivacanaṁ;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Chư Hiền tỷ, ‘dây thịt phía trong, dây gân phía trong, dây khớp xương phía trong’ là đồng nghĩa với dục hỷ và tham.<br>
+<span lang="pi" class="pali">
+‘antarā vilimaṁsaṁ antarā nhāru antarā bandhanan’ti kho, bhaginiyo, nandīrāgassetaṁ adhivacanaṁ;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Chư Hiền tỷ, ‘con dao đồ tể giết bò sắc bén’ là đồng nghĩa với Thánh trí tuệ.<br>
+<span lang="pi" class="pali">
+‘tiṇhaṁ govikantanan’ti kho, bhaginiyo, ariyāyetaṁ paññāya adhivacanaṁ;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Với Thánh trí tuệ này cắt đứt, cắt đoạn, cắt tiệt nội phiền não, nội kiết sử, nội triền phược.<br>
+<span lang="pi" class="pali">
+yāyaṁ ariyā paññā antarā kilesaṁ antarā saṁyojanaṁ antarā bandhanaṁ sañchindati saṅkantati sampakantati samparikantati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Chư Hiền tỷ, có bảy giác chi, do tu tập, làm cho sung mãn bảy giác chi này, vị Tỷ-kheo với sự đoạn tận các lậu hoặc, tự mình chứng tri ngay trong hiện tại với thượng trí; chứng đạt và an trú, vô lậu tâm giải thoát, tuệ giải thoát. Thế nào là bảy?<br>
+<span lang="pi" class="pali">
+Satta kho panime, bhaginiyo, bojjhaṅgā, yesaṁ bhāvitattā bahulīkatattā bhikkhu āsavānaṁ khayā anāsavaṁ cetovimuttiṁ paññāvimuttiṁ diṭṭheva dhamme sayaṁ abhiññā sacchikatvā upasampajja viharati. Katame satta?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ở đây, chư Hiền tỷ, Tỷ-kheo tu tập niệm giác chi, y chỉ viễn ly, y chỉ ly tham, y chỉ đoạn diệt, hướng đến từ bỏ;<br>
+<span lang="pi" class="pali">
+Idha, bhaginiyo, bhikkhu satisambojjhaṅgaṁ bhāveti vivekanissitaṁ virāganissitaṁ nirodhanissitaṁ vossaggapariṇāmiṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+tu tập trạch pháp giác chi, …<br>
+<span lang="pi" class="pali">
+Dhammavicayasambojjhaṅgaṁ bhāveti …pe…<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+tu tập tinh tấn giác chi, …<br>
+<span lang="pi" class="pali">
+vīriyasambojjhaṅgaṁ bhāveti …<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+tu tập hỷ giác chi, …<br>
+<span lang="pi" class="pali">
+pītisambojjhaṅgaṁ bhāveti …<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+tu tập khinh an giác chi, …<br>
+<span lang="pi" class="pali">
+passaddhisambojjhaṅgaṁ bhāveti …<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+tu tập định giác chi, …<br>
+<span lang="pi" class="pali">
+samādhisambojjhaṅgaṁ bhāveti …<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+tu tập xả giác chi, y chỉ viễn ly, y chỉ ly tham, y chỉ đoạn diệt, hướng đến từ bỏ.<br>
+<span lang="pi" class="pali">
+upekkhāsambojjhaṅgaṁ bhāveti vivekanissitaṁ virāganissitaṁ nirodhanissitaṁ vossaggapariṇāmiṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Chư Hiền tỷ, bảy giác chi này, do tu tập, làm cho sung mãn, Tỷ-kheo với sự đoạn tận các lậu hoặc, sau khi tự mình chứng tri ngay trong hiện tại, với thượng trí chứng đạt và an trú vô lậu tâm giải thoát, tuệ giải thoát”.<br>
+<span lang="pi" class="pali">
+Ime kho, bhaginiyo, satta bojjhaṅgā yesaṁ bhāvitattā bahulīkatattā bhikkhu āsavānaṁ khayā anāsavaṁ cetovimuttiṁ paññāvimuttiṁ diṭṭheva dhamme sayaṁ abhiññā sacchikatvā upasampajja viharatī”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Rồi Tôn giả Nandaka, sau khi giáo giới các Tỷ-kheo ni ấy với lời giáo giới, liền cho giải tán: “Chư Hiền tỷ, hãy đi về, giờ đã đến rồi”.<br>
+<span lang="pi" class="pali">
+Atha kho āyasmā nandako tā bhikkhuniyo iminā ovādena ovaditvā uyyojesi: “gacchatha, bhaginiyo; kālo”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Rồi các Tỷ-kheo ni ấy, sau khi hoan hỷ tín thọ lời Tôn giả Nandaka dạy, từ chỗ ngồi đứng dậy, đảnh lễ Tôn giả Nandaka, thân phía hữu hướng về Tôn giả, rồi đi đến Thế Tôn; sau khi đến đảnh lễ Thế Tôn rồi đứng một bên. Thế Tôn nói với các Tỷ-kheo-ni ấy đang đứng một bên:<br>
+<span lang="pi" class="pali">
+Atha kho tā bhikkhuniyo āyasmato nandakassa bhāsitaṁ abhinanditvā anumoditvā uṭṭhāyāsanā āyasmantaṁ nandakaṁ abhivādetvā padakkhiṇaṁ katvā yena bhagavā tenupasaṅkamiṁsu; upasaṅkamitvā bhagavantaṁ abhivādetvā ekamantaṁ aṭṭhaṁsu. Ekamantaṁ ṭhitā kho tā bhikkhuniyo bhagavā etadavoca:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Này các Tỷ-kheo-ni, hãy đi. Giờ đã đến rồi”.<br>
+<span lang="pi" class="pali">
+“gacchatha, bhikkhuniyo; kālo”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Thế Tôn, sau khi các Tỷ-kheo-ni ấy ra đi không bao lâu, Thế Tôn gọi các Tỷ-kheo và nói:<br>
+<span lang="pi" class="pali">
+Atha kho tā bhikkhuniyo bhagavantaṁ abhivādetvā padakkhiṇaṁ katvā pakkamiṁsu. Atha kho bhagavā acirapakkantīsu tāsu bhikkhunīsu bhikkhū āmantesi:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Này các Tỷ-kheo, ví như vào ngày Bố-tát, ngày rằm, quần chúng không có nghi ngờ hay phân vân rằng mặt trăng là không tròn hay mặt trăng là tròn, vì khi ấy mặt trăng đã tròn;<br>
+<span lang="pi" class="pali">
+“seyyathāpi, bhikkhave, tadahuposathe pannarase na hoti bahuno janassa kaṅkhā vā vimati vā: ‘ūno nu kho cando, puṇṇo nu kho cando’ti, atha kho puṇṇo cando tveva hoti;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+cũng vậy, này các Tỷ-kheo, các Tỷ-kheo-ni ấy hoan hỷ với bài thuyết pháp của Tôn giả Ānandaka, và tâm tư của họ được thỏa mãn.<br>
+<span lang="pi" class="pali">
+evameva kho, bhikkhave, tā bhikkhuniyo nandakassa dhammadesanāya attamanā ceva paripuṇṇasaṅkappā ca.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này các Tỷ-kheo, trong năm trăm Tỷ-kheo-ni ấy, Tỷ-kheo-ni cuối cùng chứng được Dự lưu, không còn bị đọa lạc, và chắc chắn đạt đến chánh giác”.<br>
+<span lang="pi" class="pali">
+Tāsaṁ, bhikkhave, pañcannaṁ bhikkhunisatānaṁ yā pacchimikā bhikkhunī sā sotāpannā avinipātadhammā niyatā sambodhiparāyanā”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Thế Tôn thuyết giảng như vậy. Các Tỷ-kheo ấy hoan hỷ tín thọ lời Thế Tôn dạy.<br>
+<span lang="pi" class="pali">
+Idamavoca bhagavā. Attamanā te bhikkhū bhagavato bhāsitaṁ abhinandunti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+<span lang="pi" class="vi">
+Nandakovādasuttaṁ niṭṭhitaṁ catutthaṁ.<br>
+</span>
+</p>
+
+
+
+<!-- COPY CONTENT SUTTA Ở ĐÂY -->
+
+
+
+<br>
+<p><p style="text-align: right;font-style: italic;">Hoà Thượng Thích Minh Châu dịch Việt</span></p>
+
+
+
+
+
+
+
+
+</section>  <!-- End English and Pali -->
+<div id="nextprev"><a id="previous-sutta" href="./mn145.html#content"></a><a id="next-sutta" href="./mn147.html#content"></a></div>
+</div>  <!--End Content -->
+</div>  <!-- End Page -->
+
+
+
+
+
+
+<footer>
+					 <!-- End bottom links -->
+</footer>
+
+
+ 
+ <!-- Scripts -->
+
+ <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      if (typeof enablePaliLookup === "function") {
+        enablePaliLookup();
+      } else {
+        console.error("enablePaliLookup is not defined");
+      }
+    });
+  </script>
+
+ <script>
+ // Script to open and close sidebar
+ 	function w3_open() {
+ 	document.getElementById("mySidebar").style.display = "block";
+ 	}
+ 		function w3_close() {
+ 		document.getElementById("mySidebar").style.display = "none";
+ 	}
+ </script>
+ <script>
+ 		var app = document.getElementsByTagName("BODY")[0];
+ 		if (localStorage.lightMode == "dark") {
+ 			app.setAttribute("light-mode", "dark");
+ 	}
+ </script>
+ 
+ <script>
+ 		function toggle_light_mode() {
+ 			var app = document.getElementsByTagName("BODY")[0];
+ 				if (localStorage.lightMode == "dark") {
+ 			localStorage.lightMode = "light";
+ 			app.setAttribute("light-mode", "light");
+ 		} else {
+ 					localStorage.lightMode = "dark";
+ 					app.setAttribute("light-mode", "dark");
+ 	}
+ 		}
+ 
+ 		window.addEventListener("storage", function () {
+ 			if (localStorage.lightMode == "dark") {
+ 				app.setAttribute("light-mode", "dark");
+ 				} else {
+ 				app.setAttribute("light-mode", "light");
+ 		}
+ 		}, false);
+ 
+ </script>
+ <script src="../js/footer.js"></script><script src="../js/dpd_deconstructor.js"></script><script src="../js/dpd_ebts.js"></script><script src="../js/dpd_i2h.js"></script>
+ <script src="/sw.js"></script>
+ </body>
+ </html>

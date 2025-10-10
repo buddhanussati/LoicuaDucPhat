@@ -1,0 +1,1191 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+ 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+ 	<link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+ 	<meta name="viewport" content="width=device-width, initial-scale=1">
+		<!-- Loading manifest -->
+	<link rel="manifest" href="../manifest.json">
+ 	<!-- Loading main and menu stylesheets -->
+ 	<link rel="stylesheet" href="../css/w3.css">
+ 	<link rel="stylesheet" href="../css/css.css">
+ 	<link rel="stylesheet" href="../css/menu.css">
+ 	<script src="../js/jquery-1.10.2.min.js"></script>
+ 	<script src="../js/controlpanel.js"></script>
+ 	<script src="../js/mousetrap.min.js"></script>
+    <script src="../js/pali-lookup-standalone.js"></script>
+
+ <script src="../js/suttaFiles.js"></script>
+<script>
+ // Script to open random Sutta
+ function openRandomSutta() {
+  const randomIndex = Math.floor(Math.random() * suttaFiles.length);
+  const selectedFile = suttaFiles[randomIndex];
+
+  // Get root path of your site 
+  const currentPath = location.pathname;
+  const rootPath = currentPath.split("/").slice(0, -2).join("/") + "/";
+
+  // Redirect to the correct file
+  window.location.href = rootPath + selectedFile;
+}
+</script>
+
+
+</head>
+ <body class="container">
+ <div class="header-background">
+ <!-- Header -->
+ <div class="w3-header w3-content w3-padding w3-left-align bwcontainer">
+ 	<div class="centered">
+ 		<button class="light-mode-button" aria-label="Bật Chế Độ Sáng" onclick="toggle_light_mode()">
+ 			<span></span>
+ 			<span></span>
+ 		</button>
+ 		<span class="box-lbl">Sáng/Tối</span>
+ 	</div> <!-- Centered -->
+ 		<a href="../home/index.html" id="bwlogo"><img src="../images/headerlogo.png" alt="Logo Lời Của Đức Phật" class="w3-image"></a>
+ 		<div class="w3-bar bwcontainer">
+ 			<div id="searchlinks">
+ 			<a href="../home/visearch.html"><span class="w3-bar-item"><i class="fa fa-search"></i>&nbsp;Tìm Tiếng Việt</span></a>
+ 			<a href="../home/palisearch.html"><span class="w3-bar-item"><i class="fa fa-search"></i>&nbsp;Tìm Tiếng Pali</span></a>
+ 			</div><!-- End Searchlinks div -->
+ 			<div class="help"><span><a href="../home/help.html"><img src="../images/help_icon.png" title="Trợ Giúp" alt="Help"></a></span></div>
+ 		</div> <!-- End w3-bar bwcontainer --> 	</div> <!-- End w3-header w3-content w3-padding w3-left-align bwcontainer -->
+ </div> <!-- End header-background -->
+ <!-- Top menu -->
+
+ <div class="w3-main w3-white bwcontainer2">
+ 	<div class="w3-button w3-padding-8 w3-left w3-hide-large" onclick="w3_open()">☰</div>
+ 		<div id="navbar" class="w3-hide-small w3-hide-medium bwcontainer3">
+ 			<ul id="css3menu0">
+ 				<li class="topfirst" id="home"><a href="../home/index.html" class="w3-hide-small">Trang Chủ</a></li>
+  				<li class="topmenu" id="dn"><a href="../dn/dn.html" class="pressed w3-hide-small">Trường Bộ Kinh</a></li>
+ 				<li class="topmenu" id="mn"><a href="../mn/mn.html" class="w3-hide-small">Trung Bộ Kinh</a></li>
+ 				<li class="topmenu" id="sn"><a href="../sn/sn.html" class="w3-hide-small"><i class="fa fa-caret-down"></i>&nbsp;Tương Ưng Bộ Kinh</a>
+ 					<ul>
+ 						<li><a href="../sn/sn01.html" class="w3-hide-small">Tập I - Thiên Có Kệ</a></li>
+ 						<li><a href="../sn/sn02.html" class="w3-hide-small">Tập II - Thiên Nhân Duyên</a></li>
+ 						<li><a href="../sn/sn03.html" class="w3-hide-small">Tập III - Thiên Uẩn</a></li>
+ 						<li><a href="../sn/sn04.html" class="w3-hide-small">Tập IV - Thiên Sáu Xứ</a></li>
+ 						<li><a href="../sn/sn05.html" class="w3-hide-small">Tập V - Thiên Ðại Phẩm</a></li>
+ 					</ul>
+ 				<li class="topmenu" id="an"><a href="../an/an.html" class="w3-hide-small"><i class="fa fa-caret-down"></i>&nbsp;Tăng Chi Bộ Kinh</a>
+ 					<ul>
+ 						<li><a href="../an/an1.html" class="w3-hide-small">Chương Một Pháp</a></li>
+ 						<li><a href="../an/an2.html" class="w3-hide-small">Chương Hai Pháp</a></li>
+ 						<li><a href="../an/an3.html" class="w3-hide-small">Chương Ba Pháp</a></li>
+ 						<li><a href="../an/an4.html" class="w3-hide-small">Chương Bốn Pháp</a></li>
+ 						<li><a href="../an/an5.html" class="w3-hide-small">Chương Năm Pháp</a></li>
+ 						<li><a href="../an/an6.html" class="w3-hide-small">Chương Sáu Pháp</a></li>
+ 						<li><a href="../an/an7.html" class="w3-hide-small">Chương Bảy Pháp</a></li>
+ 						<li><a href="../an/an8.html" class="w3-hide-small">Chương Tám Pháp</a></li>
+ 						<li><a href="../an/an9.html" class="w3-hide-small">Chương Chín Pháp</a></li>
+ 						<li><a href="../an/an10.html" class="w3-hide-small">Chương Mười Pháp</a></li>
+ 						<li><a href="../an/an11.html" class="w3-hide-small">Chương Mười Một Pháp</a></li>
+ 					</ul>
+ 				</li>
+ 				<li class="topmenu" id="kn"><a href="../kn/kn.html" class="w3-hide-small"><i class="fa fa-caret-down"></i>&nbsp;Tiểu Bộ Kinh</a>
+ 					<ul>
+ 						<li><a href="../kp/kp.html" class="w3-hide-small">Kinh Tiểu Tụng</a></li>
+ 						<li><a href="../dhp/dhp.html" class="w3-hide-small">Kinh Pháp Cú</a></li>
+ 						<li><a href="../snp/snp.html" class="w3-hide-small">Kinh Tập</a></li>
+ 						<li><a href="../ud/ud.html" class="w3-hide-small">Kinh Phật Tự Thuyết</a></li>
+ 						<li><a href="../it/it.html" class="w3-hide-small">Kinh Phật Thuyết Như Vậy</a></li>
+ 						<li><a href="../tha/tha.html" class="w3-hide-small">Trưởng Lão Tăng Kệ</a></li>
+ 						<li><a href="../thi/thi.html" class="w3-hide-small">Trưởng Lão Ni Kệ</a></li>
+ 					</ul>
+ 				</li>
+				<li class="toplast" id="rd"><a href="../rd/rd.html" class="w3-hide-small"></i>Kinh Ngẫu Nhiên Theo Nhóm</a>
+ 					</ul>
+ 				</li>
+ 			</ul>
+ 			</div>
+ 		</div> <!--navbar-->
+
+<!-- Sidebar (hidden by default) -->
+ <nav class="w3-sidebar w3-bar-block w3-card w3-border w3-top w3-animate-left w3-hide-large" id="mySidebar">
+ 	<a href="javascript:void(0)" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-times fa-2x red-color"></i>&nbsp;&nbsp;&nbsp;Close</a><!-- Hides the sidebar when clicked -->
+ 		<div class="w3-bar-block w3-white">
+ 			<a href="../home/index.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-home fa-lg"></i>&nbsp;&nbsp;&nbsp;Home</a>
+ 			<a href="../guide/guide.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Guide</a>
+ 			<a href="../dn/dn.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Trường Bộ Kinh</a>
+ 			<a href="../mn/mn.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Trung Bộ Kinh</a>
+ 			<a href="../sn/sn.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Tương Ưng Bộ Kinh</a>
+ 			<a href="../an/an.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Tăng Chi Bộ Kinh
+ 			<a href="../kn/kn.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Tiểu Bộ Kinh</a>
+			<a href="../rd/rd.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>Kinh Ngẫu Nhiên Theo Nhóm</a>
+ 		</div>
+ </nav>
+ 
+ 
+ 
+   <!-- !PAGE CONTENT! --> 
+<div class="w3-main w3-content w3-padding w3-left-align bwcontainer4">
+<div id="content">
+<h2>Majjhima Nikāya - Trung Bộ Kinh</h2>
+<h5><span style="font-style: italic;">Hoà Thượng Thích Minh Châu dịch Việt</span></h5>
+
+</div>
+
+<br>
+ 	<title>        Trung Bộ 136          </title>
+
+<p lang="vi" class="vi"; style="text-align: center">
+Trung Bộ 136<br>
+<span lang="pi" class="pali">
+Majjhima Nikāya 136<br>
+</span>
+</p>
+
+
+<p lang="vi" class="vi"; style="text-align: center">
+Đại Kinh Nghiệp Phân Biệt<br>
+<span lang="pi" class="pali">
+Mahākammavibhaṅgasutta<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Như vầy tôi nghe.<br>
+<span lang="pi" class="pali">
+Evaṁ me sutaṁ—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Một thời, Thế Tôn ở Rājagaha (Vương Xá), Veluvana (Trúc Lâm), tại chỗ nuôi dưỡng sóc.<br>
+<span lang="pi" class="pali">
+ekaṁ samayaṁ bhagavā rājagahe viharati veḷuvane kalandakanivāpe.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Lúc bấy giờ, Tôn giả Samiddhi trú tại một cái cốc trong rừng.<br>
+<span lang="pi" class="pali">
+Tena kho pana samayena āyasmā samiddhi araññakuṭikāyaṁ viharati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Rồi du sĩ ngoại đạo Potaliputta tiêu dao tản bộ, tuần tự du hành, đi đến Tôn giả Samiddhi; sau khi đến, nói lên với Tôn giả Samiddhi những lời chào đón hỏi thăm.<br>
+<span lang="pi" class="pali">
+Atha kho potaliputto paribbājako jaṅghāvihāraṁ anucaṅkamamāno anuvicaramāno yenāyasmā samiddhi tenupasaṅkami; upasaṅkamitvā āyasmatā samiddhinā saddhiṁ sammodi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Sau khi nói lên những lời chào đón hỏi thăm thân hữu rồi ngồi xuống một bên. Ngồi một bên, du sĩ ngoại đạo Potaliputta thưa với Tôn giả Samiddhi:<br>
+<span lang="pi" class="pali">
+Sammodanīyaṁ kathaṁ sāraṇīyaṁ vītisāretvā ekamantaṁ nisīdi. Ekamantaṁ nisinno kho potaliputto paribbājako āyasmantaṁ samiddhiṁ etadavoca:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Này Hiền giả Samiddhi, trước mặt Sa-môn Gotama, tôi tự thân nghe, tự thân ghi nhận như sau:<br>
+<span lang="pi" class="pali">
+“sammukhā metaṁ, āvuso samiddhi, samaṇassa gotamassa sutaṁ, sammukhā paṭiggahitaṁ:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Hư vọng là thân nghiệp, hư vọng là khẩu nghiệp, chỉ có ý nghiệp là chân thật’.<br>
+<span lang="pi" class="pali">
+‘moghaṁ kāyakammaṁ moghaṁ vacīkammaṁ, manokammameva saccan’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Và có một Thiền chứng (samapatti), do thành tựu Thiền chứng này, sẽ không có cảm giác gì”.<br>
+<span lang="pi" class="pali">
+Atthi ca sā samāpatti yaṁ samāpattiṁ samāpanno na kiñci vediyatī”ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Này Hiền giả Potaliputta, chớ có nói vậy. Này Hiền giả Potaliputta, chớ có nói vậy. Chớ có phỉ báng Thế Tôn; phỉ báng Thế Tôn là không tốt. Thế Tôn không có nói như vậy: ‘Hư vọng là thân nghiệp, hư vọng là khẩu nghiệp, chỉ có ý nghiệp là chân thật’.<br>
+<span lang="pi" class="pali">
+“Mā hevaṁ, āvuso potaliputta, avaca; mā hevaṁ, āvuso potaliputta, avaca; mā bhagavantaṁ abbhācikkhi. Na hi sādhu bhagavato abbhakkhānaṁ. Na hi bhagavā evaṁ vadeyya: ‘moghaṁ kāyakammaṁ moghaṁ vacīkammaṁ, manokammameva saccan’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Và Hiền giả, có một Thiền Chứng, do thành tựu thiền chứng này, sẽ không có cảm giác gì’.”<br>
+<span lang="pi" class="pali">
+‘Atthi ca kho sā, āvuso, samāpatti yaṁ samāpattiṁ samāpanno na kiñci vediyatī’”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Ngài xuất gia đã bao lâu, thưa Hiền giả Samiddhi?”<br>
+<span lang="pi" class="pali">
+“Kīvaciraṁ pabbajitosi, āvuso samiddhī”ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Không lâu, thưa Hiền giả. Có ba năm”.<br>
+<span lang="pi" class="pali">
+“Na ciraṁ, āvuso, tīṇi vassānī”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Nay ở đây chúng tôi còn hỏi các Tỷ-kheo trưởng lão làm gì khi một tân Tỷ-kheo nghĩ rằng cần phải bảo vệ vị Ðạo sư như vậy.<br>
+<span lang="pi" class="pali">
+“Ettha dāni mayaṁ there bhikkhū kiṁ vakkhāma, yatra hi nāma evaṁnavo bhikkhu satthāraṁ parirakkhitabbaṁ maññissati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Thưa Hiền giả Samiddhi, khi một người có dụng ý làm thân nghiệp, khẩu nghiệp, ý nghiệp thời người ấy có cảm giác gì?”<br>
+<span lang="pi" class="pali">
+Sañcetanikaṁ, āvuso samiddhi, kammaṁ katvā kāyena vācāya manasā kiṁ so vediyatī”ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Này Hiền giả Potaliputta, khi một người có dụng ý làm thân nghiệp, khẩu nghiệp, ý nghiệp thời người ấy cảm giác khổ đau.”<br>
+<span lang="pi" class="pali">
+“Sañcetanikaṁ, āvuso potaliputta, kammaṁ katvā kāyena vācāya manasā dukkhaṁ so vediyatī”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Rồi du sĩ ngoại đạo Potaliputta, không tán thán cũng không phản đối lời nói của Tôn giả Samiddhi. Không tán thán, không phản đối, du sĩ ngoại đạo Potaliputta từ chỗ ngồi đứng dậy rồi ra đi.<br>
+<span lang="pi" class="pali">
+Atha kho potaliputto paribbājako āyasmato samiddhissa bhāsitaṁ neva abhinandi nappaṭikkosi; anabhinanditvā appaṭikkositvā uṭṭhāyāsanā pakkāmi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Rồi Tôn giả Samiddhi, sau khi du sĩ ngoại đạo Potaliputta ra đi không bao lâu, liền đi đến Tôn giả Ānanda; sau khi đến, nói lên với Tôn giả Ānanda những lời chào đón hỏi thăm; sau khi nói lên những lời chào đón hỏi thăm thân hữu rồi ngồi xuống một bên.<br>
+<span lang="pi" class="pali">
+Atha kho āyasmā samiddhi acirapakkante potaliputte paribbājake yenāyasmā ānando tenupasaṅkami; upasaṅkamitvā āyasmatā ānandena saddhiṁ sammodi. Sammodanīyaṁ kathaṁ sāraṇīyaṁ vītisāretvā ekamantaṁ nisīdi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ngồi xuống một bên, Tôn giả Samiddhi kể lại cho Tôn giả Ānanda tất cả cuộc đàm thoại với du sĩ ngoại đạo Potaliputta.<br>
+<span lang="pi" class="pali">
+Ekamantaṁ nisinno kho āyasmā samiddhi yāvatako ahosi potaliputtena paribbājakena saddhiṁ kathāsallāpo taṁ sabbaṁ āyasmato ānandassa ārocesi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Sau khi nghe nói vậy, Tôn giả Ānanda nói với Tôn giả Samiddhi:<br>
+<span lang="pi" class="pali">
+Evaṁ vutte, āyasmā ānando āyasmantaṁ samiddhiṁ etadavoca:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Này Hiền giả Samiddhi, đây là đề tài một câu chuyện cần phải yết kiến Thế Tôn.<br>
+<span lang="pi" class="pali">
+“atthi kho idaṁ, āvuso samiddhi, kathāpābhataṁ bhagavantaṁ dassanāya.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Hiền giả Samiddhi, chúng ta hãy đi đến Thế Tôn, sau khi đến hãy trình bày lên Thế Tôn rõ ý nghĩa này.<br>
+<span lang="pi" class="pali">
+Āyāmāvuso samiddhi, yena bhagavā tenupasaṅkamissāma; upasaṅkamitvā etamatthaṁ bhagavato ārocessāma.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Thế Tôn trả lời chúng ta như thế nào, chúng ta hãy như vậy thọ trì.”<br>
+<span lang="pi" class="pali">
+Yathā no bhagavā byākarissati tathā naṁ dhāressāmā”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Thưa vâng, Hiền giả”. Tôn giả Samiddhi vâng đáp Tôn giả Ānanda.<br>
+<span lang="pi" class="pali">
+“Evamāvuso”ti kho āyasmā samiddhi āyasmato ānandassa paccassosi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Rồi Tôn giả Ānanda và Tôn giả Samiddhi đi đến Thế Tôn; sau khi đến đảnh lễ Thế Tôn rồi ngồi xuống một bên.<br>
+<span lang="pi" class="pali">
+Atha kho āyasmā ca ānando āyasmā ca samiddhi yena bhagavā tenupasaṅkamiṁsu; upasaṅkamitvā bhagavantaṁ abhivādetvā ekamantaṁ nisīdiṁsu.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ngồi xuống một bên, Tôn giả Ānanda, trình lên Thế Tôn tất cả câu chuyện giữa Tôn giả Samiddhi với du sĩ ngoại đạo Potaliputta.<br>
+<span lang="pi" class="pali">
+Ekamantaṁ nisinno kho āyasmā ānando yāvatako ahosi āyasmato samiddhissa potaliputtena paribbājakena saddhiṁ kathāsallāpo taṁ sabbaṁ bhagavato ārocesi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Khi nghe nói vậy, Thế Tôn nói với Tôn giả Ānanda:<br>
+<span lang="pi" class="pali">
+Evaṁ vutte, bhagavā āyasmantaṁ ānandaṁ etadavoca:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Này Ānanda, Ta chưa từng thấy du sĩ ngoại đạo Potaliputta, thời câu chuyện này từ đây xảy ra?<br>
+<span lang="pi" class="pali">
+“dassanampi kho ahaṁ, ānanda, potaliputtassa paribbājakassa nābhijānāmi, kuto panevarūpaṁ kathāsallāpaṁ?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Ānanda, câu hỏi đáng lý phải trả lời phân tích rõ ràng cho du sĩ ngoại đạo Potaliputta, lại được kẻ ngu si Samiddhi này trả lời theo một chiều.”<br>
+<span lang="pi" class="pali">
+Iminā ca, ānanda, samiddhinā moghapurisena potaliputtassa paribbājakassa vibhajjabyākaraṇīyo pañho ekaṁsena byākato”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Khi nghe nói vậy, Tôn giả Udayi bạch Thế Tôn:<br>
+<span lang="pi" class="pali">
+Evaṁ vutte, āyasmā udāyī bhagavantaṁ etadavoca:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Bạch Thế Tôn, nếu đây là ý nghĩa của Tôn giả Samiddhi nói lên, thời cảm giác gì người ấy cảm thọ là cảm giác khổ đau”.<br>
+<span lang="pi" class="pali">
+“sace pana, bhante, āyasmatā samiddhinā idaṁ sandhāya bhāsitaṁ—yaṁ kiñci vedayitaṁ taṁ dukkhasmin”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Rồi Thế Tôn nói với Tôn giả Ānanda:<br>
+<span lang="pi" class="pali">
+Atha kho bhagavā āyasmantaṁ ānandaṁ āmantesi:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Này Ānanda, hãy xem con đường sai lạc của kẻ ngu si Udayi này.<br>
+<span lang="pi" class="pali">
+“passasi no tvaṁ, ānanda, imassa udāyissa moghapurisassa ummaṅgaṁ?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Ānanda, Ta biết rằng:<br>
+<span lang="pi" class="pali">
+Aññāsiṁ kho ahaṁ, ānanda:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+nếu nay kẻ ngu si Udayi này mở miệng ra (đề cập vấn đề gì), ông ấy sẽ mở miệng đề cập một cách không như lý (ayoniso).<br>
+<span lang="pi" class="pali">
+‘idānevāyaṁ udāyī moghapuriso ummujjamāno ayoniso ummujjissatī’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Ānanda, thật sự chỗ khởi thủy của du sĩ ngoại đạo Potaliputta hỏi là về ba cảm thọ.<br>
+<span lang="pi" class="pali">
+Ādiṁyeva, ānanda, potaliputtena paribbājakena tisso vedanā pucchitā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Ānanda, nếu kẻ ngu si Samiddhi này được du sĩ ngoại đạo Potaliputta hỏi như vậy và trả lời như sau:<br>
+<span lang="pi" class="pali">
+Sacāyaṁ, ānanda, samiddhi moghapuriso potaliputtassa paribbājakassa evaṁ puṭṭho evaṁ byākareyya:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Này Hiền giả Potaliputta, nếu một ai có dụng ý làm thân nghiệp, khẩu nghiệp, ý nghiệp, có khả năng đưa đến lạc thọ, người ấy sẽ cảm giác lạc thọ.<br>
+<span lang="pi" class="pali">
+‘sañcetanikaṁ, āvuso potaliputta, kammaṁ katvā kāyena vācāya manasā sukhavedanīyaṁ sukhaṁ so vedayati;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Hiền giả Potaliputta, nếu một ai có dụng ý làm thân nghiệp, khẩu nghiệp, ý nghiệp có khả năng đưa đến khổ thọ, người ấy sẽ cảm giác khổ thọ.<br>
+<span lang="pi" class="pali">
+sañcetanikaṁ, āvuso potaliputta, kammaṁ katvā kāyena vācāya manasā dukkhavedanīyaṁ dukkhaṁ so vedayati;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Hiền giả Potaliputta, nếu một ai có dụng ý làm thân nghiệp, khẩu nghiệp, ý nghiệp có khả năng đưa đến bất khổ bất lạc thọ, người ấy sẽ cảm giác bất khổ bất lạc thọ’;<br>
+<span lang="pi" class="pali">
+sañcetanikaṁ, āvuso potaliputta, kammaṁ katvā kāyena vācāya manasā adukkhamasukhavedanīyaṁ adukkhamasukhaṁ so vedayatī’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+nếu trả lời như vậy, này Ānanda, kẻ ngu si Samiddhi đã trả lời một cách chơn chánh cho du sĩ ngoại đạo Potaliputta.<br>
+<span lang="pi" class="pali">
+Evaṁ byākaramāno kho, ānanda, samiddhi moghapuriso potaliputtassa paribbājakassa sammā byākaramāno byākareyya.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Và lại nữa, này Ānanda, những kẻ du sĩ ngoại đạo ngu si, kém học, họ sẽ hiểu được đại phân biệt về nghiệp của Như Lai? Này Ānanda, nếu Ông nghe Như Lai phân tích đại phân biệt về nghiệp”.<br>
+<span lang="pi" class="pali">
+Api ca, ānanda, ke ca aññatitthiyā paribbājakā bālā abyattā ke ca tathāgatassa mahākammavibhaṅgaṁ jānissanti? Sace tumhe, ānanda, suṇeyyātha tathāgatassa mahākammavibhaṅgaṁ vibhajantassā”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Bạch Thế Tôn, nay đã đến thời; bạch Thiện Thệ nay đã đến thời, Thế Tôn hãy phân tích đại phân biệt về nghiệp! Sau khi nghe Thế Tôn, các Tỷ-kheo sẽ thọ trì”.<br>
+<span lang="pi" class="pali">
+“Etassa, bhagavā, kālo, etassa, sugata, kālo yaṁ bhagavā mahākammavibhaṅgaṁ vibhajeyya. Bhagavato sutvā bhikkhū dhāressantī”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Vậy này Ānanda, hãy nghe và khéo tác ý, Ta sẽ nói.”<br>
+<span lang="pi" class="pali">
+“Tena hānanda, suṇāhi, sādhukaṁ manasi karohi; bhāsissāmī”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Thưa vâng, bạch Thế Tôn”. Tôn giả Ānanda vâng đáp Thế Tôn. Thế Tôn nói như sau:<br>
+<span lang="pi" class="pali">
+“Evaṁ, bhante”ti kho āyasmā ānando bhagavato paccassosi. Bhagavā etadavoca:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Này Ānanda, có bốn loại người này có mặt ở đời. Thế nào là bốn?<br>
+<span lang="pi" class="pali">
+“Cattārome, ānanda, puggalā santo saṁvijjamānā lokasmiṁ. Katame cattāro?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ở đây, này Ānanda, có người sát sanh, lấy của không cho, sống tà hạnh trong các dục, nói láo, nói hai lưỡi, nói lời ác khẩu, nói lời phù phiếm, có tham dục, có sân tâm, có tà kiến;<br>
+<span lang="pi" class="pali">
+Idhānanda, ekacco puggalo idha pāṇātipātī hoti, adinnādāyī hoti, kāmesumicchācārī hoti, musāvādī hoti, pisuṇavāco hoti, pharusavāco hoti, samphappalāpī hoti, abhijjhālu hoti, byāpannacitto hoti, micchādiṭṭhi hoti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+sau khi thân hoại mạng chung, người ấy sanh vào cõi dữ, ác thú, đọa xứ, địa ngục.<br>
+<span lang="pi" class="pali">
+So kāyassa bhedā paraṁ maraṇā apāyaṁ duggatiṁ vinipātaṁ nirayaṁ upapajjati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Nhưng ở đây, này Ānanda, có người sát sanh, lấy của không cho, sống tà hạnh trong các dục, nói láo, nói hai lưỡi, nói lời ác khẩu, nói lời phù phiếm, có tham dục, có sân tâm, có tà kiến;<br>
+<span lang="pi" class="pali">
+Idha panānanda, ekacco puggalo idha pāṇātipātī hoti, adinnādāyī hoti, kāmesumicchācārī hoti, musāvādī hoti, pisuṇavāco hoti, pharusavāco hoti, samphappalāpī hoti, abhijjhālu hoti, byāpannacitto hoti, micchādiṭṭhi hoti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+sau khi thân hoại mạng chung, người ấy sanh vào thiện thú, Thiên giới, cõi đời này.<br>
+<span lang="pi" class="pali">
+So kāyassa bhedā paraṁ maraṇā sugatiṁ saggaṁ lokaṁ upapajjati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ở đây, này Ānanda, có người từ bỏ sát sanh, từ bỏ lấy của không cho, từ bỏ tà hạnh trong các dục, từ bỏ nói láo, từ bỏ nói hai lưỡi, từ bỏ nói ác khẩu, từ bỏ nói lời phù phiếm, từ bỏ tham dục, từ bỏ sân tâm, có chánh kiến;<br>
+<span lang="pi" class="pali">
+Idhānanda, ekacco puggalo idha pāṇātipātā paṭivirato hoti, adinnādānā paṭivirato hoti, kāmesumicchācārā paṭivirato hoti, musāvādā paṭivirato hoti, pisuṇāya vācāya paṭivirato hoti, pharusāya vācāya paṭivirato hoti, samphappalāpā paṭivirato hoti, anabhijjhālu hoti, abyāpannacitto hoti, sammādiṭṭhi hoti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+sau khi thân hoại mạng chung, người ấy được sanh vào thiện thú, Thiên giới, cõi đời này.<br>
+<span lang="pi" class="pali">
+So kāyassa bhedā paraṁ maraṇā sugatiṁ saggaṁ lokaṁ upapajjati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Nhưng ở đây, này Ānanda, có người từ bỏ sát sanh, từ bỏ lấy của không cho, từ bỏ tà hạnh trong các dục, từ bỏ nói láo, từ bỏ nói hai lưỡi, từ bỏ nói ác khẩu, từ bỏ nói lời phù phiếm, từ bỏ tham dục, từ bỏ sân tâm, có chánh kiến;<br>
+<span lang="pi" class="pali">
+Idha panānanda, ekacco puggalo idha pāṇātipātā paṭivirato hoti, adinnādānā paṭivirato hoti, kāmesumicchācārā paṭivirato hoti, musāvādā paṭivirato hoti, pisuṇāya vācāya paṭivirato hoti, pharusāya vācāya paṭivirato hoti, samphappalāpā paṭivirato hoti, anabhijjhālu hoti, abyāpannacitto hoti, sammādiṭṭhi hoti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+sau khi thân hoại mạng chung, người ấy sanh vào cõi dữ, ác thú, đọa xứ, địa ngục.<br>
+<span lang="pi" class="pali">
+So kāyassa bhedā paraṁ maraṇā apāyaṁ duggatiṁ vinipātaṁ nirayaṁ upapajjati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ở đây, này Ānanda, có vị Sa-môn hay Bà-la-môn nhờ nhiệt tâm, nhờ tinh tấn, nhờ cần mẫn, nhờ không phóng dật, nhờ chánh tác ý, nên tâm nhập định. Khi tâm nhập định, nhờ thiên nhãn thanh tịnh siêu nhân, vị ấy thấy:<br>
+<span lang="pi" class="pali">
+Idhānanda, ekacco samaṇo vā brāhmaṇo vā ātappamanvāya padhānamanvāya anuyogamanvāya appamādamanvāya sammāmanasikāramanvāya tathārūpaṁ cetosamādhiṁ phusati yathāsamāhite citte dibbena cakkhunā visuddhena atikkantamānusakena amuṁ puggalaṁ passati—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ở đây, này Ānanda, có vị Sa-môn hay Bà-la-môn nhờ nhiệt tâm, nhờ tinh tấn, nhờ cần mẫn, nhờ không phóng dật, nhờ chánh tác ý, nên tâm nhập định. Khi tâm nhập định, nhờ thiên nhãn thanh tịnh siêu nhân, vị ấy thấy có người ở đây sát sanh, lấy của không cho, sống tà hạnh trong các dục, nói láo, nói hai lưỡi, nói ác khẩu, nói lời phù phiếm, có tham dục, có sân tâm, có tà kiến; sau khi thân hoại mạng chung, người ấy sanh vào cõi dữ, ác thú, đọa xứ, địa ngục.<br>
+<span lang="pi" class="pali">
+idha pāṇātipātiṁ adinnādāyiṁ kāmesumicchācāriṁ musāvādiṁ pisuṇavācaṁ pharusavācaṁ samphappalāpiṁ abhijjhāluṁ byāpannacittaṁ micchādiṭṭhiṁ kāyassa bhedā paraṁ maraṇā passati apāyaṁ duggatiṁ vinipātaṁ nirayaṁ upapannaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vị ấy nói như sau:<br>
+<span lang="pi" class="pali">
+So evamāha:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Thật sự có những ác nghiệp, có quả báo ác hạnh.<br>
+<span lang="pi" class="pali">
+‘atthi kira, bho, pāpakāni kammāni, atthi duccaritassa vipāko.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Và ta đã thấy có người ở đây sát sanh, lấy của không cho … nói hai lưỡi … có tà kiến, sau khi thân hoại mạng chung, người ấy sanh vào cõi dữ, ác thú, đọa xứ, địa ngục’.<br>
+<span lang="pi" class="pali">
+Amāhaṁ puggalaṁ addasaṁ idha pāṇātipātiṁ adinnādāyiṁ …pe… micchādiṭṭhiṁ kāyassa bhedā paraṁ maraṇā passāmi apāyaṁ duggatiṁ vinipātaṁ nirayaṁ upapannan’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vị ấy nói như sau:<br>
+<span lang="pi" class="pali">
+So evamāha:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Chắc chắn tất cả mọi người sát sanh, lấy của không cho … có tà kiến; sau khi thân hoại mạng chung, họ đều sanh vào cõi dữ, ác thú, đọa xứ, địa ngục.<br>
+<span lang="pi" class="pali">
+‘yo kira, bho, pāṇātipātī adinnādāyī …pe… micchādiṭṭhi, sabbo so kāyassa bhedā paraṁ maraṇā apāyaṁ duggatiṁ vinipātaṁ nirayaṁ upapajjati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Những ai biết như vậy, những vị ấy biết một cách chơn chánh. Những ai biết khác như vậy, trí của họ thuộc tà trí’.<br>
+<span lang="pi" class="pali">
+Ye evaṁ jānanti, te sammā jānanti; ye aññathā jānanti, micchā tesaṁ ñāṇan’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Như vậy, điều vị ấy tự mình biết, tự mình thấy, tự mình hiểu rõ, ở đây, vị ấy nắm giữ, chấp trước và tuyên bố: ‘Chỉ như vậy mới chơn thực, ngoài ra đều là hư vọng’.<br>
+<span lang="pi" class="pali">
+Iti so yadeva tassa sāmaṁ ñātaṁ sāmaṁ diṭṭhaṁ sāmaṁ viditaṁ tadeva tattha thāmasā parāmāsā abhinivissa voharati: ‘idameva saccaṁ, moghamaññan’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ở đây, này Ānanda, có Sa-môn hay Bà-la-môn, nhờ nhiệt tâm, nhờ tinh tấn, … vị ấy thấy có người sát sanh, lấy của không cho … có tà kiến; sau khi thân hoại mạng chung, vị ấy được sanh vào thiện thú, Thiên giới, cõi đời này.<br>
+<span lang="pi" class="pali">
+Idha panānanda, ekacco samaṇo vā brāhmaṇo vā ātappamanvāya padhānamanvāya anuyogamanvāya appamādamanvāya sammāmanasikāramanvāya tathārūpaṁ cetosamādhiṁ phusati yathāsamāhite citte dibbena cakkhunā visuddhena atikkantamānusakena amuṁ puggalaṁ passati—idha pāṇātipātiṁ adinnādāyiṁ …pe… micchādiṭṭhiṁ, kāyassa bhedā paraṁ maraṇā passati sugatiṁ saggaṁ lokaṁ upapannaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vị ấy nói như sau:<br>
+<span lang="pi" class="pali">
+So evamāha:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Thật sự không có những ác nghiệp, không có quả báo ác hạnh.<br>
+<span lang="pi" class="pali">
+‘natthi kira, bho, pāpakāni kammāni, natthi duccaritassa vipāko.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Và ta đã thấy có người ở đây sát sanh, lấy của không cho… có tà kiến; sau khi thân hoại mạng chung, được sanh vào thiện thú, Thiên giới, cõi đời này.<br>
+<span lang="pi" class="pali">
+Amāhaṁ puggalaṁ addasaṁ—idha pāṇātipātiṁ adinnādāyiṁ …pe… micchādiṭṭhiṁ, kāyassa bhedā paraṁ maraṇā passāmi sugatiṁ saggaṁ lokaṁ upapannan’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vị ấy nói như sau:<br>
+<span lang="pi" class="pali">
+So evamāha:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Chắc chắn tất cả mọi người sát sanh, lấy của không cho… có tà kiến; ‘sau khi thân hoại mạng chung, họ đều được sanh vào thiện thú, Thiên giới, cõi đời này’.<br>
+<span lang="pi" class="pali">
+‘yo kira, bho, pāṇātipātī adinnādāyī …pe… micchādiṭṭhi, sabbo so kāyassa bhedā paraṁ maraṇā sugatiṁ saggaṁ lokaṁ upapajjati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Những ai biết như vậy, những vị ấy biết một cách chơn chánh. Những ai biết khác như vậy, trí của họ thuộc tà trí’.<br>
+<span lang="pi" class="pali">
+Ye evaṁ jānanti te sammā jānanti; ye aññathā jānanti, micchā tesaṁ ñāṇan’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Như vậy, điều vị ấy tự mình biết, tự mình thấy, tự mình hiểu rõ, ở đây, vị ấy nắm giữ, chấp trước và tuyên bố: ‘Chỉ như vậy mới chân thực, ngoài ra đều là hư vọng’.<br>
+<span lang="pi" class="pali">
+Iti so yadeva tassa sāmaṁ ñātaṁ sāmaṁ diṭṭhaṁ sāmaṁ viditaṁ tadeva tattha thāmasā parāmāsā abhinivissa voharati: ‘idameva saccaṁ, moghamaññan’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ở đây, này Ānanda, có Sa-môn hay Bà-la-môn, nhờ nhiệt tâm, nhờ tinh tấn,… vị ấy thấy có người ở đây từ bỏ sát sanh, từ bỏ lấy của không cho… có chánh kiến; sau khi thân hoại mạng chung, người ấy sanh vào thiện thú, Thiên giới, cõi đời này.<br>
+<span lang="pi" class="pali">
+Idhānanda, ekacco samaṇo vā brāhmaṇo vā ātappamanvāya padhānamanvāya anuyogamanvāya appamādamanvāya sammāmanasikāramanvāya tathārūpaṁ cetosamādhiṁ phusati yathāsamāhite citte dibbena cakkhunā visuddhena atikkantamānusakena amuṁ puggalaṁ passati—idha pāṇātipātā paṭivirataṁ adinnādānā paṭivirataṁ kāmesumicchācārā paṭivirataṁ musāvādā paṭivirataṁ pisuṇāya vācāya paṭivirataṁ pharusāya vācāya paṭivirataṁ samphappalāpā paṭivirataṁ anabhijjhāluṁ abyāpannacittaṁ sammādiṭṭhiṁ, kāyassa bhedā paraṁ maraṇā passati sugatiṁ saggaṁ lokaṁ upapannaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vị ấy nói như sau:<br>
+<span lang="pi" class="pali">
+So evamāha:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Thật sự có những thiện nghiệp, có quả báo thiện hạnh.<br>
+<span lang="pi" class="pali">
+‘atthi kira, bho, kalyāṇāni kammāni, atthi sucaritassa vipāko.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Và ta đã thấy có người ở đây từ bỏ sát sanh, từ bỏ lấy của không cho … có chánh kiến sau khi thân hoại mạng chung, sanh vào thiện thú, Thiên giới, cõi đời này’.<br>
+<span lang="pi" class="pali">
+Amāhaṁ puggalaṁ addasaṁ—idha pāṇātipātā paṭivirataṁ adinnādānā paṭivirataṁ …pe… sammādiṭṭhiṁ, kāyassa bhedā paraṁ maraṇā passāmi sugatiṁ saggaṁ lokaṁ upapannan’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vị ấy nói như sau:<br>
+<span lang="pi" class="pali">
+So evamāha:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Chắc chắn tất cả mọi người từ bỏ sát sanh, từ bỏ lấy của không cho … có chánh kiến; sau khi thân hoại mạng chung, họ đều sanh vào thiện thú, Thiên giới, cõi đời này.<br>
+<span lang="pi" class="pali">
+‘yo kira, bho, pāṇātipātā paṭivirato adinnādānā paṭivirato …pe… sammādiṭṭhi sabbo so kāyassa bhedā paraṁ maraṇā sugatiṁ saggaṁ lokaṁ upapajjati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Những ai biết như vậy, những vị ấy biết một cách chơn chánh. Những ai biết khác như vậy, trí của họ thuộc tà trí’.<br>
+<span lang="pi" class="pali">
+Ye evaṁ jānanti te sammā jānanti; ye aññathā jānanti, micchā tesaṁ ñāṇan’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Như vậy, điều này vị ấy tự mình biết, tự mình thấy, tự mình hiểu rõ, ở đây, vị ấy nắm giữ, chấp trước và tuyên bố: ‘Chỉ như vậy mới chơn thực, ngoài ra đều là hư vọng’.<br>
+<span lang="pi" class="pali">
+Iti so yadeva tassa sāmaṁ ñātaṁ sāmaṁ diṭṭhaṁ sāmaṁ viditaṁ tadeva tattha thāmasā parāmāsā abhinivissa voharati: ‘idameva saccaṁ, moghamaññan’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ở đây, này Ānanda, có Sa-môn… vị ấy thấy có người từ bỏ sát sanh, từ bỏ lấy của không cho … có chánh kiến; sau khi thân hoại mạng chung, người ấy bị sanh vào cõi dữ, ác thú, đọa xứ, địa ngục.<br>
+<span lang="pi" class="pali">
+Idha panānanda, ekacco samaṇo vā brāhmaṇo vā ātappamanvāya padhānamanvāya anuyogamanvāya appamādamanvāya sammāmanasikāramanvāya tathārūpaṁ cetosamādhiṁ phusati yathāsamāhite citte dibbena cakkhunā visuddhena atikkantamānusakena amuṁ puggalaṁ passati—idha pāṇātipātā paṭivirataṁ …pe… sammādiṭṭhiṁ, kāyassa bhedā paraṁ maraṇā passati apāyaṁ duggatiṁ vinipātaṁ nirayaṁ upapannaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vị ấy nói như sau:<br>
+<span lang="pi" class="pali">
+So evamāha:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Thật sự không có những thiện nghiệp, không có quả báo thiện hạnh. Và ta đã thấy có người ở đây từ bỏ sát sanh, từ bỏ lấy của không cho … có chánh kiến; sau khi thân hoại mạng chung, người ấy bị sanh vào cõi dữ, ác thú, đọa xứ, địa ngục’.<br>
+<span lang="pi" class="pali">
+‘natthi kira, bho, kalyāṇāni kammāni, natthi sucaritassa vipāko. Amāhaṁ puggalaṁ addasaṁ—idha pāṇātipātā paṭivirataṁ adinnādānā paṭivirataṁ …pe… sammādiṭṭhiṁ, kāyassa bhedā paraṁ maraṇā passāmi apāyaṁ duggatiṁ vinipātaṁ nirayaṁ upapannan’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vị ấy nói như sau: ‘Chắc chắn tất cả mọi người từ bỏ sát sanh, từ bỏ lấy của không cho … có chánh kiến; sau khi thân hoại mạng chung, họ đều bị sanh vào cõi dữ, ác thú, đọa xứ, địa ngục.<br>
+<span lang="pi" class="pali">
+So evamāha: ‘yo kira, bho, pāṇātipātā paṭivirato adinnādānā paṭivirato …pe… sammādiṭṭhi, sabbo so kāyassa bhedā paraṁ maraṇā apāyaṁ duggatiṁ vinipātaṁ nirayaṁ upapajjati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Những ai biết như vậy, những vị ấy biết một cách chân chánh. Những ai biết khác như vậy, trí của họ thuộc tà trí’.<br>
+<span lang="pi" class="pali">
+Ye evaṁ jānanti te sammā jānanti; ye aññathā jānanti, micchā tesaṁ ñāṇan’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Như vậy, điều vị ấy tự mình biết, tự mình thấy, tự mình hiểu rõ, ở đây, vị ấy nắm giữ, chấp trước và tuyên bố: ‘Chỉ như vậy mới chân thực, ngoài ra đều là hư vọng’.<br>
+<span lang="pi" class="pali">
+Iti so yadeva tassa sāmaṁ ñātaṁ sāmaṁ diṭṭhaṁ sāmaṁ viditaṁ tadeva tattha thāmasā parāmāsā abhinivissa voharati: ‘idameva saccaṁ, moghamaññan’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ở đây, này Ānanda, Sa-môn hay Bà-la-môn nào nói như sau:<br>
+<span lang="pi" class="pali">
+Tatrānanda, yvāyaṁ samaṇo vā brāhmaṇo vā evamāha:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Chắc chắn có ác nghiệp, có quả báo ác nghiệp’. Như vậy, Ta chấp nhận cho vị ấy. .<br>
+<span lang="pi" class="pali">
+‘atthi kira, bho, pāpakāni kammāni, atthi duccaritassa vipāko’ti idamassa anujānāmi;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vị ấy nói như sau:<br>
+<span lang="pi" class="pali">
+yampi so evamāha:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Tôi đã thấy ở đây có người sát sanh, lấy của không cho … có tà kiến, sau khi thân hoại mạng chung, tôi thấy người ấy sanh vào cõi dữ, ác thú, đọa xứ, địa ngục’. Như vậy, Ta cũng chấp nhận cho vị ấy.<br>
+<span lang="pi" class="pali">
+‘amāhaṁ puggalaṁ addasaṁ—idha pāṇātipātiṁ adinnādāyiṁ …pe… micchādiṭṭhiṁ, kāyassa bhedā paraṁ maraṇā passāmi apāyaṁ duggatiṁ vinipātaṁ nirayaṁ upapannan’ti idampissa anujānāmi;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Còn nếu vị ấy nói như sau:<br>
+<span lang="pi" class="pali">
+yañca kho so evamāha:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Chắc chắn tất cả những ai sát sanh, lấy của không cho …; sau khi thân hoại mạng chung, họ đều sanh vào cõi dữ, ác thú, đọa xứ, địa ngục’, như vậy, Ta không chấp nhận cho vị ấy.<br>
+<span lang="pi" class="pali">
+‘yo kira, bho, pāṇātipātī adinnādāyī …pe… micchādiṭṭhi, sabbo so kāyassa bhedā paraṁ maraṇā apāyaṁ duggatiṁ vinipātaṁ nirayaṁ upapajjatī’ti idamassa nānujānāmi;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Và nếu vị ấy nói như sau:<br>
+<span lang="pi" class="pali">
+yampi so evamāha:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Những ai biết như vậy, những vị ấy biết một cách chân chánh. Những ai biết khác như vậy, trí của họ thuộc tà trí’; như vậy, Ta không chấp nhận cho vị ấy.<br>
+<span lang="pi" class="pali">
+‘ye evaṁ jānanti te sammā jānanti; ye aññathā jānanti, micchā tesaṁ ñāṇan’ti idampissa nānujānāmi;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ðiều vị ấy tự mình biết, tự mình thấy, tự mình hiểu rõ, ở đây, vị ấy nắm giữ, chấp trước và tuyên bố: ‘Chỉ như vậy mới chơn thực, ngoài ra đều là hư vọng’. Như vậy, Ta cũng không chấp nhận cho vị ấy. Vì cớ sao?<br>
+<span lang="pi" class="pali">
+yampi so yadeva tassa sāmaṁ ñātaṁ sāmaṁ diṭṭhaṁ sāmaṁ viditaṁ tadeva tattha thāmasā parāmāsā abhinivissa voharati: ‘idameva saccaṁ, moghamaññan’ti idampissa nānujānāmi. Taṁ kissa hetu?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Khác như vậy, này Ānanda, là trí của Như Lai về Ðại phân biệt về nghiệp.<br>
+<span lang="pi" class="pali">
+Aññathā hi, ānanda, tathāgatassa mahākammavibhaṅge ñāṇaṁ hoti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ở đây, này Ānanda, Sa-môn hay Bà-la-môn nào nói như sau:<br>
+<span lang="pi" class="pali">
+Tatrānanda, yvāyaṁ samaṇo vā brāhmaṇo vā evamāha:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Chắc chắn không có ác nghiệp, không có quả báo ác hạnh’. Như vậy, Ta không chấp nhận cho vị ấy.<br>
+<span lang="pi" class="pali">
+‘natthi kira, bho, pāpakāni kammāni, natthi duccaritassa vipāko’ti idamassa nānujānāmi;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Và vị ấy nói như sau:<br>
+<span lang="pi" class="pali">
+yañca kho so evamāha:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Tôi đã thấy ở đây có người sát sanh, lấy của không cho… có tà kiến; sau khi thân hoại mạng chung, tôi thấy người ấy sanh vào thiện thú, Thiên giới, cõi đời này’. Như vậy, Ta chấp nhận cho vị ấy.<br>
+<span lang="pi" class="pali">
+‘amāhaṁ puggalaṁ addasaṁ—idha pāṇātipātiṁ adinnādāyiṁ …pe… micchādiṭṭhiṁ kāyassa bhedā paraṁ maraṇā passāmi sugatiṁ saggaṁ lokaṁ upapannan’ti idamassa anujānāmi;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Còn nếu vị ấy nói như sau:<br>
+<span lang="pi" class="pali">
+yañca kho so evamāha:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Chắc chắn tất cả những ai sát sanh, lấy của không cho… tất cả sau khi thân hoại mạng chung, họ đều sanh vào thiện thú Thiên giới, cõi đời này’; như vậy, Ta không chấp nhận cho vị ấy.<br>
+<span lang="pi" class="pali">
+‘yo kira, bho, pāṇātipātī adinnādāyī …pe… micchādiṭṭhi, sabbo so kāyassa bhedā paraṁ maraṇā sugatiṁ saggaṁ lokaṁ upapajjatī’ti idamassa nānujānāmi;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Và nếu vị ấy nói như sau:<br>
+<span lang="pi" class="pali">
+yampi so evamāha:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Những ai biết như vậy, những vị ấy biết một cách chơn chánh. Những ai biết khác như vậy, trí của họ thuộc tà trí’; như vậy, Ta không chấp nhận cho vị ấy. Ðiều vị ấy tự mình biết, tự mình thấy, tự mình hiểu rõ, ở đây, vị ấy nắm giữ, chấp trước và tuyên bố: ‘Chỉ như vậy mới chơn thực, ngoài ra đều là hư vọng’. Như vậy, Ta cũng không chấp nhận cho vị ấy. Vì cớ sao?<br>
+<span lang="pi" class="pali">
+‘ye evaṁ jānanti te sammā jānanti; ye aññathā jānanti, micchā tesaṁ ñāṇan’ti idampissa nānujānāmi; yampi so yadeva tassa sāmaṁ ñātaṁ sāmaṁ diṭṭhaṁ sāmaṁ viditaṁ tadeva tattha thāmasā parāmāsā abhinivissa voharati: ‘idameva saccaṁ, moghamaññan’ti idampissa nānujānāmi. Taṁ kissa hetu?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Khác như vậy, này Ānanda, là trí của Như Lai về Ðại phân biệt về nghiệp.<br>
+<span lang="pi" class="pali">
+Aññathā hi, ānanda, tathāgatassa mahākammavibhaṅge ñāṇaṁ hoti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ở đây, này Ānanda, Sa-môn hay Bà-la-môn nào nói như sau:<br>
+<span lang="pi" class="pali">
+Tatrānanda, yvāyaṁ samaṇo vā brāhmaṇo vā evamāha:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Chắc chắn có thiện nghiệp, có quả báo thiện hạnh’. Như vậy, Ta chấp nhận cho vị ấy.<br>
+<span lang="pi" class="pali">
+‘atthi kira, bho, kalyāṇāni kammāni, atthi sucaritassa vipāko’ti idamassa anujānāmi;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Và vị ấy nói như sau:<br>
+<span lang="pi" class="pali">
+yampi so evamāha:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Tôi đã thấy ở đây có người từụ bỏ sát sanh, từ bỏ lấy của không cho … có chánh kiến; sau khi thân hoại mạng chung, tôi thấy người ấy sanh vào thiện thú, Thiên giới, cõi đời này’. Như vậy, Ta cũng chấp nhận cho vị ấy.<br>
+<span lang="pi" class="pali">
+‘amāhaṁ puggalaṁ addasaṁ—idha pāṇātipātā paṭivirataṁ adinnādānā paṭivirataṁ …pe… sammādiṭṭhiṁ, kāyassa bhedā paraṁ maraṇā passāmi sugatiṁ saggaṁ lokaṁ upapannan’ti idampissa anujānāmi;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Còn nếu vị ấy nói như sau:<br>
+<span lang="pi" class="pali">
+yañca kho so evamāha:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Chắc chắn tất cả những ai từ bỏ sát sanh, từ bỏ lấy của không cho … tất cả sau khi thân hoại mạng chung; họ đều sanh vào thiện thú, Thiên giới, cõi đời này’; như vậy, Ta không chấp nhận cho vị ấy.<br>
+<span lang="pi" class="pali">
+‘yo kira, bho, pāṇātipātā paṭivirato adinnādānā paṭivirato …pe… sammādiṭṭhi, sabbo so kāyassa bhedā paraṁ maraṇā sugatiṁ saggaṁ lokaṁ upapajjatī’ti idamassa nānujānāmi;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Và nếu vị ấy nói như sau:<br>
+<span lang="pi" class="pali">
+yampi so evamāha:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Những ai biết như vậy, những vị ấy biết một cách chân chánh. Những ai biết khác như vậy, trí của họ thuộc tà trí’; như vậy, Ta cũng không chấp nhận cho vị ấy. Ðiều vị ấy tự mình biết, tự mình thấy, tự mình hiểu rõ, ở đây, vị ấy nắm giữ, chấp trước và tuyên bố: ‘Chỉ như vậy mới chơn thực, ngoài ra đều là hư vọng’. Như vậy, Ta cũng không chấp nhận cho vị ấy. Vì cớ sao?<br>
+<span lang="pi" class="pali">
+‘ye evaṁ jānanti te sammā jānanti; ye aññathā jānanti, micchā tesaṁ ñāṇan’ti idampissa nānujānāmi; yampi so yadeva tassa sāmaṁ ñātaṁ sāmaṁ diṭṭhaṁ sāmaṁ viditaṁ tadeva tattha thāmasā parāmāsā abhinivissa voharati: ‘idameva saccaṁ, moghamaññan’ti idampissa nānujānāmi. Taṁ kissa hetu?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Khác như vậy, này Ānanda, là trí của Như Lai về Ðại phân biệt về nghiệp.<br>
+<span lang="pi" class="pali">
+Aññathā hi, ānanda, tathāgatassa mahākammavibhaṅge ñāṇaṁ hoti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ở đây, này Ānanda, Sa-môn hay Bà-la-môn nào nói như sau:<br>
+<span lang="pi" class="pali">
+Tatrānanda, yvāyaṁ samaṇo vā brāhmaṇo vā evamāha:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Chắc chắn không có thiện nghiệp, không có quả báo thiện hạnh’. Như vậy, Ta không chấp nhận cho vị ấy.<br>
+<span lang="pi" class="pali">
+‘natthi kira, bho, kalyāṇāni kammāni, natthi sucaritassa vipāko’ti idamassa nānujānāmi;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Và vị ấy nói như sau:<br>
+<span lang="pi" class="pali">
+yañca kho so evamāha:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Tôi đã thấy ở đây có người từ bỏ sát sanh, từ bỏ lấy của không cho … có chánh kiến; sau khi thân hoại mạng chung, tôi thấy người ấy sanh vào cõi dữ, ác thú, đọa xứ, địa ngục’. Như vậy, Ta chấp nhận cho vị ấy.<br>
+<span lang="pi" class="pali">
+‘amāhaṁ puggalaṁ addasaṁ—idha pāṇātipātā paṭivirataṁ adinnādānā paṭivirataṁ …pe… sammādiṭṭhiṁ, kāyassa bhedā paraṁ maraṇā passāmi apāyaṁ duggatiṁ vinipātaṁ nirayaṁ upapannan’ti idamassa anujānāmi;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Còn nếu vị ấy nói như sau:<br>
+<span lang="pi" class="pali">
+yañca kho so evamāha:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Chắc chắn những ai từ bỏ sát sanh, từ bỏ lấy của không cho … có chánh kiến, tất cả sau khi thân hoại mạng chung, họ đều sanh vào cõi dữ, ác thú, đọa xứ, địa ngục’; như vậy, Ta cũng không chấp nhận cho vị ấy.<br>
+<span lang="pi" class="pali">
+‘yo kira, bho, pāṇātipātā paṭivirato adinnādānā paṭivirato …pe… sammādiṭṭhi, sabbo so kāyassa bhedā paraṁ maraṇā apāyaṁ duggatiṁ vinipātaṁ nirayaṁ upapajjatī’ti idamassa nānujānāmi;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Và nếu vị ấy nói như sau: ‘Những ai biết như vậy, những vị ấy biết một cách chân chánh.<br>
+<span lang="pi" class="pali">
+yañca kho so evamāha: ‘ye evaṁ jānanti te sammā jānanti;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Những ai biết khác như vậy, trí của họ thuộc tà trí’; như vậy, Ta cũng không chấp nhận cho vị ấy.<br>
+<span lang="pi" class="pali">
+ye aññathā jānanti, micchā tesaṁ ñāṇan’ti idampissa nānujānāmi;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ðiều vị ấy tự mình biết, tự mình thấy, tự mình hiểu rõ, ở đây, vị ấy nắm giữ, chấp trước và tuyên bố: ‘Chỉ như vậy mới chơn thực, ngoài ra đều là hư vọng’. Như vậy, Ta cũng không chấp nhận cho vị ấy. Vì cớ sao?<br>
+<span lang="pi" class="pali">
+yampi so yadeva tassa sāmaṁ ñātaṁ sāmaṁ diṭṭhaṁ sāmaṁ viditaṁ tadeva tattha thāmasā parāmāsā abhinivissa voharati: ‘idameva saccaṁ, moghamaññan’ti idampissa nānujānāmi. Taṁ kissa hetu?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Khác như vậy, này Ānanda, là trí của Như Lai về Ðại phân biệt về nghiệp.<br>
+<span lang="pi" class="pali">
+Aññathā hi, ānanda, tathāgatassa mahākammavibhaṅge ñāṇaṁ hoti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ở đây, này Ānanda, người nào sát sanh, lấy của không cho … có tà kiến; sau khi thân hoại mạng chung, người ấy bị sanh vào cõi dữ, ác thú, đọa xứ, địa ngục… Hoặc là một ác nghiệp đưa đến cảm giác khổ thọ do người ấy làm lúc trước, hay một ác nghiệp đưa đến cảm giác khổ thọ do người ấy làm về sau, hay trong khi mệnh chung, một tà kiến được người ấy chấp nhận và chấp chặt.<br>
+<span lang="pi" class="pali">
+Tatrānanda, yvāyaṁ puggalo idha pāṇātipātī adinnādāyī …pe… micchādiṭṭhi, kāyassa bhedā paraṁ maraṇā apāyaṁ duggatiṁ vinipātaṁ nirayaṁ upapajjati, pubbe vāssa taṁ kataṁ hoti pāpakammaṁ dukkhavedanīyaṁ, pacchā vāssa taṁ kataṁ hoti pāpakammaṁ dukkhavedanīyaṁ, maraṇakāle vāssa hoti micchādiṭṭhi samattā samādinnā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Do vậy, sau khi thân hoại mạng chung, người ấy sanh vào cõi dữ, ác thú, đọa xứ, địa ngục.<br>
+<span lang="pi" class="pali">
+Tena so kāyassa bhedā paraṁ maraṇā apāyaṁ duggatiṁ vinipātaṁ nirayaṁ upapajjati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Và ai ở đây sát sanh, lấy của không cho … có tà kiến, người ấy phải lãnh thọ quả báo được khởi lên ngay hiện tại hay trong một đời khác.<br>
+<span lang="pi" class="pali">
+Yañca kho so idha pāṇātipātī hoti adinnādāyī hoti …pe… micchādiṭṭhi hoti tassa diṭṭheva dhamme vipākaṁ paṭisaṁvedeti upapajja vā apare vā pariyāye.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ở đây, này Ānanda, người nào sát sanh, lấy của không cho … có tà kiến; sau khi thân hoại mạng chung, người ấy sanh vào thiện thú, Thiên giới, cõi đời này … Hoặc là một thiện nghiệp đưa đến cảm giác lạc thọ do người ấy làm lúc trước, hay một thiện nghiệp đưa đến cảm giác lạc thọ do người ấy làm về sau, hay trong khi mệnh chung, một chánh kiến được người ấy chấp nhận và chấp chặt.<br>
+<span lang="pi" class="pali">
+Tatrānanda, yvāyaṁ puggalo idha pāṇātipātī adinnādāyī …pe… micchādiṭṭhi kāyassa bhedā paraṁ maraṇā sugatiṁ saggaṁ lokaṁ upapajjati, pubbe vāssa taṁ kataṁ hoti kalyāṇakammaṁ sukhavedanīyaṁ, pacchā vāssa taṁ kataṁ hoti kalyāṇakammaṁ sukhavedanīyaṁ, maraṇakāle vāssa hoti sammādiṭṭhi samattā samādinnā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Do vậy sau khi thân hoại mạng chung, người ấy sanh vào thiện thú, Thiên giới, cõi đời này.<br>
+<span lang="pi" class="pali">
+Tena so kāyassa bhedā paraṁ maraṇā sugatiṁ saggaṁ lokaṁ upapajjati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Và ai ở đây sát sanh, lấy của không cho … có tà kiến, người ấy phải lãnh thọ quả báo được khởi lên ngay hiện tại hay trong một đời khác.<br>
+<span lang="pi" class="pali">
+Yañca kho so idha pāṇātipātī hoti adinnādāyī hoti …pe… micchādiṭṭhi hoti tassa diṭṭheva dhamme vipākaṁ paṭisaṁvedeti upapajja vā apare vā pariyāye.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ở đây, này Ānanda, người nào từ bỏ sát sanh, từ bỏ lấy của không cho … có chánh kiến; sau khi thân hoại mạng chung, người ấy sanh vào thiện thú, Thiên giới, cõi đời này … Hoặc là một thiện nghiệp đưa đến cảm giác lạc thọ do người ấy làm từ trước, hay một thiện nghiệp đưa đến cảm giác lạc thọ do người ấy làm về sau, hay trong khi mệnh chung, một chánh kiến được người ấy chấp nhận và chấp chặt.<br>
+<span lang="pi" class="pali">
+Tatrānanda, yvāyaṁ puggalo idha pāṇātipātā paṭivirato adinnādānā paṭivirato …pe… sammādiṭṭhi, kāyassa bhedā paraṁ maraṇā sugatiṁ saggaṁ lokaṁ upapajjati, pubbe vāssa taṁ kataṁ hoti kalyāṇakammaṁ sukhavedanīyaṁ, pacchā vāssa taṁ kataṁ hoti kalyāṇakammaṁ sukhavedanīyaṁ, maraṇakāle vāssa hoti sammādiṭṭhi samattā samādinnā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Do vậy, sau khi thân hoại mạng chung, người ấy sanh vào thiện thú, Thiên giới, cõi đời này.<br>
+<span lang="pi" class="pali">
+Tena so kāyassa bhedā paraṁ maraṇā sugatiṁ saggaṁ lokaṁ upapajjati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Và ai ở đây từ bỏ sát sanh, từ bỏ lấy của không cho … có chánh kiến, người ấy phải lãnh thọ quả báo được khởi lên ngay hiện tại, hay trong một đời khác.<br>
+<span lang="pi" class="pali">
+Yañca kho so idha pāṇātipātā paṭivirato hoti adinnādānā paṭivirato hoti …pe… sammādiṭṭhi hoti, tassa diṭṭheva dhamme vipākaṁ paṭisaṁvedeti upapajja vā apare vā pariyāye.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ở đây, này Ānanda, người nào từ bỏ sát sanh, từ bỏ lấy của không cho… có chánh kiến; sau khi thân hoại mạng chung, người ấy bị sanh vào cõi dữ, ác thú, đọa xứ, địa ngục… Hoặc là một ác nghiệp đưa đến cảm giác khổ thọ do người ấy làm từ trước, hay một ác nghiệp đưa đến cảm giác khổ thọ do người ấy làm về sau, hay trong khi mệnh chung, một tà kiến được người ấy chấp nhận và chấp chặt.<br>
+<span lang="pi" class="pali">
+Tatrānanda, yvāyaṁ puggalo idha pāṇātipātā paṭivirato adinnādānā paṭivirato …pe… sammādiṭṭhi, kāyassa bhedā paraṁ maraṇā apāyaṁ duggatiṁ vinipātaṁ nirayaṁ upapajjati, pubbe vāssa taṁ kataṁ hoti pāpakammaṁ dukkhavedanīyaṁ, pacchā vāssa taṁ kataṁ hoti pāpakammaṁ dukkhavedanīyaṁ, maraṇakāle vāssa hoti micchādiṭṭhi samattā samādinnā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Do vậy, sau khi thân hoại mạng chung, người ấy sanh vào cõi dữ, ác thú, đọa xứ, địa ngục.<br>
+<span lang="pi" class="pali">
+Tena so kāyassa bhedā paraṁ maraṇā apāyaṁ duggatiṁ vinipātaṁ nirayaṁ upapajjati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Và ai ở đây từ bỏ sát sanh, từ bỏ lấy của không cho … có chánh kiến, người ấy phải lãnh thọ quả báo được khởi lên ngay hiện tại hay trong một đời khác.<br>
+<span lang="pi" class="pali">
+Yañca kho so idha pāṇātipātā paṭivirato hoti, adinnādānā paṭivirato hoti …pe… sammādiṭṭhi hoti, tassa diṭṭheva dhamme vipākaṁ paṭisaṁvedeti upapajja vā apare vā pariyāye.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Như vậy, này Ānanda, có nghiệp vô hữu tợ vô hữu, có nghiệp vô hữu tợ hữu, có nghiệp hữu tợ hữu, có nghiệp hữu tợ vô hữu”.<br>
+<span lang="pi" class="pali">
+Iti kho, ānanda, atthi kammaṁ abhabbaṁ abhabbābhāsaṁ, atthi kammaṁ abhabbaṁ bhabbābhāsaṁ, atthi kammaṁ bhabbañceva bhabbābhāsañca, atthi kammaṁ bhabbaṁ abhabbābhāsan”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Thế Tôn thuyết giảng như vậy. Tôn giả Ānanda hoan hỷ tín thọ lời Thế Tôn dạy.<br>
+<span lang="pi" class="pali">
+Idamavoca bhagavā. Attamano āyasmā ānando bhagavato bhāsitaṁ abhinandīti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+<span lang="pi" class="vi">
+Mahākammavibhaṅgasuttaṁ niṭṭhitaṁ chaṭṭhaṁ.<br>
+</span>
+</p>
+
+
+
+<!-- COPY CONTENT SUTTA Ở ĐÂY -->
+
+
+
+<br>
+<p><p style="text-align: right;font-style: italic;">Hoà Thượng Thích Minh Châu dịch Việt</span></p>
+
+
+
+
+
+
+
+
+</section>  <!-- End English and Pali -->
+<div id="nextprev"><a id="previous-sutta" href="./mn135.html#content"></a><a id="next-sutta" href="./mn137.html#content"></a></div>
+</div>  <!--End Content -->
+</div>  <!-- End Page -->
+
+
+
+
+
+
+<footer>
+					 <!-- End bottom links -->
+</footer>
+
+
+ 
+ <!-- Scripts -->
+
+ <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      if (typeof enablePaliLookup === "function") {
+        enablePaliLookup();
+      } else {
+        console.error("enablePaliLookup is not defined");
+      }
+    });
+  </script>
+
+ <script>
+ // Script to open and close sidebar
+ 	function w3_open() {
+ 	document.getElementById("mySidebar").style.display = "block";
+ 	}
+ 		function w3_close() {
+ 		document.getElementById("mySidebar").style.display = "none";
+ 	}
+ </script>
+ <script>
+ 		var app = document.getElementsByTagName("BODY")[0];
+ 		if (localStorage.lightMode == "dark") {
+ 			app.setAttribute("light-mode", "dark");
+ 	}
+ </script>
+ 
+ <script>
+ 		function toggle_light_mode() {
+ 			var app = document.getElementsByTagName("BODY")[0];
+ 				if (localStorage.lightMode == "dark") {
+ 			localStorage.lightMode = "light";
+ 			app.setAttribute("light-mode", "light");
+ 		} else {
+ 					localStorage.lightMode = "dark";
+ 					app.setAttribute("light-mode", "dark");
+ 	}
+ 		}
+ 
+ 		window.addEventListener("storage", function () {
+ 			if (localStorage.lightMode == "dark") {
+ 				app.setAttribute("light-mode", "dark");
+ 				} else {
+ 				app.setAttribute("light-mode", "light");
+ 		}
+ 		}, false);
+ 
+ </script>
+ <script src="../js/footer.js"></script><script src="../js/dpd_deconstructor.js"></script><script src="../js/dpd_ebts.js"></script><script src="../js/dpd_i2h.js"></script>
+ <script src="/sw.js"></script>
+ </body>
+ </html>

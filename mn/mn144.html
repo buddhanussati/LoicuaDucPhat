@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+ 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+ 	<link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+ 	<meta name="viewport" content="width=device-width, initial-scale=1">
+		<!-- Loading manifest -->
+	<link rel="manifest" href="../manifest.json">
+ 	<!-- Loading main and menu stylesheets -->
+ 	<link rel="stylesheet" href="../css/w3.css">
+ 	<link rel="stylesheet" href="../css/css.css">
+ 	<link rel="stylesheet" href="../css/menu.css">
+ 	<script src="../js/jquery-1.10.2.min.js"></script>
+ 	<script src="../js/controlpanel.js"></script>
+ 	<script src="../js/mousetrap.min.js"></script>
+    <script src="../js/pali-lookup-standalone.js"></script>
+
+ <script src="../js/suttaFiles.js"></script>
+<script>
+ // Script to open random Sutta
+ function openRandomSutta() {
+  const randomIndex = Math.floor(Math.random() * suttaFiles.length);
+  const selectedFile = suttaFiles[randomIndex];
+
+  // Get root path of your site 
+  const currentPath = location.pathname;
+  const rootPath = currentPath.split("/").slice(0, -2).join("/") + "/";
+
+  // Redirect to the correct file
+  window.location.href = rootPath + selectedFile;
+}
+</script>
+
+
+</head>
+ <body class="container">
+ <div class="header-background">
+ <!-- Header -->
+ <div class="w3-header w3-content w3-padding w3-left-align bwcontainer">
+ 	<div class="centered">
+ 		<button class="light-mode-button" aria-label="Bật Chế Độ Sáng" onclick="toggle_light_mode()">
+ 			<span></span>
+ 			<span></span>
+ 		</button>
+ 		<span class="box-lbl">Sáng/Tối</span>
+ 	</div> <!-- Centered -->
+ 		<a href="../home/index.html" id="bwlogo"><img src="../images/headerlogo.png" alt="Logo Lời Của Đức Phật" class="w3-image"></a>
+ 		<div class="w3-bar bwcontainer">
+ 			<div id="searchlinks">
+ 			<a href="../home/visearch.html"><span class="w3-bar-item"><i class="fa fa-search"></i>&nbsp;Tìm Tiếng Việt</span></a>
+ 			<a href="../home/palisearch.html"><span class="w3-bar-item"><i class="fa fa-search"></i>&nbsp;Tìm Tiếng Pali</span></a>
+ 			</div><!-- End Searchlinks div -->
+ 			<div class="help"><span><a href="../home/help.html"><img src="../images/help_icon.png" title="Trợ Giúp" alt="Help"></a></span></div>
+ 		</div> <!-- End w3-bar bwcontainer --> 	</div> <!-- End w3-header w3-content w3-padding w3-left-align bwcontainer -->
+ </div> <!-- End header-background -->
+ <!-- Top menu -->
+
+ <div class="w3-main w3-white bwcontainer2">
+ 	<div class="w3-button w3-padding-8 w3-left w3-hide-large" onclick="w3_open()">☰</div>
+ 		<div id="navbar" class="w3-hide-small w3-hide-medium bwcontainer3">
+ 			<ul id="css3menu0">
+ 				<li class="topfirst" id="home"><a href="../home/index.html" class="w3-hide-small">Trang Chủ</a></li>
+  				<li class="topmenu" id="dn"><a href="../dn/dn.html" class="pressed w3-hide-small">Trường Bộ Kinh</a></li>
+ 				<li class="topmenu" id="mn"><a href="../mn/mn.html" class="w3-hide-small">Trung Bộ Kinh</a></li>
+ 				<li class="topmenu" id="sn"><a href="../sn/sn.html" class="w3-hide-small"><i class="fa fa-caret-down"></i>&nbsp;Tương Ưng Bộ Kinh</a>
+ 					<ul>
+ 						<li><a href="../sn/sn01.html" class="w3-hide-small">Tập I - Thiên Có Kệ</a></li>
+ 						<li><a href="../sn/sn02.html" class="w3-hide-small">Tập II - Thiên Nhân Duyên</a></li>
+ 						<li><a href="../sn/sn03.html" class="w3-hide-small">Tập III - Thiên Uẩn</a></li>
+ 						<li><a href="../sn/sn04.html" class="w3-hide-small">Tập IV - Thiên Sáu Xứ</a></li>
+ 						<li><a href="../sn/sn05.html" class="w3-hide-small">Tập V - Thiên Ðại Phẩm</a></li>
+ 					</ul>
+ 				<li class="topmenu" id="an"><a href="../an/an.html" class="w3-hide-small"><i class="fa fa-caret-down"></i>&nbsp;Tăng Chi Bộ Kinh</a>
+ 					<ul>
+ 						<li><a href="../an/an1.html" class="w3-hide-small">Chương Một Pháp</a></li>
+ 						<li><a href="../an/an2.html" class="w3-hide-small">Chương Hai Pháp</a></li>
+ 						<li><a href="../an/an3.html" class="w3-hide-small">Chương Ba Pháp</a></li>
+ 						<li><a href="../an/an4.html" class="w3-hide-small">Chương Bốn Pháp</a></li>
+ 						<li><a href="../an/an5.html" class="w3-hide-small">Chương Năm Pháp</a></li>
+ 						<li><a href="../an/an6.html" class="w3-hide-small">Chương Sáu Pháp</a></li>
+ 						<li><a href="../an/an7.html" class="w3-hide-small">Chương Bảy Pháp</a></li>
+ 						<li><a href="../an/an8.html" class="w3-hide-small">Chương Tám Pháp</a></li>
+ 						<li><a href="../an/an9.html" class="w3-hide-small">Chương Chín Pháp</a></li>
+ 						<li><a href="../an/an10.html" class="w3-hide-small">Chương Mười Pháp</a></li>
+ 						<li><a href="../an/an11.html" class="w3-hide-small">Chương Mười Một Pháp</a></li>
+ 					</ul>
+ 				</li>
+ 				<li class="topmenu" id="kn"><a href="../kn/kn.html" class="w3-hide-small"><i class="fa fa-caret-down"></i>&nbsp;Tiểu Bộ Kinh</a>
+ 					<ul>
+ 						<li><a href="../kp/kp.html" class="w3-hide-small">Kinh Tiểu Tụng</a></li>
+ 						<li><a href="../dhp/dhp.html" class="w3-hide-small">Kinh Pháp Cú</a></li>
+ 						<li><a href="../snp/snp.html" class="w3-hide-small">Kinh Tập</a></li>
+ 						<li><a href="../ud/ud.html" class="w3-hide-small">Kinh Phật Tự Thuyết</a></li>
+ 						<li><a href="../it/it.html" class="w3-hide-small">Kinh Phật Thuyết Như Vậy</a></li>
+ 						<li><a href="../tha/tha.html" class="w3-hide-small">Trưởng Lão Tăng Kệ</a></li>
+ 						<li><a href="../thi/thi.html" class="w3-hide-small">Trưởng Lão Ni Kệ</a></li>
+ 					</ul>
+ 				</li>
+				<li class="toplast" id="rd"><a href="../rd/rd.html" class="w3-hide-small"></i>Kinh Ngẫu Nhiên Theo Nhóm</a>
+ 					</ul>
+ 				</li>
+ 			</ul>
+ 			</div>
+ 		</div> <!--navbar-->
+
+<!-- Sidebar (hidden by default) -->
+ <nav class="w3-sidebar w3-bar-block w3-card w3-border w3-top w3-animate-left w3-hide-large" id="mySidebar">
+ 	<a href="javascript:void(0)" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-times fa-2x red-color"></i>&nbsp;&nbsp;&nbsp;Close</a><!-- Hides the sidebar when clicked -->
+ 		<div class="w3-bar-block w3-white">
+ 			<a href="../home/index.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-home fa-lg"></i>&nbsp;&nbsp;&nbsp;Home</a>
+ 			<a href="../guide/guide.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Guide</a>
+ 			<a href="../dn/dn.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Trường Bộ Kinh</a>
+ 			<a href="../mn/mn.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Trung Bộ Kinh</a>
+ 			<a href="../sn/sn.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Tương Ưng Bộ Kinh</a>
+ 			<a href="../an/an.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Tăng Chi Bộ Kinh
+ 			<a href="../kn/kn.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Tiểu Bộ Kinh</a>
+			<a href="../rd/rd.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>Kinh Ngẫu Nhiên Theo Nhóm</a>
+ 		</div>
+ </nav>
+ 
+ 
+ 
+   <!-- !PAGE CONTENT! --> 
+<div class="w3-main w3-content w3-padding w3-left-align bwcontainer4">
+<div id="content">
+<h2>Majjhima Nikāya - Trung Bộ Kinh</h2>
+<h5><span style="font-style: italic;">Hoà Thượng Thích Minh Châu dịch Việt</span></h5>
+
+</div>
+
+<br>
+ 	<title>        Trung Bộ 144          </title>
+
+<p lang="vi" class="vi"; style="text-align: center">
+ Trung Bộ 144<br>
+<span lang="pi" class="pali">
+Majjhima Nikāya 144<br>
+</span>
+</p>
+
+
+<p lang="vi" class="vi"; style="text-align: center">
+Kinh Giáo Giới Channa<br>
+<span lang="pi" class="pali">
+Channovādasutta<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Như vầy tôi nghe.<br>
+<span lang="pi" class="pali">
+Evaṁ me sutaṁ—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Một thời, Thế Tôn ở Rājagaha (Vương Xá), Veluvana (Trúc-lâm), tại chỗ nuôi dưỡng sóc (Kalandakanivapa).<br>
+<span lang="pi" class="pali">
+ekaṁ samayaṁ bhagavā rājagahe viharati veḷuvane kalandakanivāpe.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Lúc bấy giờ Tôn giả Sāriputta (Xá-lợi-phất), Tôn giả Mahācunda (Ðại Chu-na) và Tôn giả Channa (Xiển-đà) cùng trú ở Gijjhakuta (Linh Thứu).<br>
+<span lang="pi" class="pali">
+Tena kho pana samayena āyasmā ca sāriputto āyasmā ca mahācundo āyasmā ca channo gijjhakūṭe pabbate viharanti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Lúc bấy giờ, Tôn giả Channa bị bệnh, đau khổ, bị trọng bệnh.<br>
+<span lang="pi" class="pali">
+Tena kho pana samayena āyasmā channo ābādhiko hoti dukkhito bāḷhagilāno.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Rồi Tôn giả Sāriputta, vào buổi chiều từ Thiền tịnh độc cư đứng dậy, đi đến Tôn giả Mahācunda, sau khi đến, nói với Tôn giả Mahācunda:<br>
+<span lang="pi" class="pali">
+Atha kho āyasmā sāriputto sāyanhasamayaṁ paṭisallānā vuṭṭhito yenāyasmā mahācundo tenupasaṅkami; upasaṅkamitvā āyasmantaṁ mahācundaṁ etadavoca:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Chúng ta hãy đi, này Hiền giả Cunda, chúng ta hãy đi đến Tôn giả Channa để hỏi thăm bệnh trạng”.<br>
+<span lang="pi" class="pali">
+“āyāmāvuso cunda, yenāyasmā channo tenupasaṅkamissāma gilānapucchakā”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Thưa vâng, Hiền giả”. Tôn giả Mahācunda vâng đáp Tôn giả Sāriputta.<br>
+<span lang="pi" class="pali">
+“Evamāvuso”ti kho āyasmā mahācundo āyasmato sāriputtassa paccassosi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Rồi Tôn giả Sāriputta cùng với Tôn giả Mahācunda đi đến Tôn giả Channa; sau khi đến, nói lên với Tôn giả Channa những lời chào đón hỏi thăm; sau khi nói lên những lời chào đón hỏi thăm thân hữu, liền ngồi xuống một bên. Ngồi xuống một bên, Tôn giả Sāriputta nói với Tôn giả Channa:<br>
+<span lang="pi" class="pali">
+Atha kho āyasmā ca sāriputto āyasmā ca mahācundo yenāyasmā channo tenupasaṅkamiṁsu; upasaṅkamitvā āyasmatā channena saddhiṁ sammodiṁsu. Sammodanīyaṁ kathaṁ sāraṇīyaṁ vītisāretvā ekamantaṁ nisīdiṁsu. Ekamantaṁ nisinno kho āyasmā sāriputto āyasmantaṁ channaṁ etadavoca:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Này Hiền giả Channa, mong rằng Hiền giả có thể kham nhẫn! Mong rằng Hiền giả có thể chịu đựng! Mong rằng khổ thọ được giảm thiểu không có gia tăng, và sự giảm thiểu được rõ rệt, không có gia tăng!”<br>
+<span lang="pi" class="pali">
+“kacci te, āvuso channa, khamanīyaṁ, kacci yāpanīyaṁ? Kacci te dukkhā vedanā paṭikkamanti, no abhikkamanti; paṭikkamosānaṁ paññāyati, no abhikkamo”ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Thưa Hiền giả Sāriputta, tôi không có thể kham nhẫn, tôi không có thể chịu đựng. Sự khổ thống của tôi gia tăng, không có giảm thiểu; sự gia tăng rõ rệt, không có giảm thiểu.<br>
+<span lang="pi" class="pali">
+“Na me, āvuso sāriputta, khamanīyaṁ na yāpanīyaṁ. Bāḷhā me dukkhā vedanā abhikkamanti, no paṭikkamanti; abhikkamosānaṁ paññāyati, no paṭikkamo.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Thưa Hiền giả Sāriputta, ví như một người lực sĩ chém đầu (một người khác) với một thanh kiếm sắc bén; cũng vậy, Thưa Hiền giả Sāriputta, những ngọn gió kinh khủng thổi lên đau nhói trong đầu tôi.<br>
+<span lang="pi" class="pali">
+Seyyathāpi, āvuso sāriputta, balavā puriso tiṇhena sikharena muddhani abhimattheyya; evameva kho me, āvuso sāriputta, adhimattā vātā muddhani ūhananti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Thưa Hiền giả Sāriputta, tôi không có thể kham nhẫn, tôi không có thể chịu đựng. Những khổ thống của tôi gia tăng, không có giảm thiểu; sự gia tăng rõ rệt, không có giảm thiểu.<br>
+<span lang="pi" class="pali">
+Na me, āvuso sāriputta, khamanīyaṁ na yāpanīyaṁ. Bāḷhā me dukkhā vedanā abhikkamanti, no paṭikkamanti; abhikkamosānaṁ paññāyati no paṭikkamo.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Thưa Hiền giả Sāriputta, như một người lực sĩ lấy một dây nịt bằng da cứng quấn tròn quanh đầu rồi xiết chặt; cũng vậy, Thưa Hiền giả Sāriputta, tôi cảm thấy bị đau đầu một cách kinh khủng.<br>
+<span lang="pi" class="pali">
+Seyyathāpi, āvuso sāriputta, balavā puriso daḷhena varattakkhaṇḍena sīse sīsaveṭhaṁ dadeyya; evameva kho me, āvuso sāriputta, adhimattā sīse sīsavedanā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Thưa Hiền giả Sāriputta, tôi không có thể kham nhẫn, tôi không có thể chịu đựng. Những khổ thống của tôi gia tăng, không có giảm thiểu; sự gia tăng rõ rệt, không có giảm thiểu.<br>
+<span lang="pi" class="pali">
+Na me, āvuso sāriputta, khamanīyaṁ na yāpanīyaṁ. Bāḷhā me dukkhā vedanā abhikkamanti, no paṭikkamanti; abhikkamosānaṁ paññāyati, no paṭikkamo.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Thưa Hiền giả Sāriputta, như một người đồ tể thiện xảo hay đệ tử người đồ tể cắt ngang bụng với một con dao cắt thịt bò sắc bén; cũng vậy, Thưa Hiền giả Sāriputta, một ngọn gió kinh khủng cắt ngang bụng của tôi.<br>
+<span lang="pi" class="pali">
+Seyyathāpi, āvuso sāriputta, dakkho goghātako vā goghātakantevāsī vā tiṇhena govikantanena kucchiṁ parikanteyya; evameva kho me, āvuso sāriputta, adhimattā vātā kucchiṁ parikantanti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Thưa Hiền giả Sāriputta, tôi không có thể kham nhẫn, tôi không có thể chịu đựng. Những khổ thống của tôi gia tăng, không có giảm thiểu; sự gia tăng rõ rệt, không có giảm thiểu.<br>
+<span lang="pi" class="pali">
+Na me, āvuso sāriputta, khamanīyaṁ na yāpanīyaṁ. Bāḷhā me dukkhā vedanā abhikkamanti, no paṭikkamanti; abhikkamosānaṁ paññāyati, no paṭikkamo.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Thưa Hiền giả Sāriputta, ví như hai người lực sĩ, sau khi nắm cánh tay của một người yếu hơn, nướng người ấy, đốt người ấy trên một hố than hừng; cũng vậy, Thưa Hiền giả Sāriputta, một sức nóng kinh khủng khởi lên trong thân tôi.<br>
+<span lang="pi" class="pali">
+Seyyathāpi, āvuso sāriputta, dve balavanto purisā dubbalataraṁ purisaṁ nānābāhāsu gahetvā aṅgārakāsuyā santāpeyyuṁ samparitāpeyyuṁ; evameva kho me, āvuso sāriputta, adhimatto kāyasmiṁ ḍāho.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Thưa Hiền giả Sāriputta, tôi không có thể kham nhẫn, tôi không có thể chịu đựng. Sự thống khổ của tôi gia tăng không có giảm thiểu, và sự gia tăng rõ rệt, không có giảm thiểu.<br>
+<span lang="pi" class="pali">
+Na me, āvuso sāriputta, khamanīyaṁ na yāpanīyaṁ. Bāḷhā me dukkhā vedanā abhikkamanti, no paṭikkamanti; abhikkamosānaṁ paññāyati, no paṭikkamo.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Thưa Hiền giả Sāriputta, tôi sẽ đem dao (cho tôi). Tôi không còn muốn sống.”<br>
+<span lang="pi" class="pali">
+Satthaṁ, āvuso sāriputta, āharissāmi, nāvakaṅkhāmi jīvitan”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Tôn giả Channa, chớ có đem lại con dao!<br>
+<span lang="pi" class="pali">
+“Māyasmā channo satthaṁ āharesi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Tôn giả Channa, hãy tiếp tục sống! Chúng tôi muốn Tôn giả Channa tiếp tục sống.<br>
+<span lang="pi" class="pali">
+Yāpetāyasmā channo. Yāpentaṁ mayaṁ āyasmantaṁ channaṁ icchāma.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Nếu Tôn giả Channa không có các món ăn tốt lành, tôi sẽ đi tìm các món ăn tốt lành cho Tôn giả Channa.<br>
+<span lang="pi" class="pali">
+Sace āyasmato channassa natthi sappāyāni bhojanāni, ahaṁ āyasmato channassa sappāyāni bhojanāni pariyesissāmi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Nếu Tôn giả Channa không có các dược phẩm tốt lành, tôi sẽ đi tìm các dược phẩm tốt lành cho Tôn giả Channa.<br>
+<span lang="pi" class="pali">
+Sace āyasmato channassa natthi sappāyāni bhesajjāni, ahaṁ āyasmato channassa sappāyāni bhesajjāni pariyesissāmi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Nếu Tôn giả Channa không có người thị giả thích đáng, tôi sẽ hầu hạ Tôn giả Channa.<br>
+<span lang="pi" class="pali">
+Sace āyasmato channassa natthi patirūpā upaṭṭhākā, ahaṁ āyasmantaṁ channaṁ upaṭṭhahissāmi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Tôn giả Channa chớ có đem lại con dao!<br>
+<span lang="pi" class="pali">
+Māyasmā channo satthaṁ āharesi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Tôn giả Channa hãy tiếp tục sống! Chúng tôi muốn Tôn giả Channa tiếp tục sống.”<br>
+<span lang="pi" class="pali">
+Yāpetāyasmā channo. Yāpentaṁ mayaṁ āyasmantaṁ channaṁ icchāmā”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Thưa Hiền giả Sāriputta, không phải tôi không có các món ăn tốt lành,<br>
+<span lang="pi" class="pali">
+“Napi me, āvuso sāriputta, natthi sappāyāni bhojanāni;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+cũng không phải tôi không có các dược phẩm tốt lành.<br>
+<span lang="pi" class="pali">
+napi me natthi sappāyāni bhesajjāni;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Cũng không phải tôi không có thị giả thích đáng.<br>
+<span lang="pi" class="pali">
+napi me natthi patirūpā upaṭṭhākā;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Thưa Hiền giả Sāriputta, trong một thời gian dài, tôi đã hầu hạ bậc Ðạo Sư, làm cho (bậc Ðạo sư) được đẹp lòng, không phải không được đẹp lòng.<br>
+<span lang="pi" class="pali">
+api cāvuso sāriputta, pariciṇṇo me satthā dīgharattaṁ manāpeneva no amanāpena.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Thưa Hiền giả Sāriputta, thật là thích đáng cho người đệ tử hầu hạ bậc Ðạo Sư, làm cho (bậc Ðạo Sư) được đẹp lòng, không phải không được đẹp lòng.<br>
+<span lang="pi" class="pali">
+Etañhi, āvuso sāriputta, sāvakassa patirūpaṁ yaṁ satthāraṁ paricareyya manāpeneva no amanāpena.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Tỷ-kheo Channa đem lại con dao không có phạm tội’. Thưa Hiền giả Sāriputta, hãy thọ trì như vậy!”<br>
+<span lang="pi" class="pali">
+‘Anupavajjaṁ channo bhikkhu satthaṁ āharissatī’ti evametaṁ, āvuso sāriputta, dhārehī”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Chúng tôi muốn hỏi Tôn giả Channa về một vấn đề đặc biệt, nếu Tôn giả Channa cho chúng tôi được phép đặt câu hỏi”.<br>
+<span lang="pi" class="pali">
+“Puccheyyāma mayaṁ āyasmantaṁ channaṁ kañcideva desaṁ, sace āyasmā channo okāsaṁ karoti pañhassa veyyākaraṇāyā”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Hãy hỏi đi, Hiền giả Sāriputta; sau khi nghe, tôi sẽ biết”.<br>
+<span lang="pi" class="pali">
+“Pucchāvuso sāriputta, sutvā vedissāmī”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Hiền giả Channa, Hiền giả có xem con mắt, nhãn thức và các pháp do mắt nhận thức là: ‘Cái này là của tôi, cái này là tôi, cái này là tự ngã của tôi?’<br>
+<span lang="pi" class="pali">
+“Cakkhuṁ, āvuso channa, cakkhuviññāṇaṁ cakkhuviññāṇaviññātabbe dhamme ‘etaṁ mama, esohamasmi, eso me attā’ti samanupassasi?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Hiền giả Channa, Hiền giả có xem tai, nhĩ thức…<br>
+<span lang="pi" class="pali">
+Sotaṁ, āvuso channa, sotaviññāṇaṁ …pe…<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Hiền giả Channa, Hiền giả có xem mũi, tỷ thức…<br>
+<span lang="pi" class="pali">
+ghānaṁ, āvuso channa, ghānaviññāṇaṁ …<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Hiền giả Channa, Hiền giả có xem lưỡi, thiệt thức…<br>
+<span lang="pi" class="pali">
+jivhaṁ, āvuso channa, jivhāviññāṇaṁ …<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Hiền giả Channa, Hiền giả có xem thân, thân thức…<br>
+<span lang="pi" class="pali">
+kāyaṁ, āvuso channa, kāyaviññāṇaṁ …<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Hiền giả Channa, Hiền giả có xem ý, ý thức và các pháp do ý nhận thức là: ‘Cái này của tôi, cái này là tôi, cái này là tự ngã của tôi’?”<br>
+<span lang="pi" class="pali">
+manaṁ, āvuso channa, manoviññāṇaṁ manoviññāṇaviññātabbe dhamme ‘etaṁ mama, esohamasmi, eso me attā’ti samanupassasī”ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Hiền giả Sāriputta, tôi xem mắt, nhãn thức và các pháp do mắt nhận thức là: ‘Cái này không phải của tôi, cái này không phải là tôi, cái này không phải tự ngã của tôi’.<br>
+<span lang="pi" class="pali">
+“Cakkhuṁ, āvuso sāriputta, cakkhuviññāṇaṁ cakkhuviññāṇaviññātabbe dhamme ‘netaṁ mama, nesohamasmi, na meso attā’ti samanupassāmi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Hiền giả Sāriputta, tôi xem tai, nhĩ thức…<br>
+<span lang="pi" class="pali">
+Sotaṁ, āvuso sāriputta …pe…<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Hiền giả Sāriputta, tôi xem mũi, tỷ thức…<br>
+<span lang="pi" class="pali">
+ghānaṁ, āvuso sāriputta …<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Hiền giả Sāriputta, tôi xem lưỡi, thiệt thức…<br>
+<span lang="pi" class="pali">
+jivhaṁ, āvuso sāriputta …<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Hiền giả Sāriputta, tôi xem thân, thân thức…<br>
+<span lang="pi" class="pali">
+kāyaṁ, āvuso sāriputta …<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Hiền giả Sāriputta, tôi xem ý, ý thức và các pháp do ý nhận thức là: ‘Cái này không phải của tôi, cái này không phải là tôi, cái này không phải tự ngã của tôi’.”<br>
+<span lang="pi" class="pali">
+manaṁ, āvuso sāriputta, manoviññāṇaṁ manoviññāṇaviññātabbe dhamme ‘netaṁ mama, nesohamasmi, na meso attā’ti samanupassāmī”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Này Hiền giả Channa, Hiền giả đã thấy cái gì, đã chứng tri cái gì trong mắt, trong nhãn thức, trong các pháp được mắt nhận thức mà Hiền giả xem mắt, nhãn thức và các pháp do mắt nhận thức là: ‘Cái này không phải của tôi, cái này không phải là tôi, cái này không phải là tự ngã của tôi?’<br>
+<span lang="pi" class="pali">
+“Cakkhusmiṁ, āvuso channa, cakkhuviññāṇe cakkhuviññāṇaviññātabbesu dhammesu kiṁ disvā kiṁ abhiññāya cakkhuṁ cakkhuviññāṇaṁ cakkhuviññāṇaviññātabbe dhamme ‘netaṁ mama, nesohamasmi, na meso attā’ti samanupassasi?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Hiền giả Channa, Hiền giả đã thấy cái gì, đã chứng tri cái gì trong tai, trong nhĩ thức … trong mũi, trong tỷ thức … trong lưỡi, trong thiệt thức … trong thân, trong thân thức … trong ý, trong ý thức và trong các pháp do ý nhận thức mà Hiền giả xem ý, ý thức và các pháp do ý nhận thức là: ‘Cái này không phải của tôi, cái này không phải là tôi, cái này không phải tự ngã của tôi’?”<br>
+<span lang="pi" class="pali">
+Sotasmiṁ, āvuso channa, sotaviññāṇe … ghānasmiṁ, āvuso channa, ghānaviññāṇe … jivhāya, āvuso channa, jivhāviññāṇe … kāyasmiṁ, āvuso channa, kāyaviññāṇe … manasmiṁ, āvuso channa, manoviññāṇe manoviññāṇaviññātabbesu dhammesu kiṁ disvā kiṁ abhiññāya manaṁ manoviññāṇaṁ manoviññāṇaviññātabbe dhamme ‘netaṁ mama, nesohamasmi, na meso attā’ti samanupassasī”ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Thưa Hiền giả Sāriputta, chính vì tôi thấy sự diệt (nirodha), chứng tri sự diệt trong mắt, trong nhãn thức và trong các pháp do mắt nhận thức, mà tôi xem mắt, nhãn thức, và các pháp do mắt nhận thức là: ‘Cái này không phải của tôi, cái này không phải là tôi, cái này không phải tự ngã của tôi’.<br>
+<span lang="pi" class="pali">
+“Cakkhusmiṁ, āvuso sāriputta, cakkhuviññāṇe cakkhuviññāṇaviññātabbesu dhammesu nirodhaṁ disvā nirodhaṁ abhiññāya cakkhuṁ cakkhuviññāṇaṁ cakkhuviññāṇaviññātabbe dhamme ‘netaṁ mama, nesohamasmi, na meso attā’ti samanupassāmi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Thưa Hiền giả Sāriputta, chính vì tôi thấy sự diệt, chứng tri sự diệt trong tai, trong nhĩ thức… trong mũi, trong tỷ thức… trong lưỡi, trong thiệt thức… trong thân, trong thân thức… trong ý, trong ý thức và trong các pháp do ý nhận thức mà tôi xem ý, ý thức và các pháp do ý nhận thức là: ‘Cái này không phải của tôi, cái này không phải là tôi, cái này không phải tự ngã của tôi’.”<br>
+<span lang="pi" class="pali">
+Sotasmiṁ, āvuso sāriputta, sotaviññāṇe … ghānasmiṁ, āvuso sāriputta, ghānaviññāṇe … jivhāya, āvuso sāriputta, jivhāviññāṇe … kāyasmiṁ, āvuso sāriputta, kāyaviññāṇe … manasmiṁ, āvuso sāriputta, manoviññāṇe manoviññāṇaviññātabbesu dhammesu nirodhaṁ disvā nirodhaṁ abhiññāya manaṁ manoviññāṇaṁ manoviññāṇaviññātabbe dhamme ‘netaṁ mama, nesohamasmi, na meso attā’ti samanupassāmī”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Khi được nghe nói vậy, Tôn giả Mahācunda nói với Tôn giả Channa:<br>
+<span lang="pi" class="pali">
+Evaṁ vutte, āyasmā mahācundo āyasmantaṁ channaṁ etadavoca:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Do vậy, này Hiền giả Channa, lời dạy này của Thế Tôn phải được thường trực tác ý:<br>
+<span lang="pi" class="pali">
+“tasmātiha, āvuso channa, idampi tassa bhagavato sāsanaṁ, niccakappaṁ manasi kātabbaṁ:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Ai có chấp trước là có dao động. Ai không chấp trước là không có dao động.<br>
+<span lang="pi" class="pali">
+‘nissitassa calitaṁ, anissitassa calitaṁ natthi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Không có dao động, thời có khinh an;<br>
+<span lang="pi" class="pali">
+Calite asati passaddhi,<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+có khinh an thời không có hy cầu (nati);<br>
+<span lang="pi" class="pali">
+passaddhiyā sati nati na hoti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+không có hy cầu thời không có khứ lai;<br>
+<span lang="pi" class="pali">
+Natiyā asati āgatigati na hoti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+không có khứ lai thời không có tử sanh;<br>
+<span lang="pi" class="pali">
+Āgatigatiyā asati cutūpapāto na hoti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+không có tử sanh thời không có đời này, không có đời sau, không có giữa hai đời.<br>
+<span lang="pi" class="pali">
+Cutūpapāte asati nevidha na huraṁ na ubhayamantarena.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Như vậy là sự đoạn tận đau khổ”.<br>
+<span lang="pi" class="pali">
+Esevanto dukkhassā’”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Rồi Tôn giả Sāriputta và Tôn giả Mahācunda sau khi giáo giới cho Tôn giả Channa, từ chỗ ngồi đứng dậy và ra đi.<br>
+<span lang="pi" class="pali">
+Atha kho āyasmā ca sāriputto āyasmā ca mahācundo āyasmantaṁ channaṁ iminā ovādena ovaditvā uṭṭhāyāsanā pakkamiṁsu.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Rồi Tôn giả Channa, sau khi Tôn giả Sāriputta và Tôn giả Mahācunda ra đi không bao lâu, đem dao lại (cho mình).<br>
+<span lang="pi" class="pali">
+Atha kho āyasmā channo acirapakkante āyasmante ca sāriputte āyasmante ca mahācunde satthaṁ āharesi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Rồi Tôn giả Sāriputta đi đến Thế Tôn, sau khi đến đảnh lễ Thế Tôn rồi ngồi xuống một bên. Ngồi xuống một bên, Tôn giả Sāriputta bạch Thế Tôn:<br>
+<span lang="pi" class="pali">
+Atha kho āyasmā sāriputto yena bhagavā tenupasaṅkami; upasaṅkamitvā bhagavantaṁ abhivādetvā ekamantaṁ nisīdi. Ekamantaṁ nisinno kho āyasmā sāriputto bhagavantaṁ etadavoca:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Bạch Thế Tôn, Tôn giả Channa đã đem dao lại (cho mình), sanh xứ của Tôn giả ấy là gì? Ðời sống tương lai là gì?”<br>
+<span lang="pi" class="pali">
+“āyasmatā, bhante, channena satthaṁ āharitaṁ. Tassa kā gati, ko abhisamparāyo”ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Này Sāriputta, có phải trước mặt Ông, Tỷ-kheo Channa đã tuyên bố sự không phạm tội?”<br>
+<span lang="pi" class="pali">
+“Nanu te, sāriputta, channena bhikkhunā sammukhāyeva anupavajjatā byākatā”ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Bạch Thế Tôn, có một ngôi làng của dòng họ Vajji (Bạt-kỳ) tên là Pubbajira.<br>
+<span lang="pi" class="pali">
+“Atthi, bhante, pubbajiraṁ nāma vajjigāmo.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Tại đấy, có những gia đình thân hữu, những gia đình hộ trì Tôn giả Channa, những gia đình cần được viếng thăm”.<br>
+<span lang="pi" class="pali">
+Tatthāyasmato channassa mittakulāni suhajjakulāni upavajjakulānī”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Này Sāriputta, có những gia đình ấy là những gia đình thân hữu, những gia đình hộ trì Tỷ-kheo Channa, những gia đình cần được viếng thăm.<br>
+<span lang="pi" class="pali">
+“Honti hete, sāriputta, channassa bhikkhuno mittakulāni suhajjakulāni upavajjakulāni.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Sāriputta, cho đến nay, Ta không nói rằng Tỷ-kheo Channa có phạm tội.<br>
+<span lang="pi" class="pali">
+Nāhaṁ, sāriputta, ettāvatā ‘saupavajjo’ti vadāmi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Sāriputta, ai quăng bỏ thân này, và chấp thủ thân khác, Ta nói rằng người ấy có phạm tội.<br>
+<span lang="pi" class="pali">
+Yo kho, sāriputta, imañca kāyaṁ nikkhipati aññañca kāyaṁ upādiyati tamahaṁ ‘saupavajjo’ti vadāmi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Tỷ-kheo Channa không có (chấp thủ) như vậy.<br>
+<span lang="pi" class="pali">
+Taṁ channassa bhikkhuno natthi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Tỷ-kheo Channa đem con dao lại (cho mình), không có phạm tội’.”<br>
+<span lang="pi" class="pali">
+‘Anupavajjo channo bhikkhu satthaṁ āharesī’ti evametaṁ, sāriputta, dhārehī”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Thế Tôn thuyết giảng như vậy. Tôn giả Sāriputta hoan hỷ tín thọ lời Thế Tôn dạy.<br>
+<span lang="pi" class="pali">
+Idamavoca bhagavā. Attamano āyasmā sāriputto bhagavato bhāsitaṁ abhinandīti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+<span lang="pi" class="vi">
+Channovādasuttaṁ niṭṭhitaṁ dutiyaṁ.<br>
+</span>
+</p>
+
+
+
+<!-- COPY CONTENT SUTTA Ở ĐÂY -->
+
+
+
+<br>
+<p><p style="text-align: right;font-style: italic;">Hoà Thượng Thích Minh Châu dịch Việt</span></p>
+
+
+
+
+
+
+
+
+</section>  <!-- End English and Pali -->
+<div id="nextprev"><a id="previous-sutta" href="./mn143.html#content"></a><a id="next-sutta" href="./mn145.html#content"></a></div>
+</div>  <!--End Content -->
+</div>  <!-- End Page -->
+
+
+
+
+
+
+<footer>
+					 <!-- End bottom links -->
+</footer>
+
+
+ 
+ <!-- Scripts -->
+
+ <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      if (typeof enablePaliLookup === "function") {
+        enablePaliLookup();
+      } else {
+        console.error("enablePaliLookup is not defined");
+      }
+    });
+  </script>
+
+ <script>
+ // Script to open and close sidebar
+ 	function w3_open() {
+ 	document.getElementById("mySidebar").style.display = "block";
+ 	}
+ 		function w3_close() {
+ 		document.getElementById("mySidebar").style.display = "none";
+ 	}
+ </script>
+ <script>
+ 		var app = document.getElementsByTagName("BODY")[0];
+ 		if (localStorage.lightMode == "dark") {
+ 			app.setAttribute("light-mode", "dark");
+ 	}
+ </script>
+ 
+ <script>
+ 		function toggle_light_mode() {
+ 			var app = document.getElementsByTagName("BODY")[0];
+ 				if (localStorage.lightMode == "dark") {
+ 			localStorage.lightMode = "light";
+ 			app.setAttribute("light-mode", "light");
+ 		} else {
+ 					localStorage.lightMode = "dark";
+ 					app.setAttribute("light-mode", "dark");
+ 	}
+ 		}
+ 
+ 		window.addEventListener("storage", function () {
+ 			if (localStorage.lightMode == "dark") {
+ 				app.setAttribute("light-mode", "dark");
+ 				} else {
+ 				app.setAttribute("light-mode", "light");
+ 		}
+ 		}, false);
+ 
+ </script>
+ <script src="../js/footer.js"></script><script src="../js/dpd_deconstructor.js"></script><script src="../js/dpd_ebts.js"></script><script src="../js/dpd_i2h.js"></script>
+ <script src="/sw.js"></script>
+ </body>
+ </html>

@@ -1,0 +1,1533 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+ 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+ 	<link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+ 	<meta name="viewport" content="width=device-width, initial-scale=1">
+		<!-- Loading manifest -->
+	<link rel="manifest" href="../manifest.json">
+ 	<!-- Loading main and menu stylesheets -->
+ 	<link rel="stylesheet" href="../css/w3.css">
+ 	<link rel="stylesheet" href="../css/css.css">
+ 	<link rel="stylesheet" href="../css/menu.css">
+ 	<script src="../js/jquery-1.10.2.min.js"></script>
+ 	<script src="../js/controlpanel.js"></script>
+ 	<script src="../js/mousetrap.min.js"></script>
+    <script src="../js/pali-lookup-standalone.js"></script>
+
+ <script src="../js/suttaFiles.js"></script>
+<script>
+ // Script to open random Sutta
+ function openRandomSutta() {
+  const randomIndex = Math.floor(Math.random() * suttaFiles.length);
+  const selectedFile = suttaFiles[randomIndex];
+
+  // Get root path of your site 
+  const currentPath = location.pathname;
+  const rootPath = currentPath.split("/").slice(0, -2).join("/") + "/";
+
+  // Redirect to the correct file
+  window.location.href = rootPath + selectedFile;
+}
+</script>
+
+
+</head>
+ <body class="container">
+ <div class="header-background">
+ <!-- Header -->
+ <div class="w3-header w3-content w3-padding w3-left-align bwcontainer">
+ 	<div class="centered">
+ 		<button class="light-mode-button" aria-label="Bật Chế Độ Sáng" onclick="toggle_light_mode()">
+ 			<span></span>
+ 			<span></span>
+ 		</button>
+ 		<span class="box-lbl">Sáng/Tối</span>
+ 	</div> <!-- Centered -->
+ 		<a href="../home/index.html" id="bwlogo"><img src="../images/headerlogo.png" alt="Logo Lời Của Đức Phật" class="w3-image"></a>
+ 		<div class="w3-bar bwcontainer">
+ 			<div id="searchlinks">
+ 			<a href="../home/visearch.html"><span class="w3-bar-item"><i class="fa fa-search"></i>&nbsp;Tìm Tiếng Việt</span></a>
+ 			<a href="../home/palisearch.html"><span class="w3-bar-item"><i class="fa fa-search"></i>&nbsp;Tìm Tiếng Pali</span></a>
+ 			</div><!-- End Searchlinks div -->
+ 			<div class="help"><span><a href="../home/help.html"><img src="../images/help_icon.png" title="Trợ Giúp" alt="Help"></a></span></div>
+ 		</div> <!-- End w3-bar bwcontainer --> 	</div> <!-- End w3-header w3-content w3-padding w3-left-align bwcontainer -->
+ </div> <!-- End header-background -->
+ <!-- Top menu -->
+
+ <div class="w3-main w3-white bwcontainer2">
+ 	<div class="w3-button w3-padding-8 w3-left w3-hide-large" onclick="w3_open()">☰</div>
+ 		<div id="navbar" class="w3-hide-small w3-hide-medium bwcontainer3">
+ 			<ul id="css3menu0">
+ 				<li class="topfirst" id="home"><a href="../home/index.html" class="w3-hide-small">Trang Chủ</a></li>
+  				<li class="topmenu" id="dn"><a href="../dn/dn.html" class="pressed w3-hide-small">Trường Bộ Kinh</a></li>
+ 				<li class="topmenu" id="mn"><a href="../mn/mn.html" class="w3-hide-small">Trung Bộ Kinh</a></li>
+ 				<li class="topmenu" id="sn"><a href="../sn/sn.html" class="w3-hide-small"><i class="fa fa-caret-down"></i>&nbsp;Tương Ưng Bộ Kinh</a>
+ 					<ul>
+ 						<li><a href="../sn/sn01.html" class="w3-hide-small">Tập I - Thiên Có Kệ</a></li>
+ 						<li><a href="../sn/sn02.html" class="w3-hide-small">Tập II - Thiên Nhân Duyên</a></li>
+ 						<li><a href="../sn/sn03.html" class="w3-hide-small">Tập III - Thiên Uẩn</a></li>
+ 						<li><a href="../sn/sn04.html" class="w3-hide-small">Tập IV - Thiên Sáu Xứ</a></li>
+ 						<li><a href="../sn/sn05.html" class="w3-hide-small">Tập V - Thiên Ðại Phẩm</a></li>
+ 					</ul>
+ 				<li class="topmenu" id="an"><a href="../an/an.html" class="w3-hide-small"><i class="fa fa-caret-down"></i>&nbsp;Tăng Chi Bộ Kinh</a>
+ 					<ul>
+ 						<li><a href="../an/an1.html" class="w3-hide-small">Chương Một Pháp</a></li>
+ 						<li><a href="../an/an2.html" class="w3-hide-small">Chương Hai Pháp</a></li>
+ 						<li><a href="../an/an3.html" class="w3-hide-small">Chương Ba Pháp</a></li>
+ 						<li><a href="../an/an4.html" class="w3-hide-small">Chương Bốn Pháp</a></li>
+ 						<li><a href="../an/an5.html" class="w3-hide-small">Chương Năm Pháp</a></li>
+ 						<li><a href="../an/an6.html" class="w3-hide-small">Chương Sáu Pháp</a></li>
+ 						<li><a href="../an/an7.html" class="w3-hide-small">Chương Bảy Pháp</a></li>
+ 						<li><a href="../an/an8.html" class="w3-hide-small">Chương Tám Pháp</a></li>
+ 						<li><a href="../an/an9.html" class="w3-hide-small">Chương Chín Pháp</a></li>
+ 						<li><a href="../an/an10.html" class="w3-hide-small">Chương Mười Pháp</a></li>
+ 						<li><a href="../an/an11.html" class="w3-hide-small">Chương Mười Một Pháp</a></li>
+ 					</ul>
+ 				</li>
+ 				<li class="topmenu" id="kn"><a href="../kn/kn.html" class="w3-hide-small"><i class="fa fa-caret-down"></i>&nbsp;Tiểu Bộ Kinh</a>
+ 					<ul>
+ 						<li><a href="../kp/kp.html" class="w3-hide-small">Kinh Tiểu Tụng</a></li>
+ 						<li><a href="../dhp/dhp.html" class="w3-hide-small">Kinh Pháp Cú</a></li>
+ 						<li><a href="../snp/snp.html" class="w3-hide-small">Kinh Tập</a></li>
+ 						<li><a href="../ud/ud.html" class="w3-hide-small">Kinh Phật Tự Thuyết</a></li>
+ 						<li><a href="../it/it.html" class="w3-hide-small">Kinh Phật Thuyết Như Vậy</a></li>
+ 						<li><a href="../tha/tha.html" class="w3-hide-small">Trưởng Lão Tăng Kệ</a></li>
+ 						<li><a href="../thi/thi.html" class="w3-hide-small">Trưởng Lão Ni Kệ</a></li>
+ 					</ul>
+ 				</li>
+				<li class="toplast" id="rd"><a href="../rd/rd.html" class="w3-hide-small"></i>Kinh Ngẫu Nhiên Theo Nhóm</a>
+ 					</ul>
+ 				</li>
+ 			</ul>
+ 			</div>
+ 		</div> <!--navbar-->
+
+<!-- Sidebar (hidden by default) -->
+ <nav class="w3-sidebar w3-bar-block w3-card w3-border w3-top w3-animate-left w3-hide-large" id="mySidebar">
+ 	<a href="javascript:void(0)" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-times fa-2x red-color"></i>&nbsp;&nbsp;&nbsp;Close</a><!-- Hides the sidebar when clicked -->
+ 		<div class="w3-bar-block w3-white">
+ 			<a href="../home/index.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-home fa-lg"></i>&nbsp;&nbsp;&nbsp;Home</a>
+ 			<a href="../guide/guide.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Guide</a>
+ 			<a href="../dn/dn.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Trường Bộ Kinh</a>
+ 			<a href="../mn/mn.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Trung Bộ Kinh</a>
+ 			<a href="../sn/sn.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Tương Ưng Bộ Kinh</a>
+ 			<a href="../an/an.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Tăng Chi Bộ Kinh
+ 			<a href="../kn/kn.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Tiểu Bộ Kinh</a>
+			<a href="../rd/rd.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>Kinh Ngẫu Nhiên Theo Nhóm</a>
+ 		</div>
+ </nav>
+ 
+ 
+ 
+   <!-- !PAGE CONTENT! --> 
+<div class="w3-main w3-content w3-padding w3-left-align bwcontainer4">
+<div id="content">
+<h2>Majjhima Nikāya - Trung Bộ Kinh</h2>
+<h5><span style="font-style: italic;">Hoà Thượng Thích Minh Châu dịch Việt</span></h5>
+
+</div>
+
+<br>
+ 	<title>        Trung Bộ 97          </title>
+
+<p lang="vi" class="vi"; style="text-align: center">
+Trung Bộ 97<br>
+<span lang="pi" class="pali">
+Majjhima Nikāya 97<br>
+</span>
+</p>
+
+<p lang="vi" class="vi"; style="text-align: center">
+Kinh Dhanañjāni<br>
+<span lang="pi" class="pali">
+Dhanañjānisutta<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Như vầy tôi nghe.<br>
+<span lang="pi" class="pali">
+Evaṁ me sutaṁ—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Một thời Thế Tôn ở tại Rājagaha (Vương Xá), Veluvana (Trúc Lâm), tại chỗ nuôi dưỡng sóc.<br>
+<span lang="pi" class="pali">
+ekaṁ samayaṁ bhagavā rājagahe viharati veḷuvane kalandakanivāpe.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Lúc bấy giờ, Tôn giả Sāriputta đang du hành tại Nam Sơn cùng với đại chúng Tỷ-kheo.<br>
+<span lang="pi" class="pali">
+Tena kho pana samayena āyasmā sāriputto dakkhiṇāgirismiṁ cārikaṁ carati mahatā bhikkhusaṅghena saddhiṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Một vị Tỷ-kheo sau khi an cư mùa mưa ở Rājagaha (Vương Xá) đi đến Nam Sơn và đi đến Tôn giả Sāriputta, sau khi đến nói lên với Tôn giả Sāriputta, những lời chào đón hỏi thăm.<br>
+<span lang="pi" class="pali">
+Atha kho aññataro bhikkhu rājagahe vassaṁvuṭṭho yena dakkhiṇāgiri yenāyasmā sāriputto tenupasaṅkami; upasaṅkamitvā āyasmatā sāriputtena saddhiṁ sammodi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Sau khi nói lên những lời chào đón hỏi thăm thân hữu, liền ngồi xuống một bên. Rồi Tôn giả Sāriputta nói với vị Tỷ-kheo ấy đang ngồi một bên:<br>
+<span lang="pi" class="pali">
+Sammodanīyaṁ kathaṁ sāraṇīyaṁ vītisāretvā ekamantaṁ nisīdi. Ekamantaṁ nisinnaṁ kho taṁ bhikkhuṁ āyasmā sāriputto etadavoca:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Này Hiền giả, Thế Tôn có được không bệnh, mạnh khỏe không?”<br>
+<span lang="pi" class="pali">
+“kaccāvuso, bhagavā arogo ca balavā cā”ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Thưa Hiền giả, Thế Tôn không bệnh và được mạnh khỏe.”<br>
+<span lang="pi" class="pali">
+“Arogo cāvuso, bhagavā balavā cā”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Thưa Hiền giả, còn chúng Tỷ-kheo có được không bệnh và mạnh khỏe không?”<br>
+<span lang="pi" class="pali">
+“Kacci panāvuso, bhikkhusaṅgho arogo ca balavā cā”ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Thưa Hiền giả, chúng Tỷ-kheo cũng không bệnh và được mạnh khỏe.”<br>
+<span lang="pi" class="pali">
+“Bhikkhusaṅghopi kho, āvuso, arogo ca balavā cā”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Ở đây, này Hiền giả, có Bà-la-môn tên là Dhanañjāni ở tại Tandulapala. Này Hiền giả, Bà-la-môn Dhanañjāni có được không bệnh và mạnh khỏe không?”<br>
+<span lang="pi" class="pali">
+“Ettha, āvuso, taṇḍulapālidvārāya dhanañjāni nāma brāhmaṇo atthi. Kaccāvuso, dhanañjāni brāhmaṇo arogo ca balavā cā”ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Thưa Hiền giả, Bà-la-môn Dhanañjāni cũng không bệnh và được mạnh khỏe.”<br>
+<span lang="pi" class="pali">
+“Dhanañjānipi kho, āvuso, brāhmaṇo arogo ca balavā cā”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Này Hiền giả, Bà-la-môn Dhanajani có được không phóng dật không?”<br>
+<span lang="pi" class="pali">
+“Kacci panāvuso, dhanañjāni brāhmaṇo appamatto”ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Thưa Hiền giả, làm sao Bà-la-môn Dhannajani có thể không phóng dật được!<br>
+<span lang="pi" class="pali">
+“Kuto panāvuso, dhanañjānissa brāhmaṇassa appamādo?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Thưa Hiền giả, Bà-la-môn Dhanañjāni ỷ thế vua, bóc lột các Bà-la-môn gia chủ, ỷ thế các Bà-la-môn gia chủ, bóc lột vua.<br>
+<span lang="pi" class="pali">
+Dhanañjāni, āvuso, brāhmaṇo rājānaṁ nissāya brāhmaṇagahapatike vilumpati, brāhmaṇagahapatike nissāya rājānaṁ vilumpati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Người vợ trước của Bà-la-môn có thành tín, cưới từ một gia đình có thành tín đã từ trần.<br>
+<span lang="pi" class="pali">
+Yāpissa bhariyā saddhā saddhakulā ānītā sāpi kālaṅkatā;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Người vợ sau không có thành tín và cưới từ một gia đình không có thành tín.”<br>
+<span lang="pi" class="pali">
+aññāssa bhariyā assaddhā assaddhakulā ānītā”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Này Hiền giả, thật là một tin không tốt lành!<br>
+<span lang="pi" class="pali">
+“Dussutaṁ vatāvuso, assumha, dussutaṁ vatāvuso, assumha;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Hiền giả, thật là một tin không tốt lành khi chúng ta được nghe Bà-la-môn Dhanañjāni phóng dật.<br>
+<span lang="pi" class="pali">
+ye mayaṁ dhanañjāniṁ brāhmaṇaṁ pamattaṁ assumha.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Rất có thể chúng ta có dịp gặp Bà-la-môn Dhanañjāni, rất có thể sẽ có một cuộc đàm thoại.”<br>
+<span lang="pi" class="pali">
+Appeva ca nāma mayaṁ kadāci karahaci dhanañjāninā brāhmaṇena saddhiṁ samāgaccheyyāma, appeva nāma siyā kocideva kathāsallāpo”ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Rồi Tôn giả Sāriputta sau khi ở tại Nam Sơn cho đến khi vừa ý, liền khởi hành đi Rājagaha (Vương Xá), tuần tự du hành và đến tại Vương Xá.<br>
+<span lang="pi" class="pali">
+Atha kho āyasmā sāriputto dakkhiṇāgirismiṁ yathābhirantaṁ viharitvā yena rājagahaṁ tena cārikaṁ pakkāmi. Anupubbena cārikaṁ caramāno yena rājagahaṁ tadavasari.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ở đây, Tôn giả Sāriputta trú ở Rājagaha, Veluvana, tại chỗ nuôi dưỡng các con Sóc.<br>
+<span lang="pi" class="pali">
+Tatra sudaṁ āyasmā sāriputto rājagahe viharati veḷuvane kalandakanivāpe.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Rồi Tôn giả Sāriputta đắp y vào buổi sáng, cầm y bát, đi vào Vương Xá để khất thực.<br>
+<span lang="pi" class="pali">
+Atha kho āyasmā sāriputto pubbaṇhasamayaṁ nivāsetvā pattacīvaramādāya rājagahaṁ piṇḍāya pāvisi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Lúc bấy giờ Bà-la-môn Dhanañjāni đang cho vắt sữa bò ở ngoài thành.<br>
+<span lang="pi" class="pali">
+Tena kho pana samayena dhanañjāni brāhmaṇo bahinagare gāvo goṭṭhe duhāpeti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Tôn giả Sāriputta sau khi khất thực ở Vương Xá xong, sau buổi ăn, trên con đường khất thực trở về, đi đến Bà-la-môn Dhanañjāni.<br>
+<span lang="pi" class="pali">
+Atha kho āyasmā sāriputto rājagahe piṇḍāya caritvā pacchābhattaṁ piṇḍapātapaṭikkanto yena dhanañjāni brāhmaṇo tenupasaṅkami.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Bà-la-môn Dhanañjāni thấy Tôn giả Sāriputta từ xa đi tới, sau khi thấy, liền đi đến Tôn giả Sāriputta, sau khi đến liền thưa với Tôn giả Sāriputta:<br>
+<span lang="pi" class="pali">
+Addasā kho dhanañjāni brāhmaṇo āyasmantaṁ sāriputtaṁ dūratova āgacchantaṁ. Disvāna yenāyasmā sāriputto tenupasaṅkami; upasaṅkamitvā āyasmantaṁ sāriputtaṁ etadavoca:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Thưa hiền giả Sāriputta, hãy uống sữa này và chờ cho đến giờ ăn cơm.”<br>
+<span lang="pi" class="pali">
+“ito, bho sāriputta, payo, pīyataṁ tāva bhattassa kālo bhavissatī”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Thôi vừa rồi, Bà-la-môn.<br>
+<span lang="pi" class="pali">
+“Alaṁ, brāhmaṇa.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Hôm nay ta đã ăn xong.<br>
+<span lang="pi" class="pali">
+Kataṁ me ajja bhattakiccaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ta sẽ ngồi nghỉ trưa ở một góc cây.<br>
+<span lang="pi" class="pali">
+Amukasmiṁ me rukkhamūle divāvihāro bhavissati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ông có thể đến đó.”<br>
+<span lang="pi" class="pali">
+Tattha āgaccheyyāsī”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Thưa vâng, Tôn giả”, Bà-la-môn Dhanañjāni vâng đáp Tôn giả Sāriputta.<br>
+<span lang="pi" class="pali">
+“Evaṁ, bho”ti kho dhanañjāni brāhmaṇo āyasmato sāriputtassa paccassosi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Rồi Bà-la-môn Dhanañjāni sau khi ăn sáng xong, liền đi đến Tôn giả Sāriputta, sau khi đến nói lên với Tôn giả Sāriputta những lời chào đón hỏi thăm.<br>
+<span lang="pi" class="pali">
+Atha kho dhanañjāni brāhmaṇo pacchābhattaṁ bhuttapātarāso yenāyasmā sāriputto tenupasaṅkami; upasaṅkamitvā āyasmatā sāriputtena saddhiṁ sammodi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Sau khi nói lên những lời chào đón hỏi thăm thân hữu, liền ngồi xuống một bên. Tôn giả Sāriputta nói với Bà-la-môn Dhanañjāni đang ngồi một bên:<br>
+<span lang="pi" class="pali">
+Sammodanīyaṁ kathaṁ sāraṇīyaṁ vītisāretvā ekamantaṁ nisīdi. Ekamantaṁ nisinnaṁ kho dhanañjāniṁ brāhmaṇaṁ āyasmā sāriputto etadavoca:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Này Dhanañjāni, ông có không phóng dật không?”<br>
+<span lang="pi" class="pali">
+“kaccāsi, dhanañjāni, appamatto”ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Thưa Tôn giả Sāriputta, làm sao chúng tôi có thể không phóng dật được, khi chúng tôi còn cha mẹ phải phụng dưỡng, còn vợ con phải nuôi dưỡng, còn đầy tớ, lao công phải nuôi dưỡng, còn có những trách nhiệm bạn bè thân hữu phải làm đối với bạn bè thân hữu, còn có những trách nhiệm bà con huyết thống phải làm đối với bà con huyết thống, còn có những trách nhiệm tân khách phải làm đối với tân khách, còn có những trách nhiệm tổ tiên phải làm đối với tổ tiên, còn có những trách nhiệm chư Thiên phải làm đối với chư Thiên, còn có những trách nhiệm vua chúa phải làm đối với vua chúa, lại còn thân này cần phải làm cho thỏa mãn và trưởng dưỡng!”<br>
+<span lang="pi" class="pali">
+“Kuto, bho sāriputta, amhākaṁ appamādo yesaṁ no mātāpitaro posetabbā, puttadāro posetabbo, dāsakammakarā posetabbā, mittāmaccānaṁ mittāmaccakaraṇīyaṁ kātabbaṁ, ñātisālohitānaṁ ñātisālohitakaraṇīyaṁ kātabbaṁ, atithīnaṁ atithikaraṇīyaṁ kātabbaṁ, pubbapetānaṁ pubbapetakaraṇīyaṁ kātabbaṁ, devatānaṁ devatākaraṇīyaṁ kātabbaṁ, rañño rājakaraṇīyaṁ kātabbaṁ, ayampi kāyo pīṇetabbo brūhetabbo”ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Này Dhanañjāni, Ông nghĩ thế nào?<br>
+<span lang="pi" class="pali">
+“Taṁ kiṁ maññasi, dhanañjāni,<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ở đây, có người vì cha mẹ làm các điều phi pháp, làm các điều bất chánh. Do nhân duyên làm các điều phi pháp, làm các điều bất chánh, các địa ngục quân kéo người ấy đến địa ngục.<br>
+<span lang="pi" class="pali">
+idhekacco mātāpitūnaṁ hetu adhammacārī visamacārī assa, tamenaṁ adhammacariyāvisamacariyāhetu nirayaṁ nirayapālā upakaḍḍheyyuṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Người ấy làm được gì khi nói: “Tôi vì cha mẹ đã làm các điều phi pháp, đã làm các điều bất chánh. Chớ có để các địa ngục quân kéo tôi đến địa ngục”? Hay cha mẹ của người ấy làm được gì khi nói: “Con chúng tôi vì cha mẹ đã làm các điều phi pháp, đã làm các điều bất chánh. Chớ có để các địa ngục quân kéo nó đến địa ngục”?<br>
+<span lang="pi" class="pali">
+Labheyya nu kho so ‘ahaṁ kho mātāpitūnaṁ hetu adhammacārī visamacārī ahosiṁ, mā maṁ nirayaṁ nirayapālā’ti, mātāpitaro vā panassa labheyyuṁ ‘eso kho amhākaṁ hetu adhammacārī visamacārī ahosi, mā naṁ nirayaṁ nirayapālā’”ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Thưa không được, Tôn giả Sāriputta.<br>
+<span lang="pi" class="pali">
+“No hidaṁ, bho sāriputta.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Các địa ngục quân vẫn quăng người ấy xuống địa ngục, dầu người ấy có khóc than.”<br>
+<span lang="pi" class="pali">
+Atha kho naṁ vikkandantaṁyeva niraye nirayapālā pakkhipeyyuṁ”.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Này Dhanañjāni, Ông nghĩ thế nào?<br>
+<span lang="pi" class="pali">
+“Taṁ kiṁ maññasi, dhanañjāni,<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ở đây, có người vì vợ con làm các điều phi pháp, làm các điều bất chánh. Do nhân duyên làm các điều phi pháp, làm các điều bất chánh, các địa ngục quân kéo người ấy đến địa ngục. Người ấy làm được gì khi nói: “Tôi vì vợ con đã làm các điều phi pháp, đã làm điều bất chánh. Chớ có để các địa ngục quân kéo tôi đến địa ngục”? Hay vợ con người ấy có làm được gì khi nói: “Chồng, cha tôi vì chúng tôi đã làm các điều phi pháp, đã làm các điều bất chánh. Chớ có để các địa ngục quân kéo chồng, cha tôi đến địa ngục”?<br>
+<span lang="pi" class="pali">
+idhekacco puttadārassa hetu adhammacārī visamacārī assa, tamenaṁ adhammacariyā-visamacariyā-hetu nirayaṁ nirayapālā upakaḍḍheyyuṁ. Labheyya nu kho so ‘ahaṁ kho puttadārassa hetu adhammacārī visamacārī ahosiṁ, mā maṁ nirayaṁ nirayapālā’ti, puttadāro vā panassa labheyya ‘eso kho amhākaṁ hetu adhammacārī visamacārī ahosi mā naṁ nirayaṁ nirayapālā’”ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Thưa không được, Tôn giả Sāriputta.<br>
+<span lang="pi" class="pali">
+“No hidaṁ, bho sāriputta.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Các địa ngục quân vẫn quăng người ấy xuống địa ngục, dầu người ấy có khóc than.”<br>
+<span lang="pi" class="pali">
+Atha kho naṁ vikkandantaṁyeva niraye nirayapālā pakkhipeyyuṁ”.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Này Dhanañjāni, Ông nghĩ thế nào? Ở đây, có người vì đầy tớ lao công làm các điều phi pháp, làm các điều bất chánh. Do nhân duyên làm các điều phi pháp, làm các điều bất chánh, các địa ngục quân kéo người ấy đến địa ngục. Người ấy làm được gì khó nói: “Tôi vì các đầy tớ lao công đã làm các điều phi pháp, đã làm các điều bất chánh. Chớ có để các địa ngục quân kéo tôi đến địa ngục”? Hay các đầy tớ lao công có làm được gì khi nói: “Chủ chúng tôi vì chúng tôi đã làm các điều phi pháp, đã làm các điều bất chánh. Chớ có để các địa ngục quân kéo chủ chúng tôi đến địa ngục”?<br>
+<span lang="pi" class="pali">
+“Taṁ kiṁ maññasi, dhanañjāni, idhekacco dāsakammakaraporisassa hetu adhammacārī visamacārī assa, tamenaṁ adhammacariyāvisamacariyāhetu nirayaṁ nirayapālā upakaḍḍheyyuṁ. Labheyya nu kho so ‘ahaṁ kho dāsakammakaraporisassa hetu adhammacārī visamacārī ahosiṁ, mā maṁ nirayaṁ nirayapālā’ti, dāsakammakaraporisā vā panassa labheyyuṁ ‘eso kho amhākaṁ hetu adhammacārī visamacārī ahosi, mā naṁ nirayaṁ nirayapālā’”ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Thưa không được, Tôn giả Sāriputta. Các địa ngục quân vẫn quăng người ấy xuống địa ngục, dầu người ấy có khóc than.<br>
+<span lang="pi" class="pali">
+“No hidaṁ, bho sāriputta. Atha kho naṁ vikkandantaṁyeva niraye nirayapālā pakkhipeyyuṁ”.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Này Dhanañjāni, Ông nghĩ thế nào? Ở đây, có người vì bạn bè thân hữu …<br>
+<span lang="pi" class="pali">
+“Taṁ kiṁ maññasi, dhanañjāni, idhekacco mittāmaccānaṁ hetu adhammacārī visamacārī assa, tamenaṁ adhammacariyāvisamacariyāhetu nirayaṁ nirayapālā upakaḍḍheyyuṁ. Labheyya nu kho so ‘ahaṁ kho mittāmaccānaṁ hetu adhammacārī visamacārī ahosiṁ, mā maṁ nirayaṁ nirayapālā’ti, mittāmaccā vā panassa labheyyuṁ ‘eso kho amhākaṁ hetu adhammacārī visamacārī ahosi, mā naṁ nirayaṁ nirayapālā’”ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+… dầu người ấy có khóc than.”<br>
+<span lang="pi" class="pali">
+“No hidaṁ, bho sāriputta. Atha kho naṁ vikkandantaṁyeva niraye nirayapālā pakkhipeyyuṁ”.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Này Dhanañjāni, Ông nghĩ thế nào? Ở đây, có người vì gia đình và thân quyến …<br>
+<span lang="pi" class="pali">
+“Taṁ kiṁ maññasi, dhanañjāni, idhekacco ñātisālohitānaṁ hetu adhammacārī visamacārī assa, tamenaṁ adhammacariyāvisamacariyāhetu nirayaṁ nirayapālā upakaḍḍheyyuṁ. Labheyya nu kho so ‘ahaṁ kho ñātisālohitānaṁ hetu adhammacārī visamacārī ahosiṁ, mā maṁ nirayaṁ nirayapālā’ti, ñātisālohitā vā panassa labheyyuṁ ‘eso kho amhākaṁ hetu adhammacārī visamacārī ahosi, mā naṁ nirayaṁ nirayapālā’”ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+… dầu người ấy có khóc than.”<br>
+<span lang="pi" class="pali">
+“No hidaṁ, bho sāriputta. Atha kho naṁ vikkandantaṁyeva niraye nirayapālā pakkhipeyyuṁ”.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Này Dhanañjāni, Ông nghĩ thế nào? Ở đây, có người tân khách…<br>
+<span lang="pi" class="pali">
+“Taṁ kiṁ maññasi, dhanañjāni, idhekacco atithīnaṁ hetu adhammacārī visamacārī assa, tamenaṁ adhammacariyāvisamacariyāhetu nirayaṁ nirayapālā upakaḍḍheyyuṁ. Labheyya nu kho so ‘ahaṁ kho atithīnaṁ hetu adhammacārī visamacārī ahosiṁ, mā maṁ nirayaṁ nirayapālā’ti, atithī vā panassa labheyyuṁ ‘eso kho amhākaṁ hetu adhammacārī visamacārī ahosi, mā naṁ nirayaṁ nirayapālā’”ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+… dầu người ấy có khóc than.”<br>
+<span lang="pi" class="pali">
+“No hidaṁ, bho sāriputta. Atha kho naṁ vikkandantaṁyeva niraye nirayapālā pakkhipeyyuṁ”.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Này Dhanañjāni, Ông nghĩ thế nào? Ở đây, có người vì tổ tiên …<br>
+<span lang="pi" class="pali">
+“Taṁ kiṁ maññasi, dhanañjāni, idhekacco pubbapetānaṁ hetu adhammacārī visamacārī assa, tamenaṁ adhammacariyāvisamacariyāhetu nirayaṁ nirayapālā upakaḍḍheyyuṁ. Labheyya nu kho so ‘ahaṁ kho pubbapetānaṁ hetu adhammacārī visamacārī ahosiṁ, mā maṁ nirayaṁ nirayapālā’ti, pubbapetā vā panassa labheyyuṁ ‘eso kho amhākaṁ hetu adhammacārī visamacārī ahosi, mā naṁ nirayaṁ nirayapālā’”ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+… dầu người ấy có khóc than.”<br>
+<span lang="pi" class="pali">
+“No hidaṁ, bho sāriputta. Atha kho naṁ vikkandantaṁyeva niraye nirayapālā pakkhipeyyuṁ”.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Này Dhanañjāni, Ông nghĩ thế nào? Ở đây, có người vì chư Thiên …<br>
+<span lang="pi" class="pali">
+“Taṁ kiṁ maññasi, dhanañjāni, idhekacco devatānaṁ hetu adhammacārī visamacārī assa, tamenaṁ adhammacariyāvisamacariyāhetu nirayaṁ nirayapālā upakaḍḍheyyuṁ. Labheyya nu kho so ‘ahaṁ kho devatānaṁ hetu adhammacārī visamacārī ahosiṁ, mā maṁ nirayaṁ nirayapālā’ti, devatā vā panassa labheyyuṁ ‘eso kho amhākaṁ hetu adhammacārī visamacārī ahosi, mā naṁ nirayaṁ nirayapālā’”ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+… dầu người ấy có khóc than.”<br>
+<span lang="pi" class="pali">
+“No hidaṁ, bho sāriputta. Atha kho naṁ vikkandantaṁyeva niraye nirayapālā pakkhipeyyuṁ”.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Này Dhanañjāni, Ông nghĩ thế nào? Ở đây, có người vì vua chúa. ..<br>
+<span lang="pi" class="pali">
+“Taṁ kiṁ maññasi, dhanañjāni, idhekacco rañño hetu adhammacārī visamacārī assa, tamenaṁ adhammacariyāvisamacariyāhetu nirayaṁ nirayapālā upakaḍḍheyyuṁ. Labheyya nu kho so ‘ahaṁ kho rañño hetu adhammacārī visamacārī ahosiṁ, mā maṁ nirayaṁ nirayapālā’ti, rājā vā panassa labheyya ‘eso kho amhākaṁ hetu adhammacārī visamacārī ahosi, mā naṁ nirayaṁ nirayapālā’”ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+… dầu người ấy có khóc than.”<br>
+<span lang="pi" class="pali">
+“No hidaṁ, bho sāriputta. Atha kho naṁ vikkandantaṁyeva niraye nirayapālā pakkhipeyyuṁ”.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Này Dhanañjāni, Ông nghĩ thế nào? Ở đây, có người vì làm cho thỏa mãn, vì trưởng dưỡng cái thân làm các điều phi pháp, làm các điều bất chánh. Do nhân duyên làm các điều phi pháp, làm các điều bất chánh này, các địa ngục quân kéo người ấy đến địa ngục.<br>
+<span lang="pi" class="pali">
+“Taṁ kiṁ maññasi, dhanañjāni, idhekacco kāyassa pīṇanāhetu brūhanāhetu adhammacārī visamacārī assa, tamenaṁ adhammacariyāvisamacariyāhetu nirayaṁ nirayapālā upakaḍḍheyyuṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Người ấy làm được gì khi người ấy nói: “Vì làm cho thỏa mãn, vì trưởng dưỡng cái thân, tôi đã làm các điều phi pháp, đã làm các điều bất chánh này. Chớ có để các địa ngục quân kéo tôi đến địa ngục”? Hay các người khác có làm được gì khi họ nói: “Vì làm cho thỏa mãn, vì trưởng dưỡng cái thân, người này làm các điều phi pháp, làm các điều bất chánh này. Chớ có để các địa ngục quân kéo nó đến địa ngục”?<br>
+<span lang="pi" class="pali">
+Labheyya nu kho so ‘ahaṁ kho kāyassa pīṇanāhetu brūhanāhetu adhammacārī visamacārī ahosiṁ, mā maṁ nirayaṁ nirayapālā’ti, pare vā panassa labheyyuṁ ‘eso kho kāyassa pīṇanāhetu brūhanāhetu adhammacārī visamacārī ahosi, mā naṁ nirayaṁ nirayapālā’”ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Thưa không được, Tôn giả Sāriputta.<br>
+<span lang="pi" class="pali">
+“No hidaṁ, bho sāriputta.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Các địa ngục quân vẫn quăng người ấy xuống địa ngục, dầu người ấy có khóc than.”<br>
+<span lang="pi" class="pali">
+Atha kho naṁ vikkandantaṁyeva niraye nirayapālā pakkhipeyyuṁ”.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Này Dhanañjāni, Ông nghĩ thế nào? Một người vì cha mẹ làm các điều phi pháp, làm các điều bất chánh, hay một người vì cha mẹ làm các điều đúng pháp, làm các điều chơn chánh, ai tốt đẹp hơn?”<br>
+<span lang="pi" class="pali">
+“Taṁ kiṁ maññasi, dhanañjāni, yo vā mātāpitūnaṁ hetu adhammacārī visamacārī assa, yo vā mātāpitūnaṁ hetu dhammacārī samacārī assa; katamaṁ seyyo”ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Thưa Tôn giả Sāriputta, người vì cha mẹ làm các điều phi pháp, làm các điều bất chánh, người ấy không tốt đẹp hơn.<br>
+<span lang="pi" class="pali">
+“Yo hi, bho sāriputta, mātāpitūnaṁ hetu adhammacārī visamacārī assa, na taṁ seyyo;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Và thưa Tôn giả Sāriputta, người vì cha mẹ làm các điều đúng pháp, làm các điều chơn chánh, người ấy tốt đẹp hơn.<br>
+<span lang="pi" class="pali">
+yo ca kho, bho sāriputta, mātāpitūnaṁ hetu dhammacārī samacārī assa, tadevettha seyyo.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Thưa Tôn giả Sāriputta, hành trì đúng pháp, hành trì chơn chánh tốt đẹp hơn hành trì phi pháp, hành trì bất chánh.”<br>
+<span lang="pi" class="pali">
+Adhammacariyāvisamacariyāhi, bho sāriputta, dhammacariyāsamacariyā seyyo”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Dhanañjāni, có những hành động khác có nhân, đúng pháp, với những hành động này có thể phụng dưỡng cha mẹ, không làm các điều ác, làm được các thiện hành.<br>
+<span lang="pi" class="pali">
+“Atthi kho, dhanañjāni, aññesaṁ hetukā dhammikā kammantā, yehi sakkā mātāpitaro ceva posetuṁ, na ca pāpakammaṁ kātuṁ, puññañca paṭipadaṁ paṭipajjituṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Dhanañjāni, Ông nghĩ thế nào? Một người vì vợ con làm các điều phi pháp, làm các điều bất chánh, hay một người vì vợ con, làm các điều đúng pháp, làm các điều chơn chánh, ai tốt đẹp hơn?<br>
+<span lang="pi" class="pali">
+Taṁ kiṁ maññasi, dhanañjāni, yo vā puttadārassa hetu adhammacārī visamacārī assa, yo vā puttadārassa hetu dhammacārī samacārī assa; katamaṁ seyyo”ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Thưa Tôn giả Sāriputta, một người vì vợ con làm các điều phi pháp, làm các điều bất chánh, người ấy không tốt đẹp hơn.<br>
+<span lang="pi" class="pali">
+“Yo hi, bho sāriputta, puttadārassa hetu adhammacārī visamacārī assa, na taṁ seyyo;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Và thưa Tôn giả Sāriputta, một người vì vợ con làm các điều đúng pháp, làm các điều chơn chánh, người ấy tốt đẹp hơn.<br>
+<span lang="pi" class="pali">
+yo ca kho, bho sāriputta, puttadārassa hetu dhammacārī samacārī assa, tadevettha seyyo.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Thưa Tôn giả Sāriputta, hành trì đúng pháp, hành trì chơn chánh tốt đẹp hơn hành trì phi pháp, hành trì bất chánh.”<br>
+<span lang="pi" class="pali">
+Adhammacariyāvisamacariyāhi, bho sāriputta, dhammacariyāsamacariyā seyyo”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Này Dhanañjāni, có những hành động khác có nhân, đúng pháp, với những hành động này có thể nuôi dưỡng vợ con, không làm các điều ác, làm được các thiện hành.<br>
+<span lang="pi" class="pali">
+“Atthi kho, dhanañjāni, aññesaṁ hetukā dhammikā kammantā yehi sakkā puttadārañceva posetuṁ, na ca pāpakammaṁ kātuṁ, puññañca paṭipadaṁ paṭipajjituṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Dhanañjāni, Ông nghĩ thế nào? Một người vì đầy tớ lao công làm các điều phi pháp, làm các điều bất chánh, hay một người vì đầy tớ lao công làm các điều đúng pháp, làm các điều chơn chánh, ai tốt đẹp hơn?<br>
+<span lang="pi" class="pali">
+Taṁ kiṁ maññasi, dhanañjāni, yo vā dāsakammakaraporisassa hetu adhammacārī visamacārī assa, yo vā dāsakammakaraporisassa hetu dhammacārī samacārī assa; katamaṁ seyyo”ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Thưa Tôn giả Sāriputta, người vì đầy tớ lao công làm các điều phi pháp, làm các điều bất chánh, người ấy không tốt đẹp hơn.<br>
+<span lang="pi" class="pali">
+“Yo hi, bho sāriputta, dāsakammakaraporisassa hetu adhammacārī visamacārī assa, na taṁ seyyo;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Và thưa Tôn giả Sāriputta, người vì đầy tớ lao công làm các điều đúng pháp, làm các điều chơn chánh, người ấy tốt đẹp hơn.<br>
+<span lang="pi" class="pali">
+yo ca kho, bho sāriputta, dāsakammakaraporisassa hetu dhammacārī samacārī assa, tadevettha seyyo.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Thưa Tôn giả Sāriputta, hành trì đúng pháp, hành trì chơn chánh tốt đẹp hơn hành trì phi pháp, hành trì bất chánh.<br>
+<span lang="pi" class="pali">
+Adhammacariyāvisamacariyāhi, bho sāriputta, dhammacariyāsamacariyā seyyo”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Này Dhanañjāni, có những hành động khác có nhân, đúng pháp, với những hành động này có thể nuôi dưỡng đầy tớ lao công, không làm các điều ác, làm được các thiện hành.<br>
+<span lang="pi" class="pali">
+“Atthi kho, dhanañjāni, aññesaṁ hetukā dhammikā kammantā, yehi sakkā dāsakammakaraporise ceva posetuṁ, na ca pāpakammaṁ kātuṁ, puññañca paṭipadaṁ paṭipajjituṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Dhanañjāni, Ông nghĩ thế nào? Một người vì bạn bè thân hữu làm các điều phi pháp, làm các điều bất chánh, hay là người vì bạn bè thân hữu làm các điều đúng pháp, làm các điều chơn chánh, ai tốt đẹp hơn?<br>
+<span lang="pi" class="pali">
+Taṁ kiṁ maññasi, dhanañjāni, yo vā mittāmaccānaṁ hetu adhammacārī visamacārī assa, yo vā mittāmaccānaṁ hetu dhammacārī samacārī assa; katamaṁ seyyo”ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Thưa Tôn giả Sāriputta, người vị bạn bè thân hữu làm các điều phi pháp, làm các điều bất chánh, người ấy không tốt đẹp hơn.<br>
+<span lang="pi" class="pali">
+“Yo hi, bho sāriputta, mittāmaccānaṁ hetu adhammacārī visamacārī assa, na taṁ seyyo;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Và thưa Tôn giả Sāriputta, người vì bạn bè thân hữu làm các điều đúng pháp, làm các điều chơn chánh, người ấy tốt đẹp hơn.<br>
+<span lang="pi" class="pali">
+yo ca kho, bho sāriputta, mittāmaccānaṁ hetu dhammacārī samacārī assa, tadevettha seyyo.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Thưa Tôn giả Sāriputta, hành trì đúng pháp, hành trì chơn chánh tốt đẹp hơn hành trì phi pháp, hành trì bất chánh.”<br>
+<span lang="pi" class="pali">
+Adhammacariyāvisamacariyāhi, bho sāriputta, dhammacariyāsamacariyā seyyo”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Này Dhanañjāni, có những hành động khác có nhân, đúng pháp, với những hành động này có thể nuôi dưỡng bạn bè thân hữu, không làm các điều ác, làm được các thiện hành.<br>
+<span lang="pi" class="pali">
+“Atthi kho, dhanañjāni, aññesaṁ hetukā dhammikā kammantā, yehi sakkā mittāmaccānañceva mittāmaccakaraṇīyaṁ kātuṁ, na ca pāpakammaṁ kātuṁ, puññañca paṭipadaṁ paṭipajjituṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Dhanañjāni, Ông nghĩ thế nào? Một người vì bà con huyết thống làm các điều phi pháp, làm các điều bất chánh, hay một người vì bà con huyết thống làm các điều đúng pháp, làm các điều chơn chánh, ai tốt đẹp hơn?”<br>
+<span lang="pi" class="pali">
+Taṁ kiṁ maññasi, dhanañjāni, yo vā ñātisālohitānaṁ hetu adhammacārī visamacārī assa, yo vā ñātisālohitānaṁ hetu dhammacārī samacārī assa; katamaṁ seyyo”ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Thưa Tôn giả Sāriputta, người vì bà con huyết thống làm các điều phi pháp, làm các điều bất chánh, người ấy không tốt đẹp hơn.<br>
+<span lang="pi" class="pali">
+“Yo hi, bho sāriputta, ñātisālohitānaṁ hetu adhammacārī visamacārī assa, na taṁ seyyo;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Và thưa Tôn giả Sāriputta, người vì bà con huyết thống làm các điều đúng pháp, làm các điều chơn chánh, người ấy tốt đẹp hơn.<br>
+<span lang="pi" class="pali">
+yo ca kho, bho sāriputta, ñātisālohitānaṁ hetu dhammacārī samacārī assa, tadevettha seyyo.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Thưa Tôn giả Sāriputta, hành trì đúng pháp, hành trì chơn chánh tốt đẹp hơn hành trì phi pháp, hành trì bất chánh.”<br>
+<span lang="pi" class="pali">
+Adhammacariyāvisamacariyāhi, bho sāriputta, dhammacariyāsamacariyā seyyo”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Này Dhanañjāni, có những hành động khác, có nhân, đúng pháp, với những hành động này có thể nuôi dưỡng bà con huyết thống, không làm các điều ác, làm được các thiện hành.<br>
+<span lang="pi" class="pali">
+“Atthi kho, dhanañjāni, aññesaṁ hetukā dhammikā kammantā, yehi sakkā ñātisālohitānañceva ñātisālohitakaraṇīyaṁ kātuṁ, na ca pāpakammaṁ kātuṁ, puññañca paṭipadaṁ paṭipajjituṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Dhanañjāni, Ông nghĩ thế nào? Một người vì tân khách làm các điều phi pháp, làm các điều bất chánh, hay một người vì tân khách làm các điều đúng pháp, làm các điều chơn chánh, ai tốt đẹp hơn?”<br>
+<span lang="pi" class="pali">
+Taṁ kiṁ maññasi, dhanañjāni, yo vā atithīnaṁ hetu adhammacārī visamacārī assa, yo vā atithīnaṁ hetu dhammacārī samacārī assa; katamaṁ seyyo”ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Thưa Tôn giả Sāriputta, người vì tân khách làm các điều phi pháp, làm các điều bất chánh, người ấy không tốt đẹp hơn.<br>
+<span lang="pi" class="pali">
+“Yo hi, bho sāriputta, atithīnaṁ hetu adhammacārī visamacārī assa, na taṁ seyyo;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Và thưa Tôn giả Sāriputta, người vì tân khách làm các điều đúng pháp, làm các điều chơn chánh, người ấy tốt đẹp hơn.<br>
+<span lang="pi" class="pali">
+yo ca kho, bho sāriputta, atithīnaṁ hetu dhammacārī samacārī assa, tadevettha seyyo.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Thưa Tôn giả Sāriputta, hành trì đúng pháp, hành trì chơn chánh tốt đẹp hơn hành trì phi pháp, hành trì bất chánh.”<br>
+<span lang="pi" class="pali">
+Adhammacariyāvisamacariyāhi, bho sāriputta, dhammacariyāsamacariyā seyyo”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Này Dhanañjāni, có những hành động khác có nhân, đúng pháp, với những hành động này có thể làm các bổn phận tân khách đối với tân khách, không làm các điều ác, làm được các thiện hành.<br>
+<span lang="pi" class="pali">
+“Atthi kho, dhanañjāni, aññesaṁ hetukā dhammikā kammantā, yehi sakkā atithīnañceva atithikaraṇīyaṁ kātuṁ, na ca pāpakammaṁ kātuṁ, puññañca paṭipadaṁ paṭipajjituṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Dhanañjāni, Ông nghĩ thế nào? Một người vì tổ tiên làm các điều phi pháp, làm các điều bất chánh, hay người vì tổ tiên làm các điều đúng pháp, làm các điều chơn chánh, ai tốt đẹp hơn?”<br>
+<span lang="pi" class="pali">
+Taṁ kiṁ maññasi, dhanañjāni, yo vā pubbapetānaṁ hetu adhammacārī visamacārī assa, yo vā pubbapetānaṁ hetu dhammacārī samacārī assa; katamaṁ seyyo”ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Thưa Tôn giả Sāriputta, người vì tổ tiên làm các điều phi pháp, làm các điều bất chánh, người ấy không tốt đẹp hơn.<br>
+<span lang="pi" class="pali">
+“Yo hi, bho sāriputta, pubbapetānaṁ hetu adhammacārī visamacārī assa, na taṁ seyyo;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Và thưa Tôn giả Sāriputta, người vì tổ tiên làm các điều đúng pháp, làm các điều chơn chánh, người ấy tốt đẹp hơn.<br>
+<span lang="pi" class="pali">
+yo ca kho, bho sāriputta, pubbapetānaṁ hetu dhammacārī samacārī assa, tadevettha seyyo.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Thưa Tôn giả Sāriputta, hành trì đúng pháp, hành trì chơn chánh tốt đẹp hơn hành trì phi pháp, hành trì bất chánh.”<br>
+<span lang="pi" class="pali">
+Adhammacariyāvisamacariyāhi, bho sāriputta, dhammacariyāsamacariyā seyyo”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Này Dhanañjāni, có những hành động khác có nhân, đúng pháp, với những hành động này có thể làm được những trách nhiệm tổ tiên phải làm đối với các tổ tiên, không làm các điều ác, làm được các thiện hành.<br>
+<span lang="pi" class="pali">
+“Atthi kho, dhanañjāni, aññesaṁ hetukā dhammikā kammantā, yehi sakkā pubbapetānañceva pubbapetakaraṇīyaṁ kātuṁ, na ca pāpakammaṁ kātuṁ, puññañca paṭipadaṁ paṭipajjituṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Dhanañjāni, Ông nghĩ thế nào? Một người vì chư Thiên làm các điều phi pháp, làm các điều bất chánh, hay người vì chư Thiên làm các điều đúng pháp, làm các điều chơn chánh, ai tốt đẹp hơn?”<br>
+<span lang="pi" class="pali">
+Taṁ kiṁ maññasi, dhanañjāni, yo vā devatānaṁ hetu adhammacārī visamacārī assa, yo vā devatānaṁ hetu dhammacārī samacārī assa; katamaṁ seyyo”ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Thưa Tôn giả Sāriputta, người vì chư Thiên làm các điều phi pháp, làm các điều bất chánh, người ấy không tốt đẹp hơn.<br>
+<span lang="pi" class="pali">
+“Yo hi, bho sāriputta, devatānaṁ hetu adhammacārī visamacārī assa, na taṁ seyyo;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Và thưa Tôn giả Sāriputta, người vì chư Thiên làm các điều đúng pháp, làm các điều chơn chánh, người ấy tốt đẹp hơn.<br>
+<span lang="pi" class="pali">
+yo ca kho, bho sāriputta, devatānaṁ hetu dhammacārī samacārī assa, tadevettha seyyo.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Thưa Tôn giả Sāriputta, hành trì đúng pháp, hành trì chơn chánh tốt đẹp hơn hành trì phi pháp, hành trì bất chánh.”<br>
+<span lang="pi" class="pali">
+Adhammacariyāvisamacariyāhi, bho sāriputta, dhammacariyāsamacariyā seyyo”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Này Dhanañjāni, có những hành động khác có nhân, đúng pháp, với những hành động này có thể làm được các trách nhiệm chư Thiên, phải làm đối với chư Thiên, không làm các điều ác, làm được các thiện hành.<br>
+<span lang="pi" class="pali">
+“Atthi kho, dhanañjāni, aññesaṁ hetukā dhammikā kammantā, yehi sakkā devatānañceva devatākaraṇīyaṁ kātuṁ, na ca pāpakammaṁ kātuṁ, puññañca paṭipadaṁ paṭipajjituṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Dhanañjāni, Ông nghĩ thế nào? Người vì vua chúa làm các điều phi pháp, làm các điều bất chánh, hay người vì vua chúa làm các điều đúng pháp, làm các điều chơn chánh, ai tốt đẹp hơn?”<br>
+<span lang="pi" class="pali">
+Taṁ kiṁ maññasi, dhanañjāni, yo vā rañño hetu adhammacārī visamacārī assa, yo vā rañño hetu dhammacārī samacārī assa; katamaṁ seyyo”ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Thưa Tôn giả Sāriputta, người vì vua chúa làm các điều phi pháp, làm các điều bất chánh, người ấy không tốt đẹp hơn.<br>
+<span lang="pi" class="pali">
+“Yo hi, bho sāriputta, rañño hetu adhammacārī visamacārī assa, na taṁ seyyo;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Và thưa Tôn giả Sāriputta, người vì vua chúa làm các điều đúng pháp, làm các điều chơn chánh, người ấy tốt đẹp hơn.<br>
+<span lang="pi" class="pali">
+yo ca kho, bho sāriputta, rañño hetu dhammacārī samacārī assa, tadevettha seyyo.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Thưa Tôn giả Sāriputta, hành trì đúng pháp, hành trì chơn chánh tốt đẹp hơn hành trì phi pháp, hành trì bất chánh.”<br>
+<span lang="pi" class="pali">
+Adhammacariyāvisamacariyāhi, bho sāriputta, dhammacariyāsamacariyā seyyo”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Này Dhanañjāni, có những hành động khác có nhân, đúng pháp, có thể làm các trách nhiệm vua chúa phải làm đối với vua chúa, không làm các điều ác, làm được các thiện hành.<br>
+<span lang="pi" class="pali">
+“Atthi kho, dhanañjāni, aññesaṁ hetukā dhammikā kammantā, yehi sakkā rañño ceva rājakaraṇīyaṁ kātuṁ, na ca pāpakammaṁ kātuṁ, puññañca paṭipadaṁ paṭipajjituṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Dhanañjāni, Ông nghĩ thế nào? Người vì làm thỏa mãn, vì trưởng dưỡng cái thân làm điều phi pháp, làm các điều bất chánh, hay là người vì làm thỏa mãn, vì trưởng dưỡng cái thân, làm các điều đúng pháp, làm các điều chơn chánh, ai tốt đẹp hơn?”<br>
+<span lang="pi" class="pali">
+Taṁ kiṁ maññasi, dhanañjāni, yo vā kāyassa pīṇanāhetu brūhanāhetu adhammacārī visamacārī assa, yo vā kāyassa pīṇanāhetu brūhanāhetu dhammacārī samacārī assa; katamaṁ seyyo”ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Thưa Tôn giả Sāriputta, người vì làm thỏa mãn, vì trưởng dưỡng cái thân làm các điều phi pháp, làm các điều bất chánh, người ấy không tốt đẹp hơn.<br>
+<span lang="pi" class="pali">
+“Yo hi, bho sāriputta, kāyassa pīṇanāhetu brūhanāhetu adhammacārī visamacārī assa, na taṁ seyyo;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Và thưa Tôn giả Sāriputta, người vì làm thỏa mãn, vì trưởng dưỡng cái thân làm các điều đúng pháp, làm các điều chơn chánh, người ấy tốt đẹp hơn.<br>
+<span lang="pi" class="pali">
+yo ca kho, bho sāriputta, kāyassa pīṇanāhetu brūhanāhetu dhammacārī samacārī assa, tadevettha seyyo.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Thưa Tôn giả Sāriputta, hành trì đúng pháp, hành trì chơn chánh tốt đẹp hơn hành trì phi pháp, hành trì bất chánh.”<br>
+<span lang="pi" class="pali">
+Adhammacariyāvisamacariyāhi, bho sāriputta, dhammacariyāsamacariyā seyyo”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Này Dhanañjāni, có những hành động khác có nhân, đúng pháp, với những hành động này có thể làm thỏa mãn, trưởng dưỡng cái thân, không làm các điều ác, làm được các thiện hành.”<br>
+<span lang="pi" class="pali">
+“Atthi kho, dhanañjāni, aññesaṁ hetukā dhammikā kammantā, yehi sakkā kāyañceva pīṇetuṁ brūhetuṁ, na ca pāpakammaṁ kātuṁ, puññañca paṭipadaṁ paṭipajjitun”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Bà-la-môn Dhanañjāni hoan hỷ tín thọ lời Tôn giả Sāriputta dạy, từ chỗ ngồi đứng dậy và ra đi.<br>
+<span lang="pi" class="pali">
+Atha kho dhanañjāni brāhmaṇo āyasmato sāriputtassa bhāsitaṁ abhinanditvā anumoditvā uṭṭhāyāsanā pakkāmi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Bà-la-môn Dhanañjāni sau một thời gian bị bệnh, khổ đau, bị trọng bệnh. Rồi Bà-la-môn Dhanañjāni cho gọi một người khác:<br>
+<span lang="pi" class="pali">
+Atha kho dhanañjāni brāhmaṇo aparena samayena ābādhiko ahosi dukkhito bāḷhagilāno. Atha kho dhanañjāni brāhmaṇo aññataraṁ purisaṁ āmantesi:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Ông hãy đi đến Thế Tôn, sau khi đến, hãy nhân danh ta cúi đầu đảnh lễ chân thế Tôn và thưa:<br>
+<span lang="pi" class="pali">
+“ehi tvaṁ, ambho purisa, yena bhagavā tenupasaṅkama; upasaṅkamitvā mama vacanena bhagavato pāde sirasā vandāhi:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Bạch Thế Tôn, Bà-la-môn Dhanañjāni bị bệnh, khổ đau, bị bạo bệnh,<br>
+<span lang="pi" class="pali">
+‘dhanañjāni, bhante, brāhmaṇo ābādhiko dukkhito bāḷhagilāno.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+xin cúi đầu đảnh lễ Thế Tôn’.<br>
+<span lang="pi" class="pali">
+So bhagavato pāde sirasā vandatī’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Rồi Ông đi đến Tôn giả Sāriputta, sau khi đến, hãy nhân danh ta cúi đầu đảnh lễ Tôn giả Sāriputta, và thưa:<br>
+<span lang="pi" class="pali">
+Yena cāyasmā sāriputto tenupasaṅkama; upasaṅkamitvā mama vacanena āyasmato sāriputtassa pāde sirasā vandāhi:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Thưa Tôn giả Sāriputta, Bà-la-môn Dhanañjāni bị bệnh, khổ đau, bị trọng bệnh,<br>
+<span lang="pi" class="pali">
+‘dhanañjāni, bhante, brāhmaṇo ābādhiko dukkhito bāḷhagilāno.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+cúi đầu đảnh lễ Tôn giả Sāriputta’.<br>
+<span lang="pi" class="pali">
+So āyasmato sāriputtassa pāde sirasā vandatī’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+và thưa:<br>
+<span lang="pi" class="pali">
+Evañca vadehi:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Tôn giả, lành thay nếu Tôn giả Sāriputta vì lòng từ bi thương xót, đi đến trú xá của Bà-la-môn Dhanañjāni’.”<br>
+<span lang="pi" class="pali">
+‘sādhu kira, bhante, āyasmā sāriputto yena dhanañjānissa brāhmaṇassa nivesanaṁ tenupasaṅkamatu anukampaṁ upādāyā’”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Thưa vâng, Tôn giả,” Người ấy vâng theo lời Bà-la-môn Dhanañjāni, đi đến Thế Tôn, sau khi đến, đảnh lễ chân Thế Tôn rồi ngồi xuống một bên. Ngồi xuống một bên, người ấy bạch Thế Tôn:<br>
+<span lang="pi" class="pali">
+“Evaṁ, bhante”ti kho so puriso dhanañjānissa brāhmaṇassa paṭissutvā yena bhagavā tenupasaṅkami; upasaṅkamitvā bhagavantaṁ abhivādetvā ekamantaṁ nisīdi. Ekamantaṁ nisinno kho so puriso bhagavantaṁ etadavoca:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Bạch Thế Tôn, Bà-la-môn Dhanañjāni bị bệnh, khổ đau, bị trọng bệnh, cúi đầu đảnh lễ chân Thế Tôn.”<br>
+<span lang="pi" class="pali">
+“dhanañjāni, bhante, brāhmaṇo ābādhiko dukkhito bāḷhagilāno. So bhagavato pāde sirasā vandatī”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Rồi đi đến Tôn giả Sāriputta, sau khi đến đảnh lễ Tôn giả Sāriputta rồi ngồi xuống một bên. Ngồi xuống một bên, người ấy thưa với Tôn giả Sāriputta:<br>
+<span lang="pi" class="pali">
+Yena cāyasmā sāriputto tenupasaṅkami; upasaṅkamitvā āyasmantaṁ sāriputtaṁ abhivādetvā ekamantaṁ nisīdi. Ekamantaṁ nisinno kho so puriso āyasmantaṁ sāriputtaṁ etadavoca:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Thưa Tôn giả, Bà-la-môn Dhanañjāni bị bệnh, khổ đau, bị trọng bệnh, cúi đầu đảnh lễ Tôn giả Sāriputta và thưa:<br>
+<span lang="pi" class="pali">
+“dhanañjāni, bhante, brāhmaṇo ābādhiko dukkhito bāḷhagilāno. So āyasmato sāriputtassa pāde sirasā vandati, evañca vadeti:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Thưa tôn giả, lành thay nếu Tôn giả Sāriputta vì lòng từ bi thương xót, đi đến trú xá của Bà-la-môn Dhanañjāni’.”<br>
+<span lang="pi" class="pali">
+‘sādhu kira, bhante, āyasmā sāriputto yena dhanañjānissa brāhmaṇassa nivesanaṁ tenupasaṅkamatu anukampaṁ upādāyā’”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Tôn giả Sāriputta im lặng nhận lời.<br>
+<span lang="pi" class="pali">
+Adhivāsesi kho āyasmā sāriputto tuṇhībhāvena.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Rồi Tôn giả Sāriputta đắp y, cầm y bát đi đến trú xá Bà-la-môn Dhanañjāni, sau khi đến, liền ngồi trên chỗ đã soạn sẵn. Sau khi ngồi, Tôn giả Sāriputta hỏi Bà-la-môn Dhanañjāni:<br>
+<span lang="pi" class="pali">
+Atha kho āyasmā sāriputto nivāsetvā pattacīvaramādāya yena dhanañjānissa brāhmaṇassa nivesanaṁ tenupasaṅkami; upasaṅkamitvā paññatte āsane nisīdi. Nisajja kho āyasmā sāriputto dhanañjāniṁ brāhmaṇaṁ etadavoca:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Ta mong, này Dhanañjāni, Ông có thể kham nhẫn; ta mong Ông có thể chịu đựng; ta mong khổ thọ được giảm thiểu, không có gia tăng, và sự giảm thiểu được rõ rệt, không có gia tăng!”<br>
+<span lang="pi" class="pali">
+“kacci te, dhanañjāni, khamanīyaṁ, kacci yāpanīyaṁ? Kacci dukkhā vedanā paṭikkamanti, no abhikkamanti? Paṭikkamosānaṁ paññāyati, no abhikkamo”ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Thưa Tôn giả Sāriputta, tôi không có thể kham nhẫn, tôi không có thể chịu đựng. Sự khổ thống của tôi gia tăng, không có giảm thiểu. Và sự gia tăng được rõ rệt, không có giảm thiểu.<br>
+<span lang="pi" class="pali">
+“Na me, bho sāriputta, khamanīyaṁ na yāpanīyaṁ. Bāḷhā me dukkhā vedanā abhikkamanti, no paṭikkamanti. Abhikkamosānaṁ paññāyati, no paṭikkamo.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Thưa Tôn giả Sāriputta, ví như một người lực sĩ chém đầu một người khác với một thanh kiếm sắc bén; cũng vậy, thưa Tôn giả Sāriputta, những ngọn gió kinh khủng thổi lên đau nhói trong đầu tôi.<br>
+<span lang="pi" class="pali">
+Seyyathāpi, bho sāriputta, balavā puriso tiṇhena sikharena muddhani abhimattheyya; evameva kho, bho sāriputta, adhimattā vātā muddhani ca ūhananti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Thưa Tôn giả Sāriputta, tôi không có thể kham nhẫn, tôi không có thể chịu đựng. Những khổ thống của tôi gia tăng, không có giảm thiểu, sự gia tăng được rõ rệt, không có giảm thiểu.<br>
+<span lang="pi" class="pali">
+Na me, bho sāriputta, khamanīyaṁ, na yāpanīyaṁ. Bāḷhā me dukkhā vedanā abhikkamanti, no paṭikkamanti. Abhikkamosānaṁ paññāyati, no paṭikkamo.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Thưa Tôn giả Sāriputta, như một người lực sĩ lấy một dây nịt bằng da cứng quấn tròn quanh đầu rồi siết chặt; cũng vậy, thưa Tôn giả Sāriputta, tôi bị cảm đau đầu một cách kinh khủng.<br>
+<span lang="pi" class="pali">
+Seyyathāpi, bho sāriputta, balavā puriso daḷhena varattakkhaṇḍena sīse sīsaveṭhaṁ dadeyya; evameva kho, bho sāriputta, adhimattā sīse sīsavedanā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Thưa Tôn giả Sāriputta, tôi không có thể kham nhẫn, tôi không có thể chịu đựng. Những khổ thống của tôi gia tăng, không có giảm thiểu, sự gia tăng được rõ rệt, không có giảm thiểu.<br>
+<span lang="pi" class="pali">
+Na me, bho sāriputta, khamanīyaṁ na yāpanīyaṁ. Bāḷhā me dukkhā vedanā abhikkamanti, no paṭikkamanti. Abhikkamosānaṁ paññāyati, no paṭikkamo.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Thưa Tôn giả Sāriputta, như một người đồ tể thiện xảo hay đệ tử người đồ tể cắt ngang bụng với con dao cắt thịt bò sắc bén; cũng vậy, thưa Tôn giả Sāriputta, một ngọn gió kinh khủng cắt ngang bụng của tôi.<br>
+<span lang="pi" class="pali">
+Seyyathāpi, bho sāriputta, dakkho goghātako vā goghātakantevāsī vā tiṇhena govikantanena kucchiṁ parikanteyya; evameva kho, bho sāriputta, adhimattā vātā kucchiṁ parikantanti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Thưa Tôn giả Sāriputta, tôi không có thể kham nhẫn, tôi không có thể chịu đựng. Những thống khổ của tôi gia tăng, không có giảm thiểu, sự gia tăng được rõ rệt, không có giảm thiểu.<br>
+<span lang="pi" class="pali">
+Na me, bho sāriputta, khamanīyaṁ, na yāpanīyaṁ. Bāḷhā me dukkhā vedanā abhikkamanti, no paṭikkamanti. Abhikkamosānaṁ paññāyati, no paṭikkamo.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Thưa Tôn giả Sāriputta, ví như hai người lực sĩ, sau khi nắm cánh tay của một người yếu hơn, nướng người ấy, đốt người ấy trên một hố than hừng; cũng vậy, thưa Tôn giả Sāriputta, một sức nóng kinh khủng khởi lên trong thân tôi.<br>
+<span lang="pi" class="pali">
+Seyyathāpi, bho sāriputta, dve balavanto purisā dubbalataraṁ purisaṁ nānābāhāsu gahetvā aṅgārakāsuyā santāpeyyuṁ samparitāpeyyuṁ; evameva kho, bho sāriputta, adhimatto kāyasmiṁ ḍāho.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Thưa Tôn giả Sāriputta, tôi không có thể kham nhẫn, tôi không có thể chịu đựng. Những khổ thống của tôi gia tăng, không có giảm thiểu, sự gia tăng được rõ rệt, không có giảm thiểu.”<br>
+<span lang="pi" class="pali">
+Na me, bho sāriputta, khamanīyaṁ na yāpanīyaṁ. Bāḷhā me dukkhā vedanā abhikkamanti, no paṭikkamanti. Abhikkamosānaṁ paññāyati, no paṭikkamo”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Này Dhanañjāni, địa ngục hay bàng sanh, chỗ nào tốt hơn?”<br>
+<span lang="pi" class="pali">
+“Taṁ kiṁ maññasi, dhanañjāni, katamaṁ seyyo—nirayo vā tiracchānayoni vā”ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Thưa Tôn giả Sāriputta, bàng sanh tốt hơn địa ngục.”<br>
+<span lang="pi" class="pali">
+“Nirayā, bho sāriputta, tiracchānayoni seyyo”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Này Dhanañjāni, bàng sanh hay cảnh ngạ quỷ, chỗ nào tốt hơn?”<br>
+<span lang="pi" class="pali">
+“Taṁ kiṁ maññasi, dhanañjāni, katamaṁ seyyo—tiracchānayoni vā pettivisayo vā”ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Thưa Tôn giả Sāriputta, cảnh ngạ quỷ tốt hơn bàng sanh.”<br>
+<span lang="pi" class="pali">
+“Tiracchānayoniyā, bho sāriputta, pettivisayo seyyo”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Này Dhanañjāni, cảnh giới ngạ quỷ hay loài Người, chỗ nào tốt hơn?”<br>
+<span lang="pi" class="pali">
+“Taṁ kiṁ maññasi, dhanañjāni, katamaṁ seyyo—pettivisayo vā manussā vā”ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Thưa Tôn giả Sāriputta, loài Người tốt hơn cảnh giới ngạ quỷ.”<br>
+<span lang="pi" class="pali">
+“Pettivisayā, bho sāriputta, manussā seyyo”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Này Dhanañjāni, loài Người hay Tứ thiên vương thiên, chỗ nào tốt hơn?”<br>
+<span lang="pi" class="pali">
+“Taṁ kiṁ maññasi, dhanañjāni, katamaṁ seyyo—manussā vā cātumahārājikā vā devā”ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Thưa Tôn giả Sāriputta, Tứ thiên vương thiên tốt hơn loài Người.”<br>
+<span lang="pi" class="pali">
+“Manussehi, bho sāriputta, cātumahārājikā devā seyyo”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Này Dhanañjāni, Tứ thiên vương thiên hay Tam thập tam thiên, chỗ nào tốt hơn?”<br>
+<span lang="pi" class="pali">
+“Taṁ kiṁ maññasi, dhanañjāni, katamaṁ seyyo—cātumahārājikā vā devā tāvatiṁsā vā devā”ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Thưa Tôn giả Sāriputta, Tam thập tam thiên tốt hơn Tứ thiên vương thiên.”<br>
+<span lang="pi" class="pali">
+“Cātumahārājikehi, bho sāriputta, devehi tāvatiṁsā devā seyyo”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Này Dhanañjāni, Tam thập tam thiên hay Dạ-ma Thiên, chỗ nào tốt hơn?”<br>
+<span lang="pi" class="pali">
+“Taṁ kiṁ maññasi, dhanañjāni, katamaṁ seyyo—tāvatiṁsā vā devā yāmā vā devā”ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Thưa Tôn giả Sāriputta, Dạ-ma thiên tốt hơn Tam thập tam thiên.”<br>
+<span lang="pi" class="pali">
+“Tāvatiṁsehi, bho sāriputta, devehi yāmā devā seyyo”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Này Dhanañjāni, Dạ-ma thiên hay Ðâu-suất-đà thiên (Tusita), chỗ nào tốt hơn?”<br>
+<span lang="pi" class="pali">
+“Taṁ kiṁ maññasi, dhanañjāni, katamaṁ seyyo—yāmā vā devā tusitā vā devā”ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Thưa Tôn giả Sāriputta, Ðâu-Suất-đà thiên tốt hơn Dạ-ma thiên.”<br>
+<span lang="pi" class="pali">
+“Yāmehi, bho sāriputta, devehi tusitā devā seyyo”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Này Dhanañjāni, Ðâu-suất-đà thiên hay Hóa lạc thiên (Nimmanarati), chỗ nào tốt hơn?”<br>
+<span lang="pi" class="pali">
+“Taṁ kiṁ maññasi, dhanañjāni, katamaṁ seyyo—tusitā vā devā nimmānaratī vā devā”ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Thưa Tôn giả Sāriputta, Hóa lạc thiên tốt hơn Ðâu-suất-đà thiên.”<br>
+<span lang="pi" class="pali">
+“Tusitehi, bho sāriputta, devehi nimmānaratī devā seyyo”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Này Dhanañjāni, Hóa lạc thiên hay Tha hóa tự tại thiên, chỗ nào tốt hơn?”<br>
+<span lang="pi" class="pali">
+“Taṁ kiṁ maññasi, dhanañjāni, katamaṁ seyyo—nimmānaratī vā devā paranimmitavasavattī vā devā”ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Thưa Tôn giả Sāriputta, Tha hóa tự tại thiên tốt hơn Hóa lạc thiên.”<br>
+<span lang="pi" class="pali">
+“Nimmānaratīhi, bho sāriputta, devehi paranimmitavasavattī devā seyyo”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Này Dhanañjāni, Tha hóa tự tại thiên hay Phạm thiên giới, chỗ nào tốt hơn?”<br>
+<span lang="pi" class="pali">
+“Taṁ kiṁ maññasi, dhanañjāni, katamaṁ seyyo paranimmitavasavattī vā devā brahmaloko vā”ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Tôn giả Sāriputta đã nói: “Phạm thiên giới”.<br>
+<span lang="pi" class="pali">
+“‘Brahmaloko’ti—bhavaṁ sāriputto āha;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Tôn giả Sāriputta đã nói: “Phạm thiên giới”.<br>
+<span lang="pi" class="pali">
+‘brahmaloko’ti—bhavaṁ sāriputto āhā”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Rồi Tôn giả Sāriputta suy nghĩ:<br>
+<span lang="pi" class="pali">
+Atha kho āyasmato sāriputtassa etadahosi:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Các vị Bà-la-môn này rất ái luyến Phạm thiên giới.<br>
+<span lang="pi" class="pali">
+“ime kho brāhmaṇā brahmalokādhimuttā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vậy ta hãy thuyết giảng con đường đưa đến cọng trú với Phạm thiên”.<br>
+<span lang="pi" class="pali">
+Yannūnāhaṁ dhanañjānissa brāhmaṇassa brahmānaṁ sahabyatāya maggaṁ deseyyan”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Này Dhanañjāni, ta sẽ thuyết giảng cho Ông con đường đưa đến cọng trú với Phạm thiên.<br>
+<span lang="pi" class="pali">
+“Brahmānaṁ te, dhanañjāni, sahabyatāya maggaṁ desessāmi;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Hãy nghe khéo tác ý, ta sẽ giảng.”<br>
+<span lang="pi" class="pali">
+taṁ suṇāhi, sādhukaṁ manasi karohi, bhāsissāmī”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Thưa vâng,” Bà-la-môn Dhanañjāni vâng đáp Tôn giả Sāriputta. Tôn giả Sāriputta thuyết như sau:<br>
+<span lang="pi" class="pali">
+“Evaṁ, bho”ti kho dhanañjāni brāhmaṇo āyasmato sāriputtassa paccassosi. Āyasmā sāriputto etadavoca:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Này Dhanañjāni, thế nào là con đường đưa đến cọng trú với Phạm thiên?<br>
+<span lang="pi" class="pali">
+“katamo ca, dhanañjāni, brahmānaṁ sahabyatāya maggo?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ở đây, này Dhanañjāni, vị Tỷ-kheo an trú, biến mãn một phương với tâm câu hữu với từ, cũng vậy phương thứ hai, cũng vậy phương thứ ba, cũng vậy phương thứ tư. Như vậy cùng khắp thế giới, trên, dưới, bề ngang, hết thảy phương xứ, cùng khắp vô biên giới, vị ấy an trú biến mãn với tâm câu hữu với từ quảng đại, vô biên, không hận, không sân.<br>
+<span lang="pi" class="pali">
+Idha, dhanañjāni, bhikkhu mettāsahagatena cetasā ekaṁ disaṁ pharitvā viharati, tathā dutiyaṁ, tathā tatiyaṁ, tathā catutthaṁ; iti uddhamadho tiriyaṁ sabbadhi sabbattatāya sabbāvantaṁ lokaṁ mettāsahagatena cetasā vipulena mahaggatena appamāṇena averena abyābajjhena pharitvā viharati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Dhanañjāni, như vậy là con đường đưa đến cọng trú với Phạm thiên.<br>
+<span lang="pi" class="pali">
+Ayaṁ kho, dhanañjāni, brahmānaṁ sahabyatāya maggo.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Lại nữa, này Dhanañjāni, vị Tỷ-kheo an trú biến mãn một phương với tâm câu hữu với bi…<br>
+<span lang="pi" class="pali">
+Puna caparaṁ, dhanañjāni, bhikkhu karuṇāsahagatena cetasā …pe…<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+an trú biến mãn một phương với tâm câu hữu với hỷ…<br>
+<span lang="pi" class="pali">
+muditāsahagatena cetasā …<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+an trú biến mãn một phương với tâm câu hữu với xả, cũng vậy phương thứ hai cũng vậy phương thứ ba, cũng vậy phương thứ tư. Như vậy cùng khắp thế giới, trên, dưới, bề ngang, hết thảy phương xứ, cùng khắp vô biên giới, vị ấy an trú biến mãn với tâm câu hữu với xả, quảng đại, vô biên, không hận, không sân.<br>
+<span lang="pi" class="pali">
+upekkhāsahagatena cetasā ekaṁ disaṁ pharitvā viharati, tathā dutiyaṁ, tathā tatiyaṁ, tathā catutthaṁ; iti uddhamadho tiriyaṁ sabbadhi sabbattatāya sabbāvantaṁ lokaṁ upekkhāsahagatena cetasā vipulena mahaggatena appamāṇena averena abyābajjhena pharitvā viharati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Dhanañjāni, như vậy là con đường đưa đến cọng trú với Phạm thiên.”<br>
+<span lang="pi" class="pali">
+Ayaṁ kho, dhanañjāni, brahmānaṁ sahabyatāya maggo”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Vậy thưa Tôn giả Sāriputta, hãy nhân danh tôi cúi đầu đảnh lễ Thế Tôn và thưa:<br>
+<span lang="pi" class="pali">
+“Tena hi, bho sāriputta, mama vacanena bhagavato pāde sirasā vandāhi:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Bạch Thế Tôn, Bà-la-môn Dhanañjāni bị bệnh, khổ đau, bị trọng bệnh, cúi đầu đảnh lễ chân Thế Tôn’.”<br>
+<span lang="pi" class="pali">
+‘dhanañjāni, bhante, brāhmaṇo ābādhiko dukkhito bāḷhagilāno. So bhagavato pāde sirasā vandatī’”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Rồi Tôn giả Sāriputta, dầu cho có những cảnh giới cao thượng hơn cần phải chứng, sau khi an trú Bà-la-môn vào Phạm thiên giới thấp kém, từ chỗ ngồi đứng dậy và ra đi.<br>
+<span lang="pi" class="pali">
+Atha kho āyasmā sāriputto dhanañjāniṁ brāhmaṇaṁ sati uttarikaraṇīye hīne brahmaloke patiṭṭhāpetvā uṭṭhāyāsanā pakkāmi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Và Bà-la-môn Dhanañjāni, sau khi Tôn giả Sāriputta ra đi không bao lâu, liền mệnh chung và được sanh lên Phạm thiên giới.<br>
+<span lang="pi" class="pali">
+Atha kho dhanañjāni brāhmaṇo acirapakkante āyasmante sāriputte kālamakāsi, brahmalokañca upapajji.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Rồi Thế Tôn gọi các Tỷ-kheo:<br>
+<span lang="pi" class="pali">
+Atha kho bhagavā bhikkhū āmantesi:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Này các Tỷ-kheo, dầu cho có những cảnh giới cao thượng hơn cần phải chứng, Sāriputta sau khi an trú Bà-la-môn Dhanañjāni vào Phạm thiên giới thấp kém, đã từ chỗ ngồi đứng dậy và ra đi.”<br>
+<span lang="pi" class="pali">
+“eso, bhikkhave, sāriputto dhanañjāniṁ brāhmaṇaṁ sati uttarikaraṇīye hīne brahmaloke patiṭṭhāpetvā uṭṭhāyāsanā pakkanto”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Rồi Tôn giả Sāriputta đi đến Thế Tôn, sau khi đến đảnh lễ Thế Tôn và ngồi xuống một bên. Ngồi xuống một bên, Tôn giả Sāriputta bạch Thế Tôn:<br>
+<span lang="pi" class="pali">
+Atha kho āyasmā sāriputto yena bhagavā tenupasaṅkami, upasaṅkamitvā bhagavantaṁ abhivādetvā ekamantaṁ nisīdi, ekamantaṁ nisinno kho āyasmā sāriputto bhagavantaṁ etadavoca:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Bạch Thế Tôn, Bà-la-môn Dhanañjāni bị bệnh, khổ đau, bị trọng bệnh, cúi đầu đảnh lễ chân Thế Tôn.”<br>
+<span lang="pi" class="pali">
+“dhanañjāni, bhante, brāhmaṇo ābādhiko dukkhito bāḷhagilāno, so bhagavato pāde sirasā vandatī”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Này Sāriputta, vì sao, dầu cho có những cảnh giới cao thượng hơn cần phải chứng, Ông sau khi an trú Bà-la-môn Dhanañjāni vào Phạm thiên giới thấp kém, đã từ chỗ ngồi đứng dậy và ra đi?”<br>
+<span lang="pi" class="pali">
+“Kiṁ pana tvaṁ, sāriputta, dhanañjāniṁ brāhmaṇaṁ sati uttarikaraṇīye hīne brahmaloke patiṭṭhāpetvā uṭṭhāyāsanā pakkanto”ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Bạch Thế Tôn, con nghĩ như sau:<br>
+<span lang="pi" class="pali">
+“Mayhaṁ kho, bhante, evaṁ ahosi:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Những vị Bà-la-môn này rất luyến ái Phạm thiên giới. Do vậy con mới thuyết giảng con đường đưa đến cọng trú với Phạm thiên’.”<br>
+<span lang="pi" class="pali">
+‘ime kho brāhmaṇā brahmalokādhimuttā, yannūnāhaṁ dhanañjānissa brāhmaṇassa brahmānaṁ sahabyatāya maggaṁ deseyyan’”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Và này Sāriputta, Bà-la-môn Dhanañjāni đã mệnh chung và sanh lên Phạm thiên giới.”<br>
+<span lang="pi" class="pali">
+“Kālaṅkato ca, sāriputta, dhanañjāni brāhmaṇo, brahmalokañca upapanno”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+<span lang="pi" class="vi">
+Dhanañjānisuttaṁ niṭṭhitaṁ sattamaṁ.<br>
+</span>
+</p>
+
+
+
+<!-- COPY CONTENT SUTTA Ở ĐÂY -->
+
+
+
+<br>
+<p><p style="text-align: right;font-style: italic;">Hoà Thượng Thích Minh Châu dịch Việt</span></p>
+
+
+
+
+
+
+
+
+</section>  <!-- End English and Pali -->
+<div id="nextprev"><a id="previous-sutta" href="./mn96.html#content"></a><a id="next-sutta" href="./mn98.html#content"></a></div>
+</div>  <!--End Content -->
+</div>  <!-- End Page -->
+
+
+
+
+
+
+<footer>
+					 <!-- End bottom links -->
+</footer>
+
+
+ 
+ <!-- Scripts -->
+
+ <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      if (typeof enablePaliLookup === "function") {
+        enablePaliLookup();
+      } else {
+        console.error("enablePaliLookup is not defined");
+      }
+    });
+  </script>
+
+ <script>
+ // Script to open and close sidebar
+ 	function w3_open() {
+ 	document.getElementById("mySidebar").style.display = "block";
+ 	}
+ 		function w3_close() {
+ 		document.getElementById("mySidebar").style.display = "none";
+ 	}
+ </script>
+ <script>
+ 		var app = document.getElementsByTagName("BODY")[0];
+ 		if (localStorage.lightMode == "dark") {
+ 			app.setAttribute("light-mode", "dark");
+ 	}
+ </script>
+ 
+ <script>
+ 		function toggle_light_mode() {
+ 			var app = document.getElementsByTagName("BODY")[0];
+ 				if (localStorage.lightMode == "dark") {
+ 			localStorage.lightMode = "light";
+ 			app.setAttribute("light-mode", "light");
+ 		} else {
+ 					localStorage.lightMode = "dark";
+ 					app.setAttribute("light-mode", "dark");
+ 	}
+ 		}
+ 
+ 		window.addEventListener("storage", function () {
+ 			if (localStorage.lightMode == "dark") {
+ 				app.setAttribute("light-mode", "dark");
+ 				} else {
+ 				app.setAttribute("light-mode", "light");
+ 		}
+ 		}, false);
+ 
+ </script>
+ <script src="../js/footer.js"></script><script src="../js/dpd_deconstructor.js"></script><script src="../js/dpd_ebts.js"></script><script src="../js/dpd_i2h.js"></script>
+ <script src="/sw.js"></script>
+ </body>
+ </html>

@@ -1,0 +1,1254 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+ 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+ 	<link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+ 	<meta name="viewport" content="width=device-width, initial-scale=1">
+		<!-- Loading manifest -->
+	<link rel="manifest" href="../manifest.json">
+ 	<!-- Loading main and menu stylesheets -->
+ 	<link rel="stylesheet" href="../css/w3.css">
+ 	<link rel="stylesheet" href="../css/css.css">
+ 	<link rel="stylesheet" href="../css/menu.css">
+ 	<script src="../js/jquery-1.10.2.min.js"></script>
+ 	<script src="../js/controlpanel.js"></script>
+ 	<script src="../js/mousetrap.min.js"></script>
+    <script src="../js/pali-lookup-standalone.js"></script>
+
+ <script src="../js/suttaFiles.js"></script>
+<script>
+ // Script to open random Sutta
+ function openRandomSutta() {
+  const randomIndex = Math.floor(Math.random() * suttaFiles.length);
+  const selectedFile = suttaFiles[randomIndex];
+
+  // Get root path of your site 
+  const currentPath = location.pathname;
+  const rootPath = currentPath.split("/").slice(0, -2).join("/") + "/";
+
+  // Redirect to the correct file
+  window.location.href = rootPath + selectedFile;
+}
+</script>
+
+
+</head>
+ <body class="container">
+ <div class="header-background">
+ <!-- Header -->
+ <div class="w3-header w3-content w3-padding w3-left-align bwcontainer">
+ 	<div class="centered">
+ 		<button class="light-mode-button" aria-label="Bật Chế Độ Sáng" onclick="toggle_light_mode()">
+ 			<span></span>
+ 			<span></span>
+ 		</button>
+ 		<span class="box-lbl">Sáng/Tối</span>
+ 	</div> <!-- Centered -->
+ 		<a href="../home/index.html" id="bwlogo"><img src="../images/headerlogo.png" alt="Logo Lời Của Đức Phật" class="w3-image"></a>
+ 		<div class="w3-bar bwcontainer">
+ 			<div id="searchlinks">
+ 			<a href="../home/visearch.html"><span class="w3-bar-item"><i class="fa fa-search"></i>&nbsp;Tìm Tiếng Việt</span></a>
+ 			<a href="../home/palisearch.html"><span class="w3-bar-item"><i class="fa fa-search"></i>&nbsp;Tìm Tiếng Pali</span></a>
+ 			</div><!-- End Searchlinks div -->
+ 			<div class="help"><span><a href="../home/help.html"><img src="../images/help_icon.png" title="Trợ Giúp" alt="Help"></a></span></div>
+ 		</div> <!-- End w3-bar bwcontainer --> 	</div> <!-- End w3-header w3-content w3-padding w3-left-align bwcontainer -->
+ </div> <!-- End header-background -->
+ <!-- Top menu -->
+
+ <div class="w3-main w3-white bwcontainer2">
+ 	<div class="w3-button w3-padding-8 w3-left w3-hide-large" onclick="w3_open()">☰</div>
+ 		<div id="navbar" class="w3-hide-small w3-hide-medium bwcontainer3">
+ 			<ul id="css3menu0">
+ 				<li class="topfirst" id="home"><a href="../home/index.html" class="w3-hide-small">Trang Chủ</a></li>
+  				<li class="topmenu" id="dn"><a href="../dn/dn.html" class="pressed w3-hide-small">Trường Bộ Kinh</a></li>
+ 				<li class="topmenu" id="mn"><a href="../mn/mn.html" class="w3-hide-small">Trung Bộ Kinh</a></li>
+ 				<li class="topmenu" id="sn"><a href="../sn/sn.html" class="w3-hide-small"><i class="fa fa-caret-down"></i>&nbsp;Tương Ưng Bộ Kinh</a>
+ 					<ul>
+ 						<li><a href="../sn/sn01.html" class="w3-hide-small">Tập I - Thiên Có Kệ</a></li>
+ 						<li><a href="../sn/sn02.html" class="w3-hide-small">Tập II - Thiên Nhân Duyên</a></li>
+ 						<li><a href="../sn/sn03.html" class="w3-hide-small">Tập III - Thiên Uẩn</a></li>
+ 						<li><a href="../sn/sn04.html" class="w3-hide-small">Tập IV - Thiên Sáu Xứ</a></li>
+ 						<li><a href="../sn/sn05.html" class="w3-hide-small">Tập V - Thiên Ðại Phẩm</a></li>
+ 					</ul>
+ 				<li class="topmenu" id="an"><a href="../an/an.html" class="w3-hide-small"><i class="fa fa-caret-down"></i>&nbsp;Tăng Chi Bộ Kinh</a>
+ 					<ul>
+ 						<li><a href="../an/an1.html" class="w3-hide-small">Chương Một Pháp</a></li>
+ 						<li><a href="../an/an2.html" class="w3-hide-small">Chương Hai Pháp</a></li>
+ 						<li><a href="../an/an3.html" class="w3-hide-small">Chương Ba Pháp</a></li>
+ 						<li><a href="../an/an4.html" class="w3-hide-small">Chương Bốn Pháp</a></li>
+ 						<li><a href="../an/an5.html" class="w3-hide-small">Chương Năm Pháp</a></li>
+ 						<li><a href="../an/an6.html" class="w3-hide-small">Chương Sáu Pháp</a></li>
+ 						<li><a href="../an/an7.html" class="w3-hide-small">Chương Bảy Pháp</a></li>
+ 						<li><a href="../an/an8.html" class="w3-hide-small">Chương Tám Pháp</a></li>
+ 						<li><a href="../an/an9.html" class="w3-hide-small">Chương Chín Pháp</a></li>
+ 						<li><a href="../an/an10.html" class="w3-hide-small">Chương Mười Pháp</a></li>
+ 						<li><a href="../an/an11.html" class="w3-hide-small">Chương Mười Một Pháp</a></li>
+ 					</ul>
+ 				</li>
+ 				<li class="topmenu" id="kn"><a href="../kn/kn.html" class="w3-hide-small"><i class="fa fa-caret-down"></i>&nbsp;Tiểu Bộ Kinh</a>
+ 					<ul>
+ 						<li><a href="../kp/kp.html" class="w3-hide-small">Kinh Tiểu Tụng</a></li>
+ 						<li><a href="../dhp/dhp.html" class="w3-hide-small">Kinh Pháp Cú</a></li>
+ 						<li><a href="../snp/snp.html" class="w3-hide-small">Kinh Tập</a></li>
+ 						<li><a href="../ud/ud.html" class="w3-hide-small">Kinh Phật Tự Thuyết</a></li>
+ 						<li><a href="../it/it.html" class="w3-hide-small">Kinh Phật Thuyết Như Vậy</a></li>
+ 						<li><a href="../tha/tha.html" class="w3-hide-small">Trưởng Lão Tăng Kệ</a></li>
+ 						<li><a href="../thi/thi.html" class="w3-hide-small">Trưởng Lão Ni Kệ</a></li>
+ 					</ul>
+ 				</li>
+				<li class="toplast" id="rd"><a href="../rd/rd.html" class="w3-hide-small"></i>Kinh Ngẫu Nhiên Theo Nhóm</a>
+ 					</ul>
+ 				</li>
+ 			</ul>
+ 			</div>
+ 		</div> <!--navbar-->
+
+<!-- Sidebar (hidden by default) -->
+ <nav class="w3-sidebar w3-bar-block w3-card w3-border w3-top w3-animate-left w3-hide-large" id="mySidebar">
+ 	<a href="javascript:void(0)" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-times fa-2x red-color"></i>&nbsp;&nbsp;&nbsp;Close</a><!-- Hides the sidebar when clicked -->
+ 		<div class="w3-bar-block w3-white">
+ 			<a href="../home/index.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-home fa-lg"></i>&nbsp;&nbsp;&nbsp;Home</a>
+ 			<a href="../guide/guide.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Guide</a>
+ 			<a href="../dn/dn.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Trường Bộ Kinh</a>
+ 			<a href="../mn/mn.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Trung Bộ Kinh</a>
+ 			<a href="../sn/sn.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Tương Ưng Bộ Kinh</a>
+ 			<a href="../an/an.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Tăng Chi Bộ Kinh
+ 			<a href="../kn/kn.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Tiểu Bộ Kinh</a>
+			<a href="../rd/rd.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>Kinh Ngẫu Nhiên Theo Nhóm</a>
+ 		</div>
+ </nav>
+ 
+ 
+ 
+   <!-- !PAGE CONTENT! --> 
+<div class="w3-main w3-content w3-padding w3-left-align bwcontainer4">
+<div id="content">
+<h2>Majjhima Nikāya - Trung Bộ Kinh</h2>
+<h5><span style="font-style: italic;">Hoà Thượng Thích Minh Châu dịch Việt</span></h5>
+
+</div>
+
+<br>
+ 	<title>        Trung Bộ 126          </title>
+
+<p lang="vi" class="vi"; style="text-align: center">
+Trung Bộ 126<br>
+<span lang="pi" class="pali">
+Majjhima Nikāya 126<br>
+</span>
+</p>
+
+
+<p lang="vi" class="vi"; style="text-align: center">
+Kinh Bhūmija<br>
+<span lang="pi" class="pali">
+Bhūmijasutta<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Như vầy tôi nghe.<br>
+<span lang="pi" class="pali">
+Evaṁ me sutaṁ—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Một thời Thế Tôn trú ở Vương Xá, Trúc Lâm, tại chỗ nuôi dưỡng sóc.<br>
+<span lang="pi" class="pali">
+ekaṁ samayaṁ bhagavā rājagahe viharati veḷuvane kalandakanivāpe.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Rồi Tôn giả Bhūmija (Phù-di) vào buổi sáng đắp y, cầm y bát, đi đến trú xứ của vương tử Jayasena, sau khi đến ngồi trên chỗ đã soạn sẵn.<br>
+<span lang="pi" class="pali">
+Atha kho āyasmā bhūmijo pubbaṇhasamayaṁ nivāsetvā pattacīvaramādāya yena jayasenassa rājakumārassa nivesanaṁ tenupasaṅkami; upasaṅkamitvā paññatte āsane nisīdi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Rồi vương tử Jayasena đi đến Tôn giả Bhūmija, sau khi đến nói lên với Tôn giả Bhūmija những lời chào đón hỏi thăm, sau khi nói lên những lời chào đón hỏi thăm thân hữu, rồi ngồi xuống một bên. Ngồi xuống một bên, vương tử Jayasena thưa với Tôn giả Bhūmija:<br>
+<span lang="pi" class="pali">
+Atha kho jayaseno rājakumāro yenāyasmā bhūmijo tenupasaṅkami; upasaṅkamitvā āyasmatā bhūmijena saddhiṁ sammodi. Sammodanīyaṁ kathaṁ sāraṇīyaṁ vītisāretvā ekamantaṁ nisīdi. Ekamantaṁ nisinno kho jayaseno rājakumāro āyasmantaṁ bhūmijaṁ etadavoca:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Thưa Tôn giả Bhūmija, có một số Sa-môn, Bà-la-môn có lý thuyết như sau, có quan điểm như sau:<br>
+<span lang="pi" class="pali">
+“santi, bho bhūmija, eke samaṇabrāhmaṇā evaṁvādino evaṁdiṭṭhino:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Nếu có ước nguyện hành Phạm hạnh, thời không đạt được quả vị;<br>
+<span lang="pi" class="pali">
+‘āsañcepi karitvā brahmacariyaṁ caranti, abhabbā phalassa adhigamāya;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+nếu không có ước nguyện hành Phạm hạnh, thời không đạt được quả vị;<br>
+<span lang="pi" class="pali">
+anāsañcepi karitvā brahmacariyaṁ caranti, abhabbā phalassa adhigamāya;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+nếu có và không có ước nguyện hành Phạm hạnh, thời không đạt được quả vị;<br>
+<span lang="pi" class="pali">
+āsañca anāsañcepi karitvā brahmacariyaṁ caranti, abhabbā phalassa adhigamāya;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+nếu không có và không không có ước nguyện hành Phạm hạnh, thời không đạt được quả vị’.<br>
+<span lang="pi" class="pali">
+nevāsaṁ nānāsañcepi karitvā brahmacariyaṁ caranti, abhabbā phalassa adhigamāyā’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ở đây, bậc Ðạo sư của Tôn giả Bhūmija có nói gì, và có lập luận gì?”<br>
+<span lang="pi" class="pali">
+Idha bhoto bhūmijassa satthā kiṁvādī kimakkhāyī”ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Thưa Vương tử, tôi không tận mặt Thế Tôn được nghe như vậy, được ghi nhớ như vậy.<br>
+<span lang="pi" class="pali">
+“Na kho metaṁ, rājakumāra, bhagavato sammukhā sutaṁ, sammukhā paṭiggahitaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Và sự việc này xảy ra, Thế Tôn có giải thích như sau:<br>
+<span lang="pi" class="pali">
+Ṭhānañca kho etaṁ vijjati yaṁ bhagavā evaṁ byākareyya:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Nếu có ước nguyện, hành Phạm hạnh không chánh đáng, thời không đạt được quả vị;<br>
+<span lang="pi" class="pali">
+‘āsañcepi karitvā ayoniso brahmacariyaṁ caranti, abhabbā phalassa adhigamāya;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+nếu không có ước nguyện, hành Phạm hạnh không chánh đáng, thời không đạt được quả vị;<br>
+<span lang="pi" class="pali">
+anāsañcepi karitvā ayoniso brahmacariyaṁ caranti, abhabbā phalassa adhigamāya;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+nếu có và không có ước nguyện, hành Phạm hạnh không chánh đáng, thời không đạt được quả vị;<br>
+<span lang="pi" class="pali">
+āsañca anāsañcepi karitvā ayoniso brahmacariyaṁ caranti, abhabbā phalassa adhigamāya;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+nếu không có và không không có ước nguyện, hành Phạm hạnh không chánh đáng, thời không đạt được quả vị.<br>
+<span lang="pi" class="pali">
+nevāsaṁ nānāsañcepi karitvā ayoniso brahmacariyaṁ caranti, abhabbā phalassa adhigamāya.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Còn nếu có ước nguyện, hành Phạm hạnh một cách chánh đáng, thời đạt được quả vị;<br>
+<span lang="pi" class="pali">
+Āsañcepi karitvā yoniso brahmacariyaṁ caranti, bhabbā phalassa adhigamāya;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+nếu không có ước nguyện, hành Phạm hạnh một cách chánh đáng, thời đạt được quả vị;<br>
+<span lang="pi" class="pali">
+anāsañcepi karitvā yoniso brahmacariyaṁ caranti, bhabbā phalassa adhigamāya;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+nếu có và không có ước nguyện, hành Phạm hạnh một cách chánh đáng, thời đạt được quả vị;<br>
+<span lang="pi" class="pali">
+āsañca anāsañcepi karitvā yoniso brahmacariyaṁ caranti, bhabbā phalassa adhigamāya;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+nếu không có và không không có ước nguyện, hành Phạm hạnh một cách chánh đáng, thời đạt được quả vị’.<br>
+<span lang="pi" class="pali">
+nevāsaṁ nānāsañcepi karitvā yoniso brahmacariyaṁ caranti, bhabbā phalassa adhigamāyā’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Thưa Vương tử, tôi không tận mặt Thế Tôn được nghe như vậy, được ghi nhớ như vậy.<br>
+<span lang="pi" class="pali">
+Na kho me taṁ, rājakumāra, bhagavato sammukhā sutaṁ, sammukhā paṭiggahitaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Sự việc xảy ra, Thế Tôn có giải thích như vậy”.<br>
+<span lang="pi" class="pali">
+Ṭhānañca kho etaṁ vijjati yaṁ bhagavā evaṁ byākareyyā”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Nếu Ðạo sư của Tôn giả Bhūmija thuyết lý như vậy, lập luận như vậy, thời tôi nghĩ rằng chắc chắn vị Ðạo sư của Tôn giả Bhūmija, đứng cao hơn trên đầu tất cả Sa-môn, Bà-la-môn tầm thường.”<br>
+<span lang="pi" class="pali">
+“Sace kho bhoto bhūmijassa satthā evaṁvādī evamakkhāyī, addhā bhoto bhūmijassa satthā sabbesaṁyeva puthusamaṇabrāhmaṇānaṁ muddhānaṁ maññe āhacca tiṭṭhatī”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Rồi vương tử Jayasena mời Tôn giả Bhūmija, dùng với bát ăn (thalipaka) của mình.<br>
+<span lang="pi" class="pali">
+Atha kho jayaseno rājakumāro āyasmantaṁ bhūmijaṁ sakeneva thālipākena parivisi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Rồi Tôn giả Bhūmija, sau bữa ăn khất thực trở về đi đến chỗ Thế Tôn, sau khi đến đảnh lễ Thế Tôn rồi ngồi xuống một bên. Ngồi xuống một bên, Tôn giả Bhūmija bạch Thế Tôn:<br>
+<span lang="pi" class="pali">
+Atha kho āyasmā bhūmijo pacchābhattaṁ piṇḍapātapaṭikkanto yena bhagavā tenupasaṅkami; upasaṅkamitvā bhagavantaṁ abhivādetvā ekamantaṁ nisīdi. Ekamantaṁ nisinno kho āyasmā bhūmijo bhagavantaṁ etadavoca:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Bạch Thế Tôn, ở đây, vào buổi sáng con đắp y, cầm y bát, đi đến trú xứ của vương tử Jayasena.<br>
+<span lang="pi" class="pali">
+“idhāhaṁ, bhante, pubbaṇhasamayaṁ nivāsetvā pattacīvaramādāya yena jayasenassa rājakumārassa nivesanaṁ tenupasaṅkamiṁ; upasaṅkamitvā paññatte āsane nisīdiṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+sau khi đến con ngồi trên chỗ đã soạn sẵn, bạch Thế Tôn, vương tử Jayasena đến chỗ con, sau khi đến nói lên với con những lời chào đón hỏi thăm, sau khi nói lên những lời chào đón hỏi thăm thân hữu rồi ngồi xuống một bên. Ngồi xuống một bên, bạch Thế Tôn, vương tử Jayasena nói với con như sau:<br>
+<span lang="pi" class="pali">
+Atha kho, bhante, jayaseno rājakumāro yenāhaṁ tenupasaṅkami; upasaṅkamitvā mayā saddhiṁ sammodi. Sammodanīyaṁ kathaṁ sāraṇīyaṁ vītisāretvā ekamantaṁ nisīdi. Ekamantaṁ nisinno kho, bhante, jayaseno rājakumāro maṁ etadavoca:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Thưa Tôn giả Bhūmija, một số Sa-môn, Bà-la-môn, …. bậc Ðạo sư của Tôn giả có nói gì, có lập luận gì?’ Khi được nghe nói vậy, bạch Thế Tôn, con có nói với vương tử Jayasena, như sau: “Này Vương tử, tôi không tận mặt Thế Tôn, được nghe như sau, được ghi nhớ như sau:… “. “Nếu Ðạo sư của Tôn giả Bhūmija… Tôi nghĩ rằng chắc chắn Ðạo sư của Tôn giả Bhūmija, đứng cao hơn trên đầu tất cả Sa-môn, Bà-la-môn tầm thường’.<br>
+<span lang="pi" class="pali">
+‘santi, bho bhūmija, eke samaṇabrāhmaṇā evaṁvādino evaṁdiṭṭhino— āsañcepi karitvā brahmacariyaṁ caranti, abhabbā phalassa adhigamāya; anāsañcepi karitvā …pe… āsañca anāsañcepi karitvā brahmacariyaṁ caranti, abhabbā phalassa adhigamāya; nevāsaṁ nānāsañcepi karitvā brahmacariyaṁ caranti, abhabbā phalassa adhigamāyā’ti. ‘Idha bhoto bhūmijassa satthā kiṁvādī kimakkhāyī’ti?Evaṁ vutte, ahaṁ, bhante, jayasenaṁ rājakumāraṁ etadavocaṁ: ‘na kho me taṁ, rājakumāra, bhagavato sammukhā sutaṁ, sammukhā paṭiggahitaṁ. Ṭhānañca kho etaṁ vijjati yaṁ bhagavā evaṁ byākareyya—āsañcepi karitvā ayoniso brahmacariyaṁ caranti, abhabbā phalassa adhigamāya; anāsañcepi karitvā ayoniso brahmacariyaṁ caranti, abhabbā phalassa adhigamāya; āsañca anāsañcepi karitvā ayoniso brahmacariyaṁ caranti, abhabbā phalassa adhigamāya; nevāsaṁ nānāsañcepi karitvā ayoniso brahmacariyaṁ caranti, abhabbā phalassa adhigamāya. Āsañcepi karitvā yoniso brahmacariyaṁ caranti, bhabbā phalassa adhigamāya; anāsañcepi karitvā …pe… āsañca anāsañcepi karitvā …pe… nevāsaṁ nānāsañcepi karitvā yoniso brahmacariyaṁ caranti, bhabbā phalassa adhigamāyāti. Na kho me taṁ, rājakumāra, bhagavato sammukhā sutaṁ, sammukhā paṭiggahitaṁ. Ṭhānañca kho etaṁ vijjati yaṁ bhagavā evaṁ byākareyyā’ti. ‘Sace bhoto bhūmijassa satthā evaṁvādī evamakkhāyī, addhā bhoto bhūmijassa satthā sabbesaṁyeva puthusamaṇabrāhmaṇānaṁ muddhānaṁ maññe āhacca tiṭṭhatī’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Bạch Thế Tôn, không hiểu hỏi như vậy, trả lời như vậy, con có nói đúng lời Thế Tôn nói, con không xuyên tạc lời Thế Tôn với điều không đúng sự thực, nhưng con đã giải thích đúng pháp, tùy pháp, và một vị đồng Phạm hạnh nói đúng pháp, tùy pháp sẽ không có lý do để chỉ trích?’”<br>
+<span lang="pi" class="pali">
+‘Kaccāhaṁ, bhante, evaṁ puṭṭho evaṁ byākaramāno vuttavādī ceva bhagavato homi, na ca bhagavantaṁ abhūtena abbhācikkhāmi, dhammassa cānudhammaṁ byākaromi, na ca koci sahadhammiko vādānuvādo gārayhaṁ ṭhānaṁ āgacchatī’”ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Thật vậy, này Bhūmija, được hỏi vậy, được trả lời vậy, Ông nói đúng lời Thế Tôn nói, Ông không xuyên tạc Thế Tôn với điều không đúng sự thực, Ông đã giải thích đúng pháp, tùy pháp, và một vị đồng Phạm hạnh nói đúng pháp, tùy pháp không có lý do gì để chỉ trích.<br>
+<span lang="pi" class="pali">
+“Taggha tvaṁ, bhūmija, evaṁ puṭṭho evaṁ byākaramāno vuttavādī ceva me hosi, na ca maṁ abhūtena abbhācikkhasi, dhammassa cānudhammaṁ byākarosi, na ca koci sahadhammiko vādānuvādo gārayhaṁ ṭhānaṁ āgacchati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Bhūmija, những Sa-môn hay Bà-la-môn nào có tà kiến, tà tư duy, tà ngữ, tà nghiệp, tà mạng, tà tinh tấn, tà niệm, tà định, nếu họ có ước nguyện hành Phạm hạnh, thời không đạt được quả vị;<br>
+<span lang="pi" class="pali">
+Ye hi keci, bhūmija, samaṇā vā brāhmaṇā vā micchādiṭṭhino micchāsaṅkappā micchāvācā micchākammantā micchāājīvā micchāvāyāmā micchāsatī micchāsamādhino te āsañcepi karitvā brahmacariyaṁ caranti, abhabbā phalassa adhigamāya;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+nếu họ không có ước nguyện, hành Phạm hạnh, thời không đạt được quả vị;<br>
+<span lang="pi" class="pali">
+anāsañcepi karitvā brahmacariyaṁ caranti, abhabbā phalassa adhigamāya;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+nếu họ có và không có ước nguyện, hành Phạm hạnh, thời không đạt được quả vị;<br>
+<span lang="pi" class="pali">
+āsañca anāsañcepi karitvā brahmacariyaṁ caranti, abhabbā phalassa adhigamāya;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+nếu họ không có và không không có ước nguyện, hành Phạm hạnh, thời không đạt được quả vị.<br>
+<span lang="pi" class="pali">
+nevāsaṁ nānāsañcepi karitvā brahmacariyaṁ caranti, abhabbā phalassa adhigamāya.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vì sao vậy?<br>
+<span lang="pi" class="pali">
+Taṁ kissa hetu?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ðây không phải là phương pháp, này Bhūmija, để đạt được quả vị.<br>
+<span lang="pi" class="pali">
+Ayoni hesā, bhūmija, phalassa adhigamāya.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ví như, này Bhūmija, một người cần dầu, tìm cầu dầu, đi chỗ này chỗ kia để tìm dầu. Sau khi đổ cát vào thùng, tiếp tục rưới nước rồi ép (cát cho ra dầu).<br>
+<span lang="pi" class="pali">
+Seyyathāpi, bhūmija, puriso telatthiko telagavesī telapariyesanaṁ caramāno vālikaṁ doṇiyā ākiritvā udakena paripphosakaṁ paripphosakaṁ pīḷeyya.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Nếu người ấy có ước nguyện, sau khi đổ cát vào thùng, tiếp tục rưới nước rồi ép (cát cho ra dầu), người ấy không lấy được dầu.<br>
+<span lang="pi" class="pali">
+Āsañcepi karitvā vālikaṁ doṇiyā ākiritvā udakena paripphosakaṁ paripphosakaṁ pīḷeyya, abhabbo telassa adhigamāya;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Nếu người ấy không có ước nguyện, sau khi đổ cát vào thùng, tiếp tục rưới nước rồi ép (cát cho ra dầu), người ấy không lấy được dầu.<br>
+<span lang="pi" class="pali">
+anāsañcepi karitvā vālikaṁ doṇiyā ākiritvā udakena paripphosakaṁ paripphosakaṁ pīḷeyya, abhabbo telassa adhigamāya;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Nếu người ấy có và không có ước nguyện, sau khi đổ cát vào thùng, tiếp tục rưới nước rồi ép (cát cho ra dầu), người ấy không lấy được dầu.<br>
+<span lang="pi" class="pali">
+āsañca anāsañcepi karitvā vālikaṁ doṇiyā ākiritvā udakena paripphosakaṁ paripphosakaṁ pīḷeyya, abhabbo telassa adhigamāya;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Nếu người ấy không có và không không có ước nguyện, sau khi đổ cát vào thùng, tiếp tục rưới nước rồi ép (cát cho ra dầu), người ấy không lấy được dầu.<br>
+<span lang="pi" class="pali">
+nevāsaṁ nānāsañcepi karitvā vālikaṁ doṇiyā ākiritvā udakena paripphosakaṁ paripphosakaṁ pīḷeyya, abhabbo telassa adhigamāya.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vì sao vậy?<br>
+<span lang="pi" class="pali">
+Taṁ kissa hetu?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ðây không phải là phương pháp, này Bhūmija, để lấy được dầu.<br>
+<span lang="pi" class="pali">
+Ayoni hesā, bhūmija, telassa adhigamāya.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Cũng vậy, này Bhūmija, những vị Sa-môn hay Bà-la-môn có tà kiến, tà tư duy… tà định, nếu họ có ước nguyện, hành Phạm hạnh, họ không đạt được quả vị; nếu họ không ước nguyện… có và không có ước nguyện… không có và không không có ước nguyện, hành Phạm hạnh, thời họ không đạt được quả vị.<br>
+<span lang="pi" class="pali">
+Evameva kho, bhūmija, ye hi keci samaṇā vā brāhmaṇā vā micchādiṭṭhino micchāsaṅkappā micchāvācā micchākammantā micchāājīvā micchāvāyāmā micchāsatī micchāsamādhino te āsañcepi karitvā brahmacariyaṁ caranti, abhabbā phalassa adhigamāya; anāsañcepi karitvā brahmacariyaṁ caranti, abhabbā phalassa adhigamāya; āsañca anāsañcepi karitvā brahmacariyaṁ caranti, abhabbā phalassa adhigamāya; nevāsaṁ nānāsañcepi karitvā brahmacariyaṁ caranti, abhabbā phalassa adhigamāya.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vì sao vậy?<br>
+<span lang="pi" class="pali">
+Taṁ kissa hetu?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ðây không phải là phương pháp này Bhūmija, để đạt được quả vị.<br>
+<span lang="pi" class="pali">
+Ayoni hesā, bhūmija, phalassa adhigamāya.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ví như, này Bhūmija, một người cần sữa, tìm cầu sữa, đi chỗ này chỗ kia để tìm sữa, nắm sừng con bò cái trẻ để vắt sữa.<br>
+<span lang="pi" class="pali">
+Seyyathāpi, bhūmija, puriso khīratthiko khīragavesī khīrapariyesanaṁ caramāno gāviṁ taruṇavacchaṁ visāṇato āviñcheyya.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Nếu người ấy có ước nguyện, nắm sừng con bò cái trẻ để vắt sữa, người ấy không lấy được sữa.<br>
+<span lang="pi" class="pali">
+Āsañcepi karitvā gāviṁ taruṇavacchaṁ visāṇato āviñcheyya, abhabbo khīrassa adhigamāya;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Nếu người ấy không có ước nguyện…<br>
+<span lang="pi" class="pali">
+anāsañcepi karitvā …pe…<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Nếu người ấy có và không có ước nguyện…<br>
+<span lang="pi" class="pali">
+āsañca anāsañcepi karitvā …pe…<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Nếu người ấy không có và không không có ước nguyện, nắm sừng con bò cái trẻ để vắt sữa, người ấy không lấy được sữa.<br>
+<span lang="pi" class="pali">
+nevāsaṁ nānāsañcepi karitvā gāviṁ taruṇavacchaṁ visāṇato āviñcheyya, abhabbo khīrassa adhigamāya.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vì sao vậy?<br>
+<span lang="pi" class="pali">
+Taṁ kissa hetu?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Bhūmija, đây không phải là phương pháp để lấy sữa.<br>
+<span lang="pi" class="pali">
+Ayoni hesā, bhūmija, khīrassa adhigamāya.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Cũng vậy, này Bhūmija, các vị Sa-môn hay Bà-la-môn, có tà kiến… có tà định, nếu họ có ước nguyện, hành Phạm hạnh, họ không đạt được quả vị; nếu họ không có ước nguyện … ; nếu họ có và không có ước nguyện …; nếu họ không có và không không có ước nguyện, hành Phạm hạnh, họ không đạt được quả vị.<br>
+<span lang="pi" class="pali">
+Evameva kho, bhūmija, ye hi keci samaṇā vā brāhmaṇā vā micchādiṭṭhino …pe… micchāsamādhino te āsañcepi karitvā brahmacariyaṁ caranti, abhabbā phalassa adhigamāya; anāsañcepi karitvā …pe… āsañca anāsañcepi karitvā …pe… nevāsaṁ nānāsañcepi karitvā brahmacariyaṁ caranti, abhabbā phalassa adhigamāya.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vì sao vậy?<br>
+<span lang="pi" class="pali">
+Taṁ kissa hetu?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ðây không phải là phương pháp, này Bhūmija, để đạt được quả vị.<br>
+<span lang="pi" class="pali">
+Ayoni hesā, bhūmija, phalassa adhigamāya.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ví như, này Bhūmija, một người cần sanh tô, tìm cầu sanh tô, đi chỗ này chỗ kia để tìm cầu sanh tô, sau khi đổ nước vào một cái ghè, rồi lấy que khuấy đánh.<br>
+<span lang="pi" class="pali">
+Seyyathāpi, bhūmija, puriso navanītatthiko navanītagavesī navanītapariyesanaṁ caramāno udakaṁ kalase āsiñcitvā matthena āviñcheyya.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Nếu người ấy có ước nguyện, sau khi đổ nước vào một cái ghè, lấy que khuấy đánh, người ấy không lấy được sanh tô.<br>
+<span lang="pi" class="pali">
+Āsañcepi karitvā udakaṁ kalase āsiñcitvā matthena āviñcheyya, abhabbo navanītassa adhigamāya;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Nếu người ấy không có ước nguyện…;<br>
+<span lang="pi" class="pali">
+anāsañcepi karitvā …pe…<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+nếu người ấy có và không có ước nguyện…;<br>
+<span lang="pi" class="pali">
+āsañca anāsañcepi karitvā …pe…<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+nếu người ấy không có và không không có ước nguyện, đổ nước vào một cái ghè, lấy que khuấy đánh, người ấy không lấy được sanh tô.<br>
+<span lang="pi" class="pali">
+nevāsaṁ nānāsañcepi karitvā udakaṁ kalase āsiñcitvā matthena āviñcheyya, abhabbo navanītassa adhigamāya.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vì sao vậy?<br>
+<span lang="pi" class="pali">
+Taṁ kissa hetu?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Bhūmija, đây không phải là phương pháp để lấy sanh tô.<br>
+<span lang="pi" class="pali">
+Ayoni hesā, bhūmija, navanītassa adhigamāya.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Cũng vậy, này Bhūmija, những Sa-môn hay Bà-la-môn có tà kiến … có tà định, nếu họ có ước nguyện, hành Phạm hạnh, họ không đạt được quả vị;<br>
+<span lang="pi" class="pali">
+Evameva kho, bhūmija, ye hi keci samaṇā vā brāhmaṇā vā micchādiṭṭhino …pe… micchāsamādhino te āsañcepi karitvā brahmacariyaṁ caranti, abhabbā phalassa adhigamāya;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+nếu họ không có ước nguyện …<br>
+<span lang="pi" class="pali">
+anāsañcepi karitvā …pe…<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+nếu họ có và không có ước nguyện …<br>
+<span lang="pi" class="pali">
+āsañca anāsañcepi karitvā …pe…<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+nếu họ không có và không không có ước nguyện, hành Phạm hạnh, thời họ không đạt được quả vị.<br>
+<span lang="pi" class="pali">
+nevāsaṁ nānāsañcepi karitvā brahmacariyaṁ caranti, abhabbā phalassa adhigamāya.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vì sao vậy?<br>
+<span lang="pi" class="pali">
+Taṁ kissa hetu?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Bhūmija, đây không phải là phương pháp để đạt được quả vị.<br>
+<span lang="pi" class="pali">
+Ayoni hesā, bhūmija, phalassa adhigamāya.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ví như, này Bhūmija, một người cần lửa, tìm cầu lửa, đi chỗ này chỗ kia để tìm lửa. Người ấy đem phần phía trên đồ quay lửa, rồi cọ xát với một khúc que ướt và có nhựa.<br>
+<span lang="pi" class="pali">
+Seyyathāpi, bhūmija, puriso aggitthiko aggigavesī aggipariyesanaṁ caramāno allaṁ kaṭṭhaṁ sasnehaṁ uttarāraṇiṁ ādāya abhimantheyya.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Nếu người ấy có ước nguyện, đem phần phía trên đồ quay lửa, rồi cọ xát với một khúc que ướt và có nhựa, thời người ấy không lấy được lửa;<br>
+<span lang="pi" class="pali">
+Āsañcepi karitvā allaṁ kaṭṭhaṁ sasnehaṁ uttarāraṇiṁ ādāya abhimantheyya, abhabbo aggissa adhigamāya;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+nếu người ấy không có ước nguyện…;<br>
+<span lang="pi" class="pali">
+anāsañcepi karitvā …pe…<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+nếu người ấy có và không có ước nguyện …;<br>
+<span lang="pi" class="pali">
+āsañca anāsañcepi karitvā …pe…<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+nếu người ấy không có và không không có ước nguyện, đem phần trên đồ quay lửa, rồi cọ xát với một khúc que ướt và có nhựa, thời người ấy không lấy được lửa.<br>
+<span lang="pi" class="pali">
+nevāsaṁ nānāsañcepi karitvā allaṁ kaṭṭhaṁ sasnehaṁ uttarāraṇiṁ ādāya abhimantheyya, abhabbo aggissa adhigamāya.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vì sao vậy?<br>
+<span lang="pi" class="pali">
+Taṁ kissa hetu?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ðây không phải là phương pháp, này Bhūmija, để lấy được lửa.<br>
+<span lang="pi" class="pali">
+Ayoni hesā, bhūmija, aggissa adhigamāya.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Cũng vậy, này Bhūmija, có những Sa-môn, hay Bà-la-môn có tà kiến… có tà định; nếu họ có ước nguyện, hành Phạm hạnh, họ không đạt được quả vị;<br>
+<span lang="pi" class="pali">
+Evameva kho, bhūmija, ye hi keci samaṇā vā brāhmaṇā vā micchādiṭṭhino …pe… micchāsamādhino te āsañcepi karitvā brahmacariyaṁ caranti, abhabbā phalassa adhigamāya;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+nếu họ không có ước nguyện…<br>
+<span lang="pi" class="pali">
+anāsañcepi karitvā …pe…<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+nếu họ có và không có ước nguyện…<br>
+<span lang="pi" class="pali">
+āsañca anāsañcepi karitvā …pe…<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+nếu họ không có và không không có ước nguyện, hành Phạm hạnh, thời họ không thể đạt được quả vị.<br>
+<span lang="pi" class="pali">
+nevāsaṁ nānāsañcepi karitvā brahmacariyaṁ caranti, abhabbā phalassa adhigamāya.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vì cớ sao?<br>
+<span lang="pi" class="pali">
+Taṁ kissa hetu?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ðây không phải là phương pháp, này Bhūmija, để đạt được quả vị.<br>
+<span lang="pi" class="pali">
+Ayoni hesā, bhūmija, phalassa adhigamāya.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Bhūmija, những Sa-môn hay Bà-la-môn nào có chánh kiến, chánh tư duy, chánh ngữ, chánh nghiệp, chánh mạng, chánh tinh tấn, chánh niệm, chánh định; nếu họ có ước nguyện, hành Phạm hạnh, họ đạt được quả vị;<br>
+<span lang="pi" class="pali">
+Ye hi keci, bhūmija, samaṇā vā brāhmaṇā vā sammādiṭṭhino sammāsaṅkappā sammāvācā sammākammantā sammāājīvā sammāvāyāmā sammāsatī sammāsamādhino te āsañcepi karitvā brahmacariyaṁ caranti, bhabbā phalassa adhigamāya;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+nếu họ không có ước nguyện …<br>
+<span lang="pi" class="pali">
+anāsañcepi karitvā brahmacariyaṁ caranti, bhabbā phalassa adhigamāya;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+nếu họ có và không có ước nguyện …<br>
+<span lang="pi" class="pali">
+āsañca anāsañcepi karitvā brahmacariyaṁ caranti, bhabbā phalassa adhigamāya;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+nếu họ không có và không không có ước nguyện, hành Phạm hạnh, thời họ đạt được quả vị.<br>
+<span lang="pi" class="pali">
+nevāsaṁ nānāsañcepi karitvā brahmacariyaṁ caranti, bhabbā phalassa adhigamāya.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vì cớ sao?<br>
+<span lang="pi" class="pali">
+Taṁ kissa hetu?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ðây là phương pháp, này Bhūmija, để đạt được quả vị.<br>
+<span lang="pi" class="pali">
+Yoni hesā, bhūmija, phalassa adhigamāya.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ví như, này Bhūmija, một người cần dầu, cầu tìm dầu, đi chỗ này chỗ kia để tìm dầu, sau khi đổ những hột giống dầu vào cái thùng, tiếp tục rưới nước rồi ép (cho ra dầu).<br>
+<span lang="pi" class="pali">
+Seyyathāpi, bhūmija, puriso telatthiko telagavesī telapariyesanaṁ caramāno tilapiṭṭhaṁ doṇiyā ākiritvā udakena paripphosakaṁ paripphosakaṁ pīḷeyya.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Nếu người ấy có ước nguyện, sau khi đổ những giống dầu vào trong cái thùng, tiếp tục rưới nước rồi ép (cho ra dầu), thời người ấy lấy được dầu.<br>
+<span lang="pi" class="pali">
+Āsañcepi karitvā tilapiṭṭhaṁ doṇiyā ākiritvā udakena paripphosakaṁ paripphosakaṁ pīḷeyya, bhabbo telassa adhigamāya;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Nếu người ấy không có ước nguyện …<br>
+<span lang="pi" class="pali">
+anāsañcepi karitvā …pe…<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+nếu người ấy có và không có ước nguyện …<br>
+<span lang="pi" class="pali">
+āsañca anāsañcepi karitvā …pe…<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+nếu người ấy không có và không không có ước nguyện, sau khi đổ những hột giống dầu vào trong cái thùng, tiếp tục rưới nước rồi ép (cho ra dầu), thời người ấy lấy được dầu.<br>
+<span lang="pi" class="pali">
+nevāsaṁ nānāsañcepi karitvā tilapiṭṭhaṁ doṇiyā ākiritvā udakena paripphosakaṁ paripphosakaṁ pīḷeyya, bhabbo telassa adhigamāya.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vì cớ sao?<br>
+<span lang="pi" class="pali">
+Taṁ kissa hetu?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Bhūmija, đây là phương pháp để lấy được dầu.<br>
+<span lang="pi" class="pali">
+Yoni hesā, bhūmija, telassa adhigamāya.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Cũng vậy, này Bhūmija, những vị Sa-môn hay Bà-la-môn nào có chánh kiến … có chánh định. Nếu họ có ước nguyện, hành Phạm hạnh, thời họ đạt được quả vị;<br>
+<span lang="pi" class="pali">
+Evameva kho, bhūmija, ye hi keci samaṇā vā brāhmaṇā vā sammādiṭṭhino …pe… sammāsamādhino te āsañcepi karitvā brahmacariyaṁ caranti, bhabbā phalassa adhigamāya;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+nếu họ không có ước nguyện …<br>
+<span lang="pi" class="pali">
+anāsañcepi karitvā …pe…<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+nếu họ có và không có ước nguyện …<br>
+<span lang="pi" class="pali">
+āsañca anāsañcepi karitvā …pe…<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+nếu họ không có và không không có ước nguyện, hành Phạm hạnh, thời họ đạt được quả vị.<br>
+<span lang="pi" class="pali">
+nevāsaṁ nānāsañcepi karitvā brahmacariyaṁ caranti, bhabbā phalassa adhigamāya.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vì cớ sao?<br>
+<span lang="pi" class="pali">
+Taṁ kissa hetu?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Bhūmija, đây là phương pháp để đạt được quả vị.<br>
+<span lang="pi" class="pali">
+Yoni hesā, bhūmija, phalassa adhigamāya.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ví như, này Bhūmija, một người cần sữa, tìm cầu sữa, đi chỗ này chỗ kia để tìm sữa. Và người ấy vắt sữa từ nơi vú con bò cái còn trẻ.<br>
+<span lang="pi" class="pali">
+Seyyathāpi, bhūmija, puriso khīratthiko khīragavesī khīrapariyesanaṁ caramāno gāviṁ taruṇavacchaṁ thanato āviñcheyya.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Nếu người ấy có ước nguyện, vắt sữa từ nơi vú con bò cái còn trẻ, thời người ấy lấy được sữa.<br>
+<span lang="pi" class="pali">
+Āsañcepi karitvā gāviṁ taruṇavacchaṁ thanato āviñcheyya, bhabbo khīrassa adhigamāya;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Nếu người ấy không có ước nguyện …<br>
+<span lang="pi" class="pali">
+anāsañcepi karitvā …pe…<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+nếu người ấy có và không có ước nguyện …<br>
+<span lang="pi" class="pali">
+āsañca anāsañcepi karitvā …pe…<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+nếu người ấy không có và không không có ước nguyện, người ấy vắt sữa từ nơi vú con bò cái còn trẻ, thời người ấy lấy được sữa.<br>
+<span lang="pi" class="pali">
+nevāsaṁ nānāsañcepi karitvā gāviṁ taruṇavacchaṁ thanato āviñcheyya, bhabbo khīrassa adhigamāya.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vì cớ sao?<br>
+<span lang="pi" class="pali">
+Taṁ kissa hetu?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Bhūmija, đây là phương pháp để lấy được sữa.<br>
+<span lang="pi" class="pali">
+Yoni hesā, bhūmija, khīrassa adhigamāya.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Cũng vậy, này Bhūmija, những Sa-môn hay Bà-la-môn nào có chánh kiến…<br>
+<span lang="pi" class="pali">
+Evameva kho, bhūmija, ye hi keci samaṇā vā brāhmaṇā vā sammādiṭṭhino …pe…<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+có chánh định, nếu họ có ước nguyện, hành Phạm hạnh, thời họ đạt được quả vị.<br>
+<span lang="pi" class="pali">
+sammāsamādhino te āsañcepi karitvā …pe…<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Nếu họ không có ước nguyện …<br>
+<span lang="pi" class="pali">
+anāsañcepi karitvā …pe…<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+nếu họ có và không có ước nguyện …<br>
+<span lang="pi" class="pali">
+āsañca anāsañcepi karitvā …pe…<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+nếu họ không có và không không có ước nguyện, hành Phạm hạnh, thời họ đạt được quả vị.<br>
+<span lang="pi" class="pali">
+nevāsaṁ nānāsañcepi karitvā brahmacariyaṁ caranti, bhabbā phalassa adhigamāya.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vì cớ sao?<br>
+<span lang="pi" class="pali">
+Taṁ kissa hetu?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Bhūmija, đây là phương pháp để đạt được quả vị.<br>
+<span lang="pi" class="pali">
+Yoni hesā, bhūmija, phalassa adhigamāya.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ví như, này Bhūmija, một người cần sanh tô, tìm cầu sanh tô, đi chỗ này chỗ kia tìm cầu sanh tô; sau khi đổ lạc (dadhi) vào trong một cái ghè, rồi lấy cây que khuấy, đánh.<br>
+<span lang="pi" class="pali">
+Seyyathāpi, bhūmija, puriso navanītatthiko navanītagavesī navanītapariyesanaṁ caramāno dadhiṁ kalase āsiñcitvā matthena āviñcheyya.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Nếu người ấy có ước nguyện, sau khi đổ lạc (dadhi) vào trong một cái ghè, rồi lấy cây que khuấy, đánh, thời người ấy lấy được sanh tô.<br>
+<span lang="pi" class="pali">
+Āsañcepi karitvā dadhiṁ kalase āsiñcitvā matthena āviñcheyya, bhabbo navanītassa adhigamāya;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Nếu người ấy không có ước nguyện …<br>
+<span lang="pi" class="pali">
+anāsañcepi karitvā …<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+nếu người ấy có và không có ước nguyện …<br>
+<span lang="pi" class="pali">
+āsañca anāsañcepi karitvā …<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+nếu người ấy không có và không không có ước nguyện, thời sau khi đổ lạc (dadhi) vào trong một cái ghè, rồi lấy que khuấy, đánh, người ấy lấy được sanh tô.<br>
+<span lang="pi" class="pali">
+nevāsaṁ nānāsañcepi karitvā dadhiṁ kalase āsiñcitvā matthena āviñcheyya, bhabbo navanītassa adhigamāya.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vì cớ sao?<br>
+<span lang="pi" class="pali">
+Taṁ kissa hetu?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Bhūmija, đây là phương pháp để lấy được sanh tô.<br>
+<span lang="pi" class="pali">
+Yoni hesā, bhūmija, navanītassa adhigamāya.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Cũng vậy, này Bhūmija, những Sa-môn hay Bà-la-môn nào có chánh kiến … có chánh định; nếu họ có ước nguyện, hành Phạm hạnh, thời họ đạt được quả vị.<br>
+<span lang="pi" class="pali">
+Evameva kho, bhūmija, ye hi keci samaṇā vā brāhmaṇā vā sammādiṭṭhino …pe… sammāsamādhino te āsañcepi karitvā brahmacariyaṁ caranti, bhabbā phalassa adhigamāya;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Nếu họ không có ước nguyện …<br>
+<span lang="pi" class="pali">
+anāsañcepi karitvā …<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+nếu họ có và không có ước nguyện …<br>
+<span lang="pi" class="pali">
+āsañca anāsañcepi karitvā …<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+nếu họ không có và không không có ước nguyện, hành Phạm hạnh, thời họ đạt được quả vị.<br>
+<span lang="pi" class="pali">
+nevāsaṁ nānāsañcepi karitvā brahmacariyaṁ caranti, bhabbā phalassa adhigamāya.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vì cớ sao?<br>
+<span lang="pi" class="pali">
+Taṁ kissa hetu?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Bhūmija, đây là phương pháp để đạt được quả vị.<br>
+<span lang="pi" class="pali">
+Yoni hesā, bhūmija, phalassa adhigamāya.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ví như, này Bhūmija, có một người cần lửa, tìm cầu lửa, đi chỗ này chỗ kia để tìm lửa, sau khi mang phần trên đồ quay lửa rồi cọ xát với một khúc cây khô không có nhựa.<br>
+<span lang="pi" class="pali">
+Seyyathāpi, bhūmija, puriso aggitthiko aggigavesī aggipariyesanaṁ caramāno sukkhaṁ kaṭṭhaṁ koḷāpaṁ uttarāraṇiṁ ādāya abhimantheyya;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Nếu người ấy có ước nguyện, đem phần phía trên đồ quay lửa rồi cọ xát với một khúc cây khô không có nhựa, thời người ấy lấy được lửa.<br>
+<span lang="pi" class="pali">
+(…) āsañcepi karitvā …<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Nếu người ấy không có ước nguyện …<br>
+<span lang="pi" class="pali">
+anāsañcepi karitvā …<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+nếu người ấy có và không có ước nguyện …<br>
+<span lang="pi" class="pali">
+āsañca anāsañcepi karitvā …<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+nếu người ấy không có và không không có ước nguyện, đem phần phía trên đồ quay lửa rồi cọ xát với một khúc cây khô không có nhựa, thời người ấy lấy được lửa.<br>
+<span lang="pi" class="pali">
+nevāsaṁ nānāsañcepi karitvā sukkhaṁ kaṭṭhaṁ koḷāpaṁ uttarāraṇiṁ ādāya abhimantheyya, bhabbo aggissa adhigamāya.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vì cớ sao?<br>
+<span lang="pi" class="pali">
+Taṁ kissa hetu?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Bhūmija, đây là phương pháp để lấy được lửa.<br>
+<span lang="pi" class="pali">
+Yoni hesā, bhūmija, aggissa adhigamāya.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Cũng vậy, này Bhūmija, những vị Sa-môn hay Bà-la-môn nào có chánh kiến… chánh định.<br>
+<span lang="pi" class="pali">
+Evameva kho, bhūmija, ye hi keci samaṇā vā brāhmaṇā vā sammādiṭṭhino …pe…<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Nếu họ có ước nguyện, hành Phạm hạnh, thời họ đạt được quả vị;<br>
+<span lang="pi" class="pali">
+sammāsamādhino te āsañcepi karitvā brahmacariyaṁ caranti, bhabbā phalassa adhigamāya;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+nếu họ không có ước nguyện …;<br>
+<span lang="pi" class="pali">
+anāsañcepi karitvā brahmacariyaṁ caranti, bhabbā phalassa adhigamāya;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+nếu họ có và không có ước nguyện …;<br>
+<span lang="pi" class="pali">
+āsañca anāsañcepi karitvā brahmacariyaṁ caranti, bhabbā phalassa adhigamāya;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+nếu họ không có và không không có ước nguyện, hành Phạm hạnh, thời họ đạt được quả vị.<br>
+<span lang="pi" class="pali">
+nevāsaṁ nānāsañcepi karitvā brahmacariyaṁ caranti, bhabbā phalassa adhigamāya.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vì sao vậy?<br>
+<span lang="pi" class="pali">
+Taṁ kissa hetu?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Bhūmija, đây là phương pháp để đạt được quả vị.<br>
+<span lang="pi" class="pali">
+Yoni hesā, bhūmija, phalassa adhigamāya.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Nếu bốn ví dụ này, này Bhūmija, khởi đến từ nơi Ông cho vương tử Jayasena, thời vương tử Jayasena tự nhiên tin tưởng Ông, và khi đã tin tưởng, sẽ hành động đúng theo cung cách một người đã tin tưởng Ông.<br>
+<span lang="pi" class="pali">
+Sace kho taṁ, bhūmija, jayasenassa rājakumārassa imā catasso upamā paṭibhāyeyyuṁ anacchariyaṁ te jayaseno rājakumāro pasīdeyya, pasanno ca te pasannākāraṁ kareyyā”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Nhưng làm sao, bạch Thế Tôn, bốn ví dụ này khởi đến từ nơi con cho vương tử Jayasena, khởi lên một cách tự nhiên, từ trước chưa từng được nghe, như Thế Tôn được?”<br>
+<span lang="pi" class="pali">
+“Kuto pana maṁ, bhante, jayasenassa rājakumārassa imā catasso upamā paṭibhāyissanti anacchariyā pubbe assutapubbā, seyyathāpi bhagavantan”ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Thế Tôn thuyết giảng như vậy. Tôn giả Bhumja hoan hỷ tín thọ lời Thế Tôn dạy.<br>
+<span lang="pi" class="pali">
+Idamavoca bhagavā. Attamano āyasmā bhūmijo bhagavato bhāsitaṁ abhinandīti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+<span lang="pi" class="vi">
+Bhūmijasuttaṁ niṭṭhitaṁ chaṭṭhaṁ.<br>
+</span>
+</p>
+
+
+
+<!-- COPY CONTENT SUTTA Ở ĐÂY -->
+
+
+
+<br>
+<p><p style="text-align: right;font-style: italic;">Hoà Thượng Thích Minh Châu dịch Việt</span></p>
+
+
+
+
+
+
+
+
+</section>  <!-- End English and Pali -->
+<div id="nextprev"><a id="previous-sutta" href="./mn125.html#content"></a><a id="next-sutta" href="./mn127.html#content"></a></div>
+</div>  <!--End Content -->
+</div>  <!-- End Page -->
+
+
+
+
+
+
+<footer>
+					 <!-- End bottom links -->
+</footer>
+
+
+ 
+ <!-- Scripts -->
+
+ <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      if (typeof enablePaliLookup === "function") {
+        enablePaliLookup();
+      } else {
+        console.error("enablePaliLookup is not defined");
+      }
+    });
+  </script>
+
+ <script>
+ // Script to open and close sidebar
+ 	function w3_open() {
+ 	document.getElementById("mySidebar").style.display = "block";
+ 	}
+ 		function w3_close() {
+ 		document.getElementById("mySidebar").style.display = "none";
+ 	}
+ </script>
+ <script>
+ 		var app = document.getElementsByTagName("BODY")[0];
+ 		if (localStorage.lightMode == "dark") {
+ 			app.setAttribute("light-mode", "dark");
+ 	}
+ </script>
+ 
+ <script>
+ 		function toggle_light_mode() {
+ 			var app = document.getElementsByTagName("BODY")[0];
+ 				if (localStorage.lightMode == "dark") {
+ 			localStorage.lightMode = "light";
+ 			app.setAttribute("light-mode", "light");
+ 		} else {
+ 					localStorage.lightMode = "dark";
+ 					app.setAttribute("light-mode", "dark");
+ 	}
+ 		}
+ 
+ 		window.addEventListener("storage", function () {
+ 			if (localStorage.lightMode == "dark") {
+ 				app.setAttribute("light-mode", "dark");
+ 				} else {
+ 				app.setAttribute("light-mode", "light");
+ 		}
+ 		}, false);
+ 
+ </script>
+ <script src="../js/footer.js"></script><script src="../js/dpd_deconstructor.js"></script><script src="../js/dpd_ebts.js"></script><script src="../js/dpd_i2h.js"></script>
+ <script src="/sw.js"></script>
+ </body>
+ </html>

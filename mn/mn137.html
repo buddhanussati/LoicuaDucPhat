@@ -1,0 +1,1303 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+ 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+ 	<link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+ 	<meta name="viewport" content="width=device-width, initial-scale=1">
+		<!-- Loading manifest -->
+	<link rel="manifest" href="../manifest.json">
+ 	<!-- Loading main and menu stylesheets -->
+ 	<link rel="stylesheet" href="../css/w3.css">
+ 	<link rel="stylesheet" href="../css/css.css">
+ 	<link rel="stylesheet" href="../css/menu.css">
+ 	<script src="../js/jquery-1.10.2.min.js"></script>
+ 	<script src="../js/controlpanel.js"></script>
+ 	<script src="../js/mousetrap.min.js"></script>
+    <script src="../js/pali-lookup-standalone.js"></script>
+
+ <script src="../js/suttaFiles.js"></script>
+<script>
+ // Script to open random Sutta
+ function openRandomSutta() {
+  const randomIndex = Math.floor(Math.random() * suttaFiles.length);
+  const selectedFile = suttaFiles[randomIndex];
+
+  // Get root path of your site 
+  const currentPath = location.pathname;
+  const rootPath = currentPath.split("/").slice(0, -2).join("/") + "/";
+
+  // Redirect to the correct file
+  window.location.href = rootPath + selectedFile;
+}
+</script>
+
+
+</head>
+ <body class="container">
+ <div class="header-background">
+ <!-- Header -->
+ <div class="w3-header w3-content w3-padding w3-left-align bwcontainer">
+ 	<div class="centered">
+ 		<button class="light-mode-button" aria-label="Bật Chế Độ Sáng" onclick="toggle_light_mode()">
+ 			<span></span>
+ 			<span></span>
+ 		</button>
+ 		<span class="box-lbl">Sáng/Tối</span>
+ 	</div> <!-- Centered -->
+ 		<a href="../home/index.html" id="bwlogo"><img src="../images/headerlogo.png" alt="Logo Lời Của Đức Phật" class="w3-image"></a>
+ 		<div class="w3-bar bwcontainer">
+ 			<div id="searchlinks">
+ 			<a href="../home/visearch.html"><span class="w3-bar-item"><i class="fa fa-search"></i>&nbsp;Tìm Tiếng Việt</span></a>
+ 			<a href="../home/palisearch.html"><span class="w3-bar-item"><i class="fa fa-search"></i>&nbsp;Tìm Tiếng Pali</span></a>
+ 			</div><!-- End Searchlinks div -->
+ 			<div class="help"><span><a href="../home/help.html"><img src="../images/help_icon.png" title="Trợ Giúp" alt="Help"></a></span></div>
+ 		</div> <!-- End w3-bar bwcontainer --> 	</div> <!-- End w3-header w3-content w3-padding w3-left-align bwcontainer -->
+ </div> <!-- End header-background -->
+ <!-- Top menu -->
+
+ <div class="w3-main w3-white bwcontainer2">
+ 	<div class="w3-button w3-padding-8 w3-left w3-hide-large" onclick="w3_open()">☰</div>
+ 		<div id="navbar" class="w3-hide-small w3-hide-medium bwcontainer3">
+ 			<ul id="css3menu0">
+ 				<li class="topfirst" id="home"><a href="../home/index.html" class="w3-hide-small">Trang Chủ</a></li>
+  				<li class="topmenu" id="dn"><a href="../dn/dn.html" class="pressed w3-hide-small">Trường Bộ Kinh</a></li>
+ 				<li class="topmenu" id="mn"><a href="../mn/mn.html" class="w3-hide-small">Trung Bộ Kinh</a></li>
+ 				<li class="topmenu" id="sn"><a href="../sn/sn.html" class="w3-hide-small"><i class="fa fa-caret-down"></i>&nbsp;Tương Ưng Bộ Kinh</a>
+ 					<ul>
+ 						<li><a href="../sn/sn01.html" class="w3-hide-small">Tập I - Thiên Có Kệ</a></li>
+ 						<li><a href="../sn/sn02.html" class="w3-hide-small">Tập II - Thiên Nhân Duyên</a></li>
+ 						<li><a href="../sn/sn03.html" class="w3-hide-small">Tập III - Thiên Uẩn</a></li>
+ 						<li><a href="../sn/sn04.html" class="w3-hide-small">Tập IV - Thiên Sáu Xứ</a></li>
+ 						<li><a href="../sn/sn05.html" class="w3-hide-small">Tập V - Thiên Ðại Phẩm</a></li>
+ 					</ul>
+ 				<li class="topmenu" id="an"><a href="../an/an.html" class="w3-hide-small"><i class="fa fa-caret-down"></i>&nbsp;Tăng Chi Bộ Kinh</a>
+ 					<ul>
+ 						<li><a href="../an/an1.html" class="w3-hide-small">Chương Một Pháp</a></li>
+ 						<li><a href="../an/an2.html" class="w3-hide-small">Chương Hai Pháp</a></li>
+ 						<li><a href="../an/an3.html" class="w3-hide-small">Chương Ba Pháp</a></li>
+ 						<li><a href="../an/an4.html" class="w3-hide-small">Chương Bốn Pháp</a></li>
+ 						<li><a href="../an/an5.html" class="w3-hide-small">Chương Năm Pháp</a></li>
+ 						<li><a href="../an/an6.html" class="w3-hide-small">Chương Sáu Pháp</a></li>
+ 						<li><a href="../an/an7.html" class="w3-hide-small">Chương Bảy Pháp</a></li>
+ 						<li><a href="../an/an8.html" class="w3-hide-small">Chương Tám Pháp</a></li>
+ 						<li><a href="../an/an9.html" class="w3-hide-small">Chương Chín Pháp</a></li>
+ 						<li><a href="../an/an10.html" class="w3-hide-small">Chương Mười Pháp</a></li>
+ 						<li><a href="../an/an11.html" class="w3-hide-small">Chương Mười Một Pháp</a></li>
+ 					</ul>
+ 				</li>
+ 				<li class="topmenu" id="kn"><a href="../kn/kn.html" class="w3-hide-small"><i class="fa fa-caret-down"></i>&nbsp;Tiểu Bộ Kinh</a>
+ 					<ul>
+ 						<li><a href="../kp/kp.html" class="w3-hide-small">Kinh Tiểu Tụng</a></li>
+ 						<li><a href="../dhp/dhp.html" class="w3-hide-small">Kinh Pháp Cú</a></li>
+ 						<li><a href="../snp/snp.html" class="w3-hide-small">Kinh Tập</a></li>
+ 						<li><a href="../ud/ud.html" class="w3-hide-small">Kinh Phật Tự Thuyết</a></li>
+ 						<li><a href="../it/it.html" class="w3-hide-small">Kinh Phật Thuyết Như Vậy</a></li>
+ 						<li><a href="../tha/tha.html" class="w3-hide-small">Trưởng Lão Tăng Kệ</a></li>
+ 						<li><a href="../thi/thi.html" class="w3-hide-small">Trưởng Lão Ni Kệ</a></li>
+ 					</ul>
+ 				</li>
+				<li class="toplast" id="rd"><a href="../rd/rd.html" class="w3-hide-small"></i>Kinh Ngẫu Nhiên Theo Nhóm</a>
+ 					</ul>
+ 				</li>
+ 			</ul>
+ 			</div>
+ 		</div> <!--navbar-->
+
+<!-- Sidebar (hidden by default) -->
+ <nav class="w3-sidebar w3-bar-block w3-card w3-border w3-top w3-animate-left w3-hide-large" id="mySidebar">
+ 	<a href="javascript:void(0)" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-times fa-2x red-color"></i>&nbsp;&nbsp;&nbsp;Close</a><!-- Hides the sidebar when clicked -->
+ 		<div class="w3-bar-block w3-white">
+ 			<a href="../home/index.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-home fa-lg"></i>&nbsp;&nbsp;&nbsp;Home</a>
+ 			<a href="../guide/guide.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Guide</a>
+ 			<a href="../dn/dn.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Trường Bộ Kinh</a>
+ 			<a href="../mn/mn.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Trung Bộ Kinh</a>
+ 			<a href="../sn/sn.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Tương Ưng Bộ Kinh</a>
+ 			<a href="../an/an.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Tăng Chi Bộ Kinh
+ 			<a href="../kn/kn.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Tiểu Bộ Kinh</a>
+			<a href="../rd/rd.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>Kinh Ngẫu Nhiên Theo Nhóm</a>
+ 		</div>
+ </nav>
+ 
+ 
+ 
+   <!-- !PAGE CONTENT! --> 
+<div class="w3-main w3-content w3-padding w3-left-align bwcontainer4">
+<div id="content">
+<h2>Majjhima Nikāya - Trung Bộ Kinh</h2>
+<h5><span style="font-style: italic;">Hoà Thượng Thích Minh Châu dịch Việt</span></h5>
+
+</div>
+
+<br>
+ 	<title>        Trung Bộ 137          </title>
+
+<p lang="vi" class="vi"; style="text-align: center">
+Trung Bộ 137<br>
+<span lang="pi" class="pali">
+Majjhima Nikāya 137<br>
+</span>
+</p>
+
+
+<p lang="vi" class="vi"; style="text-align: center">
+Kinh Phân Biệt Sáu Xứ<br>
+<span lang="pi" class="pali">
+Saḷāyatanavibhaṅgasutta<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Như vầy tôi nghe.<br>
+<span lang="pi" class="pali">
+Evaṁ me sutaṁ—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Một thời, Thế Tôn ở Sāvatthī (Xá-vệ), Jetavana (Kỳ-đà Lâm), tại tinh xá ông Anāthapiṇḍika (Cấp Cô Ðộc). Ở đấy, Thế Tôn gọi các Tỷ-kheo: “Này các Tỷ-kheo”<br>
+<span lang="pi" class="pali">
+ekaṁ samayaṁ bhagavā sāvatthiyaṁ viharati jetavane anāthapiṇḍikassa ārāme. Tatra kho bhagavā bhikkhū āmantesi: “bhikkhavo”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Bạch Thế Tôn”. Các vị Tỷ-kheo ấy vâng đáp Thế Tôn, Thế Tôn nói như sau:<br>
+<span lang="pi" class="pali">
+“Bhadante”ti te bhikkhū bhagavato paccassosuṁ. Bhagavā etadavoca:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Này các Tỷ-kheo, Ta sẽ giảng cho các Ông phân biệt sáu xứ. Hãy lắng nghe và suy nghiệm kỹ, Ta sẽ nói.”<br>
+<span lang="pi" class="pali">
+“saḷāyatanavibhaṅgaṁ vo, bhikkhave, desessāmi. Taṁ suṇātha, sādhukaṁ manasi karotha, bhāsissāmī”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Thưa vâng, bạch Thế Tôn”. Các vị Tỷ-kheo ấy vâng đáp Thế Tôn. Thế Tôn nói như sau:<br>
+<span lang="pi" class="pali">
+“Evaṁ, bhante”ti kho te bhikkhū bhagavato paccassosuṁ. Bhagavā etadavoca:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“‘Có sáu nội xứ cần phải biết. Có sáu ngoại xứ cần phải biết. Có sáu thức thân cần phải biết. Có sáu xúc thân cần phải biết. Có mười tám ý hành cần phải biết. Có ba mươi sáu loại hữu tình cần phải biết. Tại đây, do y cứ cái này, đoạn tận cái này, có ba niệm xứ mà một bậc Thánh phải thực hành, và có thực hành (niệm xứ) ấy, bậc Thánh mới xứng là bậc Ðạo sư diễn giảng đồ chúng. Trong các bậc Huấn luyện sư, vị ấy được gọi là bậc Vô thượng Ðiều ngự sư, điều phục các hạng người đáng được điều phục’.<br>
+<span lang="pi" class="pali">
+“‘Cha ajjhattikāni āyatanāni veditabbāni, cha bāhirāni āyatanāni veditabbāni, cha viññāṇakāyā veditabbā, cha phassakāyā veditabbā, aṭṭhārasa manopavicārā veditabbā, chattiṁsa sattapadā veditabbā, tatra idaṁ nissāya idaṁ pajahatha, tayo satipaṭṭhānā yadariyo sevati yadariyo sevamāno satthā gaṇamanusāsitumarahati, so vuccati yoggācariyānaṁ anuttaro purisadammasārathī’ti—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ðây là tổng thuyết về phân biệt sáu xứ.<br>
+<span lang="pi" class="pali">
+ayamuddeso saḷāyatanavibhaṅgassa.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Khi được nói đến ‘Sáu nội xứ cần phải biết’, do duyên gì, được nói đến như vậy?<br>
+<span lang="pi" class="pali">
+‘Cha ajjhattikāni āyatanāni veditabbānī’ti—iti kho panetaṁ vuttaṁ. Kiñcetaṁ paṭicca vuttaṁ?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Nhãn xứ, nhĩ xứ, tỷ xứ, thiệt xứ, thân xứ, ý xứ. Khi được nói đến:<br>
+<span lang="pi" class="pali">
+‘Cakkhāyatanaṁ sotāyatanaṁ ghānāyatanaṁ jivhāyatanaṁ kāyāyatanaṁ manāyatanaṁ—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Sáu nội xứ cần phải biết’, chính do duyên này, được nói đến như vậy.<br>
+<span lang="pi" class="pali">
+cha ajjhattikāni āyatanāni veditabbānī’ti—iti yaṁ taṁ vuttaṁ idametaṁ paṭicca vuttaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Khi được nói đến ‘Sáu ngoại xứ cần phải biết’, do duyên gì, được nói đến như vậy?<br>
+<span lang="pi" class="pali">
+‘Cha bāhirāni āyatanāni veditabbānī’ti—iti kho panetaṁ vuttaṁ. Kiñcetaṁ paṭicca vuttaṁ?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Sắc xứ, thanh xứ, hương xứ, vị xứ, xúc xứ, pháp xứ. Khi được nói đến:<br>
+<span lang="pi" class="pali">
+‘Rūpāyatanaṁ saddāyatanaṁ gandhāyatanaṁ rasāyatanaṁ phoṭṭhabbāyatanaṁ dhammāyatanaṁ—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Sáu ngoại xứ cần phải biết’, chính do duyên này, được nói đến như vậy.<br>
+<span lang="pi" class="pali">
+cha bāhirāni āyatanāni veditabbānī’ti—iti yaṁ taṁ vuttaṁ idametaṁ paṭicca vuttaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Khi được nói đến ‘Sáu thức thân cần phải biết’, do duyên gì, được nói đến như vậy?<br>
+<span lang="pi" class="pali">
+‘Cha viññāṇakāyā veditabbā’ti—iti kho panetaṁ vuttaṁ. Kiñcetaṁ paṭicca vuttaṁ?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Nhãn thức, nhĩ thức, tỷ thức, thiệt thức, thân thức, ý thức.<br>
+<span lang="pi" class="pali">
+‘Cakkhuviññāṇaṁ sotaviññāṇaṁ ghānaviññāṇaṁ jivhāviññāṇaṁ kāyaviññāṇaṁ manoviññāṇaṁ—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Khi được nói đến: Sáu thức thân cần phải biết’, chính do duyên này, được nói đến như vậy.<br>
+<span lang="pi" class="pali">
+cha viññāṇakāyā veditabbā’ti—iti yaṁ taṁ vuttaṁ idametaṁ paṭicca vuttaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Khi được nói đến ‘Sáu xúc thân cần phải biết’, do duyên gì được nói đến như vậy?<br>
+<span lang="pi" class="pali">
+‘Cha phassakāyā veditabbā’ti—iti kho panetaṁ vuttaṁ. Kiñcetaṁ paṭicca vuttaṁ?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Nhãn xúc, nhĩ xúc, tỷ xúc, thiệt xúc, thân xúc, ý xúc.<br>
+<span lang="pi" class="pali">
+‘Cakkhusamphasso sotasamphasso ghānasamphasso jivhāsamphasso kāyasamphasso manosamphasso—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Khi được nói đến: Sáu xúc thân cần phải biết’, chính do duyên này, được nói đến như vậy.<br>
+<span lang="pi" class="pali">
+cha phassakāyā veditabbā’ti—iti yaṁ taṁ vuttaṁ idametaṁ paṭicca vuttaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Khi được nói đến ‘Mười tám ý hành cần phải biết’, do duyên gì được nói đến như vậy?<br>
+<span lang="pi" class="pali">
+‘Aṭṭhārasa manopavicārā veditabbā’ti—iti kho panetaṁ vuttaṁ. Kiñcetaṁ paṭicca vuttaṁ?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Sau khi mắt thấy sắc, ý chạy theo sắc trú xứ của hỷ, chạy theo sắc trú xứ của ưu, chạy theo sắc trú xứ của xả;<br>
+<span lang="pi" class="pali">
+‘Cakkhunā rūpaṁ disvā somanassaṭṭhānīyaṁ rūpaṁ upavicarati, domanassaṭṭhānīyaṁ rūpaṁ upavicarati, upekkhāṭṭhānīyaṁ rūpaṁ upavicarati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+sau khi tai nghe tiếng… ;<br>
+<span lang="pi" class="pali">
+Sotena saddaṁ sutvā …pe…<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+sau khi mũi ngửi hương…<br>
+<span lang="pi" class="pali">
+ghānena gandhaṁ ghāyitvā …<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+sau khi lưỡi nếm vị…<br>
+<span lang="pi" class="pali">
+jivhāya rasaṁ sāyitvā …<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+sau khi thân cảm xúc…<br>
+<span lang="pi" class="pali">
+kāyena phoṭṭhabbaṁ phusitvā …<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+sau khi ý nhận thức pháp, ý chạy theo pháp khởi lên hỷ, chạy theo pháp khởi lên ưu, chạy theo pháp khởi lên xả.<br>
+<span lang="pi" class="pali">
+manasā dhammaṁ viññāya somanassaṭṭhānīyaṁ dhammaṁ upavicarati, domanassaṭṭhānīyaṁ dhammaṁ upavicarati, upekkhāṭṭhānīyaṁ dhammaṁ upavicarati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Như vậy, có sáu hỷ hành, có sáu ưu hành, có sáu xả hành. Khi được nói đến Mười tám ý hành cần phải biết’, chính do duyên này, được nói đến như vậy.<br>
+<span lang="pi" class="pali">
+Iti cha somanassūpavicārā, cha domanassūpavicārā, cha upekkhūpavicārā, aṭṭhārasa manopavicārā veditabbā’ti—iti yaṁ taṁ vuttaṁ idametaṁ paṭicca vuttaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Khi được nói đến ‘Ba mươi sáu loại hữu tình cần phải biết’, do duyên gì, được nói đến như vậy?<br>
+<span lang="pi" class="pali">
+‘Chattiṁsa sattapadā veditabbā’ti—iti kho panetaṁ vuttaṁ. Kiñcetaṁ paṭicca vuttaṁ?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Sáu hỷ liên hệ tại gia, sáu hỷ liên hệ xuất ly, sáu ưu liên hệ tại gia, sáu ưu liên hệ xuất ly, sáu xả liên hệ tại gia, sáu xả liên hệ xuất ly.<br>
+<span lang="pi" class="pali">
+Cha gehasitāni somanassāni, cha nekkhammasitāni somanassāni, cha gehasitāni domanassāni, cha nekkhammasitāni domanassāni, cha gehasitā upekkhā, cha nekkhammasitā upekkhā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ở đây, thế nào là sáu hỷ liên hệ tại gia?<br>
+<span lang="pi" class="pali">
+Tattha katamāni cha gehasitāni somanassāni?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Có hỷ khởi lên, hoặc do nhận được hay thấy sự nhận được các sắc do con mắt nhận thức, khả ái, khả hỷ, khả lạc, khả ý, liên hệ đến thế vật; hoặc do nhớ được những gì đã nhận được về trước, đã qua, đã diệt, đã biến hoại.<br>
+<span lang="pi" class="pali">
+Cakkhuviññeyyānaṁ rūpānaṁ iṭṭhānaṁ kantānaṁ manāpānaṁ manoramānaṁ lokāmisapaṭisaṁyuttānaṁ paṭilābhaṁ vā paṭilābhato samanupassato pubbe vā paṭiladdhapubbaṁ atītaṁ niruddhaṁ vipariṇataṁ samanussarato uppajjati somanassaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Loại hỷ như vậy được gọi là hỷ liên hệ tại gia.<br>
+<span lang="pi" class="pali">
+Yaṁ evarūpaṁ somanassaṁ idaṁ vuccati gehasitaṁ somanassaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Có hỷ khởi lên, hoặc do nhận được hay thấy sự nhận được các tiếng do tai nhận thức…<br>
+<span lang="pi" class="pali">
+Sotaviññeyyānaṁ saddānaṁ …<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+các hương do mũi nhận thức…<br>
+<span lang="pi" class="pali">
+ghānaviññeyyānaṁ gandhānaṁ …<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+các vị do lưỡi nhận thức…<br>
+<span lang="pi" class="pali">
+jivhāviññeyyānaṁ rasānaṁ …<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+các xúc do thân nhận thức…<br>
+<span lang="pi" class="pali">
+kāyaviññeyyānaṁ phoṭṭhabbānaṁ …<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+các pháp do ý nhận thức, khả ái, khả hỷ, khả lạc, khả ý liên hệ đến thế vật; hoặc do nhớ được những gì đã nhận được về trước, đã qua, đã diệt, đã biến hoại.<br>
+<span lang="pi" class="pali">
+manoviññeyyānaṁ dhammānaṁ iṭṭhānaṁ kantānaṁ manāpānaṁ …pe… somanassaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Loại hỷ như vậy được gọi là hỷ liên hệ đến tại gia.<br>
+<span lang="pi" class="pali">
+Yaṁ evarūpaṁ somanassaṁ idaṁ vuccati gehasitaṁ somanassaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Sáu hỷ này liên hệ đến tại gia.<br>
+<span lang="pi" class="pali">
+Imāni cha gehasitāni somanassāni.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ở đây, thế nào là sáu hỷ liên hệ đến xuất ly?<br>
+<span lang="pi" class="pali">
+Tattha katamāni cha nekkhammasitāni somanassāni?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Sau khi biết các sắc pháp là vô thường, biến hoại, ly tham, biến diệt và nghĩ rằng: ‘Các sắc pháp xưa kia và các sắc pháp hiện tại, tất cả sắc pháp là vô thường, khổ, biến hoại’. Sau khi như thật thấy như vậy với chánh trí tuệ, có hỷ khởi lên.<br>
+<span lang="pi" class="pali">
+Rūpānaṁ tveva aniccataṁ viditvā vipariṇāmavirāganirodhaṁ, ‘pubbe ceva rūpā etarahi ca sabbe te rūpā aniccā dukkhā vipariṇāmadhammā’ti evametaṁ yathābhūtaṁ sammappaññāya passato uppajjati somanassaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Loại hỷ như vậy được gọi là hỷ liên hệ đến xuất ly.<br>
+<span lang="pi" class="pali">
+Yaṁ evarūpaṁ somanassaṁ idaṁ vuccati nekkhammasitaṁ somanassaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Sau khi biết được các tiếng…<br>
+<span lang="pi" class="pali">
+Saddānaṁ tveva …<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+các hương…<br>
+<span lang="pi" class="pali">
+gandhānaṁ tveva …<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+các vị…<br>
+<span lang="pi" class="pali">
+rasānaṁ tveva …<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+các xúc…<br>
+<span lang="pi" class="pali">
+phoṭṭhabbānaṁ tveva …<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+các pháp là vô thường, biến hoại, ly dục, biến diệt và nghĩ rằng: ‘Các pháp xưa kia và các pháp hiện tại, tất cả các pháp là vô thường, khổ, biến hoại’. Sau khi như thật thấy như vậy với chánh trí tuệ, có hỷ khởi lên.<br>
+<span lang="pi" class="pali">
+dhammānaṁ tveva aniccataṁ viditvā vipariṇāmavirāganirodhaṁ, ‘pubbe ceva dhammā etarahi ca sabbe te dhammā aniccā dukkhā vipariṇāmadhammā’ti evametaṁ yathābhūtaṁ sammappaññāya passato uppajjati somanassaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Loại hỷ như vậy được gọi là hỷ liên hệ đến xuất ly.<br>
+<span lang="pi" class="pali">
+Yaṁ evarūpaṁ somanassaṁ idaṁ vuccati nekkhammasitaṁ somanassaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Sáu hỷ này liên hệ đến xuất ly.<br>
+<span lang="pi" class="pali">
+Imāni cha nekkhammasitāni somanassāni.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ở đây, thế nào là sáu ưu liên hệ tại gia?<br>
+<span lang="pi" class="pali">
+Tattha katamāni cha gehasitāni domanassāni?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Có ưu khởi lên; hoặc do không nhận được hay thấy sự không nhận được các sắc do mắt nhận thức, khả ái, khả hỷ, khả lạc, khả ý, liên hệ đến thế vật; hoặc do nhớ được những gì không nhận được về trước, đã qua, đã diệt, đã biến hoại. Loại ưu như vậy được gọi là ưu liên hệ tại gia.<br>
+<span lang="pi" class="pali">
+Cakkhuviññeyyānaṁ rūpānaṁ …pe…<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Có ưu khởi lên, hoặc do không nhận được hay thấy sự không nhận được các tiếng do tai nhận thức…<br>
+<span lang="pi" class="pali">
+sotaviññeyyānaṁ saddānaṁ …<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+các hương do mũi nhận thức…<br>
+<span lang="pi" class="pali">
+ghānaviññeyyānaṁ gandhānaṁ …<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+các vị do lưỡi nhận thức…<br>
+<span lang="pi" class="pali">
+jivhāviññeyyānaṁ rasānaṁ …<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+các xúc do thân nhận thức…<br>
+<span lang="pi" class="pali">
+kāyaviññeyyānaṁ phoṭṭhabbānaṁ …<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+các pháp do ý nhận thức, khả ái, khả hỷ, khả lạc, khả ý, liên hệ đến thế vật; hoặc do nhớ được những gì không nhận được về trước, đã qua, đã diệt, đã biến hoại.<br>
+<span lang="pi" class="pali">
+manoviññeyyānaṁ dhammānaṁ iṭṭhānaṁ kantānaṁ manāpānaṁ manoramānaṁ lokāmisapaṭisaṁyuttānaṁ appaṭilābhaṁ vā appaṭilābhato samanupassato pubbe vā appaṭiladdhapubbaṁ atītaṁ niruddhaṁ vipariṇataṁ samanussarato uppajjati domanassaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Loại ưu như vậy được gọi là ưu liên hệ đến tại gia.<br>
+<span lang="pi" class="pali">
+Yaṁ evarūpaṁ domanassaṁ idaṁ vuccati gehasitaṁ domanassaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Sáu ưu này liên hệ đến tại gia.<br>
+<span lang="pi" class="pali">
+Imāni cha gehasitāni domanassāni.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Ở đây, thế nào là sáu ưu liên hệ đến xuất ly?<br>
+<span lang="pi" class="pali">
+“Tattha katamāni cha nekkhammasitāni domanassāni?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Sau khi biết được các sắc pháp là vô thường, biến hoại, ly tham, biến diệt và nghĩ rằng: ‘Các sắc pháp xưa kia và các sắc pháp hiện tại, tất cả sắc pháp là vô thường, khổ, biến hoại’. Sau khi như thật thấy như vậy với chánh trí tuệ, vị ấy khởi lên ước muốn đối với vô thượng giải thoát, nghĩ rằng:<br>
+<span lang="pi" class="pali">
+Rūpānaṁ tveva aniccataṁ viditvā vipariṇāmavirāganirodhaṁ, ‘pubbe ceva rūpā etarahi ca sabbe te rūpā aniccā dukkhā vipariṇāmadhammā’ti evametaṁ yathābhūtaṁ sammappaññāya disvā anuttaresu vimokkhesu pihaṁ upaṭṭhāpeti:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Khi nào ta có thể chứng đạt và an trú trong xứ (ayatana) mà các bậc Thánh đang chứng đạt và an trú?’ Như vậy, do ước muốn đối với các vô thượng giải thoát, ưu khởi lên do duyên ước muốn.<br>
+<span lang="pi" class="pali">
+‘kudāssu nāmāhaṁ tadāyatanaṁ upasampajja viharissāmi yadariyā etarahi āyatanaṁ upasampajja viharantī’ti iti anuttaresu vimokkhesu pihaṁ upaṭṭhāpayato uppajjati pihapaccayā domanassaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Loại ưu như vậy được gọi là ưu liên hệ xuất ly.<br>
+<span lang="pi" class="pali">
+Yaṁ evarūpaṁ domanassaṁ idaṁ vuccati nekkhammasitaṁ domanassaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Sau khi biết được các tiếng…<br>
+<span lang="pi" class="pali">
+Saddānaṁ tveva …pe…<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+các hương…<br>
+<span lang="pi" class="pali">
+gandhānaṁ tveva …<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+các vị…<br>
+<span lang="pi" class="pali">
+rasānaṁ tveva …<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+các xúc…<br>
+<span lang="pi" class="pali">
+phoṭṭhabbānaṁ tveva …<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+các pháp là vô thường, biến hoại, ly dục, biến diệt và nghĩ rằng: ‘Các pháp xưa kia và các pháp hiện tại, tất cả các pháp là vô thường, khổ, biến hoại’. Sau khi sự thật thấy như vậy với chánh trí tuệ, vị ấy khởi lên ước muốn đối với các vô thượng giải thoát, nghĩ rằng:<br>
+<span lang="pi" class="pali">
+dhammānaṁ tveva aniccataṁ viditvā vipariṇāmavirāganirodhaṁ, ‘pubbe ceva dhammā etarahi ca sabbe te dhammā aniccā dukkhā vipariṇāmadhammā’ti evametaṁ yathābhūtaṁ sammappaññāya disvā anuttaresu vimokkhesu pihaṁ upaṭṭhāpeti:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Khi nào ta có thể chứng đạt và an trú trong xứ (ayatana) mà các bậc Thánh đang chứng đạt và an trú?’ Như vậy, do ước muốn đối với các vô thượng giải thoát, ưu khởi lên do duyên ước muốn.<br>
+<span lang="pi" class="pali">
+‘kudāssu nāmāhaṁ tadāyatanaṁ upasampajja viharissāmi yadariyā etarahi āyatanaṁ upasampajja viharantī’ti iti anuttaresu vimokkhesu pihaṁ upaṭṭhāpayato uppajjati pihapaccayā domanassaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Loại ưu như vậy được gọi là ưu liên hệ xuất ly.<br>
+<span lang="pi" class="pali">
+Yaṁ evarūpaṁ domanassaṁ idaṁ vuccati nekkhammasitaṁ domanassaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Sáu ưu này liên hệ xuất ly.<br>
+<span lang="pi" class="pali">
+Imāni cha nekkhammasitāni domanassāni.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ở đây, thế nào là sáu xả liên hệ tại gia?<br>
+<span lang="pi" class="pali">
+Tattha katamā cha gehasitā upekkhā?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Khi một người ngu si, ám độn, phàm phu thấy sắc với con mắt, xả khởi lên của một vô văn phàm phu, không chinh phục được (phiền não), không chinh phục được quả dị thục, không thấy sự nguy hiểm.<br>
+<span lang="pi" class="pali">
+Cakkhunā rūpaṁ disvā uppajjati upekkhā bālassa mūḷhassa puthujjanassa anodhijinassa avipākajinassa anādīnavadassāvino assutavato puthujjanassa.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Loại xả như vậy không vượt khỏi sắc pháp.<br>
+<span lang="pi" class="pali">
+Yā evarūpā upekkhā, rūpaṁ sā nātivattati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Do vậy, đây được gọi là xả liên hệ tại gia.<br>
+<span lang="pi" class="pali">
+Tasmā sā upekkhā ‘gehasitā’ti vuccati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Khi một người ngu si, ám độn, phàm phu nghe tiếng với tai…<br>
+<span lang="pi" class="pali">
+Sotena saddaṁ sutvā …<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+ngửi hương với mũi…<br>
+<span lang="pi" class="pali">
+ghānena gandhaṁ ghāyitvā …<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+nếm vị với lưỡi…<br>
+<span lang="pi" class="pali">
+jivhāya rasaṁ sāyitvā …<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+cảm xúc với thân…<br>
+<span lang="pi" class="pali">
+kāyena phoṭṭhabbaṁ phusitvā …<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+nhận thức pháp với ý, xả khởi lên của một vô văn phàm phu, không chinh phục được (phiền não), không chinh phục được quả dị thục, không thấy sự nguy hiểm.<br>
+<span lang="pi" class="pali">
+manasā dhammaṁ viññāya uppajjati upekkhā bālassa mūḷhassa puthujjanassa anodhijinassa avipākajinassa anādīnavadassāvino assutavato puthujjanassa.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Loại xả như vậy không vượt khỏi các pháp.<br>
+<span lang="pi" class="pali">
+Yā evarūpā upekkhā, dhammaṁ sā nātivattati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Do vậy, đây được gọi là xả liên hệ tại gia.<br>
+<span lang="pi" class="pali">
+Tasmā sā upekkhā ‘gehasitā’ti vuccati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Sáu xả này liên hệ tại gia.<br>
+<span lang="pi" class="pali">
+Imā cha gehasitā upekkhā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ở đây, thế nào là sáu xả liên hệ xuất ly?<br>
+<span lang="pi" class="pali">
+Tattha katamā cha nekkhammasitā upekkhā?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Sau khi biết sắc pháp là vô thường, biến hoại, ly tham, biến diệt, nghĩ rằng: ‘Các sắc pháp xưa kia và sắc pháp hiện tại, tất cả sắc pháp là vô thường, khổ, biến hoại’. Sau khi như thật thấy như vậy với chánh trí tuệ, xả khởi lên.<br>
+<span lang="pi" class="pali">
+Rūpānaṁ tveva aniccataṁ viditvā vipariṇāmavirāganirodhaṁ, ‘pubbe ceva rūpā etarahi ca sabbe te rūpā aniccā dukkhā vipariṇāmadhammā’ti evametaṁ yathābhūtaṁ sammappaññāya passato uppajjati upekkhā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Loại xả như vậy không vượt khỏi sắc pháp.<br>
+<span lang="pi" class="pali">
+Yā evarūpā upekkhā, rūpaṁ sā ativattati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Loại xả như vậy được gọi là xả liên hệ xuất ly.<br>
+<span lang="pi" class="pali">
+Tasmā sā upekkhā ‘nekkhammasitā’ti vuccati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Sau khi biết được các tiếng…<br>
+<span lang="pi" class="pali">
+Saddānaṁ tveva …<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+các hương…<br>
+<span lang="pi" class="pali">
+gandhānaṁ tveva …<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+các vị…<br>
+<span lang="pi" class="pali">
+rasānaṁ tveva …<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+các xúc…<br>
+<span lang="pi" class="pali">
+phoṭṭhabbānaṁ tveva …<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+các pháp là vô thường, biến hoại, ly dục, biến diệt, nghĩ rằng: “Các pháp xưa kia và các pháp hiện tại, tất cả các pháp là vô thường, khổ, biến hoại”. Sau khi như thật thấy như vậy với chánh trí tuệ, xả khởi lên.<br>
+<span lang="pi" class="pali">
+dhammānaṁ tveva aniccataṁ viditvā vipariṇāmavirāganirodhaṁ, ‘pubbe ceva dhammā etarahi ca sabbe te dhammā aniccā dukkhā vipariṇāmadhammā’ti evametaṁ yathābhūtaṁ sammappaññāya passato uppajjati upekkhā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Loại xả như vậy không vượt khỏi các pháp.<br>
+<span lang="pi" class="pali">
+Yā evarūpā upekkhā, dhammaṁ sā ativattati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Loại xả như vậy được gọi là xả liên hệ xuất ly.<br>
+<span lang="pi" class="pali">
+Tasmā sā upekkhā ‘nekkhammasitā’ti vuccati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Sáu xả này liên hệ xuất ly.<br>
+<span lang="pi" class="pali">
+Imā cha nekkhammasitā upekkhā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Khi được nói đến ‘Ba mươi sáu loại hữu tình cần phải biết’, chính do duyên này, được nói đến như vậy.<br>
+<span lang="pi" class="pali">
+‘Chattiṁsa sattapadā veditabbā’ti—iti yaṁ taṁ vuttaṁ idametaṁ paṭicca vuttaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Khi được nói đến ‘Ở đây, do y cứ cái này, đoạn tận cái này’, do duyên gì, được nói đến như vậy?<br>
+<span lang="pi" class="pali">
+‘Tatra idaṁ nissāya idaṁ pajahathā’ti—iti kho panetaṁ vuttaṁ; Kiñcetaṁ paṭicca vuttaṁ?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Tại đây, này các Tỷ-kheo, do y cứ do duyên sáu hỷ liên hệ xuất ly, đoạn tận, vượt qua sáu hỷ liên hệ tại gia.<br>
+<span lang="pi" class="pali">
+Tatra, bhikkhave, yāni cha nekkhammasitāni somanassāni tāni nissāya tāni āgamma yāni cha gehasitāni somanassāni tāni pajahatha, tāni samatikkamatha.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Như vậy là sự đoạn tận chúng; như vậy là sự vượt qua chúng.<br>
+<span lang="pi" class="pali">
+Evametesaṁ pahānaṁ hoti, evametesaṁ samatikkamo hoti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Tại đây, này các Tỷ-kheo, do y cứ, do duyên sáu ưu liên hệ xuất ly; đoạn tận, vượt qua sáu ưu liên hệ tại gia.<br>
+<span lang="pi" class="pali">
+Tatra, bhikkhave, yāni cha nekkhammasitāni domanassāni tāni nissāya tāni āgamma yāni cha gehasitāni domanassāni tāni pajahatha, tāni samatikkamatha.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Như vậy là sự đoạn tận chúng; như vậy là sự vượt qua chúng.<br>
+<span lang="pi" class="pali">
+Evametesaṁ pahānaṁ hoti, evametesaṁ samatikkamo hoti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Tại đây, này các Tỷ-kheo, do y cứ, do duyên sáu xả liên hệ xuất ly, đoạn tận, vượt qua sáu xả liên hệ tại gia.<br>
+<span lang="pi" class="pali">
+Tatra, bhikkhave, yā cha nekkhammasitā upekkhā tā nissāya tā āgamma, yā cha gehasitā upekkhā tā pajahatha tā samatikkamatha.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Như vậy là sự đoạn tận chúng, là sự vượt qua chúng.<br>
+<span lang="pi" class="pali">
+Evametāsaṁ pahānaṁ hoti, evametāsaṁ samatikkamo hoti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Tại đây, này các Tỷ-kheo, do y cứ, do duyên sáu hỷ liên hệ xuất ly, đoạn tận, vượt qua sáu ưu liên hệ xuất ly.<br>
+<span lang="pi" class="pali">
+Tatra, bhikkhave, yāni cha nekkhammasitāni somanassāni tāni nissāya tāni āgamma yāni cha nekkhammasitāni domanassāni tāni pajahatha, tāni samatikkamatha.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Như vậy là sự đoạn tận chúng, là sự vượt qua chúng.<br>
+<span lang="pi" class="pali">
+Evametesaṁ pahānaṁ hoti, evametesaṁ samatikkamo hoti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Tại đây, này các Tỷ-kheo, do y cứ, do duyên xả liên hệ xuất ly, đoạn tận, vượt qua sáu hỷ liên hệ xuất ly.<br>
+<span lang="pi" class="pali">
+Tatra, bhikkhave, yā cha nekkhammasitā upekkhā tā nissāya tā āgamma yāni cha nekkhammasitāni somanassāni tāni pajahatha, tāni samatikkamatha.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Như vậy là sự đoạn tận chúng, là sự vượt qua chúng.<br>
+<span lang="pi" class="pali">
+Evametesaṁ pahānaṁ hoti, evametesaṁ samatikkamo hoti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này các Tỷ-kheo, có xả đa diện, y cứ đa diện; có xả nhứt diện, y cứ nhứt diện.<br>
+<span lang="pi" class="pali">
+Atthi, bhikkhave, upekkhā nānattā nānattasitā, atthi upekkhā ekattā ekattasitā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này các Tỷ-kheo, thế nào là xả đa diện, y cứ đa diện?<br>
+<span lang="pi" class="pali">
+Katamā ca, bhikkhave, upekkhā nānattā nānattasitā?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này các Tỷ-kheo, có xả đối với các sắc pháp, có xả đối với các tiếng, có xả đối với các hương, có xả đối với các vị, có xả đối với các xúc.<br>
+<span lang="pi" class="pali">
+Atthi, bhikkhave, upekkhā rūpesu, atthi saddesu, atthi gandhesu, atthi rasesu, atthi phoṭṭhabbesu—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Như vậy, này các Tỷ-kheo là xả đa diện, y cứ đa diện.<br>
+<span lang="pi" class="pali">
+ayaṁ, bhikkhave, upekkhā nānattā nānattasitā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Và này các Tỷ-kheo, thế nào là xả nhứt diện, y cứ nhứt diện?<br>
+<span lang="pi" class="pali">
+Katamā ca, bhikkhave, upekkhā ekattā ekattasitā?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Có xả y cứ Hư không vô biên xứ, có xả y cứ Thức vô biên xứ, có xả y cứ Vô sở hữu xứ, có xả y cứ Phi tưởng phi phi tưởng xứ.<br>
+<span lang="pi" class="pali">
+Atthi, bhikkhave, upekkhā ākāsānañcāyatananissitā, atthi viññāṇañcāyatananissitā, atthi ākiñcaññāyatananissitā, atthi nevasaññānāsaññāyatananissitā—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Như vậy, này các Tỷ-kheo là xả nhứt diện, y cứ nhứt diện.<br>
+<span lang="pi" class="pali">
+ayaṁ, bhikkhave, upekkhā ekattā ekattasitā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ở đây, này các Tỷ-kheo, do y cứ, do duyên xả nhứt diện, xả y cứ nhứt diện, đoạn tận vượt qua xả đa diện, xả y cứ đa diện.<br>
+<span lang="pi" class="pali">
+Tatra, bhikkhave, yāyaṁ upekkhā ekattā ekattasitā taṁ nissāya taṁ āgamma yāyaṁ upekkhā nānattā nānattasitā taṁ pajahatha, taṁ samatikkamatha.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Như vậy là sự đoạn tận (xả) này, như vậy là sự vượt qua (xả) này.<br>
+<span lang="pi" class="pali">
+Evametissā pahānaṁ hoti, evametissā samatikkamo hoti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này các Tỷ-kheo, do y cứ không tham dục, do duyên không tham dục, đoạn tận, vượt qua xả nhứt diện, xả y cứ nhứt diện ấy.<br>
+<span lang="pi" class="pali">
+Atammayataṁ, bhikkhave, nissāya atammayataṁ āgamma yāyaṁ upekkhā ekattā ekattasitā taṁ pajahatha, taṁ samatikkamatha.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Như vậy là sự đoạn tận (xả) này, như vậy là sự vượt qua (xả) này.<br>
+<span lang="pi" class="pali">
+Evametissā pahānaṁ hoti, evametissā samatikkamo hoti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Khi được nói đến: ‘Tại đây do y cứ cái này, đoạn tận cái này’, chính do duyên này, được nói đến như vậy.<br>
+<span lang="pi" class="pali">
+‘Tatra idaṁ nissāya idaṁ pajahathā’ti—iti yaṁ taṁ vuttaṁ idametaṁ paṭicca vuttaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Khi được nói đến: ‘Có ba niệm xứ mà một bậc Thánh phải thực hành, và có thực hành (niệm xứ) ấy, bậc Thánh mới xứng là bậc Ðạo sư diễn giảng đồ chúng’, do duyên gì, được nói đến như vậy?<br>
+<span lang="pi" class="pali">
+‘Tayo satipaṭṭhānā yadariyo sevati, yadariyo sevamāno satthā gaṇamanusāsitumarahatī’ti—iti kho panetaṁ vuttaṁ; kiñcetaṁ paṭicca vuttaṁ?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ở đây, này các Tỷ-kheo, bậc Ðạo sư thuyết pháp cho các đệ tử, vì lòng từ mẫn, vì lo cho hạnh phúc của họ, vì thương tưởng họ, nói rằng:<br>
+<span lang="pi" class="pali">
+Idha, bhikkhave, satthā sāvakānaṁ dhammaṁ deseti anukampako hitesī anukampaṁ upādāya:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Ðây là hạnh phúc cho các Ông, đây là an lạc cho các Ông’.<br>
+<span lang="pi" class="pali">
+‘idaṁ vo hitāya, idaṁ vo sukhāyā’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Một số đệ tử của bậc Ðạo sư ấy không có khéo nghe, không có lóng tai, không có an trú tâm vào chánh trí, và hành động ngược lại lời dạy của bậc Ðạo sư.<br>
+<span lang="pi" class="pali">
+Tassa sāvakā na sussūsanti, na sotaṁ odahanti, na aññā cittaṁ upaṭṭhapenti, vokkamma ca satthusāsanā vattanti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Tại đây, này các Tỷ-kheo, Như Lai không có hoan hỷ, không có cảm giác hoan hỷ, nhưng sống không có dao động, chánh niệm, tỉnh giác.<br>
+<span lang="pi" class="pali">
+Tatra, bhikkhave, tathāgato na ceva anattamano hoti, na ca anattamanataṁ paṭisaṁvedeti, anavassuto ca viharati sato sampajāno.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này các Tỷ-kheo, đây là niệm xứ thứ nhất, một bậc Thánh phải thực hành, và có thực hành niệm xứ ấy, bậc Thánh mới xứng là bậc Ðạo sư diễn giảng đồ chúng.<br>
+<span lang="pi" class="pali">
+Idaṁ, bhikkhave, paṭhamaṁ satipaṭṭhānaṁ yadariyo sevati, yadariyo sevamāno satthā gaṇamanusāsitumarahati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Lại nữa, này các Tỷ-kheo, bậc Ðạo sư thuyết pháp cho các đệ tử, vì lòng từ mẫn, vì lo cho hạnh phúc của họ, vì thương tưởng họ, nói rằng:<br>
+<span lang="pi" class="pali">
+Puna caparaṁ, bhikkhave, satthā sāvakānaṁ dhammaṁ deseti anukampako hitesī anukampaṁ upādāya:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Ðây là hạnh phúc cho các Ông, đây là an lạc cho các Ông’.<br>
+<span lang="pi" class="pali">
+‘idaṁ vo hitāya, idaṁ vo sukhāyā’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Một số đệ tử bậc Ðạo sư ấy không có khéo nghe, không có lóng tai, không có an trú tâm vào chánh trí, và hành động ngược lại lời dạy của bậc Ðạo sư.<br>
+<span lang="pi" class="pali">
+Tassa ekacce sāvakā na sussūsanti, na sotaṁ odahanti, na aññā cittaṁ upaṭṭhapenti, vokkamma ca satthusāsanā vattanti;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Có một số đệ tử khéo nghe, lóng tai, an trú tâm vào chánh trí, và không hành động ngược lại lời dạy của bậc Ðạo sư.<br>
+<span lang="pi" class="pali">
+ekacce sāvakā sussūsanti, sotaṁ odahanti, aññā cittaṁ upaṭṭhapenti, na ca vokkamma satthusāsanā vattanti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Tại đây, này các Tỷ-kheo, Như Lai không có hoan hỷ, không có cảm giác hoan hỷ, không có không hoan hỷ, không có cảm giác không hoan hỷ; sau khi đoạn bỏ cả hai, hoan hỷ và không hoan hỷ, Như Lai trú xả, chánh niệm, tỉnh giác.<br>
+<span lang="pi" class="pali">
+Tatra, bhikkhave, tathāgato na ceva anattamano hoti, na ca anattamanataṁ paṭisaṁvedeti; na ca attamano hoti, na ca attamanataṁ paṭisaṁvedeti. Anattamanatā ca attamanatā ca—tadubhayaṁ abhinivajjetvā upekkhako viharati sato sampajāno.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này các Tỷ-kheo, đây là niệm xứ hai, một bậc Thánh phải thực hành, và có thực hành niệm xứ ấy, bậc Thánh mới xứng là bậc Ðạo sư diễn giảng đồ chúng.<br>
+<span lang="pi" class="pali">
+Idaṁ vuccati, bhikkhave, dutiyaṁ satipaṭṭhānaṁ yadariyo sevati, yadariyo sevamāno satthā gaṇamanusāsitumarahati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Lại nữa, này các Tỷ-kheo, có bậc Ðạo Sư thuyết pháp cho các đệ tử, vì lòng từ mẫn, vì lo cho hạnh phúc của họ, vì thương tưởng họ, nói rằng:<br>
+<span lang="pi" class="pali">
+Puna caparaṁ, bhikkhave, satthā sāvakānaṁ dhammaṁ deseti anukampako hitesī anukampaṁ upādāya:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Ðây là hạnh phúc cho các Ông, đây là an lạc cho các Ông’.<br>
+<span lang="pi" class="pali">
+‘idaṁ vo hitāya, idaṁ vo sukhāyā’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ðệ tử của bậc Ðạo Sư ấy khéo nghe, lóng tai, an trú tâm vào chánh trí và không đi ngược lời dạy của bậc Ðạo Sư.<br>
+<span lang="pi" class="pali">
+Tassa sāvakā sussūsanti, sotaṁ odahanti, aññācittaṁ upaṭṭhapenti, na ca vokkamma satthusāsanā vattanti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Tại đây, này các Tỷ-kheo, Như lai hoan hỷ, và cảm giác hoan hỷ, sống không dao động, chánh niệm, tỉnh giác.<br>
+<span lang="pi" class="pali">
+Tatra, bhikkhave, tathāgato attamano ceva hoti, attamanatañca paṭisaṁvedeti, anavassuto ca viharati sato sampajāno.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này các Tỷ-kheo, đây là niệm xứ thứ ba, một bậc Thánh phải thực hành, và có thực hành niệm xứ ấy, bậc Thánh mới xứng là bậc Ðạo sư diễn giảng cho đồ chúng.<br>
+<span lang="pi" class="pali">
+Idaṁ vuccati, bhikkhave, tatiyaṁ satipaṭṭhānaṁ yadariyo sevati, yadariyo sevamāno satthā gaṇamanusāsitumarahati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Khi được nói đến: ‘Có ba niệm xứ, một bậc Thánh phải thực hành, và có (thực hành) niệm xứ ấy, bậc Thánh mới xứng đáng là bậc Ðạo sư diễn giảng cho đồ chúng’, chính do duyên này, được nói đến như vậy.<br>
+<span lang="pi" class="pali">
+‘Tayo satipaṭṭhānā yadariyo sevati, yadariyo sevamāno satthā gaṇamanusāsitumarahatī’ti—iti yaṁ taṁ vuttaṁ idametaṁ paṭicca vuttaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Khi được nói đến: ‘Trong các vị Huấn luyện sư, vị ấy được gọi là vị Vô thượng Ðiều ngự sư, điều phục hạng người đáng được điều phục’, do duyên gì được nói đến như vậy?<br>
+<span lang="pi" class="pali">
+‘So vuccati yoggācariyānaṁ anuttaro purisadammasārathī’ti—iti kho panetaṁ vuttaṁ. Kiñcetaṁ paṭicca vuttaṁ?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này các Tỷ-kheo, một con voi được điều phục do một vị điều ngự tượng sư dắt dẫn chỉ chạy về một phương, phương Ðông, phương Tây, phương Bắc hay phương Nam.<br>
+<span lang="pi" class="pali">
+Hatthidamakena, bhikkhave, hatthidammo sārito ekaṁyeva disaṁ dhāvati—puratthimaṁ vā pacchimaṁ vā uttaraṁ vā dakkhiṇaṁ vā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này các Tỷ-kheo, một con ngựa được điều phục do một vị điều ngự mã sư dắt dẫn chỉ chạy về một phương, phương Ðông, phương Tây, phương Bắc hay phương Nam.<br>
+<span lang="pi" class="pali">
+Assadamakena, bhikkhave, assadammo sārito ekaññeva disaṁ dhāvati—puratthimaṁ vā pacchimaṁ vā uttaraṁ vā dakkhiṇaṁ vā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này các Tỷ-kheo, một con bò được điều phục do một vị điều ngự sư dắt dẫn chỉ chạy về một phương, phương Ðông, phương Tây, phương Bắc hay phương Nam.<br>
+<span lang="pi" class="pali">
+Godamakena, bhikkhave, godammo sārito ekaññeva disaṁ dhāvati—puratthimaṁ vā pacchimaṁ vā uttaraṁ vā dakkhiṇaṁ vā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này các Tỷ-kheo, một người được điều phục do Như Lai, bậc A-La-Hán, Chánh Ðẳng Giác dắt dẫn, được chạy cùng khắp cả tám phương.<br>
+<span lang="pi" class="pali">
+Tathāgatena hi, bhikkhave, arahatā sammāsambuddhena purisadammo sārito aṭṭha disā vidhāvati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Có sắc, thấy các sắc pháp; đó là phương thứ nhất.<br>
+<span lang="pi" class="pali">
+Rūpī rūpāni passati—ayaṁ ekā disā;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Không có tưởng nội sắc, thấy các ngoại sắc; đó là phương thứ hai.<br>
+<span lang="pi" class="pali">
+ajjhattaṁ arūpasaññī bahiddhā rūpāni passati—ayaṁ dutiyā disā;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Nghĩ đến thanh tịnh, chú tâm trên ấy; đó là phương thứ ba.<br>
+<span lang="pi" class="pali">
+subhantveva adhimutto hoti—ayaṁ tatiyā disā;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vượt qua một cách hoàn toàn các sắc tưởng, diệt trừ đối ngại tưởng, không tác ý sai biệt tưởng; và nghĩ rằng ‘Hư không là vô biên’, chứng đạt và an trú Không vô biên xứ; đó là phương thứ tư.<br>
+<span lang="pi" class="pali">
+sabbaso rūpasaññānaṁ samatikkamā paṭighasaññānaṁ atthaṅgamā nānattasaññānaṁ amanasikārā ‘ananto ākāso’ti ākāsānañcāyatanaṁ upasampajja viharati—ayaṁ catutthī disā;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vượt qua một cách hoàn toàn Không vô biên xứ, nghĩ rằng: ‘Thức là vô biên’, chứng đạt và an trú Thức vô biên xứ; đó là phương thứ năm.<br>
+<span lang="pi" class="pali">
+sabbaso ākāsānañcāyatanaṁ samatikkamma ‘anantaṁ viññāṇan’ti viññāṇañcāyatanaṁ upasampajja viharati—ayaṁ pañcamī disā;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vượt qua một cách hoàn toàn Thức vô biên xứ, nghĩ rằng: ‘Không có gì cả’, chứng đạt và an trú Vô sở hữu xứ; đó là phương thứ sáu.<br>
+<span lang="pi" class="pali">
+sabbaso viññāṇañcāyatanaṁ samatikkamma ‘natthi kiñcī’ti ākiñcaññāyatanaṁ upasampajja viharati—ayaṁ chaṭṭhī disā;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vượt qua một cách hoàn toàn Vô sở hữu xứ; chứng đạt và an trú Phi tưởng phi phi tưởng xứ; đó là phương thứ bảy.<br>
+<span lang="pi" class="pali">
+sabbaso ākiñcaññāyatanaṁ samatikkamma nevasaññānāsaññāyatanaṁ upasampajja viharati—ayaṁ sattamī disā;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vượt qua một cách hoàn toàn Phi tưởng phi phi tưởng xứ, chứng đạt và an trú Diệt thọ tưởng (định); đó là phương thứ tám.<br>
+<span lang="pi" class="pali">
+sabbaso nevasaññānāsaññāyatanaṁ samatikkamma saññāvedayitanirodhaṁ upasampajja viharati—ayaṁ aṭṭhamī disā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này các Tỷ-kheo, một người đáng được điều phục do Như Lai, bậc A-La-Hán, Chánh Ðẳng Giác dắt dẫn, được chạy cùng khắp tám phương này.<br>
+<span lang="pi" class="pali">
+Tathāgatena, bhikkhave, arahatā sammāsambuddhena purisadammo sārito imā aṭṭha disā vidhāvati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Khi được nói đến: ‘Trong các vị Huấn luyện sư, vị ấy được gọi là Vô thượng Ðiều ngự sư, điều phục hạng người đáng điều phục’, chính do duyên này, được nói đến như vậy.<br>
+<span lang="pi" class="pali">
+So vuccati: ‘yoggācariyānaṁ anuttaro purisadammasārathī’ti—iti yaṁ taṁ vuttaṁ idametaṁ paṭicca vuttan”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Thế Tôn thuyết giảng như vậy. Các vị Tỷ-kheo ấy hoan hỷ tín thọ lời Thế Tôn dạy.<br>
+<span lang="pi" class="pali">
+Idamavoca bhagavā. Attamanā te bhikkhū bhagavato bhāsitaṁ abhinandunti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+<span lang="pi" class="vi">
+Saḷāyatanavibhaṅgasuttaṁ niṭṭhitaṁ sattamaṁ.<br>
+</span>
+</p>
+
+
+
+<!-- COPY CONTENT SUTTA Ở ĐÂY -->
+
+
+
+<br>
+<p><p style="text-align: right;font-style: italic;">Hoà Thượng Thích Minh Châu dịch Việt</span></p>
+
+
+
+
+
+
+
+
+</section>  <!-- End English and Pali -->
+<div id="nextprev"><a id="previous-sutta" href="./mn136.html#content"></a><a id="next-sutta" href="./mn138.html#content"></a></div>
+</div>  <!--End Content -->
+</div>  <!-- End Page -->
+
+
+
+
+
+
+<footer>
+					 <!-- End bottom links -->
+</footer>
+
+
+ 
+ <!-- Scripts -->
+
+ <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      if (typeof enablePaliLookup === "function") {
+        enablePaliLookup();
+      } else {
+        console.error("enablePaliLookup is not defined");
+      }
+    });
+  </script>
+
+ <script>
+ // Script to open and close sidebar
+ 	function w3_open() {
+ 	document.getElementById("mySidebar").style.display = "block";
+ 	}
+ 		function w3_close() {
+ 		document.getElementById("mySidebar").style.display = "none";
+ 	}
+ </script>
+ <script>
+ 		var app = document.getElementsByTagName("BODY")[0];
+ 		if (localStorage.lightMode == "dark") {
+ 			app.setAttribute("light-mode", "dark");
+ 	}
+ </script>
+ 
+ <script>
+ 		function toggle_light_mode() {
+ 			var app = document.getElementsByTagName("BODY")[0];
+ 				if (localStorage.lightMode == "dark") {
+ 			localStorage.lightMode = "light";
+ 			app.setAttribute("light-mode", "light");
+ 		} else {
+ 					localStorage.lightMode = "dark";
+ 					app.setAttribute("light-mode", "dark");
+ 	}
+ 		}
+ 
+ 		window.addEventListener("storage", function () {
+ 			if (localStorage.lightMode == "dark") {
+ 				app.setAttribute("light-mode", "dark");
+ 				} else {
+ 				app.setAttribute("light-mode", "light");
+ 		}
+ 		}, false);
+ 
+ </script>
+ <script src="../js/footer.js"></script><script src="../js/dpd_deconstructor.js"></script><script src="../js/dpd_ebts.js"></script><script src="../js/dpd_i2h.js"></script>
+ <script src="/sw.js"></script>
+ </body>
+ </html>

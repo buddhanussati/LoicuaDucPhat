@@ -1,0 +1,1227 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+ 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+ 	<link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+ 	<meta name="viewport" content="width=device-width, initial-scale=1">
+		<!-- Loading manifest -->
+	<link rel="manifest" href="../manifest.json">
+ 	<!-- Loading main and menu stylesheets -->
+ 	<link rel="stylesheet" href="../css/w3.css">
+ 	<link rel="stylesheet" href="../css/css.css">
+ 	<link rel="stylesheet" href="../css/menu.css">
+ 	<script src="../js/jquery-1.10.2.min.js"></script>
+ 	<script src="../js/controlpanel.js"></script>
+ 	<script src="../js/mousetrap.min.js"></script>
+    <script src="../js/pali-lookup-standalone.js"></script>
+
+ <script src="../js/suttaFiles.js"></script>
+<script>
+ // Script to open random Sutta
+ function openRandomSutta() {
+  const randomIndex = Math.floor(Math.random() * suttaFiles.length);
+  const selectedFile = suttaFiles[randomIndex];
+
+  // Get root path of your site 
+  const currentPath = location.pathname;
+  const rootPath = currentPath.split("/").slice(0, -2).join("/") + "/";
+
+  // Redirect to the correct file
+  window.location.href = rootPath + selectedFile;
+}
+</script>
+
+
+</head>
+ <body class="container">
+ <div class="header-background">
+ <!-- Header -->
+ <div class="w3-header w3-content w3-padding w3-left-align bwcontainer">
+ 	<div class="centered">
+ 		<button class="light-mode-button" aria-label="Bật Chế Độ Sáng" onclick="toggle_light_mode()">
+ 			<span></span>
+ 			<span></span>
+ 		</button>
+ 		<span class="box-lbl">Sáng/Tối</span>
+ 	</div> <!-- Centered -->
+ 		<a href="../home/index.html" id="bwlogo"><img src="../images/headerlogo.png" alt="Logo Lời Của Đức Phật" class="w3-image"></a>
+ 		<div class="w3-bar bwcontainer">
+ 			<div id="searchlinks">
+ 			<a href="../home/visearch.html"><span class="w3-bar-item"><i class="fa fa-search"></i>&nbsp;Tìm Tiếng Việt</span></a>
+ 			<a href="../home/palisearch.html"><span class="w3-bar-item"><i class="fa fa-search"></i>&nbsp;Tìm Tiếng Pali</span></a>
+ 			</div><!-- End Searchlinks div -->
+ 			<div class="help"><span><a href="../home/help.html"><img src="../images/help_icon.png" title="Trợ Giúp" alt="Help"></a></span></div>
+ 		</div> <!-- End w3-bar bwcontainer --> 	</div> <!-- End w3-header w3-content w3-padding w3-left-align bwcontainer -->
+ </div> <!-- End header-background -->
+ <!-- Top menu -->
+
+ <div class="w3-main w3-white bwcontainer2">
+ 	<div class="w3-button w3-padding-8 w3-left w3-hide-large" onclick="w3_open()">☰</div>
+ 		<div id="navbar" class="w3-hide-small w3-hide-medium bwcontainer3">
+ 			<ul id="css3menu0">
+ 				<li class="topfirst" id="home"><a href="../home/index.html" class="w3-hide-small">Trang Chủ</a></li>
+  				<li class="topmenu" id="dn"><a href="../dn/dn.html" class="pressed w3-hide-small">Trường Bộ Kinh</a></li>
+ 				<li class="topmenu" id="mn"><a href="../mn/mn.html" class="w3-hide-small">Trung Bộ Kinh</a></li>
+ 				<li class="topmenu" id="sn"><a href="../sn/sn.html" class="w3-hide-small"><i class="fa fa-caret-down"></i>&nbsp;Tương Ưng Bộ Kinh</a>
+ 					<ul>
+ 						<li><a href="../sn/sn01.html" class="w3-hide-small">Tập I - Thiên Có Kệ</a></li>
+ 						<li><a href="../sn/sn02.html" class="w3-hide-small">Tập II - Thiên Nhân Duyên</a></li>
+ 						<li><a href="../sn/sn03.html" class="w3-hide-small">Tập III - Thiên Uẩn</a></li>
+ 						<li><a href="../sn/sn04.html" class="w3-hide-small">Tập IV - Thiên Sáu Xứ</a></li>
+ 						<li><a href="../sn/sn05.html" class="w3-hide-small">Tập V - Thiên Ðại Phẩm</a></li>
+ 					</ul>
+ 				<li class="topmenu" id="an"><a href="../an/an.html" class="w3-hide-small"><i class="fa fa-caret-down"></i>&nbsp;Tăng Chi Bộ Kinh</a>
+ 					<ul>
+ 						<li><a href="../an/an1.html" class="w3-hide-small">Chương Một Pháp</a></li>
+ 						<li><a href="../an/an2.html" class="w3-hide-small">Chương Hai Pháp</a></li>
+ 						<li><a href="../an/an3.html" class="w3-hide-small">Chương Ba Pháp</a></li>
+ 						<li><a href="../an/an4.html" class="w3-hide-small">Chương Bốn Pháp</a></li>
+ 						<li><a href="../an/an5.html" class="w3-hide-small">Chương Năm Pháp</a></li>
+ 						<li><a href="../an/an6.html" class="w3-hide-small">Chương Sáu Pháp</a></li>
+ 						<li><a href="../an/an7.html" class="w3-hide-small">Chương Bảy Pháp</a></li>
+ 						<li><a href="../an/an8.html" class="w3-hide-small">Chương Tám Pháp</a></li>
+ 						<li><a href="../an/an9.html" class="w3-hide-small">Chương Chín Pháp</a></li>
+ 						<li><a href="../an/an10.html" class="w3-hide-small">Chương Mười Pháp</a></li>
+ 						<li><a href="../an/an11.html" class="w3-hide-small">Chương Mười Một Pháp</a></li>
+ 					</ul>
+ 				</li>
+ 				<li class="topmenu" id="kn"><a href="../kn/kn.html" class="w3-hide-small"><i class="fa fa-caret-down"></i>&nbsp;Tiểu Bộ Kinh</a>
+ 					<ul>
+ 						<li><a href="../kp/kp.html" class="w3-hide-small">Kinh Tiểu Tụng</a></li>
+ 						<li><a href="../dhp/dhp.html" class="w3-hide-small">Kinh Pháp Cú</a></li>
+ 						<li><a href="../snp/snp.html" class="w3-hide-small">Kinh Tập</a></li>
+ 						<li><a href="../ud/ud.html" class="w3-hide-small">Kinh Phật Tự Thuyết</a></li>
+ 						<li><a href="../it/it.html" class="w3-hide-small">Kinh Phật Thuyết Như Vậy</a></li>
+ 						<li><a href="../tha/tha.html" class="w3-hide-small">Trưởng Lão Tăng Kệ</a></li>
+ 						<li><a href="../thi/thi.html" class="w3-hide-small">Trưởng Lão Ni Kệ</a></li>
+ 					</ul>
+ 				</li>
+				<li class="toplast" id="rd"><a href="../rd/rd.html" class="w3-hide-small"></i>Kinh Ngẫu Nhiên Theo Nhóm</a>
+ 					</ul>
+ 				</li>
+ 			</ul>
+ 			</div>
+ 		</div> <!--navbar-->
+
+<!-- Sidebar (hidden by default) -->
+ <nav class="w3-sidebar w3-bar-block w3-card w3-border w3-top w3-animate-left w3-hide-large" id="mySidebar">
+ 	<a href="javascript:void(0)" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-times fa-2x red-color"></i>&nbsp;&nbsp;&nbsp;Close</a><!-- Hides the sidebar when clicked -->
+ 		<div class="w3-bar-block w3-white">
+ 			<a href="../home/index.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-home fa-lg"></i>&nbsp;&nbsp;&nbsp;Home</a>
+ 			<a href="../guide/guide.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Guide</a>
+ 			<a href="../dn/dn.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Trường Bộ Kinh</a>
+ 			<a href="../mn/mn.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Trung Bộ Kinh</a>
+ 			<a href="../sn/sn.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Tương Ưng Bộ Kinh</a>
+ 			<a href="../an/an.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Tăng Chi Bộ Kinh
+ 			<a href="../kn/kn.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Tiểu Bộ Kinh</a>
+			<a href="../rd/rd.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>Kinh Ngẫu Nhiên Theo Nhóm</a>
+ 		</div>
+ </nav>
+ 
+ 
+ 
+   <!-- !PAGE CONTENT! --> 
+<div class="w3-main w3-content w3-padding w3-left-align bwcontainer4">
+<div id="content">
+<h2>Majjhima Nikāya - Trung Bộ Kinh</h2>
+<h5><span style="font-style: italic;">Hoà Thượng Thích Minh Châu dịch Việt</span></h5>
+
+</div>
+
+<br>
+ 	<title>        Trung Bộ 118          </title>
+
+<p lang="vi" class="vi"; style="text-align: center">
+Trung Bộ 118<br>
+<span lang="pi" class="pali">
+Majjhima Nikāya 118<br>
+</span>
+</p>
+
+
+
+<p lang="vi" class="vi"; style="text-align: center">
+Kinh Quán Niệm Hơi Thở<br>
+<span lang="pi" class="pali">
+Ānāpānassatisutta<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Như vầy tôi nghe.<br>
+<span lang="pi" class="pali">
+Evaṁ me sutaṁ—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Một thời Thế Tôn ở Sāvatthī (Xá-vệ), tại Ðông Viên, giảng đường Lộc Mẫu, cùng với rất nhiều Thượng tọa có thời danh, có danh xưng như:<br>
+<span lang="pi" class="pali">
+ekaṁ samayaṁ bhagavā sāvatthiyaṁ viharati pubbārāme migāramātupāsāde sambahulehi abhiññātehi abhiññātehi therehi sāvakehi saddhiṁ—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Tôn giả Sāriputta (Xá-lợi-phất), Tôn giả Mahāmoggallāna (Ðại Mục-kiền-liên), Tôn giả Mahākassapa, Tôn giả Mahākaccāna (Ðại Ca-chiên-diên), Tôn giả Mahākoṭṭhita (Ðại Câu-hy-la), Tôn giả Mahākappina (Ðại Kiếp-tân-na), Tôn giả Mahācunda (Ðại Thuần-đà), Tôn giả Anuruddha (A-na-luật), Tôn giả Revata (Ly-bà-đa) và Tôn giả Ānanda (A-nan), cùng với nhiều bậc Thượng tọa đệ tử khác có thời danh, có danh xưng.<br>
+<span lang="pi" class="pali">
+āyasmatā ca sāriputtena āyasmatā ca mahāmoggallānena āyasmatā ca mahākassapena āyasmatā ca mahākaccāyanena āyasmatā ca mahākoṭṭhikena āyasmatā ca mahākappinena āyasmatā ca mahācundena āyasmatā ca anuruddhena āyasmatā ca revatena āyasmatā ca ānandena, aññehi ca abhiññātehi abhiññātehi therehi sāvakehi saddhiṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Lúc bấy giờ, các Thượng tọa Tỷ-kheo khuyến giáo, giảng dạy các tân Tỷ-kheo.<br>
+<span lang="pi" class="pali">
+Tena kho pana samayena therā bhikkhū nave bhikkhū ovadanti anusāsanti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Một số Thượng tọa Tỷ-kheo khuyến giáo, giảng dạy mười tân Tỷ-kheo. Một số Thượng Tọa Tỷ-kheo khuyến giáo, giảng dạy hai mươi tân Tỷ-kheo. Một số Thượng tọa Tỷ-kheo khuyến giáo, giảng dạy ba mươi tân Tỷ-kheo. Một số Thượng Tọa Tỷ-kheo khuyến giáo, giảng dạy bốn mươi tân Tỷ-kheo.<br>
+<span lang="pi" class="pali">
+Appekacce therā bhikkhū dasapi bhikkhū ovadanti anusāsanti, appekacce therā bhikkhū vīsampi bhikkhū ovadanti anusāsanti, appekacce therā bhikkhū tiṁsampi bhikkhū ovadanti anusāsanti, appekacce therā bhikkhū cattārīsampi bhikkhū ovadanti anusāsanti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Và các tân Tỷ-kheo được các Thượng tọa Tỷ-kheo khuyến giáo, giảng dạy ý thức rõ ràng những quả vị cao diệu, tiệm thứ, thù thắng đã chứng đạt.<br>
+<span lang="pi" class="pali">
+Te ca navā bhikkhū therehi bhikkhūhi ovadiyamānā anusāsiyamānā uḷāraṁ pubbenāparaṁ visesaṁ jānanti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Lúc bấy giờ Thế Tôn, vào ngày Bố-tát, ngày rằm, vào đêm trăng tròn sau ngày Tự tứ, đang ngồi giữa trời với chúng Tỷ-kheo đoanh vây.<br>
+<span lang="pi" class="pali">
+Tena kho pana samayena bhagavā tadahuposathe pannarase pavāraṇāya puṇṇāya puṇṇamāya rattiyā bhikkhusaṅghaparivuto abbhokāse nisinno hoti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Thế Tôn nhìn quanh chúng Tỷ-kheo đang yên lặng, hết sức yên lặng, rồi bảo các Tỷ-kheo:<br>
+<span lang="pi" class="pali">
+Atha kho bhagavā tuṇhībhūtaṁ tuṇhībhūtaṁ bhikkhusaṅghaṁ anuviloketvā bhikkhū āmantesi:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Ta được thỏa mãn, này các Tỷ-kheo, với đạo lộ này.<br>
+<span lang="pi" class="pali">
+“āraddhosmi, bhikkhave, imāya paṭipadāya;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Tâm ta được thỏa mãn, này các Tỷ-kheo, với đạo lộ này.<br>
+<span lang="pi" class="pali">
+āraddhacittosmi, bhikkhave, imāya paṭipadāya.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Do vậy, này các Tỷ-kheo, hãy tinh tấn hơn nữa, để chứng đạt những gì chưa chứng đạt, để chứng đắc những gì chưa chứng đắc, để chứng ngộ những gì chưa chứng ngộ.<br>
+<span lang="pi" class="pali">
+Tasmātiha, bhikkhave, bhiyyoso mattāya vīriyaṁ ārabhatha appattassa pattiyā, anadhigatassa adhigamāya, asacchikatassa sacchikiriyāya.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ta sẽ ở đây, tại Sāvatthī cho đến tháng tư, lễ Komudī.”<br>
+<span lang="pi" class="pali">
+Idhevāhaṁ sāvatthiyaṁ komudiṁ cātumāsiniṁ āgamessāmī”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Những Tỷ-kheo địa phương được nghe: “Thế Tôn sẽ ở đây, tại Sāvatthī, cho đến tháng tư, lễ Komudī”. Các Tỷ-kheo địa phương tụ họp tại Sāvatthī để yết kiến Thế Tôn.<br>
+<span lang="pi" class="pali">
+Assosuṁ kho jānapadā bhikkhū: “bhagavā kira tattheva sāvatthiyaṁ komudiṁ cātumāsiniṁ āgamessatī”ti. Te jānapadā bhikkhū sāvatthiṁ osaranti bhagavantaṁ dassanāya.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Và các Thượng tọa Tỷ-kheo lại càng khuyến giáo, giảng dạy các tân Tỷ-kheo nhiều hơn nữa.<br>
+<span lang="pi" class="pali">
+Te ca kho therā bhikkhū bhiyyoso mattāya nave bhikkhū ovadanti anusāsanti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Một số Thượng tọa Tỷ-kheo khuyến giáo, giảng dạy mười tân Tỷ-kheo. Một số Thượng tọa Tỷ-kheo khuyến giáo, giảng dạy hai mươi tân Tỷ-kheo, Một số Thượng tọa Tỷ-kheo khuyến giáo, giảng dạy ba mươi tân Tỷ-kheo. Một số Thượng tọa Tỷ-kheo khuyến giáo, giảng dạy bốn mươi tân Tỷ-kheo.<br>
+<span lang="pi" class="pali">
+Appekacce therā bhikkhū dasapi bhikkhū ovadanti anusāsanti, appekacce therā bhikkhū vīsampi bhikkhū ovadanti anusāsanti, appekacce therā bhikkhū tiṁsampi bhikkhū ovadanti anusāsanti, appekacce therā bhikkhū cattārīsampi bhikkhū ovadanti anusāsanti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Và những tân Tỷ-kheo được các Thượng tọa Tỷ-kheo khuyến giáo, giảng dạy ý thức rõ ràng những quả vị cao diệu, tiệm thứ, thù thắng đã chứng đạt.<br>
+<span lang="pi" class="pali">
+Te ca navā bhikkhū therehi bhikkhūhi ovadiyamānā anusāsiyamānā uḷāraṁ pubbenāparaṁ visesaṁ jānanti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Lúc bấy giờ Thế Tôn vào ngày Bố-tát, ngày rằm, vào đêm trăng tròn, ngày lễ Komudi vào tháng tư, Thế Tôn đang ngồi ngoài trời, chung quanh có chúng Tỷ-kheo đoanh vây.<br>
+<span lang="pi" class="pali">
+Tena kho pana samayena bhagavā tadahuposathe pannarase komudiyā cātumāsiniyā puṇṇāya puṇṇamāya rattiyā bhikkhusaṅghaparivuto abbhokāse nisinno hoti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Rồi Thế Tôn sau khi nhìn xung quanh chúng Tỷ-kheo đang yên lặng, hết sức yên lặng liền bảo các Tỷ-kheo:<br>
+<span lang="pi" class="pali">
+Atha kho bhagavā tuṇhībhūtaṁ tuṇhībhūtaṁ bhikkhusaṅghaṁ anuviloketvā bhikkhū āmantesi:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Hội chúng này, này các Tỷ-kheo, không có lời thừa thãi. Hội chúng này, này các Tỷ-kheo, không có lời dư thừa, đã được an trú trong lõi cây thanh tịnh. Chúng Tỷ-kheo như thế này, này các Tỷ-kheo, hội chúng như thế này, này các Tỷ-kheo, là một hội chúng đáng được cung kính, đáng được tôn trọng, đáng được cúng dường, đáng được chấp tay, là phước điền vô thượng ở đời.<br>
+<span lang="pi" class="pali">
+“Apalāpāyaṁ, bhikkhave, parisā; nippalāpāyaṁ, bhikkhave, parisā; suddhā sāre patiṭṭhitā. Tathārūpo ayaṁ, bhikkhave, bhikkhusaṅgho; tathārūpā ayaṁ, bhikkhave, parisā yathārūpā parisā āhuneyyā pāhuneyyā dakkhiṇeyyā añjalikaraṇīyā anuttaraṁ puññakkhettaṁ lokassa.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Chúng Tỷ-kheo như thế này, này các Tỷ-kheo, hội chúng như thế này, này các Tỷ-kheo, là một hội chúng bố thí ít, được phước báo nhiều; bố thí nhiều, càng được phước báo nhiều hơn nữa. Chúng Tỷ-kheo như thế này, này các Tỷ-kheo, hội chúng như thế này, này các Tỷ-kheo, là một hội chúng khó thấy ở đời.<br>
+<span lang="pi" class="pali">
+Tathārūpo ayaṁ, bhikkhave, bhikkhusaṅgho; tathārūpā ayaṁ, bhikkhave, parisā yathārūpāya parisāya appaṁ dinnaṁ bahu hoti, bahu dinnaṁ bahutaraṁ. Tathārūpo ayaṁ, bhikkhave, bhikkhusaṅgho; tathārūpā ayaṁ, bhikkhave, parisā yathārūpā parisā dullabhā dassanāya lokassa.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Chúng Tỷ-kheo như thế này, này các Tỷ-kheo, hội chúng như thế này, này các Tỷ-kheo, là một hội chúng xứng đáng đi nhiều do tuần (yojana) với một bao lương thực trên vai để đến yết kiến.<br>
+<span lang="pi" class="pali">
+Tathārūpo ayaṁ, bhikkhave, bhikkhusaṅgho; tathārūpā ayaṁ, bhikkhave, parisā yathārūpaṁ parisaṁ alaṁ yojanagaṇanāni dassanāya gantuṁ puṭosenāpi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này các Tỷ-kheo, trong chúng Tỷ-kheo này, có những Tỷ-kheo là những A-la-hán, các lậu hoặc đã đoạn trừ, Phạm hạnh đã thành, các việc nên làm đã làm, gánh nặng đã đặt xuống, mục đích đã thành đạt, hữu kiết sử đã được đoạn tận, được giải thoát nhờ chánh trí.<br>
+<span lang="pi" class="pali">
+Santi, bhikkhave, bhikkhū imasmiṁ bhikkhusaṅghe arahanto khīṇāsavā vusitavanto katakaraṇīyā ohitabhārā anuppattasadatthā parikkhīṇabhavasaṁyojanā sammadaññāvimuttā—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này các Tỷ-kheo, có những bậc Tỷ-kheo như vậy trong chúng Tỷ-kheo này.<br>
+<span lang="pi" class="pali">
+evarūpāpi, bhikkhave, santi bhikkhū imasmiṁ bhikkhusaṅghe.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này các Tỷ-kheo, trong chúng Tỷ-kheo này, có những Tỷ-kheo đã đoạn trừ năm hạ phần kiết sử, được hóa sanh, từ ở đấy được nhập Niết-bàn, không còn phải trở lại đời này nữa.<br>
+<span lang="pi" class="pali">
+Santi, bhikkhave, bhikkhū imasmiṁ bhikkhusaṅghe pañcannaṁ orambhāgiyānaṁ saṁyojanānaṁ parikkhayā opapātikā tattha parinibbāyino anāvattidhammā tasmā lokā—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Các bậc Tỷ-kheo như vậy, này các Tỷ-kheo, có mặt trong chúng Tỷ-kheo này.<br>
+<span lang="pi" class="pali">
+evarūpāpi, bhikkhave, santi bhikkhū imasmiṁ bhikkhusaṅghe.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này các Tỷ-kheo, trong chúng Tỷ-kheo này, này có những Tỷ-kheo đã đoạn trừ ba kiết sử, đã làm cho muội lược tham, sân, si, là bậc Nhất lai, sau khi sanh vào đời này một lần nữa, sẽ đoạn tận khổ đau.<br>
+<span lang="pi" class="pali">
+Santi, bhikkhave, bhikkhū imasmiṁ bhikkhusaṅghe tiṇṇaṁ saṁyojanānaṁ parikkhayā rāgadosamohānaṁ tanuttā sakadāgāmino sakideva imaṁ lokaṁ āgantvā dukkhassantaṁ karissanti—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Các bậc Tỷ-kheo như vậy, này các Tỷ-kheo, có mặt trong chúng Tỷ-kheo này.<br>
+<span lang="pi" class="pali">
+evarūpāpi, bhikkhave, santi bhikkhū imasmiṁ bhikkhusaṅghe.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này các Tỷ-kheo, trong chúng Tỷ-kheo, có những Tỷ-kheo đã đoạn trừ ba kiết sử, là bậc Dự lưu, không còn đọa vào ác đạo, chắc chắn sẽ được giác ngộ.<br>
+<span lang="pi" class="pali">
+Santi, bhikkhave, bhikkhū imasmiṁ bhikkhusaṅghe tiṇṇaṁ saṁyojanānaṁ parikkhayā sotāpannā avinipātadhammā niyatā sambodhiparāyanā—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Các bậc Tỷ-kheo như vậy, này các Tỷ-kheo, có mặt trong chúng Tỷ-kheo này.<br>
+<span lang="pi" class="pali">
+evarūpāpi, bhikkhave, santi bhikkhū imasmiṁ bhikkhusaṅghe.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này các Tỷ-kheo, trong chúng Tỷ-kheo này, có những Tỷ-kheo là những vị sống chuyên tâm, chú tâm, tu tập bốn niệm xứ. Các bậc Tỷ-kheo như vậy, này các Tỷ-kheo, có mặt trong chúng Tỷ-kheo này.<br>
+<span lang="pi" class="pali">
+Santi, bhikkhave, bhikkhū imasmiṁ bhikkhusaṅghe catunnaṁ satipaṭṭhānānaṁ bhāvanānuyogamanuyuttā viharanti—evarūpāpi, bhikkhave, santi bhikkhū imasmiṁ bhikkhusaṅghe.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này các Tỷ-kheo, trong chúng Tỷ-kheo này, có những Tỷ-kheo là những vị sống chuyên tâm, chú tâm, tu tập bốn chánh cần. Các bậc Tỷ-kheo như vậy, này các Tỷ-kheo, có mặt trong hội chúng này.<br>
+<span lang="pi" class="pali">
+Santi, bhikkhave, bhikkhū imasmiṁ bhikkhusaṅghe catunnaṁ sammappadhānānaṁ bhāvanānuyogamanuyuttā viharanti …pe…<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này các Tỷ-kheo, trong chúng Tỷ-kheo này, có những Tỷ-kheo, sống chuyên tâm, chú tâm tu tập bốn như ý túc. Các bậc Tỷ-kheo như vậy, này các Tỷ-kheo, có mặt trong chúng Tỷ-kheo này.<br>
+<span lang="pi" class="pali">
+catunnaṁ iddhipādānaṁ …<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này các Tỷ-kheo, trong chúng Tỷ-kheo này, có những Tỷ-kheo, sống chuyên tâm, chú tâm tu tập năm căn. Các bậc Tỷ-kheo như vậy, này các Tỷ-kheo, có mặt trong chúng Tỷ-kheo này.<br>
+<span lang="pi" class="pali">
+pañcannaṁ indriyānaṁ …<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này các Tỷ-kheo, trong chúng Tỷ-kheo này, có những Tỷ-kheo, sống chuyên tâm, chú tâm tu tập năm lực. Các bậc Tỷ-kheo như vậy, này các Tỷ-kheo, có mặt trong chúng Tỷ-kheo này.<br>
+<span lang="pi" class="pali">
+pañcannaṁ balānaṁ …<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này các Tỷ-kheo, trong chúng Tỷ-kheo này, có những Tỷ-kheo, sống chuyên tâm, chú tâm tu tập bảy giác chi. Các bậc Tỷ-kheo như vậy, này các Tỷ-kheo, có mặt trong chúng Tỷ-kheo này.<br>
+<span lang="pi" class="pali">
+sattannaṁ bojjhaṅgānaṁ …<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này các Tỷ-kheo, trong chúng Tỷ-kheo này có những Tỷ-kheo sống chuyên tâm, chú tâm tu tập Thánh đạo tám ngành.<br>
+<span lang="pi" class="pali">
+ariyassa aṭṭhaṅgikassa maggassa bhāvanānuyogamanuyuttā viharanti—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Các bậc Tỷ-kheo như vậy, này các Tỷ-kheo, có mặt trong chúng Tỷ-kheo này.<br>
+<span lang="pi" class="pali">
+evarūpāpi, bhikkhave, santi bhikkhū imasmiṁ bhikkhusaṅghe.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này các Tỷ-kheo, trong chúng Tỷ-kheo này, có những Tỷ-kheo, sống chuyên tâm, chú tâm tu tập từ tâm. Các bậc Tỷ-kheo như vậy, này các Tỷ-kheo, có mặt trong chúng Tỷ-kheo này.<br>
+<span lang="pi" class="pali">
+Santi, bhikkhave, bhikkhū imasmiṁ bhikkhusaṅghe mettābhāvanānuyogamanuyuttā viharanti …<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này các Tỷ-kheo, trong chúng Tỷ-kheo này, có những Tỷ-kheo, sống chuyên tâm, chú tâm tu tập bi tâm. Các bậc Tỷ-kheo như vậy, này các Tỷ-kheo, có mặt trong chúng Tỷ-kheo này.<br>
+<span lang="pi" class="pali">
+karuṇābhāvanānuyogamanuyuttā viharanti …<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này các Tỷ-kheo, trong chúng Tỷ-kheo này, có những Tỷ-kheo, sống chuyên tâm, chú tâm tu tập hỷ tâm. Các bậc Tỷ-kheo như vậy, này các Tỷ-kheo, có mặt trong chúng Tỷ-kheo này.<br>
+<span lang="pi" class="pali">
+muditābhāvanānuyogamanuyuttā viharanti …<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này các Tỷ-kheo, trong chúng Tỷ-kheo này, có những Tỷ-kheo, sống chuyên tâm, chú tâm tu tập xả tâm. Các bậc Tỷ-kheo như vậy, này các Tỷ-kheo, có mặt trong chúng Tỷ-kheo này.<br>
+<span lang="pi" class="pali">
+upekkhābhāvanānuyogamanuyuttā viharanti …<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này các Tỷ-kheo, trong chúng Tỷ-kheo này, có những Tỷ-kheo, sống chuyên tâm, chú tâm tu tập bất tịnh. Các bậc Tỷ-kheo như vậy, này các Tỷ-kheo, có mặt trong chúng Tỷ-kheo này.<br>
+<span lang="pi" class="pali">
+asubhabhāvanānuyogamanuyuttā viharanti …<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này các Tỷ-kheo, trong chúng Tỷ-kheo này có những Tỷ-kheo sống chuyên tâm, chú tâm tu tập vô thường tưởng.<br>
+<span lang="pi" class="pali">
+aniccasaññābhāvanānuyogamanuyuttā viharanti—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Các bậc Tỷ-kheo như vậy, này các Tỷ-kheo, có mặt trong chúng Tỷ-kheo này.<br>
+<span lang="pi" class="pali">
+evarūpāpi, bhikkhave, santi bhikkhū imasmiṁ bhikkhusaṅghe.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này các Tỷ-kheo, trong chúng Tỷ-kheo này, có những Tỷ-kheo sống chuyên tâm, chú tâm tu tập nhập tức xuất tức niệm.<br>
+<span lang="pi" class="pali">
+Santi, bhikkhave, bhikkhū imasmiṁ bhikkhusaṅghe ānāpānassatibhāvanānuyogamanuyuttā viharanti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Nhập tức xuất tức niệm, này các Tỷ-kheo, được tu tập, được làm cho sung mãn, đưa đến quả lớn, công đức lớn.<br>
+<span lang="pi" class="pali">
+Ānāpānassati, bhikkhave, bhāvitā bahulīkatā mahapphalā hoti mahānisaṁsā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Nhập tức xuất tức niệm, được tu tập, làm cho sung mãn, khiến cho bốn niệm xứ được viên mãn.<br>
+<span lang="pi" class="pali">
+Ānāpānassati, bhikkhave, bhāvitā bahulīkatā cattāro satipaṭṭhāne paripūreti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Bốn niệm xứ được tu tập, làm cho sung mãn, khiến cho bảy giác chi được viên mãn.<br>
+<span lang="pi" class="pali">
+Cattāro satipaṭṭhānā bhāvitā bahulīkatā satta bojjhaṅge paripūrenti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Bảy giác chi được tu tập, làm cho sung mãn, khiến cho minh giải thoát (vijjavimutti) được viên mãn.<br>
+<span lang="pi" class="pali">
+Satta bojjhaṅgā bhāvitā bahulīkatā vijjāvimuttiṁ paripūrenti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Và này các Tỷ-kheo, như thế nào là tu tập nhập tức xuất tức niệm? Như thế nào là làm cho sung mãn? Như thế nào là quả lớn, công đức lớn?<br>
+<span lang="pi" class="pali">
+Kathaṁ bhāvitā ca, bhikkhave, ānāpānassati kathaṁ bahulīkatā mahapphalā hoti mahānisaṁsā?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ở đây, này các Tỷ-kheo, Tỷ-kheo đi đến khu rừng, đi đến gốc cây, hay đi đến ngôi nhà trống, và ngồi kiết-già, lưng thẳng và trú niệm trước mặt.<br>
+<span lang="pi" class="pali">
+Idha, bhikkhave, bhikkhu araññagato vā rukkhamūlagato vā suññāgāragato vā nisīdati pallaṅkaṁ ābhujitvā ujuṁ kāyaṁ paṇidhāya parimukhaṁ satiṁ upaṭṭhapetvā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Chánh niệm, vị ấy thở vô; chánh niệm, vị ấy thở ra.<br>
+<span lang="pi" class="pali">
+So satova assasati satova passasati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Thở vô dài, vị ấy biết: ‘Tôi thở vô dài’. Hay thở ra dài, vị ấy biết: ‘Tôi thở ra dài’.<br>
+<span lang="pi" class="pali">
+Dīghaṁ vā assasanto ‘dīghaṁ assasāmī’ti pajānāti, dīghaṁ vā passasanto ‘dīghaṁ passasāmī’ti pajānāti;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Hay thở vô ngắn, vị ấy biết: ‘Tôi thở vô ngắn’. Hay thở ra ngắn, vị ấy biết: ‘Tôi thở ra ngắn’.<br>
+<span lang="pi" class="pali">
+rassaṁ vā assasanto ‘rassaṁ assasāmī’ti pajānāti, rassaṁ vā passasanto ‘rassaṁ passasāmī’ti pajānāti;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Cảm giác cả toàn thân, tôi sẽ thở vô’, vị ấy tập. ‘Cảm giác cả toàn thân, tôi sẽ thở ra’, vị ấy tập.<br>
+<span lang="pi" class="pali">
+‘sabbakāyapaṭisaṁvedī assasissāmī’ti sikkhati, ‘sabbakāyapaṭisaṁvedī passasissāmī’ti sikkhati;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘An tịnh thân hành, tôi sẽ thở vô’, vị ấy tập. ‘An tịnh thân hành, tôi sẽ thở ra’, vị ấy tập.<br>
+<span lang="pi" class="pali">
+‘passambhayaṁ kāyasaṅkhāraṁ assasissāmī’ti sikkhati, ‘passambhayaṁ kāyasaṅkhāraṁ passasissāmī’ti sikkhati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Cảm giác hỷ thọ, tôi sẽ thở vô’, vị ấy tập. ‘Cảm giác hỷ thọ, tôi sẽ thở ra’, vị ấy tập.<br>
+<span lang="pi" class="pali">
+‘Pītipaṭisaṁvedī assasissāmī’ti sikkhati, ‘pītipaṭisaṁvedī passasissāmī’ti sikkhati;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Cảm giác lạc thọ, tôi sẽ thở vô’, vị ấy tập. ‘Cảm giác lạc thọ, tôi sẽ thở ra’, vị ấy tập.<br>
+<span lang="pi" class="pali">
+‘sukhapaṭisaṁvedī assasissāmī’ti sikkhati, ‘sukhapaṭisaṁvedī passasissāmī’ti sikkhati;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Cảm giác tâm hành, tôi sẽ thở vô’, vị ấy tập. ‘Cảm giác tâm hành, tôi sẽ thở ra’, vị ấy tập.<br>
+<span lang="pi" class="pali">
+‘cittasaṅkhārapaṭisaṁvedī assasissāmī’ti sikkhati, ‘cittasaṅkhārapaṭisaṁvedī passasissāmī’ti sikkhati;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘An tịnh tâm hành, tôi sẽ thở vô’, vị ấy tập. ‘An tịnh tâm hành, tôi sẽ thở ra’, vị ấy tập.<br>
+<span lang="pi" class="pali">
+‘passambhayaṁ cittasaṅkhāraṁ assasissāmī’ti sikkhati, ‘passambhayaṁ cittasaṅkhāraṁ passasissāmī’ti sikkhati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Cảm giác về tâm, tôi sẽ thở vô’, vị ấy tập. ‘Cảm giác về tâm, tôi sẽ thở ra’, vị ấy tập.<br>
+<span lang="pi" class="pali">
+‘Cittapaṭisaṁvedī assasissāmī’ti sikkhati, ‘cittapaṭisaṁvedī passasissāmī’ti sikkhati;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Với tâm hân hoan, tôi sẽ thở vô’, vị ấy tập. ‘Với tâm hân hoan, tôi sẽ thở ra’, vị ấy tập.<br>
+<span lang="pi" class="pali">
+‘abhippamodayaṁ cittaṁ assasissāmī’ti sikkhati, ‘abhippamodayaṁ cittaṁ passasissāmī’ti sikkhati;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Với tâm định tĩnh, tôi sẽ thở vô’, vị ấy tập. ‘Với tâm định tĩnh, tôi sẽ thở ra’, vị ấy tập.<br>
+<span lang="pi" class="pali">
+‘samādahaṁ cittaṁ assasissāmī’ti sikkhati, ‘samādahaṁ cittaṁ passasissāmī’ti sikkhati;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Với tâm giải thoát, tôi sẽ thở vô’, vị ấy tập. ‘Với tâm giải thoát, tôi sẽ thở ra’, vị ấy tập.<br>
+<span lang="pi" class="pali">
+‘vimocayaṁ cittaṁ assasissāmī’ti sikkhati, ‘vimocayaṁ cittaṁ passasissāmī’ti sikkhati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Quán vô thường, tôi sẽ thở vô’, vị ấy tập. ‘Quán vô thường, tôi sẽ thở ra’, vị ấy tập.<br>
+<span lang="pi" class="pali">
+‘Aniccānupassī assasissāmī’ti sikkhati, ‘aniccānupassī passasissāmī’ti sikkhati;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Quán ly tham, tôi sẽ thở vô’, vị ấy tập ‘Quán ly tham, tôi sẽ thở ra’, vị ấy tập.<br>
+<span lang="pi" class="pali">
+‘virāgānupassī assasissāmī’ti sikkhati, ‘virāgānupassī passasissāmī’ti sikkhati;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Quán đoạn diệt, tôi sẽ thở vô’, vị ấy tập. ‘Quán đoạn diệt, tôi sẽ thở ra’, vị ấy tập.<br>
+<span lang="pi" class="pali">
+‘nirodhānupassī assasissāmī’ti sikkhati, ‘nirodhānupassī passasissāmī’ti sikkhati;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Quán từ bỏ, tôi sẽ thở vô’, vị ấy tập. ‘Quán từ bỏ, tôi sẽ thở ra’, vị ấy tập.<br>
+<span lang="pi" class="pali">
+‘paṭinissaggānupassī assasissāmī’ti sikkhati, ‘paṭinissaggānupassī passasissāmī’ti sikkhati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Nhập tức xuất tức niệm, này các Tỷ-kheo, tu tập như vậy, làm cho sung mãn như vậy, được quả lớn, được công đức lớn.<br>
+<span lang="pi" class="pali">
+Evaṁ bhāvitā kho, bhikkhave, ānāpānassati evaṁ bahulīkatā mahapphalā hoti mahānisaṁsā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Và như thế nào, này các Tỷ-kheo, là nhập tức xuất tức niệm được tu tập? Như thế nào là làm cho sung mãn, khiến bốn niệm xứ được viên mãn?<br>
+<span lang="pi" class="pali">
+Kathaṁ bhāvitā ca, bhikkhave, ānāpānassati kathaṁ bahulīkatā cattāro satipaṭṭhāne paripūreti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Khi nào, này các Tỷ-kheo, Tỷ-kheo thở vô dài, vị ấy biết: ‘Tôi thở vô dài’. Hay khi thở ra dài, vị ấy biết ‘Tôi thở ra dài’.<br>
+<span lang="pi" class="pali">
+Yasmiṁ samaye, bhikkhave, bhikkhu dīghaṁ vā assasanto ‘dīghaṁ assasāmī’ti pajānāti, dīghaṁ vā passasanto ‘dīghaṁ passasāmī’ti pajānāti;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Hay thở vô ngắn, vị ấy biết: ‘Tôi thở vô ngắn’. Hay khi thở ra ngắn, vị ấy biết: ‘Tôi thở ra ngắn’.<br>
+<span lang="pi" class="pali">
+rassaṁ vā assasanto ‘rassaṁ assasāmī’ti pajānāti, rassaṁ vā passasanto ‘rassaṁ passasāmī’ti pajānāti;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Cảm giác cả toàn thân, tôi sẽ thở vô’, vị ấy tập. ‘Cảm giác cả toàn thân, tôi sẽ thở ra’, vị ấy tập.<br>
+<span lang="pi" class="pali">
+‘sabbakāyapaṭisaṁvedī assasissāmī’ti sikkhati, ‘sabbakāyapaṭisaṁvedī passasissāmī’ti sikkhati;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘An tịnh thân hành, tôi sẽ thở vô’, vị ấy tập. ‘An tịnh thân hành, tôi sẽ thở ra’, vị ấy tập.<br>
+<span lang="pi" class="pali">
+‘passambhayaṁ kāyasaṅkhāraṁ assasissāmī’ti sikkhati, ‘passambhayaṁ kāyasaṅkhāraṁ passasissāmī’ti sikkhati;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Trong khi tùy quán thân trên thân, này các Tỷ-kheo, vị Tỷ-kheo trú, nhiệt tâm, tỉnh giác, chánh niệm để chế ngự tham ưu ở đời.<br>
+<span lang="pi" class="pali">
+kāye kāyānupassī, bhikkhave, tasmiṁ samaye bhikkhu viharati ātāpī sampajāno satimā vineyya loke abhijjhādomanassaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này các Tỷ-kheo, đối với các thân, Ta nói đây là một, tức là thở vô thở ra.<br>
+<span lang="pi" class="pali">
+Kāyesu kāyaññatarāhaṁ, bhikkhave, evaṁ vadāmi yadidaṁ—assāsapassāsā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Do vậy, này các Tỷ-kheo, trong khi tùy quán thân trên thân, vị Tỷ-kheo trú, nhiệt tâm, tỉnh giác, chánh niệm để chế ngự tham ưu ở đời.<br>
+<span lang="pi" class="pali">
+Tasmātiha, bhikkhave, kāye kāyānupassī tasmiṁ samaye bhikkhu viharati ātāpī sampajāno satimā vineyya loke abhijjhādomanassaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Khi nào, này các Tỷ-kheo, vị Tỷ-kheo nghĩ: ‘Cảm giác hỷ thọ, tôi sẽ thở vô’, vị ấy tập. ‘Cảm giác hỷ thọ, tôi sẽ thở ra’, vị ấy tập.<br>
+<span lang="pi" class="pali">
+Yasmiṁ samaye, bhikkhave, bhikkhu ‘pītipaṭisaṁvedī assasissāmī’ti sikkhati, ‘pītipaṭisaṁvedī passasissāmī’ti sikkhati;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Cảm giác lạc thọ, tôi sẽ thở vô’, vị ấy tập. ‘Cảm giác lạc thọ, tôi sẽ thở ra’, vị ấy tập.<br>
+<span lang="pi" class="pali">
+‘sukhapaṭisaṁvedī assasissāmī’ti sikkhati, ‘sukhapaṭisaṁvedī passasissāmī’ti sikkhati;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Cảm giác tâm hành, tôi sẽ thở vô’, vị ấy tập. ‘Cảm giác tâm hành, tôi sẽ thở ra’, vị ấy tập.<br>
+<span lang="pi" class="pali">
+‘cittasaṅkhārapaṭisaṁvedī assasissāmī’ti sikkhati, ‘cittasaṅkhārapaṭisaṁvedī passasissāmī’ti sikkhati;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘An tịnh tâm hành tôi sẽ thở vô’, vị ấy tập. ‘An tịnh tâm hành tôi sẽ thở ra’, vị ấy tập.<br>
+<span lang="pi" class="pali">
+‘passambhayaṁ cittasaṅkhāraṁ assasissāmī’ti sikkhati, ‘passambhayaṁ cittasaṅkhāraṁ passasissāmī’ti sikkhati;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Trong khi tùy quán thọ trên các thọ, này các Tỷ-kheo, Tỷ-kheo trú, nhiệt tâm, tỉnh giác, chánh niệm, để chế ngự tham ưu ở đời.<br>
+<span lang="pi" class="pali">
+vedanāsu vedanānupassī, bhikkhave, tasmiṁ samaye bhikkhu viharati ātāpī sampajāno satimā vineyya loke abhijjhādomanassaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này các Tỷ-kheo, đối với các cảm thọ, Ta nói đây là một, tức là thở vô thở ra.<br>
+<span lang="pi" class="pali">
+Vedanāsu vedanāññatarāhaṁ, bhikkhave, evaṁ vadāmi yadidaṁ—assāsapassāsānaṁ sādhukaṁ manasikāraṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Do vậy này các Tỷ-kheo, trong khi tùy quán thọ trên các cảm thọ, Tỷ-kheo trú, nhiệt tâm, tỉnh giác, chánh niệm để chế ngự tham ưu ở đời.<br>
+<span lang="pi" class="pali">
+Tasmātiha, bhikkhave, vedanāsu vedanānupassī tasmiṁ samaye bhikkhu viharati ātāpī sampajāno satimā vineyya loke abhijjhādomanassaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Khi nào, này các Tỷ-kheo, Tỷ-kheo nghĩ: ‘Cảm giác tâm, tôi sẽ thở vô’, vị ấy tập. ‘Cảm giác tâm, tôi sẽ thở ra’, vị ấy tập.<br>
+<span lang="pi" class="pali">
+Yasmiṁ samaye, bhikkhave, bhikkhu ‘cittapaṭisaṁvedī assasissāmī’ti sikkhati, ‘cittapaṭisaṁvedī passasissāmī’ti sikkhati;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Với tâm hân hoan, tôi sẽ thở vô’, vị ấy tu tập. ‘Với tâm hân hoan, tôi sẽ thở ra’, vị ấy tập.<br>
+<span lang="pi" class="pali">
+‘abhippamodayaṁ cittaṁ assasissāmī’ti sikkhati, ‘abhippamodayaṁ cittaṁ passasissāmī’ti sikkhati;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Với tâm Thiền định, tôi sẽ thở vô’, vị ấy tập. ‘Với tâm Thiền định, tôi sẽ thở ra’, vị ấy tập.<br>
+<span lang="pi" class="pali">
+‘samādahaṁ cittaṁ assasissāmī’ti sikkhati, ‘samādahaṁ cittaṁ passasissāmī’ti sikkhati;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Với tâm giải thoát, tôi sẽ thở vô’, vị ấy tập. ‘Với tâm giải thoát, tôi sẽ thở ra’, vị ấy tập.<br>
+<span lang="pi" class="pali">
+‘vimocayaṁ cittaṁ assasissāmī’ti sikkhati, ‘vimocayaṁ cittaṁ passasissāmī’ti sikkhati;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Trong khi tùy quán tâm trên tâm, này các Tỷ-kheo, Tỷ-kheo trú, nhiệt tâm, tỉnh giác, chánh niệm, để chế ngự tham ưu ở đời.<br>
+<span lang="pi" class="pali">
+citte cittānupassī, bhikkhave, tasmiṁ samaye bhikkhu viharati ātāpī sampajāno satimā vineyya loke abhijjhādomanassaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này các Tỷ-kheo, sự tu tập nhập tức xuất tức niệm không thể đến với kẻ thất niệm, không có tỉnh giác.<br>
+<span lang="pi" class="pali">
+Nāhaṁ, bhikkhave, muṭṭhassatissa asampajānassa ānāpānassatiṁ vadāmi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Do vậy, này các Tỷ-kheo, trong khi tùy quán tâm trên tâm, Tỷ-kheo trú, nhiệt tâm, tỉnh giác, chánh niệm để chế ngự tham ưu ở đời.<br>
+<span lang="pi" class="pali">
+Tasmātiha, bhikkhave, citte cittānupassī tasmiṁ samaye bhikkhu viharati ātāpī sampajāno satimā vineyya loke abhijjhādomanassaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Khi nào này các Tỷ-kheo, Tỷ-kheo nghĩ: ‘Quán vô thường, tôi sẽ thở vô’, vị ấy tập. ‘Quán vô thường, tôi sẽ thở ra’, vị ấy tập.<br>
+<span lang="pi" class="pali">
+Yasmiṁ samaye, bhikkhave, bhikkhu ‘aniccānupassī assasissāmī’ti sikkhati, ‘aniccānupassī passasissāmī’ti sikkhati;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Quán ly tham….<br>
+<span lang="pi" class="pali">
+‘virāgānupassī assasissāmī’ti sikkhati, ‘virāgānupassī passasissāmī’ti sikkhati;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘quán đoạn diệt…<br>
+<span lang="pi" class="pali">
+‘nirodhānupassī assasissāmī’ti sikkhati, ‘nirodhānupassī passasissāmī’ti sikkhati;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘quán từ bỏ, tôi sẽ thở vô’, vị ấy tập. ‘Quán từ bỏ, tôi sẽ thở ra’, vị ấy tập.<br>
+<span lang="pi" class="pali">
+‘paṭinissaggānupassī assasissāmī’ti sikkhati, ‘paṭinissaggānupassī passasissāmī’ti sikkhati;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Trong khi tùy quán trên các pháp, này các Tỷ-kheo, Tỷ-kheo an trú, nhiệt tâm, tỉnh giác, chánh niệm để chế ngự tham ưu ở đời.<br>
+<span lang="pi" class="pali">
+dhammesu dhammānupassī, bhikkhave, tasmiṁ samaye bhikkhu viharati ātāpī sampajāno satimā vineyya loke abhijjhādomanassaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vị ấy, do đoạn trừ tham ưu, sau khi thấy với trí tuệ, khéo nhìn sự vật với niệm xả ly.<br>
+<span lang="pi" class="pali">
+So yaṁ taṁ abhijjhādomanassānaṁ pahānaṁ taṁ paññāya disvā sādhukaṁ ajjhupekkhitā hoti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Do vậy, này các Tỷ-kheo, trong khi tùy quán pháp trên các pháp, Tỷ-kheo trú, nhiệt tâm, tỉnh giác, chánh niệm để chế ngự tham ưu ở đời.<br>
+<span lang="pi" class="pali">
+Tasmātiha, bhikkhave, dhammesu dhammānupassī tasmiṁ samaye bhikkhu viharati ātāpī sampajāno satimā vineyya loke abhijjhādomanassaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Nhập tức xuất tức niệm, này các Tỷ-kheo, được tu tập như vậy, được làm cho sung mãn như vậy, khiến cho bốn niệm xứ được viên mãn.<br>
+<span lang="pi" class="pali">
+Evaṁ bhāvitā kho, bhikkhave, ānāpānassati evaṁ bahulīkatā cattāro satipaṭṭhāne paripūreti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Và bốn niệm xứ, này các Tỷ-kheo, được tu tập như thế nào, được làm sung mãn như thế nào, khiến cho bảy giác chi được viên mãn?<br>
+<span lang="pi" class="pali">
+Kathaṁ bhāvitā ca, bhikkhave, cattāro satipaṭṭhānā kathaṁ bahulīkatā satta bojjhaṅge paripūrenti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này các Tỷ-kheo, trong khi tùy quán thân trên thân, Tỷ-kheo trú, nhiệt tâm, tỉnh giác, chánh niệm để chế ngự tham ưu ở đời, trong khi ấy, niệm không hôn mê của vị ấy được an trú.<br>
+<span lang="pi" class="pali">
+Yasmiṁ samaye, bhikkhave, bhikkhu kāye kāyānupassī viharati ātāpī sampajāno satimā vineyya loke abhijjhādomanassaṁ, upaṭṭhitāssa tasmiṁ samaye sati hoti asammuṭṭhā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Trong khi niệm không hôn mê của vị ấy cũng được an trú, này các Tỷ-kheo, trong khi ấy niệm giác chi được bắt đầu khởi lên với Tỷ-kheo. Trong khi ấy, Tỷ-kheo tu tập niệm giác chi. Trong khi ấy, niệm giác chi được Tỷ-kheo tu tập đi đến viên mãn.<br>
+<span lang="pi" class="pali">
+Yasmiṁ samaye, bhikkhave, bhikkhuno upaṭṭhitā sati hoti asammuṭṭhā, satisambojjhaṅgo tasmiṁ samaye bhikkhuno āraddho hoti. Satisambojjhaṅgaṁ tasmiṁ samaye bhikkhu bhāveti, satisambojjhaṅgo tasmiṁ samaye bhikkhuno bhāvanāpāripūriṁ gacchati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vị ấy an trú với chánh niệm như vậy, suy tư, tư duy, thẩm sát pháp ấy với trí tuệ.<br>
+<span lang="pi" class="pali">
+So tathāsato viharanto taṁ dhammaṁ paññāya pavicinati pavicayati parivīmaṁsaṁ āpajjati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này các Tỷ-kheo, trong khi trú với chánh niệm như vậy, Tỷ-kheo với trí tuệ suy tư, tư duy, thẩm sát pháp ấy, trong khi ấy trạch pháp giác chi được bắt đầu khởi lên với Tỷ-kheo. Trong khi ấy, Tỷ-kheo tu tập trạch pháp giác chi. Trong khi ấy, trạch pháp giác chi được Tỷ-kheo tu tập đi đến viên mãn.<br>
+<span lang="pi" class="pali">
+Yasmiṁ samaye, bhikkhave, bhikkhu tathāsato viharanto taṁ dhammaṁ paññāya pavicinati pavicayati parivīmaṁsaṁ āpajjati, dhammavicayasambojjhaṅgo tasmiṁ samaye bhikkhuno āraddho hoti, dhammavicayasambojjhaṅgaṁ tasmiṁ samaye bhikkhu bhāveti, dhammavicayasambojjhaṅgo tasmiṁ samaye bhikkhuno bhāvanāpāripūriṁ gacchati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Trong khi Tỷ-kheo với trí tuệ suy tư, tư duy, thẩm sát pháp ấy, sự tinh tấn không thụ động bắt đầu khởi lên với vị Tỷ-kheo.<br>
+<span lang="pi" class="pali">
+Tassa taṁ dhammaṁ paññāya pavicinato pavicayato parivīmaṁsaṁ āpajjato āraddhaṁ hoti vīriyaṁ asallīnaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này các Tỷ-kheo, trong khi Tỷ-kheo với trí tuệ suy tư, tư duy, thẩm sát pháp ấy, trong khi ấy sự tinh tấn không thụ động bắt đầu khởi lên với Tỷ-kheo ấy. Trong khi ấy tinh tấn giác chi được bắt đầu khởi lên nơi Tỷ-kheo. Trong khi ấy, Tỷ-kheo tu tập tinh tấn giác chi. Trong khi ấy, tinh tấn giác chi được Tỷ-kheo tu tập đi đến viên mãn.<br>
+<span lang="pi" class="pali">
+Yasmiṁ samaye, bhikkhave, bhikkhuno taṁ dhammaṁ paññāya pavicinato pavicayato parivīmaṁsaṁ āpajjato āraddhaṁ hoti vīriyaṁ asallīnaṁ, vīriyasambojjhaṅgo tasmiṁ samaye bhikkhuno āraddho hoti, vīriyasambojjhaṅgaṁ tasmiṁ samaye bhikkhu bhāveti, vīriyasambojjhaṅgo tasmiṁ samaye bhikkhuno bhāvanāpāripūriṁ gacchati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Hỷ không liên hệ đến vật chất được khởi lên nơi vị tinh tấn tinh cần.<br>
+<span lang="pi" class="pali">
+Āraddhavīriyassa uppajjati pīti nirāmisā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này các Tỷ-kheo, trong khi hỷ không liên hệ đến vật chất khởi lên nơi Tỷ-kheo tinh tấn tinh cần, trong khi ấy, hỷ giác chi bắt đầu khởi lên nơi Tỷ-kheo. Trong khi ấy, hỷ giác chi được vị Tỷ-kheo tu tập. Trong khi ấy hỷ giác chi được Tỷ-kheo tu tập đi đến viên mãn.<br>
+<span lang="pi" class="pali">
+Yasmiṁ samaye, bhikkhave, bhikkhuno āraddhavīriyassa uppajjati pīti nirāmisā, pītisambojjhaṅgo tasmiṁ samaye bhikkhuno āraddho hoti, pītisambojjhaṅgaṁ tasmiṁ samaye bhikkhu bhāveti, pītisambojjhaṅgo tasmiṁ samaye bhikkhuno bhāvanāpāripūriṁ gacchati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Thân của vị ấy được tâm hoan hỷ trở thành khinh an, tâm cũng được khinh an.<br>
+<span lang="pi" class="pali">
+Pītimanassa kāyopi passambhati, cittampi passambhati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này các Tỷ-kheo, trong khi Tỷ-kheo với ý hoan hỷ được thân khinh an, được tâm cũng khinh an, trong khi ấy, khinh an giác chi bắt đầu khởi lên nơi Tỷ-kheo. Trong khi ấy, khinh an giác chi được Tỷ-kheo tu tập. Trong khi ấy, khinh an giác chi được Tỷ-kheo làm cho đi đến sung mãn.<br>
+<span lang="pi" class="pali">
+Yasmiṁ samaye, bhikkhave, bhikkhuno pītimanassa kāyopi passambhati, cittampi passambhati, passaddhisambojjhaṅgo tasmiṁ samaye bhikkhuno āraddho hoti, passaddhisambojjhaṅgaṁ tasmiṁ samaye bhikkhu bhāveti, passaddhisambojjhaṅgo tasmiṁ samaye bhikkhuno bhāvanāpāripūriṁ gacchati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Một vị có thân khinh an, an lạc, tâm vị ấy được định tĩnh.<br>
+<span lang="pi" class="pali">
+Passaddhakāyassa sukhino cittaṁ samādhiyati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này các Tỷ-kheo, trong khi Tỷ-kheo có thân khinh an, an lạc, tâm vị ấy được định tĩnh, trong khi ấy, định giác chi bắt đầu khởi lên nơi Tỷ-kheo. Trong khi ấy, định giác chi được Tỷ-kheo tu tập. Trong khi ấy định giác chi được Tỷ-kheo làm cho đi đến sung mãn.<br>
+<span lang="pi" class="pali">
+Yasmiṁ samaye, bhikkhave, bhikkhuno passaddhakāyassa sukhino cittaṁ samādhiyati, samādhisambojjhaṅgo tasmiṁ samaye bhikkhuno āraddho hoti, samādhisambojjhaṅgaṁ tasmiṁ samaye bhikkhu bhāveti, samādhisambojjhaṅgo tasmiṁ samaye bhikkhuno bhāvanāpāripūriṁ gacchati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vị ấy với tâm định tĩnh như vậy, khéo nhìn sự vật với ý niệm xả ly.<br>
+<span lang="pi" class="pali">
+So tathāsamāhitaṁ cittaṁ sādhukaṁ ajjhupekkhitā hoti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này các Tỷ-kheo, trong khi Tỷ-kheo với tâm định tĩnh như vậy, khéo nhìn sự vật với ý niệm xả ly, trong khi ấy, xả giác chi bắt đầu khởi lên nơi Tỷ-kheo. Trong khi ấy, xả giác chi được Tỷ-kheo tu tập. Trong khi ấy xả giác chi, được Tỷ-kheo làm cho đến sung mãn.<br>
+<span lang="pi" class="pali">
+Yasmiṁ samaye, bhikkhave, bhikkhu tathāsamāhitaṁ cittaṁ sādhukaṁ ajjhupekkhitā hoti, upekkhāsambojjhaṅgo tasmiṁ samaye bhikkhuno āraddho hoti, upekkhāsambojjhaṅgaṁ tasmiṁ samaye bhikkhu bhāveti, upekkhāsambojjhaṅgo tasmiṁ samaye bhikkhuno bhāvanāpāripūriṁ gacchati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này các Tỷ-kheo, trong khi quán thọ trên các cảm thọ …<br>
+<span lang="pi" class="pali">
+Yasmiṁ samaye, bhikkhave, bhikkhu vedanāsu …pe…<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này các Tỷ-kheo, trong khi quán tâm trên tâm …<br>
+<span lang="pi" class="pali">
+citte …<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này các Tỷ-kheo, trong khi quán pháp trên các pháp, Tỷ-kheo an trú, nhiệt tâm, tỉnh giác, chánh niệm với mục đích điều phục tham ưu ở đời, trong khi ấy niệm của vị ấy được an trú, không có hôn mê.<br>
+<span lang="pi" class="pali">
+dhammesu dhammānupassī viharati ātāpī sampajāno satimā vineyya loke abhijjhādomanassaṁ, upaṭṭhitāssa tasmiṁ samaye sati hoti asammuṭṭhā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này các Tỷ-kheo, trong khi niệm của Tỷ-kheo được an trú, không có hôn mê, niệm giác chi, trong khi ấy, được bắt đầu khởi lên nơi Tỷ-kheo. Niệm giác chi trong khi ấy được Tỷ-kheo tu tập. Niệm giác chi trong khi ấy, được Tỷ-kheo làm cho đi đến sung mãn.<br>
+<span lang="pi" class="pali">
+Yasmiṁ samaye, bhikkhave, bhikkhuno upaṭṭhitā sati hoti asammuṭṭhā, satisambojjhaṅgo tasmiṁ samaye bhikkhuno āraddho hoti, satisambojjhaṅgaṁ tasmiṁ samaye bhikkhu bhāveti, satisambojjhaṅgo tasmiṁ samaye bhikkhuno bhāvanāpāripūriṁ gacchati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vị ấy an trú với chánh niệm như vậy, suy tư, tư duy, thẩm sát pháp ấy với trí tuệ.<br>
+<span lang="pi" class="pali">
+So tathāsato viharanto taṁ dhammaṁ paññāya pavicinati pavicayati parivīmaṁsaṁ āpajjati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này các Tỷ-kheo, trong khi an trú với chánh niệm như vậy, vị ấy suy tư, tư duy, thẩm sát pháp ấy với trí tuệ. Trạch pháp giác chi trong khi ấy được bắt đầu khởi lên nơi Tỷ-kheo. Trạch pháp giác chi trong khi ấy được Tỷ-kheo tu tập. Trạch pháp giác chi trong khi ấy, được Tỷ-kheo làm cho đến sung mãn.<br>
+<span lang="pi" class="pali">
+Yasmiṁ samaye, bhikkhave, bhikkhu tathāsato viharanto taṁ dhammaṁ paññāya pavicinati pavicayati parivīmaṁsaṁ āpajjati, dhammavicayasambojjhaṅgo tasmiṁ samaye bhikkhuno āraddho hoti, dhammavicayasambojjhaṅgaṁ tasmiṁ samaye bhikkhu bhāveti, dhammavicayasambojjhaṅgo tasmiṁ samaye bhikkhuno bhāvanāpāripūriṁ gacchati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Trong khi Tỷ-kheo với trí tuệ suy tư, tư duy, thẩm sát pháp ấy, sự tinh tấn không thụ động bắt đầu khởi lên với vị Tỷ-kheo.<br>
+<span lang="pi" class="pali">
+Tassa taṁ dhammaṁ paññāya pavicinato pavicayato parivīmaṁsaṁ āpajjato āraddhaṁ hoti vīriyaṁ asallīnaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này các Tỷ-kheo, trong khi Tỷ-kheo suy tư, tư duy, thẩm sát pháp ấy với trí tuệ, và tinh tấn không thụ động bắt đầu khởi lên nơi vị ấy, tinh tấn giác chi trong khi ấy bắt đầu khởi lên nơi vị Tỷ-kheo. Tinh tấn giác chi được Tỷ-kheo tu tập. Tinh tấn giác chi được Tỷ-kheo làm cho đi đến sung mãn.<br>
+<span lang="pi" class="pali">
+Yasmiṁ samaye, bhikkhave, bhikkhuno taṁ dhammaṁ paññāya pavicinato pavicayato parivīmaṁsaṁ āpajjato āraddhaṁ hoti vīriyaṁ asallīnaṁ, vīriyasambojjhaṅgo tasmiṁ samaye bhikkhuno āraddho hoti, vīriyasambojjhaṅgaṁ tasmiṁ samaye bhikkhu bhāveti, vīriyasambojjhaṅgo tasmiṁ samaye bhikkhuno bhāvanāpāripūriṁ gacchati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ðối với vị ấy, tinh cần tinh tấn, hỷ không liên hệ đến vật chất khởi lên.<br>
+<span lang="pi" class="pali">
+Āraddhavīriyassa uppajjati pīti nirāmisā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này các Tỷ-kheo, trong khi Tỷ-kheo tinh cần tinh tấn và hỷ không liên hệ đến vật chất khởi lên, hỷ giác chi trong khi ấy bắt đầu được khởi lên nơi Tỷ-kheo. Hỷ giác chi trong khi ấy được Tỷ-kheo tu tập. Hỷ giác chi trong khi ấy được Tỷ-kheo làm cho đi đến sung mãn.<br>
+<span lang="pi" class="pali">
+Yasmiṁ samaye, bhikkhave, bhikkhuno āraddhavīriyassa uppajjati pīti nirāmisā, pītisambojjhaṅgo tasmiṁ samaye bhikkhuno āraddho hoti, pītisambojjhaṅgaṁ tasmiṁ samaye bhikkhu bhāveti, pītisambojjhaṅgo tasmiṁ samaye bhikkhuno bhāvanāpāripūriṁ gacchati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Thân của vị ấy được tâm hoan hỷ trở thành khinh an, tâm cũng được khinh an.<br>
+<span lang="pi" class="pali">
+Pītimanassa kāyopi passambhati, cittampi passambhati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này các Tỷ-kheo, trong khi Tỷ-kheo với ý hoan hỷ được thân khinh an, được tâm cũng khinh an, trong khi ấy khinh an giác chi bắt đầu khởi lên nơi Tỷ-kheo. Trong khi ấy, khinh an giác chi được Tỷ-kheo tu tập. Trong khi ấy, khinh an giác chi được Tỷ-kheo làm cho đi đến sung mãn.<br>
+<span lang="pi" class="pali">
+Yasmiṁ samaye, bhikkhave, bhikkhuno pītimanassa kāyopi passambhati, cittampi passambhati, passaddhisambojjhaṅgo tasmiṁ samaye bhikkhuno āraddho hoti, passaddhisambojjhaṅgaṁ tasmiṁ samaye bhikkhu bhāveti, passaddhisambojjhaṅgo tasmiṁ samaye bhikkhuno bhāvanāpāripūriṁ gacchati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Một vị có tâm khinh an, an lạc, tâm vị ấy được định tĩnh.<br>
+<span lang="pi" class="pali">
+Passaddhakāyassa sukhino cittaṁ samādhiyati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này các Tỷ-kheo, trong khi vị ấy có thân khinh an, an lạc, tâm vị ấy được định tĩnh, trong khi ấy định giác chi bắt đầu khởi lên nơi Tỷ-kheo. Trong khi ấy, định giác chi được Tỷ-kheo tu tập. Trong khi ấy định giác chi được Tỷ-kheo làm cho đi đến sung mãn.<br>
+<span lang="pi" class="pali">
+Yasmiṁ samaye, bhikkhave, bhikkhuno passaddhakāyassa sukhino cittaṁ samādhiyati, samādhisambojjhaṅgo tasmiṁ samaye bhikkhuno āraddho hoti, samādhisambojjhaṅgaṁ tasmiṁ samaye bhikkhu bhāveti, samādhisambojjhaṅgo tasmiṁ samaye bhikkhuno bhāvanāpāripūriṁ gacchati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vị ấy với tâm định tĩnh như vậy khéo nhìn sự vật với ý niệm xả ly.<br>
+<span lang="pi" class="pali">
+So tathāsamāhitaṁ cittaṁ sādhukaṁ ajjhupekkhitā hoti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này các Tỷ-kheo, trong khi Tỷ-kheo với tâm định tĩnh như vậy, khéo nhìn sự vật với ý niệm xả ly, trong khi ấy xả giác chi bắt đầu khởi lên nơi Tỷ-kheo. Trong khi ấy, xả giác chi được Tỷ-kheo tu tập. Trong khi ấy xả giác chi được Tỷ-kheo làm cho đi đến sung mãn.<br>
+<span lang="pi" class="pali">
+Yasmiṁ samaye, bhikkhave, bhikkhu tathāsamāhitaṁ cittaṁ sādhukaṁ ajjhupekkhitā hoti, upekkhāsambojjhaṅgo tasmiṁ samaye bhikkhuno āraddho hoti, upekkhāsambojjhaṅgaṁ tasmiṁ samaye bhikkhu bhāveti, upekkhāsambojjhaṅgo tasmiṁ samaye bhikkhuno bhāvanāpāripūriṁ gacchati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này các Tỷ-kheo, bốn niệm xứ được tu tập như vậy, được làm cho sung mãn như vậy khiến cho bảy giác chi được sung mãn.<br>
+<span lang="pi" class="pali">
+Evaṁ bhāvitā kho, bhikkhave, cattāro satipaṭṭhānā evaṁ bahulīkatā satta sambojjhaṅge paripūrenti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Và này các Tỷ-kheo, bảy giác chi được tu tập như thế nào, được làm cho sung mãn như thế nào, khiến cho minh giải thoát được viên mãn?<br>
+<span lang="pi" class="pali">
+Kathaṁ bhāvitā ca, bhikkhave, satta bojjhaṅgā kathaṁ bahulīkatā vijjāvimuttiṁ paripūrenti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ở đây, này các Tỷ-kheo, Tỷ-kheo tu tập niệm giác chi, liên hệ đến viễn ly, liên hệ đến ly tham, liên hệ đến diệt, hướng đến xả ly;<br>
+<span lang="pi" class="pali">
+Idha, bhikkhave, bhikkhu satisambojjhaṅgaṁ bhāveti vivekanissitaṁ virāganissitaṁ nirodhanissitaṁ vossaggapariṇāmiṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+tu tập trạch pháp giác chi…<br>
+<span lang="pi" class="pali">
+Dhammavicayasambojjhaṅgaṁ bhāveti …pe…<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+tu tập tinh tấn giác chi…<br>
+<span lang="pi" class="pali">
+vīriyasambojjhaṅgaṁ bhāveti …<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+tu tập hỷ giác chi…<br>
+<span lang="pi" class="pali">
+pītisambojjhaṅgaṁ bhāveti …<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+tu tập khinh an giác chi…<br>
+<span lang="pi" class="pali">
+passaddhisambojjhaṅgaṁ bhāveti …<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+tu tập định giác chi…<br>
+<span lang="pi" class="pali">
+samādhisambojjhaṅgaṁ bhāveti …<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+tu tập xả giác chi, liên hệ đến viễn ly, liên hệ đến ly tham, liên hệ đến diệt, hướng đến xả ly.<br>
+<span lang="pi" class="pali">
+upekkhāsambojjhaṅgaṁ bhāveti vivekanissitaṁ virāganissitaṁ nirodhanissitaṁ vossaggapariṇāmiṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này các Tỷ-kheo, bảy giác chi được tu tập như vậy, được làm cho sung mãn như vậy, khiến cho minh giải thoát được viên mãn.”<br>
+<span lang="pi" class="pali">
+Evaṁ bhāvitā kho, bhikkhave, satta bojjhaṅgā evaṁ bahulīkatā vijjāvimuttiṁ paripūrentī”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Thế Tôn thuyết giảng như vậy. Các Tỷ-kheo ấy hoan hỷ tín thọ lời Thế Tôn dạy.<br>
+<span lang="pi" class="pali">
+Idamavoca bhagavā. Attamanā te bhikkhū bhagavato bhāsitaṁ abhinandunti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+<span lang="pi" class="vi">
+Ānāpānassatisuttaṁ niṭṭhitaṁ aṭṭhamaṁ.<br>
+</span>
+</p>
+
+
+
+<!-- COPY CONTENT SUTTA Ở ĐÂY -->
+
+
+
+<br>
+<p><p style="text-align: right;font-style: italic;">Hoà Thượng Thích Minh Châu dịch Việt</span></p>
+
+
+
+
+
+
+
+
+</section>  <!-- End English and Pali -->
+<div id="nextprev"><a id="previous-sutta" href="./mn117.html#content"></a><a id="next-sutta" href="./mn119.html#content"></a></div>
+</div>  <!--End Content -->
+</div>  <!-- End Page -->
+
+
+
+
+
+
+<footer>
+					 <!-- End bottom links -->
+</footer>
+
+
+ 
+ <!-- Scripts -->
+
+ <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      if (typeof enablePaliLookup === "function") {
+        enablePaliLookup();
+      } else {
+        console.error("enablePaliLookup is not defined");
+      }
+    });
+  </script>
+
+ <script>
+ // Script to open and close sidebar
+ 	function w3_open() {
+ 	document.getElementById("mySidebar").style.display = "block";
+ 	}
+ 		function w3_close() {
+ 		document.getElementById("mySidebar").style.display = "none";
+ 	}
+ </script>
+ <script>
+ 		var app = document.getElementsByTagName("BODY")[0];
+ 		if (localStorage.lightMode == "dark") {
+ 			app.setAttribute("light-mode", "dark");
+ 	}
+ </script>
+ 
+ <script>
+ 		function toggle_light_mode() {
+ 			var app = document.getElementsByTagName("BODY")[0];
+ 				if (localStorage.lightMode == "dark") {
+ 			localStorage.lightMode = "light";
+ 			app.setAttribute("light-mode", "light");
+ 		} else {
+ 					localStorage.lightMode = "dark";
+ 					app.setAttribute("light-mode", "dark");
+ 	}
+ 		}
+ 
+ 		window.addEventListener("storage", function () {
+ 			if (localStorage.lightMode == "dark") {
+ 				app.setAttribute("light-mode", "dark");
+ 				} else {
+ 				app.setAttribute("light-mode", "light");
+ 		}
+ 		}, false);
+ 
+ </script>
+ <script src="../js/footer.js"></script><script src="../js/dpd_deconstructor.js"></script><script src="../js/dpd_ebts.js"></script><script src="../js/dpd_i2h.js"></script>
+ <script src="/sw.js"></script>
+ </body>
+ </html>

@@ -1,0 +1,1232 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+ 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+ 	<link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+ 	<meta name="viewport" content="width=device-width, initial-scale=1">
+		<!-- Loading manifest -->
+	<link rel="manifest" href="../manifest.json">
+ 	<!-- Loading main and menu stylesheets -->
+ 	<link rel="stylesheet" href="../css/w3.css">
+ 	<link rel="stylesheet" href="../css/css.css">
+ 	<link rel="stylesheet" href="../css/menu.css">
+ 	<script src="../js/jquery-1.10.2.min.js"></script>
+ 	<script src="../js/controlpanel.js"></script>
+ 	<script src="../js/mousetrap.min.js"></script>
+    <script src="../js/pali-lookup-standalone.js"></script>
+
+ <script src="../js/suttaFiles.js"></script>
+<script>
+ // Script to open random Sutta
+ function openRandomSutta() {
+  const randomIndex = Math.floor(Math.random() * suttaFiles.length);
+  const selectedFile = suttaFiles[randomIndex];
+
+  // Get root path of your site 
+  const currentPath = location.pathname;
+  const rootPath = currentPath.split("/").slice(0, -2).join("/") + "/";
+
+  // Redirect to the correct file
+  window.location.href = rootPath + selectedFile;
+}
+</script>
+
+
+</head>
+ <body class="container">
+ <div class="header-background">
+ <!-- Header -->
+ <div class="w3-header w3-content w3-padding w3-left-align bwcontainer">
+ 	<div class="centered">
+ 		<button class="light-mode-button" aria-label="Bật Chế Độ Sáng" onclick="toggle_light_mode()">
+ 			<span></span>
+ 			<span></span>
+ 		</button>
+ 		<span class="box-lbl">Sáng/Tối</span>
+ 	</div> <!-- Centered -->
+ 		<a href="../home/index.html" id="bwlogo"><img src="../images/headerlogo.png" alt="Logo Lời Của Đức Phật" class="w3-image"></a>
+ 		<div class="w3-bar bwcontainer">
+ 			<div id="searchlinks">
+ 			<a href="../home/visearch.html"><span class="w3-bar-item"><i class="fa fa-search"></i>&nbsp;Tìm Tiếng Việt</span></a>
+ 			<a href="../home/palisearch.html"><span class="w3-bar-item"><i class="fa fa-search"></i>&nbsp;Tìm Tiếng Pali</span></a>
+ 			</div><!-- End Searchlinks div -->
+ 			<div class="help"><span><a href="../home/help.html"><img src="../images/help_icon.png" title="Trợ Giúp" alt="Help"></a></span></div>
+ 		</div> <!-- End w3-bar bwcontainer --> 	</div> <!-- End w3-header w3-content w3-padding w3-left-align bwcontainer -->
+ </div> <!-- End header-background -->
+ <!-- Top menu -->
+
+ <div class="w3-main w3-white bwcontainer2">
+ 	<div class="w3-button w3-padding-8 w3-left w3-hide-large" onclick="w3_open()">☰</div>
+ 		<div id="navbar" class="w3-hide-small w3-hide-medium bwcontainer3">
+ 			<ul id="css3menu0">
+ 				<li class="topfirst" id="home"><a href="../home/index.html" class="w3-hide-small">Trang Chủ</a></li>
+  				<li class="topmenu" id="dn"><a href="../dn/dn.html" class="pressed w3-hide-small">Trường Bộ Kinh</a></li>
+ 				<li class="topmenu" id="mn"><a href="../mn/mn.html" class="w3-hide-small">Trung Bộ Kinh</a></li>
+ 				<li class="topmenu" id="sn"><a href="../sn/sn.html" class="w3-hide-small"><i class="fa fa-caret-down"></i>&nbsp;Tương Ưng Bộ Kinh</a>
+ 					<ul>
+ 						<li><a href="../sn/sn01.html" class="w3-hide-small">Tập I - Thiên Có Kệ</a></li>
+ 						<li><a href="../sn/sn02.html" class="w3-hide-small">Tập II - Thiên Nhân Duyên</a></li>
+ 						<li><a href="../sn/sn03.html" class="w3-hide-small">Tập III - Thiên Uẩn</a></li>
+ 						<li><a href="../sn/sn04.html" class="w3-hide-small">Tập IV - Thiên Sáu Xứ</a></li>
+ 						<li><a href="../sn/sn05.html" class="w3-hide-small">Tập V - Thiên Ðại Phẩm</a></li>
+ 					</ul>
+ 				<li class="topmenu" id="an"><a href="../an/an.html" class="w3-hide-small"><i class="fa fa-caret-down"></i>&nbsp;Tăng Chi Bộ Kinh</a>
+ 					<ul>
+ 						<li><a href="../an/an1.html" class="w3-hide-small">Chương Một Pháp</a></li>
+ 						<li><a href="../an/an2.html" class="w3-hide-small">Chương Hai Pháp</a></li>
+ 						<li><a href="../an/an3.html" class="w3-hide-small">Chương Ba Pháp</a></li>
+ 						<li><a href="../an/an4.html" class="w3-hide-small">Chương Bốn Pháp</a></li>
+ 						<li><a href="../an/an5.html" class="w3-hide-small">Chương Năm Pháp</a></li>
+ 						<li><a href="../an/an6.html" class="w3-hide-small">Chương Sáu Pháp</a></li>
+ 						<li><a href="../an/an7.html" class="w3-hide-small">Chương Bảy Pháp</a></li>
+ 						<li><a href="../an/an8.html" class="w3-hide-small">Chương Tám Pháp</a></li>
+ 						<li><a href="../an/an9.html" class="w3-hide-small">Chương Chín Pháp</a></li>
+ 						<li><a href="../an/an10.html" class="w3-hide-small">Chương Mười Pháp</a></li>
+ 						<li><a href="../an/an11.html" class="w3-hide-small">Chương Mười Một Pháp</a></li>
+ 					</ul>
+ 				</li>
+ 				<li class="topmenu" id="kn"><a href="../kn/kn.html" class="w3-hide-small"><i class="fa fa-caret-down"></i>&nbsp;Tiểu Bộ Kinh</a>
+ 					<ul>
+ 						<li><a href="../kp/kp.html" class="w3-hide-small">Kinh Tiểu Tụng</a></li>
+ 						<li><a href="../dhp/dhp.html" class="w3-hide-small">Kinh Pháp Cú</a></li>
+ 						<li><a href="../snp/snp.html" class="w3-hide-small">Kinh Tập</a></li>
+ 						<li><a href="../ud/ud.html" class="w3-hide-small">Kinh Phật Tự Thuyết</a></li>
+ 						<li><a href="../it/it.html" class="w3-hide-small">Kinh Phật Thuyết Như Vậy</a></li>
+ 						<li><a href="../tha/tha.html" class="w3-hide-small">Trưởng Lão Tăng Kệ</a></li>
+ 						<li><a href="../thi/thi.html" class="w3-hide-small">Trưởng Lão Ni Kệ</a></li>
+ 					</ul>
+ 				</li>
+				<li class="toplast" id="rd"><a href="../rd/rd.html" class="w3-hide-small"></i>Kinh Ngẫu Nhiên Theo Nhóm</a>
+ 					</ul>
+ 				</li>
+ 			</ul>
+ 			</div>
+ 		</div> <!--navbar-->
+
+<!-- Sidebar (hidden by default) -->
+ <nav class="w3-sidebar w3-bar-block w3-card w3-border w3-top w3-animate-left w3-hide-large" id="mySidebar">
+ 	<a href="javascript:void(0)" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-times fa-2x red-color"></i>&nbsp;&nbsp;&nbsp;Close</a><!-- Hides the sidebar when clicked -->
+ 		<div class="w3-bar-block w3-white">
+ 			<a href="../home/index.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-home fa-lg"></i>&nbsp;&nbsp;&nbsp;Home</a>
+ 			<a href="../guide/guide.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Guide</a>
+ 			<a href="../dn/dn.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Trường Bộ Kinh</a>
+ 			<a href="../mn/mn.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Trung Bộ Kinh</a>
+ 			<a href="../sn/sn.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Tương Ưng Bộ Kinh</a>
+ 			<a href="../an/an.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Tăng Chi Bộ Kinh
+ 			<a href="../kn/kn.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Tiểu Bộ Kinh</a>
+			<a href="../rd/rd.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>Kinh Ngẫu Nhiên Theo Nhóm</a>
+ 		</div>
+ </nav>
+ 
+ 
+ 
+   <!-- !PAGE CONTENT! --> 
+<div class="w3-main w3-content w3-padding w3-left-align bwcontainer4">
+<div id="content">
+<h2>Majjhima Nikāya - Trung Bộ Kinh</h2>
+<h5><span style="font-style: italic;">Hoà Thượng Thích Minh Châu dịch Việt</span></h5>
+
+</div>
+
+<br>
+ 	<title>        Trung Bộ 104          </title>
+
+<p lang="vi" class="vi"; style="text-align: center">
+Trung Bộ 104<br>
+<span lang="pi" class="pali">
+Majjhima Nikāya 104<br>
+</span>
+</p>
+
+
+<p lang="vi" class="vi"; style="text-align: center">
+Kinh Sāmagāma<br>
+<span lang="pi" class="pali">
+Sāmagāmasutta<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Như vầy tôi nghe.<br>
+<span lang="pi" class="pali">
+Evaṁ me sutaṁ—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Một thời Thế Tôn trú ở giữa các vị Sakka (Thích Ca), tại làng Sāma (Xá-di thôn).<br>
+<span lang="pi" class="pali">
+ekaṁ samayaṁ bhagavā sakkesu viharati sāmagāme.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Lúc bấy giờ, Nigantha Nataputta vừa mới tạ thế ở Pāvā.<br>
+<span lang="pi" class="pali">
+Tena kho pana samayena nigaṇṭho nāṭaputto pāvāyaṁ adhunākālaṅkato hoti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Sau khi vị này tạ thế, các vị Nigantha chia ra làm hai phái, chia rẽ nhau, tranh chấp nhau, tranh luận nhau và sống tàn hại nhau với binh khí miệng lưỡi:<br>
+<span lang="pi" class="pali">
+Tassa kālaṅkiriyāya bhinnā nigaṇṭhā dvedhikajātā bhaṇḍanajātā kalahajātā vivādāpannā aññamaññaṁ mukhasattīhi vitudantā viharanti:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Ông không biết Pháp và Luật này, ta biết Pháp và Luật  này. Sao Ông có thể biết Pháp và Luật  này? Ông theo tà hạnh, ta theo chánh hạnh. Lời nói ta tương ưng, lời nói Ông không tương ưng. Ðiều đáng nói trước, Ông nói sau; điều đáng nói sau, Ông nói trước. Ðiều Ông quan niệm, trình bày đã bị đảo lộn. Quan điểm của Ông đã bị thách đố. Ông đã bị đánh bại. Hãy đi giải tỏa quan điểm của Ông. Hãy tự thoát khỏi bế tắc nếu Ông có thể làm được!”<br>
+<span lang="pi" class="pali">
+“na tvaṁ imaṁ dhammavinayaṁ ājānāsi, ahaṁ imaṁ dhammavinayaṁ ājānāmi. Kiṁ tvaṁ imaṁ dhammavinayaṁ ājānissasi. Micchāpaṭipanno tvamasi, ahamasmi sammāpaṭipanno. Sahitaṁ me, asahitaṁ te. Purevacanīyaṁ pacchā avaca, pacchāvacanīyaṁ pure avaca. Adhiciṇṇaṁ te viparāvattaṁ. Āropito te vādo. Niggahitosi, cara vādappamokkhāya; nibbeṭhehi vā sace pahosī”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Hình như các đệ tử của Nigantha Nataputta muốn tàn hại lẫn nhau.<br>
+<span lang="pi" class="pali">
+Vadhoyeva kho maññe nigaṇṭhesu nāṭaputtiyesu vattati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Chính các đệ tử cư sĩ mặc đồ trắng của Nigantha Nataputta cũng chán ngấy, cơ hiềm, và phản đối các Nigantha, vì pháp luật của họ đã được trình bày, tuyên bố một cách vụng về, không có hiệu năng hướng dẫn, không hướng đến an tịnh, không do vị Chánh Ðẳng Giác tuyên thuyết, tháp y chỉ đã bị đổ vỡ, không có chỗ y chỉ.<br>
+<span lang="pi" class="pali">
+Yepi nigaṇṭhassa nāṭaputtassa sāvakā gihī odātavasanā tepi nigaṇṭhesu nāṭaputtiyesu nibbinnarūpā virattarūpā paṭivānarūpā yathā taṁ durakkhāte dhammavinaye duppavedite aniyyānike anupasamasaṁvattanike asammāsambuddhappavedite bhinnathūpe appaṭisaraṇe.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Rồi Sa-di Cunda, sau khi an cư mùa mưa ở Pāvā, đến thăm Tôn giả Ānanda ở làng Sāma, sau khi đến, đảnh lễ Tôn giả Ānanda và ngồi xuống một bên. Sau khi ngồi xuống một bên, Sa-di Cunda bạch Tôn giả Ānanda:<br>
+<span lang="pi" class="pali">
+Atha kho cundo samaṇuddeso pāvāyaṁ vassaṁvuṭṭho yena sāmagāmo yenāyasmā ānando tenupasaṅkami; upasaṅkamitvā āyasmantaṁ ānandaṁ abhivādetvā ekamantaṁ nisīdi. Ekamantaṁ nisinno kho cundo samaṇuddeso āyasmantaṁ ānandaṁ etadavoca:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Bạch Tôn giả, Nigantha Nataputtta đã từ trần ở Pāvā. Sau khi vị này tạ thế, các Nigantha chia ra làm hai phái… tháp y chỉ đã bị đổ vỡ, không có chỗ y chỉ.”<br>
+<span lang="pi" class="pali">
+“nigaṇṭho, bhante, nāṭaputto pāvāyaṁ adhunākālaṅkato. Tassa kālaṅkiriyāya bhinnā nigaṇṭhā dvedhikajātā …pe… bhinnathūpe appaṭisaraṇe”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Khi nghe nói vậy, Tôn giả Ānanda nói với Sa di Cunda:<br>
+<span lang="pi" class="pali">
+Evaṁ vutte, āyasmā ānando cundaṁ samaṇuddesaṁ etadavoca:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Này Hiền giả Cunda, đây là vấn đề đáng đưa ra để yết kiến Thế Tôn.<br>
+<span lang="pi" class="pali">
+“atthi kho idaṁ, āvuso cunda, kathāpābhataṁ bhagavantaṁ dassanāya.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Hiền giả Cunda, chúng ta hãy đi yết kiến Thế Tôn; sau khi đến, chúng ta hãy trình bày vấn đề này để Thế Tôn biết.”<br>
+<span lang="pi" class="pali">
+Āyāma, āvuso cunda, yena bhagavā tenupasaṅkamissāma; upasaṅkamitvā etamatthaṁ bhagavato ārocessāmā”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Thưa vâng, Tôn giả”. Sa di Cunda vâng lời Tôn giả Ānanda.<br>
+<span lang="pi" class="pali">
+“Evaṁ, bhante”ti kho cundo samaṇuddeso āyasmato ānandassa paccassosi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Rồi Tôn giả Ānanda cùng với Sa di Cunda đi đến yết kiến Thế Tôn, sau khi đến, đảnh lễ Ngài và ngồi xuống một bên. Sau khi ngồi xuống một bên, Tôn giả Ānanda bạch Thế Tôn:<br>
+<span lang="pi" class="pali">
+Atha kho āyasmā ca ānando cundo ca samaṇuddeso yena bhagavā tenupasaṅkamiṁsu; upasaṅkamitvā bhagavantaṁ abhivādetvā ekamantaṁ nisīdiṁsu. Ekamantaṁ nisinno kho āyasmā ānando bhagavantaṁ etadavoca:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Bạch Thế Tôn, Sa di Cunda có nói:<br>
+<span lang="pi" class="pali">
+“ayaṁ, bhante, cundo samaṇuddeso evamāha:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Nigantha Nataputta đã từ trần ở Pāvā. Sau khi vị này từ trần, các vị Nigantha chia ra làm hai phái … tháp y chỉ đã bị đổ vỡ, không có chỗ y chỉ’.<br>
+<span lang="pi" class="pali">
+‘nigaṇṭho, bhante, nāṭaputto pāvāyaṁ adhunākālaṅkato. Tassa kālaṅkiriyāya bhinnā nigaṇṭhā dvedhikajātā …pe… bhinnathūpe appaṭisaraṇe’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Bạch Thế Tôn, con nghĩ như sau:<br>
+<span lang="pi" class="pali">
+Tassa mayhaṁ, bhante, evaṁ hoti:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Sau khi Thế Tôn nhập diệt, chớ để cho tranh luận khởi lên giữa Tăng chúng.<br>
+<span lang="pi" class="pali">
+‘mā heva bhagavato accayena saṅghe vivādo uppajji;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Tranh luận ấy đưa đến sự bất an cho đa số, bất hạnh cho đa số, thất lợi cho đa số, bất an, đau khổ cho loài Trời, loài người’.”<br>
+<span lang="pi" class="pali">
+svāssa vivādo bahujanāhitāya bahujanāsukhāya bahuno janassa anatthāya ahitāya dukkhāya devamanussānan’”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Này Ānanda, Ông nghĩ thế nào?<br>
+<span lang="pi" class="pali">
+“Taṁ kiṁ maññasi, ānanda,<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Những pháp Ta dạy cho các Ông với thượng trí, như:<br>
+<span lang="pi" class="pali">
+ye vo mayā dhammā abhiññā desitā, seyyathidaṁ—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Bốn niệm xứ, Bốn chánh cần, Bốn như ý túc, Năm căn, Năm lực, Bảy Bồ đề phần, Thánh đạo tám ngành. Ông có thấy chăng, này Ānanda, có hai Tỷ-kheo đối với những pháp này tuyên bố sai khác nhau?”<br>
+<span lang="pi" class="pali">
+cattāro satipaṭṭhānā cattāro sammappadhānā cattāro iddhipādā pañcindriyāni pañca balāni satta bojjhaṅgā ariyo aṭṭhaṅgiko maggo, passasi no tvaṁ, ānanda, imesu dhammesu dvepi bhikkhū nānāvāde”ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Bạch Thế Tôn, những pháp Thế Tôn dạy cho con với thượng trí, như<br>
+<span lang="pi" class="pali">
+“Ye me, bhante, dhammā bhagavatā abhiññā desitā, seyyathidaṁ—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Bốn niệm xứ, Bốn chánh cần, Bốn như ý túc, Năm căn, Năm lực, Bảy Bồ đề phần, Thánh đạo tám ngành, con không thấy cho đến hai Tỷ-kheo đối với những pháp này tuyên bố sai khác nhau.<br>
+<span lang="pi" class="pali">
+cattāro satipaṭṭhānā cattāro sammappadhānā cattāro iddhipādā pañcindriyāni pañca balāni satta bojjhaṅgā ariyo aṭṭhaṅgiko maggo, nāhaṁ passāmi imesu dhammesu dvepi bhikkhū nānāvāde.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Bạch Thế Tôn, và những người nào sống y cứ sùng kính Thế Tôn, những người ấy sau khi Thế Tôn nhập diệt, có thể khởi lên những tranh luận giữa tăng chúng, hoặc về Tăng thượng hoạt mạng, hoặc về Tăng thượng Giới bổn (Patimokkha).<br>
+<span lang="pi" class="pali">
+Ye ca kho, bhante, puggalā bhagavantaṁ patissayamānarūpā viharanti tepi bhagavato accayena saṅghe vivādaṁ janeyyuṁ ajjhājīve vā adhipātimokkhe vā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Tranh luận ấy đem đến bất an cho đa số, bất hạnh cho đa số, bất an, đau khổ cho loài Trời, loài Người.”<br>
+<span lang="pi" class="pali">
+Svāssa vivādo bahujanāhitāya bahujanāsukhāya bahuno janassa anatthāya ahitāya dukkhāya devamanussānan”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Là nhỏ nhặt, này Ānanda, là sự tranh luận ấy, tức là tranh luận về Tăng thượng hoạt mạng hay Tăng thượng giới bổn.<br>
+<span lang="pi" class="pali">
+“Appamattako so, ānanda, vivādo yadidaṁ—ajjhājīve vā adhipātimokkhe vā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Ānanda, sự tranh luận khởi lên giữa Tăng chúng về con đường (magga) hay về đường hướng tu hành (patipada), sự tranh luận ấy mới đưa đến bất an cho đa số, thất lợi cho đa số, bất an, đau khổ cho loài Trời, loài Người.<br>
+<span lang="pi" class="pali">
+Magge vā hi, ānanda, paṭipadāya vā saṅghe vivādo uppajjamāno uppajjeyya; svāssa vivādo bahujanāhitāya bahujanāsukhāya bahuno janassa anatthāya ahitāya dukkhāya devamanussānaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Ānanda, có sáu căn bản tranh chấp này. Thế nào là sáu?<br>
+<span lang="pi" class="pali">
+Chayimāni, ānanda, vivādamūlāni. Katamāni cha?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ở đây, Tỷ-kheo phẫn nộ, sân hận.<br>
+<span lang="pi" class="pali">
+Idhānanda, bhikkhu kodhano hoti upanāhī.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Ānanda, vị Tỷ-kheo nào phẩn nộ, sân hận, vị ấy sống không cung kính, không tôn trọng bậc Ðạo sư; sống không cung kính, không tôn trọng Pháp; sống không cung kính, không tôn trọng Tăng chúng, và sống không viên mãn sự học tập.<br>
+<span lang="pi" class="pali">
+Yo so, ānanda, bhikkhu kodhano hoti upanāhī so sattharipi agāravo viharati appatisso, dhammepi agāravo viharati appatisso, saṅghepi agāravo viharati appatisso, sikkhāyapi na paripūrakārī hoti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Ānanda, Tỷ-kheo nào sống không cung kính, không tôn trọng bậc Ðạo sư; sống không cung kính, không tôn trọng Pháp; sống không cung kính, không tôn trọng Tăng chúng; và sống không viên mãn sự học tập, vị ấy khởi lên tranh luận giữa Tăng chúng. Sự tranh luận nào đưa đến bất an cho đa số, bất hạnh cho đa số, thất lợi cho đa số, bất an, đau khổ cho loài Trời, loài Người.<br>
+<span lang="pi" class="pali">
+Yo so, ānanda, bhikkhu satthari agāravo viharati appatisso, dhamme … saṅghe agāravo viharati appatisso, sikkhāya na paripūrakārī hoti, so saṅghe vivādaṁ janeti; yo hoti vivādo bahujanāhitāya bahujanāsukhāya, bahuno janassa anatthāya ahitāya dukkhāya devamanussānaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Ānanda, nếu Ông thấy căn bản tranh luận như vậy, giữa các Ông hay giữa các người khác, ở đây, này Ānanda, Ông phải tinh tấn đoạn trừ ác căn bản tranh luận ấy.<br>
+<span lang="pi" class="pali">
+Evarūpañce tumhe, ānanda, vivādamūlaṁ ajjhattaṁ vā bahiddhā vā samanupasseyyātha, tatra tumhe, ānanda, tasseva pāpakassa vivādamūlassa pahānāya vāyameyyātha.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Ānanda, nếu Ông không thấy căn bản tranh luận như vậy, giữa các Ông hay giữa các người khác; ở đây, này Ānanda, Ông phải theo một đường hướng để không có sự tiếp tục diễn tiến đến tương lai về ác căn bản tranh luận ấy.<br>
+<span lang="pi" class="pali">
+Evarūpañce tumhe, ānanda, vivādamūlaṁ ajjhattaṁ vā bahiddhā vā na samanupasseyyātha. Tatra tumhe, ānanda, tasseva pāpakassa vivādamūlassa āyatiṁ anavassavāya paṭipajjeyyātha.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Có sự đoạn diệt ác căn bản tranh luận ấy, như vậy mới không có sự tiếp tục diễn tiến đến tương lai về ác căn bản tranh luận ấy như vậy.<br>
+<span lang="pi" class="pali">
+Evametassa pāpakassa vivādamūlassa pahānaṁ hoti, evametassa pāpakassa vivādamūlassa āyatiṁ anavassavo hoti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Lại nữa này Ānanda, vị Tỷ-kheo hiềm hận não hại…<br>
+<span lang="pi" class="pali">
+Puna caparaṁ, ānanda, bhikkhu makkhī hoti paḷāsī …pe…<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+tật đố, xan tham…<br>
+<span lang="pi" class="pali">
+issukī hoti maccharī …pe…<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+gian manh, xảo trá…<br>
+<span lang="pi" class="pali">
+saṭho hoti māyāvī …pe…<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+ác dục tà kiến…<br>
+<span lang="pi" class="pali">
+pāpiccho hoti micchādiṭṭhi …pe…<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+chấp thủ thế trí, cố chấp, khó thuyết phục.<br>
+<span lang="pi" class="pali">
+sandiṭṭhiparāmāsī hoti ādhānaggāhī duppaṭinissaggī.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Ānanda, Tỷ-kheo nào chấp thủ thế trí, cố chấp khó thuyết phục, vị ấy sống không cung kính, không tôn trọng bậc Ðạo sư; sống không cung kính, không tôn trọng Pháp; sống không cung kính, không tôn trọng Tăng chúng; và sống không viên mãn sự học tập.<br>
+<span lang="pi" class="pali">
+Yo so, ānanda, bhikkhu sandiṭṭhiparāmāsī hoti ādhānaggāhī duppaṭinissaggī so sattharipi agāravo viharati appatisso, dhammepi agāravo viharati appatisso, saṅghepi agāravo viharati appatisso, sikkhāyapi na paripūrakārī hoti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Ānanda, vị Tỷ-kheo nào sống không cung kính, không tôn trọng bậc Ðạo sư; sống không cung kính, không tôn trọng Pháp; sống không cung kính, không tôn trọng Tăng chúng; và sống không viên mãn sự học tập, vị ấy khởi lên sự tranh luận giữa Tăng chúng. Sự tranh luận nào đưa đến bất an cho đa số, bất hạnh cho đa số, thất lợi cho đa số, bất an, đau khổ cho loài Trời, loài Người.<br>
+<span lang="pi" class="pali">
+Yo so, ānanda, bhikkhu satthari agāravo viharati appatisso, dhamme … saṅghe … sikkhāya na paripūrakārī hoti so saṅghe vivādaṁ janeti; yo hoti vivādo bahujanāhitāya bahujanāsukhāya, bahuno janassa anatthāya ahitāya dukkhāya devamanussānaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+này Ānanda, nếu Ông thấy căn bản tranh luận như vậy, giữa các Ông hay giữa các người khác, ở đây, này Ānanda, Ông phải tinh tấn đoạn trừ ác căn bản tranh luận ấy.<br>
+<span lang="pi" class="pali">
+Evarūpañce tumhe, ānanda, vivādamūlaṁ ajjhattaṁ vā bahiddhā vā samanupasseyyātha. Tatra tumhe, ānanda, tasseva pāpakassa vivādamūlassa pahānāya vāyameyyātha.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Ānanda, nếu Ông không thấy căn bản tranh luận như vậy, giữa các Ông hay giữa người khác, ở đây, này Ānanda, Ông phải theo một đường hướng để không có sự tiếp tục diễn tiến đến tương lai về ác căn bản tranh luận ấy.<br>
+<span lang="pi" class="pali">
+Evarūpañce tumhe, ānanda, vivādamūlaṁ ajjhattaṁ vā bahiddhā vā na samanupasseyyātha, tatra tumhe, ānanda, tasseva pāpakassa vivādamūlassa āyatiṁ anavassavāya paṭipajjeyyātha.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Có sự đoạn diệt ác căn bản tranh luận ấy, như vậy mới không có sự tiếp tục diễn tiến đến tương lai về ác căn bản tranh luận như vậy.<br>
+<span lang="pi" class="pali">
+Evametassa pāpakassa vivādamūlassa pahānaṁ hoti, evametassa pāpakassa vivādamūlassa āyatiṁ anavassavo hoti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Những pháp này, này Ānanda, là sáu căn bản tranh chấp.<br>
+<span lang="pi" class="pali">
+Imāni kho, ānanda, cha vivādamūlāni.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Ānanda, có bốn tránh sự này. Thế nào là bốn?<br>
+<span lang="pi" class="pali">
+Cattārimāni, ānanda, adhikaraṇāni. Katamāni cattāri?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Tránh sự khởi lên do tranh luận, tránh sự khởi lên do chỉ trích, tránh sự khởi lên do phạm giới tội, tránh sự khởi lên do trách nhiệm (kiccadhikaranam: hành tránh sự).<br>
+<span lang="pi" class="pali">
+Vivādādhikaraṇaṁ, anuvādādhikaraṇaṁ, āpattādhikaraṇaṁ, kiccādhikaraṇaṁ—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Những pháp này, này Ānanda, là bốn tránh sự.<br>
+<span lang="pi" class="pali">
+imāni kho, ānanda, cattāri adhikaraṇāni.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Nhưng này Ānanda, có bảy diệt tránh pháp này để giải quyết diệt trừ các tránh pháp thỉnh thoảng khởi lên:<br>
+<span lang="pi" class="pali">
+Satta kho panime, ānanda, adhikaraṇasamathā—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+phán quyết với sự hiện diện cần được ban cho (sammukhavinayo databbo: ưng dữ hiện tiền tỳ- ni), phán quyết ức niệm cần được ban cho (sativinayadatabbo: ưng dữ ức niệm tỳ-ni), phán quyết bất si cần được ban cho (amulhavinayo databbo: ưng dữ bất si tỳ-ni), quyết định tùy theo thú nhận (patinnaya karetabbam), quyết định đa số (yebhuya ssika: đa nhân mích tội), quyết định tùy theo giới tội người phạm (tassa papiyyasika), trải cỏ che lấp (tinavattha rako: như thảo phú địa).<br>
+<span lang="pi" class="pali">
+uppannuppannānaṁ adhikaraṇānaṁ samathāya vūpasamāya sammukhāvinayo dātabbo, sativinayo dātabbo, amūḷhavinayo dātabbo, paṭiññāya kāretabbaṁ, yebhuyyasikā, tassapāpiyasikā, tiṇavatthārako.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Ānanda, thế nào là phán quyết với sự hiện diện cần được ban cho?<br>
+<span lang="pi" class="pali">
+Kathañcānanda, sammukhāvinayo hoti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ở đây, này Ānanda, các Tỷ-kheo tranh chấp nhau: “Ðây là pháp, hay đây là phi pháp, hay đây là luật, hay đây là phi luật”.<br>
+<span lang="pi" class="pali">
+Idhānanda, bhikkhū vivadanti dhammoti vā adhammoti vā vinayoti vā avinayoti vā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Ānanda, tất cả các Tỷ-kheo ấy phải tập hợp hòa hợp với nhau, sau khi tập hợp, pháp quy chế (dhammanetti) phải được thảo luận, phân tích.<br>
+<span lang="pi" class="pali">
+Tehānanda, bhikkhūhi sabbeheva samaggehi sannipatitabbaṁ. Sannipatitvā dhammanetti samanumajjitabbā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Sau khi pháp quy chế được thảo luận, phân tích, ở đây, làm thế nào để đồng nhất đạt được, như vậy, tránh sự phải được giải quyết.<br>
+<span lang="pi" class="pali">
+Dhammanettiṁ samanumajjitvā yathā tattha sameti tathā taṁ adhikaraṇaṁ vūpasametabbaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Như vậy, này Ānanda, là phán quyết với sự hiện diện; và như vậy, ở đây là sự giải quyết một số tránh sự tức là dùng phán quyết với sự hiện diện.<br>
+<span lang="pi" class="pali">
+Evaṁ kho, ānanda, sammukhāvinayo hoti; evañca panidhekaccānaṁ adhikaraṇānaṁ vūpasamo hoti yadidaṁ—sammukhāvinayena.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Và này Ānanda, thế nào là quyết định đa số (yebbuyyasika)?<br>
+<span lang="pi" class="pali">
+Kathañcānanda, yebhuyyasikā hoti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Ānanda, nếu các Tỷ-kheo kia không có thể giải quyết tránh ấy tại trú xứ ấy,<br>
+<span lang="pi" class="pali">
+Te ce, ānanda, bhikkhū na sakkonti taṁ adhikaraṇaṁ tasmiṁ āvāse vūpasametuṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+thời này Ānanda, các vị Tỷ-kheo kia cần phải đi đến chỗ trú xứ có nhiều Tỷ-kheo hơn, tại đấy tất cả các Tỷ-kheo phải hòa đồng tập hợp lại;<br>
+<span lang="pi" class="pali">
+Tehānanda, bhikkhūhi yasmiṁ āvāse bahutarā bhikkhū so āvāso gantabbo. Tattha sabbeheva samaggehi sannipatitabbaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+sau khi tập hợp, pháp quy chế (dhammanetti) phải được thảo luận, phân tích.<br>
+<span lang="pi" class="pali">
+Sannipatitvā dhammanetti samanumajjitabbā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Sau khi pháp quy chế được thảo luận, phân tích, ở đây làm thế nào, để đồng nhất đạt được như vậy, tránh sự phải được giải quyết.<br>
+<span lang="pi" class="pali">
+Dhammanettiṁ samanumajjitvā yathā tattha sameti tathā taṁ adhikaraṇaṁ vūpasametabbaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Như vậy, này Ānanda, là sự giải quyết một số tránh sự tức là dùng sự quyết định đa số.<br>
+<span lang="pi" class="pali">
+Evaṁ kho, ānanda, yebhuyyasikā hoti, evañca panidhekaccānaṁ adhikaraṇānaṁ vūpasamo hoti yadidaṁ—yebhuyyasikāya.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Và này Ānanda, thế nào phán quyết ức niệm?<br>
+<span lang="pi" class="pali">
+Kathañcānanda, sativinayo hoti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ở đây, này Ānanda, các Tỷ-kheo buộc tội một Tỷ-kheo về một trọng tội như thế này, hoặc Ba-la-di, hoặc gần Ba-la-di, nói rằng:<br>
+<span lang="pi" class="pali">
+Idhānanda, bhikkhū bhikkhuṁ evarūpāya garukāya āpattiyā codenti pārājikena vā pārājikasāmantena vā:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Tôn giả có nhớ Tôn giả đã phạm trọng tội như thế này không, hoặc Ba-la-di, hoặc gần Ba-la-di?’<br>
+<span lang="pi" class="pali">
+‘saratāyasmā evarūpiṁ garukaṁ āpattiṁ āpajjitā pārājikaṁ vā pārājikasāmantaṁ vā’ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vị ấy trả lời như sau:<br>
+<span lang="pi" class="pali">
+So evamāha:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Chư Hiền, tôi không nhớ tôi đã phạm trọng tội như vậy, hoặc Ba-la-di (bất cộng trú), hoặc gần Ba-la-di’.<br>
+<span lang="pi" class="pali">
+‘na kho ahaṁ, āvuso, sarāmi evarūpiṁ garukaṁ āpattiṁ āpajjitā pārājikaṁ vā pārājikasāmantaṁ vā’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Như vậy, này Ānanda, một phán quyết ức niệm cần phải cho Tỷ-kheo ấy.<br>
+<span lang="pi" class="pali">
+Tassa kho, ānanda, bhikkhuno sativinayo dātabbo.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Như vậy, này Ānanda, là phán quyết ức niệm. Như vậy, ở đây là sự giải quyết một số tránh sự tức là nhờ phán quyết ức niệm.<br>
+<span lang="pi" class="pali">
+Evaṁ kho, ānanda, sativinayo hoti, evañca panidhekaccānaṁ adhikaraṇānaṁ vūpasamo hoti yadidaṁ—sativinayena.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Và này Ānanda, thế nào là phán quyết bất si?<br>
+<span lang="pi" class="pali">
+Kathañcānanda, amūḷhavinayo hoti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ở đây, này Ānanda, các Tỷ-kheo buộc tội một Tỷ-kheo về một trọng tội như thế này, hoặc Ba-la-di, hoặc gần Ba-la-di nói rằng:<br>
+<span lang="pi" class="pali">
+Idhānanda, bhikkhū bhikkhuṁ evarūpāya garukāya āpattiyā codenti pārājikena vā pārājikasāmantena vā:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Tôn giả có nhớ Tôn giả đã phạm trọng tội như thế này không, hoặc Ba-la-di, hoặc gần Ba-la-di?’<br>
+<span lang="pi" class="pali">
+‘saratāyasmā evarūpiṁ garukaṁ āpattiṁ āpajjitā pārājikaṁ vā pārājikasāmantaṁ vā’ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vị ấy trả lời như sau:<br>
+<span lang="pi" class="pali">
+So evamāha:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Chư Hiền, tôi không nhớ tôi đã phạm trọng tội như vậy, hoặc Ba-la-di, hoặc gần Ba-la-di’.<br>
+<span lang="pi" class="pali">
+‘na kho ahaṁ, āvuso, sarāmi evarūpiṁ garukaṁ āpattiṁ āpajjitā pārājikaṁ vā pārājikasāmantaṁ vā’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Tỷ-kheo ấy bị các vị Tỷ-kheo kia dồn ép phải thú nhận:<br>
+<span lang="pi" class="pali">
+Tamenaṁ so nibbeṭhentaṁ ativeṭheti:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Tôn giả hãy biết cho rõ ràng, nếu Tôn giả có nhớ có phạm trọng tội như thế này, hoặc Ba-la-di, hoặc gần Ba-la-di’.<br>
+<span lang="pi" class="pali">
+‘iṅghāyasmā sādhukameva jānāhi yadi sarasi evarūpiṁ garukaṁ āpattiṁ āpajjitā pārājikaṁ vā pārājikasāmantaṁ vā’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Tỷ-kheo ấy trả lời như sau:<br>
+<span lang="pi" class="pali">
+So evamāha:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Này Chư Hiền, tôi đã bị cuồng si, tâm trí tôi điên đảo;<br>
+<span lang="pi" class="pali">
+‘ahaṁ kho, āvuso, ummādaṁ pāpuṇiṁ cetaso vipariyāsaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+do tôi cuồng si như vậy, nhiều việc đã được tôi làm, tôi nói không xứng Sa-môn hạnh.<br>
+<span lang="pi" class="pali">
+Tena me ummattakena bahuṁ assāmaṇakaṁ ajjhāciṇṇaṁ bhāsitaparikkantaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vì bị cuồng si, tôi không nhớ đã làm như vậy’.<br>
+<span lang="pi" class="pali">
+Nāhaṁ taṁ sarāmi. Mūḷhena me etaṁ katan’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Ānanda, phán quyết bất si cần phải cho Tỷ-kheo ấy.<br>
+<span lang="pi" class="pali">
+Tassa kho, ānanda, bhikkhuno amūḷhavinayo dātabbo.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Như vậy, này Ānanda, là phán quyết bất si. Và như vậy, ở đây là sự giải quyết một số tránh pháp, tức là nhờ phán quyết bất si.<br>
+<span lang="pi" class="pali">
+Evaṁ kho, ānanda, amūḷhavinayo hoti, evañca panidhekaccānaṁ adhikaraṇānaṁ vūpasamo hoti yadidaṁ—amūḷhavinayena.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Và này Ānanda, thế nào là quyết định tùy theo thú nhận?<br>
+<span lang="pi" class="pali">
+Kathañcānanda, paṭiññātakaraṇaṁ hoti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ở đây, này Ānanda, bị buộc tội hay không bị buộc tội, Tỷ-kheo nhớ một giới tội, tỏ lộ, trình bày.<br>
+<span lang="pi" class="pali">
+Idhānanda, bhikkhu codito vā acodito vā āpattiṁ sarati, vivarati uttānīkaroti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Tỷ-kheo ấy phải đến một Tỷ-kheo lớn tuổi hơn, đắp y phía một bên vai, đảnh lễ chân vị ấy, ngồi gối hai chân, chấp tay và nói như sau:<br>
+<span lang="pi" class="pali">
+Tena, ānanda, bhikkhunā vuḍḍhataraṁ bhikkhuṁ upasaṅkamitvā ekaṁsaṁ cīvaraṁ katvā pāde vanditvā ukkuṭikaṁ nisīditvā añjaliṁ paggahetvā evamassa vacanīyo:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Bạch Tôn giả, tôi có phạm giới tội tên như thế này, nay xin sám hối’.<br>
+<span lang="pi" class="pali">
+‘ahaṁ, bhante, itthannāmaṁ āpattiṁ āpanno, taṁ paṭidesemī’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Tỷ-kheo kia nói như sau: ‘Ông có thấy chăng?’<br>
+<span lang="pi" class="pali">
+So evamāha: ‘passasī’ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Tôi có thấy!’<br>
+<span lang="pi" class="pali">
+‘Āma passāmī’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Ông có gìn giữ trong tương lai không?’<br>
+<span lang="pi" class="pali">
+‘Āyatiṁ saṁvareyyāsī’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Tôi sẽ gìn giữ’.<br>
+<span lang="pi" class="pali">
+‘Saṁvarissāmī’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Như vậy, này Ānanda, là quyết định tùy theo thú nhận, như vậy, ở đây là sự giải quyết một số tránh sự tức là nhờ quyết định tùy theo thú nhận.<br>
+<span lang="pi" class="pali">
+Evaṁ kho, ānanda, paṭiññātakaraṇaṁ hoti, evañca panidhekaccānaṁ adhikaraṇānaṁ vūpasamo hoti yadidaṁ—paṭiññātakaraṇena.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Và này Ānanda, thế nào là quyết định tùy theo giới tội người phạm?<br>
+<span lang="pi" class="pali">
+Kathañcānanda, tassapāpiyasikā hoti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ở đây, này Ānanda, các Tỷ-kheo buộc tội một Tỷ-kheo về một trọng tội như thế này, hoặc Ba-la-di, hoặc gần Ba-la-di, nói rằng:<br>
+<span lang="pi" class="pali">
+Idhānanda, bhikkhu bhikkhuṁ evarūpāya garukāya āpattiyā codeti pārājikena vā pārājikasāmantena vā:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Tôn giả có nhớ Tôn giả đã phạm trọng tội như thế này không, hoặc Ba-la-di, hoặc gần Ba-la-di?’<br>
+<span lang="pi" class="pali">
+‘saratāyasmā evarūpiṁ garukaṁ āpattiṁ āpajjitā pārājikaṁ vā pārājikasāmantaṁ vā’ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vị ấy trả lời như sau:<br>
+<span lang="pi" class="pali">
+So evamāha:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Chư Hiền, tôi không nhớ tôi đã phạm trọng tội như vậy, hoặc Ba-la-di, hoặc gần Ba-la-di’.<br>
+<span lang="pi" class="pali">
+‘na kho ahaṁ, āvuso, sarāmi evarūpiṁ garukaṁ āpattiṁ āpajjitā pārājikaṁ vā pārājikasāmantaṁ vā’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Tỷ-kheo ấy bị các Tỷ-kheo kia dồn ép phải tỏ lộ ra:<br>
+<span lang="pi" class="pali">
+Tamenaṁ so nibbeṭhentaṁ ativeṭheti:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Tôn giả hãy biết cho rõ ràng, nếu Tôn giả có nhớ có phạm trọng tội như thế này, hoặc Ba-la-di, hoặc gần Ba-la-di?’<br>
+<span lang="pi" class="pali">
+‘iṅghāyasmā sādhukameva jānāhi yadi sarasi evarūpiṁ garukaṁ āpattiṁ āpajjitā pārājikaṁ vā pārājikasāmantaṁ vā’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Tỷ-kheo ấy trả lời như sau:<br>
+<span lang="pi" class="pali">
+So evamāha:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Chư Hiền, tôi không có nhớ tôi có phạm trọng tội như thế này, hoặc Ba-la-di, hoặc gần Ba-la-di.<br>
+<span lang="pi" class="pali">
+‘na kho ahaṁ, āvuso, sarāmi evarūpiṁ garukaṁ āpattiṁ āpajjitā pārājikaṁ vā pārājikasāmantaṁ vā;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Chư Hiền, tôi nhớ tôi có phạm khinh tội như thế này’.<br>
+<span lang="pi" class="pali">
+sarāmi ca kho ahaṁ, āvuso, evarūpiṁ appamattikaṁ āpattiṁ āpajjitā’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Tỷ-kheo ấy bị các Tỷ-kheo kia dồn ép phải tỏ lộ:<br>
+<span lang="pi" class="pali">
+Tamenaṁ so nibbeṭhentaṁ ativeṭheti:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Tôn giả hãy biết cho rõ ràng, nếu Tôn giả nhớ có phạm trọng tội như thế này, hoặc Ba-la-di hoặc gần Ba-la-di?’.<br>
+<span lang="pi" class="pali">
+‘iṅghāyasmā sādhukameva jānāhi yadi sarasi evarūpiṁ garukaṁ āpattiṁ āpajjitā pārājikaṁ vā pārājikasāmantaṁ vā’ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vị ấy trả lời như sau:<br>
+<span lang="pi" class="pali">
+So evamāha:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Chư Hiền, dầu không ai hỏi tội, tôi sẽ thú nhận có phạm khinh tội như thế này, làm sao tôi có thể, khi có người hỏi tôi, lại không thú nhận có phạm trọng tội như thế này, hoặc Ba-la-di (bất cộng trú), hoặc gần Ba-la-di?’<br>
+<span lang="pi" class="pali">
+‘imañhi nāmāhaṁ, āvuso, appamattikaṁ āpattiṁ āpajjitvā apuṭṭho paṭijānissāmi. Kiṁ panāhaṁ evarūpiṁ garukaṁ āpattiṁ āpajjitvā pārājikaṁ vā pārājikasāmantaṁ vā puṭṭho na paṭijānissāmī’ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vị kia nói như sau:<br>
+<span lang="pi" class="pali">
+So evamāha:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Này Hiền giả, dầu Ông có phạm khinh tội này, nếu không hỏi, Ông sẽ không thú nhận, làm sao khi đã phạm trọng tội như thế này, hoặc Ba-la-di, hoặc gần Ba-la-di, nếu có hỏi, Ông lại có thể thú nhận?<br>
+<span lang="pi" class="pali">
+‘imañhi nāma tvaṁ, āvuso, appamattikaṁ āpattiṁ āpajjitvā apuṭṭho na paṭijānissasi, kiṁ pana tvaṁ evarūpiṁ garukaṁ āpattiṁ āpajjitvā pārājikaṁ vā pārājikasāmantaṁ vā puṭṭho paṭijānissasi?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Tôn giả hãy biết rõ ràng, nếu Tôn giả nhớ có phạm trọng tội như thế này không, hoặc Ba-la-di. hoặc gần Ba-la-di?’<br>
+<span lang="pi" class="pali">
+Iṅghāyasmā sādhukameva jānāhi yadi sarasi evarūpiṁ garukaṁ āpattiṁ āpajjitā pārājikaṁ vā pārājikasāmantaṁ vā’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vị ấy trả lời như sau:<br>
+<span lang="pi" class="pali">
+So evamāha:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Chư Hiền, tôi nhớ, tôi có phạm trọng tội như thế này, hoặc Ba-la-di, hoặc gần Ba-la-di.<br>
+<span lang="pi" class="pali">
+‘sarāmi kho ahaṁ, āvuso, evarūpiṁ garukaṁ āpattiṁ āpajjitā pārājikaṁ vā pārājikasāmantaṁ vā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ðiều tôi đã nói như vậy, là nói chơi, điều tôi đã nói như vậy là để cười (rava) Tôi không có nhớ tôi đã phạm trọng tội như thế này, hoặc Ba-la-di, hoặc gần Ba-la-di’.<br>
+<span lang="pi" class="pali">
+Davā me etaṁ vuttaṁ, ravā me etaṁ vuttaṁ—nāhaṁ taṁ sarāmi evarūpiṁ garukaṁ āpattiṁ āpajjitā pārājikaṁ vā pārājikasāmantaṁ vā’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Như vậy, này Ānanda, là quyết định tùy theo giới tội người phạm. Và như vậy, ở đây là sự giải quyết một số tránh tội, tức là nhờ quyết định tùy theo giới tội người phạm.<br>
+<span lang="pi" class="pali">
+Evaṁ kho, ānanda, tassapāpiyasikā hoti, evañca panidhekaccānaṁ adhikaraṇānaṁ vūpasamo hoti yadidaṁ—tassapāpiyasikāya.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Và này Ānanda, thế nào là trải cỏ che lấp?<br>
+<span lang="pi" class="pali">
+Kathañcānanda, tiṇavatthārako hoti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ở đây, này Ānanda, một số Tỷ-kheo sống tranh chấp, tranh cãi, tranh luận với nhau, có nhiều việc đã làm, đã nói không xứng Sa-môn hạnh.<br>
+<span lang="pi" class="pali">
+Idhānanda, bhikkhūnaṁ bhaṇḍanajātānaṁ kalahajātānaṁ vivādāpannānaṁ viharataṁ bahuṁ assāmaṇakaṁ ajjhāciṇṇaṁ hoti bhāsitaparikkantaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Tất cả các Tỷ-kheo ấy phải tập hợp hòa đồng với nhau.<br>
+<span lang="pi" class="pali">
+Tehānanda, bhikkhūhi sabbeheva samaggehi sannipatitabbaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Sau khi tập hợp, một Tỷ-kheo thông minh có kinh nghiệm hơn của một phe nhóm Tỷ-kheo, từ chỗ ngồi đứng dậy, đắp y về phía một bên vai, chắp tay, bạch Tăng chúng, nói rằng:<br>
+<span lang="pi" class="pali">
+Sannipatitvā ekatopakkhikānaṁ bhikkhūnaṁ byattena bhikkhunā uṭṭhāyāsanā ekaṁsaṁ cīvaraṁ katvā añjaliṁ paṇāmetvā saṅgho ñāpetabbo—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Chư Tôn giả, Tăng chúng hãy nghe tôi.<br>
+<span lang="pi" class="pali">
+Suṇātu me, bhante, saṅgho.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Khi chúng tôi sống tranh chấp, tranh cãi, tranh luận với nhau, nhiều việc đã làm, đã nói không xứng Sa-môn hạnh.<br>
+<span lang="pi" class="pali">
+Idaṁ amhākaṁ bhaṇḍanajātānaṁ kalahajātānaṁ vivādāpannānaṁ viharataṁ bahuṁ assāmaṇakaṁ ajjhāciṇṇaṁ bhāsitaparikkantaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Nếu Tăng chúng xem là phải thời, tôi xin tỏ lộ bất cứ giới tội nào của các Tôn giả này và bất cứ giới tội nào của tôi. Vì lợi ích cho chư Tôn giả và cũng vì lợi ích cho tự thân, tôi xin tỏ lộ giữa Tăng chúng, như lấy cỏ trải ra, trừ các trọng tội, trừ tội liên hệ đến cư sĩ’.<br>
+<span lang="pi" class="pali">
+Yadi saṅghassa pattakallaṁ, ahaṁ yā ceva imesaṁ āyasmantānaṁ āpatti yā ca attano āpatti, imesañceva āyasmantānaṁ atthāya attano ca atthāya, saṅghamajjhe tiṇavatthārakena deseyyaṁ, ṭhapetvā thullavajjaṁ ṭhapetvā gihipaṭisaṁyuttan’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Rồi một vị Tỷ-kheo thông minh, kinh nghiệm của nhóm Tỷ-kheo khác, từ chỗ ngồi đứng dậy, đắp y về phía một bên vai, chấp tay bạch Tăng chúng, nói rằng:<br>
+<span lang="pi" class="pali">
+Athāparesaṁ ekatopakkhikānaṁ bhikkhūnaṁ byattena bhikkhunā uṭṭhāyāsanā ekaṁsaṁ cīvaraṁ katvā añjaliṁ paṇāmetvā saṅgho ñāpetabbo:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Chư Tôn giả, Tăng chúng hãy nghe tôi.<br>
+<span lang="pi" class="pali">
+‘Suṇātu me, bhante, saṅgho.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Khi chúng tôi sống tranh chấp, tranh cãi, tranh luận với nhau, nhiều việc đã làm, đã nói không xứng Sa-môn hạnh.<br>
+<span lang="pi" class="pali">
+Idaṁ amhākaṁ bhaṇḍanajātānaṁ kalahajātānaṁ vivādāpannānaṁ viharataṁ bahuṁ assāmaṇakaṁ ajjhāciṇṇaṁ bhāsitaparikkantaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Nếu Tăng chúng xem là phải thời, tôi xin tỏ lộ bất cứ giới tội nào của các Tôn giả này và bất cứ giới tội nào của tôi. Vì lợi ích cho chư Tôn giả và cũng vì lợi ích cho tự thân, tôi xin tỏ lộ giữa Tăng chúng, như lấy cỏ trải ra, trừ các trọng tội, trừ tội liên hệ đến cư sĩ’.<br>
+<span lang="pi" class="pali">
+Yadi saṅghassa pattakallaṁ, ahaṁ yā ceva imesaṁ āyasmantānaṁ āpatti yā ca attano āpatti, imesañceva āyasmantānaṁ atthāya attano ca atthāya, saṅghamajjhe tiṇavatthārakena deseyyaṁ, ṭhapetvā thullavajjaṁ ṭhapetvā gihipaṭisaṁyuttan’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Như vậy, này Ānanda, là trải cỏ che lấp, và như vậy, ở đây là sự giải quyết một số tránh pháp, tức là nhờ trải cỏ che lấp.<br>
+<span lang="pi" class="pali">
+Evaṁ kho, ānanda, tiṇavatthārako hoti, evañca panidhekaccānaṁ adhikaraṇānaṁ vūpasamo hoti yadidaṁ—tiṇavatthārakena.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Ānanda, có sáu khả niệm pháp này, tác thành khả ái, tác thành tôn kính, đưa đến đoàn tụ, không tranh luận, hòa hợp, đồng nhất. Thế nào là sáu?<br>
+<span lang="pi" class="pali">
+Chayime, ānanda, dhammā sāraṇīyā piyakaraṇā garukaraṇā saṅgahāya avivādāya sāmaggiyā ekībhāvāya saṁvattanti. Katame cha?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ở đây, này Ānanda, Tỷ-kheo an trú từ thân nghiệp, đối với các vị đồng Phạm hạnh, chỗ đông người và chỗ vắng người.<br>
+<span lang="pi" class="pali">
+Idhānanda, bhikkhuno mettaṁ kāyakammaṁ paccupaṭṭhitaṁ hoti sabrahmacārīsu āvi ceva raho ca.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Khả niệm pháp này, tác thành khả ái, tác thành tôn kính đưa đến đoàn tụ, không tranh luận, hòa hợp, đồng nhất.<br>
+<span lang="pi" class="pali">
+Ayampi dhammo sāraṇīyo piyakaraṇo garukaraṇo saṅgahāya avivādāya sāmaggiyā ekībhāvāya saṁvattati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Và lại nữa, này Ānanda, Tỷ-kheo an trú từ khẩu nghiệp, đối với các vị đồng Phạm hạnh, chỗ đông người và chỗ vắng người.<br>
+<span lang="pi" class="pali">
+Puna caparaṁ, ānanda, bhikkhuno mettaṁ vacīkammaṁ paccupaṭṭhitaṁ hoti sabrahmacārīsu āvi ceva raho ca.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Khả niệm pháp này, tác thành khả ái, tác thành tôn kính đưa đến đoàn tụ, không tranh luận, hòa hợp, đồng nhất.<br>
+<span lang="pi" class="pali">
+Ayampi dhammo sāraṇīyo piyakaraṇo garukaraṇo saṅgahāya avivādāya sāmaggiyā ekībhāvāya saṁvattati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Và lại nữa, này Ānanda, Tỷ-kheo an trú từ ý nghiệp đối với các vị đồng Phạm hạnh, chỗ đông người và chỗ vắng người.<br>
+<span lang="pi" class="pali">
+Puna caparaṁ, ānanda, bhikkhuno mettaṁ manokammaṁ paccupaṭṭhitaṁ hoti sabrahmacārīsu āvi ceva raho ca.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Khả niệm pháp này tác thành khả ái, tác thành tôn kính, đưa đến đoàn tụ, không tranh luận, hòa hợp, đồng nhất.<br>
+<span lang="pi" class="pali">
+Ayampi dhammo sāraṇīyo piyakaraṇo garukaraṇo saṅgahāya avivādāya sāmaggiyā ekībhāvāya saṁvattati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Và lại nữa, này Ānanda, với mọi sở đắc như pháp, mọi lợi dưỡng đúng pháp cho đến những thọ lãnh trong bình bát, Tỷ-kheo là vị san sẻ các lợi dưỡng như vậy, là vị thọ hưởng chúng cùng với các vị đồng Phạm hạnh có giới đức.<br>
+<span lang="pi" class="pali">
+Puna caparaṁ, ānanda, bhikkhu—ye te lābhā dhammikā dhammaladdhā antamaso pattapariyāpannamattampi tathārūpehi lābhehi—apaṭivibhattabhogī hoti, sīlavantehi sabrahmacārīhi sādhāraṇabhogī.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Khả niệm pháp này cũng tác thành khả ái, tác thành tôn kính, đưa đến đoàn tụ, không tranh luận, hòa hợp, đồng nhất.<br>
+<span lang="pi" class="pali">
+Ayampi dhammo sāraṇīyo piyakaraṇo garukaraṇo saṅgahāya avivādāya sāmaggiyā ekībhāvāya saṁvattati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Và lại nữa, này Ānanda, đối với mọi giới luật nào, không sứt mẻ, không tỳ, không vết, không ô uế, giải thoát, được người trí tán thán, không chấp thủ, đưa đến Thiền định, Tỷ-kheo sống thành tựu những giới luật như vậy cùng với các vị đồng Phạm hạnh giữa chỗ đông người và tại chỗ vắng người.<br>
+<span lang="pi" class="pali">
+Puna caparaṁ, ānanda, bhikkhu—yāni tāni sīlāni akhaṇḍāni acchiddāni asabalāni akammāsāni bhujissāni viññuppasatthāni aparāmaṭṭhāni samādhisaṁvattanikāni tathārūpesu sīlesu—sīlasāmaññagato viharati sabrahmacārīhi āvi ceva raho ca.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Khả niệm pháp này cũng tác thành khả ái, tác thành tôn kính, đưa đến đoàn tụ, không tranh luận, hòa hợp, đồng nhất.<br>
+<span lang="pi" class="pali">
+Ayampi dhammo sāraṇīyo piyakaraṇo garukaraṇo saṅgahāya avivādāya sāmaggiyā ekībhāvāya saṁvattati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Và lại nữa, này Ānanda, đối với mọi tri kiến thánh thiện, đưa đến xuất ly, dẫn đến sự chơn chánh, đoạn diệt khổ đau cho những ai thực hành theo, Tỷ-kheo sống thành tựu những tri kiến như vậy cùng với các vị đồng Phạm hạnh trước chỗ đông người và tại chỗ vắng người.<br>
+<span lang="pi" class="pali">
+Puna caparaṁ, ānanda, bhikkhu—yāyaṁ diṭṭhi ariyā niyyānikā niyyāti takkarassa sammā dukkhakkhayāya tathārūpāya diṭṭhiyā—diṭṭhisāmaññagato viharati sabrahmacārīhi āvi ceva raho ca.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Khả niệm pháp này cũng tác thành khả ái, tác thành tôn kính đưa đến đoàn tụ, không tranh luận, hòa đồng, đồng nhất.<br>
+<span lang="pi" class="pali">
+Ayampi dhammo sāraṇīyo piyakaraṇo garukaraṇo saṅgahāya avivādāya sāmaggiyā ekībhāvāya saṁvattati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Ānanda, sáu pháp khả niệm này tác thành khả ái, tác thành tôn kính, đưa đến đoàn tụ, không tranh luận, hòa đồng, đồng nhất.<br>
+<span lang="pi" class="pali">
+Ime kho, ānanda, cha sāraṇīyā dhammā piyakaraṇā garukaraṇā saṅgahāya avivādāya sāmaggiyā ekībhāvāya saṁvattanti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Ānanda, nếu Ông thọ trì và thực hành sáu pháp khả niệm này, thời này Ānanda, Ông thấy có những cách nói nào, hoặc tế hoặc thô, khiến Ông không có thể kham nhẫn?”<br>
+<span lang="pi" class="pali">
+Ime ce tumhe, ānanda, cha sāraṇīye dhamme samādāya vatteyyātha, passatha no tumhe, ānanda, taṁ vacanapathaṁ aṇuṁ vā thūlaṁ vā yaṁ tumhe nādhivāseyyāthā”ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Thưa không, bạch Thế Tôn.”<br>
+<span lang="pi" class="pali">
+“No hetaṁ, bhante”.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Do vậy, này Ānanda, hãy thọ trì và thực hành sáu pháp khả niệm này, như vậy sẽ đưa đến cho Ông an lạc và hạnh phúc lâu dài.”<br>
+<span lang="pi" class="pali">
+“Tasmātihānanda, ime cha sāraṇīye dhamme samādāya vattatha. Taṁ vo bhavissati dīgharattaṁ hitāya sukhāyā”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Thế Tôn thuyết giảng như vậy. Tôn giả Ānanda hoan hỷ tín thọ lời Thế Tôn dạy.<br>
+<span lang="pi" class="pali">
+Idamavoca bhagavā. Attamano āyasmā ānando bhagavato bhāsitaṁ abhinandīti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+<span lang="pi" class="vi">
+Sāmagāmasuttaṁ niṭṭhitaṁ catutthaṁ.<br>
+</span>
+</p>
+
+
+<!-- COPY CONTENT SUTTA Ở ĐÂY -->
+
+
+
+<br>
+<p><p style="text-align: right;font-style: italic;">Hoà Thượng Thích Minh Châu dịch Việt</span></p>
+
+
+
+
+
+
+
+
+</section>  <!-- End English and Pali -->
+<div id="nextprev"><a id="previous-sutta" href="./mn103.html#content"></a><a id="next-sutta" href="./mn105.html#content"></a></div>
+</div>  <!--End Content -->
+</div>  <!-- End Page -->
+
+
+
+
+
+
+<footer>
+					 <!-- End bottom links -->
+</footer>
+
+
+ 
+ <!-- Scripts -->
+
+ <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      if (typeof enablePaliLookup === "function") {
+        enablePaliLookup();
+      } else {
+        console.error("enablePaliLookup is not defined");
+      }
+    });
+  </script>
+
+ <script>
+ // Script to open and close sidebar
+ 	function w3_open() {
+ 	document.getElementById("mySidebar").style.display = "block";
+ 	}
+ 		function w3_close() {
+ 		document.getElementById("mySidebar").style.display = "none";
+ 	}
+ </script>
+ <script>
+ 		var app = document.getElementsByTagName("BODY")[0];
+ 		if (localStorage.lightMode == "dark") {
+ 			app.setAttribute("light-mode", "dark");
+ 	}
+ </script>
+ 
+ <script>
+ 		function toggle_light_mode() {
+ 			var app = document.getElementsByTagName("BODY")[0];
+ 				if (localStorage.lightMode == "dark") {
+ 			localStorage.lightMode = "light";
+ 			app.setAttribute("light-mode", "light");
+ 		} else {
+ 					localStorage.lightMode = "dark";
+ 					app.setAttribute("light-mode", "dark");
+ 	}
+ 		}
+ 
+ 		window.addEventListener("storage", function () {
+ 			if (localStorage.lightMode == "dark") {
+ 				app.setAttribute("light-mode", "dark");
+ 				} else {
+ 				app.setAttribute("light-mode", "light");
+ 		}
+ 		}, false);
+ 
+ </script>
+ <script src="../js/footer.js"></script><script src="../js/dpd_deconstructor.js"></script><script src="../js/dpd_ebts.js"></script><script src="../js/dpd_i2h.js"></script>
+ <script src="/sw.js"></script>
+ </body>
+ </html>

@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+ 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+ 	<link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+ 	<meta name="viewport" content="width=device-width, initial-scale=1">
+		<!-- Loading manifest -->
+	<link rel="manifest" href="../manifest.json">
+ 	<!-- Loading main and menu stylesheets -->
+ 	<link rel="stylesheet" href="../css/w3.css">
+ 	<link rel="stylesheet" href="../css/css.css">
+ 	<link rel="stylesheet" href="../css/menu.css">
+ 	<script src="../js/jquery-1.10.2.min.js"></script>
+ 	<script src="../js/controlpanel.js"></script>
+ 	<script src="../js/mousetrap.min.js"></script>
+    <script src="../js/pali-lookup-standalone.js"></script>
+
+ <script src="../js/suttaFiles.js"></script>
+<script>
+ // Script to open random Sutta
+ function openRandomSutta() {
+  const randomIndex = Math.floor(Math.random() * suttaFiles.length);
+  const selectedFile = suttaFiles[randomIndex];
+
+  // Get root path of your site 
+  const currentPath = location.pathname;
+  const rootPath = currentPath.split("/").slice(0, -2).join("/") + "/";
+
+  // Redirect to the correct file
+  window.location.href = rootPath + selectedFile;
+}
+</script>
+
+
+</head>
+ <body class="container">
+ <div class="header-background">
+ <!-- Header -->
+ <div class="w3-header w3-content w3-padding w3-left-align bwcontainer">
+ 	<div class="centered">
+ 		<button class="light-mode-button" aria-label="Bật Chế Độ Sáng" onclick="toggle_light_mode()">
+ 			<span></span>
+ 			<span></span>
+ 		</button>
+ 		<span class="box-lbl">Sáng/Tối</span>
+ 	</div> <!-- Centered -->
+ 		<a href="../home/index.html" id="bwlogo"><img src="../images/headerlogo.png" alt="Logo Lời Của Đức Phật" class="w3-image"></a>
+ 		<div class="w3-bar bwcontainer">
+ 			<div id="searchlinks">
+ 			<a href="../home/visearch.html"><span class="w3-bar-item"><i class="fa fa-search"></i>&nbsp;Tìm Tiếng Việt</span></a>
+ 			<a href="../home/palisearch.html"><span class="w3-bar-item"><i class="fa fa-search"></i>&nbsp;Tìm Tiếng Pali</span></a>
+ 			</div><!-- End Searchlinks div -->
+ 			<div class="help"><span><a href="../home/help.html"><img src="../images/help_icon.png" title="Trợ Giúp" alt="Help"></a></span></div>
+ 		</div> <!-- End w3-bar bwcontainer --> 	</div> <!-- End w3-header w3-content w3-padding w3-left-align bwcontainer -->
+ </div> <!-- End header-background -->
+ <!-- Top menu -->
+
+ <div class="w3-main w3-white bwcontainer2">
+ 	<div class="w3-button w3-padding-8 w3-left w3-hide-large" onclick="w3_open()">☰</div>
+ 		<div id="navbar" class="w3-hide-small w3-hide-medium bwcontainer3">
+ 			<ul id="css3menu0">
+ 				<li class="topfirst" id="home"><a href="../home/index.html" class="w3-hide-small">Trang Chủ</a></li>
+  				<li class="topmenu" id="dn"><a href="../dn/dn.html" class="pressed w3-hide-small">Trường Bộ Kinh</a></li>
+ 				<li class="topmenu" id="mn"><a href="../mn/mn.html" class="w3-hide-small">Trung Bộ Kinh</a></li>
+ 				<li class="topmenu" id="sn"><a href="../sn/sn.html" class="w3-hide-small"><i class="fa fa-caret-down"></i>&nbsp;Tương Ưng Bộ Kinh</a>
+ 					<ul>
+ 						<li><a href="../sn/sn01.html" class="w3-hide-small">Tập I - Thiên Có Kệ</a></li>
+ 						<li><a href="../sn/sn02.html" class="w3-hide-small">Tập II - Thiên Nhân Duyên</a></li>
+ 						<li><a href="../sn/sn03.html" class="w3-hide-small">Tập III - Thiên Uẩn</a></li>
+ 						<li><a href="../sn/sn04.html" class="w3-hide-small">Tập IV - Thiên Sáu Xứ</a></li>
+ 						<li><a href="../sn/sn05.html" class="w3-hide-small">Tập V - Thiên Ðại Phẩm</a></li>
+ 					</ul>
+ 				<li class="topmenu" id="an"><a href="../an/an.html" class="w3-hide-small"><i class="fa fa-caret-down"></i>&nbsp;Tăng Chi Bộ Kinh</a>
+ 					<ul>
+ 						<li><a href="../an/an1.html" class="w3-hide-small">Chương Một Pháp</a></li>
+ 						<li><a href="../an/an2.html" class="w3-hide-small">Chương Hai Pháp</a></li>
+ 						<li><a href="../an/an3.html" class="w3-hide-small">Chương Ba Pháp</a></li>
+ 						<li><a href="../an/an4.html" class="w3-hide-small">Chương Bốn Pháp</a></li>
+ 						<li><a href="../an/an5.html" class="w3-hide-small">Chương Năm Pháp</a></li>
+ 						<li><a href="../an/an6.html" class="w3-hide-small">Chương Sáu Pháp</a></li>
+ 						<li><a href="../an/an7.html" class="w3-hide-small">Chương Bảy Pháp</a></li>
+ 						<li><a href="../an/an8.html" class="w3-hide-small">Chương Tám Pháp</a></li>
+ 						<li><a href="../an/an9.html" class="w3-hide-small">Chương Chín Pháp</a></li>
+ 						<li><a href="../an/an10.html" class="w3-hide-small">Chương Mười Pháp</a></li>
+ 						<li><a href="../an/an11.html" class="w3-hide-small">Chương Mười Một Pháp</a></li>
+ 					</ul>
+ 				</li>
+ 				<li class="topmenu" id="kn"><a href="../kn/kn.html" class="w3-hide-small"><i class="fa fa-caret-down"></i>&nbsp;Tiểu Bộ Kinh</a>
+ 					<ul>
+ 						<li><a href="../kp/kp.html" class="w3-hide-small">Kinh Tiểu Tụng</a></li>
+ 						<li><a href="../dhp/dhp.html" class="w3-hide-small">Kinh Pháp Cú</a></li>
+ 						<li><a href="../snp/snp.html" class="w3-hide-small">Kinh Tập</a></li>
+ 						<li><a href="../ud/ud.html" class="w3-hide-small">Kinh Phật Tự Thuyết</a></li>
+ 						<li><a href="../it/it.html" class="w3-hide-small">Kinh Phật Thuyết Như Vậy</a></li>
+ 						<li><a href="../tha/tha.html" class="w3-hide-small">Trưởng Lão Tăng Kệ</a></li>
+ 						<li><a href="../thi/thi.html" class="w3-hide-small">Trưởng Lão Ni Kệ</a></li>
+ 					</ul>
+ 				</li>
+				<li class="toplast" id="rd"><a href="../rd/rd.html" class="w3-hide-small"></i>Kinh Ngẫu Nhiên Theo Nhóm</a>
+ 					</ul>
+ 				</li>
+ 			</ul>
+ 			</div>
+ 		</div> <!--navbar-->
+
+<!-- Sidebar (hidden by default) -->
+ <nav class="w3-sidebar w3-bar-block w3-card w3-border w3-top w3-animate-left w3-hide-large" id="mySidebar">
+ 	<a href="javascript:void(0)" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-times fa-2x red-color"></i>&nbsp;&nbsp;&nbsp;Close</a><!-- Hides the sidebar when clicked -->
+ 		<div class="w3-bar-block w3-white">
+ 			<a href="../home/index.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-home fa-lg"></i>&nbsp;&nbsp;&nbsp;Home</a>
+ 			<a href="../guide/guide.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Guide</a>
+ 			<a href="../dn/dn.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Trường Bộ Kinh</a>
+ 			<a href="../mn/mn.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Trung Bộ Kinh</a>
+ 			<a href="../sn/sn.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Tương Ưng Bộ Kinh</a>
+ 			<a href="../an/an.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Tăng Chi Bộ Kinh
+ 			<a href="../kn/kn.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Tiểu Bộ Kinh</a>
+			<a href="../rd/rd.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>Kinh Ngẫu Nhiên Theo Nhóm</a>
+ 		</div>
+ </nav>
+ 
+ 
+ 
+   <!-- !PAGE CONTENT! --> 
+<div class="w3-main w3-content w3-padding w3-left-align bwcontainer4">
+<div id="content">
+<h2>Majjhima Nikāya - Trung Bộ Kinh</h2>
+<h5><span style="font-style: italic;">Hoà Thượng Thích Minh Châu dịch Việt</span></h5>
+
+</div>
+
+<br>
+ 	<title>        Trung Bộ 150          </title>
+
+<p lang="vi" class="vi"; style="text-align: center">
+Trung Bộ 150<br>
+<span lang="pi" class="pali">
+Majjhima Nikāya 150<br>
+</span>
+</p>
+
+
+<p lang="vi" class="vi"; style="text-align: center">
+Kinh Dân Chúng Nagaravinda<br>
+<span lang="pi" class="pali">
+Nagaravindeyyasutta<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Như vầy tôi nghe.<br>
+<span lang="pi" class="pali">
+Evaṁ me sutaṁ—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Môt thời, Thế Tôn du hành giữa dân chúng Kosala, cùng với Ðại chúng Tỷ-kheo và đi đến một làng Bà-la-môn của dân chúng Kosala tên là Nagaravinda.<br>
+<span lang="pi" class="pali">
+ekaṁ samayaṁ bhagavā kosalesu cārikaṁ caramāno mahatā bhikkhusaṅghena saddhiṁ yena nagaravindaṁ nāma kosalānaṁ brāhmaṇānaṁ gāmo tadavasari.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Các Bà-la-môn gia chủ ở Nagaravinda được nghe như sau:<br>
+<span lang="pi" class="pali">
+Assosuṁ kho nagaravindeyyakā brāhmaṇagahapatikā:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Sa-môn Gotama là Thích tử, xuất gia từ gia tộc Sakka (Thích-ca), đang du hành giữa dân chúng Kosala, cùng với Ðại chúng Tỷ-kheo và đã đến một làng Bà-la-môn của dân chúng Kosala tên là Nagaravinda.<br>
+<span lang="pi" class="pali">
+“samaṇo khalu, bho, gotamo sakyaputto sakyakulā pabbajito kosalesu cārikaṁ caramāno mahatā bhikkhusaṅghena saddhiṁ nagaravindaṁ anuppatto.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Tiếng đồn tốt đẹp sau đây được truyền đi về Tôn giả Gotama:<br>
+<span lang="pi" class="pali">
+Taṁ kho pana bhavantaṁ gotamaṁ evaṁ kalyāṇo kittisaddo abbhuggato:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Ngài là Thế Tôn, bậc A-la-hán, Chánh Biến Tri, Minh Hạnh Túc, Thiện Thệ, Thế Gian Giải, Vô Thượng Sĩ, Ðiều Ngự Trượng Phu, Thiên Nhân Sư, Phật, Thế Tôn’.<br>
+<span lang="pi" class="pali">
+‘itipi so bhagavā arahaṁ sammāsambuddho vijjācaraṇasampanno sugato lokavidū anuttaro purisadammasārathi satthā devamanussānaṁ buddho bhagavā’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Với thắng trí, Ngài tự thân chứng ngộ thế giới này cùng với Thiên giới, Ma giới, Phạm thiên giới, cùng với chúng Sa-môn, Bà-la-môn, các loài Trời và Người.<br>
+<span lang="pi" class="pali">
+So imaṁ lokaṁ sadevakaṁ samārakaṁ sabrahmakaṁ sassamaṇabrāhmaṇiṁ pajaṁ sadevamanussaṁ sayaṁ abhiññā sacchikatvā pavedeti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Khi đã chứng ngộ, Ngài còn tuyên thuyết điều Ngài đã chứng ngộ. Ngài thuyết pháp sơ thiện, trung thiện, hậu thiện, đầy đủ văn nghĩa. Ngài truyền dạy phạm hạnh hoàn toàn đầy đủ trong sạch.<br>
+<span lang="pi" class="pali">
+So dhammaṁ deseti ādikalyāṇaṁ majjhekalyāṇaṁ pariyosānakalyāṇaṁ sātthaṁ sabyañjanaṁ, kevalaparipuṇṇaṁ parisuddhaṁ brahmacariyaṁ pakāseti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Lành thay, nếu được yết kiến một A-la-hán như vậy!”<br>
+<span lang="pi" class="pali">
+Sādhu kho pana tathārūpānaṁ arahataṁ dassanaṁ hotī”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Rồi các vị Bà-la-môn gia chủ ở Nagaravinda đi đến Thế Tôn. Sau khi đến, một số người nói lên với Thế Tôn những lời chào đón hỏi thăm, sau khi nói lên những lời chào đón hỏi thăm thân hữu liền ngồi xuống một bên; một số người chấp tay vái chào Thế Tôn rồi ngồi xuống một bên; một số người nói lên tên họ trước Thế Tôn rồi ngồi xuống một bên; một số người im lặng ngồi xuống một bên. Thế Tôn nói với những Bà-la-môn gia chủ ở Nagaravinda đang ngồi một bên:<br>
+<span lang="pi" class="pali">
+Atha kho nagaravindeyyakā brāhmaṇagahapatikā yena bhagavā tenupasaṅkamiṁsu; upasaṅkamitvā appekacce bhagavantaṁ abhivādetvā ekamantaṁ nisīdiṁsu. Appekacce bhagavatā saddhiṁ sammodiṁsu; sammodanīyaṁ kathaṁ sāraṇīyaṁ vītisāretvā ekamantaṁ nisīdiṁsu. Appekacce yena bhagavā tenañjaliṁ paṇāmetvā ekamantaṁ nisīdiṁsu. Appekacce bhagavato santike nāmagottaṁ sāvetvā ekamantaṁ nisīdiṁsu. Appekacce tuṇhībhūtā ekamantaṁ nisīdiṁsu. Ekamantaṁ nisinne kho nagaravindeyyake brāhmaṇagahapatike bhagavā etadavoca:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Này Gia chủ, nếu những du sĩ ngoại đạo hỏi các Ông như sau:<br>
+<span lang="pi" class="pali">
+“Sace vo, gahapatayo, aññatitthiyā paribbājakā evaṁ puccheyyuṁ:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Này Gia chủ, hạng Sa-môn, Bà-la-môn nào không đáng tôn trọng, cung kính, đảnh lễ, cúng dường?’<br>
+<span lang="pi" class="pali">
+‘kathaṁbhūtā, gahapatayo, samaṇabrāhmaṇā na sakkātabbā na garukātabbā na mānetabbā na pūjetabbā’ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ðược hỏi vậy, này các Gia chủ, các du sĩ ngoại đạo ấy cần được trả lời như sau:<br>
+<span lang="pi" class="pali">
+Evaṁ puṭṭhā tumhe, gahapatayo, tesaṁ aññatitthiyānaṁ paribbājakānaṁ evaṁ byākareyyātha:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Những Sa-môn, Bà-la-môn nào, đối với các sắc do mắt nhận thức, không ly tham, không ly sân, không ly si, nội tâm không tịch tịnh, sở hành thân nghiệp, ngữ nghiệp, ý nghiệp khi thăng bằng, khi không thăng bằng. Những Sa-môn, Bà-la-môn như vậy không đáng cung kính, tôn trọng, đảnh lễ, cúng dường. Vì sao vậy?<br>
+<span lang="pi" class="pali">
+‘ye te samaṇabrāhmaṇā cakkhuviññeyyesu rūpesu avītarāgā avītadosā avītamohā, ajjhattaṁ avūpasantacittā, samavisamaṁ caranti kāyena vācāya manasā, evarūpā samaṇabrāhmaṇā na sakkātabbā na garukātabbā na mānetabbā na pūjetabbā. Taṁ kissa hetu?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Chúng tôi đối với các sắc do mắt nhận thức, không ly tham, không ly sân, không ly si, nội tâm không tịch tịnh, sở hành thân nghiệp, khẩu nghiệp, ý nghiệp khi thăng bằng, khi không thăng bằng, nhưng chúng tôi không thấy các vị ấy hơn sở hành thăng bằng của chúng tôi.<br>
+<span lang="pi" class="pali">
+Mayampi hi cakkhuviññeyyesu rūpesu avītarāgā avītadosā avītamohā, ajjhattaṁ avūpasantacittā, samavisamaṁ carāma kāyena vācāya manasā, tesaṁ no samacariyampi hetaṁ uttari apassataṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Do vậy, các Tôn giả Sa-môn, Bà-la-môn ấy không đáng được tôn trọng, cung kính, lễ bái, cúng dường.<br>
+<span lang="pi" class="pali">
+Tasmā te bhonto samaṇabrāhmaṇā na sakkātabbā na garukātabbā na mānetabbā na pūjetabbā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Những vị Sa-môn, Bà-la-môn nào, đối với các tiếng do tai nhận thức…,<br>
+<span lang="pi" class="pali">
+Ye te samaṇabrāhmaṇā sotaviññeyyesu saddesu …<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+đối với các hương do mũi nhận thức…,<br>
+<span lang="pi" class="pali">
+ghānaviññeyyesu gandhesu …<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+đối với các vị do lưỡi nhận thức…,<br>
+<span lang="pi" class="pali">
+jivhāviññeyyesu rasesu …<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+đối với các xúc do thân nhận thức…,<br>
+<span lang="pi" class="pali">
+kāyaviññeyyesu phoṭṭhabbesu …<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+đối với các pháp do ý nhận thức, không ly tham, không ly sân, không ly si, nội tâm không tịch tịnh, sở hành thân nghiệp, khẩu nghiệp, ý nghiệp khi thăng bằng, khi không thăng bằng, các Sa-môn, Bà-la-môn ấy không đáng được tôn trọng, cung kính, lễ bái, cúng dường. Vì cớ sao?<br>
+<span lang="pi" class="pali">
+manoviññeyyesu dhammesu avītarāgā avītadosā avītamohā, ajjhattaṁ avūpasantacittā, samavisamaṁ caranti kāyena vācāya manasā, evarūpā samaṇabrāhmaṇā na sakkātabbā na garukātabbā na mānetabbā na pūjetabbā. Taṁ kissa hetu?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Chúng tôi đối với các pháp do ý nhận thức, không ly tham, không ly sân, không ly si, nội tâm không tịch tịnh, sở hành thân nghiệp, khẩu nghiệp, ý nghiệp khi thăng bằng, khi không thăng bằng; nhưng chúng tôi không thấy các vị ấy hơn sở hành thăng bằng của chúng tôi.<br>
+<span lang="pi" class="pali">
+Mayampi hi manoviññeyyesu dhammesu avītarāgā avītadosā avītamohā, ajjhattaṁ avūpasantacittā, samavisamaṁ carāma kāyena vācāya manasā, tesaṁ no samacariyampi hetaṁ uttari apassataṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Do vậy, các vị Sa-môn, Bà-la-môn ấy không đáng được tôn trọng, cung kính, đảnh lễ, cúng dường’.<br>
+<span lang="pi" class="pali">
+Tasmā te bhonto samaṇabrāhmaṇā na sakkātabbā na garukātabbā na mānetabbā na pūjetabbā’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ðược hỏi như vậy, này các Gia chủ, các Ông cần phải trả lời như vậy cho các du sĩ ngoại đạo ấy.<br>
+<span lang="pi" class="pali">
+Evaṁ puṭṭhā tumhe, gahapatayo, tesaṁ aññatitthiyānaṁ paribbājakānaṁ evaṁ byākareyyātha.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Nhưng này các Gia chủ, nếu các du sĩ ngoại đạo hỏi các Ông như sau:<br>
+<span lang="pi" class="pali">
+Sace pana vo, gahapatayo, aññatitthiyā paribbājakā evaṁ puccheyyuṁ:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Này các Gia chủ, hạng Sa-môn, Bà-la-môn nào đáng tôn trọng, cung kính, đảnh lễ, cúng dường?’<br>
+<span lang="pi" class="pali">
+‘kathaṁbhūtā, gahapatayo, samaṇabrāhmaṇā sakkātabbā garukātabbā mānetabbā pūjetabbā’ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Khi được hỏi vậy, này các Gia chủ, các Ông cần phải trả lời cho các du sĩ ngoại đạo ấy như sau:<br>
+<span lang="pi" class="pali">
+Evaṁ puṭṭhā tumhe, gahapatayo, tesaṁ aññatitthiyānaṁ paribbājakānaṁ evaṁ byākareyyātha:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Những Sa-môn, Bà-la-môn nào, đối với các sắc do mắt nhận thức, ly tham, ly sân, ly si, nội tâm tịch tịnh, sở hành thân nghiệp, khẩu nghiệp, ý nghiệp được thăng bằng. Các Sa-môn, Bà-la-môn như vậy đáng được tôn trọng, cung kính, đảnh lễ, cúng dường. Vì sao vậy?<br>
+<span lang="pi" class="pali">
+‘ye te samaṇabrāhmaṇā cakkhuviññeyyesu rūpesu vītarāgā vītadosā vītamohā, ajjhattaṁ vūpasantacittā, samacariyaṁ caranti kāyena vācāya manasā, evarūpā samaṇabrāhmaṇā sakkātabbā garukātabbā mānetabbā pūjetabbā. Taṁ kissa hetu?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Chúng tôi đối với các sắc do mắt nhận thức, không ly tham, không ly sân, không ly si, nội tâm không tịch tịnh, sở hành thân nghiệp, khẩu nghiệp, ý nghiệp khi thăng bằng, khi không thăng bằng; nhưng chúng tôi có thấy các vị ấy hơn sở hành thăng bằng của chúng tôi.<br>
+<span lang="pi" class="pali">
+Mayampi hi cakkhuviññeyyesu rūpesu avītarāgā avītadosā avītamohā, ajjhattaṁ avūpasantacittā, samavisamaṁ carāma kāyena vācāya manasā, tesaṁ no samacariyampi hetaṁ uttari passataṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Do vậy, các Sa-môn, Bà-la-môn ấy đáng được tôn trọng, cung kính, đảnh lễ, cúng dường.<br>
+<span lang="pi" class="pali">
+Tasmā te bhonto samaṇabrāhmaṇā sakkātabbā garukātabbā mānetabbā pūjetabbā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Những Sa-môn, Bà-la-môn nào đối với các tiếng do tai nhận thức…,<br>
+<span lang="pi" class="pali">
+Ye te samaṇabrāhmaṇā sotaviññeyyesu saddesu …<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+đối với các hương do mũi nhận thức…,<br>
+<span lang="pi" class="pali">
+ghānaviññeyyesu gandhesu …<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+đối với các vị do lưỡi nhận thức…,<br>
+<span lang="pi" class="pali">
+jivhāviññeyyesu rasesu …<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+đối với các xúc do thân nhận thức…,<br>
+<span lang="pi" class="pali">
+kāyaviññeyyesu phoṭṭhabbesu …<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+đối với các pháp do ý nhận thức, ly tham, ly sân, ly si, nội tâm tịch tịnh, sở hành thân nghiệp, khẩu nghiệp, ý nghiệp được thăng bằng, những Sa-môn, Bà-la-môn ấy đáng được tôn trọng, cung kính, lễ bái, cúng dường. Vì sao vậy?<br>
+<span lang="pi" class="pali">
+manoviññeyyesu dhammesu vītarāgā vītadosā vītamohā, ajjhattaṁ vūpasantacittā, samacariyaṁ caranti kāyena vācāya manasā, evarūpā samaṇabrāhmaṇā sakkātabbā garukātabbā mānetabbā pūjetabbā. Taṁ kissa hetu?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Chúng tôi đối với các pháp do ý nhận thức, không ly tham, không ly sân, không ly si, nội tâm không tịch tịnh, sở hành thân nghiệp, khẩu nghiệp, ý nghiệp, khi thăng bằng, khi không thăng bằng, nhưng chúng tôi có thấy các vị ấy hơn sở hành thăng bằng của chúng tôi.<br>
+<span lang="pi" class="pali">
+Mayampi hi manoviññeyyesu dhammesu avītarāgā avītadosā avītamohā ajjhattaṁ avūpasantacittā, samavisamaṁ carāma kāyena vācāya manasā, tesaṁ no samacariyampi hetaṁ uttari passataṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Do vậy, những Sa-môn, Bà-la-môn ấy đáng được tôn trọng, cung kính, lễ bái, cúng dường.’<br>
+<span lang="pi" class="pali">
+Tasmā te bhonto samaṇabrāhmaṇā sakkātabbā garukātabbā mānetabbā pūjetabbā’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Khi được hỏi vậy, này các Gia chủ, các Ông hãy trả lời như vậy cho các vị du sĩ ngoại đạo ấy.<br>
+<span lang="pi" class="pali">
+Evaṁ puṭṭhā tumhe, gahapatayo, tesaṁ aññatitthiyānaṁ paribbājakānaṁ evaṁ byākareyyātha.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này các Gia chủ, nhưng nếu du sĩ ngoại đạo ấy hỏi các Ông như sau:<br>
+<span lang="pi" class="pali">
+Sace pana vo, gahapatayo, aññatitthiyā paribbājakā evaṁ puccheyyuṁ:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Do căn cứ gì về các Tôn giả ấy, do truyền thống gì, các vị nói về các Tôn giả ấy như sau?<br>
+<span lang="pi" class="pali">
+‘ke panāyasmantānaṁ ākārā, ke anvayā, yena tumhe āyasmanto evaṁ vadetha?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Chắc chắn các Tôn giả ấy là ly tham, hay đang đi trên con đường điều phục tham, hay ly sân, hay đang đi trên con đường điều phục sân, hay ly si, hay đang đi trên con đường điều phục si?’<br>
+<span lang="pi" class="pali">
+Addhā te āyasmanto vītarāgā vā rāgavinayāya vā paṭipannā, vītadosā vā dosavinayāya vā paṭipannā, vītamohā vā mohavinayāya vā paṭipannā’ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Khi được hỏi vậy, này các Gia chủ, các Ông hãy trả lời các du sĩ ngoại đạo ấy như sau:<br>
+<span lang="pi" class="pali">
+Evaṁ puṭṭhā tumhe, gahapatayo, tesaṁ aññatitthiyānaṁ paribbājakānaṁ evaṁ byākareyyātha:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Các Tôn giả ấy sống tại các trú xứ xa vắng trong các khu rừng nhàn tịnh.<br>
+<span lang="pi" class="pali">
+‘tathā hi te āyasmanto araññavanapatthāni pantāni senāsanāni paṭisevanti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Nhưng tại các chỗ như vậy, không có các sắc do mắt nhận thức để họ có thể thấy, và sau khi thấy, có lòng thích thú; nhưng tại các chỗ như vậy, không có các tiếng do tai nhận thức để họ có thể nghe, và sau khi nghe, có lòng thích thú; nhưng tại các chỗ như vậy, không có hương do mũi nhận thức, để họ có thể ngửi và sau khi ngửi, có lòng thích thú; nhưng tại các chỗ ấy như vậy, không có các vị do lưỡi nhận thức, để họ có thể nếm, và sau khi nếm, có lòng thích thú; nhưng tại các chỗ như vậy, không có các xúc do thân nhận thức, để họ có thể cảm giác, và sau khi cảm giác, có lòng thích thú.<br>
+<span lang="pi" class="pali">
+Natthi kho pana tattha tathārūpā cakkhuviññeyyā rūpā ye disvā disvā abhirameyyuṁ, natthi kho pana tattha tathārūpā sotaviññeyyā saddā ye sutvā sutvā abhirameyyuṁ, natthi kho pana tattha tathārūpā ghānaviññeyyā gandhā ye ghāyitvā ghāyitvā abhirameyyuṁ, natthi kho pana tattha tathārūpā jivhāviññeyyā rasā ye sāyitvā sāyitvā abhirameyyuṁ, natthi kho pana tattha tathārūpā kāyaviññeyyā phoṭṭhabbā ye phusitvā phusitvā abhirameyyuṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Chư Hiền giả, do căn cứ này, do những truyền thống này, mà chúng tôi nói về các Tôn giả ấy như sau:<br>
+<span lang="pi" class="pali">
+Ime kho no, āvuso, ākārā, ime anvayā, yena mayaṁ evaṁ vadema—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Thật vậy, chư Tôn giả ấy ly tham hay đang đi trên con đường nhiếp phục tham, hay ly sân, hay đang đi trên con đường nhiếp phục sân, hay ly si, hay đang đi trên con đường nhiếp phục si’.<br>
+<span lang="pi" class="pali">
+addhā te āyasmanto vītarāgā vā rāgavinayāya vā paṭipannā, vītadosā vā dosavinayāya vā paṭipannā, vītamohā vā mohavinayāya vā paṭipannā’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Khi được hỏi vậy, này các Gia chủ, các Ông hãy trả lời các du sĩ ngoại đạo như vậy”.<br>
+<span lang="pi" class="pali">
+Evaṁ puṭṭhā tumhe, gahapatayo, tesaṁ aññatitthiyānaṁ paribbājakānaṁ evaṁ byākareyyāthā”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Khi nghe nói vậy, các Bà-la-môn gia chủ ở Nagaravinda nói với Thế Tôn:<br>
+<span lang="pi" class="pali">
+Evaṁ vutte, nagaravindeyyakā brāhmaṇagahapatikā bhagavantaṁ etadavocuṁ:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Thật vi diệu thay, Tôn giả Gotama! Thật vị diệu thay, Tôn giả Gotama!<br>
+<span lang="pi" class="pali">
+“abhikkantaṁ, bho gotama, abhikkantaṁ, bho gotama.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Như người dựng đứng lại những gì bị quăng ngã xuống, phơi bày những gì bị che kín, chỉ đường cho kẻ bị lạc hướng, đem đèn sáng vào trong bóng tối để những ai ‘có mắt có thể thấy sắc’. Cũng vậy, Chánh pháp đã được Thế Tôn dùng nhiều phương tiện để trình bày.<br>
+<span lang="pi" class="pali">
+Seyyathāpi, bho gotama, nikkujjitaṁ vā ukkujjeyya, paṭicchannaṁ vā vivareyya, mūḷhassa vā maggaṁ ācikkheyya, andhakāre vā telapajjotaṁ dhāreyya: ‘cakkhumanto rūpāni dakkhantī’ti; evamevaṁ bhotā gotamena anekapariyāyena dhammo pakāsito.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Và nay chúng con xin quy y Tôn giả Gotama, quy y Pháp và quy y chúng Tỷ-kheo Tăng.<br>
+<span lang="pi" class="pali">
+Ete mayaṁ bhavantaṁ gotamaṁ saraṇaṁ gacchāma dhammañca bhikkhusaṅghañca.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+mong Tôn giả Gotama nhận chúng con làm đệ tử, từ nay trở đi cho đến mạng chung, chúng con trọn đời quy ngưỡng”.<br>
+<span lang="pi" class="pali">
+Upāsake no bhavaṁ gotamo dhāretu ajjatagge pāṇupete saraṇaṁ gate”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+<span lang="pi" class="vi">
+Nagaravindeyyasuttaṁ niṭṭhitaṁ aṭṭhamaṁ.<br>
+</span>
+</p>
+
+
+
+<!-- COPY CONTENT SUTTA Ở ĐÂY -->
+
+
+
+<br>
+<p><p style="text-align: right;font-style: italic;">Hoà Thượng Thích Minh Châu dịch Việt</span></p>
+
+
+
+
+
+
+
+
+</section>  <!-- End English and Pali -->
+<div id="nextprev"><a id="previous-sutta" href="./mn149.html#content"></a><a id="next-sutta" href="./mn151.html#content"></a></div>
+</div>  <!--End Content -->
+</div>  <!-- End Page -->
+
+
+
+
+
+
+<footer>
+					 <!-- End bottom links -->
+</footer>
+
+
+ 
+ <!-- Scripts -->
+
+ <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      if (typeof enablePaliLookup === "function") {
+        enablePaliLookup();
+      } else {
+        console.error("enablePaliLookup is not defined");
+      }
+    });
+  </script>
+
+ <script>
+ // Script to open and close sidebar
+ 	function w3_open() {
+ 	document.getElementById("mySidebar").style.display = "block";
+ 	}
+ 		function w3_close() {
+ 		document.getElementById("mySidebar").style.display = "none";
+ 	}
+ </script>
+ <script>
+ 		var app = document.getElementsByTagName("BODY")[0];
+ 		if (localStorage.lightMode == "dark") {
+ 			app.setAttribute("light-mode", "dark");
+ 	}
+ </script>
+ 
+ <script>
+ 		function toggle_light_mode() {
+ 			var app = document.getElementsByTagName("BODY")[0];
+ 				if (localStorage.lightMode == "dark") {
+ 			localStorage.lightMode = "light";
+ 			app.setAttribute("light-mode", "light");
+ 		} else {
+ 					localStorage.lightMode = "dark";
+ 					app.setAttribute("light-mode", "dark");
+ 	}
+ 		}
+ 
+ 		window.addEventListener("storage", function () {
+ 			if (localStorage.lightMode == "dark") {
+ 				app.setAttribute("light-mode", "dark");
+ 				} else {
+ 				app.setAttribute("light-mode", "light");
+ 		}
+ 		}, false);
+ 
+ </script>
+ <script src="../js/footer.js"></script><script src="../js/dpd_deconstructor.js"></script><script src="../js/dpd_ebts.js"></script><script src="../js/dpd_i2h.js"></script>
+ <script src="/sw.js"></script>
+ </body>
+ </html>

@@ -1,0 +1,1364 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+ 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+ 	<link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+ 	<meta name="viewport" content="width=device-width, initial-scale=1">
+		<!-- Loading manifest -->
+	<link rel="manifest" href="../manifest.json">
+ 	<!-- Loading main and menu stylesheets -->
+ 	<link rel="stylesheet" href="../css/w3.css">
+ 	<link rel="stylesheet" href="../css/css.css">
+ 	<link rel="stylesheet" href="../css/menu.css">
+ 	<script src="../js/jquery-1.10.2.min.js"></script>
+ 	<script src="../js/controlpanel.js"></script>
+ 	<script src="../js/mousetrap.min.js"></script>
+    <script src="../js/pali-lookup-standalone.js"></script>
+
+ <script src="../js/suttaFiles.js"></script>
+<script>
+ // Script to open random Sutta
+ function openRandomSutta() {
+  const randomIndex = Math.floor(Math.random() * suttaFiles.length);
+  const selectedFile = suttaFiles[randomIndex];
+
+  // Get root path of your site 
+  const currentPath = location.pathname;
+  const rootPath = currentPath.split("/").slice(0, -2).join("/") + "/";
+
+  // Redirect to the correct file
+  window.location.href = rootPath + selectedFile;
+}
+</script>
+
+
+</head>
+ <body class="container">
+ <div class="header-background">
+ <!-- Header -->
+ <div class="w3-header w3-content w3-padding w3-left-align bwcontainer">
+ 	<div class="centered">
+ 		<button class="light-mode-button" aria-label="Bật Chế Độ Sáng" onclick="toggle_light_mode()">
+ 			<span></span>
+ 			<span></span>
+ 		</button>
+ 		<span class="box-lbl">Sáng/Tối</span>
+ 	</div> <!-- Centered -->
+ 		<a href="../home/index.html" id="bwlogo"><img src="../images/headerlogo.png" alt="Logo Lời Của Đức Phật" class="w3-image"></a>
+ 		<div class="w3-bar bwcontainer">
+ 			<div id="searchlinks">
+ 			<a href="../home/visearch.html"><span class="w3-bar-item"><i class="fa fa-search"></i>&nbsp;Tìm Tiếng Việt</span></a>
+ 			<a href="../home/palisearch.html"><span class="w3-bar-item"><i class="fa fa-search"></i>&nbsp;Tìm Tiếng Pali</span></a>
+ 			</div><!-- End Searchlinks div -->
+ 			<div class="help"><span><a href="../home/help.html"><img src="../images/help_icon.png" title="Trợ Giúp" alt="Help"></a></span></div>
+ 		</div> <!-- End w3-bar bwcontainer --> 	</div> <!-- End w3-header w3-content w3-padding w3-left-align bwcontainer -->
+ </div> <!-- End header-background -->
+ <!-- Top menu -->
+
+ <div class="w3-main w3-white bwcontainer2">
+ 	<div class="w3-button w3-padding-8 w3-left w3-hide-large" onclick="w3_open()">☰</div>
+ 		<div id="navbar" class="w3-hide-small w3-hide-medium bwcontainer3">
+ 			<ul id="css3menu0">
+ 				<li class="topfirst" id="home"><a href="../home/index.html" class="w3-hide-small">Trang Chủ</a></li>
+  				<li class="topmenu" id="dn"><a href="../dn/dn.html" class="pressed w3-hide-small">Trường Bộ Kinh</a></li>
+ 				<li class="topmenu" id="mn"><a href="../mn/mn.html" class="w3-hide-small">Trung Bộ Kinh</a></li>
+ 				<li class="topmenu" id="sn"><a href="../sn/sn.html" class="w3-hide-small"><i class="fa fa-caret-down"></i>&nbsp;Tương Ưng Bộ Kinh</a>
+ 					<ul>
+ 						<li><a href="../sn/sn01.html" class="w3-hide-small">Tập I - Thiên Có Kệ</a></li>
+ 						<li><a href="../sn/sn02.html" class="w3-hide-small">Tập II - Thiên Nhân Duyên</a></li>
+ 						<li><a href="../sn/sn03.html" class="w3-hide-small">Tập III - Thiên Uẩn</a></li>
+ 						<li><a href="../sn/sn04.html" class="w3-hide-small">Tập IV - Thiên Sáu Xứ</a></li>
+ 						<li><a href="../sn/sn05.html" class="w3-hide-small">Tập V - Thiên Ðại Phẩm</a></li>
+ 					</ul>
+ 				<li class="topmenu" id="an"><a href="../an/an.html" class="w3-hide-small"><i class="fa fa-caret-down"></i>&nbsp;Tăng Chi Bộ Kinh</a>
+ 					<ul>
+ 						<li><a href="../an/an1.html" class="w3-hide-small">Chương Một Pháp</a></li>
+ 						<li><a href="../an/an2.html" class="w3-hide-small">Chương Hai Pháp</a></li>
+ 						<li><a href="../an/an3.html" class="w3-hide-small">Chương Ba Pháp</a></li>
+ 						<li><a href="../an/an4.html" class="w3-hide-small">Chương Bốn Pháp</a></li>
+ 						<li><a href="../an/an5.html" class="w3-hide-small">Chương Năm Pháp</a></li>
+ 						<li><a href="../an/an6.html" class="w3-hide-small">Chương Sáu Pháp</a></li>
+ 						<li><a href="../an/an7.html" class="w3-hide-small">Chương Bảy Pháp</a></li>
+ 						<li><a href="../an/an8.html" class="w3-hide-small">Chương Tám Pháp</a></li>
+ 						<li><a href="../an/an9.html" class="w3-hide-small">Chương Chín Pháp</a></li>
+ 						<li><a href="../an/an10.html" class="w3-hide-small">Chương Mười Pháp</a></li>
+ 						<li><a href="../an/an11.html" class="w3-hide-small">Chương Mười Một Pháp</a></li>
+ 					</ul>
+ 				</li>
+ 				<li class="topmenu" id="kn"><a href="../kn/kn.html" class="w3-hide-small"><i class="fa fa-caret-down"></i>&nbsp;Tiểu Bộ Kinh</a>
+ 					<ul>
+ 						<li><a href="../kp/kp.html" class="w3-hide-small">Kinh Tiểu Tụng</a></li>
+ 						<li><a href="../dhp/dhp.html" class="w3-hide-small">Kinh Pháp Cú</a></li>
+ 						<li><a href="../snp/snp.html" class="w3-hide-small">Kinh Tập</a></li>
+ 						<li><a href="../ud/ud.html" class="w3-hide-small">Kinh Phật Tự Thuyết</a></li>
+ 						<li><a href="../it/it.html" class="w3-hide-small">Kinh Phật Thuyết Như Vậy</a></li>
+ 						<li><a href="../tha/tha.html" class="w3-hide-small">Trưởng Lão Tăng Kệ</a></li>
+ 						<li><a href="../thi/thi.html" class="w3-hide-small">Trưởng Lão Ni Kệ</a></li>
+ 					</ul>
+ 				</li>
+				<li class="toplast" id="rd"><a href="../rd/rd.html" class="w3-hide-small"></i>Kinh Ngẫu Nhiên Theo Nhóm</a>
+ 					</ul>
+ 				</li>
+ 			</ul>
+ 			</div>
+ 		</div> <!--navbar-->
+
+<!-- Sidebar (hidden by default) -->
+ <nav class="w3-sidebar w3-bar-block w3-card w3-border w3-top w3-animate-left w3-hide-large" id="mySidebar">
+ 	<a href="javascript:void(0)" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-times fa-2x red-color"></i>&nbsp;&nbsp;&nbsp;Close</a><!-- Hides the sidebar when clicked -->
+ 		<div class="w3-bar-block w3-white">
+ 			<a href="../home/index.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-home fa-lg"></i>&nbsp;&nbsp;&nbsp;Home</a>
+ 			<a href="../guide/guide.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Guide</a>
+ 			<a href="../dn/dn.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Trường Bộ Kinh</a>
+ 			<a href="../mn/mn.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Trung Bộ Kinh</a>
+ 			<a href="../sn/sn.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Tương Ưng Bộ Kinh</a>
+ 			<a href="../an/an.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Tăng Chi Bộ Kinh
+ 			<a href="../kn/kn.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Tiểu Bộ Kinh</a>
+			<a href="../rd/rd.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>Kinh Ngẫu Nhiên Theo Nhóm</a>
+ 		</div>
+ </nav>
+ 
+ 
+ 
+   <!-- !PAGE CONTENT! --> 
+<div class="w3-main w3-content w3-padding w3-left-align bwcontainer4">
+<div id="content">
+<h2>Majjhima Nikāya - Trung Bộ Kinh</h2>
+<h5><span style="font-style: italic;">Hoà Thượng Thích Minh Châu dịch Việt</span></h5>
+
+</div>
+
+<br>
+ 	<title>        Trung Bộ 143          </title>
+
+<p lang="vi" class="vi"; style="text-align: center">
+Trung Bộ 143<br>
+<span lang="pi" class="pali">
+Majjhima Nikāya 143<br>
+</span>
+</p>
+
+
+
+<p lang="vi" class="vi"; style="text-align: center">
+Kinh Giáo Giới Cấp-Cô-Độc<br>
+<span lang="pi" class="pali">
+Anāthapiṇḍikovādasutta<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Như vầy tôi nghe.<br>
+<span lang="pi" class="pali">
+Evaṁ me sutaṁ—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Một thời, Thế Tôn trú ở Sāvatthī (Xá-vệ), Jetavana, (Kỳ-đà Lâm), tại tinh xá ông Cấp-Cô-Ðộc (Anāthapiṇḍika).<br>
+<span lang="pi" class="pali">
+ekaṁ samayaṁ bhagavā sāvatthiyaṁ viharati jetavane anāthapiṇḍikassa ārāme.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Lúc bấy giờ, cư sĩ Anāthapiṇḍika bị bệnh, khổ đau, bị trọng bệnh.<br>
+<span lang="pi" class="pali">
+Tena kho pana samayena anāthapiṇḍiko gahapati ābādhiko hoti dukkhito bāḷhagilāno.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Rồi cư sĩ Anāthapiṇḍika gọi một người:<br>
+<span lang="pi" class="pali">
+Atha kho anāthapiṇḍiko gahapati aññataraṁ purisaṁ āmantesi:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Hãy đến đây, này Bạn. Hãy đi đến Thế Tôn; sau khi đến, nhân danh ta, cúi đầu đảnh lễ chân Thế Tôn và bạch như sau:<br>
+<span lang="pi" class="pali">
+“ehi tvaṁ, ambho purisa, yena bhagavā tenupasaṅkama; upasaṅkamitvā mama vacanena bhagavato pāde sirasā vandāhi:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Bạch Thế Tôn, cư sĩ Anāthapiṇḍika bị bệnh, khổ đau, bị trọng bệnh.<br>
+<span lang="pi" class="pali">
+‘anāthapiṇḍiko, bhante, gahapati ābādhiko dukkhito bāḷhagilāno.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Anāthapiṇḍika xin cúi đầu đảnh lễ chân Thế Tôn’.<br>
+<span lang="pi" class="pali">
+So bhagavato pāde sirasā vandatī’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Rồi đi đến Tôn giả Sariputta (Xá-lợi-phất), sau khi đến, nhân danh ta cúi đầu đảnh lễ dưới chân Tôn giả Sariputta và thưa như sau:<br>
+<span lang="pi" class="pali">
+Yena cāyasmā sāriputto tenupasaṅkama; upasaṅkamitvā mama vacanena āyasmato sāriputtassa pāde sirasā vandāhi:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Thưa Tôn giả, cư sĩ Anāthapiṇḍika bị bệnh, khổ đau, bị trọng bệnh.<br>
+<span lang="pi" class="pali">
+‘anāthapiṇḍiko, bhante, gahapati ābādhiko dukkhito bāḷhagilāno.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Anāthapiṇḍika xin cúi đầu đảnh lễ dưới chân Tôn giả Sariputta và thưa như sau:<br>
+<span lang="pi" class="pali">
+So āyasmato sāriputtassa pāde sirasā vandatī’ti. Evañca vadehi:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Thưa Tôn giả, lành thay, nếu Tôn giả Sariputta vì lòng từ mẫn, đi đến trú xứ của cư sĩ Anāthapiṇḍika’.”<br>
+<span lang="pi" class="pali">
+‘sādhu kira, bhante, āyasmā sāriputto yena anāthapiṇḍikassa gahapatissa nivesanaṁ tenupasaṅkamatu anukampaṁ upādāyā’”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Thưa vâng, Tôn giả”. Người ấy vâng đáp cư sĩ Anāthapiṇḍika, đi đến Thế Tôn, sau khi đến đảnh lễ chân Thế Tôn rồi ngồi xuống một bên. Ngồi xuống một bên, người ấy bạch Thế Tôn:<br>
+<span lang="pi" class="pali">
+“Evaṁ, bhante”ti kho so puriso anāthapiṇḍikassa gahapatissa paṭissutvā yena bhagavā tenupasaṅkami; upasaṅkamitvā bhagavantaṁ abhivādetvā ekamantaṁ nisīdi. Ekamantaṁ nisinno kho so puriso bhagavantaṁ etadavoca:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Bạch Thế Tôn, cư sĩ Anāthapiṇḍika bị bệnh, khổ đau, bị trọng bệnh. Xin cúi đầu đảnh lễ chân Thế Tôn”.<br>
+<span lang="pi" class="pali">
+“anāthapiṇḍiko, bhante, gahapati ābādhiko dukkhito bāḷhagilāno. So bhagavato pāde sirasā vandatī”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Rồi người ấy đi đến Tôn giả Sariputta, sau khi đến đảnh lễ Tôn giả Sariputta rồi ngồi xuống một bên. Ngồi xuống một bên, người ấy thưa với Tôn giả Sariputta:<br>
+<span lang="pi" class="pali">
+Yena cāyasmā sāriputto tenupasaṅkami; upasaṅkamitvā āyasmantaṁ sāriputtaṁ abhivādetvā ekamantaṁ nisīdi. Ekamantaṁ nisinno kho so puriso āyasmantaṁ sāriputtaṁ etadavoca:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Thưa Tôn giả, cư sĩ Anāthapiṇḍika bị bệnh, khổ đau, bị trọng bệnh, xin cúi đầu đảnh lễ Tôn giả Sariputta và thưa như sau:<br>
+<span lang="pi" class="pali">
+“anāthapiṇḍiko, bhante, gahapati ābādhiko dukkhito bāḷhagilāno. So āyasmato sāriputtassa pāde sirasā vandati;<br>
+evañca vadeti:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Thưa Tôn giả, tốt lành thay, nếu Tôn giả Sariputta vì lòng từ mẫn đi đến trú xứ của cư sĩ Anāthapiṇḍika’.”<br>
+<span lang="pi" class="pali">
+‘sādhu kira, bhante, āyasmā sāriputto yena anāthapiṇḍikassa gahapatissa nivesanaṁ tenupasaṅkamatu anukampaṁ upādāyā’”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Tôn giả Sariputta im lặng nhận lời.<br>
+<span lang="pi" class="pali">
+Adhivāsesi kho āyasmā sāriputto tuṇhībhāvena.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Rồi Tôn giả Sariputta đắp y, cầm y bát, cùng với Tôn giả Ānanda là thị giả, đi đến trú xứ của cư sĩ Anāthapiṇḍika, sau khi đến liền ngồi lên chỗ đã soạn sẵn. Sau khi ngồi, Tôn giả Sariputta nói với cư sĩ Anāthapiṇḍika.<br>
+<span lang="pi" class="pali">
+Atha kho āyasmā sāriputto nivāsetvā pattacīvaramādāya āyasmatā ānandena pacchāsamaṇena yena anāthapiṇḍikassa gahapatissa nivesanaṁ tenupasaṅkami; upasaṅkamitvā paññatte āsane nisīdi. Nisajja kho āyasmā sāriputto anāthapiṇḍikaṁ gahapatiṁ etadavoca:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Này Cư sĩ, ta mong rằng Ông có thể kham nhẫn; Ta mong rằng Ông có thể chịu đựng. Ta mong rằng khổ thọ được giảm thiểu, không gia tăng, sự giảm thiểu được rõ rệt, không có gia tăng”.<br>
+<span lang="pi" class="pali">
+“kacci te, gahapati, khamanīyaṁ, kacci yāpanīyaṁ? Kacci te dukkhā vedanā paṭikkamanti, no abhikkamanti; paṭikkamosānaṁ paññāyati, no abhikkamo”ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Thưa Tôn giả Sariputta, con không có thể kham nhẫn, con không có thể chịu đựng. Sự khổ thống của con gia tăng, không có giảm thiểu; sự gia tăng rõ rệt, không có giảm thiểu.<br>
+<span lang="pi" class="pali">
+“Na me, bhante sāriputta, khamanīyaṁ na yāpanīyaṁ. Bāḷhā me dukkhā vedanā abhikkamanti, no paṭikkamanti; abhikkamosānaṁ paññāyati, no paṭikkamo.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Thưa Tôn giả Sariputta, ví như một người lực sĩ chém đầu (một người khác) với một thanh kiếm sắc bén; cũng vậy, thưa Tôn giả Sariputta, những ngọn gió kinh khủng thổi lên đau nhói trong đầu con.<br>
+<span lang="pi" class="pali">
+Seyyathāpi, bhante sāriputta, balavā puriso tiṇhena sikharena muddhani abhimattheyya; evameva kho me, bhante sāriputta, adhimattā vātā muddhani ūhananti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Thưa Tôn giả Sariputta, con không có thể kham nhẫn, con không có thể chịu đựng. Những khổ thống của con gia tăng, không có giảm thiểu; sự gia tăng rõ rệt, không có giảm thiểu.<br>
+<span lang="pi" class="pali">
+Na me, bhante sāriputta, khamanīyaṁ na yāpanīyaṁ. Bāḷhā me dukkhā vedanā abhikkamanti, no paṭikkamanti; abhikkamosānaṁ paññāyati, no paṭikkamo.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Thưa Tôn giả Sariputta, như một người lực sĩ lấy một dây nịt bằng da cứng quấn tròn quanh đầu rồi xiết chặt; cũng vậy, thưa Tôn giả Sariputta, con cảm thấy bị đau đầu một cách kinh khủng.<br>
+<span lang="pi" class="pali">
+Seyyathāpi, bhante sāriputta, balavā puriso daḷhena varattakhaṇḍena sīse sīsaveṭhaṁ dadeyya; evameva kho me, bhante sāriputta, adhimattā sīse sīsavedanā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Thưa Tôn giả Sariputta, con không có thể kham nhẫn, con không có thể chịu đựng. Những khổ thống của con gia tăng, không có giảm thiểu; sự gia tăng rõ rệt, không có giảm thiểu.<br>
+<span lang="pi" class="pali">
+Na me, bhante sāriputta, khamanīyaṁ na yāpanīyaṁ. Bāḷhā me dukkhā vedanā abhikkamanti, no paṭikkamanti; abhikkamosānaṁ paññāyati, no paṭikkamo.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Thưa Tôn giả Sariputta, như một người đồ tể thiện xảo hay đệ tử người đồ tể cắt ngang bụng với một con dao cắt thịt bò sắc bén; cũng vậy, thưa Tôn giả Sariputta, một ngọn gió kinh khủng cắt ngang bụng của con.<br>
+<span lang="pi" class="pali">
+Seyyathāpi, bhante sāriputta, dakkho goghātako vā goghātakantevāsī vā tiṇhena govikantanena kucchiṁ parikanteyya; evameva kho me, bhante sāriputta, adhimattā vātā kucchiṁ parikantanti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Thưa Tôn giả Sariputta, con không có thể kham nhẫn, con không có thể chịu đựng. Những khổ thống của con gia tăng, không có giảm thiểu; sự gia tăng rõ rệt, không có giảm thiểu.<br>
+<span lang="pi" class="pali">
+Na me, bhante sāriputta, khamanīyaṁ na yāpanīyaṁ. Bāḷhā me dukkhā vedanā abhikkamanti, no paṭikkamanti; abhikkamosānaṁ paññāyati, no paṭikkamo.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Thưa Tôn giả Sariputta, ví như hai người lực sĩ, sau khi nắm cánh tay của một người yếu hơn, nướng người ấy, đốt người ấy trên một hố than hừng; cũng vậy, thưa Tôn giả Sariputta, một sức nóng kinh khủng khởi lên trong thân con.<br>
+<span lang="pi" class="pali">
+Seyyathāpi, bhante sāriputta, dve balavanto purisā dubbalataraṁ purisaṁ nānābāhāsu gahetvā aṅgārakāsuyā santāpeyyuṁ, samparitāpeyyuṁ; evameva kho me, bhante sāriputta, adhimatto kāyasmiṁ ḍāho.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Thưa Tôn giả Sariputta, con không có thể kham nhẫn, con không có thể chịu đựng. Những thống khổ của con gia tăng, không có giảm thiểu; sự gia tăng rõ rệt, không có giảm thiểu”.<br>
+<span lang="pi" class="pali">
+Na me, bhante sāriputta, khamanīyaṁ na yāpanīyaṁ. Bāḷhā me dukkhā vedanā abhikkamanti, no paṭikkamanti; abhikkamosānaṁ paññāyati, no paṭikkamo”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Do vậy, này Cư sĩ hãy học tập như sau:<br>
+<span lang="pi" class="pali">
+“Tasmātiha te, gahapati, evaṁ sikkhitabbaṁ:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Tôi sẽ không chấp thủ con mắt, và tôi sẽ không có thức y cứ vào con mắt’.<br>
+<span lang="pi" class="pali">
+‘na cakkhuṁ upādiyissāmi, na ca me cakkhunissitaṁ viññāṇaṁ bhavissatī’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Cư sĩ, hãy học tập như vậy.<br>
+<span lang="pi" class="pali">
+Evañhi te, gahapati, sikkhitabbaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Do vậy, này Cư sĩ, hãy học tập như sau:<br>
+<span lang="pi" class="pali">
+Tasmātiha te, gahapati, evaṁ sikkhitabbaṁ:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Tôi sẽ không chấp thủ tai, và tôi sẽ không có thức y cứ vào tai’.<br>
+<span lang="pi" class="pali">
+‘na sotaṁ upādiyissāmi, na ca me sotanissitaṁ viññāṇaṁ bhavissatī’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Cư sĩ, hãy học tập như vậy.<br>
+<span lang="pi" class="pali">
+Evañhi te, gahapati, sikkhitabbaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Do vậy…<br>
+<span lang="pi" class="pali">
+Tasmātiha te, gahapati, evaṁ sikkhitabbaṁ:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘không chấp thủ mũi… y cứ vào mũi’.<br>
+<span lang="pi" class="pali">
+‘na ghānaṁ upādiyissāmi, na ca me ghānanissitaṁ viññāṇaṁ bhavissatī’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+… hãy học tập như vậy.<br>
+<span lang="pi" class="pali">
+Evañhi te, gahapati, sikkhitabbaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Do vậy…<br>
+<span lang="pi" class="pali">
+Tasmātiha te, gahapati, evaṁ sikkhitabbaṁ:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘không chấp thủ lưỡi… y cứ vào lưỡi’.<br>
+<span lang="pi" class="pali">
+‘na jivhaṁ upādiyissāmi, na ca me jivhānissitaṁ viññāṇaṁ bhavissatī’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+…. hãy học tập như vậy.<br>
+<span lang="pi" class="pali">
+Evañhi te, gahapati, sikkhitabbaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Do vậy…<br>
+<span lang="pi" class="pali">
+Tasmātiha te, gahapati, evaṁ sikkhitabbaṁ:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘không chấp thủ thân… y cứ vào thân’.<br>
+<span lang="pi" class="pali">
+‘na kāyaṁ upādiyissāmi, na ca me kāyanissitaṁ viññāṇaṁ bhavissatī’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+… hãy học tập như vậy.<br>
+<span lang="pi" class="pali">
+Evañhi te, gahapati, sikkhitabbaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Do vậy…<br>
+<span lang="pi" class="pali">
+Tasmātiha te, gahapati, evaṁ sikkhitabbaṁ:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘không chấp thủ ý… y cứ vào ý’.<br>
+<span lang="pi" class="pali">
+‘na manaṁ upādiyissāmi, na ca me manonissitaṁ viññāṇaṁ bhavissatī’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+… hãy học tập như vậy.<br>
+<span lang="pi" class="pali">
+Evañhi te, gahapati, sikkhitabbaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Do vậy, này Cư sĩ, hãy học tập như sau:<br>
+<span lang="pi" class="pali">
+Tasmātiha te, gahapati, evaṁ sikkhitabbaṁ:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Tôi sẽ không chấp thủ hình dạng, và tôi sẽ không có thức y cứ vào hình dạng’.<br>
+<span lang="pi" class="pali">
+‘na rūpaṁ upādiyissāmi, na ca me rūpanissitaṁ viññāṇaṁ bhavissatī’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Cư sĩ, hãy học tập như vậy.<br>
+<span lang="pi" class="pali">
+Evañhi te, gahapati, sikkhitabbaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Do vậy…<br>
+<span lang="pi" class="pali">
+Tasmātiha te, gahapati, evaṁ sikkhitabbaṁ:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘không chấp thủ tiếng … y cứ vào tiếng … hãy học tập như vậy.<br>
+<span lang="pi" class="pali">
+‘na saddaṁ upādiyissāmi …pe…<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Do vậy… không chấp thủ hương… y cứ vào hương… hãy học tập như vậy.<br>
+<span lang="pi" class="pali">
+na gandhaṁ upādiyissāmi …<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Do vậy…. không chấp thủ vị… y cứ vào vị… hãy học tập như vậy.<br>
+<span lang="pi" class="pali">
+na rasaṁ upādiyissāmi …<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Do vậy… không chấp thủ xúc… y cứ vào xúc… hãy học tập như vậy.<br>
+<span lang="pi" class="pali">
+na phoṭṭhabbaṁ upādiyissāmi …<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Do vậy, này Cư sĩ, hãy học tập như sau: ‘Tôi sẽ không chấp thủ pháp, và tôi sẽ không có thức y cứ vào pháp’.<br>
+<span lang="pi" class="pali">
+na dhammaṁ upādiyissāmi, na ca me dhammanissitaṁ viññāṇaṁ bhavissatī’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Cư sĩ, hãy học tập như vậy.<br>
+<span lang="pi" class="pali">
+Evañhi te, gahapati, sikkhitabbaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Do vậy, này Cư sĩ, hãy học tập như sau:<br>
+<span lang="pi" class="pali">
+Tasmātiha te, gahapati, evaṁ sikkhitabbaṁ:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Tôi sẽ không chấp thủ nhãn thức, và tôi sẽ không có thức y cứ vào nhãn thức’. Này Cư sĩ, hãy học tập như vậy.<br>
+<span lang="pi" class="pali">
+‘na cakkhuviññāṇaṁ upādiyissāmi, na ca me cakkhuviññāṇanissitaṁ viññāṇaṁ bhavissatī’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+<span lang="pi" class="pali">
+Evañhi te, gahapati, sikkhitabbaṁ.<br>
+Tasmātiha te, gahapati, evaṁ sikkhitabbaṁ:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Do vậy… ‘Tôi sẽ không chấp thủ nhĩ thức…<br>
+<span lang="pi" class="pali">
+‘na sotaviññāṇaṁ upādiyissāmi …<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Tôi sẽ không chấp thủ tỷ thức…<br>
+<span lang="pi" class="pali">
+na ghānaviññāṇaṁ upādiyissāmi …<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Tôi sẽ không chấp thủ thiệt thức…<br>
+<span lang="pi" class="pali">
+na jivhāviññāṇaṁ upādiyissāmi …<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Tôi sẽ không chấp thủ thân thức…<br>
+<span lang="pi" class="pali">
+na kāyaviññāṇaṁ upādiyissāmi …<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Tôi sẽ không chấp thủ ý thức, và tôi sẽ không có thức y cứ vào ý thức’.<br>
+<span lang="pi" class="pali">
+na manoviññāṇaṁ upādiyissāmi, na ca me manoviññāṇanissitaṁ viññāṇaṁ bhavissatī’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Cư sĩ, hãy học tập như vậy.<br>
+<span lang="pi" class="pali">
+Evañhi te, gahapati, sikkhitabbaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Do vậy, này Cư sĩ, hãy học tập như sau:<br>
+<span lang="pi" class="pali">
+Tasmātiha te, gahapati, evaṁ sikkhitabbaṁ:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Tôi sẽ không chấp thủ nhãn xúc, và tôi sẽ không có thức y cứ vào nhãn xúc’.<br>
+<span lang="pi" class="pali">
+‘na cakkhusamphassaṁ upādiyissāmi, na ca me cakkhusamphassanissitaṁ viññāṇaṁ bhavissatī’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Cư sĩ, hãy học tập như vậy.<br>
+<span lang="pi" class="pali">
+Evañhi te, gahapati, sikkhitabbaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Do vậy…<br>
+<span lang="pi" class="pali">
+Tasmātiha te, gahapati, evaṁ sikkhitabbaṁ:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Tôi sẽ không chấp thủ nhĩ xúc…<br>
+<span lang="pi" class="pali">
+‘na sotasamphassaṁ upādiyissāmi …<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Tôi sẽ không chấp thủ tỷ xúc…<br>
+<span lang="pi" class="pali">
+na ghānasamphassaṁ upādiyissāmi …<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Tôi sẽ không chấp thủ thiệt xúc…<br>
+<span lang="pi" class="pali">
+na jivhāsamphassaṁ upādiyissāmi …<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Tôi sẽ không chấp thủ thân xúc…<br>
+<span lang="pi" class="pali">
+na kāyasamphassaṁ upādiyissāmi …<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Tôi sẽ không chấp thủ ý xúc, và tôi sẽ không có thức y cứ vào ý xúc’.<br>
+<span lang="pi" class="pali">
+na manosamphassaṁ upādiyissāmi, na ca me manosamphassanissitaṁ viññāṇaṁ bhavissatī’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Cư sĩ, hãy học tập như vậy.<br>
+<span lang="pi" class="pali">
+Evañhi te, gahapati, sikkhitabbaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Do vậy, này Cư sĩ, hãy học tập như sau:<br>
+<span lang="pi" class="pali">
+Tasmātiha te, gahapati, evaṁ sikkhitabbaṁ:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Tôi sẽ không chấp thủ thọ do nhãn xúc sanh khởi, và tôi sẽ không có thức y cứ vào thọ do nhãn xúc sanh khởi’.<br>
+<span lang="pi" class="pali">
+‘na cakkhusamphassajaṁ vedanaṁ upādiyissāmi, na ca me cakkhusamphassajāvedanānissitaṁ viññāṇaṁ bhavissatī’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Cư sĩ, hãy học tập như vậy.<br>
+<span lang="pi" class="pali">
+Evañhi te, gahapati, sikkhitabbaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Do vậy…<br>
+<span lang="pi" class="pali">
+Tasmātiha te, gahapati, evaṁ sikkhitabbaṁ:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Tôi sẽ không chấp thủ thọ do nhĩ xúc sanh khởi…<br>
+<span lang="pi" class="pali">
+‘na sotasamphassajaṁ vedanaṁ upādiyissāmi …<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Tôi sẽ không chấp thủ thọ do tỷ xúc sanh khởi…<br>
+<span lang="pi" class="pali">
+na ghānasamphassajaṁ vedanaṁ upādiyissāmi …<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Tôi sẽ không chấp thủ thọ do thiệt xúc sanh khởi…<br>
+<span lang="pi" class="pali">
+na jivhāsamphassajaṁ vedanaṁ upādiyissāmi …<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Tôi sẽ không chấp thủ thọ do thân xúc sanh khởi…<br>
+<span lang="pi" class="pali">
+na kāyasamphassajaṁ vedanaṁ upādiyissāmi …<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Tôi sẽ không chấp thủ thọ do ý xúc sanh khởi và tôi sẽ không có thức y cứ vào thọ do ý xúc sanh khởi’.<br>
+<span lang="pi" class="pali">
+na manosamphassajaṁ vedanaṁ upādiyissāmi, na ca me manosamphassajāvedanānissitaṁ viññāṇaṁ bhavissatī’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Cư sĩ, hãy học tập như vậy.<br>
+<span lang="pi" class="pali">
+Evañhi te, gahapati, sikkhitabbaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Do vậy, này Cư sĩ, hãy học tập như sau:<br>
+<span lang="pi" class="pali">
+Tasmātiha te, gahapati, evaṁ sikkhitabbaṁ:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Tôi sẽ không chấp thủ địa giới, và tôi sẽ không có thức y cứ vào địa giới’.<br>
+<span lang="pi" class="pali">
+‘na pathavīdhātuṁ upādiyissāmi, na ca me pathavīdhātunissitaṁ viññāṇaṁ bhavissatī’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Cư sĩ, hãy học tập như vậy.<br>
+<span lang="pi" class="pali">
+Evañhi te, gahapati, sikkhitabbaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Do vậy…<br>
+<span lang="pi" class="pali">
+Tasmātiha te, gahapati, evaṁ sikkhitabbaṁ:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Tôi sẽ không chấp thủ thủy giới…<br>
+<span lang="pi" class="pali">
+‘na āpodhātuṁ upādiyissāmi …<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Tôi sẽ không chấp thủ hỏa giới…<br>
+<span lang="pi" class="pali">
+na tejodhātuṁ upādiyissāmi …<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Tôi sẽ không chấp thủ phong giới…<br>
+<span lang="pi" class="pali">
+na vāyodhātuṁ upādiyissāmi …<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Tôi sẽ không chấp thủ hư không giới…<br>
+<span lang="pi" class="pali">
+na ākāsadhātuṁ upādiyissāmi …<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Tôi sẽ không chấp thủ thức giới, và tôi sẽ không có thức y cứ vào thức giới’.<br>
+<span lang="pi" class="pali">
+na viññāṇadhātuṁ upādiyissāmi, na ca me viññāṇadhātunissitaṁ viññāṇaṁ bhavissatī’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Cư sĩ, hãy học tập như vậy.<br>
+<span lang="pi" class="pali">
+Evañhi te, gahapati, sikkhitabbaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Do vậy, này Cư sĩ, hãy học tập như sau:<br>
+<span lang="pi" class="pali">
+Tasmātiha te, gahapati, evaṁ sikkhitabbaṁ:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Tôi sẽ không chấp thủ sắc, và tôi sẽ không có thức y cứ vào sắc’.<br>
+<span lang="pi" class="pali">
+‘na rūpaṁ upādiyissāmi, na ca me rūpanissitaṁ viññāṇaṁ bhavissatī’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Cư sĩ, hãy học tập như vậy.<br>
+<span lang="pi" class="pali">
+Evañhi te, gahapati, sikkhitabbaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Do vậy…<br>
+<span lang="pi" class="pali">
+Tasmātiha te, gahapati, evaṁ sikkhitabbaṁ:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Tôi sẽ không chấp thủ thọ…<br>
+<span lang="pi" class="pali">
+‘na vedanaṁ upādiyissāmi …<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Tôi sẽ không chấp thủ tưởng…<br>
+<span lang="pi" class="pali">
+na saññaṁ upādiyissāmi …<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Tôi sẽ không chấp thủ hành…<br>
+<span lang="pi" class="pali">
+na saṅkhāre upādiyissāmi …<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Tôi sẽ không chấp thủ thức và tôi sẽ không có thức y cứ vào thức giới’.<br>
+<span lang="pi" class="pali">
+na viññāṇaṁ upādiyissāmi, na ca me viññāṇanissitaṁ viññāṇaṁ bhavissatī’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Cư sĩ, hãy học tập như vậy.<br>
+<span lang="pi" class="pali">
+Evañhi te, gahapati, sikkhitabbaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Do vậy, này Cư sĩ, hãy học tập như sau:<br>
+<span lang="pi" class="pali">
+Tasmātiha te, gahapati, evaṁ sikkhitabbaṁ:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Tôi sẽ không chấp thủ Hư không vô biên xứ, và tôi sẽ không có thức y cứ vào Hư không vô biên xứ’.<br>
+<span lang="pi" class="pali">
+‘na ākāsānañcāyatanaṁ upādiyissāmi, na ca me ākāsānañcāyatananissitaṁ viññāṇaṁ bhavissatī’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Cư sĩ, hãy học tập như vậy.<br>
+<span lang="pi" class="pali">
+Evañhi te, gahapati, sikkhitabbaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Do vậy…<br>
+<span lang="pi" class="pali">
+Tasmātiha te, gahapati, evaṁ sikkhitabbaṁ:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Tôi sẽ không chấp thủ Thức vô biên xứ…<br>
+<span lang="pi" class="pali">
+‘na viññāṇañcāyatanaṁ upādiyissāmi …<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Tôi sẽ không chấp thủ Vô sở hữu xứ…<br>
+<span lang="pi" class="pali">
+na ākiñcaññāyatanaṁ upādiyissāmi …<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Tôi sẽ không chấp thủ Phi tưởng phi phi tưởng xứ, và tôi sẽ không có thức y cứ vào Phi tưởng phi phi tưởng xứ’.<br>
+<span lang="pi" class="pali">
+na nevasaññānāsaññāyatanaṁ upādiyissāmi, na ca me nevasaññānāsaññāyatananissitaṁ viññāṇaṁ bhavissatī’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Cư sĩ, hãy học tập như vậy.<br>
+<span lang="pi" class="pali">
+Evañhi te, gahapati, sikkhitabbaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Do vậy, này Cư sĩ, hãy học tập như sau:<br>
+<span lang="pi" class="pali">
+Tasmātiha te, gahapati, evaṁ sikkhitabbaṁ:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Tôi sẽ không chấp thủ thế giới ở đây và tôi sẽ không có thức y cứ vào thế giới ở đây’.<br>
+<span lang="pi" class="pali">
+‘na idhalokaṁ upādiyissāmi, na ca me idhalokanissitaṁ viññāṇaṁ bhavissatī’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Cư sĩ, hãy học tập như vậy.<br>
+<span lang="pi" class="pali">
+Evañhi te, gahapati, sikkhitabbaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Do vậy…<br>
+<span lang="pi" class="pali">
+Tasmātiha te, gahapati, evaṁ sikkhitabbaṁ:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Tôi sẽ không chấp thủ thế giới khác, và tôi sẽ không có thức y cứ vào thế giới khác’.<br>
+<span lang="pi" class="pali">
+‘na paralokaṁ upādiyissāmi, na ca me paralokanissitaṁ viññāṇaṁ bhavissatī’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Cư sĩ, hãy học tập như vậy.<br>
+<span lang="pi" class="pali">
+Evañhi te, gahapati, sikkhitabbaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Do vậy, này Cư sĩ, hãy học tập như sau:<br>
+<span lang="pi" class="pali">
+Tasmātiha te, gahapati, evaṁ sikkhitabbaṁ:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Tôi sẽ không chấp thủ những gì được thấy, được nghe, được cảm thọ, được nhận thức, được hy cầu, được tư sát với ý, và tôi sẽ không có thức y cứ vào các pháp (nói trên)’.<br>
+<span lang="pi" class="pali">
+‘yampi me diṭṭhaṁ sutaṁ mutaṁ viññātaṁ pattaṁ pariyesitaṁ anupariyesitaṁ anucaritaṁ manasā tampi na upādiyissāmi, na ca me tannissitaṁ viññāṇaṁ bhavissatī’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Cư sĩ, hãy học tập như vậy”.<br>
+<span lang="pi" class="pali">
+Evañhi te, gahapati, sikkhitabban”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Khi nghe nói vậy, cư sĩ Anāthapiṇḍika khóc và chảy nước mắt. Rồi Tôn giả Ānanda nói với cư sĩ Anāthapiṇḍika:<br>
+<span lang="pi" class="pali">
+Evaṁ vutte, anāthapiṇḍiko gahapati parodi, assūni pavattesi. Atha kho āyasmā ānando anāthapiṇḍikaṁ gahapatiṁ etadavoca:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Này Cư sĩ, Ông đang gượng lên mà sống, hay chìm xuống (cõi chết)?”<br>
+<span lang="pi" class="pali">
+“olīyasi kho tvaṁ, gahapati, saṁsīdasi kho tvaṁ, gahapatī”ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Thưa Tôn giả Ānanda, con không gượng lên mà sống, con đang chìm xuống cõi chết.<br>
+<span lang="pi" class="pali">
+“Nāhaṁ, bhante ānanda, olīyāmi, napi saṁsīdāmi;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Dầu cho bậc Ðạo sư được con hầu hạ đã lâu và dầu con đã từng gần gũi các vị Tỷ-kheo tu tập ý lực,<br>
+<span lang="pi" class="pali">
+api ca me dīgharattaṁ satthā payirupāsito manobhāvanīyā ca bhikkhū;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+con chưa từng được nghe một thời thuyết pháp như vậy”.<br>
+<span lang="pi" class="pali">
+na ca me evarūpī dhammī kathā sutapubbā”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Này Cư sĩ, thuyết pháp như vậy không nói cho các hàng cư sĩ mặc áo trắng. Này Cư sĩ, thuyết pháp như vậy nói cho các hàng xuất gia”.<br>
+<span lang="pi" class="pali">
+“Na kho, gahapati, gihīnaṁ odātavasanānaṁ evarūpī dhammī kathā paṭibhāti; pabbajitānaṁ kho, gahapati, evarūpī dhammī kathā paṭibhātī”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Vậy thưa Tôn giả Sariputta, hãy thuyết pháp như vậy cho hàng cư sĩ mặc áo trắng.<br>
+<span lang="pi" class="pali">
+“Tena hi, bhante sāriputta, gihīnampi odātavasanānaṁ evarūpī dhammī kathā paṭibhātu.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Thưa Tôn giả Sariputta, có những Thiện gia nam tử sanh ra với cấu uế không nhiều, nếu không được nghe pháp, sẽ bị đọa lạc; nhưng nếu được nghe, họ có thể biết được (Chánh) pháp”.<br>
+<span lang="pi" class="pali">
+Santi hi, bhante, kulaputtā apparajakkhajātikā, assavanatā dhammassa parihāyanti; bhavissanti dhammassa aññātāro”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Rồi Tôn giả Sariputta và Tôn giả Ānanda sau khi giảng dạy cho cư sĩ Anāthapiṇḍika với bài thuyết giảng, từ chỗ ngồi đứng dậy và ra đi.<br>
+<span lang="pi" class="pali">
+Atha kho āyasmā ca sāriputto āyasmā ca ānando anāthapiṇḍikaṁ gahapatiṁ iminā ovādena ovaditvā uṭṭhāyāsanā pakkamiṁsu.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Rồi cư sĩ Anāthapiṇḍika, sau khi Tôn giả Sariputta và Tôn giả Ānanda ra đi không bao lâu, thân hoại mạng chung, và sau khi thân hoại mạng chung liền sanh lên cõi Tusita (Ðâu-suất thiên).<br>
+<span lang="pi" class="pali">
+Atha kho anāthapiṇḍiko gahapati, acirapakkante āyasmante ca sāriputte āyasmante ca ānande, kālamakāsi tusitaṁ kāyaṁ upapajji.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Rồi Thiên tử Anāthapiṇḍika, khi đêm đã gần mãn, sau khi chói sáng toàn cảnh Jetavana (Kỳ-đà-Lâm) với dung sắc thù thắng đi đến Thế Tôn, sau khi đến đảnh lễ Thế Tôn và đứng một bên.<br>
+<span lang="pi" class="pali">
+Atha kho anāthapiṇḍiko devaputto abhikkantāya rattiyā abhikkantavaṇṇo kevalakappaṁ jetavanaṁ obhāsetvā yena bhagavā tenupasaṅkami; upasaṅkamitvā bhagavantaṁ abhivādetvā ekamantaṁ aṭṭhāsi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ðứng một bên, Thiên tử Anāthapiṇḍika nói lên với Thế Tôn bài kệ sau đây:<br>
+<span lang="pi" class="pali">
+Ekamantaṁ ṭhito kho anāthapiṇḍiko devaputto bhagavantaṁ gāthāhi ajjhabhāsi:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Nơi rừng xoài Je-ta,<br>
+Chúng Tăng thường lui tới,<br>
+Được Pháp Vương trú trì,<br>
+Mang an lạc đến ta.<br>
+<span lang="pi" class="pali">
+“Idañhi taṁ jetavanaṁ,<br>
+isisaṅghanisevitaṁ;<br>
+Āvutthaṁ dhammarājena,<br>
+pītisañjananaṁ mama.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Nghiệp, minh và Chánh Pháp,<br>
+Giới, tối thượng sanh hữu,<br>
+Nhờ giới nên thanh tịnh,<br>
+Không phải do tài sản,<br>
+Hay nhờ vào giai cấp.<br>
+<span lang="pi" class="pali">
+Kammaṁ vijjā ca dhammo ca,<br>
+sīlaṁ jīvitamuttamaṁ;<br>
+Etena maccā sujjhanti,<br>
+na gottena dhanena vā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Do vậy Bậc Hiền Trí,<br>
+Thấy rõ lợi ích mình,<br>
+Khéo thẩm tra trong Pháp,<br>
+Được thanh tịnh ở đây.<br>
+<span lang="pi" class="pali">
+Tasmā hi paṇḍito poso,<br>
+sampassaṁ atthamattano;<br>
+Yoniso vicine dhammaṁ,<br>
+evaṁ tattha visujjhati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Như Sā-ri-put-ta,<br>
+Về giới, tuệ, tịch tịnh,<br>
+Bất luận tỳ-kheo nào,<br>
+Đã tới bờ bên kia,<br>
+Tốt nhất ngang với Ngài.”<br>
+<span lang="pi" class="pali">
+Sāriputtova paññāya,<br>
+sīlena upasamena ca;<br>
+Yopi pāraṅgato bhikkhu,<br>
+etāvaparamo siyā”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Thiên tử Anāthapiṇḍika nói như vậy. Bậc Ðạo sư tán đồng.<br>
+<span lang="pi" class="pali">
+Idamavoca anāthapiṇḍiko devaputto. Samanuñño satthā ahosi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Rồi Thiên tử Anāthapiṇḍika suy nghĩ:<br>
+<span lang="pi" class="pali">
+Atha kho anāthapiṇḍiko devaputto:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Bậc Ðạo sư tán đồng ta”. Sau khi đảnh lễ Thế Tôn, thân phía hữu hướng về Ngài rồi biến mất tại chỗ.<br>
+<span lang="pi" class="pali">
+“samanuñño me satthā”ti bhagavantaṁ abhivādetvā padakkhiṇaṁ katvā tatthevantaradhāyi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Rồi Thế Tôn, khi đêm ấy đã mãn, gọi các Tỷ-kheo:<br>
+<span lang="pi" class="pali">
+Atha kho bhagavā tassā rattiyā accayena bhikkhū āmantesi:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Này các Tỷ-kheo, đêm nay, một vị Thiên tử, khi đêm đã gần mãn, chiếu sáng toàn cảnh Jetavana với dung sắc thù thắng đã đi đến Ta, sau khi đến đảnh lễ Ta rồi đứng một bên.<br>
+<span lang="pi" class="pali">
+“imaṁ, bhikkhave, rattiṁ aññataro devaputto abhikkantāya rattiyā abhikkantavaṇṇo kevalakappaṁ jetavanaṁ obhāsetvā yenāhaṁ tenupasaṅkami; upasaṅkamitvā maṁ abhivādetvā ekamantaṁ aṭṭhāsi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ðứng một bên, vị Thiên tử ấy nói lên với Ta bài kệ sau đây:<br>
+<span lang="pi" class="pali">
+Ekamantaṁ ṭhito kho so devaputto maṁ gāthāhi ajjhabhāsi:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Nơi rừng xoài Je-ta,<br>
+Chúng Tăng thường lui tới,<br>
+Được Pháp Vương trú trì,<br>
+Mang an lạc đến ta.<br>
+<span lang="pi" class="pali">
+“Idañhi taṁ jetavanaṁ,<br>
+isisaṅghanisevitaṁ;<br>
+Āvutthaṁ dhammarājena,<br>
+pītisañjananaṁ mama.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Nghiệp, minh và Chánh Pháp,<br>
+Giới, tối thượng sanh hữu,<br>
+Nhờ giới nên thanh tịnh,<br>
+Không phải do tài sản,<br>
+Hay nhờ vào giai cấp.<br>
+<span lang="pi" class="pali">
+Kammaṁ vijjā ca dhammo ca,<br>
+sīlaṁ jīvitamuttamaṁ;<br>
+Etena maccā sujjhanti,<br>
+na gottena dhanena vā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Do vậy Bậc Hiền Trí,<br>
+Thấy rõ lợi ích mình,<br>
+Khéo thẩm tra trong Pháp,<br>
+Được thanh tịnh ở đây.<br>
+<span lang="pi" class="pali">
+Tasmā hi paṇḍito poso,<br>
+sampassaṁ atthamattano;<br>
+Yoniso vicine dhammaṁ,<br>
+evaṁ tattha visujjhati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Như Sā-ri-put-ta,<br>
+Về giới, tuệ, tịch tịnh,<br>
+Bất luận tỳ-kheo nào,<br>
+Đã tới bờ bên kia,<br>
+Tốt nhất ngang với Ngài.”<br>
+<span lang="pi" class="pali">
+Sāriputtova paññāya,<br>
+sīlena upasamena ca;<br>
+Yopi pāraṅgato bhikkhu,<br>
+etāvaparamo siyā”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Nói vậy xong, này các Tỷ-kheo, vị Thiên tử ấy suy nghĩ: ‘Bậc Ðạo sư tán đồng ta’, sau khi đảnh lễ thân phía hữu hướng về Ta, rồi biến mất tại chỗ.<br>
+<span lang="pi" class="pali">
+Idamavoca, bhikkhave, so devaputto. ‘Samanuñño me satthā’ti maṁ abhivādetvā padakkhiṇaṁ katvā tatthevantaradhāyī”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Khi được nghe nói vậy, Tôn giả Ānanda bạch Thế Tôn:<br>
+<span lang="pi" class="pali">
+Evaṁ vutte, āyasmā ānando bhagavantaṁ etadavoca:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Bạch Thế Tôn, có phải vị ấy là Thiên tử Anāthapiṇḍika chăng? Bạch Thế Tôn, cư sĩ Anāthapiṇḍika có lòng tịnh tín bất động đối với Tôn giả Sariputta”.<br>
+<span lang="pi" class="pali">
+“so hi nūna so, bhante, anāthapiṇḍiko devaputto bhavissati. Anāthapiṇḍiko, bhante, gahapati āyasmante sāriputte abhippasanno ahosī”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Lành thay, lành thay, Ānanda!<br>
+<span lang="pi" class="pali">
+“Sādhu sādhu, ānanda.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Những gì có thể thành đạt được bởi suy tư đã được đạt đến, này Ānanda. Chính Anāthapiṇḍika là vị Thiên tử ấy, không một ai khác”.<br>
+<span lang="pi" class="pali">
+Yāvatakaṁ kho, ānanda, takkāya pattabbaṁ, anuppattaṁ taṁ tayā. Anāthapiṇḍiko so, ānanda, devaputto”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Thế Tôn thuyết giảng như vậy. Tôn giả Ānanda hoan hỷ tín thọ lời Thế Tôn dạy.<br>
+<span lang="pi" class="pali">
+Idamavoca bhagavā. Attamano āyasmā ānando bhagavato bhāsitaṁ abhinandīti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+<span lang="pi" class="vi">
+Anāthapiṇḍikovādasuttaṁ niṭṭhitaṁ paṭhamaṁ.<br>
+</span>
+</p>
+
+
+
+<!-- COPY CONTENT SUTTA Ở ĐÂY -->
+
+
+
+<br>
+<p><p style="text-align: right;font-style: italic;">Hoà Thượng Thích Minh Châu dịch Việt</span></p>
+
+
+
+
+
+
+
+
+</section>  <!-- End English and Pali -->
+<div id="nextprev"><a id="previous-sutta" href="./mn142.html#content"></a><a id="next-sutta" href="./mn144.html#content"></a></div>
+</div>  <!--End Content -->
+</div>  <!-- End Page -->
+
+
+
+
+
+
+<footer>
+					 <!-- End bottom links -->
+</footer>
+
+
+ 
+ <!-- Scripts -->
+
+ <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      if (typeof enablePaliLookup === "function") {
+        enablePaliLookup();
+      } else {
+        console.error("enablePaliLookup is not defined");
+      }
+    });
+  </script>
+
+ <script>
+ // Script to open and close sidebar
+ 	function w3_open() {
+ 	document.getElementById("mySidebar").style.display = "block";
+ 	}
+ 		function w3_close() {
+ 		document.getElementById("mySidebar").style.display = "none";
+ 	}
+ </script>
+ <script>
+ 		var app = document.getElementsByTagName("BODY")[0];
+ 		if (localStorage.lightMode == "dark") {
+ 			app.setAttribute("light-mode", "dark");
+ 	}
+ </script>
+ 
+ <script>
+ 		function toggle_light_mode() {
+ 			var app = document.getElementsByTagName("BODY")[0];
+ 				if (localStorage.lightMode == "dark") {
+ 			localStorage.lightMode = "light";
+ 			app.setAttribute("light-mode", "light");
+ 		} else {
+ 					localStorage.lightMode = "dark";
+ 					app.setAttribute("light-mode", "dark");
+ 	}
+ 		}
+ 
+ 		window.addEventListener("storage", function () {
+ 			if (localStorage.lightMode == "dark") {
+ 				app.setAttribute("light-mode", "dark");
+ 				} else {
+ 				app.setAttribute("light-mode", "light");
+ 		}
+ 		}, false);
+ 
+ </script>
+ <script src="../js/footer.js"></script><script src="../js/dpd_deconstructor.js"></script><script src="../js/dpd_ebts.js"></script><script src="../js/dpd_i2h.js"></script>
+ <script src="/sw.js"></script>
+ </body>
+ </html>

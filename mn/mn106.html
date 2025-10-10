@@ -1,0 +1,947 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+ 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+ 	<link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+ 	<meta name="viewport" content="width=device-width, initial-scale=1">
+		<!-- Loading manifest -->
+	<link rel="manifest" href="../manifest.json">
+ 	<!-- Loading main and menu stylesheets -->
+ 	<link rel="stylesheet" href="../css/w3.css">
+ 	<link rel="stylesheet" href="../css/css.css">
+ 	<link rel="stylesheet" href="../css/menu.css">
+ 	<script src="../js/jquery-1.10.2.min.js"></script>
+ 	<script src="../js/controlpanel.js"></script>
+ 	<script src="../js/mousetrap.min.js"></script>
+    <script src="../js/pali-lookup-standalone.js"></script>
+
+ <script src="../js/suttaFiles.js"></script>
+<script>
+ // Script to open random Sutta
+ function openRandomSutta() {
+  const randomIndex = Math.floor(Math.random() * suttaFiles.length);
+  const selectedFile = suttaFiles[randomIndex];
+
+  // Get root path of your site 
+  const currentPath = location.pathname;
+  const rootPath = currentPath.split("/").slice(0, -2).join("/") + "/";
+
+  // Redirect to the correct file
+  window.location.href = rootPath + selectedFile;
+}
+</script>
+
+
+</head>
+ <body class="container">
+ <div class="header-background">
+ <!-- Header -->
+ <div class="w3-header w3-content w3-padding w3-left-align bwcontainer">
+ 	<div class="centered">
+ 		<button class="light-mode-button" aria-label="Bật Chế Độ Sáng" onclick="toggle_light_mode()">
+ 			<span></span>
+ 			<span></span>
+ 		</button>
+ 		<span class="box-lbl">Sáng/Tối</span>
+ 	</div> <!-- Centered -->
+ 		<a href="../home/index.html" id="bwlogo"><img src="../images/headerlogo.png" alt="Logo Lời Của Đức Phật" class="w3-image"></a>
+ 		<div class="w3-bar bwcontainer">
+ 			<div id="searchlinks">
+ 			<a href="../home/visearch.html"><span class="w3-bar-item"><i class="fa fa-search"></i>&nbsp;Tìm Tiếng Việt</span></a>
+ 			<a href="../home/palisearch.html"><span class="w3-bar-item"><i class="fa fa-search"></i>&nbsp;Tìm Tiếng Pali</span></a>
+ 			</div><!-- End Searchlinks div -->
+ 			<div class="help"><span><a href="../home/help.html"><img src="../images/help_icon.png" title="Trợ Giúp" alt="Help"></a></span></div>
+ 		</div> <!-- End w3-bar bwcontainer --> 	</div> <!-- End w3-header w3-content w3-padding w3-left-align bwcontainer -->
+ </div> <!-- End header-background -->
+ <!-- Top menu -->
+
+ <div class="w3-main w3-white bwcontainer2">
+ 	<div class="w3-button w3-padding-8 w3-left w3-hide-large" onclick="w3_open()">☰</div>
+ 		<div id="navbar" class="w3-hide-small w3-hide-medium bwcontainer3">
+ 			<ul id="css3menu0">
+ 				<li class="topfirst" id="home"><a href="../home/index.html" class="w3-hide-small">Trang Chủ</a></li>
+  				<li class="topmenu" id="dn"><a href="../dn/dn.html" class="pressed w3-hide-small">Trường Bộ Kinh</a></li>
+ 				<li class="topmenu" id="mn"><a href="../mn/mn.html" class="w3-hide-small">Trung Bộ Kinh</a></li>
+ 				<li class="topmenu" id="sn"><a href="../sn/sn.html" class="w3-hide-small"><i class="fa fa-caret-down"></i>&nbsp;Tương Ưng Bộ Kinh</a>
+ 					<ul>
+ 						<li><a href="../sn/sn01.html" class="w3-hide-small">Tập I - Thiên Có Kệ</a></li>
+ 						<li><a href="../sn/sn02.html" class="w3-hide-small">Tập II - Thiên Nhân Duyên</a></li>
+ 						<li><a href="../sn/sn03.html" class="w3-hide-small">Tập III - Thiên Uẩn</a></li>
+ 						<li><a href="../sn/sn04.html" class="w3-hide-small">Tập IV - Thiên Sáu Xứ</a></li>
+ 						<li><a href="../sn/sn05.html" class="w3-hide-small">Tập V - Thiên Ðại Phẩm</a></li>
+ 					</ul>
+ 				<li class="topmenu" id="an"><a href="../an/an.html" class="w3-hide-small"><i class="fa fa-caret-down"></i>&nbsp;Tăng Chi Bộ Kinh</a>
+ 					<ul>
+ 						<li><a href="../an/an1.html" class="w3-hide-small">Chương Một Pháp</a></li>
+ 						<li><a href="../an/an2.html" class="w3-hide-small">Chương Hai Pháp</a></li>
+ 						<li><a href="../an/an3.html" class="w3-hide-small">Chương Ba Pháp</a></li>
+ 						<li><a href="../an/an4.html" class="w3-hide-small">Chương Bốn Pháp</a></li>
+ 						<li><a href="../an/an5.html" class="w3-hide-small">Chương Năm Pháp</a></li>
+ 						<li><a href="../an/an6.html" class="w3-hide-small">Chương Sáu Pháp</a></li>
+ 						<li><a href="../an/an7.html" class="w3-hide-small">Chương Bảy Pháp</a></li>
+ 						<li><a href="../an/an8.html" class="w3-hide-small">Chương Tám Pháp</a></li>
+ 						<li><a href="../an/an9.html" class="w3-hide-small">Chương Chín Pháp</a></li>
+ 						<li><a href="../an/an10.html" class="w3-hide-small">Chương Mười Pháp</a></li>
+ 						<li><a href="../an/an11.html" class="w3-hide-small">Chương Mười Một Pháp</a></li>
+ 					</ul>
+ 				</li>
+ 				<li class="topmenu" id="kn"><a href="../kn/kn.html" class="w3-hide-small"><i class="fa fa-caret-down"></i>&nbsp;Tiểu Bộ Kinh</a>
+ 					<ul>
+ 						<li><a href="../kp/kp.html" class="w3-hide-small">Kinh Tiểu Tụng</a></li>
+ 						<li><a href="../dhp/dhp.html" class="w3-hide-small">Kinh Pháp Cú</a></li>
+ 						<li><a href="../snp/snp.html" class="w3-hide-small">Kinh Tập</a></li>
+ 						<li><a href="../ud/ud.html" class="w3-hide-small">Kinh Phật Tự Thuyết</a></li>
+ 						<li><a href="../it/it.html" class="w3-hide-small">Kinh Phật Thuyết Như Vậy</a></li>
+ 						<li><a href="../tha/tha.html" class="w3-hide-small">Trưởng Lão Tăng Kệ</a></li>
+ 						<li><a href="../thi/thi.html" class="w3-hide-small">Trưởng Lão Ni Kệ</a></li>
+ 					</ul>
+ 				</li>
+				<li class="toplast" id="rd"><a href="../rd/rd.html" class="w3-hide-small"></i>Kinh Ngẫu Nhiên Theo Nhóm</a>
+ 					</ul>
+ 				</li>
+ 			</ul>
+ 			</div>
+ 		</div> <!--navbar-->
+
+<!-- Sidebar (hidden by default) -->
+ <nav class="w3-sidebar w3-bar-block w3-card w3-border w3-top w3-animate-left w3-hide-large" id="mySidebar">
+ 	<a href="javascript:void(0)" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-times fa-2x red-color"></i>&nbsp;&nbsp;&nbsp;Close</a><!-- Hides the sidebar when clicked -->
+ 		<div class="w3-bar-block w3-white">
+ 			<a href="../home/index.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-home fa-lg"></i>&nbsp;&nbsp;&nbsp;Home</a>
+ 			<a href="../guide/guide.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Guide</a>
+ 			<a href="../dn/dn.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Trường Bộ Kinh</a>
+ 			<a href="../mn/mn.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Trung Bộ Kinh</a>
+ 			<a href="../sn/sn.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Tương Ưng Bộ Kinh</a>
+ 			<a href="../an/an.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Tăng Chi Bộ Kinh
+ 			<a href="../kn/kn.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Tiểu Bộ Kinh</a>
+			<a href="../rd/rd.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>Kinh Ngẫu Nhiên Theo Nhóm</a>
+ 		</div>
+ </nav>
+ 
+ 
+ 
+   <!-- !PAGE CONTENT! --> 
+<div class="w3-main w3-content w3-padding w3-left-align bwcontainer4">
+<div id="content">
+<h2>Majjhima Nikāya - Trung Bộ Kinh</h2>
+<h5><span style="font-style: italic;">Hoà Thượng Thích Minh Châu dịch Việt</span></h5>
+
+</div>
+
+<br>
+ 	<title>        Trung Bộ 106          </title>
+
+<p lang="vi" class="vi"; style="text-align: center">
+Trung Bộ 106<br>
+<span lang="pi" class="pali">
+Majjhima Nikāya 106<br>
+</span>
+</p>
+
+
+
+<p lang="vi" class="vi"; style="text-align: center">
+Kinh Lợi Ích Bất Động<br>
+<span lang="pi" class="pali">
+Āneñjasappāyasutta<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Như vầy tôi nghe.<br>
+<span lang="pi" class="pali">
+Evaṁ me sutaṁ—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Một thời Thế Tôn trú giữa dân chúng Kuru (Câu-lâu). Kammāsadamma (Kiềm-ma-sắt-đàm) là thị trấn của dân chúng Kuru.<br>
+<span lang="pi" class="pali">
+ekaṁ samayaṁ bhagavā kurūsu viharati kammāsadhammaṁ nāma kurūnaṁ nigamo.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Tại đấy Thế Tôn gọi các Tỷ-kheo: “Này các Tỷ-kheo”.<br>
+<span lang="pi" class="pali">
+Tatra kho bhagavā bhikkhū āmantesi: “bhikkhavo”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Thưa vâng, bạch Thế Tôn”. Các Tỷ-kheo ấy vâng đáp Thế Tôn. Thế Tôn nói như sau:<br>
+<span lang="pi" class="pali">
+“Bhadante”ti te bhikkhū bhagavato paccassosuṁ. Bhagavā etadavoca:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Này các Tỷ-kheo, các dục là vô thường, trống rỗng, giả dối, thuộc ngu si tánh.<br>
+<span lang="pi" class="pali">
+“Aniccā, bhikkhave, kāmā tucchā musā mosadhammā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này các Tỷ-kheo, đây là lời chào xáo của kẻ ngu xây dựng trên giả dối.<br>
+<span lang="pi" class="pali">
+Māyākatametaṁ, bhikkhave, bālalāpanaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Các dục hiện tại, và các dục tương lai, các dục tưởng hiện tại và các dục tưởng tương lai.<br>
+<span lang="pi" class="pali">
+Ye ca diṭṭhadhammikā kāmā, ye ca samparāyikā kāmā; yā ca diṭṭhadhammikā kāmasaññā, yā ca samparāyikā kāmasaññā—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+cả hai đều thuộc lãnh vực của ma, là cảnh giới của ma, là chỗ dinh dưỡng của ma, là chỗ ăn uống của ma.<br>
+<span lang="pi" class="pali">
+ubhayametaṁ māradheyyaṁ, mārassesa visayo, mārassesa nivāpo, mārassesa gocaro.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ở đây, các ác bất thiện ý này dẫn đến tham dục, sân hận, khích động.<br>
+<span lang="pi" class="pali">
+Etthete pāpakā akusalā mānasā abhijjhāpi byāpādāpi sārambhāpi saṁvattanti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+và chính những pháp ấy tác thành chướng ngại ở đây cho Thánh đệ tử học tập.<br>
+<span lang="pi" class="pali">
+Teva ariyasāvakassa idhamanusikkhato antarāyāya sambhavanti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ở đây, này các Tỷ-kheo, vị Thánh đệ tử suy nghĩ như sau:<br>
+<span lang="pi" class="pali">
+Tatra, bhikkhave, ariyasāvako iti paṭisañcikkhati:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Các dục hiện tại và các dục tương lai … cho Thánh đệ tử học tập.<br>
+<span lang="pi" class="pali">
+‘ye ca diṭṭhadhammikā kāmā, ye ca samparāyikā kāmā; yā ca diṭṭhadhammikā kāmasaññā, yā ca samparāyikā kāmasaññā— ubhayametaṁ māradheyyaṁ, mārassesa visayo, mārassesa nivāpo, mārassesa gocaro. Etthete pāpakā akusalā mānasā abhijjhāpi byāpādāpi sārambhāpi saṁvattanti, teva ariyasāvakassa idhamanusikkhato antarāyāya sambhavanti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vậy ta hãy an trú với tâm quảng đại, đại hành, sau khi chiến thắng thế giới, sau khi xác định vị trí của ý.<br>
+<span lang="pi" class="pali">
+Yannūnāhaṁ vipulena mahaggatena cetasā vihareyyaṁ abhibhuyya lokaṁ adhiṭṭhāya manasā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Khi ta an trú với tâm quảng đại, đại hành chiến thắng thế giới, xác định vị trí của ý, các ác bất thiện ý: tham dục, sân hận, khích động sẽ không khởi lên;<br>
+<span lang="pi" class="pali">
+Vipulena hi me mahaggatena cetasā viharato abhibhuyya lokaṁ adhiṭṭhāya manasā ye pāpakā akusalā mānasā abhijjhāpi byāpādāpi sārambhāpi te na bhavissanti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+với các pháp ấy được đoạn trừ, tâm của ta không trở thành hạn hẹp, trái lại thành vô lượng, khéo tu tập’.<br>
+<span lang="pi" class="pali">
+Tesaṁ pahānā aparittañca me cittaṁ bhavissati appamāṇaṁ subhāvitan’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Trong khi ấy hành trì như vậy, an trú nhiều lần như vậy, tâm trở thành an tịnh trong giới xứ (của nó).<br>
+<span lang="pi" class="pali">
+Tassa evaṁpaṭipannassa tabbahulavihārino āyatane cittaṁ pasīdati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Với tâm an tịnh, vị ấy thành tựu bất động ngay hiện tại hay thiên nặng về trí tuệ.<br>
+<span lang="pi" class="pali">
+Sampasāde sati etarahi vā āneñjaṁ samāpajjati paññāya vā adhimuccati kāyassa bhedā paraṁ maraṇā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Sau khi thân hoại mạng chung, sự tình này xảy ra, thức diễn tiến (samvattanikam vinnanam) có thể tùy theo đây đạt đến Bất động.<br>
+<span lang="pi" class="pali">
+Ṭhānametaṁ vijjati yaṁ taṁsaṁvattanikaṁ viññāṇaṁ assa āneñjūpagaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Như vậy, này các Tỷ-kheo, được gọi là đệ nhất hành đạo về lợi ích Bất động.<br>
+<span lang="pi" class="pali">
+Ayaṁ, bhikkhave, paṭhamā āneñjasappāyā paṭipadā akkhāyati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Lại nữa này các Tỷ-kheo, vị Thánh đệ tử suy nghĩ như sau:<br>
+<span lang="pi" class="pali">
+Puna caparaṁ, bhikkhave, ariyasāvako iti paṭisañcikkhati:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Những dục hiện tại và những dục tương lai,<br>
+<span lang="pi" class="pali">
+‘ye ca diṭṭhadhammikā kāmā, ye ca samparāyikā kāmā;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+những dục tưởng hiện tại, và những dục tưởng tương lai,<br>
+<span lang="pi" class="pali">
+yā ca diṭṭhadhammikā kāmasaññā, yā ca samparāyikā kāmasaññā;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+phàm bất cứ sắc pháp gì, là bốn đại chủng và sắc do bốn đại tạo thành’.<br>
+<span lang="pi" class="pali">
+yaṁ kiñci rūpaṁ sabbaṁ rūpaṁ cattāri ca mahābhūtāni, catunnañca mahābhūtānaṁ upādāyarūpan’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Trong khi vị ấy hành trì như vậy, an trú nhiều lần như vậy, tâm trở thành an tịnh trong giới xứ (của nó).<br>
+<span lang="pi" class="pali">
+Tassa evaṁpaṭipannassa tabbahulavihārino āyatane cittaṁ pasīdati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Với tâm an tịnh, vị ấy thành tựu Bất động ngay trong hiện tại hay thiên nặng về trí tuệ.<br>
+<span lang="pi" class="pali">
+Sampasāde sati etarahi vā āneñjaṁ samāpajjati paññāya vā adhimuccati kāyassa bhedā paraṁ maraṇā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Sau khi thân hoại mạng chung, sự tình này xảy ra, thức diễn tiến ấy có thể tùy theo đây đạt đến Bất động.<br>
+<span lang="pi" class="pali">
+Ṭhānametaṁ vijjati yaṁ taṁsaṁvattanikaṁ viññāṇaṁ assa āneñjūpagaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Như vậy, này các Tỷ-kheo, được gọi là đệ nhị hành đạo về lợi ích Bất động.<br>
+<span lang="pi" class="pali">
+Ayaṁ, bhikkhave, dutiyā āneñjasappāyā paṭipadā akkhāyati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Lại nữa này các Tỷ-kheo, vị Thánh đệ tử suy nghĩ như sau:<br>
+<span lang="pi" class="pali">
+Puna caparaṁ, bhikkhave, ariyasāvako iti paṭisañcikkhati:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Những dục hiện tại và những dục tương lai,<br>
+<span lang="pi" class="pali">
+‘ye ca diṭṭhadhammikā kāmā, ye ca samparāyikā kāmā;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+những dục tưởng hiện tại và những dục tưởng tương lai,<br>
+<span lang="pi" class="pali">
+yā ca diṭṭhadhammikā kāmasaññā, yā ca samparāyikā kāmasaññā;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+những sắc pháp hiện tại và những sắc pháp tương lai,<br>
+<span lang="pi" class="pali">
+ye ca diṭṭhadhammikā rūpā, ye ca samparāyikā rūpā;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+những sắc tưởng hiện tại và những sắc tưởng tương lai,<br>
+<span lang="pi" class="pali">
+yā ca diṭṭhadhammikā rūpasaññā, yā ca samparāyikā rūpasaññā—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+cả hai đều vô thường.<br>
+<span lang="pi" class="pali">
+ubhayametaṁ aniccaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Cái gì vô thường thời không đáng để được hoan hỷ, không đáng để được hoan nghênh, không đáng để được chấp trước’.<br>
+<span lang="pi" class="pali">
+Yadaniccaṁ taṁ nālaṁ abhinandituṁ, nālaṁ abhivadituṁ, nālaṁ ajjhositun’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Trong khi vị ấy hành trì như vậy, an trú nhiều lần như vậy, tâm trí trở thành an tịnh trong giới xứ (của nó).<br>
+<span lang="pi" class="pali">
+Tassa evaṁpaṭipannassa tabbahulavihārino āyatane cittaṁ pasīdati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Với tâm an tịnh, vị ấy thành tựu Bất động ngay trong hiện tại hay thiên nặng về trí tuệ.<br>
+<span lang="pi" class="pali">
+Sampasāde sati etarahi vā āneñjaṁ samāpajjati paññāya vā adhimuccati kāyassa bhedā paraṁ maraṇā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Sau khi thân hoại mạng chung, sự tình này xảy ra, thức diễn tiến ấy có thể tùy theo đây đạt đến Bất động.<br>
+<span lang="pi" class="pali">
+Ṭhānametaṁ vijjati yaṁ taṁsaṁvattanikaṁ viññāṇaṁ assa āneñjūpagaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Như vậy, này các Tỷ-kheo được gọi là đệ tam hành đạo về lợi ích Bất động.<br>
+<span lang="pi" class="pali">
+Ayaṁ, bhikkhave, tatiyā āneñjasappāyā paṭipadā akkhāyati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Lại nữa này các Tỷ-kheo, vị Thánh đệ tử suy nghĩ như sau:<br>
+<span lang="pi" class="pali">
+Puna caparaṁ, bhikkhave, ariyasāvako iti paṭisañcikkhati:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Những dục hiện tại … và những sắc tưởng tương lai, và những bất động tưởng, tất cả tưởng, chỗ nào các tưởng ấy được đoạn diệt không có dư tàn, như vậy là tịch tịnh, như vậy là thù diệu, tức là vô sở hữu’.<br>
+<span lang="pi" class="pali">
+‘ye ca diṭṭhadhammikā kāmā, ye ca samparāyikā kāmā; yā ca diṭṭhadhammikā kāmasaññā, yā ca samparāyikā kāmasaññā; ye ca diṭṭhadhammikā rūpā, ye ca samparāyikā rūpā; yā ca diṭṭhadhammikā rūpasaññā, yā ca samparāyikā rūpasaññā; yā ca āneñjasaññā—sabbā saññā. Yatthetā aparisesā nirujjhanti etaṁ santaṁ etaṁ paṇītaṁ—yadidaṁ ākiñcaññāyatanan’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Trong khi vị ấy hành trì như vậy, an trú nhiều lần như vậy, tâm trí trở thành an tịnh trong giới xứ (của nó).<br>
+<span lang="pi" class="pali">
+Tassa evaṁpaṭipannassa tabbahulavihārino āyatane cittaṁ pasīdati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Với tâm an tịnh, vị ấy thành tựu Vô sở hữu xứ ngay trong hiện tại hay thiên nặng về trí tuệ.<br>
+<span lang="pi" class="pali">
+Sampasāde sati etarahi vā ākiñcaññāyatanaṁ samāpajjati paññāya vā adhimuccati kāyassa bhedā paraṁ maraṇā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Sau khi thân hoại mạng chung, sự tình này xảy ra, thức diễn tiến ấy có thể tùy theo đây đạt đến Vô sở hữu xứ.<br>
+<span lang="pi" class="pali">
+Ṭhānametaṁ vijjati yaṁ taṁsaṁvattanikaṁ viññāṇaṁ assa ākiñcaññāyatanūpagaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Như vậy, này các Tỷ-kheo được gọi là đệ nhất hành đạo về lợi ích Vô sở hữu xứ.<br>
+<span lang="pi" class="pali">
+Ayaṁ, bhikkhave, paṭhamā ākiñcaññāyatanasappāyā paṭipadā akkhāyati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Lại nữa này các Tỷ-kheo, vị Thánh đệ tử đi đến khu rừng hay đi đến dưới gốc cây và suy nghĩ như sau:<br>
+<span lang="pi" class="pali">
+Puna caparaṁ, bhikkhave, ariyasāvako araññagato vā rukkhamūlagato vā suññāgāragato vā iti paṭisañcikkhati:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Trống không là tự ngã hay ngã này sở hữu’.<br>
+<span lang="pi" class="pali">
+‘suññamidaṁ attena vā attaniyena vā’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Trong khi vị ấy hành trì như vậy, an trú nhiều lần như vậy, tâm trí trở thành an tịnh trong giới xứ (của nó).<br>
+<span lang="pi" class="pali">
+Tassa evaṁpaṭipannassa tabbahulavihārino āyatane cittaṁ pasīdati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Với tâm an tịnh, vị ấy thành tựu Vô sở hữu xứ ngay trong hiện tại hay thiên nặng về trí tuệ.<br>
+<span lang="pi" class="pali">
+Sampasāde sati etarahi vā ākiñcaññāyatanaṁ samāpajjati paññāya vā adhimuccati kāyassa bhedā paraṁ maraṇā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Sau khi thân hoại mạng chung, sự tình này xảy ra, thức diễn tiến ấy có thể tùy theo đây đạt đến Vô sở hữu xứ.<br>
+<span lang="pi" class="pali">
+Ṭhānametaṁ vijjati yaṁ taṁsaṁvattanikaṁ viññāṇaṁ assa ākiñcaññāyatanūpagaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Như vậy, này các Tỷ-kheo, được gọi là đệ nhị hành đạo về lợi ích Vô sở hữu xứ.<br>
+<span lang="pi" class="pali">
+Ayaṁ, bhikkhave, dutiyā ākiñcaññāyatanasappāyā paṭipadā akkhāyati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Lại nữa này các Tỷ-kheo, vị Thánh đệ tử suy nghĩ như sau:<br>
+<span lang="pi" class="pali">
+Puna caparaṁ, bhikkhave, ariyasāvako iti paṭisañcikkhati:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Ta không có bất cứ chỗ nào, cho ai và trong hình thức nào, và sở thuộc của ta không có bất cứ chỗ nào, cho ai và trong hình thức nào’.<br>
+<span lang="pi" class="pali">
+‘nāhaṁ kvacani kassaci kiñcanatasmiṁ, na ca mama kvacani kismiñci kiñcanaṁ natthī’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Trong khi vị ấy hành trì như vậy, an trú nhiều lần như vậy, tâm trí trở thành an tịnh trong trú xứ (của nó).<br>
+<span lang="pi" class="pali">
+Tassa evaṁpaṭipannassa tabbahulavihārino āyatane cittaṁ pasīdati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Với tâm an tịnh, vị ấy thành tựu Vô sở hữu xứ trong hiện tại hay thiên nặng về trí tuệ.<br>
+<span lang="pi" class="pali">
+Sampasāde sati etarahi vā ākiñcaññāyatanaṁ samāpajjati paññāya vā adhimuccati kāyassa bhedā paraṁ maraṇā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Sau khi thân hoại mạng chung, sự tình này xảy ra, thức diễn tiến ấy có thể tùy theo đây đạt đến Vô sở hữu xứ.<br>
+<span lang="pi" class="pali">
+Ṭhānametaṁ vijjati yaṁ taṁsaṁvattanikaṁ viññāṇaṁ assa ākiñcaññāyatanūpagaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Như vậy, này các Tỷ-kheo được gọi là đệ tam hành đạo về lợi ích Vô sở hữu xứ.<br>
+<span lang="pi" class="pali">
+Ayaṁ, bhikkhave, tatiyā ākiñcaññāyatanasappāyā paṭipadā akkhāyati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Và lại nữa, này các Tỷ-kheo, vị Thánh đệ tử suy nghĩ như sau:<br>
+<span lang="pi" class="pali">
+Puna caparaṁ, bhikkhave, ariyasāvako iti paṭisañcikkhati:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Những dục hiện tại … và những sắc tưởng và những Bất động tưởng, và những Vô sở hữu xứ tưởng, tất cả các tưởng, chỗ nào các tưởng ấy được đoạn diệt không có dư tàn, như vậy là tịch tịnh, như vậy là thù diệu, tức là Phi tưởng phi phi tưởng xứ’.<br>
+<span lang="pi" class="pali">
+‘ye ca diṭṭhadhammikā kāmā, ye ca samparāyikā kāmā; yā ca diṭṭhadhammikā kāmasaññā, yā ca samparāyikā kāmasaññā; ye ca diṭṭhadhammikā rūpā, ye ca samparāyikā rūpā; yā ca diṭṭhadhammikā rūpasaññā, yā ca samparāyikā rūpasaññā; yā ca āneñjasaññā, yā ca ākiñcaññāyatanasaññā—sabbā saññā. Yatthetā aparisesā nirujjhanti etaṁ santaṁ etaṁ paṇītaṁ—yadidaṁ nevasaññānāsaññāyatanan’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Trong khi vị ấy hành trì như vậy, an trú nhiều lần như vậy, tâm trí trở thành an tịnh trong trú xứ (của nó) .<br>
+<span lang="pi" class="pali">
+Tassa evaṁpaṭipannassa tabbahulavihārino āyatane cittaṁ pasīdati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Với tâm an tịnh vị ấy có thể thành tựu Phi tưởng phi phi tưởng xứ ngay trong hiện tại, hoặc thiên nặng về trí tuệ.<br>
+<span lang="pi" class="pali">
+Sampasāde sati etarahi vā nevasaññānāsaññāyatanaṁ samāpajjati paññāya vā adhimuccati kāyassa bhedā paraṁ maraṇā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Sau khi thân hoại mạng chung, sự tình này xảy ra, thức diễn tiến ấy có thể tùy theo đây đạt đến Phi tưởng phi phi tưởng xứ.<br>
+<span lang="pi" class="pali">
+Ṭhānametaṁ vijjati yaṁ taṁsaṁvattanikaṁ viññāṇaṁ assa nevasaññānāsaññāyatanūpagaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Như vậy, này các Tỷ-kheo, được gọi là hành đạo về lợi ích Phi tưởng phi phi tưởng xứ.”<br>
+<span lang="pi" class="pali">
+Ayaṁ, bhikkhave, nevasaññānāsaññāyatanasappāyā paṭipadā akkhāyatī”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Khi được nói như vậy, Tôn giả Ānanda bạch Thế Tôn:<br>
+<span lang="pi" class="pali">
+Evaṁ vutte, āyasmā ānando bhagavantaṁ etadavoca:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Ở đây, bạch Thế Tôn, vị Tỷ-kheo hành trì như vậy và suy nghĩ:<br>
+<span lang="pi" class="pali">
+“idha, bhante, bhikkhu evaṁ paṭipanno hoti:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Nếu trước không có như vậy, thời có thể không là của ta; nếu nay không có như vậy thời có thể sẽ không là của ta. Ta đoạn trừ những gì hiện có và những gì đã có’.<br>
+<span lang="pi" class="pali">
+‘no cassa, no ca me siyā; na bhavissati, na me bhavissati; yadatthi yaṁ, bhūtaṁ—taṁ pajahāmī’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Và như vậy vị ấy được xả.<br>
+<span lang="pi" class="pali">
+Evaṁ upekkhaṁ paṭilabhati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Bạch Thế Tôn, môt vị Tỷ-kheo như vậy có chứng được cứu cánh Niết-bàn không?”<br>
+<span lang="pi" class="pali">
+Parinibbāyeyya nu kho so, bhante, bhikkhu na vā parinibbāyeyyā”ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Ở đây, này Ānanda, một số Tỷ-kheo có thể chứng được cứu cánh Niết-bàn, và ở đây, một số Tỷ-kheo có thể không chứng được cứu cánh Niết-bàn.”<br>
+<span lang="pi" class="pali">
+“Apetthekacco, ānanda, bhikkhu parinibbāyeyya, apetthekacco bhikkhu na parinibbāyeyyā”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Do nhân gì, do duyên gì, bạch Thế Tôn, ở đây, một số Tỷ-kheo có thể chứng được cứu cánh Niết-bàn, và ở đây, một số Tỷ-kheo có thể không chứng được cứu cánh Niết-bàn?”<br>
+<span lang="pi" class="pali">
+“Ko nu kho, bhante, hetu ko paccayo yenapetthekacco bhikkhu parinibbāyeyya, apetthekacco bhikkhu na parinibbāyeyyā”ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Ở đây, này Ānanda, một Tỷ-kheo hành trì như vậy và suy nghĩ:<br>
+<span lang="pi" class="pali">
+“Idhānanda, bhikkhu evaṁ paṭipanno hoti:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Nếu trước không có như vậy thời có thể không là của ta. Nếu nay không có như vậy, thời có thể sẽ không là của ta. Ta đoạn trừ những gì hiện có và những gì đã có’.<br>
+<span lang="pi" class="pali">
+‘no cassa, no ca me siyā; na bhavissati, na me bhavissati; yadatthi, yaṁ bhūtaṁ—taṁ pajahāmī’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Và như vậy vị ấy được xả.<br>
+<span lang="pi" class="pali">
+Evaṁ upekkhaṁ paṭilabhati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vị ấy hoan hỷ trong xả ấy, hoan nghênh, chấp trước xả ấy.<br>
+<span lang="pi" class="pali">
+So taṁ upekkhaṁ abhinandati, abhivadati, ajjhosāya tiṭṭhati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Do vị ấy hoan hỷ trong xả ấy, hoan nghênh, chấp trước xả ấy, thức lệ thuộc xả ấy và thủ trước xả ấy.<br>
+<span lang="pi" class="pali">
+Tassa taṁ upekkhaṁ abhinandato abhivadato ajjhosāya tiṭṭhato tannissitaṁ hoti viññāṇaṁ tadupādānaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Có thủ trước, này Ānanda, vị Tỷ-kheo không chứng cứu cánh Niết-bàn.”<br>
+<span lang="pi" class="pali">
+Saupādāno, ānanda, bhikkhu na parinibbāyatī”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Bạch Thế Tôn, vị Tỷ-kheo ấy thủ trước là thủ trước chỗ nào?”<br>
+<span lang="pi" class="pali">
+“Kahaṁ pana so, bhante, bhikkhu upādiyamāno upādiyatī”ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Này Ānanda, Phi tưởng phi phi tưởng xứ.”<br>
+<span lang="pi" class="pali">
+“Nevasaññānāsaññāyatanaṁ, ānandā”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Bạch Thế Tôn, Tỷ-kheo ấy thủ trước, thủ trước như vậy là thủ trước tối thượng?”<br>
+<span lang="pi" class="pali">
+“Upādānaseṭṭhaṁ kira so, bhante, bhikkhu upādiyamāno upādiyatī”ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Này Ānanda, Vị Tỷ-kheo ấy thủ trước, thủ trước như vậy là thủ trước tối thượng.<br>
+<span lang="pi" class="pali">
+“Upādānaseṭṭhañhi so, ānanda, bhikkhu upādiyamāno upādiyati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Ānanda, đây là thủ trước tối thượng, tức là Phi tưởng phi phi tưởng xứ.<br>
+<span lang="pi" class="pali">
+Upādānaseṭṭhañhetaṁ, ānanda, yadidaṁ—nevasaññānāsaññāyatanaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ở đây, này Ānanda, vị Tỷ-kheo hành trì như vậy và suy nghĩ:<br>
+<span lang="pi" class="pali">
+Idhānanda, bhikkhu evaṁ paṭipanno hoti:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Nếu (trước) không có như vậy thời có thể không là của ta. Nếu (nay) không có như vậy, thời có thể không là của ta. Ta đoạn trừ những gì hiện có và những gì đã có’.<br>
+<span lang="pi" class="pali">
+‘no cassa, no ca me siyā; na bhavissati, na me bhavissati; yadatthi, yaṁ bhūtaṁ—taṁ pajahāmī’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Như vậy, vị ấy được xả.<br>
+<span lang="pi" class="pali">
+Evaṁ upekkhaṁ paṭilabhati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+vị ấy không hoan hỷ trong xả ấy, không hoan nghênh, không chấp trước xả ấy.<br>
+<span lang="pi" class="pali">
+So taṁ upekkhaṁ nābhinandati, nābhivadati, na ajjhosāya tiṭṭhati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Do vị ấy không hoan hỷ trong xả ấy, không hoan nghênh, không thủ trước xả ấy, thức không lệ thuộc xả ấy và không thủ trước xả ấy.<br>
+<span lang="pi" class="pali">
+Tassa taṁ upekkhaṁ anabhinandato anabhivadato anajjhosāya tiṭṭhato na tannissitaṁ hoti viññāṇaṁ na tadupādānaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Không thủ trước, này Ānanda, vị Tỷ-kheo chứng cứu cánh Niết-bàn.”<br>
+<span lang="pi" class="pali">
+Anupādāno, ānanda, bhikkhu parinibbāyatī”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Thật vi diệu thay, bạch Thế Tôn! Thật hy hữu thay, bạch Thế Tôn!<br>
+<span lang="pi" class="pali">
+“Acchariyaṁ, bhante, abbhutaṁ, bhante.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Chính mười y cứ sự này sự kia, bạch Thế Tôn, sự vượt thoát dòng nước mạnh đã được Thế Tôn nói lên.<br>
+<span lang="pi" class="pali">
+Nissāya nissāya kira no, bhante, bhagavatā oghassa nittharaṇā akkhātā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Nhưng bạch Thế Tôn, thế nào là Thánh giải thoát?”<br>
+<span lang="pi" class="pali">
+Katamo pana, bhante, ariyo vimokkho”ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Ở đây, này các Tỷ-kheo, vị Thánh đệ tử suy nghĩ như sau:<br>
+<span lang="pi" class="pali">
+“Idhānanda, bhikkhu ariyasāvako iti paṭisañcikkhati:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Những dục hiện tại và những dục tương lai,<br>
+<span lang="pi" class="pali">
+‘ye ca diṭṭhadhammikā kāmā, ye ca samparāyikā kāmā;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+những dục tưởng hiện tại và những dục tưởng tương lai,<br>
+<span lang="pi" class="pali">
+yā ca diṭṭhadhammikā kāmasaññā, yā ca samparāyikā kāmasaññā;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+những sắc pháp hiện tại và những sắc pháp tương lai;<br>
+<span lang="pi" class="pali">
+ye ca diṭṭhadhammikā rūpā, ye ca samparāyikā rūpā;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+những sắc tưởng hiện tại và những sắc tưởng tương lai;<br>
+<span lang="pi" class="pali">
+yā ca diṭṭhadhammikā rūpasaññā, yā ca samparāyikā rūpasaññā;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+những Bất động tưởng, những Vô sở hữu xứ tưởng, và những Phi tưởng phi phi tưởng xứ tưởng,<br>
+<span lang="pi" class="pali">
+yā ca āneñjasaññā, yā ca ākiñcaññāyatanasaññā, yā ca nevasaññānāsaññāyatanasaññā—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+cái gì thuộc tự thân, là tự thân.<br>
+<span lang="pi" class="pali">
+esa sakkāyo yāvatā sakkāyo.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ðây là bất tử tức là tâm giải thoát không thủ trước.<br>
+<span lang="pi" class="pali">
+Etaṁ amataṁ yadidaṁ anupādā cittassa vimokkho.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Ānanda, đây là đạo lộ về lợi ích Bất động được Ta thuyết giảng, đạo lộ về lợi ích Vô sở hữu xứ được Ta thuyết giảng, đạo lộ về lợi ích Phi tưởng phi phi tưởng xứ được Ta thuyết giảng, là sự vượt qua dòng nước mạnh do y cứ sự này sự kia được Ta thuyết giảng, Thánh giải thoát được Ta thuyết giảng.<br>
+<span lang="pi" class="pali">
+Iti, kho, ānanda, desitā mayā āneñjasappāyā paṭipadā, desitā ākiñcaññāyatanasappāyā paṭipadā, desitā nevasaññānāsaññāyatanasappāyā paṭipadā, desitā nissāya nissāya oghassa nittharaṇā, desito ariyo vimokkho.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Những gì, này Ānanda, vị Ðạo sư cần phải làm, vì lòng từ mẫn mưu tìm hạnh phúc cho các đệ tử, những điều ấy đã được Ta làm, vì lòng từ mẫn của Ta đối với Ông.<br>
+<span lang="pi" class="pali">
+Yaṁ kho, ānanda, satthārā karaṇīyaṁ sāvakānaṁ hitesinā anukampakena anukampaṁ upādāya, kataṁ vo taṁ mayā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Ānanda, đây là những gốc cây, đây là những khoảng trống. Hãy tu Thiền, này Ānanda, chớ có phóng dật, chớ có hối hận về sau. Ðây là lời dạy của Ta cho Ông’.”<br>
+<span lang="pi" class="pali">
+Etāni, ānanda, rukkhamūlāni, etāni suññāgārāni. Jhāyathānanda, mā pamādattha, mā pacchā vippaṭisārino ahuvattha. Ayaṁ vo amhākaṁ anusāsanī’”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Thế Tôn thuyết giảng như vậy. Tôn giả Ānanda hoan hỷ tín thọ lời Thế Tôn dạy.<br>
+<span lang="pi" class="pali">
+Idamavoca bhagavā. Attamano āyasmā ānando bhagavato bhāsitaṁ abhinandīti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+<span lang="pi" class="vi">
+Āneñjasappāyasuttaṁ niṭṭhitaṁ chaṭṭhaṁ.<br>
+</span>
+</p>
+
+
+
+<!-- COPY CONTENT SUTTA Ở ĐÂY -->
+
+
+
+<br>
+<p><p style="text-align: right;font-style: italic;">Hoà Thượng Thích Minh Châu dịch Việt</span></p>
+
+
+
+
+
+
+
+
+</section>  <!-- End English and Pali -->
+<div id="nextprev"><a id="previous-sutta" href="./mn105.html#content"></a><a id="next-sutta" href="./mn107.html#content"></a></div>
+</div>  <!--End Content -->
+</div>  <!-- End Page -->
+
+
+
+
+
+
+<footer>
+					 <!-- End bottom links -->
+</footer>
+
+
+ 
+ <!-- Scripts -->
+
+ <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      if (typeof enablePaliLookup === "function") {
+        enablePaliLookup();
+      } else {
+        console.error("enablePaliLookup is not defined");
+      }
+    });
+  </script>
+
+ <script>
+ // Script to open and close sidebar
+ 	function w3_open() {
+ 	document.getElementById("mySidebar").style.display = "block";
+ 	}
+ 		function w3_close() {
+ 		document.getElementById("mySidebar").style.display = "none";
+ 	}
+ </script>
+ <script>
+ 		var app = document.getElementsByTagName("BODY")[0];
+ 		if (localStorage.lightMode == "dark") {
+ 			app.setAttribute("light-mode", "dark");
+ 	}
+ </script>
+ 
+ <script>
+ 		function toggle_light_mode() {
+ 			var app = document.getElementsByTagName("BODY")[0];
+ 				if (localStorage.lightMode == "dark") {
+ 			localStorage.lightMode = "light";
+ 			app.setAttribute("light-mode", "light");
+ 		} else {
+ 					localStorage.lightMode = "dark";
+ 					app.setAttribute("light-mode", "dark");
+ 	}
+ 		}
+ 
+ 		window.addEventListener("storage", function () {
+ 			if (localStorage.lightMode == "dark") {
+ 				app.setAttribute("light-mode", "dark");
+ 				} else {
+ 				app.setAttribute("light-mode", "light");
+ 		}
+ 		}, false);
+ 
+ </script>
+ <script src="../js/footer.js"></script><script src="../js/dpd_deconstructor.js"></script><script src="../js/dpd_ebts.js"></script><script src="../js/dpd_i2h.js"></script>
+ <script src="/sw.js"></script>
+ </body>
+ </html>

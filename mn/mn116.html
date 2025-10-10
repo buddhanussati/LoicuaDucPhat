@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+ 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+ 	<link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+ 	<meta name="viewport" content="width=device-width, initial-scale=1">
+		<!-- Loading manifest -->
+	<link rel="manifest" href="../manifest.json">
+ 	<!-- Loading main and menu stylesheets -->
+ 	<link rel="stylesheet" href="../css/w3.css">
+ 	<link rel="stylesheet" href="../css/css.css">
+ 	<link rel="stylesheet" href="../css/menu.css">
+ 	<script src="../js/jquery-1.10.2.min.js"></script>
+ 	<script src="../js/controlpanel.js"></script>
+ 	<script src="../js/mousetrap.min.js"></script>
+    <script src="../js/pali-lookup-standalone.js"></script>
+
+ <script src="../js/suttaFiles.js"></script>
+<script>
+ // Script to open random Sutta
+ function openRandomSutta() {
+  const randomIndex = Math.floor(Math.random() * suttaFiles.length);
+  const selectedFile = suttaFiles[randomIndex];
+
+  // Get root path of your site 
+  const currentPath = location.pathname;
+  const rootPath = currentPath.split("/").slice(0, -2).join("/") + "/";
+
+  // Redirect to the correct file
+  window.location.href = rootPath + selectedFile;
+}
+</script>
+
+
+</head>
+ <body class="container">
+ <div class="header-background">
+ <!-- Header -->
+ <div class="w3-header w3-content w3-padding w3-left-align bwcontainer">
+ 	<div class="centered">
+ 		<button class="light-mode-button" aria-label="Bật Chế Độ Sáng" onclick="toggle_light_mode()">
+ 			<span></span>
+ 			<span></span>
+ 		</button>
+ 		<span class="box-lbl">Sáng/Tối</span>
+ 	</div> <!-- Centered -->
+ 		<a href="../home/index.html" id="bwlogo"><img src="../images/headerlogo.png" alt="Logo Lời Của Đức Phật" class="w3-image"></a>
+ 		<div class="w3-bar bwcontainer">
+ 			<div id="searchlinks">
+ 			<a href="../home/visearch.html"><span class="w3-bar-item"><i class="fa fa-search"></i>&nbsp;Tìm Tiếng Việt</span></a>
+ 			<a href="../home/palisearch.html"><span class="w3-bar-item"><i class="fa fa-search"></i>&nbsp;Tìm Tiếng Pali</span></a>
+ 			</div><!-- End Searchlinks div -->
+ 			<div class="help"><span><a href="../home/help.html"><img src="../images/help_icon.png" title="Trợ Giúp" alt="Help"></a></span></div>
+ 		</div> <!-- End w3-bar bwcontainer --> 	</div> <!-- End w3-header w3-content w3-padding w3-left-align bwcontainer -->
+ </div> <!-- End header-background -->
+ <!-- Top menu -->
+
+ <div class="w3-main w3-white bwcontainer2">
+ 	<div class="w3-button w3-padding-8 w3-left w3-hide-large" onclick="w3_open()">☰</div>
+ 		<div id="navbar" class="w3-hide-small w3-hide-medium bwcontainer3">
+ 			<ul id="css3menu0">
+ 				<li class="topfirst" id="home"><a href="../home/index.html" class="w3-hide-small">Trang Chủ</a></li>
+  				<li class="topmenu" id="dn"><a href="../dn/dn.html" class="pressed w3-hide-small">Trường Bộ Kinh</a></li>
+ 				<li class="topmenu" id="mn"><a href="../mn/mn.html" class="w3-hide-small">Trung Bộ Kinh</a></li>
+ 				<li class="topmenu" id="sn"><a href="../sn/sn.html" class="w3-hide-small"><i class="fa fa-caret-down"></i>&nbsp;Tương Ưng Bộ Kinh</a>
+ 					<ul>
+ 						<li><a href="../sn/sn01.html" class="w3-hide-small">Tập I - Thiên Có Kệ</a></li>
+ 						<li><a href="../sn/sn02.html" class="w3-hide-small">Tập II - Thiên Nhân Duyên</a></li>
+ 						<li><a href="../sn/sn03.html" class="w3-hide-small">Tập III - Thiên Uẩn</a></li>
+ 						<li><a href="../sn/sn04.html" class="w3-hide-small">Tập IV - Thiên Sáu Xứ</a></li>
+ 						<li><a href="../sn/sn05.html" class="w3-hide-small">Tập V - Thiên Ðại Phẩm</a></li>
+ 					</ul>
+ 				<li class="topmenu" id="an"><a href="../an/an.html" class="w3-hide-small"><i class="fa fa-caret-down"></i>&nbsp;Tăng Chi Bộ Kinh</a>
+ 					<ul>
+ 						<li><a href="../an/an1.html" class="w3-hide-small">Chương Một Pháp</a></li>
+ 						<li><a href="../an/an2.html" class="w3-hide-small">Chương Hai Pháp</a></li>
+ 						<li><a href="../an/an3.html" class="w3-hide-small">Chương Ba Pháp</a></li>
+ 						<li><a href="../an/an4.html" class="w3-hide-small">Chương Bốn Pháp</a></li>
+ 						<li><a href="../an/an5.html" class="w3-hide-small">Chương Năm Pháp</a></li>
+ 						<li><a href="../an/an6.html" class="w3-hide-small">Chương Sáu Pháp</a></li>
+ 						<li><a href="../an/an7.html" class="w3-hide-small">Chương Bảy Pháp</a></li>
+ 						<li><a href="../an/an8.html" class="w3-hide-small">Chương Tám Pháp</a></li>
+ 						<li><a href="../an/an9.html" class="w3-hide-small">Chương Chín Pháp</a></li>
+ 						<li><a href="../an/an10.html" class="w3-hide-small">Chương Mười Pháp</a></li>
+ 						<li><a href="../an/an11.html" class="w3-hide-small">Chương Mười Một Pháp</a></li>
+ 					</ul>
+ 				</li>
+ 				<li class="topmenu" id="kn"><a href="../kn/kn.html" class="w3-hide-small"><i class="fa fa-caret-down"></i>&nbsp;Tiểu Bộ Kinh</a>
+ 					<ul>
+ 						<li><a href="../kp/kp.html" class="w3-hide-small">Kinh Tiểu Tụng</a></li>
+ 						<li><a href="../dhp/dhp.html" class="w3-hide-small">Kinh Pháp Cú</a></li>
+ 						<li><a href="../snp/snp.html" class="w3-hide-small">Kinh Tập</a></li>
+ 						<li><a href="../ud/ud.html" class="w3-hide-small">Kinh Phật Tự Thuyết</a></li>
+ 						<li><a href="../it/it.html" class="w3-hide-small">Kinh Phật Thuyết Như Vậy</a></li>
+ 						<li><a href="../tha/tha.html" class="w3-hide-small">Trưởng Lão Tăng Kệ</a></li>
+ 						<li><a href="../thi/thi.html" class="w3-hide-small">Trưởng Lão Ni Kệ</a></li>
+ 					</ul>
+ 				</li>
+				<li class="toplast" id="rd"><a href="../rd/rd.html" class="w3-hide-small"></i>Kinh Ngẫu Nhiên Theo Nhóm</a>
+ 					</ul>
+ 				</li>
+ 			</ul>
+ 			</div>
+ 		</div> <!--navbar-->
+
+<!-- Sidebar (hidden by default) -->
+ <nav class="w3-sidebar w3-bar-block w3-card w3-border w3-top w3-animate-left w3-hide-large" id="mySidebar">
+ 	<a href="javascript:void(0)" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-times fa-2x red-color"></i>&nbsp;&nbsp;&nbsp;Close</a><!-- Hides the sidebar when clicked -->
+ 		<div class="w3-bar-block w3-white">
+ 			<a href="../home/index.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-home fa-lg"></i>&nbsp;&nbsp;&nbsp;Home</a>
+ 			<a href="../guide/guide.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Guide</a>
+ 			<a href="../dn/dn.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Trường Bộ Kinh</a>
+ 			<a href="../mn/mn.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Trung Bộ Kinh</a>
+ 			<a href="../sn/sn.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Tương Ưng Bộ Kinh</a>
+ 			<a href="../an/an.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Tăng Chi Bộ Kinh
+ 			<a href="../kn/kn.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Tiểu Bộ Kinh</a>
+			<a href="../rd/rd.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>Kinh Ngẫu Nhiên Theo Nhóm</a>
+ 		</div>
+ </nav>
+ 
+ 
+ 
+   <!-- !PAGE CONTENT! --> 
+<div class="w3-main w3-content w3-padding w3-left-align bwcontainer4">
+<div id="content">
+<h2>Majjhima Nikāya - Trung Bộ Kinh</h2>
+<h5><span style="font-style: italic;">Hoà Thượng Thích Minh Châu dịch Việt</span></h5>
+
+</div>
+
+<br>
+ 	<title>        Trung Bộ 116          </title>
+
+<p lang="vi" class="vi"; style="text-align: center">
+Trung Bộ 116<br>
+<span lang="pi" class="pali">
+Majjhima Nikāya 116<br>
+</span>
+</p>
+
+
+<p lang="vi" class="vi"; style="text-align: center">
+Kinh Đồi Isigili<br>
+<span lang="pi" class="pali">
+Isigilisutta<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Như vầy tôi nghe.<br>
+<span lang="pi" class="pali">
+Evaṁ me sutaṁ—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Một thời Thế Tôn trú tại Rājagaha (Vương Xá), trên núi Isigili (Thôn tiên). Ở đấy Thế Tôn gọi các Tỷ-kheo:<br>
+<span lang="pi" class="pali">
+ekaṁ samayaṁ bhagavā rājagahe viharati isigilismiṁ pabbate. Tatra kho bhagavā bhikkhū āmantesi:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Này các Tỷ-kheo”.<br>
+<span lang="pi" class="pali">
+“bhikkhavo”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Bạch Thế Tôn”. Các Tỷ-kheo ấy vâng đáp Thế Tôn. Thế Tôn nói như sau:<br>
+<span lang="pi" class="pali">
+“Bhadante”ti te bhikkhū bhagavato paccassosuṁ. Bhagavā etadavoca:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Này các Tỷ-kheo, các Ông có thấy núi Vebhāra (Phụ Trọng) này không?”<br>
+<span lang="pi" class="pali">
+“Passatha no tumhe, bhikkhave, etaṁ vebhāraṁ pabbatan”ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Thưa có thấy, bạch Thế Tôn.”<br>
+<span lang="pi" class="pali">
+“Evaṁ, bhante”.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Này các Tỷ-kheo, đây chỉ là một danh xưng khác cho núi Vebhāra này, một tên gọi khác. Này các Tỷ-kheo, các Ông có thấy núi Paṇḍava (Bạch Thiện) này không?”<br>
+<span lang="pi" class="pali">
+“Etassapi kho, bhikkhave, vebhārassa pabbatassa aññāva samaññā ahosi aññā paññatti. Passatha no tumhe, bhikkhave, etaṁ paṇḍavaṁ pabbatan”ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Thưa có thấy, bạch Thế Tôn.”<br>
+<span lang="pi" class="pali">
+“Evaṁ, bhante”.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Này các Tỷ-kheo, đây chỉ là một danh xưng khác cho núi Paṇḍava này, một tên gọi khác. Này các Tỷ-kheo, các Ông có thấy núi Vepulla (Quảng Phổ) này không?”<br>
+<span lang="pi" class="pali">
+“Etassapi kho, bhikkhave, paṇḍavassa pabbatassa aññāva samaññā ahosi aññā paññatti. Passatha no tumhe, bhikkhave, etaṁ vepullaṁ pabbatan”ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Thưa có thấy, bạch Thế Tôn.”<br>
+<span lang="pi" class="pali">
+“Evaṁ, bhante”.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Này các Tỷ-kheo, đây chỉ là một danh xưng khác cho núi Vepulla này, một tên gọi khác. Này các Tỷ-kheo, các Ông có thấy núi Gijjhakuta (Linh Thứu) này không?”<br>
+<span lang="pi" class="pali">
+“Etassapi kho, bhikkhave, vepullassa pabbatassa aññāva samaññā ahosi aññā paññatti. Passatha no tumhe, bhikkhave, etaṁ gijjhakūṭaṁ pabbatan”ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Thưa có thấy, bạch Thế Tôn.”<br>
+<span lang="pi" class="pali">
+“Evaṁ, bhante”.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Này các Tỷ-kheo, đây chỉ là một danh xưng khác cho núi Gijjhakuta này, một tên gọi khác. Này các Tỷ-kheo, các Ông có thấy núi Isigili (Thôn tiên) này không?”<br>
+<span lang="pi" class="pali">
+“Etassapi kho, bhikkhave, gijjhakūṭassa pabbatassa aññāva samaññā ahosi aññā paññatti. Passatha no tumhe, bhikkhave, imaṁ isigiliṁ pabbatan”ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Thưa có thấy, bạch Thế Tôn.”<br>
+<span lang="pi" class="pali">
+“Evaṁ, bhante”.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Này các Tỷ-kheo, đây chỉ là một danh xưng của núi Isigili, một tên gọi khác.”<br>
+<span lang="pi" class="pali">
+“Imassa kho pana, bhikkhave, isigilissa pabbatassa esāva samaññā ahosi esā paññatti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Thuở xưa, này các Tỷ-kheo, có năm trăm vị Ðộc Giác Phật sống trong một thời gian khá dài, trong núi Isigili này.<br>
+<span lang="pi" class="pali">
+Bhūtapubbaṁ, bhikkhave, pañca paccekabuddhasatāni imasmiṁ isigilismiṁ pabbate ciranivāsino ahesuṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Những vị ấy được thấy đi vào trong ngọn núi này, nhưng khi đi vào rồi thời không được thấy nữa.<br>
+<span lang="pi" class="pali">
+Te imaṁ pabbataṁ pavisantā dissanti, paviṭṭhā na dissanti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Quần chúng thấy vậy nói như sau:<br>
+<span lang="pi" class="pali">
+Tamenaṁ manussā disvā evamāhaṁsu:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Ngọn núi này nuốt những ẩn sĩ ấy’ (Ime Isi gilatiti) nên được danh xưng là ‘Isigili’.<br>
+<span lang="pi" class="pali">
+‘ayaṁ pabbato ime isī gilatī’ti; ‘isigili isigili’ tveva samaññā udapādi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này các Tỷ-kheo, Ta sẽ kể tên các vị Ðộc Giác Phật;<br>
+<span lang="pi" class="pali">
+Ācikkhissāmi, bhikkhave, paccekabuddhānaṁ nāmāni;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+này các Tỷ-kheo, Ta sẽ tán thán tên các vị Ðộc Giác Phật.<br>
+<span lang="pi" class="pali">
+kittayissāmi, bhikkhave, paccekabuddhānaṁ nāmāni;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+này các Tỷ-kheo, Ta sẽ thuyết giảng tên các vị Ðộc Giác Phật.<br>
+<span lang="pi" class="pali">
+desessāmi, bhikkhave, paccekabuddhānaṁ nāmāni.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Hãy lắng nghe và suy nghiệm kỹ, Ta sẽ nói .”<br>
+<span lang="pi" class="pali">
+Taṁ suṇātha, sādhukaṁ manasi karotha, bhāsissāmī”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Thưa vâng, bạch Thế Tôn”. Các vị Tỷ-kheo ấy vâng đáp Thế Tôn.<br>
+<span lang="pi" class="pali">
+“Evaṁ, bhante”ti kho te bhikkhū bhagavato paccassosuṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Thế Tôn nói như sau:<br>
+<span lang="pi" class="pali">
+Bhagavā etadavoca:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Ariṭṭha (A-lợi-sá), này các Tỷ-kheo, là tên vị Ðộc Giác Phật đã trú lâu ngày trong núi Isigili này.<br>
+<span lang="pi" class="pali">
+“Ariṭṭho nāma, bhikkhave, paccekasambuddho imasmiṁ isigilismiṁ pabbate ciranivāsī ahosi;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Upariṭṭha (Bà-lợi-sá), này các Tỷ-kheo, là tên vị Ðộc Giác Phật đã trú lâu ngày trong núi Isigili này.<br>
+<span lang="pi" class="pali">
+upariṭṭho nāma, bhikkhave, paccekasambuddho imasmiṁ isigilismiṁ pabbate ciranivāsī ahosi;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Tagarasikhī, này các Tỷ-kheo, là tên vị Ðộc Giác Phật đã trú lâu ngày trong núi Isigili này.<br>
+<span lang="pi" class="pali">
+tagarasikhī nāma, bhikkhave, paccekasambuddho imasmiṁ isigilismiṁ pabbate ciranivāsī ahosi;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Yasassin, này các Tỷ-kheo, là tên vị Ðộc Giác Phật đã trú lâu ngày trong núi Isigili này.<br>
+<span lang="pi" class="pali">
+yasassī nāma, bhikkhave, paccekasambuddho imasmiṁ isigilismiṁ pabbate ciranivāsī ahosi;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Sudassana (Thiện Kiến), này các Tỷ-kheo, là tên vị Ðộc Giác Phật đã trú lâu ngày trong núi Isigili này.<br>
+<span lang="pi" class="pali">
+sudassano nāma, bhikkhave, paccekasambuddho imasmiṁ isigilismiṁ pabbate ciranivāsī ahosi;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Piyadassin, này các Tỷ-kheo, là tên vị Ðộc Giác Phật đã trú lâu ngày trong núi Isigili này.<br>
+<span lang="pi" class="pali">
+piyadassī nāma, bhikkhave, paccekasambuddho imasmiṁ isigilismiṁ pabbate ciranivāsī ahosi;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Gandhara, này các Tỷ-kheo, là tên vị Ðộc Giác Phật đã trú lâu ngày trong núi Isigili này.<br>
+<span lang="pi" class="pali">
+gandhāro nāma, bhikkhave, paccekasambuddho imasmiṁ isigilismiṁ pabbate ciranivāsī ahosi;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Piṇḍola, này các Tỷ-kheo, là tên vị Ðộc Giác Phật đã trú lâu ngày trong núi Isigili này.<br>
+<span lang="pi" class="pali">
+piṇḍolo nāma, bhikkhave, paccekasambuddho imasmiṁ isigilismiṁ pabbate ciranivāsī ahosi;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Upāsabha, này các Tỷ-kheo, là tên vị Ðộc Giác Phật đã trú lâu ngày trong núi Isigili này.<br>
+<span lang="pi" class="pali">
+upāsabho nāma, bhikkhave, paccekasambuddho imasmiṁ isigilismiṁ pabbate ciranivāsī ahosi;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Nītha, này các Tỷ-kheo, là tên vị Ðộc Giác Phật đã trú lâu ngày trong núi Isigili này.<br>
+<span lang="pi" class="pali">
+nīto nāma, bhikkhave, paccekasambuddho imasmiṁ isigilismiṁ pabbate ciranivāsī ahosi;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Tatha, này các Tỷ-kheo, là tên vị Ðộc Giác Phật đã trú lâu ngày trong núi Isigili này.<br>
+<span lang="pi" class="pali">
+tatho nāma, bhikkhave, paccekasambuddho imasmiṁ isigilismiṁ pabbate ciranivāsī ahosi,<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Sutavā, này các Tỷ-kheo, là tên vị Ðộc Giác Phật đã trú lâu ngày trong núi Isigili này.<br>
+<span lang="pi" class="pali">
+sutavā nāma, bhikkhave, paccekasambuddho imasmiṁ isigilismiṁ pabbate ciranivāsī ahosi;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Bhāvitatta, này các Tỷ-kheo, là tên vị Ðộc Giác Phật đã trú lâu ngày trong núi Isigili này.<br>
+<span lang="pi" class="pali">
+bhāvitatto nāma, bhikkhave, paccekasambuddho imasmiṁ isigilismiṁ pabbate ciranivāsī ahosi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Chúng sanh có cốt lõi,<br>
+Với an tịnh, ít dục,<br>
+Bậc tự mình giác ngộ,<br>
+Vị đã rút mũi tên,<br>
+Đức Phật, bậc tối thắng,<br>
+Hãy lóng tai nghe kỹ,<br>
+Ta sẽ xướng danh hiệu:<br>
+<span lang="pi" class="pali">
+Ye sattasārā anīghā nirāsā,<br>
+Paccekamevajjhagamaṁsu bodhiṁ;<br>
+Tesaṁ visallāna naruttamānaṁ,<br>
+Nāmāni me kittayato suṇātha.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ariṭṭha, Upariṭṭha, Tagarasikhī, Yasassin,<br>
+Sudassana, bậc giác ngộ Piyadassin;<br>
+Gandhāra, Piṇḍola, và Upāsabha,<br>
+Nītha, Tatha, Sutavā, và Bhāvitatta.<br>
+<span lang="pi" class="pali">
+Ariṭṭho upariṭṭho tagarasikhī yasassī,<br>
+Sudassano piyadassī ca susambuddho;<br>
+Gandhāro piṇḍolo upāsabho ca,<br>
+Nīto tatho sutavā bhāvitatto.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Sumbha, Subha, Methula, và Aṭṭhama,<br>
+Assumegha, Anīgha, và Sudāṭha,<br>
+Các Chư Phật Độc Giác,<br>
+Sanh tử đã đoạn tận,<br>
+Hiṅgū, Hiṅga vĩ đại.<br>
+<span lang="pi" class="pali">
+Sumbho subho matulo aṭṭhamo ca,<br>
+Athassumegho anīgho sudāṭho;<br>
+Paccekabuddhā bhavanettikhīṇā,<br>
+Hiṅgū ca hiṅgo ca mahānubhāvā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Hai ẩn sĩ tên là,<br>
+Jāli, và Aṭṭhaka.<br>
+Đức Phật Kosala và Subāhu,<br>
+Upanemi, Nemi, và Santacitta,<br>
+Sống chân thật, thanh tịnh,<br>
+Bậc trí, lời như thật.<br>
+<span lang="pi" class="pali">
+Dve jālino munino aṭṭhako ca,<br>
+Atha kosallo buddho atho subāhu;<br>
+Upanemiso nemiso santacitto,<br>
+Sacco tatho virajo paṇḍito ca.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Kāḷa và Upakāḷa,<br>
+Vijita và Jita,<br>
+Aṅga và Paṅga,<br>
+Và luôn Guttijita;<br>
+Passin đoạn trừ chấp thủ,<br>
+Gốc rễ của khổ đau,<br>
+Còn vị Aparājita,<br>
+Đánh bại cả Ma-Vương.<br>
+<span lang="pi" class="pali">
+Kāḷūpakāḷā vijito jito ca,<br>
+Aṅgo ca paṅgo ca guttijito ca;<br>
+Passi jahi upadhidukkhamūlaṁ,<br>
+Aparājito mārabalaṁ ajesi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Satthar, Pavattar,<br>
+Sarabhaṅga, Lomahaṁsa,<br>
+Uccaṅgamāya, Asita, Anāsava,<br>
+Manomaya, và Bandhumant,<br>
+Đã đoạn trừ kiêu mạn,<br>
+Và Tadādhimutta,<br>
+Thanh tịnh và huy hoàng.<br>
+<span lang="pi" class="pali">
+Satthā pavattā sarabhaṅgo lomahaṁso,<br>
+Uccaṅgamāyo asito anāsavo;<br>
+Manomayo mānacchido ca bandhumā,<br>
+Tadādhimutto vimalo ca ketumā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ketumbarāga, Mātaṅga, và Ariya,<br>
+Accuta, Accutagāma, và Byāmaka,<br>
+Sumaṅgala, Dabbila, Supatiṭṭhita,<br>
+Asayha, Khemābhirata, và Sorata.<br>
+<span lang="pi" class="pali">
+Ketumbharāgo ca mātaṅgo ariyo,<br>
+Athaccuto accutagāmabyāmako;<br>
+Sumaṅgalo dabbilo supatiṭṭhito,<br>
+Asayho khemābhirato ca sorato.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Durannaya, hội chúng,<br>
+Và cả Ujjaya,<br>
+Với vị ẩn sĩ khác,<br>
+Sayha tinh tấn phi thường,<br>
+Ānandas, Nandas, và Upanandas,<br>
+Tất cả là mười hai,<br>
+Và Bhāradvāja,<br>
+Thân sống kiếp cuối cùng.<br>
+<span lang="pi" class="pali">
+Durannayo saṅgho athopi ujjayo,<br>
+Aparo muni sayho anomanikkamo;<br>
+Ānando nando upanando dvādasa,<br>
+Bhāradvājo antimadehadhārī.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Bodhi, cùng Mahānāma tối thượng,<br>
+Kesī, Sikhī, Sundara, và Bhāradvāja,<br>
+Tissa và Upatissa,<br>
+Cả hai đoạn chấp thủ,<br>
+Đưa tới sự tái sanh,<br>
+Upasīdarin và Sīdarin,<br>
+Cả hai đoạn trừ ái.<br>
+<span lang="pi" class="pali">
+Bodhi mahānāmo athopi uttaro,<br>
+Kesī sikhī sundaro dvārabhājo;<br>
+Tissūpatissā bhavabandhanacchidā,<br>
+Upasikhi taṇhacchido ca sikhari.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Đức Phật Maṅgala,<br>
+Giác ngộ đoạn trừ tham,<br>
+Usabha đoạn khổ đau,<br>
+Upanīta chứng an lạc,<br>
+Uposatha, Sundara,<br>
+Và Saccanāma.<br>
+<span lang="pi" class="pali">
+Buddho ahu maṅgalo vītarāgo,<br>
+Usabhacchidā jāliniṁ dukkhamūlaṁ;<br>
+Santaṁ padaṁ ajjhagamopanīto,<br>
+Uposatho sundaro saccanāmo.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Jeta, Jayanta,<br>
+Paduma, và Uppala;<br>
+Padumuttara,<br>
+Rakkhita, và Pabbata,<br>
+Mānatthaddha,<br>
+Khả ái đoạn trừ tham,<br>
+Và Đức Phật Kaṇha,<br>
+Với tâm tư giải thoát.<br>
+<span lang="pi" class="pali">
+Jeto jayanto padumo uppalo ca,<br>
+Padumuttaro rakkhito pabbato ca;<br>
+Mānatthaddho sobhito vītarāgo,<br>
+Kaṇho ca buddho suvimuttacitto.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Các vị ấy đã tự mình,<br>
+Chứng ngộ và giải thoát,<br>
+Tử sanh đã đoạn tận,<br>
+Đảnh lễ bậc Đại Lực,<br>
+Cắt đứt mọi trói buộc,<br>
+Chứng niết bàn, tịch tịnh.”<br>
+<span lang="pi" class="pali">
+Ete ca aññe ca mahānubhāvā,<br>
+Paccekabuddhā bhavanettikhīṇā;<br>
+Te sabbasaṅgātigate mahesī,<br>
+Parinibbute vandatha appameyye”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+<span lang="pi" class="vi">
+Isigilisuttaṁ niṭṭhitaṁ chaṭṭhaṁ.<br>
+</span>
+</p>
+
+
+<!-- COPY CONTENT SUTTA Ở ĐÂY -->
+
+
+
+<br>
+<p><p style="text-align: right;font-style: italic;">Hoà Thượng Thích Minh Châu dịch Việt</span></p>
+
+
+
+
+
+
+
+
+</section>  <!-- End English and Pali -->
+<div id="nextprev"><a id="previous-sutta" href="./mn115.html#content"></a><a id="next-sutta" href="./mn117.html#content"></a></div>
+</div>  <!--End Content -->
+</div>  <!-- End Page -->
+
+
+
+
+
+
+<footer>
+					 <!-- End bottom links -->
+</footer>
+
+
+ 
+ <!-- Scripts -->
+
+ <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      if (typeof enablePaliLookup === "function") {
+        enablePaliLookup();
+      } else {
+        console.error("enablePaliLookup is not defined");
+      }
+    });
+  </script>
+
+ <script>
+ // Script to open and close sidebar
+ 	function w3_open() {
+ 	document.getElementById("mySidebar").style.display = "block";
+ 	}
+ 		function w3_close() {
+ 		document.getElementById("mySidebar").style.display = "none";
+ 	}
+ </script>
+ <script>
+ 		var app = document.getElementsByTagName("BODY")[0];
+ 		if (localStorage.lightMode == "dark") {
+ 			app.setAttribute("light-mode", "dark");
+ 	}
+ </script>
+ 
+ <script>
+ 		function toggle_light_mode() {
+ 			var app = document.getElementsByTagName("BODY")[0];
+ 				if (localStorage.lightMode == "dark") {
+ 			localStorage.lightMode = "light";
+ 			app.setAttribute("light-mode", "light");
+ 		} else {
+ 					localStorage.lightMode = "dark";
+ 					app.setAttribute("light-mode", "dark");
+ 	}
+ 		}
+ 
+ 		window.addEventListener("storage", function () {
+ 			if (localStorage.lightMode == "dark") {
+ 				app.setAttribute("light-mode", "dark");
+ 				} else {
+ 				app.setAttribute("light-mode", "light");
+ 		}
+ 		}, false);
+ 
+ </script>
+ <script src="../js/footer.js"></script><script src="../js/dpd_deconstructor.js"></script><script src="../js/dpd_ebts.js"></script><script src="../js/dpd_i2h.js"></script>
+ <script src="/sw.js"></script>
+ </body>
+ </html>

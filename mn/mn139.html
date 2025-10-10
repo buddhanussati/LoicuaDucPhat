@@ -1,0 +1,1200 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+ 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+ 	<link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+ 	<meta name="viewport" content="width=device-width, initial-scale=1">
+		<!-- Loading manifest -->
+	<link rel="manifest" href="../manifest.json">
+ 	<!-- Loading main and menu stylesheets -->
+ 	<link rel="stylesheet" href="../css/w3.css">
+ 	<link rel="stylesheet" href="../css/css.css">
+ 	<link rel="stylesheet" href="../css/menu.css">
+ 	<script src="../js/jquery-1.10.2.min.js"></script>
+ 	<script src="../js/controlpanel.js"></script>
+ 	<script src="../js/mousetrap.min.js"></script>
+    <script src="../js/pali-lookup-standalone.js"></script>
+
+ <script src="../js/suttaFiles.js"></script>
+<script>
+ // Script to open random Sutta
+ function openRandomSutta() {
+  const randomIndex = Math.floor(Math.random() * suttaFiles.length);
+  const selectedFile = suttaFiles[randomIndex];
+
+  // Get root path of your site 
+  const currentPath = location.pathname;
+  const rootPath = currentPath.split("/").slice(0, -2).join("/") + "/";
+
+  // Redirect to the correct file
+  window.location.href = rootPath + selectedFile;
+}
+</script>
+
+
+</head>
+ <body class="container">
+ <div class="header-background">
+ <!-- Header -->
+ <div class="w3-header w3-content w3-padding w3-left-align bwcontainer">
+ 	<div class="centered">
+ 		<button class="light-mode-button" aria-label="Bật Chế Độ Sáng" onclick="toggle_light_mode()">
+ 			<span></span>
+ 			<span></span>
+ 		</button>
+ 		<span class="box-lbl">Sáng/Tối</span>
+ 	</div> <!-- Centered -->
+ 		<a href="../home/index.html" id="bwlogo"><img src="../images/headerlogo.png" alt="Logo Lời Của Đức Phật" class="w3-image"></a>
+ 		<div class="w3-bar bwcontainer">
+ 			<div id="searchlinks">
+ 			<a href="../home/visearch.html"><span class="w3-bar-item"><i class="fa fa-search"></i>&nbsp;Tìm Tiếng Việt</span></a>
+ 			<a href="../home/palisearch.html"><span class="w3-bar-item"><i class="fa fa-search"></i>&nbsp;Tìm Tiếng Pali</span></a>
+ 			</div><!-- End Searchlinks div -->
+ 			<div class="help"><span><a href="../home/help.html"><img src="../images/help_icon.png" title="Trợ Giúp" alt="Help"></a></span></div>
+ 		</div> <!-- End w3-bar bwcontainer --> 	</div> <!-- End w3-header w3-content w3-padding w3-left-align bwcontainer -->
+ </div> <!-- End header-background -->
+ <!-- Top menu -->
+
+ <div class="w3-main w3-white bwcontainer2">
+ 	<div class="w3-button w3-padding-8 w3-left w3-hide-large" onclick="w3_open()">☰</div>
+ 		<div id="navbar" class="w3-hide-small w3-hide-medium bwcontainer3">
+ 			<ul id="css3menu0">
+ 				<li class="topfirst" id="home"><a href="../home/index.html" class="w3-hide-small">Trang Chủ</a></li>
+  				<li class="topmenu" id="dn"><a href="../dn/dn.html" class="pressed w3-hide-small">Trường Bộ Kinh</a></li>
+ 				<li class="topmenu" id="mn"><a href="../mn/mn.html" class="w3-hide-small">Trung Bộ Kinh</a></li>
+ 				<li class="topmenu" id="sn"><a href="../sn/sn.html" class="w3-hide-small"><i class="fa fa-caret-down"></i>&nbsp;Tương Ưng Bộ Kinh</a>
+ 					<ul>
+ 						<li><a href="../sn/sn01.html" class="w3-hide-small">Tập I - Thiên Có Kệ</a></li>
+ 						<li><a href="../sn/sn02.html" class="w3-hide-small">Tập II - Thiên Nhân Duyên</a></li>
+ 						<li><a href="../sn/sn03.html" class="w3-hide-small">Tập III - Thiên Uẩn</a></li>
+ 						<li><a href="../sn/sn04.html" class="w3-hide-small">Tập IV - Thiên Sáu Xứ</a></li>
+ 						<li><a href="../sn/sn05.html" class="w3-hide-small">Tập V - Thiên Ðại Phẩm</a></li>
+ 					</ul>
+ 				<li class="topmenu" id="an"><a href="../an/an.html" class="w3-hide-small"><i class="fa fa-caret-down"></i>&nbsp;Tăng Chi Bộ Kinh</a>
+ 					<ul>
+ 						<li><a href="../an/an1.html" class="w3-hide-small">Chương Một Pháp</a></li>
+ 						<li><a href="../an/an2.html" class="w3-hide-small">Chương Hai Pháp</a></li>
+ 						<li><a href="../an/an3.html" class="w3-hide-small">Chương Ba Pháp</a></li>
+ 						<li><a href="../an/an4.html" class="w3-hide-small">Chương Bốn Pháp</a></li>
+ 						<li><a href="../an/an5.html" class="w3-hide-small">Chương Năm Pháp</a></li>
+ 						<li><a href="../an/an6.html" class="w3-hide-small">Chương Sáu Pháp</a></li>
+ 						<li><a href="../an/an7.html" class="w3-hide-small">Chương Bảy Pháp</a></li>
+ 						<li><a href="../an/an8.html" class="w3-hide-small">Chương Tám Pháp</a></li>
+ 						<li><a href="../an/an9.html" class="w3-hide-small">Chương Chín Pháp</a></li>
+ 						<li><a href="../an/an10.html" class="w3-hide-small">Chương Mười Pháp</a></li>
+ 						<li><a href="../an/an11.html" class="w3-hide-small">Chương Mười Một Pháp</a></li>
+ 					</ul>
+ 				</li>
+ 				<li class="topmenu" id="kn"><a href="../kn/kn.html" class="w3-hide-small"><i class="fa fa-caret-down"></i>&nbsp;Tiểu Bộ Kinh</a>
+ 					<ul>
+ 						<li><a href="../kp/kp.html" class="w3-hide-small">Kinh Tiểu Tụng</a></li>
+ 						<li><a href="../dhp/dhp.html" class="w3-hide-small">Kinh Pháp Cú</a></li>
+ 						<li><a href="../snp/snp.html" class="w3-hide-small">Kinh Tập</a></li>
+ 						<li><a href="../ud/ud.html" class="w3-hide-small">Kinh Phật Tự Thuyết</a></li>
+ 						<li><a href="../it/it.html" class="w3-hide-small">Kinh Phật Thuyết Như Vậy</a></li>
+ 						<li><a href="../tha/tha.html" class="w3-hide-small">Trưởng Lão Tăng Kệ</a></li>
+ 						<li><a href="../thi/thi.html" class="w3-hide-small">Trưởng Lão Ni Kệ</a></li>
+ 					</ul>
+ 				</li>
+				<li class="toplast" id="rd"><a href="../rd/rd.html" class="w3-hide-small"></i>Kinh Ngẫu Nhiên Theo Nhóm</a>
+ 					</ul>
+ 				</li>
+ 			</ul>
+ 			</div>
+ 		</div> <!--navbar-->
+
+<!-- Sidebar (hidden by default) -->
+ <nav class="w3-sidebar w3-bar-block w3-card w3-border w3-top w3-animate-left w3-hide-large" id="mySidebar">
+ 	<a href="javascript:void(0)" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-times fa-2x red-color"></i>&nbsp;&nbsp;&nbsp;Close</a><!-- Hides the sidebar when clicked -->
+ 		<div class="w3-bar-block w3-white">
+ 			<a href="../home/index.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-home fa-lg"></i>&nbsp;&nbsp;&nbsp;Home</a>
+ 			<a href="../guide/guide.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Guide</a>
+ 			<a href="../dn/dn.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Trường Bộ Kinh</a>
+ 			<a href="../mn/mn.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Trung Bộ Kinh</a>
+ 			<a href="../sn/sn.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Tương Ưng Bộ Kinh</a>
+ 			<a href="../an/an.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Tăng Chi Bộ Kinh
+ 			<a href="../kn/kn.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Tiểu Bộ Kinh</a>
+			<a href="../rd/rd.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>Kinh Ngẫu Nhiên Theo Nhóm</a>
+ 		</div>
+ </nav>
+ 
+ 
+ 
+   <!-- !PAGE CONTENT! --> 
+<div class="w3-main w3-content w3-padding w3-left-align bwcontainer4">
+<div id="content">
+<h2>Majjhima Nikāya - Trung Bộ Kinh</h2>
+<h5><span style="font-style: italic;">Hoà Thượng Thích Minh Châu dịch Việt</span></h5>
+
+</div>
+
+<br>
+ 	<title>        Trung Bộ 139          </title>
+
+<p lang="vi" class="vi"; style="text-align: center">
+Trung Bộ 139<br>
+<span lang="pi" class="pali">
+Majjhima Nikāya 139<br>
+</span>
+</p>
+
+
+<p lang="vi" class="vi"; style="text-align: center">
+Kinh Tránh Phân Biệt<br>
+<span lang="pi" class="pali">
+Araṇavibhaṅgasutta<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Như vầy tôi nghe.<br>
+<span lang="pi" class="pali">
+Evaṁ me sutaṁ—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Một thời, Thế Tôn trú ở Sāvatthī (Xá-vệ), Jetavana (Kỳ-đà Lâm), tại tịnh xá ông Anāthapiṇḍika (Cấp-Cô-Ðộc).<br>
+<span lang="pi" class="pali">
+ekaṁ samayaṁ bhagavā sāvatthiyaṁ viharati jetavane anāthapiṇḍikassa ārāme.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Tại đấy, Thế Tôn gọi các Tỷ-kheo: “Này các Tỷ-kheo”.<br>
+<span lang="pi" class="pali">
+Tatra kho bhagavā bhikkhū āmantesi: “bhikkhavo”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Bạch Thế Tôn”. Các Tỷ-kheo ấy vâng đáp Thế Tôn. Thế Tôn nói như sau:<br>
+<span lang="pi" class="pali">
+“Bhadante”ti te bhikkhū bhagavato paccassosuṁ. Bhagavā etadavoca:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Này các Tỷ-kheo, Ta sẽ giảng cho các Ông về tránh phân biệt. Hãy nghe và suy nghiệm kỹ, Ta sẽ giảng”.<br>
+<span lang="pi" class="pali">
+“araṇavibhaṅgaṁ vo, bhikkhave, desessāmi. Taṁ suṇātha, sādhukaṁ manasi karotha, bhāsissāmī”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Thưa vâng, bạch Thế Tôn”. Các Tỷ-kheo ấy vâng đáp Thế Tôn. Thế Tôn nói như sau:<br>
+<span lang="pi" class="pali">
+“Evaṁ, bhante”ti kho te bhikkhū bhagavato paccassosuṁ. Bhagavā etadavoca:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Chớ có hành trì dục lạc, hạ liệt, đê tiện, phàm phu, không xứng bậc Thánh, không liên hệ mục đích. Và cũng không nên hành trì tự kỷ khổ hạnh, đau khổ, không xứng bậc Thánh, không liên hệ mục đích.<br>
+<span lang="pi" class="pali">
+“Na kāmasukhamanuyuñjeyya hīnaṁ gammaṁ pothujjanikaṁ anariyaṁ anatthasaṁhitaṁ, na ca attakilamathānuyogamanuyuñjeyya dukkhaṁ anariyaṁ anatthasaṁhitaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Từ bỏ hai cực đoan ấy, có con đường Trung đạo đã được Như Lai giác ngộ, tác thành mắt, tác thành trí, đưa đến an tịnh, thắng trí, giác ngộ, Niết-bàn.<br>
+<span lang="pi" class="pali">
+Ete kho, bhikkhave, ubho ante anupagamma majjhimā paṭipadā tathāgatena abhisambuddhā, cakkhukaraṇī ñāṇakaraṇī upasamāya abhiññāya sambodhāya nibbānāya saṁvattati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Nên biết tán thán và nên biết chỉ trích.<br>
+<span lang="pi" class="pali">
+Ussādanañca jaññā, apasādanañca jaññā;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Sau khi biết tán thán và sau khi biết chỉ trích, không tán thán, không chỉ trích, chỉ nên thuyết pháp.<br>
+<span lang="pi" class="pali">
+ussādanañca ñatvā apasādanañca ñatvā nevussādeyya, na apasādeyya, dhammameva deseyya.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Nên biết phán xét về lạc.<br>
+<span lang="pi" class="pali">
+Sukhavinicchayaṁ jaññā;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Sau khi biết phán xét về lạc, nên chú tâm vào nội lạc.<br>
+<span lang="pi" class="pali">
+sukhavinicchayaṁ ñatvā ajjhattaṁ sukhamanuyuñjeyya.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Không nên nói lên lời bí mật. Mặt đối mặt (với ai), không nên nói lời mất lòng.<br>
+<span lang="pi" class="pali">
+Rahovādaṁ na bhāseyya, sammukhā na khīṇaṁ bhaṇe.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Nên nói thật từ từ, không có vội vàng.<br>
+<span lang="pi" class="pali">
+Ataramānova bhāseyya, no taramāno.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Chớ có chấp trước địa phương ngữ, chớ có đi quá xa ngôn ngữ thường dùng.<br>
+<span lang="pi" class="pali">
+Janapadaniruttiṁ nābhiniveseyya, samaññaṁ nātidhāveyyāti—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Như vậy là tổng thuyết về tránh phân biệt.<br>
+<span lang="pi" class="pali">
+ayamuddeso araṇavibhaṅgassa.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Khi được nói đến: ‘Chớ có hành trì dục lạc, hạ liệt, đê tiện, phàm phu, không xứng bậc Thánh, không liên hệ mục đích, và cũng không nên hành trì tự kỷ khổ hạnh, đau khổ, không xứng bậc Thánh, không liên hệ mục đích’, do duyên gì được nói đến như vậy?<br>
+<span lang="pi" class="pali">
+‘Na kāmasukhamanuyuñjeyya hīnaṁ gammaṁ pothujjanikaṁ anariyaṁ anatthasaṁhitaṁ, na ca attakilamathānuyogamanuyuñjeyya dukkhaṁ anariyaṁ anatthasaṁhitan’ti—iti kho panetaṁ vuttaṁ; Kiñcetaṁ paṭicca vuttaṁ?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Phàm lạc gì liên hệ với dục nhưng đam mê loại hỷ hạ liệt, đê tiện, phàm phu, không xứng bậc Thánh, không liên hệ mục đích, pháp như vậy là có đau khổ, có phiền lao, có ưu não, có nhiệt não, thuộc tà đạo.<br>
+<span lang="pi" class="pali">
+Yo kāmapaṭisandhisukhino somanassānuyogo hīno gammo pothujjaniko anariyo anatthasaṁhito, sadukkho eso dhammo saupaghāto saupāyāso sapariḷāho; micchāpaṭipadā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Phàm lạc gì liên kết với dục, nhưng không đam mê loại hỷ hạ liệt, đê tiện, phàm phu, không xứng bậc Thánh, không liên hệ mục đích, pháp như vậy không có đau khổ, không có phiền lao, không có ưu não, không có nhiệt não, thuộc chánh đạo.<br>
+<span lang="pi" class="pali">
+Yo kāmapaṭisandhisukhino somanassānuyogaṁ ananuyogo hīnaṁ gammaṁ pothujjanikaṁ anariyaṁ anatthasaṁhitaṁ, adukkho eso dhammo anupaghāto anupāyāso apariḷāho; sammāpaṭipadā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Phàm hành trì tự kỷ khổ hạnh nào, khổ đau, không xứng bậc Thánh, không liên hệ mục đích, pháp như vậy có đau khổ, có phiền lao, có ưu não, có nhiệt não, thuộc tà đạo.<br>
+<span lang="pi" class="pali">
+Yo attakilamathānuyogo dukkho anariyo anatthasaṁhito, sadukkho eso dhammo saupaghāto saupāyāso sapariḷāho; micchāpaṭipadā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Phàm không hành trì khổ hạnh nào, đau khổ không xứng bậc Thánh, không liên hệ mục đích, pháp như vậy không có đau khổ, không có phiền lao, không có ưu não, không có nhiệt não, thuộc chánh đạo.<br>
+<span lang="pi" class="pali">
+Yo attakilamathānuyogaṁ ananuyogo dukkhaṁ anariyaṁ anatthasaṁhitaṁ, adukkho eso dhammo anupaghāto anupāyāso apariḷāho; sammāpaṭipadā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Khi được nói đến: ‘Chớ có hành trì dục lạc, hạ liệt, đê tiện, không xứng bậc Thánh, không liên hệ mục đích, và cũng không nên hành trì tự kỷ khổ hạnh, đau khổ, không xứng bậc Thánh, không liên hệ mục đích’, chính do duyên này, được nói đến như vậy.<br>
+<span lang="pi" class="pali">
+‘Na kāmasukhamanuyuñjeyya hīnaṁ gammaṁ pothujjanikaṁ anariyaṁ anatthasaṁhitaṁ, na ca attakilamathānuyogaṁ anuyuñjeyya dukkhaṁ anariyaṁ anatthasaṁhitan’ti—iti yaṁ taṁ vuttaṁ idametaṁ paṭicca vuttaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Khi được nói đến: ‘Từ bỏ hai cực đoan ấy, có con đường Trung đạo đã được Như Lai giác ngộ, tác thành mắt, tác thành trí, đưa đến an tịnh, thượng trí, giác ngộ, Niết-bàn’, do duyên gì được nói đến như vậy?<br>
+<span lang="pi" class="pali">
+‘Ete kho ubho ante anupagamma majjhimā paṭipadā tathāgatena abhisambuddhā, cakkhukaraṇī ñāṇakaraṇī upasamāya abhiññāya sambodhāya nibbānāya saṁvattatī’ti—iti kho panetaṁ vuttaṁ. Kiñcetaṁ paṭicca vuttaṁ?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ðây là con đường Thánh tám ngành, tức là: chánh tri kiến, chánh tư duy, chánh ngữ, chánh nghiệp, chánh mạng, chánh tinh tấn, chánh niệm, chánh định.<br>
+<span lang="pi" class="pali">
+Ayameva ariyo aṭṭhaṅgiko maggo, seyyathidaṁ—sammādiṭṭhi, sammāsaṅkappo, sammāvācā, sammākammanto, sammāājīvo, sammāvāyāmo, sammāsati, sammāsamādhi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Khi được nói đến: ‘Từ bỏ hai cực đoan ấy, có con đường Trung đạo đã được Như Lai giác ngộ, tác thành mắt, tác thành trí, đưa đến an tịnh, thượng trí, giác ngộ, Niết-bàn’, chính do duyên này, được nói đến như vậy.<br>
+<span lang="pi" class="pali">
+‘Ete kho ubho ante anupagamma majjhimā paṭipadā tathāgatena abhisambuddhā, cakkhukaraṇī ñāṇakaraṇī upasamāya abhiññāya sambodhāya nibbānāya saṁvattatī’ti—iti yaṁ taṁ vuttaṁ, idametaṁ paṭicca vuttaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Khi được nói đến: ‘Nên biết tán thán và nên biết chỉ trích; sau khi biết tán thán và sau khi biết chỉ trích, không tán thán, không chỉ trích, chỉ nên thuyết pháp’, do duyên gì được nói đến như vậy?<br>
+<span lang="pi" class="pali">
+‘Ussādanañca jaññā, apasādanañca jaññā; ussādanañca ñatvā apasādanañca ñatvā nevussādeyya, na apasādeyya, dhammameva deseyyā’ti—iti kho panetaṁ vuttaṁ. Kiñcetaṁ paṭicca vuttaṁ?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này các Tỷ-kheo, thế nào là tán thán, thế nào là chỉ trích, nhưng không thuyết pháp?<br>
+<span lang="pi" class="pali">
+Kathañca, bhikkhave, ussādanā ca hoti apasādanā ca, no ca dhammadesanā?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vị ấy chỉ trích một số người và nói như sau: ‘Những ai tìm thấy lạc liên hệ với dục nhưng đam mê loại hỷ hạ liệt, đê tiện, phàm phu, không xứng bậc Thánh, không liên hệ mục đích, tất cả những người ấy có đau khổ, có phiền lao, có ưu não, có nhiệt não, thuộc tà đạo’.<br>
+<span lang="pi" class="pali">
+‘Ye kāmapaṭisandhisukhino somanassānuyogaṁ anuyuttā hīnaṁ gammaṁ pothujjanikaṁ anariyaṁ anatthasaṁhitaṁ, sabbe te sadukkhā saupaghātā saupāyāsā sapariḷāhā micchāpaṭipannā’ti—<br>
+iti vadaṁ ittheke apasādeti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vị ấy tán thán một số người và nói như sau: ‘Những ai tìm thấy lạc liên hệ với dục, nhưng không đam mê loại hỷ hạ liệt, đê tiện, phàm phu, không xứng bậc Thánh, không liên hệ mục đích, tất cả những vị ấy không có đau khổ, không có phiền lao, không có ưu não, không có nhiệt não, thuộc chánh đạo’.<br>
+<span lang="pi" class="pali">
+‘Ye kāmapaṭisandhisukhino somanassānuyogaṁ ananuyuttā hīnaṁ gammaṁ pothujjanikaṁ anariyaṁ anatthasaṁhitaṁ, sabbe te adukkhā anupaghātā anupāyāsā apariḷāhā sammāpaṭipannā’ti—<br>
+iti vadaṁ ittheke ussādeti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ở đây, vị ấy chỉ trích một số người và nói như sau: ‘Những ai đam mê hành trì tự kỷ khổ hạnh, đau khổ, không xứng bậc Thánh, không liên hệ mục đích, tất cả những vị ấy đều có đau khổ, có phiền lao, có ưu não, có nhiệt não, thuộc về tà đạo’.<br>
+<span lang="pi" class="pali">
+‘Ye attakilamathānuyogaṁ anuyuttā dukkhaṁ anariyaṁ anatthasaṁhitaṁ, sabbe te sadukkhā saupaghātā saupāyāsā sapariḷāhā micchāpaṭipannā’ti—<br>
+iti vadaṁ ittheke apasādeti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ở đây, vị ấy tán thán một số người và nói như sau: ‘Những ai không đam mê hành trì tự kỷ khổ hạnh; đau khổ, không xứng bậc Thánh, không liên hệ mục đích, tất cả những vị ấy đều không có đau khổ, không có phiền lao, không có ưu não, không có nhiệt não, thuộc chánh đạo’.<br>
+<span lang="pi" class="pali">
+‘Ye attakilamathānuyogaṁ ananuyuttā dukkhaṁ anariyaṁ anatthasaṁhitaṁ, sabbe te adukkhā anupaghātā anupāyāsā apariḷāhā sammāpaṭipannā’ti—<br>
+iti vadaṁ ittheke ussādeti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ở đây, vị ấy chỉ trích một số người và nói như sau: ‘Những ai chưa đoạn tận hữu kiết sử, tất cả những vị ấy đều có đau khổ, có phiền lao, có ưu não, có nhiệt não, thuộc tà đạo’.<br>
+<span lang="pi" class="pali">
+‘Yesaṁ kesañci bhavasaṁyojanaṁ appahīnaṁ, sabbe te sadukkhā saupaghātā saupāyāsā sapariḷāhā micchāpaṭipannā’ti—<br>
+iti vadaṁ ittheke apasādeti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ở đây, vị ấy tán thán một số người và nói như sau: ‘Những ai đã đoạn tận hữu kiết sử, tất cả những vị ấy không có đau khổ, không có phiền lao, không có ưu não, không có nhiệt não, thuộc chánh đạo’.<br>
+<span lang="pi" class="pali">
+‘Yesaṁ kesañci bhavasaṁyojanaṁ pahīnaṁ, sabbe te adukkhā anupaghātā anupāyāsā apariḷāhā sammāpaṭipannā’ti—iti vadaṁ ittheke ussādeti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Như vậy, này các Tỷ-kheo, là có tán thán và có chỉ trích nhưng không thuyết pháp.<br>
+<span lang="pi" class="pali">
+Evaṁ kho, bhikkhave, ussādanā ca hoti apasādanā ca, no ca dhammadesanā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Và này các Tỷ-kheo, thế nào là không có tán thán và không có chỉ trích, nhưng có thuyết pháp?<br>
+<span lang="pi" class="pali">
+Kathañca, bhikkhave, nevussādanā hoti na apasādanā, dhammadesanā ca?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vị ấy không nói như sau: ‘Những ai tìm thấy lạc liên hệ với dục, nhưng đam mê loại hỷ hạ liệt, đê tiện, phàm phu, không xứng bậc Thánh, không liên hệ mục đích, tất cả những vị ấy có đau khổ, có phiền lao, có ưu não, có nhiệt não, thuộc tà đạo’.<br>
+<span lang="pi" class="pali">
+‘Ye kāmapaṭisandhisukhino somanassānuyogaṁ anuyuttā hīnaṁ gammaṁ pothujjanikaṁ anariyaṁ anatthasaṁhitaṁ, sabbe te sadukkhā saupaghātā saupāyāsā sapariḷāhā micchāpaṭipannā’ti—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vị ấy chỉ thuyết pháp và nói như sau:<br>
+<span lang="pi" class="pali">
+na evamāha.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Sự đam mê là một pháp có đau khổ, có phiền lao, có ưu não, có nhiệt não, thuộc tà đạo’.<br>
+<span lang="pi" class="pali">
+‘Anuyogo ca kho sadukkho eso dhammo saupaghāto saupāyāso sapariḷāho; micchāpaṭipadā’ti—iti vadaṁ dhammameva deseti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vị ấy không nói: ‘Những ai tìm thấy lạc liên hệ với dục, nhưng không đam mê loại hỷ hạ liệt, đê tiện, phàm phu, không xứng bậc Thánh, tất cả những vị ấy không có đau khổ, không có phiền lao, không có ưu não, không có nhiệt não, thuộc chánh đạo’.<br>
+<span lang="pi" class="pali">
+‘Ye kāmapaṭisandhisukhino somanassānuyogaṁ ananuyuttā hīnaṁ gammaṁ pothujjanikaṁ anariyaṁ anatthasaṁhitaṁ, sabbe te adukkhā anupaghātā anupāyāsā apariḷāhā sammāpaṭipannā’ti—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vị ấy chỉ thuyết pháp và nói như sau:<br>
+<span lang="pi" class="pali">
+na evamāha.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Không đam mê là một pháp không đau khổ, không có phiền lao, không có ưu não, không có nhiệt não, thuộc chánh đạo’.<br>
+<span lang="pi" class="pali">
+‘Ananuyogo ca kho adukkho eso dhammo anupaghāto anupāyāso apariḷāho;<br>
+sammāpaṭipadā’ti—iti vadaṁ dhammameva deseti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vị ấy không nói: ‘Những ai đam mê hành trì tự kỷ khổ hạnh, đau khổ, không xứng bậc Thánh, không liên hệ mục đích, tất cả những vị ấy có đau khổ, có phiền lao, có ưu não, có nhiệt não, thuộc tà đạo’.<br>
+<span lang="pi" class="pali">
+‘Ye attakilamathānuyogaṁ anuyuttā dukkhaṁ anariyaṁ anatthasaṁhitaṁ, sabbe te sadukkhā saupaghātā saupāyāsā sapariḷāhā micchāpaṭipannā’ti—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vị ấy chỉ thuyết pháp và nói như sau:<br>
+<span lang="pi" class="pali">
+na evamāha.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Sự đam mê là một pháp có đau khổ, có phiền lao, có ưu não, có nhiệt não, thuộc tà đạo’.<br>
+<span lang="pi" class="pali">
+‘Anuyogo ca kho sadukkho eso dhammo saupaghāto saupāyāso sapariḷāho; micchāpaṭipadā’ti—iti vadaṁ dhammameva deseti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vị ấy không nói: ‘Những ai không đam mê hành trì tự kỷ khổ hạnh, đau khổ, không xứng bậc Thánh, không liên hệ đến mục đích, tất cả những vị ấy đều không có đau khổ, không có phiền lao, không có ưu não, không có nhiệt não, thuộc chánh đạo’.<br>
+<span lang="pi" class="pali">
+‘Ye attakilamathānuyogaṁ ananuyuttā dukkhaṁ anariyaṁ anatthasaṁhitaṁ, sabbe te adukkhā anupaghātā anupāyāsā apariḷāhā sammāpaṭipannā’ti—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vị ấy chỉ thuyết pháp và nói như sau:<br>
+<span lang="pi" class="pali">
+na evamāha.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Sự không đam mê là không đau khổ, pháp này không có phiền lao, không có ưu não, không có nhiệt não, thuộc về chánh đạo’.<br>
+<span lang="pi" class="pali">
+‘Ananuyogo ca kho adukkho eso dhammo anupaghāto anupāyāso apariḷāho; sammāpaṭipadā’ti—iti vadaṁ dhammameva deseti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vị ấy không có nói: ‘Những ai chưa đoạn tận hữu kiết sử, tất cả những vị ấy đều có đau khổ, có phiền lao, có ưu não, có nhiệt não’.<br>
+<span lang="pi" class="pali">
+‘Yesaṁ kesañci bhavasaṁyojanaṁ appahīnaṁ, sabbe te sadukkhā saupaghātā saupāyāsā sapariḷāhā micchāpaṭipannā’ti—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vị ấy chỉ thuyết pháp và nói như sau:<br>
+<span lang="pi" class="pali">
+na evamāha.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Khi hữu kiết sử chưa đoạn tận, hữu chưa đoạn tận’.<br>
+<span lang="pi" class="pali">
+‘Bhavasaṁyojane ca kho appahīne bhavopi appahīno hotī’ti—iti vadaṁ dhammameva deseti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vị ấy không nói như sau: ‘Những ai đã đoạn tận hữu kiết sử, tất cả những vị ấy không có đau khổ, không có phiền lao, không có ưu não, không có nhiệt não’.<br>
+<span lang="pi" class="pali">
+‘Yesaṁ kesañci bhavasaṁyojanaṁ pahīnaṁ, sabbe te adukkhā anupaghātā anupāyāsā apariḷāhā sammāpaṭipannā’ti—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vị ấy chỉ thuyết pháp và nói như sau:<br>
+<span lang="pi" class="pali">
+na evamāha.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Và khi hữu kiết sử được đoạn tận, hữu được đoạn tận’.<br>
+<span lang="pi" class="pali">
+‘Bhavasaṁyojane ca kho pahīne bhavopi pahīno hotī’ti—iti vadaṁ dhammameva deseti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Như vậy, này các Tỷ-kheo, là không tán thán, không chỉ trích, nhưng chỉ thuyết pháp.<br>
+<span lang="pi" class="pali">
+Evaṁ kho, bhikkhave, nevussādanā hoti na apasādanā, dhammadesanā ca.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Khi được nói đến: ‘Nên biết tán thán và nên biết chỉ trích; sau khi biết tán thán và sau khi biết chỉ trích, chớ có tán thán, chớ có chỉ trích, chỉ nên thuyết pháp’, chính do duyên này được nói đến như vậy.<br>
+<span lang="pi" class="pali">
+‘Ussādanañca jaññā, apasādanañca jaññā; ussādanañca ñatvā apasādanañca ñatvā nevussādeyya, na apasādeyya, dhammameva deseyyā’ti—iti yaṁ taṁ vuttaṁ idametaṁ paṭicca vuttaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Khi được nói đến: ‘Nên biết phán xét về lạc; sau khi biết phán xét về lạc, nên chú tâm vào nội lạc’, do duyên gì được nói đến như vậy?<br>
+<span lang="pi" class="pali">
+‘Sukhavinicchayaṁ jaññā; sukhavinicchayaṁ ñatvā ajjhattaṁ sukhamanuyuñjeyyā’ti—iti kho panetaṁ vuttaṁ. Kiñcetaṁ paṭicca vuttaṁ?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này các Tỷ-kheo, có năm dục trưởng dưỡng này. Thế nào là năm?<br>
+<span lang="pi" class="pali">
+Pañcime, bhikkhave, kāmaguṇā. Katame pañca?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Các sắc pháp do mắt nhận thức, khả ái, khả lạc, khả ý, khả hỷ, liên hệ đến dục, hấp dẫn;<br>
+<span lang="pi" class="pali">
+Cakkhuviññeyyā rūpā iṭṭhā kantā manāpā piyarūpā kāmūpasaṁhitā rajanīyā,<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+các tiếng do tai nhận thức,… ;<br>
+<span lang="pi" class="pali">
+sotaviññeyyā saddā …<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+các hương do mũi nhận thức,… ;<br>
+<span lang="pi" class="pali">
+ghānaviññeyyā gandhā …<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+các vị do lưỡi nhận thức… ;<br>
+<span lang="pi" class="pali">
+jivhāviññeyyā rasā …<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+các xúc do thân cảm giác, khả ái, khả lạc, khả ý, khả hỷ, liên hệ đến dục, hấp dẫn.<br>
+<span lang="pi" class="pali">
+kāyaviññeyyā phoṭṭhabbā iṭṭhā kantā manāpā piyarūpā kāmūpasaṁhitā rajanīyā—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này các Tỷ-kheo, như vậy là năm dục trưởng dưỡng.<br>
+<span lang="pi" class="pali">
+ime kho, bhikkhave, pañca kāmaguṇā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này các Tỷ-kheo, do duyên năm dục trưởng dưỡng này khởi lên lạc và hỷ, như vậy gọi là dục lạc, uế lạc, phàm phu lạc, phi Thánh lạc.<br>
+<span lang="pi" class="pali">
+Yaṁ kho, bhikkhave, ime pañca kāmaguṇe paṭicca uppajjati sukhaṁ somanassaṁ idaṁ vuccati kāmasukhaṁ mīḷhasukhaṁ puthujjanasukhaṁ anariyasukhaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Ta nói loại lạc này không nên thực hành, không nên tu tập, không nên làm cho sung mãn, nên sợ hãi’.<br>
+<span lang="pi" class="pali">
+‘Na āsevitabbaṁ, na bhāvetabbaṁ, na bahulīkātabbaṁ, bhāyitabbaṁ etassa sukhassā’ti—vadāmi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ở đây, này các Tỷ-kheo, Tỷ-kheo ly dục, ly bất thiện pháp, chứng đạt và an trú Thiền thứ nhất, một trạng thái hỷ lạc do ly dục sanh, có tầm, có tứ.<br>
+<span lang="pi" class="pali">
+Idha, bhikkhave, bhikkhu vivicceva kāmehi vivicca akusalehi dhammehi savitakkaṁ savicāraṁ vivekajaṁ pītisukhaṁ paṭhamaṁ jhānaṁ upasampajja viharati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ðình chỉ tầm và tứ, chứng đạt và an trú Thiền thứ hai, một trạng thái hỷ lạc do định sanh, không tầm, không tứ, nội tĩnh nhứt tâm…<br>
+<span lang="pi" class="pali">
+Vitakkavicārānaṁ vūpasamā ajjhattaṁ sampasādanaṁ cetaso ekodibhāvaṁ avitakkaṁ avicāraṁ samādhijaṁ pītisukhaṁ dutiyaṁ jhānaṁ upasampajja viharati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Thiền thứ ba…<br>
+<span lang="pi" class="pali">
+Pītiyā ca virāgā upekkhako ca viharati …pe… tatiyaṁ jhānaṁ …pe…<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+chứng đạt và an trú Thiền thứ tư.<br>
+<span lang="pi" class="pali">
+catutthaṁ jhānaṁ upasampajja viharati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Như vậy gọi là xuất ly lạc, viễn ly lạc, an tịnh lạc, giác ngộ lạc.<br>
+<span lang="pi" class="pali">
+Idaṁ vuccati nekkhammasukhaṁ pavivekasukhaṁ upasamasukhaṁ sambodhisukhaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Ta nói loại lạc này nên thực hành, nên tu tập, nên làm cho sung mãn, không nên sợ hãi’.<br>
+<span lang="pi" class="pali">
+‘Āsevitabbaṁ, bhāvetabbaṁ, bahulīkātabbaṁ, na bhāyitabbaṁ etassa sukhassā’ti—vadāmi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Khi được nói đến: ‘Nên biết phán xét về lạc; sau khi phán xét về lạc, hãy chú tâm vào nội lạc’, do chính duyên này được nói đến như vậy.<br>
+<span lang="pi" class="pali">
+‘Sukhavinicchayaṁ jaññā; sukhavinicchayaṁ ñatvā ajjhattaṁ sukhamanuyuñjeyyā’ti—iti yaṁ taṁ vuttaṁ idametaṁ paṭicca vuttaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Khi được nói đến: ‘Không nên nói lên lời bí mật. Mặt đối mặt (với ai), không nên nói lời mất lòng’, do duyên gì được nói đến như vậy?<br>
+<span lang="pi" class="pali">
+‘Rahovādaṁ na bhāseyya, sammukhā na khīṇaṁ bhaṇe’ti—iti kho panetaṁ vuttaṁ. Kiñcetaṁ paṭicca vuttaṁ?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Tại đây, này các Tỷ-kheo, biết được một lời bí mật là không thực, hư vọng, không liên hệ mục đích, nếu có thể được, chớ nói lên lời bí mật ấy.<br>
+<span lang="pi" class="pali">
+Tatra, bhikkhave, yaṁ jaññā rahovādaṁ abhūtaṁ atacchaṁ anatthasaṁhitaṁ sasakkaṁ taṁ rahovādaṁ na bhāseyya.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Và nếu biết được một lời bí mật là thực, không hư vọng, nhưng không liên hệ mục đích, hãy tự tập đừng nói lời ấy.<br>
+<span lang="pi" class="pali">
+Yampi jaññā rahovādaṁ bhūtaṁ tacchaṁ anatthasaṁhitaṁ tassapi sikkheyya avacanāya.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Và nếu biết được một lời bí mật là thực, không hư vọng, có liên hệ mục đích; ở đây nên biết thời nói lên lời bí mật ấy.<br>
+<span lang="pi" class="pali">
+Yañca kho jaññā rahovādaṁ bhūtaṁ tacchaṁ atthasaṁhitaṁ tatra kālaññū assa tassa rahovādassa vacanāya.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Nếu biết một lời mất lòng, mặt đối mặt (với ai) là không thực, hư vọng, không liên hệ mục đích, nếu có thể được, mặt đối mặt; chớ có nói lên lời nói mất lòng ấy.<br>
+<span lang="pi" class="pali">
+Tatra, bhikkhave, yaṁ jaññā sammukhā khīṇavādaṁ abhūtaṁ atacchaṁ anatthasaṁhitaṁ sasakkaṁ taṁ sammukhā khīṇavādaṁ na bhāseyya.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Nếu biết một lời mất lòng, mặt đối mặt (với ai) là thực, không hư vọng, nhưng không liên hệ mục đích, hãy tập chớ nói lên lời ấy.<br>
+<span lang="pi" class="pali">
+Yampi jaññā sammukhā khīṇavādaṁ bhūtaṁ tacchaṁ anatthasaṁhitaṁ tassapi sikkheyya avacanāya.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Và nếu biết một lời mất lòng, mặt đối mặt (với ai) là thực, không hư vọng, có liên hệ mục đích; ở đây nên biết thời nói lên lời mất lòng ấy.<br>
+<span lang="pi" class="pali">
+Yañca kho jaññā sammukhā khīṇavādaṁ bhūtaṁ tacchaṁ atthasaṁhitaṁ tatra kālaññū assa tassa sammukhā khīṇavādassa vacanāya.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Khi được nói đến: ‘Không nên nói lên lời bí mật, mặt đối mặt (với ai), không nên nói lên lời mất lòng’, do chính duyên này được nói đến như vậy.<br>
+<span lang="pi" class="pali">
+‘Rahovādaṁ na bhāseyya, sammukhā na khīṇaṁ bhaṇe’ti—iti yaṁ taṁ vuttaṁ, idametaṁ paṭicca vuttaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Khi được nói đến: ‘Nên nói thật từ từ, chớ có vội vàng’, do duyên gì được nói đến như vậy?<br>
+<span lang="pi" class="pali">
+‘Ataramānova bhāseyya no taramāno’ti—iti kho panetaṁ vuttaṁ. Kiñcetaṁ paṭicca vuttaṁ?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ở đây, này các Tỷ-kheo, nếu nói vội vàng, thời thân mệt mỏi, tâm bị tổn hại, tiếng bị tổn hại và cổ họng bị đau. Lời nói một người vội vàng không được rõ ràng và không được nhận hiểu.<br>
+<span lang="pi" class="pali">
+Tatra, bhikkhave, taramānassa bhāsato kāyopi kilamati, cittampi upahaññati, saropi upahaññati, kaṇṭhopi āturīyati, avisaṭṭhampi hoti aviññeyyaṁ taramānassa bhāsitaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Tại đây, này các Tỷ-kheo, nói lời từ từ, thân không mệt mỏi, tâm không tổn hại, tiếng không tổn hại và cổ họng không bị đau. Lời nói một người nói từ từ được rõ ràng và được nhận hiểu.<br>
+<span lang="pi" class="pali">
+Tatra, bhikkhave, ataramānassa bhāsato kāyopi na kilamati, cittampi na upahaññati, saropi na upahaññati, kaṇṭhopi na āturīyati, visaṭṭhampi hoti viññeyyaṁ ataramānassa bhāsitaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Khi được nói đến: ‘Nên nói thật từ từ, chớ có nói vội vàng’, chính do duyên này được nói đến như vậy.<br>
+<span lang="pi" class="pali">
+‘Ataramānova bhāseyya, no taramāno’ti—iti yaṁ taṁ vuttaṁ, idametaṁ paṭicca vuttaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Khi được nói đến: ‘Chớ có chấp trước địa phương ngữ, chớ có đi quá xa ngôn ngữ thường dùng’, do duyên gì được nói đến như vậy?<br>
+<span lang="pi" class="pali">
+‘Janapadaniruttiṁ nābhiniveseyya, samaññaṁ nātidhāveyyā’ti—iti kho panetaṁ vuttaṁ. Kiñcetaṁ paṭicca vuttaṁ?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Và này các Tỷ-kheo, thế nào là chấp trước địa phương ngữ và đi quá xa ngôn ngữ thường dùng?<br>
+<span lang="pi" class="pali">
+Kathañca, bhikkhave, janapadaniruttiyā ca abhiniveso hoti samaññāya ca atisāro?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ở đây, này các Tỷ-kheo, trong nhiều quốc độ, người ta biết ‘đĩa’, ‘bát’, ‘tách’, ‘dĩa’, ‘chậu’, ‘cái liễn’, ‘tô’.<br>
+<span lang="pi" class="pali">
+Idha, bhikkhave, tadevekaccesu janapadesu ‘pātī’ti sañjānanti, ‘pattan’ti sañjānanti, ‘vittan’ti sañjānanti, ‘sarāvan’ti sañjānanti ‘dhāropan’ti sañjānanti, ‘poṇan’ti sañjānanti, ‘pisīlavan’ti sañjānanti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Như vậy, như họ biết trong các quốc độ ấy những chữ là như vậy, như vậy, có người lại làm như vậy, kiên trì chấp thủ, chấp trước và nói:<br>
+<span lang="pi" class="pali">
+Iti yathā yathā naṁ tesu tesu janapadesu sañjānanti tathā tathā thāmasā parāmāsā abhinivissa voharati:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Chỉ như vậy là sự thật, ngoài ra là hư vọng’.<br>
+<span lang="pi" class="pali">
+‘idameva saccaṁ, moghamaññan’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Như vậy, này các Tỷ-kheo, là chấp trước địa phương ngữ, là đi quá xa ngôn ngữ thường dùng.<br>
+<span lang="pi" class="pali">
+Evaṁ kho, bhikkhave, janapadaniruttiyā ca abhiniveso hoti samaññāya ca atisāro.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Và này các Tỷ-kheo, thế nào là không chấp trước địa phương ngữ, không đi quá xa ngôn ngữ thường dùng?<br>
+<span lang="pi" class="pali">
+Kathañca, bhikkhave, janapadaniruttiyā ca anabhiniveso hoti samaññāya ca anatisāro?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ở đây, này các Tỷ-kheo, trong nhiều quốc độ, người ta biết những chữ ‘đĩa’, ‘bát’, ‘tách’, ‘dĩa’, ‘chậu’, ‘cái liễn’, ‘tô’.<br>
+<span lang="pi" class="pali">
+Idha, bhikkhave, tadevekaccesu janapadesu ‘pātī’ti sañjānanti, ‘pattan’ti sañjānanti, ‘vittan’ti sañjānanti, ‘sarāvan’ti sañjānanti, ‘dhāropan’ti sañjānanti, ‘poṇan’ti sañjānanti, ‘pisīlavan’ti sañjānanti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Như vậy, như họ biết trong các quốc độ ấy, những chữ là như vậy, như vậy, một người không chấp thủ mà giải thích: ‘Các vị ấy y cứ như thế này, giải thích như vậy’.<br>
+<span lang="pi" class="pali">
+Iti yathā yathā naṁ tesu tesu janapadesu sañjānanti ‘idaṁ kira me āyasmanto sandhāya voharantī’ti tathā tathā voharati aparāmasaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Như vậy, này các Tỷ-kheo là không chấp trước địa phương ngữ, không đi quá xa ngôn ngữ thường dùng.<br>
+<span lang="pi" class="pali">
+Evaṁ kho, bhikkhave, janapadaniruttiyā ca anabhiniveso hoti, samaññāya ca anatisāro.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Khi được nói đến: ‘Chớ có chấp trước địa phương ngữ, chớ có đi quá xa ngôn ngữ thường dùng’, do chính duyên này được nói đến như vậy.<br>
+<span lang="pi" class="pali">
+‘Janapadaniruttiṁ nābhiniveseyya samaññaṁ nātidhāveyyā’ti—iti yaṁ taṁ vuttaṁ, idametaṁ paṭicca vuttaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ở đây, này các Tỷ-kheo, phàm lạc gì liên hệ với dục nhưng có đam mê loại hỷ, hạ liệt, đê tiện, phàm phu, không xứng bậc Thánh, không liên hệ mục đích, pháp như vậy có đau khổ, có phiền lao, có ưu não, có nhiệt não, thuộc tà đạo.<br>
+<span lang="pi" class="pali">
+Tatra, bhikkhave, yo kāmapaṭisandhisukhino somanassānuyogo hīno gammo pothujjaniko anariyo anatthasaṁhito, sadukkho eso dhammo saupaghāto saupāyāso sapariḷāho;<br>
+micchāpaṭipadā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Do vậy, pháp này là pháp hữu tránh.<br>
+<span lang="pi" class="pali">
+Tasmā eso dhammo saraṇo.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Tại đây, này các Tỷ-kheo, phàm lạc gì, liên kết với dục, nhưng không có đam mê loại hỷ, hạ liệt, đê tiện, phàm phu, không xứng bậc Thánh, không liên hệ mục đích, pháp như vậy không có đau khổ, không có phiền lao, không có ưu não, không có nhiệt não, thuộc chánh đạo.<br>
+<span lang="pi" class="pali">
+Tatra, bhikkhave, yo kāmapaṭisandhisukhino somanassānuyogaṁ ananuyogo hīnaṁ gammaṁ pothujjanikaṁ anariyaṁ anatthasaṁhitaṁ, adukkho eso dhammo anupaghāto anupāyāso apariḷāho;<br>
+sammāpaṭipadā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Do vậy, pháp này là pháp vô tránh.<br>
+<span lang="pi" class="pali">
+Tasmā eso dhammo araṇo.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Tại đây, này các Tỷ-kheo, phàm hành trì tự kỷ khổ hạnh, đau khổ, không xứng bậc Thánh, không liên hệ mục đích, pháp như vậy có đau khổ, có phiền lao, có ưu não, có nhiệt não, thuộc tà đạo.<br>
+<span lang="pi" class="pali">
+Tatra, bhikkhave, yo attakilamathānuyogo dukkho anariyo anatthasaṁhito, sadukkho eso dhammo saupaghāto saupāyāso sapariḷāho; micchāpaṭipadā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Do vậy, pháp này là pháp hữu tránh.<br>
+<span lang="pi" class="pali">
+Tasmā eso dhammo saraṇo.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Tại đây, này các Tỷ-kheo, phàm không có hành trì tự kỷ khổ hạnh, không đau khổ, không xứng bậc Thánh, không liên hệ mục đích, pháp như vậy không có đau khổ, không có phiền lao, không có ưu não, không có nhiệt não, thuộc chánh đạo.<br>
+<span lang="pi" class="pali">
+Tatra, bhikkhave, yo attakilamathānuyogaṁ ananuyogo dukkhaṁ anariyaṁ anatthasaṁhitaṁ, adukkho eso dhammo anupaghāto anupāyāso apariḷāho; sammāpaṭipadā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Do vậy, pháp này là pháp vô tránh.<br>
+<span lang="pi" class="pali">
+Tasmā eso dhammo araṇo.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Tại đây, này các Tỷ-kheo, đây là Trung đạo đã được Thế Tôn giác ngộ, tác thành mắt, tác thành trí, đưa đến an tịnh, thắng trí, giác ngộ, Niết – bàn. Pháp này không có đau khổ, không có phiền lao, không có ưu não, không có nhiệt não, thuộc chánh đạo.<br>
+<span lang="pi" class="pali">
+Tatra, bhikkhave, yāyaṁ majjhimā paṭipadā tathāgatena abhisambuddhā, cakkhukaraṇī ñāṇakaraṇī upasamāya abhiññāya sambodhāya nibbānāya saṁvattati, adukkho eso dhammo anupaghāto anupāyāso apariḷāho; sammāpaṭipadā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Do vậy, pháp này là pháp vô tránh.<br>
+<span lang="pi" class="pali">
+Tasmā eso dhammo araṇo.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Tại đây, này các Tỷ-kheo, pháp tán thán và chỉ trích nhưng không thuyết pháp này, pháp này có đau khổ, có phiền lao, có ưu não, có phiền não, thuộc tà đạo.<br>
+<span lang="pi" class="pali">
+Tatra, bhikkhave, yāyaṁ ussādanā ca apasādanā ca no ca dhammadesanā, sadukkho eso dhammo saupaghāto saupāyāso sapariḷāho; micchāpaṭipadā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Do vậy, pháp này là pháp hữu tránh.<br>
+<span lang="pi" class="pali">
+Tasmā eso dhammo saraṇo.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Tại đây, này các Tỷ-kheo, pháp không tán thán, cũng không chỉ trích, chỉ có thuyết pháp, pháp này không có đau khổ, không có phiền lao, không có ưu não, không có nhiệt não, thuộc chánh đạo.<br>
+<span lang="pi" class="pali">
+Tatra, bhikkhave, yāyaṁ nevussādanā ca na apasādanā ca dhammadesanā ca, adukkho eso dhammo anupaghāto anupāyāso apariḷāho;<br>
+sammāpaṭipadā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Do vậy, pháp này là pháp vô tránh.<br>
+<span lang="pi" class="pali">
+Tasmā eso dhammo araṇo.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Tại đây, này các Tỷ-kheo, pháp dục lạc này là uế lạc, phàm phu lạc, phi Thánh lạc, pháp này là pháp có đau khổ, có phiền lao, có ưu não, có nhiệt não.<br>
+<span lang="pi" class="pali">
+Tatra, bhikkhave, yamidaṁ kāmasukhaṁ mīḷhasukhaṁ pothujjanasukhaṁ anariyasukhaṁ, sadukkho eso dhammo saupaghāto saupāyāso sapariḷāho; micchāpaṭipadā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Do vậy, pháp này là pháp hữu tránh.<br>
+<span lang="pi" class="pali">
+Tasmā eso dhammo saraṇo.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Tại đây, này các Tỷ-kheo, pháp xuất ly lạc, viễn ly lạc, an tịnh lạc, pháp này là pháp không đau khổ, không phiền lao, không ưu não, không nhiệt não, thuộc chánh đạo.<br>
+<span lang="pi" class="pali">
+Tatra, bhikkhave, yamidaṁ nekkhammasukhaṁ pavivekasukhaṁ upasamasukhaṁ sambodhisukhaṁ, adukkho eso dhammo anupaghāto anupāyāso apariḷāho; sammāpaṭipadā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Do vậy, pháp này là pháp vô tránh.<br>
+<span lang="pi" class="pali">
+Tasmā eso dhammo araṇo.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Tại đây, này các Tỷ-kheo, phàm lời nói bí mật nào không thật, hư vọng, không liên hệ mục đích, pháp này là pháp có đau khổ, có phiền lao, có ưu não, có nhiệt não, thuộc tà đạo.<br>
+<span lang="pi" class="pali">
+Tatra, bhikkhave, yvāyaṁ rahovādo abhūto ataccho anatthasaṁhito, sadukkho eso dhammo saupaghāto saupāyāso sapariḷāho; micchāpaṭipadā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Do vậy, pháp này là pháp hữu tránh.<br>
+<span lang="pi" class="pali">
+Tasmā eso dhammo saraṇo.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Tại đây, này các Tỷ-kheo, phàm lời nói bí mật nào là chân thật, không hư vọng, không liên hệ mục đích, pháp này là pháp có đau khổ, có phiền lao, có ưu não, có nhiệt não, thuộc tà đạo.<br>
+<span lang="pi" class="pali">
+Tatra, bhikkhave, yvāyaṁ rahovādo bhūto taccho anatthasaṁhito, sadukkho eso dhammo saupaghāto saupāyāso sapariḷāho; micchāpaṭipadā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Do vậy, pháp này là pháp hữu tránh.<br>
+<span lang="pi" class="pali">
+Tasmā eso dhammo saraṇo.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Tại đây, này các Tỷ-kheo, phàm lời nói bí mật nào là chân thật, không hư vọng, có liên hệ mục đích, pháp này là pháp không đau khổ, không có phiền lao, không có ưu não, không có nhiệt não, thuộc chánh đạo.<br>
+<span lang="pi" class="pali">
+Tatra, bhikkhave, yvāyaṁ rahovādo bhūto taccho atthasaṁhito, adukkho eso dhammo anupaghāto anupāyāso apariḷāho; sammāpaṭipadā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Do vậy, pháp này là pháp vô tránh.<br>
+<span lang="pi" class="pali">
+Tasmā eso dhammo araṇo.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Tại đây, này các Tỷ-kheo, phàm lời nói mất lòng nào, mặt đối mặt (với ai), không chân thật, hư vọng, không liên hệ mục đích, pháp này là pháp có đau khổ, có phiền lao, có ưu não, có nhiệt não, thuộc tà đạo.<br>
+<span lang="pi" class="pali">
+Tatra, bhikkhave, yvāyaṁ sammukhā khīṇavādo abhūto ataccho anatthasaṁhito, sadukkho eso dhammo saupaghāto saupāyāso sapariḷāho; micchāpaṭipadā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Do vậy, pháp này là pháp hữu tránh.<br>
+<span lang="pi" class="pali">
+Tasmā eso dhammo saraṇo.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Tại đây, này các Tỷ-kheo, phàm lời nói mất lòng nào, mặt đối mặt (với ai) là chân thật, không hư vọng, không liên hệ mục đích, pháp này là pháp có đau khổ, có phiền lao, có ưu não, có nhiệt não, thuộc tà đạo.<br>
+<span lang="pi" class="pali">
+Tatra, bhikkhave, yvāyaṁ sammukhā khīṇavādo bhūto taccho anatthasaṁhito, sadukkho eso dhammo saupaghāto saupāyāso sapariḷāho; micchāpaṭipadā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Do vậy, pháp này là pháp hữu tránh.<br>
+<span lang="pi" class="pali">
+Tasmā eso dhammo saraṇo.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Tại đây, này các Tỷ-kheo, phàm lời nói mất lòng nào, mặt đối mặt (với ai) là chân thật, không hư vọng, liên hệ mục đích, pháp này là pháp không đau khổ, không có phiền lao, không có ưu não, không có nhiệt não, thuộc chánh đạo.<br>
+<span lang="pi" class="pali">
+Tatra, bhikkhave, yvāyaṁ sammukhā khīṇavādo bhūto taccho atthasaṁhito, adukkho eso dhammo anupaghāto anupāyāso apariḷāho; sammāpaṭipadā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Do vậy, pháp này là pháp vô tránh.<br>
+<span lang="pi" class="pali">
+Tasmā eso dhammo araṇo.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Tại đây, này các Tỷ-kheo, phàm lời nói nào được nói lên một cách vội vàng, pháp này có đau khổ, có phiền lao, có ưu não, có nhiệt não, thuộc tà đạo.<br>
+<span lang="pi" class="pali">
+Tatra, bhikkhave, yamidaṁ taramānassa bhāsitaṁ, sadukkho eso dhammo saupaghāto saupāyāso sapariḷāho; micchāpaṭipadā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Do vậy, pháp này là pháp hữu tránh.<br>
+<span lang="pi" class="pali">
+Tasmā eso dhammo saraṇo.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Tại đây, này các Tỷ-kheo, phàm lời nói nào được nói lên một cách từ từ, pháp này không có đau khổ, không có phiền lao, không có ưu não, không có nhiệt não, thuộc chánh đạo.<br>
+<span lang="pi" class="pali">
+Tatra, bhikkhave, yamidaṁ ataramānassa bhāsitaṁ, adukkho eso dhammo anupaghāto anupāyāso apariḷāho; sammāpaṭipadā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Do vậy, pháp này là pháp vô tránh.<br>
+<span lang="pi" class="pali">
+Tasmā eso dhammo araṇo.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Tại đây, này các Tỷ-kheo, chấp trước địa phương ngữ và đi quá xa ngôn ngữ thường dùng, pháp này là pháp có đau khổ, có phiền lao, có ưu não, có nhiệt não, thuộc tà đạo.<br>
+<span lang="pi" class="pali">
+Tatra, bhikkhave, yvāyaṁ janapadaniruttiyā ca abhiniveso samaññāya ca atisāro, sadukkho eso dhammo saupaghāto saupāyāso sapariḷāho; micchāpaṭipadā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Do vậy, pháp này là pháp hữu tránh.<br>
+<span lang="pi" class="pali">
+Tasmā eso dhammo saraṇo.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Tại đây, này các Tỷ-kheo, không chấp trước địa phương ngữ và không đi quá xa ngôn ngữ thường dùng, pháp này là pháp không có đau khổ, không có phiền lao, không có ưu não, không có nhiệt não, thuộc chánh đạo.<br>
+<span lang="pi" class="pali">
+Tatra, bhikkhave, yvāyaṁ janapadaniruttiyā ca anabhiniveso samaññāya ca anatisāro, adukkho eso dhammo anupaghāto anupāyāso apariḷāho; sammāpaṭipadā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Do vậy, pháp này là pháp vô tránh.<br>
+<span lang="pi" class="pali">
+Tasmā eso dhammo araṇo.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Do vậy, này các Tỷ-kheo, các Ông phải tự tu học như sau: ‘Chúng ta sẽ biết hữu tránh pháp và chúng ta sẽ biết vô tránh pháp. Sau khi biết hữu tránh pháp và sau khi biết vô tránh pháp, chúng ta sẽ hành trì vô tránh đạo’.<br>
+<span lang="pi" class="pali">
+Tasmātiha, bhikkhave, ‘saraṇañca dhammaṁ jānissāma, araṇañca dhammaṁ jānissāma; saraṇañca dhammaṁ ñatvā araṇañca dhammaṁ ñatvā araṇapaṭipadaṁ paṭipajjissāmā’ti evañhi vo, bhikkhave, sikkhitabbaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Và này các Tỷ-kheo, Thiện gia nam tử Subhūti (Tu-bồ-đề) đã hành trì vô tránh pháp”.<br>
+<span lang="pi" class="pali">
+Subhūti ca pana, bhikkhave, kulaputto araṇapaṭipadaṁ paṭipanno”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Thế Tôn thuyết giảng như vậy. Các Tỷ-kheo ấy hoan hỷ tín thọ lời Thế Tôn dạy.<br>
+<span lang="pi" class="pali">
+Idamavoca bhagavā. Attamanā te bhikkhū bhagavato bhāsitaṁ abhinandunti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+<span lang="pi" class="vi">
+Araṇavibhaṅgasuttaṁ niṭṭhitaṁ navamaṁ.<br>
+</span>
+</p>
+
+
+
+<!-- COPY CONTENT SUTTA Ở ĐÂY -->
+
+
+
+<br>
+<p><p style="text-align: right;font-style: italic;">Hoà Thượng Thích Minh Châu dịch Việt</span></p>
+
+
+
+
+
+
+
+
+</section>  <!-- End English and Pali -->
+<div id="nextprev"><a id="previous-sutta" href="./mn138.html#content"></a><a id="next-sutta" href="./mn140.html#content"></a></div>
+</div>  <!--End Content -->
+</div>  <!-- End Page -->
+
+
+
+
+
+
+<footer>
+					 <!-- End bottom links -->
+</footer>
+
+
+ 
+ <!-- Scripts -->
+
+ <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      if (typeof enablePaliLookup === "function") {
+        enablePaliLookup();
+      } else {
+        console.error("enablePaliLookup is not defined");
+      }
+    });
+  </script>
+
+ <script>
+ // Script to open and close sidebar
+ 	function w3_open() {
+ 	document.getElementById("mySidebar").style.display = "block";
+ 	}
+ 		function w3_close() {
+ 		document.getElementById("mySidebar").style.display = "none";
+ 	}
+ </script>
+ <script>
+ 		var app = document.getElementsByTagName("BODY")[0];
+ 		if (localStorage.lightMode == "dark") {
+ 			app.setAttribute("light-mode", "dark");
+ 	}
+ </script>
+ 
+ <script>
+ 		function toggle_light_mode() {
+ 			var app = document.getElementsByTagName("BODY")[0];
+ 				if (localStorage.lightMode == "dark") {
+ 			localStorage.lightMode = "light";
+ 			app.setAttribute("light-mode", "light");
+ 		} else {
+ 					localStorage.lightMode = "dark";
+ 					app.setAttribute("light-mode", "dark");
+ 	}
+ 		}
+ 
+ 		window.addEventListener("storage", function () {
+ 			if (localStorage.lightMode == "dark") {
+ 				app.setAttribute("light-mode", "dark");
+ 				} else {
+ 				app.setAttribute("light-mode", "light");
+ 		}
+ 		}, false);
+ 
+ </script>
+ <script src="../js/footer.js"></script><script src="../js/dpd_deconstructor.js"></script><script src="../js/dpd_ebts.js"></script><script src="../js/dpd_i2h.js"></script>
+ <script src="/sw.js"></script>
+ </body>
+ </html>

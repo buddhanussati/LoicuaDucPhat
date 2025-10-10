@@ -1,0 +1,849 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+ 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+ 	<link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+ 	<meta name="viewport" content="width=device-width, initial-scale=1">
+		<!-- Loading manifest -->
+	<link rel="manifest" href="../manifest.json">
+ 	<!-- Loading main and menu stylesheets -->
+ 	<link rel="stylesheet" href="../css/w3.css">
+ 	<link rel="stylesheet" href="../css/css.css">
+ 	<link rel="stylesheet" href="../css/menu.css">
+ 	<script src="../js/jquery-1.10.2.min.js"></script>
+ 	<script src="../js/controlpanel.js"></script>
+ 	<script src="../js/mousetrap.min.js"></script>
+    <script src="../js/pali-lookup-standalone.js"></script>
+
+ <script src="../js/suttaFiles.js"></script>
+<script>
+ // Script to open random Sutta
+ function openRandomSutta() {
+  const randomIndex = Math.floor(Math.random() * suttaFiles.length);
+  const selectedFile = suttaFiles[randomIndex];
+
+  // Get root path of your site 
+  const currentPath = location.pathname;
+  const rootPath = currentPath.split("/").slice(0, -2).join("/") + "/";
+
+  // Redirect to the correct file
+  window.location.href = rootPath + selectedFile;
+}
+</script>
+
+
+</head>
+ <body class="container">
+ <div class="header-background">
+ <!-- Header -->
+ <div class="w3-header w3-content w3-padding w3-left-align bwcontainer">
+ 	<div class="centered">
+ 		<button class="light-mode-button" aria-label="Bật Chế Độ Sáng" onclick="toggle_light_mode()">
+ 			<span></span>
+ 			<span></span>
+ 		</button>
+ 		<span class="box-lbl">Sáng/Tối</span>
+ 	</div> <!-- Centered -->
+ 		<a href="../home/index.html" id="bwlogo"><img src="../images/headerlogo.png" alt="Logo Lời Của Đức Phật" class="w3-image"></a>
+ 		<div class="w3-bar bwcontainer">
+ 			<div id="searchlinks">
+ 			<a href="../home/visearch.html"><span class="w3-bar-item"><i class="fa fa-search"></i>&nbsp;Tìm Tiếng Việt</span></a>
+ 			<a href="../home/palisearch.html"><span class="w3-bar-item"><i class="fa fa-search"></i>&nbsp;Tìm Tiếng Pali</span></a>
+ 			</div><!-- End Searchlinks div -->
+ 			<div class="help"><span><a href="../home/help.html"><img src="../images/help_icon.png" title="Trợ Giúp" alt="Help"></a></span></div>
+ 		</div> <!-- End w3-bar bwcontainer --> 	</div> <!-- End w3-header w3-content w3-padding w3-left-align bwcontainer -->
+ </div> <!-- End header-background -->
+ <!-- Top menu -->
+
+ <div class="w3-main w3-white bwcontainer2">
+ 	<div class="w3-button w3-padding-8 w3-left w3-hide-large" onclick="w3_open()">☰</div>
+ 		<div id="navbar" class="w3-hide-small w3-hide-medium bwcontainer3">
+ 			<ul id="css3menu0">
+ 				<li class="topfirst" id="home"><a href="../home/index.html" class="w3-hide-small">Trang Chủ</a></li>
+  				<li class="topmenu" id="dn"><a href="../dn/dn.html" class="pressed w3-hide-small">Trường Bộ Kinh</a></li>
+ 				<li class="topmenu" id="mn"><a href="../mn/mn.html" class="w3-hide-small">Trung Bộ Kinh</a></li>
+ 				<li class="topmenu" id="sn"><a href="../sn/sn.html" class="w3-hide-small"><i class="fa fa-caret-down"></i>&nbsp;Tương Ưng Bộ Kinh</a>
+ 					<ul>
+ 						<li><a href="../sn/sn01.html" class="w3-hide-small">Tập I - Thiên Có Kệ</a></li>
+ 						<li><a href="../sn/sn02.html" class="w3-hide-small">Tập II - Thiên Nhân Duyên</a></li>
+ 						<li><a href="../sn/sn03.html" class="w3-hide-small">Tập III - Thiên Uẩn</a></li>
+ 						<li><a href="../sn/sn04.html" class="w3-hide-small">Tập IV - Thiên Sáu Xứ</a></li>
+ 						<li><a href="../sn/sn05.html" class="w3-hide-small">Tập V - Thiên Ðại Phẩm</a></li>
+ 					</ul>
+ 				<li class="topmenu" id="an"><a href="../an/an.html" class="w3-hide-small"><i class="fa fa-caret-down"></i>&nbsp;Tăng Chi Bộ Kinh</a>
+ 					<ul>
+ 						<li><a href="../an/an1.html" class="w3-hide-small">Chương Một Pháp</a></li>
+ 						<li><a href="../an/an2.html" class="w3-hide-small">Chương Hai Pháp</a></li>
+ 						<li><a href="../an/an3.html" class="w3-hide-small">Chương Ba Pháp</a></li>
+ 						<li><a href="../an/an4.html" class="w3-hide-small">Chương Bốn Pháp</a></li>
+ 						<li><a href="../an/an5.html" class="w3-hide-small">Chương Năm Pháp</a></li>
+ 						<li><a href="../an/an6.html" class="w3-hide-small">Chương Sáu Pháp</a></li>
+ 						<li><a href="../an/an7.html" class="w3-hide-small">Chương Bảy Pháp</a></li>
+ 						<li><a href="../an/an8.html" class="w3-hide-small">Chương Tám Pháp</a></li>
+ 						<li><a href="../an/an9.html" class="w3-hide-small">Chương Chín Pháp</a></li>
+ 						<li><a href="../an/an10.html" class="w3-hide-small">Chương Mười Pháp</a></li>
+ 						<li><a href="../an/an11.html" class="w3-hide-small">Chương Mười Một Pháp</a></li>
+ 					</ul>
+ 				</li>
+ 				<li class="topmenu" id="kn"><a href="../kn/kn.html" class="w3-hide-small"><i class="fa fa-caret-down"></i>&nbsp;Tiểu Bộ Kinh</a>
+ 					<ul>
+ 						<li><a href="../kp/kp.html" class="w3-hide-small">Kinh Tiểu Tụng</a></li>
+ 						<li><a href="../dhp/dhp.html" class="w3-hide-small">Kinh Pháp Cú</a></li>
+ 						<li><a href="../snp/snp.html" class="w3-hide-small">Kinh Tập</a></li>
+ 						<li><a href="../ud/ud.html" class="w3-hide-small">Kinh Phật Tự Thuyết</a></li>
+ 						<li><a href="../it/it.html" class="w3-hide-small">Kinh Phật Thuyết Như Vậy</a></li>
+ 						<li><a href="../tha/tha.html" class="w3-hide-small">Trưởng Lão Tăng Kệ</a></li>
+ 						<li><a href="../thi/thi.html" class="w3-hide-small">Trưởng Lão Ni Kệ</a></li>
+ 					</ul>
+ 				</li>
+				<li class="toplast" id="rd"><a href="../rd/rd.html" class="w3-hide-small"></i>Kinh Ngẫu Nhiên Theo Nhóm</a>
+ 					</ul>
+ 				</li>
+ 			</ul>
+ 			</div>
+ 		</div> <!--navbar-->
+
+<!-- Sidebar (hidden by default) -->
+ <nav class="w3-sidebar w3-bar-block w3-card w3-border w3-top w3-animate-left w3-hide-large" id="mySidebar">
+ 	<a href="javascript:void(0)" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-times fa-2x red-color"></i>&nbsp;&nbsp;&nbsp;Close</a><!-- Hides the sidebar when clicked -->
+ 		<div class="w3-bar-block w3-white">
+ 			<a href="../home/index.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-home fa-lg"></i>&nbsp;&nbsp;&nbsp;Home</a>
+ 			<a href="../guide/guide.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Guide</a>
+ 			<a href="../dn/dn.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Trường Bộ Kinh</a>
+ 			<a href="../mn/mn.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Trung Bộ Kinh</a>
+ 			<a href="../sn/sn.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Tương Ưng Bộ Kinh</a>
+ 			<a href="../an/an.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Tăng Chi Bộ Kinh
+ 			<a href="../kn/kn.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Tiểu Bộ Kinh</a>
+			<a href="../rd/rd.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>Kinh Ngẫu Nhiên Theo Nhóm</a>
+ 		</div>
+ </nav>
+ 
+ 
+ 
+   <!-- !PAGE CONTENT! --> 
+<div class="w3-main w3-content w3-padding w3-left-align bwcontainer4">
+<div id="content">
+<h2>Majjhima Nikāya - Trung Bộ Kinh</h2>
+<h5><span style="font-style: italic;">Hoà Thượng Thích Minh Châu dịch Việt</span></h5>
+
+</div>
+
+<br>
+ 	<title>        Trung Bộ 142          </title>
+
+<p lang="vi" class="vi"; style="text-align: center">
+Trung Bộ 142<br>
+<span lang="pi" class="pali">
+Majjhima Nikāya 142<br>
+</span>
+</p>
+
+
+<p lang="vi" class="vi"; style="text-align: center">
+Kinh Phân Biệt Cúng Dường<br>
+<span lang="pi" class="pali">
+Dakkhiṇāvibhaṅgasutta<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Như vầy tôi nghe.<br>
+<span lang="pi" class="pali">
+Evaṁ me sutaṁ—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Một thời, Thế Tôn trú giữa dòng họ Sakka (Thích-Ca), ở Kapilavatthu (Ca-ty-la-vệ), tại tinh xá Nigrodha (Ni-câu-luật Thọ Viên).<br>
+<span lang="pi" class="pali">
+ekaṁ samayaṁ bhagavā sakkesu viharati kapilavatthusmiṁ nigrodhārāme.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Rồi Mahāpajāpati Gotamī (Củ đàm Nữ Ma-ha-ba-xà-bà-đề), đem theo một cặp y mới, đi đến Thế Tôn; sau khi đến, đảnh lễ Thế Tôn rồi ngồi xuống một bên. Ngồi xuống một bên, Mahāpajāpati Gotamī bạch Thế Tôn:<br>
+<span lang="pi" class="pali">
+Atha kho mahāpajāpati gotamī navaṁ dussayugaṁ ādāya yena bhagavā tenupasaṅkami; upasaṅkamitvā bhagavantaṁ abhivādetvā ekamantaṁ nisīdi. Ekamantaṁ nisinnā kho mahāpajāpati gotamī bhagavantaṁ etadavoca:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Bạch Thế Tôn, cặp y mới này do con cắt và dệt đặc biệt cho Thế Tôn.<br>
+<span lang="pi" class="pali">
+“idaṁ me, bhante, navaṁ dussayugaṁ bhagavantaṁ uddissa sāmaṁ kantaṁ sāmaṁ vāyitaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Bạch Thế Tôn, mong Thế Tôn vì lòng từ mẫn hãy nhận lấy cho con.”<br>
+<span lang="pi" class="pali">
+Taṁ me, bhante, bhagavā paṭiggaṇhātu anukampaṁ upādāyā”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Khi được nghe nói vậy, Thế Tôn nói với Mahāpajāpati Gotamī:<br>
+<span lang="pi" class="pali">
+Evaṁ vutte, bhagavā mahāpajāpatiṁ gotamiṁ etadavoca:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Này Gotami, hãy cúng dường Tăng chúng. Bà cúng dường Tăng chúng, thời Ta sẽ được cung kính, và cả Tăng chúng cũng vậy”.<br>
+<span lang="pi" class="pali">
+“saṅghe, gotami, dehi. Saṅghe te dinne ahañceva pūjito bhavissāmi saṅgho cā”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Lần thứ hai, Mahāpajāpati Gotamī bạch Thế Tôn:<br>
+<span lang="pi" class="pali">
+Dutiyampi kho mahāpajāpati gotamī bhagavantaṁ etadavoca:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Bạch Thế Tôn, cặp y mới này do con cắt và dệt … hãy nhận lấy cho con”.<br>
+<span lang="pi" class="pali">
+“idaṁ me, bhante, navaṁ dussayugaṁ bhagavantaṁ uddissa sāmaṁ kantaṁ sāmaṁ vāyitaṁ. Taṁ me, bhante, bhagavā paṭiggaṇhātu anukampaṁ upādāyā”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Lần thứ hai, Thế Tôn nói với Mahāpajāpati Gotamī:<br>
+<span lang="pi" class="pali">
+Dutiyampi kho bhagavā mahāpajāpatiṁ gotamiṁ etadavoca:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Này Gotami, hãy cúng dường Tăng chúng … và cả Tăng chúng cũng vậy”.<br>
+<span lang="pi" class="pali">
+“saṅghe, gotami, dehi. Saṅghe te dinne ahañceva pūjito bhavissāmi saṅgho cā”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Lần thứ ba, Mahāpajāpati Gotamī bạch Thế Tôn:<br>
+<span lang="pi" class="pali">
+Tatiyampi kho mahāpajāpati gotamī bhagavantaṁ etadavoca:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Bạch Thế Tôn, cặp y mới này do con cắt và dệt … hãy nhận lấy cho con”.<br>
+<span lang="pi" class="pali">
+“idaṁ me, bhante, navaṁ dussayugaṁ bhagavantaṁ uddissa sāmaṁ kantaṁ sāmaṁ vāyitaṁ. Taṁ me, bhante, bhagavā paṭiggaṇhātu anukampaṁ upādāyā”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Lần thứ ba, Thế Tôn nói với Mahāpajāpati Gotamī :<br>
+<span lang="pi" class="pali">
+Tatiyampi kho bhagavā mahāpajāpatiṁ gotamiṁ etadavoca:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Này Gotami, hãy cúng dường Tăng chúng … và cả tăng chúng cũng vậy”.<br>
+<span lang="pi" class="pali">
+“saṅghe, gotami, dehi. Saṅghe te dinne ahañceva pūjito bhavissāmi saṅgho cā”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Khi được nghe nói vậy, Tôn giả Ānanda bạch Thế Tôn:<br>
+<span lang="pi" class="pali">
+Evaṁ vutte, āyasmā ānando bhagavantaṁ etadavoca:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Thế Tôn hãy nhận cặp y mới cho Mahāpajāpati Gotamī!<br>
+<span lang="pi" class="pali">
+“paṭiggaṇhātu, bhante, bhagavā mahāpajāpatiyā gotamiyā navaṁ dussayugaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Bạch Thế Tôn, Mahāpajāpati Gotamī đã giúp ích nhiều cho Thế Tôn, là thúc mẫu, là dưỡng mẫu, đã nuôi dưỡng Thế Tôn, đã cho Thế Tôn bú sữa,<br>
+<span lang="pi" class="pali">
+Bahūpakārā, bhante, mahāpajāpati gotamī bhagavato mātucchā āpādikā posikā khīrassa dāyikā;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+vì rằng sau khi sanh, thân mẫu của Thế Tôn mệnh chung, chính bà đã cho Thế Tôn bú sữa.<br>
+<span lang="pi" class="pali">
+bhagavantaṁ janettiyā kālaṅkatāya thaññaṁ pāyesi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Bạch Thế Tôn, và Thế Tôn cũng giúp ích nhiều cho Mahāpajāpati Gotamī.<br>
+<span lang="pi" class="pali">
+Bhagavāpi, bhante, bahūpakāro mahāpajāpatiyā gotamiyā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Bạch Thế Tôn, chính nhờ Thế Tôn, Mahāpajāpati Gotamī đã quy y Phật, quy Pháp, quy y Tăng.<br>
+<span lang="pi" class="pali">
+Bhagavantaṁ, bhante, āgamma mahāpajāpati gotamī buddhaṁ saraṇaṁ gatā, dhammaṁ saraṇaṁ gatā, saṅghaṁ saraṇaṁ gatā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Bạch Thế Tôn, chính nhờ Thế Tôn, Mahapajapati từ bỏ sát sanh, từ bỏ lấy của không cho, từ bỏ tà hạnh trong các dục, từ bỏ nói láo, từ bỏ đắm say các loại rượu đem lại.<br>
+<span lang="pi" class="pali">
+Bhagavantaṁ, bhante, āgamma mahāpajāpati gotamī pāṇātipātā paṭiviratā adinnādānā paṭiviratā kāmesumicchācārā paṭiviratā musāvādā paṭiviratā surāmerayamajjapamādaṭṭhānā paṭiviratā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Bạch Thế Tôn, chính nhờ Thế Tôn, Mahāpajāpati Gotamī có đầy đủ lòng tịnh tín bất động đối với đức Phật, đầy đủ lòng tịnh tín bất động đối với Pháp, đầy đủ lòng tịnh tín bất động đối với chúng Tăng, đầy đủ các giới luật làm bậc Thánh hoan hỷ.<br>
+<span lang="pi" class="pali">
+Bhagavantaṁ, bhante, āgamma mahāpajāpati gotamī buddhe aveccappasādena samannāgatā, dhamme aveccappasādena samannāgatā, saṅghe aveccappasādena samannāgatā ariyakantehi sīlehi samannāgatā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Bạch Thế Tôn, chính nhờ Thế Tôn, Mahāpajāpati Gotamī không còn nghi ngờ đối với Khổ, không còn nghi ngờ đối với Khổ tập, không còn nghi ngờ đối với Khổ diệt, không còn nghi ngờ đối với Con Ðường đưa đến khổ diệt.<br>
+<span lang="pi" class="pali">
+Bhagavantaṁ, bhante, āgamma mahāpajāpati gotamī dukkhe nikkaṅkhā, dukkhasamudaye nikkaṅkhā, dukkhanirodhe nikkaṅkhā, dukkhanirodhagāminiyā paṭipadāya nikkaṅkhā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Bạch Thế Tôn, Thế Tôn cũng đã giúp ích nhiều cho Mahāpajāpati Gotamī.”<br>
+<span lang="pi" class="pali">
+Bhagavāpi, bhante, bahūpakāro mahāpajāpatiyā gotamiyā”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Thật là như vậy, này Ānanda!<br>
+<span lang="pi" class="pali">
+“Evametaṁ, ānanda.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Thật là như vậy, này Ānanda! Này Ānanda, nếu do nhờ một người, mà một người khác được quy y Phật, quy y Pháp, quy y Tăng, thời này Ānanda, Ta nói rằng người này không có một đền ơn nào xứng đáng đối với người kia về đảnh lễ, đứng đậy, chấp tay, về làm những việc thích hợp và về dâng cúng các sự cúng dường như y, đồ ăn khất thực, sàng tọa, dược phẩm trị bệnh.<br>
+<span lang="pi" class="pali">
+Yaṁ hānanda, puggalo puggalaṁ āgamma buddhaṁ saraṇaṁ gato hoti, dhammaṁ saraṇaṁ gato hoti, saṅghaṁ saraṇaṁ gato hoti, imassānanda, puggalassa iminā puggalena na suppatikāraṁ vadāmi, yadidaṁ—abhivādana-paccuṭṭhāna-añjalikamma-sāmīcikammaṃ-cīvara-piṇḍapāta-senāsana-gilānappaccaya-bhesajja-parikkhārā-nuppadānena.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Nếu do nhờ một người mà một người khác từ bỏ sát sanh, từ bỏ lấy của không cho, từ bỏ tà hạnh trong các dục, từ bỏ nói láo, từ bỏ đắm say các loại rượu men, rượu nấu, thời này Ānanda, Ta nói rằng người này không có một đền ơn nào xứng đáng đối với người kia … dược phẩm trị bệnh.<br>
+<span lang="pi" class="pali">
+Yaṁ hānanda, puggalo puggalaṁ āgamma pāṇātipātā paṭivirato hoti, adinnādānā paṭivirato hoti, kāmesumicchācārā paṭivirato hoti, musāvādā paṭivirato hoti, surāmerayamajjapamādaṭṭhānā paṭivirato hoti, imassānanda, puggalassa iminā puggalena na suppatikāraṁ vadāmi, yadidaṁ—abhivādana-paccuṭṭhāna-añjalikamma-sāmīcikammaṃ-cīvara-piṇḍapāta-senāsana-gilānappaccaya-bhesajja-parikkhārā-nuppadānena.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Ānanda, nếu do nhờ một người mà một người khác đầy đủ tịnh tín bất động đối với Phật, đối với Pháp, đối với Tăng, đầy đủ các giới luật, thời này Ānanda, Ta nói rằng người này không có một đền ơn nào xứng đáng đối với người kia … dược phẩm trị bệnh.<br>
+<span lang="pi" class="pali">
+Yaṁ hānanda, puggalo puggalaṁ āgamma buddhe aveccappasādena samannāgato hoti, dhamme … saṅghe … ariyakantehi sīlehi samannāgato hoti, imassānanda, puggalassa iminā puggalena na suppatikāraṁ vadāmi, yadidaṁ—abhivādana-paccuṭṭhāna-añjalikamma-sāmīcikammaṃ-cīvara-piṇḍapāta-senāsana-gilānappaccaya-bhesajja-parikkhārā-nuppadānena.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Ānanda, nếu do nhờ một người mà một người khác không có nghi ngờ đối với Khổ, không có nghi ngờ đối với Khổ tập, không có nghi ngờ đối với Khổ diệt, không có khi ngờ đối với Con Ðường đưa đến khổ diệt, thời này Ānanda, Ta nói rằng người này không có một đền ơn nào xứng đáng đối với người kia … dược phẩm trị bệnh.<br>
+<span lang="pi" class="pali">
+Yaṁ hānanda, puggalo puggalaṁ āgamma dukkhe nikkaṅkho hoti, dukkhasamudaye nikkaṅkho hoti, dukkhanirodhe nikkaṅkho hoti, dukkhanirodhagāminiyā paṭipadāya nikkaṅkho hoti, imassānanda, puggalassa iminā puggalena na suppatikāraṁ vadāmi, yadidaṁ—abhivādana-paccuṭṭhāna-añjalikamma-sāmīcikammaṃ-cīvara-piṇḍapāta-senāsana-gilānappaccaya-bhesajja-parikkhārā-nuppadānena.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Ānanda, có mười bốn loại cúng dường phân loại theo hạng người. Thế nào là bốn?<br>
+<span lang="pi" class="pali">
+Cuddasa kho panimānanda, pāṭipuggalikā dakkhiṇā. Katamā cuddasa?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Bố thí các đức Như Lai, bậc A-la-hán, Chánh Ðẳng Giác, là cúng dường thứ nhất, phân loại theo hạng người.<br>
+<span lang="pi" class="pali">
+Tathāgate arahante sammāsambuddhe dānaṁ deti—ayaṁ paṭhamā pāṭipuggalikā dakkhiṇā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Bố thí các vị Ðộc Giác Phật, là cúng dường thứ hai, phân loại theo hạng người.<br>
+<span lang="pi" class="pali">
+Paccekasambuddhe dānaṁ deti—ayaṁ dutiyā pāṭipuggalikā dakkhiṇā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Bố thí các bậc A-la-hán, đệ tử Như Lai, là cúng dường thứ ba, phân loại theo hạng người.<br>
+<span lang="pi" class="pali">
+Tathāgatasāvake arahante dānaṁ deti—ayaṁ tatiyā pāṭipuggalikā dakkhiṇā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Bố thí các vị trên con đường chứng quả A-la-hán là cúng dường thứ tư, phân loại theo hạng người.<br>
+<span lang="pi" class="pali">
+Arahattaphalasacchikiriyāya paṭipanne dānaṁ deti—ayaṁ catutthī pāṭipuggalikā dakkhiṇā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Bố thí các vị chứng quả Bất lai, là cúng dường thứ năm, phân loại theo hạng người.<br>
+<span lang="pi" class="pali">
+Anāgāmissa dānaṁ deti—ayaṁ pañcamī pāṭipuggalikā dakkhiṇā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Bố thí các vị trên con đường chứng quả Bất lai là cúng dường thứ sáu, phân loại theo hạng người.<br>
+<span lang="pi" class="pali">
+Anāgāmiphalasacchikiriyāya paṭipanne dānaṁ deti—ayaṁ chaṭṭhī pāṭipuggalikā dakkhiṇā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Bố thí các vị chứng quả Nhất lai là cúng dường thứ bảy, phân loại theo hạng người.<br>
+<span lang="pi" class="pali">
+Sakadāgāmissa dānaṁ deti—ayaṁ sattamī pāṭipuggalikā dakkhiṇā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Bố thí các vị trên con đường chứng quả Nhất lai là cúng dường thứ tám, phân loại theo hạng người.<br>
+<span lang="pi" class="pali">
+Sakadāgāmiphalasacchikiriyāya paṭipanne dānaṁ deti—ayaṁ aṭṭhamī pāṭipuggalikā dakkhiṇā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Bố thí các vị chứng quả Dự lưu là cúng dường thứ chín, phân loại theo hạng người.<br>
+<span lang="pi" class="pali">
+Sotāpanne dānaṁ deti—ayaṁ navamī pāṭipuggalikā dakkhiṇā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Bố thí các vị trên con đường chứng quả Dự lưu là cúng dường thứ mười, phân loại theo hạng người.<br>
+<span lang="pi" class="pali">
+Sotāpattiphalasacchikiriyāya paṭipanne dānaṁ deti—ayaṁ dasamī pāṭipuggalikā dakkhiṇā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Bố thí những vị ngoại học (bahiraka) đã ly tham trong các dục vọng là cúng dường thứ mười một, phân loại theo hạng người.<br>
+<span lang="pi" class="pali">
+Bāhirake kāmesu vītarāge dānaṁ deti—ayaṁ ekādasamī pāṭipuggalikā dakkhiṇā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Bố thí những phàm phu gìn giữ giới luật là cúng dường thứ mười hai, phân loại theo hạng người.<br>
+<span lang="pi" class="pali">
+Puthujjanasīlavante dānaṁ deti—ayaṁ dvādasamī pāṭipuggalikā dakkhiṇā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Bố thí những phàm phu theo ác giới là cúng dường thứ mười ba, phân loại theo hạng người.<br>
+<span lang="pi" class="pali">
+Puthujjanadussīle dānaṁ deti—ayaṁ terasamī pāṭipuggalikā dakkhiṇā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Bố thí các loại bàng sanh là cúng dường thứ mười bốn, phân loại theo hạng người.<br>
+<span lang="pi" class="pali">
+Tiracchānagate dānaṁ deti—ayaṁ cuddasamī pāṭipuggalikā dakkhiṇāti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Tại đây, này Ānanda, sau khi bố thí cho các loại bàng sanh, cúng dường này có hy vọng đem lại trăm phần công đức. Sau khi bố thí cho những phàm phu theo ác giới, cúng dường này có hy vọng đem lại ngàn phần công đức. Sau khi bố thí cho các phàm phu gìn giữ giới luật, cúng dường này có hy vọng đem lại trăm ngàn lần công đức. Sau khi bố thí cho các người ngoại học đã ly tham trong các dục vọng, cúng dường này có hy vọng đem lại trăm ngàn ức lần công đức. Sau khi bố thí cho các vị trên con đường chứng quả Dự lưu, cúng dường này có hy vọng đem lại vô số vô lượng công đức. Còn nói gì đến những vị đã chứng quả Dự lưu? Còn nói gì đến những vị trên con đường chứng quả Nhất lai? Còn nói gì đến những vị đã chứng quả Nhất lai? Còn nói gì đến những vị trên con đường chứng quả Bất lai? Còn nói gì đến những vị đã chứng quả Bất lai? Còn nói gì đến những vị trên con đường chứng quả A-la-hán? Còn nói gì đến những vị đã chứng quả A-la-hán, đệ tử Như Lai? Còn nói gì đến những vị Ðộc Giác Phật? Còn nói gì đến các Như Lai, bậc A-la-hán, Chánh Ðẳng Giác?<br>
+<span lang="pi" class="pali">
+Tatrānanda, tiracchānagate dānaṁ datvā sataguṇā dakkhiṇā pāṭikaṅkhitabbā, puthujjanadussīle dānaṁ datvā sahassaguṇā dakkhiṇā pāṭikaṅkhitabbā, puthujjanasīlavante dānaṁ datvā satasahassaguṇā dakkhiṇā pāṭikaṅkhitabbā, bāhirake kāmesu vītarāge dānaṁ datvā koṭisatasahassaguṇā dakkhiṇā pāṭikaṅkhitabbā, sotāpattiphalasacchikiriyāya paṭipanne dānaṁ datvā asaṅkheyyā appameyyā dakkhiṇā pāṭikaṅkhitabbā, ko pana vādo sotāpanne, ko pana vādo sakadāgāmiphalasacchikiriyāya paṭipanne, ko pana vādo sakadāgāmissa, ko pana vādo anāgāmiphalasacchikiriyāya paṭipanne, ko pana vādo anāgāmissa, ko pana vādo arahattaphalasacchikiriyāya paṭipanne, ko pana vādo arahante, ko pana vādo paccekasambuddhe, ko pana vādo tathāgate arahante sammāsambuddhe.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Ānanda, có bảy loại cúng dường cho Tăng chúng. Thế nào là bảy?<br>
+<span lang="pi" class="pali">
+Satta kho panimānanda, saṅghagatā dakkhiṇā. Katamā satta?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Bố thí cho cả hai Tăng chúng với đức Phật là vị dẫn đầu là cúng dường Tăng chúng thứ nhất.<br>
+<span lang="pi" class="pali">
+Buddhappamukhe ubhatosaṅghe dānaṁ deti—ayaṁ paṭhamā saṅghagatā dakkhiṇā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Bố thí cho cả hai Tăng chúng, sau khi đức Phật đã nhập diệt là cúng dường Tăng chúng thứ hai.<br>
+<span lang="pi" class="pali">
+Tathāgate parinibbute ubhatosaṅghe dānaṁ deti—ayaṁ dutiyā saṅghagatā dakkhiṇā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Bố thí cho chúng Tỷ-kheo Tăng là cúng dường Tăng chúng thứ ba.<br>
+<span lang="pi" class="pali">
+Bhikkhusaṅghe dānaṁ deti—ayaṁ tatiyā saṅghagatā dakkhiṇā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Bố thí cho chúng Tỷ-kheo ni là cúng dường Tăng chúng thứ tư.<br>
+<span lang="pi" class="pali">
+Bhikkhunisaṅghe dānaṁ deti—ayaṁ catutthī saṅghagatā dakkhiṇā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Bố thí và nói rằng: ‘Mong Tăng chúng chỉ định cho tôi một số Tỷ-kheo và Tỷ-kheo ni như vậy’, là cúng dường Tăng chúng thứ năm.<br>
+<span lang="pi" class="pali">
+‘Ettakā me bhikkhū ca bhikkhuniyo ca saṅghato uddissathā’ti dānaṁ deti—ayaṁ pañcamī saṅghagatā dakkhiṇā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Bố thí và nói rằng: ‘Mong rằng Tăng chúng chỉ định cho tôi một số Tỷ-kheo như vậy’, là cúng dường Tăng chúng thứ sáu.<br>
+<span lang="pi" class="pali">
+‘Ettakā me bhikkhū saṅghato uddissathā’ti dānaṁ deti—ayaṁ chaṭṭhī saṅghagatā dakkhiṇā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Bố thí và nói rằng: ‘Mong rằng Tăng chúng chỉ định cho một số Tỷ-kheo ni như vậy’, là cúng dường Tăng chúng thứ bảy.<br>
+<span lang="pi" class="pali">
+‘Ettakā me bhikkhuniyo saṅghato uddissathā’ti dānaṁ deti—ayaṁ sattamī saṅghagatā dakkhiṇā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Nhưng này Ānanda, trong thời gian tương lai sẽ có những hạng chuyển tánh (gotrabhuno), với những áo cà-sa vàng xung quanh cổ, theo ác giới, ác pháp, và cuộc bố thí đối với chúng Tăng theo ác giới.<br>
+<span lang="pi" class="pali">
+Bhavissanti kho panānanda, anāgatamaddhānaṁ gotrabhuno kāsāvakaṇṭhā dussīlā pāpadhammā. Tesu dussīlesu saṅghaṁ uddissa dānaṁ dassanti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Nhưng này Ānanda, khi Ta nói rằng cúng dường cho Tăng chúng là vô số và vô lượng, thời này Ānanda, Ta không có muốn nói rằng bất cứ phương tiện gì, một sự bố thí phân loại theo cá nhân lại có kết quả to lớn hơn đối với cúng dường cho Tăng chúng.<br>
+<span lang="pi" class="pali">
+Tadāpāhaṁ, ānanda, saṅghagataṁ dakkhiṇaṁ asaṅkheyyaṁ appameyyaṁ vadāmi. Na tvevāhaṁ, ānanda, kenaci pariyāyena saṅghagatāya dakkhiṇāya pāṭipuggalikaṁ dānaṁ mahapphalataraṁ vadāmi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Ānanda, có bốn sự thanh tịnh của các loại cúng dường. Thế nào là bốn?<br>
+<span lang="pi" class="pali">
+Catasso kho imā, ānanda, dakkhiṇā visuddhiyo. Katamā catasso?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Ānanda, có loại cúng dường được thanh tịnh bởi người cho, nhưng không bởi người nhận.<br>
+<span lang="pi" class="pali">
+Atthānanda, dakkhiṇā dāyakato visujjhati no paṭiggāhakato.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Ānanda, có loại cúng dường được thanh tịnh bởi người nhận, nhưng không bởi người cho.<br>
+<span lang="pi" class="pali">
+Atthānanda, dakkhiṇā paṭiggāhakato visujjhati no dāyakato.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Ānanda, có loại cúng dường không được thanh tịnh bởi người cho và cũng bởi người nhận.<br>
+<span lang="pi" class="pali">
+Atthānanda, dakkhiṇā neva dāyakato visujjhati no paṭiggāhakato.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Ānanda, có loại cúng dường được thanh tịnh bởi người cho và cũng bởi người nhận.<br>
+<span lang="pi" class="pali">
+Atthānanda, dakkhiṇā dāyakato ceva visujjhati paṭiggāhakato ca.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Và này Ānanda, thế nào là loại cúng dường được thanh tịnh bởi người cho, nhưng không bởi người nhận?<br>
+<span lang="pi" class="pali">
+Kathañcānanda, dakkhiṇā dāyakato visujjhati no paṭiggāhakato?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ở đây, này Ānanda, người cho giữ giới, theo thiện pháp, còn những người nhận theo ác giới, theo ác pháp.<br>
+<span lang="pi" class="pali">
+Idhānanda, dāyako hoti sīlavā kalyāṇadhammo, paṭiggāhakā honti dussīlā pāpadhammā—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Như vậy, này Ānanda, là loại cúng dường được thanh tịnh bởi người cho, nhưng không bởi người nhận.<br>
+<span lang="pi" class="pali">
+evaṁ kho, ānanda, dakkhiṇā dāyakato visujjhati no paṭiggāhakato.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Và này Ānanda, thế nào là loại cúng dường được thanh tịnh bởi người nhận, nhưng không bởi người cho?<br>
+<span lang="pi" class="pali">
+Kathañcānanda, dakkhiṇā paṭiggāhakato visujjhati no dāyakato?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ở đây, này Ānanda, người cho theo ác giới, theo ác pháp, còn những người nhận giữ giới, theo thiện pháp.<br>
+<span lang="pi" class="pali">
+Idhānanda, dāyako hoti dussīlo pāpadhammo, paṭiggāhakā honti sīlavanto kalyāṇadhammā—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Như vậy, này Ānanda, là loại cúng dường được thanh tịnh bởi người nhận, nhưng không bởi người cho.<br>
+<span lang="pi" class="pali">
+evaṁ kho, ānanda, dakkhiṇā paṭiggāhakato visujjhati no dāyakato.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Và này Ānanda, thế nào là loại cúng dường không được thanh tịnh bởi người cho và cũng bởi người nhận?<br>
+<span lang="pi" class="pali">
+Kathañcānanda, dakkhiṇā neva dāyakato visujjhati no paṭiggāhakato?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ở đây, này Ānanda, người cho theo ác giới, theo ác pháp, và người nhận cũng theo ác giới, theo ác pháp.<br>
+<span lang="pi" class="pali">
+Idhānanda, dāyako ca hoti dussīlo pāpadhammo, paṭiggāhakā ca honti dussīlā pāpadhammā—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Như vậy, này Ānanda, là sự cúng dường không được thanh tịnh bởi người cho và cũng bởi người nhận.<br>
+<span lang="pi" class="pali">
+evaṁ kho, ānanda, dakkhiṇā neva dāyakato visujjhati no paṭiggāhakato.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Và này Ānanda, thế nào là loại cúng dường được thanh tịnh bởi người cho và cũng bởi người nhận?<br>
+<span lang="pi" class="pali">
+Kathañcānanda, dakkhiṇā dāyakato ceva visujjhati paṭiggāhakato ca?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ở đây, này Ānanda, người cho giữ giới, theo thiện pháp; và người nhận cũng giữ giới, theo thiện pháp.<br>
+<span lang="pi" class="pali">
+Idhānanda, dāyako ca hoti sīlavā kalyāṇadhammo, paṭiggāhakā ca honti sīlavanto kalyāṇadhammā—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Như vậy, này Ānanda, là sự cúng dường được thanh tịnh bởi người cho và cũng bởi người nhận.<br>
+<span lang="pi" class="pali">
+evaṁ kho, ānanda, dakkhiṇā dāyakato ceva visujjhati paṭiggāhakato ca.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Ānanda, như vậy là bốn sự thanh tịnh của các loại cúng dường.”<br>
+<span lang="pi" class="pali">
+Imā kho, ānanda, catasso dakkhiṇā visuddhiyo”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Thế Tôn thuyết giảng như vậy. Bậc Thiện Thệ sau khi nói như vậy, bậc Ðạo sư lại nói thêm:<br>
+<span lang="pi" class="pali">
+Idamavoca bhagavā. Idaṁ vatvāna sugato athāparaṁ etadavoca satthā:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Ai đầy đủ giới luật,<br>
+Bố thí cho ác giới;<br>
+Vật thí được đúng pháp,<br>
+Với tâm khéo thanh tịnh,<br>
+Với lòng tin vững vàng,<br>
+Vào quả lớn của nghiệp,<br>
+Sự cúng dường như vậy,<br>
+Thanh tịnh bởi người cho.<br>
+<span lang="pi" class="pali">
+“Yo sīlavā dussīlesu dadāti dānaṁ,<br>
+Dhammena laddhaṁ supasannacitto;<br>
+Abhisaddahaṁ kammaphalaṁ uḷāraṁ,<br>
+Sā dakkhiṇā dāyakato visujjhati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ai không giữ giới luật,<br>
+Bố thí cho thiện giới;<br>
+Vật thí không đúng pháp,<br>
+Với tâm không thanh tịnh,<br>
+Lòng tin không vững vàng,<br>
+Vào quả lớn của nghiệp,<br>
+Sự cúng dường như vậy,<br>
+Thanh tịnh bởi người nhận.<br>
+<span lang="pi" class="pali">
+Yo dussīlo sīlavantesu dadāti dānaṁ,<br>
+Adhammena laddhaṁ appasannacitto;<br>
+Anabhisaddahaṁ kammaphalaṁ uḷāraṁ,<br>
+Sā dakkhiṇā paṭiggāhakato visujjhati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ai không giữ giới luật,<br>
+Bố thí cho ác giới;<br>
+Vật thí không đúng pháp,<br>
+Với tâm không thanh tịnh,<br>
+Lòng tin không vững vàng,<br>
+Vào quả lớn của nghiệp,<br>
+Sự cúng dường như vậy<br>
+Cả hai không thanh tịnh.<br>
+<span lang="pi" class="pali">
+Yo dussīlo dussīlesu dadāti dānaṁ,<br>
+Adhammena laddhaṁ appasannacitto;<br>
+Anabhisaddahaṁ kammaphalaṁ uḷāraṁ,<br>
+Na taṁ dānaṁ vipulapphalanti brūmi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ai đầy đủ giới luật,<br>
+Bố thí cho thiện giới;<br>
+Vật thí được đúng pháp,<br>
+Với tâm khéo thanh tịnh,<br>
+Với lòng tin vững vàng,<br>
+Vào quả lớn của nghiệp,<br>
+Ta nói bố thí ấy,<br>
+Chắc chắn có quả lớn.<br>
+<span lang="pi" class="pali">
+Yo sīlavā sīlavantesu dadāti dānaṁ,<br>
+Dhammena laddhaṁ supasannacitto;<br>
+Abhisaddahaṁ kammaphalaṁ uḷāraṁ,<br>
+Taṁ ve dānaṁ vipulapphalanti brūmi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ai xuất ly tham ái,<br>
+Bố thí không tham ái,<br>
+Vật thí được đúng pháp.<br>
+Với tâm khéo thanh tịnh,<br>
+Với lòng tin vững vàng,<br>
+Vào quả lớn của nghiệp,<br>
+Ta nói bố thí ấy,<br>
+Là bố thí tối thượng.”<br>
+<span lang="pi" class="pali">
+Yo vītarāgo vītarāgesu dadāti dānaṁ,<br>
+Dhammena laddhaṁ supasannacitto;<br>
+Abhisaddahaṁ kammaphalaṁ uḷāraṁ,<br>
+Taṁ ve dānaṁ āmisadānānamaggan”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+<span lang="pi" class="vi">
+Dakkhiṇāvibhaṅgasuttaṁ niṭṭhitaṁ dvādasamaṁ.<br>
+</span>
+</p>
+
+
+
+<!-- COPY CONTENT SUTTA Ở ĐÂY -->
+
+
+
+<br>
+<p><p style="text-align: right;font-style: italic;">Hoà Thượng Thích Minh Châu dịch Việt</span></p>
+
+
+
+
+
+
+
+
+</section>  <!-- End English and Pali -->
+<div id="nextprev"><a id="previous-sutta" href="./mn141.html#content"></a><a id="next-sutta" href="./mn143.html#content"></a></div>
+</div>  <!--End Content -->
+</div>  <!-- End Page -->
+
+
+
+
+
+
+<footer>
+					 <!-- End bottom links -->
+</footer>
+
+
+ 
+ <!-- Scripts -->
+
+ <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      if (typeof enablePaliLookup === "function") {
+        enablePaliLookup();
+      } else {
+        console.error("enablePaliLookup is not defined");
+      }
+    });
+  </script>
+
+ <script>
+ // Script to open and close sidebar
+ 	function w3_open() {
+ 	document.getElementById("mySidebar").style.display = "block";
+ 	}
+ 		function w3_close() {
+ 		document.getElementById("mySidebar").style.display = "none";
+ 	}
+ </script>
+ <script>
+ 		var app = document.getElementsByTagName("BODY")[0];
+ 		if (localStorage.lightMode == "dark") {
+ 			app.setAttribute("light-mode", "dark");
+ 	}
+ </script>
+ 
+ <script>
+ 		function toggle_light_mode() {
+ 			var app = document.getElementsByTagName("BODY")[0];
+ 				if (localStorage.lightMode == "dark") {
+ 			localStorage.lightMode = "light";
+ 			app.setAttribute("light-mode", "light");
+ 		} else {
+ 					localStorage.lightMode = "dark";
+ 					app.setAttribute("light-mode", "dark");
+ 	}
+ 		}
+ 
+ 		window.addEventListener("storage", function () {
+ 			if (localStorage.lightMode == "dark") {
+ 				app.setAttribute("light-mode", "dark");
+ 				} else {
+ 				app.setAttribute("light-mode", "light");
+ 		}
+ 		}, false);
+ 
+ </script>
+ <script src="../js/footer.js"></script><script src="../js/dpd_deconstructor.js"></script><script src="../js/dpd_ebts.js"></script><script src="../js/dpd_i2h.js"></script>
+ <script src="/sw.js"></script>
+ </body>
+ </html>

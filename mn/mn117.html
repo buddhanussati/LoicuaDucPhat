@@ -1,0 +1,1227 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+ 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+ 	<link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+ 	<meta name="viewport" content="width=device-width, initial-scale=1">
+		<!-- Loading manifest -->
+	<link rel="manifest" href="../manifest.json">
+ 	<!-- Loading main and menu stylesheets -->
+ 	<link rel="stylesheet" href="../css/w3.css">
+ 	<link rel="stylesheet" href="../css/css.css">
+ 	<link rel="stylesheet" href="../css/menu.css">
+ 	<script src="../js/jquery-1.10.2.min.js"></script>
+ 	<script src="../js/controlpanel.js"></script>
+ 	<script src="../js/mousetrap.min.js"></script>
+    <script src="../js/pali-lookup-standalone.js"></script>
+
+ <script src="../js/suttaFiles.js"></script>
+<script>
+ // Script to open random Sutta
+ function openRandomSutta() {
+  const randomIndex = Math.floor(Math.random() * suttaFiles.length);
+  const selectedFile = suttaFiles[randomIndex];
+
+  // Get root path of your site 
+  const currentPath = location.pathname;
+  const rootPath = currentPath.split("/").slice(0, -2).join("/") + "/";
+
+  // Redirect to the correct file
+  window.location.href = rootPath + selectedFile;
+}
+</script>
+
+
+</head>
+ <body class="container">
+ <div class="header-background">
+ <!-- Header -->
+ <div class="w3-header w3-content w3-padding w3-left-align bwcontainer">
+ 	<div class="centered">
+ 		<button class="light-mode-button" aria-label="Bật Chế Độ Sáng" onclick="toggle_light_mode()">
+ 			<span></span>
+ 			<span></span>
+ 		</button>
+ 		<span class="box-lbl">Sáng/Tối</span>
+ 	</div> <!-- Centered -->
+ 		<a href="../home/index.html" id="bwlogo"><img src="../images/headerlogo.png" alt="Logo Lời Của Đức Phật" class="w3-image"></a>
+ 		<div class="w3-bar bwcontainer">
+ 			<div id="searchlinks">
+ 			<a href="../home/visearch.html"><span class="w3-bar-item"><i class="fa fa-search"></i>&nbsp;Tìm Tiếng Việt</span></a>
+ 			<a href="../home/palisearch.html"><span class="w3-bar-item"><i class="fa fa-search"></i>&nbsp;Tìm Tiếng Pali</span></a>
+ 			</div><!-- End Searchlinks div -->
+ 			<div class="help"><span><a href="../home/help.html"><img src="../images/help_icon.png" title="Trợ Giúp" alt="Help"></a></span></div>
+ 		</div> <!-- End w3-bar bwcontainer --> 	</div> <!-- End w3-header w3-content w3-padding w3-left-align bwcontainer -->
+ </div> <!-- End header-background -->
+ <!-- Top menu -->
+
+ <div class="w3-main w3-white bwcontainer2">
+ 	<div class="w3-button w3-padding-8 w3-left w3-hide-large" onclick="w3_open()">☰</div>
+ 		<div id="navbar" class="w3-hide-small w3-hide-medium bwcontainer3">
+ 			<ul id="css3menu0">
+ 				<li class="topfirst" id="home"><a href="../home/index.html" class="w3-hide-small">Trang Chủ</a></li>
+  				<li class="topmenu" id="dn"><a href="../dn/dn.html" class="pressed w3-hide-small">Trường Bộ Kinh</a></li>
+ 				<li class="topmenu" id="mn"><a href="../mn/mn.html" class="w3-hide-small">Trung Bộ Kinh</a></li>
+ 				<li class="topmenu" id="sn"><a href="../sn/sn.html" class="w3-hide-small"><i class="fa fa-caret-down"></i>&nbsp;Tương Ưng Bộ Kinh</a>
+ 					<ul>
+ 						<li><a href="../sn/sn01.html" class="w3-hide-small">Tập I - Thiên Có Kệ</a></li>
+ 						<li><a href="../sn/sn02.html" class="w3-hide-small">Tập II - Thiên Nhân Duyên</a></li>
+ 						<li><a href="../sn/sn03.html" class="w3-hide-small">Tập III - Thiên Uẩn</a></li>
+ 						<li><a href="../sn/sn04.html" class="w3-hide-small">Tập IV - Thiên Sáu Xứ</a></li>
+ 						<li><a href="../sn/sn05.html" class="w3-hide-small">Tập V - Thiên Ðại Phẩm</a></li>
+ 					</ul>
+ 				<li class="topmenu" id="an"><a href="../an/an.html" class="w3-hide-small"><i class="fa fa-caret-down"></i>&nbsp;Tăng Chi Bộ Kinh</a>
+ 					<ul>
+ 						<li><a href="../an/an1.html" class="w3-hide-small">Chương Một Pháp</a></li>
+ 						<li><a href="../an/an2.html" class="w3-hide-small">Chương Hai Pháp</a></li>
+ 						<li><a href="../an/an3.html" class="w3-hide-small">Chương Ba Pháp</a></li>
+ 						<li><a href="../an/an4.html" class="w3-hide-small">Chương Bốn Pháp</a></li>
+ 						<li><a href="../an/an5.html" class="w3-hide-small">Chương Năm Pháp</a></li>
+ 						<li><a href="../an/an6.html" class="w3-hide-small">Chương Sáu Pháp</a></li>
+ 						<li><a href="../an/an7.html" class="w3-hide-small">Chương Bảy Pháp</a></li>
+ 						<li><a href="../an/an8.html" class="w3-hide-small">Chương Tám Pháp</a></li>
+ 						<li><a href="../an/an9.html" class="w3-hide-small">Chương Chín Pháp</a></li>
+ 						<li><a href="../an/an10.html" class="w3-hide-small">Chương Mười Pháp</a></li>
+ 						<li><a href="../an/an11.html" class="w3-hide-small">Chương Mười Một Pháp</a></li>
+ 					</ul>
+ 				</li>
+ 				<li class="topmenu" id="kn"><a href="../kn/kn.html" class="w3-hide-small"><i class="fa fa-caret-down"></i>&nbsp;Tiểu Bộ Kinh</a>
+ 					<ul>
+ 						<li><a href="../kp/kp.html" class="w3-hide-small">Kinh Tiểu Tụng</a></li>
+ 						<li><a href="../dhp/dhp.html" class="w3-hide-small">Kinh Pháp Cú</a></li>
+ 						<li><a href="../snp/snp.html" class="w3-hide-small">Kinh Tập</a></li>
+ 						<li><a href="../ud/ud.html" class="w3-hide-small">Kinh Phật Tự Thuyết</a></li>
+ 						<li><a href="../it/it.html" class="w3-hide-small">Kinh Phật Thuyết Như Vậy</a></li>
+ 						<li><a href="../tha/tha.html" class="w3-hide-small">Trưởng Lão Tăng Kệ</a></li>
+ 						<li><a href="../thi/thi.html" class="w3-hide-small">Trưởng Lão Ni Kệ</a></li>
+ 					</ul>
+ 				</li>
+				<li class="toplast" id="rd"><a href="../rd/rd.html" class="w3-hide-small"></i>Kinh Ngẫu Nhiên Theo Nhóm</a>
+ 					</ul>
+ 				</li>
+ 			</ul>
+ 			</div>
+ 		</div> <!--navbar-->
+
+<!-- Sidebar (hidden by default) -->
+ <nav class="w3-sidebar w3-bar-block w3-card w3-border w3-top w3-animate-left w3-hide-large" id="mySidebar">
+ 	<a href="javascript:void(0)" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-times fa-2x red-color"></i>&nbsp;&nbsp;&nbsp;Close</a><!-- Hides the sidebar when clicked -->
+ 		<div class="w3-bar-block w3-white">
+ 			<a href="../home/index.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-home fa-lg"></i>&nbsp;&nbsp;&nbsp;Home</a>
+ 			<a href="../guide/guide.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Guide</a>
+ 			<a href="../dn/dn.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Trường Bộ Kinh</a>
+ 			<a href="../mn/mn.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Trung Bộ Kinh</a>
+ 			<a href="../sn/sn.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Tương Ưng Bộ Kinh</a>
+ 			<a href="../an/an.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Tăng Chi Bộ Kinh
+ 			<a href="../kn/kn.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Tiểu Bộ Kinh</a>
+			<a href="../rd/rd.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>Kinh Ngẫu Nhiên Theo Nhóm</a>
+ 		</div>
+ </nav>
+ 
+ 
+ 
+   <!-- !PAGE CONTENT! --> 
+<div class="w3-main w3-content w3-padding w3-left-align bwcontainer4">
+<div id="content">
+<h2>Majjhima Nikāya - Trung Bộ Kinh</h2>
+<h5><span style="font-style: italic;">Hoà Thượng Thích Minh Châu dịch Việt</span></h5>
+
+</div>
+
+<br>
+ 	<title>        Trung Bộ 117          </title>
+
+<p lang="vi" class="vi"; style="text-align: center">
+Trung Bộ 117<br>
+<span lang="pi" class="pali">
+Majjhima Nikāya 117<br>
+</span>
+</p>
+
+
+
+<p lang="vi" class="vi"; style="text-align: center">
+Kinh Bốn Mươi Đại Pháp<br>
+<span lang="pi" class="pali">
+Mahācattārīsakasutta<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Như vầy tôi nghe.<br>
+<span lang="pi" class="pali">
+Evaṁ me sutaṁ—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Một thời Thế Tôn ở Sāvatthī (Xá-vệ), Jetavana (Kỳ-đà Lâm), tại tinh xá ông Anāthapiṇḍika (Cấp Cô Ðộc). Ở đấy, Thế Tôn gọi các Tỷ-kheo:<br>
+<span lang="pi" class="pali">
+ekaṁ samayaṁ bhagavā sāvatthiyaṁ viharati jetavane anāthapiṇḍikassa ārāme. Tatra kho bhagavā bhikkhū āmantesi:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Này các Tỷ-kheo”.<br>
+<span lang="pi" class="pali">
+“bhikkhavo”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Bạch Thế Tôn”. Các vị Tỷ-kheo ấy vâng đáp Thế Tôn. Thế Tôn nói như sau:<br>
+<span lang="pi" class="pali">
+“Bhadante”ti te bhikkhū bhagavato paccassosuṁ. Bhagavā etadavoca:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Này các Tỷ-kheo, Ta sẽ giảng cho các Ông Thánh chánh định cùng với các cận duyên và các tư trợ. Hãy lắng tai nghe và suy nghiệm kỹ, Ta sẽ giảng”.<br>
+<span lang="pi" class="pali">
+“ariyaṁ vo, bhikkhave, sammāsamādhiṁ desessāmi saupanisaṁ saparikkhāraṁ. Taṁ suṇātha, sādhukaṁ manasi karotha, bhāsissāmī”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Thưa vâng, bạch Thế Tôn”. Các vị Tỷ-kheo ấy vâng đáp Thế Tôn. Thế Tôn nói như sau:<br>
+<span lang="pi" class="pali">
+“Evaṁ, bhante”ti kho te bhikkhū bhagavato paccassosuṁ. Bhagavā etadavoca:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Này các Tỷ-kheo, thế nào là Thánh chánh định với các cận duyên và các tư trợ?<br>
+<span lang="pi" class="pali">
+“Katamo ca, bhikkhave, ariyo sammāsamādhi saupaniso saparikkhāro?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Chính là chánh kiến, chánh tư duy, chánh ngữ, chánh nghiệp, chánh mạng, chánh tinh tấn, chánh niệm.<br>
+<span lang="pi" class="pali">
+Seyyathidaṁ—sammādiṭṭhi, sammāsaṅkappo, sammāvācā, sammākammanto, sammāājīvo, sammāvāyāmo, sammāsati;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này các Tỷ-kheo, phàm có nhất tâm nào (ekaggata) được tư trợ với bảy chi phần này, này các Tỷ-kheo, như vậy gọi là Thánh chánh định cùng với các cận duyên và các tư trợ.<br>
+<span lang="pi" class="pali">
+yā kho, bhikkhave, imehi sattahaṅgehi cittassa ekaggatā parikkhatā—ayaṁ vuccati, bhikkhave, ariyo sammāsamādhi saupaniso itipi, saparikkhāro itipi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ở đây, này các Tỷ-kheo, chánh kiến đi hàng đầu.<br>
+<span lang="pi" class="pali">
+Tatra, bhikkhave, sammādiṭṭhi pubbaṅgamā hoti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Và như thế nào, này các Tỷ-kheo, là chánh kiến đi hàng đầu?<br>
+<span lang="pi" class="pali">
+Kathañca, bhikkhave, sammādiṭṭhi pubbaṅgamā hoti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Tuệ tri tà kiến là tà kiến, tuệ tri chánh kiến là chánh kiến. Như vậy là chánh kiến của vị ấy.<br>
+<span lang="pi" class="pali">
+Micchādiṭṭhiṁ ‘micchādiṭṭhī’ti pajānāti, sammādiṭṭhiṁ ‘sammādiṭṭhī’ti pajānāti—sāssa hoti sammādiṭṭhi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Và này các Tỷ-kheo, thế nào là tà kiến?<br>
+<span lang="pi" class="pali">
+Katamā ca, bhikkhave, micchādiṭṭhi?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Không có bố thí, không có cúng dường, không có tế tự, không có quả báo các nghiệp thiện ác, không có đời này, không có đời khác, không có mẹ, không có cha, không có các loại hóa sanh; ở đời không có các vị Sa-môn, Bà-la-môn, chánh hướng, chánh hạnh, sau khi với thượng trí tự mình chứng đạt lại tuyên bố lên’.<br>
+<span lang="pi" class="pali">
+‘Natthi dinnaṁ, natthi yiṭṭhaṁ, natthi hutaṁ, natthi sukatadukkaṭānaṁ kammānaṁ phalaṁ vipāko, natthi ayaṁ loko, natthi paro loko, natthi mātā, natthi pitā, natthi sattā opapātikā, natthi loke samaṇabrāhmaṇā sammaggatā sammāpaṭipannā ye imañca lokaṁ parañca lokaṁ sayaṁ abhiññā sacchikatvā pavedentī’ti—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Như vậy, này các Tỷ-kheo, là tà kiến.<br>
+<span lang="pi" class="pali">
+ayaṁ, bhikkhave, micchādiṭṭhi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Và này các Tỷ-kheo, thế nào là chánh kiến?<br>
+<span lang="pi" class="pali">
+Katamā ca, bhikkhave, sammādiṭṭhi?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Chánh kiến, này các Tỷ-kheo, Ta nói có hai loại.<br>
+<span lang="pi" class="pali">
+Sammādiṭṭhimpahaṁ, bhikkhave, dvāyaṁ vadāmi—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này các Tỷ-kheo, có loại chánh kiến hữu lậu, thuộc phước báo, đưa đến quả sanh y (upadhivepakka);<br>
+<span lang="pi" class="pali">
+atthi, bhikkhave, sammādiṭṭhi sāsavā puññabhāgiyā upadhivepakkā;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+có loại chánh kiến, này các Tỷ-kheo, thuộc bậc Thánh, vô lậu, siêu thế, thuộc đạo chi (magganga).<br>
+<span lang="pi" class="pali">
+atthi, bhikkhave, sammādiṭṭhi ariyā anāsavā lokuttarā maggaṅgā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Và này các Tỷ-kheo, thế nào là chánh kiến hữu lậu, thuộc phước báo, đưa đến quả sanh y?<br>
+<span lang="pi" class="pali">
+Katamā ca, bhikkhave, sammādiṭṭhi sāsavā puññabhāgiyā upadhivepakkā?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Có bố thí, có cúng dường, có tế tự, có quả báo các nghiệp thiện ác, có đời này, có đời khác, có mẹ, có cha, có các loại hóa sanh; ở đời có các vị Sa-môn, Bà-la-môn, chánh hướng, chánh hạnh, sau khi với thượng trí tự mình chứng đạt đời này và đời khác lại tuyên bố lên’.<br>
+<span lang="pi" class="pali">
+‘Atthi dinnaṁ, atthi yiṭṭhaṁ, atthi hutaṁ, atthi sukatadukkaṭānaṁ kammānaṁ phalaṁ vipāko, atthi ayaṁ loko, atthi paro loko, atthi mātā, atthi pitā, atthi sattā opapātikā, atthi loke samaṇabrāhmaṇā sammaggatā sammāpaṭipannā ye imañca lokaṁ parañca lokaṁ sayaṁ abhiññā sacchikatvā pavedentī’ti—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Như vậy, này các Tỷ-kheo, là chánh kiến hữu lậu, thuộc phước báo, đưa đến quả sanh y.<br>
+<span lang="pi" class="pali">
+ayaṁ, bhikkhave, sammādiṭṭhi sāsavā puññabhāgiyā upadhivepakkā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Và này các Tỷ-kheo, thế nào là chánh kiến thuộc bậc Thánh, vô lậu, siêu thế, thuộc đạo chi?<br>
+<span lang="pi" class="pali">
+Katamā ca, bhikkhave, sammādiṭṭhi ariyā anāsavā lokuttarā maggaṅgā?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Phàm cái gì, này các Tỷ-kheo, thuộc trí tuệ, tuệ căn, tuệ lực, trạch pháp giác chi, chánh kiến, đạo chi của một vị tu tập Thánh đạo, thành thục trong Thánh đạo, có vô lậu tâm, có Thánh tâm.<br>
+<span lang="pi" class="pali">
+Yā kho, bhikkhave, ariyacittassa anāsavacittassa ariyamaggasamaṅgino ariyamaggaṁ bhāvayato paññā paññindriyaṁ paññābalaṁ dhammavicayasambojjhaṅgo sammādiṭṭhi maggaṅgaṁ—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Chánh kiến như vậy, này các Tỷ-kheo, thuộc bậc Thánh, vô lậu, siêu thế, thuộc đạo chi.<br>
+<span lang="pi" class="pali">
+ayaṁ vuccati, bhikkhave, sammādiṭṭhi ariyā anāsavā lokuttarā maggaṅgā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ai tinh tấn đoạn trừ tà kiến, thành tựu chánh kiến; như vậy là chánh tinh tấn của vị ấy.<br>
+<span lang="pi" class="pali">
+So micchādiṭṭhiyā pahānāya vāyamati, sammādiṭṭhiyā, upasampadāya, svāssa hoti sammāvāyāmo.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ai chánh niệm đoạn trừ tà kiến, chánh niệm đạt được và an trú chánh kiến; như vậy là chánh niệm của vị ấy.<br>
+<span lang="pi" class="pali">
+So sato micchādiṭṭhiṁ pajahati, sato sammādiṭṭhiṁ upasampajja viharati, sāssa hoti sammāsati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Như vậy ba pháp này chạy theo, chạy vòng theo chánh kiến, tức là chánh kiến, chánh tinh tấn, chánh niệm.<br>
+<span lang="pi" class="pali">
+Itiyime tayo dhammā sammādiṭṭhiṁ anuparidhāvanti anuparivattanti, seyyathidaṁ—sammādiṭṭhi, sammāvāyāmo, sammāsati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ở đây, này các Tỷ-kheo, chánh kiến đi hàng đầu.<br>
+<span lang="pi" class="pali">
+Tatra, bhikkhave, sammādiṭṭhi pubbaṅgamā hoti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Và như thế nào, này các Tỷ-kheo, là chánh kiến đi hàng đầu?<br>
+<span lang="pi" class="pali">
+Kathañca, bhikkhave, sammādiṭṭhi pubbaṅgamā hoti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Tuệ tri tà tư duy là tà tư duy, tuệ tri chánh tư duy là chánh tư duy, như vậy là chánh kiến của các vị ấy.<br>
+<span lang="pi" class="pali">
+Micchāsaṅkappaṁ ‘micchāsaṅkappo’ti pajānāti, sammāsaṅkappaṁ ‘sammāsaṅkappo’ti pajānāti, sāssa hoti sammādiṭṭhi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Và này các Tỷ-kheo, thế nào là tà tư duy?<br>
+<span lang="pi" class="pali">
+Katamo ca, bhikkhave, micchāsaṅkappo?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Dục tư duy, sân tư duy, hại tư duy, này các Tỷ-kheo, như vậy là tà tư duy.<br>
+<span lang="pi" class="pali">
+Kāmasaṅkappo, byāpādasaṅkappo, vihiṁsāsaṅkappo—ayaṁ, bhikkhave, micchāsaṅkappo.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Và này các Tỷ-kheo, thế nào là chánh tư duy?<br>
+<span lang="pi" class="pali">
+Katamo ca, bhikkhave, sammāsaṅkappo?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Chánh tư duy, này các Tỷ-kheo, Ta nói có hai loại: có loại chánh tư duy,<br>
+<span lang="pi" class="pali">
+Sammāsaṅkappampahaṁ, bhikkhave, dvāyaṁ vadāmi—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+này các Tỷ-kheo, hữu lậu, thuộc phước báo, đưa đến quả sanh y;<br>
+<span lang="pi" class="pali">
+atthi, bhikkhave, sammāsaṅkappo sāsavo puññabhāgiyo upadhivepakko;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+có loại chánh tư duy, này các Tỷ-kheo, thuộc bậc Thánh vô lậu, siêu thế, thuộc đạo chi.<br>
+<span lang="pi" class="pali">
+atthi, bhikkhave, sammāsaṅkappo ariyo anāsavo lokuttaro maggaṅgo.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Và này các Tỷ-kheo, thế nào là chánh tư duy hữu lậu, thuộc phước báo, đưa đến quả sanh y?<br>
+<span lang="pi" class="pali">
+Katamo ca, bhikkhave, sammāsaṅkappo sāsavo puññabhāgiyo upadhivepakko?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ly dục tư duy, vô sân tư duy, bất hại tư duy,<br>
+<span lang="pi" class="pali">
+Nekkhammasaṅkappo, abyāpādasaṅkappo, avihiṁsāsaṅkappo:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘như vậy, này các Tỷ-kheo là chánh tư duy, hữu lậu, thuộc phước báo, đưa đến quả sanh y.’<br>
+<span lang="pi" class="pali">
+‘ayaṁ, bhikkhave, sammāsaṅkappo sāsavo puññabhāgiyo upadhivepakko’.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Và này các Tỷ-kheo, thế nào là chánh tư duy, thuộc bậc Thánh, vô lậu, siêu thế, thuộc đạo chi?<br>
+<span lang="pi" class="pali">
+Katamo ca, bhikkhave, sammāsaṅkappo ariyo anāsavo lokuttaro maggaṅgo?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Phàm cái gì này các Tỷ-kheo thuộc suy tư, tầm cầu, tư duy, một ngữ hành do sự hoàn toàn chú tâm chuyên tâm của một vị tu tập Thánh đạo, thành thục trong Thánh đạo, có vô lậu tâm, có Thánh tâm;<br>
+<span lang="pi" class="pali">
+Yo kho, bhikkhave, ariyacittassa anāsavacittassa ariyamaggasamaṅgino ariyamaggaṁ bhāvayato takko vitakko saṅkappo appanā byappanā cetaso abhiniropanā vacīsaṅkhāro—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+chánh tư duy như vậy, này các Tỷ-kheo, thuộc bậc Thánh, vô lậu, siêu thế, thuộc đạo chi.<br>
+<span lang="pi" class="pali">
+ayaṁ, bhikkhave, sammāsaṅkappo ariyo anāsavo lokuttaro maggaṅgo.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ai tinh tấn đoạn trừ tà tư duy, thành tựu chánh tư duy, như vậy là chánh tinh tấn của vị ấy.<br>
+<span lang="pi" class="pali">
+So micchāsaṅkappassa pahānāya vāyamati, sammāsaṅkappassa upasampadāya, svāssa hoti sammāvāyāmo.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ai chánh niệm đoạn trừ tà tư duy, chánh niệm đạt được và an trú chánh tư duy, như vậy là chánh niệm của vị ấy.<br>
+<span lang="pi" class="pali">
+So sato micchāsaṅkappaṁ pajahati, sato sammāsaṅkappaṁ upasampajja viharati; sāssa hoti sammāsati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Như vậy ba pháp này chạy theo, chạy vòng theo chánh tư duy, tức là chánh kiến, chánh tinh tấn, chánh niệm.<br>
+<span lang="pi" class="pali">
+Itiyime tayo dhammā sammāsaṅkappaṁ anuparidhāvanti anuparivattanti, seyyathidaṁ—sammādiṭṭhi, sammāvāyāmo, sammāsati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ở đây, này các Tỷ-kheo, chánh kiến đi hàng đầu.<br>
+<span lang="pi" class="pali">
+Tatra, bhikkhave, sammādiṭṭhi pubbaṅgamā hoti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Và như thế nào, này các Tỷ-kheo, chánh kiến đi hàng đầu?<br>
+<span lang="pi" class="pali">
+Kathañca, bhikkhave, sammādiṭṭhi pubbaṅgamā hoti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Tuệ tri tà ngữ là ‘tà ngữ’, tuệ tri chánh ngữ là ‘chánh ngữ’; như vậy là chánh kiến của vị ấy.<br>
+<span lang="pi" class="pali">
+Micchāvācaṁ ‘micchāvācā’ti pajānāti, sammāvācaṁ ‘sammāvācā’ti pajānāti; sāssa hoti sammādiṭṭhi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Và này các Tỷ-kheo, thế nào là tà ngữ?<br>
+<span lang="pi" class="pali">
+Katamā ca, bhikkhave, micchāvācā?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vọng ngữ, nói hai lưỡi, ác khẩu, nói lời phù phiếm;<br>
+<span lang="pi" class="pali">
+Musāvādo, pisuṇā vācā, pharusā vācā, samphappalāpo—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+như vậy, này các Tỷ-kheo, là tà ngữ.<br>
+<span lang="pi" class="pali">
+ayaṁ, bhikkhave, micchāvācā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Và này các Tỷ-kheo, thế nào là chánh ngữ?<br>
+<span lang="pi" class="pali">
+Katamā ca, bhikkhave, sammāvācā?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Chánh ngữ, này các Tỷ-kheo, Ta nói có hai loại:<br>
+<span lang="pi" class="pali">
+Sammāvācampahaṁ, bhikkhave, dvāyaṁ vadāmi—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+có loại chánh ngữ, này các Tỷ-kheo, hữu lậu, thuộc phước báo, đưa đến quả sanh y;<br>
+<span lang="pi" class="pali">
+atthi, bhikkhave, sammāvācā sāsavā puññabhāgiyā upadhivepakkā;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+có loại chánh ngữ, này các Tỷ-kheo, thuộc bậc Thánh, vô lậu, siêu thế, thuộc đạo chi.<br>
+<span lang="pi" class="pali">
+atthi, bhikkhave, sammāvācā ariyā anāsavā lokuttarā maggaṅgā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Và này các Tỷ-kheo, thế nào là chánh ngữ hữu lậu, thuộc phước báo, đưa đến quả sanh y?<br>
+<span lang="pi" class="pali">
+Katamā ca, bhikkhave, sammāvācā sāsavā puññabhāgiyā upadhivepakkā?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Viễn ly vọng ngữ, viễn ly nói hai lưỡi, viễn ly ác khẩu, viễn ly phù phiếm ngữ;<br>
+<span lang="pi" class="pali">
+Musāvādā veramaṇī, pisuṇāya vācāya veramaṇī, pharusāya vācāya veramaṇī, samphappalāpā veramaṇī—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+như vậy, này các Tỷ-kheo, là chánh ngữ hữu lậu thuộc phước báo, đưa đến quả sanh y.<br>
+<span lang="pi" class="pali">
+ayaṁ, bhikkhave, sammāvācā sāsavā puññabhāgiyā upadhivepakkā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Và này các Tỷ-kheo, thế nào là chánh ngữ thuộc bậc Thánh, vô lậu, siêu thế, thuộc đạo chi?<br>
+<span lang="pi" class="pali">
+Katamā ca, bhikkhave, sammāvācā ariyā anāsavā lokuttarā maggaṅgā?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Cái gì, này các Tỷ-kheo, thuộc về từ bỏ, từ đoạn, từ khước, viễn ly bốn ngữ ác hành, đối với một vị tu tập Thánh đạo, thuần thục trong Thánh đạo, có vô lậu tâm, có Hiền Thánh tâm;<br>
+<span lang="pi" class="pali">
+Yā kho, bhikkhave, ariyacittassa anāsavacittassa ariyamaggasamaṅgino ariyamaggaṁ bhāvayato catūhi vacīduccaritehi ārati virati paṭivirati veramaṇī—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+như vậy, này các Tỷ-kheo là chánh ngữ thuộc bậc Thánh, vô lậu, siêu thế, thuộc đạo chi.<br>
+<span lang="pi" class="pali">
+ayaṁ, bhikkhave, sammāvācā ariyā anāsavā lokuttarā maggaṅgā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ai tinh tấn đoạn trừ tà ngữ, thành tựu chánh ngữ; như vậy là chánh tinh tấn của vị ấy.<br>
+<span lang="pi" class="pali">
+So micchāvācāya pahānāya vāyamati, sammāvācāya upasampadāya; svāssa hoti sammāvāyāmo.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ai chánh niệm đoạn trừ tà ngữ, chánh niệm đạt được và an trú chánh ngữ; như vậy là chánh niệm của vị ấy.<br>
+<span lang="pi" class="pali">
+So sato micchāvācaṁ pajahati, sato sammāvācaṁ upasampajja viharati; sāssa hoti sammāsati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Như vậy, ba pháp này chạy theo, chạy vòng theo chánh ngữ, tức là chánh kiến, chánh tinh tấn, chánh niệm.<br>
+<span lang="pi" class="pali">
+Itiyime tayo dhammā sammāvācaṁ anuparidhāvanti anuparivattanti, seyyathidaṁ—sammādiṭṭhi, sammāvāyāmo, sammāsati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ở đây, này các Tỷ-kheo, chánh kiến đi hàng đầu.<br>
+<span lang="pi" class="pali">
+Tatra, bhikkhave, sammādiṭṭhi pubbaṅgamā hoti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Và như thế nào, này các Tỷ-kheo, là chánh kiến đi hàng đầu?<br>
+<span lang="pi" class="pali">
+Kathañca, bhikkhave, sammādiṭṭhi pubbaṅgamā hoti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Tuệ tri tà nghiệp là tà nghiệp, tuệ tri chánh nghiệp là chánh nghiệp; như vậy là chánh kiến của vị ấy.<br>
+<span lang="pi" class="pali">
+Micchākammantaṁ ‘micchākammanto’ti pajānāti, sammākammantaṁ ‘sammākammanto’ti pajānāti; sāssa hoti sammādiṭṭhi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Và này các Tỷ-kheo, thế nào là tà nghiệp?<br>
+<span lang="pi" class="pali">
+Katamo ca, bhikkhave, micchākammanto?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Sát sanh, lấy của không cho, tà hạnh trong các dục;<br>
+<span lang="pi" class="pali">
+Pāṇātipāto, adinnādānaṁ, kāmesumicchācāro—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+như vậy, này các Tỷ-kheo, là tà nghiệp.<br>
+<span lang="pi" class="pali">
+ayaṁ, bhikkhave, micchākammanto.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Và này các Tỷ-kheo, thế nào là chánh nghiệp?<br>
+<span lang="pi" class="pali">
+Katamo ca, bhikkhave, sammākammanto?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Chánh nghiệp, này các Tỷ-kheo, Ta nói có hai loại:<br>
+<span lang="pi" class="pali">
+Sammākammantampahaṁ, bhikkhave, dvāyaṁ vadāmi—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Có loại chánh nghiệp, này các Tỷ-kheo, hữu lậu, thuộc phước báo, đưa đến quả sanh y;<br>
+<span lang="pi" class="pali">
+atthi, bhikkhave, sammākammanto sāsavo puññabhāgiyo upadhivepakko;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+có loại chánh nghiệp, này các Tỷ-kheo, thuộc bậc Thánh, vô lậu, siêu thế, thuộc đạo chi.<br>
+<span lang="pi" class="pali">
+atthi, bhikkhave, sammākammanto ariyo anāsavo lokuttaro maggaṅgo.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Và này các Tỷ-kheo, thế nào là chánh nghiệp thuộc hữu lậu thuộc phước báo, đưa đến quả sanh y?<br>
+<span lang="pi" class="pali">
+Katamo ca, bhikkhave, sammākammanto sāsavo puññabhāgiyo upadhivepakko?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Viễn ly sát sanh, viễn ly lấy của không cho, viễn ly tà hạnh trong các dục;<br>
+<span lang="pi" class="pali">
+Pāṇātipātā veramaṇī, adinnādānā veramaṇī, kāmesumicchācārā veramaṇī—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+như vậy, này các Tỷ-kheo, là chánh nghiệp, thuộc hữu lậu thuộc phước báo, đưa đến quả sanh y.<br>
+<span lang="pi" class="pali">
+ayaṁ, bhikkhave, sammākammanto sāsavo puññabhāgiyo upadhivepakko.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Và này các Tỷ-kheo, thế nào là chánh nghiệp thuộc bậc Thánh, vô lậu, siêu thế, thuộc đạo chi?<br>
+<span lang="pi" class="pali">
+Katamo ca, bhikkhave, sammākammanto ariyo anāsavo lokuttaro maggaṅgo?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Cái gì, này các Tỷ-kheo, thuộc về từ bỏ, từ đoạn, từ khước, viễn ly ba thân ác hành đối với một vị tu tập Thánh đạo, thành thục trong Thánh đạo, có vô lậu tâm, có Hiền Thánh tâm;<br>
+<span lang="pi" class="pali">
+Yā kho, bhikkhave, ariyacittassa anāsavacittassa ariyamaggasamaṅgino ariyamaggaṁ bhāvayato tīhi kāyaduccaritehi ārati virati paṭivirati veramaṇī—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+như vậy, này các Tỷ-kheo, là chánh nghiệp thuộc bậc Thánh, vô lậu, siêu thế, thuộc đạo chi.<br>
+<span lang="pi" class="pali">
+ayaṁ, bhikkhave, sammākammanto ariyo anāsavo lokuttaro maggaṅgo.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ai tinh tấn đoạn trừ tà nghiệp, thành tựu chánh nghiệp; như vậy là chánh tinh tấn của vị ấy.<br>
+<span lang="pi" class="pali">
+So micchākammantassa pahānāya vāyamati, sammākammantassa upasampadāya; svāssa hoti sammāvāyāmo.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ai chánh niệm đoạn trừ tà nghiệp, chánh niệm đạt được và an trú chánh nghiệp; như vậy là chánh niệm của vị ấy.<br>
+<span lang="pi" class="pali">
+So sato micchākammantaṁ pajahati, sato sammākammantaṁ upasampajja viharati; sāssa hoti sammāsati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Như vậy ba pháp này chạy theo, chạy vòng theo chánh nghiệp, tức là chánh kiến, chánh tinh tấn, chánh niệm.<br>
+<span lang="pi" class="pali">
+Itiyime tayo dhammā sammākammantaṁ anuparidhāvanti anuparivattanti, seyyathidaṁ—sammādiṭṭhi, sammāvāyāmo, sammāsati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ở đây, này các Tỷ-kheo, chánh kiến đi hàng đầu.<br>
+<span lang="pi" class="pali">
+Tatra, bhikkhave, sammādiṭṭhi pubbaṅgamā hoti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Và như thế nào, này các Tỷ-kheo, là chánh kiến đi hàng đầu?<br>
+<span lang="pi" class="pali">
+Kathañca, bhikkhave, sammādiṭṭhi pubbaṅgamā hoti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Tuệ tri được tà mạng là tà mạng, tuệ tri được chánh mạng là chánh mạng; như vậy là chánh kiến của vị ấy.<br>
+<span lang="pi" class="pali">
+Micchāājīvaṁ ‘micchāājīvo’ti pajānāti, sammāājīvaṁ ‘sammāājīvo’ti pajānāti; sāssa hoti sammādiṭṭhi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Và này các Tỷ-kheo, thế nào là tà mạng?<br>
+<span lang="pi" class="pali">
+Katamo ca, bhikkhave, micchāājīvo?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Lừa đảo, nói lời mê ly, hiện tướng, gian trá, lấy lợi cầu lợi;<br>
+<span lang="pi" class="pali">
+Kuhanā, lapanā, nemittikatā, nippesikatā, lābhena lābhaṁ nijigīsanatā—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+như vậy, này các Tỷ-kheo, là tà mạng.<br>
+<span lang="pi" class="pali">
+ayaṁ, bhikkhave, micchāājīvo.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Và thế nào, này các Tỷ-kheo, là chánh mạng?<br>
+<span lang="pi" class="pali">
+Katamo ca, bhikkhave, sammāājīvo?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Chánh mạng, này các Tỷ-kheo, Ta nói có hai loại:<br>
+<span lang="pi" class="pali">
+Sammāājīvampahaṁ, bhikkhave, dvāyaṁ vadāmi—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+có loại chánh mạng, này các Tỷ-kheo, hữu lậu, thuộc phước báo, đưa đến quả sanh y;<br>
+<span lang="pi" class="pali">
+atthi, bhikkhave, sammāājīvo sāsavo puññabhāgiyo upadhivepakko;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+có loại chánh mạng, này các Tỷ-kheo, thuộc bậc Thánh, vô lậu, siêu thế, thuộc đạo chi.<br>
+<span lang="pi" class="pali">
+atthi, bhikkhave, sammāājīvo ariyo anāsavo lokuttaro maggaṅgo.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Và thế nào, này các Tỷ-kheo là chánh mạng hữu lậu, thuộc phước báo, đưa đến quả sanh y?<br>
+<span lang="pi" class="pali">
+Katamo ca, bhikkhave, sammāājīvo sāsavo puññabhāgiyo upadhivepakko?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ở đây, này các Tỷ-kheo, vị Thánh đệ tử bỏ tà mạng, nuôi sống với chánh mạng;<br>
+<span lang="pi" class="pali">
+Idha, bhikkhave, ariyasāvako micchāājīvaṁ pahāya sammāājīvena jīvikaṁ kappeti—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+như vậy, này các Tỷ-kheo là chánh mạng hữu lậu, thuộc phước báo, đưa đến quả sanh y.<br>
+<span lang="pi" class="pali">
+ayaṁ, bhikkhave, sammāājīvo sāsavo puññabhāgiyo upadhivepakko.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Và này các Tỷ-kheo, thế nào là chánh mạng thuộc bậc Thánh, vô lậu, siêu thế, thuộc đạo chi?<br>
+<span lang="pi" class="pali">
+Katamo ca, bhikkhave, sammāājīvo ariyo anāsavo lokuttaro maggaṅgo?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Cái gì, này các Tỷ-kheo thuộc về từ bỏ, từ đoạn, từ khước, viễn ly tà mạng đối với một vị tu tập Thánh đạo, thuần thục trong Thánh đạo. Có vô lậu tâm, có Hiền Thánh tâm;<br>
+<span lang="pi" class="pali">
+Yā kho, bhikkhave, ariyacittassa anāsavacittassa ariyamaggasamaṅgino ariyamaggaṁ bhāvayato micchāājīvā ārati virati paṭivirati veramaṇī—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+như vậy, này các Tỷ-kheo, là chánh mạng thuộc bậc Thánh, vô lậu, siêu thế, thuộc đạo chi.<br>
+<span lang="pi" class="pali">
+ayaṁ, bhikkhave, sammāājīvo ariyo anāsavo lokuttaro maggaṅgo.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ai tinh tấn đoạn trừ tà mạng, thành tựu chánh mạng; như vậy là chánh tinh tấn của vị ấy.<br>
+<span lang="pi" class="pali">
+So micchāājīvassa pahānāya vāyamati, sammāājīvassa upasampadāya; svāssa hoti sammāvāyāmo.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ai chánh niệm đoạn trừ tà mạng, chánh niệm đạt được và an trú chánh mạng, như vậy là chánh niệm của vị ấy.<br>
+<span lang="pi" class="pali">
+So sato micchāājīvaṁ pajahati, sato sammāājīvaṁ upasampajja viharati; sāssa hoti sammāsati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Như vậy, ba pháp này chạy theo, chạy vòng theo chánh mạng, tức là chánh kiến, chánh tinh tấn, chánh niệm.<br>
+<span lang="pi" class="pali">
+Itiyime tayo dhammā sammāājīvaṁ anuparidhāvanti anuparivattanti, seyyathidaṁ—sammādiṭṭhi, sammāvāyāmo, sammāsati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ở đây, này các Tỷ-kheo chánh kiến đi hàng đầu.<br>
+<span lang="pi" class="pali">
+Tatra, bhikkhave, sammādiṭṭhi pubbaṅgamā hoti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Và thế nào, này các Tỷ-kheo, là chánh kiến đi hàng đầu?<br>
+<span lang="pi" class="pali">
+Kathañca, bhikkhave, sammādiṭṭhi pubbaṅgamā hoti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Chánh tư duy, này các Tỷ-kheo, do chánh kiến, được khởi lên. Chánh ngữ do chánh tư duy được khởi lên. Chánh nghiệp do chánh ngữ được khởi lên. Chánh mạng do chánh nghiệp được khởi lên. Chánh tinh tấn do chánh mạng được khởi lên. Chánh niệm do chánh tinh tấn được khởi lên. Chánh định do chánh niệm được khởi lên. Chánh trí do chánh định được khởi lên. Chánh giải thoát do chánh trí được khởi lên.<br>
+<span lang="pi" class="pali">
+Sammādiṭṭhissa, bhikkhave, sammāsaṅkappo pahoti, sammāsaṅkappassa sammāvācā pahoti, sammāvācassa sammākammanto pahoti, sammākammantassa sammāājīvo pahoti, sammāājīvassa sammāvāyāmo pahoti, sammāvāyāmassa sammāsati pahoti, sammāsatissa sammāsamādhi pahoti, sammāsamādhissa sammāñāṇaṁ pahoti, sammāñāṇassa sammāvimutti pahoti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Như vậy, này các Tỷ-kheo, đạo lộ của vị hữu học gồm có tám chi phần, và đạo lộ của vị A-la-hán gồm có mười chi phần.<br>
+<span lang="pi" class="pali">
+Iti kho, bhikkhave, aṭṭhaṅgasamannāgato sekkho, dasaṅgasamannāgato arahā hoti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ở đây, này các Tỷ-kheo, sự đoạn trừ các bất thiện pháp và được phát triển trọn vẹn, như vậy là nhờ chánh tư duy.<br>
+<span lang="pi" class="pali">
+Tatrapi sammāñāṇena aneke pāpakā akusalā dhammā vigatā bhāvanāpāripūriṁ gacchanti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ở đây, này các Tỷ-kheo, chánh kiến đi hàng đầu.<br>
+<span lang="pi" class="pali">
+Tatra, bhikkhave, sammādiṭṭhi pubbaṅgamā hoti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Và như thế nào, này các Tỷ-kheo, là chánh kiến đi hàng đầu?<br>
+<span lang="pi" class="pali">
+Kathañca, bhikkhave, sammādiṭṭhi pubbaṅgamā hoti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Tà kiến, này các Tỷ-kheo, do chánh kiến làm cho tiêu diệt.<br>
+<span lang="pi" class="pali">
+Sammādiṭṭhissa, bhikkhave, micchādiṭṭhi nijjiṇṇā hoti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Và những ác bất thiện pháp được tà kiến duyên khởi, các pháp ấy bị tiêu diệt trong vị có chánh kiến.<br>
+<span lang="pi" class="pali">
+Ye ca micchādiṭṭhipaccayā aneke pāpakā akusalā dhammā sambhavanti te cassa nijjiṇṇā honti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Và những thiện pháp được chánh kiến duyên khởi, các pháp ấy được tu tập và trở thành viên mãn.<br>
+<span lang="pi" class="pali">
+Sammādiṭṭhipaccayā aneke kusalā dhammā bhāvanāpāripūriṁ gacchanti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Tà tư duy, này các Tỷ-kheo, do chánh tư duy làm cho tiêu diệt và những ác bất thiện pháp, được tà tư duy duyên khởi, các pháp ấy bị tiêu diệt trong người có chánh tư duy. Và những thiện pháp được chánh tư duy duyên khởi, các pháp ấy được phát triển trở thành viên mãn.<br>
+<span lang="pi" class="pali">
+Sammāsaṅkappassa, bhikkhave, micchāsaṅkappo nijjiṇṇo hoti …pe…<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Tà ngữ, này các Tỷ-kheo, do chánh ngữ làm cho tiêu diệt và những ác bất thiện pháp được tà ngữ duyên khởi, các pháp ấy bị tiêu diệt trong người có chánh ngữ. Và những thiện pháp được chánh ngữ duyên khởi, các pháp ấy được tu tập và trở thành viên mãn.<br>
+<span lang="pi" class="pali">
+sammāvācassa, bhikkhave, micchāvācā nijjiṇṇā hoti …<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Tà nghiệp, này các Tỷ-kheo, do chánh nghiệp làm cho tiêu diệt, và những ác bất thiện pháp được tà nghiệp duyên khởi, các pháp ấy bị tiêu diệt trong người có chánh nghiệp. Và những thiện pháp được chánh nghiệp duyên khởi, các pháp ấy được tu tập và trở thành viên mãn.<br>
+<span lang="pi" class="pali">
+sammākammantassa, bhikkhave, micchākammanto nijjiṇṇo hoti …<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Tà mạng, này các Tỷ-kheo, do chánh mạng làm cho tiêu diệt. Và những ác bất thiện pháp được tà mạng duyên khởi, các pháp ấy được tiêu diệt trong người có chánh mạng. Và những thiện pháp được chánh mạng duyên khởi, các pháp ấy được tu tập và trở thành viên mãn.<br>
+<span lang="pi" class="pali">
+sammāājīvassa, bhikkhave, micchāājīvo nijjiṇṇo hoti …<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Tà tinh tấn, này các Tỷ-kheo, do chánh tinh tấn làm cho tiêu diệt. Và những ác bất thiện pháp được tà tinh tấn duyên khởi, các pháp ấy được tiêu diệt trong người có chánh tinh tấn. Và những thiện pháp được khởi lên do duyên chánh tinh tấn, các pháp ấy được tu tập và trở thành viên mãn.<br>
+<span lang="pi" class="pali">
+sammāvāyāmassa, bhikkhave, micchāvāyāmo nijjiṇṇo hoti …<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Tà niệm, này các Tỷ-kheo, do chánh niệm làm cho tiêu diệt. Và những ác bất thiện pháp được tà niệm duyên khởi, các pháp ấy được tiêu diệt trong người có chánh niệm. Và những thiện pháp được chánh niệm duyên khởi, các pháp ấy được tu tập và trở thành viên mãn.<br>
+<span lang="pi" class="pali">
+sammāsatissa, bhikkhave, micchāsati nijjiṇṇā hoti …<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Tà định, này các Tỷ-kheo do chánh định làm cho tiêu diệt. Và những ác bất thiện pháp được tà định duyên khởi, các pháp ấy được tiêu diệt trong người có chánh định. Và những thiện pháp được chánh định duyên khởi, các pháp ấy được tu tập và trở thành viên mãn.<br>
+<span lang="pi" class="pali">
+sammāsamādhissa, bhikkhave, micchāsamādhi nijjiṇṇo hoti …<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Tà trí, này các Tỷ-kheo, do chánh trí làm cho tiêu diệt. Và những ác bất thiện pháp được tà trí duyên khởi, các pháp ấy được tiêu diệt trong người có chánh trí. Và những thiện pháp được chánh trí duyên khởi, các pháp ấy được phát triển và trở thành viên mãn.<br>
+<span lang="pi" class="pali">
+sammāñāṇassa, bhikkhave, micchāñāṇaṁ nijjiṇṇaṁ hoti …<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Tà giải thoát, này các Tỷ-kheo, do chánh giải thoát làm cho tiêu diệt.<br>
+<span lang="pi" class="pali">
+sammāvimuttassa, bhikkhave, micchāvimutti nijjiṇṇā hoti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Và những ác bất thiện pháp được tà giải thoát duyên khởi, các pháp ấy được tiêu diệt trong người có chánh giải thoát.<br>
+<span lang="pi" class="pali">
+Ye ca micchāvimuttipaccayā aneke pāpakā akusalā dhammā sambhavanti te cassa nijjiṇṇā honti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Và các thiện pháp được chánh giải thoát duyên khởi, các pháp ấy được phát triển và trở thành viên mãn.<br>
+<span lang="pi" class="pali">
+Sammāvimuttipaccayā ca aneke kusalā dhammā bhāvanāpāripūriṁ gacchanti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Như vậy, này các Tỷ-kheo, có hai mươi thiện phần, hai mươi bất thiện phần.<br>
+<span lang="pi" class="pali">
+Iti kho, bhikkhave, vīsati kusalapakkhā, vīsati akusalapakkhā—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ðại pháp môn Bốn mươi đã được chuyển vận không bị chận đứng lại bởi một Sa-môn, Bà-la-môn, Thiên, Ma, Phạm thiên hay một ai ở đời.<br>
+<span lang="pi" class="pali">
+mahācattārīsako dhammapariyāyo pavattito appaṭivattiyo samaṇena vā brāhmaṇena vā devena vā mārena vā brahmunā vā kenaci vā lokasmiṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Nếu có Sa-môn hay Bà-la-môn nào, này các Tỷ-kheo, nghĩ rằng đại pháp môn Bốn mươi này đáng bị phê bình, đáng bị phỉ báng, thời ngay hiện tại, mười thuận thuyết tùy thuyết hợp pháp được nói lên để chỉ trích người ấy.<br>
+<span lang="pi" class="pali">
+Yo hi koci, bhikkhave, samaṇo vā brāhmaṇo vā imaṁ mahācattārīsakaṁ dhammapariyāyaṁ garahitabbaṁ paṭikkositabbaṁ maññeyya tassa diṭṭheva dhamme dasasahadhammikā vādānuvādā gārayhaṁ ṭhānaṁ āgacchanti—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Nếu Tôn giả chỉ trích chánh kiến, thời các Sa-môn có tà kiến, các Tôn giả ấy là những vị đáng được cúng dường, các Tôn giả ấy là những vị đáng được tán thán.<br>
+<span lang="pi" class="pali">
+sammādiṭṭhiñce bhavaṁ garahati, ye ca micchādiṭṭhī samaṇabrāhmaṇā te bhoto pujjā, te bhoto pāsaṁsā;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Nếu Tôn giả chỉ trích chánh tư duy, thời các Sa-môn, Bà-la-môn có tà tư duy, các Tôn giả ấy là những vị đáng được cúng dường, các Tôn giả ấy là những vị đáng được tán thán.<br>
+<span lang="pi" class="pali">
+sammāsaṅkappañce bhavaṁ garahati, ye ca micchāsaṅkappā samaṇabrāhmaṇā te bhoto pujjā, te bhoto pāsaṁsā;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Nếu Tôn giả chỉ trích chánh ngữ…<br>
+<span lang="pi" class="pali">
+sammāvācañce bhavaṁ garahati …pe…<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+chánh nghiệp…<br>
+<span lang="pi" class="pali">
+sammākammantañce bhavaṁ garahati …<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+chánh mạng…<br>
+<span lang="pi" class="pali">
+sammāājīvañce bhavaṁ garahati …<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+chánh tinh tấn…<br>
+<span lang="pi" class="pali">
+sammāvāyāmañce bhavaṁ garahati …<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+chánh niệm…<br>
+<span lang="pi" class="pali">
+sammāsatiñce bhavaṁ garahati …<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+chánh định…<br>
+<span lang="pi" class="pali">
+sammāsamādhiñce bhavaṁ garahati …<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+chánh trí…<br>
+<span lang="pi" class="pali">
+sammāñāṇañce bhavaṁ garahati …<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Nếu Tôn giả chỉ trích chánh giải thoát, thời các Sa-môn, Bà-la-môn có tà giải thoát, các Tôn giả ấy là những vị đáng cúng dường, các Tôn giả ấy là những vị đáng được tán thán.<br>
+<span lang="pi" class="pali">
+sammāvimuttiñce bhavaṁ garahati, ye ca micchāvimuttī samaṇabrāhmaṇā te bhoto pujjā, te bhoto pāsaṁsā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Nếu có Sa-môn hay Bà-la-môn nào, này các Tỷ-kheo, nghĩ rằng đại pháp môn Bốn mươi này đáng bị phê bình, đáng bị phỉ báng, thời ngay hiện tại, mười thuận thuyết hợp pháp được nói lên để chỉ trích người ấy.<br>
+<span lang="pi" class="pali">
+Yo koci, bhikkhave, samaṇo vā brāhmaṇo vā imaṁ mahācattārīsakaṁ dhammapariyāyaṁ garahitabbaṁ paṭikkositabbaṁ maññeyya tassa diṭṭheva dhamme ime dasasahadhammikā vādānuvādā gārayhaṁ ṭhānaṁ āgacchanti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này các Tỷ-kheo, cho đến các dân chúng ở Ukkala và dân chúng Vassa, dân chúng Bhanna theo vô nhân luận, theo vô tác luận, theo hư vô luận, những vị ấy cũng không nghĩ rằng đại pháp môn Bốn mươi đáng chỉ trích, đáng bị phỉ báng. Vì sao vậy?<br>
+<span lang="pi" class="pali">
+Yepi te, bhikkhave, ahesuṁ okkalā vassabhaññā ahetuvādā akiriyavādā natthikavādā tepi mahācattārīsakaṁ dhammapariyāyaṁ na garahitabbaṁ nappaṭikkositabbaṁ amaññiṁsu. Taṁ kissa hetu?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vì sợ quở trách, phẫn nộ, công kích.”<br>
+<span lang="pi" class="pali">
+Nindābyārosaupārambhabhayā”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Thế Tôn thuyết giảng như vậy. Các vị Tỷ-kheo ấy hoan hỷ tín thọ lời Thế Tôn dạy.<br>
+<span lang="pi" class="pali">
+Idamavoca bhagavā. Attamanā te bhikkhū bhagavato bhāsitaṁ abhinandunti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+<span lang="pi" class="vi">
+Mahācattārīsakasuttaṁ niṭṭhitaṁ sattamaṁ.<br>
+</span>
+</p>
+
+
+
+<!-- COPY CONTENT SUTTA Ở ĐÂY -->
+
+
+
+<br>
+<p><p style="text-align: right;font-style: italic;">Hoà Thượng Thích Minh Châu dịch Việt</span></p>
+
+
+
+
+
+
+
+
+</section>  <!-- End English and Pali -->
+<div id="nextprev"><a id="previous-sutta" href="./mn116.html#content"></a><a id="next-sutta" href="./mn118.html#content"></a></div>
+</div>  <!--End Content -->
+</div>  <!-- End Page -->
+
+
+
+
+
+
+<footer>
+					 <!-- End bottom links -->
+</footer>
+
+
+ 
+ <!-- Scripts -->
+
+ <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      if (typeof enablePaliLookup === "function") {
+        enablePaliLookup();
+      } else {
+        console.error("enablePaliLookup is not defined");
+      }
+    });
+  </script>
+
+ <script>
+ // Script to open and close sidebar
+ 	function w3_open() {
+ 	document.getElementById("mySidebar").style.display = "block";
+ 	}
+ 		function w3_close() {
+ 		document.getElementById("mySidebar").style.display = "none";
+ 	}
+ </script>
+ <script>
+ 		var app = document.getElementsByTagName("BODY")[0];
+ 		if (localStorage.lightMode == "dark") {
+ 			app.setAttribute("light-mode", "dark");
+ 	}
+ </script>
+ 
+ <script>
+ 		function toggle_light_mode() {
+ 			var app = document.getElementsByTagName("BODY")[0];
+ 				if (localStorage.lightMode == "dark") {
+ 			localStorage.lightMode = "light";
+ 			app.setAttribute("light-mode", "light");
+ 		} else {
+ 					localStorage.lightMode = "dark";
+ 					app.setAttribute("light-mode", "dark");
+ 	}
+ 		}
+ 
+ 		window.addEventListener("storage", function () {
+ 			if (localStorage.lightMode == "dark") {
+ 				app.setAttribute("light-mode", "dark");
+ 				} else {
+ 				app.setAttribute("light-mode", "light");
+ 		}
+ 		}, false);
+ 
+ </script>
+ <script src="../js/footer.js"></script><script src="../js/dpd_deconstructor.js"></script><script src="../js/dpd_ebts.js"></script><script src="../js/dpd_i2h.js"></script>
+ <script src="/sw.js"></script>
+ </body>
+ </html>

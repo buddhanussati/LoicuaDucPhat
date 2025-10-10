@@ -1,0 +1,877 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+ 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+ 	<link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+ 	<meta name="viewport" content="width=device-width, initial-scale=1">
+		<!-- Loading manifest -->
+	<link rel="manifest" href="../manifest.json">
+ 	<!-- Loading main and menu stylesheets -->
+ 	<link rel="stylesheet" href="../css/w3.css">
+ 	<link rel="stylesheet" href="../css/css.css">
+ 	<link rel="stylesheet" href="../css/menu.css">
+ 	<script src="../js/jquery-1.10.2.min.js"></script>
+ 	<script src="../js/controlpanel.js"></script>
+ 	<script src="../js/mousetrap.min.js"></script>
+    <script src="../js/pali-lookup-standalone.js"></script>
+
+ <script src="../js/suttaFiles.js"></script>
+<script>
+ // Script to open random Sutta
+ function openRandomSutta() {
+  const randomIndex = Math.floor(Math.random() * suttaFiles.length);
+  const selectedFile = suttaFiles[randomIndex];
+
+  // Get root path of your site 
+  const currentPath = location.pathname;
+  const rootPath = currentPath.split("/").slice(0, -2).join("/") + "/";
+
+  // Redirect to the correct file
+  window.location.href = rootPath + selectedFile;
+}
+</script>
+
+
+</head>
+ <body class="container">
+ <div class="header-background">
+ <!-- Header -->
+ <div class="w3-header w3-content w3-padding w3-left-align bwcontainer">
+ 	<div class="centered">
+ 		<button class="light-mode-button" aria-label="Bật Chế Độ Sáng" onclick="toggle_light_mode()">
+ 			<span></span>
+ 			<span></span>
+ 		</button>
+ 		<span class="box-lbl">Sáng/Tối</span>
+ 	</div> <!-- Centered -->
+ 		<a href="../home/index.html" id="bwlogo"><img src="../images/headerlogo.png" alt="Logo Lời Của Đức Phật" class="w3-image"></a>
+ 		<div class="w3-bar bwcontainer">
+ 			<div id="searchlinks">
+ 			<a href="../home/visearch.html"><span class="w3-bar-item"><i class="fa fa-search"></i>&nbsp;Tìm Tiếng Việt</span></a>
+ 			<a href="../home/palisearch.html"><span class="w3-bar-item"><i class="fa fa-search"></i>&nbsp;Tìm Tiếng Pali</span></a>
+ 			</div><!-- End Searchlinks div -->
+ 			<div class="help"><span><a href="../home/help.html"><img src="../images/help_icon.png" title="Trợ Giúp" alt="Help"></a></span></div>
+ 		</div> <!-- End w3-bar bwcontainer --> 	</div> <!-- End w3-header w3-content w3-padding w3-left-align bwcontainer -->
+ </div> <!-- End header-background -->
+ <!-- Top menu -->
+
+ <div class="w3-main w3-white bwcontainer2">
+ 	<div class="w3-button w3-padding-8 w3-left w3-hide-large" onclick="w3_open()">☰</div>
+ 		<div id="navbar" class="w3-hide-small w3-hide-medium bwcontainer3">
+ 			<ul id="css3menu0">
+ 				<li class="topfirst" id="home"><a href="../home/index.html" class="w3-hide-small">Trang Chủ</a></li>
+  				<li class="topmenu" id="dn"><a href="../dn/dn.html" class="pressed w3-hide-small">Trường Bộ Kinh</a></li>
+ 				<li class="topmenu" id="mn"><a href="../mn/mn.html" class="w3-hide-small">Trung Bộ Kinh</a></li>
+ 				<li class="topmenu" id="sn"><a href="../sn/sn.html" class="w3-hide-small"><i class="fa fa-caret-down"></i>&nbsp;Tương Ưng Bộ Kinh</a>
+ 					<ul>
+ 						<li><a href="../sn/sn01.html" class="w3-hide-small">Tập I - Thiên Có Kệ</a></li>
+ 						<li><a href="../sn/sn02.html" class="w3-hide-small">Tập II - Thiên Nhân Duyên</a></li>
+ 						<li><a href="../sn/sn03.html" class="w3-hide-small">Tập III - Thiên Uẩn</a></li>
+ 						<li><a href="../sn/sn04.html" class="w3-hide-small">Tập IV - Thiên Sáu Xứ</a></li>
+ 						<li><a href="../sn/sn05.html" class="w3-hide-small">Tập V - Thiên Ðại Phẩm</a></li>
+ 					</ul>
+ 				<li class="topmenu" id="an"><a href="../an/an.html" class="w3-hide-small"><i class="fa fa-caret-down"></i>&nbsp;Tăng Chi Bộ Kinh</a>
+ 					<ul>
+ 						<li><a href="../an/an1.html" class="w3-hide-small">Chương Một Pháp</a></li>
+ 						<li><a href="../an/an2.html" class="w3-hide-small">Chương Hai Pháp</a></li>
+ 						<li><a href="../an/an3.html" class="w3-hide-small">Chương Ba Pháp</a></li>
+ 						<li><a href="../an/an4.html" class="w3-hide-small">Chương Bốn Pháp</a></li>
+ 						<li><a href="../an/an5.html" class="w3-hide-small">Chương Năm Pháp</a></li>
+ 						<li><a href="../an/an6.html" class="w3-hide-small">Chương Sáu Pháp</a></li>
+ 						<li><a href="../an/an7.html" class="w3-hide-small">Chương Bảy Pháp</a></li>
+ 						<li><a href="../an/an8.html" class="w3-hide-small">Chương Tám Pháp</a></li>
+ 						<li><a href="../an/an9.html" class="w3-hide-small">Chương Chín Pháp</a></li>
+ 						<li><a href="../an/an10.html" class="w3-hide-small">Chương Mười Pháp</a></li>
+ 						<li><a href="../an/an11.html" class="w3-hide-small">Chương Mười Một Pháp</a></li>
+ 					</ul>
+ 				</li>
+ 				<li class="topmenu" id="kn"><a href="../kn/kn.html" class="w3-hide-small"><i class="fa fa-caret-down"></i>&nbsp;Tiểu Bộ Kinh</a>
+ 					<ul>
+ 						<li><a href="../kp/kp.html" class="w3-hide-small">Kinh Tiểu Tụng</a></li>
+ 						<li><a href="../dhp/dhp.html" class="w3-hide-small">Kinh Pháp Cú</a></li>
+ 						<li><a href="../snp/snp.html" class="w3-hide-small">Kinh Tập</a></li>
+ 						<li><a href="../ud/ud.html" class="w3-hide-small">Kinh Phật Tự Thuyết</a></li>
+ 						<li><a href="../it/it.html" class="w3-hide-small">Kinh Phật Thuyết Như Vậy</a></li>
+ 						<li><a href="../tha/tha.html" class="w3-hide-small">Trưởng Lão Tăng Kệ</a></li>
+ 						<li><a href="../thi/thi.html" class="w3-hide-small">Trưởng Lão Ni Kệ</a></li>
+ 					</ul>
+ 				</li>
+				<li class="toplast" id="rd"><a href="../rd/rd.html" class="w3-hide-small"></i>Kinh Ngẫu Nhiên Theo Nhóm</a>
+ 					</ul>
+ 				</li>
+ 			</ul>
+ 			</div>
+ 		</div> <!--navbar-->
+
+<!-- Sidebar (hidden by default) -->
+ <nav class="w3-sidebar w3-bar-block w3-card w3-border w3-top w3-animate-left w3-hide-large" id="mySidebar">
+ 	<a href="javascript:void(0)" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-times fa-2x red-color"></i>&nbsp;&nbsp;&nbsp;Close</a><!-- Hides the sidebar when clicked -->
+ 		<div class="w3-bar-block w3-white">
+ 			<a href="../home/index.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-home fa-lg"></i>&nbsp;&nbsp;&nbsp;Home</a>
+ 			<a href="../guide/guide.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Guide</a>
+ 			<a href="../dn/dn.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Trường Bộ Kinh</a>
+ 			<a href="../mn/mn.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Trung Bộ Kinh</a>
+ 			<a href="../sn/sn.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Tương Ưng Bộ Kinh</a>
+ 			<a href="../an/an.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Tăng Chi Bộ Kinh
+ 			<a href="../kn/kn.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Tiểu Bộ Kinh</a>
+			<a href="../rd/rd.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>Kinh Ngẫu Nhiên Theo Nhóm</a>
+ 		</div>
+ </nav>
+ 
+ 
+ 
+   <!-- !PAGE CONTENT! --> 
+<div class="w3-main w3-content w3-padding w3-left-align bwcontainer4">
+<div id="content">
+<h2>Majjhima Nikāya - Trung Bộ Kinh</h2>
+<h5><span style="font-style: italic;">Hoà Thượng Thích Minh Châu dịch Việt</span></h5>
+
+</div>
+
+<br>
+ 	<title>        Trung Bộ 123          </title>
+
+<p lang="vi" class="vi"; style="text-align: center">
+Trung Bộ 123<br>
+<span lang="pi" class="pali">
+Majjhima Nikāya 123<br>
+</span>
+</p>
+
+
+
+<p lang="vi" class="vi"; style="text-align: center">
+Kinh Hy Hữu Vị Tằng Hữu<br>
+<span lang="pi" class="pali">
+Acchariyaabbhutasutta<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Như vầy tôi nghe.<br>
+<span lang="pi" class="pali">
+Evaṁ me sutaṁ—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Một thời Thế Tôn trú ở Sāvatthī (Xá-vệ), Jetavana (Kỳ-đà-lâm), tại tịnh xá ông Anāthapiṇḍika (Cấp Cô Ðộc).<br>
+<span lang="pi" class="pali">
+ekaṁ samayaṁ bhagavā sāvatthiyaṁ viharati jetavane anāthapiṇḍikassa ārāme.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Rồi một số rất đông Tỷ-kheo, sau buổi ăn, sau khi đi khất thực về, đang ngồi tụ họp trong thị giả đường (upatthanasala), câu chuyện này được khởi lên giữa chúng Tăng:<br>
+<span lang="pi" class="pali">
+Atha kho sambahulānaṁ bhikkhūnaṁ pacchābhattaṁ piṇḍapātapaṭikkantānaṁ upaṭṭhānasālāyaṁ sannisinnānaṁ sannipatitānaṁ ayamantarākathā udapādi:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Thật hy hữu thay chư Hiền! Thật vị tằng hữu thay chư Hiền, là đại thần thông lực, đại uy lực của Như Lai! Vì Ngài biết được chư Phật quá khứ, đã nhập Niết-bàn, đã đoạn các hý luận, đã đoạn các chướng đạo, đã chấm dứt luân hồi, đã thoát ly mọi khổ:<br>
+<span lang="pi" class="pali">
+“acchariyaṁ, āvuso, abbhutaṁ, āvuso. Tathāgatassa mahiddhikatā mahānubhāvatā, yatra hi nāma tathāgato atīte buddhe parinibbute chinnapapañce chinnavaṭume pariyādinnavaṭṭe sabbadukkhavītivatte jānissati:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Chư Thế Tôn ấy sanh tánh như vậy, danh tánh như vậy, tộc tánh như vậy, giới hạnh như vậy, pháp hạnh như vậy, tuệ hạnh như vậy, trú hạnh như vậy, chư Thế Tôn ấy giải thoát như vậy’.<br>
+<span lang="pi" class="pali">
+‘evaṁjaccā te bhagavanto ahesuṁ’ itipi, ‘evaṁnāmā te bhagavanto ahesuṁ’ itipi, ‘evaṅgottā te bhagavanto ahesuṁ’ itipi, ‘evaṁsīlā te bhagavanto ahesuṁ’ itipi, ‘evaṁdhammā te bhagavanto ahesuṁ’ itipi, ‘evaṁpaññā te bhagavanto ahesuṁ’ itipi, ‘evaṁvihārī te bhagavanto ahesuṁ’ itipi, ‘evaṁvimuttā te bhagavanto ahesuṁ’ itipī”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Khi được nghe nói như vậy, Tôn giả Ānanda nói với các Tỷ-kheo ấy:<br>
+<span lang="pi" class="pali">
+Evaṁ vutte, āyasmā ānando te bhikkhū etadavoca:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Thật hy hữu thay chư Hiền, Như Lai được đầy đủ các pháp hy hữu! Thật vị tằng hữu thay chư Hiền, Như Lai được đầy đủ các pháp vị tằng hữu!”<br>
+<span lang="pi" class="pali">
+“acchariyā ceva, āvuso, tathāgatā acchariyadhammasamannāgatā ca; abbhutā ceva, āvuso, tathāgatā abbhutadhammasamannāgatā cā”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Và câu chuyện giữa các Tỷ-kheo ấy bị gián đoạn.<br>
+<span lang="pi" class="pali">
+Ayañca hidaṁ tesaṁ bhikkhūnaṁ antarākathā vippakatā hoti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Rồi Thế Tôn vào buổi chiều, từ Thiền tịnh độc cư đứng dậy, đi đến thị giả đường, sau khi đến, ngồi trên chỗ đã soạn sẵn. Sau khi ngồi, Thế Tôn gọi các Tỷ-kheo:<br>
+<span lang="pi" class="pali">
+Atha kho bhagavā sāyanhasamayaṁ paṭisallānā vuṭṭhito yenupaṭṭhānasālā tenupasaṅkami; upasaṅkamitvā paññatte āsane nisīdi. Nisajja kho bhagavā bhikkhū āmantesi:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Này các Tỷ-kheo, nay các Ông ngồi nói chuyện gì? Câu chuyện gì giữa các Ông bị gián đoạn?”<br>
+<span lang="pi" class="pali">
+“kāya nuttha, bhikkhave, etarahi kathāya sannisinnā, kā ca pana vo antarākathā vippakatā”ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Ở đây, bạch Thế Tôn, chúng con sau buổi ăn, sau khi đi khất thực trở về, chúng con ngồi tụ họp tại thị giả đường, câu chuyện sau đây được khởi lên:<br>
+<span lang="pi" class="pali">
+“Idha, bhante, amhākaṁ pacchābhattaṁ piṇḍapātapaṭikkantānaṁ upaṭṭhānasālāyaṁ sannisinnānaṁ sannipatitānaṁ ayamantarākathā udapādi:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Hy hữu thay, chư Hiền! … chư Thế Tôn ấy được giải thoát như vậy’. Khi được nghe nói vậy, bạch Thế Tôn, Tôn giả Ānanda nói với chúng con như sau: ‘Thật hy hữu thay … Như Lai được đầy đủ các pháp hy hữu! Thật vị tằng hữu thay … Như Lai được đầy đủ các pháp vị tằng hữu!’<br>
+<span lang="pi" class="pali">
+‘acchariyaṁ, āvuso, abbhutaṁ, āvuso, tathāgatassa mahiddhikatā mahānubhāvatā, yatra hi nāma tathāgato atīte buddhe parinibbute chinnapapañce chinnavaṭume pariyādinnavaṭṭe sabbadukkhavītivatte jānissati—evaṁjaccā te bhagavanto ahesuṁ itipi, evaṁnāmā … evaṅgottā … evaṁsīlā … evaṁdhammā … evaṁpaññā … evaṁvihārī … evaṁvimuttā te bhagavanto ahesuṁ itipī’ti. Evaṁ vutte, bhante, āyasmā ānando amhe etadavoca: ‘acchariyā ceva, āvuso, tathāgatā acchariyadhammasamannāgatā ca; abbhutā ceva, āvuso, tathāgatā abbhutadhammasamannāgatā cā’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Câu chuyện này giữa chúng con, bạch Thế Tôn, bị gián đoạn. Rồi Thế Tôn đến.”<br>
+<span lang="pi" class="pali">
+Ayaṁ kho no, bhante, antarākathā vippakatā; atha bhagavā anuppatto”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Thế Tôn bảo Tôn giả Ānanda:<br>
+<span lang="pi" class="pali">
+Atha kho bhagavā āyasmantaṁ ānandaṁ āmantesi:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Do vậy, này Ānanda, hãy nói lên nhiều nữa, những đặc tánh hy hữu, vị tằng hữu của Như Lai.”<br>
+<span lang="pi" class="pali">
+“tasmātiha taṁ, ānanda, bhiyyoso mattāya paṭibhantu tathāgatassa acchariyā abbhutadhammā”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Bạch Thế Tôn, con tận mặt nghe, con tận mặt ghi nhớ từ Thế Tôn:<br>
+<span lang="pi" class="pali">
+“Sammukhā metaṁ, bhante, bhagavato sutaṁ, sammukhā paṭiggahitaṁ:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Chánh niệm tỉnh giác, này Ānanda, Bồ-tát sanh trong Thiên chúng (Kaya) Tusita’.<br>
+<span lang="pi" class="pali">
+‘sato sampajāno, ānanda, bodhisatto tusitaṁ kāyaṁ upapajjī’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vì rằng, bạch Thế Tôn, chánh niệm tỉnh giác, Bồ-tát sanh trong Thiên chúng Tusita, con thọ trì sự việc này, bạch Thế Tôn, là một hy hữu, một vị tằng hữu của Thế Tôn.<br>
+<span lang="pi" class="pali">
+Yampi, bhante, sato sampajāno bodhisatto tusitaṁ kāyaṁ upapajji idampāhaṁ, bhante, bhagavato acchariyaṁ abbhutadhammaṁ dhāremi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Bạch Thế Tôn, con tận mặt nghe, con tận mặt ghi nhớ từ Thế Tôn:<br>
+<span lang="pi" class="pali">
+Sammukhā metaṁ, bhante, bhagavato sutaṁ, sammukhā paṭiggahitaṁ:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Chánh niệm tỉnh giác, này Ānanda, Bồ-tát an trú trong Thiên chúng Tusita’.<br>
+<span lang="pi" class="pali">
+‘sato sampajāno, ānanda, bodhisatto tusite kāye aṭṭhāsī’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vì rằng, bạch Thế Tôn, chánh niệm tỉnh giác, Bồ-tát an trú trong Thiên chúng Tusita, con thọ trì sự việc này, bạch Thế Tôn, là một hy hữu, một vị tằng hữu của Thế Tôn.<br>
+<span lang="pi" class="pali">
+Yampi, bhante, sato sampajāno bodhisatto tusite kāye aṭṭhāsi idampāhaṁ, bhante, bhagavato acchariyaṁ abbhutadhammaṁ dhāremi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Bạch Thế Tôn, con tận mặt nghe, con tận mặt ghi nhớ từ Thế Tôn:<br>
+<span lang="pi" class="pali">
+Sammukhā metaṁ, bhante, bhagavato sutaṁ, sammukhā paṭiggahitaṁ:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Chánh niệm tỉnh giác, này Ānanda, Bồ-tát an trú tại Thiên chúng Tusita cho đến trọn thọ mạng’.<br>
+<span lang="pi" class="pali">
+‘yāvatāyukaṁ, ānanda, bodhisatto tusite kāye aṭṭhāsī’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vì rằng, bạch Thế Tôn, chánh niệm tỉnh giác, Bồ-tát an trú tại Thiên chúng Tusita cho đến trọn thọ mạng, con thọ trì sự việc này, bạch Thế Tôn, là một hy hữu, một vị tằng hữu của Thế Tôn.<br>
+<span lang="pi" class="pali">
+Yampi, bhante, yāvatāyukaṁ bodhisatto tusite kāye aṭṭhāsi idampāhaṁ, bhante, bhagavato acchariyaṁ abbhutadhammaṁ dhāremi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Bạch Thế Tôn, con tận mặt nghe, con tận mặt ghi nhớ từ Thế Tôn:<br>
+<span lang="pi" class="pali">
+Sammukhā metaṁ, bhante, bhagavato sutaṁ, sammukhā paṭiggahitaṁ:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Chánh niệm tỉnh giác này Ānanda, Bồ-tát sau khi từ Thiên chúng Tusita mạng chung, nhập vào mẫu thai’.<br>
+<span lang="pi" class="pali">
+‘sato sampajāno, ānanda, bodhisatto tusitā, kāyā cavitvā mātukucchiṁ okkamī’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vì rằng, bạch Thế Tôn, chánh niệm tỉnh giác, Bồ-tát sau khi từ Thiên chúng Tusita mạng chung, nhập vào mẫu thai, con thọ trì sự việc này, bạch Thế Tôn, là một hy hữu, một vị tằng hữu của Thế Tôn.<br>
+<span lang="pi" class="pali">
+Yampi, bhante, sato sampajāno bodhisatto tusitā kāyā cavitvā mātukucchiṁ okkami idampāhaṁ, bhante, bhagavato acchariyaṁ abbhutadhammaṁ dhāremi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Bạch Thế Tôn, con tận mặt nghe, con tận mặt ghi nhớ từ Thế Tôn:<br>
+<span lang="pi" class="pali">
+Sammukhā metaṁ, bhante, bhagavato sutaṁ, sammukhā paṭiggahitaṁ:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Khi Bồ-tát nhập vào mẫu thai, này Ānanda, khi ấy một hào quang vô lượng, thần diệu, thắng xa oai lực của chư Thiên hiện ra cùng khắp thế giới, gồm có các thế giới ở trên chư Thiên, thế giới của các Ma vương và Phạm thiên và thế giới ở dưới gồm các vị Sa-môn, Bà-la-môn, chư Thiên và loài Người. Cho đến các thế giới ở giữa các thế giới, tối tăm, u ám không có nền tảng, những cảnh giới mà mặt trăng mặt trời với đại thần lực, với đại oai lực như vậy cũng không thể chiếu thấu, trong những cảnh giới ấy, một hào quang vô lượng, thắng xa oai lực của chư Thiên hiện ra.<br>
+<span lang="pi" class="pali">
+‘yadā, ānanda, bodhisatto tusitā kāyā cavitvā mātukucchiṁ okkamati, atha sadevake loke samārake sabrahmake sassamaṇabrāhmaṇiyā pajāya sadevamanussāya appamāṇo uḷāro obhāso loke pātubhavati atikkammeva devānaṁ devānubhāvaṁ. Yāpi tā lokantarikā aghā asaṁvutā andhakārā andhakāratimisā, yatthapime candimasūriyā evaṁmahiddhikā evaṁmahānubhāvā ābhāya nānubhonti tatthapi appamāṇo uḷāro obhāso loke pātubhavati atikkammeva devānaṁ devānubhāvaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Và các chúng sanh sống tại những chỗ ấy nhờ hào quang ấy mới thấy nhau và nói: Cũng có những chúng sanh khác sống ở đây.<br>
+<span lang="pi" class="pali">
+Yepi tattha sattā upapannā tepi tenobhāsena aññamaññaṁ sañjānanti—aññepi kira, bho, santi sattā idhūpapannāti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Và mười ngàn thế giới này chuyển động, rung động, chuyển động mạnh. Và hào quang vô lượng, thần diệu, thắng xa oai lực của chư Thiên hiện ra ở thế giới’.<br>
+<span lang="pi" class="pali">
+Ayañca dasasahassī lokadhātu saṅkampati sampakampati sampavedhati appamāṇo ca uḷāro obhāso loke pātubhavati atikkammeva devānaṁ devānubhāvan’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vì rằng, bạch Thế Tôn, con thọ trì sự việc này, bạch Thế Tôn, là một hy hữu, một vị tằng hữu của Thế Tôn.<br>
+<span lang="pi" class="pali">
+Yampi, bhante …pe… idampāhaṁ, bhante, bhagavato acchariyaṁ abbhutadhammaṁ dhāremi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Bạch Thế Tôn, con tận mặt nghe, con tận mặt ghi nhớ từ Thế Tôn:<br>
+<span lang="pi" class="pali">
+Sammukhā metaṁ, bhante, bhagavato sutaṁ, sammukhā paṭiggahitaṁ:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Khi Bồ-tát nhập mẫu thai, này Ānanda, bốn vị Thiên tử đến canh gác bốn phương trời và nói: Không cho một ai, người hay không phải loài người được phiền nhiễu Bồ-tát, hay mẹ vị Bồ-tát’.<br>
+<span lang="pi" class="pali">
+‘yadā, ānanda, bodhisatto mātukucchiṁ okkanto hoti, cattāro devaputtā catuddisaṁ ārakkhāya upagacchanti—mā naṁ bodhisattaṁ vā bodhisattamātaraṁ vā manusso vā amanusso vā koci vā viheṭhesī’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vì rằng, bạch Thế Tôn, con thọ trì sự việc này, bạch Thế Tôn, là một hy hữu, một vị tằng hữu của Thế Tôn”.<br>
+<span lang="pi" class="pali">
+Yampi, bhante …pe… idampāhaṁ, bhante, bhagavato acchariyaṁ abbhutadhammaṁ dhāremi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Bạch Thế Tôn, con tận mặt nghe, con tận mặt ghi nhớ từ Thế Tôn:<br>
+<span lang="pi" class="pali">
+Sammukhā metaṁ, bhante, bhagavato sutaṁ, sammukhā paṭiggahitaṁ:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Khi Bồ-tát nhập mẫu thai, này Ānanda, mẹ Bồ-tát giữ giới một cách hồn nhiên, không sát sanh, không trộm cắp, không tà dâm, không nói láo, không uống các thứ rượu nấu, rượu lên chất men’.<br>
+<span lang="pi" class="pali">
+‘yadā, ānanda, bodhisatto mātukucchiṁ okkanto hoti, pakatiyā sīlavatī bodhisattamātā hoti viratā pāṇātipātā viratā adinnādānā viratā kāmesumicchācārā viratā musāvādā viratā surāmerayamajjapamādaṭṭhānā’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vì rằng, bạch Thế Tôn, con thọ trì sự việc này, bạch Thế Tôn, là một hy hữu, một vị tằng hữu của Thế Tôn.<br>
+<span lang="pi" class="pali">
+Yampi, bhante …pe… idampāhaṁ, bhante, bhagavato acchariyaṁ abbhutadhammaṁ dhāremi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Bạch Thế Tôn, con tận mặt nghe, con tận mặt ghi nhớ từ Thế Tôn:<br>
+<span lang="pi" class="pali">
+Sammukhā metaṁ, bhante, bhagavato sutaṁ, sammukhā paṭiggahitaṁ:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Khi Bồ-tát nhập mẫu thai, này Ānanda, mẹ Bồ-tát không khởi dục tâm đối với một nam nhân nào, và mẹ Bồ-tát không bị xâm phạm bởi bất kỳ người đàn ông nào có nhiễm tâm’.<br>
+<span lang="pi" class="pali">
+‘yadā, ānanda, bodhisatto mātukucchiṁ okkanto hoti, na bodhisattamātu purisesu mānasaṁ uppajjati kāmaguṇūpasaṁhitaṁ, anatikkamanīyā ca bodhisattamātā hoti kenaci purisena rattacittenā’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vì rằng, bạch Thế Tôn, con thọ trì sự việc này, bạch Thế Tôn, là một hy hữu, một vị tằng hữu của Thế Tôn.<br>
+<span lang="pi" class="pali">
+Yampi, bhante …pe… idampāhaṁ, bhante, bhagavato acchariyaṁ abbhutadhammaṁ dhāremi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Bạch Thế Tôn, con tận mặt nghe, con tận mặt ghi nhớ từ Thế Tôn:<br>
+<span lang="pi" class="pali">
+Sammukhā metaṁ, bhante, bhagavato sutaṁ, sammukhā paṭiggahitaṁ:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Khi Bồ-tát nhập mẫu thai, này Ānanda, mẹ vị Bồ-tát tận hưởng năm dục công đức đầy đủ, tận hưởng trọn năm dục công đức’.<br>
+<span lang="pi" class="pali">
+‘yadā, ānanda, bodhisatto mātukucchiṁ okkanto hoti, lābhinī bodhisattamātā hoti pañcannaṁ kāmaguṇānaṁ. Sā pañcahi kāmaguṇehi samappitā samaṅgībhūtā paricāretī’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vì rằng, bạch Thế Tôn, con thọ trì sự việc này, bạch Thế Tôn, là một hy hữu, một vị tằng hữu của Thế Tôn.<br>
+<span lang="pi" class="pali">
+Yampi, bhante …pe… idampāhaṁ, bhante, bhagavato acchariyaṁ abbhutadhammaṁ dhāremi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Bạch Thế Tôn, con tận mặt nghe, con tận mặt ghi nhớ từ Thế Tôn:<br>
+<span lang="pi" class="pali">
+Sammukhā metaṁ, bhante, bhagavato sutaṁ, sammukhā paṭiggahitaṁ:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Khi Bồ-tát nhập mẫu thai, này Ānanda, mẹ Bồ-tát không bị một bệnh tật gì. Bà sống với tâm hoan hỷ, với tâm khoan khoái. Bà thấy trong bào thai của mình vị Bồ-tát đầy đủ mọi bộ phận và chân tay.<br>
+<span lang="pi" class="pali">
+‘yadā, ānanda, bodhisatto mātukucchiṁ okkanto hoti, na bodhisattamātu kocideva ābādho uppajjati; sukhinī bodhisattamātā hoti akilantakāyā; bodhisattañca bodhisattamātā tirokucchigataṁ passati sabbaṅgapaccaṅgaṁ ahīnindriyaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Ānanda, ví như viên ngọc lưu ly, thanh tịnh, thuần nhất, có tám cạnh, khéo cắt, khéo dũa, trong sáng, không tỳ vết, hoàn hảo trong mọi phương diện. Rồi một sợi dây được xâu qua viên ngọc ấy, dây màu xanh, màu vàng, màu đỏ, màu trắng hay màu vàng lợt.<br>
+<span lang="pi" class="pali">
+Seyyathāpi, ānanda, maṇi veḷuriyo subho jātimā aṭṭhaṁso suparikammakato. Tatrāssa suttaṁ āvutaṁ nīlaṁ vā pītaṁ vā lohitaṁ vā odātaṁ vā paṇḍusuttaṁ vā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Nếu có người có mắt để viên ngọc trên bàn tay của mình, người ấy sẽ thấy rõ ràng: Ðây là viên ngọc lưu ly, thanh tịnh, thuần nhất, có tám cạnh, khéo cắt, khéo dũa, trong sáng, không tỳ vết, hoàn hảo trong mọi phương diện. Ðây là sợi dây xâu qua, sợi dây màu xanh, màu vàng, màu đỏ, màu trắng hay màu vàng lợt.<br>
+<span lang="pi" class="pali">
+Tamenaṁ cakkhumā puriso hatthe karitvā paccavekkheyya—ayaṁ kho maṇi veḷuriyo subho jātimā aṭṭhaṁso suparikammakato, tatridaṁ suttaṁ āvutaṁ nīlaṁ vā pītaṁ vā lohitaṁ vā odātaṁ vā paṇḍusuttaṁ vāti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Cũng vậy, này Ānanda, khi Bồ-tát nhập mẫu thai, mẹ Bồ-tát không bị một bệnh tật gì. Bà sống với tâm hoan hỷ, với tâm khoan khoái. Bà thấy trong bào thai của mình vị Bồ-tát đầy đủ bộ phận và chân tay’.<br>
+<span lang="pi" class="pali">
+Evameva kho, ānanda, yadā bodhisatto mātukucchiṁ okkanto hoti, na bodhisattamātu kocideva ābādho uppajjati; sukhinī bodhisattamātā hoti akilantakāyā; bodhisattañca bodhisattamātā tirokucchigataṁ passati sabbaṅgapaccaṅgaṁ ahīnindriyan’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vì rằng, bạch Thế Tôn, con thọ trì sự việc này, bạch Thế Tôn, là một hy hữu, một vị tằng hữu của Thế Tôn.<br>
+<span lang="pi" class="pali">
+Yampi, bhante …pe… idampāhaṁ, bhante, bhagavato acchariyaṁ abbhutadhammaṁ dhāremi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Bạch Thế Tôn con tận mặt nghe, con tận mặt ghi nhớ từ Thế Tôn:<br>
+<span lang="pi" class="pali">
+Sammukhā metaṁ, bhante, bhagavato sutaṁ, sammukhā paṭiggahitaṁ:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Sau khi sanh Bồ-tát bảy ngày, này Ānanda, mẹ Bồ-tát mệnh chung và sanh lên cõi trời Ðâu suất’.<br>
+<span lang="pi" class="pali">
+‘sattāhajāte, ānanda, bodhisatte bodhisattamātā kālaṁ karoti, tusitaṁ kāyaṁ upapajjatī’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vì rằng, bạch Thế Tôn, con thọ trì sự việc này, bạch Thế Tôn, là một hy hữu, một vị tằng hữu của Thế Tôn.<br>
+<span lang="pi" class="pali">
+Yampi, bhante …pe… idampāhaṁ, bhante, bhagavato acchariyaṁ abbhutadhammaṁ dhāremi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Bạch Thế Tôn, con tận mặt nghe, con tận mặt ghi nhớ từ Thế Tôn:<br>
+<span lang="pi" class="pali">
+Sammukhā metaṁ, bhante, bhagavato sutaṁ, sammukhā paṭiggahitaṁ:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Trong khi các người đàn bà khác, này Ānanda, mang bầu thai trong bụng chín tháng hay mười tháng rồi mới sanh, mẹ Bồ-tát sanh Bồ-tát không phải như vậy. Mẹ Bồ-tát mang Bồ-tát trong bụng mười tháng rồi mới sanh’.<br>
+<span lang="pi" class="pali">
+‘yathā kho panānanda, aññā itthikā nava vā dasa vā māse gabbhaṁ kucchinā pariharitvā vijāyanti, na hevaṁ bodhisattaṁ bodhisattamātā vijāyati. Daseva māsāni bodhisattaṁ bodhisattamātā kucchinā pariharitvā vijāyatī’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vì rằng, bạch Thế Tôn, con thọ trì sự việc này, bạch Thế Tôn, là một hy hữu, một vị tằng hữu của Thế Tôn.<br>
+<span lang="pi" class="pali">
+Yampi, bhante …pe… idampāhaṁ, bhante, bhagavato acchariyaṁ abbhutadhammaṁ dhāremi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Bạch Thế Tôn, con tận mặt nghe, con tận mặt ghi nhớ từ Thế Tôn:<br>
+<span lang="pi" class="pali">
+Sammukhā metaṁ, bhante, bhagavato sutaṁ, sammukhā paṭiggahitaṁ:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Trong khi các người đàn bà khác, này Ānanda, hoặc ngồi hoặc nằm mà sanh con, mẹ vị Bồ-tát sanh Bồ- tát không phải như vậy. Mẹ Bồ-tát đứng mà sanh Bồ-tát’.<br>
+<span lang="pi" class="pali">
+‘yathā kho panānanda, aññā itthikā nisinnā vā nipannā vā vijāyanti, na hevaṁ bodhisattaṁ bodhisattamātā vijāyati. Ṭhitāva bodhisattaṁ bodhisattamātā vijāyatī’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vì rằng, bạch Thế Tôn, con thọ trì sự việc này, bạch Thế Tôn, là một hy hữu, một vị tằng hữu của Thế Tôn.<br>
+<span lang="pi" class="pali">
+Yampi, bhante …pe… idampāhaṁ, bhante, bhagavato acchariyaṁ abbhutadhammaṁ dhāremi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Bạch Thế Tôn, con tận mặt nghe, con tận mặt ghi nhớ từ Thế Tôn:<br>
+<span lang="pi" class="pali">
+Sammukhā metaṁ, bhante, bhagavato sutaṁ, sammukhā paṭiggahitaṁ:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Khi Bồ-tát từ bụng mẹ sanh ra, này Ānanda, chư Thiên đỡ lấy Ngài trước, sau mới đến loài người’.<br>
+<span lang="pi" class="pali">
+‘yadā, ānanda, bodhisatto mātukucchimhā nikkhamati, devā naṁ paṭhamaṁ paṭiggaṇhanti pacchā manussā’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vì rằng, bạch Thế Tôn, con thọ trì sự việc này, bạch Thế Tôn, là một hy hữu, một vị tằng hữu của Thế Tôn.<br>
+<span lang="pi" class="pali">
+Yampi, bhante …pe… idampāhaṁ, bhante, bhagavato acchariyaṁ abbhutadhammaṁ dhāremi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Bạch Thế Tôn, con tận mặt nghe, con tận mặt ghi nhớ từ Thế Tôn:<br>
+<span lang="pi" class="pali">
+Sammukhā metaṁ, bhante, bhagavato sutaṁ, sammukhā paṭiggahitaṁ:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Khi Bồ-tát từ bụng mẹ sanh ra, này Ānanda, Bồ-tát không đụng đến đất. Có bốn Thiên tử đỡ lấy Ngài, đặt Ngài trước bà mẹ và thưa: “Hoàng hậu hãy hoan hỷ! Hoàng Hậu sanh một bậc vĩ nhân’.<br>
+<span lang="pi" class="pali">
+‘yadā, ānanda, bodhisatto mātukucchimhā nikkhamati, appattova bodhisatto pathaviṁ hoti, cattāro naṁ devaputtā paṭiggahetvā mātu purato ṭhapenti—attamanā, devi, hohi; mahesakkho te putto uppanno’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vì rằng, bạch Thế Tôn, con thọ trì sự việc này, bạch Thế Tôn, là một hy hữu, một vị tằng hữu của Thế Tôn.<br>
+<span lang="pi" class="pali">
+Yampi, bhante …pe… idampāhaṁ, bhante, bhagavato acchariyaṁ abbhutadhammaṁ dhāremi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Bạch Thế Tôn, con tận mặt nghe, con tận mặt ghi nhớ từ Thế Tôn:<br>
+<span lang="pi" class="pali">
+Sammukhā metaṁ, bhante, bhagavato sutaṁ, sammukhā paṭiggahitaṁ:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Khi Bồ-tát từ bụng mẹ sanh ra, này Ānanda, Ngài sanh ra thanh tịnh, không bị nhiễm ô bởi nước nhớt nào, không bị nhiễm ô bởi loại mủ nào, không bị nhiễm ô bởi loại máu nào, không bị nhiễm ô bởi bất cứ vật bất tịnh nào, thanh tịnh, trong sạch.<br>
+<span lang="pi" class="pali">
+‘yadā, ānanda, bodhisatto mātukucchimhā nikkhamati, visadova nikkhamati amakkhito udena amakkhito semhena amakkhito ruhirena amakkhito kenaci asucinā suddho visado.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Ānanda, ví như một viên ngọc ma-ni bảo châu đặt trên một tấm vải Ba-la-nại. Viên ngọc không làm nhiễm ô tấm vải Ba-la-nại, tấm vải Ba-la-nai cũng không làm nhiễm ô hòn ngọc.<br>
+<span lang="pi" class="pali">
+Seyyathāpi, ānanda, maṇiratanaṁ kāsike vatthe nikkhittaṁ neva maṇiratanaṁ kāsikaṁ vatthaṁ makkheti nāpi kāsikaṁ vatthaṁ maṇiratanaṁ makkheti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vì sao vậy?<br>
+<span lang="pi" class="pali">
+Taṁ kissa hetu?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vì cả hai đều thanh tịnh.<br>
+<span lang="pi" class="pali">
+Ubhinnaṁ suddhattā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Cũng vậy, này Ānanda, khi Bồ-tát từ bụng mẹ sanh ra, Ngài sanh ra thanh tịnh, không bị nhiễm ô bởi nước nhớt nào, không bị nhiễm ô bởi loại mủ nào, không bị nhiễm ô bởi loại máu nào, không bị nhiễm ô bởi bất cứ vật bất tịnh nào, thanh tịnh, trong sạch’.<br>
+<span lang="pi" class="pali">
+Evameva kho, ānanda, yadā bodhisatto mātukucchimhā nikkhamati, visadova nikkhamati amakkhito udena amakkhito semhena amakkhito ruhirena amakkhito kenaci asucinā suddho visado’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vì rằng, bạch Thế Tôn, con thọ trì sự việc này, bạch Thế Tôn, là một hy hữu, một vị tằng hữu của Thế Tôn.<br>
+<span lang="pi" class="pali">
+Yampi, bhante …pe… idampāhaṁ, bhante, bhagavato acchariyaṁ abbhutadhammaṁ dhāremi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Bạch Thế Tôn, con tận mặt nghe, con tận mặt ghi nhớ từ Thế Tôn:<br>
+<span lang="pi" class="pali">
+Sammukhā metaṁ, bhante, bhagavato sutaṁ, sammukhā paṭiggahitaṁ:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Khi Bồ-tát từ bụng mẹ sanh ra, này Ānanda, hai dòng nước từ hư không hiện ra, một dòng lạnh, một dòng nóng. Hai dòng nước ấy tắm rửa sạch sẽ cho Bồ-tát và cho bà mẹ’.<br>
+<span lang="pi" class="pali">
+‘yadā, ānanda, bodhisatto mātukucchimhā nikkhamati, dve udakassa dhārā antalikkhā pātubhavanti—ekā sītassa, ekā uṇhassa; yena bodhisattassa udakakiccaṁ karonti mātu cā’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vì rằng, bạch Thế Tôn, con thọ trì sự việc này, bạch Thế Tôn, là một hy hữu, một vị tằng hữu của Thế Tôn.<br>
+<span lang="pi" class="pali">
+Yampi, bhante …pe… idampāhaṁ, bhante, bhagavato acchariyaṁ abbhutadhammaṁ dhāremi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Bạch Thế Tôn, con tận mặt nghe, con tận mặt ghi nhớ từ Thế Tôn:<br>
+<span lang="pi" class="pali">
+Sammukhā metaṁ, bhante, bhagavato sutaṁ, sammukhā paṭiggahitaṁ:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Bồ-tát khi sanh ra, này Ānanda, Ngài đứng vững, thăng bằng trên hai chân, mặt hướng phía Bắc, bước đi bảy bước, một lọng trắng được che lên. Ngài nhìn khắp cả mọi phương, lên tiếng như con ngưu vương, thốt ra lời như sau: Ta là bậc tối thượng ở trên đời! Ta là bậc tối tôn ở trên đời! Ta là bậc cao nhất ở trên đời! Nay là đời sống cuối cùng, không còn phải tái sanh ở đời này nữa’.<br>
+<span lang="pi" class="pali">
+‘sampatijāto, ānanda, bodhisatto samehi pādehi pathaviyaṁ patiṭṭhahitvā uttarābhimukho sattapadavītihārena gacchati, setamhi chatte anudhāriyamāne, sabbā ca disā viloketi, āsabhiñca vācaṁ bhāsati—aggohamasmi lokassa, jeṭṭhohamasmi lokassa, seṭṭhohamasmi lokassa. Ayamantimā jāti, natthi dāni punabbhavo’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vì rằng, bạch Thế Tôn, con thọ trì sự việc này, bạch Thế Tôn, là một hy hữu, một vị tằng hữu của Thế Tôn.<br>
+<span lang="pi" class="pali">
+Yampi, bhante …pe… idampāhaṁ, bhante, bhagavato acchariyaṁ abbhutadhammaṁ dhāremi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Bạch Thế Tôn, con tận mặt nghe, con tận mặt ghi nhớ từ Thế Tôn:<br>
+<span lang="pi" class="pali">
+Sammukhā metaṁ, bhante, bhagavato sutaṁ, sammukhā paṭiggahitaṁ:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Khi Bồ-tát từ bụng mẹ sanh ra, này Ānanda, khi ấy một hào quang vô lượng thần diệu, thắng xa oai lực của chư Thiên, hiện ra cùng khắp thế giới, gồm có các thế giới trên chư Thiên, thế giới của các Ma vương và Phạm thiên, và thế giới ở dưới gồm các Sa-môn, Bà-la-môn, chư Thiên và loài Người.<br>
+<span lang="pi" class="pali">
+‘yadā, ānanda, bodhisatto mātukucchimhā nikkhamati, atha sadevake loke samārake sabrahmake sassamaṇabrāhmaṇiyā pajāya sadevamanussāya appamāṇo uḷāro obhāso loke pātubhavati atikkammeva devānaṁ devānubhāvaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Cho đến các cảnh giới giữa các thế giới, tối tăm, u ám, không có nền tảng, những cảnh giới mà mặt trăng mặt trời với đại thần lực, đại oai lực như vậy cũng không thể chiếu thấu, trong những cảnh giới ấy một hào quang vô lượng, thắng xa oai lực chư Thiên hiện ra.<br>
+<span lang="pi" class="pali">
+Yāpi tā lokantarikā aghā asaṁvutā andhakārā andhakāratimisā yatthapime candimasūriyā evaṁmahiddhikā evaṁmahānubhāvā ābhāya nānubhonti tatthapi appamāṇo uḷāro obhāso loke pātubhavati atikkammeva devānaṁ devānubhāvaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Và các chúng sanh sống tại các chỗ ấy, nhờ hào quang ấy mới thấy nhau mà nói: Cũng có những chúng sanh khác sống ở đây.<br>
+<span lang="pi" class="pali">
+Yepi tattha sattā upapannā tepi tenobhāsena aññamaññaṁ sañjānanti—aññepi kira, bho, santi sattā idhūpapannāti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Và mười ngàn thế giới này chuyển động, rung động, chuyển động mạnh. Và hào quang vô lượng thần diệu, thắng xa oai lực của chư Thiên hiện ra ở thế giới.<br>
+<span lang="pi" class="pali">
+Ayañca dasasahassī lokadhātu saṅkampati sampakampati sampavedhati, appamāṇo ca uḷāro obhāso loke pātubhavati atikkammeva devānaṁ devānubhāvan’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vì rằng, bạch Thế Tôn, con thọ trì sự việc này, bạch Thế Tôn là một hy hữu, một vị tằng hữu của Thế Tôn.”<br>
+<span lang="pi" class="pali">
+Yampi, bhante …pe… idampāhaṁ, bhante, bhagavato acchariyaṁ abbhutadhammaṁ dhāremī”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Do vậy, này Ānanda, hãy thọ trì sự việc này là một hy hữu, một vị tằng hữu của Như Lai.<br>
+<span lang="pi" class="pali">
+“Tasmātiha tvaṁ, ānanda, idampi tathāgatassa acchariyaṁ abbhutadhammaṁ dhārehi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ở đây, này Ānanda, các cảm thọ khởi lên nơi Thế Tôn được biết đến; được biết đến, chúng an trú; được biết đến, chúng đi đến biến hoại; các tưởng được biết đến; các tầm khởi lên được biết đến; được biết đến, chúng an trú; được biết đến, chúng đi đến biến hoại.<br>
+<span lang="pi" class="pali">
+Idhānanda, tathāgatassa viditā vedanā uppajjanti, viditā upaṭṭhahanti, viditā abbhatthaṁ gacchanti; viditā saññā uppajjanti …pe… viditā vitakkā uppajjanti, viditā upaṭṭhahanti, viditā abbhatthaṁ gacchanti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Ānanda, hãy thọ trì việc này là một hy hữu, một vị tằng hữu của Như Lai.”<br>
+<span lang="pi" class="pali">
+Idampi kho tvaṁ, ānanda, tathāgatassa acchariyaṁ abbhutadhammaṁ dhārehī”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vì rằng, bạch Thế Tôn, các cảm thọ khởi lên nơi Thế Tôn được biết đến; được biết đến, chúng an trú; được biết đến, chúng đi đến biến hoại; các tưởng được biết đến; các tầm khởi lên được biết đến; được biết đến, chúng an trú; được biết đến, chúng đi đến biến hoại.<br>
+<span lang="pi" class="pali">
+“Yampi, bhante, bhagavato viditā vedanā uppajjanti, viditā upaṭṭhahanti, viditā abbhatthaṁ gacchanti; viditā saññā … viditā vitakkā uppajjanti, viditā upaṭṭhahanti, viditā abbhatthaṁ gacchanti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Bạch Thế Tôn, con thọ trì sự việc này là một hy hữu, một vị tằng hữu của Như Lai.”<br>
+<span lang="pi" class="pali">
+Idampāhaṁ, bhante, bhagavato acchariyaṁ abbhutadhammaṁ dhāremī”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Tôn giả Ānanda nói như vậy. Bậc Ðạo Sư chấp nhận.<br>
+<span lang="pi" class="pali">
+Idamavoca āyasmā ānando. Samanuñño satthā ahosi;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Các Tỷ-kheo hoan hỷ tín thọ lời Tôn giả Ānanda nói.<br>
+<span lang="pi" class="pali">
+attamanā ca te bhikkhū āyasmato ānandassa bhāsitaṁ abhinandunti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+<span lang="pi" class="vi">
+Acchariyaabbhutasuttaṁ niṭṭhitaṁ tatiyaṁ.<br>
+</span>
+</p>
+
+
+
+<!-- COPY CONTENT SUTTA Ở ĐÂY -->
+
+
+
+<br>
+<p><p style="text-align: right;font-style: italic;">Hoà Thượng Thích Minh Châu dịch Việt</span></p>
+
+
+
+
+
+
+
+
+</section>  <!-- End English and Pali -->
+<div id="nextprev"><a id="previous-sutta" href="./mn122.html#content"></a><a id="next-sutta" href="./mn124.html#content"></a></div>
+</div>  <!--End Content -->
+</div>  <!-- End Page -->
+
+
+
+
+
+
+<footer>
+					 <!-- End bottom links -->
+</footer>
+
+
+ 
+ <!-- Scripts -->
+
+ <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      if (typeof enablePaliLookup === "function") {
+        enablePaliLookup();
+      } else {
+        console.error("enablePaliLookup is not defined");
+      }
+    });
+  </script>
+
+ <script>
+ // Script to open and close sidebar
+ 	function w3_open() {
+ 	document.getElementById("mySidebar").style.display = "block";
+ 	}
+ 		function w3_close() {
+ 		document.getElementById("mySidebar").style.display = "none";
+ 	}
+ </script>
+ <script>
+ 		var app = document.getElementsByTagName("BODY")[0];
+ 		if (localStorage.lightMode == "dark") {
+ 			app.setAttribute("light-mode", "dark");
+ 	}
+ </script>
+ 
+ <script>
+ 		function toggle_light_mode() {
+ 			var app = document.getElementsByTagName("BODY")[0];
+ 				if (localStorage.lightMode == "dark") {
+ 			localStorage.lightMode = "light";
+ 			app.setAttribute("light-mode", "light");
+ 		} else {
+ 					localStorage.lightMode = "dark";
+ 					app.setAttribute("light-mode", "dark");
+ 	}
+ 		}
+ 
+ 		window.addEventListener("storage", function () {
+ 			if (localStorage.lightMode == "dark") {
+ 				app.setAttribute("light-mode", "dark");
+ 				} else {
+ 				app.setAttribute("light-mode", "light");
+ 		}
+ 		}, false);
+ 
+ </script>
+ <script src="../js/footer.js"></script><script src="../js/dpd_deconstructor.js"></script><script src="../js/dpd_ebts.js"></script><script src="../js/dpd_i2h.js"></script>
+ <script src="/sw.js"></script>
+ </body>
+ </html>
