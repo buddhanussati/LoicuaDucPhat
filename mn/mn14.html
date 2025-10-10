@@ -1,14 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
 <head>
  	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
  	<link rel="icon" type="image/x-icon" href="../images/favicon.ico">
- 	<title>Majjhima Nikāya 14</title>
  	<meta name="viewport" content="width=device-width, initial-scale=1">
 		<!-- Loading manifest -->
 	<link rel="manifest" href="../manifest.json">
- 	<!-- Loading third party fonts -->
- 	<link href="../fonts/font-awesome.min.css" rel="stylesheet" type="text/css">
  	<!-- Loading main and menu stylesheets -->
  	<link rel="stylesheet" href="../css/w3.css">
  	<link rel="stylesheet" href="../css/css.css">
@@ -16,25 +13,44 @@
  	<script src="../js/jquery-1.10.2.min.js"></script>
  	<script src="../js/controlpanel.js"></script>
  	<script src="../js/mousetrap.min.js"></script>
- </head>
+    <script src="../js/pali-lookup-standalone.js"></script>
+
+ <script src="../js/suttaFiles.js"></script>
+<script>
+ // Script to open random Sutta
+ function openRandomSutta() {
+  const randomIndex = Math.floor(Math.random() * suttaFiles.length);
+  const selectedFile = suttaFiles[randomIndex];
+
+  // Get root path of your site 
+  const currentPath = location.pathname;
+  const rootPath = currentPath.split("/").slice(0, -2).join("/") + "/";
+
+  // Redirect to the correct file
+  window.location.href = rootPath + selectedFile;
+}
+</script>
+
+
+</head>
  <body class="container">
  <div class="header-background">
  <!-- Header -->
  <div class="w3-header w3-content w3-padding w3-left-align bwcontainer">
  	<div class="centered">
- 		<button class="light-mode-button" aria-label="Toggle Light Mode" onclick="toggle_light_mode()">
+ 		<button class="light-mode-button" aria-label="Bật Chế Độ Sáng" onclick="toggle_light_mode()">
  			<span></span>
  			<span></span>
  		</button>
- 		<span class="box-lbl">Light/Dark</span>
+ 		<span class="box-lbl">Sáng/Tối</span>
  	</div> <!-- Centered -->
- 		<a href="../home/index.html" id="bwlogo"><img src="../images/headerlogo.png" alt="The Buddha's Words logo" class="w3-image"></a>
+ 		<a href="../home/index.html" id="bwlogo"><img src="../images/headerlogo.png" alt="Logo Lời Của Đức Phật" class="w3-image"></a>
  		<div class="w3-bar bwcontainer">
  			<div id="searchlinks">
- 			<a href="../home/engsearch.html"><span class="w3-bar-item"><i class="fa fa-search"></i>&nbsp;Search English</span></a>
- 			<a href="../home/palisearch.html"><span class="w3-bar-item"><i class="fa fa-search"></i>&nbsp;Search Pali</span></a>
+ 			<a href="../home/visearch.html"><span class="w3-bar-item"><i class="fa fa-search"></i>&nbsp;Tìm Tiếng Việt</span></a>
+ 			<a href="../home/palisearch.html"><span class="w3-bar-item"><i class="fa fa-search"></i>&nbsp;Tìm Tiếng Pali</span></a>
  			</div><!-- End Searchlinks div -->
- 			<div class="help"><span><a href="../home/help.html"><img src="../images/help_icon.png" title="Help" alt="Help"></a></span></div>
+ 			<div class="help"><span><a href="../home/help.html"><img src="../images/help_icon.png" title="Trợ Giúp" alt="Help"></a></span></div>
  		</div> <!-- End w3-bar bwcontainer --> 	</div> <!-- End w3-header w3-content w3-padding w3-left-align bwcontainer -->
  </div> <!-- End header-background -->
  <!-- Top menu -->
@@ -43,50 +59,44 @@
  	<div class="w3-button w3-padding-8 w3-left w3-hide-large" onclick="w3_open()">☰</div>
  		<div id="navbar" class="w3-hide-small w3-hide-medium bwcontainer3">
  			<ul id="css3menu0">
- 				<li class="topfirst" id="home"><a href="../home/index.html" class="w3-hide-small">Home</a></li>
- 			<li class="topmenu" id="dn"><a href="../dn/dn.html" class="w3-hide-small">Dīgha Nikāya</a></li>
- 				<li class="topmenu" id="mn"><a href="../mn/mn.html" class="pressed w3-hide-small">Majjhima Nikāya</a></li>
- 				<li class="topmenu" id="sn"><a href="../sn/sn.html" class="w3-hide-small"><i class="fa fa-caret-down"></i>&nbsp;Saṁyutta Nikāya</a>
+ 				<li class="topfirst" id="home"><a href="../home/index.html" class="w3-hide-small">Trang Chủ</a></li>
+  				<li class="topmenu" id="dn"><a href="../dn/dn.html" class="pressed w3-hide-small">Trường Bộ Kinh</a></li>
+ 				<li class="topmenu" id="mn"><a href="../mn/mn.html" class="w3-hide-small">Trung Bộ Kinh</a></li>
+ 				<li class="topmenu" id="sn"><a href="../sn/sn.html" class="w3-hide-small"><i class="fa fa-caret-down"></i>&nbsp;Tương Ưng Bộ Kinh</a>
  					<ul>
- 						<li><a href="../sn/sn01.html" class="w3-hide-small">Vol. 1 ‒ The Book with Verses</a></li>
- 						<li><a href="../sn/sn02.html" class="w3-hide-small">Vol. 2 ‒ The Book of Causation</a></li>
- 						<li><a href="../sn/sn03.html" class="w3-hide-small">Vol. 3 ‒ The Book of the Aggregates</a></li>
- 						<li><a href="../sn/sn04.html" class="w3-hide-small">Vol. 4 ‒ The Book of the Six Sense Bases</a></li>
- 						<li><a href="../sn/sn05.html" class="w3-hide-small">Vol. 5 ‒ The Great Book</a></li>
+ 						<li><a href="../sn/sn01.html" class="w3-hide-small">Tập I - Thiên Có Kệ</a></li>
+ 						<li><a href="../sn/sn02.html" class="w3-hide-small">Tập II - Thiên Nhân Duyên</a></li>
+ 						<li><a href="../sn/sn03.html" class="w3-hide-small">Tập III - Thiên Uẩn</a></li>
+ 						<li><a href="../sn/sn04.html" class="w3-hide-small">Tập IV - Thiên Sáu Xứ</a></li>
+ 						<li><a href="../sn/sn05.html" class="w3-hide-small">Tập V - Thiên Ðại Phẩm</a></li>
  					</ul>
- 				<li class="topmenu" id="an"><a href="../an/an.html" class="w3-hide-small"><i class="fa fa-caret-down"></i>&nbsp;Aṅguttara Nikāya</a>
+ 				<li class="topmenu" id="an"><a href="../an/an.html" class="w3-hide-small"><i class="fa fa-caret-down"></i>&nbsp;Tăng Chi Bộ Kinh</a>
  					<ul>
- 						<li><a href="../an/an1.html" class="w3-hide-small">The Ones</a></li>
- 						<li><a href="../an/an2.html" class="w3-hide-small">The Twos</a></li>
- 						<li><a href="../an/an3.html" class="w3-hide-small">The Threes</a></li>
- 						<li><a href="../an/an4.html" class="w3-hide-small">The Fours</a></li>
- 						<li><a href="../an/an5.html" class="w3-hide-small">The Fives</a></li>
- 						<li><a href="../an/an6.html" class="w3-hide-small">The Sixes</a></li>
- 						<li><a href="../an/an7.html" class="w3-hide-small">The Sevens</a></li>
- 						<li><a href="../an/an8.html" class="w3-hide-small">The Eights</a></li>
- 						<li><a href="../an/an9.html" class="w3-hide-small">The Nines</a></li>
- 						<li><a href="../an/an10.html" class="w3-hide-small">The Tens</a></li>
- 						<li><a href="../an/an11.html" class="w3-hide-small">The Elevens</a></li>
- 					</ul>
- 				</li>
- 				<li class="topmenu" id="kn"><a href="../kn/kn.html" class="w3-hide-small"><i class="fa fa-caret-down"></i>&nbsp;Khuddaka Nikāya</a>
- 					<ul>
- 						<li><a href="../kp/kp.html" class="w3-hide-small">The Khuddakapatha</a></li>
- 						<li><a href="../dhp/dhp.html" class="w3-hide-small">The Dhammapada</a></li>
- 						<li><a href="../snp/snp.html" class="w3-hide-small">Sutta Nipata</a></li>
- 						<li><a href="../ud/ud.html" class="w3-hide-small">Udana</a></li>
- 						<li><a href="../it/it.html" class="w3-hide-small">Itivuttaka</a></li>
- 						<li><a href="../tha/tha.html" class="w3-hide-small">The Theragatha</a></li>
- 						<li><a href="../thi/thi.html" class="w3-hide-small">The Therigatha</a></li>
+ 						<li><a href="../an/an1.html" class="w3-hide-small">Chương Một Pháp</a></li>
+ 						<li><a href="../an/an2.html" class="w3-hide-small">Chương Hai Pháp</a></li>
+ 						<li><a href="../an/an3.html" class="w3-hide-small">Chương Ba Pháp</a></li>
+ 						<li><a href="../an/an4.html" class="w3-hide-small">Chương Bốn Pháp</a></li>
+ 						<li><a href="../an/an5.html" class="w3-hide-small">Chương Năm Pháp</a></li>
+ 						<li><a href="../an/an6.html" class="w3-hide-small">Chương Sáu Pháp</a></li>
+ 						<li><a href="../an/an7.html" class="w3-hide-small">Chương Bảy Pháp</a></li>
+ 						<li><a href="../an/an8.html" class="w3-hide-small">Chương Tám Pháp</a></li>
+ 						<li><a href="../an/an9.html" class="w3-hide-small">Chương Chín Pháp</a></li>
+ 						<li><a href="../an/an10.html" class="w3-hide-small">Chương Mười Pháp</a></li>
+ 						<li><a href="../an/an11.html" class="w3-hide-small">Chương Mười Một Pháp</a></li>
  					</ul>
  				</li>
- 				<li class="toplast" id="vi"><a href="../vi/vi.html" class="w3-hide-small"><i class="fa fa-caret-down"></i>&nbsp;Vinaya Piṭaka</a>
+ 				<li class="topmenu" id="kn"><a href="../kn/kn.html" class="w3-hide-small"><i class="fa fa-caret-down"></i>&nbsp;Tiểu Bộ Kinh</a>
  					<ul>
- 						<li><a href="../vi/kd.html" class="w3-hide-small">Khandhaka</a></li>
- 						<li><a href="../vi/bu-vb.html" class="w3-hide-small">Bhikkhu Vibhaṅga</a></li>
- 						<li><a href="../vi/bu-pt.html" class="w3-hide-small">Bhikkhu Pātimokkha</a></li>
- 						<li><a href="../vi/bi-pt.html" class="w3-hide-small">Bhikkhunī Pātimokkha</a></li>
- 						<li><a href="../vi/bi-vb.html" class="w3-hide-small">Bhikkhunī Vibhaṅga</a></li>
+ 						<li><a href="../kp/kp.html" class="w3-hide-small">Kinh Tiểu Tụng</a></li>
+ 						<li><a href="../dhp/dhp.html" class="w3-hide-small">Kinh Pháp Cú</a></li>
+ 						<li><a href="../snp/snp.html" class="w3-hide-small">Kinh Tập</a></li>
+ 						<li><a href="../ud/ud.html" class="w3-hide-small">Kinh Phật Tự Thuyết</a></li>
+ 						<li><a href="../it/it.html" class="w3-hide-small">Kinh Phật Thuyết Như Vậy</a></li>
+ 						<li><a href="../tha/tha.html" class="w3-hide-small">Trưởng Lão Tăng Kệ</a></li>
+ 						<li><a href="../thi/thi.html" class="w3-hide-small">Trưởng Lão Ni Kệ</a></li>
+ 					</ul>
+ 				</li>
+				<li class="toplast" id="rd"><a href="../rd/rd.html" class="w3-hide-small"></i>Kinh Ngẫu Nhiên Theo Nhóm</a>
  					</ul>
  				</li>
  			</ul>
@@ -99,252 +109,966 @@
  		<div class="w3-bar-block w3-white">
  			<a href="../home/index.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-home fa-lg"></i>&nbsp;&nbsp;&nbsp;Home</a>
  			<a href="../guide/guide.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Guide</a>
- 			<a href="../dn/dn.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Dīgha Nikāya</a>
- 			<a href="../mn/mn.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Majjhima Nikāya</a>
- 			<a href="../sn/sn.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Saṁyutta Nikāya</a>
- 			<a href="../an/an.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Aṅguttara Nikāya</a>
- 			<a href="../kn/kn.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Khuddaka Nikāya</a>
- 			<a href="../vi/vi.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Vinaya Piṭaka</a>
+ 			<a href="../dn/dn.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Trường Bộ Kinh</a>
+ 			<a href="../mn/mn.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Trung Bộ Kinh</a>
+ 			<a href="../sn/sn.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Tương Ưng Bộ Kinh</a>
+ 			<a href="../an/an.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Tăng Chi Bộ Kinh
+ 			<a href="../kn/kn.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Tiểu Bộ Kinh</a>
+			<a href="../rd/rd.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>Kinh Ngẫu Nhiên Theo Nhóm</a>
  		</div>
  </nav>
-
- <!-- !PAGE CONTENT! --> 
+ 
+ 
+ 
+   <!-- !PAGE CONTENT! --> 
 <div class="w3-main w3-content w3-padding w3-left-align bwcontainer4">
-
-<h2>Majjhima Nikāya</h2>
-
 <div id="content">
+<h2>Majjhima Nikāya - Trung Bộ Kinh</h2>
+<h5><span style="font-style: italic;">Hoà Thượng Thích Minh Châu dịch Việt</span></h5>
 
-<h3>MN14: Cūḷadukkhakkhandha Sutta — The Shorter Discourse on the Mass of Suffering</h3>
-
-<div id="metaarea">
-	<ul class="translator">
-		<li>©&nbsp;Translated from the Pali by Bhante Sujato.&nbsp;<a href="../home/copyright.html#sc">(More copyright information)</a>
-	</ul>
 </div>
 
-<section class="raw_sutta">
-<div lang="en">
+<br>
+ 	<title>       Trung Bộ 14            </title>
+
+<p lang="vi" class="vi"; style="text-align: center">
+Trung Bộ 14<br>
+<span lang="pi" class="pali">
+Majjhima Nikāya 14<br>
+</span>
+</p>
+
+<p lang="vi" class="vi"; style="text-align: center">
+Tiểu Kinh Khổ Uẩn<br>
+<span lang="pi" class="pali">
+Cūḷadukkhakkhandhasutta<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Như vầy tôi nghe:<br>
+<span lang="pi" class="pali">
+Evaṁ me sutaṁ—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Một thời, Thế Tôn sống giữa giòng họ Sakka (Thích-ca), trong thành Kapilavatthu (Ca-tỳ-la-vệ) tại vườn Nigrodhā (Ni-câu-luật Viên).<br>
+<span lang="pi" class="pali">
+ekaṁ samayaṁ bhagavā sakkesu viharati kapilavatthusmiṁ nigrodhārāme.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Lúc ấy, có người Sakka tên Mahānāma đến chỗ Thế Tôn ở, sau khi đến xong, đảnh lễ Ngài rồi ngồi xuống một bên. Sau khi ngồi xuống một bên, Mahānāma, dòng họ Sakka bạch Thế Tôn:<br>
+<span lang="pi" class="pali">
+Atha kho mahānāmo sakko yena bhagavā tenupasaṅkami; upasaṅkamitvā bhagavantaṁ abhivādetvā ekamantaṁ nisīdi. Ekamantaṁ nisinno kho mahānāmo sakko bhagavantaṁ etadavoca:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Bạch Thế Tôn, đã lâu rồi, con đã hiểu như thế này lời dạy của Thế Tôn:<br>
+<span lang="pi" class="pali">
+“dīgharattāhaṁ, bhante, bhagavatā evaṁ dhammaṁ desitaṁ ājānāmi:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Tham là cấu uế của tâm, sân là cấu uế của tâm, si là cấu uế của tâm.’<br>
+<span lang="pi" class="pali">
+‘lobho cittassa upakkileso, doso cittassa upakkileso, moho cittassa upakkileso’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Bạch Thế Tôn, con đã hiểu như thế này lời dạy của Thế Tôn:<br>
+<span lang="pi" class="pali">
+Evañcāhaṁ, bhante, bhagavatā dhammaṁ desitaṁ ājānāmi:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Tham là cấu uế của tâm, sân là cấu uế của tâm, si là cấu uế của tâm.’<br>
+<span lang="pi" class="pali">
+‘lobho cittassa upakkileso, doso cittassa upakkileso, moho cittassa upakkileso’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Tuy vậy, đôi lúc các tham pháp chiếm cứ tâm con và an trú, các sân pháp chiếm cứ tâm con và an trú, các si pháp chiếm cứ tâm con và an trú.<br>
+<span lang="pi" class="pali">
+Atha ca pana me ekadā lobhadhammāpi cittaṁ pariyādāya tiṭṭhanti, dosadhammāpi cittaṁ pariyādāya tiṭṭhanti, mohadhammāpi cittaṁ pariyādāya tiṭṭhanti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Bạch Thế Tôn, con tự suy nghĩ: “Pháp nào tự trong ta không đoạn trừ được, do vậy các tham pháp xâm nhập tâm ta và an trú, các sân pháp xâm nhập tâm ta và an trú, các si pháp xâm nhập tâm ta và an trú?”<br>
+<span lang="pi" class="pali">
+Tassa mayhaṁ, bhante, evaṁ hoti: ‘kosu nāma me dhammo ajjhattaṁ appahīno yena me ekadā lobhadhammāpi cittaṁ pariyādāya tiṭṭhanti, dosadhammāpi cittaṁ pariyādāya tiṭṭhanti, mohadhammāpi cittaṁ pariyādāya tiṭṭhantī’”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Này Mahānāma, có một pháp trong Ông chưa được đoạn trừ, do vậy các tham pháp xâm nhập tâm Ông và an trú, các sân pháp xâm nhập tâm Ông và an trú, các si pháp xâm nhập tâm Ông và an trú.<br>
+<span lang="pi" class="pali">
+“So eva kho te, mahānāma, dhammo ajjhattaṁ appahīno yena te ekadā lobhadhammāpi cittaṁ pariyādāya tiṭṭhanti, dosadhammāpi cittaṁ pariyādāya tiṭṭhanti, mohadhammāpi cittaṁ pariyādāya tiṭṭhanti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Và này Mahānāma, pháp ấy trong Ông có thể đoạn trừ được, nếu Ông không sống trong gia đình, nếu Ông không thụ hưởng các dục vọng.<br>
+<span lang="pi" class="pali">
+So ca hi te, mahānāma, dhammo ajjhattaṁ pahīno abhavissa, na tvaṁ agāraṁ ajjhāvaseyyāsi, na kāme paribhuñjeyyāsi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Và này Mahānāma, vì pháp ấy trong Ông chưa được đoạn trừ, nên Ông sống trong gia đình và thụ hưởng các dục vọng.<br>
+<span lang="pi" class="pali">
+Yasmā ca kho te, mahānāma, so eva dhammo ajjhattaṁ appahīno tasmā tvaṁ agāraṁ ajjhāvasasi, kāme paribhuñjasi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Các dục vọng, vui ít, khổ nhiều, não nhiều, sự nguy hiểm ở đây lại nhiều hơn.<br>
+<span lang="pi" class="pali">
+‘Appassādā kāmā bahudukkhā bahupāyāsā, ādīnavo ettha bhiyyo’ti—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Mahānāma, nếu một vị Thánh đệ tử khéo thấy như vậy với như thật chánh trí tuệ, nhưng nếu vị này chưa chứng được hỷ lạc do ly dục, ly ác bất thiện pháp sanh, hay một pháp nào khác cao thượng hơn; như vậy vị ấy chưa khỏi bị các dục chi phối.<br>
+<span lang="pi" class="pali">
+iti cepi, mahānāma, ariyasāvakassa yathābhūtaṁ sammappaññāya sudiṭṭhaṁ hoti, so ca aññatreva kāmehi aññatra akusalehi dhammehi pītisukhaṁ nādhigacchati, aññaṁ vā tato santataraṁ; atha kho so neva tāva anāvaṭṭī kāmesu hoti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Mahānāma, khi nào vị Thánh đệ tử khéo thấy như vậy với như thật chánh trí tuệ: “Các dục, vui ít, khổ nhiều, não nhiều. Sự nguy hiểm ở đây lại nhiều hơn”, và vị này chứng được hỷ lạc do ly dục, ly ác bất thiện pháp sanh hay một pháp nào cao thượng hơn; như vậy vị ấy không bị các dục chi phối.<br>
+<span lang="pi" class="pali">
+Yato ca kho, mahānāma, ariyasāvakassa ‘appassādā kāmā bahudukkhā bahupāyāsā, ādīnavo ettha bhiyyo’ti—evametaṁ yathābhūtaṁ sammappaññāya sudiṭṭhaṁ hoti, so ca aññatreva kāmehi aññatra akusalehi dhammehi pītisukhaṁ adhigacchati aññaṁ vā tato santataraṁ; atha kho so anāvaṭṭī kāmesu hoti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Mahānāma, thuở xưa, khi Ta còn là Bồ-tát, chưa chứng được Bồ-đề, chưa thành Chánh Ðẳng Chánh Giác, Ta khéo thấy với như thật chánh trí tuệ: “Các dục vui ít, khổ nhiều, não nhiều, sự nguy hiểm ở đây lại nhiều hơn”, dầu Ta có thấy với như thật chánh trí tuệ như vậy, nhưng Ta chưa chứng được hỷ lạc do ly dục, ly ác bất thiện pháp sanh hay một pháp nào khác cao thượng hơn.<br>
+<span lang="pi" class="pali">
+Mayhampi kho, mahānāma, pubbeva sambodhā, anabhisambuddhassa bodhisattasseva sato, ‘appassādā kāmā bahudukkhā bahupāyāsā, ādīnavo ettha bhiyyo’ti—evametaṁ yathābhūtaṁ sammappaññāya sudiṭṭhaṁ hoti, so ca aññatreva kāmehi aññatra akusalehi dhammehi pītisukhaṁ nājjhagamaṁ, aññaṁ vā tato santataraṁ;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Và như vậy Ta biết rằng, Ta chưa khỏi bị các dục chi phối.<br>
+<span lang="pi" class="pali">
+atha khvāhaṁ neva tāva anāvaṭṭī kāmesu paccaññāsiṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Và này Mahānāma, khi nào Ta khéo thấy với như thật chánh trí tuệ: “Các dục, vui ít, khổ nhiều, não nhiều, sự nguy hiểm ở đây lại nhiều hơn”, và Ta chứng được hỷ lạc do ly dục, ly ác bất thiện pháp sanh hay một pháp nào khác cao thượng hơn;<br>
+<span lang="pi" class="pali">
+Yato ca kho me, mahānāma, ‘appassādā kāmā bahudukkhā bahupāyāsā, ādīnavo ettha bhiyyo’ti—evametaṁ yathābhūtaṁ sammappaññāya sudiṭṭhaṁ ahosi, so ca aññatreva kāmehi aññatra akusalehi dhammehi pītisukhaṁ ajjhagamaṁ, aññaṁ vā tato santataraṁ;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+như vậy Ta khỏi bị các dục chi phối.<br>
+<span lang="pi" class="pali">
+athāhaṁ anāvaṭṭī kāmesu paccaññāsiṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Và này Mahānāma, thế nào là vị ngọt các dục?<br>
+<span lang="pi" class="pali">
+Ko ca, mahānāma, kāmānaṁ assādo?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Mahānāma, có năm pháp tăng trưởng các dục này. Thế nào là năm?<br>
+<span lang="pi" class="pali">
+Pañcime, mahānāma, kāmaguṇā. Katame pañca?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Các sắc pháp do mắt nhận thức, khả ái, khả lạc, khả ý, khả hỷ, tương ưng với dục, hấp dẫn;<br>
+<span lang="pi" class="pali">
+Cakkhuviññeyyā rūpā iṭṭhā kantā manāpā piyarūpā kāmūpasaṁhitā rajanīyā;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+các tiếng do tai nhận thức …<br>
+<span lang="pi" class="pali">
+sotaviññeyyā saddā …pe…<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+các hương do mũi nhận thức …<br>
+<span lang="pi" class="pali">
+ghānaviññeyyā gandhā …<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+các vị do lưỡi nhận thức …<br>
+<span lang="pi" class="pali">
+jivhāviññeyyā rasā …<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+các xúc do thân nhận thức, khả ái, khả lạc, khả ý, khả hỷ, tương ưng với dục, hấp dẫn.<br>
+<span lang="pi" class="pali">
+kāyaviññeyyā phoṭṭhabbā iṭṭhā kantā manāpā piyarūpā kāmūpasaṁhitā rajanīyā—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Mahānāma, có năm pháp tăng trưởng các dục như vậy.<br>
+<span lang="pi" class="pali">
+ime kho, mahānāma, pañca kāmaguṇā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Mahānāma, y cứ vào năm pháp tăng trưởng các dục này, có lạc và hỷ khởi lên, như vậy là vị ngọt các dục.<br>
+<span lang="pi" class="pali">
+Yaṁ kho, mahānāma, ime pañca kāmaguṇe paṭicca uppajjati sukhaṁ somanassaṁ—ayaṁ kāmānaṁ assādo.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Và này Mahānāma, thế nào là sự nguy hiểm các dục?<br>
+<span lang="pi" class="pali">
+Ko ca, mahānāma, kāmānaṁ ādīnavo?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ở đây, này Mahānāma, có thiện nam tử nuôi sống với nghề nghiệp, như:<br>
+<span lang="pi" class="pali">
+Idha, mahānāma, kulaputto yena sippaṭṭhānena jīvikaṁ kappeti—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+đếm ngón tay, như tính toán, như ước toán, như làm ruộng, như buôn bán, như chăn bò, như bắn cung, như làm công cho vua, như làm một nghề nào khác.<br>
+<span lang="pi" class="pali">
+yadi muddāya yadi gaṇanāya yadi saṅkhānena yadi kasiyā yadi vaṇijjāya yadi gorakkhena yadi issatthena yadi rājaporisena yadi sippaññatarena,<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Người ấy phải chống đỡ lạnh, phải chống đỡ nóng, phải chịu đựng sự xúc chạm của ruồi, muỗi, gió, sức nóng, mặt trời, các loài bò sát, bị chết đói chết khát.<br>
+<span lang="pi" class="pali">
+sītassa purakkhato uṇhassa purakkhato ḍaṁsamakasavātātapasarīsapasamphassehi rissamāno khuppipāsāya mīyamāno;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Mahānāma, như vậy là sự nguy hiểm các dục, thiết thực hiện tại, thuộc khổ uẩn, lấy dục làm nhân, lấy dục làm duyên, là nguồn gốc của dục, là nguyên nhân của dục.<br>
+<span lang="pi" class="pali">
+ayampi, mahānāma, kāmānaṁ ādīnavo sandiṭṭhiko dukkhakkhandho kāmahetu kāmanidānaṁ kāmādhikaraṇaṁ kāmānameva hetu.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Mahānāma, nếu thiện nam tử ấy nỗ lực như vậy, tinh cần như vậy, tinh tấn như vậy, nhưng các tài sản ấy không được đến tay mình, vị ấy than vãn, buồn phiền khóc than, đấm ngực, mê man bất tỉnh: “Ôi! Sự nỗ lực của ta thật sự là vô ích, sự tinh cần của ta thật sự không kết quả”.<br>
+<span lang="pi" class="pali">
+Tassa ce, mahānāma, kulaputtassa evaṁ uṭṭhahato ghaṭato vāyamato te bhogā nābhinipphajjanti, so socati kilamati paridevati urattāḷiṁ kandati sammohaṁ āpajjati ‘moghaṁ vata me uṭṭhānaṁ, aphalo vata me vāyāmo’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Mahānāma, như vậy là sự nguy hiểm các dục, thiết thực hiện tại, thuộc khổ uẩn, lấy dục làm nhân, lấy dục làm duyên, là nguồn gốc của dục, là nguyên nhân của dục.<br>
+<span lang="pi" class="pali">
+Ayampi, mahānāma, kāmānaṁ ādīnavo sandiṭṭhiko dukkhakkhandho kāmahetu kāmanidānaṁ kāmādhikaraṇaṁ kāmānameva hetu.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Mahānāma, nếu thiện nam tử ấy nỗ lực như vậy, tinh cần như vậy, tinh tấn như vậy, và các tài sản ấy được đến tay mình, vì phải hộ trì các tài sản ấy, vị ấy cảm thọ sự đau khổ, ưu tư:<br>
+<span lang="pi" class="pali">
+Tassa ce, mahānāma, kulaputtassa evaṁ uṭṭhahato ghaṭato vāyamato te bhogā abhinipphajjanti. So tesaṁ bhogānaṁ ārakkhādhikaraṇaṁ dukkhaṁ domanassaṁ paṭisaṁvedeti:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Làm sao các vua chúa khỏi cướp đoạt chúng, làm sao trộm cướp khỏi cướp đoạt chúng, làm sao lửa khỏi đốt cháy, nước khỏi cuốn trôi, hay các kẻ thừa tự không xứng đáng khỏi cướp đoạt chúng?’<br>
+<span lang="pi" class="pali">
+‘kinti me bhoge neva rājāno hareyyuṁ, na corā hareyyuṁ, na aggi daheyya, na udakaṁ vaheyya, na appiyā vā dāyādā hareyyun’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Dầu vị ấy hộ trì như vậy, giữ gìn như vậy, vua chúa vẫn cướp đoạt các tài sản ấy, trộm cướp vẫn cướp đoạt, lửa vẫn đốt cháy, nước vẫn cuốn trôi hay các kẻ thừa tự không xứng đáng vẫn cướp đoạt chúng.<br>
+<span lang="pi" class="pali">
+Tassa evaṁ ārakkhato gopayato te bhoge rājāno vā haranti, corā vā haranti, aggi vā dahati, udakaṁ vā vahati, appiyā vā dāyādā haranti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vị ấy than vãn, buồn phiền, khóc than, đấm ngực, mê man bất tỉnh: “Cái đã thuộc của ta, nay ta không có nữa”.<br>
+<span lang="pi" class="pali">
+So socati kilamati paridevati urattāḷiṁ kandati sammohaṁ āpajjati: ‘yampi me ahosi tampi no natthī’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Mahānāma, như vậy là sự nguy hiểm các dục, thiết thực hiện tại, thuộc khổ uẩn, lấy dục làm nhân, lấy dục làm duyên, là nguồn gốc của dục, là nguyên nhân của dục.<br>
+<span lang="pi" class="pali">
+Ayampi, mahānāma, kāmānaṁ ādīnavo sandiṭṭhiko dukkhakkhandho kāmahetu kāmanidānaṁ kāmādhikaraṇaṁ kāmānameva hetu.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Lại nữa, này Mahānāma, do dục làm nhân, do dục làm duyên, do dục làm nguyên nhân, do chính dục làm nhân, vua tranh đoạt với vua, Sát-đế-lị tranh đoạt với Sát-đế-lị, Bà-la-môn tranh đoạt với Bà-la-môn, gia chủ tranh đoạt với gia chủ, mẹ tranh đoạt với con, con tranh đoạt với mẹ, cha tranh đoạt với con, con tranh đoạt với cha, anh em tranh đoạt với anh em, anh tranh đoạt với chị, chị tranh đoạt với anh, bạn bè tranh đoạt với bạn bè.<br>
+<span lang="pi" class="pali">
+Puna caparaṁ, mahānāma, kāmahetu kāmanidānaṁ kāmādhikaraṇaṁ kāmānameva hetu rājānopi rājūhi vivadanti, khattiyāpi khattiyehi vivadanti, brāhmaṇāpi brāhmaṇehi vivadanti, gahapatīpi gahapatīhi vivadanti, mātāpi puttena vivadati, puttopi mātarā vivadati, pitāpi puttena vivadati, puttopi pitarā vivadati, bhātāpi bhātarā vivadati, bhātāpi bhaginiyā vivadati, bhaginīpi bhātarā vivadati, sahāyopi sahāyena vivadati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Khi họ đã dấn mình vào tranh chấp, tranh luận, tranh đoạt; họ công phá nhau bằng tay; họ công phá nhau bằng đá; họ công phá nhau bằng gậy; họ công phá nhau bằng kiếm.<br>
+<span lang="pi" class="pali">
+Te tattha kalahaviggahavivādāpannā aññamaññaṁ pāṇīhipi upakkamanti, leḍḍūhipi upakkamanti, daṇḍehipi upakkamanti, satthehipi upakkamanti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ở đây họ đi đến tử vong, đi đến sự đau khổ gần như tử vong.<br>
+<span lang="pi" class="pali">
+Te tattha maraṇampi nigacchanti, maraṇamattampi dukkhaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Mahānāma, như vậy là sự nguy hiểm các dục, thiết thực hiện tại, thuộc khổ uẩn, lấy dục làm nhân, lấy dục làm duyên, là nguồn gốc của dục, là nguyên nhân của dục.<br>
+<span lang="pi" class="pali">
+Ayampi, mahānāma, kāmānaṁ ādīnavo sandiṭṭhiko dukkhakkhandho kāmahetu kāmanidānaṁ kāmādhikaraṇaṁ kāmānameva hetu.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Lại nữa, này Mahānāma, do dục làm nhân… do chính dục làm nhân, họ cầm mâu và thuẫn, họ đeo cung và tên, họ dàn trận hai mặt, và tên được nhắm bắn nhau, đao được quăng ném nhau, kiếm được vung chém nhau.<br>
+<span lang="pi" class="pali">
+Puna caparaṁ, mahānāma, kāmahetu kāmanidānaṁ kāmādhikaraṇaṁ kāmānameva hetu asicammaṁ gahetvā, dhanukalāpaṁ sannayhitvā, ubhatobyūḷhaṁ saṅgāmaṁ pakkhandanti usūsupi khippamānesu, sattīsupi khippamānāsu, asīsupi vijjotalantesu.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Họ bắn đâm nhau bằng tên, họ quăng đâm nhau bằng đao, họ chặt đầu nhau bằng kiếm.<br>
+<span lang="pi" class="pali">
+Te tattha usūhipi vijjhanti, sattiyāpi vijjhanti, asināpi sīsaṁ chindanti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ở đây họ đi đến tử vong, đi đến sự đau khổ gần như tử vong.<br>
+<span lang="pi" class="pali">
+Te tattha maraṇampi nigacchanti, maraṇamattampi dukkhaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Mahānāma, như vậy là sự nguy hiểm các dục, thiết thực hiện tại, thuộc khổ uẩn, lấy dục làm nhân, lấy dục làm duyên, là nguồn gốc của dục, là nguyên nhân của dục.<br>
+<span lang="pi" class="pali">
+Ayampi, mahānāma, kāmānaṁ ādīnavo sandiṭṭhiko dukkhakkhandho kāmahetu kāmanidānaṁ kāmādhikaraṇaṁ kāmānameva hetu.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Lại nữa, này Mahānāma, do dục làm nhân … do chính dục làm nhân, họ cầm mâu và thuẫn, họ đeo cung và tên, họ công phá thành quách mới trét vôi hồ và tên được nhắm bắn nhau, đao được quăng ném nhau, kiếm được vung chém nhau.<br>
+<span lang="pi" class="pali">
+Puna caparaṁ, mahānāma, kāmahetu kāmanidānaṁ kāmādhikaraṇaṁ kāmānameva hetu asicammaṁ gahetvā, dhanukalāpaṁ sannayhitvā, addāvalepanā upakāriyo pakkhandanti usūsupi khippamānesu, sattīsupi khippamānāsu, asīsupi vijjotalantesu.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ở đây, họ bắn đâm nhau bằng tên, họ quăng đâm nhau bằng đao, họ đổ nước phân sôi, họ đè bẹp nhau bằng đá, họ chặt đầu nhau bằng kiếm.<br>
+<span lang="pi" class="pali">
+Te tattha usūhipi vijjhanti, sattiyāpi vijjhanti, chakaṇakāyapi osiñcanti, abhivaggenapi omaddanti, asināpi sīsaṁ chindanti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ở đây họ đi đến tử vong, đi đến sự đau khổ gần như tử vong.<br>
+<span lang="pi" class="pali">
+Te tattha maraṇampi nigacchanti, maraṇamattampi dukkhaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Mahānāma, như vậy là sự nguy hiểm các dục, thiết thực hiện tại, thuộc khổ uẩn, lấy dục làm nhân, lấy dục làm duyên, là nguồn gốc của dục, là nguyên nhân của dục.<br>
+<span lang="pi" class="pali">
+Ayampi, mahānāma, kāmānaṁ ādīnavo sandiṭṭhiko dukkhakkhandho kāmahetu kāmanidānaṁ kāmādhikaraṇaṁ kāmānameva hetu.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Lại nữa, này Mahānāma, do dục làm nhân … do chính dục làm nhân, họ đột nhập nhà cửa, họ cướp giật đồ đạc, họ hành động như kẻ cướp, họ phục kích các đường lớn, họ đi đến vợ người.<br>
+<span lang="pi" class="pali">
+Puna caparaṁ, mahānāma, kāmahetu kāmanidānaṁ kāmādhikaraṇaṁ kāmānameva hetu sandhimpi chindanti, nillopampi haranti, ekāgārikampi karonti, paripanthepi tiṭṭhanti, paradārampi gacchanti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Các vua chúa khi bắt được một người như vậy liền áp dụng nhiều hình phạt sai khác.<br>
+<span lang="pi" class="pali">
+Tamenaṁ rājāno gahetvā vividhā kammakāraṇā kārenti—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Họ đánh bằng roi, họ đánh bằng gậy, họ đánh bằng côn, họ chặt tay, họ chặt chân, họ chặt tay chân, họ xẻo tai, họ cắt mũi, họ xẻo tai cắt mũi, họ dùng hình phạt vạc dầu, họ dùng hình phạt bối đồi hình (xẻo đỉnh đầu thành hình con sò), họ dùng hình phạt la hầu khẩu hình… Hỏa man hình (lấy lửa đốt thành vòng hoa)… chúc thủ hình (đốt tay)… khu hành hình (lấy rơm bện lại rồi siết chặt)… bì y hình (lấy vỏ cây làm áo)… linh dương hình (hình phạt con dê núi)… câu nhục hình (lấy câu móc vào thịt)… tiền hình (cắt thịt thành hình đồng tiền)… khối trấp hình… chuyển hình… cao đạp đài… họ tưới bằng dầu sôi, họ cho chó ăn, họ đóng cọc những người sống, họ lấy gươm chặt đầu.<br>
+<span lang="pi" class="pali">
+kasāhipi tāḷenti, vettehipi tāḷenti, aḍḍhadaṇḍakehipi tāḷenti; hatthampi chindanti, pādampi chindanti, hatthapādampi chindanti, kaṇṇampi chindanti, nāsampi chindanti, kaṇṇanāsampi chindanti; bilaṅgathālikampi karonti, saṅkhamuṇḍikampi karonti, rāhumukhampi karonti, jotimālikampi karonti, hatthapajjotikampi karonti, erakavattikampi karonti, cīrakavāsikampi karonti, eṇeyyakampi karonti, baḷisamaṁsikampi karonti, kahāpaṇikampi karonti, khārāpatacchikampi karonti, palighaparivattikampi karonti, palālapīṭhakampi karonti, tattenapi telena osiñcanti, sunakhehipi khādāpenti, jīvantampi sūle uttāsenti, asināpi sīsaṁ chindanti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ở đây họ đi đến tử vong, đi đến sự đau khổ gần như tử vong.<br>
+<span lang="pi" class="pali">
+Te tattha maraṇampi nigacchanti, maraṇamattampi dukkhaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Mahānāma, như vậy là sự nguy hiểm các dục, thiết thực hiện tại, thuộc khổ uẩn, lấy dục làm nhân, lấy dục làm duyên, là nguồn gốc của dục, là nguyên nhân của dục.<br>
+<span lang="pi" class="pali">
+Ayampi, mahānāma, kāmānaṁ ādīnavo sandiṭṭhiko dukkhakkhandho kāmahetu kāmanidānaṁ kāmādhikaraṇaṁ kāmānameva hetu.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Lại nữa, này Mahānāma, do dục làm nhân … do chính dục làm nhân, họ sống làm các ác hạnh về thân, làm các ác hạnh về lời nói, làm các ác hạnh về ý.<br>
+<span lang="pi" class="pali">
+Puna caparaṁ, mahānāma, kāmahetu kāmanidānaṁ kāmādhikaraṇaṁ kāmānameva hetu kāyena duccaritaṁ caranti, vācāya duccaritaṁ caranti, manasā duccaritaṁ caranti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Do họ sống làm các ác hạnh về thân, làm các ác hạnh về lời nói, làm các ác hạnh về ý, khi thân hoại mạng chung, họ sanh vào cõi dữ, ác thú, đọa xứ, địa ngục.<br>
+<span lang="pi" class="pali">
+Te kāyena duccaritaṁ caritvā, vācāya duccaritaṁ caritvā, manasā duccaritaṁ caritvā, kāyassa bhedā paraṁ maraṇā, apāyaṁ duggatiṁ vinipātaṁ nirayaṁ upapajjanti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Mahānāma, như vậy là sự nguy hiểm các dục, đưa đến đau khổ tương lai, là khổ uẩn, do dục làm nhân, do dục làm duyên, do dục làm nhân duyên, do chính dục làm nhân.<br>
+<span lang="pi" class="pali">
+Ayampi, mahānāma, kāmānaṁ ādīnavo samparāyiko, dukkhakkhandho kāmahetu kāmanidānaṁ kāmādhikaraṇaṁ kāmānameva hetu.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Mahānāma, một thời Ta ở tại Rājagaha (Vương Xá), trên núi Gijjhakuta (Linh Thứu).<br>
+<span lang="pi" class="pali">
+Ekamidāhaṁ, mahānāma, samayaṁ rājagahe viharāmi gijjhakūṭe pabbate.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Lúc bấy giờ, rất nhiều Nigaṇṭhā (Ni-kiền Tử) tại sườn núi Isigili, trên Kalasila (Hắc Nham), đứng thẳng người, không chịu ngồi và cảm giác những cảm thọ thống thiết, khổ đau, khốc liệt, bén nhạy.<br>
+<span lang="pi" class="pali">
+Tena kho pana samayena sambahulā nigaṇṭhā isigilipasse kāḷasilāyaṁ ubbhaṭṭhakā honti āsanapaṭikkhittā, opakkamikā dukkhā tibbā kharā kaṭukā vedanā vedayanti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Mahānāma, rồi Ta vào buổi chiều, từ Thiền tịnh độc cư đứng dậy, đi đến sườn núi Isigili, tại Kalasila chỗ các Nigaṇṭhā ấy ở, khi đến nơi Ta nói với các Nigaṇṭhā ấy:<br>
+<span lang="pi" class="pali">
+Atha khvāhaṁ, mahānāma, sāyanhasamayaṁ paṭisallānā vuṭṭhito yena isigilipasse kāḷasilā yena te nigaṇṭhā tenupasaṅkamiṁ; upasaṅkamitvā te nigaṇṭhe etadavocaṁ:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Chư Hiền, tại sao các Ngươi lại đứng thẳng người, không chịu ngồi xuống và cảm giác những cảm thọ thống thiết, khổ đau, khốc liệt, bén nhạy như vậy?’<br>
+<span lang="pi" class="pali">
+‘kiṁ nu tumhe, āvuso nigaṇṭhā, ubbhaṭṭhakā āsanapaṭikkhittā, opakkamikā dukkhā tibbā kharā kaṭukā vedanā vedayathā’ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Mahānāma, được nói vậy các Nigaṇṭhā ấy trả lời Ta như sau:<br>
+<span lang="pi" class="pali">
+Evaṁ vutte, mahānāma, te nigaṇṭhā maṁ etadavocuṁ:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Này Hiền giả, Nigaṇṭhā Nataputta – là bậc toàn tri, toàn kiến, tự xưng là có tri kiến toàn diện như sau:<br>
+<span lang="pi" class="pali">
+‘nigaṇṭho, āvuso, nāṭaputto sabbaññū sabbadassāvī aparisesaṁ ñāṇadassanaṁ paṭijānāti:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Dầu ta có đi, có đứng, có ngủ và có thức, tri kiến luôn luôn được tồn tại liên tục ở nơi ta.”<br>
+<span lang="pi" class="pali">
+“carato ca me tiṭṭhato ca suttassa ca jāgarassa ca satataṁ samitaṁ ñāṇadassanaṁ paccupaṭṭhitan”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vị ấy nói như sau:<br>
+<span lang="pi" class="pali">
+So evamāha:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Này các Nigaṇṭhā, nếu xưa kia Ngươi có làm ác nghiệp, hãy làm cho nghiệp ấy tiêu mòn bằng khổ hạnh khốc liệt này.<br>
+<span lang="pi" class="pali">
+“atthi kho vo, nigaṇṭhā, pubbe pāpakammaṁ kataṁ, taṁ imāya kaṭukāya dukkarakārikāya nijjīretha;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Sự không làm ác nghiệp trong tương lai chính do sự hộ trì về thân, sự hộ trì về lời nói, sự hộ trì về ý ngay trong hiện tại, ở tại nơi đây.<br>
+<span lang="pi" class="pali">
+yaṁ panettha etarahi kāyena saṁvutā vācāya saṁvutā manasā saṁvutā taṁ āyatiṁ pāpassa kammassa akaraṇaṁ;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Như vậy chính nhờ sự thiêu đốt, sự chấm dứt các nghiệp quá khứ, sự không làm các nghiệp mới, mà không có sự tiếp tục trong tương lai.<br>
+<span lang="pi" class="pali">
+iti purāṇānaṁ kammānaṁ tapasā byantibhāvā, navānaṁ kammānaṁ akaraṇā, āyatiṁ anavassavo;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Do sự không tiếp tục trong tương lai, các nghiệp được diệt trừ; do nghiệp được diệt trừ, khổ được diệt trừ; do khổ được diệt trừ, cảm thọ được diệt trừ; do cảm thọ được diệt trừ, tất cả khổ đau sẽ được tiêu mòn.”<br>
+<span lang="pi" class="pali">
+āyatiṁ anavassavā kammakkhayo, kammakkhayā dukkhakkhayo, dukkhakkhayā vedanākkhayo, vedanākkhayā sabbaṁ dukkhaṁ nijjiṇṇaṁ bhavissatī”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Và vì chúng tôi chấp nhận điều ấy, và chúng tôi kham nhẫn điều ấy, nên chúng tôi được hoan hỷ.’<br>
+<span lang="pi" class="pali">
+Tañca panamhākaṁ ruccati ceva khamati ca, tena camha attamanā’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Mahānāma, khi được nói vậy Ta nói với các Nigaṇṭhā ấy như sau:<br>
+<span lang="pi" class="pali">
+Evaṁ vutte, ahaṁ, mahānāma, te nigaṇṭhe etadavocaṁ:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Chư Hiền Nigaṇṭhā, các Ngươi có biết chăng, trong quá khứ, các Ngươi có mặt hay các Ngươi không có mặt?’<br>
+<span lang="pi" class="pali">
+‘kiṁ pana tumhe, āvuso nigaṇṭhā, jānātha—ahuvamheva mayaṁ pubbe na nāhuvamhā’ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Thưa Hiền giả, chúng tôi không biết.’<br>
+<span lang="pi" class="pali">
+‘No hidaṁ, āvuso’.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Chư Hiền Nigaṇṭhā, các Ngươi có biết chăng, trong quá khứ, các Ngươi không làm ác nghiệp hay có làm ác nghiệp?’<br>
+<span lang="pi" class="pali">
+‘Kiṁ pana tumhe, āvuso nigaṇṭhā, jānātha—akaramheva mayaṁ pubbe pāpakammaṁ na nākaramhā’ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Thưa Hiền giả, chúng tôi không biết.’<br>
+<span lang="pi" class="pali">
+‘No hidaṁ, āvuso’.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Chư Hiền Nigaṇṭhā, các Ngươi có biết chăng, các Ngươi không làm các nghiệp như thế này hay như thế kia?’<br>
+<span lang="pi" class="pali">
+‘Kiṁ pana tumhe, āvuso nigaṇṭhā, jānātha—evarūpaṁ vā evarūpaṁ vā pāpakammaṁ akaramhā’ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Thưa Hiền giả, chúng tôi không biết.’<br>
+<span lang="pi" class="pali">
+‘No hidaṁ, āvuso’.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Chư Hiền Nigaṇṭhā, các Ngươi có biết chăng:<br>
+<span lang="pi" class="pali">
+‘Kiṁ pana tumhe, āvuso nigaṇṭhā, jānātha—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Mức độ đau khổ như thế này đã trừ diệt, mức độ đau khổ như thế này cần phải trừ diệt? Hay, khi mức độ đau khổ như thế này đã được trừ diệt, thời tất cả đau khổ sẽ được trừ diệt?’<br>
+<span lang="pi" class="pali">
+ettakaṁ vā dukkhaṁ nijjiṇṇaṁ, ettakaṁ vā dukkhaṁ nijjīretabbaṁ, ettakamhi vā dukkhe nijjiṇṇe sabbaṁ dukkhaṁ nijjiṇṇaṁ bhavissatī’ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Thưa Hiền giả, chúng tôi không biết.’<br>
+<span lang="pi" class="pali">
+‘No hidaṁ, āvuso’.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Chư Hiền Nigaṇṭhā, các Ngươi có biết chăng, sự đoạn trừ ngay trong hiện tại các bất thiện pháp và sự thành tựu các thiện pháp?’<br>
+<span lang="pi" class="pali">
+‘Kiṁ pana tumhe, āvuso nigaṇṭhā, jānātha—diṭṭheva dhamme akusalānaṁ dhammānaṁ pahānaṁ, kusalānaṁ dhammānaṁ upasampadan’ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Thưa Hiền giả, chúng tôi không biết.’<br>
+<span lang="pi" class="pali">
+‘No hidaṁ, āvuso’.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Chư Hiền, theo các Ngươi nói, Nigaṇṭhā các Ngươi không biết:<br>
+<span lang="pi" class="pali">
+‘Iti kira tumhe, āvuso nigaṇṭhā, na jānātha—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Trong quá khứ các Ngươi có mặt hay các Ngươi không có mặt;<br>
+<span lang="pi" class="pali">
+ahuvamheva mayaṁ pubbe na nāhuvamhāti, na jānātha—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+các Ngươi không biết, trong quá khứ các Ngươi không làm các ác nghiệp hay có làm các ác nghiệp;<br>
+<span lang="pi" class="pali">
+akaramheva mayaṁ pubbe pāpakammaṁ na nākaramhāti, na jānātha—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+các Ngươi không biết, các Ngươi không làm ác nghiệp như thế này hay như thế kia;<br>
+<span lang="pi" class="pali">
+evarūpaṁ vā evarūpaṁ vā pāpakammaṁ akaramhāti, na jānātha—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+các Ngươi không biết, mức độ đau khổ như thế này đã được trừ diệt, mức độ đau khổ như thế này cần phải trừ diệt; mức độ đau khổ như thế này đã được trừ diệt thời tất cả đau khổ sẽ được trừ diệt;<br>
+<span lang="pi" class="pali">
+ettakaṁ vā dukkhaṁ nijjiṇṇaṁ, ettakaṁ vā dukkhaṁ nijjīretabbaṁ, ettakamhi vā dukkhe nijjiṇṇe sabbaṁ dukkhaṁ nijjiṇṇaṁ bhavissatīti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+các Ngươi không biết, sự đoạn trừ ngay trong hiện tại các bất thiện pháp và sự thành tựu các thiện pháp.<br>
+<span lang="pi" class="pali">
+Na jānātha—diṭṭheva dhamme akusalānaṁ dhammānaṁ pahānaṁ, kusalānaṁ dhammānaṁ upasampadaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Chư Hiền Nigaṇṭhā, sự kiện là như vậy thì những kẻ săn bắn ở đời, với bàn tay đẫm máu, làm các nghiệp hung dữ, được tái sanh trong loài người, những hạng ấy có xuất gia trong hàng ngũ Nigaṇṭhā các Ngươi không?’<br>
+<span lang="pi" class="pali">
+Evaṁ sante, āvuso nigaṇṭhā, ye loke luddā lohitapāṇino kurūrakammantā manussesu paccājātā te nigaṇṭhesu pabbajantī’ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Hiền giả Gotama, hạnh phúc không có thể thành tựu nhờ hạnh phúc. Hạnh phúc phải thành tựu nhờ đau khổ.<br>
+<span lang="pi" class="pali">
+‘Na kho, āvuso gotama, sukhena sukhaṁ adhigantabbaṁ, dukkhena kho sukhaṁ adhigantabbaṁ;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Hiền giả Gotama, nếu hạnh phúc có thể thành tựu nhờ hạnh phúc thì vua Magadha Seniya Bimbisāra (Tần-bà-ta-la) có thể đạt được hạnh phúc, và vua Magadha Seniya Bimbisāra sống hạnh phúc hơn Tôn giả Gotama.’<br>
+<span lang="pi" class="pali">
+sukhena cāvuso gotama, sukhaṁ adhigantabbaṁ abhavissa, rājā māgadho seniyo bimbisāro sukhaṁ adhigaccheyya, rājā māgadho seniyo bimbisāro sukhavihāritaro āyasmatā gotamenā’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Lời nói này thật sự đã được các Tôn giả Nigaṇṭhā nói lên một cách hấp tấp, không có suy tư.<br>
+<span lang="pi" class="pali">
+‘Addhāyasmantehi nigaṇṭhehi sahasā appaṭisaṅkhā vācā bhāsitā:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Hiền giả Gotama, hạnh phúc không có thể thành tựu nhờ hạnh phúc. Hạnh phúc phải thành tựu nhờ đau khổ.<br>
+<span lang="pi" class="pali">
+“na kho, āvuso gotama, sukhena sukhaṁ adhigantabbaṁ, dukkhena kho sukhaṁ adhigantabbaṁ;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Hiền giả Gotama, nếu hạnh phúc có thể thành tựu nhờ hạnh phúc, thời vua Magadha Seniya Bimbisāra có thể đạt được hạnh phúc; và vua Magadha Seniya Bimbisāra sống hạnh phúc hơn Tôn giả Gotama.”<br>
+<span lang="pi" class="pali">
+sukhena cāvuso gotama, sukhaṁ adhigantabbaṁ abhavissa, rājā māgadho seniyo bimbisāro sukhaṁ adhigaccheyya, rājā māgadho seniyo bimbisāro sukhavihāritaro āyasmatā gotamenā”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Và chính ta ở đây cần phải được hỏi như sau:<br>
+<span lang="pi" class="pali">
+Api ca ahameva tattha paṭipucchitabbo:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Giữa các bậc Tôn Giả, ai sống hạnh phúc hơn, vua Magadha Seniya Bimbisāra hay Tôn giả Gotama?’<br>
+<span lang="pi" class="pali">
+“ko nu kho āyasmantānaṁ sukhavihāritaro rājā vā māgadho seniyo bimbisāro āyasmā vā gotamo”ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Hiền giả Gotama, lời nói này thật sự đã được chúng tôi nói lên một cách hấp tấp, không có suy tư: Hiền giả Gotama, hạnh phúc không có thể thành tựu nhờ hạnh phúc, thời vua Magadha Seniya Bimbisāra có thể đạt được hạnh phúc; và vua Magadha Seniya Bimbisāra sống hạnh phúc hơn Tôn giả Gotama.<br>
+<span lang="pi" class="pali">
+Addhāvuso gotama, amhehi sahasā appaṭisaṅkhā vācā bhāsitā, na kho, āvuso gotama, sukhena sukhaṁ adhigantabbaṁ, dukkhena kho sukhaṁ adhigantabbaṁ; sukhena cāvuso gotama, sukhaṁ adhigantabbaṁ abhavissa, rājā māgadho seniyo bimbisāro sukhaṁ adhigaccheyya, rājā māgadho seniyo bimbisāro sukhavihāritaro āyasmatā gotamenāti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Hãy để yên sự việc như vậy. Nay chúng tôi hỏi Tôn giả Gotama:<br>
+<span lang="pi" class="pali">
+Api ca tiṭṭhatetaṁ, idānipi mayaṁ āyasmantaṁ gotamaṁ pucchāma:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Giữa quý vị Tôn giả, ai sống hạnh phúc hơn, vua Magadha Seniya Bimbisāra hay Tôn giả Gotama?”’<br>
+<span lang="pi" class="pali">
+“ko nu kho āyasmantānaṁ sukhavihāritaro rājā vā māgadho seniyo bimbisāro āyasmā vā gotamo”ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Chư Hiền Nigaṇṭhā, nay Ta sẽ hỏi các Ngươi một câu, cũng vấn đề này. Nếu các Ngươi vui lòng, hãy trả lời câu hỏi ấy.<br>
+<span lang="pi" class="pali">
+Tena hāvuso nigaṇṭhā, tumheva tattha paṭipucchissāmi, yathā vo khameyya tathā naṁ byākareyyātha.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Chư Hiền Nigaṇṭhā, các Ngươi nghĩ thế nào?<br>
+<span lang="pi" class="pali">
+Taṁ kiṁ maññathāvuso nigaṇṭhā, pahoti rājā māgadho seniyo bimbisāro,<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vua Magadha Seniya Bimbisāra có thể không di động thân thể, không nói lên một tiếng, sống cảm giác thuần túy lạc thọ luôn bảy ngày bảy đêm có được không?’<br>
+<span lang="pi" class="pali">
+aniñjamāno kāyena, abhāsamāno vācaṁ, satta rattindivāni ekantasukhaṁ paṭisaṁvedī viharitun’ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Này Hiền giả, không thể được.’<br>
+<span lang="pi" class="pali">
+‘No hidaṁ, āvuso’.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Chư Hiền Nigaṇṭhā, các Ngươi nghĩ thế nào?<br>
+<span lang="pi" class="pali">
+‘Taṁ kiṁ maññathāvuso nigaṇṭhā, pahoti rājā māgadho seniyo bimbisāro,<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vua Magadha Seniya Bimbisāra có thể không di động thân thể, không nói lên một tiếng, sống cảm giác thuần túy lạc thọ luôn sáu ngày sáu đêm …<br>
+<span lang="pi" class="pali">
+aniñjamāno kāyena, abhāsamāno vācaṁ, cha rattindivāni …pe…<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+luôn năm ngày năm đêm …<br>
+<span lang="pi" class="pali">
+pañca rattindivāni …<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+luôn bốn ngày bốn đêm …<br>
+<span lang="pi" class="pali">
+cattāri rattindivāni …<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+luôn ba ngày ba đêm …<br>
+<span lang="pi" class="pali">
+tīṇi rattindivāni …<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+luôn hai ngày hai đêm …<br>
+<span lang="pi" class="pali">
+dve rattindivāni …<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+luôn một ngày một đêm không?’<br>
+<span lang="pi" class="pali">
+ekaṁ rattindivaṁ ekantasukhaṁ paṭisaṁvedī viharitun’ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Này Hiền giả, không thể được.’<br>
+<span lang="pi" class="pali">
+‘No hidaṁ, āvuso’.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Chư Hiền Nigaṇṭhā, Ta có thể không di động thân thể, không nói lên một lời, sống cảm giác thuần túy lạc thọ luôn trong một ngày một đêm.<br>
+<span lang="pi" class="pali">
+‘Ahaṁ kho, āvuso nigaṇṭhā, pahomi aniñjamāno kāyena, abhāsamāno vācaṁ, ekaṁ rattindivaṁ ekantasukhaṁ paṭisaṁvedī viharituṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Chư Hiền Nigaṇṭhā, Ta có thể không di động thân thể , không nói lên một lời, sống cảm giác thuần túy lạc thọ luôn trong hai ngày hai đêm …<br>
+<span lang="pi" class="pali">
+Ahaṁ kho, āvuso nigaṇṭhā, pahomi aniñjamāno kāyena, abhāsamāno vācaṁ, dve rattindivāni …<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+luôn trong ba ngày ba đêm …<br>
+<span lang="pi" class="pali">
+tīṇi rattindivāni …<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+luôn trong bốn ngày bốn đêm …<br>
+<span lang="pi" class="pali">
+cattāri rattindivāni …<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+luôn trong năm ngày năm đêm …<br>
+<span lang="pi" class="pali">
+pañca rattindivāni …<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+luôn trong sáu ngày sáu đêm …<br>
+<span lang="pi" class="pali">
+cha rattindivāni …<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+luôn trong bảy ngày bảy đêm.<br>
+<span lang="pi" class="pali">
+satta rattindivāni ekantasukhaṁ paṭisaṁvedī viharituṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Chư Hiền Nigaṇṭhā, các Ngươi nghĩ thế nào? Sự kiện là như vậy, ai sống hạnh phúc hơn, vua Magadha Seniya Bimbisāra hay Ta?’<br>
+<span lang="pi" class="pali">
+Taṁ kiṁ maññathāvuso nigaṇṭhā, evaṁ sante ko sukhavihāritaro rājā vā māgadho seniyo bimbisāro ahaṁ vā’ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Sự kiện là như vậy, Tôn giả Gotama sống hạnh phúc hơn vua Magadha Seniya Bimbisāra.’”<br>
+<span lang="pi" class="pali">
+‘Evaṁ sante āyasmāva gotamo sukhavihāritaro raññā māgadhena seniyena bimbisārenā’”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Thế Tôn thuyết giảng như vậy.<br>
+<span lang="pi" class="pali">
+Idamavoca bhagavā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Mahānāma thuộc giòng họ Sakka hoan hỷ, tín thọ lời dạy của Thế Tôn.<br>
+<span lang="pi" class="pali">
+Attamano mahānāmo sakko bhagavato bhāsitaṁ abhinandīti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+<span lang="pi" class="vi">
+Cūḷadukkhakkhandhasuttaṁ niṭṭhitaṁ catutthaṁ.<br>
+</span>
+</p>
+
+
+
+<!-- COPY CONTENT SUTTA Ở ĐÂY -->
+
+
+
+<br>
+<p><p style="text-align: right;font-style: italic;">Hoà Thượng Thích Minh Châu dịch Việt</span></p>
 
-<p><span class="parno">1</span>So I have heard. At one time the Buddha was staying in the land of the Sakyans, near Kapilavatthu in the Banyan Tree Monastery.</p>
 
-<p>Then Mahānāma the Sakyan went up to the Buddha, bowed, sat down to one side, and said to him: “For a long time, sir, I have understood your teaching like this: ‘Greed, hate, and delusion are corruptions of the mind.’ Despite understanding this, sometimes my mind is occupied by thoughts of greed, hate, and delusion. I wonder what qualities remain in me that I have such thoughts?”</p>
 
-<hr>
-<p><span class="parno">2</span>“Mahānāma, there is a quality that remains in you that makes you have such thoughts. For if you had given up that quality you would not still be living at home and enjoying sensual pleasures. But because you haven’t given up that quality you are still living at home and enjoying sensual pleasures.</p>
 
-<p><span class="parno">3</span>Sensual pleasures give little gratification and much suffering and distress, and they are all the more full of drawbacks. Even though a noble disciple has clearly seen this with right wisdom, so long as they don’t achieve the rapture and bliss that are apart from sensual pleasures and unskillful qualities, or something even more peaceful than that, they might still return to sensual pleasures. But when they do achieve that rapture and bliss, or something more peaceful than that, they will not return to sensual pleasures.</p>
 
-<p><span class="parno">4</span>Before my awakening — when I was still unawakened but intent on awakening — I too clearly saw with right wisdom that: ‘Sensual pleasures give little gratification and much suffering and distress, and they are all the more full of drawbacks.’ But so long as I didn’t achieve the rapture and bliss that are apart from sensual pleasures and unskillful qualities, or something even more peaceful than that, I didn’t announce that I would not return to sensual pleasures. But when I did achieve that rapture and bliss, or something more peaceful than that, I announced that I would not return to sensual pleasures.</p>
 
-<p><span class="parno">5</span>And what is the gratification of sensual pleasures? There are these five kinds of sensual stimulation. What five? Sights known by the eye that are likable, desirable, agreeable, pleasant, sensual, and arousing. Sounds known by the ear … Smells known by the nose … Tastes known by the tongue … Touches known by the body that are likable, desirable, agreeable, pleasant, sensual, and arousing. These are the five kinds of sensual stimulation. The pleasure and happiness that arise from these five kinds of sensual stimulation: this is the gratification of sensual pleasures.</p>
 
-<p><span class="parno">6</span>And what is the drawback of sensual pleasures? It’s when a gentleman earns a living by means such as computing, accounting, calculating, farming, trade, raising cattle, archery, government service, or one of the professions. But they must face cold and heat, being hurt by the touch of flies, mosquitoes, wind, sun, and reptiles, and risking death from hunger and thirst. This is a drawback of sensual pleasures apparent in this very life, a mass of suffering caused by sensual pleasures.</p>
 
-<p><span class="parno">7</span>That gentleman might try hard, strive, and make an effort, but fail to earn any money. If this happens, they sorrow and pine and lament, beating their breast and falling into confusion, saying: ‘Oh, my hard work is wasted. My efforts are fruitless!’ This too is a drawback of sensual pleasures apparent in this very life, a mass of suffering caused by sensual pleasures.</p>
-
-<p><span class="parno">8</span>That gentleman might try hard, strive, and make an effort, and succeed in earning money. But they experience pain and sadness when they try to protect it, thinking: ‘How can I prevent my wealth from being taken by rulers or bandits, consumed by fire, swept away by flood, or taken by unloved heirs?’ And even though they protect it and ward it, rulers or bandits take it, or fire consumes it, or flood sweeps it away, or unloved heirs take it. They sorrow and pine and lament, beating their breast and falling into confusion: ‘What used to be mine is gone.’ This too is a drawback of sensual pleasures apparent in this very life, a mass of suffering caused by sensual pleasures.</p>
-
-<p><span class="parno">9</span>Furthermore, for the sake of sensual pleasures kings fight with kings, aristocrats fight with aristocrats, brahmins fight with brahmins, and householders fight with householders. A mother fights with her child, child with mother, father with child, and child with father. Brother fights with brother, brother with sister, sister with brother, and friend fights with friend. Once they’ve started quarreling, arguing, and fighting, they attack each other with fists, stones, rods, and swords, resulting in death and deadly pain. This too is a drawback of sensual pleasures apparent in this very life, a mass of suffering caused by sensual pleasures.</p>
-
-<p><span class="parno">10</span>Furthermore, for the sake of sensual pleasures they don their sword and shield, fasten their bow and arrows, and plunge into a battle massed on both sides, with arrows and spears flying and swords flashing. There they are struck with arrows and spears, and their heads are chopped off, resulting in death and deadly pain. This too is a drawback of sensual pleasures apparent in this very life, a mass of suffering caused by sensual pleasures.</p>
-
-<p><span class="parno">11</span>Furthermore, for the sake of sensual pleasures they don their sword and shield, fasten their bow and arrows, and charge wetly plastered bastions, with arrows and spears flying and swords flashing. There they are struck with arrows and spears, splashed with dung, crushed with spiked blocks, and their heads are chopped off, resulting in death and deadly pain. This too is a drawback of sensual pleasures apparent in this very life, a mass of suffering caused by sensual pleasures.</p>
-
-<p><span class="parno">12</span>Furthermore, for the sake of sensual pleasures they break into houses, plunder wealth, steal from isolated buildings, commit highway robbery, and commit adultery. The rulers would arrest them and subject them to various punishments — whipping, caning, and clubbing; cutting off hands or feet, or both; cutting off ears or nose, or both; the ‘porridge pot’, the ‘shell-shave’, the ‘demon’s mouth’, the ‘garland of fire’, the ‘burning hand’, the ‘grass blades’, the ‘bark dress’, the ‘antelope’, the ‘meat hook’, the ‘coins’, the ‘acid pickle’, the ‘twisting bar’, the ‘straw mat’; being splashed with hot oil, being fed to the dogs, being impaled alive, and being beheaded. These result in death and deadly pain. This too is a drawback of sensual pleasures apparent in this very life, a mass of suffering caused by sensual pleasures.</p>
-
-<hr>
-<p><span class="parno">13</span>Furthermore, for the sake of sensual pleasures, they conduct themselves badly by way of body, speech, and mind. When their body breaks up, after death, they’re reborn in a place of loss, a bad place, the underworld, hell. This is a drawback of sensual pleasures to do with lives to come, a mass of suffering caused by sensual pleasures.</p>
-
-<hr>
-<p><span class="parno">14</span>Mahānāma, this one time I was staying near Rājagaha, on the Vulture’s Peak Mountain. Now at that time several Jain ascetics on the slopes of Isigili at the Black Rock were constantly standing, refusing seats. And they felt painful, sharp, severe, acute feelings due to overexertion.</p>
-
-<p>Then in the late afternoon, I came out of retreat and went to the Black Rock to visit those Jain ascetics. I said to them, ‘Reverends, why are you constantly standing, refusing seats, so that you feel painful, sharp, severe, acute feelings due to overexertion?’</p>
-
-<p>When I said this, those Jain ascetics said to me, ‘Reverend, the Jain leader Nātaputta claims to be all-knowing and all-seeing, to know and see everything without exception, thus: “Knowledge and vision are constantly and continually present to me, while walking, standing, sleeping, and waking.”</p>
-
-<p>He says: “O Jain ascetics, you have done bad deeds in a past life. Wear them away with these severe and grueling austerities. And when you refrain from such deeds in the present by way of body, speech, and mind, you’re not doing any bad deeds for the future. So, due to eliminating past deeds by mortification, and not doing any new deeds, there’s nothing to come up in the future. With nothing to come up in the future, deeds end. With the ending of deeds, suffering ends. With the ending of suffering, feeling ends. And with the ending of feeling, all suffering will have been worn away.” We like and accept this, and we are satisfied with it.’</p>
-
-<p><span class="parno">15</span>When they said this, I said to them, ‘But reverends, do you know for sure that you existed in the past, and it is not the case that you didn’t exist?’</p>
-
-<p>‘No we don’t, reverend.’</p>
-
-<p>‘But reverends, do you know for sure that you did bad deeds in the past?’</p>
-
-<hr>
-<p>‘No we don’t, reverend.’</p>
-
-<p>‘But reverends, do you know that you did such and such bad deeds?’</p>
-
-<p>‘No we don’t, reverend.’</p>
-
-<hr>
-<p>‘But reverends, do you know that so much suffering has already been worn away? Or that so much suffering still remains to be worn away? Or that when so much suffering is worn away all suffering will have been worn away?’</p>
-
-<p>‘No we don’t, reverend.’</p>
-
-<hr>
-<p>‘But reverends, do you know about giving up unskillful qualities in the present life and embracing skillful qualities?’</p>
-
-<p>‘No we don’t, reverend.’</p>
-
-<hr>
-<p><span class="parno">16</span>‘So it seems that you don’t know any of these things. That being so, when those in the world who are violent and bloody-handed and make their living by cruelty are reborn among humans they go forth as Jain ascetics.’</p>
-
-<hr>
-<p>‘Reverend Gotama, pleasure is not gained through pleasure; pleasure is gained through pain. For if pleasure were to be gained through pleasure, King Seniya Bimbisāra of Māgadha would gain pleasure, since he lives in greater pleasure than Venerable Gotama.’</p>
-
-<hr>
-<p><span class="parno">17</span>‘Clearly the venerables have spoken rashly, without reflection. Rather, I’m the one who should be asked about who lives in greater pleasure, King Bimbisāra or Venerable Gotama?’</p>
-
-<p>‘Clearly we spoke rashly and without reflection. But forget about that. Now we ask Venerable Gotama: “Who lives in greater pleasure, King Bimbisāra or Venerable Gotama?”'</p>
-
-<hr>
-<p><span class="parno">18</span>‘Well then, reverends, I’ll ask you about this in return, and you can answer as you like. What do you think, reverends? Is King Bimbisāra capable of experiencing perfect happiness for seven days and nights without moving his body or speaking?’</p>
-
-<p>‘No he is not, reverend.’</p>
-
-<hr>
-<p><span class="parno">19</span>‘What do you think, reverends? Is King Bimbisāra capable of experiencing perfect happiness for six days … five days … four days … three days … two days … one day?’</p>
-
-<p>‘No he is not, reverend.’</p>
-
-<hr>
-<p><span class="parno">20</span>‘But I am capable of experiencing perfect happiness for one day and night without moving my body or speaking. I am capable of experiencing perfect happiness for two days … three days … four days … five days … six days … seven days. What do you think, reverends? This being so, who lives in greater pleasure, King Bimbisāra or I?’</p>
-
-<p>‘This being so, Venerable Gotama lives in greater pleasure than King Bimbisāra.’”</p>
-
-<p><span class="parno">21</span>That is what the Buddha said. Satisfied, Mahānāma the Sakyan was happy with what the Buddha said.</p>
-<hr>
-</div>
-
-<div lang="pi">
-
-<p><span class="parno">1</span>Evaṁ me sutaṁ — ​ekaṁ samayaṁ bhagavā sakkesu viharati kapilavatthusmiṁ nigrodhārāme.</p>
-
-<p>Atha kho mahānāmo sakko yena bhagavā tenupasaṅkami; upasaṅkamitvā bhagavantaṁ abhivādetvā ekamantaṁ nisīdi. Ekamantaṁ nisinno kho mahānāmo sakko bhagavantaṁ etadavoca: "dīgharattāhaṁ, bhante, bhagavatā evaṁ dhammaṁ desitaṁ ājānāmi: ‘lobho cittassa upakkileso, doso cittassa upakkileso, moho cittassa upakkileso’ti<q class="open" id="note169" title=" idaṁ vākyaṁ syā1 potthake">. <span class="var" title="evaṁpāhaṁ (mr)" id="note170">Evañcāhaṁ</span>, bhante, bhagavatā dhammaṁ desitaṁ ājānāmi: ‘lobho cittassa upakkileso, doso cittassa upakkileso, moho cittassa upakkileso’ti</q>. Atha ca pana me ekadā lobhadhammāpi cittaṁ pariyādāya tiṭṭhanti, dosadhammāpi cittaṁ pariyādāya tiṭṭhanti, mohadhammāpi cittaṁ pariyādāya tiṭṭhanti. Tassa mayhaṁ, bhante, evaṁ hoti: ‘kosu nāma me dhammo ajjhattaṁ appahīno yena me ekadā lobhadhammāpi cittaṁ pariyādāya tiṭṭhanti, dosadhammāpi cittaṁ pariyādāya tiṭṭhanti, mohadhammāpi cittaṁ pariyādāya tiṭṭhantī’"ti.</p>
-
-<hr>
-<p><span class="parno">2</span>"So eva kho te, mahānāma, dhammo ajjhattaṁ appahīno yena te ekadā lobhadhammāpi cittaṁ pariyādāya tiṭṭhanti, dosadhammāpi cittaṁ pariyādāya tiṭṭhanti, mohadhammāpi cittaṁ pariyādāya tiṭṭhanti. So ca hi te, mahānāma, dhammo ajjhattaṁ pahīno abhavissa, na tvaṁ agāraṁ ajjhāvaseyyāsi, na kāme paribhuñjeyyāsi. Yasmā ca kho te, mahānāma, so eva dhammo ajjhattaṁ appahīno tasmā tvaṁ agāraṁ ajjhāvasasi, kāme paribhuñjasi.</p>
-
-<p><span class="parno">3</span>‘Appassādā kāmā bahudukkhā <span class="var" title="bahūpāyāsā (bj, s1–3)" id="note172">bahupāyāsā</span>, ādīnavo ettha bhiyyo’ti — iti cepi, mahānāma, ariyasāvakassa yathābhūtaṁ sammappaññāya sudiṭṭhaṁ <span class="var" title="sova (mr)" id="note173">hoti, so ca</span> aññatreva kāmehi aññatra akusalehi dhammehi pītisukhaṁ nādhigacchati, aññaṁ vā tato santataraṁ; atha kho so neva tāva anāvaṭṭī kāmesu hoti. Yato ca kho, mahānāma, ariyasāvakassa ‘appassādā kāmā bahudukkhā bahupāyāsā, ādīnavo ettha bhiyyo’ti — evametaṁ yathābhūtaṁ sammappaññāya sudiṭṭhaṁ hoti, so ca aññatreva kāmehi aññatra akusalehi dhammehi pītisukhaṁ adhigacchati aññaṁ vā tato santataraṁ; atha kho so anāvaṭṭī kāmesu hoti.</p>
-
-<p><span class="parno">4</span>Mayhampi kho, mahānāma, pubbeva sambodhā, anabhisambuddhassa bodhisattasseva sato, ‘appassādā kāmā bahudukkhā bahupāyāsā, ādīnavo ettha bhiyyo’ti — evametaṁ yathābhūtaṁ sammappaññāya sudiṭṭhaṁ hoti, so ca aññatreva kāmehi aññatra akusalehi dhammehi pītisukhaṁ nājjhagamaṁ, aññaṁ vā tato santataraṁ; atha khvāhaṁ neva tāva anāvaṭṭī kāmesu paccaññāsiṁ. Yato ca kho me, mahānāma, ‘appassādā kāmā bahudukkhā bahupāyāsā, ādīnavo ettha bhiyyo’ti — evametaṁ yathābhūtaṁ sammappaññāya sudiṭṭhaṁ ahosi, so <span class="var" title="sova (mr)" id="note174">ca</span> aññatreva kāmehi aññatra akusalehi dhammehi pītisukhaṁ ajjhagamaṁ, aññaṁ vā tato santataraṁ; athāhaṁ anāvaṭṭī kāmesu paccaññāsiṁ.</p>
-
-<p><span class="parno">5</span>Ko ca, mahānāma, kāmānaṁ assādo? Pañcime, mahānāma, kāmaguṇā. Katame pañca? Cakkhuviññeyyā rūpā iṭṭhā kantā manāpā piyarūpā kāmūpasaṁhitā rajanīyā; sotaviññeyyā saddā … pe … ghānaviññeyyā gandhā … jivhāviññeyyā rasā … kāyaviññeyyā phoṭṭhabbā iṭṭhā kantā manāpā piyarūpā kāmūpasaṁhitā rajanīyā –  ime kho, mahānāma, pañca kāmaguṇā. Yaṁ kho, mahānāma, ime pañca kāmaguṇe paṭicca uppajjati sukhaṁ somanassaṁ — ayaṁ kāmānaṁ assādo.</p>
-
-<p><span class="parno">6</span>Ko ca, mahānāma, kāmānaṁ ādīnavo? Idha, mahānāma, kulaputto yena sippaṭṭhānena jīvikaṁ kappeti — yadi muddāya yadi gaṇanāya yadi saṅkhānena yadi kasiyā yadi vaṇijjāya yadi gorakkhena yadi issatthena yadi rājaporisena yadi sippaññatarena, sītassa purakkhato uṇhassa purakkhato ḍaṁsamakasavātātapasarīsapasamphassehi rissamāno khuppipāsāya mīyamāno; ayampi, mahānāma, kāmānaṁ ādīnavo sandiṭṭhiko dukkhakkhandho kāmahetu kāmanidānaṁ kāmādhikaraṇaṁ kāmānameva hetu.</p>
-
-<p><span class="parno">7</span>Tassa ce, mahānāma, kulaputtassa evaṁ uṭṭhahato ghaṭato vāyamato te bhogā nābhinipphajjanti, so socati kilamati paridevati urattāḷiṁ kandati sammohaṁ āpajjati ‘moghaṁ vata me uṭṭhānaṁ, aphalo vata me vāyāmo’ti. Ayampi, mahānāma, kāmānaṁ ādīnavo sandiṭṭhiko dukkhakkhandho kāmahetu kāmanidānaṁ kāmādhikaraṇaṁ kāmānameva hetu.</p>
-
-<p><span class="parno">8</span>Tassa ce, mahānāma, kulaputtassa evaṁ uṭṭhahato ghaṭato vāyamato te bhogā abhinipphajjanti. So tesaṁ bhogānaṁ ārakkhādhikaraṇaṁ dukkhaṁ domanassaṁ paṭisaṁvedeti: ‘Kinti me bhoge neva rājāno hareyyuṁ, na corā hareyyuṁ, na aggi daheyya, na udakaṁ vaheyya, na appiyā vā dāyādā hareyyun’ti. Tassa evaṁ ārakkhato gopayato te bhoge rājāno vā haranti, corā vā haranti, aggi vā dahati, udakaṁ vā vahati, appiyā vā dāyādā haranti. So socati kilamati paridevati urattāḷiṁ kandati sammohaṁ āpajjati: ‘yampi me ahosi tampi no natthī’ti. Ayampi, mahānāma, kāmānaṁ ādīnavo sandiṭṭhiko dukkhakkhandho kāmahetu kāmanidānaṁ kāmādhikaraṇaṁ kāmānameva hetu.</p>
-
-<p><span class="parno">9</span>Puna caparaṁ, mahānāma, kāmahetu kāmanidānaṁ kāmādhikaraṇaṁ kāmānameva hetu rājānopi rājūhi vivadanti, khattiyāpi khattiyehi vivadanti, brāhmaṇāpi brāhmaṇehi vivadanti, gahapatīpi gahapatīhi vivadanti, mātāpi puttena vivadati, puttopi mātarā vivadati, pitāpi puttena vivadati, puttopi pitarā vivadati, bhātāpi bhātarā vivadati, bhātāpi bhaginiyā vivadati, bhaginīpi bhātarā vivadati, sahāyopi sahāyena vivadati. Te tattha kalahaviggahavivādāpannā aññamaññaṁ pāṇīhipi upakkamanti, leḍḍūhipi upakkamanti, daṇḍehipi upakkamanti, satthehipi upakkamanti. Te tattha maraṇampi nigacchanti, maraṇamattampi dukkhaṁ. Ayampi, mahānāma, kāmānaṁ ādīnavo sandiṭṭhiko dukkhakkhandho kāmahetu kāmanidānaṁ kāmādhikaraṇaṁ kāmānameva hetu.</p>
-
-<p><span class="parno">10</span>Puna caparaṁ, mahānāma, kāmahetu kāmanidānaṁ kāmādhikaraṇaṁ kāmānameva hetu asicammaṁ gahetvā, dhanukalāpaṁ sannayhitvā, ubhatobyūḷhaṁ saṅgāmaṁ pakkhandanti usūsupi khippamānesu, sattīsupi khippamānāsu, asīsupi vijjotalantesu. Te tattha usūhipi vijjhanti, sattiyāpi vijjhanti, asināpi sīsaṁ chindanti. Te tattha maraṇampi nigacchanti, maraṇamattampi dukkhaṁ. Ayampi, mahānāma, kāmānaṁ ādīnavo sandiṭṭhiko dukkhakkhandho kāmahetu kāmanidānaṁ kāmādhikaraṇaṁ kāmānameva hetu.</p>
-
-<p><span class="parno">11</span>Puna caparaṁ, mahānāma, kāmahetu kāmanidānaṁ kāmādhikaraṇaṁ kāmānameva hetu asicammaṁ gahetvā, dhanukalāpaṁ sannayhitvā, addāvalepanā upakāriyo pakkhandanti usūsupi khippamānesu, sattīsupi khippamānāsu, asīsupi vijjotalantesu. Te tattha usūhipi vijjhanti, sattiyāpi vijjhanti, chakaṇakāyapi osiñcanti, abhivaggenapi omaddanti, asināpi sīsaṁ chindanti. Te tattha maraṇampi nigacchanti, maraṇamattampi dukkhaṁ. Ayampi, mahānāma, kāmānaṁ ādīnavo sandiṭṭhiko dukkhakkhandho kāmahetu kāmanidānaṁ kāmādhikaraṇaṁ kāmānameva hetu.</p>
-
-<p><span class="parno">12</span>Puna caparaṁ, mahānāma, kāmahetu kāmanidānaṁ kāmādhikaraṇaṁ kāmānameva hetu sandhimpi chindanti, nillopampi haranti, ekāgārikampi karonti, paripanthepi tiṭṭhanti, paradārampi gacchanti. Tamenaṁ rājāno gahetvā vividhā kammakāraṇā kārenti — kasāhipi tāḷenti, vettehipi tāḷenti, aḍḍhadaṇḍakehipi tāḷenti; hatthampi chindanti, pādampi chindanti, hatthapādampi chindanti, kaṇṇampi chindanti, nāsampi chindanti, kaṇṇanāsampi chindanti; bilaṅgathālikampi karonti, saṅkhamuṇḍikampi karonti, rāhumukhampi karonti, jotimālikampi karonti, hatthapajjotikampi karonti, erakavattikampi karonti, cīrakavāsikampi karonti, eṇeyyakampi karonti, baḷisamaṁsikampi karonti, kahāpaṇikampi karonti, khārāpatacchikampi karonti, palighaparivattikampi karonti, palālapīṭhakampi karonti, tattenapi telena osiñcanti, sunakhehipi khādāpenti, jīvantampi sūle uttāsenti, asināpi sīsaṁ chindanti. Te tattha maraṇampi nigacchanti, maraṇamattampi dukkhaṁ. Ayampi, mahānāma, kāmānaṁ ādīnavo sandiṭṭhiko dukkhakkhandho kāmahetu kāmanidānaṁ kāmādhikaraṇaṁ kāmānameva hetu.</p>
-
-<hr>
-<p><span class="parno">13</span>Puna caparaṁ, mahānāma, kāmahetu kāmanidānaṁ kāmādhikaraṇaṁ kāmānameva hetu kāyena duccaritaṁ caranti, vācāya duccaritaṁ caranti, manasā duccaritaṁ caranti. Te kāyena duccaritaṁ caritvā, vācāya duccaritaṁ caritvā, manasā duccaritaṁ caritvā, kāyassa bhedā paraṁ maraṇā, apāyaṁ duggatiṁ vinipātaṁ nirayaṁ upapajjanti. Ayampi, mahānāma, kāmānaṁ ādīnavo samparāyiko, dukkhakkhandho kāmahetu kāmanidānaṁ kāmādhikaraṇaṁ kāmānameva hetu.</p>
-
-<hr>
-<p><span class="parno">14</span>Ekamidāhaṁ, mahānāma, samayaṁ rājagahe viharāmi gijjhakūṭe pabbate. Tena kho pana samayena sambahulā <span class="var" title="niganthā (s1–3, mr)" id="note176">nigaṇṭhā</span> isigilipasse kāḷasilāyaṁ ubbhaṭṭhakā honti āsanapaṭikkhittā, opakkamikā dukkhā tibbā kharā kaṭukā vedanā vedayanti. </p>
-
-<p>Atha khvāhaṁ, mahānāma, sāyanhasamayaṁ paṭisallānā vuṭṭhito yena isigilipasse kāḷasilā yena te nigaṇṭhā tenupasaṅkamiṁ; upasaṅkamitvā te nigaṇṭhe etadavocaṁ: ‘kiṁ nu tumhe, āvuso nigaṇṭhā, ubbhaṭṭhakā āsanapaṭikkhittā, opakkamikā dukkhā tibbā kharā kaṭukā vedanā vedayathā’ti?</p>
-
-<p>Evaṁ vutte, mahānāma, te nigaṇṭhā maṁ etadavocuṁ: ‘nigaṇṭho, āvuso, <span class="var" title="nātaputto (bj) | nāthaputto (pts1)" id="note177">nāṭaputto</span> sabbaññū sabbadassāvī aparisesaṁ ñāṇadassanaṁ paṭijānāti: "carato ca me tiṭṭhato ca suttassa ca jāgarassa ca satataṁ samitaṁ ñāṇadassanaṁ paccupaṭṭhitan"ti. </p>
-
-<p>So evamāha: "<span class="var" title="atthi vo (bj) | atthi kho bho (s1–3, mr)" id="note178">atthi kho vo</span>, nigaṇṭhā, pubbe pāpakammaṁ kataṁ, taṁ imāya kaṭukāya dukkarakārikāya <span class="var" title="nijjaretha (bj, s1–3, pts1)" id="note179">nijjīretha</span>; <span class="var" title="Mayaṁ panettha (mr)" id="note180">yaṁ panettha</span> etarahi kāyena saṁvutā vācāya saṁvutā manasā saṁvutā taṁ āyatiṁ pāpassa kammassa akaraṇaṁ; iti purāṇānaṁ kammānaṁ tapasā byantibhāvā, navānaṁ kammānaṁ akaraṇā, āyatiṁ anavassavo; āyatiṁ anavassavā kammakkhayo, kammakkhayā dukkhakkhayo, dukkhakkhayā vedanākkhayo, vedanākkhayā sabbaṁ dukkhaṁ nijjiṇṇaṁ bhavissatī"ti. Tañca panamhākaṁ ruccati ceva khamati ca, tena camha attamanā’ti.</p>
-
-<p><span class="parno">15</span>Evaṁ vutte, ahaṁ, mahānāma, te nigaṇṭhe etadavocaṁ: ‘kiṁ pana tumhe, āvuso nigaṇṭhā, jānātha — ahuvamheva mayaṁ pubbe na nāhuvamhā’ti? </p>
-
-<p>‘No hidaṁ, āvuso’. </p>
-
-<p>‘Kiṁ pana tumhe, āvuso nigaṇṭhā, jānātha — akaramheva mayaṁ pubbe pāpakammaṁ na nākaramhā’ti? </p>
-
-<hr>
-<p>‘No hidaṁ, āvuso’. </p>
-
-<p>‘Kiṁ pana tumhe, āvuso nigaṇṭhā, jānātha –  evarūpaṁ vā evarūpaṁ vā pāpakammaṁ akaramhā’ti? </p>
-
-<p>‘No hidaṁ, āvuso’. </p>
-
-<hr>
-<p>‘Kiṁ pana tumhe, āvuso nigaṇṭhā, jānātha — ettakaṁ vā dukkhaṁ nijjiṇṇaṁ, ettakaṁ vā dukkhaṁ nijjīretabbaṁ, ettakamhi vā dukkhe nijjiṇṇe sabbaṁ dukkhaṁ nijjiṇṇaṁ bhavissatī’ti? </p>
-
-<p>‘No hidaṁ, āvuso’. </p>
-
-<hr>
-<p>‘Kiṁ pana tumhe, āvuso nigaṇṭhā, jānātha –  diṭṭheva dhamme akusalānaṁ dhammānaṁ pahānaṁ, kusalānaṁ dhammānaṁ upasampadan’ti? </p>
-
-<p>‘No hidaṁ, āvuso’.</p>
-
-<hr>
-<p><span class="parno">16</span>‘Iti kira tumhe, āvuso nigaṇṭhā, na jānātha — ahuvamheva mayaṁ pubbe na nāhuvamhāti, na jānātha — akaramheva mayaṁ pubbe pāpakammaṁ na nākaramhāti, na jānātha — evarūpaṁ vā evarūpaṁ vā pāpakammaṁ akaramhāti, na jānātha — ettakaṁ vā dukkhaṁ nijjiṇṇaṁ, ettakaṁ vā dukkhaṁ nijjīretabbaṁ, ettakamhi vā dukkhe nijjiṇṇe sabbaṁ dukkhaṁ nijjiṇṇaṁ bhavissatīti. Na jānātha — diṭṭheva dhamme akusalānaṁ dhammānaṁ pahānaṁ, kusalānaṁ dhammānaṁ upasampadaṁ. Evaṁ sante, āvuso nigaṇṭhā, ye loke luddā lohitapāṇino kurūrakammantā manussesu paccājātā te nigaṇṭhesu pabbajantī’ti? </p>
-
-<hr>
-<p>‘Na kho, āvuso gotama, sukhena sukhaṁ adhigantabbaṁ, dukkhena kho sukhaṁ adhigantabbaṁ; sukhena cāvuso gotama, sukhaṁ adhigantabbaṁ abhavissa, rājā māgadho seniyo bimbisāro sukhaṁ adhigaccheyya, rājā māgadho seniyo bimbisāro sukhavihāritaro āyasmatā gotamenā’ti.</p>
-
-<hr>
-<p><span class="parno">17</span>‘Addhāyasmantehi nigaṇṭhehi sahasā appaṭisaṅkhā vācā bhāsitā: "na kho, āvuso gotama, sukhena sukhaṁ adhigantabbaṁ, dukkhena kho sukhaṁ adhigantabbaṁ; sukhena cāvuso gotama, sukhaṁ adhigantabbaṁ abhavissa, rājā māgadho seniyo bimbisāro sukhaṁ adhigaccheyya, rājā māgadho seniyo bimbisāro sukhavihāritaro āyasmatā gotamenā"ti.</p>
-
-<p>Api ca ahameva tattha paṭipucchitabbo: "ko nu kho āyasmantānaṁ sukhavihāritaro rājā vā māgadho seniyo bimbisāro āyasmā vā gotamo"ti? Addhāvuso gotama, amhehi sahasā appaṭisaṅkhā vācā bhāsitā, na kho, āvuso gotama, sukhena sukhaṁ adhigantabbaṁ, dukkhena kho sukhaṁ adhigantabbaṁ; sukhena cāvuso gotama, sukhaṁ adhigantabbaṁ abhavissa, rājā māgadho seniyo bimbisāro sukhaṁ adhigaccheyya, rājā māgadho seniyo bimbisāro sukhavihāritaro āyasmatā gotamenāti. Api ca tiṭṭhatetaṁ, idānipi mayaṁ āyasmantaṁ gotamaṁ pucchāma: "ko nu kho āyasmantānaṁ sukhavihāritaro rājā vā māgadho seniyo bimbisāro āyasmā vā gotamo"ti?</p>
-
-<hr>
-<p><span class="parno">18</span>Tena hāvuso nigaṇṭhā, tumheva tattha paṭipucchissāmi, yathā vo khameyya tathā naṁ byākareyyātha. Taṁ kiṁ maññathāvuso nigaṇṭhā, pahoti rājā māgadho seniyo bimbisāro, aniñjamāno kāyena, abhāsamāno vācaṁ, satta rattindivāni ekantasukhaṁ paṭisaṁvedī viharitun’ti? </p>
-
-<p>‘No hidaṁ, āvuso’.</p>
-
-<hr>
-<p><span class="parno">19</span>‘Taṁ kiṁ maññathāvuso nigaṇṭhā, pahoti rājā māgadho seniyo bimbisāro, aniñjamāno kāyena, abhāsamāno vācaṁ, cha rattindivāni … pe … pañca rattindivāni … cattāri rattindivāni … tīṇi rattindivāni … dve rattindivāni … ekaṁ rattindivaṁ ekantasukhaṁ paṭisaṁvedī viharitun’ti? </p>
-
-<p>‘No hidaṁ, āvuso’.</p>
-
-<hr>
-<p><span class="parno">20</span>‘Ahaṁ kho, āvuso nigaṇṭhā, pahomi aniñjamāno kāyena, abhāsamāno vācaṁ, ekaṁ rattindivaṁ ekantasukhaṁ paṭisaṁvedī viharituṁ. Ahaṁ kho, āvuso nigaṇṭhā, pahomi aniñjamāno kāyena, abhāsamāno vācaṁ, dve rattindivāni … tīṇi rattindivāni … cattāri rattindivāni … pañca rattindivāni … cha rattindivāni … satta rattindivāni ekantasukhaṁ paṭisaṁvedī viharituṁ. </p>
-
-<p>Taṁ kiṁ maññathāvuso nigaṇṭhā, evaṁ sante ko sukhavihāritaro rājā vā māgadho seniyo bimbisāro ahaṁ vā’ti?</p>
-
-<p>‘Evaṁ sante āyasmāva gotamo sukhavihāritaro raññā māgadhena seniyena bimbisārenā’"ti.</p>
-
-<p><span class="parno">21</span>Idamavoca bhagavā. Attamano mahānāmo sakko bhagavato bhāsitaṁ abhinandīti.</p><hr>
-<p class="endsutta">Cūḷadukkhakkhandhasuttaṁ niṭṭhitaṁ catutthaṁ.</p>
-</div>
 </section>  <!-- End English and Pali -->
 <div id="nextprev"><a id="previous-sutta" href="./mn13.html#content"></a><a id="next-sutta" href="./mn15.html#content"></a></div>
 </div>  <!--End Content -->
 </div>  <!-- End Page -->
-<div class="w3-white bwcontainer2"> <!-- Footer div -->
-<!-- Footer -->
-		<footer>
-			<div id="breadcrumbs"><a href="../home/index.html">Home</a><a href="../mn/mn.html">Majjhima Nikāya</a>MN14: Cūḷadukkhakkhandha Sutta</div>
-					<div class="bottomlinks">
- 	<a href="../guide/guide.html"><span class="w3-bar-item"><i class="fa fa-compass"></i>&nbsp;Guide</span></a>
- 	 	<a href="../home/help.html"><span class="w3-bar-item"><i class="fa fa-info"></i>&nbsp;Help</span></a>
- 	<a href="../home/crossreference.html"><span class="w3-bar-item"><i class="fa fa-exchange"></i>&nbsp;Links&nbsp;Cross&nbsp;Reference</span></a>
- 	<a href="../home/copyright.html"><span class="w3-bar-item">&copy;&nbsp;Copyright</span></a>
- 	<a href="../home/contact.html"><span class="w3-bar-item"><i class="fa fa-envelope"></i>&nbsp;Contact</span></a>
- </div>  <!-- End bottom links -->
+
+
+
+
+
+
+<footer>
+					 <!-- End bottom links -->
 </footer>
- </div>
+
+
  
  <!-- Scripts -->
 
-<script>
- // Script to turn Pali Lookup on and off
- function togPaliLookup() {
- 		var checkBox = document.getElementById("myCheck");
- 		var text = document.getElementById("text");
- 		if (checkBox.checked == true){
- 				text.style.display = "block";
- 					} else {
- 							text.style.display = "none";
- 		}
- }
- </script>
+ <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      if (typeof enablePaliLookup === "function") {
+        enablePaliLookup();
+      } else {
+        console.error("enablePaliLookup is not defined");
+      }
+    });
+  </script>
 
  <script>
  // Script to open and close sidebar

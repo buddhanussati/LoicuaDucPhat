@@ -1,14 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
 <head>
  	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
  	<link rel="icon" type="image/x-icon" href="../images/favicon.ico">
- 	<title>Majjhima Nikāya 21</title>
  	<meta name="viewport" content="width=device-width, initial-scale=1">
 		<!-- Loading manifest -->
 	<link rel="manifest" href="../manifest.json">
- 	<!-- Loading third party fonts -->
- 	<link href="../fonts/font-awesome.min.css" rel="stylesheet" type="text/css">
  	<!-- Loading main and menu stylesheets -->
  	<link rel="stylesheet" href="../css/w3.css">
  	<link rel="stylesheet" href="../css/css.css">
@@ -16,25 +13,44 @@
  	<script src="../js/jquery-1.10.2.min.js"></script>
  	<script src="../js/controlpanel.js"></script>
  	<script src="../js/mousetrap.min.js"></script>
- </head>
+    <script src="../js/pali-lookup-standalone.js"></script>
+
+ <script src="../js/suttaFiles.js"></script>
+<script>
+ // Script to open random Sutta
+ function openRandomSutta() {
+  const randomIndex = Math.floor(Math.random() * suttaFiles.length);
+  const selectedFile = suttaFiles[randomIndex];
+
+  // Get root path of your site 
+  const currentPath = location.pathname;
+  const rootPath = currentPath.split("/").slice(0, -2).join("/") + "/";
+
+  // Redirect to the correct file
+  window.location.href = rootPath + selectedFile;
+}
+</script>
+
+
+</head>
  <body class="container">
  <div class="header-background">
  <!-- Header -->
  <div class="w3-header w3-content w3-padding w3-left-align bwcontainer">
  	<div class="centered">
- 		<button class="light-mode-button" aria-label="Toggle Light Mode" onclick="toggle_light_mode()">
+ 		<button class="light-mode-button" aria-label="Bật Chế Độ Sáng" onclick="toggle_light_mode()">
  			<span></span>
  			<span></span>
  		</button>
- 		<span class="box-lbl">Light/Dark</span>
+ 		<span class="box-lbl">Sáng/Tối</span>
  	</div> <!-- Centered -->
- 		<a href="../home/index.html" id="bwlogo"><img src="../images/headerlogo.png" alt="The Buddha's Words logo" class="w3-image"></a>
+ 		<a href="../home/index.html" id="bwlogo"><img src="../images/headerlogo.png" alt="Logo Lời Của Đức Phật" class="w3-image"></a>
  		<div class="w3-bar bwcontainer">
  			<div id="searchlinks">
- 			<a href="../home/engsearch.html"><span class="w3-bar-item"><i class="fa fa-search"></i>&nbsp;Search English</span></a>
- 			<a href="../home/palisearch.html"><span class="w3-bar-item"><i class="fa fa-search"></i>&nbsp;Search Pali</span></a>
+ 			<a href="../home/visearch.html"><span class="w3-bar-item"><i class="fa fa-search"></i>&nbsp;Tìm Tiếng Việt</span></a>
+ 			<a href="../home/palisearch.html"><span class="w3-bar-item"><i class="fa fa-search"></i>&nbsp;Tìm Tiếng Pali</span></a>
  			</div><!-- End Searchlinks div -->
- 			<div class="help"><span><a href="../home/help.html"><img src="../images/help_icon.png" title="Help" alt="Help"></a></span></div>
+ 			<div class="help"><span><a href="../home/help.html"><img src="../images/help_icon.png" title="Trợ Giúp" alt="Help"></a></span></div>
  		</div> <!-- End w3-bar bwcontainer --> 	</div> <!-- End w3-header w3-content w3-padding w3-left-align bwcontainer -->
  </div> <!-- End header-background -->
  <!-- Top menu -->
@@ -43,50 +59,44 @@
  	<div class="w3-button w3-padding-8 w3-left w3-hide-large" onclick="w3_open()">☰</div>
  		<div id="navbar" class="w3-hide-small w3-hide-medium bwcontainer3">
  			<ul id="css3menu0">
- 				<li class="topfirst" id="home"><a href="../home/index.html" class="w3-hide-small">Home</a></li>
- 			<li class="topmenu" id="dn"><a href="../dn/dn.html" class="w3-hide-small">Dīgha Nikāya</a></li>
- 				<li class="topmenu" id="mn"><a href="../mn/mn.html" class="pressed w3-hide-small">Majjhima Nikāya</a></li>
- 				<li class="topmenu" id="sn"><a href="../sn/sn.html" class="w3-hide-small"><i class="fa fa-caret-down"></i>&nbsp;Saṁyutta Nikāya</a>
+ 				<li class="topfirst" id="home"><a href="../home/index.html" class="w3-hide-small">Trang Chủ</a></li>
+  				<li class="topmenu" id="dn"><a href="../dn/dn.html" class="pressed w3-hide-small">Trường Bộ Kinh</a></li>
+ 				<li class="topmenu" id="mn"><a href="../mn/mn.html" class="w3-hide-small">Trung Bộ Kinh</a></li>
+ 				<li class="topmenu" id="sn"><a href="../sn/sn.html" class="w3-hide-small"><i class="fa fa-caret-down"></i>&nbsp;Tương Ưng Bộ Kinh</a>
  					<ul>
- 						<li><a href="../sn/sn01.html" class="w3-hide-small">Vol. 1 ‒ The Book with Verses</a></li>
- 						<li><a href="../sn/sn02.html" class="w3-hide-small">Vol. 2 ‒ The Book of Causation</a></li>
- 						<li><a href="../sn/sn03.html" class="w3-hide-small">Vol. 3 ‒ The Book of the Aggregates</a></li>
- 						<li><a href="../sn/sn04.html" class="w3-hide-small">Vol. 4 ‒ The Book of the Six Sense Bases</a></li>
- 						<li><a href="../sn/sn05.html" class="w3-hide-small">Vol. 5 ‒ The Great Book</a></li>
+ 						<li><a href="../sn/sn01.html" class="w3-hide-small">Tập I - Thiên Có Kệ</a></li>
+ 						<li><a href="../sn/sn02.html" class="w3-hide-small">Tập II - Thiên Nhân Duyên</a></li>
+ 						<li><a href="../sn/sn03.html" class="w3-hide-small">Tập III - Thiên Uẩn</a></li>
+ 						<li><a href="../sn/sn04.html" class="w3-hide-small">Tập IV - Thiên Sáu Xứ</a></li>
+ 						<li><a href="../sn/sn05.html" class="w3-hide-small">Tập V - Thiên Ðại Phẩm</a></li>
  					</ul>
- 				<li class="topmenu" id="an"><a href="../an/an.html" class="w3-hide-small"><i class="fa fa-caret-down"></i>&nbsp;Aṅguttara Nikāya</a>
+ 				<li class="topmenu" id="an"><a href="../an/an.html" class="w3-hide-small"><i class="fa fa-caret-down"></i>&nbsp;Tăng Chi Bộ Kinh</a>
  					<ul>
- 						<li><a href="../an/an1.html" class="w3-hide-small">The Ones</a></li>
- 						<li><a href="../an/an2.html" class="w3-hide-small">The Twos</a></li>
- 						<li><a href="../an/an3.html" class="w3-hide-small">The Threes</a></li>
- 						<li><a href="../an/an4.html" class="w3-hide-small">The Fours</a></li>
- 						<li><a href="../an/an5.html" class="w3-hide-small">The Fives</a></li>
- 						<li><a href="../an/an6.html" class="w3-hide-small">The Sixes</a></li>
- 						<li><a href="../an/an7.html" class="w3-hide-small">The Sevens</a></li>
- 						<li><a href="../an/an8.html" class="w3-hide-small">The Eights</a></li>
- 						<li><a href="../an/an9.html" class="w3-hide-small">The Nines</a></li>
- 						<li><a href="../an/an10.html" class="w3-hide-small">The Tens</a></li>
- 						<li><a href="../an/an11.html" class="w3-hide-small">The Elevens</a></li>
- 					</ul>
- 				</li>
- 				<li class="topmenu" id="kn"><a href="../kn/kn.html" class="w3-hide-small"><i class="fa fa-caret-down"></i>&nbsp;Khuddaka Nikāya</a>
- 					<ul>
- 						<li><a href="../kp/kp.html" class="w3-hide-small">The Khuddakapatha</a></li>
- 						<li><a href="../dhp/dhp.html" class="w3-hide-small">The Dhammapada</a></li>
- 						<li><a href="../snp/snp.html" class="w3-hide-small">Sutta Nipata</a></li>
- 						<li><a href="../ud/ud.html" class="w3-hide-small">Udana</a></li>
- 						<li><a href="../it/it.html" class="w3-hide-small">Itivuttaka</a></li>
- 						<li><a href="../tha/tha.html" class="w3-hide-small">The Theragatha</a></li>
- 						<li><a href="../thi/thi.html" class="w3-hide-small">The Therigatha</a></li>
+ 						<li><a href="../an/an1.html" class="w3-hide-small">Chương Một Pháp</a></li>
+ 						<li><a href="../an/an2.html" class="w3-hide-small">Chương Hai Pháp</a></li>
+ 						<li><a href="../an/an3.html" class="w3-hide-small">Chương Ba Pháp</a></li>
+ 						<li><a href="../an/an4.html" class="w3-hide-small">Chương Bốn Pháp</a></li>
+ 						<li><a href="../an/an5.html" class="w3-hide-small">Chương Năm Pháp</a></li>
+ 						<li><a href="../an/an6.html" class="w3-hide-small">Chương Sáu Pháp</a></li>
+ 						<li><a href="../an/an7.html" class="w3-hide-small">Chương Bảy Pháp</a></li>
+ 						<li><a href="../an/an8.html" class="w3-hide-small">Chương Tám Pháp</a></li>
+ 						<li><a href="../an/an9.html" class="w3-hide-small">Chương Chín Pháp</a></li>
+ 						<li><a href="../an/an10.html" class="w3-hide-small">Chương Mười Pháp</a></li>
+ 						<li><a href="../an/an11.html" class="w3-hide-small">Chương Mười Một Pháp</a></li>
  					</ul>
  				</li>
- 				<li class="toplast" id="vi"><a href="../vi/vi.html" class="w3-hide-small"><i class="fa fa-caret-down"></i>&nbsp;Vinaya Piṭaka</a>
+ 				<li class="topmenu" id="kn"><a href="../kn/kn.html" class="w3-hide-small"><i class="fa fa-caret-down"></i>&nbsp;Tiểu Bộ Kinh</a>
  					<ul>
- 						<li><a href="../vi/kd.html" class="w3-hide-small">Khandhaka</a></li>
- 						<li><a href="../vi/bu-vb.html" class="w3-hide-small">Bhikkhu Vibhaṅga</a></li>
- 						<li><a href="../vi/bu-pt.html" class="w3-hide-small">Bhikkhu Pātimokkha</a></li>
- 						<li><a href="../vi/bi-pt.html" class="w3-hide-small">Bhikkhunī Pātimokkha</a></li>
- 						<li><a href="../vi/bi-vb.html" class="w3-hide-small">Bhikkhunī Vibhaṅga</a></li>
+ 						<li><a href="../kp/kp.html" class="w3-hide-small">Kinh Tiểu Tụng</a></li>
+ 						<li><a href="../dhp/dhp.html" class="w3-hide-small">Kinh Pháp Cú</a></li>
+ 						<li><a href="../snp/snp.html" class="w3-hide-small">Kinh Tập</a></li>
+ 						<li><a href="../ud/ud.html" class="w3-hide-small">Kinh Phật Tự Thuyết</a></li>
+ 						<li><a href="../it/it.html" class="w3-hide-small">Kinh Phật Thuyết Như Vậy</a></li>
+ 						<li><a href="../tha/tha.html" class="w3-hide-small">Trưởng Lão Tăng Kệ</a></li>
+ 						<li><a href="../thi/thi.html" class="w3-hide-small">Trưởng Lão Ni Kệ</a></li>
+ 					</ul>
+ 				</li>
+				<li class="toplast" id="rd"><a href="../rd/rd.html" class="w3-hide-small"></i>Kinh Ngẫu Nhiên Theo Nhóm</a>
  					</ul>
  				</li>
  			</ul>
@@ -99,424 +109,1512 @@
  		<div class="w3-bar-block w3-white">
  			<a href="../home/index.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-home fa-lg"></i>&nbsp;&nbsp;&nbsp;Home</a>
  			<a href="../guide/guide.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Guide</a>
- 			<a href="../dn/dn.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Dīgha Nikāya</a>
- 			<a href="../mn/mn.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Majjhima Nikāya</a>
- 			<a href="../sn/sn.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Saṁyutta Nikāya</a>
- 			<a href="../an/an.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Aṅguttara Nikāya</a>
- 			<a href="../kn/kn.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Khuddaka Nikāya</a>
- 			<a href="../vi/vi.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Vinaya Piṭaka</a>
+ 			<a href="../dn/dn.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Trường Bộ Kinh</a>
+ 			<a href="../mn/mn.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Trung Bộ Kinh</a>
+ 			<a href="../sn/sn.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Tương Ưng Bộ Kinh</a>
+ 			<a href="../an/an.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Tăng Chi Bộ Kinh
+ 			<a href="../kn/kn.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Tiểu Bộ Kinh</a>
+			<a href="../rd/rd.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>Kinh Ngẫu Nhiên Theo Nhóm</a>
  		</div>
  </nav>
-
- <!-- !PAGE CONTENT! --> 
+ 
+ 
+ 
+   <!-- !PAGE CONTENT! --> 
 <div class="w3-main w3-content w3-padding w3-left-align bwcontainer4">
-
-<h2>Majjhima Nikāya</h2>
-
 <div id="content">
-
-<h3>MN21: Kakacūpama Sutta — The Simile of the Saw</h3>
-
-<div id="metaarea">
-	<ul class="translator">
-		<li>©&nbsp;Translated from the Pali by Bhante Sujato.&nbsp;<a href="../home/copyright.html#sc">(More copyright information)</a>
-	</ul>
-</div>
-
-
-<section class="raw_sutta">
-<div lang="en">
-<p><span class="parno">1</span><span>So I have heard. </span>At one time the Buddha was staying near Sāvatthī in Jeta’s Grove, Anāthapiṇḍika’s monastery.</p>
-<p>Now at that time, Venerable Phagguna of the Top-Knot was mixing too closely together with the nuns. So much so that if any mendicant criticized those nuns in his presence, Phagguna of the Top-Knot got angry and upset, and even instigated disciplinary proceedings. And if any mendicant criticized Phagguna of the Top-Knot in their presence, those nuns got angry and upset, and even instigated disciplinary proceedings. That’s how much Phagguna of the Top-Knot was mixing too closely together with the nuns.</p>
-
-<hr>
-
-<p><span class="parno">2</span>Then a mendicant went up to the Buddha, bowed, sat down to one side, and told him what was going on.</p>
-
-<hr>
-
-<p><span class="parno">3</span>So the Buddha said to a certain monk: “Please, monk, in my name tell the mendicant Phagguna of the Top-Knot that the teacher summons him.”</p>
-
-<p>“Yes, sir,” that monk replied. He went to Phagguna of the Top-Knot and said to him: “Reverend Phagguna, the teacher summons you.”</p>
-
-<p>“Yes, reverend,” Phagguna replied. He went to the Buddha, bowed, and sat down to one side. The Buddha said to him:</p>
-
-<hr>
-
-<p><span class="parno">4</span>“Is it really true, Phagguna, that you’ve been mixing overly closely together with the nuns? So much so that if any mendicant criticizes those nuns in your presence, you get angry and upset, and even instigate disciplinary proceedings? And if any mendicant criticizes you in those nuns’ presence, they get angry and upset, and even instigate disciplinary proceedings? Is that how much you’re mixing overly closely together with the nuns?”</p>
-
-<p>“Yes, sir.”</p>
-
-<p>“Phagguna, are you not a gentleman who has gone forth from the lay life to homelessness?”</p>
-
-<p>“Yes, sir.”</p>
-
-<p><span class="parno">5</span>“As such, it’s not appropriate for you to mix so closely with the nuns. So if anyone criticizes those nuns in your presence, you should give up any desires or thoughts of the lay life. If that happens, you should train like this: ‘My mind will be unaffected. I will blurt out no bad words. I will remain full of compassion, with a heart of love and no secret hate.’ That’s how you should train.</p>
-
-<p><span class="parno">6</span>So even if someone strikes those nuns with fists, stones, rods, and swords in your presence, you should give up any desires or thoughts of the lay life. If that happens, you should train like this: ‘My mind will be unaffected. I will blurt out no bad words. I will remain full of compassion, with a heart of love and no secret hate.’ That’s how you should train.</p>
-
-<p><span class="parno">7</span>So if anyone criticizes you in your presence, you should give up any desires or thoughts of the lay life. If that happens, you should train like this: ‘My mind will be unaffected. I will blurt out no bad words. I will remain full of compassion, with a heart of love and no secret hate.’ That’s how you should train.</p>
-
-<p><span class="parno">8</span>So Phagguṇa, even if someone strikes you with fists, stones, rods, and swords, you should give up any desires or thoughts of the lay life. If that happens, you should train like this: ‘My mind will be unaffected. I will blurt out no bad words. I will remain full of compassion, with a heart of love and no secret hate.’ That’s how you should train.”</p>
-
-<p><span class="parno">9</span>Then the Buddha said to the mendicants:</p>
-
-<p>“Mendicants, I used to be satisfied with the mendicants. Once, I addressed them: ‘I eat my food in one sitting per day. Doing so, I find that I’m healthy and well, nimble, strong, and living comfortably. You too should eat your food in one sitting per day. Doing so, you’ll find that you’re healthy and well, nimble, strong, and living comfortably.’ I didn’t have to keep on instructing those mendicants; I just had to prompt their mindfulness.</p>
-
-<hr>
-
-<p><span class="parno">10</span>Suppose a chariot stood harnessed to thoroughbreds at a level crossroads, with a goad ready. Then a deft horse trainer, a master charioteer, might mount the chariot, taking the reins in his right hand and goad in the left. He’d drive out and back wherever he wishes, whenever he wishes.</p>
-
-<p>In the same way, I didn’t have to keep on instructing those mendicants; I just had to prompt their mindfulness. So, mendicants, give up what’s unskillful and devote yourselves to skillful qualities. In this way you’ll achieve growth, improvement, and maturity in this teaching and training.</p>
-
-
-<p><span class="parno">11</span>Suppose that not far from a town or village there was a large grove of sal trees that was choked with castor-oil weeds. Then along comes a person who wants to help protect and nurture that grove. They’d cut down the crooked sal saplings that were robbing the sap, and throw them out. They’d clean up the interior of the grove, and properly care for the straight, well-formed sal saplings. In this way, in due course, that sal grove would grow, increase, and mature.</p>
-
-<p>In the same way, mendicants, give up what’s unskillful and devote yourselves to skillful qualities. In this way you’ll achieve growth, improvement, and maturity in this teaching and training.</p>
-
-<hr>
-
-<p><span class="parno">12</span>Once upon a time, mendicants, right here in Sāvatthī there was a housewife named Vedehikā. She had this good reputation: ‘The housewife Vedehikā is sweet, even-tempered, and calm.’ Now, Vedehikā had a bonded maid named Kāḷī who was skilled, tireless, and well-organized in her work.</p>
-
-<p><span class="parno">13</span>Then Kāḷī thought, ‘My mistress has a good reputation as being sweet, even-tempered, and calm. But does she actually have anger in her and just not show it? Or does she have no anger? Or is it just because my work is well-organized that she doesn’t show anger, even though she still has it inside? Why don’t I test my mistress?’</p>
-
-<hr>
-
-<p>So Kāḷī got up during the day. Vedehikā said to her, ‘What the hell, Kāḷī!’</p>
-
-<p>‘What is it, madam?’</p>
-
-<hr>
-
-<p>‘You’re getting up in the day — what’s up with you, girl?’</p>
-
-<p>‘Nothing, madam.’</p>
-
-<hr>
-
-<p>‘Nothing’s up, you bad girl, but you get up in the day!’ Angry and upset, she scowled.</p>
-
-<p>Then Kāḷī thought, ‘My mistress actually has anger in her and just doesn’t show it; it’s not that she has no anger. It’s just because my work is well-organized that she doesn’t show anger, even though she still has it inside. Why don’t I test my mistress further?’</p>
-
-<p><span class="parno">14</span>So Kāḷī got up later in the day. Vedehikā said to her, ‘What the hell, Kāḷī!’</p>
-
-<hr>
-
-<p>‘What is it, madam?’</p>
-
-<p>‘You’re getting up later in the day — what’s up with you, girl?’</p>
-
-<hr>
-
-<p>‘Nothing, madam.’</p>
-
-<p>‘Nothing’s up, you bad girl, but you get up later in the day!’ Angry and upset, she blurted out angry words.</p>
-
-<p>Then Kāḷī thought, ‘My mistress actually has anger in her and just doesn’t show it; it’s not that she has no anger. It’s just because my work is well-organized that she doesn’t show anger, even though she still has it inside. Why don’t I test my mistress further?’</p>
-
-<hr>
-
-<p><span class="parno">15</span>So Kāḷī got up even later in the day. Vedehikā said to her, ‘What the hell, Kāḷī!’</p>
-
-<p>‘What is it, madam?’</p>
-
-<hr>
-
-<p>‘You’re getting up even later in the day — what’s up with you, girl?’</p>
-
-<p>‘Nothing, madam.’</p>
-
-<hr>
-
-<p>‘Nothing’s up, you bad girl, but you get up even later in the day!’ Angry and upset, she grabbed a rolling-pin and hit Kāḷī on the head, cracking it open.</p>
-
-<p>Then Kāḷī, with blood pouring from her cracked skull, denounced her mistress to the neighbors, ‘See, ladies, what the sweet one did! See what the even-tempered one did! See what the calm one did! How on earth can she grab a rolling-pin and hit her only maid on the head, cracking it open, just for getting up late?’</p>
-
-<p><span class="parno">16</span>Then after some time the housewife Vedehikā got this bad reputation: ‘The housewife Vedehikā is fierce, ill-tempered, and not calm at all.’</p>
-
-<p><span class="parno">17</span>In the same way, a mendicant may be the sweetest of the sweet, the most even-tempered of the even-tempered, the calmest of the calm, so long as they don’t encounter any disagreeable criticism. But it’s when they encounter disagreeable criticism that you’ll know whether they’re really sweet, even-tempered, and calm. I don’t say that a mendicant is easy to admonish if they make themselves easy to admonish only for the sake of robes, alms-food, lodgings, and medicines and supplies for the sick. Why is that? Because when they don’t get robes, alms-food, lodgings, and medicines and supplies for the sick, they’re no longer easy to admonish. But when a mendicant is easy to admonish purely because they honor, respect, revere, worship, and venerate the teaching, then I say that they’re easy to admonish. So, mendicants, you should train yourselves: ‘We will be easy to admonish purely because we honor, respect, revere, worship, and venerate the teaching.’ That’s how you should train.</p>
-
-<p><span class="parno">18</span>Mendicants, there are these five ways in which others might criticize you. Their speech may be timely or untimely, true or false, gentle or harsh, beneficial or harmful, from a heart of love or from secret hate. When others criticize you, they may do so in any of these ways. If that happens, you should train like this: ‘Our minds will remain unaffected. We will blurt out no bad words. We will remain full of compassion, with a heart of love and no secret hate. We will meditate spreading a heart of love to that person. And with them as a basis, we will meditate spreading a heart full of love to everyone in the world — abundant, expansive, limitless, free of enmity and ill will.’ That’s how you should train.</p>
-
-<hr>
-
-<p><span class="parno">19</span>Suppose a person was to come along carrying a spade and basket and say, ‘I shall make this great earth be without earth!’ And they’d dig all over, scatter all over, spit all over, and urinate all over, saying, ‘Be without earth! Be without earth!’</p>
-
-<p>What do you think, mendicants? Could that person make this great earth be without earth?”</p>
-
-<hr>
-
-<p>“No, sir. Why is that? Because this great earth is deep and limitless. It’s not easy to make it be without earth. That person will eventually get weary and frustrated.”</p>
-
-<p>“In the same way, there are these five ways in which others might criticize you. Their speech may be timely or untimely, true or false, gentle or harsh, beneficial or harmful, from a heart of love or from secret hate. When others criticize you, they may do so in any of these ways. If that happens, you should train like this: ‘Our minds will remain unaffected. We will blurt out no bad words. We will remain full of compassion, with a heart of love and no secret hate. We will meditate spreading a heart of love to that person. And with them as a basis, we will meditate spreading a heart like the earth to everyone in the world — abundant, expansive, limitless, free of enmity and ill will.’ That’s how you should train.</p>
-
-<hr>
-
-<p><span class="parno">20</span>Suppose a person was to come along with dye such as red lac, turmeric, indigo, or rose madder, and say, ‘I shall draw pictures on the sky, making pictures appear there.’</p>
-
-<p>What do you think, mendicants? Could that person draw pictures on the sky?”</p>
-
-<p>“No, sir. Why is that? Because the sky is formless and invisible. It’s not easy to draw pictures there. That person will eventually get weary and frustrated.”</p>
-
-<hr>
-
-<p><span class="parno">21</span>“In the same way, there are these five ways in which others might criticize you …</p>
-
-<hr>
-
-<p><span class="parno">22</span>Suppose a person was to come along carrying a blazing grass torch, and say, ‘I shall burn and scorch the river Ganges with this blazing grass torch.’</p>
-
-<p>What do you think, mendicants? Could that person burn and scorch the river Ganges with a blazing grass torch?”</p>
-
-<hr>
-
-<p>“No, sir. Why is that? Because the river Ganges is deep and limitless. It’s not easy to burn and scorch it with a blazing grass torch. That person will eventually get weary and frustrated.”</p>
-
-<p>“In the same way, there are these five ways in which others might criticize you …</p>
-
-<hr>
-
-<p><span class="parno">23</span>Suppose there was a catskin bag that was rubbed, well-rubbed, very well-rubbed, soft, silky, rid of rustling and crackling. Then a person comes along carrying a stick or a stone, and says, ‘I shall make this soft catskin bag rustle and crackle with this stick or stone.’</p>
-
-<p>What do you think, mendicants? Could that person make that soft catskin bag rustle and crackle with that stick or stone?”</p>
-
-<p>“No, sir. Why is that? Because that catskin bag is rubbed, well-rubbed, very well-rubbed, soft, silky, rid of rustling and crackling. It’s not easy to make it rustle or crackle with a stick or stone. That person will eventually get weary and frustrated.”</p>
-
-<p>“In the same way, there are these five ways in which others might criticize you. Their speech may be timely or untimely, true or false, gentle or harsh, beneficial or harmful, from a heart of love or from secret hate. When others criticize you, they may do so in any of these ways. If that happens, you should train like this: ‘Our minds will remain unaffected. We will blurt out no bad words. We will remain full of compassion, with a heart of love and no secret hate. We will meditate spreading a heart of love to that person. And with them as a basis, we will meditate spreading a heart like a catskin bag to everyone in the world — abundant, expansive, limitless, free of enmity and ill will.’ That’s how you should train.</p>
-
-<p><span class="parno">24</span>Even if low-down bandits were to sever you limb from limb, anyone who had a malevolent thought on that account would not be following my instructions. If that happens, you should train like this: ‘Our minds will remain unaffected. We will blurt out no bad words. We will remain full of compassion, with a heart of love and no secret hate. We will meditate spreading a heart of love to that person. And with them as a basis, we will meditate spreading a heart full of love to everyone in the world — abundant, expansive, limitless, free of enmity and ill will.’ That’s how you should train.</p>
-
-<hr>
-
-<p><span class="parno">25</span>If you frequently reflect on this advice — the simile of the saw — do you see any criticism, large or small, that you could not endure?”</p>
-
-<p>“No, sir.”</p>
-
-<p>“So, mendicants, you should frequently reflect on this advice, the simile of the saw. This will be for your lasting welfare and happiness.”</p>
-
-<hr>
-
-<p><span class="parno">26</span>That is what the Buddha said. Satisfied, the mendicants were happy with what the Buddha said.</p>
+<h2>Majjhima Nikāya - Trung Bộ Kinh</h2>
+<h5><span style="font-style: italic;">Hoà Thượng Thích Minh Châu dịch Việt</span></h5>
 
 </div>
 
+<br>
+ 	<title>        Trung Bộ 21          </title>
+
+<p lang="vi" class="vi"; style="text-align: center">
+Trung Bộ 21<br>
+<span lang="pi" class="pali">
+Majjhima Nikāya 21<br>
+</span>
+</p>
+
+<p lang="vi" class="vi"; style="text-align: center">
+Kinh Ví Dụ Cái Cưa<br>
+<span lang="pi" class="pali">
+Kakacūpamasutta<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Như vầy tôi nghe.<br>
+<span lang="pi" class="pali">
+Evaṁ me sutaṁ—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Một thời, Thế Tôn ở Sāvatthī (Xá-vệ), tại Jetavana (Kỳ-đà Lâm), vườn ông Anāthapiṇḍika (Cấp Cô Ðộc).<br>
+<span lang="pi" class="pali">
+ekaṁ samayaṁ bhagavā sāvatthiyaṁ viharati jetavane anāthapiṇḍikassa ārāme.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Lúc bấy giờ, Tôn giả Moliya Phagguna sống liên hệ với các Tỷ-kheo ni một cách quá độ.<br>
+<span lang="pi" class="pali">
+Tena kho pana samayena āyasmā moḷiyaphagguno bhikkhunīhi saddhiṁ ativelaṁ saṁsaṭṭho viharati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Tôn giả Moliya Phagguna sống liên hệ với các Tỷ-kheo-ni như sau:<br>
+<span lang="pi" class="pali">
+Evaṁ saṁsaṭṭho āyasmā moḷiyaphagguno bhikkhunīhi saddhiṁ viharati—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Nếu có Tỷ-kheo nào, trước mặt Tôn giả Moliya Phagguna nói xấu các Tỷ-kheo-ni ấy, Tôn giả Moliya Phagguna liền phẫn nộ, bất mãn, vấn tội ngay;<br>
+<span lang="pi" class="pali">
+sace koci bhikkhu āyasmato moḷiyaphaggunassa sammukhā tāsaṁ bhikkhunīnaṁ avaṇṇaṁ bhāsati, tenāyasmā moḷiyaphagguno kupito anattamano adhikaraṇampi karoti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+nếu có Tỷ-kheo nào, trước mặt các Tỷ-kheo ni ấy, nói xấu Tôn giả Moliya Phagguna, các Tỷ-kheo ni ấy liền phẫn nộ, bất mãn, vấn tội ngay.<br>
+<span lang="pi" class="pali">
+Sace pana koci bhikkhu tāsaṁ bhikkhunīnaṁ sammukhā āyasmato moḷiyaphaggunassa avaṇṇaṁ bhāsati, tena tā bhikkhuniyo kupitā anattamanā adhikaraṇampi karonti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Tôn giả Moliya Phagguna sống liên hệ với các Tỷ-kheo-ni như vậy.<br>
+<span lang="pi" class="pali">
+Evaṁ saṁsaṭṭho āyasmā moḷiyaphagguno bhikkhunīhi saddhiṁ viharati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Có một Tỷ-kheo khác đi đến chỗ Thế Tôn ở, sau khi đến, đảnh lễ Thế Tôn và ngồi xuống một bên. Sau khi ngồi xuống một bên, Tỷ-kheo ấy bạch Thế Tôn:<br>
+<span lang="pi" class="pali">
+Atha kho aññataro bhikkhu yena bhagavā tenupasaṅkami; upasaṅkamitvā bhagavantaṁ abhivādetvā ekamantaṁ nisīdi. Ekamantaṁ nisinno kho so bhikkhu bhagavantaṁ etadavoca:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Bạch Thế Tôn, Tôn giả Moliya Phagguna sống liên hệ với các Tỷ-kheo ni một cách quá độ.<br>
+<span lang="pi" class="pali">
+“āyasmā, bhante, moḷiyaphagguno bhikkhunīhi saddhiṁ ativelaṁ saṁsaṭṭho viharati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Bạch Thế Tôn, Tôn giả Moliya Phagguna sống liên hệ với các Tỷ-kheo-ni như sau:<br>
+<span lang="pi" class="pali">
+Evaṁ saṁsaṭṭho, bhante, āyasmā moḷiyaphagguno bhikkhunīhi saddhiṁ viharati—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Nếu có Tỷ-kheo nào, trước mặt Tôn giả Moliya Phagguna nói xấu các Tỷ-kheo-ni ấy, Tôn giả Moliya Phagguna liền phẫn nộ, bất mãn và vấn tội ngay;<br>
+<span lang="pi" class="pali">
+sace koci bhikkhu āyasmato moḷiyaphaggunassa sammukhā tāsaṁ bhikkhunīnaṁ avaṇṇaṁ bhāsati, tenāyasmā moḷiyaphagguno kupito anattamano adhikaraṇampi karoti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+nếu có Tỷ-kheo nào, trước mặt các Tỷ-kheo ni ấy, nói xấu Tôn giả Moliya Phagguna, các Tỷ-kheo-ni ấy liền phẫn nộ, bất mãn và vấn tội ngay.<br>
+<span lang="pi" class="pali">
+Sace pana koci bhikkhu tāsaṁ bhikkhunīnaṁ sammukhā āyasmato moḷiyaphaggunassa avaṇṇaṁ bhāsati, tena tā bhikkhuniyo kupitā anattamanā adhikaraṇampi karonti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Bạch Thế Tôn, Tôn giả Moliya Phagguna sống liên hệ với các Tỷ-kheo-ni một cách quá độ như vậy”.<br>
+<span lang="pi" class="pali">
+Evaṁ saṁsaṭṭho, bhante, āyasmā moḷiyaphagguno bhikkhunīhi saddhiṁ viharatī”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Thế Tôn gọi một Tỷ-kheo khác và bảo:<br>
+<span lang="pi" class="pali">
+Atha kho bhagavā aññataraṁ bhikkhuṁ āmantesi:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Này Tỷ-kheo, hãy đi, nhân danh Ta, cho gọi Tỷ-kheo Moliya Phagguna: “Hiền giả Phagguna, bậc Ðạo Sư gọi Hiền giả”.<br>
+<span lang="pi" class="pali">
+“ehi tvaṁ, bhikkhu, mama vacanena moḷiyaphaggunaṁ bhikkhuṁ āmantehi: ‘satthā taṁ, āvuso phagguna, āmantetī’”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Bạch Thế Tôn, vâng,” Tỷ-kheo ấy vâng đáp Thế Tôn, đi đến chỗ Tôn giả Moliya Phagguna, khi đến xong, liền thưa Tôn giả Moliya Phagguna:<br>
+<span lang="pi" class="pali">
+“Evaṁ, bhante”ti kho so bhikkhu bhagavato paṭissutvā yenāyasmā moḷiyaphagguno tenupasaṅkami; upasaṅkamitvā āyasmantaṁ moḷiyaphaggunaṁ etadavoca:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Hiền giả Moliya Phagguna, bậc Ðạo Sư gọi Hiền giả.”<br>
+<span lang="pi" class="pali">
+“satthā taṁ, āvuso phagguna, āmantetī”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Vâng, Hiền giả,” Tỷ-kheo Moliya Phagguna vâng đáp Tỷ-kheo ấy, đến chỗ Thế Tôn ở, khi đến xong, đảnh lễ Thế Tôn rồi ngồi xuống một bên. Thế Tôn nói với Tôn giả Moliya Phagguna đang ngồi xuống một bên:<br>
+<span lang="pi" class="pali">
+“Evamāvuso”ti kho āyasmā moḷiyaphagguno tassa bhikkhuno paṭissutvā yena bhagavā tenupasaṅkami; upasaṅkamitvā bhagavantaṁ abhivādetvā ekamantaṁ nisīdi. Ekamantaṁ nisinnaṁ kho āyasmantaṁ moḷiyaphaggunaṁ bhagavā etadavoca:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Này Phagguna, có đúng sự thật không, như lời người ta đồn là ông sống liên hệ với các Tỷ-kheo-ni một cách quá độ?<br>
+<span lang="pi" class="pali">
+“Saccaṁ kira tvaṁ, phagguna, bhikkhunīhi saddhiṁ ativelaṁ saṁsaṭṭho viharasi?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Người ta đồn ông sống liên hệ với các Tỷ-kheo-ni như sau:<br>
+<span lang="pi" class="pali">
+Evaṁ saṁsaṭṭho kira tvaṁ, phagguna, bhikkhunīhi saddhiṁ viharasi—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Nếu Tỷ-kheo nào, trước mặt ông nói xấu các Tỷ-kheo-ni ấy, ông liền phẫn nộ, bất mãn, vấn tội ngay;<br>
+<span lang="pi" class="pali">
+sace koci bhikkhu tuyhaṁ sammukhā tāsaṁ bhikkhunīnaṁ avaṇṇaṁ bhāsati, tena tvaṁ kupito anattamano adhikaraṇampi karosi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+nếu Tỷ-kheo nào, trước mặt các Tỷ-kheo-ni ấy, nói xấu ông, các Tỷ-kheo-ni ấy liền phẫn nộ, bất mãn, vấn tội ngay.<br>
+<span lang="pi" class="pali">
+Sace pana koci bhikkhu tāsaṁ bhikkhunīnaṁ sammukhā tuyhaṁ avaṇṇaṁ bhāsati, tena tā bhikkhuniyo kupitā anattamanā adhikaraṇampi karonti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Phagguna, có phải ông sống liên hệ với các Tỷ-kheo-ni như vậy?”<br>
+<span lang="pi" class="pali">
+Evaṁ saṁsaṭṭho kira tvaṁ, phagguna, bhikkhunīhi saddhiṁ viharasī”ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Bạch Thế Tôn, có như vậy.”<br>
+<span lang="pi" class="pali">
+“Evaṁ, bhante”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Này Phagguna, có phải ông là Thiện nam tử, vì lòng tin, đã xuất gia từ bỏ gia đình, sống không gia đình?”<br>
+<span lang="pi" class="pali">
+“Nanu tvaṁ, phagguna, kulaputto saddhā agārasmā anagāriyaṁ pabbajito”ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Thưa vâng, bạch Thế Tôn.”<br>
+<span lang="pi" class="pali">
+“Evaṁ, bhante”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Này Phagguna, thật không xứng đáng cho ông, một Thiện nam tử, vì lòng tin đã xuất gia, từ bỏ gia đình, sống không gia đình, mà sống liên hệ với các Tỷ-kheo-ni một cách quá độ như vậy.<br>
+<span lang="pi" class="pali">
+“Na kho te etaṁ, phagguna, patirūpaṁ kulaputtassa saddhā agārasmā anagāriyaṁ pabbajitassa, yaṁ tvaṁ bhikkhunīhi saddhiṁ ativelaṁ saṁsaṭṭho vihareyyāsi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Do vậy, này Phagguna, nếu có ai trước mặt ông, nói xấu các Tỷ-kheo-ni ấy, này Phagguna, ông phải từ bỏ những dục liên hệ đến thế tục, những tư duy liên hệ đến thế tục.<br>
+<span lang="pi" class="pali">
+Tasmātiha, phagguna, tava cepi koci sammukhā tāsaṁ bhikkhunīnaṁ avaṇṇaṁ bhāseyya, tatrāpi tvaṁ, phagguna, ye gehasitā chandā ye gehasitā vitakkā te pajaheyyāsi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Phagguna, ông phải học tập như sau:<br>
+<span lang="pi" class="pali">
+Tatrāpi te, phagguna, evaṁ sikkhitabbaṁ:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Mong rằng tâm của ta sẽ không bi biến nhiễm! Mong rằng ta sẽ không nói những lời ác ngữ! Mong rằng ta sẽ sống với lòng lân mẫn, với tâm từ bi, không ôm lòng sân hận!’<br>
+<span lang="pi" class="pali">
+‘na ceva me cittaṁ vipariṇataṁ bhavissati, na ca pāpikaṁ vācaṁ nicchāressāmi, hitānukampī ca viharissāmi mettacitto, na dosantaro’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Phagguna, ông phải học tập như vậy.<br>
+<span lang="pi" class="pali">
+Evañhi te, phagguna, sikkhitabbaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Do vậy, này Phagguna, nếu có ai trước mặt ông, lấy tay đánh những Tỷ-kheo-ni ấy, lấy đất ném, lấy gậy đập, lấy gươm đánh, này Phagguna, ông phải từ bỏ những dục liên hệ đến thế tục, những tư duy liên hệ đến thế tục.<br>
+<span lang="pi" class="pali">
+Tasmātiha, phagguna, tava cepi koci sammukhā tāsaṁ bhikkhunīnaṁ pāṇinā pahāraṁ dadeyya, leḍḍunā pahāraṁ dadeyya, daṇḍena pahāraṁ dadeyya, satthena pahāraṁ dadeyya. Tatrāpi tvaṁ, phagguna, ye gehasitā chandā ye gehasitā vitakkā te pajaheyyāsi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Phagguna, ông phải học tập như sau:<br>
+<span lang="pi" class="pali">
+Tatrāpi te, phagguna, evaṁ sikkhitabbaṁ<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Mong rằng tâm của ta sẽ không bi biến nhiễm! Mong rằng ta sẽ không nói những lời ác ngữ! Mong rằng ta sẽ sống với lòng lân mẫn, với tâm từ bi, không ôm lòng sân hận!’<br>
+<span lang="pi" class="pali">
+‘na ceva me cittaṁ vipariṇataṁ bhavissati, na ca pāpikaṁ vācaṁ nicchāressāmi, hitānukampī ca viharissāmi mettacitto, na dosantaro’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Phagguna, ông phải học tập như vậy.<br>
+<span lang="pi" class="pali">
+Evañhi te, phagguna, sikkhitabbaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Do vậy, này Phagguna, nếu có ai trước mặt ông nói xấu (ai), này Phagguna, ông phải từ bỏ những dục liên hệ đến thế tục, những tư duy liên hệ đến thế tục.<br>
+<span lang="pi" class="pali">
+Tasmātiha, phagguna, tava cepi koci sammukhā avaṇṇaṁ bhāseyya, tatrāpi tvaṁ, phagguna, ye gehasitā chandā ye gehasitā vitakkā te pajaheyyāsi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Phagguna, ông phải học tập như sau: “Mong rằng tâm của ta sẽ không bi biến nhiễm! Mong rằng ta sẽ không nói những lời ác ngữ! Mong rằng ta sẽ sống với lòng lân mẫn, với tâm từ bi, không ôm lòng sân hận!”<br>
+<span lang="pi" class="pali">
+Tatrāpi te, phagguna, evaṁ sikkhitabbaṁ ‘na ceva me cittaṁ vipariṇataṁ bhavissati, na ca pāpikaṁ vācaṁ nicchāressāmi, hitānukampī ca viharissāmi mettacitto, na dosantaro’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Phagguna, ông phải học tập như vậy.<br>
+<span lang="pi" class="pali">
+Evañhi te, phagguna, sikkhitabbaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Do vậy, này Phagguna, nếu có ai trước mặt ông lấy tay đánh, lấy đất ném, lấy gậy đập, lấy gươm đánh, này Phagguna, ông phải từ bỏ những dục liên hệ đến thế tục, những tư duy liên hệ đến thế tục.<br>
+<span lang="pi" class="pali">
+Tasmātiha, phagguna, tava cepi koci pāṇinā pahāraṁ dadeyya, leḍḍunā pahāraṁ dadeyya, daṇḍena pahāraṁ dadeyya, satthena pahāraṁ dadeyya, tatrāpi tvaṁ, phagguna, ye gehasitā chandā ye gehasitā vitakkā te pajaheyyāsi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Phagguna, ông phải học tập như sau: “Mong rằng tâm của ta sẽ không bị biến nhiễm! Mong rằng ta sẽ không nói những lời ác ngữ! Mong rằng ta sẽ sống với lòng lân mẫn, với tâm từ bi, không ôm lòng sân hận!”<br>
+<span lang="pi" class="pali">
+Tatrāpi te, phagguna, evaṁ sikkhitabbaṁ ‘na ceva me cittaṁ vipariṇataṁ bhavissati, na ca pāpikaṁ vācaṁ nicchāressāmi, hitānukampī ca viharissāmi mettacitto, na dosantaro’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Phagguna, ông phải học tập như vậy.”<br>
+<span lang="pi" class="pali">
+Evañhi te, phagguna, sikkhitabban”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Rồi Thế Tôn nói với các Tỷ-kheo:<br>
+<span lang="pi" class="pali">
+Atha kho bhagavā bhikkhū āmantesi:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Này các Tỷ-kheo, một thời các Tỷ-kheo của Ta có tâm rất thuần thục hoan hỷ.<br>
+<span lang="pi" class="pali">
+“ārādhayiṁsu vata me, bhikkhave, bhikkhū ekaṁ samayaṁ cittaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này các Tỷ-kheo, ở đây, Ta bảo các Tỷ-kheo, này các Tỷ-kheo, Ta theo hạnh nhất tọa thực.<br>
+<span lang="pi" class="pali">
+Idhāhaṁ, bhikkhave, bhikkhū āmantesiṁ—ahaṁ kho, bhikkhave, ekāsanabhojanaṁ bhuñjāmi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Chư Tỷ-kheo, sống theo hạnh nhất tọa thực, Ta cảm thấy không bệnh tật, không ốm đau, nhẹ nhàng, khang kiện và sảng khoái.<br>
+<span lang="pi" class="pali">
+Ekāsanabhojanaṁ kho ahaṁ, bhikkhave, bhuñjamāno appābādhatañca sañjānāmi appātaṅkatañca lahuṭṭhānañca balañca phāsuvihārañca.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Chư Tỷ-kheo, các ông hãy sống theo hạnh nhất tọa thực.<br>
+<span lang="pi" class="pali">
+Etha tumhepi, bhikkhave, ekāsanabhojanaṁ bhuñjatha.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Chư Tỷ-kheo, các ông theo hạnh nhất tọa thực thời các ông sẽ cảm thấy không bệnh tật, không ốm đau, nhẹ nhàng, khang kiện và sảng khoái.’<br>
+<span lang="pi" class="pali">
+Ekāsanabhojanaṁ kho, bhikkhave, tumhepi bhuñjamānā appābādhatañca sañjānissatha appātaṅkatañca lahuṭṭhānañca balañca phāsuvihārañcāti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Chư Tỷ-kheo, Ta không cần phải giảng dạy gì cho các Tỷ-kheo ấy;<br>
+<span lang="pi" class="pali">
+Na me, bhikkhave, tesu bhikkhūsu anusāsanī karaṇīyā ahosi;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+chư Tỷ-kheo, Ta chỉ cần khơi dậy ức niệm nơi các Tỷ-kheo ấy.<br>
+<span lang="pi" class="pali">
+satuppādakaraṇīyameva me, bhikkhave, tesu bhikkhūsu ahosi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Chư Tỷ-kheo, ví như trên đất bằng, tại chỗ ngã tư, có một chiếc xe đang đậu, thắng với ngựa hay, có roi ngựa đặt ngang sẵn sàng.<br>
+<span lang="pi" class="pali">
+Seyyathāpi, bhikkhave, subhūmiyaṁ catumahāpathe ājaññaratho yutto assa ṭhito odhastapatodo.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Có người mã thuật sư thiện xảo, người đánh xe điều ngự các con ngựa đáng được điều ngự, leo lên xe ấy, tay trái nắm lấy dây cương, tay mặt cầm lấy roi ngựa, có thể đánh xe ngựa ấy đi tới đi lui, tại chỗ nào và như thế nào, theo ý mình muốn.<br>
+<span lang="pi" class="pali">
+Tamenaṁ dakkho yoggācariyo assadammasārathi abhiruhitvā, vāmena hatthena rasmiyo gahetvā, dakkhiṇena hatthena patodaṁ gahetvā, yenicchakaṁ yadicchakaṁ sāreyyapi paccāsāreyyapi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Cũng vậy chư Tỷ-kheo, Ta không cần phải giảng dạy gì cho các Tỷ-kheo ấy;<br>
+<span lang="pi" class="pali">
+Evameva kho, bhikkhave, na me tesu bhikkhūsu anusāsanī karaṇīyā ahosi,<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+chư Tỷ-kheo, Ta chỉ cần khơi dậy ức niệm nơi các Tỷ-kheo ấy.<br>
+<span lang="pi" class="pali">
+satuppādakaraṇīyameva me, bhikkhave, tesu bhikkhūsu ahosi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Do vậy, này các Tỷ-kheo, hãy từ bỏ bất thiện, hãy nỗ lực đối với các thiện pháp.<br>
+<span lang="pi" class="pali">
+Tasmātiha, bhikkhave, tumhepi akusalaṁ pajahatha, kusalesu dhammesu āyogaṁ karotha.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Như vậy các ông mới thành tựu sự trưởng thành, hưng thịnh, lớn mạnh trong Pháp và Luật này.<br>
+<span lang="pi" class="pali">
+Evañhi tumhepi imasmiṁ dhammavinaye vuddhiṁ virūḷhiṁ vepullaṁ āpajjissatha.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Chư Tỷ-kheo, cũng như gần một thôn làng hay thị trấn nhỏ, có ngôi rừng cây sāla lớn, ngôi rừng bị các cây leo y lan bao phủ.<br>
+<span lang="pi" class="pali">
+Seyyathāpi, bhikkhave, gāmassa vā nigamassa vā avidūre mahantaṁ sālavanaṁ. Tañcassa eḷaṇḍehi sañchannaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Có một người đến khu rừng này, muốn lợi ích cho ngôi rừng, muốn hạnh phúc, muốn an ổn khỏi các ách phược cho ngôi rừng.<br>
+<span lang="pi" class="pali">
+Tassa kocideva puriso uppajjeyya atthakāmo hitakāmo yogakkhemakāmo.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Người ấy chặt đứt các nhành cây cong thiếu hẳn sinh lực, vất chúng ra khỏi ngôi rừng, dọn dẹp trong rừng sạch sẽ.<br>
+<span lang="pi" class="pali">
+So yā tā sālalaṭṭhiyo kuṭilā ojāpaharaṇiyo tā chetvā bahiddhā nīhareyya, antovanaṁ suvisodhitaṁ visodheyya.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Người ấy săn sóc kỹ lưỡng các nhánh cây sāla thẳng thắn, khéo mọc.<br>
+<span lang="pi" class="pali">
+Yā pana tā sālalaṭṭhiyo ujukā sujātā tā sammā parihareyya.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Cũng vậy, chư Tỷ-kheo, sau một thời gian, ngôi rừng như vậy được trưởng thành, hưng thịnh, lớn mạnh.<br>
+<span lang="pi" class="pali">
+Evañhetaṁ, bhikkhave, sālavanaṁ aparena samayena vuddhiṁ virūḷhiṁ vepullaṁ āpajjeyya.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Cũng vậy, này các Tỷ-kheo, các ông hãy từ bỏ bất thiện, hãy nỗ lực đối với các thiện pháp.<br>
+<span lang="pi" class="pali">
+Evameva kho, bhikkhave, tumhepi akusalaṁ pajahatha, kusalesu dhammesu āyogaṁ karotha.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Như vậy các ông mới thành tựu sự trưởng thành, hưng thịnh, lớn mạnh trong Pháp và Luật này.<br>
+<span lang="pi" class="pali">
+Evañhi tumhepi imasmiṁ dhammavinaye vuddhiṁ virūḷhiṁ vepullaṁ āpajjissatha.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Chư Tỷ-kheo, thuở xưa, tại thành Savatthi này có nữ gia chủ tên là Vedehikā.<br>
+<span lang="pi" class="pali">
+Bhūtapubbaṁ, bhikkhave, imissāyeva sāvatthiyā vedehikā nāma gahapatānī ahosi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Chư Tỷ-kheo, tiếng đồn tốt đẹp sau đây được khởi lên về nữ gia chủ Vedehikā:<br>
+<span lang="pi" class="pali">
+Vedehikāya, bhikkhave, gahapatāniyā evaṁ kalyāṇo kittisaddo abbhuggato:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Nữ gia chủ Vedehikā là hiền thục, nữ gia chủ Vedehikā là nhu thuận; nữ gia chủ Vedehikā là ôn hòa”.<br>
+<span lang="pi" class="pali">
+‘soratā vedehikā gahapatānī, nivātā vedehikā gahapatānī, upasantā vedehikā gahapatānī’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Chư Tỷ-kheo, nữ gia chủ Vedehikā có người nữ tỳ tên là Kāḷī, người này khéo tay, siêng năng, và làm việc cẩn thận chu toàn.<br>
+<span lang="pi" class="pali">
+Vedehikāya kho pana, bhikkhave, gahapatāniyā kāḷī nāma dāsī ahosi dakkhā analasā susaṁvihitakammantā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Chư Tỷ-kheo, nữ tỳ Kāḷī khởi lên ý nghĩ:<br>
+<span lang="pi" class="pali">
+Atha kho, bhikkhave, kāḷiyā dāsiyā etadahosi:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Chủ của ta được tiếng đồn tốt đẹp khởi lên như sau:<br>
+<span lang="pi" class="pali">
+‘mayhaṁ kho ayyāya evaṁ kalyāṇo kittisaddo abbhuggato:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Nữ gia chủ Vedehikā là hiền thục; nữ gia chủ Vedehikā là nhu thuận; nữ gia chủ Vedehikā là ôn hòa.”<br>
+<span lang="pi" class="pali">
+“soratā vedehikā gahapatānī, nivātā vedehikā gahapatānī, upasantā vedehikā gahapatānī”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Không biết nữ chủ của ta có nội sân mà không tỏ lộ hay không có nội sân,<br>
+<span lang="pi" class="pali">
+Kiṁ nu kho me ayyā santaṁyeva nu kho ajjhattaṁ kopaṁ na pātukaroti udāhu asantaṁ<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+hay vì công việc ta làm cẩn thận chu toàn nên nữ chủ ta có nội sân nhưng không tỏ lộ, không phải không có?<br>
+<span lang="pi" class="pali">
+udāhu mayhamevete kammantā susaṁvihitā yena me ayyā santaṁyeva ajjhattaṁ kopaṁ na pātukaroti, no asantaṁ?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vậy ta hãy thử nữ chủ của ta!’<br>
+<span lang="pi" class="pali">
+Yannūnāhaṁ ayyaṁ vīmaṁseyyan’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Chư Tỷ-kheo, rồi nữ tỳ Kāḷī sáng ngày sau dậy thật trễ. Chư Tỷ-kheo, nữ gia chủ Vedehikā nói với nữ tỳ Kāḷī:<br>
+<span lang="pi" class="pali">
+Atha kho, bhikkhave, kāḷī dāsī divā uṭṭhāsi. Atha kho, bhikkhave, vedehikā gahapatānī kāḷiṁ dāsiṁ etadavoca:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Này Kāḷī!’<br>
+<span lang="pi" class="pali">
+‘he je kāḷī’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Thưa Nữ chủ, có việc gì?’<br>
+<span lang="pi" class="pali">
+‘Kiṁ, ayye’ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Sao hôm nay Ngươi dậy trễ vậy?’<br>
+<span lang="pi" class="pali">
+‘Kiṁ, je, divā uṭṭhāsī’ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Thưa nữ chủ, có việc gì đâu?’<br>
+<span lang="pi" class="pali">
+‘Na khvayye, kiñcī’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Thật sự không có việc gì à? Ác nữ tỳ kia, hôm nay Ngươi dậy trễ!’ Và nữ chủ phẫn nộ, bất mãn, trừng mắt.<br>
+<span lang="pi" class="pali">
+‘No vata re kiñci, pāpi dāsi, divā uṭṭhāsī’ti kupitā anattamanā bhākuṭiṁ akāsi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Chư Tỷ-kheo, nữ tỳ Kāḷī suy nghĩ:<br>
+<span lang="pi" class="pali">
+Atha kho, bhikkhave, kāḷiyā dāsiyā etadahosi:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Nữ chủ của ta thật sự có nội sân nhưng không tỏ lộ, không phải không có.<br>
+<span lang="pi" class="pali">
+‘santaṁyeva kho me ayyā ajjhattaṁ kopaṁ na pātukaroti, no asantaṁ;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vì những công việc ta làm cẩn thận chu toàn, nên nữ chủ của ta tuy có nội sân nhưng không tỏ lộ, không phải không có.<br>
+<span lang="pi" class="pali">
+mayhamevete kammantā susaṁvihitā, yena me ayyā santaṁyeva ajjhattaṁ kopaṁ na pātukaroti, no asantaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vậy Ta hãy thử thêm nữa nữ chủ của ta!’<br>
+<span lang="pi" class="pali">
+Yannūnāhaṁ bhiyyoso mattāya ayyaṁ vīmaṁseyyan’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Chư Tỷ-kheo, rồi nữ tỳ Kāḷī ngày sau lại dậy trễ hơn nữa. Chư Tỷ-kheo, nữ chủ Vedehikā nói với nữ tỳ Kāḷī:<br>
+<span lang="pi" class="pali">
+Atha kho, bhikkhave, kāḷī dāsī divātaraṁyeva uṭṭhāsi. Atha kho, bhikkhave, vedehikā gahapatānī kāḷiṁ dāsiṁ etadavoca:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Này Kāḷī!’<br>
+<span lang="pi" class="pali">
+‘he je kāḷī’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Thưa Nữ chủ, có việc gì?’<br>
+<span lang="pi" class="pali">
+‘Kiṁ, ayye’ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Sao hôm nay Ngươi dậy trễ vậy?’<br>
+<span lang="pi" class="pali">
+‘Kiṁ, je, divātaraṁ uṭṭhāsī’ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Thưa Nữ chủ, có việc gì đâu?’<br>
+<span lang="pi" class="pali">
+‘Na khvayye, kiñcī’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Thật sự không có việc gì à? Ác nữ tỳ kia, hôm nay Ngươi dậy trễ!’ Và nữ chủ phẫn nộ, bất mãn, thốt lên những lời bất mãn.<br>
+<span lang="pi" class="pali">
+‘No vata re kiñci, pāpi dāsi, divātaraṁ uṭṭhāsī’ti kupitā anattamanā anattamanavācaṁ nicchāresi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Chư Tỷ-kheo, nữ tỳ Kāḷī suy nghĩ:<br>
+<span lang="pi" class="pali">
+Atha kho, bhikkhave, kāḷiyā dāsiyā etadahosi:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Nữ chủ của ta thật sự có nội sân nhưng không tỏ lộ, không phải không có.<br>
+<span lang="pi" class="pali">
+‘santaṁyeva kho me ayyā ajjhattaṁ kopaṁ na pātukaroti, no asantaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vì những công việc ta làm cẩn thận chu toàn nên nữ chủ của ta tuy có nội sân nhưng không tỏ lộ, không phải không có.<br>
+<span lang="pi" class="pali">
+Mayhamevete kammantā susaṁvihitā, yena me ayyā santaṁyeva ajjhattaṁ kopaṁ na pātukaroti, no asantaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vậy ta hãy thử thêm nữa nữ chủ của ta!’<br>
+<span lang="pi" class="pali">
+Yannūnāhaṁ bhiyyoso mattāya ayyaṁ vīmaṁseyyan’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Chư Tỷ-kheo, rồi nữ tỳ Kāḷī sáng hôm sau lại dậy trễ hơn nữa. Chư Tỷ-kheo, nữ chủ Vedehikā nói với nữ tỳ Kāḷī:<br>
+<span lang="pi" class="pali">
+Atha kho, bhikkhave, kāḷī dāsī divātaraṁyeva uṭṭhāsi. Atha kho, bhikkhave, vedehikā gahapatānī kāḷiṁ dāsiṁ etadavoca:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Này Kāḷī!’<br>
+<span lang="pi" class="pali">
+‘he je kāḷī’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Thưa Nữ chủ, có việc gì?’<br>
+<span lang="pi" class="pali">
+‘Kiṁ, ayye’ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Sao hôm nay Ngươi dậy trễ vậy?’<br>
+<span lang="pi" class="pali">
+‘Kiṁ, je, divā uṭṭhāsī’ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Thưa Nữ chủ, có việc gì đâu?’<br>
+<span lang="pi" class="pali">
+‘Na khvayye, kiñcī’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Thật sự không có việc gì à? Ác nữ tỳ kia, hôm nay Ngươi dậy trễ!’ Rồi phẫn nộ, không hoan hỷ, nàng cầm cái then gài cửa, đánh một cú trên đầu nữ tỳ khiến bể đầu.<br>
+<span lang="pi" class="pali">
+‘No vata re kiñci, pāpi dāsi, divā uṭṭhāsī’ti kupitā anattamanā aggaḷasūciṁ gahetvā sīse pahāraṁ adāsi, sīsaṁ vobhindi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Chư Tỷ-kheo, nữ tỳ Kāḷī, với đầu bể máu chảy, liền đi kể lể với các nhà láng giềng:<br>
+<span lang="pi" class="pali">
+Atha kho, bhikkhave, kāḷī dāsī bhinnena sīsena lohitena galantena paṭivissakānaṁ ujjhāpesi:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Hãy xem việc làm của nữ chủ hiền thục!<br>
+<span lang="pi" class="pali">
+‘passathayye, soratāya kammaṁ;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Hãy xem việc làm của nữ chủ nhu thuận! Hãy xem việc làm của nữ chủ ôn hòa!<br>
+<span lang="pi" class="pali">
+passathayye, nivātāya kammaṁ, passathayye, upasantāya kammaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Sao nữ chủ nói với nữ tỳ độc nhất: “Hôm nay Ngươi dậy trễ”, rồi phẫn nộ, bất mãn, nàng cầm then gài cửa, đánh tôi một cú trên đầu khiến bể đầu”.<br>
+<span lang="pi" class="pali">
+Kathañhi nāma ekadāsikāya divā uṭṭhāsīti kupitā anattamanā aggaḷasūciṁ gahetvā sīse pahāraṁ dassati, sīsaṁ vobhindissatī’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Chư Tỷ-kheo, sau một thời gian, tiếng đồn xấu sau đây được khởi lên về nữ chủ Vedehikā:<br>
+<span lang="pi" class="pali">
+Atha kho, bhikkhave, vedehikāya gahapatāniyā aparena samayena evaṁ pāpako kittisaddo abbhuggacchi:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Nữ chủ Vedehikā là độc ác! Nữ chủ Vedehikā là không nhu thuận! Nữ chủ Vedehikā là không ôn hòa!”<br>
+<span lang="pi" class="pali">
+‘caṇḍī vedehikā gahapatānī, anivātā vedehikā gahapatānī, anupasantā vedehikā gahapatānī’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Cũng vậy chư Tỷ-kheo, ở đây, Tỷ-kheo hết sức hiền lành, hết sức nhu thuận, hết sức ôn hòa trong khi chưa bị những lời nói bất khả ý, xúc phạm.<br>
+<span lang="pi" class="pali">
+Evameva kho, bhikkhave, idhekacco bhikkhu tāvadeva soratasorato hoti nivātanivāto hoti upasantūpasanto hoti yāva na amanāpā vacanapathā phusanti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Và chư Tỷ-kheo, chỉ khi nào Tỷ-kheo bị những lời nói bất khả ý, xúc phạm mà vị ấy vẫn hết sức hiền lành, hết sức nhu thuận, hết sức ôn hòa, khi ấy vị ấy mới được xem là hiền lành, mới được xem là nhu thuận, mới được xem là ôn hòa.<br>
+<span lang="pi" class="pali">
+Yato ca, bhikkhave, bhikkhuṁ amanāpā vacanapathā phusanti, atha bhikkhu ‘sorato’ti veditabbo, ‘nivāto’ti veditabbo, ‘upasanto’ti veditabbo.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Chư Tỷ-kheo, Ta không gọi một Tỷ-kheo là dễ nói, khi vị ấy dễ nói về các vật dụng như y áo, món ăn, sàng tọa, dược phẩm trị bệnh, khi vị ấy thành tựu được tánh dễ nói. Vì sao vậy?<br>
+<span lang="pi" class="pali">
+Nāhaṁ taṁ, bhikkhave, bhikkhuṁ ‘suvaco’ti vadāmi yo cīvara-piṇḍapāta-senāsana-gilānappaccaya-bhesajja-parikkhārahetu suvaco hoti, sovacassataṁ āpajjati. Taṁ kissa hetu?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Chư Tỷ-kheo, Tỷ-kheo ấy khi không được các vật dụng như y áo, thức ăn, sàng tọa, dược phẩm trị bệnh, không còn là dễ nói, không còn thành tựu tánh dễ nói.<br>
+<span lang="pi" class="pali">
+Tañhi so, bhikkhave, bhikkhu cīvara-piṇḍapāta-senāsana-gilānappaccaya-bhesajja-parikkhāraṁ alabhamāno na suvaco hoti, na sovacassataṁ āpajjati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Chư Tỷ-kheo, Tỷ-kheo nào tôn trọng Pháp, cung kính Pháp, sùng kính Pháp trở thành dễ nói, thành tựu tánh dễ nói, vị ấy Ta mới gọi là dễ nói.<br>
+<span lang="pi" class="pali">
+Yo ca kho, bhikkhave, bhikkhu dhammaṁyeva sakkaronto, dhammaṁ garuṁ karonto, dhammaṁ mānento, dhammaṁ pūjento, dhammaṁ apacāyamāno suvaco hoti, sovacassataṁ āpajjati, tamahaṁ ‘suvaco’ti vadāmi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Do vậy, này các Tỷ-kheo, hãy suy nghĩ: “Chỉ vì tôn trọng Pháp, cung kính Pháp, sùng kính Pháp chúng ta sẽ trở thành dễ nói, thành tựu tánh dễ nói”.<br>
+<span lang="pi" class="pali">
+Tasmātiha, bhikkhave, ‘dhammaṁyeva sakkarontā, dhammaṁ garuṁ karontā, dhammaṁ mānentā, dhammaṁ pūjentā, dhammaṁ apacāyamānā suvacā bhavissāma, sovacassataṁ āpajjissāmā’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Chư Tỷ-kheo, các ông phải học tập như vậy.<br>
+<span lang="pi" class="pali">
+Evañhi vo, bhikkhave, sikkhitabbaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Chư Tỷ-kheo, có năm loại ngôn ngữ mà người khác có thể dùng khi nói với các ông:<br>
+<span lang="pi" class="pali">
+Pañcime, bhikkhave, vacanapathā yehi vo pare vadamānā vadeyyuṁ—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Đúng thời hay phi thời,<br>
+<span lang="pi" class="pali">
+kālena vā akālena vā;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+chơn thực hay không chơn thực,<br>
+<span lang="pi" class="pali">
+bhūtena vā abhūtena vā;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+nhu nhuyến hay thô bạo,<br>
+<span lang="pi" class="pali">
+saṇhena vā pharusena vā;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+có lợi ích hay không lợi ích,<br>
+<span lang="pi" class="pali">
+atthasaṁhitena vā anatthasaṁhitena vā;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+với từ tâm hay với sân tâm.<br>
+<span lang="pi" class="pali">
+mettacittā vā dosantarā vā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Chư Tỷ-kheo, khi người khác nói với các ông, họ có thể nói đúng thời hay phi thời.<br>
+<span lang="pi" class="pali">
+Kālena vā, bhikkhave, pare vadamānā vadeyyuṁ akālena vā;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Chư Tỷ-kheo, khi người khác nói với các ông, họ có thể nói lời chơn thực hay nói lời không chơn thực.<br>
+<span lang="pi" class="pali">
+bhūtena vā, bhikkhave, pare vadamānā vadeyyuṁ abhūtena vā;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Chư Tỷ-kheo, khi người khác nói với các ông, họ có thể nói lời nhu nhuyến hay nói lời thô bạo.<br>
+<span lang="pi" class="pali">
+saṇhena vā, bhikkhave, pare vadamānā vadeyyuṁ pharusena vā;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Chư Tỷ-kheo, khi người khác nói với các ông, họ có thể nói lời lợi ích hay nói lời không lợi ích.<br>
+<span lang="pi" class="pali">
+atthasaṁhitena vā, bhikkhave, pare vadamānā vadeyyuṁ anatthasaṁhitena vā;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Chư Tỷ-kheo, khi người khác nói với các ông, họ có thể nói với từ tâm hay với sân tâm.<br>
+<span lang="pi" class="pali">
+mettacittā vā, bhikkhave, pare vadamānā vadeyyuṁ dosantarā vā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Chư Tỷ-kheo, ở tại đây, các ông cần phải học tập như sau:<br>
+<span lang="pi" class="pali">
+Tatrāpi vo, bhikkhave, evaṁ sikkhitabbaṁ:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Chúng ta sẽ giữ tâm của chúng ta không biến nhiễm, chúng ta sẽ không thốt ra những lời ác ngữ, chúng ta sẽ sống với lòng lân mẫn, với tâm từ bi, với nội tâm không sân hận.<br>
+<span lang="pi" class="pali">
+‘na ceva no cittaṁ vipariṇataṁ bhavissati, na ca pāpikaṁ vācaṁ nicchāressāma, hitānukampī ca viharissāma mettacittā, na dosantarā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Chúng ta sẽ sống bao phủ người này với tâm câu hữu với từ. Và với người này là đối tượng, ta sống biến mãn cùng khắp thế giới với tâm câu hữu với từ, quảng đại vô biên, không hận, không sân.’<br>
+<span lang="pi" class="pali">
+Tañca puggalaṁ mettāsahagatena cetasā pharitvā viharissāma, tadārammaṇañca sabbāvantaṁ lokaṁ mettāsahagatena cittena vipulena mahaggatena appamāṇena averena abyābajjhena pharitvā viharissāmā’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Chư Tỷ-kheo, như vậy các ông cần phải học tập.<br>
+<span lang="pi" class="pali">
+Evañhi vo, bhikkhave, sikkhitabbaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Chư Tỷ-kheo, ví như một người đến, cầm xẻng và thúng,<br>
+<span lang="pi" class="pali">
+Seyyathāpi, bhikkhave, puriso āgaccheyya kudālapiṭakaṁ ādāya.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+nói như sau:<br>
+<span lang="pi" class="pali">
+So evaṁ vadeyya:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Tôi sẽ làm cho đất lớn này không thành đất nữa!’<br>
+<span lang="pi" class="pali">
+‘ahaṁ imaṁ mahāpathaviṁ apathaviṁ karissāmī’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+và người ấy đào chỗ này chỗ kia, rải đất chỗ này chỗ kia, nhổ nước miếng chỗ này chỗ kia, đi tiểu tiện chỗ này chỗ kia, với ý nghĩ:<br>
+<span lang="pi" class="pali">
+So tatra tatra vikhaṇeyya, tatra tatra vikireyya, tatra tatra oṭṭhubheyya, tatra tatra omutteyya:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Ngươi trở thành không phải đất! Ngươi trở thành không phải đất!’<br>
+<span lang="pi" class="pali">
+‘apathavī bhavasi, apathavī bhavasī’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Chư Tỷ-kheo, nghĩ thế nào?<br>
+<span lang="pi" class="pali">
+Taṁ kiṁ maññatha, bhikkhave,<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Người ấy có thể làm cho đất lớn này trở thành không phải đất chăng?”<br>
+<span lang="pi" class="pali">
+api nu so puriso imaṁ mahāpathaviṁ apathaviṁ kareyyā”ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Bạch Thế Tôn, không”. “Vì sao vậy? “<br>
+<span lang="pi" class="pali">
+“No hetaṁ, bhante”. “Taṁ kissa hetu”?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vì đất lớn này thâm sâu và vô lượng,<br>
+<span lang="pi" class="pali">
+“Ayañhi, bhante, mahāpathavī gambhīrā appameyyā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+không dễ gì khiến cho đất lớn này trở thành không phải đất,<br>
+<span lang="pi" class="pali">
+Sā na sukarā apathavī kātuṁ;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+trước khi người ấy bị mệt nhoài và bị thất bại.”<br>
+<span lang="pi" class="pali">
+yāvadeva ca pana so puriso kilamathassa vighātassa bhāgī assā”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Cũng vậy, này chư Tỷ-kheo, có năm loại ngôn ngữ mà người khác có thể dùng khi nói với các ông:<br>
+<span lang="pi" class="pali">
+“Evameva kho, bhikkhave, pañcime vacanapathā yehi vo pare vadamānā vadeyyuṁ—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Đúng thời hay phi thời, chơn thực hay không chơn thực, nhu nhuyến hay thô bạo, có lợi ích hay không lợi ích, với từ tâm hay với sân tâm.<br>
+<span lang="pi" class="pali">
+kālena vā akālena vā; bhūtena vā abhūtena vā; saṇhena vā pharusena vā; atthasaṁhitena vā anatthasaṁhitena vā; mettacittā vā dosantarā vā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Chư Tỷ-kheo, khi người khác nói với các ông, họ có thể nói đúng thời hay phi thời.<br>
+<span lang="pi" class="pali">
+Kālena vā, bhikkhave, pare vadamānā vadeyyuṁ akālena vā;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Chư Tỷ-kheo, khi người khác nói với các ông, họ có thể nói lời chơn thực hay nói lời không chơn thực.<br>
+<span lang="pi" class="pali">
+bhūtena vā bhikkhave, pare vadamānā vadeyyuṁ abhūtena vā;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Chư Tỷ-kheo, khi người khác nói với các ông, họ có thể nói lời nhu nhuyến hay nói lời thô bạo.<br>
+<span lang="pi" class="pali">
+saṇhena vā, bhikkhave, pare vadamānā vadeyyuṁ pharusena vā;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Chư Tỷ-kheo, khi người khác nói với các ông, họ có thể nói lời lợi ích hay nói lời không lợi ích.<br>
+<span lang="pi" class="pali">
+atthasaṁhitena vā, bhikkhave, pare vadamānā vadeyyuṁ anatthasaṁhitena vā;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Chư Tỷ-kheo, khi người khác nói với các ông, họ có thể nói với từ tâm hay với sân tâm.<br>
+<span lang="pi" class="pali">
+mettacittā vā, bhikkhave, pare vadamānā vadeyyuṁ dosantarā vā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Các Tỷ-kheo, ở tại đây, các ông cần phải học tập như sau:<br>
+<span lang="pi" class="pali">
+Tatrāpi vo, bhikkhave, evaṁ sikkhitabbaṁ:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Chúng ta sẽ giữ tâm của chúng ta không biến nhiễm, chúng ta sẽ không thốt ra những lời ác ngữ, chúng ta sẽ sống với lòng lân mẫn, với tâm từ bi, với nội tâm không sân hận.<br>
+<span lang="pi" class="pali">
+‘na ceva no cittaṁ vipariṇataṁ bhavissati, na ca pāpikaṁ vācaṁ nicchāressāma, hitānukampī ca viharissāma mettacittā na dosantarā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Chúng ta sẽ sống bao phủ người này với tâm câu hữu với từ. Và với người này là đối tượng, ta sống biến mãn cùng khắp thế giới với tâm câu hữu với từ, quảng đại vô biên, không hận, không sân.’<br>
+<span lang="pi" class="pali">
+Tañca puggalaṁ mettāsahagatena cetasā pharitvā viharissāma, tadārammaṇañca sabbāvantaṁ lokaṁ pathavisamena cetasā vipulena mahaggatena appamāṇena averena abyābajjhena pharitvā viharissāmā’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Chư Tỷ-kheo, như vậy các ông cần phải học tập.<br>
+<span lang="pi" class="pali">
+Evañhi vo, bhikkhave, sikkhitabbaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Chư Tỷ-kheo, ví như một người đến, cầm màu sơn, màu vàng, màu xanh sẫm hay màu đỏ tía; người ấy có thể nói như sau:<br>
+<span lang="pi" class="pali">
+Seyyathāpi, bhikkhave, puriso āgaccheyya lākhaṁ vā haliddiṁ vā nīlaṁ vā mañjiṭṭhaṁ vā ādāya. So evaṁ vadeyya:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Ta sẽ viết các hình sắc trên hư không này. Ta sẽ làm cho các hình sắc hiển hiện.’<br>
+<span lang="pi" class="pali">
+‘ahaṁ imasmiṁ ākāse rūpaṁ likhissāmi, rūpapātubhāvaṁ karissāmī’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Các Tỷ-kheo, các ông nghĩ thế nào?<br>
+<span lang="pi" class="pali">
+Taṁ kiṁ maññatha, bhikkhave,<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Người ấy có thể viết các hình sắc trên hư không và làm cho các hình sắc hiển hiện được không?”<br>
+<span lang="pi" class="pali">
+api nu so puriso imasmiṁ ākāse rūpaṁ likheyya, rūpapātubhāvaṁ kareyyā”ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Bạch Thế Tôn, không thể được. Vì sao vậy?<br>
+<span lang="pi" class="pali">
+“No hetaṁ, bhante”. “Taṁ kissa hetu”?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Bạch Thế Tôn, hư không là vô sắc, không thể thấy được.<br>
+<span lang="pi" class="pali">
+“Ayañhi, bhante, ākāso arūpī anidassano.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ở đây, không dễ gì viết các hình sắc và làm hình sắc hiển hiện,<br>
+<span lang="pi" class="pali">
+Tattha na sukaraṁ rūpaṁ likhituṁ, rūpapātubhāvaṁ kātuṁ;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+trước khi người ấy bị mệt nhoài và bị thất bại.”<br>
+<span lang="pi" class="pali">
+yāvadeva ca pana so puriso kilamathassa vighātassa bhāgī assā”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Cũng vậy, này chư Tỷ-kheo, có năm loại ngôn ngữ mà người khác có thể dùng khi nói với các ông: “Ðúng thời hay phi thời … hay với sân tâm”. Các Tỷ-kheo, ở tại đây, các ông cần phải học tập như sau: “Chúng ta sẽ giữ tâm của chúng ta không biến nhiễm … Và với người này là đối tượng, ta sống biến mãn cùng khắp thế giới, với tâm câu hữu với từ, quảng đại, vô biên, không hận, không sân”.<br>
+<span lang="pi" class="pali">
+“Evameva kho, bhikkhave, pañcime vacanapathā yehi vo pare vadamānā vadeyyuṁ kālena vā akālena vā …pe… tadārammaṇañca sabbāvantaṁ lokaṁ ākāsasamena cetasā vipulena mahaggatena appamāṇena averena abyābajjhena pharitvā viharissāmā’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Các Tỷ-kheo, các ông cần phải học tập như vậy.<br>
+<span lang="pi" class="pali">
+Evañhi vo, bhikkhave, sikkhitabbaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Chư Tỷ-kheo, ví như một người đến, cầm một bó cỏ khô đang cháy và nói như sau:<br>
+<span lang="pi" class="pali">
+Seyyathāpi, bhikkhave, puriso āgaccheyya ādittaṁ tiṇukkaṁ ādāya. So evaṁ vadeyya:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Ta với bó cỏ khô đang cháy này sẽ hâm nóng và đun sôi sông Hằng này.’<br>
+<span lang="pi" class="pali">
+‘ahaṁ imāya ādittāya tiṇukkāya gaṅgaṁ nadiṁ santāpessāmi samparitāpessāmī’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Chư Tỷ-kheo, các ông nghĩ thế nào?<br>
+<span lang="pi" class="pali">
+Taṁ kiṁ maññatha, bhikkhave,<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Người ấy, với bỏ cỏ khô đang cháy có thể hâm nóng và đun sôi sông Hằng được không?”<br>
+<span lang="pi" class="pali">
+api nu so puriso ādittāya tiṇukkāya gaṅgaṁ nadiṁ santāpeyya samparitāpeyyā”ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Bạch Thế Tôn, không. Vì sao vậy?<br>
+<span lang="pi" class="pali">
+“No hetaṁ, bhante”. “Taṁ kissa hetu”?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Bạch Thế Tôn, vì sông Hằng thâm sâu và vô lượng,<br>
+<span lang="pi" class="pali">
+“Gaṅgā hi, bhante, nadī gambhīrā appameyyā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+không dễ gì với bó cỏ khô đang cháy có thể hâm nóng và đun sôi sông Hằng được,<br>
+<span lang="pi" class="pali">
+Sā na sukarā ādittāya tiṇukkāya santāpetuṁ samparitāpetuṁ;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+trước khi người ấy mệt nhoài và bị thất bại.”<br>
+<span lang="pi" class="pali">
+yāvadeva ca pana so puriso kilamathassa vighātassa bhāgī assā”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Cũng vậy, này chư Tỷ-kheo, có năm loại ngôn ngữ mà người khác có thể dùng khi nói với các ông: “Ðúng thời hay phi thời … hay với sân tâm”. Các Tỷ-kheo, ở tại đây, các ông cần phải học tập như sau: “Chúng ta sẽ giữ tâm của chúng ta không biến nhiễm … Và với người này là đối tượng, ta sống biến mãn cùng khắp thế giới, với tâm câu hữu với từ, quảng đại, vô biên, không hận, không sân”.<br>
+<span lang="pi" class="pali">
+“Evameva kho, bhikkhave, pañcime vacanapathā yehi vo pare vadamānā vadeyyuṁ kālena vā akālena vā …pe… tadārammaṇañca sabbāvantaṁ lokaṁ gaṅgāsamena cetasā vipulena mahaggatena appamāṇena averena abyābajjhena pharitvā viharissāmā’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Các Tỷ-kheo, các ông cần phải học tập như vậy.<br>
+<span lang="pi" class="pali">
+Evañhi vo, bhikkhave, sikkhitabbaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Chư Tỷ-kheo, ví như một cái bị bằng da mèo, đã được thuộc chín, khéo thuộc, khéo thuộc cùng khắp, nhu nhuyến, như bông, không còn tiếng xì, tiếng xọp,<br>
+<span lang="pi" class="pali">
+Seyyathāpi, bhikkhave, biḷārabhastā madditā sumadditā suparimadditā, mudukā tūlinī chinnasassarā chinnabhabbharā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+và một người đến, cầm gậy hay cầm mẻ sành và nói như sau:<br>
+<span lang="pi" class="pali">
+Atha puriso āgaccheyya kaṭṭhaṁ vā kathalaṁ vā ādāya. So evaṁ vadeyya:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Ta sẽ lấy cái gậy hay với cái mẻ sành làm cho cái bị bằng da mèo này, đã được thuộc chín, khéo thuộc, khéo thuộc cùng khắp, nhu nhuyễn, như bông, không còn tiếng xì, tiếng xọp, phát ra tiếng xì, tiếng xọp.’<br>
+<span lang="pi" class="pali">
+‘ahaṁ imaṁ biḷārabhastaṁ madditaṁ sumadditaṁ suparimadditaṁ, mudukaṁ tūliniṁ, chinnasassaraṁ chinnabhabbharaṁ kaṭṭhena vā kathalena vā sarasaraṁ karissāmi bharabharaṁ karissāmī’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Chư Tỷ-kheo, các ông nghĩ thế nào?<br>
+<span lang="pi" class="pali">
+Taṁ kiṁ maññatha, bhikkhave,<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Người ấy có thể, với cái gậy hay với cái mẻ sành làm cho cái bị bằng da mèo này đã được thuộc chín, khéo thuộc, khéo thuộc cùng khắp, nhu nhuyễn, như bông, không còn tiếng xì, tiếng xọp, phát ra tiếng xì, tiếng xọp được không?”<br>
+<span lang="pi" class="pali">
+api nu so puriso amuṁ biḷārabhastaṁ madditaṁ sumadditaṁ suparimadditaṁ, mudukaṁ tūliniṁ, chinnasassaraṁ chinnabhabbharaṁ kaṭṭhena vā kathalena vā sarasaraṁ kareyya, bharabharaṁ kareyyā”ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Bạch Thế Tôn, không. Vì sao vậy?<br>
+<span lang="pi" class="pali">
+“No hetaṁ, bhante”. “Taṁ kissa hetu”?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Bạch Thế Tôn, cái bị bằng da mèo này đã được thuộc chín, khéo thuộc, khéo thuộc cùng khắp, nhu nhuyễn, như bông, không còn tiếng xì, tiếng xọp,<br>
+<span lang="pi" class="pali">
+“Amu hi, bhante, biḷārabhastā madditā sumadditā suparimadditā, mudukā tūlinī, chinnasassarā chinnabhabbharā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+không dễ gì làm cho cái bị ấy phát ra tiếng xì, tiếng xọp được,<br>
+<span lang="pi" class="pali">
+Sā na sukarā kaṭṭhena vā kathalena vā sarasaraṁ kātuṁ bharabharaṁ kātuṁ;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+trước khi người ấy bị mệt nhoài và bị thất bại.”<br>
+<span lang="pi" class="pali">
+yāvadeva ca pana so puriso kilamathassa vighātassa bhāgī assā”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Cũng vậy, chư Tỷ-kheo, có năm loại ngôn ngữ mà người khác có thể dùng khi nói với các ông:<br>
+<span lang="pi" class="pali">
+“Evameva kho, bhikkhave, pañcime vacanapathā yehi vo pare vadamānā vadeyyuṁ<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Đúng thời hay phi thời,<br>
+<span lang="pi" class="pali">
+kālena vā akālena vā;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+chơn thực hay không chơn thực,<br>
+<span lang="pi" class="pali">
+bhūtena vā abhūtena vā;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+nhu nhuyến hay thô bạo,<br>
+<span lang="pi" class="pali">
+saṇhena vā pharusena vā;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+có lợi ích hay không lợi ích,<br>
+<span lang="pi" class="pali">
+atthasaṁhitena vā anatthasaṁhitena vā;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+với từ tâm hay với sân tâm.<br>
+<span lang="pi" class="pali">
+mettacittā vā dosantarā vā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Chư Tỷ-kheo, khi người khác nói với các ông, họ có thể nói đúng thời hay phi thời.<br>
+<span lang="pi" class="pali">
+Kālena vā, bhikkhave, pare vadamānā vadeyyuṁ akālena vā;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Chư Tỷ-kheo, khi người khác nói với các ông, họ có thể nói lời chơn thực hay nói lời không chơn thực.<br>
+<span lang="pi" class="pali">
+bhūtena vā, bhikkhave, pare vadamānā vadeyyuṁ abhūtena vā;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Chư Tỷ-kheo, khi người khác nói với các ông, họ có thể nói lời nhu nhuyến hay nói lời thô bạo.<br>
+<span lang="pi" class="pali">
+saṇhena vā, bhikkhave, pare vadamānā vadeyyuṁ pharusena vā;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Chư Tỷ-kheo, khi người khác nói với các ông, họ có thể nói lời lợi ích hay nói lời không lợi ích.<br>
+<span lang="pi" class="pali">
+atthasaṁhitena vā, bhikkhave, pare vadamānā vadeyyuṁ anatthasaṁhitena vā;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Chư Tỷ-kheo, khi người khác nói với các ông, họ có thể nói với từ tâm hay với sân tâm.<br>
+<span lang="pi" class="pali">
+mettacittā vā, bhikkhave, pare vadamānā vadeyyuṁ dosantarā vā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Chư Tỷ-kheo, ở tại đây, các ông cần phải học tập như sau:<br>
+<span lang="pi" class="pali">
+Tatrāpi vo, bhikkhave, evaṁ sikkhitabbaṁ:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Chúng ta sẽ giữ tâm của chúng ta không biến nhiễm, chúng ta sẽ không thốt ra những lời ác ngữ, chúng ta sẽ sống với lòng lân mẫn, với tâm từ bi, với nội tâm không sân hận.<br>
+<span lang="pi" class="pali">
+‘na ceva no cittaṁ vipariṇataṁ bhavissati, na ca pāpikaṁ vācaṁ nicchāressāma hitānukampī ca viharissāma mettacittā na dosantarā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Chúng ta sẽ sống bao phủ người này với tâm câu hữu với từ. Và với người này là đối tượng, ta sống biến mãn cùng khắp thế giới với tâm câu hữu với từ, quảng đại vô biên, không hận, không sân.’<br>
+<span lang="pi" class="pali">
+Tañca puggalaṁ mettāsahagatena cetasā pharitvā viharissāma, tadārammaṇañca sabbāvantaṁ lokaṁ biḷārabhastāsamena cetasā vipulena mahaggatena appamāṇena averena abyābajjhena pharitvā viharissāmā’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Chư Tỷ-kheo, như vậy các ông cần phải học tập.<br>
+<span lang="pi" class="pali">
+Evañhi vo, bhikkhave, sikkhitabbaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Chư Tỷ-kheo, như những kẻ đạo tặc hạ liệt, dùng cưa hai lưỡi mà cưa tay, cưa chân; dầu vậy, nếu một ai ở đây khởi ý nhiễm loạn, người ấy do vậy không phải là người thực hành giáo pháp của Ta.<br>
+<span lang="pi" class="pali">
+Ubhatodaṇḍakena cepi, bhikkhave, kakacena corā ocarakā aṅgamaṅgāni okanteyyuṁ, tatrāpi yo mano padūseyya, na me so tena sāsanakaro.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ở đây, chư Tỷ-kheo các ông phải học tập như sau:<br>
+<span lang="pi" class="pali">
+Tatrāpi vo, bhikkhave, evaṁ sikkhitabbaṁ:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Chúng ta sẽ giữ tâm của chúng ta không biến nhiễm; chúng ta sẽ không thốt ra những lời ác ngữ; chúng ta sẽ sống với lòng lân mẫn, với tâm từ bi, với nội tâm không sân hận.<br>
+<span lang="pi" class="pali">
+‘na ceva no cittaṁ vipariṇataṁ bhavissati, na ca pāpikaṁ vācaṁ nicchāressāma, hitānukampī ca viharissāma mettacittā na dosantarā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Chúng ta sẽ sống bao phủ người này với tâm câu hữu với từ. Và với người này là đối tượng, ta sống biến mãn cùng khắp thế giới với tâm câu hữu với từ, quảng đại, vô biên, không hận, không sân.’<br>
+<span lang="pi" class="pali">
+Tañca puggalaṁ mettāsahagatena cetasā pharitvā viharissāma tadārammaṇañca sabbāvantaṁ lokaṁ mettāsahagatena cetasā vipulena mahaggatena appamāṇena averena abyābajjhena pharitvā viharissāmā’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Chư Tỷ-kheo, các ông cần phải học tập như vậy.<br>
+<span lang="pi" class="pali">
+Evañhi vo, bhikkhave, sikkhitabbaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Và này chư Tỷ-kheo, nếu các ông luôn luôn suy tư lời dạy ví dụ cái cưa này,<br>
+<span lang="pi" class="pali">
+Imañca tumhe, bhikkhave, kakacūpamaṁ ovādaṁ abhikkhaṇaṁ manasi kareyyātha.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+thì này các Tỷ-kheo, các ông có thấy loại ngôn ngữ nào, dầu tế nhị hay thô bạo mà các ông không kham nhẫn được chăng?”<br>
+<span lang="pi" class="pali">
+Passatha no tumhe, bhikkhave, taṁ vacanapathaṁ, aṇuṁ vā thūlaṁ vā, yaṁ tumhe nādhivāseyyāthā”ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Bạch Thế Tôn, không.”<br>
+<span lang="pi" class="pali">
+“No hetaṁ, bhante”.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Chư Tỷ-kheo, do vậy, hãy luôn luôn suy tư lời dạy ví như cái cưa này,<br>
+<span lang="pi" class="pali">
+“Tasmātiha, bhikkhave, imaṁ kakacūpamaṁ ovādaṁ abhikkhaṇaṁ manasikarotha.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+và các ông sẽ được hạnh phúc an lạc lâu ngày.”<br>
+<span lang="pi" class="pali">
+Taṁ vo bhavissati dīgharattaṁ hitāya sukhāyā”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Thế Tôn thuyết giảng như vậy. Các Tỷ-kheo ấy hoan hỷ, tín thọ lời Thế Tôn dạy.<br>
+<span lang="pi" class="pali">
+Idamavoca bhagavā. Attamanā te bhikkhū bhagavato bhāsitaṁ abhinandunti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+<span lang="pi" class="vi">
+Kakacūpamasuttaṁ niṭṭhitaṁ paṭhamaṁ.<br>
+</span>
+</p>
+
+
+
+<!-- COPY CONTENT SUTTA Ở ĐÂY -->
+
+
+
+<br>
+<p><p style="text-align: right;font-style: italic;">Hoà Thượng Thích Minh Châu dịch Việt</span></p>
 
 
-<div lang="pi">
 
-<p><span class="parno">1</span>Evaṁ me sutaṁ — ekaṁ samayaṁ bhagavā sāvatthiyaṁ viharati jetavane anāthapiṇḍikassa ārāme.</p>
 
-<p>Tena kho pana samayena āyasmā moḷiyaphagguno bhikkhunīhi saddhiṁ ativelaṁ saṁsaṭṭho viharati. Evaṁ saṁsaṭṭho āyasmā moḷiyaphagguno bhikkhunīhi saddhiṁ viharati — sace koci bhikkhu āyasmato moḷiyaphaggunassa sammukhā tāsaṁ bhikkhunīnaṁ avaṇṇaṁ bhāsati, tenāyasmā moḷiyaphagguno kupito anattamano adhikaraṇampi karoti. Sace pana koci bhikkhu tāsaṁ bhikkhunīnaṁ sammukhā āyasmato moḷiyaphaggunassa avaṇṇaṁ bhāsati, tena tā bhikkhuniyo kupitā anattamanā adhikaraṇampi karonti. Evaṁ saṁsaṭṭho āyasmā moḷiyaphagguno bhikkhunīhi saddhiṁ viharati.</p>
 
 
-<hr>
 
-<p><span class="parno">2</span>Atha kho aññataro bhikkhu yena bhagavā tenupasaṅkami; upasaṅkamitvā bhagavantaṁ abhivādetvā ekamantaṁ nisīdi. Ekamantaṁ nisinno kho so bhikkhu bhagavantaṁ etadavoca: "Āyasmā, bhante, moḷiyaphagguno bhikkhunīhi saddhiṁ ativelaṁ saṁsaṭṭho viharati. Evaṁ saṁsaṭṭho, bhante, āyasmā moḷiyaphagguno bhikkhunīhi saddhiṁ viharati — sace koci bhikkhu āyasmato moḷiyaphaggunassa sammukhā tāsaṁ bhikkhunīnaṁ avaṇṇaṁ bhāsati, tenāyasmā moḷiyaphagguno kupito anattamano adhikaraṇampi karoti. Sace pana koci bhikkhu tāsaṁ bhikkhunīnaṁ sammukhā āyasmato moḷiyaphaggunassa avaṇṇaṁ bhāsati, tena tā bhikkhuniyo kupitā anattamanā adhikaraṇampi karonti. Evaṁ saṁsaṭṭho, bhante, āyasmā moḷiyaphagguno bhikkhunīhi saddhiṁ viharatī"ti.</p>
 
-
-<hr>
-
-<p><span class="parno">3</span>Atha kho bhagavā aññataraṁ bhikkhuṁ āmantesi: "ehi tvaṁ, bhikkhu, mama vacanena moḷiyaphaggunaṁ bhikkhuṁ āmantehi: ‘satthā taṁ, āvuso phagguna, āmantetī’"ti. </p>
-
-<p>"Evaṁ, bhante"ti kho so bhikkhu bhagavato paṭissutvā yenāyasmā moḷiyaphagguno tenupasaṅkami; upasaṅkamitvā āyasmantaṁ moḷiyaphaggunaṁ etadavoca: "satthā taṁ, āvuso phagguna, āmantetī"ti. </p>
-
-<p>"Evamāvuso"ti kho āyasmā moḷiyaphagguno tassa bhikkhuno paṭissutvā yena bhagavā tenupasaṅkami; upasaṅkamitvā bhagavantaṁ abhivādetvā ekamantaṁ nisīdi. Ekamantaṁ nisinnaṁ kho āyasmantaṁ moḷiyaphaggunaṁ bhagavā etadavoca: </p>
-
-<hr>
-
-<p><span class="parno">4</span>"Saccaṁ kira tvaṁ, phagguna, bhikkhunīhi saddhiṁ ativelaṁ saṁsaṭṭho viharasi? Evaṁ saṁsaṭṭho kira tvaṁ, phagguna, bhikkhunīhi saddhiṁ viharasi — sace koci bhikkhu tuyhaṁ sammukhā tāsaṁ bhikkhunīnaṁ avaṇṇaṁ bhāsati, tena tvaṁ kupito anattamano adhikaraṇampi karosi. Sace pana koci bhikkhu tāsaṁ bhikkhunīnaṁ sammukhā tuyhaṁ avaṇṇaṁ bhāsati, tena tā bhikkhuniyo kupitā anattamanā adhikaraṇampi karonti. Evaṁ saṁsaṭṭho kira tvaṁ, phagguna, bhikkhunīhi saddhiṁ viharasī"ti? "Evaṁ, bhante"ti. "Nanu tvaṁ, phagguna, kulaputto saddhā agārasmā anagāriyaṁ pabbajito"ti? "Evaṁ, bhante"ti.</p>
-
-<p><span class="parno">5</span>"Na kho te etaṁ, phagguna, patirūpaṁ kulaputtassa saddhā agārasmā anagāriyaṁ pabbajitassa, yaṁ tvaṁ bhikkhunīhi saddhiṁ ativelaṁ saṁsaṭṭho vihareyyāsi. Tasmātiha, phagguna, tava cepi koci sammukhā tāsaṁ bhikkhunīnaṁ avaṇṇaṁ bhāseyya, tatrāpi tvaṁ, phagguna, ye <span class="var" title="gehassitā (?)" id="note221">gehasitā</span> chandā ye gehasitā vitakkā te pajaheyyāsi. Tatrāpi te, phagguna, evaṁ sikkhitabbaṁ: ‘Na ceva me cittaṁ vipariṇataṁ bhavissati, na ca pāpikaṁ vācaṁ nicchāressāmi, hitānukampī ca viharissāmi mettacitto, na dosantaro’ti. Evañhi te, phagguna, sikkhitabbaṁ.</p>
-
-<p><span class="parno">6</span>Tasmātiha, phagguna, tava cepi koci sammukhā tāsaṁ bhikkhunīnaṁ pāṇinā pahāraṁ dadeyya, leḍḍunā pahāraṁ dadeyya, daṇḍena pahāraṁ dadeyya, satthena pahāraṁ dadeyya. Tatrāpi tvaṁ, phagguna, ye gehasitā chandā ye gehasitā vitakkā te pajaheyyāsi. Tatrāpi te, phagguna, evaṁ sikkhitabbaṁ ‘Na ceva me cittaṁ vipariṇataṁ bhavissati, na ca pāpikaṁ vācaṁ nicchāressāmi, hitānukampī ca viharissāmi mettacitto, na dosantaro’ti. Evañhi te, phagguna, sikkhitabbaṁ.</p>
-
-<p><span class="parno">7</span>Tasmātiha, phagguna, tava cepi koci sammukhā avaṇṇaṁ bhāseyya, tatrāpi tvaṁ, phagguna, ye gehasitā chandā ye gehasitā vitakkā te pajaheyyāsi. Tatrāpi te, phagguna, evaṁ sikkhitabbaṁ ‘Na ceva me cittaṁ vipariṇataṁ bhavissati, na ca pāpikaṁ vācaṁ nicchāressāmi, hitānukampī ca viharissāmi mettacitto, na dosantaro’ti. Evañhi te, phagguna, sikkhitabbaṁ.</p>
-
-<p><span class="parno">8</span>Tasmātiha, phagguna, tava cepi koci pāṇinā pahāraṁ dadeyya, leḍḍunā pahāraṁ dadeyya, daṇḍena pahāraṁ dadeyya, satthena pahāraṁ dadeyya, tatrāpi tvaṁ, phagguna, ye gehasitā chandā ye gehasitā vitakkā te pajaheyyāsi. Tatrāpi te, phagguna, evaṁ sikkhitabbaṁ ‘Na ceva me cittaṁ vipariṇataṁ bhavissati, na ca pāpikaṁ vācaṁ nicchāressāmi, hitānukampī ca viharissāmi mettacitto, na dosantaro’ti. Evañhi te, phagguna, sikkhitabban"ti.</p>
-
-
-<p><span class="parno">9</span>Atha kho bhagavā bhikkhū āmantesi: </p>
-
-<p>"ārādhayiṁsu vata me, bhikkhave, bhikkhū ekaṁ samayaṁ cittaṁ. Idhāhaṁ, bhikkhave, bhikkhū āmantesiṁ — ahaṁ kho, bhikkhave, ekāsanabhojanaṁ bhuñjāmi. Ekāsanabhojanaṁ kho ahaṁ, bhikkhave, bhuñjamāno appābādhatañca sañjānāmi appātaṅkatañca lahuṭṭhānañca balañca phāsuvihārañca. Etha tumhepi, bhikkhave, ekāsanabhojanaṁ bhuñjatha. Ekāsanabhojanaṁ kho, bhikkhave, tumhepi bhuñjamānā appābādhatañca sañjānissatha appātaṅkatañca lahuṭṭhānañca balañca phāsuvihārañcāti. Na me, bhikkhave, tesu bhikkhūsu anusāsanī karaṇīyā ahosi; satuppādakaraṇīyameva me, bhikkhave, tesu bhikkhūsu ahosi.</p>
-
-<hr>
-
-<p><span class="parno">10</span>Seyyathāpi, bhikkhave, subhūmiyaṁ catumahāpathe ājaññaratho yutto assa ṭhito odhastapatodo. Tamenaṁ dakkho yoggācariyo assadammasārathi abhiruhitvā, vāmena hatthena rasmiyo gahetvā, dakkhiṇena hatthena patodaṁ gahetvā, yenicchakaṁ yadicchakaṁ sāreyyapi paccāsāreyyapi. </p>
-
-<p>Evameva kho, bhikkhave, na me tesu bhikkhūsu anusāsanī karaṇīyā ahosi, satuppādakaraṇīyameva me, bhikkhave, tesu bhikkhūsu ahosi. Tasmātiha, bhikkhave, tumhepi akusalaṁ pajahatha, kusalesu dhammesu āyogaṁ karotha. Evañhi tumhepi imasmiṁ dhammavinaye vuddhiṁ virūḷhiṁ vepullaṁ āpajjissatha.</p>
-
-
-<p><span class="parno">11</span>Seyyathāpi, bhikkhave, gāmassa vā nigamassa vā avidūre mahantaṁ sālavanaṁ. Tañcassa eḷaṇḍehi sañchannaṁ. Tassa kocideva puriso uppajjeyya atthakāmo hitakāmo yogakkhemakāmo. So yā tā sālalaṭṭhiyo kuṭilā <span class="var" title="ojasāraṇiyo (s1–3) | ojāhāraṇiyo (mr)" id="note222">ojāpāhāraṇiyo</span> tā <span class="var" title="tacchetvā (bj, s1–3, pts1)" id="note223">chetvā</span> bahiddhā nīhareyya, antovanaṁ suvisodhitaṁ visodheyya. Yā pana tā sālalaṭṭhiyo ujukā sujātā tā sammā parihareyya. Evañhetaṁ, bhikkhave, sālavanaṁ aparena samayena vuddhiṁ virūḷhiṁ vepullaṁ āpajjeyya. </p>
-
-<p>Evameva kho, bhikkhave, tumhepi akusalaṁ pajahatha, kusalesu dhammesu āyogaṁ karotha. Evañhi tumhepi imasmiṁ dhammavinaye vuddhiṁ virūḷhiṁ vepullaṁ āpajjissatha.</p>
-
-
-<hr>
-
-<p><span class="parno">12</span>Bhūtapubbaṁ, bhikkhave, imissāyeva sāvatthiyā vedehikā nāma gahapatānī ahosi. Vedehikāya, bhikkhave, gahapatāniyā evaṁ kalyāṇo kittisaddo abbhuggato: ‘soratā vedehikā gahapatānī, nivātā vedehikā gahapatānī, upasantā vedehikā gahapatānī’ti. Vedehikāya kho pana, bhikkhave, gahapatāniyā kāḷī nāma dāsī ahosi dakkhā analasā susaṁvihitakammantā.</p>
-
-<p><span class="parno">13</span>Atha kho, bhikkhave, kāḷiyā dāsiyā etadahosi: ‘mayhaṁ kho ayyāya evaṁ kalyāṇo kittisaddo abbhuggato: "soratā vedehikā gahapatānī, nivātā vedehikā gahapatānī, upasantā vedehikā gahapatānī"ti. Kiṁ nu kho me ayyā santaṁyeva nu kho ajjhattaṁ kopaṁ na pātukaroti udāhu asantaṁ udāhu <span class="var" title="mayhevete (bj, pts1) | mayhaṁpete (s1–3)" id="note224">mayhamevete</span> kammantā susaṁvihitā yena me ayyā santaṁyeva ajjhattaṁ kopaṁ na pātukaroti, no asantaṁ? Yannūnāhaṁ ayyaṁ vīmaṁseyyan’ti.</p>
-
-<hr>
-
-<p>Atha kho, bhikkhave, kāḷī dāsī divā uṭṭhāsi. Atha kho, bhikkhave, vedehikā gahapatānī kāḷiṁ dāsiṁ etadavoca: ‘he je kāḷī’ti. </p>
-
-<p>‘Kiṁ, ayye’ti? </p>
-
-<hr>
-
-<p>‘Kiṁ, je, divā uṭṭhāsī’ti? </p>
-
-<p>‘<span class="var" title="na kho ayye (bj, pts1)" id="note225">Na khvayye</span>, kiñcī’ti. </p>
-
-<hr>
-
-<p>‘No vata re kiñci, <span class="var" title="pāpadāsi (s1–3, mr)" id="note226">pāpi dāsi</span>, divā uṭṭhāsī’ti kupitā anattamanā <span class="var" title="bhūkuṭiṁ akāsi (si, pts1) | bhakuṭimakāsi (s1, s3) ^snp3.4#792 [Pūraḷāsa (sundarikabhāradvāja)]" id="note227">bhākuṭiṁ akāsi</span>. </p>
-
-<p>Atha kho, bhikkhave, kāḷiyā dāsiyā etadahosi: ‘santaṁyeva kho me ayyā ajjhattaṁ kopaṁ na pātukaroti, no asantaṁ; mayhamevete kammantā susaṁvihitā, yena me ayyā santaṁyeva ajjhattaṁ kopaṁ na pātukaroti, no asantaṁ. Yannūnāhaṁ bhiyyoso mattāya ayyaṁ vīmaṁseyyan’ti.</p>
-
-<p><span class="parno">14</span>Atha kho, bhikkhave, kāḷī dāsī divātaraṁyeva uṭṭhāsi. Atha kho, bhikkhave, vedehikā gahapatānī kāḷiṁ dāsiṁ etadavoca: ‘he je kāḷī’ti. </p>
-
-<hr>
-
-<p>‘Kiṁ, ayye’ti? </p>
-
-<p>‘Kiṁ, je, divātaraṁ uṭṭhāsī’ti? </p>
-
-<hr>
-
-<p>‘Na khvayye, kiñcī’ti. </p>
-
-<p>‘No vata re kiñci, pāpi dāsi, divātaraṁ uṭṭhāsī’ti kupitā anattamanā anattamanavācaṁ nicchāresi. </p>
-
-<p>Atha kho, bhikkhave, kāḷiyā dāsiyā etadahosi: ‘santaṁyeva kho me ayyā ajjhattaṁ kopaṁ na pātukaroti, no asantaṁ. Mayhamevete kammantā susaṁvihitā, yena me ayyā santaṁyeva ajjhattaṁ kopaṁ na pātukaroti, no asantaṁ. Yannūnāhaṁ bhiyyoso mattāya ayyaṁ vīmaṁseyyan’ti.</p>
-
-<hr>
-
-<p><span class="parno">15</span>Atha kho, bhikkhave, kāḷī dāsī divātaraṁyeva uṭṭhāsi. Atha kho, bhikkhave, vedehikā gahapatānī kāḷiṁ dāsiṁ etadavoca: ‘he je kāḷī’ti. </p>
-
-<p>‘Kiṁ, ayye’ti? </p>
-
-<hr>
-
-<p>‘Kiṁ, je, divā uṭṭhāsī’ti? </p>
-
-<p>‘Na khvayye, kiñcī’ti. </p>
-
-<hr>
-
-<p>‘No vata re kiñci, pāpi dāsi, divā uṭṭhāsī’ti kupitā anattamanā aggaḷasūciṁ gahetvā sīse pahāraṁ adāsi, sīsaṁ <span class="var" title="te bhindissāmīti (s1–3)" id="note228">vobhindi</span>.</p>
-
-<p>Atha kho, bhikkhave, kāḷī dāsī bhinnena sīsena lohitena galantena paṭivissakānaṁ ujjhāpesi: ‘passathayye, soratāya kammaṁ; passathayye, nivātāya kammaṁ, passathayye, upasantāya kammaṁ. Kathañhi nāma ekadāsikāya divā uṭṭhāsīti kupitā anattamanā aggaḷasūciṁ gahetvā sīse pahāraṁ dassati, sīsaṁ vobhindissatī’ti.</p>
-
-<p><span class="parno">16</span>Atha kho, bhikkhave, vedehikāya gahapatāniyā aparena samayena evaṁ pāpako kittisaddo abbhuggacchi: ‘caṇḍī vedehikā gahapatānī, anivātā vedehikā gahapatānī, anupasantā vedehikā gahapatānī’ti.</p>
-
-
-<p><span class="parno">17</span>Evameva kho, bhikkhave, idhekacco bhikkhu tāvadeva soratasorato hoti nivātanivāto hoti upasantūpasanto hoti yāva na amanāpā vacanapathā phusanti. Yato ca, bhikkhave, bhikkhuṁ amanāpā vacanapathā phusanti, atha bhikkhu ‘sorato’ti veditabbo, ‘nivāto’ti veditabbo, ‘upasanto’ti veditabbo. Nāhaṁ taṁ, bhikkhave, bhikkhuṁ ‘suvaco’ti vadāmi yo cīvarapiṇḍapātasenāsanagilānappaccayabhesajjaparikkhārahetu suvaco hoti, sovacassataṁ āpajjati. Taṁ kissa hetu? Tañhi so, bhikkhave, bhikkhu cīvarapiṇḍapātasenāsanagilānappaccayabhesajjaparikkhāraṁ alabhamāno na suvaco hoti, na sovacassataṁ āpajjati. Yo ca kho, bhikkhave, bhikkhu dhammaṁyeva sakkaronto, dhammaṁ garuṁ karonto, <span class="var" title="dhammaṁyeva sakkaronto dhammaṁ garukaronto dhammaṁ apacāyamāno (bj, s1–3, pts1)" id="note229">dhammaṁ mānento, dhammaṁ pūjento, dhammaṁ apacāyamāno</span> suvaco hoti, sovacassataṁ āpajjati, tamahaṁ ‘suvaco’ti vadāmi. Tasmātiha, bhikkhave, ‘dhammaṁyeva sakkarontā, dhammaṁ garuṁ karontā, dhammaṁ mānentā, dhammaṁ pūjentā, dhammaṁ apacāyamānā suvacā bhavissāma, sovacassataṁ āpajjissāmā’ti. Evañhi vo, bhikkhave, sikkhitabbaṁ.</p>
-
-<p><span class="parno">18</span>Pañcime, bhikkhave, vacanapathā yehi vo pare vadamānā vadeyyuṁ — kālena vā akālena vā; bhūtena vā abhūtena vā; saṇhena vā pharusena vā; atthasaṁhitena vā anatthasaṁhitena vā; mettacittā vā dosantarā vā. Kālena vā, bhikkhave, pare vadamānā vadeyyuṁ akālena vā; bhūtena vā, bhikkhave, pare vadamānā vadeyyuṁ abhūtena vā; saṇhena vā, bhikkhave, pare vadamānā vadeyyuṁ pharusena vā; atthasaṁhitena vā, bhikkhave, pare vadamānā vadeyyuṁ anatthasaṁhitena vā; mettacittā vā, bhikkhave, pare vadamānā vadeyyuṁ dosantarā vā. Tatrāpi vo, bhikkhave, evaṁ sikkhitabbaṁ: ‘Na ceva no cittaṁ vipariṇataṁ bhavissati, na ca pāpikaṁ vācaṁ nicchāressāma, hitānukampī ca viharissāma mettacittā, na dosantarā. Tañca puggalaṁ mettāsahagatena cetasā pharitvā viharissāma, tadārammaṇañca sabbāvantaṁ lokaṁ mettāsahagatena cittena vipulena mahaggatena appamāṇena averena <span class="var" title="abyāpajjhena (bj, s1–3) | abyāpajjena (mr)" id="note230">abyābajjhena</span> pharitvā viharissāmā’ti. Evañhi vo, bhikkhave, sikkhitabbaṁ.</p>
-
-
-<hr>
-
-<p><span class="parno">19</span>Seyyathāpi, bhikkhave, puriso āgaccheyya <span class="var" title="kuddālapiṭakaṁ (bj, s1–3, pts1)" id="note231">kudālapiṭakaṁ</span> ādāya. So evaṁ vadeyya: ‘Ahaṁ imaṁ mahāpathaviṁ apathaviṁ karissāmī’ti. So tatra tatra <span class="var" title="khaṇeyya (bj, s1, pts1) | khaneyya (s2, s3)" id="note232">vikhaṇeyya</span>, tatra tatra vikireyya, tatra tatra oṭṭhubheyya, tatra tatra omutteyya: ‘apathavī bhavasi, apathavī bhavasī’ti. </p>
-
-<p>Taṁ kiṁ maññatha, bhikkhave, api nu so puriso imaṁ mahāpathaviṁ apathaviṁ kareyyā"ti? </p>
-
-<hr>
-
-<p>"No hetaṁ, bhante". "Taṁ kissa hetu"? "Ayañhi, bhante, mahāpathavī gambhīrā appameyyā. Sā na sukarā apathavī kātuṁ; yāvadeva ca pana so puriso kilamathassa vighātassa bhāgī assā"ti.</p>
-
-<p>"Evameva kho, bhikkhave, pañcime vacanapathā yehi vo pare vadamānā vadeyyuṁ –  kālena vā akālena vā; bhūtena vā abhūtena vā; saṇhena vā pharusena vā; atthasaṁhitena vā anatthasaṁhitena vā; mettacittā vā dosantarā vā. Kālena vā, bhikkhave, pare vadamānā vadeyyuṁ akālena vā; bhūtena vā bhikkhave, pare vadamānā vadeyyuṁ abhūtena vā; saṇhena vā, bhikkhave, pare vadamānā vadeyyuṁ pharusena vā; atthasaṁhitena vā, bhikkhave, pare vadamānā vadeyyuṁ anatthasaṁhitena vā; mettacittā vā, bhikkhave, pare vadamānā vadeyyuṁ dosantarā vā. Tatrāpi vo, bhikkhave, evaṁ sikkhitabbaṁ: ‘Na ceva no cittaṁ vipariṇataṁ bhavissati, na ca pāpikaṁ vācaṁ nicchāressāma, hitānukampī ca viharissāma mettacittā na dosantarā. Tañca puggalaṁ mettāsahagatena cetasā pharitvā viharissāma, tadārammaṇañca sabbāvantaṁ lokaṁ pathavisamena cetasā vipulena mahaggatena appamāṇena averena abyābajjhena pharitvā viharissāmā’ti. Evañhi vo, bhikkhave, sikkhitabbaṁ.</p>
-
-
-<hr>
-
-<p><span class="parno">20</span>Seyyathāpi, bhikkhave, puriso āgaccheyya lākhaṁ vā haliddiṁ vā nīlaṁ vā mañjiṭṭhaṁ vā ādāya. So evaṁ vadeyya: ‘Ahaṁ imasmiṁ ākāse rūpaṁ likhissāmi, rūpapātubhāvaṁ karissāmī’ti. </p>
-
-<p>Taṁ kiṁ maññatha, bhikkhave, api nu so puriso imasmiṁ ākāse rūpaṁ likheyya, rūpapātubhāvaṁ kareyyā"ti? </p>
-
-<p>"No hetaṁ, bhante". "Taṁ kissa hetu"? "Ayañhi, bhante, ākāso arūpī anidassano. Tattha na sukaraṁ rūpaṁ likhituṁ, rūpapātubhāvaṁ kātuṁ; yāvadeva ca pana so puriso kilamathassa vighātassa bhāgī assā"ti.</p>
-
-
-<hr>
-
-<p><span class="parno">21</span>"Evameva kho, bhikkhave, pañcime vacanapathā yehi vo pare vadamānā vadeyyuṁ kālena vā akālena vā … pe … tadārammaṇañca sabbāvantaṁ lokaṁ ākāsasamena cetasā vipulena mahaggatena appamāṇena averena abyābajjhena pharitvā viharissāmā’ti. Evañhi vo, bhikkhave, sikkhitabbaṁ.</p>
-
-
-<hr>
-
-<p><span class="parno">22</span>Seyyathāpi, bhikkhave, puriso āgaccheyya ādittaṁ tiṇukkaṁ ādāya. So evaṁ vadeyya: ‘Ahaṁ imāya ādittāya tiṇukkāya gaṅgaṁ nadiṁ santāpessāmi samparitāpessāmī’ti. </p>
-
-<p>Taṁ kiṁ maññatha, bhikkhave, api nu so puriso ādittāya tiṇukkāya gaṅgaṁ nadiṁ santāpeyya samparitāpeyyā"ti? </p>
-
-<hr>
-
-<p>"No hetaṁ, bhante". "Taṁ kissa hetu"? "Gaṅgā hi, bhante, nadī gambhīrā appameyyā. Sā na sukarā ādittāya tiṇukkāya santāpetuṁ samparitāpetuṁ; yāvadeva ca pana so puriso kilamathassa vighātassa bhāgī assā"ti.</p>
-
-
-<p>"Evameva kho, bhikkhave, pañcime vacanapathā yehi vo pare vadamānā vadeyyuṁ kālena vā akālena vā … pe … tadārammaṇañca sabbāvantaṁ lokaṁ gaṅgāsamena cetasā vipulena mahaggatena appamāṇena averena abyābajjhena pharitvā viharissāmā’ti. Evañhi vo, bhikkhave, sikkhitabbaṁ.</p>
-
-
-<hr>
-
-<p><span class="parno">23</span>Seyyathāpi, bhikkhave, biḷārabhastā madditā sumadditā suparimadditā, mudukā tūlinī chinnasassarā chinnabhabbharā. Atha puriso āgaccheyya kaṭṭhaṁ vā <span class="var" title="kaṭhalaṁ (bj, s1–3, pts1)" id="note233">kathalaṁ</span> vā ādāya. So evaṁ vadeyya: ‘Ahaṁ imaṁ biḷārabhastaṁ madditaṁ sumadditaṁ suparimadditaṁ, mudukaṁ tūliniṁ, chinnasassaraṁ chinnabhabbharaṁ kaṭṭhena vā kathalena vā sarasaraṁ karissāmi bharabharaṁ karissāmī’ti. </p>
-
-<p>Taṁ kiṁ maññatha, bhikkhave, api nu so puriso amuṁ biḷārabhastaṁ madditaṁ sumadditaṁ suparimadditaṁ, mudukaṁ tūliniṁ, chinnasassaraṁ chinnabhabbharaṁ kaṭṭhena vā kathalena vā sarasaraṁ kareyya, bharabharaṁ kareyyā"ti? </p>
-
-<p>"No hetaṁ, bhante". "Taṁ kissa hetu"? "Amu hi, bhante, biḷārabhastā madditā sumadditā suparimadditā, mudukā tūlinī, chinnasassarā chinnabhabbharā. Sā na sukarā kaṭṭhena vā kathalena vā sarasaraṁ kātuṁ bharabharaṁ kātuṁ; yāvadeva ca pana so puriso kilamathassa vighātassa bhāgī assā"ti.</p>
-
-<p>"Evameva kho, bhikkhave, pañcime vacanapathā yehi vo pare vadamānā vadeyyuṁ kālena vā akālena vā; bhūtena vā abhūtena vā; saṇhena vā pharusena vā; atthasaṁhitena vā anatthasaṁhitena vā; mettacittā vā dosantarā vā. Kālena vā, bhikkhave, pare vadamānā vadeyyuṁ akālena vā; bhūtena vā, bhikkhave, pare vadamānā vadeyyuṁ abhūtena vā; saṇhena vā, bhikkhave, pare vadamānā vadeyyuṁ pharusena vā; atthasaṁhitena vā, bhikkhave, pare vadamānā vadeyyuṁ anatthasaṁhitena vā; mettacittā vā, bhikkhave, pare vadamānā vadeyyuṁ dosantarā vā. Tatrāpi vo, bhikkhave, evaṁ sikkhitabbaṁ: ‘Na ceva no cittaṁ vipariṇataṁ bhavissati, na ca pāpikaṁ vācaṁ nicchāressāma hitānukampī ca viharissāma mettacittā na dosantarā. Tañca puggalaṁ mettāsahagatena cetasā pharitvā viharissāma, tadārammaṇañca sabbāvantaṁ lokaṁ biḷārabhastāsamena cetasā vipulena mahaggatena appamāṇena averena abyābajjhena pharitvā viharissāmā’ti. Evañhi vo, bhikkhave, sikkhitabbaṁ.</p>
-
-
-<p><span class="parno">24</span>Ubhatodaṇḍakena cepi, bhikkhave, kakacena corā ocarakā aṅgamaṅgāni okanteyyuṁ, tatrāpi yo mano padūseyya, na me so tena sāsanakaro. Tatrāpi vo, bhikkhave, evaṁ sikkhitabbaṁ: ‘Na ceva no cittaṁ vipariṇataṁ bhavissati, na ca pāpikaṁ vācaṁ nicchāressāma, hitānukampī ca viharissāma mettacittā na dosantarā. Tañca puggalaṁ mettāsahagatena cetasā pharitvā viharissāma tadārammaṇañca sabbāvantaṁ lokaṁ mettāsahagatena cetasā vipulena mahaggatena appamāṇena averena abyābajjhena pharitvā viharissāmā’ti. Evañhi vo, bhikkhave, sikkhitabbaṁ.</p>
-
-<hr>
-
-<p><span class="parno">25</span><span class="var" title="imañce (?)" id="note235">Imañca</span> tumhe, bhikkhave, kakacūpamaṁ ovādaṁ abhikkhaṇaṁ manasi kareyyātha. Passatha no tumhe, bhikkhave, taṁ vacanapathaṁ, aṇuṁ vā thūlaṁ vā, yaṁ tumhe nādhivāseyyāthā"ti? </p>
-
-<p>"No hetaṁ, bhante". </p>
-
-<p>"Tasmātiha, bhikkhave, imaṁ kakacūpamaṁ ovādaṁ abhikkhaṇaṁ manasikarotha. Taṁ vo bhavissati dīgharattaṁ hitāya sukhāyā"ti.</p>
-
-<hr>
-
-<p><span class="parno">26</span>Idamavoca bhagavā. Attamanā te bhikkhū bhagavato bhāsitaṁ abhinandunti.</p>
-
-<p class="endsutta">Kakacūpamasuttaṁ niṭṭhitaṁ paṭhamaṁ.</p>
-</div>
 </section>  <!-- End English and Pali -->
 <div id="nextprev"><a id="previous-sutta" href="./mn20.html#content"></a><a id="next-sutta" href="./mn22.html#content"></a></div>
 </div>  <!--End Content -->
 </div>  <!-- End Page -->
-<div class="w3-white bwcontainer2"> <!-- Footer div -->
-<!-- Footer -->
-		<footer>
-			<div id="breadcrumbs"><a href="../home/index.html">Home</a><a href="../mn/mn.html">Majjhima Nikāya</a>MN21: Kakacūpama Sutta</div>
-					<div class="bottomlinks">
- 	<a href="../guide/guide.html"><span class="w3-bar-item"><i class="fa fa-compass"></i>&nbsp;Guide</span></a>
- 	 	<a href="../home/help.html"><span class="w3-bar-item"><i class="fa fa-info"></i>&nbsp;Help</span></a>
- 	<a href="../home/crossreference.html"><span class="w3-bar-item"><i class="fa fa-exchange"></i>&nbsp;Links&nbsp;Cross&nbsp;Reference</span></a>
- 	<a href="../home/copyright.html"><span class="w3-bar-item">&copy;&nbsp;Copyright</span></a>
- 	<a href="../home/contact.html"><span class="w3-bar-item"><i class="fa fa-envelope"></i>&nbsp;Contact</span></a>
- </div>  <!-- End bottom links -->
+
+
+
+
+
+
+<footer>
+					 <!-- End bottom links -->
 </footer>
- </div>
+
+
  
  <!-- Scripts -->
 
-<script>
- // Script to turn Pali Lookup on and off
- function togPaliLookup() {
- 		var checkBox = document.getElementById("myCheck");
- 		var text = document.getElementById("text");
- 		if (checkBox.checked == true){
- 				text.style.display = "block";
- 					} else {
- 							text.style.display = "none";
- 		}
- }
- </script>
+ <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      if (typeof enablePaliLookup === "function") {
+        enablePaliLookup();
+      } else {
+        console.error("enablePaliLookup is not defined");
+      }
+    });
+  </script>
 
  <script>
  // Script to open and close sidebar

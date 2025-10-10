@@ -1,14 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
 <head>
  	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
  	<link rel="icon" type="image/x-icon" href="../images/favicon.ico">
- 	<title>Majjhima Nikāya 18</title>
  	<meta name="viewport" content="width=device-width, initial-scale=1">
 		<!-- Loading manifest -->
 	<link rel="manifest" href="../manifest.json">
- 	<!-- Loading third party fonts -->
- 	<link href="../fonts/font-awesome.min.css" rel="stylesheet" type="text/css">
  	<!-- Loading main and menu stylesheets -->
  	<link rel="stylesheet" href="../css/w3.css">
  	<link rel="stylesheet" href="../css/css.css">
@@ -16,25 +13,44 @@
  	<script src="../js/jquery-1.10.2.min.js"></script>
  	<script src="../js/controlpanel.js"></script>
  	<script src="../js/mousetrap.min.js"></script>
- </head>
+    <script src="../js/pali-lookup-standalone.js"></script>
+
+ <script src="../js/suttaFiles.js"></script>
+<script>
+ // Script to open random Sutta
+ function openRandomSutta() {
+  const randomIndex = Math.floor(Math.random() * suttaFiles.length);
+  const selectedFile = suttaFiles[randomIndex];
+
+  // Get root path of your site 
+  const currentPath = location.pathname;
+  const rootPath = currentPath.split("/").slice(0, -2).join("/") + "/";
+
+  // Redirect to the correct file
+  window.location.href = rootPath + selectedFile;
+}
+</script>
+
+
+</head>
  <body class="container">
  <div class="header-background">
  <!-- Header -->
  <div class="w3-header w3-content w3-padding w3-left-align bwcontainer">
  	<div class="centered">
- 		<button class="light-mode-button" aria-label="Toggle Light Mode" onclick="toggle_light_mode()">
+ 		<button class="light-mode-button" aria-label="Bật Chế Độ Sáng" onclick="toggle_light_mode()">
  			<span></span>
  			<span></span>
  		</button>
- 		<span class="box-lbl">Light/Dark</span>
+ 		<span class="box-lbl">Sáng/Tối</span>
  	</div> <!-- Centered -->
- 		<a href="../home/index.html" id="bwlogo"><img src="../images/headerlogo.png" alt="The Buddha's Words logo" class="w3-image"></a>
+ 		<a href="../home/index.html" id="bwlogo"><img src="../images/headerlogo.png" alt="Logo Lời Của Đức Phật" class="w3-image"></a>
  		<div class="w3-bar bwcontainer">
  			<div id="searchlinks">
- 			<a href="../home/engsearch.html"><span class="w3-bar-item"><i class="fa fa-search"></i>&nbsp;Search English</span></a>
- 			<a href="../home/palisearch.html"><span class="w3-bar-item"><i class="fa fa-search"></i>&nbsp;Search Pali</span></a>
+ 			<a href="../home/visearch.html"><span class="w3-bar-item"><i class="fa fa-search"></i>&nbsp;Tìm Tiếng Việt</span></a>
+ 			<a href="../home/palisearch.html"><span class="w3-bar-item"><i class="fa fa-search"></i>&nbsp;Tìm Tiếng Pali</span></a>
  			</div><!-- End Searchlinks div -->
- 			<div class="help"><span><a href="../home/help.html"><img src="../images/help_icon.png" title="Help" alt="Help"></a></span></div>
+ 			<div class="help"><span><a href="../home/help.html"><img src="../images/help_icon.png" title="Trợ Giúp" alt="Help"></a></span></div>
  		</div> <!-- End w3-bar bwcontainer --> 	</div> <!-- End w3-header w3-content w3-padding w3-left-align bwcontainer -->
  </div> <!-- End header-background -->
  <!-- Top menu -->
@@ -43,50 +59,44 @@
  	<div class="w3-button w3-padding-8 w3-left w3-hide-large" onclick="w3_open()">☰</div>
  		<div id="navbar" class="w3-hide-small w3-hide-medium bwcontainer3">
  			<ul id="css3menu0">
- 				<li class="topfirst" id="home"><a href="../home/index.html" class="w3-hide-small">Home</a></li>
- 			<li class="topmenu" id="dn"><a href="../dn/dn.html" class="w3-hide-small">Dīgha Nikāya</a></li>
- 				<li class="topmenu" id="mn"><a href="../mn/mn.html" class="pressed w3-hide-small">Majjhima Nikāya</a></li>
- 				<li class="topmenu" id="sn"><a href="../sn/sn.html" class="w3-hide-small"><i class="fa fa-caret-down"></i>&nbsp;Saṁyutta Nikāya</a>
+ 				<li class="topfirst" id="home"><a href="../home/index.html" class="w3-hide-small">Trang Chủ</a></li>
+  				<li class="topmenu" id="dn"><a href="../dn/dn.html" class="pressed w3-hide-small">Trường Bộ Kinh</a></li>
+ 				<li class="topmenu" id="mn"><a href="../mn/mn.html" class="w3-hide-small">Trung Bộ Kinh</a></li>
+ 				<li class="topmenu" id="sn"><a href="../sn/sn.html" class="w3-hide-small"><i class="fa fa-caret-down"></i>&nbsp;Tương Ưng Bộ Kinh</a>
  					<ul>
- 						<li><a href="../sn/sn01.html" class="w3-hide-small">Vol. 1 ‒ The Book with Verses</a></li>
- 						<li><a href="../sn/sn02.html" class="w3-hide-small">Vol. 2 ‒ The Book of Causation</a></li>
- 						<li><a href="../sn/sn03.html" class="w3-hide-small">Vol. 3 ‒ The Book of the Aggregates</a></li>
- 						<li><a href="../sn/sn04.html" class="w3-hide-small">Vol. 4 ‒ The Book of the Six Sense Bases</a></li>
- 						<li><a href="../sn/sn05.html" class="w3-hide-small">Vol. 5 ‒ The Great Book</a></li>
+ 						<li><a href="../sn/sn01.html" class="w3-hide-small">Tập I - Thiên Có Kệ</a></li>
+ 						<li><a href="../sn/sn02.html" class="w3-hide-small">Tập II - Thiên Nhân Duyên</a></li>
+ 						<li><a href="../sn/sn03.html" class="w3-hide-small">Tập III - Thiên Uẩn</a></li>
+ 						<li><a href="../sn/sn04.html" class="w3-hide-small">Tập IV - Thiên Sáu Xứ</a></li>
+ 						<li><a href="../sn/sn05.html" class="w3-hide-small">Tập V - Thiên Ðại Phẩm</a></li>
  					</ul>
- 				<li class="topmenu" id="an"><a href="../an/an.html" class="w3-hide-small"><i class="fa fa-caret-down"></i>&nbsp;Aṅguttara Nikāya</a>
+ 				<li class="topmenu" id="an"><a href="../an/an.html" class="w3-hide-small"><i class="fa fa-caret-down"></i>&nbsp;Tăng Chi Bộ Kinh</a>
  					<ul>
- 						<li><a href="../an/an1.html" class="w3-hide-small">The Ones</a></li>
- 						<li><a href="../an/an2.html" class="w3-hide-small">The Twos</a></li>
- 						<li><a href="../an/an3.html" class="w3-hide-small">The Threes</a></li>
- 						<li><a href="../an/an4.html" class="w3-hide-small">The Fours</a></li>
- 						<li><a href="../an/an5.html" class="w3-hide-small">The Fives</a></li>
- 						<li><a href="../an/an6.html" class="w3-hide-small">The Sixes</a></li>
- 						<li><a href="../an/an7.html" class="w3-hide-small">The Sevens</a></li>
- 						<li><a href="../an/an8.html" class="w3-hide-small">The Eights</a></li>
- 						<li><a href="../an/an9.html" class="w3-hide-small">The Nines</a></li>
- 						<li><a href="../an/an10.html" class="w3-hide-small">The Tens</a></li>
- 						<li><a href="../an/an11.html" class="w3-hide-small">The Elevens</a></li>
- 					</ul>
- 				</li>
- 				<li class="topmenu" id="kn"><a href="../kn/kn.html" class="w3-hide-small"><i class="fa fa-caret-down"></i>&nbsp;Khuddaka Nikāya</a>
- 					<ul>
- 						<li><a href="../kp/kp.html" class="w3-hide-small">The Khuddakapatha</a></li>
- 						<li><a href="../dhp/dhp.html" class="w3-hide-small">The Dhammapada</a></li>
- 						<li><a href="../snp/snp.html" class="w3-hide-small">Sutta Nipata</a></li>
- 						<li><a href="../ud/ud.html" class="w3-hide-small">Udana</a></li>
- 						<li><a href="../it/it.html" class="w3-hide-small">Itivuttaka</a></li>
- 						<li><a href="../tha/tha.html" class="w3-hide-small">The Theragatha</a></li>
- 						<li><a href="../thi/thi.html" class="w3-hide-small">The Therigatha</a></li>
+ 						<li><a href="../an/an1.html" class="w3-hide-small">Chương Một Pháp</a></li>
+ 						<li><a href="../an/an2.html" class="w3-hide-small">Chương Hai Pháp</a></li>
+ 						<li><a href="../an/an3.html" class="w3-hide-small">Chương Ba Pháp</a></li>
+ 						<li><a href="../an/an4.html" class="w3-hide-small">Chương Bốn Pháp</a></li>
+ 						<li><a href="../an/an5.html" class="w3-hide-small">Chương Năm Pháp</a></li>
+ 						<li><a href="../an/an6.html" class="w3-hide-small">Chương Sáu Pháp</a></li>
+ 						<li><a href="../an/an7.html" class="w3-hide-small">Chương Bảy Pháp</a></li>
+ 						<li><a href="../an/an8.html" class="w3-hide-small">Chương Tám Pháp</a></li>
+ 						<li><a href="../an/an9.html" class="w3-hide-small">Chương Chín Pháp</a></li>
+ 						<li><a href="../an/an10.html" class="w3-hide-small">Chương Mười Pháp</a></li>
+ 						<li><a href="../an/an11.html" class="w3-hide-small">Chương Mười Một Pháp</a></li>
  					</ul>
  				</li>
- 				<li class="toplast" id="vi"><a href="../vi/vi.html" class="w3-hide-small"><i class="fa fa-caret-down"></i>&nbsp;Vinaya Piṭaka</a>
+ 				<li class="topmenu" id="kn"><a href="../kn/kn.html" class="w3-hide-small"><i class="fa fa-caret-down"></i>&nbsp;Tiểu Bộ Kinh</a>
  					<ul>
- 						<li><a href="../vi/kd.html" class="w3-hide-small">Khandhaka</a></li>
- 						<li><a href="../vi/bu-vb.html" class="w3-hide-small">Bhikkhu Vibhaṅga</a></li>
- 						<li><a href="../vi/bu-pt.html" class="w3-hide-small">Bhikkhu Pātimokkha</a></li>
- 						<li><a href="../vi/bi-pt.html" class="w3-hide-small">Bhikkhunī Pātimokkha</a></li>
- 						<li><a href="../vi/bi-vb.html" class="w3-hide-small">Bhikkhunī Vibhaṅga</a></li>
+ 						<li><a href="../kp/kp.html" class="w3-hide-small">Kinh Tiểu Tụng</a></li>
+ 						<li><a href="../dhp/dhp.html" class="w3-hide-small">Kinh Pháp Cú</a></li>
+ 						<li><a href="../snp/snp.html" class="w3-hide-small">Kinh Tập</a></li>
+ 						<li><a href="../ud/ud.html" class="w3-hide-small">Kinh Phật Tự Thuyết</a></li>
+ 						<li><a href="../it/it.html" class="w3-hide-small">Kinh Phật Thuyết Như Vậy</a></li>
+ 						<li><a href="../tha/tha.html" class="w3-hide-small">Trưởng Lão Tăng Kệ</a></li>
+ 						<li><a href="../thi/thi.html" class="w3-hide-small">Trưởng Lão Ni Kệ</a></li>
+ 					</ul>
+ 				</li>
+				<li class="toplast" id="rd"><a href="../rd/rd.html" class="w3-hide-small"></i>Kinh Ngẫu Nhiên Theo Nhóm</a>
  					</ul>
  				</li>
  			</ul>
@@ -99,275 +109,974 @@
  		<div class="w3-bar-block w3-white">
  			<a href="../home/index.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-home fa-lg"></i>&nbsp;&nbsp;&nbsp;Home</a>
  			<a href="../guide/guide.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Guide</a>
- 			<a href="../dn/dn.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Dīgha Nikāya</a>
- 			<a href="../mn/mn.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Majjhima Nikāya</a>
- 			<a href="../sn/sn.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Saṁyutta Nikāya</a>
- 			<a href="../an/an.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Aṅguttara Nikāya</a>
- 			<a href="../kn/kn.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Khuddaka Nikāya</a>
- 			<a href="../vi/vi.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Vinaya Piṭaka</a>
+ 			<a href="../dn/dn.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Trường Bộ Kinh</a>
+ 			<a href="../mn/mn.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Trung Bộ Kinh</a>
+ 			<a href="../sn/sn.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Tương Ưng Bộ Kinh</a>
+ 			<a href="../an/an.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Tăng Chi Bộ Kinh
+ 			<a href="../kn/kn.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Tiểu Bộ Kinh</a>
+			<a href="../rd/rd.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>Kinh Ngẫu Nhiên Theo Nhóm</a>
  		</div>
  </nav>
-
- <!-- !PAGE CONTENT! --> 
+ 
+ 
+ 
+   <!-- !PAGE CONTENT! --> 
 <div class="w3-main w3-content w3-padding w3-left-align bwcontainer4">
-
-<h2>Majjhima Nikāya</h2>
-
 <div id="content">
-
-<h3>MN18: Madhupiṇḍika Sutta — The Honey-Cake </h3>
-
-<div id="metaarea">
-	<ul class="translator">
-		<li>©&nbsp;Translated from the Pali by Bhante Sujato.&nbsp;<a href="../home/copyright.html#sc">(More copyright information)</a>
-	</ul>
-</div>
-
-
-<section class="raw_sutta">
-<div lang="en">
-<p><span class="parno">1</span><span>So I have heard. </span>At one time the Buddha was staying in the land of the Sakyans, near Kapilavatthu in the Banyan Tree Monastery.</p>
-
-<p>Then the Buddha put on his outer robe in the morning and, taking his bowl and robe, entered Kapilavatthu for alms. He wandered for alms in Kapilavatthu. After the meal, on his return from alms-round, he went to the Great Wood, plunged deep into it, and sat at the root of a young wood apple tree for the day’s meditation.</p>
-
-<p>Daṇḍapāṇi the Sakyan, while going for a walk, plunged deep into the Great Wood. He approached the Buddha and exchanged greetings with him. When the greetings and polite conversation were over, he stood to one side leaning on his staff, and said to the Buddha: “What does the ascetic teach? What does he explain?”</p>
-
-<p>“Sir, my teaching is such that one does not conflict with anyone in this world with its gods, Māras, and Brahmās, this population with its ascetics and brahmins, its gods and humans. And it is such that perceptions do not underlie the brahmin who lives detached from sensual pleasures, without doubting, stripped of worry, and rid of craving for rebirth in this or that state. That’s what I teach, and that’s what I explain.”</p>
-
-<hr>
-
-<p><span class="parno">2</span>When he had spoken, Daṇḍapāṇi shook his head, waggled his tongue, raised his eyebrows until his brow puckered in three furrows, and he departed leaning on his staff.</p>
-
-<hr>
-
-<p><span class="parno">3–4</span>Then in the late afternoon, the Buddha came out of retreat and went to the Banyan Tree Monastery, sat down on the seat spread out, and told the mendicants what had happened.</p>
-
-<hr>
-
-<p><span class="parno">5</span>When he had spoken, one of the mendicants said to him: </p>
-
-<p>“But sir, what is the teaching such that the Buddha does not conflict with anyone in this world with its gods, Māras, and Brahmās, this population with its ascetics and brahmins, its gods and humans? And how is it that perceptions do not underlie the Buddha, the brahmin who lives detached from sensual pleasures, without indecision, stripped of worry, and rid of craving for rebirth in this or that state?”</p>
-
-<p>“Mendicant, a person is beset by concepts of identity that emerge from the proliferation of perceptions. If they don’t find anything worth approving, welcoming, or getting attached to in the source from which these arise, just this is the end of the underlying tendencies to desire, repulsion, views, doubt, conceit, the desire to be reborn, and ignorance. This is the end of taking up the rod and the sword, the end of quarrels, arguments, and fights, of accusations, divisive speech, and lies. This is where these bad, unskillful qualities cease without anything left over.”</p>
-
-<p>That is what the Buddha said. When he had spoken, the Holy One got up from his seat and entered his dwelling.</p>
-
-<hr>
-
-<p><span class="parno">6</span>Soon after the Buddha left, those mendicants considered: “The Buddha gave this brief passage for recitation, then entered his dwelling without explaining the meaning in detail. Who can explain in detail the meaning of this brief passage for recitation given by the Buddha?”</p>
-
-<p>Then those mendicants thought: “This Venerable Mahākaccāna is praised by the Buddha and esteemed by his sensible spiritual companions. He is capable of explaining in detail the meaning of this brief passage for recitation given by the Buddha. Let’s go to him, and ask him about this matter.”</p>
-
-<hr>
-
-<p><span class="parno">7</span>Then those mendicants went to Mahākaccāna, and exchanged greetings with him. When the greetings and polite conversation were over, they sat down to one side. They told him what had happened, and said: “May Venerable Mahākaccāna please explain this.”</p>
-
-<hr>
-
-<p><span class="parno">8</span>“Reverends, suppose there was a person in need of heartwood. And while wandering in search of heartwood he’d come across a large tree standing with heartwood. But he’d pass over the roots and trunk, imagining that the heartwood should be sought in the branches and leaves. Such is the consequence for the venerables. Though you were face to face with the Buddha, you passed him by, imagining that you should ask me about this matter. For he is the Buddha, who knows and sees. He is vision, he is knowledge, he is the truth, he is holiness. He is the teacher, the proclaimer, the elucidator of meaning, the bestower of the deathless, the lord of truth, the Realized One. That was the time to approach the Buddha and ask about this matter. You should have remembered it in line with the Buddha’s answer.”</p>
-
-<p>“Certainly he is the Buddha, who knows and sees. He is vision, he is knowledge, he is the truth, he is holiness. He is the teacher, the proclaimer, the elucidator of meaning, the bestower of the deathless, the lord of truth, the Realized One. That was the time to approach the Buddha and ask about this matter. We should have remembered it in line with the Buddha’s answer. </p>
-
-<p>Still, Mahākaccāna is praised by the Buddha and esteemed by his sensible spiritual companions. You are capable of explaining in detail the meaning of this brief passage for recitation given by the Buddha. Please explain this, if it’s no trouble.”</p>
-
-<p>“Well then, reverends, listen and pay close attention, I will speak.”</p>
-
-<p>“Yes, reverend,” they replied. Venerable Mahākaccāna said this:</p>
-
-<p><span class="parno">9</span>“Reverends, the Buddha gave this brief passage for recitation, then entered his dwelling without explaining the meaning in detail: ‘A person is beset by concepts of identity that emerge from the proliferation of perceptions. If they don’t find anything worth approving, welcoming, or getting attached to in the source from which these arise … This is where these bad, unskillful qualities cease without anything left over.’ This is how I understand the detailed meaning of this passage for recitation.</p>
-
-<hr>
-
-<p><span class="parno">10</span>Eye consciousness arises dependent on the eye and sights. The meeting of the three is contact. Contact is a condition for feeling. What you feel, you perceive. What you perceive, you think about. What you think about, you proliferate. What you proliferate about is the source from which a person is beset by concepts of identity that emerge from the proliferation of perceptions. This occurs with respect to sights known by the eye in the past, future, and present.</p>
-
-<hr>
-
-<p>Ear consciousness arises dependent on the ear and sounds. …</p>
-
-<p>Nose consciousness arises dependent on the nose and smells. …</p>
-
-<p>Tongue consciousness arises dependent on the tongue and tastes. …</p>
-
-<p>Body consciousness arises dependent on the body and touches. …</p>
-
-<p>Mind consciousness arises dependent on the mind and thoughts. The meeting of the three is contact. Contact is a condition for feeling. What you feel, you perceive. What you perceive, you think about. What you think about, you proliferate. What you proliferate about is the source from which a person is beset by concepts of identity that emerge from the proliferation of perceptions. This occurs with respect to thoughts known by the mind in the past, future, and present.</p>
-
-<hr>
-
-<p><span class="parno">11</span>When there is the eye, sights, and eye consciousness, it’s possible to point out what’s known as ‘contact’. When there is what’s known as contact, it’s possible to point out what’s known as ‘feeling’. When there is what’s known as feeling, it’s possible to point out what’s known as ‘perception’. When there is what’s known as perception, it’s possible to point out what’s known as ‘thought’. When there is what’s known as thought, it’s possible to point out what’s known as ‘being beset by concepts of identity that emerge from the proliferation of perceptions’.</p>
-
-<hr>
-
-<p>When there is the ear … nose … tongue … body … mind, thoughts, and mind consciousness, it’s possible to point out what’s known as ‘contact’. … When there is what’s known as thought, it’s possible to point out what’s known as ‘being beset by concepts of identity that emerge from the proliferation of perceptions’.</p>
-
-<p><span class="parno">12</span>When there is no eye, no sights, and no eye consciousness, it’s not possible to point out what’s known as ‘contact’. When there isn’t what’s known as contact, it’s not possible to point out what’s known as ‘feeling’. When there isn’t what’s known as feeling, it’s not possible to point out what’s known as ‘perception’. When there isn’t what’s known as perception, it’s not possible to point out what’s known as ‘thought’. When there isn’t what’s known as thought, it’s not possible to point out what’s known as ‘being beset by concepts of identity that emerge from the proliferation of perceptions’.</p>
-
-<p>When there is no ear … nose … tongue … body … mind, no thoughts, and no mind consciousness, it’s not possible to point out what’s known as ‘contact’. … When there isn’t what’s known as thought, it’s not possible to point out what’s known as ‘being beset by concepts of identity that emerge from the proliferation of perceptions’.</p>
-
-
-<hr>
-
-<p><span class="parno">13</span>This is how I understand the detailed meaning of that brief passage for recitation given by the Buddha. If you wish, you may go to the Buddha and ask him about this. You should remember it in line with the Buddha’s answer.”</p>
-
-<hr>
-
-<p><span class="parno">14</span>“Yes, reverend,” said those mendicants, approving and agreeing with what Mahākaccāna said. Then they rose from their seats and went to the Buddha, bowed, sat down to one side, and told him what had happened. Then they said: “Mahākaccāna clearly explained the meaning to us in this manner, with these words and phrases.”</p>
-
-<hr>
-
-<p>“Mahākaccāna is astute, mendicants, he has great wisdom. If you came to me and asked this question, I would answer it in exactly the same way as Mahākaccāna. That is what it means, and that’s how you should remember it.”</p>
-
-<hr>
-
-<p><span class="parno">15</span>When he said this, Venerable Ānanda said to the Buddha: “Sir, suppose a person who was weak with hunger was to obtain a honey-cake. Wherever they taste it, they would enjoy a sweet, delicious flavor.</p>
-
-<p>In the same way, wherever a sincere, capable mendicant might examine with wisdom the meaning of this exposition of the teaching they would only gain joy and clarity. Sir, what is the name of this exposition of the teaching?”</p>
-
-<p>“Well, Ānanda, you may remember this exposition of the teaching as ‘The Honey-Cake Discourse’.”</p>
-
-<p><span class="parno">16</span>That is what the Buddha said. Satisfied, Venerable Ānanda was happy with what the Buddha said.</p>
+<h2>Majjhima Nikāya - Trung Bộ Kinh</h2>
+<h5><span style="font-style: italic;">Hoà Thượng Thích Minh Châu dịch Việt</span></h5>
 
 </div>
 
-
-<div lang="pi">
-
-<p><span class="parno">1</span>Evaṁ me sutaṁ — ekaṁ samayaṁ bhagavā sakkesu viharati kapilavatthusmiṁ nigrodhārāme.</p>
-
-<p>Atha kho bhagavā pubbaṇhasamayaṁ nivāsetvā pattacīvaramādāya kapilavatthuṁ piṇḍāya pāvisi. Kapilavatthusmiṁ piṇḍāya caritvā pacchābhattaṁ piṇḍapātapaṭikkanto yena mahāvanaṁ tenupasaṅkami divāvihārāya.Mahāvanaṁ ajjhogāhetvā beluvalaṭṭhikāya mūle divāvihāraṁ nisīdi. </p>
-
-<p>Daṇḍapāṇipi kho sakko <span class="var" title="jaṅghavihāraṁ (mr)" id="note194">jaṅghāvihāraṁ</span> anucaṅkamamāno anuvicaramāno yena mahāvanaṁ tenupasaṅkami. Mahāvanaṁ ajjhogāhetvā yena beluvalaṭṭhikā yena bhagavā tenupasaṅkami; upasaṅkamitvā bhagavatā saddhiṁ sammodi. Sammodanīyaṁ kathaṁ sāraṇīyaṁ vītisāretvā daṇḍamolubbha ekamantaṁ aṭṭhāsi. Ekamantaṁ ṭhito kho daṇḍapāṇi sakko bhagavantaṁ etadavoca: "kiṁvādī samaṇo kimakkhāyī"ti?</p>
-
-<p>"Yathāvādī kho, āvuso, sadevake loke samārake sabrahmake sassamaṇabrāhmaṇiyā pajāya sadevamanussāya na kenaci loke viggayha tiṭṭhati, yathā ca pana kāmehi visaṁyuttaṁ viharantaṁ taṁ brāhmaṇaṁ akathaṁkathiṁ chinnakukkuccaṁ bhavābhave vītataṇhaṁ saññā nānusenti — evaṁvādī kho ahaṁ, āvuso, evamakkhāyī"ti.</p>
+<br>
+ 	<title>        Trung Bộ 18          </title>
 
 
-<hr>
+<p lang="vi" class="vi"; style="text-align: center">
+Trung Bộ 18<br>
+<span lang="pi" class="pali">
+Majjhima Nikāya 18<br>
+</span>
+</p>
 
-<p><span class="parno">2</span>Evaṁ vutte, daṇḍapāṇi sakko sīsaṁ okampetvā, jivhaṁ nillāḷetvā, tivisākhaṁ nalāṭikaṁ nalāṭe vuṭṭhāpetvā daṇḍamolubbha pakkāmi.</p>
+<p lang="vi" class="vi"; style="text-align: center">
+Kinh Mật Hoàn<br>
+<span lang="pi" class="pali">
+Madhupiṇḍikasutta<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Tôi nghe như vầy:<br>
+<span lang="pi" class="pali">
+Evaṁ me sutaṁ—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Một thời, Thế Tôn sống giữa các vị dòng họ Sakka (Thích-ca), tại Kapilavatthu (Ca-tỳ-la-vệ), ở vườn Nigrodharama.<br>
+<span lang="pi" class="pali">
+ekaṁ samayaṁ bhagavā sakkesu viharati kapilavatthusmiṁ nigrodhārāme.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Rồi Thế Tôn vào buổi sáng, đắp y, cầm y bát vào thành Kapilavatthu để khất thực.<br>
+<span lang="pi" class="pali">
+Atha kho bhagavā pubbaṇhasamayaṁ nivāsetvā pattacīvaramādāya kapilavatthuṁ piṇḍāya pāvisi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Sau khi khất thực ở Kapilavatthu, khi ăn xong, trên đường khất thực trở về, Thế Tôn đi đến Ðại Lâm để nghỉ trưa.<br>
+<span lang="pi" class="pali">
+Kapilavatthusmiṁ piṇḍāya caritvā pacchābhattaṁ piṇḍapātapaṭikkanto yena mahāvanaṁ tenupasaṅkami divāvihārāya.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Sau khi vào rừng Ðại Lâm, Ngài ngồi nghỉ trưa dưới gốc cây Quách.<br>
+<span lang="pi" class="pali">
+Mahāvanaṁ ajjhogāhetvā beluvalaṭṭhikāya mūle divāvihāraṁ nisīdi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Có vị Gậy cầm tay (Daṇḍapāṇi) Sakka (Thích-ca), kéo bộ khắp nơi, ngao du thiên hạ.<br>
+<span lang="pi" class="pali">
+Daṇḍapāṇipi kho sakko jaṅghāvihāraṁ anucaṅkamamāno anuvicaramāno yena mahāvanaṁ tenupasaṅkami.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+đến tại rừng Ðại Lâm, đi sâu vào ngôi rừng, đến tại Cây Quách chỗ Thế Tôn ở.<br>
+<span lang="pi" class="pali">
+Mahāvanaṁ ajjhogāhetvā yena beluvalaṭṭhikā yena bhagavā tenupasaṅkami; upasaṅkamitvā bhagavatā saddhiṁ sammodi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+khi đến xong nói lên những lời hỏi thăm xã giao thân hữu, rồi đứng một bên, dựa trên cây gậy, đứng một bên. Gậy cầm tay Sakka nói với Thế Tôn:<br>
+<span lang="pi" class="pali">
+Sammodanīyaṁ kathaṁ sāraṇīyaṁ vītisāretvā daṇḍamolubbha ekamantaṁ aṭṭhāsi. Ekamantaṁ ṭhito kho daṇḍapāṇi sakko bhagavantaṁ etadavoca:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Sa-môn có quan điểm thế nào, giảng thuyết những gì?”<br>
+<span lang="pi" class="pali">
+“kiṁvādī samaṇo kimakkhāyī”ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Này Hiền giả, theo lời dạy của Ta, trong thế giới với chư Thiên, Mara và Phạm thiên, với các chúng Sa-môn, Bà-la-môn, chư Thiên và loài Người, không có tranh luận một ai ở đời; các tưởng sẽ không ám ảnh vị Bà-la-môn sống không bị dục triền phược, không có nghi ngờ do dự, với mọi hối quá đoạn diệt, không có tham ái đối với hữu và phi hữu.<br>
+<span lang="pi" class="pali">
+“Yathāvādī kho, āvuso, sadevake loke samārake sabrahmake sassamaṇabrāhmaṇiyā pajāya sadevamanussāya na kenaci loke viggayha tiṭṭhati, yathā ca pana kāmehi visaṁyuttaṁ viharantaṁ taṁ brāhmaṇaṁ akathaṅkathiṁ chinnakukkuccaṁ bhavābhave vītataṇhaṁ saññā nānusenti—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Hiền giả, như vậy là quan điểm của Ta, như vậy là lời Ta giảng dạy.”<br>
+<span lang="pi" class="pali">
+evaṁvādī kho ahaṁ, āvuso, evamakkhāyī”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Khi nghe nói vậy, Gậy cầm tay Sakka lắc đầu, liếm lưỡi, với trán nổi lên ba đường nhăn, chống gậy rồi đi.<br>
+<span lang="pi" class="pali">
+Evaṁ vutte, daṇḍapāṇi sakko sīsaṁ okampetvā, jivhaṁ nillāḷetvā, tivisākhaṁ nalāṭikaṁ nalāṭe vuṭṭhāpetvā daṇḍamolubbha pakkāmi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Rồi Thế Tôn vào buổi chiều từ Thiền tịnh độc cư đứng dậy, đi đến vườn Nigrodha, khi đến xong, ngồi trên chỗ đã soạn sẵn. Sau khi ngồi, Thế Tôn gọi các Tỷ-kheo:<br>
+<span lang="pi" class="pali">
+Atha kho bhagavā sāyanhasamayaṁ paṭisallānā vuṭṭhito yena nigrodhārāmo tenupasaṅkami; upasaṅkamitvā paññatte āsane nisīdi. Nisajja kho bhagavā bhikkhū āmantesi:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Chư Tỷ-kheo, ở đây, Ta vào buổi sáng, đắp y, cầm y bát vào thành Kapilavatthu để khất thực. Sau khi khất thực ở Kapilavatthu, ăn xong, trên đường khất thực trở về, Ta đi đến Ðại Lâm để nghỉ trưa.<br>
+<span lang="pi" class="pali">
+“idhāhaṁ, bhikkhave, pubbaṇhasamayaṁ nivāsetvā pattacīvaramādāya kapilavatthuṁ piṇḍāya pāvisiṁ. Kapilavatthusmiṁ piṇḍāya caritvā pacchābhattaṁ piṇḍapātapaṭikkanto yena mahāvanaṁ tenupasaṅkamiṁ divāvihārāya.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Sau khi vào rừng Ðại Lâm, Ta ngồi nghỉ trưa dưới gốc cây Quách.<br>
+<span lang="pi" class="pali">
+Mahāvanaṁ ajjhogāhetvā beluvalaṭṭhikāya mūle divāvihāraṁ nisīdiṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Có vị Gậy cầm tay Sakka kéo bộ khắp nơi, ngao du thiên hạ, đến tại rừng Ðại Lâm.<br>
+<span lang="pi" class="pali">
+Daṇḍapāṇipi kho, bhikkhave, sakko jaṅghāvihāraṁ anucaṅkamamāno anuvicaramāno yena mahāvanaṁ tenupasaṅkami.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Đến tại rừng Ðại Lâm, đi sâu vào ngôi rừng, đến tại Cây Quách chỗ Ta ở, khi đến xong.<br>
+<span lang="pi" class="pali">
+Mahāvanaṁ ajjhogāhetvā yena beluvalaṭṭhikā yenāhaṁ tenupasaṅkami; upasaṅkamitvā mayā saddhiṁ sammodi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Nói lên những lời hỏi thăm xã giao thân hữu, rồi đứng một bên, dựa trên cây gậy. Ðứng một bên, Gậy cầm tay Sakka nói với Ta như sau:<br>
+<span lang="pi" class="pali">
+Sammodanīyaṁ kathaṁ sāraṇīyaṁ vītisāretvā daṇḍamolubbha ekamantaṁ aṭṭhāsi. Ekamantaṁ ṭhito kho, bhikkhave, daṇḍapāṇi sakko maṁ etadavoca:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Sa-môn có quan điểm thế nào, giảng thuyết những gì?’<br>
+<span lang="pi" class="pali">
+‘kiṁvādī samaṇo kimakkhāyī’ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Chư Tỷ-kheo, được nói vậy, Ta trả lời Gậy cầm tay Sakka:<br>
+<span lang="pi" class="pali">
+Evaṁ vutte, ahaṁ, bhikkhave, daṇḍapāṇiṁ sakkaṁ etadavocaṁ:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Hiền giả, theo lời Ta dạy trong thế giới với chư Thiên, Mara, và Phạm thiên, với các chúng Sa-môn, Bà-la-môn, chư Thiên và loài Người, không có tranh luận một ai ở đời. Các tưởng sẽ không ám ảnh vị Bà-la-môn sống không bị dục triền phược, không có nghi ngờ do dự, với mọi hối quá đoạn diệt, không có tham ái đối với hữu và phi hữu.<br>
+<span lang="pi" class="pali">
+‘yathāvādī kho, āvuso, sadevake loke samārake sabrahmake sassamaṇabrāhmaṇiyā pajāya sadevamanussāya na kenaci loke viggayha tiṭṭhati, yathā ca pana kāmehi visaṁyuttaṁ viharantaṁ taṁ brāhmaṇaṁ akathaṅkathiṁ chinnakukkuccaṁ bhavābhave vītataṇhaṁ saññā nānusenti—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Hiền giả, như vậy là quan điểm của Ta, như vậy là lời Ta giảng dạy.’<br>
+<span lang="pi" class="pali">
+evaṁvādī kho ahaṁ, āvuso, evamakkhāyī’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Chư Tỷ-kheo, khi nghe nói vậy, Gậy cầm tay Sakka lắc đầu, liếm lưỡi, với trán nổi lên ba đường nhăn, chống gậy rồi đi”.<br>
+<span lang="pi" class="pali">
+Evaṁ vutte, bhikkhave, daṇḍapāṇi sakko sīsaṁ okampetvā, jivhaṁ nillāḷetvā, tivisākhaṁ nalāṭikaṁ nalāṭe vuṭṭhāpetvā daṇḍamolubbha pakkāmī”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Khi nghe nói vậy, một Tỷ-kheo bạch Thế Tôn:<br>
+<span lang="pi" class="pali">
+Evaṁ vutte, aññataro bhikkhu bhagavantaṁ etadavoca:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Nhưng bạch Thế Tôn, lời dạy ấy là gì mà Thế Tôn, trong thế giới với chư Thiên, Mara và Phạm thiên, với các chúng Sa-môn, Bà-la-môn, chư Thiên và loài Người, không có tranh luận một ai ở đời?<br>
+<span lang="pi" class="pali">
+“kiṁvādī pana, bhante, bhagavā sadevake loke samārake sabrahmake sassamaṇabrāhmaṇiyā pajāya sadevamanussāya na kenaci loke viggayha tiṭṭhati?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Các tưởng sẽ không ám ảnh Thế Tôn, vị đã sống không bị dục triền phược, không có nghi ngờ do dự, với mọi hối quá đoạn diệt, không có tham ái đối với hữu và phi hữu?”<br>
+<span lang="pi" class="pali">
+Kathañca pana, bhante, bhagavantaṁ kāmehi visaṁyuttaṁ viharantaṁ taṁ brāhmaṇaṁ akathaṅkathiṁ chinnakukkuccaṁ bhavābhave vītataṇhaṁ saññā nānusentī”ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Này Tỷ-kheo, do bất cứ nhân duyên gì, một số hý luận vọng tưởng ám ảnh một người.<br>
+<span lang="pi" class="pali">
+“Yatonidānaṁ, bhikkhu, purisaṁ papañca-saññā-saṅkhā samudācaranti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Nếu ở đây không có gì đáng tùy hỷ, đáng đón mừng, đáng chấp thủ.<br>
+<span lang="pi" class="pali">
+Ettha ce natthi abhinanditabbaṁ abhivaditabbaṁ ajjhositabbaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Thời như vậy là sự đoạn tận tham tùy miên, sự đoạn tận sân tùy miên, sự đoạn tận kiến tùy miên, sự đoạn tận nghi tùy miên, sự đoạn tận mạn tùy miên, sự đoạn tận hữu tham tùy miên, sự đoạn tận vô minh tùy miên, sự đoạn tận chấp trượng, chấp kiếm, đấu tranh, tránh tranh, luận tranh, kháng tranh, ly gián ngữ, vọng ngữ.<br>
+<span lang="pi" class="pali">
+Esevanto rāgānusayānaṁ, esevanto paṭighānusayānaṁ, esevanto diṭṭhānusayānaṁ, esevanto vicikicchānusayānaṁ, esevanto mānānusayānaṁ, esevanto bhavarāgānusayānaṁ, esevanto avijjānusayānaṁ, esevanto daṇḍādāna-satthādāna-kalaha-viggaha-vivāda-tuvaṁtuvaṁ-pesuñña-musāvādānaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Chính ở đây, những ác, bất thiện pháp này đều được tiêu diệt, không còn dư tàn.”<br>
+<span lang="pi" class="pali">
+Etthete pāpakā akusalā dhammā aparisesā nirujjhantī”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Thế Tôn thuyết giảng như vậy. Sau khi nói vậy, Thiện Thệ từ chỗ ngồi đứng dậy bước vào tịnh xá.<br>
+<span lang="pi" class="pali">
+Idamavoca bhagavā. Idaṁ vatvāna sugato uṭṭhāyāsanā vihāraṁ pāvisi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Sau khi Thế Tôn đi chẳng bao lâu, các Tỷ-kheo ấy suy nghĩ:<br>
+<span lang="pi" class="pali">
+Atha kho tesaṁ bhikkhūnaṁ acirapakkantassa bhagavato etadahosi:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Chư Hiền, Thế Tôn sau khi nói lên lời dạy tóm tắt này cho chúng ta, không giải thích rộng rãi ý nghĩa, từ chỗ ngồi đứng dậy và đã đi vào tịnh xá:<br>
+<span lang="pi" class="pali">
+“idaṁ kho no, āvuso, bhagavā saṅkhittena uddesaṁ uddisitvā, vitthārena atthaṁ avibhajitvā, uṭṭhāyāsanā vihāraṁ paviṭṭho:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Này Tỷ-kheo, do bất cứ nhân duyên gì, một số hý luận vọng tưởng ám ảnh một người. Nếu ở đây không có gì đáng tùy hỷ, đáng đón mừng, đáng chấp thủ. Thời như vậy là sự đoạn tận tham tùy miên, sự đoạn tận sân tùy miên, sự đoạn tận kiến tùy miên, sự đoạn tận nghi tùy miên, sự đoạn tận mạn tùy miên, sự đoạn tận hữu tham tùy miên, sự đoạn tận vô minh tùy miên, sự đoạn tận chấp trượng, chấp kiếm, đấu tranh, tránh tranh, luận tranh, kháng tranh, ly gián ngữ, vọng ngữ. Chính ở đây, những ác, bất thiện pháp này đều được tiêu diệt, không còn dư tàn’.<br>
+<span lang="pi" class="pali">
+‘yatonidānaṁ, bhikkhu, purisaṁ papañca-saññā-saṅkhā samudācaranti. Ettha ce natthi abhinanditabbaṁ abhivaditabbaṁ ajjhositabbaṁ. Esevanto rāgānusayānaṁ …pe… etthete pāpakā akusalā dhammā aparisesā nirujjhantī’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Nay ai có thể giải thích rộng rãi ý nghĩa lời giảng được Thế Tôn nói lên một cách vắn tắt, và không giải thích rõ ràng ý nghĩa?”<br>
+<span lang="pi" class="pali">
+Ko nu kho imassa bhagavatā saṅkhittena uddesassa uddiṭṭhassa vitthārena atthaṁ avibhattassa vitthārena atthaṁ vibhajeyyā”ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Rồi những Tỷ-kheo ấy suy nghĩ:<br>
+<span lang="pi" class="pali">
+Atha kho tesaṁ bhikkhūnaṁ etadahosi:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Nay có Tôn giả Mahākaccāna (Ðại Ca-chiên-diên) là vị được Thế Tôn tán dương và được các vị đồng phạm hạnh có trí kính trọng.<br>
+<span lang="pi" class="pali">
+“ayaṁ kho āyasmā mahākaccāno satthu ceva saṁvaṇṇito sambhāvito ca viññūnaṁ sabrahmacārīnaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Tôn giả Mahākaccāna có thể giải thích rộng rãi ý nghĩa lời giảng dạy này được Thế Tôn nói lên một cách vắn tắt, và không giải thích rõ ràng ý nghĩa.<br>
+<span lang="pi" class="pali">
+Pahoti cāyasmā mahākaccāno imassa bhagavatā saṅkhittena uddesassa uddiṭṭhassa vitthārena atthaṁ avibhattassa vitthārena atthaṁ vibhajituṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vậy chúng ta hãy đi đến chỗ Tôn giả Mahākaccāna ở, sau khi đến, sẽ hỏi Tôn giả Mahākaccāna ý nghĩa này.”<br>
+<span lang="pi" class="pali">
+Yannūna mayaṁ yenāyasmā mahākaccāno tenupasaṅkameyyāma; upasaṅkamitvā āyasmantaṁ mahākaccānaṁ etamatthaṁ paṭipuccheyyāmā”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Rồi những Tỷ-kheo ấy đến chỗ Tôn giả Mahākaccāna ở, sau khi đến, nói lên những lời chúc tụng, hỏi thăm xã giao với Tôn giả Mahākaccāna rồi ngồi xuống một bên. Sau khi ngồi xuống một bên, những Tỷ-kheo ấy thưa với Tôn giả Mahākaccāna:<br>
+<span lang="pi" class="pali">
+Atha kho te bhikkhū yenāyasmā mahākaccāno tenupasaṅkamiṁsu; upasaṅkamitvā āyasmatā mahākaccānena saddhiṁ sammodiṁsu. Sammodanīyaṁ kathaṁ sāraṇīyaṁ vītisāretvā ekamantaṁ nisīdiṁsu. Ekamantaṁ nisinnā kho te bhikkhū āyasmantaṁ mahākaccānaṁ etadavocuṁ:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Này Hiền giả, Thế Tôn sau khi nói lên lời dạy tóm tắt này và không giải thích rõ ràng ý nghĩa, từ chỗ ngồi đứng dậy và đã đi vào tịnh xá:<br>
+<span lang="pi" class="pali">
+“idaṁ kho no, āvuso kaccāna, bhagavā saṅkhittena uddesaṁ uddisitvā vitthārena atthaṁ avibhajitvā uṭṭhāyāsanā vihāraṁ paviṭṭho:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Này Tỷ-kheo, do bất cứ nhân duyên gì, một số hý luận vọng tưởng ám ảnh một người. Nếu ở đây không có gì đáng tùy hỷ, đáng đón mừng, đáng chấp thủ. Thời như vậy là sự đoạn tận tham tùy miên, sự đoạn tận sân tùy miên, sự đoạn tận kiến tùy miên, sự đoạn tận nghi tùy miên, sự đoạn tận mạn tùy miên, sự đoạn tận hữu tham tùy miên, sự đoạn tận vô minh tùy miên, sự đoạn tận chấp trượng, chấp kiếm, đấu tranh, tránh tranh, luận tranh, kháng tranh, ly gián ngữ, vọng ngữ. Chính ở đây, những ác, bất thiện pháp này đều được tiêu diệt, không còn dư tàn’.<br>
+<span lang="pi" class="pali">
+‘yatonidānaṁ, bhikkhu, purisaṁ papañca-saññā-saṅkhā samudācaranti. Ettha ce natthi abhinanditabbaṁ abhivaditabbaṁ ajjhositabbaṁ. Esevanto rāgānusayānaṁ …pe… etthete pāpakā akusalā dhammā aparisesā nirujjhantī’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Hiền giả Mahākaccāna, khi Thế Tôn đi chưa bao lâu, chúng tôi suy nghĩ:<br>
+<span lang="pi" class="pali">
+Tesaṁ no, āvuso kaccāna, amhākaṁ acirapakkantassa bhagavato etadahosi:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Chư Hiền, Thế Tôn sau khi nói lên lời dạy vắn tắt này cho chúng ta … đã đi vào tịnh xá:<br>
+<span lang="pi" class="pali">
+‘idaṁ kho no, āvuso, bhagavā saṅkhittena uddesaṁ uddisitvā vitthārena atthaṁ avibhajitvā uṭṭhāyāsanā vihāraṁ paviṭṭho:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Này Tỷ-kheo, do bất cứ nhân duyên gì, một số hý luận vọng tưởng ám ảnh một người. Nếu ở đây không có gì đáng tùy hỷ, đáng đón mừng, đáng chấp thủ. Thời như vậy là sự đoạn tận tham tùy miên, sự đoạn tận sân tùy miên, sự đoạn tận kiến tùy miên, sự đoạn tận nghi tùy miên, sự đoạn tận mạn tùy miên, sự đoạn tận hữu tham tùy miên, sự đoạn tận vô minh tùy miên, sự đoạn tận chấp trượng, chấp kiếm, đấu tranh, tránh tranh, luận tranh, kháng tranh, ly gián ngữ, vọng ngữ. Chính ở đây, những ác, bất thiện pháp này đều được tiêu diệt, không còn dư tàn”.<br>
+<span lang="pi" class="pali">
+“yatonidānaṁ, bhikkhu, purisaṁ papañca-saññā-saṅkhā samudācaranti. Ettha ce natthi abhinanditabbaṁ abhivaditabbaṁ ajjhositabbaṁ. Esevanto rāgānusayānaṁ …pe… etthete pāpakā akusalā dhammā aparisesā nirujjhantī”’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Ai có thể giải thích rộng rãi ý nghĩa lời giảng dạy mà Thế Tôn nói lên một cách vắn tắt… không giải thích rõ ràng ý nghĩa?<br>
+<span lang="pi" class="pali">
+Ko nu kho imassa bhagavatā saṅkhittena uddesassa uddiṭṭhassa vitthārena atthaṁ avibhattassa vitthārena atthaṁ vibhajeyyāti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Hiền giả Mahākaccāna, rồi chúng tôi suy nghĩ:<br>
+<span lang="pi" class="pali">
+Tesaṁ no, āvuso kaccāna, amhākaṁ etadahosi:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Nay Tôn giả Mahākaccāna được Thế Tôn tán thán và được các vị đồng phạm hạnh có trí kính trọng, Tôn giả Mahākaccāna có thể giải thích rộng rãi ý nghĩa lời giảng dạy được Thế Tôn nói lên một cách vắn tắt và không giải thích rõ ràng ý nghĩa.<br>
+<span lang="pi" class="pali">
+‘ayaṁ kho āyasmā mahākaccāno satthu ceva saṁvaṇṇito sambhāvito ca viññūnaṁ sabrahmacārīnaṁ, pahoti cāyasmā mahākaccāno imassa bhagavatā saṅkhittena uddesassa uddiṭṭhassa vitthārena atthaṁ avibhattassa vitthārena atthaṁ vibhajituṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Vậy chúng ta hãy đi đến chỗ Tôn giả Mahākaccāna ở, sau khi đến, chúng ta hỏi Tôn giả Mahākaccāna ý nghĩa này’.<br>
+<span lang="pi" class="pali">
+Yannūna mayaṁ yenāyasmā mahākaccāno tenupasaṅkameyyāma; upasaṅkamitvā āyasmantaṁ mahākaccānaṁ etamatthaṁ paṭipuccheyyāmā’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Tôn giả Mahākaccāna sẽ giải thích cho.”<br>
+<span lang="pi" class="pali">
+Vibhajatāyasmā mahākaccāno”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Chư Hiền, cũng như một người ưa thích lõi cây, tìm tòi lõi cây, đi khắp mọi nơi tìm lõi cây, đến một cây to lớn, đứng thẳng và có lõi cây. Người này bỏ qua rễ, bỏ qua thân cây, nghĩ rằng phải tìm lõi cây ở nơi cành lá.<br>
+<span lang="pi" class="pali">
+“Seyyathāpi, āvuso, puriso sāratthiko sāragavesī sārapariyesanaṁ caramāno mahato rukkhassa tiṭṭhato sāravato atikkammeva mūlaṁ, atikkamma khandhaṁ, sākhāpalāse sāraṁ pariyesitabbaṁ maññeyya;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Cũng vậy là hành động của chư Tôn giả, đứng trước mặt Thế Tôn, quý vị bỏ qua Thế Tôn, nghĩ rằng phải hỏi tôi về ý nghĩa này.<br>
+<span lang="pi" class="pali">
+evaṁsampadamidaṁ āyasmantānaṁ satthari sammukhībhūte, taṁ bhagavantaṁ atisitvā, amhe etamatthaṁ paṭipucchitabbaṁ maññatha.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Chư Hiền, Thế Tôn biết những gì cần phải biết, thấy những gì cần phải thấy, Ngài đã trở thành vị có mắt, trở thành vị có trí, trở thành Chánh pháp, trở thành Brahma, vị thuyết giả, vị diễn giả, vị đem lại mục tiêu, vị trao cho bất tử, vị Pháp Chủ, Như Lai.<br>
+<span lang="pi" class="pali">
+So hāvuso, bhagavā jānaṁ jānāti, passaṁ passati, cakkhubhūto ñāṇabhūto dhammabhūto brahmabhūto, vattā pavattā, atthassa ninnetā, amatassa dātā, dhammassāmī tathāgato.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Quý vị phải tùy thời hỏi Thế Tôn ý nghĩa này.<br>
+<span lang="pi" class="pali">
+So ceva panetassa kālo ahosi, yaṁ bhagavantaṁyeva etamatthaṁ paṭipuccheyyātha.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Những gì Thế Tôn giải thích cho quý vị, quý vị hãy như vậy thọ trì.”<br>
+<span lang="pi" class="pali">
+Yathā vo bhagavā byākareyya tathā naṁ dhāreyyāthā”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Hiền giả Mahākaccāna, chắc chắn Thế Tôn biết những gì cần phải biết, thấy những gì cần phải thấy, Ngài đã trở thành vị có mắt, trở thành vị có trí, trở thành Chánh pháp, trở thành Brahma, vị thuyết giả, vị diễn giả, vị đem lại mục tiêu, vị trao cho bất tử, vị Pháp Chủ, Như Lai.<br>
+<span lang="pi" class="pali">
+“Addhāvuso kaccāna, bhagavā jānaṁ jānāti, passaṁ passati, cakkhubhūto ñāṇabhūto dhammabhūto brahmabhūto, vattā pavattā, atthassa ninnetā, amatassa dātā, dhammassāmī tathāgato.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Chúng tôi phải tùy thời hỏi Thế Tôn ý nghĩa này.<br>
+<span lang="pi" class="pali">
+So ceva panetassa kālo ahosi, yaṁ bhagavantaṁyeva etamatthaṁ paṭipuccheyyāma.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Những gì Thế Tôn giải thích cho chúng tôi, chúng tôi sẽ như vậy thọ trì.<br>
+<span lang="pi" class="pali">
+Yathā no bhagavā byākareyya tathā naṁ dhāreyyāma.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Nhưng Tôn giả Mahākaccāna được Thế Tôn tán thán, được các vị đồng phạm hạnh có trí kính trọng.<br>
+<span lang="pi" class="pali">
+Api cāyasmā mahākaccāno satthu ceva saṁvaṇṇito sambhāvito ca viññūnaṁ sabrahmacārīnaṁ,<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Tôn giả Mahākaccāna có thể giải thích rộng rãi ý nghĩa lời giảng dạy được Thế Tôn nói lên một cách vắn tắt và không giải thích rõ ràng ý nghĩa.<br>
+<span lang="pi" class="pali">
+pahoti cāyasmā mahākaccāno imassa bhagavatā saṅkhittena uddesassa uddiṭṭhassa vitthārena atthaṁ avibhattassa vitthārena atthaṁ vibhajituṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Mong Tôn giả Mahākaccāna hãy giải thích không có sự gì bất kính.”<br>
+<span lang="pi" class="pali">
+Vibhajatāyasmā mahākaccāno agaruṁ katvā”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Vậy chư Hiền hãy nghe và khéo tác ý, tôi sẽ giảng.”<br>
+<span lang="pi" class="pali">
+“Tena hāvuso, suṇātha, sādhukaṁ manasikarotha, bhāsissāmī”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Thưa vâng, Hiền giả,” các Tỷ-kheo ấy vâng đáp Tôn giả Mahākaccāna. Tôn giả Mahākaccāna giảng như sau:<br>
+<span lang="pi" class="pali">
+“Evamāvuso”ti kho te bhikkhū āyasmato mahākaccānassa paccassosuṁ. Āyasmā mahākaccāno etadavoca:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Chư Hiền, Thế Tôn nói lên một cách vắn tắt lời dạy này và đã đi vào tịnh xá:<br>
+<span lang="pi" class="pali">
+“Yaṁ kho no, āvuso, bhagavā saṅkhittena uddesaṁ uddisitvā vitthārena atthaṁ avibhajitvā uṭṭhāyāsanā vihāraṁ paviṭṭho:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Này Tỷ-kheo, do bất cứ nhân duyên gì, một số hý luận vọng tưởng ám ảnh một người.<br>
+<span lang="pi" class="pali">
+‘yatonidānaṁ, bhikkhu, purisaṁ papañcasaññāsaṅkhā samudācaranti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Nếu ở đây không có gì đáng tùy hỷ, đáng đón mừng, đáng chấp thủ. Thời như vậy là sự đoạn tận tham tùy miên, sự đoạn tận sân tùy miên, sự đoạn tận kiến tùy miên, sự đoạn tận nghi tùy miên, sự đoạn tận mạn tùy miên, sự đoạn tận hữu tham tùy miên, sự đoạn tận vô minh tùy miên, sự đoạn tận chấp trượng, chấp kiếm, đấu tranh, tránh tranh, luận tranh, kháng tranh, ly gián ngữ, vọng ngữ. Chính ở đây, những ác, bất thiện pháp này đều được tiêu diệt, không còn dư tàn.”<br>
+<span lang="pi" class="pali">
+Ettha ce natthi abhinanditabbaṁ abhivaditabbaṁ ajjhositabbaṁ, esevanto rāgānusayānaṁ …pe… etthete pāpakā akusalā dhammā aparisesā nirujjhantī’ti,<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Chư Hiền, với lời dạy được Thế Tôn nói lên một cách vắn tắt, và không giải thích rõ ràng ý nghĩa. Tôi hiểu ý nghĩa một cách đầy đủ như sau:<br>
+<span lang="pi" class="pali">
+imassa kho ahaṁ, āvuso, bhagavatā saṅkhittena uddesassa uddiṭṭhassa vitthārena atthaṁ avibhattassa evaṁ vitthārena atthaṁ ājānāmi—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Chư Hiền, do nhơn con mắt và các sắc pháp, nhãn thức khởi lên. Sự gặp gỡ của ba pháp này là xúc. Do duyên xúc nên có cảm thọ. Những gì có cảm thọ thời có tưởng, những gì có tưởng thời có suy tầm, những gì có suy tầm thì có hý luận. Do hý luận ấy làm nhơn, một số hý luận vọng tưởng ám ảnh một người, đối với các sắc pháp do con mắt nhận thức, quá khứ, tương lai và hiện tại.<br>
+<span lang="pi" class="pali">
+Cakkhuñcāvuso, paṭicca rūpe ca uppajjati cakkhuviññāṇaṁ, tiṇṇaṁ saṅgati phasso, phassapaccayā vedanā, yaṁ vedeti taṁ sañjānāti, yaṁ sañjānāti taṁ vitakketi, yaṁ vitakketi taṁ papañceti, yaṁ papañceti tatonidānaṁ purisaṁ papañcasaññāsaṅkhā samudācaranti atītānāgatapaccuppannesu cakkhuviññeyyesu rūpesu.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Chư Hiền, do nhơn lỗ tai và các tiếng, nhĩ thức khởi lên, …<br>
+<span lang="pi" class="pali">
+Sotañcāvuso, paṭicca sadde ca uppajjati sotaviññāṇaṁ …pe…<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+do nhơn lỗ mũi và các hương, tỷ thức khởi lên, …<br>
+<span lang="pi" class="pali">
+ghānañcāvuso, paṭicca gandhe ca uppajjati ghānaviññāṇaṁ …pe…<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+do nhơn lưỡi và các vị, thiệt thức khởi lên, …<br>
+<span lang="pi" class="pali">
+jivhañcāvuso, paṭicca rase ca uppajjati jivhāviññāṇaṁ …pe…<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+do nhơn thân và xúc, thân thức khởi lên; …<br>
+<span lang="pi" class="pali">
+kāyañcāvuso, paṭicca phoṭṭhabbe ca uppajjati kāyaviññāṇaṁ …pe…<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+do nhơn ý và các pháp, ý thức khởi lên. Sự gặp gỡ của ba pháp này là xúc. Do duyên xúc nên có các cảm thọ. Những gì có cảm thọ thời có tưởng. Những gì có tưởng thời có suy tầm. Những gì có suy tầm thời có hý luận. Do hý luận ấy làm nhơn, một số hý luận vọng tưởng ám ảnh một người, đối với các pháp do ý thức nhận thức, quá khứ, tương lai và hiện tại.<br>
+<span lang="pi" class="pali">
+manañcāvuso, paṭicca dhamme ca uppajjati manoviññāṇaṁ, tiṇṇaṁ saṅgati phasso, phassapaccayā vedanā, yaṁ vedeti taṁ sañjānāti, yaṁ sañjānāti taṁ vitakketi, yaṁ vitakketi taṁ papañceti, yaṁ papañceti tatonidānaṁ purisaṁ papañcasaññāsaṅkhā samudācaranti atītānāgatapaccuppannesu manoviññeyyesu dhammesu.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Chư Hiền, sự kiện này xảy ra: khi nào có mắt, khi nào có sắc pháp, khi nào có nhãn thức, thời sự thi thiết của xúc được hiển lộ.<br>
+<span lang="pi" class="pali">
+So vatāvuso, cakkhusmiṁ sati rūpe sati cakkhuviññāṇe sati phassapaññattiṁ paññāpessatīti—ṭhānametaṁ vijjati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Sự kiện này xảy ra: khi nào có sự thi thiết của xúc thời sự thi thiết của thọ được hiển lộ.<br>
+<span lang="pi" class="pali">
+Phassapaññattiyā sati vedanāpaññattiṁ paññāpessatīti—ṭhānametaṁ vijjati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Sự kiện này xảy ra: khi nào có thi thiết của thọ thời sự thi thiết của tưởng được hiển lộ.<br>
+<span lang="pi" class="pali">
+Vedanāpaññattiyā sati saññāpaññattiṁ paññāpessatīti—ṭhānametaṁ vijjati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Sự kiện này xảy ra: khi nào có sự thi thiết của tưởng, thời sự thi thiết của suy tầm được hiển lộ.<br>
+<span lang="pi" class="pali">
+Saññāpaññattiyā sati vitakkapaññattiṁ paññāpessatīti—ṭhānametaṁ vijjati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Sự kiện này xảy ra: khi nào có sự thi thiết của suy tầm thời sự thi thiết của sự ám ảnh một số hý luận vọng tưởng được hiển lộ.<br>
+<span lang="pi" class="pali">
+Vitakkapaññattiyā sati papañca-saññā-saṅkhā-samudācaraṇa-paññattiṁ paññāpessatīti—ṭhānametaṁ vijjati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Sự kiện này xảy ra: khi nào có tai, khi nào có các tiếng, khi nào có nhĩ thức …<br>
+<span lang="pi" class="pali">
+So vatāvuso, sotasmiṁ sati sadde sati …pe…<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Sự kiện này xảy ra: khi nào có lỗ mũi, khi nào có các hương, khi nào có tỷ thức …<br>
+<span lang="pi" class="pali">
+ghānasmiṁ sati gandhe sati …pe…<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Sự kiện này xảy ra, khi nào có lưỡi, khi nào có các vị, khi nào có thiệt thức …<br>
+<span lang="pi" class="pali">
+jivhāya sati rase sati …pe…<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Sự kiện này xảy ra: khi nào có thân, khi nào có các xúc, khi nào có thân thức …<br>
+<span lang="pi" class="pali">
+kāyasmiṁ sati phoṭṭhabbe sati …pe…<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Sự kiện này xảy ra: khi nào có ý, khi nào có các pháp, khi nào có ý thức thời sự thi thiết của xúc được hiển lộ.<br>
+<span lang="pi" class="pali">
+manasmiṁ sati dhamme sati manoviññāṇe sati phassapaññattiṁ paññāpessatīti—ṭhānametaṁ vijjati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Sự kiện này xảy ra: khi nào có sự thi thiết của xúc thời sự thi thiết của thọ được hiển lộ.<br>
+<span lang="pi" class="pali">
+Phassapaññattiyā sati vedanāpaññattiṁ paññāpessatīti—ṭhānametaṁ vijjati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Sự kiện này xảy ra: khi nào có thi thiết của thọ thời sự thi thiết của tưởng được hiển lộ.<br>
+<span lang="pi" class="pali">
+Vedanāpaññattiyā sati saññāpaññattiṁ paññāpessatīti—ṭhānametaṁ vijjati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Sự kiện này xảy ra: khi nào có sự thi thiết của tưởng, thời sự thi thiết của suy tầm được hiển lộ.<br>
+<span lang="pi" class="pali">
+Saññāpaññattiyā sati vitakkapaññattiṁ paññāpessatīti—ṭhānametaṁ vijjati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Sự kiện này xảy ra: khi nào có sự thi thiết của suy tầm thời sự thi thiết của sự ám ảnh một số hý luận vọng tưởng được hiển lộ.<br>
+<span lang="pi" class="pali">
+Vitakkapaññattiyā sati papañca-saññā-saṅkhā-samudācaraṇa-paññattiṁ paññāpessatīti—ṭhānametaṁ vijjati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Chư Hiền, sự kiện này không xảy ra: khi nào không có mắt, khi nào không có các sắc, khi nào không có nhãn thức, sự thi thiết của xúc được hiển lộ.<br>
+<span lang="pi" class="pali">
+So vatāvuso, cakkhusmiṁ asati rūpe asati cakkhuviññāṇe asati phassapaññattiṁ paññāpessatīti—netaṁ ṭhānaṁ vijjati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Sự kiện này không xảy ra: khi nào không có sự thi thiết của xúc, sự thi thiết của thọ được hiển lộ.<br>
+<span lang="pi" class="pali">
+Phassapaññattiyā asati vedanāpaññattiṁ paññāpessatīti—netaṁ ṭhānaṁ vijjati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Sự kiện này không xảy ra: khi nào không có sự thi thiết của thọ, sự thi thiết của tưởng được hiển lộ.<br>
+<span lang="pi" class="pali">
+Vedanāpaññattiyā asati saññāpaññattiṁ paññāpessatīti—netaṁ ṭhānaṁ vijjati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Sự kiện này không xảy ra: khi nào không có sự thi thiết của tưởng, sự thi thiết của suy tầm được hiển lộ.<br>
+<span lang="pi" class="pali">
+Saññāpaññattiyā asati vitakkapaññattiṁ paññāpessatīti—netaṁ ṭhānaṁ vijjati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Sự kiện này không xảy ra: khi nào không có sự thi thiết của suy tầm, thời sự thi thiết của sự ám ảnh một số hý luận vọng tưởng được hiển lộ.<br>
+<span lang="pi" class="pali">
+Vitakkapaññattiyā asati papañca-saññā-saṅkhā-samudācaraṇa-paññattiṁ paññāpessatīti—netaṁ ṭhānaṁ vijjati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Chư Hiền, sự kiện này không xảy ra: khi nào không có tai, khi nào không có các tiếng …<br>
+<span lang="pi" class="pali">
+So vatāvuso, sotasmiṁ asati sadde asati …pe…<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+khi nào không có mũi, khi nào không có các hương …<br>
+<span lang="pi" class="pali">
+ghānasmiṁ asati gandhe asati …pe…<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+khi nào không có lưỡi, khi nào không có các vị …<br>
+<span lang="pi" class="pali">
+jivhāya asati rase asati …pe…<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+khi nào không có thân, khi nào không có các xúc …<br>
+<span lang="pi" class="pali">
+kāyasmiṁ asati phoṭṭhabbe asati …pe…<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Sự kiện này không xảy ra: khi nào không có ý, khi nào không có các pháp, khi nào không có ý thức, sự thi thiết của xúc được hiển lộ.<br>
+<span lang="pi" class="pali">
+manasmiṁ asati dhamme asati manoviññāṇe asati phassapaññattiṁ paññāpessatīti—netaṁ ṭhānaṁ vijjati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Sự kiện này không xảy ra: khi nào không có sự thi thiết của xúc, sự thi thiết của thọ được hiển lộ.<br>
+<span lang="pi" class="pali">
+Phassapaññattiyā asati vedanāpaññattiṁ paññāpessatīti—netaṁ ṭhānaṁ vijjati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Sự kiện này không xảy ra: khi nào không có sự thi thiết của thọ, sự thi thiết của tưởng được hiển lộ.<br>
+<span lang="pi" class="pali">
+Vedanāpaññattiyā asati saññāpaññattiṁ paññāpessatīti—netaṁ ṭhānaṁ vijjati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Sự kiện này không xảy ra: khi nào không có sự thi thiết của tưởng, sự thi thiết của suy tầm được hiển lộ.<br>
+<span lang="pi" class="pali">
+Saññāpaññattiyā asati vitakkapaññattiṁ paññāpessatīti—netaṁ ṭhānaṁ vijjati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Sự kiện này không xảy ra: khi nào không có sự thi thiết của suy tầm, thời sự thi thiết của sự ám ảnh một số hý luận vọng tưởng được hiển lộ.<br>
+<span lang="pi" class="pali">
+Vitakkapaññattiyā asati papañca-saññā-saṅkhā-samudācaraṇa-paññattiṁ paññāpessatīti—netaṁ ṭhānaṁ vijjati.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Chư Hiền, Thế Tôn, sau khi nói lên lời dạy một cách vắn tắt … đã đi vào tịnh xá:<br>
+<span lang="pi" class="pali">
+Yaṁ kho no, āvuso, bhagavā saṅkhittena uddesaṁ uddisitvā vitthārena atthaṁ avibhajitvā uṭṭhāyāsanā vihāraṁ paviṭṭho:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Này Tỷ-kheo, do bất cứ nhân duyên gì, một số hý luận vọng tưởng ám ảnh một người. Nếu ở đây không có gì đáng tùy hỷ, đáng đón mừng, đáng chấp thủ. Thời như vậy là sự đoạn tận tham tùy miên, sự đoạn tận sân tùy miên, sự đoạn tận kiến tùy miên, sự đoạn tận nghi tùy miên, sự đoạn tận mạn tùy miên, sự đoạn tận hữu tham tùy miên, sự đoạn tận vô minh tùy miên, sự đoạn tận chấp trượng, chấp kiếm, đấu tranh, tránh tranh, luận tranh, kháng tranh, ly gián ngữ, vọng ngữ. Chính ở đây, những ác, bất thiện pháp này đều được tiêu diệt, không còn dư tàn”.<br>
+<span lang="pi" class="pali">
+‘yatonidānaṁ, bhikkhu, purisaṁ papañcasaññāsaṅkhā samudācaranti ettha ce natthi abhinanditabbaṁ abhivaditabbaṁ ajjhositabbaṁ esevanto rāgānusayānaṁ …pe…etthete pāpakā akusalā dhammā aparisesā nirujjhantī’ti,<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Chư Hiền, đối với lời dạy Thế Tôn nói lên một cách vắn tắt này, và nghĩa lý không được giải thích một cách rộng rãi, tôi đã hiểu ý nghĩa một cách rộng rãi như vậy.<br>
+<span lang="pi" class="pali">
+imassa kho ahaṁ, āvuso, bhagavatā saṅkhittena uddesassa uddiṭṭhassa vitthārena atthaṁ avibhattassa evaṁ vitthārena atthaṁ ājānāmi.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Nếu quý vị muốn, hãy đi đến chỗ Thế Tôn ở, sau khi đến, hãy hỏi ý nghĩa này. Thế Tôn giải đáp như thế nào, hãy như vậy thọ trì”.<br>
+<span lang="pi" class="pali">
+Ākaṅkhamānā ca pana tumhe āyasmanto bhagavantaṁyeva upasaṅkamitvā etamatthaṁ paṭipuccheyyātha. Yathā vo bhagavā byākaroti tathā naṁ dhāreyyāthā”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Rồi những Tỷ-kheo ấy, hoan hỷ, tùy hỷ lời Tôn giả Mahākaccāna nói, từ chỗ ngồi đứng dậy, đi đến chỗ Thế Tôn ở, sau khi đến đảnh lễ Ngài và ngồi xuống một bên. Sau khi ngồi xuống một bên, các Tỷ-kheo ấy bạch Thế Tôn:<br>
+<span lang="pi" class="pali">
+Atha kho te bhikkhū āyasmato mahākaccānassa bhāsitaṁ abhinanditvā anumoditvā uṭṭhāyāsanā yena bhagavā tenupasaṅkamiṁsu; upasaṅkamitvā bhagavantaṁ abhivādetvā ekamantaṁ nisīdiṁsu. Ekamantaṁ nisinnā kho te bhikkhū bhagavantaṁ etadavocuṁ:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Bạch Thế Tôn, Thế Tôn nói lên lời dạy này một cách vắn tắt cho chúng con… đã vào tịnh xá:<br>
+<span lang="pi" class="pali">
+“yaṁ kho no, bhante, bhagavā saṅkhittena uddesaṁ uddisitvā vitthārena atthaṁ avibhajitvā uṭṭhāyāsanā vihāraṁ paviṭṭho:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Này Tỷ-kheo, do bất cứ nhân duyên gì, một số hý luận vọng tưởng ám ảnh một người. Nếu ở đây không có gì đáng tùy hỷ, đáng đón mừng, đáng chấp thủ. Thời như vậy là sự đoạn tận tham tùy miên, sự đoạn tận sân tùy miên, sự đoạn tận kiến tùy miên, sự đoạn tận nghi tùy miên, sự đoạn tận mạn tùy miên, sự đoạn tận hữu tham tùy miên, sự đoạn tận vô minh tùy miên, sự đoạn tận chấp trượng, chấp kiếm, đấu tranh, tránh tranh, luận tranh, kháng tranh, ly gián ngữ, vọng ngữ. Chính ở đây, những ác, bất thiện pháp này đều được tiêu diệt, không còn dư tàn’.<br>
+<span lang="pi" class="pali">
+‘yatonidānaṁ, bhikkhu, purisaṁ papañcasaññāsaṅkhā samudācaranti. Ettha ce natthi abhinanditabbaṁ abhivaditabbaṁ ajjhositabbaṁ. Esevanto rāgānusayānaṁ …pe… etthete pāpakā akusalā dhammā aparisesā nirujjhantī’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Khi Thế Tôn đi chẳng bao lâu, chúng con suy nghĩ như sau:<br>
+<span lang="pi" class="pali">
+Tesaṁ no, bhante, amhākaṁ acirapakkantassa bhagavato etadahosi:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Chư Hiền, Thế Tôn sau khi nói cho chúng ta lời dạy tóm tắt này, không giải thích ý nghĩa một cách rộng rãi, từ chỗ ngồi đứng dậy và đã đi vào tịnh xá:<br>
+<span lang="pi" class="pali">
+‘idaṁ kho no, āvuso, bhagavā saṅkhittena uddesaṁ uddisitvā vitthārena atthaṁ avibhajitvā uṭṭhāyāsanā vihāraṁ paviṭṭho:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Này Tỷ-kheo, do bất cứ nhân duyên gì, một số hý luận vọng tưởng ám ảnh một người, nếu ở đây không có gì đáng tùy hỷ, đáng đón mừng, đáng chấp thủ, thời như vậy là sự đoạn tận tham tùy miên, sự đoạn tận sân tùy miên, sự đoạn tận kiến tùy miên, sự đoạn tận nghi tùy miên, sự đoạn tận mạn tùy miên, sự đoạn tận hữu tham tùy miên, sự đoạn tận vô minh tùy miên, sự đoạn tận chấp trượng, chấp kiếm, đấu tranh, tránh tranh, luận tranh, kháng tranh, ly gián ngữ, vọng ngữ. Chính ở đây, những ác, bất thiện pháp này đều được tiêu diệt, không còn dư tàn”.<br>
+<span lang="pi" class="pali">
+“yatonidānaṁ, bhikkhu, purisaṁ papañcasaññāsaṅkhā samudācaranti. Ettha ce natthi abhinanditabbaṁ abhivaditabbaṁ ajjhositabbaṁ. Esevanto rāgānusayānaṁ, esevanto paṭighānusayānaṁ, esevanto diṭṭhānusayānaṁ, esevanto vicikicchānusayānaṁ, esevanto mānānusayānaṁ, esevanto bhavarāgānusayānaṁ, esevanto avijjānusayānaṁ, esevanto daṇḍādāna-satthādāna-kalaha-viggaha-vivāda-tuvaṁtuvaṁ-pesuñña-musāvādānaṁ. Etthete pāpakā akusalā dhammā aparisesā nirujjhantī”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Nay ai có thể giải thích rộng rãi ý nghĩa lời giảng dạy này được Thế Tôn nói lên một cách vắn tắt và không giải thích rõ ràng ý nghĩa?<br>
+<span lang="pi" class="pali">
+Ko nu kho imassa bhagavatā saṅkhittena uddesassa uddiṭṭhassa vitthārena atthaṁ avibhattassa vitthārena atthaṁ vibhajeyyā’ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Bạch Thế Tôn, và chúng con suy nghĩ:<br>
+<span lang="pi" class="pali">
+Tesaṁ no, bhante, amhākaṁ etadahosi:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Nay có Tôn giả Mahākaccāna là vị được Thế Tôn tán dương và được các vị đồng phạm hạnh có trí kính trọng. Tôn giả Mahākaccāna có thể giải thích rộng rãi ý nghĩa lời giảng dạy này được Thế Tôn nói lên một cách vắn tắt và không giải thích rõ ràng ý nghĩa. Vậy chúng ta hãy đi đến chỗ Tôn giả Mahākaccāna ở, sau khi đến sẽ hỏi Tôn giả Mahākaccāna ý nghĩa này.’<br>
+<span lang="pi" class="pali">
+‘ayaṁ kho āyasmā mahākaccāno satthu ceva saṁvaṇṇito sambhāvito ca viññūnaṁ sabrahmacārīnaṁ, pahoti cāyasmā mahākaccāno imassa bhagavatā saṅkhittena uddesassa uddiṭṭhassa vitthārena atthaṁ avibhattassa vitthārena atthaṁ vibhajituṁ, yannūna mayaṁ yenāyasmā mahākaccāno tenupasaṅkameyyāma; upasaṅkamitvā āyasmantaṁ mahākaccānaṁ etamatthaṁ paṭipuccheyyāmā’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Bạch Thế Tôn, rồi chúng con đi đến chỗ Tôn giả Mahākaccāna ở, sau khi đến, chúng con hỏi Tôn giả Mahākaccāna ý nghĩa này.<br>
+<span lang="pi" class="pali">
+Atha kho mayaṁ, bhante, yenāyasmā mahākaccāno tenupasaṅkamimha; upasaṅkamitvā āyasmantaṁ mahākaccānaṁ etamatthaṁ paṭipucchimha.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Bạch Thế Tôn, Tôn giả Mahākaccāna đã giải thích ý nghĩa ấy cho chúng con với những phương pháp này, với những văn cú này, với những văn tự này.<br>
+<span lang="pi" class="pali">
+Tesaṁ no, bhante, āyasmatā mahākaccānena imehi ākārehi imehi padehi imehi byañjanehi attho vibhatto”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Chư Tỷ-kheo, Tôn giả Mahākaccāna là bậc Hiền trí. Chư Tỷ-kheo, Tôn giả Mahākaccāna là bậc Ðại tuệ.<br>
+<span lang="pi" class="pali">
+“Paṇḍito, bhikkhave, mahākaccāno; mahāpañño, bhikkhave, mahākaccāno.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Chư Tỷ-kheo, nếu các Người hỏi Ta ý nghĩa này, Ta cũng trả lời như Mahākaccāna đã trả lời.<br>
+<span lang="pi" class="pali">
+Mañcepi tumhe, bhikkhave, etamatthaṁ paṭipuccheyyātha, ahampi taṁ evamevaṁ byākareyyaṁ yathā taṁ mahākaccānena byākataṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Như vậy là chính nghĩa lời dạy ấy, hãy như vậy thọ trì.”<br>
+<span lang="pi" class="pali">
+Eso cevetassa attho. Evañca naṁ dhārethā”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Khi nghe nói vậy, Tôn giả Ananda bạch Thế Tôn:<br>
+<span lang="pi" class="pali">
+Evaṁ vutte, āyasmā ānando bhagavantaṁ etadavoca:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Bạch Thế Tôn, như một người bị đói lả và mệt mỏi, tìm được một bánh mật, cứ mỗi miếng vị ấy được nếm, cứ mỗi miếng vị ấy được thưởng thức vị ngọt thuần nhất.<br>
+<span lang="pi" class="pali">
+“seyyathāpi, bhante, puriso jighacchādubbalyapareto madhupiṇḍikaṁ adhigaccheyya, so yato yato sāyeyya, labhetheva sādurasaṁ asecanakaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Bạch Thế Tôn, cũng vậy, Tỷ-kheo có tri thức biệt tài, cứ mỗi phần suy tư đến ý nghĩa pháp môn này với trí tuệ, cứ mỗi phần vị ấy được thưởng thức sự hoan hỷ, được thưởng thức sự thoải mái tâm trí.<br>
+<span lang="pi" class="pali">
+Evameva kho, bhante, cetaso bhikkhu dabbajātiko, yato yato imassa dhammapariyāyassa paññāya atthaṁ upaparikkheyya, labhetheva attamanataṁ, labhetheva cetaso pasādaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Bạch Thế Tôn, pháp môn này tên gọi là gì?”<br>
+<span lang="pi" class="pali">
+Ko nāmo ayaṁ, bhante, dhammapariyāyo”ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Do vậy, này Ananda, pháp môn này được gọi là pháp môn bánh mật (Mật hoàn). Hãy như vậy thọ trì!.”<br>
+<span lang="pi" class="pali">
+“Tasmātiha tvaṁ, ānanda, imaṁ dhammapariyāyaṁ madhupiṇḍikapariyāyotveva naṁ dhārehī”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Thế Tôn thuyết giảng như vậy.<br>
+<span lang="pi" class="pali">
+Idamavoca bhagavā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Tôn giả Ananda hoan hỷ, tín thọ lời dạy của Thế Tôn.<br>
+<span lang="pi" class="pali">
+Attamano āyasmā ānando bhagavato bhāsitaṁ abhinandīti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+<span lang="pi" class="vi">
+Madhupiṇḍikasuttaṁ niṭṭhitaṁ aṭṭhamaṁ.<br>
+</span>
+</p>
 
 
-<hr>
 
-<p><span class="parno">3</span>Atha kho bhagavā sāyanhasamayaṁ paṭisallānā vuṭṭhito yena nigrodhārāmo tenupasaṅkami; upasaṅkamitvā paññatte āsane nisīdi. isajja kho bhagavā bhikkhū āmantesi: "Idhāhaṁ, bhikkhave, pubbaṇhasamayaṁ nivāsetvā pattacīvaramādāya kapilavatthuṁ piṇḍāya pāvisiṁ. Kapilavatthusmiṁ piṇḍāya caritvā pacchābhattaṁ piṇḍapātapaṭikkanto yena mahāvanaṁ tenupasaṅkamiṁ divāvihārāya. Mahāvanaṁ ajjhogāhetvā beluvalaṭṭhikāya mūle divāvihāraṁ nisīdiṁ. Daṇḍapāṇipi kho, bhikkhave, sakko jaṅghāvihāraṁ anucaṅkamamāno anuvicaramāno yena mahāvanaṁ tenupasaṅkami. Mahāvanaṁ ajjhogāhetvā yena beluvalaṭṭhikā yenāhaṁ tenupasaṅkami; upasaṅkamitvā mayā saddhiṁ sammodi. Sammodanīyaṁ kathaṁ sāraṇīyaṁ vītisāretvā daṇḍamolubbha ekamantaṁ aṭṭhāsi. Ekamantaṁ ṭhito kho, bhikkhave, daṇḍapāṇi sakko maṁ etadavoca: ‘kiṁvādī samaṇo kimakkhāyī’ti?</p>
-
-<p><span class="parno">4</span>Evaṁ vutte, ahaṁ, bhikkhave, daṇḍapāṇiṁ sakkaṁ etadavocaṁ: ‘yathāvādī kho, āvuso, sadevake loke samārake sabrahmake sassamaṇabrāhmaṇiyā pajāya sadevamanussāya na kenaci loke viggayha tiṭṭhati, yathā ca pana kāmehi visaṁyuttaṁ viharantaṁ taṁ brāhmaṇaṁ akathaṅkathiṁ chinnakukkuccaṁ bhavābhave vītataṇhaṁ saññā nānusenti — evaṁvādī kho ahaṁ, āvuso, evamakkhāyī’ti. Evaṁ vutte, bhikkhave, daṇḍapāṇi sakko sīsaṁ okampetvā, jivhaṁ nillāḷetvā, tivisākhaṁ nalāṭikaṁ nalāṭe vuṭṭhāpetvā daṇḍamolubbha pakkāmī"ti.</p>
+<!-- COPY CONTENT SUTTA Ở ĐÂY -->
 
 
-<hr>
 
-<p><span class="parno">5</span>Evaṁ vutte, aññataro bhikkhu bhagavantaṁ etadavoca:</p>
-
-<p>"kiṁvādī pana, bhante, bhagavā sadevake loke samārake sabrahmake sassamaṇabrāhmaṇiyā pajāya sadevamanussāya na kenaci loke viggayha tiṭṭhati? Kathañca pana, bhante, bhagavantaṁ kāmehi visaṁyuttaṁ viharantaṁ taṁ brāhmaṇaṁ akathaṅkathiṁ chinnakukkuccaṁ bhavābhave vītataṇhaṁ saññā nānusentī"ti? </p>
-
-<p>"Yatonidānaṁ, bhikkhu, purisaṁ papañcasaññāsaṅkhā samudācaranti. Ettha ce natthi abhinanditabbaṁ abhivaditabbaṁ ajjhositabbaṁ. Esevanto rāgānusayānaṁ, esevanto paṭighānusayānaṁ, esevanto diṭṭhānusayānaṁ, esevanto vicikicchānusayānaṁ, esevanto mānānusayānaṁ, esevanto bhavarāgānusayānaṁ, esevanto avijjānusayānaṁ, esevanto daṇḍādānasatthādānakalahaviggahavivādatuvaṁtuvaṁpesuññamusāvādānaṁ. Etthete pāpakā akusalā dhammā aparisesā nirujjhantī"ti.</p>
-
-<p>Idamavoca bhagavā. Idaṁ vatvāna sugato uṭṭhāyāsanā vihāraṁ pāvisi.</p>
+<br>
+<p><p style="text-align: right;font-style: italic;">Hoà Thượng Thích Minh Châu dịch Việt</span></p>
 
 
-<hr>
-
-<p><span class="parno">6</span>Atha kho tesaṁ bhikkhūnaṁ acirapakkantassa bhagavato etadahosi: "Idaṁ kho no, āvuso, bhagavā saṅkhittena uddesaṁ uddisitvā, vitthārena atthaṁ avibhajitvā, uṭṭhāyāsanā vihāraṁ paviṭṭho: ‘yatonidānaṁ, bhikkhu, purisaṁ papañcasaññāsaṅkhā samudācaranti. Ettha ce natthi abhinanditabbaṁ abhivaditabbaṁ ajjhositabbaṁ. Esevanto rāgānusayānaṁ … pe … etthete pāpakā akusalā dhammā aparisesā nirujjhantī’ti. Ko nu kho imassa bhagavatā saṅkhittena uddesassa uddiṭṭhassa vitthārena atthaṁ avibhattassa vitthārena atthaṁ vibhajeyyā"ti? </p>
-
-<p>Atha kho tesaṁ bhikkhūnaṁ etadahosi: "Ayaṁ kho āyasmā mahākaccāno satthu ceva saṁvaṇṇito sambhāvito ca viññūnaṁ sabrahmacārīnaṁ. Pahoti cāyasmā mahākaccāno imassa bhagavatā saṅkhittena uddesassa uddiṭṭhassa vitthārena atthaṁ avibhattassa vitthārena atthaṁ vibhajituṁ. Yannūna mayaṁ yenāyasmā mahākaccāno tenupasaṅkameyyāma; upasaṅkamitvā āyasmantaṁ mahākaccānaṁ etamatthaṁ paṭipuccheyyāmā"ti.</p>
 
 
-<hr>
-
-<p><span class="parno">7</span>Atha kho te bhikkhū yenāyasmā mahākaccāno tenupasaṅkamiṁsu; upasaṅkamitvā āyasmatā mahākaccānena saddhiṁ sammodiṁsu. Sammodanīyaṁ kathaṁ sāraṇīyaṁ vītisāretvā ekamantaṁ nisīdiṁsu. Ekamantaṁ nisinnā kho te bhikkhū āyasmantaṁ mahākaccānaṁ etadavocuṁ: "Idaṁ kho no, āvuso kaccāna, bhagavā saṅkhittena uddesaṁ uddisitvā vitthārena atthaṁ avibhajitvā uṭṭhāyāsanā vihāraṁ paviṭṭho: ‘yatonidānaṁ, bhikkhu, purisaṁ papañcasaññāsaṅkhā samudācaranti. Ettha ce natthi abhinanditabbaṁ abhivaditabbaṁ ajjhositabbaṁ. Esevanto rāgānusayānaṁ … pe … etthete pāpakā akusalā dhammā aparisesā nirujjhantī’ti. Tesaṁ no, āvuso kaccāna, amhākaṁ acirapakkantassa bhagavato etadahosi: ‘idaṁ kho no, āvuso, bhagavā saṅkhittena uddesaṁ uddisitvā vitthārena atthaṁ avibhajitvā uṭṭhāyāsanā vihāraṁ paviṭṭho: "yatonidānaṁ, bhikkhu, purisaṁ papañcasaññāsaṅkhā samudācaranti. Ettha ce natthi abhinanditabbaṁ abhivaditabbaṁ ajjhositabbaṁ. Esevanto rāgānusayānaṁ … pe … etthete pāpakā akusalā dhammā aparisesā nirujjhantī"’ti. Ko nu kho imassa bhagavatā saṅkhittena uddesassa uddiṭṭhassa vitthārena atthaṁ avibhattassa vitthārena atthaṁ vibhajeyyāti? Tesaṁ no, āvuso kaccāna, amhākaṁ etadahosi: ‘Ayaṁ kho āyasmā mahākaccāno satthu ceva saṁvaṇṇito sambhāvito ca viññūnaṁ sabrahmacārīnaṁ, pahoti cāyasmā mahākaccāno imassa bhagavatā saṅkhittena uddesassa uddiṭṭhassa vitthārena atthaṁ avibhattassa vitthārena atthaṁ vibhajituṁ. Yannūna mayaṁ yenāyasmā mahākaccāno tenupasaṅkameyyāma; upasaṅkamitvā āyasmantaṁ mahākaccānaṁ etamatthaṁ paṭipuccheyyāmā’ti. Vibhajatāyasmā mahākaccāno"ti.</p>
 
 
-<hr>
-
-<p><span class="parno">8</span>"Seyyathāpi, āvuso, puriso sāratthiko sāragavesī sārapariyesanaṁ caramāno mahato rukkhassa tiṭṭhato sāravato atikkammeva mūlaṁ, atikkamma khandhaṁ, sākhāpalāse sāraṁ pariyesitabbaṁ maññeyya; evaṁsampadamidaṁ āyasmantānaṁ satthari sammukhībhūte, taṁ bhagavantaṁ atisitvā, amhe etamatthaṁ paṭipucchitabbaṁ maññatha. So hāvuso, bhagavā jānaṁ jānāti, passaṁ passati, cakkhubhūto ñāṇabhūto dhammabhūto brahmabhūto, vattā pavattā, atthassa ninnetā, amatassa dātā, dhammassāmī tathāgato. So ceva panetassa kālo ahosi, yaṁ bhagavantaṁyeva etamatthaṁ paṭipuccheyyātha. Yathā vo bhagavā byākareyya tathā naṁ dhāreyyāthā"ti. </p>
-
-<p>"Addhāvuso kaccāna, bhagavā jānaṁ jānāti, passaṁ passati, cakkhubhūto ñāṇabhūto dhammabhūto brahmabhūto, vattā pavattā, atthassa ninnetā, amatassa dātā, dhammassāmī tathāgato. So ceva panetassa kālo ahosi, yaṁ bhagavantaṁyeva etamatthaṁ paṭipuccheyyāma. Yathā no bhagavā byākareyya tathā naṁ dhāreyyāma.</p>
-
-<p>Api cāyasmā mahākaccāno satthu ceva saṁvaṇṇito sambhāvito ca viññūnaṁ sabrahmacārīnaṁ, pahoti cāyasmā mahākaccāno imassa bhagavatā saṁkhittena uddesassa uddiṭṭhassa vitthārena atthaṁ avibhattassa vitthārena atthaṁ vibhajituṁ. Vibhajatāyasmā mahākaccāno <span class="var" title="agarukatvāti (bj) | agarukaritvāti (s1–3, pts1)" id="note195">agaruṁ katvā"ti</span>. </p>
-
-<p>"Tena hāvuso, suṇātha, sādhukaṁ manasikarotha, bhāsissāmī"ti.</p>
-
-<p>"Evamāvuso"ti kho te bhikkhū āyasmato mahākaccānassa paccassosuṁ. Āyasmā mahākaccāno etadavoca:</p>
 
 
-<p><span class="parno">9</span>"Yaṁ kho no, āvuso, bhagavā saṅkhittena uddesaṁ uddisitvā vitthārena atthaṁ avibhajitvā uṭṭhāyāsanā vihāraṁ paviṭṭho: ‘yatonidānaṁ, bhikkhu, purisaṁ papañcasaññāsaṅkhā samudācaranti. Ettha ce natthi abhinanditabbaṁ abhivaditabbaṁ ajjhositabbaṁ, esevanto rāgānusayānaṁ … pe … etthete pāpakā akusalā dhammā aparisesā nirujjhantī’ti, imassa kho ahaṁ, āvuso, bhagavatā saṅkhittena uddesassa uddiṭṭhassa vitthārena atthaṁ avibhattassa evaṁ vitthārena atthaṁ ājānāmi – </p>
-
-<hr>
-
-<p><span class="parno">10</span>Cakkhuñcāvuso, paṭicca rūpe ca uppajjati cakkhuviññāṇaṁ, tiṇṇaṁ saṅgati phasso, phassapaccayā vedanā, yaṁ vedeti taṁ sañjānāti, yaṁ sañjānāti taṁ vitakketi, yaṁ vitakketi taṁ papañceti, yaṁ papañceti tatonidānaṁ purisaṁ papañcasaññāsaṅkhā samudācaranti atītānāgatapaccuppannesu cakkhuviññeyyesu rūpesu.</p>
-
-<hr>
-
-<p>Sotañcāvuso, paṭicca sadde ca uppajjati sotaviññāṇaṁ … pe … ghānañcāvuso, paṭicca gandhe ca uppajjati ghānaviññāṇaṁ … pe … jivhañcāvuso, paṭicca rase ca uppajjati jivhāviññāṇaṁ … pe … kāyañcāvuso, paṭicca phoṭṭhabbe ca uppajjati kāyaviññāṇaṁ … pe … manañcāvuso, paṭicca dhamme ca uppajjati manoviññāṇaṁ, tiṇṇaṁ saṅgati phasso, phassapaccayā vedanā, yaṁ vedeti taṁ sañjānāti, yaṁ sañjānāti taṁ vitakketi, yaṁ vitakketi taṁ papañceti, yaṁ papañceti tatonidānaṁ purisaṁ papañcasaññāsaṅkhā samudācaranti atītānāgatapaccuppannesu manoviññeyyesu dhammesu.</p>
-
-<hr>
-
-<p><span class="parno">11</span>So vatāvuso, cakkhusmiṁ sati rūpe sati cakkhuviññāṇe sati phassapaññattiṁ paññāpessatīti — ṭhānametaṁ vijjati. Phassapaññattiyā sati vedanāpaññattiṁ paññāpessatīti — ṭhānametaṁ vijjati. Vedanāpaññattiyā sati saññāpaññattiṁ paññāpessatīti — ṭhānametaṁ vijjati. Saññāpaññattiyā sati vitakkapaññattiṁ paññāpessatīti — ṭhānametaṁ vijjati. Vitakkapaññattiyā sati papañcasaññāsaṅkhāsamudācaraṇapaññattiṁ paññāpessatīti — ṭhānametaṁ vijjati.</p>
-
-<hr>
-
-<p>So vatāvuso, sotasmiṁ sati sadde sati … pe … ghānasmiṁ sati gandhe sati … pe … jivhāya sati rase sati … pe … kāyasmiṁ sati phoṭṭhabbe sati … pe … manasmiṁ sati dhamme sati manoviññāṇe sati phassapaññattiṁ paññāpessatīti — ṭhānametaṁ vijjati. Phassapaññattiyā sati vedanāpaññattiṁ paññāpessatīti — ṭhānametaṁ vijjati. Vedanāpaññattiyā sati saññāpaññattiṁ paññāpessatīti — ṭhānametaṁ vijjati. Saññāpaññattiyā sati vitakkapaññattiṁ paññāpessatīti — ṭhānametaṁ vijjati. Vitakkapaññattiyā sati papañcasaññāsaṅkhāsamudācaraṇapaññattiṁ paññāpessatīti — ṭhānametaṁ vijjati.</p>
-
-<p><span class="parno">12</span>So vatāvuso, cakkhusmiṁ asati rūpe asati cakkhuviññāṇe asati phassapaññattiṁ paññāpessatīti — netaṁ ṭhānaṁ vijjati. Phassapaññattiyā asati vedanāpaññattiṁ paññāpessatīti — netaṁ ṭhānaṁ vijjati. Vedanāpaññattiyā asati saññāpaññattiṁ paññāpessatīti — netaṁ ṭhānaṁ vijjati. Saññāpaññattiyā asati vitakkapaññattiṁ paññāpessatīti — netaṁ ṭhānaṁ vijjati. Vitakkapaññattiyā asati papañcasaññāsaṅkhāsamudācaraṇapaññattiṁ paññāpessatīti — netaṁ ṭhānaṁ vijjati. </p>
-
-<p>So vatāvuso, sotasmiṁ asati sadde asati … pe … ghānasmiṁ asati gandhe asati … pe … jivhāya asati rase asati … pe … kāyasmiṁ asati phoṭṭhabbe asati … pe … manasmiṁ asati dhamme asati manoviññāṇe asati phassapaññattiṁ paññāpessatīti — netaṁ ṭhānaṁ vijjati. Phassapaññattiyā asati vedanāpaññattiṁ paññāpessatīti — netaṁ ṭhānaṁ vijjati. Vedanāpaññattiyā asati saññāpaññattiṁ paññāpessatīti — netaṁ ṭhānaṁ vijjati. Saññāpaññattiyā asati vitakkapaññattiṁ paññāpessatīti — netaṁ ṭhānaṁ vijjati. Vitakkapaññattiyā asati papañcasaññāsaṅkhāsamudācaraṇapaññattiṁ paññāpessatīti — netaṁ ṭhānaṁ vijjati.</p>
-
-<hr>
-
-<p><span class="parno">13</span>Yaṁ kho no, āvuso, bhagavā saṅkhittena uddesaṁ uddisitvā vitthārena atthaṁ avibhajitvā uṭṭhāyāsanā vihāraṁ paviṭṭho: ‘yatonidānaṁ, bhikkhu, purisaṁ papañcasaññāsaṅkhā samudācaranti ettha ce natthi abhinanditabbaṁ abhivaditabbaṁ ajjhositabbaṁ esevanto rāgānusayānaṁ … pe … etthete pāpakā akusalā dhammā aparisesā nirujjhantī’ti, imassa kho ahaṁ, āvuso, bhagavatā saṅkhittena uddesassa uddiṭṭhassa vitthārena atthaṁ avibhattassa evaṁ vitthārena atthaṁ ājānāmi. Ākaṅkhamānā ca pana tumhe āyasmanto bhagavantaṁyeva upasaṅkamitvā etamatthaṁ paṭipuccheyyātha. Yathā vo bhagavā byākaroti tathā naṁ dhāreyyāthā"ti.</p>
-
-
-<hr>
-
-<p><span class="parno">14</span>Atha kho te bhikkhū āyasmato mahākaccānassa bhāsitaṁ abhinanditvā anumoditvā uṭṭhāyāsanā yena bhagavā tenupasaṅkamiṁsu; upasaṅkamitvā bhagavantaṁ abhivādetvā ekamantaṁ nisīdiṁsu. Ekamantaṁ nisinnā kho te bhikkhū bhagavantaṁ etadavocuṁ: "yaṁ kho no, bhante, bhagavā saṁkhittena uddesaṁ uddisitvā vitthārena atthaṁ avibhajitvā uṭṭhāyāsanā vihāraṁ paviṭṭho: ‘yatonidānaṁ, bhikkhu, purisaṁ papañcasaññāsaṅkhā samudācaranti. Ettha ce natthi abhinanditabbaṁ abhivaditabbaṁ ajjhositabbaṁ. Esevanto rāgānusayānaṁ … pe … etthete pāpakā akusalā dhammā aparisesā nirujjhantī’ti. Tesaṁ no, bhante, amhākaṁ acirapakkantassa bhagavato etadahosi: ‘idaṁ kho no, āvuso, bhagavā saṁkhittena uddesaṁ uddisitvā vitthārena atthaṁ avibhajitvā uṭṭhāyāsanā vihāraṁ paviṭṭho: "yatonidānaṁ, bhikkhu, purisaṁ papañcasaññāsaṅkhā samudācaranti. Ettha ce natthi abhinanditabbaṁ abhivaditabbaṁ ajjhositabbaṁ. Esevanto rāgānusayānaṁ, esevanto paṭighānusayānaṁ, esevanto diṭṭhānusayānaṁ, esevanto vicikicchānusayānaṁ, esevanto mānānusayānaṁ, esevanto bhavarāgānusayānaṁ, esevanto avijjānusayānaṁ, esevanto daṇḍādānasatthādānakalahaviggahavivādatuvaṁtuvaṁpesuññamusāvādānaṁ. Etthete pāpakā akusalā dhammā aparisesā nirujjhantī"ti. Ko nu kho imassa bhagavatā saṁkhittena uddesassa uddiṭṭhassa vitthārena atthaṁ avibhattassa vitthārena atthaṁ vibhajeyyā’ti? Tesaṁ no, bhante, amhākaṁ etadahosi: ‘Ayaṁ kho āyasmā mahākaccāno satthu ceva saṁvaṇṇito sambhāvito ca viññūnaṁ sabrahmacārīnaṁ, pahoti cāyasmā mahākaccāno imassa bhagavatā saṁkhittena uddesassa uddiṭṭhassa vitthārena atthaṁ avibhattassa vitthārena atthaṁ vibhajituṁ, yannūna mayaṁ yenāyasmā mahākaccāno tenupasaṅkameyyāma; upasaṅkamitvā āyasmantaṁ mahākaccānaṁ etamatthaṁ paṭipuccheyyāmā’ti. Atha kho mayaṁ, bhante, yenāyasmā mahākaccāno tenupasaṅkamimha; upasaṅkamitvā āyasmantaṁ mahākaccānaṁ etamatthaṁ paṭipucchimha. Tesaṁ no, bhante, āyasmatā mahākaccānena imehi ākārehi imehi padehi imehi byañjanehi attho vibhatto"ti.</p>
-
-
-<hr>
-
-<p>"Paṇḍito, bhikkhave, mahākaccāno; mahāpañño, bhikkhave, mahākaccāno. Mañcepi tumhe, bhikkhave, etamatthaṁ paṭipuccheyyātha, <span class="var" title="ahampi cetaṁ evamevaṁ (^an10.115#1 [115. Tatiyaadhammasutta])" id="note197">ahampi taṁ evamevaṁ</span> byākareyyaṁ yathā taṁ mahākaccānena byākataṁ. Eso <span class="var" title="Eso ceva tassa (^an10.28#1 [28. Dutiyamahāpañhāsutta])" id="note198">cevetassa</span> attho. <span class="var" title="evemeva ca (mr)" id="note199">Evañca</span> naṁ dhārethā"ti.</p>
-
-
-<hr>
-
-<p><span class="parno">15</span>Evaṁ vutte, āyasmā ānando bhagavantaṁ etadavoca: "Seyyathāpi, bhante, puriso jighacchādubbalyapareto madhupiṇḍikaṁ adhigaccheyya, so yato yato sāyeyya, labhetheva sādurasaṁ asecanakaṁ. </p>
-
-<p>Evameva kho, bhante, cetaso bhikkhu dabbajātiko, yato yato imassa dhammapariyāyassa paññāya atthaṁ upaparikkheyya, labhetheva attamanataṁ, labhetheva cetaso pasādaṁ. Ko nāmo <span class="var" title="ko nāmāyaṁ (s1–3)" id="note200">ayaṁ</span>, bhante, dhammapariyāyo"ti?</p>
-
-<p>"Tasmātiha tvaṁ, ānanda, imaṁ dhammapariyāyaṁ madhupiṇḍikapariyāyotveva naṁ dhārehī"ti.</p>
-
-<p><span class="parno">16</span>Idamavoca bhagavā. Attamano āyasmā ānando bhagavato bhāsitaṁ abhinandīti.</p><p class="endsutta">Madhupiṇḍikasuttaṁ niṭṭhitaṁ aṭṭhamaṁ.</p>
-</div>
 </section>  <!-- End English and Pali -->
 <div id="nextprev"><a id="previous-sutta" href="./mn17.html#content"></a><a id="next-sutta" href="./mn19.html#content"></a></div>
 </div>  <!--End Content -->
 </div>  <!-- End Page -->
-<div class="w3-white bwcontainer2"> <!-- Footer div -->
-<!-- Footer -->
-		<footer>
-			<div id="breadcrumbs"><a href="../home/index.html">Home</a><a href="../mn/mn.html">Majjhima Nikāya</a>MN18: Madhupiṇḍika Sutta</div>
-					<div class="bottomlinks">
- 	<a href="../guide/guide.html"><span class="w3-bar-item"><i class="fa fa-compass"></i>&nbsp;Guide</span></a>
- 	 	<a href="../home/help.html"><span class="w3-bar-item"><i class="fa fa-info"></i>&nbsp;Help</span></a>
- 	<a href="../home/crossreference.html"><span class="w3-bar-item"><i class="fa fa-exchange"></i>&nbsp;Links&nbsp;Cross&nbsp;Reference</span></a>
- 	<a href="../home/copyright.html"><span class="w3-bar-item">&copy;&nbsp;Copyright</span></a>
- 	<a href="../home/contact.html"><span class="w3-bar-item"><i class="fa fa-envelope"></i>&nbsp;Contact</span></a>
- </div>  <!-- End bottom links -->
+
+
+
+
+
+
+<footer>
+					 <!-- End bottom links -->
 </footer>
- </div>
+
+
  
  <!-- Scripts -->
 
-<script>
- // Script to turn Pali Lookup on and off
- function togPaliLookup() {
- 		var checkBox = document.getElementById("myCheck");
- 		var text = document.getElementById("text");
- 		if (checkBox.checked == true){
- 				text.style.display = "block";
- 					} else {
- 							text.style.display = "none";
- 		}
- }
- </script>
+ <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      if (typeof enablePaliLookup === "function") {
+        enablePaliLookup();
+      } else {
+        console.error("enablePaliLookup is not defined");
+      }
+    });
+  </script>
 
  <script>
  // Script to open and close sidebar

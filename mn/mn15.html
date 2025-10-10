@@ -1,14 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
 <head>
  	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
  	<link rel="icon" type="image/x-icon" href="../images/favicon.ico">
- 	<title>Majjhima Nikāya 15</title>
  	<meta name="viewport" content="width=device-width, initial-scale=1">
 		<!-- Loading manifest -->
 	<link rel="manifest" href="../manifest.json">
- 	<!-- Loading third party fonts -->
- 	<link href="../fonts/font-awesome.min.css" rel="stylesheet" type="text/css">
  	<!-- Loading main and menu stylesheets -->
  	<link rel="stylesheet" href="../css/w3.css">
  	<link rel="stylesheet" href="../css/css.css">
@@ -16,25 +13,44 @@
  	<script src="../js/jquery-1.10.2.min.js"></script>
  	<script src="../js/controlpanel.js"></script>
  	<script src="../js/mousetrap.min.js"></script>
- </head>
+    <script src="../js/pali-lookup-standalone.js"></script>
+
+ <script src="../js/suttaFiles.js"></script>
+<script>
+ // Script to open random Sutta
+ function openRandomSutta() {
+  const randomIndex = Math.floor(Math.random() * suttaFiles.length);
+  const selectedFile = suttaFiles[randomIndex];
+
+  // Get root path of your site 
+  const currentPath = location.pathname;
+  const rootPath = currentPath.split("/").slice(0, -2).join("/") + "/";
+
+  // Redirect to the correct file
+  window.location.href = rootPath + selectedFile;
+}
+</script>
+
+
+</head>
  <body class="container">
  <div class="header-background">
  <!-- Header -->
  <div class="w3-header w3-content w3-padding w3-left-align bwcontainer">
  	<div class="centered">
- 		<button class="light-mode-button" aria-label="Toggle Light Mode" onclick="toggle_light_mode()">
+ 		<button class="light-mode-button" aria-label="Bật Chế Độ Sáng" onclick="toggle_light_mode()">
  			<span></span>
  			<span></span>
  		</button>
- 		<span class="box-lbl">Light/Dark</span>
+ 		<span class="box-lbl">Sáng/Tối</span>
  	</div> <!-- Centered -->
- 		<a href="../home/index.html" id="bwlogo"><img src="../images/headerlogo.png" alt="The Buddha's Words logo" class="w3-image"></a>
+ 		<a href="../home/index.html" id="bwlogo"><img src="../images/headerlogo.png" alt="Logo Lời Của Đức Phật" class="w3-image"></a>
  		<div class="w3-bar bwcontainer">
  			<div id="searchlinks">
- 			<a href="../home/engsearch.html"><span class="w3-bar-item"><i class="fa fa-search"></i>&nbsp;Search English</span></a>
- 			<a href="../home/palisearch.html"><span class="w3-bar-item"><i class="fa fa-search"></i>&nbsp;Search Pali</span></a>
+ 			<a href="../home/visearch.html"><span class="w3-bar-item"><i class="fa fa-search"></i>&nbsp;Tìm Tiếng Việt</span></a>
+ 			<a href="../home/palisearch.html"><span class="w3-bar-item"><i class="fa fa-search"></i>&nbsp;Tìm Tiếng Pali</span></a>
  			</div><!-- End Searchlinks div -->
- 			<div class="help"><span><a href="../home/help.html"><img src="../images/help_icon.png" title="Help" alt="Help"></a></span></div>
+ 			<div class="help"><span><a href="../home/help.html"><img src="../images/help_icon.png" title="Trợ Giúp" alt="Help"></a></span></div>
  		</div> <!-- End w3-bar bwcontainer --> 	</div> <!-- End w3-header w3-content w3-padding w3-left-align bwcontainer -->
  </div> <!-- End header-background -->
  <!-- Top menu -->
@@ -43,50 +59,44 @@
  	<div class="w3-button w3-padding-8 w3-left w3-hide-large" onclick="w3_open()">☰</div>
  		<div id="navbar" class="w3-hide-small w3-hide-medium bwcontainer3">
  			<ul id="css3menu0">
- 				<li class="topfirst" id="home"><a href="../home/index.html" class="w3-hide-small">Home</a></li>
- 			<li class="topmenu" id="dn"><a href="../dn/dn.html" class="w3-hide-small">Dīgha Nikāya</a></li>
- 				<li class="topmenu" id="mn"><a href="../mn/mn.html" class="pressed w3-hide-small">Majjhima Nikāya</a></li>
- 				<li class="topmenu" id="sn"><a href="../sn/sn.html" class="w3-hide-small"><i class="fa fa-caret-down"></i>&nbsp;Saṁyutta Nikāya</a>
+ 				<li class="topfirst" id="home"><a href="../home/index.html" class="w3-hide-small">Trang Chủ</a></li>
+  				<li class="topmenu" id="dn"><a href="../dn/dn.html" class="pressed w3-hide-small">Trường Bộ Kinh</a></li>
+ 				<li class="topmenu" id="mn"><a href="../mn/mn.html" class="w3-hide-small">Trung Bộ Kinh</a></li>
+ 				<li class="topmenu" id="sn"><a href="../sn/sn.html" class="w3-hide-small"><i class="fa fa-caret-down"></i>&nbsp;Tương Ưng Bộ Kinh</a>
  					<ul>
- 						<li><a href="../sn/sn01.html" class="w3-hide-small">Vol. 1 ‒ The Book with Verses</a></li>
- 						<li><a href="../sn/sn02.html" class="w3-hide-small">Vol. 2 ‒ The Book of Causation</a></li>
- 						<li><a href="../sn/sn03.html" class="w3-hide-small">Vol. 3 ‒ The Book of the Aggregates</a></li>
- 						<li><a href="../sn/sn04.html" class="w3-hide-small">Vol. 4 ‒ The Book of the Six Sense Bases</a></li>
- 						<li><a href="../sn/sn05.html" class="w3-hide-small">Vol. 5 ‒ The Great Book</a></li>
+ 						<li><a href="../sn/sn01.html" class="w3-hide-small">Tập I - Thiên Có Kệ</a></li>
+ 						<li><a href="../sn/sn02.html" class="w3-hide-small">Tập II - Thiên Nhân Duyên</a></li>
+ 						<li><a href="../sn/sn03.html" class="w3-hide-small">Tập III - Thiên Uẩn</a></li>
+ 						<li><a href="../sn/sn04.html" class="w3-hide-small">Tập IV - Thiên Sáu Xứ</a></li>
+ 						<li><a href="../sn/sn05.html" class="w3-hide-small">Tập V - Thiên Ðại Phẩm</a></li>
  					</ul>
- 				<li class="topmenu" id="an"><a href="../an/an.html" class="w3-hide-small"><i class="fa fa-caret-down"></i>&nbsp;Aṅguttara Nikāya</a>
+ 				<li class="topmenu" id="an"><a href="../an/an.html" class="w3-hide-small"><i class="fa fa-caret-down"></i>&nbsp;Tăng Chi Bộ Kinh</a>
  					<ul>
- 						<li><a href="../an/an1.html" class="w3-hide-small">The Ones</a></li>
- 						<li><a href="../an/an2.html" class="w3-hide-small">The Twos</a></li>
- 						<li><a href="../an/an3.html" class="w3-hide-small">The Threes</a></li>
- 						<li><a href="../an/an4.html" class="w3-hide-small">The Fours</a></li>
- 						<li><a href="../an/an5.html" class="w3-hide-small">The Fives</a></li>
- 						<li><a href="../an/an6.html" class="w3-hide-small">The Sixes</a></li>
- 						<li><a href="../an/an7.html" class="w3-hide-small">The Sevens</a></li>
- 						<li><a href="../an/an8.html" class="w3-hide-small">The Eights</a></li>
- 						<li><a href="../an/an9.html" class="w3-hide-small">The Nines</a></li>
- 						<li><a href="../an/an10.html" class="w3-hide-small">The Tens</a></li>
- 						<li><a href="../an/an11.html" class="w3-hide-small">The Elevens</a></li>
- 					</ul>
- 				</li>
- 				<li class="topmenu" id="kn"><a href="../kn/kn.html" class="w3-hide-small"><i class="fa fa-caret-down"></i>&nbsp;Khuddaka Nikāya</a>
- 					<ul>
- 						<li><a href="../kp/kp.html" class="w3-hide-small">The Khuddakapatha</a></li>
- 						<li><a href="../dhp/dhp.html" class="w3-hide-small">The Dhammapada</a></li>
- 						<li><a href="../snp/snp.html" class="w3-hide-small">Sutta Nipata</a></li>
- 						<li><a href="../ud/ud.html" class="w3-hide-small">Udana</a></li>
- 						<li><a href="../it/it.html" class="w3-hide-small">Itivuttaka</a></li>
- 						<li><a href="../tha/tha.html" class="w3-hide-small">The Theragatha</a></li>
- 						<li><a href="../thi/thi.html" class="w3-hide-small">The Therigatha</a></li>
+ 						<li><a href="../an/an1.html" class="w3-hide-small">Chương Một Pháp</a></li>
+ 						<li><a href="../an/an2.html" class="w3-hide-small">Chương Hai Pháp</a></li>
+ 						<li><a href="../an/an3.html" class="w3-hide-small">Chương Ba Pháp</a></li>
+ 						<li><a href="../an/an4.html" class="w3-hide-small">Chương Bốn Pháp</a></li>
+ 						<li><a href="../an/an5.html" class="w3-hide-small">Chương Năm Pháp</a></li>
+ 						<li><a href="../an/an6.html" class="w3-hide-small">Chương Sáu Pháp</a></li>
+ 						<li><a href="../an/an7.html" class="w3-hide-small">Chương Bảy Pháp</a></li>
+ 						<li><a href="../an/an8.html" class="w3-hide-small">Chương Tám Pháp</a></li>
+ 						<li><a href="../an/an9.html" class="w3-hide-small">Chương Chín Pháp</a></li>
+ 						<li><a href="../an/an10.html" class="w3-hide-small">Chương Mười Pháp</a></li>
+ 						<li><a href="../an/an11.html" class="w3-hide-small">Chương Mười Một Pháp</a></li>
  					</ul>
  				</li>
- 				<li class="toplast" id="vi"><a href="../vi/vi.html" class="w3-hide-small"><i class="fa fa-caret-down"></i>&nbsp;Vinaya Piṭaka</a>
+ 				<li class="topmenu" id="kn"><a href="../kn/kn.html" class="w3-hide-small"><i class="fa fa-caret-down"></i>&nbsp;Tiểu Bộ Kinh</a>
  					<ul>
- 						<li><a href="../vi/kd.html" class="w3-hide-small">Khandhaka</a></li>
- 						<li><a href="../vi/bu-vb.html" class="w3-hide-small">Bhikkhu Vibhaṅga</a></li>
- 						<li><a href="../vi/bu-pt.html" class="w3-hide-small">Bhikkhu Pātimokkha</a></li>
- 						<li><a href="../vi/bi-pt.html" class="w3-hide-small">Bhikkhunī Pātimokkha</a></li>
- 						<li><a href="../vi/bi-vb.html" class="w3-hide-small">Bhikkhunī Vibhaṅga</a></li>
+ 						<li><a href="../kp/kp.html" class="w3-hide-small">Kinh Tiểu Tụng</a></li>
+ 						<li><a href="../dhp/dhp.html" class="w3-hide-small">Kinh Pháp Cú</a></li>
+ 						<li><a href="../snp/snp.html" class="w3-hide-small">Kinh Tập</a></li>
+ 						<li><a href="../ud/ud.html" class="w3-hide-small">Kinh Phật Tự Thuyết</a></li>
+ 						<li><a href="../it/it.html" class="w3-hide-small">Kinh Phật Thuyết Như Vậy</a></li>
+ 						<li><a href="../tha/tha.html" class="w3-hide-small">Trưởng Lão Tăng Kệ</a></li>
+ 						<li><a href="../thi/thi.html" class="w3-hide-small">Trưởng Lão Ni Kệ</a></li>
+ 					</ul>
+ 				</li>
+				<li class="toplast" id="rd"><a href="../rd/rd.html" class="w3-hide-small"></i>Kinh Ngẫu Nhiên Theo Nhóm</a>
  					</ul>
  				</li>
  			</ul>
@@ -99,327 +109,1064 @@
  		<div class="w3-bar-block w3-white">
  			<a href="../home/index.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-home fa-lg"></i>&nbsp;&nbsp;&nbsp;Home</a>
  			<a href="../guide/guide.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Guide</a>
- 			<a href="../dn/dn.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Dīgha Nikāya</a>
- 			<a href="../mn/mn.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Majjhima Nikāya</a>
- 			<a href="../sn/sn.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Saṁyutta Nikāya</a>
- 			<a href="../an/an.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Aṅguttara Nikāya</a>
- 			<a href="../kn/kn.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Khuddaka Nikāya</a>
- 			<a href="../vi/vi.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Vinaya Piṭaka</a>
+ 			<a href="../dn/dn.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Trường Bộ Kinh</a>
+ 			<a href="../mn/mn.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Trung Bộ Kinh</a>
+ 			<a href="../sn/sn.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Tương Ưng Bộ Kinh</a>
+ 			<a href="../an/an.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Tăng Chi Bộ Kinh
+ 			<a href="../kn/kn.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Tiểu Bộ Kinh</a>
+			<a href="../rd/rd.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>Kinh Ngẫu Nhiên Theo Nhóm</a>
  		</div>
  </nav>
-
- <!-- !PAGE CONTENT! --> 
+ 
+ 
+ 
+   <!-- !PAGE CONTENT! --> 
 <div class="w3-main w3-content w3-padding w3-left-align bwcontainer4">
-
-<h2>Majjhima Nikāya</h2>
-
 <div id="content">
+<h2>Majjhima Nikāya - Trung Bộ Kinh</h2>
+<h5><span style="font-style: italic;">Hoà Thượng Thích Minh Châu dịch Việt</span></h5>
 
-<h3>MN15: Anumāna Sutta — Measuring Up </h3>
-
-<div id="metaarea">
-	<ul class="translator">
-		<li>©&nbsp;Translated from the Pali by Bhante Sujato.&nbsp;<a href="../home/copyright.html#sc">(More copyright information)</a>
-	</ul>
 </div>
 
-<section class="raw_sutta">
-<div lang="en">
+<br>
+ 	<title>        Trung Bộ 15</title>
+
+
+<p lang="vi" class="vi"; style="text-align: center">
+Trung Bộ 15<br>
+<span lang="pi" class="pali">
+Majjhima Nikāya 15<br>
+</span>
+</p>
+
+<p lang="vi" class="vi"; style="text-align: center">
+Tiểu Kinh Khổ Uẩn<br>
+<span lang="pi" class="pali">
+Cūḷadukkhakkhandhasutta<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Như vầy tôi nghe:<br>
+<span lang="pi" class="pali">
+Evaṁ me sutaṁ—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Một thời, Tôn giả Mahāmoggallāna sống giữa những người thuộc dòng họ Bhagga, tại núi Sumsumaragira, rừng Bhesakala, vườn Lộc Uyển. Ở đây, Tôn giả Mahāmoggallāna (Ðại Mục-kiền-liên) gọi các Tỷ-kheo:<br>
+<span lang="pi" class="pali">
+ekaṁ samayaṁ āyasmā mahāmoggallāno bhaggesu viharati susumāragire bhesakaḷāvane migadāye. Tatra kho āyasmā mahāmoggallāno bhikkhū āmantesi:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Chư Hiền Tỷ-kheo!”<br>
+<span lang="pi" class="pali">
+“āvuso bhikkhavo”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Thưa Hiền giả” những Tỷ-kheo ấy vâng đáp Tôn giả Mahāmoggallāna. Tôn giả Mahāmoggallāna nói như sau:<br>
+<span lang="pi" class="pali">
+“Āvuso”ti kho te bhikkhū āyasmato mahāmoggallānassa paccassosuṁ. Āyasmā mahāmoggallāno etadavoca:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Chư Hiền, nếu Tỷ-kheo thỉnh nguyện: “Mong rằng chư Tôn giả nói với tôi, mong rằng tôi được chư Tôn giả nói!”<br>
+<span lang="pi" class="pali">
+“Pavāreti cepi, āvuso, bhikkhu: ‘vadantu maṁ āyasmanto, vacanīyomhi āyasmantehī’ti,<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Nhưng nếu vị ấy là một người khó nói, đầy đủ những tánh khiến người ấy trở thành khó nói, khó kham nhẫn, không cung kính đón nhận khi được giảng dạy thì các vị đồng phạm hạnh nghĩ rằng, Tỷ-kheo ấy không đáng nói đến, nghĩ rằng Tỷ-kheo ấy không đáng được giáo huấn, nghĩ rằng không nên đặt lòng tin vào người ấy.<br>
+<span lang="pi" class="pali">
+so ca hoti dubbaco, dovacassakaraṇehi dhammehi samannāgato, akkhamo appadakkhiṇaggāhī anusāsaniṁ, atha kho naṁ sabrahmacārī na ceva vattabbaṁ maññanti, na ca anusāsitabbaṁ maññanti, na ca tasmiṁ puggale vissāsaṁ āpajjitabbaṁ maññanti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Chư Hiền, thế nào là những tánh khiến người ấy trở thành khó nói?<br>
+<span lang="pi" class="pali">
+Katame cāvuso, dovacassakaraṇā dhammā?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Chư Hiền, ở đây, vị Tỷ-kheo có ác dục, bị ác dục chi phối; chư Hiền, Tỷ-kheo có ác dục, bị ác dục chi phối.<br>
+<span lang="pi" class="pali">
+Idhāvuso, bhikkhu pāpiccho hoti, pāpikānaṁ icchānaṁ vasaṁ gato. Yaṁpāvuso, bhikkhu pāpiccho hoti, pāpikānaṁ icchānaṁ vasaṁ gato—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+như vậy là một tánh khiến trở thành khó nói.<br>
+<span lang="pi" class="pali">
+ayampi dhammo dovacassakaraṇo.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Lại nữa, chư Hiền, Tỷ-kheo khen mình chê người; chư Hiền, Tỷ-kheo khen mình chê người.<br>
+<span lang="pi" class="pali">
+Puna caparaṁ, āvuso, bhikkhu attukkaṁsako hoti paravambhī. Yaṁpāvuso, bhikkhu attukkaṁsako hoti paravambhī—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+như vậy là một tánh khiến trở thành khó nói.<br>
+<span lang="pi" class="pali">
+ayampi dhammo dovacassakaraṇo.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Lại nữa, chư Hiền, Tỷ-kheo phẫn nộ, bị phẫn nộ chi phối; chư Hiền, Tỷ-kheo phẫn nộ, bị phẫn nộ chi phối.<br>
+<span lang="pi" class="pali">
+Puna caparaṁ, āvuso, bhikkhu kodhano hoti kodhābhibhūto. Yaṁpāvuso, bhikkhu kodhano hoti kodhābhibhūto—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+như vậy là một tánh khiến trở thành khó nói.<br>
+<span lang="pi" class="pali">
+ayampi dhammo dovacassakaraṇo.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Lại nữa, chư Hiền, Tỷ-kheo phẫn nộ, vì phẫn nộ làm nhân trở thành người có hiềm hận; chư Hiền, Tỷ-kheo phẫn nộ, vì phẫn nộ làm nhân trở thành người có hiềm hận.<br>
+<span lang="pi" class="pali">
+Puna caparaṁ, āvuso, bhikkhu kodhano hoti kodhahetu upanāhī. Yaṁpāvuso, bhikkhu kodhano hoti kodhahetu upanāhī—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+như vậy là một tánh khiến trở thành khó nói.<br>
+<span lang="pi" class="pali">
+ayampi dhammo dovacassakaraṇo.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Lại nữa, chư Hiền, Tỷ-kheo phẫn nộ, vì phẫn nộ làm nhân trở thành cố chấp; chư Hiền, Tỷ-kheo phẫn nộ, vì phẫn nộ làm nhân trở thành cố chấp.<br>
+<span lang="pi" class="pali">
+Puna caparaṁ, āvuso, bhikkhu kodhano hoti kodhahetu abhisaṅgī. Yaṁpāvuso, bhikkhu kodhano hoti kodhahetu abhisaṅgī—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+như vậy là một tánh khiến trở thành khó nói.<br>
+<span lang="pi" class="pali">
+ayampi dhammo dovacassakaraṇo.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Lại nữa, chư Hiền, Tỷ-kheo phẫn nộ, thốt ra những lời liên hệ đến phẫn nộ; chư Hiền, Tỷ-kheo phẫn nộ.<br>
+<span lang="pi" class="pali">
+Puna caparaṁ, āvuso, bhikkhu kodhano hoti kodhasāmantā vācaṁ nicchāretā. Yaṁpāvuso, bhikkhu kodhano hoti kodhasāmantā vācaṁ nicchāretā—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+như vậy là một tánh khiến trở thành khó nói.<br>
+<span lang="pi" class="pali">
+ayampi dhammo dovacassakaraṇo.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Lại nữa, chư Hiền, Tỷ-kheo bị buộc tội trở lại chống đối vị đã buộc tội mình; chư Hiền, Tỷ-kheo bị buộc tội.<br>
+<span lang="pi" class="pali">
+Puna caparaṁ, āvuso, bhikkhu codito codakena codakaṁ paṭippharati. Yaṁpāvuso, bhikkhu codito codakena codakaṁ paṭippharati—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+như vậy là một tánh khiến trở thành khó nói.<br>
+<span lang="pi" class="pali">
+ayampi dhammo dovacassakaraṇo.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Lại nữa, chư Hiền, Tỷ-kheo bị buộc tội trở lại chỉ trích vị đã buộc tội mình; chư Hiền, Tỷ-kheo bị buộc tội.<br>
+<span lang="pi" class="pali">
+Puna caparaṁ, āvuso, bhikkhu codito codakena codakaṁ apasādeti. Yaṁpāvuso, bhikkhu codito codakena codakaṁ apasādeti—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+như vậy là một tánh khiến trở thành khó nói.<br>
+<span lang="pi" class="pali">
+ayampi dhammo dovacassakaraṇo.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Lại nữa, chư Hiền, Tỷ-kheo bị buộc tội trở lại chất vấn vị đã buộc tội mình; chư Hiền, Tỷ-kheo bị buộc tội.<br>
+<span lang="pi" class="pali">
+Puna caparaṁ, āvuso, bhikkhu codito codakena codakassa paccāropeti. Yaṁpāvuso, bhikkhu codito codakena codakassa paccāropeti—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+như vậy là một tánh khiến trở thành khó nói.<br>
+<span lang="pi" class="pali">
+ayampi dhammo dovacassakaraṇo.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Lại nữa, chư Hiền, Tỷ-kheo bị buộc tội tránh né vấn đề với một vấn đề khác, trả lời ra ngoài vấn đề, để lộ phẫn nộ, sân hận và bất mãn của mình; chư Hiền, Tỷ-kheo bị buộc tội.<br>
+<span lang="pi" class="pali">
+Puna caparaṁ, āvuso, bhikkhu codito codakena aññenaññaṁ paṭicarati, bahiddhā kathaṁ apanāmeti, kopañca dosañca appaccayañca pātukaroti. Yaṁpāvuso, bhikkhu codito codakena aññenaññaṁ paṭicarati, bahiddhā kathaṁ apanāmeti, kopañca dosañca appaccayañca pātukaroti—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+như vậy là một tánh khiến trở thành khó nói.<br>
+<span lang="pi" class="pali">
+ayampi dhammo dovacassakaraṇo.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Lại nữa, chư Hiền, Tỷ-kheo bị buộc tội không giải thích thỏa mãn hành động của mình cho vị buộc tội; chư Hiền, Tỷ-kheo bị buộc tội.<br>
+<span lang="pi" class="pali">
+Puna caparaṁ, āvuso, bhikkhu codito codakena apadāne na sampāyati. Yaṁpāvuso, bhikkhu codito codakena apadāne na sampāyati—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+như vậy là một tánh khiến trở thành khó nói.<br>
+<span lang="pi" class="pali">
+ayampi dhammo dovacassakaraṇo.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Lại nữa, chư Hiền, Tỷ-kheo hư ngụy và não hại; chư Hiền, Tỷ-kheo hư ngụy và não hại.<br>
+<span lang="pi" class="pali">
+Puna caparaṁ, āvuso, bhikkhu makkhī hoti paḷāsī. Yaṁpāvuso, bhikkhu makkhī hoti paḷāsī—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+như vậy là một tánh khiến trở thành khó nói.<br>
+<span lang="pi" class="pali">
+ayampi dhammo dovacassakaraṇo.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Lại nữa, chư Hiền, Tỷ-kheo tật đố và xan tham; chư Hiền, Tỷ-kheo tật đố và xan tham.<br>
+<span lang="pi" class="pali">
+Puna caparaṁ, āvuso, bhikkhu issukī hoti maccharī. Yaṁpāvuso, bhikkhu issukī hoti maccharī—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+như vậy là một tánh khiến trở thành khó nói.<br>
+<span lang="pi" class="pali">
+ayampi dhammo dovacassakaraṇo.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Lại nữa, chư Hiền, Tỷ-kheo lừa đảo và lường gạt; chư Hiền, Tỷ-kheo lừa đảo và lường gạt.<br>
+<span lang="pi" class="pali">
+Puna caparaṁ, āvuso, bhikkhu saṭho hoti māyāvī. Yaṁpāvuso, bhikkhu saṭho hoti māyāvī—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+như vậy là một tánh khiến trở thành khó nói.<br>
+<span lang="pi" class="pali">
+ayampi dhammo dovacassakaraṇo.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Lại nữa, chư Hiền, Tỷ-kheo ngoan mê và quá mạn; chư Hiền, Tỷ-kheo ngoan mê và quá. mạn.Puna caparaṁ, āvuso, bhikkhu thaddho hoti atimānī.<br>
+<span lang="pi" class="pali">
+Yaṁpāvuso, bhikkhu thaddho hoti atimānī—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+như vậy là một tánh khiến trở thành khó nói.<br>
+<span lang="pi" class="pali">
+ayampi dhammo dovacassakaraṇo.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Lại nữa, chư Hiền, Tỷ-kheo chấp trước thế tục, cố chấp tư kiến, tánh khó hành xả; chư Hiền, Tỷ-kheo chấp trước thế tục, cố chấp tư kiến, tánh khó hành xả.<br>
+<span lang="pi" class="pali">
+Puna caparaṁ, āvuso, bhikkhu sandiṭṭhiparāmāsī hoti ādhānaggāhī duppaṭinissaggī. Yaṁpāvuso, bhikkhu sandiṭṭhiparāmāsī hoti ādhānaggāhī duppaṭinissaggī—<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+như vậy là một tánh trở thành khó nói.<br>
+<span lang="pi" class="pali">
+ayampi dhammo dovacassakaraṇo.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Chư Hiền, như vậy được gọi là những tánh khiến trở thành khó nói.<br>
+<span lang="pi" class="pali">
+Ime vuccantāvuso, dovacassakaraṇā dhammā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Chư Hiền, nếu Tỷ-kheo không thỉnh nguyện:<br>
+<span lang="pi" class="pali">
+No cepi, āvuso, bhikkhu pavāreti:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Mong rằng chư Tôn giả nói với tôi, mong rằng tôi được chư Tôn giả nói!”; Và nếu vị ấy là một người dễ nói, đầy đủ những đức tánh khiến người ấy trở thành dễ nói, kham nhẫn, cung kính đón nhận khi được nghe giảng dạy, thì các vị đồng phạm hạnh nghĩ rằng, Tỷ-kheo ấy đáng được nói đến, nghĩ rằng Tỷ-kheo ấy đáng được giáo huấn, nghĩ rằng nên đặt lòng tin vào người ấy.<br>
+<span lang="pi" class="pali">
+‘vadantu maṁ āyasmanto, vacanīyomhi āyasmantehī’ti, so ca hoti suvaco, sovacassakaraṇehi dhammehi samannāgato, khamo padakkhiṇaggāhī anusāsaniṁ, atha kho naṁ sabrahmacārī vattabbañceva maññanti, anusāsitabbañca maññanti, tasmiñca puggale vissāsaṁ āpajjitabbaṁ maññanti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Chư Hiền, thế nào là những đức tánh khiến người ấy trở thành dễ nói?<br>
+<span lang="pi" class="pali">
+Katame cāvuso, sovacassakaraṇā dhammā?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Chư Hiền, ở đây Tỷ-kheo không có ác dục, không bị ác dục chi phối; chư Hiền, Tỷ-kheo không có ác dục, không bị ác dục chi phối, như vậy là một đức tánh khiến trở thành dễ nói.<br>
+<span lang="pi" class="pali">
+Idhāvuso, bhikkhu na pāpiccho hoti, na pāpikānaṁ icchānaṁ vasaṁ gato. Yaṁpāvuso, bhikkhu na pāpiccho hoti na pāpikānaṁ icchānaṁ vasaṁ gato—ayampi dhammo sovacassakaraṇo.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Lại nữa, chư Hiền, Tỷ-kheo không khen mình chê người; chư Hiền, Tỷ-kheo không khen mình chê người… dễ nói.<br>
+<span lang="pi" class="pali">
+Puna caparaṁ, āvuso, bhikkhu anattukkaṁsako hoti aparavambhī. Yaṁpāvuso, bhikkhu anattukkaṁsako hoti aparavambhī—ayampi dhammo sovacassakaraṇo.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Lại nữa, chư Hiền, Tỷ-kheo không phẫn nộ, không bị phẫn nộ chi phối; chư Hiền, Tỷ-kheo không phẫn nộ … trở thành dễ nói.<br>
+<span lang="pi" class="pali">
+Puna caparaṁ, āvuso, bhikkhu na kodhano hoti na kodhābhibhūto. Yaṁpāvuso, bhikkhu na kodhano hoti na kodhābhibhūto—ayampi dhammo sovacassakaraṇo.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Lại nữa, chư Hiền, Tỷ-kheo không phẫn nộ, không vì phẫn nộ làm nhân trở thành người hiềm hận; chư Hiền, Tỷ-kheo không phẫn nộ … trở thành dễ nói.<br>
+<span lang="pi" class="pali">
+Puna caparaṁ, āvuso, bhikkhu na kodhano hoti na kodhahetu upanāhī. Yaṁpāvuso, bhikkhu na kodhano hoti na kodhahetu upanāhī—ayampi dhammo sovacassakaraṇo.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Lại nữa, chư Hiền, Tỷ-kheo không phẫn nộ, không bị phẫn nộ làm nhân trở thành cố chấp; chư Hiền, Tỷ-kheo không phẫn nộ … trở thành dễ nói.<br>
+<span lang="pi" class="pali">
+Puna caparaṁ, āvuso, bhikkhu na kodhano hoti na kodhahetu abhisaṅgī. Yaṁpāvuso, bhikkhu na kodhano hoti na kodhahetu abhisaṅgī—ayampi dhammo sovacassakaraṇo.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Lại nữa, chư Hiền, Tỷ-kheo không phẫn nộ, không vì phẫn nộ thốt ra những lời liên hệ đến phẫn nộ; chư Hiền, Tỷ-kheo không phẫn nộ … trở thành dễ nói.<br>
+<span lang="pi" class="pali">
+Puna caparaṁ, āvuso, bhikkhu na kodhano hoti na kodhasāmantā vācaṁ nicchāretā. Yaṁpāvuso, bhikkhu na kodhano hoti na kodhasāmantā vācaṁ nicchāretā—ayampi dhammo sovacassakaraṇo.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Lại nữa, chư Hiền, Tỷ-kheo bị buộc tội, không trở lại chống đối vị đã buộc tội mình; chư Hiền, Tỷ-kheo bị buộc tội … trở thành dễ nói.<br>
+<span lang="pi" class="pali">
+Puna caparaṁ, āvuso, bhikkhu codito codakena codakaṁ nappaṭippharati. Yaṁpāvuso, bhikkhu codito codakena codakaṁ nappaṭippharati—ayampi dhammo sovacassakaraṇo.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Lại nữa, chư Hiền, Tỷ-kheo bị buộc tội không trở lại chỉ trích vị đã khiển trách mình; chư Hiền, Tỷ-kheo bị buộc tội … trở thành dễ nói.<br>
+<span lang="pi" class="pali">
+Puna caparaṁ, āvuso, bhikkhu codito codakena codakaṁ na apasādeti. Yaṁpāvuso, bhikkhu codito codakena codakaṁ na apasādeti—ayampi dhammo sovacassakaraṇo.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Lại nữa, chư Hiền, Tỷ-kheo bị buộc tội không trở lại chất vấn vị đã buộc tội mình; chư Hiền, Tỷ-kheo bị buộc tội … trở thành dễ nói.<br>
+<span lang="pi" class="pali">
+Puna caparaṁ, āvuso, bhikkhu codito codakena codakassa na paccāropeti. Yaṁpāvuso, bhikkhu codito codakena codakassa na paccāropeti—ayampi dhammo sovacassakaraṇo.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Lại nữa, chư Hiền, Tỷ-kheo bị buộc tội, không tránh né vấn đề với một vấn đề khác, trả lời ra ngoài vấn đề, để lộ phẫn nộ, sân hận và bất mãn của mình, chư Hiền, Tỷ-kheo bị buộc tội … trở thành dễ nói.<br>
+<span lang="pi" class="pali">
+Puna caparaṁ, āvuso, bhikkhu codito codakena na aññenaññaṁ paṭicarati, na bahiddhā kathaṁ apanāmeti, na kopañca dosañca appaccayañca pātukaroti. Yaṁpāvuso, bhikkhu codito codakena na aññenaññaṁ paṭicarati, na bahiddhā kathaṁ apanāmeti, na kopañca dosañca appaccayañca pātukaroti—ayampi dhammo sovacassakaraṇo.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Lại nữa, chư Hiền, Tỷ-kheo bị buộc tội, giải thích thỏa mãn hành động của mình cho vị buộc tội, chư Hiền, Tỷ-kheo bị buộc tội… trở thành dễ nói.<br>
+<span lang="pi" class="pali">
+Puna caparaṁ, āvuso, bhikkhu codito codakena apadāne sampāyati. Yaṁpāvuso, bhikkhu codito codakena apadāne sampāyati—ayampi dhammo sovacassakaraṇo.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Lại nữa, chư Hiền, Tỷ-kheo không hư ngụy và não hại, chư Hiền, Tỷ-kheo không hư ngụy và não hại … trở thành dễ nói.<br>
+<span lang="pi" class="pali">
+Puna caparaṁ, āvuso, bhikkhu amakkhī hoti apaḷāsī. Yaṁpāvuso, bhikkhu amakkhī hoti apaḷāsī—ayampi dhammo sovacassakaraṇo.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Lại nữa, chư Hiền, Tỷ-kheo không tật đố và xan tham, chư Hiền, Tỷ-kheo không tật đố và xan tham … trở thành dễ nói.<br>
+<span lang="pi" class="pali">
+Puna caparaṁ, āvuso, bhikkhu anissukī hoti amaccharī. Yaṁpāvuso, bhikkhu anissukī hoti amaccharī—ayampi dhammo sovacassakaraṇo.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Lại nữa, chư Hiền, Tỷ-kheo không khi cuống và lường gạt. Chư Hiền, Tỷ-kheo không khi cuống và lường gạt … trở thành dễ nói.<br>
+<span lang="pi" class="pali">
+Puna caparaṁ, āvuso, bhikkhu asaṭho hoti amāyāvī. Yaṁpāvuso, bhikkhu asaṭho hoti amāyāvī— ayampi dhammo sovacassakaraṇo.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Lại nữa, chư Hiền, Tỷ-kheo không ngoan mê và quá mạn, chư Hiền, Tỷ-kheo không ngoan mê và quá mạn… trở thành dễ nói.<br>
+<span lang="pi" class="pali">
+Puna caparaṁ, āvuso, bhikkhu atthaddho hoti anatimānī. Yaṁpāvuso, bhikkhu atthaddho hoti anatimānī—ayampi dhammo sovacassakaraṇo.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Lại nữa, chư Hiền, Tỷ-kheo không chấp trước thế tục, cố chấp tư kiến, tánh dễ hành xả, chư Hiền, Tỷ-kheo không chấp trước thế tục, không cố chấp tư kiến, tánh dễ hành xả, như vậy là một đức tánh trở thành dễ nói.<br>
+<span lang="pi" class="pali">
+Puna caparaṁ, āvuso, bhikkhu asandiṭṭhiparāmāsī hoti anādhānaggāhī suppaṭinissaggī. Yaṁpāvuso, bhikkhu asandiṭṭhiparāmāsī hoti, anādhānaggāhī suppaṭinissaggī—ayampi dhammo sovacassakaraṇo.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Chư Hiền, như vậy được gọi là những đức tánh khiến trở thành dễ nói.<br>
+<span lang="pi" class="pali">
+Ime vuccantāvuso, sovacassakaraṇā dhammā.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Chư Hiền, ở đây Tỷ-kheo cần phải tư lượng tự ngã với tự ngã như sau:<br>
+<span lang="pi" class="pali">
+Tatrāvuso, bhikkhunā attanāva attānaṁ evaṁ anuminitabbaṁ:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+‘Người này có ác dục, bị ác dục chi phối nên ta không ưa người ấy, không thích người ấy.<br>
+<span lang="pi" class="pali">
+‘yo khvāyaṁ puggalo pāpiccho, pāpikānaṁ icchānaṁ vasaṁ gato, ayaṁ me puggalo appiyo amanāpo;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Và nếu ta có ác dục, bị ác dục chi phối, các người khác sẽ không ưa ta, không thích ta.<br>
+<span lang="pi" class="pali">
+ahañceva kho panassaṁ pāpiccho pāpikānaṁ icchānaṁ vasaṁ gato, ahampāssaṁ paresaṁ appiyo amanāpo’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Chư Hiền, Tỷ-kheo khi biết vậy cần phải phát tâm như sau: “Ta sẽ không có ác dục, sẽ không bị ác dục chi phối.”<br>
+<span lang="pi" class="pali">
+Evaṁ jānantenāvuso, bhikkhunā ‘na pāpiccho bhavissāmi, na pāpikānaṁ icchānaṁ vasaṁ gato’ti cittaṁ uppādetabbaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Người này khen mình chê người, nên ta không ưa người ấy, không thích người ấy. Và nếu ta khen mình chê người, các người khác sẽ không ưa ta, sẽ không thích ta”.<br>
+<span lang="pi" class="pali">
+‘Yo khvāyaṁ puggalo attukkaṁsako paravambhī, ayaṁ me puggalo appiyo amanāpo; ahañceva kho panassaṁ attukkaṁsako paravambhī, ahampāssaṁ paresaṁ appiyo amanāpo’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Chư Hiền, Tỷ-kheo khi biết vậy, cần phải phát tâm như sau: “Ta sẽ không khen mình chê người.”<br>
+<span lang="pi" class="pali">
+Evaṁ jānantenāvuso, bhikkhunā ‘anattukkaṁsako bhavissāmi aparavambhī’ti cittaṁ uppādetabbaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Người này có phẫn nộ, bị phẫn nộ chi phối, nên ta không ưa người ấy … Ta sẽ không phẫn nộ, không bị phẫn nộ chi phối”<br>
+<span lang="pi" class="pali">
+‘Yo khvāyaṁ puggalo kodhano kodhābhibhūto, ayaṁ me puggalo appiyo amanāpo. Ahañceva kho panassaṁ kodhano kodhābhibhūto, ahampāssaṁ paresaṁ appiyo amanāpo’ti. Evaṁ jānantenāvuso, bhikkhunā ‘na kodhano bhavissāmi na kodhābhibhūto’ti cittaṁ uppādetabbaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Người này phẫn nộ, vì phẫn nộ làm nhân trở thành người hiềm hận nên ta không ưa người ấy … Ta sẽ không phẫn nộ, không vì phẫn nộ làm nhân trở thành người hiềm hận”.<br>
+<span lang="pi" class="pali">
+‘Yo khvāyaṁ puggalo kodhano kodhahetu upanāhī, ayaṁ me puggalo appiyo amanāpo; ahañceva kho panassaṁ kodhano kodhahetu upanāhī, ahampāssaṁ paresaṁ appiyo amanāpo’ti. Evaṁ jānantenāvuso, bhikkhunā ‘na kodhano bhavissāmi na kodhahetu upanāhī’ti cittaṁ uppādetabbaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Người này phẫn nộ, vì phẫn nộ làm nhân trở thành cố chấp nên ta không ưa người ấy … Ta sẽ không phẫn nộ, không vì phẫn nộ làm nhân trở thành cố chấp”.<br>
+<span lang="pi" class="pali">
+‘Yo khvāyaṁ puggalo kodhano kodhahetu abhisaṅgī, ayaṁ me puggalo appiyo amanāpo; ahañceva kho panassaṁ kodhano kodhahetu abhisaṅgī, ahampāssaṁ paresaṁ appiyo amanāpo’ti. Evaṁ jānantenāvuso, bhikkhunā ‘na kodhano bhavissāmi na kodhahetu abhisaṅgī’ti cittaṁ uppādetabbaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Người này phẫn nộ, thốt ra những lời liên hệ đến phẫn nộ nên Ta không ưa người ấy … Ta sẽ không phẫn nộ, không thốt ra những lời liên hệ đến phẫn nộ”.<br>
+<span lang="pi" class="pali">
+‘Yo khvāyaṁ puggalo kodhano kodhasāmantā vācaṁ nicchāretā, ayaṁ me puggalo appiyo amanāpo; ahañceva kho panassaṁ kodhano kodhasāmantā vācaṁ nicchāretā, ahampāssaṁ paresaṁ appiyo amanāpo’ti. Evaṁ jānantenāvuso, bhikkhunā ‘na kodhano bhavissāmi na kodhasāmantā vācaṁ nicchāressāmī’ti cittaṁ uppādetabbaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Người này bị buộc tội, trở lại chống đối vị đã buộc tội mình, nên Ta không ưa người ấy … Ta có bị buộc tội, sẽ không trở lại chống đối vị buộc tội mình”.<br>
+<span lang="pi" class="pali">
+‘Yo khvāyaṁ puggalo codito codakena codakaṁ paṭippharati, ayaṁ me puggalo appiyo amanāpo; ahañceva kho pana codito codakena codakaṁ paṭipphareyyaṁ, ahampāssaṁ paresaṁ appiyo amanāpo’ti. Evaṁ jānantenāvuso, bhikkhunā ‘codito codakena codakaṁ nappaṭippharissāmī’ti cittaṁ uppādetabbaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Người này bị buộc tội trở lại chỉ trích vị đã khiển trách mình, nên Ta không ưa người ấy … Ta có bị buộc tội, sẽ không trở lại chỉ trích vị buộc tội mình”.<br>
+<span lang="pi" class="pali">
+‘Yo khvāyaṁ puggalo codito codakena codakaṁ apasādeti, ayaṁ me puggalo appiyo amanāpo; ahañceva kho pana codito codakena codakaṁ apasādeyyaṁ, ahampāssaṁ paresaṁ appiyo amanāpo’ti. Evaṁ jānantenāvuso, bhikkhunā ‘codito codakena codakaṁ na apasādessāmī’ti cittaṁ uppādetabbaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Người này bị buộc tội, trở lại chất vấn vị đã buộc tội mình, nên ta không ưa người ấy … Ta có bị buộc tội, sẽ không trở lại chất vấn vị đã buộc tội mình”.<br>
+<span lang="pi" class="pali">
+‘Yo khvāyaṁ puggalo codito codakena codakassa paccāropeti, ayaṁ me puggalo appiyo amanāpo; ahañceva kho pana codito codakena codakassa paccāropeyyaṁ, ahampāssaṁ paresaṁ appiyo amanāpo’ti. Evaṁ jānantenāvuso, bhikkhunā ‘codito codakena codakassa na paccāropessāmī’ti cittaṁ uppādetabbaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Người này bị buộc tội, tránh né vấn đề với một vấn đề khác, trả lời ra ngoài vấn đề, để lộ phẫn nộ, sân hận, bất mãn của mình, nên ta không ưa người ấy … Ta bị buộc tội sẽ không tránh né vấn đề với một vấn đề khác, không trả lời ra ngoài vấn đề, và không để lộ phẫn nộ, sân hận bất mãn của mình”.<br>
+<span lang="pi" class="pali">
+‘Yo khvāyaṁ puggalo codito codakena aññenaññaṁ paṭicarati, bahiddhā kathaṁ apanāmeti, kopañca dosañca appaccayañca pātukaroti, ayaṁ me puggalo appiyo amanāpo; ahañceva kho pana codito codakena aññenaññaṁ paṭicareyyaṁ, bahiddhā kathaṁ apanāmeyyaṁ, kopañca dosañca appaccayañca pātukareyyaṁ, ahampāssaṁ paresaṁ appiyo amanāpo’ti. Evaṁ jānantenāvuso, bhikkhunā ‘codito codakena na aññenaññaṁ paṭicarissāmi, na bahiddhā kathaṁ apanāmessāmi, na kopañca dosañca appaccayañca pātukarissāmī’ti cittaṁ uppādetabbaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Người này bị buộc tội, không giải thích thỏa mãn hành động của mình cho vị buộc tội biết nên ta không ưa người ấy … Ta bị buộc tội, sẽ giải thích thỏa mãn hành động của mình cho vị buộc tội biết”.<br>
+<span lang="pi" class="pali">
+‘Yo khvāyaṁ puggalo codito codakena apadāne na sampāyati, ayaṁ me puggalo appiyo amanāpo; ahañceva kho pana codito codakena apadāne na sampāyeyyaṁ, ahampāssaṁ paresaṁ appiyo amanāpo’ti. Evaṁ jānantenāvuso, bhikkhunā ‘codito codakena apadāne sampāyissāmī’ti cittaṁ uppādetabbaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Người này hư ngụy và não hại nên Ta không ưa người ấy … Ta sẽ không hư ngụy và não hại”.<br>
+<span lang="pi" class="pali">
+‘Yo khvāyaṁ puggalo makkhī paḷāsī, ayaṁ me puggalo appiyo amanāpo; ahañceva kho panassaṁ makkhī paḷāsī, ahampāssaṁ paresaṁ appiyo amanāpo’ti. Evaṁ jānantenāvuso, bhikkhunā ‘amakkhī bhavissāmi apaḷāsī’ti cittaṁ uppādetabbaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Người này tật đố và xan tham nên ta không ưa người ấy … Ta sẽ không tật đố và xan tham”.<br>
+<span lang="pi" class="pali">
+‘Yo khvāyaṁ puggalo issukī maccharī, ayaṁ me puggalo appiyo amanāpo; ahañceva kho panassaṁ issukī maccharī, ahampāssaṁ paresaṁ appiyo amanāpo’ti. Evaṁ jānantenāvuso, bhikkhunā ‘anissukī bhavissāmi amaccharī’ti cittaṁ uppādetabbaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Người này khi cuống và lường gạt nên ta không ưa người ấy … Ta sẽ không khi cuống và lường gạt”.<br>
+<span lang="pi" class="pali">
+‘Yo khvāyaṁ puggalo saṭho māyāvī, ayaṁ me puggalo appiyo amanāpo; ahañceva kho panassaṁ saṭho māyāvī, ahampāssaṁ paresaṁ appiyo amanāpo’ti. Evaṁ jānantenāvuso, bhikkhunā ‘asaṭho bhavissāmi amāyāvī’ti cittaṁ uppādetabbaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Người này ngoan mê và quá mạn nên ta không ưa người ấy … Ta sẽ không ngoan mê và quá mạn”.<br>
+<span lang="pi" class="pali">
+‘Yo khvāyaṁ puggalo thaddho atimānī, ayaṁ me puggalo appiyo amanāpo; ahañceva kho panassaṁ thaddho atimānī, ahampāssaṁ paresaṁ appiyo amanāpo’ti. Evaṁ jānantenāvuso, bhikkhunā ‘atthaddho bhavissāmi anatimānī’ti cittaṁ uppādetabbaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Người này chấp trước thế tục, cố chấp tư kiến, tánh khó hành xả nên ta không ưa người ấy, không thích người ấy.<br>
+<span lang="pi" class="pali">
+‘Yo khvāyaṁ puggalo sandiṭṭhiparāmāsī ādhānaggāhī duppaṭinissaggī, ayaṁ me puggalo appiyo amanāpo;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Và nếu ta chấp trước thế tục, cố chấp tư kiến, tánh khó hành xả, các người khác sẽ không ưa ta, không thích ta”.<br>
+<span lang="pi" class="pali">
+ahañceva kho panassaṁ sandiṭṭhiparāmāsī ādhānaggāhī duppaṭinissaggī, ahampāssaṁ paresaṁ appiyo amanāpo’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Chư Hiền, Tỷ-kheo khi biết vậy, cần phải phát tâm như sau: “Ta sẽ không chấp trước thế tục, không cố chấp tư kiến, tánh dễ hành xả”.<br>
+<span lang="pi" class="pali">
+Evaṁ jānantenāvuso, bhikkhunā ‘asandiṭṭhiparāmāsī bhavissāmi anādhānaggāhī suppaṭinissaggī’ti cittaṁ uppādetabbaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Chư Hiền, ở đây, Tỷ-kheo cần phải quán sát tự ngã với tự ngã như sau:<br>
+<span lang="pi" class="pali">
+Tatrāvuso, bhikkhunā attanāva attānaṁ evaṁ paccavekkhitabbaṁ:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Không biết ta có ác dục, có bị ác dục chi phối không?”<br>
+<span lang="pi" class="pali">
+‘kiṁ nu khomhi pāpiccho, pāpikānaṁ icchānaṁ vasaṁ gato’ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Chư Hiền, nếu Tỷ-kheo quán sát và biết rằng:<br>
+<span lang="pi" class="pali">
+Sace, āvuso, bhikkhu paccavekkhamāno evaṁ jānāti:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Ta có ác dục và bị ác dục chi phối”, thì chư Hiền, Tỷ-kheo ấy cần phải tinh tấn đoạn trừ các ác, bất thiện pháp ấy.<br>
+<span lang="pi" class="pali">
+‘pāpiccho khomhi, pāpikānaṁ icchānaṁ vasaṁ gato’ti, tenāvuso, bhikkhunā tesaṁyeva pāpakānaṁ akusalānaṁ dhammānaṁ pahānāya vāyamitabbaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Chư Hiền, nếu Tỷ-kheo quán sát và biết rằng:<br>
+<span lang="pi" class="pali">
+Sace panāvuso, bhikkhu paccavekkhamāno evaṁ jānāti:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Ta không có ác dục, không bị ác dục chi phối”, thì chư Hiền, Tỷ-kheo ấy phải sống với tâm niệm hoan hỷ, ngày đêm tu học các thiện pháp.<br>
+<span lang="pi" class="pali">
+‘na khomhi pāpiccho, na pāpikānaṁ icchānaṁ vasaṁ gato’ti, tenāvuso, bhikkhunā teneva pītipāmojjena vihātabbaṁ ahorattānusikkhinā kusalesu dhammesu.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Lại nữa, chư Hiền, Tỷ-kheo phải quán sát tự ngã với tự ngã như sau: “Không biết ta có khen mình chê người hay không? … Ta không khen mình chê người … các thiện pháp.<br>
+<span lang="pi" class="pali">
+Puna caparaṁ, āvuso, bhikkhunā attanāva attānaṁ evaṁ paccavekkhitabbaṁ: ‘kiṁ nu khomhi attukkaṁsako paravambhī’ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+<span lang="pi" class="pali">
+Sace, āvuso, bhikkhu paccavekkhamāno evaṁ jānāti: ‘attukkaṁsako khomhi paravambhī’ti, tenāvuso, bhikkhunā tesaṁyeva pāpakānaṁ akusalānaṁ dhammānaṁ pahānāya vāyamitabbaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+<span lang="pi" class="pali">
+Sace panāvuso, bhikkhu paccavekkhamāno evaṁ jānāti: ‘anattukkaṁsako khomhi aparavambhī’ti, tenāvuso, bhikkhunā teneva pītipāmojjena vihātabbaṁ ahorattānusikkhinā kusalesu dhammesu.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Lại nữa… không biết ta có phẫn nộ, bị phẫn nộ chi phối không? … Ta không có phẫn nộ, không bị phẫn nộ chi phối … các thiện pháp.<br>
+<span lang="pi" class="pali">
+Puna caparaṁ, āvuso, bhikkhunā attanāva attānaṁ evaṁ paccavekkhitabbaṁ: ‘kiṁ nu khomhi kodhano kodhābhibhūto’ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+<span lang="pi" class="pali">
+Sace, āvuso, bhikkhu paccavekkhamāno evaṁ jānāti: ‘kodhano khomhi kodhābhibhūto’ti, tenāvuso, bhikkhunā tesaṁyeva pāpakānaṁ akusalānaṁ dhammānaṁ pahānāya vāyamitabbaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+<span lang="pi" class="pali">
+Sace panāvuso, bhikkhu paccavekkhamāno evaṁ jānāti: ‘na khomhi kodhano kodhābhibhūto’ti, tenāvuso, bhikkhunā teneva pītipāmojjena vihātabbaṁ ahorattānusikkhinā kusalesu dhammesu.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Lại nữa… không biết ta có phẫn nộ, vì phẫn nộ làm nhân, trở thành có hiềm hận không?… Ta không có phẫn nộ, không vì phẫn nộ làm nhân, trở thành người hiềm hận… các thiện pháp.<br>
+<span lang="pi" class="pali">
+Puna caparaṁ, āvuso, bhikkhunā attanāva attānaṁ evaṁ paccavekkhitabbaṁ: ‘kiṁ nu khomhi kodhano kodhahetu upanāhī’ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+<span lang="pi" class="pali">
+Sace, āvuso, bhikkhu paccavekkhamāno evaṁ jānāti ‘kodhano khomhi kodhahetu upanāhī’ti, tenāvuso, bhikkhunā tesaṁyeva pāpakānaṁ akusalānaṁ dhammānaṁ pahānāya vāyamitabbaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+<span lang="pi" class="pali">
+Sace panāvuso, bhikkhu paccavekkhamāno evaṁ jānāti ‘na khomhi kodhano kodhahetu upanāhī’ti, tenāvuso, bhikkhunā teneva pītipāmojjena vihātabbaṁ ahorattānusikkhinā kusalesu dhammesu.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Lại nữa … không biết ta có phẫn nộ, vì phẫn nộ làm nhân, trở thành người cố chấp? … Ta không có phẫn nộ, không vì phẫn nộ làm nhân, trở thành người cố chấp … các thiện pháp.<br>
+<span lang="pi" class="pali">
+Puna caparaṁ, āvuso, bhikkhunā attanāva attānaṁ evaṁ paccavekkhitabbaṁ: ‘kiṁ nu khomhi kodhano kodhahetu abhisaṅgī’ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+<span lang="pi" class="pali">
+Sace, āvuso, bhikkhu paccavekkhamāno evaṁ jānāti: ‘kodhano khomhi kodhahetu abhisaṅgī’ti, tenāvuso, bhikkhunā tesaṁyeva pāpakānaṁ akusalānaṁ dhammānaṁ pahānāya vāyamitabbaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+<span lang="pi" class="pali">
+Sace panāvuso, bhikkhu paccavekkhamāno evaṁ jānāti: ‘na khomhi kodhano kodhahetu abhisaṅgī’ti, tenāvuso, bhikkhunā teneva pītipāmojjena vihātabbaṁ ahorattānusikkhinā kusalesu dhammesu.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Lại nữa, … không biết ta có phẫn nộ, thốt ra những lời liên hệ đến phẫn nộ? … Ta không có phẫn nộ, không thốt ra những lời liên hệ đến phẫn nộ … các thiện pháp.<br>
+<span lang="pi" class="pali">
+Puna caparaṁ, āvuso, bhikkhunā attanāva attānaṁ evaṁ paccavekkhitabbaṁ: ‘kiṁ nu khomhi kodhano kodhasāmantā vācaṁ nicchāretā’ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+<span lang="pi" class="pali">
+Sace, āvuso, bhikkhu paccavekkhamāno evaṁ jānāti: ‘kodhano khomhi kodhasāmantā vācaṁ nicchāretā’ti, tenāvuso, bhikkhunā tesaṁyeva pāpakānaṁ akusalānaṁ dhammānaṁ pahānāya vāyamitabbaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+<span lang="pi" class="pali">
+Sace panāvuso, bhikkhu paccavekkhamāno evaṁ jānāti: ‘na khomhi kodhano kodhasāmantā vācaṁ nicchāretā’ti, tenāvuso, bhikkhunā teneva pītipāmojjena vihātabbaṁ ahorattānusikkhinā kusalesu dhammesu.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Lại nữa… Ta bị buộc tội, không biết ta có trở lại chống đối vị đã buộc tội ta…? Ta bị buộc tội, ta không trở lại chống vị đã buộc tội ta… các thiện pháp.<br>
+<span lang="pi" class="pali">
+Puna caparaṁ, āvuso, bhikkhunā attanāva attānaṁ evaṁ paccavekkhitabbaṁ: ‘kiṁ nu khomhi codito codakena codakaṁ paṭippharāmī’ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+<span lang="pi" class="pali">
+Sace, āvuso, bhikkhu paccavekkhamāno evaṁ jānāti ‘codito khomhi codakena codakaṁ paṭippharāmī’ti, tenāvuso, bhikkhunā tesaṁyeva pāpakānaṁ akusalānaṁ dhammānaṁ pahānāya vāyamitabbaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+<span lang="pi" class="pali">
+Sace panāvuso, bhikkhu paccavekkhamāno evaṁ jānāti: ‘codito khomhi codakena codakaṁ nappaṭippharāmī’ti, tenāvuso, bhikkhunā teneva pītipāmojjena vihātabbaṁ ahorattānusikkhinā kusalesu dhammesu.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Lại nữa… Ta bị buộc tội, không biết ta có trở lại chỉ trích vị đã buộc tội ta…? Ta bị buộc tội, ta không trở lại chỉ trích vị đã buộc tội ta … các thiện pháp.<br>
+<span lang="pi" class="pali">
+Puna caparaṁ, āvuso, bhikkhunā attanāva attānaṁ evaṁ paccavekkhitabbaṁ: ‘kiṁ nu khomhi codito codakena codakaṁ apasādemī’ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+<span lang="pi" class="pali">
+Sace, āvuso, bhikkhu paccavekkhamāno evaṁ jānāti ‘codito khomhi codakena codakaṁ apasādemī’ti, tenāvuso, bhikkhunā tesaṁyeva pāpakānaṁ akusalānaṁ dhammānaṁ pahānāya vāyamitabbaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+<span lang="pi" class="pali">
+Sace panāvuso, bhikkhu paccavekkhamāno evaṁ jānāti: ‘codito khomhi codakena codakaṁ na apasādemī’ti, tenāvuso, bhikkhunā teneva pītipāmojjena vihātabbaṁ ahorattānusikkhinā kusalesu dhammesu.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Lại nữa… Ta bị buộc tội, không biết ta có trở lại chất vấn vị đã buộc tội ta?… Ta bị buộc tội, ta không trở lại chất vấn vị đã buộc tội ta … các thiện pháp.<br>
+<span lang="pi" class="pali">
+Puna caparaṁ, āvuso, bhikkhunā attanāva attānaṁ evaṁ paccavekkhitabbaṁ: ‘kiṁ nu khomhi codito codakena codakassa paccāropemī’ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+<span lang="pi" class="pali">
+Sace, āvuso, bhikkhu paccavekkhamāno evaṁ jānāti: ‘codito khomhi codakena codakassa paccāropemī’ti, tenāvuso, bhikkhunā tesaṁyeva pāpakānaṁ akusalānaṁ dhammānaṁ pahānāya vāyamitabbaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+<span lang="pi" class="pali">
+Sace panāvuso, bhikkhu paccavekkhamāno evaṁ jānāti: ‘codito khomhi codakena codakassa na paccāropemī’ti, tenāvuso, bhikkhunā teneva pītipāmojjena vihātabbaṁ ahorattānusikkhinā kusalesu dhammesu.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Lại nữa … Ta bị buộc tội, không biết ta có tránh né vấn đề với một vấn đề khác, trả lời ra ngoài vấn đề, để lộ phẫn nộ, sân hận, bất mãn của ta? … Ta bị buộc tội, ta không tránh né vấn đề với một vấn đề khác, không trả lời ngoài vấn đề, và ta không để lộ sự phẫn nộ, sân hận và bất mãn của ta … các thiện pháp.<br>
+<span lang="pi" class="pali">
+Puna caparaṁ, āvuso, bhikkhunā attanāva attānaṁ evaṁ paccavekkhitabbaṁ: ‘kiṁ nu khomhi codito codakena aññenaññaṁ paṭicarāmi, bahiddhā kathaṁ apanāmemi, kopañca dosañca appaccayañca pātukaromī’ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+<span lang="pi" class="pali">
+Sace, āvuso, bhikkhu paccavekkhamāno evaṁ jānāti: ‘codito khomhi codakena aññenaññaṁ paṭicarāmi, bahiddhā kathaṁ apanāmemi, kopañca dosañca appaccayañca pātukaromī’ti, tenāvuso, bhikkhunā tesaṁyeva pāpakānaṁ akusalānaṁ dhammānaṁ pahānāya vāyamitabbaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+<span lang="pi" class="pali">
+Sace panāvuso, bhikkhu paccavekkhamāno evaṁ jānāti: ‘codito khomhi codakena na aññenaññaṁ paṭicarāmi, na bahiddhā kathaṁ apanāmemi, na kopañca dosañca appaccayañca pātukaromī’ti, tenāvuso, bhikkhunā teneva pītipāmojjena vihātabbaṁ ahorattānusikkhinā kusalesu dhammesu.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Lại nữa… Ta bị buộc tội, không biết ta có giải thích thỏa mãn hành động của ta cho vị buộc tội biết?… Ta bị buộc tội, Ta có giải thích thỏa mãn hành động của ta cho vị buộc tội biết… các thiện pháp.<br>
+<span lang="pi" class="pali">
+Puna caparaṁ, āvuso, bhikkhunā attanāva attānaṁ evaṁ paccavekkhitabbaṁ: ‘kiṁ nu khomhi codito codakena apadāne na sampāyāmī’ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+<span lang="pi" class="pali">
+Sace, āvuso, bhikkhu paccavekkhamāno evaṁ jānāti: ‘codito khomhi codakena apadāne na sampāyāmī’ti, tenāvuso, bhikkhunā tesaṁyeva pāpakānaṁ akusalānaṁ dhammānaṁ pahānāya vāyamitabbaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+<span lang="pi" class="pali">
+Sace panāvuso, bhikkhu paccavekkhamāno evaṁ jānāti: ‘codito khomhi codakena apadāne sampāyāmī’ti, tenāvuso, bhikkhunā teneva pītipāmojjena vihātabbaṁ ahorattānusikkhinā kusalesu dhammesu.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Lại nữa, không biết ta có hư ngụy và não hại? … Ta không có hư ngụy và não hại … các thiện pháp.<br>
+<span lang="pi" class="pali">
+Puna caparaṁ, āvuso, bhikkhunā attanāva attānaṁ evaṁ paccavekkhitabbaṁ: ‘kiṁ nu khomhi makkhī paḷāsī’ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+<span lang="pi" class="pali">
+Sace, āvuso, bhikkhu paccavekkhamāno evaṁ jānāti: ‘makkhī khomhi paḷāsī’ti, tenāvuso, bhikkhunā tesaṁyeva pāpakānaṁ akusalānaṁ dhammānaṁ pahānāya vāyamitabbaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+<span lang="pi" class="pali">
+Sace panāvuso, bhikkhu paccavekkhamāno evaṁ jānāti: ‘amakkhī khomhi apaḷāsī’ti, tenāvuso, bhikkhunā teneva pītipāmojjena vihātabbaṁ ahorattānusikkhinā kusalesu dhammesu.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Lại nữa, không biết ta có tật đố và xan tham?… Ta không có tật đố và xan tham… các thiện pháp.<br>
+<span lang="pi" class="pali">
+Puna caparaṁ, āvuso, bhikkhunā attanāva attānaṁ evaṁ paccavekkhitabbaṁ: ‘kiṁ nu khomhi issukī maccharī’ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+<span lang="pi" class="pali">
+Sace, āvuso, bhikkhu paccavekkhamāno evaṁ jānāti: ‘issukī khomhi maccharī’ti, tenāvuso, bhikkhunā tesaṁyeva pāpakānaṁ akusalānaṁ dhammānaṁ pahānāya vāyamitabbaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+<span lang="pi" class="pali">
+Sace panāvuso, bhikkhu paccavekkhamāno evaṁ jānāti: ‘anissukī khomhi amaccharī’ti, tenāvuso, bhikkhunā teneva pītipāmojjena vihātabbaṁ ahorattānusikkhinā kusalesu dhammesu.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Lại nữa, không biết ta có khi cuống và lường gạt?… Ta không có khi cuống và lường gạt… các thiện pháp.<br>
+<span lang="pi" class="pali">
+Puna caparaṁ, āvuso, bhikkhunā attanāva attānaṁ evaṁ paccavekkhitabbaṁ: ‘kiṁ nu khomhi saṭho māyāvī’ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+<span lang="pi" class="pali">
+Sace, āvuso, bhikkhu paccavekkhamāno evaṁ jānāti: ‘saṭho khomhi māyāvī’ti, tenāvuso, bhikkhunā tesaṁyeva pāpakānaṁ akusalānaṁ dhammānaṁ pahānāya vāyamitabbaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+<span lang="pi" class="pali">
+Sace panāvuso, bhikkhu paccavekkhamāno evaṁ jānāti: ‘asaṭho khomhi amāyāvī’ti, tenāvuso, bhikkhunā teneva pītipāmojjena vihātabbaṁ ahorattānusikkhinā kusalesu dhammesu.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Lại nữa… không biết ta có ngoan mê và quá mạn?… Ta không có ngoan mê và quá mạn… các thiện pháp”.<br>
+<span lang="pi" class="pali">
+Puna caparaṁ, āvuso, bhikkhunā attanāva attānaṁ evaṁ paccavekkhitabbaṁ: ‘kiṁ nu khomhi thaddho atimānī’ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+<span lang="pi" class="pali">
+Sace, āvuso, bhikkhu paccavekkhamāno evaṁ jānāti: ‘thaddho khomhi atimānī’ti, tenāvuso, bhikkhunā tesaṁyeva pāpakānaṁ akusalānaṁ dhammānaṁ pahānāya vāyamitabbaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+<span lang="pi" class="pali">
+Sace panāvuso, bhikkhu paccavekkhamāno evaṁ jānāti: ‘atthaddho khomhi anatimānī’ti, tenāvuso, bhikkhunā teneva pītipāmojjena vihātabbaṁ ahorattānusikkhinā kusalesu dhammesu.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Lại nữa, chư Hiền, ở đây Tỷ-kheo cần phải quán sát tự ngã như sau: “Không biết ta có chấp trước thế tục, cố chấp tư kiến, tánh khó hành xả không?”<br>
+<span lang="pi" class="pali">
+Puna caparaṁ, āvuso, bhikkhunā attanāva attānaṁ evaṁ paccavekkhitabbaṁ: ‘kiṁ nu khomhi sandiṭṭhiparāmāsī ādhānaggāhī duppaṭinissaggī’ti?<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Chư Hiền, nếu Tỷ-kheo quán sát và biết rằng:<br>
+<span lang="pi" class="pali">
+Sace, āvuso, bhikkhu paccavekkhamāno evaṁ jānāti:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Ta có chấp trước thế tục, cố chấp tư kiến, tánh khó hành xả”, thì chư Hiền, Tỷ-kheo ấy cần phải tinh tấn đoạn trừ những ác, bất thiện pháp ấy.<br>
+<span lang="pi" class="pali">
+‘sandiṭṭhiparāmāsī khomhi ādhānaggāhī duppaṭinissaggī’ti, tenāvuso, bhikkhunā tesaṁyeva pāpakānaṁ akusalānaṁ dhammānaṁ pahānāya vāyamitabbaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Chư Hiền, nếu Tỷ-kheo quán sát và biết rằng:<br>
+<span lang="pi" class="pali">
+Sace panāvuso, bhikkhu paccavekkhamāno evaṁ jānāti:<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+“Ta không chấp trước thế tục, không cố chấp tư kiến, tánh dễ hành xả”, thì chư Hiền, Tỷ-kheo ấy phải sống với tâm niệm hoan hỷ, ngày đêm tu học thiện pháp.<br>
+<span lang="pi" class="pali">
+‘asandiṭṭhiparāmāsī khomhi anādhānaggāhī suppaṭinissaggī’ti, tenāvuso, bhikkhunā teneva pītipāmojjena vihātabbaṁ ahorattānusikkhinā kusalesu dhammesu.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Chư Hiền, nếu trong khi quán sát, Tỷ-kheo thấy rõ rằng tất cả các ác, bất thiện pháp chưa được đoạn trừ trong nội tâm, thì chư Hiền, Tỷ-kheo ấy cần phải tinh tấn đoạn trừ các ác, bất thiện pháp ấy.<br>
+<span lang="pi" class="pali">
+Sace, āvuso, bhikkhu paccavekkhamāno sabbepime pāpake akusale dhamme appahīne attani samanupassati, tenāvuso, bhikkhunā sabbesaṁyeva imesaṁ pāpakānaṁ akusalānaṁ dhammānaṁ pahānāya vāyamitabbaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Chư Hiền, nếu Tỷ-kheo trong khi quán sát thấy rõ rằng tất cả các ác, bất thiện pháp đã được đoạn trừ trong nội tâm, thì chư Hiền, Tỷ-kheo ấy phải sống với tâm niệm hoan hỷ, ngày đêm tu học thiện pháp.<br>
+<span lang="pi" class="pali">
+Sace panāvuso, bhikkhu paccavekkhamāno sabbepime pāpake akusale dhamme pahīne attani samanupassati, tenāvuso, bhikkhunā teneva pītipāmojjena vihātabbaṁ, ahorattānusikkhinā kusalesu dhammesu.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Chư Hiền, ví như một phụ nữ hay một đàn ông trẻ tuổi, trong tuổi thanh xuân, tánh ưa trang điểm, tự quán sát mặt mày của mình trong một tấm kính sạch sẽ và trong suốt, hay trong một bát nước trong sáng. Nếu người ấy thấy bụi bặm hay cấu uế trên mặt mình, thì người ấy tinh tấn đoạn trừ bụi bặm hay cấu uế ấy.<br>
+<span lang="pi" class="pali">
+Seyyathāpi, āvuso, itthī vā puriso vā, daharo yuvā maṇḍanajātiko, ādāse vā parisuddhe pariyodāte, acche vā udakapatte, sakaṁ mukhanimittaṁ paccavekkhamāno, sace tattha passati rajaṁ vā aṅgaṇaṁ vā, tasseva rajassa vā aṅgaṇassa vā pahānāya vāyamati;<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Nếu người ấy không thấy bụi bặm hay cấu uế trên mặt mình, thì người ấy sẽ hoan hỷ nghĩ rằng: “Thật sự ta được điều tốt đẹp; thật sự ta được thanh tịnh”.<br>
+<span lang="pi" class="pali">
+no ce tattha passati rajaṁ vā aṅgaṇaṁ vā, teneva attamano hoti: ‘lābhā vata me, parisuddhaṁ vata me’ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Cũng vậy chư Hiền, nếu trong khi quán sát, Tỷ-kheo thấy rõ rằng tất cả các ác, bất thiện pháp chưa đoạn trừ ở nội tâm, thì chư Hiền, Tỷ-kheo ấy cần phải tinh tấn đoạn trừ các ác, bất thiện pháp ấy.<br>
+<span lang="pi" class="pali">
+Evameva kho, āvuso, sace bhikkhu paccavekkhamāno sabbepime pāpake akusale dhamme appahīne attani samanupassati, tenāvuso, bhikkhunā sabbesaṁyeva imesaṁ pāpakānaṁ akusalānaṁ dhammānaṁ pahānāya vāyamitabbaṁ.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Chư Hiền, nếu Tỷ-kheo trong khi quán sát thấy rõ rằng các ác, bất thiện pháp đã đoạn trừ ở nội tâm, thì chư Hiền, Tỷ-kheo ấy phải sống với tâm niệm hoan hỷ, ngày đêm tu học thiện pháp.”<br>
+<span lang="pi" class="pali">
+Sace panāvuso, bhikkhu paccavekkhamāno sabbepime pāpake akusale dhamme pahīne attani samanupassati, tenāvuso, bhikkhunā teneva pītipāmojjena vihātabbaṁ, ahorattānusikkhinā kusalesu dhammesū”ti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Tôn giả Mahāmoggallāna thuyết giảng như vậy.<br>
+<span lang="pi" class="pali">
+Idamavocāyasmā mahāmoggallāno.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+Các Tỷ-kheo ấy hoan hỷ, tín thọ lời dạy của Tôn giả Mahāmoggallāna.<br>
+<span lang="pi" class="pali">
+Attamanā te bhikkhū āyasmato mahāmoggallānassa bhāsitaṁ abhinandunti.<br>
+</span>
+</p>
+
+<p lang="vi" class="vi">
+<span lang="pi" class="vi">
+Anumānasuttaṁ niṭṭhitaṁ pañcamaṁ.<br>
+</span>
+</p>
+
+
+<!-- COPY CONTENT SUTTA Ở ĐÂY -->
+
+
+
+<br>
+<p><p style="text-align: right;font-style: italic;">Hoà Thượng Thích Minh Châu dịch Việt</span></p>
 
-<p><span class="parno">1</span>So I have heard. At one time Venerable Mahāmoggallāna was staying in the land of the Bhaggas on Crocodile Hill, in the deer park at Bhesakaḷā’s Wood. There Venerable Mahāmoggallāna addressed the mendicants: “Reverends, mendicants!”</p>
 
-<p>“Reverend,” they replied. Venerable Mahāmoggallāna said this:</p>
 
-<p><span class="parno">2</span>“Suppose a mendicant invites other mendicants to admonish them. But they’re hard to admonish, having qualities that make them hard to admonish. They're impatient, and don't take instruction respectfully. So their spiritual companions don’t think it’s worth advising and instructing them, and that person doesn’t gain their trust.</p>
 
-<hr>
-<p><span class="parno">3</span>And what are the qualities that make them hard to admonish? </p>
 
-<p>Firstly, a mendicant has wicked desires, having fallen under the sway of wicked desires. This is a quality that makes them difficult to admonish.</p>
 
-<hr>
-<p><span class="parno">4</span>Furthermore, a mendicant glorifies themselves and puts others down. …</p>
 
-<hr>
 
-<p><span class="parno">5</span>They’re irritable, overcome by anger …</p>
-
-<p><span class="parno">6</span>They’re irritable, and hostile due to anger …</p>
-
-<p><span class="parno">7</span>They’re irritable, and stubborn due to anger …</p>
-
-<p><span class="parno">8</span>They’re irritable, and blurt out words bordering on anger …</p>
-
-<p><span class="parno">9</span>When accused, they object to the accuser …</p>
-
-<hr>
-<p><span class="parno">10</span>When accused, they rebuke the accuser …</p>
-
-<p><span class="parno">11</span>When accused, they retort to the accuser …</p>
-
-<hr>
-<p><span class="parno">12</span>When accused, they dodge the issue, distract the discussion with irrelevant points, and display annoyance, hate, and bitterness …</p>
-
-<p><span class="parno">13</span>When accused, they don’t accept the consequences of their deeds …</p>
-
-<p><span class="parno">14</span>They are offensive and contemptuous …</p>
-
-<hr>
-<p><span class="parno">15</span>They’re jealous and stingy …</p>
-
-<hr>
-<p><span class="parno">16</span>They’re devious and deceitful …</p>
-
-<p><span class="parno">17</span>They’re obstinate and vain …</p>
-
-<hr>
-<p><span class="parno">18</span>Furthermore, a mendicant is attached to their own views, holding them tight, and refusing to let go. This too is a quality that makes them difficult to admonish.</p>
-
-<hr>
-<p><span class="parno">19</span>These are the qualities that make them hard to admonish.</p>
-
-<p><span class="parno">20</span>Suppose a mendicant doesn’t invite other mendicants to admonish them. But they’re easy to admonish, having qualities that make them easy to admonish. They're accepting, and take instruction respectfully. So their spiritual companions think it’s worth advising and instructing them, and that person gains their trust.</p>
-
-<hr>
-<p><span class="parno">21</span>And what are the qualities that make them easy to admonish? Firstly, a mendicant doesn’t have wicked desires …</p>
-
-<hr>
-<p><span class="parno">22-36</span>Furthermore, a mendicant isn’t attached to their own views, not holding them tight, but letting them go easily.</p>
-
-<hr>
-<p><span class="parno">37</span>These are the qualities that make them easy to admonish.</p>
-
-<p><span class="parno">38-68</span>In such a case, a mendicant should measure themselves against another like this. </p>
-
-<hr>
-<p>‘This person has wicked desires, having fallen under the sway of wicked desires. And I don’t like or approve of this person. And if I were to fall under the sway of wicked desires, others wouldn’t like or approve of me.’ A mendicant who knows this should give rise to the thought: ‘I will not fall under the sway of wicked desires.’ …<br>
-
-<br>‘This person is attached to their own views, holding them tight and refusing to let go. And I don’t like or approve of this person. And if I were to be attached to my own views, holding them tight and refusing to let go, others wouldn’t like or approve of me.’ A mendicant who knows this should give rise to the thought: ‘I will not be attached to my own views, holding them tight, but will let them go easily.’<br>
-
-<br>In such a case, a mendicant should check themselves like this: ‘Do I have wicked desires? Have I fallen under the sway of wicked desires?’ Suppose that, upon checking, a mendicant knows that they have fallen under the sway of wicked desires. Then they should make an effort to give up those bad, unskillful qualities. But suppose that, upon checking, a mendicant knows that they haven’t fallen under the sway of wicked desires. Then they should meditate with rapture and joy, training day and night in skillful qualities. …</p>
-
-<hr>
-<p><span class="parno">69</span>Suppose that, upon checking, a mendicant knows that they are attached to their own views, holding them tight, and refusing to let go. Then they should make an effort to give up those bad, unskillful qualities. Suppose that, upon checking, a mendicant knows that they’re not attached to their own views, holding them tight, but let them go easily. Then they should meditate with rapture and joy, training day and night in skillful qualities.</p>
-
-<p><span class="parno">70</span>Suppose that, upon checking, a mendicant sees that they haven’t given up all these bad, unskillful qualities. Then they should make an effort to give them all up. But suppose that, upon checking, a mendicant sees that they have given up all these bad, unskillful qualities. Then they should meditate with rapture and joy, training day and night in skillful qualities.</p>
-
-<p><span class="parno">71</span>Suppose there was a woman or man who was young, youthful, and fond of adornments, and they check their own reflection in a clean bright mirror or a clear bowl of water. If they see any dirt or blemish there, they’d try to remove it. But if they don’t see any dirt or blemish there, they’re happy, thinking: ‘How fortunate that I’m clean!’</p>
-
-<p>In the same way, suppose that, upon checking, a mendicant sees that they haven’t given up all these bad, unskillful qualities. Then they should make an effort to give them all up. But suppose that, upon checking, a mendicant sees that they have given up all these bad, unskillful qualities. Then they should meditate with rapture and joy, training day and night in skillful qualities.”</p>
-
-<p><span class="parno">72</span>This is what Venerable Mahāmoggallāna said. Satisfied, the mendicants were happy with what Venerable Mahāmoggallāna said.</p>
-</div>
-
-<div lang="pi">
-
-<p><span class="parno">1</span>Evaṁ me sutaṁ — ekaṁ samayaṁ āyasmā mahāmoggallāno bhaggesu viharati <span class="var" title="suṁsumāragire (bj, s1–3, pts1)" id="note181">susumāragire</span> bhesakaḷāvane migadāye. Tatra kho āyasmā mahāmoggallāno bhikkhū āmantesi: "āvuso bhikkhavo"ti. </p>
-
-<p>"Āvuso"ti kho te bhikkhū āyasmato mahāmoggallānassa paccassosuṁ. Āyasmā mahāmoggallāno etadavoca:</p>
-
-<p><span class="parno">2</span>"Pavāreti cepi, āvuso, bhikkhu: ‘vadantu maṁ āyasmanto, vacanīyomhi āyasmantehī’ti, so ca hoti dubbaco, dovacassakaraṇehi dhammehi samannāgato, akkhamo appadakkhiṇaggāhī anusāsaniṁ, atha kho naṁ sabrahmacārī na ceva vattabbaṁ maññanti, na ca anusāsitabbaṁ maññanti, na ca tasmiṁ puggale vissāsaṁ āpajjitabbaṁ maññanti.</p>
-
-<hr>
-<p><span class="parno">3</span>Katame cāvuso, dovacassakaraṇā dhammā?</p>
-
-<p>Idhāvuso, bhikkhu pāpiccho hoti, pāpikānaṁ icchānaṁ vasaṁ gato. Yaṁpāvuso, bhikkhu pāpiccho hoti, pāpikānaṁ icchānaṁ vasaṁ gato — ayampi dhammo dovacassakaraṇo. <span class="brnum">(1)</span></p>
-
-<hr>
-<p><span class="parno">4</span>Puna caparaṁ, āvuso, bhikkhu attukkaṁsako hoti paravambhī. Yaṁpāvuso, bhikkhu attukkaṁsako hoti paravambhī — ayampi dhammo dovacassakaraṇo. <span class="brnum">(2)</span></p>
-
-<hr>
-
-<p><span class="parno">5</span>Puna caparaṁ, āvuso, bhikkhu kodhano hoti kodhābhibhūto. Yaṁpāvuso, bhikkhu kodhano hoti kodhābhibhūto — ayampi dhammo dovacassakaraṇo. <span class="brnum">(3)</span></p>
-
-<p><span class="parno">6</span>Puna caparaṁ, āvuso, bhikkhu kodhano hoti kodhahetu upanāhī. Yaṁpāvuso, bhikkhu kodhano hoti kodhahetu upanāhī — ayampi dhammo dovacassakaraṇo. <span class="brnum">(4)</span></p>
-
-<p><span class="parno">7</span>Puna caparaṁ, āvuso, bhikkhu kodhano hoti kodhahetu abhisaṅgī. Yaṁpāvuso, bhikkhu kodhano hoti kodhahetu abhisaṅgī — ayampi dhammo dovacassakaraṇo. <span class="brnum">(5)</span></p>
-
-<p><span class="parno">8</span>Puna caparaṁ, āvuso, bhikkhu kodhano hoti <span class="var" title="kodhasāmantaṁ (s1–3, pts1, mr)" id="note182">kodhasāmantā</span> vācaṁ nicchāretā. Yaṁpāvuso, bhikkhu kodhano hoti kodhasāmantā vācaṁ nicchāretā — ayampi dhammo dovacassakaraṇo. <span class="brnum">(6)</span></p>
-
-<p><span class="parno">9</span>Puna caparaṁ, āvuso, bhikkhu <span class="var" title="cudito (bj, s1–3, pts1)" id="note183">codito</span> codakena codakaṁ paṭippharati. Yaṁpāvuso, bhikkhu codito codakena codakaṁ paṭippharati — ayampi dhammo dovacassakaraṇo. <span class="brnum">(7)</span></p>
-
-<hr>
-<p><span class="parno">10</span>Puna caparaṁ, āvuso, bhikkhu codito codakena codakaṁ apasādeti. Yaṁpāvuso, bhikkhu codito codakena codakaṁ apasādeti — ayampi dhammo dovacassakaraṇo. <span class="brnum">(8)</span></p>
-
-<p><span class="parno">11</span>Puna caparaṁ, āvuso, bhikkhu codito codakena codakassa paccāropeti. Yaṁpāvuso, bhikkhu codito codakena codakassa paccāropeti — ayampi dhammo dovacassakaraṇo. <span class="brnum">(9)</span></p>
-
-<hr>
-<p><span class="parno">12</span>Puna caparaṁ, āvuso, bhikkhu codito codakena aññenaññaṁ paṭicarati, bahiddhā kathaṁ apanāmeti, kopañca dosañca appaccayañca pātukaroti. Yaṁpāvuso, bhikkhu codito codakena aññenaññaṁ paṭicarati, bahiddhā kathaṁ apanāmeti, kopañca dosañca appaccayañca pātukaroti — ayampi dhammo dovacassakaraṇo. <span class="brnum">(10)</span></p>
-
-<p><span class="parno">13</span>Puna caparaṁ, āvuso, bhikkhu codito codakena apadāne na sampāyati. Yaṁpāvuso, bhikkhu codito codakena apadāne na sampāyati — ayampi dhammo dovacassakaraṇo. <span class="brnum">(11)</span></p>
-
-<p><span class="parno">14</span>Puna caparaṁ, āvuso, bhikkhu makkhī hoti paḷāsī. Yaṁpāvuso, bhikkhu makkhī hoti paḷāsī — ayampi dhammo dovacassakaraṇo. <span class="brnum">(12)</span></p>
-
-<hr>
-<p><span class="parno">15</span>Puna caparaṁ, āvuso, bhikkhu issukī hoti maccharī. Yaṁpāvuso, bhikkhu issukī hoti maccharī — ayampi dhammo dovacassakaraṇo. <span class="brnum">(13)</span></p>
-
-<hr>
-<p><span class="parno">16</span>Puna caparaṁ, āvuso, bhikkhu saṭho hoti māyāvī. Yaṁpāvuso, bhikkhu saṭho hoti māyāvī — ayampi dhammo dovacassakaraṇo. <span class="brnum">(14)</span></p>
-
-<p><span class="parno">17</span>Puna caparaṁ, āvuso, bhikkhu thaddho hoti atimānī. Yaṁpāvuso, bhikkhu thaddho hoti atimānī — ayampi dhammo dovacassakaraṇo. <span class="brnum">(15)</span></p>
-
-<hr>
-<p><span class="parno">18</span>Puna caparaṁ, āvuso, bhikkhu sandiṭṭhiparāmāsī hoti ādhānaggāhī duppaṭinissaggī. Yaṁpāvuso, bhikkhu sandiṭṭhiparāmāsī hoti ādhānaggāhī duppaṭinissaggī — ayampi dhammo dovacassakaraṇo. <span class="brnum">(16)</span></p>
-
-<hr>
-<p><span class="parno">19</span>Ime vuccantāvuso, dovacassakaraṇā dhammā.</p>
-
-<p><span class="parno">20</span>No cepi, āvuso, bhikkhu pavāreti: ‘vadantu maṁ āyasmanto, vacanīyomhi āyasmantehī’ti, so ca hoti suvaco, sovacassakaraṇehi dhammehi samannāgato, khamo padakkhiṇaggāhī anusāsaniṁ, atha kho naṁ sabrahmacārī vattabbañceva maññanti, anusāsitabbañca maññanti, tasmiñca puggale vissāsaṁ āpajjitabbaṁ maññanti.</p>
-
-<hr>
-<p><span class="parno">21</span>Katame cāvuso, sovacassakaraṇā dhammā?</p>
-
-<p>Idhāvuso, bhikkhu na pāpiccho hoti, na pāpikānaṁ icchānaṁ vasaṁ gato. Yaṁpāvuso, bhikkhu na pāpiccho hoti na pāpikānaṁ icchānaṁ vasaṁ gato — ayampi dhammo sovacassakaraṇo. <span class="brnum">(1)</span></p>
-
-<hr>
-<p><span class="parno">22</span>Puna caparaṁ, āvuso, bhikkhu anattukkaṁsako hoti aparavambhī. Yaṁpāvuso, bhikkhu anattukkaṁsako hoti aparavambhī — ayampi dhammo sovacassakaraṇo. <span class="brnum">(2)</span></p>
-
-<p><span class="parno">23</span>Puna caparaṁ, āvuso, bhikkhu na kodhano hoti na kodhābhibhūto. Yaṁpāvuso, bhikkhu na kodhano hoti na kodhābhibhūto — ayampi dhammo sovacassakaraṇo. <span class="brnum">(3)</span></p>
-
-<p><span class="parno">24</span>Puna caparaṁ, āvuso, bhikkhu na kodhano hoti na kodhahetu upanāhī. Yaṁpāvuso, bhikkhu na kodhano hoti na kodhahetu upanāhī — ayampi dhammo sovacassakaraṇo. <span class="brnum">(4)</span></p>
-
-<p><span class="parno">25</span>Puna caparaṁ, āvuso, bhikkhu na kodhano hoti na kodhahetu abhisaṅgī. Yaṁpāvuso, bhikkhu na kodhano hoti na kodhahetu abhisaṅgī — ayampi dhammo sovacassakaraṇo. <span class="brnum">(5)</span></p>
-
-<p><span class="parno">26</span>Puna caparaṁ, āvuso, bhikkhu na kodhano hoti na kodhasāmantā vācaṁ nicchāretā. Yaṁpāvuso, bhikkhu na kodhano hoti na kodhasāmantā vācaṁ nicchāretā — ayampi dhammo sovacassakaraṇo. <span class="brnum">(6)</span></p>
-
-<p><span class="parno">27</span>Puna caparaṁ, āvuso, bhikkhu codito codakena codakaṁ nappaṭippharati. Yaṁpāvuso, bhikkhu codito codakena codakaṁ nappaṭippharati — ayampi dhammo sovacassakaraṇo. <span class="brnum">(7)</span></p>
-
-<p><span class="parno">28</span>Puna caparaṁ, āvuso, bhikkhu codito codakena codakaṁ na apasādeti. Yaṁpāvuso, bhikkhu codito codakena codakaṁ na apasādeti — ayampi dhammo sovacassakaraṇo. <span class="brnum">(8)</span></p>
-
-<p><span class="parno">29</span>Puna caparaṁ, āvuso, bhikkhu codito codakena codakassa na paccāropeti. Yaṁpāvuso, bhikkhu codito codakena codakassa na paccāropeti — ayampi dhammo sovacassakaraṇo. <span class="brnum">(9)</span></p>
-
-<p><span class="parno">30</span>Puna caparaṁ, āvuso, bhikkhu codito codakena na aññenaññaṁ paṭicarati, na bahiddhā kathaṁ apanāmeti, na kopañca dosañca appaccayañca pātukaroti. Yaṁpāvuso, bhikkhu codito codakena na aññenaññaṁ paṭicarati, na bahiddhā kathaṁ apanāmeti, na kopañca dosañca appaccayañca pātukaroti — ayampi dhammo sovacassakaraṇo. <span class="brnum">(10)</span></p>
-
-<p><span class="parno">31</span>Puna caparaṁ, āvuso, bhikkhu codito codakena apadāne sampāyati. Yaṁpāvuso, bhikkhu codito codakena apadāne sampāyati — ayampi dhammo sovacassakaraṇo. <span class="brnum">(11)</span></p>
-
-<p><span class="parno">32</span>Puna caparaṁ, āvuso, bhikkhu amakkhī hoti apaḷāsī. Yaṁpāvuso, bhikkhu amakkhī hoti apaḷāsī — ayampi dhammo sovacassakaraṇo. <span class="brnum">(12)</span></p>
-
-<p><span class="parno">33</span>Puna caparaṁ, āvuso, bhikkhu anissukī hoti amaccharī. Yaṁpāvuso, bhikkhu anissukī hoti amaccharī — ayampi dhammo sovacassakaraṇo. <span class="brnum">(13)</span></p>
-
-<p><span class="parno">34</span>Puna caparaṁ, āvuso, bhikkhu asaṭho hoti amāyāvī. Yaṁpāvuso, bhikkhu asaṭho hoti amāyāvī — ayampi dhammo sovacassakaraṇo. <span class="brnum">(14)</span></p>
-
-<p><span class="parno">35</span>Puna caparaṁ, āvuso, bhikkhu atthaddho hoti anatimānī. Yaṁpāvuso, bhikkhu atthaddho hoti anatimānī — ayampi dhammo sovacassakaraṇo. <span class="brnum">(15)</span></p>
-
-<p><span class="parno">36</span>Puna caparaṁ, āvuso, bhikkhu asandiṭṭhiparāmāsī hoti anādhānaggāhī suppaṭinissaggī. Yaṁpāvuso, bhikkhu asandiṭṭhiparāmāsī hoti, anādhānaggāhī suppaṭinissaggī — ayampi dhammo sovacassakaraṇo. <span class="brnum">(16)</span></p>
-
-<hr>
-<p><span class="parno">37</span>Ime vuccantāvuso, sovacassakaraṇā dhammā.</p>
-
-<p><span class="parno">38</span>Tatrāvuso, bhikkhunā attanāva attānaṁ evaṁ <span class="var" title="anumānitabbaṁ (s1–3)" id="note184">anuminitabbaṁ</span>: ‘yo khvāyaṁ puggalo pāpiccho, pāpikānaṁ icchānaṁ vasaṁ gato, ayaṁ me puggalo appiyo amanāpo;</p>
-
-<hr>
-<p>ahañceva kho panassaṁ pāpiccho pāpikānaṁ icchānaṁ vasaṁ gato, ahampāssaṁ paresaṁ appiyo amanāpo’ti. Evaṁ jānantenāvuso, bhikkhunā ‘Na pāpiccho bhavissāmi, na pāpikānaṁ icchānaṁ vasaṁ gato’ti cittaṁ uppādetabbaṁ. <span class="brnum">(1)</span></p>
-
-
-<p><span class="parno">39</span>‘Yo khvāyaṁ puggalo attukkaṁsako paravambhī, ayaṁ me puggalo appiyo amanāpo; ahañceva kho panassaṁ attukkaṁsako paravambhī, ahampāssaṁ paresaṁ appiyo amanāpo’ti. Evaṁ jānantenāvuso, bhikkhunā ‘anattukkaṁsako bhavissāmi aparavambhī’ti cittaṁ uppādetabbaṁ. <span class="brnum">(2)</span></p>
-
-<p><span class="parno">40</span>‘Yo khvāyaṁ puggalo kodhano kodhābhibhūto, ayaṁ me puggalo appiyo amanāpo. Ahañceva kho panassaṁ kodhano kodhābhibhūto, ahampāssaṁ paresaṁ appiyo amanāpo’ti. Evaṁ jānantenāvuso, bhikkhunā ‘Na kodhano bhavissāmi na kodhābhibhūto’ti cittaṁ uppādetabbaṁ. <span class="brnum">(3)</span></p>
-
-<p><span class="parno">41</span>‘Yo khvāyaṁ puggalo kodhano kodhahetu upanāhī, ayaṁ me puggalo appiyo amanāpo; ahañceva kho panassaṁ kodhano kodhahetu upanāhī, ahampāssaṁ paresaṁ appiyo amanāpo’ti. Evaṁ jānantenāvuso, bhikkhunā ‘Na kodhano bhavissāmi na kodhahetu upanāhī’ti cittaṁ uppādetabbaṁ. <span class="brnum">(4)</span></p>
-
-<p><span class="parno">42</span>‘Yo khvāyaṁ puggalo kodhano kodhahetu abhisaṅgī, ayaṁ me puggalo appiyo amanāpo; ahañceva kho panassaṁ kodhano kodhahetu abhisaṅgī, ahampāssaṁ paresaṁ appiyo amanāpo’ti. Evaṁ jānantenāvuso, bhikkhunā ‘Na kodhano bhavissāmi na kodhahetu abhisaṅgī’ti cittaṁ uppādetabbaṁ. <span class="brnum">(5)</span></p>
-
-<p><span class="parno">43</span>‘Yo khvāyaṁ puggalo kodhano kodhasāmantā vācaṁ nicchāretā, ayaṁ me puggalo appiyo amanāpo; ahañceva kho panassaṁ kodhano kodhasāmantā vācaṁ nicchāretā, ahampāssaṁ paresaṁ appiyo amanāpo’ti. Evaṁ jānantenāvuso, bhikkhunā ‘Na kodhano bhavissāmi na kodhasāmantā vācaṁ nicchāressāmī’ti cittaṁ uppādetabbaṁ. <span class="brnum">(6)</span></p>
-
-<p><span class="parno">44</span>‘Yo khvāyaṁ puggalo codito codakena codakaṁ paṭippharati, ayaṁ me puggalo appiyo amanāpo; ahañceva kho pana codito codakena codakaṁ paṭipphareyyaṁ, ahampāssaṁ paresaṁ appiyo amanāpo’ti. Evaṁ jānantenāvuso, bhikkhunā ‘codito codakena codakaṁ nappaṭippharissāmī’ti cittaṁ uppādetabbaṁ. <span class="brnum">(7)</span></p>
-
-<p><span class="parno">45</span>‘Yo khvāyaṁ puggalo codito codakena codakaṁ apasādeti, ayaṁ me puggalo appiyo amanāpo; ahañceva kho pana codito codakena codakaṁ apasādeyyaṁ, ahampāssaṁ paresaṁ appiyo amanāpo’ti. Evaṁ jānantenāvuso, bhikkhunā ‘codito codakena codakaṁ na apasādessāmī’ti cittaṁ uppādetabbaṁ. <span class="brnum">(8)</span></p>
-
-<p><span class="parno">46</span>‘Yo khvāyaṁ puggalo codito codakena codakassa paccāropeti, ayaṁ me puggalo appiyo amanāpo; ahañceva kho pana codito codakena codakassa paccāropeyyaṁ, ahampāssaṁ paresaṁ appiyo amanāpo’ti. Evaṁ jānantenāvuso, bhikkhunā ‘codito codakena codakassa na paccāropessāmī’ti cittaṁ uppādetabbaṁ. <span class="brnum">(9)</span></p>
-
-<p><span class="parno">47</span>‘Yo khvāyaṁ puggalo codito codakena aññenaññaṁ paṭicarati, bahiddhā kathaṁ apanāmeti, kopañca dosañca appaccayañca pātukaroti, ayaṁ me puggalo appiyo amanāpo; ahañceva kho pana codito codakena aññenaññaṁ paṭicareyyaṁ, bahiddhā kathaṁ apanāmeyyaṁ, kopañca dosañca appaccayañca pātukareyyaṁ, ahampāssaṁ paresaṁ appiyo amanāpo’ti. Evaṁ jānantenāvuso, bhikkhunā ‘codito codakena na aññenaññaṁ paṭicarissāmi, na bahiddhā kathaṁ apanāmessāmi, na kopañca dosañca appaccayañca pātukarissāmī’ti cittaṁ uppādetabbaṁ. <span class="brnum">(10)</span></p>
-
-<p><span class="parno">48</span>‘Yo khvāyaṁ puggalo codito codakena apadāne na sampāyati, ayaṁ me puggalo appiyo amanāpo; ahañceva kho pana codito codakena apadāne na sampāyeyyaṁ, ahampāssaṁ paresaṁ appiyo amanāpo’ti. Evaṁ jānantenāvuso, bhikkhunā ‘codito codakena apadāne sampāyissāmī’ti cittaṁ uppādetabbaṁ. <span class="brnum">(11)</span></p>
-
-<p><span class="parno">49</span>‘Yo khvāyaṁ puggalo makkhī paḷāsī, ayaṁ me puggalo appiyo amanāpo; ahañceva kho panassaṁ makkhī paḷāsī, ahampāssaṁ paresaṁ appiyo amanāpo’ti. Evaṁ jānantenāvuso, bhikkhunā ‘amakkhī bhavissāmi apaḷāsī’ti cittaṁ uppādetabbaṁ. <span class="brnum">(12)</span></p>
-
-<p><span class="parno">50</span>‘Yo khvāyaṁ puggalo issukī maccharī, ayaṁ me puggalo appiyo amanāpo; ahañceva kho panassaṁ issukī maccharī, ahampāssaṁ paresaṁ appiyo amanāpo’ti. Evaṁ jānantenāvuso, bhikkhunā ‘anissukī bhavissāmi amaccharī’ti cittaṁ uppādetabbaṁ. <span class="brnum">(13)</span></p>
-
-<p><span class="parno">51</span>‘Yo khvāyaṁ puggalo saṭho māyāvī, ayaṁ me puggalo appiyo amanāpo; ahañceva kho panassaṁ saṭho māyāvī, ahampāssaṁ paresaṁ appiyo amanāpo’ti. Evaṁ jānantenāvuso, bhikkhunā ‘asaṭho bhavissāmi amāyāvī’ti cittaṁ uppādetabbaṁ. <span class="brnum">(14)</span></p>
-
-<p><span class="parno">52</span>‘Yo khvāyaṁ puggalo thaddho atimānī, ayaṁ me puggalo appiyo amanāpo; ahañceva kho panassaṁ thaddho atimānī, ahampāssaṁ paresaṁ appiyo amanāpo’ti. Evaṁ jānantenāvuso, bhikkhunā ‘atthaddho bhavissāmi anatimānī’ti cittaṁ uppādetabbaṁ. <span class="brnum">(15)</span></p>
-
-<p><span class="parno">53</span>‘Yo khvāyaṁ puggalo sandiṭṭhiparāmāsī ādhānaggāhī duppaṭinissaggī, ayaṁ me puggalo appiyo amanāpo; ahañceva kho panassaṁ sandiṭṭhiparāmāsī ādhānaggāhī duppaṭinissaggī, ahampāssaṁ paresaṁ appiyo amanāpo’ti. Evaṁ jānantenāvuso, bhikkhunā ‘asandiṭṭhiparāmāsī bhavissāmi anādhānaggāhī suppaṭinissaggī’ti cittaṁ uppādetabbaṁ. <span class="brnum">(16)</span></p>
-
-
-<p><span class="parno">54</span>Tatrāvuso, bhikkhunā attanāva attānaṁ evaṁ paccavekkhitabbaṁ:</p>
-
-<p>‘kiṁ nu khomhi pāpiccho, pāpikānaṁ icchānaṁ vasaṁ gato’ti? Sace, āvuso, bhikkhu paccavekkhamāno evaṁ jānāti: ‘pāpiccho khomhi, pāpikānaṁ icchānaṁ vasaṁ gato’ti, tenāvuso, bhikkhunā tesaṁyeva pāpakānaṁ akusalānaṁ dhammānaṁ pahānāya vāyamitabbaṁ. Sace panāvuso, bhikkhu paccavekkhamāno evaṁ jānāti: ‘Na khomhi pāpiccho, na pāpikānaṁ icchānaṁ vasaṁ gato’ti, tenāvuso, bhikkhunā teneva pītipāmojjena vihātabbaṁ ahorattānusikkhinā kusalesu dhammesu. <span class="brnum">(1)</span></p>
-
-
-<p><span class="parno">55</span>Puna caparaṁ, āvuso, bhikkhunā attanāva attānaṁ evaṁ paccavekkhitabbaṁ: ‘kiṁ nu khomhi attukkaṁsako paravambhī’ti? Sace, āvuso, bhikkhu paccavekkhamāno evaṁ jānāti: ‘attukkaṁsako khomhi paravambhī’ti, tenāvuso, bhikkhunā tesaṁyeva pāpakānaṁ akusalānaṁ dhammānaṁ pahānāya vāyamitabbaṁ. Sace panāvuso, bhikkhu paccavekkhamāno evaṁ jānāti: ‘anattukkaṁsako khomhi aparavambhī’ti, tenāvuso, bhikkhunā teneva pītipāmojjena vihātabbaṁ ahorattānusikkhinā kusalesu dhammesu. <span class="brnum">(2)</span></p>
-
-<p><span class="parno">56</span>Puna caparaṁ, āvuso, bhikkhunā attanāva attānaṁ evaṁ paccavekkhitabbaṁ: ‘kiṁ nu khomhi kodhano kodhābhibhūto’ti? Sace, āvuso, bhikkhu paccavekkhamāno evaṁ jānāti: ‘kodhano khomhi kodhābhibhūto’ti, tenāvuso, bhikkhunā tesaṁyeva pāpakānaṁ akusalānaṁ dhammānaṁ pahānāya vāyamitabbaṁ. Sace panāvuso, bhikkhu paccavekkhamāno evaṁ jānāti: ‘Na khomhi kodhano kodhābhibhūto’ti, tenāvuso, bhikkhunā teneva pītipāmojjena vihātabbaṁ ahorattānusikkhinā kusalesu dhammesu. <span class="brnum">(3)</span></p>
-
-<p><span class="parno">57</span>Puna caparaṁ, āvuso, bhikkhunā attanāva attānaṁ evaṁ paccavekkhitabbaṁ: ‘kiṁ nu khomhi kodhano kodhahetu upanāhī’ti? Sace, āvuso, bhikkhu paccavekkhamāno evaṁ jānāti ‘kodhano khomhi kodhahetu upanāhī’ti, tenāvuso, bhikkhunā tesaṁyeva pāpakānaṁ akusalānaṁ dhammānaṁ pahānāya vāyamitabbaṁ. Sace panāvuso, bhikkhu paccavekkhamāno evaṁ jānāti ‘Na khomhi kodhano kodhahetu upanāhī’ti, tenāvuso, bhikkhunā teneva pītipāmojjena vihātabbaṁ ahorattānusikkhinā kusalesu dhammesu. <span class="brnum">(4)</span></p>
-
-<p><span class="parno">58</span>Puna caparaṁ, āvuso, bhikkhunā attanāva attānaṁ evaṁ paccavekkhitabbaṁ: ‘kiṁ nu khomhi kodhano kodhahetu abhisaṅgī’ti? Sace, āvuso, bhikkhu paccavekkhamāno evaṁ jānāti: ‘kodhano khomhi kodhahetu abhisaṅgī’ti, tenāvuso, bhikkhunā tesaṁyeva pāpakānaṁ akusalānaṁ dhammānaṁ pahānāya vāyamitabbaṁ. Sace panāvuso, bhikkhu paccavekkhamāno evaṁ jānāti: ‘Na khomhi kodhano kodhahetu abhisaṅgī’ti, tenāvuso, bhikkhunā teneva pītipāmojjena vihātabbaṁ ahorattānusikkhinā kusalesu dhammesu. <span class="brnum">(5)</span></p>
-
-<p><span class="parno">59</span>Puna caparaṁ, āvuso, bhikkhunā attanāva attānaṁ evaṁ paccavekkhitabbaṁ: ‘kiṁ nu khomhi kodhano kodhasāmantā vācaṁ nicchāretā’ti? Sace, āvuso, bhikkhu paccavekkhamāno evaṁ jānāti: ‘kodhano khomhi kodhasāmantā vācaṁ nicchāretā’ti, tenāvuso, bhikkhunā tesaṁyeva pāpakānaṁ akusalānaṁ dhammānaṁ pahānāya vāyamitabbaṁ. Sace panāvuso, bhikkhu paccavekkhamāno evaṁ jānāti: ‘Na khomhi kodhano kodhasāmantā vācaṁ nicchāretā’ti, tenāvuso, bhikkhunā teneva pītipāmojjena vihātabbaṁ ahorattānusikkhinā kusalesu dhammesu. <span class="brnum">(6)</span></p>
-
-<p><span class="parno">60</span>Puna caparaṁ, āvuso, bhikkhunā attanāva attānaṁ evaṁ paccavekkhitabbaṁ: ‘kiṁ nu khomhi codito codakena codakaṁ paṭippharāmī’ti? Sace, āvuso, bhikkhu paccavekkhamāno evaṁ jānāti ‘codito khomhi codakena codakaṁ paṭippharāmī’ti, tenāvuso, bhikkhunā tesaṁyeva pāpakānaṁ akusalānaṁ dhammānaṁ pahānāya vāyamitabbaṁ. Sace panāvuso, bhikkhu paccavekkhamāno evaṁ jānāti: ‘codito khomhi codakena codakaṁ nappaṭippharāmī’ti, tenāvuso, bhikkhunā teneva pītipāmojjena vihātabbaṁ ahorattānusikkhinā kusalesu dhammesu. <span class="brnum">(7)</span></p>
-
-<p><span class="parno">61</span>Puna caparaṁ, āvuso, bhikkhunā attanāva attānaṁ evaṁ paccavekkhitabbaṁ: ‘kiṁ nu khomhi codito codakena codakaṁ apasādemī’ti? Sace, āvuso, bhikkhu paccavekkhamāno evaṁ jānāti ‘codito khomhi codakena codakaṁ apasādemī’ti, tenāvuso, bhikkhunā tesaṁyeva pāpakānaṁ akusalānaṁ dhammānaṁ pahānāya vāyamitabbaṁ. Sace panāvuso, bhikkhu paccavekkhamāno evaṁ jānāti: ‘codito khomhi codakena codakaṁ na apasādemī’ti, tenāvuso, bhikkhunā teneva pītipāmojjena vihātabbaṁ ahorattānusikkhinā kusalesu dhammesu. <span class="brnum">(8)</span></p>
-
-<p><span class="parno">62</span>Puna caparaṁ, āvuso, bhikkhunā attanāva attānaṁ evaṁ paccavekkhitabbaṁ: ‘kiṁ nu khomhi codito codakena codakassa paccāropemī’ti? Sace, āvuso, bhikkhu paccavekkhamāno evaṁ jānāti: ‘codito khomhi codakena codakassa paccāropemī’ti, tenāvuso, bhikkhunā tesaṁyeva pāpakānaṁ akusalānaṁ dhammānaṁ pahānāya vāyamitabbaṁ. Sace panāvuso, bhikkhu paccavekkhamāno evaṁ jānāti: ‘codito khomhi codakena codakassa na paccāropemī’ti, tenāvuso, bhikkhunā teneva pītipāmojjena vihātabbaṁ ahorattānusikkhinā kusalesu dhammesu. <span class="brnum">(9)</span></p>
-
-<p><span class="parno">63</span>Puna caparaṁ, āvuso, bhikkhunā attanāva attānaṁ evaṁ paccavekkhitabbaṁ: ‘kiṁ nu khomhi codito codakena aññenaññaṁ paṭicarāmi, bahiddhā kathaṁ apanāmemi, kopañca dosañca appaccayañca pātukaromī’ti? Sace, āvuso, bhikkhu paccavekkhamāno evaṁ jānāti: ‘codito khomhi codakena aññenaññaṁ paṭicarāmi, bahiddhā kathaṁ apanāmemi, kopañca dosañca appaccayañca pātukaromī’ti, tenāvuso, bhikkhunā tesaṁyeva pāpakānaṁ akusalānaṁ dhammānaṁ pahānāya vāyamitabbaṁ. Sace panāvuso, bhikkhu paccavekkhamāno evaṁ jānāti: ‘codito khomhi codakena na aññenaññaṁ paṭicarāmi, na bahiddhā kathaṁ apanāmemi, na kopañca dosañca appaccayañca pātukaromī’ti, tenāvuso, bhikkhunā teneva pītipāmojjena vihātabbaṁ ahorattānusikkhinā kusalesu dhammesu. <span class="brnum">(10)</span></p>
-
-<p><span class="parno">64</span>Puna caparaṁ, āvuso, bhikkhunā attanāva attānaṁ evaṁ paccavekkhitabbaṁ: ‘kiṁ nu khomhi codito codakena apadāne na sampāyāmī’ti? Sace, āvuso, bhikkhu paccavekkhamāno evaṁ jānāti: ‘codito khomhi codakena apadāne na sampāyāmī’ti, tenāvuso, bhikkhunā tesaṁyeva pāpakānaṁ akusalānaṁ dhammānaṁ pahānāya vāyamitabbaṁ. Sace panāvuso, bhikkhu paccavekkhamāno evaṁ jānāti: ‘codito khomhi codakena apadāne sampāyāmī’ti, tenāvuso, bhikkhunā teneva pītipāmojjena vihātabbaṁ ahorattānusikkhinā kusalesu dhammesu. <span class="brnum">(11)</span></p>
-
-<p><span class="parno">65</span>Puna caparaṁ, āvuso, bhikkhunā attanāva attānaṁ evaṁ paccavekkhitabbaṁ: ‘kiṁ nu khomhi makkhī paḷāsī’ti? Sace, āvuso, bhikkhu paccavekkhamāno evaṁ jānāti: ‘makkhī khomhi paḷāsī’ti, tenāvuso, bhikkhunā tesaṁyeva pāpakānaṁ akusalānaṁ dhammānaṁ pahānāya vāyamitabbaṁ. Sace panāvuso, bhikkhu paccavekkhamāno evaṁ jānāti: ‘amakkhī khomhi apaḷāsī’ti, tenāvuso, bhikkhunā teneva pītipāmojjena vihātabbaṁ ahorattānusikkhinā kusalesu dhammesu. <span class="brnum">(12)</span></p>
-
-<p><span class="parno">66</span>Puna caparaṁ, āvuso, bhikkhunā attanāva attānaṁ evaṁ paccavekkhitabbaṁ: ‘kiṁ nu khomhi issukī maccharī’ti? Sace, āvuso, bhikkhu paccavekkhamāno evaṁ jānāti: ‘issukī khomhi maccharī’ti, tenāvuso, bhikkhunā tesaṁyeva pāpakānaṁ akusalānaṁ dhammānaṁ pahānāya vāyamitabbaṁ. Sace panāvuso, bhikkhu paccavekkhamāno evaṁ jānāti: ‘anissukī khomhi amaccharī’ti, tenāvuso, bhikkhunā teneva pītipāmojjena vihātabbaṁ ahorattānusikkhinā kusalesu dhammesu. <span class="brnum">(13)</span></p>
-
-<p><span class="parno">67</span>Puna caparaṁ, āvuso, bhikkhunā attanāva attānaṁ evaṁ paccavekkhitabbaṁ: ‘kiṁ nu khomhi saṭho māyāvī’ti? Sace, āvuso, bhikkhu paccavekkhamāno evaṁ jānāti: ‘saṭho khomhi māyāvī’ti, tenāvuso, bhikkhunā tesaṁyeva pāpakānaṁ akusalānaṁ dhammānaṁ pahānāya vāyamitabbaṁ. Sace panāvuso, bhikkhu paccavekkhamāno evaṁ jānāti: ‘asaṭho khomhi amāyāvī’ti, tenāvuso, bhikkhunā teneva pītipāmojjena vihātabbaṁ ahorattānusikkhinā kusalesu dhammesu. <span class="brnum">(14)</span></p>
-
-<p><span class="parno">68</span>Puna caparaṁ, āvuso, bhikkhunā attanāva attānaṁ evaṁ paccavekkhitabbaṁ: ‘kiṁ nu khomhi thaddho atimānī’ti? Sace, āvuso, bhikkhu paccavekkhamāno evaṁ jānāti: ‘thaddho khomhi atimānī’ti, tenāvuso, bhikkhunā tesaṁyeva pāpakānaṁ akusalānaṁ dhammānaṁ pahānāya vāyamitabbaṁ. Sace panāvuso, bhikkhu paccavekkhamāno evaṁ jānāti: ‘atthaddho khomhi anatimānī’ti, tenāvuso, bhikkhunā teneva pītipāmojjena vihātabbaṁ ahorattānusikkhinā kusalesu dhammesu. <span class="brnum">(15)</span></p>
-
-<hr>
-<p><span class="parno">69</span>Puna caparaṁ, āvuso, bhikkhunā attanāva attānaṁ evaṁ paccavekkhitabbaṁ: ‘kiṁ nu khomhi sandiṭṭhiparāmāsī ādhānaggāhī duppaṭinissaggī’ti? Sace, āvuso, bhikkhu paccavekkhamāno evaṁ jānāti: ‘sandiṭṭhiparāmāsī khomhi ādhānaggāhī duppaṭinissaggī’ti, tenāvuso, bhikkhunā tesaṁyeva pāpakānaṁ akusalānaṁ dhammānaṁ pahānāya vāyamitabbaṁ. Sace panāvuso, bhikkhu paccavekkhamāno evaṁ jānāti: ‘asandiṭṭhiparāmāsī khomhi anādhānaggāhī suppaṭinissaggī’ti, tenāvuso, bhikkhunā teneva pītipāmojjena vihātabbaṁ ahorattānusikkhinā kusalesu dhammesu. <span class="brnum">(16)</span></p>
-
-<p><span class="parno">70</span>Sace, āvuso, bhikkhu paccavekkhamāno sabbepime pāpake akusale dhamme appahīne attani samanupassati, tenāvuso, bhikkhunā sabbesaṁyeva imesaṁ pāpakānaṁ akusalānaṁ dhammānaṁ pahānāya vāyamitabbaṁ. Sace panāvuso, bhikkhu paccavekkhamāno sabbepime pāpake akusale dhamme pahīne attani samanupassati, tenāvuso, bhikkhunā teneva pītipāmojjena vihātabbaṁ, ahorattānusikkhinā kusalesu dhammesu.</p>
-
-<p><span class="parno">71</span>Seyyathāpi, āvuso, itthī vā puriso vā, daharo yuvā maṇḍanajātiko, ādāse vā parisuddhe pariyodāte, acche vā udakapatte, sakaṁ mukhanimittaṁ paccavekkhamāno, sace tattha passati rajaṁ vā aṅgaṇaṁ vā, tasseva rajassa vā aṅgaṇassa vā pahānāya vāyamati; no ce tattha passati rajaṁ vā aṅgaṇaṁ vā, teneva attamano hoti: ‘lābhā vata me, parisuddhaṁ vata me’ti. </p>
-
-<p>Evameva kho, āvuso, sace bhikkhu paccavekkhamāno sabbepime pāpake akusale dhamme appahīne attani samanupassati, tenāvuso, bhikkhunā sabbesaṁyeva imesaṁ pāpakānaṁ akusalānaṁ dhammānaṁ pahānāya vāyamitabbaṁ. Sace panāvuso, bhikkhu paccavekkhamāno sabbepime pāpake akusale dhamme pahīne attani samanupassati, tenāvuso, bhikkhunā teneva pītipāmojjena vihātabbaṁ, ahorattānusikkhinā kusalesu dhammesū"ti.</p>
-
-<p><span class="parno">72</span>Idamavocāyasmā mahāmoggallāno. Attamanā te bhikkhū āyasmato mahāmoggallānassa bhāsitaṁ abhinandunti.</p>
-
-<p class="endsutta">Anumānasuttaṁ niṭṭhitaṁ pañcamaṁ.</p>
-</div>
 </section>  <!-- End English and Pali -->
 <div id="nextprev"><a id="previous-sutta" href="./mn14.html#content"></a><a id="next-sutta" href="./mn16.html#content"></a></div>
 </div>  <!--End Content -->
 </div>  <!-- End Page -->
-<div class="w3-white bwcontainer2"> <!-- Footer div -->
-<!-- Footer -->
-		<footer>
-			<div id="breadcrumbs"><a href="../home/index.html">Home</a><a href="../mn/mn.html">Majjhima Nikāya</a>MN15: Anumāna Sutta</div>
-					<div class="bottomlinks">
- 	<a href="../guide/guide.html"><span class="w3-bar-item"><i class="fa fa-compass"></i>&nbsp;Guide</span></a>
- 	 	<a href="../home/help.html"><span class="w3-bar-item"><i class="fa fa-info"></i>&nbsp;Help</span></a>
- 	<a href="../home/crossreference.html"><span class="w3-bar-item"><i class="fa fa-exchange"></i>&nbsp;Links&nbsp;Cross&nbsp;Reference</span></a>
- 	<a href="../home/copyright.html"><span class="w3-bar-item">&copy;&nbsp;Copyright</span></a>
- 	<a href="../home/contact.html"><span class="w3-bar-item"><i class="fa fa-envelope"></i>&nbsp;Contact</span></a>
- </div>  <!-- End bottom links -->
+
+
+
+
+
+
+<footer>
+					 <!-- End bottom links -->
 </footer>
- </div>
+
+
  
  <!-- Scripts -->
 
-<script>
- // Script to turn Pali Lookup on and off
- function togPaliLookup() {
- 		var checkBox = document.getElementById("myCheck");
- 		var text = document.getElementById("text");
- 		if (checkBox.checked == true){
- 				text.style.display = "block";
- 					} else {
- 							text.style.display = "none";
- 		}
- }
- </script>
+ <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      if (typeof enablePaliLookup === "function") {
+        enablePaliLookup();
+      } else {
+        console.error("enablePaliLookup is not defined");
+      }
+    });
+  </script>
 
  <script>
  // Script to open and close sidebar
