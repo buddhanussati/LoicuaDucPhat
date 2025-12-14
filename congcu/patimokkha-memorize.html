@@ -189,6 +189,34 @@
     #help-container a:hover {
         color: var(--highlight-color); /* Sử dụng màu nổi bật đã có của bạn */
     }
+	
+	@media (max-width: 600px) {
+/* FIX 1: Tighten the top navigation bar */
+.top-nav {
+gap: 9px; /* Smaller gap between the Dark Mode button and main controls */
+}
+.nav-controls {
+gap: 7px; /* Tighter gap for the navigation arrows and select */
+justify-content: flex-end; /* Ensure controls are aligned right */
+}
+.btn-nav, .btn-darkmode {
+padding: 4px 8px; /* Slightly reduced button padding */
+}
+#section-select {
+max-width: 180px; /* Force the select box to be much narrower on mobile */
+font-size: 14px; /* Smaller font to save space */
+padding: 6px; /* Tighter padding */
+}
+/* FIX 2: Ensure the Help button fits without being cut off */
+#top-right-controls {
+gap: 3px; /* Tighter gap for the rightmost controls */
+}
+/* End FIX for top bar */
+
+/* Keep the bottom bar layout fix */
+.bar-main-row { flex-direction: column; }
+.controls-cluster { width: 100%; justify-content: center; gap: 15px; }
+}
     </style>
 </head>
 <body>
@@ -236,9 +264,6 @@
                 <ul>
                     <li>Click to Start: Activates Recitation Mode. The text will enlarge and highlight line-by-line synchronized with the audio.</li>
 					
-					<li>
-                <b>NOTE:</b> For perfect synchronization, it is recommended to <b>only</b> use the toggles of <b>Recitation Button (❚❚/▶)</b> and <b>Navigation Buttons (« »)</b> to control playback (pause, play, fast forward) once Recitation Mode is active. Using the standard Audio Player controls (play/pause/seek) may interrupt the text synchronization.
-            </li>
                     <li>Status Colors:
                         <ul>
                             <li>Green (Pulsing): Auto-play mode is active (synchronized).</li>
