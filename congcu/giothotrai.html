@@ -463,7 +463,7 @@ else window.SunCalc = SunCalc;
             flex-grow: 1;
         }
         .moon-date {
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             font-weight: 600;
         }
         .moon-type {
@@ -560,7 +560,20 @@ else window.SunCalc = SunCalc;
             transition: background-color 0.3s;
         }
         .rechoose-btn:hover { background-color: #777; }		
-		
+		.uposatha-link {
+    color: #b0b0b0;
+    text-decoration: none;      /* removes underline */
+    border: 1px solid #b0b0b0;  /* border around text */
+    padding: 4px 8px;           /* optional: makes border look nicer */
+    border-radius: 4px;         /* optional: rounded corners */
+    display: inline-block;      /* ensures border wraps properly */
+}
+
+.uposatha-link:hover {
+    color: #ffffff;             /* optional hover effect */
+    border-color: #ffffff;
+}
+
     </style>
 </head>
 <body>
@@ -601,13 +614,17 @@ else window.SunCalc = SunCalc;
     <div id="app-ui" class="hidden">
         
         <div class="card">
-            <div class="card-header">
-                <span>Lịch Uposatha (Bố Tát)</span>
+            <div class="card-header" 
+         style="display:flex; justify-content:center; align-items:center;">
+                <span><a href="Uposatha.html" class="uposatha-link">
+                Lịch Uposatha (Bố Tát)
+            </a>
+            </span>
             </div>
             <div class="moon-info">
                 <div class="moon-text">
-                    <div class="moon-type" id="uposatha-name">Đang tính toán...</div>
-                    <div class="moon-date" id="uposatha-date">--/--</div>
+                    <div class="moon-type" style="text-align:center; margin-left:38px;" id="uposatha-name">Đang tính toán...</div>
+                    <div class="moon-date" style="text-align:center; margin-left:36px;" id="uposatha-date">--/--</div>
                 </div>
                 <div class="moon-phase-visual" id="moon-icon"></div>
             </div>
@@ -972,8 +989,10 @@ function formatGregorianDate(date, timeZone) {
         let periodStr = '';
         if (hour >= 0 && hour < 12) {
             periodStr = 'Sáng';
-        } else {
+        } if (hour > 12 && hour < 18) {
             periodStr = 'Chiều';
+        } else {
+            periodStr = 'Tối';
         }
 
         // Cập nhật lên màn hình
