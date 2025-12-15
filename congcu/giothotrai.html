@@ -1,0 +1,1318 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Giờ Thọ Trai</title>
+    <script>/*
+ (c) 2011-2015, Vladimir Agafonkin
+ SunCalc is a JavaScript library for calculating sun/moon position and light phases.
+ https://github.com/mourner/suncalc
+*/
+
+(function () { 'use strict';
+
+// shortcuts for easier to read formulas
+
+var PI   = Math.PI,
+    sin  = Math.sin,
+    cos  = Math.cos,
+    tan  = Math.tan,
+    asin = Math.asin,
+    atan = Math.atan2,
+    acos = Math.acos,
+    rad  = PI / 180;
+
+// sun calculations are based on http://aa.quae.nl/en/reken/zonpositie.html formulas
+
+
+// date/time constants and conversions
+
+var dayMs = 1000 * 60 * 60 * 24,
+    J1970 = 2440588,
+    J2000 = 2451545;
+
+function toJulian(date) { return date.valueOf() / dayMs - 0.5 + J1970; }
+function fromJulian(j)  { return new Date((j + 0.5 - J1970) * dayMs); }
+function toDays(date)   { return toJulian(date) - J2000; }
+
+
+// general calculations for position
+
+var e = rad * 23.4397; // obliquity of the Earth
+
+function rightAscension(l, b) { return atan(sin(l) * cos(e) - tan(b) * sin(e), cos(l)); }
+function declination(l, b)    { return asin(sin(b) * cos(e) + cos(b) * sin(e) * sin(l)); }
+
+function azimuth(H, phi, dec)  { return atan(sin(H), cos(H) * sin(phi) - tan(dec) * cos(phi)); }
+function altitude(H, phi, dec) { return asin(sin(phi) * sin(dec) + cos(phi) * cos(dec) * cos(H)); }
+
+function siderealTime(d, lw) { return rad * (280.16 + 360.9856235 * d) - lw; }
+
+function astroRefraction(h) {
+    if (h < 0) // the following formula works for positive altitudes only.
+        h = 0; // if h = -0.08901179 a div/0 would occur.
+
+    // formula 16.4 of "Astronomical Algorithms" 2nd edition by Jean Meeus (Willmann-Bell, Richmond) 1998.
+    // 1.02 / tan(h + 10.26 / (h + 5.10)) h in degrees, result in arc minutes -> converted to rad:
+    return 0.0002967 / Math.tan(h + 0.00312536 / (h + 0.08901179));
+}
+
+// general sun calculations
+
+function solarMeanAnomaly(d) { return rad * (357.5291 + 0.98560028 * d); }
+
+function eclipticLongitude(M) {
+
+    var C = rad * (1.9148 * sin(M) + 0.02 * sin(2 * M) + 0.0003 * sin(3 * M)), // equation of center
+        P = rad * 102.9372; // perihelion of the Earth
+
+    return M + C + P + PI;
+}
+
+function sunCoords(d) {
+
+    var M = solarMeanAnomaly(d),
+        L = eclipticLongitude(M);
+
+    return {
+        dec: declination(L, 0),
+        ra: rightAscension(L, 0)
+    };
+}
+
+
+var SunCalc = {};
+
+
+// calculates sun position for a given date and latitude/longitude
+
+SunCalc.getPosition = function (date, lat, lng) {
+
+    var lw  = rad * -lng,
+        phi = rad * lat,
+        d   = toDays(date),
+
+        c  = sunCoords(d),
+        H  = siderealTime(d, lw) - c.ra;
+
+    return {
+        azimuth: azimuth(H, phi, c.dec),
+        altitude: altitude(H, phi, c.dec)
+    };
+};
+
+
+// sun times configuration (angle, morning name, evening name)
+
+var times = SunCalc.times = [
+    [-0.833, 'sunrise',       'sunset'      ],
+    [  -0.3, 'sunriseEnd',    'sunsetStart' ],
+    [    -6, 'dawn',          'dusk'        ],
+    [   -12, 'nauticalDawn',  'nauticalDusk'],
+    [   -18, 'nightEnd',      'night'       ],
+    [     6, 'goldenHourEnd', 'goldenHour'  ]
+];
+
+// adds a custom time to the times config
+
+SunCalc.addTime = function (angle, riseName, setName) {
+    times.push([angle, riseName, setName]);
+};
+
+
+// calculations for sun times
+
+var J0 = 0.0009;
+
+function julianCycle(d, lw) { return Math.round(d - J0 - lw / (2 * PI)); }
+
+function approxTransit(Ht, lw, n) { return J0 + (Ht + lw) / (2 * PI) + n; }
+function solarTransitJ(ds, M, L)  { return J2000 + ds + 0.0053 * sin(M) - 0.0069 * sin(2 * L); }
+
+function hourAngle(h, phi, d) { return acos((sin(h) - sin(phi) * sin(d)) / (cos(phi) * cos(d))); }
+function observerAngle(height) { return -2.076 * Math.sqrt(height) / 60; }
+
+// returns set time for the given sun altitude
+function getSetJ(h, lw, phi, dec, n, M, L) {
+
+    var w = hourAngle(h, phi, dec),
+        a = approxTransit(w, lw, n);
+    return solarTransitJ(a, M, L);
+}
+
+
+// calculates sun times for a given date, latitude/longitude, and, optionally,
+// the observer height (in meters) relative to the horizon
+
+SunCalc.getTimes = function (date, lat, lng, height) {
+
+    height = height || 0;
+
+    var lw = rad * -lng,
+        phi = rad * lat,
+
+        dh = observerAngle(height),
+
+        d = toDays(date),
+        n = julianCycle(d, lw),
+        ds = approxTransit(0, lw, n),
+
+        M = solarMeanAnomaly(ds),
+        L = eclipticLongitude(M),
+        dec = declination(L, 0),
+
+        Jnoon = solarTransitJ(ds, M, L),
+
+        i, len, time, h0, Jset, Jrise;
+
+
+    var result = {
+        solarNoon: fromJulian(Jnoon),
+        nadir: fromJulian(Jnoon - 0.5)
+    };
+
+    for (i = 0, len = times.length; i < len; i += 1) {
+        time = times[i];
+        h0 = (time[0] + dh) * rad;
+
+        Jset = getSetJ(h0, lw, phi, dec, n, M, L);
+        Jrise = Jnoon - (Jset - Jnoon);
+
+        result[time[1]] = fromJulian(Jrise);
+        result[time[2]] = fromJulian(Jset);
+    }
+
+    return result;
+};
+
+
+// moon calculations, based on http://aa.quae.nl/en/reken/hemelpositie.html formulas
+
+function moonCoords(d) { // geocentric ecliptic coordinates of the moon
+
+    var L = rad * (218.316 + 13.176396 * d), // ecliptic longitude
+        M = rad * (134.963 + 13.064993 * d), // mean anomaly
+        F = rad * (93.272 + 13.229350 * d),  // mean distance
+
+        l  = L + rad * 6.289 * sin(M), // longitude
+        b  = rad * 5.128 * sin(F),     // latitude
+        dt = 385001 - 20905 * cos(M);  // distance to the moon in km
+
+    return {
+        ra: rightAscension(l, b),
+        dec: declination(l, b),
+        dist: dt
+    };
+}
+
+SunCalc.getMoonPosition = function (date, lat, lng) {
+
+    var lw  = rad * -lng,
+        phi = rad * lat,
+        d   = toDays(date),
+
+        c = moonCoords(d),
+        H = siderealTime(d, lw) - c.ra,
+        h = altitude(H, phi, c.dec),
+        // formula 14.1 of "Astronomical Algorithms" 2nd edition by Jean Meeus (Willmann-Bell, Richmond) 1998.
+        pa = atan(sin(H), tan(phi) * cos(c.dec) - sin(c.dec) * cos(H));
+
+    h = h + astroRefraction(h); // altitude correction for refraction
+
+    return {
+        azimuth: azimuth(H, phi, c.dec),
+        altitude: h,
+        distance: c.dist,
+        parallacticAngle: pa
+    };
+};
+
+
+// calculations for illumination parameters of the moon,
+// based on http://idlastro.gsfc.nasa.gov/ftp/pro/astro/mphase.pro formulas and
+// Chapter 48 of "Astronomical Algorithms" 2nd edition by Jean Meeus (Willmann-Bell, Richmond) 1998.
+
+SunCalc.getMoonIllumination = function (date) {
+
+    var d = toDays(date || new Date()),
+        s = sunCoords(d),
+        m = moonCoords(d),
+
+        sdist = 149598000, // distance from Earth to Sun in km
+
+        phi = acos(sin(s.dec) * sin(m.dec) + cos(s.dec) * cos(m.dec) * cos(s.ra - m.ra)),
+        inc = atan(sdist * sin(phi), m.dist - sdist * cos(phi)),
+        angle = atan(cos(s.dec) * sin(s.ra - m.ra), sin(s.dec) * cos(m.dec) -
+                cos(s.dec) * sin(m.dec) * cos(s.ra - m.ra));
+
+    return {
+        fraction: (1 + cos(inc)) / 2,
+        phase: 0.5 + 0.5 * inc * (angle < 0 ? -1 : 1) / Math.PI,
+        angle: angle
+    };
+};
+
+
+function hoursLater(date, h) {
+    return new Date(date.valueOf() + h * dayMs / 24);
+}
+
+// calculations for moon rise/set times are based on http://www.stargazing.net/kepler/moonrise.html article
+
+SunCalc.getMoonTimes = function (date, lat, lng, inUTC) {
+    var t = new Date(date);
+    if (inUTC) t.setUTCHours(0, 0, 0, 0);
+    else t.setHours(0, 0, 0, 0);
+
+    var hc = 0.133 * rad,
+        h0 = SunCalc.getMoonPosition(t, lat, lng).altitude - hc,
+        h1, h2, rise, set, a, b, xe, ye, d, roots, x1, x2, dx;
+
+    // go in 2-hour chunks, each time seeing if a 3-point quadratic curve crosses zero (which means rise or set)
+    for (var i = 1; i <= 24; i += 2) {
+        h1 = SunCalc.getMoonPosition(hoursLater(t, i), lat, lng).altitude - hc;
+        h2 = SunCalc.getMoonPosition(hoursLater(t, i + 1), lat, lng).altitude - hc;
+
+        a = (h0 + h2) / 2 - h1;
+        b = (h2 - h0) / 2;
+        xe = -b / (2 * a);
+        ye = (a * xe + b) * xe + h1;
+        d = b * b - 4 * a * h1;
+        roots = 0;
+
+        if (d >= 0) {
+            dx = Math.sqrt(d) / (Math.abs(a) * 2);
+            x1 = xe - dx;
+            x2 = xe + dx;
+            if (Math.abs(x1) <= 1) roots++;
+            if (Math.abs(x2) <= 1) roots++;
+            if (x1 < -1) x1 = x2;
+        }
+
+        if (roots === 1) {
+            if (h0 < 0) rise = i + x1;
+            else set = i + x1;
+
+        } else if (roots === 2) {
+            rise = i + (ye < 0 ? x2 : x1);
+            set = i + (ye < 0 ? x1 : x2);
+        }
+
+        if (rise && set) break;
+
+        h0 = h2;
+    }
+
+    var result = {};
+
+    if (rise) result.rise = hoursLater(t, rise);
+    if (set) result.set = hoursLater(t, set);
+
+    if (!rise && !set) result[ye > 0 ? 'alwaysUp' : 'alwaysDown'] = true;
+
+    return result;
+};
+
+
+// export as Node module / AMD module / browser variable
+if (typeof exports === 'object' && typeof module !== 'undefined') module.exports = SunCalc;
+else if (typeof define === 'function' && define.amd) define(SunCalc);
+else window.SunCalc = SunCalc;
+
+}());</script>
+<style>
+        :root {
+            /* Màu chủ đạo: Y phục tu sĩ trên nền tối */
+            --saffron: #F39C12; 
+            --gold: #FFC300;
+            --bg-color: #1a1a1a; /* Nền tối */
+            --card-bg: #2c2c2c; /* Nền thẻ tối */
+            --text-color: #f0f0f0; /* Chữ sáng */
+            --secondary-text: #b0b0b0; /* Chữ phụ */
+            --border-color: #444; /* Đường viền nhẹ */
+            --highlight-bg: #40382d; /* Nền nổi bật (vàng sẫm) */
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 420px;
+            text-align: center;
+        }
+
+        h1 {
+            color: var(--saffron);
+            font-weight: 300;
+            margin-bottom: 0.2em;
+            text-transform: uppercase;
+            font-size: 1.8rem;
+        }
+
+        .subtitle {
+            color: var(--secondary-text);
+            font-size: 0.9rem;
+            margin-bottom: 2rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Thẻ hiển thị Năm */
+        .year-display {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 20px;
+            padding: 10px 0;
+            border-bottom: 1px solid var(--border-color);
+            border-top: 1px solid var(--border-color);
+        }
+        .year-item {
+            display: flex;
+            flex-direction: column;
+            line-height: 1.2;
+        }
+        .year-type {
+            font-size: 0.75rem;
+            color: var(--secondary-text);
+            text-transform: uppercase;
+        }
+        .year-value {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: var(--gold);
+        }
+
+        /* Card Giao diện */
+        .card {
+            background: var(--card-bg);
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+            margin-bottom: 15px;
+            text-align: left;
+            border: 1px solid var(--border-color);
+        }
+        
+        .card-header {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            color: var(--secondary-text);
+            margin-bottom: 8px;
+            font-weight: bold;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        /* Phần Đồng Hồ Ngọ */
+        .timer-display {
+            text-align: center;
+            margin: 10px 0;
+        }
+        .timer {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--text-color);
+            font-variant-numeric: tabular-nums;
+            line-height: 1;
+        }
+        .timer-status {
+            font-size: 0.9rem;
+            margin-top: 5px;
+            font-weight: 500;
+        }
+        .status-ok { color: #2ecc71; } /* Xanh lá */
+        .status-wait { color: #f39c12; } /* Vàng */
+        .status-stop { color: #e74c3c; } /* Đỏ */
+
+        /* Thanh tiến trình */
+        .progress-track {
+            background-color: #444;
+            height: 6px;
+            border-radius: 3px;
+            width: 100%;
+            overflow: hidden;
+            margin-top: 15px;
+        }
+        .progress-fill {
+            background: linear-gradient(90deg, var(--gold), var(--saffron));
+            height: 100%;
+            width: 0%;
+            transition: width 0.5s ease;
+        }
+
+        /* Phần Uposatha */
+        .moon-info {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .moon-text {
+            flex-grow: 1;
+        }
+        .moon-date {
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+        .moon-type {
+            color: var(--saffron);
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+        .moon-phase-visual {
+            font-size: 2.5rem; 
+            margin-left: 15px;
+        }
+        
+        .next-uposatha-label {
+            font-size: 0.75rem;
+            color: var(--secondary-text);
+            margin-top: 5px;
+        }
+
+        /* Lưới thông tin mặt trời */
+        .data-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+        .data-item {
+            background: #3a3a3a;
+            padding: 10px;
+            border-radius: 8px;
+        }
+        .data-item.highlight {
+            background-color: var(--highlight-bg);
+            border: 1px solid var(--saffron);
+        }
+        .data-label {
+            font-size: 0.7rem;
+            color: var(--secondary-text);
+            text-transform: uppercase;
+            display: block;
+            margin-bottom: 2px;
+        }
+        .data-value {
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+
+        /* Nút và Footer */
+        .footer-info {
+            font-size: 0.75rem;
+            color: #7f8c8d;
+            margin-top: 20px;
+        }
+        button {
+            margin-top: 10px;
+            padding: 12px 24px;
+            background-color: var(--saffron);
+            color: #1a1a1a; 
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.95rem;
+            font-weight: 600;
+        }
+        button:hover { background-color: var(--gold); }
+        .hidden { display: none; }
+		        /* Tùy chỉnh cho Select */
+        #city-select {
+            padding: 10px; 
+            border-radius: 5px; 
+            background: #444; 
+            color: var(--text-color); 
+            border: none; 
+            width: 100%; 
+            max-width: 250px; 
+            margin-bottom: 10px; 
+            font-size: 1rem;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23f0f0f0%22%20d%3D%22M287%20197.8L146.2%2057.1%205.4%20197.8z%22%2F%3E%3C%2Fsvg%3E");
+            background-repeat: no-repeat;
+            background-position: right 10px center;
+            background-size: 10px;
+        }
+        /* NEW: Rechoose Button Styling */
+        .rechoose-btn {
+            padding: 5px 10px;
+            font-size: 0.7rem;
+            margin: 0;
+            background-color: #555;
+            color: #fff;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 400;
+            transition: background-color 0.3s;
+        }
+        .rechoose-btn:hover { background-color: #777; }		
+		
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Giờ Thọ Trai</h1>
+    <div class="subtitle">Công cụ hỗ trợ hành giả</div>
+
+<div class="year-display">
+        <div class="year-item">
+            <span class="year-type">Dương Lịch</span>
+            <span class="year-value" id="current-year-gregorian">--</span>
+            <span class="date-value" id="current-date-gregorian" style="font-size: 0.75rem; color: var(--secondary-text);">--/--/--</span> 
+        </div>
+        
+<div class="year-item">
+            <span class="year-type">Giờ Hiện Tại</span>
+            <span class="year-value" id="current-time-display">--:--</span>
+            <span class="date-value" id="current-period-display" style="font-size: 0.75rem; color: var(--secondary-text);">--</span>
+        </div>
+
+        <div class="year-item">
+            <span class="year-type">Phật Lịch</span>
+            <span class="year-value" id="current-year-buddhist">--</span>
+            <span class="date-value" id="current-date-buddhist" style="font-size: 0.75rem; color: var(--secondary-text);">--/-- ÂL</span> 
+        </div>
+    </div>
+    <div id="permission-ui" class="card hidden" style="text-align: center;">
+        <p>Ứng dụng cần vị trí của bạn để tính chính xác giờ <b>Đứng Bóng</b>, xin vui lòng bật dịch vụ định vị.</p>
+        <button onclick="initLocation()">1. Dùng GPS</button>
+        <div style="margin-top: 20px; border-top: 1px solid var(--border-color); padding-top: 20px;">
+            <p style="font-size: 0.9em; color: var(--secondary-text); margin-bottom: 10px;">Hoặc chọn thành phố nếu GPS lỗi / không muốn dùng GPS:</p>
+            <select id="city-select"></select>
+            <button onclick="selectCity()" style="background-color: #27ae60;">Xác nhận thành phố</button>
+        </div>
+    </div>
+
+    <div id="app-ui" class="hidden">
+        
+        <div class="card">
+            <div class="card-header">
+                <span>Lịch Uposatha (Bố Tát)</span>
+            </div>
+            <div class="moon-info">
+                <div class="moon-text">
+                    <div class="moon-type" id="uposatha-name">Đang tính toán...</div>
+                    <div class="moon-date" id="uposatha-date">--/--</div>
+                </div>
+                <div class="moon-phase-visual" id="moon-icon"></div>
+            </div>
+        </div>
+
+        <div class="card" style="text-align: center;">
+            <div class="card-header" style="justify-content: center;">
+                Thời Gian Thọ Thực (Trước Ngọ)
+            </div>
+            
+            <div class="timer-display">
+                <div class="timer" id="countdown">--:--:--</div>
+                <div class="timer-status" id="status-text">Đang tải...</div>
+            </div>
+            
+            <div class="progress-track">
+                <div class="progress-fill" id="progress-bar"></div>
+            </div>
+        </div>
+
+        <div class="data-grid">
+            <div class="data-item">
+                <span class="data-label">Rạng đông</span>
+                <span class="data-value" id="dawn-time">--:--</span>
+            </div>
+            <div class="data-item highlight">
+                <span class="data-label">Đứng&nbsp;bóng <small>(Giờ&nbsp;Ngọ)</small></span>
+                <span class="data-value" id="noon-time">--:--</span>
+            </div>
+            <div class="data-item">
+                <span class="data-label">Mặt trời mọc</span>
+                <span class="data-value" id="sunrise-time">--:--</span>
+            </div>
+            <div class="data-item">
+                <span class="data-label">Mặt trời lặn</span>
+                <span class="data-value" id="sunset-time">--:--</span>
+            </div>
+        </div>
+
+        <div class="footer-info">
+            <span id="coords-display">Đang định vị...</span>
+            <button onclick="rechooseLocation()" class="rechoose-btn">Đổi Vị Trí</button>
+        </div>
+    </div>
+</div>
+
+<script>
+// ===================================================================
+// Dữ liệu và Hàm từ amlich-hnd.js (Tích hợp)
+// ===================================================================
+
+var TK19 = new Array(0x30baa3, 0x56ab50, 0x422ba0, 0x2cab61, 0x52a370, 0x3c51e8, 0x60d160, 0x4ae4b0, 0x376926, 0x58daa0, 0x445b50, 0x3116d2, 0x562ae0, 0x3ea2e0, 0x28e2d2, 0x4ec950, 0x38d556, 0x5cb520, 0x46b690, 0x325da4, 0x5855d0, 0x4225d0, 0x2ca5b3, 0x52a2b0, 0x3da8b7, 0x60a950, 0x4ab4a0, 0x35b2a5, 0x5aad50, 0x4455b0, 0x302b74, 0x562570, 0x4052f9, 0x6452b0, 0x4e6950, 0x386d56, 0x5e5aa0, 0x46ab50, 0x3256d4, 0x584ae0, 0x42a570, 0x2d4553, 0x50d2a0, 0x3be8a7, 0x60d550, 0x4a5aa0, 0x34ada5, 0x5a95d0, 0x464ae0, 0x2eaab4, 0x54a4d0, 0x3ed2b8, 0x64b290, 0x4cb550, 0x385757, 0x5e2da0, 0x4895d0, 0x324d75, 0x5849b0, 0x42a4b0, 0x2da4b3, 0x506a90, 0x3aad98, 0x606b50, 0x4c2b60, 0x359365, 0x5a9370, 0x464970, 0x306964, 0x52e4a0, 0x3cea6a, 0x62da90, 0x4e5ad0, 0x392ad6, 0x5e2ae0, 0x4892e0, 0x32cad5, 0x56c950, 0x40d4a0, 0x2bd4a3, 0x50b690, 0x3a57a7, 0x6055b0, 0x4c25d0, 0x3695b5, 0x5a92b0, 0x44a950, 0x2ed954, 0x54b4a0, 0x3cb550, 0x286b52, 0x4e55b0, 0x3a2776, 0x5e2570, 0x4852b0, 0x32aaa5, 0x56e950, 0x406aa0, 0x2abaa3, 0x50ab50);
+var TK20 = new Array(0x3c4bd8, 0x624ae0, 0x4ca570, 0x3854d5, 0x5cd260, 0x44d950, 0x315554, 0x5656a0, 0x409ad0, 0x2a55d2, 0x504ae0, 0x3aa5b6, 0x60a4d0, 0x48d250, 0x33d255, 0x58b540, 0x42d6a0, 0x2cada2, 0x5295b0, 0x3f4977, 0x644970, 0x4ca4b0, 0x36b4b5, 0x5c6a50, 0x466d50, 0x312b54, 0x562b60, 0x409570, 0x2c52f2, 0x504970, 0x3a6566, 0x5ed4a0, 0x48ea50, 0x336a95, 0x585ad0, 0x442b60, 0x2f86e3, 0x5292e0, 0x3dc8d7, 0x62c950, 0x4cd4a0, 0x35d8a6, 0x5ab550, 0x4656a0, 0x31a5b4, 0x5625d0, 0x4092d0, 0x2ad2b2, 0x50a950, 0x38b557, 0x5e6ca0, 0x48b550, 0x355355, 0x584da0, 0x42a5b0, 0x2f4573, 0x5452b0, 0x3ca9a8, 0x60e950, 0x4c6aa0, 0x36aea6, 0x5aab50, 0x464b60, 0x30aae4, 0x56a570, 0x405260, 0x28f263, 0x4ed940, 0x38db47, 0x5cd6a0, 0x4896d0, 0x344dd5, 0x5a4ad0, 0x42a4d0, 0x2cd4b4, 0x52b250, 0x3cd558, 0x60b540, 0x4ab5a0, 0x3755a6, 0x5c95b0, 0x4649b0, 0x30a974, 0x56a4b0, 0x40aa50, 0x29aa52, 0x4e6d20, 0x39ad47, 0x5eab60, 0x489370, 0x344af5, 0x5a4970, 0x4464b0, 0x2c74a3, 0x50ea50, 0x3d6a58, 0x6256a0, 0x4aaad0, 0x3696d5, 0x5c92e0);
+var TK21 = new Array(0x46c960, 0x2ed954, 0x54d4a0, 0x3eda50, 0x2a7552, 0x4e56a0, 0x38a7a7, 0x5ea5d0, 0x4a92b0, 0x32aab5, 0x58a950, 0x42b4a0, 0x2cbaa4, 0x50ad50, 0x3c55d9, 0x624ba0, 0x4ca5b0, 0x375176, 0x5c5270, 0x466930, 0x307934, 0x546aa0, 0x3ead50, 0x2a5b52, 0x504b60, 0x38a6e6, 0x5ea4e0, 0x48d260, 0x32ea65, 0x56d520, 0x40daa0, 0x2d56a3, 0x5256d0, 0x3c4afb, 0x6249d0, 0x4ca4d0, 0x37d0b6, 0x5ab250, 0x44b520, 0x2edd25, 0x54b5a0, 0x3e55d0, 0x2a55b2, 0x5049b0, 0x3aa577, 0x5ea4b0, 0x48aa50, 0x33b255, 0x586d20, 0x40ad60, 0x2d4b63, 0x525370, 0x3e49e8, 0x60c970, 0x4c54b0, 0x3768a6, 0x5ada50, 0x445aa0, 0x2fa6a4, 0x54aad0, 0x4052e0, 0x28d2e3, 0x4ec950, 0x38d557, 0x5ed4a0, 0x46d950, 0x325d55, 0x5856a0, 0x42a6d0, 0x2c55d4, 0x5252b0, 0x3ca9b8, 0x62a930, 0x4ab490, 0x34b6a6, 0x5aad50, 0x4655a0, 0x2eab64, 0x54a570, 0x4052b0, 0x2ab173, 0x4e6930, 0x386b37, 0x5e6aa0, 0x48ad50, 0x332ad5, 0x582b60, 0x42a570, 0x2e52e4, 0x50d160, 0x3ae958, 0x60d520, 0x4ada90, 0x355aa6, 0x5a56d0, 0x462ae0, 0x30a9d4, 0x54a2d0, 0x3ed150, 0x28e952);
+var TK22 = new Array(0x4eb520, 0x38d727, 0x5eada0, 0x4a55b0, 0x362db5, 0x5a45b0, 0x44a2b0, 0x2eb2b4, 0x54a950, 0x3cb559, 0x626b20, 0x4cad50, 0x385766, 0x5c5370, 0x484570, 0x326574, 0x5852b0, 0x406950, 0x2a7953, 0x505aa0, 0x3baaa7, 0x5ea6d0, 0x4a4ae0, 0x35a2e5, 0x5aa550, 0x42d2a0, 0x2de2a4, 0x52d550, 0x3e5abb, 0x6256a0, 0x4c96d0, 0x3949b6, 0x5e4ab0, 0x46a8d0, 0x30d4b5, 0x56b290, 0x40b550, 0x2a6d52, 0x504da0, 0x3b9567, 0x609570, 0x4a49b0, 0x34a975, 0x5a64b0, 0x446a90, 0x2cba94, 0x526b50, 0x3e2b60, 0x28ab61, 0x4c9570, 0x384ae6, 0x5cd160, 0x46e4a0, 0x2eed25, 0x54da90, 0x405b50, 0x2c36d3, 0x502ae0, 0x3a93d7, 0x6092d0, 0x4ac950, 0x32d556, 0x58b4a0, 0x42b690, 0x2e5d94, 0x5255b0, 0x3e25fa, 0x6425b0, 0x4e92b0, 0x36aab6, 0x5c6950, 0x4674a0, 0x31b2a5, 0x54ad50, 0x4055a0, 0x2aab73, 0x522570, 0x3a5377, 0x6052b0, 0x4a6950, 0x346d56, 0x585aa0, 0x42ab50, 0x2e56d4, 0x544ae0, 0x3ca570, 0x2864d2, 0x4cd260, 0x36eaa6, 0x5ad550, 0x465aa0, 0x30ada5, 0x5695d0, 0x404ad0, 0x2aa9b3, 0x50a4d0, 0x3ad2b7, 0x5eb250, 0x48b540, 0x33d556);
+
+function LunarDate(dd, mm, yy, leap, jd) {
+	this.day = dd; this.month = mm; this.year = yy; this.leap = leap; this.jd = jd;
+}
+
+function INT(d) { return Math.floor(d); }
+
+function jdn(dd, mm, yy) {
+	var a = INT((14 - mm) / 12);
+	var y = yy+4800-a;
+	var m = mm+12*a-3;
+	var jd = dd + INT((153*m+2)/5) + 365*y + INT(y/4) - INT(y/100) + INT(y/400) - 32045;
+	return jd;
+}
+
+function decodeLunarYear(yy, k) {
+	var monthLengths, regularMonths, offsetOfTet, leapMonth, leapMonthLength, solarNY, currentJD, j, mm;
+	var ly = new Array();
+	monthLengths = new Array(29, 30);
+	regularMonths = new Array(12);
+	offsetOfTet = k >> 17;
+	leapMonth = k & 0xf;
+	leapMonthLength = monthLengths[k >> 16 & 0x1];
+	solarNY = jdn(1, 1, yy);
+	currentJD = solarNY+offsetOfTet;
+	j = k >> 4;
+	for(i = 0; i < 12; i++) {
+		regularMonths[12 - i - 1] = monthLengths[j & 0x1];
+		j >>= 1;
+	}
+	if (leapMonth == 0) {
+		for(mm = 1; mm <= 12; mm++) {
+			ly.push(new LunarDate(1, mm, yy, 0, currentJD));
+			currentJD += regularMonths[mm-1];
+		}
+	} else {
+		for(mm = 1; mm <= leapMonth; mm++) {
+			ly.push(new LunarDate(1, mm, yy, 0, currentJD));
+			currentJD += regularMonths[mm-1];
+		}
+		ly.push(new LunarDate(1, leapMonth, yy, 1, currentJD));
+		currentJD += leapMonthLength;
+		for(mm = leapMonth+1; mm <= 12; mm++) {
+			ly.push(new LunarDate(1, mm, yy, 0, currentJD));
+			currentJD += regularMonths[mm-1];
+		}
+	}
+	return ly;
+}
+
+function getYearInfo(yyyy) {
+	var yearCode;
+	if (yyyy < 1900) {
+		yearCode = TK19[yyyy - 1800];
+	} else if (yyyy < 2000) {
+		yearCode = TK20[yyyy - 1900];
+	} else if (yyyy < 2100) {
+		yearCode = TK21[yyyy - 2000];
+	} else {
+		yearCode = TK22[yyyy - 2100];
+	}
+	return decodeLunarYear(yyyy, yearCode);
+}
+
+var FIRST_DAY = jdn(25, 1, 1800); 
+var LAST_DAY = jdn(31, 12, 2199);
+
+function findLunarDate(jd, ly) {
+	if (jd > LAST_DAY || jd < FIRST_DAY || ly[0].jd > jd) {
+		return new LunarDate(0, 0, 0, 0, jd);
+	}
+	var i = ly.length-1;
+	while (jd < ly[i].jd) {
+		i--;
+	}
+	var off = jd - ly[i].jd;
+	ret = new LunarDate(ly[i].day+off, ly[i].month, ly[i].year, ly[i].leap, jd);
+	return ret;
+}
+
+function getLunarDate(dd, mm, yyyy) {
+	var ly, jd;
+	if (yyyy < 1800 || 2199 < yyyy) {
+		// return new LunarDate(0, 0, 0, 0, 0); // Giữ hàm này để không bị lỗi
+	}
+	ly = getYearInfo(yyyy);
+	jd = jdn(dd, mm, yyyy);
+	if (jd < ly[0].jd) {
+		ly = getYearInfo(yyyy - 1);
+	}
+	return findLunarDate(jd, ly);
+}
+
+// ===================================================================
+// Bắt đầu Logic Ứng dụng
+// ===================================================================
+
+    let solarNoon, dawnTime;
+    let timerInterval;
+    let currentLocationTimeZone = undefined; // Biến lưu múi giờ hiện tại
+
+   const CITY_COORDINATES = {
+    // === VIETNAM CITIES (5) ===
+    'hanoi': { name: "Hà Nội (Mặc định)", lat: 21.0285, lng: 105.8542, timezone: 'Asia/Ho_Chi_Minh' },
+    'hcmc': { name: "TP. Hồ Chí Minh", lat: 10.8231, lng: 106.6297, timezone: 'Asia/Ho_Chi_Minh' },
+    'hue': { name: "Huế", lat: 16.4637, lng: 107.5909, timezone: 'Asia/Ho_Chi_Minh' },
+    'danang': { name: "Đà Nẵng", lat: 16.0544, lng: 108.2022, timezone: 'Asia/Ho_Chi_Minh' },
+    'cantho': { name: "Cần Thơ", lat: 10.0452, lng: 105.7468, timezone: 'Asia/Ho_Chi_Minh' },
+
+    // === SOUTHEAST ASIA / ASIAN HUB CITIES (10) ===
+    'bangkok': { name: "Bangkok, Thái Lan", lat: 13.7563, lng: 100.5018, timezone: 'Asia/Bangkok' },
+    'singapore': { name: "Singapore", lat: 1.3521, lng: 103.8198, timezone: 'Asia/Singapore' },
+    'kualalumpur': { name: "Kuala Lumpur, Malaysia", lat: 3.1390, lng: 101.6869, timezone: 'Asia/Kuala_Lumpur' },
+    'jakarta': { name: "Jakarta, Indonesia", lat: -6.2088, lng: 106.8456, timezone: 'Asia/Jakarta' },
+    'manila': { name: "Manila, Philippines", lat: 14.5995, lng: 120.9842, timezone: 'Asia/Manila' },
+    'seoul': { name: "Seoul, Hàn Quốc", lat: 37.5665, lng: 126.9780, timezone: 'Asia/Seoul' },
+    'tokyo': { name: "Tokyo, Nhật Bản", lat: 35.6895, lng: 139.6917, timezone: 'Asia/Tokyo' },
+    'osaka': { name: "Osaka, Nhật Bản", lat: 34.6937, lng: 135.5023, timezone: 'Asia/Tokyo' },
+    'taipei': { name: "Đài Bắc, Đài Loan", lat: 25.0330, lng: 121.5654, timezone: 'Asia/Taipei' },
+    'hongkong': { name: "Hồng Kông", lat: 22.3193, lng: 114.1694, timezone: 'Asia/Hong_Kong' },
+
+    // === MYANMAR (Pa-Auk) CITIES (3) ===
+    'yangon': { name: "Yangon, Myanmar", lat: 16.84, lng: 96.17, timezone: 'Asia/Yangon' },
+    'mandalay': { name: "Mandalay, Myanmar", lat: 21.96, lng: 96.09, timezone: 'Asia/Yangon' },
+    'mawlamyine': { name: "Mawlamyine (Pa-Auk), Myanmar", lat: 16.40, lng: 97.67, timezone: 'Asia/Yangon' },
+
+    // === INDIAN SUBCONTINENT CITIES (8) ===
+    'newdelhi': { name: "New Delhi, Ấn Độ", lat: 28.61, lng: 77.23, timezone: 'Asia/Kolkata' },
+    'mumbai': { name: "Mumbai, Ấn Độ", lat: 19.08, lng: 72.88, timezone: 'Asia/Kolkata' },
+    'kolkata': { name: "Kolkata, Ấn Độ", lat: 22.5726, lng: 88.3639, timezone: 'Asia/Kolkata' },
+    'chennai': { name: "Chennai, Ấn Độ", lat: 13.0827, lng: 80.2707, timezone: 'Asia/Kolkata' },
+    'bodhgaya': { name: "Bồ Đề Đạo Tràng, Ấn Độ", lat: 24.698, lng: 84.987, timezone: 'Asia/Kolkata' },
+    'islamabad': { name: "Islamabad, Pakistan", lat: 33.6844, lng: 73.0479, timezone: 'Asia/Karachi' },
+    'dhaka': { name: "Dhaka, Bangladesh", lat: 23.8103, lng: 90.4125, timezone: 'Asia/Dhaka' },
+    'colombo': { name: "Colombo, Sri Lanka", lat: 6.9271, lng: 79.8612, timezone: 'Asia/Colombo' },
+
+    // === MIDDLE EAST / CENTRAL ASIA (5) ===
+    'dubai': { name: "Dubai, UAE", lat: 25.2048, lng: 55.2708, timezone: 'Asia/Dubai' },
+    'riyadh': { name: "Riyadh, Ả Rập Xê Út", lat: 24.7136, lng: 46.6753, timezone: 'Asia/Riyadh' },
+    'jerusalem': { name: "Jerusalem, Israel", lat: 31.7683, lng: 35.2137, timezone: 'Asia/Jerusalem' },
+    'tehran': { name: "Tehran, Iran", lat: 35.6892, lng: 51.3890, timezone: 'Asia/Tehran' },
+    'astana': { name: "Astana, Kazakhstan", lat: 51.1694, lng: 71.4491, timezone: 'Asia/Almaty' },
+
+    // === EUROPEAN CITIES (12) ===
+    'london': { name: "London, Anh", lat: 51.5074, lng: -0.1278, timezone: 'Europe/London' },
+    'paris': { name: "Paris, Pháp", lat: 48.8566, lng: 2.3522, timezone: 'Europe/Paris' },
+    'berlin': { name: "Berlin, Đức", lat: 52.5200, lng: 13.4050, timezone: 'Europe/Berlin' },
+    'rome': { name: "Rome, Ý", lat: 41.9028, lng: 12.4964, timezone: 'Europe/Rome' },
+    'madrid': { name: "Madrid, Tây Ban Nha", lat: 40.4168, lng: -3.7038, timezone: 'Europe/Madrid' },
+    'amsterdam': { name: "Amsterdam, Hà Lan", lat: 52.3676, lng: 4.9041, timezone: 'Europe/Amsterdam' },
+    'vienna': { name: "Vienna, Áo", lat: 48.2082, lng: 16.3738, timezone: 'Europe/Vienna' },
+    'moscow': { name: "Moscow, Nga", lat: 55.7558, lng: 37.6173, timezone: 'Europe/Moscow' },
+    'saintpetersburg': { name: "St. Petersburg, Nga", lat: 59.9343, lng: 30.3351, timezone: 'Europe/Moscow' },
+    'athens': { name: "Athens, Hy Lạp", lat: 37.9838, lng: 23.7275, timezone: 'Europe/Athens' },
+    'stockholm': { name: "Stockholm, Thụy Điển", lat: 59.3293, lng: 18.0686, timezone: 'Europe/Stockholm' },
+    'istanbul': { name: "Istanbul, Thổ Nhĩ Kỳ", lat: 41.01, lng: 28.98, timezone: 'Europe/Istanbul' },
+
+    // === NORTH AMERICA CITIES (6) ===
+    'newyork': { name: "New York, Mỹ", lat: 40.7128, lng: -74.0060, timezone: 'America/New_York' },
+    'losangeles': { name: "Los Angeles, Mỹ", lat: 34.0522, lng: -118.2437, timezone: 'America/Los_Angeles' },
+    'chicago': { name: "Chicago, Mỹ", lat: 41.8781, lng: -87.6298, timezone: 'America/Chicago' },
+    'toronto': { name: "Toronto, Canada", lat: 43.6532, lng: -79.3832, timezone: 'America/Toronto' },
+    'vancouver': { name: "Vancouver, Canada", lat: 49.2827, lng: -123.1207, timezone: 'America/Vancouver' },
+    'mexicocity': { name: "Mexico City, Mexico", lat: 19.4326, lng: -99.1332, timezone: 'America/Mexico_City' },
+
+    // === SOUTH AMERICA CITIES (6) ===
+    'riodejaneiro': { name: "Rio de Janeiro, Brazil", lat: -22.9068, lng: -43.1729, timezone: 'America/Sao_Paulo' },
+    'saopaulo': { name: "São Paulo, Brazil", lat: -23.5505, lng: -46.6333, timezone: 'America/Sao_Paulo' },
+    'buenosaires': { name: "Buenos Aires, Argentina", lat: -34.6037, lng: -58.3816, timezone: 'America/Argentina/Buenos_Aires' },
+    'santiago': { name: "Santiago, Chile", lat: -33.4489, lng: -70.6693, timezone: 'America/Santiago' },
+    'bogota': { name: "Bogotá, Colombia", lat: 4.7110, lng: -74.0721, timezone: 'America/Bogota' },
+    'lima': { name: "Lima, Peru", lat: -12.0464, lng: -77.0428, timezone: 'America/Lima' },
+
+    // === AFRICA CITIES (7) ===
+    'cairo': { name: "Cairo, Ai Cập", lat: 30.0333, lng: 31.2333, timezone: 'Africa/Cairo' },
+    'capetown': { name: "Cape Town, Nam Phi", lat: -33.9249, lng: 18.4241, timezone: 'Africa/Johannesburg' },
+    'johannesburg': { name: "Johannesburg, Nam Phi", lat: -26.2041, lng: 28.0473, timezone: 'Africa/Johannesburg' },
+    'lagos': { name: "Lagos, Nigeria", lat: 6.5244, lng: 3.3792, timezone: 'Africa/Lagos' },
+    'nairobi': { name: "Nairobi, Kenya", lat: -1.2921, lng: 36.8219, timezone: 'Africa/Nairobi' },
+    'marrakesh': { name: "Marrakesh, Ma-rốc", lat: 31.6295, lng: -7.9811, timezone: 'Africa/Casablanca' },
+    'accra': { name: "Accra, Ghana", lat: 5.6037, lng: -0.1870, timezone: 'Africa/Accra' },
+
+    // === AUSTRALIA / OCEANIA CITIES (3) ===
+    'sydney': { name: "Sydney, Úc", lat: -33.8688, lng: 151.2093, timezone: 'Australia/Sydney' },
+    'melbourne': { name: "Melbourne, Úc", lat: -37.8136, lng: 144.9631, timezone: 'Australia/Melbourne' },
+    'auckland': { name: "Auckland, New Zealand", lat: -36.8485, lng: 174.7633, timezone: 'Pacific/Auckland' }
+};
+    
+    // NEW: Định nghĩa các SVG cho Mặt trăng (dùng viewBox 0 0 24 24)
+    // Màu #FFC300 (gold) và #2c2c2c (card-bg)
+    const SVG_FULL_MOON = `<svg viewBox="0 0 24 24" width="30" height="30" style="display: block;"><circle cx="12" cy="12" r="10" fill="#FFC300"/></svg>`;
+    const SVG_NEW_MOON = `<svg viewBox="0 0 24 24" width="30" height="30" style="display: block;"><circle cx="12" cy="12" r="10" fill="#2c2c2c" stroke="#FFC300" stroke-width="1"/></svg>`;
+    
+    // Q.1 (8th): Half Moon, right side light
+    const SVG_FIRST_QUARTER = `<svg viewBox="0 0 24 24" width="30" height="30" style="display: block;">
+        <path d="M12 2a10 10 0 0 1 0 20V2z" fill="#2c2c2c"/>
+        <path d="M12 2a10 10 0 0 0 0 20V2z" fill="#FFC300"/>
+        <circle cx="12" cy="12" r="10" fill="none" stroke="#FFC300" stroke-width="1"/>
+    </svg>`;
+    
+    // Q.3 (23rd): Half Moon, left side light
+    const SVG_LAST_QUARTER = `<svg viewBox="0 0 24 24" width="30" height="30" style="display: block;">
+        <path d="M12 2a10 10 0 0 1 0 20V2z" fill="#FFC300"/>
+        <path d="M12 2a10 10 0 0 0 0 20V2z" fill="#2c2c2c"/>
+        <circle cx="12" cy="12" r="10" fill="none" stroke="#FFC300" stroke-width="1"/>
+    </svg>`;
+    
+
+function getDateComponentsInTimeZone(timeZone) {
+        const now = new Date();
+        const tz = timeZone || Intl.DateTimeFormat().resolvedOptions().timeZone;
+        
+        const formatter = new Intl.DateTimeFormat('en-US', {
+            year: 'numeric',
+            month: 'numeric',
+            day: 'numeric',
+            timeZone: tz
+        });
+
+        const parts = formatter.formatToParts(now);
+        const dateComponents = {};
+        parts.forEach(p => {
+            if (p.type === 'day') dateComponents.day = parseInt(p.value);
+            if (p.type === 'month') dateComponents.month = parseInt(p.value);
+            if (p.type === 'year') dateComponents.year = parseInt(p.value);
+        });
+        
+        return dateComponents; // {day: D, month: M, year: Y}
+    }
+
+
+    // Hàm cập nhật hiển thị ngày Âm Lịch (Đã sửa để dùng getLunarDate)
+    function updateBuddhistDateDisplay() {
+        // Lấy ngày/tháng/năm Dương Lịch theo múi giờ đã chọn
+        const solarDate = getDateComponentsInTimeZone(currentLocationTimeZone);
+        
+        // SỬ DỤNG HÀM TÍCH HỢP: getLunarDate(dd, mm, yyyy)
+        if (typeof getLunarDate === 'undefined') {
+            document.getElementById('current-date-buddhist').innerText = "Lỗi: getLunarDate không khả dụng";
+            return;
+        }
+        
+        // Hàm getLunarDate đã được cung cấp
+        const lunar = getLunarDate(solarDate.day, solarDate.month, solarDate.year);
+        
+        // Định dạng: DD-MM ÂL (Sử dụng hàm pad() đã có)
+        const lunarStr = `${pad(lunar.day)}-${pad(lunar.month)} ÂL`;
+        
+        document.getElementById('current-date-buddhist').innerText = lunarStr;
+    }
+
+function formatGregorianDate(date, timeZone) {
+        // Ánh xạ tên ngày sang định dạng T2, T3, ...
+        const DOW_MAP = {
+            'Chủ Nhật': 'CN', 'Thứ Hai': 'T2', 'Thứ Ba': 'T3', 'Thứ Tư': 'T4', 
+            'Thứ Năm': 'T5', 'Thứ Sáu': 'T6', 'Thứ Bảy': 'T7'
+        };
+        
+        // 1. Lấy tên ngày trong tuần (timezone aware)
+        const optionsWeekday = { weekday: 'long', timeZone: timeZone };
+        const weekdayLong = date.toLocaleDateString('vi-VN', optionsWeekday);
+        const dayPrefix = DOW_MAP[weekdayLong] || weekdayLong.replace('Thứ ', 'T'); 
+        
+        // 2. Lấy DD/MM/YY (timezone aware)
+        const optionsDate = { day: '2-digit', month: '2-digit', timeZone: timeZone };
+        const dateStr = date.toLocaleDateString('vi-VN', optionsDate);
+        
+        return `${dayPrefix}, ${dateStr}`;
+    }
+
+    // NEW: Hàm cập nhật hiển thị ngày Dương Lịch
+    function updateGregorianDateDisplay() {
+        const now = new Date();
+        const dateStr = formatGregorianDate(now, currentLocationTimeZone);
+        document.getElementById('current-date-gregorian').innerText = dateStr;
+    }
+
+ // Hàm cập nhật giờ hiện tại (HH:MM 24h + Sáng/Chiều)
+    function updateCurrentTimeHHMM() {
+        const now = new Date();
+        
+        // 1. Lấy giờ 24h (HH:MM) theo múi giờ đã chọn
+        const timeOptions = { 
+            hour: '2-digit', 
+            minute: '2-digit', 
+            hour12: false 
+        };
+        
+        // 2. Lấy giá trị giờ (0-23) để xác định sáng/chiều
+        const hourOptions = { 
+            hour: '2-digit', 
+            hour12: false 
+        };
+
+        if (currentLocationTimeZone) {
+            timeOptions.timeZone = currentLocationTimeZone;
+            hourOptions.timeZone = currentLocationTimeZone;
+        }
+
+        const timeStr = now.toLocaleTimeString('vi-VN', timeOptions);
+        
+        // Lấy giờ (00-23)
+        const hourStr = now.toLocaleTimeString('en-US', hourOptions);
+        const hour = parseInt(hourStr, 10);
+        
+        // Xác định Sáng/Chiều
+        let periodStr = '';
+        if (hour >= 0 && hour < 12) {
+            periodStr = 'Sáng';
+        } else {
+            periodStr = 'Chiều';
+        }
+
+        // Cập nhật lên màn hình
+        document.getElementById('current-time-display').innerText = timeStr;
+        document.getElementById('current-period-display').innerText = periodStr; // NEW: Hiển thị sáng/chiều
+    }
+    
+    // --- Hàm khởi tạo (MODIFIED) ---
+    function initializeApp() {
+        const now = new Date();
+        const currentYear = now.getFullYear();
+        
+        const buddhistYear = currentYear + 544; 
+
+        document.getElementById('current-year-gregorian').innerText = currentYear;
+        document.getElementById('current-year-buddhist').innerText = buddhistYear;
+        
+        // Cập nhật tất cả các trường hiển thị ngày/giờ
+        updateCurrentTimeHHMM();
+        updateGregorianDateDisplay();
+        updateBuddhistDateDisplay(); 
+        
+        // Cập nhật ngày/giờ mỗi 60 giây 
+        setInterval(() => {
+            updateCurrentTimeHHMM();
+            updateGregorianDateDisplay(); 
+            updateBuddhistDateDisplay();
+        }, 60000); 
+        // ------------------------------------
+
+        populateCitySelect();
+        
+        // --- TẢI DỮ LIỆU ĐÃ LƯU ---
+        const savedLat = localStorage.getItem('last_lat');
+        const savedLng = localStorage.getItem('last_lng');
+        const savedText = localStorage.getItem('last_loc_text');
+        const savedTimeZone = localStorage.getItem('last_timezone');
+        
+        if (savedLat && savedLng && savedText) {
+            startApp(parseFloat(savedLat), parseFloat(savedLng), savedText, savedTimeZone);
+        } else {
+            document.getElementById('permission-ui').classList.remove('hidden');
+        }
+    }
+
+    function populateCitySelect() {
+        const select = document.getElementById('city-select');
+        select.innerHTML = '';
+        
+        let defaultOption = document.createElement('option');
+        defaultOption.value = '';
+        defaultOption.innerText = '--- Chọn một thành phố ---';
+        defaultOption.disabled = true;
+        defaultOption.selected = true;
+        select.appendChild(defaultOption);
+
+        for (const key in CITY_COORDINATES) {
+            const city = CITY_COORDINATES[key];
+            let option = document.createElement('option');
+            option.value = key;
+            option.innerText = city.name;
+            select.appendChild(option);
+        }
+    }
+
+    // --- Xử lý Vị trí ---
+function initLocation() {
+        if (navigator.geolocation) {
+            // Hiển thị trạng thái đang tìm
+            document.querySelector('#permission-ui button:nth-child(2)').innerText = "Đang tìm GPS...";
+
+            // Lệnh tìm vị trí với timeout 5 giây
+            navigator.geolocation.getCurrentPosition(successPosition, errorPosition, { 
+                timeout: 8000, 
+                maximumAge: 0 // Để buộc tìm kiếm vị trí mới
+            });
+        } else {
+            // Trường hợp trình duyệt không hỗ trợ API
+            errorPosition({ message: "Trình duyệt không hỗ trợ GPS." });
+        }
+    }
+
+    function successPosition(position) {
+        const lat = position.coords.latitude;
+        const lng = position.coords.longitude;
+        const locationText = `GPS: ${lat.toFixed(4)} | ${lng.toFixed(4)}`;
+        // Khi dùng GPS, ta dùng múi giờ mặc định của trình duyệt (undefined)
+        startApp(lat, lng, locationText, undefined);
+    }
+
+function errorPosition(error) {
+        let errorMessage = "Không thể tìm thấy vị trí.";
+
+        // Xử lý các mã lỗi cụ thể (nếu trình duyệt cung cấp)
+        if (error.code === 1) {
+            errorMessage = "Bạn đã từ chối chia sẻ vị trí.";
+        } else if (error.code === 2) {
+            errorMessage = "Vị trí không xác định (Có thể GPS bị tắt).";
+        } else if (error.code === 3) {
+            errorMessage = "Đã hết thời gian chờ (Có thể GPS bị tắt).";
+        } else if (error.message) {
+            errorMessage = error.message;
+        }
+
+        // Hoàn nguyên giao diện:
+        // 1. Hiển thị thông báo lỗi (ví dụ: trên console hoặc alert, hoặc thêm vào #permission-ui)
+        console.error("Lỗi vị trí:", errorMessage); 
+        // Bạn có thể thêm một div hiển thị lỗi trong #permission-ui để thông báo cho người dùng
+        
+        // 2. Hoàn nguyên nút "Tìm vị trí"
+        const gpsButton = document.querySelector('#permission-ui button:nth-child(2)');
+        if (gpsButton) {
+            gpsButton.innerText = "Tìm vị trí hiện tại (GPS)";
+            gpsButton.disabled = false;
+        }
+        
+        // 3. (Tuỳ chọn) Đưa người dùng về trạng thái phải chọn thành phố
+        // Nếu muốn, bạn có thể buộc người dùng phải chọn thành phố hoặc thử lại.
+        alert(`Lỗi: ${errorMessage}. Vui lòng chọn thành phố thủ công.`);
+
+        // Ứng dụng sẽ bị kẹt lại ở giao diện #permission-ui cho đến khi người dùng chọn thành phố.
+    }
+
+    function selectCity() {
+        const select = document.getElementById('city-select');
+        const cityKey = select.value;
+
+        if (!cityKey) {
+            alert("Xin vui lòng chọn một thành phố.");
+            return;
+        }
+
+        const city = CITY_COORDINATES[cityKey];
+        const locationText = `${city.name}: ${city.lat.toFixed(4)} | ${city.lng.toFixed(4)}`;
+
+        startApp(city.lat, city.lng, locationText, city.timezone);
+    }
+
+    // Hàm khởi động chung sau khi có tọa độ
+function startApp(lat, lng, locationText, timezone) {
+        // --- LƯU VỊ TRÍ VÀO LOCAL STORAGE ---
+        localStorage.setItem('last_lat', lat);
+        localStorage.setItem('last_lng', lng);
+        localStorage.setItem('last_loc_text', locationText);
+        
+if (timezone) {
+             localStorage.setItem('last_timezone', timezone);
+             currentLocationTimeZone = timezone;
+        } else {
+             localStorage.removeItem('last_timezone');
+             currentLocationTimeZone = undefined;
+        }
+        
+        // Cập nhật tất cả các trường hiển thị ngay lập tức khi đổi múi giờ
+        if (typeof updateCurrentTimeHHMM === 'function') {
+            updateCurrentTimeHHMM();
+        }
+        if (typeof updateGregorianDateDisplay === 'function') {
+            updateGregorianDateDisplay();
+        }
+        if (typeof updateBuddhistDateDisplay === 'function') {
+            updateBuddhistDateDisplay();
+        }
+        
+        document.getElementById('permission-ui').classList.add('hidden');
+        document.getElementById('app-ui').classList.remove('hidden');
+
+        document.getElementById('coords-display').innerText = locationText;
+
+        calculateSolarData(lat, lng);
+        calculateUposatha(); 
+
+        if (timerInterval) clearInterval(timerInterval);
+        timerInterval = setInterval(updateTimer, 1000);
+        updateTimer();
+    }
+    
+    function rechooseLocation() {
+        if (timerInterval) clearInterval(timerInterval);
+        document.getElementById('app-ui').classList.add('hidden');
+        document.getElementById('permission-ui').classList.remove('hidden');
+        document.querySelector('#permission-ui button:nth-child(2)').innerText = "Dùng GPS";
+    }
+
+
+    // --- Xử lý Giờ Mặt Trời và Ngọ ---
+    function calculateSolarData(lat, lng) {
+        const now = new Date();
+        const times = SunCalc.getTimes(now, lat, lng);
+
+        solarNoon = times.solarNoon;
+        dawnTime = times.dawn; 
+
+        document.getElementById('dawn-time').innerText = formatTime(times.dawn);
+        document.getElementById('noon-time').innerText = formatTime(times.solarNoon);
+        document.getElementById('sunrise-time').innerText = formatTime(times.sunrise);
+        document.getElementById('sunset-time').innerText = formatTime(times.sunset);
+    }
+
+    function updateTimer() {
+        const now = new Date();
+        const countdownEl = document.getElementById('countdown');
+        const statusEl = document.getElementById('status-text');
+        const progressEl = document.getElementById('progress-bar');
+
+        if (!solarNoon || !dawnTime) {
+            countdownEl.innerText = "--:--:--";
+            statusEl.innerText = "Đang tính giờ...";
+            return;
+        }
+        
+        const solarNoon_ms = solarNoon.getTime();
+        const dawnTime_ms = dawnTime.getTime();
+        const now_ms = now.getTime();
+
+
+        if (now_ms < dawnTime_ms) {
+            countdownEl.innerText = "CHỜ";
+            statusEl.innerText = "Chưa đến giờ rạng đông";
+            statusEl.className = "timer-status status-wait";
+            progressEl.style.width = "0%";
+            return;
+        }
+
+        if (now_ms > solarNoon_ms) {
+            countdownEl.innerText = "HẾT GIỜ";
+            statusEl.innerText = "Đã quá giờ ngọ";
+            statusEl.className = "timer-status status-stop";
+            progressEl.style.width = "100%";
+            return;
+        }
+
+        statusEl.innerText = "Trong giờ được thọ thực";
+        statusEl.className = "timer-status status-ok";
+
+        const diff = solarNoon_ms - now_ms;
+        const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+        countdownEl.innerText = `${pad(hours)}:${pad(minutes)}:${pad(seconds)}`;
+
+        const totalDuration = solarNoon_ms - dawnTime_ms;
+        const elapsed = now_ms - dawnTime_ms;
+        const percent = (elapsed / totalDuration) * 100;
+        progressEl.style.width = `${percent}%`;
+    }
+
+    // --- Xử lý Ngày Uposatha (Dựa trên Âm Lịch) ---
+    function isUposathaDay(day, month, year) {
+        const lunar = getLunarDate(day, month, year);
+        if (lunar.day === 0) return false;
+
+        const nextDay = new Date(year, month - 1, day + 1);
+        const nextLunar = getLunarDate(nextDay.getDate(), nextDay.getMonth() + 1, nextDay.getFullYear());
+
+        const isEndOfLunarMonth = (lunar.day === 30) || (lunar.day === 29 && nextLunar.day === 1);
+        
+        return (lunar.day === 8) || (lunar.day === 15) || (lunar.day === 23) || isEndOfLunarMonth;
+    }
+
+    // NEW: Hàm sử dụng SVG tùy chỉnh
+    function getUposathaIcon(lunarDay) {
+        if (lunarDay === 15) return SVG_FULL_MOON;
+        if (lunarDay === 8) return SVG_FIRST_QUARTER;
+        if (lunarDay === 23) return SVG_LAST_QUARTER;
+        // Ngày 29/30 (Sóc)
+        return SVG_NEW_MOON; 
+    }
+
+    function calculateUposatha() {
+        const today = new Date();
+        let nextUposatha = null;
+
+        for (let i = 0; i <= 35; i++) {
+            let primaryDate = new Date(today);
+            primaryDate.setDate(today.getDate() + i);
+            
+            const dd = primaryDate.getDate();
+            const mm = primaryDate.getMonth() + 1;
+            const yy = primaryDate.getFullYear();
+
+            if (isUposathaDay(dd, mm, yy)) {
+                const lunar = getLunarDate(dd, mm, yy);
+                let type = "Ngày Bố Tát sắp tới"; 
+                
+                if (i === 0) {
+                     type = "Hôm nay là Ngày Bố Tát";
+                }
+
+                nextUposatha = {
+                    type: type,
+                    icon: getUposathaIcon(lunar.day), // Gọi hàm mới
+                    date1: primaryDate,
+                };
+                break; 
+            }
+        }
+
+        if (nextUposatha) {
+            const dateStr1 = formatFullDate(nextUposatha.date1);
+            const lunar = getLunarDate(nextUposatha.date1.getDate(), nextUposatha.date1.getMonth() + 1, nextUposatha.date1.getFullYear());
+            let lunarStr = `(${lunar.day}/${lunar.month} Âm Lịch)`;
+
+            document.getElementById('uposatha-name').innerText = nextUposatha.type;
+            document.getElementById('uposatha-date').innerHTML = `${dateStr1} <span style="font-size:0.8em; color: var(--secondary-text)">${lunarStr}</span>`;
+            document.getElementById('moon-icon').innerHTML = nextUposatha.icon; // Sử dụng .innerHTML để render SVG
+        } else {
+             document.getElementById('uposatha-name').innerText = "Không tìm thấy";
+             document.getElementById('uposatha-date').innerText = "--/--";
+             document.getElementById('moon-icon').innerHTML = SVG_NEW_MOON; // Hiển thị default
+        }
+    }
+
+    // --- Tiện ích Định dạng ---
+    function formatTime(date) {
+        const options = { hour: '2-digit', minute: '2-digit', hour12: false };
+        if (currentLocationTimeZone) {
+            options.timeZone = currentLocationTimeZone;
+        }
+        return date.toLocaleTimeString('vi-VN', options);
+    }
+
+    function formatFullDate(date) {
+        return date.toLocaleDateString('vi-VN', { 
+            weekday: 'long', 
+            day: 'numeric', 
+            month: 'numeric', 
+            year: 'numeric' 
+        });
+    }
+
+    function pad(num) {
+        return num.toString().padStart(2, '0');
+    }
+    
+    // Khởi tạo app khi trang tải xong
+    window.onload = initializeApp;
+</script>
+
+</body>
+</html>
