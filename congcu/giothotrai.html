@@ -415,7 +415,37 @@ else window.SunCalc = SunCalc;
             justify-content: space-between;
             align-items: center;
         }
-
+        /* Card Giao diện */
+        .card2 {
+            background: var(--card-bg);
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+            margin-bottom: 15px;
+            text-align: left;
+            border: 1px solid var(--border-color);
+        }
+        /* Hover effect */
+.card2:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.55);
+    border-color: var(--gold);
+    background: #353535; /* slightly brighter */
+}
+        .card-header2 {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            color: var(--secondary-text);
+            margin-bottom: 8px;
+            font-weight: bold;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+/* Header hover effect (triggered when card is hovered) */
+.card2:hover .card-header2 {
+    color: #ffffff;
+}
         /* Phần Đồng Hồ Ngọ */
         .timer-display {
             text-align: center;
@@ -560,19 +590,6 @@ else window.SunCalc = SunCalc;
             transition: background-color 0.3s;
         }
         .rechoose-btn:hover { background-color: #777; }		
-		.uposatha-link {
-    color: #b0b0b0;
-    text-decoration: none;      /* removes underline */
-    border: 1px solid #b0b0b0;  /* border around text */
-    padding: 4px 8px;           /* optional: makes border look nicer */
-    border-radius: 4px;         /* optional: rounded corners */
-    display: inline-block;      /* ensures border wraps properly */
-}
-
-.uposatha-link:hover {
-    color: #ffffff;             /* optional hover effect */
-    border-color: #ffffff;
-}
 
     </style>
 </head>
@@ -613,21 +630,27 @@ else window.SunCalc = SunCalc;
 
     <div id="app-ui" class="hidden">
         
-        <div class="card">
-            <div class="card-header" 
-         style="display:flex; justify-content:center; align-items:center;">
-                <span><a href="Uposatha.html" class="uposatha-link">
-                Lịch Uposatha (Bố Tát)
-            </a>
-            </span>
-            </div>
-            <div class="moon-info">
-                <div class="moon-text">
-                    <div class="moon-type" style="text-align:center; margin-left:38px;" id="uposatha-name">Đang tính toán...</div>
-                    <div class="moon-date" style="text-align:center; margin-left:36px;" id="uposatha-date">--/--</div>
+        <a href="uposatha.html" style="text-decoration:none; color:inherit;">
+    <div class="card2">
+        <div class="card-header2" 
+            style="display:flex; justify-content:center; align-items:center;">
+            Lịch Uposatha (Bố Tát)
+        </div>
+
+        <div class="moon-info">
+            <div class="moon-text">
+                <div class="moon-type" style="text-align:center; margin-left:38px;" id="uposatha-name">
+                    Đang tính toán...
                 </div>
-                <div class="moon-phase-visual" id="moon-icon"></div>
+                <div class="moon-date" style="text-align:center; margin-left:36px;" id="uposatha-date">
+                    --/--
+                </div>
             </div>
+            <div class="moon-phase-visual" id="moon-icon"></div>
+        </div>
+    </div>
+</a>
+
         </div>
 
         <div class="card" style="text-align: center;">
@@ -986,14 +1009,16 @@ function formatGregorianDate(date, timeZone) {
         const hour = parseInt(hourStr, 10);
         
         // Xác định Sáng/Chiều
-        let periodStr = '';
-        if (hour >= 0 && hour < 12) {
-            periodStr = 'Sáng';
-        } if (hour > 12 && hour < 18) {
-            periodStr = 'Chiều';
-        } else {
-            periodStr = 'Tối';
-        }
+let periodStr = '';
+
+if (hour >= 0 && hour < 12) {
+    periodStr = 'Sáng';
+} else if (hour >= 12 && hour < 18) {
+    periodStr = 'Chiều';
+} else {
+    periodStr = 'Tối';
+}
+
 
         // Cập nhật lên màn hình
         document.getElementById('current-time-display').innerText = timeStr;
