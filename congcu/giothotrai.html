@@ -1010,9 +1010,11 @@ function formatGregorianDate(date, timeZone) {
         // Xác định Sáng/Chiều
 let periodStr = '';
 
-if (hour >= 0 && hour < 12) {
+if (hour >= 0 && hour < 11) {
     periodStr = 'Sáng';
-} else if (hour >= 12 && hour < 18) {
+} else if (hour >= 11 && hour < 13) {
+    periodStr = 'Trưa';
+} else if (hour >= 13 && hour < 18) {
     periodStr = 'Chiều';
 } else {
     periodStr = 'Tối';
@@ -1249,7 +1251,7 @@ if (timezone) {
             return;
         }
 
-        statusEl.innerText = "Trong giờ được thọ thực";
+        statusEl.innerText = "Trong giờ thọ thực";
         statusEl.className = "timer-status status-ok";
 
         const diff = solarNoon_ms - now_ms;
