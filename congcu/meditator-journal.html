@@ -276,11 +276,9 @@
         <div style="margin-top: auto;" class="desktop-only"></div>
         
         <div class="nav-item" onclick="app.exportData()">
-            <i class="fas fa-download"></i><span class="nav-text">Backup</span>
-        </div>
-        <div class="nav-item" onclick="document.getElementById('import-file').click()">
-            <i class="fas fa-file-upload"></i><span class="nav-text">Import</span>
-        </div>
+    <i class="fas fa-save"></i><span class="nav-text">Backup</span>
+</div>
+
         <div class="nav-item" onclick="app.resetApp()" style="color: var(--danger);"> <i class="fas fa-trash-alt"></i><span class="nav-text">Reset</span>
         </div>
     </nav>
@@ -440,7 +438,52 @@
             </form>
         </div>
     </div>
+<div class="modal" id="backup-modal">
+    <div class="modal-content">
+        <h2 style="margin-bottom: 10px; text-align: center;">Backup & Restore</h2>
+        
+        <div class="desktop-actions" style="margin-bottom: 20px;">
+            <p style="color: var(--text-light); font-size: 12px; margin-bottom: 10px;">
+                <i class="fas fa-desktop"></i> <strong>For PC / Web browser:</strong>
+            </p>
+            <div style="display: flex; gap: 10px;">
+                <button class="btn" style="flex: 1;" onclick="app.downloadFile()">
+                    <i class="fas fa-download"></i> Backup
+                </button>
+                <button class="btn btn-secondary" style="flex: 1;" onclick="document.getElementById('backup-file-input').click()">
+                    <i class="fas fa-file-import"></i> Restore
+                </button>
+                <input type="file" id="backup-file-input" style="display: none;" accept=".json" onchange="app.handleFileUpload(this)">
+            </div>
+        </div>
 
+        <div style="display: flex; align-items: center; margin: 15px 0; color: var(--text-light);">
+            <div style="flex: 1; height: 1px; background: var(--border);"></div>
+            <span style="padding: 0 10px; font-size: 10px; text-transform: uppercase;">Or Manually (Mobile)</span>
+            <div style="flex: 1; height: 1px; background: var(--border);"></div>
+        </div>
+
+        <div class="mobile-actions">
+            <p style="color: var(--text-light); font-size: 12px; margin-bottom: 5px;">
+                <i class="fas fa-mobile-alt"></i> <strong>Copy the data:</strong>
+            </p>
+            <div class="form-group">
+                <textarea id="backup-data-area" class="form-control" 
+                    style="height: 100px; font-family: monospace; font-size: 10px; color: var(--text-light);" 
+                    placeholder="JSON data..."></textarea>
+            </div>
+            <div style="display: flex; gap: 10px; justify-content: flex-end;">
+			 <button type="button" class="btn btn-secondary" onclick="app.closeBackupModal()">Close</button>
+                <button class="btn btn-secondary" style="background: var(--zen); color: white;" onclick="app.copyBackupData()">
+                    <i class="fas fa-copy"></i> Copy
+                </button>
+                <button class="btn btn-secondary" style="background: var(--warning); color: black;" onclick="app.restoreFromText()">
+                    <i class="fas fa-file-import"></i> Restore
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
     <div class="modal" id="session-modal">
         <div class="modal-content">
             <h2 id="session-title" style="margin-bottom: 20px;">Log Session</h2>
@@ -1431,22 +1474,109 @@ updateStats() {
             }
             
             exportData() {
-                const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(this.data));
-                const a = document.createElement('a'); a.setAttribute("href", dataStr); a.setAttribute("download", "backup.json");
-                document.body.appendChild(a); a.click(); a.remove(); this.showToast('Backup Exported!');
+        // Added null, 2 for pretty printing so it looks better in the textarea
+        const dataStr = JSON.stringify(this.data); 
+        const modal = document.getElementById('backup-modal');
+        const textarea = document.getElementById('backup-data-area');
+        
+        textarea.value = dataStr;
+        modal.style.display = 'flex';
+    }
+
+    closeBackupModal() {
+        document.getElementById('backup-modal').style.display = 'none';
+    }
+
+    // --- OPTION 1: FILE (PC) ---
+    
+    // Download .json file
+    downloadFile() {
+        const dataStr = JSON.stringify(this.data);
+        const blob = new Blob([dataStr], { type: "application/json" });
+        const url = URL.createObjectURL(blob);
+        
+        const a = document.createElement('a');
+        a.href = url;
+        // Translated filename to "backup_data_[date].json"
+        a.download = `backup_data_${new Date().toISOString().split('T')[0]}.json`;
+        document.body.appendChild(a);
+        a.click();
+        
+        // Cleanup
+        setTimeout(() => {
+            document.body.removeChild(a);
+            window.URL.revokeObjectURL(url);
+        }, 0);
+        
+        this.showToast('File downloaded successfully!');
+    }
+
+    // Handle file selection from computer
+    handleFileUpload(inputElement) {
+        const file = inputElement.files[0];
+        if (!file) return;
+
+        const reader = new FileReader();
+        reader.onload = (e) => {
+            // Pass file content to the common processing function
+            this.processRestoreData(e.target.result);
+        };
+        reader.readAsText(file);
+        
+        // Reset input to allow selecting the same file again if needed
+        inputElement.value = '';
+    }
+
+    // --- OPTION 2: TEXT (MOBILE/WEBVIEW) ---
+
+    // Copy text from textarea
+    copyBackupData() {
+        const textarea = document.getElementById('backup-data-area');
+        textarea.select();
+        textarea.setSelectionRange(0, 99999); // Mobile fix
+
+        if (navigator.clipboard) {
+            navigator.clipboard.writeText(textarea.value).then(() => {
+                this.showToast('Copied to clipboard!');
+            }).catch(() => {
+                document.execCommand('copy');
+                this.showToast('Copied!');
+            });
+        } else {
+            document.execCommand('copy');
+            this.showToast('Copied!');
+        }
+    }
+
+    // "Restore from text" button
+    restoreFromText() {
+        const textarea = document.getElementById('backup-data-area');
+        const rawData = textarea.value.trim();
+        if (!rawData) {
+            this.showToast('Data field is empty!');
+            return;
+        }
+        this.processRestoreData(rawData);
+    }
+
+    // --- COMMON LOGIC ---
+    processRestoreData(jsonString) {
+        try {
+            const json = JSON.parse(jsonString);
+            
+            // Basic validation
+            if (!json.goals || !Array.isArray(json.goals) || !json.logs) {
+                throw new Error("Invalid file structure (Missing goals/logs).");
             }
-            importData(input) {
-                const file = input.files[0]; if (!file) return;
-                const reader = new FileReader();
-                reader.onload = (e) => {
-                    try {
-                        const json = JSON.parse(e.target.result);
-                        if (!json.goals || !json.logs) throw new Error("Invalid file");
-                        if (confirm('Overwrite data?')) { localStorage.setItem('chronoData', JSON.stringify(json)); location.reload(); }
-                    } catch (err) { alert("Error: " + err.message); }
-                };
-                reader.readAsText(file); input.value = ''; 
+
+            if (confirm(`Found ${json.goals.length} goals and ${json.logs.length} logs.\nAre you sure you want to overwrite current data?`)) {
+                localStorage.setItem('chronoData', JSON.stringify(json));
+                location.reload(); // Reload page to apply changes
             }
+        } catch (err) {
+            alert("Restore error: " + err.message);
+        }
+    }
             resetApp() {
                 if (confirm('Delete ALL data?')) { localStorage.removeItem('chronoData'); location.reload(); }
             }
