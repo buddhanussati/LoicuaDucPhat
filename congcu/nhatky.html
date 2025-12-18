@@ -285,11 +285,8 @@
         <div style="margin-top: auto;" class="desktop-only"></div>
         
         <div class="nav-item" onclick="app.exportData()">
-            <i class="fas fa-download"></i><span class="nav-text">Sao lưu</span>
-        </div>
-        <div class="nav-item" onclick="document.getElementById('import-file').click()">
-            <i class="fas fa-file-upload"></i><span class="nav-text">Nhập liệu</span>
-        </div>
+    <i class="fas fa-save"></i><span class="nav-text">Nhập liệu</span>
+</div>
         <div class="nav-item" onclick="app.resetApp()" style="color: var(--danger);"> <i class="fas fa-trash-alt"></i><span class="nav-text">Đặt lại</span>
         </div>
     </nav>
@@ -449,7 +446,31 @@
             </form>
         </div>
     </div>
+<div class="modal" id="backup-modal">
+    <div class="modal-content">
+        <h2 style="margin-bottom: 10px;">Quản lý dữ liệu</h2>
+        <p style="color: var(--text-light); font-size: 12px; margin-bottom: 15px;">
+            Do hạn chế của ứng dụng, vui lòng sao chép mã bên dưới để lưu trữ thủ công, hoặc dán mã vào để phục hồi.
+        </p>
 
+        <div class="form-group">
+            <label>Dữ liệu (JSON)</label>
+            <textarea id="backup-data-area" class="form-control" style="height: 150px; font-family: monospace; font-size: 11px;"></textarea>
+        </div>
+
+        <div style="display: flex; gap: 10px; justify-content: space-between; margin-top: 20px;">
+            <button type="button" class="btn btn-secondary" onclick="app.closeBackupModal()">Đóng</button>
+            <div style="display: flex; gap: 10px;">
+                <button type="button" class="btn" style="background: var(--zen); color: white;" onclick="app.copyBackupData()">
+                    <i class="fas fa-copy"></i> Sao chép
+                </button>
+                <button type="button" class="btn" style="background: var(--warning); color: black;" onclick="app.restoreBackupData()">
+                    <i class="fas fa-file-import"></i> Phục hồi
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
     <div class="modal" id="session-modal">
         <div class="modal-content">
             <h2 id="session-title" style="margin-bottom: 20px;">Ghi nhận phiên</h2>
@@ -1460,22 +1481,63 @@ updateStats() {
             }
             
             exportData() {
-                const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(this.data));
-                const a = document.createElement('a'); a.setAttribute("href", dataStr); a.setAttribute("download", "backup.json");
-                document.body.appendChild(a); a.click(); a.remove(); this.showToast('Đã xuất sao lưu!');
-            }
-            importData(input) {
-                const file = input.files[0]; if (!file) return;
-                const reader = new FileReader();
-                reader.onload = (e) => {
-                    try {
-                        const json = JSON.parse(e.target.result);
-                        if (!json.goals || !json.logs) throw new Error("File không hợp lệ");
-                        if (confirm('Ghi đè dữ liệu?')) { localStorage.setItem('chronoData', JSON.stringify(json)); location.reload(); }
-                    } catch (err) { alert("Lỗi: " + err.message); }
-                };
-                reader.readAsText(file); input.value = ''; 
-            }
+    // Lấy dữ liệu hiện tại
+    const dataStr = JSON.stringify(this.data);
+    
+    // Mở modal
+    const modal = document.getElementById('backup-modal');
+    const textarea = document.getElementById('backup-data-area');
+    
+    textarea.value = dataStr;
+    modal.style.display = 'flex';
+    
+}
+            closeBackupModal() {
+    document.getElementById('backup-modal').style.display = 'none';
+}
+
+copyBackupData() {
+    const textarea = document.getElementById('backup-data-area');
+    textarea.select();
+    textarea.setSelectionRange(0, 99999); // Cho thiết bị di động
+    
+    // Thử dùng API Clipboard hiện đại, nếu không được thì dùng execCommand cũ
+    if (navigator.clipboard) {
+        navigator.clipboard.writeText(textarea.value).then(() => {
+            this.showToast('Đã sao chép vào bộ nhớ tạm!');
+        }).catch(err => {
+            // Fallback nếu HTTPS/Permission bị chặn
+            document.execCommand('copy');
+            this.showToast('Đã sao chép!');
+        });
+    } else {
+        document.execCommand('copy');
+        this.showToast('Đã sao chép!');
+    }
+}
+
+restoreBackupData() {
+    const textarea = document.getElementById('backup-data-area');
+    const rawData = textarea.value.trim();
+    
+    if (!rawData) {
+        this.showToast('Vui lòng dán dữ liệu vào khung trống!');
+        return;
+    }
+
+    try {
+        const json = JSON.parse(rawData);
+        // Kiểm tra sơ bộ cấu trúc file
+        if (!json.goals || !json.logs) throw new Error("Cấu trúc dữ liệu không hợp lệ");
+        
+        if (confirm('Cảnh báo: Dữ liệu hiện tại sẽ bị thay thế hoàn toàn. Tiếp tục?')) {
+            localStorage.setItem('chronoData', JSON.stringify(json));
+            location.reload();
+        }
+    } catch (err) {
+        alert("Lỗi dữ liệu: " + err.message);
+    }
+}
             resetApp() {
                 if (confirm('Xóa TẤT CẢ dữ liệu?')) { localStorage.removeItem('chronoData'); location.reload(); }
             }
