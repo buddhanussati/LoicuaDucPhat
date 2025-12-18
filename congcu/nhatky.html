@@ -1,0 +1,1618 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nhật Ký Hành Giả</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <style>
+        :root {
+            /* --- DARK THEME PALETTE --- */
+            --primary: #818cf8;       
+            --primary-dark: #6366f1;
+            --secondary: #f472b6;     
+            --bg: #111827;            
+            --surface: #1f2937;       
+            --text: #f3f4f6;          
+            --text-light: #9ca3af;    
+            --border: #374151;        
+            --success: #34d399;
+            --warning: #fbbf24;
+            --danger: #f87171;
+            --zen: #a78bfa; 
+        }
+
+        html { color-scheme: dark; } 
+
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', system-ui, sans-serif; }
+        
+        body { background-color: var(--bg); color: var(--text); display: flex; height: 100vh; overflow: hidden; }
+
+        /* --- Sidebar --- */
+        .sidebar {
+            width: 80px;
+            background: var(--surface);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px 0;
+            border-right: 1px solid var(--border);
+            transition: width 0.3s;
+            z-index: 50;
+            flex-shrink: 0;
+        }
+        
+        @media (min-width: 769px) {
+            .sidebar:hover { width: 200px; }
+            .sidebar:hover .nav-text { display: inline; opacity: 1; }
+            .nav-item:hover, .nav-item.active { background-color: #374151; color: var(--primary); border-right: 3px solid var(--primary); }
+        }
+        
+        .logo { font-size: 24px; color: var(--primary); margin-bottom: 40px; }
+        
+        .nav-item {
+            width: 100%;
+            padding: 15px 20px;
+            cursor: pointer;
+            color: var(--text-light);
+            display: flex;
+            align-items: center;
+            transition: 0.2s;
+            white-space: nowrap;
+        }
+        
+        .nav-item i { font-size: 20px; min-width: 40px; text-align: center; }
+        .nav-text { display: none; opacity: 0; transition: opacity 0.2s; margin-left: 10px; font-weight: 500;}
+
+        /* --- Main Content --- */
+        .main { flex: 1; overflow-y: auto; padding: 30px; position: relative; }
+        
+        header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; flex-wrap: wrap; gap: 15px; }
+        h1 { font-size: 24px; font-weight: 700; color: var(--text); }
+        
+        .btn {
+            background: var(--primary);
+            color: #111; 
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            transition: 0.2s;
+        }
+        .btn:hover { background: var(--primary-dark); transform: translateY(-1px); color: white; }
+        .btn-secondary { background: var(--surface); color: var(--text); border: 1px solid var(--border); }
+        .btn-secondary:hover { background: var(--border); }
+
+        /* --- Gamification Bar --- */
+        .user-stats {
+            display: flex;
+            gap: 20px;
+            background: var(--surface);
+            padding: 10px 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+            align-items: center;
+            border: 1px solid var(--border);
+        }
+        .stat-item { display: flex; flex-direction: column; align-items: center; }
+        .stat-val { font-weight: bold; font-size: 14px; }
+        .stat-label { font-size: 10px; color: var(--text-light); text-transform: uppercase; }
+        
+        .stat-item.clickable { cursor: pointer; transition: 0.2s; }
+        .stat-item.clickable:hover { opacity: 0.7; }
+        .daily-bar-bg { width: 60px; height: 4px; background: #374151; border-radius: 2px; margin-top: 2px; overflow: hidden;}
+        .daily-bar-fill { height: 100%; background: var(--primary); width: 0%; transition: width 0.5s ease; }
+        .daily-bar-fill.complete { background: var(--success); }
+
+        /* --- Views --- */
+        .view-section { display: none; animation: fadeIn 0.3s ease; }
+        .view-section.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* --- Dashboard Grid --- */
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 20px;
+        }
+
+        .card { background: var(--surface); padding: 20px; border-radius: 16px; border: 1px solid var(--border); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.2); }
+        
+        /* Goal Cards */
+        .goal-card { position: relative; overflow: hidden; border-left: 5px solid var(--primary); display: flex; flex-direction: column; }
+        .goal-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 15px; }
+        .goal-title { font-weight: 600; font-size: 18px; }
+        .goal-tag { font-size: 12px; background: rgba(99, 102, 241, 0.2); color: var(--primary); padding: 2px 8px; border-radius: 10px; }
+        
+        .section-label { font-size: 11px; text-transform: uppercase; color: var(--text-light); font-weight: 700; margin-bottom: 5px; letter-spacing: 0.5px; }
+        
+        .progress-container { height: 8px; background: #374151; border-radius: 4px; margin: 0 0 5px; overflow: hidden; }
+        .progress-bar { height: 100%; background: var(--secondary); width: 0%; transition: width 0.5s ease; } 
+        
+        .timer-controls { display: flex; justify-content: space-between; align-items: center; margin-top: 20px; padding-top: 15px; border-top: 1px solid var(--border);}
+        .timer-display { font-family: monospace; font-size: 20px; font-weight: 700; color: var(--text); }
+        .btn-icon { width: 36px; height: 36px; border-radius: 50%; border: none; cursor: pointer; display: grid; place-items: center; color: white; transition: 0.2s;}
+        .btn-play { background: var(--success); color: #000; }
+        .btn-stop { background: var(--secondary); }
+        .btn-play:hover { transform: scale(1.1); }
+
+        /* Session List */
+        .sessions-list ol { list-style: none; counter-reset: session-counter; padding: 0; }
+        .session-item {
+            display: flex; justify-content: space-between; align-items: flex-start;
+            padding: 8px 0; border-bottom: 1px solid var(--border); font-size: 12px; counter-increment: session-counter;
+        }
+        .session-item::before { content: counter(session-counter) "."; font-weight: bold; color: var(--primary); margin-right: 8px; min-width: 15px; }
+        .session-content { flex: 1; }
+        .session-date { font-weight: 600; color: var(--text); }
+        .session-notes { color: var(--text-light); font-style: italic; margin-top: 2px; display: block;}
+
+        /* --- Calendar --- */
+        .calendar-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 5px; margin-top: 20px; }
+        
+        /* New Header for Weekdays */
+        .calendar-header {
+            display: contents; /* Allows children to sit in the main grid */
+        }
+        .cal-head-day {
+            text-align: center; font-size: 11px; color: var(--text-light); font-weight: bold; padding-bottom: 5px;
+        }
+
+        .calendar-day { 
+            aspect-ratio: 1; background: var(--bg); border-radius: 4px; 
+            display: flex; align-items: center; justify-content: center;
+            font-size: 12px; cursor: pointer; position: relative; border: 1px solid var(--border);
+            color: var(--text-light);
+        }
+        .calendar-day.has-data { background: #4b5563; color: white; border-color: #6b7280; }
+        .calendar-day.level-1 { background: rgba(99, 102, 241, 0.4); border-color: var(--primary); color: white;} 
+        .calendar-day.level-2 { background: rgba(99, 102, 241, 0.7); border-color: var(--primary); color: white; } 
+        .calendar-day.level-3 { background: var(--primary); border-color: var(--primary-dark); color: white; } 
+        .calendar-day:hover { transform: scale(1.1); z-index: 2; box-shadow: 0 0 10px var(--primary); border: 1px solid white; }
+
+        /* --- Modal & Inputs --- */
+        .modal {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.8); display: none; justify-content: center; align-items: center; z-index: 100;
+            backdrop-filter: blur(2px);
+        }
+        .modal-content { background: var(--surface); padding: 30px; border-radius: 16px; width: 400px; max-width: 90%; border: 1px solid var(--border); }
+        .form-group { margin-bottom: 15px; }
+        .form-group label { display: block; margin-bottom: 5px; font-weight: 500; color: var(--text-light); }
+        
+        .form-control { 
+            width: 100%; padding: 10px; 
+            background: var(--bg); color: var(--text);
+            border: 1px solid var(--border); border-radius: 8px; 
+        }
+        .form-control:focus { outline: none; border-color: var(--primary); }
+        input[type="color"].form-control { padding: 5px; height: 45px; cursor: pointer; }
+        textarea.form-control { resize: vertical; min-height: 60px; }
+        
+        /* --- Toast --- */
+        .toast {
+            position: fixed; bottom: 80px; right: 20px; left: 20px;
+            background: #373d49; color: white; padding: 12px 24px; border-radius: 8px;
+            transform: translateY(200px); transition: transform 0.3s; z-index: 200;
+            display: flex; align-items: center; gap: 10px; pointer-events: none;
+        }
+        .toast.show { transform: translateY(0); }
+        .toast.achievement { background: var(--warning); color: #000; }
+
+        /* --- Empty State --- */
+        .empty-state { text-align: center; padding: 20px; color: var(--text-light); }
+
+        /* --- Choice Modal --- */
+        .choice-btn-container { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 20px; }
+        .choice-card {
+            background: var(--bg); padding: 20px; border-radius: 12px; border: 1px solid var(--border);
+            text-align: center; cursor: pointer; transition: 0.2s;
+        }
+        .choice-card:hover { border-color: var(--primary); transform: translateY(-3px); }
+        .choice-card i { font-size: 30px; margin-bottom: 10px; display: block; }
+
+        /* --- Meditation Overlay --- */
+        #meditation-overlay {
+            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+            background: #000; z-index: 999; display: none;
+            flex-direction: column; justify-content: center; align-items: center;
+            user-select: none; touch-action: manipulation;
+        }
+        .meditation-circle {
+            width: 250px; height: 250px; border-radius: 50%;
+            background: radial-gradient(circle, #818cf8 0%, transparent 70%);
+            display: flex; justify-content: center; align-items: center;
+            font-size: 60px; font-weight: bold; color: white;
+            animation: breathe 6s infinite ease-in-out;
+            pointer-events: none; /* Let clicks pass through to container */
+        }
+        @keyframes breathe {
+            0%, 100% { transform: scale(1); opacity: 0.5; }
+            50% { transform: scale(1.2); opacity: 0.8; }
+        }
+        .med-controls { position: absolute; top: 20px; right: 20px; display: flex; gap: 15px; z-index: 1000; }
+        .med-timer-disp { position: absolute; top: 20px; left: 20px; font-size: 24px; font-family: monospace; color: #9ca3af; z-index: 1000;}
+        .med-instruction { position: absolute; bottom: 50px; color: #6b7280; font-size: 14px; text-transform: uppercase; letter-spacing: 2px;}
+
+        /* Mobile Adjustments */
+        @media (max-width: 768px) {
+            body { flex-direction: column; }
+            .sidebar {
+                width: 100%; height: 65px; position: fixed; bottom: 0; left: 0;
+                flex-direction: row; justify-content: space-around; padding: 0;
+                border-right: none; border-top: 1px solid var(--border);
+                background-color: var(--surface); box-shadow: 0 -4px 10px rgba(0,0,0,0.3);
+                overflow-y: auto; min-height: 0;
+            }
+            .sidebar:hover { width: 100%; }
+            .logo { display: none; }
+            .nav-item { flex-direction: column; justify-content: center; padding: 5px; font-size: 10px; height: 100%; min-width: 60px; }
+            .nav-item i { font-size: 18px; margin-bottom: 3px; }
+            .nav-text { display: block; opacity: 1; margin-left: 0; font-size: 10px; }
+            .nav-item.active { border-right: none; border-top: 3px solid var(--primary); background: transparent; color: var(--primary); }
+            .main { padding: 15px; padding-bottom: 90px; }
+            header { flex-direction: column; align-items: flex-start; gap: 10px; }
+            .user-stats { width: 100%; padding: 15px; flex-wrap: wrap; justify-content: space-between; }
+            .user-stats .btn { width: 100%; margin-top: 10px; justify-content: center; background-color: var(--primary); color: #000; }
+            .dashboard-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+<nav class="sidebar">
+        <div class="logo"><i class="fas fa-hourglass-half"></i></div>
+        <div class="nav-item active" onclick="app.switchView('dashboard')">
+            <i class="fas fa-th-large"></i><span class="nav-text">Nhật Ký</span>
+        </div>
+        <div class="nav-item" onclick="app.switchView('calendar')">
+            <i class="fas fa-calendar-alt"></i><span class="nav-text">Lịch</span>
+        </div>
+        <div class="nav-item" onclick="app.switchView('reports')">
+            <i class="fas fa-chart-pie"></i><span class="nav-text">Tổng hợp</span>
+        </div>
+        <div class="nav-item" onclick="app.switchView('achievements')">
+            <i class="fas fa-trophy"></i><span class="nav-text">Thành tựu</span>
+        </div>
+        
+        <div style="margin-top: auto;" class="desktop-only"></div>
+        
+        <div class="nav-item" onclick="app.exportData()">
+            <i class="fas fa-download"></i><span class="nav-text">Sao lưu</span>
+        </div>
+        <div class="nav-item" onclick="document.getElementById('import-file').click()">
+            <i class="fas fa-file-upload"></i><span class="nav-text">Nhập liệu</span>
+        </div>
+        <div class="nav-item" onclick="app.resetApp()" style="color: var(--danger);"> <i class="fas fa-trash-alt"></i><span class="nav-text">Đặt lại</span>
+        </div>
+    </nav>
+
+    <input type="file" id="import-file" style="display:none" onchange="app.importData(this)" accept=".json">
+
+    <main class="main">
+        <header>
+            <div>
+                <h1 id="page-title">Nhật Ký Hành Giả</h1>
+                <p style="color: var(--text-light); font-size: 14px;" id="current-date"></p>
+            </div>
+            
+            <div class="user-stats">
+                <div class="stat-item clickable" onclick="app.setGlobalDailyGoal()" title="Nhấn để sửa mục tiêu ngày">
+                    <span class="stat-val"><span id="daily-current">0</span> / <span id="daily-target">60</span>m</span>
+                    <div class="daily-bar-bg"><div id="daily-bar-fill" class="daily-bar-fill"></div></div>
+                    <span class="stat-label">Hàng ngày</span>
+                </div>
+                <div style="width: 1px; height: 30px; background: var(--border);"></div>
+                <div class="stat-item">
+                    <span class="stat-val" id="streak-disp">0 🔥</span>
+                    <span class="stat-label">Liên tục</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-val" id="xp-disp">0 XP</span>
+                    <span class="stat-label">Cấp độ <span id="level-disp">1</span></span>
+                </div>
+                <button class="btn" onclick="app.openChoiceModal()">
+                    <i class="fas fa-plus"></i> Mục tiêu mới
+                </button>
+            </div>
+        </header>
+
+        <section id="view-dashboard" class="view-section active">
+            <div id="active-goals-container" class="dashboard-grid"></div>
+            <div id="empty-msg" class="empty-state" style="display:none;">
+                <i class="fas fa-clipboard-list" style="font-size: 40px; margin-bottom: 10px;"></i>
+                <p>Chưa có mục tiêu nào. Hãy tạo để bắt đầu!</p>
+            </div>
+        </section>
+
+        <section id="view-calendar" class="view-section">
+            <div class="card">
+                <h2>Lịch Tu Tập</h2>
+                <div style="display: flex; justify-content: space-between; align-items: center; margin: 20px 0;">
+                    <button class="btn btn-secondary" onclick="app.changeMonth(-1)"><i class="fas fa-chevron-left"></i></button>
+                    <h3 id="cal-month-year">Tháng Năm</h3>
+                    <button class="btn btn-secondary" onclick="app.changeMonth(1)"><i class="fas fa-chevron-right"></i></button>
+                </div>
+                <div class="calendar-grid" id="calendar-grid"></div>
+            </div>
+        </section>
+
+        <section id="view-reports" class="view-section">
+            <div class="dashboard-grid" style="grid-template-columns: 1fr;">
+                 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 20px;">
+                    <div class="card">
+                        <h3>Phân tích số liệu</h3>
+                        <div style="height: 300px; display:flex; justify-content:center;">
+                            <canvas id="goalBreakdownChart"></canvas>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                            <button class="btn btn-secondary" style="padding: 5px 10px;" onclick="app.changeReportWeek(-1)"><i class="fas fa-chevron-left"></i></button>
+                            <h3 id="weekly-report-title">Tiêu điểm tuần</h3>
+                            <button class="btn btn-secondary" style="padding: 5px 10px;" onclick="app.changeReportWeek(1)"><i class="fas fa-chevron-right"></i></button>
+                        </div>
+                        <div style="height: 300px;">
+                            <canvas id="weeklyChart"></canvas>
+                        </div>
+                    </div>
+                 </div>
+                 
+                 <div class="card" style="margin-top: 20px;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                        <button class="btn btn-secondary" style="padding: 5px 10px;" onclick="app.changeReportMonth(-1)"><i class="fas fa-chevron-left"></i></button>
+                        <h3 id="monthly-report-title">Tiêu điểm tháng</h3>
+                        <button class="btn btn-secondary" style="padding: 5px 10px;" onclick="app.changeReportMonth(1)"><i class="fas fa-chevron-right"></i></button>
+                    </div>
+                    <div style="height: 300px;">
+                        <canvas id="monthlyChart"></canvas>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <section id="view-achievements" class="view-section">
+            <div class="card">
+                <h2><i class="fas fa-medal"></i> Thành tựu</h2>
+                <div id="achievement-list" style="margin-top: 20px; display: grid; gap: 10px;"></div>
+            </div>
+        </section>
+    </main>
+
+    <div class="modal" id="choice-modal">
+        <div class="modal-content">
+            <h2 style="text-align:center;">Chọn loại mục tiêu</h2>
+            <div class="choice-btn-container">
+                <div class="choice-card" onclick="app.openModal(null, 'meditation')">
+                    <i class="fas fa-spa" style="color: var(--zen);"></i>
+                    <h3>Thiền Định</h3>
+                    <p style="font-size:12px; color:var(--text-light); margin-top:5px;">Theo dõi chánh niệm</p>
+                </div>
+                <div class="choice-card" onclick="app.openModal(null, 'standard')">
+                    <i class="fas fa-tasks" style="color: var(--primary);"></i>
+                    <h3>Công Việc</h3>
+                    <p style="font-size:12px; color:var(--text-light); margin-top:5px;">Theo dõi tiến độ</p>
+                </div>
+            </div>
+            <button class="btn btn-secondary" style="width:100%; margin-top:20px;" onclick="app.closeChoiceModal()">Hủy</button>
+        </div>
+    </div>
+
+    <div class="modal" id="goal-modal">
+        <div class="modal-content">
+            <h2 id="modal-title" style="margin-bottom: 20px;">Tạo mục tiêu mới</h2>
+            <form onsubmit="app.saveGoal(event)">
+                <input type="hidden" id="g-id"> 
+                <input type="hidden" id="g-type"> 
+                
+                <div class="form-group">
+                    <label>Tên mục tiêu</label>
+                    <input type="text" id="g-name" class="form-control" required>
+                </div>
+                
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                    <div class="form-group">
+                        <label>Danh mục</label>
+                        <select id="g-cat" class="form-control">
+                            </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Màu sắc</label>
+                        <input type="color" id="g-color" class="form-control" value="#6366f1">
+                    </div>
+                </div>
+                
+                <div class="form-group" style="background: rgba(16, 185, 129, 0.1); padding: 10px; border-radius: 8px; border: 1px solid rgba(16, 185, 129, 0.3);">
+                    <label style="color: var(--success);">Mục tiêu hàng ngày</label>
+                    <input type="number" id="g-daily-target" class="form-control" min="0" value="30">
+                    <small id="g-daily-hint" style="color: var(--success); font-size: 11px;">Phút mỗi ngày</small>
+                </div>
+                
+                <div class="form-group">
+                    <label>Thành tựu trong</label>
+                    <input type="number" id="g-lifetime-target" class="form-control" required min="1" value="1000">
+                    <small id="g-life-hint" style="color: var(--text-light); font-size: 11px;">Tổng số phút</small>
+                </div>
+                
+                <div style="display: flex; justify-content: flex-end; gap: 10px;">
+                    <button type="button" class="btn btn-secondary" onclick="app.closeModal()">Hủy</button>
+                    <button type="submit" class="btn" id="btn-save-goal">Tạo mục tiêu</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="modal" id="session-modal">
+        <div class="modal-content">
+            <h2 id="session-title" style="margin-bottom: 20px;">Ghi nhận phiên</h2>
+            <form onsubmit="app.logSessionConfirm(event)">
+                <input type="hidden" id="s-goal-id" />
+                <input type="hidden" id="s-log-id" />
+                
+                <div class="form-group">
+                    <label>Ngày & Giờ bắt đầu</label>
+                    <input type="datetime-local" id="s-date" class="form-control" required />
+                </div>
+                
+                <div class="form-group">
+                    <label>Thời lượng (Phút)</label>
+                    <input type="number" id="s-minutes" class="form-control" required min="1" />
+                </div>
+                <div class="form-group" id="s-mindfulness-group" style="display:none; background: rgba(167, 139, 250, 0.1); padding: 10px; border-radius: 8px; border: 1px solid rgba(167, 139, 250, 0.3);">
+    <label style="color: var(--zen);">Số lần chánh niệm (Đếm)</label>
+    <input type="number" id="s-mindfulness" class="form-control" min="0" value="0" />
+</div>
+                <div class="form-group">
+                    <label>Ghi chú (Tùy chọn)</label>
+                    <textarea id="s-notes" class="form-control" placeholder="Bạn đã tập trung vào điều gì?"></textarea>
+                </div>
+
+                <div style="display: flex; justify-content: flex-end; gap: 10px;">
+                    <button type="button" class="btn btn-secondary" onclick="app.closeSessionModal()">Hủy</button>
+                    <button type="submit" class="btn">Lưu</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div id="meditation-overlay">
+        <div class="med-timer-disp" id="med-timer">00:00</div>
+        <div class="med-controls">
+            <button class="btn btn-secondary" onclick="app.togglePauseMeditation()" id="med-pause-btn"><i class="fas fa-pause"></i></button>
+            <button class="btn" style="background-color: var(--danger); color: white;" onclick="app.concludeMeditationSession()"><i class="fas fa-stop"></i></button>
+        </div>
+        
+        <div class="meditation-circle" id="med-counter">0</div>
+        
+        <div class="med-instruction" style="text-align: center;">Chạm màn hình để ghi&nbsp;nhận&nbsp;chánh&nbsp;niệm</div>
+    </div>
+
+    <div class="modal" id="meditation-finish-modal">
+        <div class="modal-content">
+            <h2 style="text-align: center; margin-bottom: 10px;">Thời thiền hoàn tất 🌿</h2>
+            <div style="text-align:center; margin: 20px 0; display:flex; justify-content:space-around; align-items:center;">
+                <div>
+                    <div style="font-size: 30px; font-weight:bold; color:var(--zen)" id="med-finish-count">0</div>
+                    <div style="color:var(--text-light); font-size:12px;">Chánh niệm</div>
+                </div>
+                <div style="height:40px; width:1px; background:var(--border);"></div>
+                <div>
+                    <div style="font-size: 30px; font-weight:bold; color:var(--text)" id="med-finish-time">0m</div>
+                    <div style="color:var(--text-light); font-size:12px;">Thời gian</div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Nhật ký</label>
+                <textarea id="med-finish-notes" class="form-control" placeholder="Chánh niệm của bạn có tốt không?"></textarea>
+            </div>
+            <div style="display:flex; gap:10px; justify-content:flex-end; margin-top:20px;">
+                 <button class="btn btn-secondary" onclick="app.discardMeditation()">Hủy bỏ</button>
+                 <button class="btn" style="background:var(--zen); color:white" onclick="app.saveMeditationLog()">Lưu nhật ký</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="graph-modal">
+        <div class="modal-content" style="width: 600px;">
+            <h2 style="margin-bottom: 10px;">Thời thiền</h2>
+            <p id="graph-date" style="color: var(--text-light); margin-bottom: 20px; font-size: 14px;"></p>
+            <div style="height: 300px; width: 100%;">
+                <canvas id="sessionGraph"></canvas>
+            </div>
+            <div style="display: flex; justify-content: flex-end; margin-top: 20px;">
+                <button class="btn btn-secondary" onclick="document.getElementById('graph-modal').style.display='none'">Đóng</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="day-details-modal" style="overflow-y: auto;">
+        <div class="modal-content">
+            <h2 id="day-modal-title" style="margin-bottom: 20px; font-size: 20px;">Chi tiết ngày</h2>
+            <div style="height: 150px; position: relative; margin-bottom: 20px;">
+                <canvas id="dayBreakdownChart"></canvas>
+            </div>
+            <h3 style="font-size: 14px; color: var(--text-light); border-bottom: 1px solid var(--border); padding-bottom: 5px; margin-bottom: 10px;">Nhật ký hoạt động</h3>
+            <div id="day-session-list" style="max-height: 100px; overflow-y: auto;"></div>
+            <div style="display: flex; justify-content: flex-end; margin-top: 20px; border-top: 1px solid var(--border); padding-top: 15px;">
+                <button class="btn btn-secondary" onclick="app.closeDayModal()">Đóng</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="toast" class="toast">
+        <i class="fas fa-info-circle"></i> <span id="toast-msg">Thông báo</span>
+    </div>
+
+    <audio id="bell" src="bell.mp3" preload="auto"></audio>
+
+    <script>
+        // Set Chart defaults
+        Chart.defaults.color = '#9ca3af';
+        Chart.defaults.borderColor = '#374151';
+
+        class GoalTracker {
+            constructor() {
+                // LOAD DATA SAFELY
+                try {
+                    this.data = JSON.parse(localStorage.getItem('chronoData'));
+                } catch(e) {
+                    console.error("Dữ liệu hỏng", e);
+                    this.data = null;
+                }
+
+                // If no data or corrupted structure, init defaults
+                if (!this.data || !Array.isArray(this.data.goals)) {
+                    this.data = {
+                        goals: [],
+                        logs: [],
+                        xp: 0,
+                        streak: 0,
+                        globalDailyGoal: 120,
+                        achievements: []
+                    };
+                }
+                
+                // MIGRATION / SANITY CHECK
+                this.data.goals.forEach(goal => {
+                    if (!goal.type) goal.type = 'standard'; 
+                    if (!goal.sessionTargetSeconds) goal.sessionTargetSeconds = 0;
+                    if (!goal.remainingSeconds) goal.remainingSeconds = 0;
+                    if (typeof goal.dailyTargetMinutes === 'undefined') goal.dailyTargetMinutes = 30;
+                    if (goal.type === 'meditation' && !goal.currentMindfulness) goal.currentMindfulness = 0;
+                    if (goal.type === 'meditation' && !goal.totalMindfulness) goal.totalMindfulness = 0;
+                });
+                
+                if (!this.data.globalDailyGoal) this.data.globalDailyGoal = 120;
+                if (!this.data.achievements) this.data.achievements = [];
+                if (!this.data.logs) this.data.logs = [];
+
+                this.timers = {}; 
+                this.today = new Date();
+                this.currentMonth = new Date(this.today.getFullYear(), this.today.getMonth(), 1); 
+                // Fix: Calculate start of week as MONDAY
+                this.currentWeekStart = this.getStartOfWeek(this.today); 
+                this.charts = { weekly: null, breakdown: null, monthly: null, dayChart: null, session: null };
+                
+                this.meditationState = {
+                    active: false, paused: false, goalId: null, count: 0,
+                    startTime: null, timerRef: null, remainingSeconds: 0,
+                    totalDurationSeconds: 0, touches: [] 
+                };
+
+                this.init();
+            }
+            
+            // Fix: Week starts on Monday
+            getStartOfWeek(date) {
+                const d = new Date(date);
+                const day = d.getDay() || 7; // CN=0 đổi thành 7, T2=1 giữ nguyên
+                const diff = d.getDate() - day + 1; // Lui về ngày 1 (Thứ Hai)
+                return new Date(d.getFullYear(), d.getMonth(), diff);
+            }
+
+            init() {
+                try {
+                    this.renderDate();
+                    this.renderGoals();
+                    this.updateStats();
+                    this.checkAchievements();
+                    this.renderCalendar();
+                    setInterval(() => this.updateTimerUI(), 1000);
+
+                    const medOverlay = document.getElementById('meditation-overlay');
+                    if(medOverlay) {
+                        medOverlay.addEventListener('pointerdown', (e) => {
+                            if(e.target.closest('.med-controls')) return;
+                            this.handleMeditationTouch();
+                        });
+                    }
+                } catch (err) {
+                    console.error("Lỗi khởi tạo:", err);
+                    alert("Ứng dụng khởi tạo thất bại. Hãy thử đặt lại dữ liệu qua thanh điều hướng.");
+                }
+            }
+
+            save() {
+                localStorage.setItem('chronoData', JSON.stringify(this.data));
+                this.updateStats();
+            }
+get totalMindfulnessCounts() {
+    return this.data.logs.reduce((sum, log) => {
+        // Fix: Check for manual 'count' first, fallback to 'touches' length
+        return sum + (log.count !== undefined ? log.count : (log.touches ? log.touches.length : 0));
+    }, 0);
+}
+            // --- AUDIO HELPER ---
+            playBell() {
+                const audio = document.getElementById('bell');
+                if (audio) {
+                    audio.currentTime = 0;
+                    audio.play().catch(e => console.log("Audio play failed (autoplay blocked):", e));
+                }
+            }
+
+            // --- Goal Management ---
+            saveGoal(e) {
+                e.preventDefault();
+                const id = document.getElementById('g-id').value;
+                const type = document.getElementById('g-type').value || 'standard';
+                const name = document.getElementById('g-name').value;
+                const category = document.getElementById('g-cat').value;
+                const color = document.getElementById('g-color').value;
+                const lifetimeTarget = parseInt(document.getElementById('g-lifetime-target').value);
+                const dailyTarget = parseInt(document.getElementById('g-daily-target').value);
+
+                if (id) {
+                    const goal = this.data.goals.find(g => g.id === id);
+                    if (goal) {
+                        goal.name = name; goal.category = category; goal.color = color;
+                        goal.lifetimeTargetMinutes = lifetimeTarget; goal.dailyTargetMinutes = dailyTarget;
+                        this.showToast('Đã cập nhật mục tiêu!');
+                    }
+                } else {
+                    const newGoal = {
+                        id: Date.now().toString(), type, name, category, color,
+                        lifetimeTargetMinutes: lifetimeTarget, dailyTargetMinutes: dailyTarget || 0,
+                        totalMinutes: 0, totalMindfulness: 0, sessionTargetSeconds: 0,
+                        remainingSeconds: 0, currentSessionStartTime: null, isActive: false
+                    };
+                    this.data.goals.push(newGoal);
+                    this.showToast('Đã tạo mục tiêu!');
+                }
+                this.save();
+                this.renderGoals();
+                this.closeModal();
+            }
+
+            setGlobalDailyGoal() {
+                const current = this.data.globalDailyGoal || 120;
+                const input = prompt("Nhập mục tiêu hàng ngày (phút):", current);
+                if (input && !isNaN(input) && parseInt(input) > 0) {
+                    this.data.globalDailyGoal = parseInt(input);
+                    this.save();
+                    this.showToast("Đã cập nhật!");
+                }
+            }
+
+            toggleTimer(id) {
+                const goal = this.data.goals.find(g => g.id === id);
+                if (!goal) return;
+
+                this.data.goals.forEach(g => {
+                    if(g.isActive && g.id !== id && g.type === 'standard') this.toggleTimer(g.id); 
+                });
+
+                if (goal.type === 'meditation') {
+                    this.startMeditationSetup(goal);
+                    return;
+                }
+
+                if (goal.isActive) {
+                    clearInterval(this.timers[id]);
+                    goal.isActive = false;
+                    const spentSeconds = goal.sessionTargetSeconds - goal.remainingSeconds;
+                    const minutesSpent = Math.floor(spentSeconds / 60);
+                    const startTime = goal.currentSessionStartTime || Date.now();
+                    goal.sessionTargetSeconds = 0; goal.remainingSeconds = 0; goal.currentSessionStartTime = null;
+                    if (minutesSpent > 0) this.openSessionModal(id, minutesSpent, null, startTime);
+                    else this.showToast('Phiên quá ngắn.');
+                } else {
+                    const minStr = prompt('Thời lượng (phút):', '25');
+                    if (!minStr) return;
+                    const min = parseInt(minStr);
+                    if (isNaN(min) || min <= 0) return;
+
+                    goal.sessionTargetSeconds = min * 60;
+                    goal.remainingSeconds = goal.sessionTargetSeconds;
+                    goal.isActive = true;
+                    goal.currentSessionStartTime = Date.now(); 
+
+                    this.timers[id] = setInterval(() => {
+                        if (goal.remainingSeconds > 0) {
+                            goal.remainingSeconds--;
+                        } else {
+                            // TIMER FINISHED LOGIC
+                            clearInterval(this.timers[id]);
+                            this.playBell(); // Play sound
+                            
+                            goal.isActive = false;
+                            const minutesSpent = Math.floor(goal.sessionTargetSeconds / 60);
+                            const startTime = goal.currentSessionStartTime;
+                            goal.sessionTargetSeconds = 0; goal.remainingSeconds = 0; goal.currentSessionStartTime = null;
+                            this.openSessionModal(id, minutesSpent, null, startTime);
+                            this.showToast('Hoàn thành!');
+                            this.renderGoals(); 
+                        }
+                    }, 1000);
+                }
+                this.renderGoals();
+            }
+            
+            // --- MEDITATION LOGIC ---
+            startMeditationSetup(goal) {
+                const minStr = prompt('Thời gian thiền (phút):', '10');
+                if (!minStr) return;
+                const min = parseInt(minStr);
+                if (isNaN(min) || min <= 0) return;
+
+                this.meditationState = {
+                    active: true, paused: false, goalId: goal.id, count: 0,
+                    startTime: Date.now(), totalDurationSeconds: min * 60,
+                    remainingSeconds: min * 60, touches: []
+                };
+                document.getElementById('meditation-overlay').style.display = 'flex';
+                document.getElementById('med-counter').innerText = '0';
+                this.updateMedTimerDisplay();
+
+                this.meditationState.timerRef = setInterval(() => {
+                    if (!this.meditationState.paused) {
+                        if (this.meditationState.remainingSeconds > 0) {
+                            this.meditationState.remainingSeconds--;
+                            this.updateMedTimerDisplay();
+                        } else {
+                            this.concludeMeditationSession('auto');
+                        }
+                    }
+                }, 1000);
+            }
+
+            updateMedTimerDisplay() {
+                const s = this.meditationState.remainingSeconds;
+                const m = Math.floor(s / 60);
+                const sec = s % 60;
+                document.getElementById('med-timer').innerText = `${m}:${sec.toString().padStart(2, '0')}`;
+            }
+
+            handleMeditationTouch() {
+                if (!this.meditationState.active || this.meditationState.paused) return;
+                this.meditationState.count++;
+                this.meditationState.touches.push(Date.now());
+                const el = document.getElementById('med-counter');
+                el.innerText = this.meditationState.count;
+                el.style.transform = 'scale(1.1)';
+                setTimeout(() => el.style.transform = 'scale(1)', 100);
+            }
+
+            togglePauseMeditation() {
+                this.meditationState.paused = !this.meditationState.paused;
+                const btn = document.getElementById('med-pause-btn');
+                btn.innerHTML = this.meditationState.paused ? '<i class="fas fa-play"></i>' : '<i class="fas fa-pause"></i>';
+            }
+            
+            // NEW: Conclude session and show Notes modal (instead of auto-saving)
+            concludeMeditationSession(type = 'manual') {
+    clearInterval(this.meditationState.timerRef);
+    
+    // Only play the bell if the timer finished on its own
+    if (type === 'auto') {
+        this.playBell();
+    }
+    
+    document.getElementById('meditation-overlay').style.display = 'none';
+    
+    const durationSeconds = this.meditationState.totalDurationSeconds - this.meditationState.remainingSeconds;
+    const minutes = Math.ceil(durationSeconds / 60);
+    
+    if (minutes <= 0) {
+        this.showToast("Phiên quá ngắn");
+        this.meditationState.active = false;
+        return;
+    }
+    
+    document.getElementById('med-finish-count').innerText = this.meditationState.count;
+    document.getElementById('med-finish-time').innerText = minutes + 'm';
+    document.getElementById('med-finish-notes').value = '';
+    document.getElementById('meditation-finish-modal').style.display = 'flex';
+}
+            
+            discardMeditation() {
+                document.getElementById('meditation-finish-modal').style.display = 'none';
+                this.meditationState.active = false;
+                this.showToast("Đã ngưng thời thiền");
+            }
+
+            saveMeditationLog() {
+                // Get data from state
+                const durationSeconds = this.meditationState.totalDurationSeconds - this.meditationState.remainingSeconds;
+                const minutes = Math.ceil(durationSeconds / 60);
+                const notes = document.getElementById('med-finish-notes').value;
+
+                const goal = this.data.goals.find(g => g.id === this.meditationState.goalId);
+                const log = {
+                    goalId: goal.id,
+                    date: this.toIsoDate(new Date(this.meditationState.startTime)),
+                    timestamp: this.meditationState.startTime,
+                    minutes: minutes,
+                    notes: `Chánh niệm: ${this.meditationState.count}. ${notes}`, // Combine count and notes
+                    touches: this.meditationState.touches
+                };
+
+                this.data.logs.push(log);
+                goal.totalMinutes += minutes;
+                if (!goal.totalMindfulness) goal.totalMindfulness = 0;
+                goal.totalMindfulness += this.meditationState.count;
+
+                this.meditationState.active = false;
+                this.save();
+                this.recalculateStreak();
+                this.renderGoals();
+                this.renderReports();
+                this.checkAchievements();
+                
+                document.getElementById('meditation-finish-modal').style.display = 'none';
+                this.showToast(`Đã lưu thời thiền! +${this.meditationState.count} điểm.`);
+            }
+
+            // --- STANDARD TIMER UI UPDATES ---
+            updateTimerUI() {
+                const todayStr = this.toIsoDate(new Date());
+                this.data.goals.forEach(goal => {
+                    if (goal.type === 'meditation') return; 
+                    let activeSessionMins = 0;
+                    let sessionPctVal = 0;
+                    if (goal.isActive) {
+                        const display = document.getElementById(`timer-${goal.id}`);
+                        if (display) display.innerText = this.formatTime(goal.remainingSeconds);
+                        const activeSessionSeconds = goal.sessionTargetSeconds - goal.remainingSeconds;
+                        activeSessionMins = Math.floor(activeSessionSeconds / 60);
+                        sessionPctVal = goal.sessionTargetSeconds > 0 ? (activeSessionSeconds / goal.sessionTargetSeconds) * 100 : 0;
+                    }
+                    const sessionBar = document.getElementById(`bar-session-${goal.id}`);
+                    const sessionText = document.getElementById(`prog-text-session-${goal.id}`);
+                    if (sessionBar) sessionBar.style.width = `${sessionPctVal}%`;
+                    if (sessionText) sessionText.innerText = goal.isActive ? `${activeSessionMins} / ${Math.floor(goal.sessionTargetSeconds / 60)} phút` : "Sẵn sàng";
+                });
+                this.updateStats(); 
+            }
+
+            renderGoals() {
+                const container = document.getElementById('active-goals-container');
+                const emptyMsg = document.getElementById('empty-msg');
+                container.innerHTML = '';
+                if (this.data.goals.length === 0) { emptyMsg.style.display = 'block'; return; }
+                emptyMsg.style.display = 'none';
+                const todayStr = this.toIsoDate(new Date());
+
+                this.data.goals.forEach(goal => {
+    const isMeditation = goal.type === 'meditation';
+    const unitLabel = isMeditation ? 'chánh niệm' : 'phút';
+    const targetProp = isMeditation ? 'totalMindfulness' : 'totalMinutes';
+    const overallPct = goal.lifetimeTargetMinutes > 0 ? Math.min((goal[targetProp] / goal.lifetimeTargetMinutes) * 100, 100) : 0;
+
+    let todayVal = 0;
+    if (isMeditation) {
+        // UPDATED LINE: Check l.count first, fallback to l.touches.length
+        todayVal = this.data.logs
+            .filter(l => l.goalId === goal.id && l.date === todayStr)
+            .reduce((sum, l) => sum + (l.count !== undefined ? l.count : (l.touches ? l.touches.length : 0)), 0);
+    } else {
+        todayVal = this.data.logs.filter(l => l.goalId === goal.id && l.date === todayStr).reduce((sum, l) => sum + l.minutes, 0);
+    }
+                    
+                    const dailyTarget = goal.dailyTargetMinutes || 0;
+                    let dailyPct = 0;
+                    let dailyBarColor = goal.color;
+                    if (dailyTarget > 0) {
+                        dailyPct = Math.min((todayVal / dailyTarget) * 100, 100);
+                        if (todayVal >= dailyTarget) dailyBarColor = 'var(--success)';
+                    }
+                    
+                    const div = document.createElement('div');
+                    div.className = 'card goal-card';
+                    div.style.borderLeft = `5px solid ${goal.color}`;
+                    
+                    let controlsHtml = '', dailySectionHtml = '', sessionSectionHtml = '';
+                    if (dailyTarget > 0) {
+                        dailySectionHtml = `
+                            <div style="margin-bottom: 15px; background: rgba(0,0,0,0.2); padding: 10px; border-radius: 8px;">
+                                <div style="display:flex; justify-content:space-between; font-size:12px; margin-bottom:5px; align-items:center;">
+                                    <strong style="color:var(--text);">Hôm nay</strong>
+                                    <span style="font-weight:600;">${todayVal} / ${dailyTarget} ${unitLabel}</span>
+                                </div>
+                                <div class="progress-container" style="height: 6px;"><div class="progress-bar" style="width: ${dailyPct}%; background: ${dailyBarColor}"></div></div>
+                            </div>`;
+                    }
+
+                    if (isMeditation) {
+                        controlsHtml = `
+                             <div class="timer-controls">
+                                <div style="font-size: 14px; color: var(--text-light); text-transform: uppercase;">Hành Thiền</div>
+                                <div style="display:flex; gap: 10px;">
+                                    <button class="btn-icon btn-play" style="background: var(--zen); color: white;" onclick="app.toggleTimer('${goal.id}')" title="Hành thiền"><i class="fas fa-om"></i></button>
+                                    
+                                    <button class="btn-icon" style="background:var(--warning); color:#000;" onclick="app.openSessionModal('${goal.id}')" title="Nhập thủ công"><i class="fas fa-plus"></i></button>
+                                </div>
+                            </div>`;
+                    } else {
+                        sessionSectionHtml = `
+                            <div class="section-label">Phiên hiện tại</div>
+                            <div class="progress-container"><div id="bar-session-${goal.id}" class="progress-bar" style="background:var(--success); width:0%;"></div></div>
+                            <div style="display:flex; justify-content:space-between; font-size:12px; color:var(--text-light);"><span id="prog-text-session-${goal.id}">Sẵn sàng</span></div>`;
+                        controlsHtml = `
+                            <div class="timer-controls">
+                                <div id="timer-${goal.id}" class="timer-display">00:00</div>
+                                <div style="display:flex; gap: 10px;">
+                                    <button class="btn-icon ${goal.isActive ? 'btn-stop' : 'btn-play'}" onclick="app.toggleTimer('${goal.id}')"><i class="fas ${goal.isActive ? 'fa-stop' : 'fa-play'}"></i></button>
+                                    <button class="btn-icon" style="background:var(--warning); color:#000;" onclick="app.openSessionModal('${goal.id}')"><i class="fas fa-plus"></i></button>
+                                </div>
+                            </div>`;
+                    }
+
+                    div.innerHTML = `
+                        <div class="goal-header">
+                            <div><div class="goal-title">${goal.name}</div><span class="goal-tag" style="color:#b1b1c9 ; background: rgba(255,255,255,0.1)">${goal.category}</span></div>
+                            <div style="display:flex; gap: 5px;">
+                                <button class="btn-icon" style="color: var(--text-light)" onclick="app.openModal('${goal.id}', '${goal.type}')"><i class="fas fa-pencil-alt"></i></button>
+                                <button class="btn-icon" style="color: var(--text-light)" onclick="app.deleteGoal('${goal.id}')"><i class="fas fa-trash"></i></button>
+                            </div>
+                        </div>
+                        ${dailySectionHtml}
+                        <div class="section-label">Mức độ thành tựu</div>
+                        <div class="progress-container"><div class="progress-bar" style="width: ${overallPct}%; background: ${goal.color}"></div></div>
+                        <div style="display:flex; justify-content:space-between; font-size:12px; color:var(--text-light); margin-bottom: 15px;"><span>${goal[targetProp]} / ${goal.lifetimeTargetMinutes} ${unitLabel}</span><span>${(overallPct).toFixed(1)}%</span></div>
+                        ${sessionSectionHtml} ${controlsHtml}
+                        <div class="sessions-list" style="margin-top: 15px; max-height: 150px; overflow-y: auto;"><div id="sessions-${goal.id}"></div></div>
+                    `;
+                    container.appendChild(div);
+                    this.renderSessions(goal.id, isMeditation);
+                });
+            }
+            
+            renderSessions(goalId, isMeditation) {
+                const container = document.getElementById(`sessions-${goalId}`);
+                if (!container) return;
+                container.innerHTML = '';
+                
+                // Sắp xếp: Mới nhất lên đầu
+                const sessions = this.data.logs.filter(l => l.goalId === goalId).sort((a,b) => b.timestamp - a.timestamp);
+                
+                if (sessions.length === 0) { 
+                    container.innerHTML = '<p style="font-size:12px; color:var(--text-light);">Chưa có phiên nào</p>'; 
+                    return; 
+                }
+                
+                const ol = document.createElement('ol');
+                sessions.forEach((log) => {
+                    const sLi = document.createElement('li');
+                    sLi.className = 'session-item';
+                    
+                    const notesDisplay = log.notes ? `<span class="session-notes">"${log.notes}"</span>` : '';
+                    
+                    // --- PHẦN SỬA ĐỔI CHÍNH Ở ĐÂY ---
+                    let actionButtons = '<div style="display:flex; gap:5px;">';
+                    
+                    // 1. Nút xem biểu đồ (Chỉ hiện nếu là thiền và có dữ liệu chạm)
+                    if (isMeditation && log.touches && log.touches.length > 0) {
+                        actionButtons += `<button class="btn-icon" style="background:transparent; color:var(--zen); height:24px; width:24px;" onclick="app.showSessionGraph('${log.timestamp}')" title="Xem biểu đồ"><i class="fas fa-chart-area" style="font-size:12px;"></i></button>`;
+                    }
+                    
+                    // 2. Nút chỉnh sửa (Luôn hiện cho tất cả các loại)
+                    // Lưu ý: log.timestamp được truyền vào làm ID để sửa
+                    actionButtons += `<button class="btn-icon" style="background:transparent; color:var(--text-light); height:24px; width:24px;" onclick="app.openSessionModal('${goalId}', ${log.minutes}, ${log.timestamp}, ${log.timestamp})" title="Sửa chi tiết"><i class="fas fa-edit" style="font-size:12px;"></i></button>`;
+                    
+                    actionButtons += '</div>';
+                    // ---------------------------------
+
+                    sLi.innerHTML = `
+                        <div class="session-content">
+                            <span class="session-date">${this.toDisplayDate(log.timestamp)}</span>: ${log.minutes} phút 
+                            ${notesDisplay}
+                        </div>
+                        ${actionButtons}
+                    `;
+                    ol.appendChild(sLi);
+                });
+                container.appendChild(ol);
+            }
+            
+            showSessionGraph(timestamp) {
+    const log = this.data.logs.find(l => l.timestamp == timestamp);
+    if (!log || !log.touches) return;
+
+    document.getElementById('graph-modal').style.display = 'flex';
+    document.getElementById('graph-date').innerText = new Date(log.timestamp).toLocaleString('vi-VN');
+
+    const ctx = document.getElementById('sessionGraph').getContext('2d');
+    if (this.charts.session) this.charts.session.destroy();
+
+    const startTime = log.timestamp;
+    const durationSeconds = (log.minutes * 60) || Math.ceil((Date.now() - startTime) / 1000);
+    
+    const dataPoints = [];
+    const labels = [];
+
+    // --- CẢI TIẾN: ĐỘ PHÂN GIẢI THÔNG MINH ---
+    // Luôn chia phiên thiền thành 50 điểm để biểu đồ luôn đầy đặn và mượt mà
+    const totalPoints = 30; 
+    const step = durationSeconds / totalPoints; 
+
+    for (let s = 0; s <= durationSeconds; s += step) {
+        // Label thông minh: < 2 phút hiện giây (s), > 2 phút hiện phút (m)
+        labels.push(durationSeconds < 120 ? Math.round(s) + 's' : (s / 60).toFixed(1));
+
+        // Cửa sổ tính mật độ (Window) là 1 phút (60s)
+        const windowSizeMs = 60000; 
+        const windowStart = (s * 1000) - (windowSizeMs / 2);
+        const windowEnd = (s * 1000) + (windowSizeMs / 2);
+
+        const intensity = log.touches.filter(t => {
+            const touchTime = t - startTime;
+            return touchTime >= windowStart && touchTime <= windowEnd;
+        }).length;
+
+        dataPoints.push(intensity);
+    }
+   
+
+// Thay vì dùng con số 900 cố định, hãy dùng logic này bên trong Chart.js hoặc ngay trước khi vẽ
+const chartHeight = ctx.canvas.clientHeight; 
+const gradient = ctx.createLinearGradient(0, 0, 0, chartHeight);
+
+gradient.addColorStop(0, 'rgba(167, 139, 250, 0.6)'); // Đỉnh: Tím rõ hơn
+gradient.addColorStop(0.5, 'rgba(167, 139, 250, 0.3)'); // Xuống gần đáy: Mờ dần
+gradient.addColorStop(1, 'rgba(167, 139, 250, 0.05)');   // Đáy: Trong suốt hoàn toàn
+
+    this.charts.session = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: 'Chánh niệm',
+                data: dataPoints,
+                borderColor: '#a78bfa',
+                backgroundColor: gradient, // Sử dụng gradient đã tạo
+                borderWidth: 3,
+                fill: true,
+                tension: 0.4,
+                pointRadius: 0,
+                pointHoverRadius: 5,
+				pointBackgroundColor: '#c7b6fc', // Màu của điểm khi hiện lên
+    pointBorderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+			interaction: {
+        mode: 'index',       // Tìm điểm theo trục X
+        intersect: false     // Chỉ cần di chuột gần đường cong là hiện điểm, không cần trỏ chính xác vào đường
+    },
+            scales: {
+                x: {
+                    title: { display: true, text: 'Thời gian (phút)', color: '#9ca3af' },
+                    grid: { display: false },
+                    ticks: { maxTicksLimit: 10, color: '#9ca3af' }
+                },
+                y: {
+                    beginAtZero: true,
+                    // Tên trục Y mới theo yêu cầu của bạn
+                    title: { display: true, text: 'Chánh niệm', color: '#9ca3af' },
+                    grid: { color: 'rgba(55, 65, 81, 0.5)' },
+                    ticks: { 
+                        stepSize: 1, 
+                        precision: 0, 
+                        color: '#9ca3af'
+                    }
+                }
+            },
+            plugins: {
+                tooltip: {
+                    mode: 'index',
+                    intersect: false,
+					displayColors: false,
+                    callbacks: {
+                        label: function(context) {
+                            const val = context.raw;
+                            // Giải thích mức độ bằng Icon và Chữ
+                            if (val >= 8) return "✨ Chánh niệm (" + val + ")";
+                            if (val >= 4) return "🙏 Chánh niệm (" + val + ")";
+                            if (val >= 1) return "🌱 Chánh niệm (" + val + ")";
+                            return "☁️ Thất niệm";
+                        }
+                    }
+                },
+                legend: { display: false }
+            }
+        }
+    });
+}
+
+            openChoiceModal() { document.getElementById('choice-modal').style.display = 'flex'; }
+            closeChoiceModal() { document.getElementById('choice-modal').style.display = 'none'; }
+
+            openModal(goalId = null, type = 'standard') { 
+                this.closeChoiceModal(); 
+                const modal = document.getElementById('goal-modal');
+                const title = document.getElementById('modal-title');
+                const btn = document.getElementById('btn-save-goal');
+                const catSelect = document.getElementById('g-cat');
+                catSelect.innerHTML = '';
+                const cats = type === 'meditation' ? ['Thiền Toạ', 'Thiền Hành'] : ['Công việc', 'Học tập', 'Sức khỏe', 'Sáng tạo', 'Tạo phước', 'Khác'];
+                cats.forEach(c => { const opt = document.createElement('option'); opt.value = c; opt.innerText = c; catSelect.appendChild(opt); });
+
+                const dailyHint = document.getElementById('g-daily-hint');
+                const lifeHint = document.getElementById('g-life-hint');
+                if (type === 'meditation') { dailyHint.innerText = "chánh niệm"; lifeHint.innerText = "chánh niệm"; } 
+                else { dailyHint.innerText = "phút"; lifeHint.innerText = "phút"; }
+                document.getElementById('g-type').value = type;
+
+                if (goalId) {
+                    const goal = this.data.goals.find(g => g.id === goalId);
+                    if (goal) {
+                        document.getElementById('g-id').value = goal.id;
+                        document.getElementById('g-name').value = goal.name;
+                        document.getElementById('g-cat').value = goal.category;
+                        document.getElementById('g-color').value = goal.color;
+                        document.getElementById('g-lifetime-target').value = goal.lifetimeTargetMinutes;
+                        document.getElementById('g-daily-target').value = goal.dailyTargetMinutes;
+                        document.getElementById('g-type').value = goal.type || 'standard';
+                        title.innerText = 'Sửa mục tiêu'; btn.innerText = 'Lưu';
+                    }
+                } else {
+                    document.getElementById('g-id').value = '';
+                    document.getElementById('g-name').value = '';
+                    document.getElementById('g-color').value = type === 'meditation' ? '#a78bfa' : '#818cf8';
+                    document.getElementById('g-lifetime-target').value = 1000;
+                    document.getElementById('g-daily-target').value = 30;
+                    title.innerText = type === 'meditation' ? 'Mục tiêu Mới' : 'Mục tiêu Mới'; btn.innerText = 'Tạo';
+                }
+                modal.style.display = 'flex'; 
+            }
+            closeModal() { document.getElementById('goal-modal').style.display = 'none'; }
+            
+            renderCalendar() {
+                const grid = document.getElementById('calendar-grid');
+                grid.innerHTML = '';
+                const y = this.currentMonth.getFullYear(); const m = this.currentMonth.getMonth();
+                document.getElementById('cal-month-year').innerText = new Date(y, m).toLocaleString('vi-VN', { month: 'long', year: 'numeric' });
+                
+                // Add Headers Row
+                const headerDiv = document.createElement('div');
+                headerDiv.className = 'calendar-header';
+                ['T2','T3','T4','T5','T6','T7','CN'].forEach(d => {
+                    const h = document.createElement('div'); h.className = 'cal-head-day'; h.innerText = d;
+                    grid.appendChild(h);
+                });
+
+                // Calculate blanks for Monday start
+                // new Date(y, m, 1).getDay() -> 0(Sun), 1(Mon)...
+                const firstDayRaw = new Date(y, m, 1).getDay();
+                // If Mon(1) -> 0 blanks. If Sun(0) -> 6 blanks.
+                const blankSlots = firstDayRaw === 0 ? 6 : firstDayRaw - 1;
+
+                const daysInMonth = new Date(y, m + 1, 0).getDate();
+                
+                for(let i=0; i<blankSlots; i++) { grid.appendChild(document.createElement('div')); }
+                for(let i=1; i<=daysInMonth; i++) {
+                    const dStr = `${y}-${String(m+1).padStart(2, '0')}-${String(i).padStart(2, '0')}`;
+                    const dayEl = document.createElement('div');
+                    dayEl.className = 'calendar-day'; dayEl.innerText = i;
+                    const totalMins = this.data.logs.filter(l => l.date === dStr).reduce((sum, l) => sum + l.minutes, 0);
+                    if(totalMins > 0) {
+                        dayEl.classList.add('has-data');
+                        if (totalMins > 120) dayEl.classList.add('level-3');
+                        else if (totalMins > 60) dayEl.classList.add('level-2');
+                        else dayEl.classList.add('level-1');
+                    }
+                    dayEl.onclick = () => this.openDayStats(dStr);
+                    grid.appendChild(dayEl);
+                }
+            }
+
+            openDayStats(dateStr) {
+                 const modal = document.getElementById('day-details-modal');
+                 const ctx = document.getElementById('dayBreakdownChart').getContext('2d');
+                 document.getElementById('day-modal-title').innerText = new Date(dateStr).toLocaleDateString('vi-VN');
+                 const dayLogs = this.data.logs.filter(l => l.date === dateStr).sort((a,b) => b.timestamp - a.timestamp);
+                 const goalStats = {};
+                 dayLogs.forEach(log => {
+                     if(!goalStats[log.goalId]) {
+                         const goal = this.data.goals.find(g => g.id === log.goalId);
+                         goalStats[log.goalId] = { name: goal ? goal.name : 'Đã xóa', color: goal ? goal.color : '#ccc', minutes: 0 };
+                     }
+                     goalStats[log.goalId].minutes += log.minutes;
+                 });
+                 if(this.charts.dayChart) this.charts.dayChart.destroy();
+                 this.charts.dayChart = new Chart(ctx, {
+                     type: 'doughnut',
+                     data: { labels: Object.values(goalStats).map(s => s.name), datasets: [{ data: Object.values(goalStats).map(s => s.minutes), backgroundColor: Object.values(goalStats).map(s => s.color), borderWidth: 1, borderColor: '#1f2937' }] },
+                     options: { maintainAspectRatio: false, plugins: { legend: { position: 'right', labels: { color: '#9ca3af' } } } }
+                 });
+                 const listContainer = document.getElementById('day-session-list');
+                 listContainer.innerHTML = dayLogs.length ? '' : '<p class="empty-state">Không có hoạt động.</p>';
+                 const ul = document.createElement('ul'); ul.style.listStyle = 'none';
+                 dayLogs.forEach(log => {
+                     const goal = this.data.goals.find(g => g.id === log.goalId);
+                     const li = document.createElement('li');
+                     li.style.cssText = 'padding: 8px 0; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; font-size: 13px; align-items:center;';
+                     li.innerHTML = `<div><span style="font-weight:600; color:${goal?goal.color:'#ccc'}">${goal?goal.name:'Đã xóa'}</span><span style="margin-left:5px;">${log.minutes}p</span></div><div style="font-size: 11px; color: var(--text-light);">${new Date(log.timestamp).toLocaleTimeString('vi-VN', {hour: '2-digit', minute:'2-digit'})}</div>`;
+                     ul.appendChild(li);
+                 });
+                 listContainer.appendChild(ul);
+                 modal.style.display = 'flex';
+            }
+            closeDayModal() { document.getElementById('day-details-modal').style.display = 'none'; }
+
+            // --- REPORTING LOGIC ---
+            renderReports() {
+                if(!document.getElementById('weeklyChart')) return;
+                
+                // Fix: Weekly labels Mon-Sun
+                const weekDays = ['T2', 'T3', 'T4', 'T5', 'T6', 'T7', 'CN'];
+                const weekStart = new Date(this.currentWeekStart);
+                const weekEnd = new Date(this.currentWeekStart); weekEnd.setDate(weekEnd.getDate() + 6);
+                document.getElementById('weekly-report-title').innerText = `Tuần (${weekStart.toLocaleDateString('vi-VN', {month:'numeric', day:'numeric'})} - ${weekEnd.toLocaleDateString('vi-VN', {month:'numeric', day:'numeric'})})`;
+                
+                // Monthly
+                const mYear = this.currentMonth.getFullYear();
+                const mMonth = this.currentMonth.getMonth();
+                const monthlyLabels = Array.from({length: new Date(mYear, mMonth + 1, 0).getDate()}, (_, i) => i + 1);
+                document.getElementById('monthly-report-title').innerText = `Tháng ${new Date(mYear, mMonth).toLocaleDateString('vi-VN', { month: 'numeric', year: 'numeric' })}`;
+
+                const goalDatasets = {};
+                this.data.goals.forEach(goal => { 
+                    goalDatasets[goal.id] = { 
+                        name: goal.name, 
+                        color: goal.color, 
+                        total: 0, 
+                        weekly: new Array(7).fill(0),
+                        monthly: new Array(monthlyLabels.length).fill(0) 
+                    }; 
+                });
+                
+                this.data.logs.forEach(log => {
+                    if(!goalDatasets[log.goalId]) return;
+                    goalDatasets[log.goalId].total += log.minutes;
+                    const logDate = new Date(log.date);
+                    const logTime = logDate.getTime();
+                    
+                    // Weekly Binning (Map JS day 0-6 to Array 0-6 where Mon is 0)
+                    if(logTime >= weekStart.getTime() && logTime <= weekEnd.getTime()) { 
+                        // JS: Sun=0, Mon=1...
+                        // Map: Mon(1)->0, Sun(0)->6
+                        let dayIdx = logDate.getDay();
+                        dayIdx = (dayIdx === 0 ? 6 : dayIdx - 1);
+                        goalDatasets[log.goalId].weekly[dayIdx] += log.minutes; 
+                    }
+                    
+                    // Monthly Binning
+                    if(logDate.getFullYear() === mYear && logDate.getMonth() === mMonth) {
+                        goalDatasets[log.goalId].monthly[logDate.getDate() - 1] += log.minutes;
+                    }
+                });
+                
+                const activeGoals = Object.values(goalDatasets).filter(d => d.total > 0);
+                
+                // Charts
+                const commonOptions = { maintainAspectRatio: false, scales: { x: {stacked: true, grid:{color:'#374151'}}, y: {stacked: true, grid:{color:'#374151'}} }, plugins: {legend:{labels:{color:'#9ca3af'}}} };
+                
+                // Breakdown
+                const ctxBreakdown = document.getElementById('goalBreakdownChart').getContext('2d');
+                if(this.charts.breakdown) this.charts.breakdown.destroy();
+                this.charts.breakdown = new Chart(ctxBreakdown, { type: 'doughnut', data: { labels: activeGoals.map(d=>d.name), datasets: [{ data: activeGoals.map(d=>d.total), backgroundColor: activeGoals.map(d=>d.color), borderWidth: 1, borderColor: '#1f2937' }] }, options: { maintainAspectRatio: false, plugins: { legend: { labels: { color: '#9ca3af' } } } } });
+                
+                // Weekly
+                const ctxWeek = document.getElementById('weeklyChart').getContext('2d');
+                if(this.charts.weekly) this.charts.weekly.destroy();
+                this.charts.weekly = new Chart(ctxWeek, { type: 'bar', data: { labels: weekDays, datasets: activeGoals.map(g => ({ label: g.name, data: g.weekly, backgroundColor: g.color, stack: '0' })) }, options: commonOptions });
+                
+                // Monthly
+                const ctxMonth = document.getElementById('monthlyChart').getContext('2d');
+                if(this.charts.monthly) this.charts.monthly.destroy();
+                this.charts.monthly = new Chart(ctxMonth, { type: 'bar', data: { labels: monthlyLabels, datasets: activeGoals.map(g => ({ label: g.name, data: g.monthly, backgroundColor: g.color, stack: '0' })) }, options: commonOptions });
+            }
+
+            changeReportWeek(dir) { this.currentWeekStart.setDate(this.currentWeekStart.getDate() + (dir * 7)); this.renderReports(); }
+            changeReportMonth(dir) { this.currentMonth.setMonth(this.currentMonth.getMonth() + dir); this.renderReports(); }
+            changeMonth(dir) { this.currentMonth.setMonth(this.currentMonth.getMonth() + dir); this.renderCalendar(); }
+            
+            // REPLACE THIS BLOCK INSIDE updateStats()
+updateStats() {
+    this.recalculateStreak();
+
+    // 1. Calculate total mindfulness
+    const totalMindfulness = this.data.logs.reduce((sum, log) => {
+        // Fix: Check for manual 'count' first, fallback to 'touches' length
+        return sum + (log.count !== undefined ? log.count : (log.touches ? log.touches.length : 0));
+    }, 0);
+
+    // 2. Update data
+    this.data.xp = totalMindfulness; 
+
+    // 3. Display on UI
+    document.getElementById('streak-disp').innerText = `${this.data.streak} 🔥`;
+    document.getElementById('xp-disp').innerText = `${this.data.xp} Sati`;
+    document.getElementById('level-disp').innerText = Math.floor(this.data.xp / 1000) + 1;
+
+    // ... (keep the rest of the function: daily goal calculation etc.) ...
+    const todayStr = this.toIsoDate(new Date());
+    let totalTodayMins = this.data.logs.filter(l => l.date === todayStr).reduce((sum, l) => sum + l.minutes, 0);
+    this.data.goals.forEach(g => {
+        if (g.isActive && g.type !== 'meditation') {
+            const spent = g.sessionTargetSeconds - g.remainingSeconds;
+            totalTodayMins += Math.floor(spent / 60);
+        }
+    });
+    const globalTarget = this.data.globalDailyGoal || 120;
+    const dailyPct = Math.min((totalTodayMins / globalTarget) * 100, 100);
+    document.getElementById('daily-current').innerText = totalTodayMins;
+    document.getElementById('daily-target').innerText = globalTarget;
+    document.getElementById('daily-bar-fill').style.width = `${dailyPct}%`;
+}
+            
+            recalculateStreak() {
+                const activeDates = [...new Set(this.data.logs.filter(l => l.minutes > 0).map(l => l.date))].sort();
+                if (activeDates.length === 0) { this.data.streak = 0; return; }
+                let streak = 1;
+                for (let i = activeDates.length - 2; i >= 0; i--) {
+                    const prev = new Date(activeDates[i]);
+                    const next = new Date(activeDates[i + 1]);
+                    if ((next - prev) < (1000 * 60 * 60 * 48) && (next - prev) > 0) streak++; else break;
+                }
+                const now = new Date(this.today.getFullYear(), this.today.getMonth(), this.today.getDate());
+                const last = new Date(activeDates[activeDates.length - 1]);
+                if ((now - last) / (1000 * 60 * 60 * 24) > 1) this.data.streak = 0; else this.data.streak = streak;
+            }
+
+            checkAchievements() {
+                const list = [
+                    { id: 'streak_3', title: 'Cố Gắng', desc: 'Hành trì 3 ngày liên tục', condition: () => this.data.streak >= 3 },
+					{ id: 'streak_10', title: 'Nỗ Lực', desc: 'Hành trì 10 ngày liên tục', condition: () => this.data.streak >= 10 },
+					{ id: 'streak_30', title: 'Tinh Cần', desc: 'Hành trì 30 ngày liên tục', condition: () => this.data.streak >= 30 },
+					{ id: 'streak_60', title: 'Nhiệt Tâm', desc: 'Hành trì 120 ngày liên tục', condition: () => this.data.streak >= 60 },
+					{ id: 'streak_120', title: 'Tinh Tấn', desc: 'Hành trì 60 ngày liên tục', condition: () => this.data.streak >= 120 },
+					{ id: 'streak_365', title: 'Tinh Tấn Giác Chi', desc: 'Hành trì 365 ngày liên tục', condition: () => this.data.streak >= 365 },
+
+					{ id: 'beginner', title: 'Sơ Cơ', desc: 'Tích luỹ 5000 Chánh niệm (Sati)', condition: () => this.totalMindfulnessCounts >= 5000 },
+					{ id: 'level2', title: 'Thiền Sinh', desc: 'Tích luỹ 10.000 Chánh niệm (Sati)', condition: () => this.totalMindfulnessCounts >= 20000 },
+					{ id: 'practitioner', title: 'Hành Giả', desc: 'Tích luỹ 20.000 Chánh niệm (Sati)', condition: () => this.totalMindfulnessCounts >= 20000 },
+					{ id: 'meditator', title: 'Thiền Giả', desc: 'Tích luỹ 80.000 Chánh niệm (Sati)', condition: () => this.totalMindfulnessCounts >= 80000 },
+					{ id: 'master', title: 'Thiền Sư', desc: 'Tích luỹ 500.000 Chánh niệm (Sati)', condition: () => this.totalMindfulnessCounts >= 500000 }
+                ];
+                const container = document.getElementById('achievement-list');
+                if (!container) return; container.innerHTML = '';
+                list.forEach(ach => {
+                    const unlocked = this.data.achievements.includes(ach.id) || ach.condition();
+                    if(unlocked && !this.data.achievements.includes(ach.id)) {
+                        this.data.achievements.push(ach.id); this.showToast(`Mở khóa: ${ach.title}`, true); this.save();
+                    }
+                    const div = document.createElement('div');
+                    div.style.cssText = `padding: 15px; border: 1px solid ${unlocked ? 'var(--success)' : 'var(--border)'}; border-radius: 8px; background: ${unlocked ? 'rgba(16, 185, 129, 0.1)' : 'rgba(255,255,255,0.05)'}; display: flex; align-items: center; gap: 15px; opacity: ${unlocked ? 1 : 0.6}`;
+                    div.innerHTML = `<div style="font-size: 24px; width: 40px; text-align: center;">${unlocked ? '🏆' : '🔒'}</div><div><div style="font-weight: bold; ${unlocked ? 'color: var(--text)' : 'color: var(--text-light)'}">${ach.title}</div><div style="font-size: 12px; color: var(--text-light);">${ach.desc}</div></div>`;
+                    container.appendChild(div);
+                });
+            }
+
+            formatTime(seconds) {
+                const h = Math.floor(seconds / 3600);
+                const m = Math.floor((seconds % 3600) / 60);
+                const s = seconds % 60;
+                return `${h > 0 ? h+':' : ''}${m.toString().padStart(2,'0')}:${s.toString().padStart(2,'0')}`;
+            }
+            toIsoDate(date) {
+    const y = date.getFullYear();
+    // Tháng trong JS bắt đầu từ 0 nên phải +1
+    const m = String(date.getMonth() + 1).padStart(2, '0');
+    const d = String(date.getDate()).padStart(2, '0');
+    return `${y}-${m}-${d}`;
+}
+            toDateTimeInput(timestamp) {
+    const date = new Date(timestamp);
+    const y = date.getFullYear();
+    const m = String(date.getMonth() + 1).padStart(2, '0');
+    const d = String(date.getDate()).padStart(2, '0');
+    const hh = String(date.getHours()).padStart(2, '0');
+    const mm = String(date.getMinutes()).padStart(2, '0');
+    return `${y}-${m}-${d}T${hh}:${mm}`;
+}
+            toDisplayDate(timestamp) { const d = new Date(timestamp); return `${d.getDate().toString().padStart(2, '0')}/${(d.getMonth() + 1).toString().padStart(2, '0')} ${d.getHours().toString().padStart(2, '0')}:${d.getMinutes().toString().padStart(2, '0')}`; }
+            showToast(msg, isAchievement = false) {
+                const t = document.getElementById('toast');
+                document.getElementById('toast-msg').innerText = msg;
+                t.classList.remove('achievement'); if (isAchievement) t.classList.add('achievement');
+                t.classList.add('show'); setTimeout(() => t.classList.remove('show'), 3000);
+            }
+            
+            switchView(viewName) {
+                document.querySelectorAll('.view-section').forEach(el => el.classList.remove('active'));
+                document.getElementById(`view-${viewName}`).classList.add('active');
+                document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
+                event.currentTarget.classList.add('active');
+                
+                const titles = {
+                    'dashboard': 'Nhật ký',
+                    'calendar': 'Lịch',
+                    'reports': 'Tổng hợp',
+                    'achievements': 'Thành tựu'
+                };
+                
+                document.getElementById('page-title').innerText = titles[viewName] || 'Nhật ký';
+                if (viewName === 'reports') { this.renderReports(); }
+                if (viewName === 'calendar') this.renderCalendar();
+            }
+            
+            exportData() {
+                const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(this.data));
+                const a = document.createElement('a'); a.setAttribute("href", dataStr); a.setAttribute("download", "backup.json");
+                document.body.appendChild(a); a.click(); a.remove(); this.showToast('Đã xuất sao lưu!');
+            }
+            importData(input) {
+                const file = input.files[0]; if (!file) return;
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    try {
+                        const json = JSON.parse(e.target.result);
+                        if (!json.goals || !json.logs) throw new Error("File không hợp lệ");
+                        if (confirm('Ghi đè dữ liệu?')) { localStorage.setItem('chronoData', JSON.stringify(json)); location.reload(); }
+                    } catch (err) { alert("Lỗi: " + err.message); }
+                };
+                reader.readAsText(file); input.value = ''; 
+            }
+            resetApp() {
+                if (confirm('Xóa TẤT CẢ dữ liệu?')) { localStorage.removeItem('chronoData'); location.reload(); }
+            }
+openSessionModal(goalId, minutes = 0, logId = null, startTime = Date.now()) {
+    document.getElementById('session-modal').style.display = 'flex';
+    document.getElementById('s-goal-id').value = goalId;
+    document.getElementById('s-log-id').value = logId || '';
+    document.getElementById('s-date').value = this.toDateTimeInput(startTime);
+    document.getElementById('s-minutes').value = minutes;
+    
+    // --- NEW LOGIC START ---
+    const goal = this.data.goals.find(g => g.id === goalId);
+    const mindGroup = document.getElementById('s-mindfulness-group');
+    const mindInput = document.getElementById('s-mindfulness');
+    
+    if (goal && goal.type === 'meditation') {
+        mindGroup.style.display = 'block';
+        let currentCount = 0;
+        if (logId) {
+            const log = this.data.logs.find(l => l.timestamp == logId);
+            // Check for explicit 'count' or fall back to 'touches' length
+            if (log) currentCount = log.count !== undefined ? log.count : (log.touches ? log.touches.length : 0);
+        }
+        mindInput.value = currentCount;
+    } else {
+        mindGroup.style.display = 'none';
+        mindInput.value = 0;
+    }
+    // --- NEW LOGIC END ---
+
+    let notes = ''; 
+    if(logId) { 
+        const log = this.data.logs.find(l => l.timestamp == logId); 
+        if(log && log.notes) notes = log.notes; 
+    }
+    document.getElementById('s-notes').value = notes;
+    document.getElementById('session-title').innerText = logId ? 'Chỉnh sửa' : 'Nhập thủ công';
+}
+            closeSessionModal() { document.getElementById('session-modal').style.display = 'none'; }
+logSessionConfirm(e) {
+    e.preventDefault();
+    const goalId = document.getElementById('s-goal-id').value;
+    const logId = document.getElementById('s-log-id').value;
+    const dateTimeStr = document.getElementById('s-date').value;
+    const minutes = parseInt(document.getElementById('s-minutes').value);
+    
+    // 1. Get Mindfulness and Raw Notes
+    const mindfulness = parseInt(document.getElementById('s-mindfulness').value) || 0;
+    let notes = document.getElementById('s-notes').value;
+    
+    if (minutes <= 0) return;
+    
+    const goal = this.data.goals.find(g => g.id === goalId);
+    
+    // --- NEW LOGIC: AUTO-FORMAT NOTES ---
+    if (goal && goal.type === 'meditation') {
+        // A. Remove any existing "Chánh niệm: X" string (to prevent duplicates if editing)
+        // Regex explains: Starts with "Chánh niệm:", followed by numbers, optional dot/space
+        let cleanNotes = notes.replace(/^Chánh niệm: \d+(\.\s*)?/, '').trim();
+        
+        // B. Add the new count if it's greater than 0
+        if (mindfulness > 0) {
+            notes = `Chánh niệm: ${mindfulness}. ${cleanNotes}`;
+        } else {
+            notes = cleanNotes;
+        }
+        // Result example: "Chánh niệm: 10. Cảm thấy bình an"
+    }
+    // ------------------------------------
+
+    const dateObj = new Date(dateTimeStr);
+    const timestamp = dateObj.getTime();
+    const dateKey = dateTimeStr.split('T')[0]; 
+    
+    if (logId) {
+        // --- EDIT EXISTING LOG ---
+        const log = this.data.logs.find(l => l.timestamp == logId);
+        if (log) {
+            const oldMinutes = log.minutes;
+            // Use saved count or fallback to touches length
+            const oldMindfulness = log.count !== undefined ? log.count : (log.touches ? log.touches.length : 0);
+            
+            log.minutes = minutes; 
+            log.date = dateKey; 
+            log.timestamp = timestamp; 
+            log.notes = notes; // Save the formatted notes
+            log.count = mindfulness;
+            
+            if (goal) {
+                goal.totalMinutes += (minutes - oldMinutes);
+                if (goal.type === 'meditation') {
+                    if (!goal.totalMindfulness) goal.totalMindfulness = 0;
+                    goal.totalMindfulness = goal.totalMindfulness - oldMindfulness + mindfulness;
+                }
+            }
+        }
+    } else {
+        // --- CREATE NEW LOG ---
+        this.data.logs.push({ 
+            goalId, 
+            date: dateKey, 
+            timestamp, 
+            minutes, 
+            notes, // Save the formatted notes
+            count: mindfulness, 
+            touches: [] 
+        });
+        
+        if (goal) {
+            goal.totalMinutes += minutes;
+            if (goal.type === 'meditation') {
+                if (!goal.totalMindfulness) goal.totalMindfulness = 0;
+                goal.totalMindfulness += mindfulness;
+            }
+        }
+    }
+    
+    this.save(); 
+    this.renderGoals(); 
+    this.renderCalendar(); 
+    this.renderReports(); 
+    this.checkAchievements();
+    this.closeSessionModal(); 
+    this.showToast(logId ? 'Đã cập nhật!' : 'Đã ghi!');
+}
+            deleteGoal(id) {
+                if(confirm('Xóa mục tiêu? Lịch sử vẫn sẽ được giữ.')) {
+                    this.data.goals = this.data.goals.filter(g => g.id !== id);
+                    this.save(); this.renderGoals(); this.renderReports(); 
+                }
+            }
+            renderDate() {
+                 document.getElementById('current-date').innerText = new Date().toLocaleDateString('vi-VN', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+            }
+        }
+
+        const app = new GoalTracker();
+    </script>
+</body>
+</html>
