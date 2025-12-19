@@ -301,24 +301,40 @@
             </div>
             
             <div class="user-stats">
-                <div class="stat-item clickable" onclick="app.setGlobalDailyGoal()" title="Nhấn để sửa mục tiêu ngày">
-                    <span class="stat-val"><span id="daily-current">0</span> / <span id="daily-target">60</span>m</span>
-                    <div class="daily-bar-bg"><div id="daily-bar-fill" class="daily-bar-fill"></div></div>
-                    <span class="stat-label">Hàng ngày</span>
-                </div>
-                <div style="width: 1px; height: 30px; background: var(--border);"></div>
-                <div class="stat-item">
-                    <span class="stat-val" id="streak-disp">0 🔥</span>
-                    <span class="stat-label">Liên tục</span>
-                </div>
-                <div class="stat-item">
-                    <span class="stat-val" id="xp-disp">0 XP</span>
-                    <span class="stat-label">Cấp độ <span id="level-disp">1</span></span>
-                </div>
-                <button class="btn" onclick="app.openChoiceModal()">
-                    <i class="fas fa-plus"></i> Mục tiêu mới
-                </button>
-            </div>
+    <div class="stat-item clickable" onclick="app.setGlobalDailyGoal()" title="Nhấn để sửa mục tiêu ngày">
+        <span class="stat-val"><span id="daily-current">0</span> / <span id="daily-target">60</span>m</span>
+        <div class="daily-bar-bg"><div id="daily-bar-fill" class="daily-bar-fill"></div></div>
+        <span class="stat-label">Hàng ngày</span>
+    </div>
+
+    <div style="width: 1px; height: 30px; background: var(--border);"></div>
+
+    <div class="stat-item">
+        <span class="stat-val" id="streak-disp">0 🔥</span>
+        <span class="stat-label">Liên tục</span>
+    </div>
+
+    <div class="stat-item">
+        <span class="stat-val" id="xp-disp">0 XP</span>
+        <span class="stat-label">Cấp độ <span id="level-disp">1</span></span>
+    </div>
+
+ <div class="stat-item clickable" onclick="app.openIntroModal()">
+    <span class="stat-val" style="
+        border: 2px solid var(--text-light); 
+        border-radius: 50%; 
+        width: 24px; 
+        height: 24px; 
+        display: flex; 
+        align-items: center; 
+        justify-content: center; 
+        font-size: 14px;">?</span>
+</div>
+
+    <button class="btn" onclick="app.openChoiceModal()">
+        <i class="fas fa-plus"></i> Mục tiêu mới
+    </button>
+</div>
         </header>
 
         <section id="view-dashboard" class="view-section active">
@@ -478,7 +494,7 @@
             <div class="form-group">
                 <textarea id="backup-data-area" class="form-control" 
                     style="height: 80px; font-family: monospace; font-size: 10px; color: var(--text-light);" 
-                    placeholder="Dữ liệu JSON sẽ hiện ở đây..."></textarea>
+                    placeholder="Dán dữ liệu ở đây..."></textarea>
             </div>
             <div style="display: flex; gap: 10px; justify-content: center;">
                 <button class="btn" style="flex: 1;" onclick="app.copyBackupData()">
@@ -490,11 +506,15 @@
             </div>
         </div>
 
-        <div style="margin-top: 20px; display: flex; justify-content: center;">
-            <button class="btn btn-secondary" style="width: 50%; border-color: var(--danger); color: var(--danger);" onclick="app.closeBackupModal()">Đóng</button>
-        </div>
-    </div>
+        <div style="margin-top: 20px; display: flex; gap: 10px;">
+    <button class="btn btn-secondary" style="flex: 1;" onclick="app.clearBackupArea()">
+        <i class="fas fa-eraser"></i> Trống ô
+    </button>
+    <button class="btn btn-secondary" style="flex: 1; border-color: var(--danger); color: var(--danger);" onclick="app.closeBackupModal()">
+        Đóng
+    </button>
 </div>
+</div></div>
     <div class="modal" id="session-modal">
         <div class="modal-content">
             <h2 id="session-title" style="margin-bottom: 20px;">Ghi nhận phiên</h2>
@@ -595,7 +615,161 @@
     <div id="toast" class="toast">
         <i class="fas fa-info-circle"></i> <span id="toast-msg">Thông báo</span>
     </div>
+<div class="modal" id="intro-modal" style="z-index: 9999;">
+    <div class="modal-content" style="max-width: 800px; width: 95%; max-height: 90vh; display: flex; flex-direction: column; padding: 0;">
+        
+        <div style="padding: 20px; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; background: var(--surface); border-radius: 16px 16px 0 0;">
+            <h2 style="margin: 0;">✨ Nhật Ký Hành Giả</h2>
+            <button class="btn-icon" onclick="app.closeIntroModal()" style="color: var(--text-light); background: transparent;"><i class="fas fa-times"></i></button>
+        </div>
 
+        <div style="padding: 20px; overflow-y: auto; line-height: 1.6; color: var(--text-light);">
+            
+            <p><strong>Nhật Ký Hành Giả</strong> là ứng dụng hỗ trợ tu tập và làm việc. Ứng dụng giúp hành giả theo dõi tiến trình trong công việc cũng như trong hành thiền, ghi nhận mức độ tỉnh giác thông qua số lần "Chánh Niệm", và trực quan hóa trạng thái tâm trí qua biểu đồ & đồ thị theo thời gian thực.</p>
+            
+            <img src="https://github.com/user-attachments/assets/ab56ed3d-9874-449a-ab0a-e65ddba0871d" alt="Dashboard Preview" style="width: 100%; border-radius: 8px; border: 1px solid var(--border); margin: 10px 0;">
+
+            <h3 style="color: var(--text); margin-top: 20px;">✨ Các Khái Niệm Cốt Lõi</h3>
+            <p>Để sử dụng ứng dụng hiệu quả, bạn cần nắm rõ các chỉ số sau:</p>
+            <ul style="padding-left: 20px; margin-bottom: 15px;">
+                <li><strong>Chánh Niệm:</strong> Đơn vị đo lường sự tỉnh giác. Mỗi lần bạn nhận biết được hơi thở hoặc trạng thái tâm trí và chạm vào màn hình, một "Chánh Niệm" sẽ được ghi lại.</li>
+                <li><strong>Chánh niệm tốt:</strong> Trạng thái khi tần suất ghi nhận (Niệm) duy trì ở mức ổn định và đều đặn.</li>
+                <li><strong>Thất niệm:</strong> Trạng thái khi tâm trí bị xao nhãng hoặc buồn ngủ, dẫn đến việc không có hoặc có rất ít ghi nhận trong một khoảng thời gian.</li>
+                <li><strong>Chuỗi Tinh Tấn (Streak):</strong> Số ngày liên tiếp bạn thực hiện tu tập.</li>
+            </ul>
+
+            <h3 style="color: var(--text); margin-top: 20px;">✨ Tính Năng Nổi Bật</h3>
+            
+            <h4 style="color: var(--primary);">1. Quản Lý Mục Tiêu Đa Dạng</h4>
+            <ul style="padding-left: 20px;">
+                <li><strong>Hai loại mục tiêu chính:</strong>
+                    <ul>
+                        <li><strong>ॐ Thiền Định:</strong> Theo dõi thời gian ngồi thiền và đếm số lần ghi nhận chánh niệm ("Sati"). Giao diện có vòng tròn hít thở để hỗ trợ định tâm.</li>
+                        <li><strong>⚡ Công Việc:</strong> Đồng hồ đếm ngược truyền thống dùng cho công việc, học tập (Pomodoro) hoặc các thói quen khác.</li>
+                    </ul>
+                </li>
+                <li><strong>Tùy biến:</strong> Tự đặt mục tiêu hàng ngày (số phút), thời gian cần dành để hoàn thành mục tiêu, màu sắc đại diện và danh mục quản lý.</li>
+            </ul>
+
+            <h4 style="color: var(--primary); margin-top: 15px;">2. Đồng Hồ & Ghi Nhận Tương Tác</h4>
+            <ul style="padding-left: 20px;">
+                <li><strong>Chế độ Thiền:</strong>
+                    <ul>
+                        <li>Hiệu ứng hình ảnh "hơi thở" (phồng/xẹp) giúp điều hòa nhịp thở.</li>
+                        <li><strong>Chạm để đếm:</strong> Chạm vào màn hình (hoặc click chuột) mỗi khi bạn ghi nhận được sự chú tâm quay về hơi thở. Số đếm này được tích lũy thành điểm Chánh niệm (Sati).</li>
+                    </ul>
+                </li>
+            </ul>
+            <div style="text-align: center; margin: 15px 0;">
+                <img src="https://github.com/user-attachments/assets/1f578774-1c46-4ede-b80b-5c35fa25a12d" alt="Meditation Mode" style="max-width: 300px; width: 100%; border-radius: 8px; border: 1px solid var(--border);">
+            </div>
+            <ul style="padding-left: 20px;">
+                <li><strong>Chế độ Tập trung:</strong> Đồng hồ đếm ngược với thanh tiến trình trực quan.</li>
+                <li><strong>Nhập liệu thủ công:</strong> Quên bấm giờ? Bạn có thể tự nhập lại phiên thiền hoặc sửa đổi các ghi chép cũ.</li>
+            </ul>
+
+            <h4 style="color: var(--primary); margin-top: 15px;">3. Báo Cáo & Phân Tích Số Liệu</h4>
+            <ul style="padding-left: 20px;">
+                <li><strong>Bảng nhật ký:</strong> Xem tiến độ ngày hôm nay so với mục tiêu đề ra.</li>
+                <li><strong>Lịch tu tập:</strong> Biểu đồ dạng lưới hiển thị mức độ tu tập theo ngày. Màu càng đậm thể hiện thời gian tu tập càng nhiều.</li>
+                <li><strong>Biểu đồ trực quan:</strong>
+                    <ul>
+                        <li><strong>Biểu đồ phiên:</strong> Xem lại mức độ chánh niệm <em>trong từng thời thiền</em> (biểu đồ đường).</li>
+                        <li><strong>Báo cáo Tuần/Tháng:</strong> So sánh hiệu suất theo thời gian thực.</li>
+                        <li><strong>Phân bổ:</strong> Biểu đồ tròn xem tỷ lệ thời gian dành cho các mục tiêu khác nhau.</li>
+                    </ul>
+                </li>
+            </ul>
+
+            <h4 style="color: var(--primary); margin-top: 15px;">4. Riêng Tư & An Toàn Dữ Liệu</h4>
+            <ul style="padding-left: 20px;">
+                <li><strong>Offline Hoàn Toàn:</strong> 100% dữ liệu được lưu trữ trực tiếp trên trình duyệt của bạn (Local Storage). Không có dữ liệu nào được gửi về máy chủ.</li>
+                <li><strong>Sao lưu & Khôi phục:</strong> Dễ dàng xuất dữ liệu ra file <code>.json</code> để cất giữ hoặc chuyển sang thiết bị khác.</li>
+            </ul>
+
+            <hr style="border: 0; border-top: 1px solid var(--border); margin: 25px 0;">
+            <h3 style="color: var(--text); margin-top: 20px;">🚀 Hướng Dẫn Sử Dụng</h3>
+            
+            <strong style="display:block; margin-bottom:10px; color: var(--text);">1. Tạo Mục Tiêu Mới</strong>
+            <ul style="padding-left: 20px; margin-bottom: 15px;">
+                <li>Nhấn nút <strong>"Mục tiêu mới"</strong> trên màn hình chính.</li>
+                <li>Chọn loại: <strong>Thiền Định</strong> hoặc <strong>Công Việc</strong>.</li>
+                <li>Điền tên, chọn màu sắc và đặt thời gian mục tiêu (ví dụ: 30 phút/ngày).</li>
+            </ul>
+
+            <strong style="display:block; margin-bottom:10px; color: var(--text);">2. Bắt Đầu Một Phiên</strong>
+            <ul style="padding-left: 20px; margin-bottom: 15px;">
+                <li>Tại thẻ mục tiêu, nhấn nút <strong>Play (▶)</strong> (với Công việc) hoặc nút <strong>ॐ</strong> (với Thiền).</li>
+                <li><strong>Trong lúc thiền:</strong> Chạm vào màn hình mỗi khi bạn thấy mình tỉnh thức quay về đối tượng thiền.</li>
+                <li>Kết thúc phiên, ứng dụng sẽ hiện bảng tổng kết để bạn ghi thêm nhật ký.</li>
+            </ul>
+
+            <strong style="display:block; margin-bottom:10px; color: var(--text);">3. Xem Báo Cáo</strong>
+            <ul style="padding-left: 20px; margin-bottom: 15px;">
+                <li>Chọn tab <strong>"Tổng hợp"</strong> ở thanh bên để xem biểu đồ.</li>
+                <li>Chọn tab <strong>"Lịch"</strong> để xem lịch sử chi tiết.</li>
+            </ul>
+
+            <hr style="border: 0; border-top: 1px solid var(--border); margin: 25px 0;">
+            <h3 style="color: var(--text); margin-top: 20px;">✨ Hệ Thống Ghi Nhận</h3>
+            
+            <p><strong>Mốc Liên Tục:</strong></p>
+            <table class="intro-table" style="width: 100%; border-collapse: collapse; margin-bottom: 20px; font-size: 13px;">
+                <thead>
+                    <tr style="background: var(--bg);">
+                        <th style="padding: 8px; border: 1px solid var(--border); text-align: left;">Danh hiệu</th>
+                        <th style="padding: 8px; border: 1px solid var(--border); text-align: left;">Điều kiện</th>
+                        <th style="padding: 8px; border: 1px solid var(--border); text-align: left;">Ý nghĩa</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td style="padding: 8px; border: 1px solid var(--border);">Cố Gắng</td><td style="padding: 8px; border: 1px solid var(--border);">3 ngày</td><td style="padding: 8px; border: 1px solid var(--border);">Bước đầu vượt qua sức ỳ.</td></tr>
+                    <tr><td style="padding: 8px; border: 1px solid var(--border);">Nỗ Lực</td><td style="padding: 8px; border: 1px solid var(--border);">10 ngày</td><td style="padding: 8px; border: 1px solid var(--border);">Bắt đầu hình thành thói quen.</td></tr>
+                    <tr><td style="padding: 8px; border: 1px solid var(--border);">Tinh Cần</td><td style="padding: 8px; border: 1px solid var(--border);">30 ngày</td><td style="padding: 8px; border: 1px solid var(--border);">Thói quen đã dần ổn định.</td></tr>
+                    <tr><td style="padding: 8px; border: 1px solid var(--border);">Nhiệt Tâm</td><td style="padding: 8px; border: 1px solid var(--border);">60 ngày</td><td style="padding: 8px; border: 1px solid var(--border);">Sự tu tập trở nên vững chãi.</td></tr>
+                    <tr><td style="padding: 8px; border: 1px solid var(--border);">Tinh Tấn Giác Chi</td><td style="padding: 8px; border: 1px solid var(--border);">365 ngày</td><td style="padding: 8px; border: 1px solid var(--border);">Sự kiên trì phi thường.</td></tr>
+                </tbody>
+            </table>
+
+            <p><strong>Mốc Chánh Niệm (Sati):</strong></p>
+            <table class="intro-table" style="width: 100%; border-collapse: collapse; margin-bottom: 20px; font-size: 13px;">
+                <thead>
+                   <tr style="background: var(--bg);">
+                        <th style="padding: 8px; border: 1px solid var(--border); text-align: left;">Cấp độ</th>
+                        <th style="padding: 8px; border: 1px solid var(--border); text-align: left;">Điểm Sati</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td style="padding: 8px; border: 1px solid var(--border);">Sơ Cơ</td><td style="padding: 8px; border: 1px solid var(--border);">5,000</td></tr>
+                    <tr><td style="padding: 8px; border: 1px solid var(--border);">Thiền Sinh</td><td style="padding: 8px; border: 1px solid var(--border);">10,000</td></tr>
+                    <tr><td style="padding: 8px; border: 1px solid var(--border);">Hành Giả</td><td style="padding: 8px; border: 1px solid var(--border);">20,000</td></tr>
+                    <tr><td style="padding: 8px; border: 1px solid var(--border);">Thiền Giả</td><td style="padding: 8px; border: 1px solid var(--border);">80,000</td></tr>
+                    <tr><td style="padding: 8px; border: 1px solid var(--border);">Thiền Sư</td><td style="padding: 8px; border: 1px solid var(--border);">500,000</td></tr>
+                </tbody>
+            </table>
+
+            <div style="background: rgba(251, 191, 36, 0.1); border: 1px solid var(--warning); padding: 15px; border-radius: 8px; color: #fbbf24; font-size: 13px;">
+                <strong>⚠️ Lưu Ý Quan Trọng Về Dữ Liệu:</strong>
+                <ul style="margin: 5px 0 0 15px;">
+                    <li>Dữ liệu được lưu trong <strong>Local Storage</strong> của trình duyệt.</li>
+                    <li><strong>Không xóa lịch sử/cache trình duyệt</strong> nếu chưa sao lưu, dữ liệu sẽ bị mất.</li>
+                    <li><strong>Cách Sao Lưu:</strong> Vào menu bên trái, chọn <strong>"Sao lưu"</strong> để tải file về máy.</li>
+                    <li><strong>Cách Khôi Phục:</strong> Chọn <strong>"Khôi phục"</strong> và tải lên file backup đã có.</li>
+                </ul>
+            </div>
+            
+             <div style="margin-top: 20px; text-align: center; color: var(--text-light); font-size: 12px; border-top: 1px solid var(--border); padding-top: 10px;">
+                <strong>Công nghệ:</strong> HTML5, CSS3, JS (ES6+).<br>
+                <strong>Thư viện:</strong> <a href="https://www.chartjs.org/" target="_blank" style="color: var(--primary); text-decoration: none;">Chart.js</a>, <a href="https://fontawesome.com/" target="_blank" style="color: var(--primary); text-decoration: none;">FontAwesome</a>.<br>
+                Mã nguồn mở. Chúc bạn an lạc và tinh tấn!
+            </div>
+        </div>
+        
+        <div style="padding: 15px; border-top: 1px solid var(--border); display: flex; justify-content: flex-end; background: var(--surface); border-radius: 0 0 16px 16px;">
+            <button class="btn btn-secondary" onclick="app.closeIntroModal()">Đóng</button>
+        </div>
+    </div>
+</div>
     <audio id="bell" src="bell.mp3" preload="auto"></audio>
 
     <script>
@@ -654,7 +828,15 @@
 
                 this.init();
             }
-            
+openIntroModal() {
+        const modal = document.getElementById('intro-modal');
+        if (modal) modal.style.display = 'flex';
+    }
+
+    closeIntroModal() {
+        const modal = document.getElementById('intro-modal');
+        if (modal) modal.style.display = 'none';
+    }
             // Fix: Week starts on Monday
             getStartOfWeek(date) {
                 const d = new Date(date);
@@ -801,13 +983,18 @@ get totalMindfulnessCounts() {
                 this.renderGoals();
             }
             
-            // --- MEDITATION LOGIC ---
+            // -// --- THÊM ĐOẠN NÀY VÀO ĐÂY ---
+    // Kiểm tra xem có đang chạy trên App Android không để tránh lỗi trên trình duyệt web
+
+    // ------------------------------- MEDITATION LOGIC ---
             startMeditationSetup(goal) {
                 const minStr = prompt('Thời gian thiền (phút):', '10');
                 if (!minStr) return;
                 const min = parseInt(minStr);
                 if (isNaN(min) || min <= 0) return;
-
+    if (typeof Website2APK !== 'undefined') {
+        Website2APK.keepScreenOn(true); // Bật chế độ luôn sáng
+    }
                 this.meditationState = {
                     active: true, paused: false, goalId: goal.id, count: 0,
                     startTime: Date.now(), totalDurationSeconds: min * 60,
@@ -855,7 +1042,11 @@ get totalMindfulnessCounts() {
             // NEW: Conclude session and show Notes modal (instead of auto-saving)
             concludeMeditationSession(type = 'manual') {
     clearInterval(this.meditationState.timerRef);
-    
+    // --- THÊM ĐOẠN NÀY VÀO ĐÂY ---
+    // Cho phép màn hình tắt bình thường trở lại khi xong phiên
+    if (typeof Website2APK !== 'undefined') {
+        Website2APK.keepScreenOn(false); 
+    }
     // Only play the bell if the timer finished on its own
     if (type === 'auto') {
         this.playBell();
@@ -1460,12 +1651,12 @@ updateStats() {
                     { id: 'streak_3', title: 'Cố Gắng', desc: 'Hành trì 3 ngày liên tục', condition: () => this.data.streak >= 3 },
 					{ id: 'streak_10', title: 'Nỗ Lực', desc: 'Hành trì 10 ngày liên tục', condition: () => this.data.streak >= 10 },
 					{ id: 'streak_30', title: 'Tinh Cần', desc: 'Hành trì 30 ngày liên tục', condition: () => this.data.streak >= 30 },
-					{ id: 'streak_60', title: 'Nhiệt Tâm', desc: 'Hành trì 120 ngày liên tục', condition: () => this.data.streak >= 60 },
-					{ id: 'streak_120', title: 'Tinh Tấn', desc: 'Hành trì 60 ngày liên tục', condition: () => this.data.streak >= 120 },
+					{ id: 'streak_60', title: 'Tinh Tấn', desc: 'Hành trì 60 ngày liên tục', condition: () => this.data.streak >= 60 },
+					{ id: 'streak_120', title: 'Nhiệt Tâm', desc: 'Hành trì 120 ngày liên tục', condition: () => this.data.streak >= 120 },
 					{ id: 'streak_365', title: 'Tinh Tấn Giác Chi', desc: 'Hành trì 365 ngày liên tục', condition: () => this.data.streak >= 365 },
 
 					{ id: 'beginner', title: 'Sơ Cơ', desc: 'Tích luỹ 5000 Chánh niệm (Sati)', condition: () => this.totalMindfulnessCounts >= 5000 },
-					{ id: 'level2', title: 'Thiền Sinh', desc: 'Tích luỹ 10.000 Chánh niệm (Sati)', condition: () => this.totalMindfulnessCounts >= 20000 },
+					{ id: 'level2', title: 'Thiền Sinh', desc: 'Tích luỹ 10.000 Chánh niệm (Sati)', condition: () => this.totalMindfulnessCounts >= 10000 },
 					{ id: 'practitioner', title: 'Hành Giả', desc: 'Tích luỹ 20.000 Chánh niệm (Sati)', condition: () => this.totalMindfulnessCounts >= 20000 },
 					{ id: 'meditator', title: 'Thiền Giả', desc: 'Tích luỹ 80.000 Chánh niệm (Sati)', condition: () => this.totalMindfulnessCounts >= 80000 },
 					{ id: 'master', title: 'Thiền Sư', desc: 'Tích luỹ 500.000 Chánh niệm (Sati)', condition: () => this.totalMindfulnessCounts >= 500000 }
@@ -1607,7 +1798,9 @@ updateStats() {
             this.showToast('Đã sao chép!');
         }
     }
-
+ clearBackupArea() {
+        document.getElementById('backup-data-area').value = '';
+    }
     // Nút "Phục hồi từ khung"
     restoreFromText() {
         const textarea = document.getElementById('backup-data-area');
