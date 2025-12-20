@@ -154,8 +154,17 @@
         .session-date { font-weight: 600; color: var(--text); }
         .session-notes { color: var(--text-light); font-style: italic; margin-top: 2px; display: block;}
 
-        /* --- Calendar --- */
+       /* --- Calendar --- */
         .calendar-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 5px; margin-top: 20px; }
+        
+        /* New Header for Weekdays */
+        .calendar-header {
+            display: contents; /* Allows children to sit in the main grid */
+        }
+        .cal-head-day {
+            text-align: center; font-size: 11px; color: var(--text-light); font-weight: bold; padding-bottom: 5px;
+        }
+
         .calendar-day { 
             aspect-ratio: 1; background: var(--bg); border-radius: 4px; 
             display: flex; align-items: center; justify-content: center;
@@ -633,14 +642,14 @@
             
             <p><strong>Meditator's Journal</strong> is an application designed to support both spiritual practice and daily work. The app helps practitioners track progress in their professional tasks as well as meditation sessions, recording levels of awareness through "Mindfulness" counts, and visualizing mental states via real-time charts and graphs.</p>
             
-            <img src="https://github.com/user-attachments/assets/ab56ed3d-9874-449a-ab0a-e65ddba0871d" alt="Dashboard Preview" style="width: 100%; border-radius: 8px; border: 1px solid var(--border); margin: 10px 0;">
+            <img src="1en.png" alt="Graph Preview" style="width: 100%; border-radius: 8px; border: 1px solid var(--border); margin: 10px 0;">
 
             <h3 style="color: var(--text); margin-top: 20px;">✨ Core Concepts</h3>
             <p>To use the app effectively, you should understand the following indicators:</p>
             <ul style="padding-left: 20px; margin-bottom: 15px;">
                 <li><strong>Mindfulness (Sati):</strong> A unit for measuring awareness. Every time you recognize your breath or mental state and touch the screen, one "Mindfulness" point is recorded.</li>
                 <li><strong>Mindful State:</strong> A state where the frequency of recording (Sati) remains stable and regular.</li>
-                <li><strong>Mindlessness:</strong> A state where the mind is distracted or drowsy, resulting in few or no recordings over a period of time.</li>
+                <li><strong>Unmindful:</strong> A state where the mind is distracted or drowsy, resulting in few or no recordings over a period of time.</li>
                 <li><strong>Diligence Streak:</strong> The number of consecutive days you have maintained your practice.</li>
             </ul>
 
@@ -667,22 +676,22 @@
                 </li>
             </ul>
             <div style="text-align: center; margin: 15px 0;">
-                <img src="https://github.com/user-attachments/assets/1f578774-1c46-4ede-b80b-5c35fa25a12d" alt="Meditation Mode" style="max-width: 300px; width: 100%; border-radius: 8px; border: 1px solid var(--border);">
+                <img src="2en.png" alt="Meditation Mode" style="max-width: 300px; width: 100%; border-radius: 8px; border: 1px solid var(--border);">
             </div>
             <ul style="padding-left: 20px;">
                 <li><strong>Focus Mode:</strong> A countdown timer with a visual progress bar.</li>
                 <li><strong>Manual Entry:</strong> Forgot to start the timer? You can manually log a session or edit previous records.</li>
             </ul>
 
-            <h4 style="color: var(--primary); margin-top: 15px;">3. Reports & Data Analysis</h4>
+            <h4 style="color: var(--primary); margin-top: 15px;">3. Statistics & Data Analysis</h4>
             <ul style="padding-left: 20px;">
                 <li><strong>Dashboard:</strong> View today's progress relative to your set goals.</li>
                 <li><strong>Practice Calendar:</strong> A grid heatmap showing daily practice intensity. Darker colors represent longer practice durations.</li>
                 <li><strong>Visual Charts:</strong>
                     <ul>
                         <li><strong>Session Graph:</strong> Review mindfulness levels <em>within a specific session</em> (line chart).</li>
-                        <li><strong>Weekly/Monthly Reports:</strong> Compare performance over real-time intervals.</li>
-                        <li><strong>Allocation:</strong> A pie chart showing the percentage of time spent on different goals.</li>
+                        <li><strong>Weekly/Monthly Statistics:</strong> Compare performance over real-time intervals.</li>
+                        <li><strong>Distribution:</strong> A pie chart showing the percentage of time or mindfulness spent on different goals.</li>
                     </ul>
                 </li>
             </ul>
@@ -710,9 +719,9 @@
                 <li>At the end of the session, a summary panel will appear for you to add journal notes.</li>
             </ul>
 
-            <strong style="display:block; margin-bottom:10px; color: var(--text);">3. View Reports</strong>
+            <strong style="display:block; margin-bottom:10px; color: var(--text);">3. View Statistics</strong>
             <ul style="padding-left: 20px; margin-bottom: 15px;">
-                <li>Select the <strong>"Reports"</strong> tab on the sidebar to view charts.</li>
+                <li>Select the <strong>"Statistics"</strong> tab on the sidebar to view charts.</li>
                 <li>Select the <strong>"Calendar"</strong> tab to see your history.</li>
             </ul>
 
@@ -1275,7 +1284,7 @@ concludeMeditationSession(type = 'manual') {
     if (!log || !log.touches) return;
 
     document.getElementById('graph-modal').style.display = 'flex';
-    document.getElementById('graph-date').innerText = new Date(log.timestamp).toLocaleString('en-US');
+    document.getElementById('graph-date').innerText = new Date(log.timestamp).toLocaleString('en-GB');
 
     const ctx = document.getElementById('sessionGraph').getContext('2d');
     if (this.charts.session) this.charts.session.destroy();
@@ -1425,14 +1434,29 @@ gradient.addColorStop(1, 'rgba(167, 139, 250, 0.05)');   // Đáy: Trong suốt 
             }
             closeModal() { document.getElementById('goal-modal').style.display = 'none'; }
             
-            renderCalendar() {
+                        renderCalendar() {
                 const grid = document.getElementById('calendar-grid');
                 grid.innerHTML = '';
                 const y = this.currentMonth.getFullYear(); const m = this.currentMonth.getMonth();
-                document.getElementById('cal-month-year').innerText = new Date(y, m).toLocaleString('default', { month: 'long', year: 'numeric' });
-                const firstDay = new Date(y, m, 1).getDay();
+                document.getElementById('cal-month-year').innerText = new Date(y, m).toLocaleString('en-GB', { month: 'long', year: 'numeric' });
+                
+                // 
+                const headerDiv = document.createElement('div');
+                headerDiv.className = 'calendar-header';
+                ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'].forEach(d => {
+                    const h = document.createElement('div'); h.className = 'cal-head-day'; h.innerText = d;
+                    grid.appendChild(h);
+                });
+
+                // Calculate blanks for Monday start
+                // new Date(y, m, 1).getDay() -> 0(Sun), 1(Mon)...
+                const firstDayRaw = new Date(y, m, 1).getDay();
+                // If Mon(1) -> 0 blanks. If Sun(0) -> 6 blanks.
+                const blankSlots = firstDayRaw === 0 ? 6 : firstDayRaw - 1;
+
                 const daysInMonth = new Date(y, m + 1, 0).getDate();
-                for(let i=0; i<firstDay; i++) { grid.appendChild(document.createElement('div')); }
+                
+                for(let i=0; i<blankSlots; i++) { grid.appendChild(document.createElement('div')); }
                 for(let i=1; i<=daysInMonth; i++) {
                     const dStr = `${y}-${String(m+1).padStart(2, '0')}-${String(i).padStart(2, '0')}`;
                     const dayEl = document.createElement('div');
@@ -1471,7 +1495,7 @@ switchDayChart(mode) {
 openDayStats(dateStr) {
     this.currentViewDate = dateStr;
     const modal = document.getElementById('day-details-modal');
-    document.getElementById('day-modal-title').innerText = new Date(dateStr).toLocaleDateString('en-US', {weekday: 'long', day: 'numeric', month: 'numeric'});
+    document.getElementById('day-modal-title').innerText = new Date(dateStr).toLocaleDateString('en-GB', {weekday: 'long', day: 'numeric', month: 'numeric'});
     
     // Reset về chế độ time khi mới mở
     this.switchDayChart('time'); 
@@ -1508,7 +1532,7 @@ openDayStats(dateStr) {
         const rightSide = `<div style="display:flex; align-items:center;">
                                ${graphBtnHtml}
                                <div style="font-size: 11px; color: var(--text-light); width:35px; text-align:right;">
-                                   ${new Date(log.timestamp).toLocaleTimeString('en-US', {hour: '2-digit', minute:'2-digit'})}
+                                   ${new Date(log.timestamp).toLocaleTimeString('en-GB', {hour: '2-digit', minute:'2-digit'})}
                                </div>
                            </div>`;
 
@@ -1614,19 +1638,19 @@ renderReports() {
     const unitLabel = isMindfulness ? 'Mindfulness' : 'Minutes';
     
     // Cập nhật tiêu đề biểu đồ tròn
-    document.getElementById('breakdown-title').innerText = isMindfulness ? 'Time distribution' : 'Mindfulness distribution';
+    document.getElementById('breakdown-title').innerText = isMindfulness ? 'Mindfulness distribution' : 'Time distribution';
 
     // Xử lý tiêu đề Tuần
     const weekDays = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
     const weekStart = new Date(this.currentWeekStart);
     const weekEnd = new Date(this.currentWeekStart); weekEnd.setDate(weekEnd.getDate() + 6);
-    document.getElementById('weekly-report-title').innerText = `Week (${weekStart.toLocaleDateString('en-US', {month:'numeric', day:'numeric'})} - ${weekEnd.toLocaleDateString('en-US', {month:'numeric', day:'numeric'})})`;
+    document.getElementById('weekly-report-title').innerText = `Week (${weekStart.toLocaleDateString('en-GB', {month:'numeric', day:'numeric'})} - ${weekEnd.toLocaleDateString('en-GB', {month:'numeric', day:'numeric'})})`;
     
     // Xử lý tiêu đề Tháng
     const mYear = this.currentMonth.getFullYear();
     const mMonth = this.currentMonth.getMonth();
     const monthlyLabels = Array.from({length: new Date(mYear, mMonth + 1, 0).getDate()}, (_, i) => i + 1);
-    document.getElementById('monthly-report-title').innerText = `Month ${new Date(mYear, mMonth).toLocaleDateString('en-US', { month: 'numeric', year: 'numeric' })}`;
+    document.getElementById('monthly-report-title').innerText = `Month ${new Date(mYear, mMonth).toLocaleDateString('en-GB', { month: 'numeric', year: 'numeric' })}`;
 
     const goalDatasets = {};
     
@@ -1723,7 +1747,7 @@ renderReports() {
             maintainAspectRatio: false, 
             plugins: { 
                 legend: { labels: { color: '#9ca3af' } },
-                title: { display: activeGoals.length === 0, text: 'Chưa có dữ liệu', position: 'bottom', color: '#6b7280' }
+                title: { display: activeGoals.length === 0, text: 'No data available', position: 'bottom', color: '#6b7280' }
             } 
         } 
     });
@@ -2106,7 +2130,7 @@ clearBackupArea() {
                 }
             }
             renderDate() {
-                 document.getElementById('current-date').innerText = new Date().toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+                 document.getElementById('current-date').innerText = new Date().toLocaleDateString('en-GB', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
             }
         }
 
