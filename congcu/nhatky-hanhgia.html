@@ -833,10 +833,10 @@ openIntroModal() {
         if (modal) modal.style.display = 'flex';
     }
 
-    closeIntroModal() {
-        const modal = document.getElementById('intro-modal');
-        if (modal) modal.style.display = 'none';
-    }
+closeIntroModal() {
+    document.getElementById('intro-modal').style.display = 'none';
+    localStorage.setItem('intro_seen', 'true'); // Save so it doesn't pop up every time
+}
             // Fix: Week starts on Monday
             getStartOfWeek(date) {
                 const d = new Date(date);
@@ -865,6 +865,9 @@ openIntroModal() {
                     console.error("Lỗi khởi tạo:", err);
                     alert("Ứng dụng khởi tạo thất bại. Hãy thử đặt lại dữ liệu qua thanh điều hướng.");
                 }
+				if (!localStorage.getItem('intro_seen')) {
+        this.openIntroModal();
+    }
             }
 
             save() {
@@ -1417,7 +1420,7 @@ gradient.addColorStop(1, 'rgba(167, 139, 250, 0.05)');   // Đáy: Trong suốt 
                     document.getElementById('g-name').value = '';
                     document.getElementById('g-color').value = type === 'meditation' ? '#a78bfa' : '#818cf8';
                     document.getElementById('g-lifetime-target').value = 1000;
-                    document.getElementById('g-daily-target').value = 30;
+                    document.getElementById('g-daily-target').value = 100;
                     title.innerText = type === 'meditation' ? 'Mục tiêu Mới' : 'Mục tiêu Mới'; btn.innerText = 'Tạo';
                 }
                 modal.style.display = 'flex'; 

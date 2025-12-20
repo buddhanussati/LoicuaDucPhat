@@ -307,6 +307,17 @@
                     <span class="stat-val" id="xp-disp">0 XP</span>
                     <span class="stat-label">Level <span id="level-disp">1</span></span>
                 </div>
+				 <div class="stat-item clickable" onclick="app.openIntroModal()">
+    <span class="stat-val" style="
+        border: 2px solid var(--text-light); 
+        border-radius: 50%; 
+        width: 24px; 
+        height: 24px; 
+        display: flex; 
+        align-items: center; 
+        justify-content: center; 
+        font-size: 14px;">?</span>
+</div>
                 <button class="btn" onclick="app.openChoiceModal()">
                     <i class="fas fa-plus"></i> New Goal
                 </button>
@@ -470,7 +481,7 @@
             <div class="form-group">
                 <textarea id="backup-data-area" class="form-control" 
                     style="height: 80px; font-family: monospace; font-size: 10px; color: var(--text-light);" 
-                    placeholder="JSON data..."></textarea>
+                    placeholder="Paste JSON data here..."></textarea>
             </div>
             <div style="display: flex; gap: 10px; justify-content: center;">
                 <button class="btn" style="flex: 1;" onclick="app.copyBackupData()">
@@ -482,8 +493,13 @@
             </div>
         </div>
 
-        <div style="margin-top: 20px; display: flex; justify-content: center;">
-            <button class="btn btn-secondary" style="width: 50%; border-color: var(--danger); color: var(--danger);" onclick="app.closeBackupModal()">Close</button>
+        <div style="margin-top: 20px; display: flex; gap: 10px;">
+    <button class="btn btn-secondary" style="flex: 1;" onclick="app.clearBackupArea()">
+        <i class="fas fa-eraser"></i> Clear texts
+    </button>
+    <button class="btn btn-secondary" style="flex: 1; border-color: var(--danger); color: var(--danger);" onclick="app.closeBackupModal()">
+        Close
+    </button>
         </div>
     </div>
 </div>
@@ -587,6 +603,161 @@
     <div id="toast" class="toast">
         <i class="fas fa-info-circle"></i> <span id="toast-msg">Message</span>
     </div>
+	<div class="modal" id="intro-modal" style="z-index: 9999;">
+    <div class="modal-content" style="max-width: 800px; width: 95%; max-height: 90vh; display: flex; flex-direction: column; padding: 0;">
+        
+        <div style="padding: 20px; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; background: var(--surface); border-radius: 16px 16px 0 0;">
+            <h2 style="margin: 0;">✨ Meditator's Journal</h2>
+            <button class="btn-icon" onclick="app.closeIntroModal()" style="color: var(--text-light); background: transparent;"><i class="fas fa-times"></i></button>
+        </div>
+
+        <div style="padding: 20px; overflow-y: auto; line-height: 1.6; color: var(--text-light);">
+            
+            <p><strong>Meditator's Journal</strong> is an application designed to support both spiritual practice and daily work. The app helps practitioners track progress in their professional tasks as well as meditation sessions, recording levels of awareness through "Mindfulness" counts, and visualizing mental states via real-time charts and graphs.</p>
+            
+            <img src="https://github.com/user-attachments/assets/ab56ed3d-9874-449a-ab0a-e65ddba0871d" alt="Dashboard Preview" style="width: 100%; border-radius: 8px; border: 1px solid var(--border); margin: 10px 0;">
+
+            <h3 style="color: var(--text); margin-top: 20px;">✨ Core Concepts</h3>
+            <p>To use the app effectively, you should understand the following indicators:</p>
+            <ul style="padding-left: 20px; margin-bottom: 15px;">
+                <li><strong>Mindfulness (Sati):</strong> A unit for measuring awareness. Every time you recognize your breath or mental state and touch the screen, one "Mindfulness" point is recorded.</li>
+                <li><strong>Mindful State:</strong> A state where the frequency of recording (Sati) remains stable and regular.</li>
+                <li><strong>Mindlessness:</strong> A state where the mind is distracted or drowsy, resulting in few or no recordings over a period of time.</li>
+                <li><strong>Diligence Streak:</strong> The number of consecutive days you have maintained your practice.</li>
+            </ul>
+
+            <h3 style="color: var(--text); margin-top: 20px;">✨ Key Features</h3>
+            
+            <h4 style="color: var(--primary);">1. Diverse Goal Management</h4>
+            <ul style="padding-left: 20px;">
+                <li><strong>Two main types of goals:</strong>
+                    <ul>
+                        <li><strong>ॐ Meditation:</strong> Tracks meditation duration and counts mindfulness ("Sati") recognitions. The interface features a breathing circle to support focus.</li>
+                        <li><strong>⚡ Work:</strong> A traditional countdown timer used for work, study (similar to Pomodoro), or other habits.</li>
+                    </ul>
+                </li>
+                <li><strong>Customization:</strong> Set daily goals (minutes), target completion time, representative colors, and management categories.</li>
+            </ul>
+
+            <h4 style="color: var(--primary); margin-top: 15px;">2. Interactive Timer & Recording</h4>
+            <ul style="padding-left: 20px;">
+                <li><strong>Meditation Mode:</strong>
+                    <ul>
+                        <li>Visual "breathing" effect (expand/contract) helps regulate breathing rhythm.</li>
+                        <li><strong>Tap-to-Track:</strong> Touch the screen (or click) every time you acknowledge your focus returning to the breath. These counts accumulate as Mindfulness (Sati) points.</li>
+                    </ul>
+                </li>
+            </ul>
+            <div style="text-align: center; margin: 15px 0;">
+                <img src="https://github.com/user-attachments/assets/1f578774-1c46-4ede-b80b-5c35fa25a12d" alt="Meditation Mode" style="max-width: 300px; width: 100%; border-radius: 8px; border: 1px solid var(--border);">
+            </div>
+            <ul style="padding-left: 20px;">
+                <li><strong>Focus Mode:</strong> A countdown timer with a visual progress bar.</li>
+                <li><strong>Manual Entry:</strong> Forgot to start the timer? You can manually log a session or edit previous records.</li>
+            </ul>
+
+            <h4 style="color: var(--primary); margin-top: 15px;">3. Reports & Data Analysis</h4>
+            <ul style="padding-left: 20px;">
+                <li><strong>Dashboard:</strong> View today's progress relative to your set goals.</li>
+                <li><strong>Practice Calendar:</strong> A grid heatmap showing daily practice intensity. Darker colors represent longer practice durations.</li>
+                <li><strong>Visual Charts:</strong>
+                    <ul>
+                        <li><strong>Session Graph:</strong> Review mindfulness levels <em>within a specific session</em> (line chart).</li>
+                        <li><strong>Weekly/Monthly Reports:</strong> Compare performance over real-time intervals.</li>
+                        <li><strong>Allocation:</strong> A pie chart showing the percentage of time spent on different goals.</li>
+                    </ul>
+                </li>
+            </ul>
+
+            <h4 style="color: var(--primary); margin-top: 15px;">4. Privacy & Data Security</h4>
+            <ul style="padding-left: 20px;">
+                <li><strong>Fully Offline:</strong> 100% of data is stored directly in your browser. No data is sent to any server.</li>
+                <li><strong>Backup & Restore:</strong> Easily export data to a <code>.json</code> file for safekeeping or to transfer to another device.</li>
+            </ul>
+
+            <hr style="border: 0; border-top: 1px solid var(--border); margin: 25px 0;">
+            <h3 style="color: var(--text); margin-top: 20px;">🚀 Usage Guide</h3>
+            
+            <strong style="display:block; margin-bottom:10px; color: var(--text);">1. Create a New Goal</strong>
+            <ul style="padding-left: 20px; margin-bottom: 15px;">
+                <li>Click the <strong>"New Goal"</strong> button on the main screen.</li>
+                <li>Select the type: <strong>Meditation</strong> or <strong>Work</strong>.</li>
+                <li>Enter a name, choose a color, and set the goal time (e.g., 30 mins/day).</li>
+            </ul>
+
+            <strong style="display:block; margin-bottom:10px; color: var(--text);">2. Start a Session</strong>
+            <ul style="padding-left: 20px; margin-bottom: 15px;">
+                <li>On the goal card, click the <strong>Play (▶)</strong> button (for Work) or the <strong>ॐ</strong> button (for Meditation).</li>
+                <li><strong>During Meditation:</strong> Tap the screen whenever you find yourself mindfully returning to the meditation object.</li>
+                <li>At the end of the session, a summary panel will appear for you to add journal notes.</li>
+            </ul>
+
+            <strong style="display:block; margin-bottom:10px; color: var(--text);">3. View Reports</strong>
+            <ul style="padding-left: 20px; margin-bottom: 15px;">
+                <li>Select the <strong>"Reports"</strong> tab on the sidebar to view charts.</li>
+                <li>Select the <strong>"Calendar"</strong> tab to see your history.</li>
+            </ul>
+
+            <hr style="border: 0; border-top: 1px solid var(--border); margin: 25px 0;">
+            <h3 style="color: var(--text); margin-top: 20px;">✨ Practice Achievement System</h3>
+            
+            <p><strong>Consistency Milestones (Streak):</strong></p>
+            <table class="intro-table" style="width: 100%; border-collapse: collapse; margin-bottom: 20px; font-size: 13px;">
+                <thead>
+                    <tr style="background: var(--bg);">
+                        <th style="padding: 8px; border: 1px solid var(--border); text-align: left;">Title</th>
+                        <th style="padding: 8px; border: 1px solid var(--border); text-align: left;">Condition</th>
+                        <th style="padding: 8px; border: 1px solid var(--border); text-align: left;">Meaning</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td style="padding: 8px; border: 1px solid var(--border);">Effort</td><td style="padding: 8px; border: 1px solid var(--border);">3 days</td><td style="padding: 8px; border: 1px solid var(--border);">Initially overcoming inertia.</td></tr>
+                    <tr><td style="padding: 8px; border: 1px solid var(--border);">Striving</td><td style="padding: 8px; border: 1px solid var(--border);">10 days</td><td style="padding: 8px; border: 1px solid var(--border);">Starting to form a habit.</td></tr>
+                    <tr><td style="padding: 8px; border: 1px solid var(--border);">Diligence</td><td style="padding: 8px; border: 1px solid var(--border);">30 days</td><td style="padding: 8px; border: 1px solid var(--border);">Habit is becoming stable.</td></tr>
+                    <tr><td style="padding: 8px; border: 1px solid var(--border);">Ardor</td><td style="padding: 8px; border: 1px solid var(--border);">60 days</td><td style="padding: 8px; border: 1px solid var(--border);">Practice becomes firm and steady.</td></tr>
+                    <tr><td style="padding: 8px; border: 1px solid var(--border);">Viriya-sambojjhanga</td><td style="padding: 8px; border: 1px solid var(--border);">365 days</td><td style="padding: 8px; border: 1px solid var(--border);">Extraordinary perseverance.</td></tr>
+                </tbody>
+            </table>
+
+            <p><strong>Mindfulness Milestones (Sati):</strong></p>
+            <table class="intro-table" style="width: 100%; border-collapse: collapse; margin-bottom: 20px; font-size: 13px;">
+                <thead>
+                   <tr style="background: var(--bg);">
+                        <th style="padding: 8px; border: 1px solid var(--border); text-align: left;">Level</th>
+                        <th style="padding: 8px; border: 1px solid var(--border); text-align: left;">Sati Points</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td style="padding: 8px; border: 1px solid var(--border);">Beginner</td><td style="padding: 8px; border: 1px solid var(--border);">5,000</td></tr>
+                    <tr><td style="padding: 8px; border: 1px solid var(--border);">Practitioner</td><td style="padding: 8px; border: 1px solid var(--border);">10,000</td></tr>
+                    <tr><td style="padding: 8px; border: 1px solid var(--border);">Yogi</td><td style="padding: 8px; border: 1px solid var(--border);">20,000</td></tr>
+                    <tr><td style="padding: 8px; border: 1px solid var(--border);">Meditator</td><td style="padding: 8px; border: 1px solid var(--border);">80,000</td></tr>
+                    <tr><td style="padding: 8px; border: 1px solid var(--border);">Meditation Master</td><td style="padding: 8px; border: 1px solid var(--border);">500,000</td></tr>
+                </tbody>
+            </table>
+
+            <div style="background: rgba(251, 191, 36, 0.1); border: 1px solid var(--warning); padding: 15px; border-radius: 8px; color: #fbbf24; font-size: 13px;">
+                <strong>⚠️ Important Data Notice:</strong>
+                <ul style="margin: 5px 0 0 15px;">
+                    <li>Your data is stored in the browser's <strong>Local Storage</strong>.</li>
+                    <li><strong>Do not clear browser history/cache</strong> without backing up, or your data will be lost.</li>
+                    <li><strong>How to Backup:</strong> Go to the left sidebar, select <strong>"Backup"</strong> to download the file.</li>
+                    <li><strong>How to Restore:</strong> Select <strong>"Restore"</strong> and upload your backup file.</li>
+                </ul>
+            </div>
+            
+             <div style="margin-top: 20px; text-align: center; color: var(--text-light); font-size: 12px; border-top: 1px solid var(--border); padding-top: 10px;">
+                <strong>Technologies:</strong> HTML5, CSS3, JS (ES6+).<br>
+                <strong>Libraries:</strong> <a href="https://www.chartjs.org/" target="_blank" style="color: var(--primary); text-decoration: none;">Chart.js</a>, <a href="https://fontawesome.com/" target="_blank" style="color: var(--primary); text-decoration: none;">FontAwesome</a>.<br>
+                Open Source. Wishing you peace and diligence!
+            </div>
+        </div>
+        
+        <div style="padding: 15px; border-top: 1px solid var(--border); display: flex; justify-content: flex-end; background: var(--surface); border-radius: 0 0 16px 16px;">
+            <button class="btn btn-secondary" onclick="app.closeIntroModal()">Close</button>
+        </div>
+    </div>
+</div>
     <audio id="bell" src="bell.mp3" preload="auto"></audio>
 
     <script>
@@ -644,7 +815,15 @@
 
                 this.init();
             }
-            
+  openIntroModal() {
+        const modal = document.getElementById('intro-modal');
+        if (modal) modal.style.display = 'flex';
+    }
+
+closeIntroModal() {
+    document.getElementById('intro-modal').style.display = 'none';
+    localStorage.setItem('intro_seen', 'true'); // Save so it doesn't pop up every time
+}          
            // Fix: Week starts on Monday
             getStartOfWeek(date) {
                 const d = new Date(date);
@@ -673,6 +852,9 @@
                     console.error("Error during init:", err);
                     alert("App failed to initialize. Try resetting data via the sidebar button.");
                 }
+				if (!localStorage.getItem('intro_seen')) {
+        this.openIntroModal();
+    }
             }
 
             save() {
@@ -794,7 +976,9 @@ get totalMindfulnessCounts() {
                 if (!minStr) return;
                 const min = parseInt(minStr);
                 if (isNaN(min) || min <= 0) return;
-
+    if (typeof Website2APK !== 'undefined') {
+        Website2APK.keepScreenOn(true); // Bật chế độ luôn sáng
+    }
                 this.meditationState = {
                     active: true, paused: false, goalId: goal.id, count: 0,
                     startTime: Date.now(), totalDurationSeconds: min * 60,
@@ -842,7 +1026,9 @@ get totalMindfulnessCounts() {
             // NEW: Conclude session and show Notes modal (instead of auto-saving)
 concludeMeditationSession(type = 'manual') {
     clearInterval(this.meditationState.timerRef);
-    
+    if (typeof Website2APK !== 'undefined') {
+        Website2APK.keepScreenOn(false); 
+    }
     // Only play the bell if the timer finished on its own
     if (type === 'auto') {
         this.playBell();
@@ -1213,7 +1399,7 @@ gradient.addColorStop(1, 'rgba(167, 139, 250, 0.05)');   // Đáy: Trong suốt 
                     document.getElementById('g-name').value = '';
                     document.getElementById('g-color').value = type === 'meditation' ? '#a78bfa' : '#818cf8';
                     document.getElementById('g-lifetime-target').value = 1000;
-                    document.getElementById('g-daily-target').value = 30;
+                    document.getElementById('g-daily-target').value = 100;
                     title.innerText = type === 'meditation' ? 'New Meditation Goal' : 'New Activity Goal'; btn.innerText = 'Create';
                 }
                 modal.style.display = 'flex'; 
@@ -1433,11 +1619,11 @@ updateStats() {
     { id: 'streak_10', title: 'Striving', desc: 'Practice for 10 consecutive days', condition: () => this.data.streak >= 10 },
     { id: 'streak_30', title: 'Diligence', desc: 'Practice for 30 consecutive days', condition: () => this.data.streak >= 30 },
     { id: 'streak_60', title: 'Ardor', desc: 'Practice for 60 consecutive days', condition: () => this.data.streak >= 60 },
-    { id: 'streak_120', title: 'Perseverance', desc: 'Practice for 120 consecutive days', condition: () => this.data.streak >= 120 },
-    { id: 'streak_365', title: 'Viriya', desc: 'Practice for 365 consecutive days', condition: () => this.data.streak >= 365 },
+    { id: 'streak_120', title: 'Viriya', desc: 'Practice for 120 consecutive days', condition: () => this.data.streak >= 120 },
+    { id: 'streak_365', title: 'Viriya-sambojjhanga', desc: 'Practice for 365 consecutive days', condition: () => this.data.streak >= 365 },
 
     { id: 'beginner', title: 'Novice', desc: 'Accumulate 5,000 Mindfulness (Sati)', condition: () => this.totalMindfulnessCounts >= 5000 },
-    { id: 'level2', title: 'Practitioner', desc: 'Accumulate 20,000 Mindfulness (Sati)', condition: () => this.totalMindfulnessCounts >= 20000 },
+    { id: 'level2', title: 'Practitioner', desc: 'Accumulate 10,000 Mindfulness (Sati)', condition: () => this.totalMindfulnessCounts >= 10000 },
     { id: 'practitioner', title: 'Yogi', desc: 'Accumulate 20,000 Mindfulness (Sati)', condition: () => this.totalMindfulnessCounts >= 20000 },
     { id: 'meditator', title: 'Meditator', desc: 'Accumulate 80,000 Mindfulness (Sati)', condition: () => this.totalMindfulnessCounts >= 80000 },
     { id: 'master', title: 'Meditation Master', desc: 'Accumulate 500,000 Mindfulness (Sati)', condition: () => this.totalMindfulnessCounts >= 500000 }
@@ -1578,7 +1764,9 @@ updateStats() {
             this.showToast('Copied!');
         }
     }
-
+clearBackupArea() {
+        document.getElementById('backup-data-area').value = '';
+    }
     // "Restore from text" button
     restoreFromText() {
         const textarea = document.getElementById('backup-data-area');
