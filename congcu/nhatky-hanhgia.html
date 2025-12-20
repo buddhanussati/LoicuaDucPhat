@@ -366,7 +366,7 @@
     <div class="dashboard-grid" style="grid-template-columns: 1fr;">
             <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 20px;">
             <div class="card">
-                <h3 id="breakdown-title">Phân bổ thời gian</h3>
+                <h3 id="breakdown-title">Biểu đồ Thời gian</h3>
                 <div style="height: 300px; display:flex; justify-content:center;">
                     <canvas id="goalBreakdownChart"></canvas>
                 </div>
@@ -1652,7 +1652,7 @@ renderReports() {
     const unitLabel = isMindfulness ? 'Chánh Niệm' : 'Phút';
     
     // Cập nhật tiêu đề biểu đồ tròn
-    document.getElementById('breakdown-title').innerText = isMindfulness ? 'Phân bố Chánh niệm' : 'Phân bố Thời gian';
+    document.getElementById('breakdown-title').innerText = isMindfulness ? 'Biểu đồ Chánh niệm' : 'Biểu đồ Thời gian';
 
     // Xử lý tiêu đề Tuần
     const weekDays = ['T2', 'T3', 'T4', 'T5', 'T6', 'T7', 'CN'];
@@ -1738,33 +1738,47 @@ renderReports() {
     };
     
     // 1. Breakdown Chart (Tròn)
-    const ctxBreakdown = document.getElementById('goalBreakdownChart').getContext('2d');
-    if(this.charts.breakdown) this.charts.breakdown.destroy();
-    
-    // Nếu không có dữ liệu chánh niệm nào
-    if (activeGoals.length === 0 && isMindfulness) {
-        // Vẽ chart rỗng hoặc không làm gì, ChartJS xử lý mảng rỗng tốt
-    }
+    // 1. Định nghĩa đơn vị dựa trên mode (đặt dòng này ở đầu hàm renderReports)
 
-    this.charts.breakdown = new Chart(ctxBreakdown, { 
-        type: 'doughnut', 
-        data: { 
-            labels: activeGoals.map(d=>d.name), 
-            datasets: [{ 
-                data: activeGoals.map(d=>d.total), 
-                backgroundColor: activeGoals.map(d=>d.color), 
-                borderWidth: 1, 
-                borderColor: '#1f2937' 
-            }] 
-        }, 
-        options: { 
-            maintainAspectRatio: false, 
-            plugins: { 
-                legend: { labels: { color: '#9ca3af' } },
-                title: { display: activeGoals.length === 0, text: 'Chưa có dữ liệu', position: 'bottom', color: '#6b7280' }
-            } 
+// 2. Cấu hình Chart
+const ctxBreakdown = document.getElementById('goalBreakdownChart').getContext('2d');
+if(this.charts.breakdown) this.charts.breakdown.destroy();
+
+this.charts.breakdown = new Chart(ctxBreakdown, { 
+    type: 'doughnut', 
+    data: { 
+        labels: activeGoals.map(d => d.name), 
+        datasets: [{ 
+            data: activeGoals.map(d => d.total), 
+            backgroundColor: activeGoals.map(d => d.color), 
+            borderWidth: 1, 
+            borderColor: '#1f2937' 
+        }] 
+    }, 
+    options: { 
+        maintainAspectRatio: false, 
+        plugins: { 
+            legend: { labels: { color: '#9ca3af' } },
+            title: { 
+                display: activeGoals.length === 0, 
+                text: 'Chưa có dữ liệu', 
+                position: 'bottom', 
+                color: '#6b7280' 
+            },
+            // --- PHẦN THÊM VÀO ĐỂ HIỂN THỊ ĐƠN VỊ ---
+            tooltip: {
+                callbacks: {
+                    label: function(context) {
+                        const label = context.label || '';
+                        const value = context.raw || 0;
+                        return ` ${label}: ${value} ${unitLabel}`;
+                    }
+                }
+            }
+            // ---------------------------------------
         } 
-    });
+    } 
+});
     
     // 2. Weekly Chart
     const ctxWeek = document.getElementById('weeklyChart').getContext('2d');
