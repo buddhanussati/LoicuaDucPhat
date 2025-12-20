@@ -261,7 +261,7 @@
 <nav class="sidebar">
         <div class="logo"><i class="fas fa-hourglass-half"></i></div>
         <div class="nav-item active" onclick="app.switchView('dashboard')">
-            <i class="fas fa-th-large"></i><span class="nav-text">Journal</span>
+            <i class="fas fa-spa"></i><span class="nav-text">Journal</span>
         </div>
         <div class="nav-item" onclick="app.switchView('calendar')">
             <i class="fas fa-calendar-alt"></i><span class="nav-text">Calendar</span>
@@ -283,7 +283,6 @@
         </div>
     </nav>
 
-    <input type="file" id="import-file" style="display:none" onchange="app.importData(this)" accept=".json">
 
     <main class="main">
         <header>
@@ -298,7 +297,6 @@
                     <div class="daily-bar-bg"><div id="daily-bar-fill" class="daily-bar-fill"></div></div>
                     <span class="stat-label">Daily Goal</span>
                 </div>
-                <div style="width: 1px; height: 30px; background: var(--border);"></div>
                 <div class="stat-item">
                     <span class="stat-val" id="streak-disp">0 🔥</span>
                     <span class="stat-label">Streak</span>
@@ -345,39 +343,47 @@
         </section>
 
         <section id="view-reports" class="view-section">
-            <div class="dashboard-grid" style="grid-template-columns: 1fr;">
-                 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 20px;">
-                    <div class="card">
-                        <h3>Goals</h3>
-                        <div style="height: 300px; display:flex; justify-content:center;">
-                            <canvas id="goalBreakdownChart"></canvas>
-                        </div>
-                    </div>
-                    <div class="card">
-                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
-                            <button class="btn btn-secondary" style="padding: 5px 10px;" onclick="app.changeReportWeek(-1)"><i class="fas fa-chevron-left"></i></button>
-                            <h3 id="weekly-report-title">Weekly Focus</h3>
-                            <button class="btn btn-secondary" style="padding: 5px 10px;" onclick="app.changeReportWeek(1)"><i class="fas fa-chevron-right"></i></button>
-                        </div>
-                        <div style="height: 300px;">
-                            <canvas id="weeklyChart"></canvas>
-                        </div>
-                    </div>
-                 </div>
-                 
-                 <div class="card" style="margin-top: 20px;">
-                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
-                        <button class="btn btn-secondary" style="padding: 5px 10px;" onclick="app.changeReportMonth(-1)"><i class="fas fa-chevron-left"></i></button>
-                        <h3 id="monthly-report-title">Monthly Focus</h3>
-                        <button class="btn btn-secondary" style="padding: 5px 10px;" onclick="app.changeReportMonth(1)"><i class="fas fa-chevron-right"></i></button>
-                    </div>
-                    <div style="height: 300px;">
-                        <canvas id="monthlyChart"></canvas>
-                    </div>
-                </div>
+    <div style="display: flex; justify-content: center; gap: 15px; margin-bottom: 25px;">
+        <button class="btn" id="btn-rep-time" onclick="app.setReportMode('time')">
+            <i class="fas fa-clock"></i> Time
+        </button>
+        <button class="btn btn-secondary" id="btn-rep-mind" onclick="app.setReportMode('mindfulness')">
+            <i class="fas fa-spa"></i> Mindfulness
+        </button>
+    </div>
 
+    <div class="dashboard-grid" style="grid-template-columns: 1fr;">
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 20px;">
+            <div class="card">
+                <h3 id="breakdown-title">Time distribution</h3>
+                <div style="height: 300px; display:flex; justify-content:center;">
+                    <canvas id="goalBreakdownChart"></canvas>
+                </div>
             </div>
-        </section>
+            <div class="card">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                    <button class="btn btn-secondary" style="padding: 5px 10px;" onclick="app.changeReportWeek(-1)"><i class="fas fa-chevron-left"></i></button>
+                    <h3 id="weekly-report-title">Weekly Focus</h3>
+                    <button class="btn btn-secondary" style="padding: 5px 10px;" onclick="app.changeReportWeek(1)"><i class="fas fa-chevron-right"></i></button>
+                </div>
+                <div style="height: 300px;">
+                    <canvas id="weeklyChart"></canvas>
+                </div>
+            </div>
+            </div>
+            
+            <div class="card" style="margin-top: 20px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                <button class="btn btn-secondary" style="padding: 5px 10px;" onclick="app.changeReportMonth(-1)"><i class="fas fa-chevron-left"></i></button>
+                <h3 id="monthly-report-title">Monthly Focus</h3>
+                <button class="btn btn-secondary" style="padding: 5px 10px;" onclick="app.changeReportMonth(1)"><i class="fas fa-chevron-right"></i></button>
+            </div>
+            <div style="height: 300px;">
+                <canvas id="monthlyChart"></canvas>
+            </div>
+        </div>
+    </div>
+</section>
 
         <section id="view-achievements" class="view-section">
             <div class="card">
@@ -587,18 +593,30 @@
     </div>
 
     <div class="modal" id="day-details-modal" style="overflow-y: auto;">
-        <div class="modal-content">
-            <h2 id="day-modal-title" style="margin-bottom: 20px; font-size: 20px;">Day Details</h2>
-            <div style="height: 150px; overflow-y: auto; position: relative; margin-bottom: 20px;">
-                <canvas id="dayBreakdownChart"></canvas>
-            </div>
-            <h3 style="font-size: 14px; color: var(--text-light); border-bottom: 1px solid var(--border); padding-bottom: 5px; margin-bottom: 10px;">Activity Log</h3>
-            <div id="day-session-list" style="max-height: 100px; overflow-y: auto;"></div>
-            <div style="display: flex; justify-content: flex-end; margin-top: 20px; border-top: 1px solid var(--border); padding-top: 15px;">
-                <button class="btn btn-secondary" onclick="app.closeDayModal()">Close</button>
-            </div>
+    <div class="modal-content">
+        <h2 id="day-modal-title" style="margin-bottom: 10px; font-size: 20px;">Day Details</h2>
+        
+        <div style="display: flex; justify-content: center; gap: 10px; margin-bottom: 15px;">
+            <button class="btn" id="btn-modal-time" style="padding: 5px 15px; font-size: 12px;" onclick="app.switchDayChart('time')">
+                <i class="fas fa-clock"></i> Time
+            </button>
+            <button class="btn btn-secondary" id="btn-modal-mind" style="padding: 5px 15px; font-size: 12px;" onclick="app.switchDayChart('mindfulness')">
+                <i class="fas fa-spa"></i> Mindfulness
+            </button>
+        </div>
+
+        <div style="height: 200px; position: relative; margin-bottom: 20px;">
+            <canvas id="dayBreakdownChart"></canvas>
+        </div>
+
+        <h3 style="font-size: 14px; color: var(--text-light); border-bottom: 1px solid var(--border); padding-bottom: 5px; margin-bottom: 10px;">Activity Log</h3>
+        <div id="day-session-list" style="max-height: 150px; overflow-y: auto;"></div>
+        
+        <div style="display: flex; justify-content: flex-end; margin-top: 20px; border-top: 1px solid var(--border); padding-top: 15px;">
+            <button class="btn btn-secondary" onclick="app.closeDayModal()">Close</button>
         </div>
     </div>
+</div>
 
     <div id="toast" class="toast">
         <i class="fas fa-info-circle"></i> <span id="toast-msg">Message</span>
@@ -749,7 +767,7 @@
              <div style="margin-top: 20px; text-align: center; color: var(--text-light); font-size: 12px; border-top: 1px solid var(--border); padding-top: 10px;">
                 <strong>Technologies:</strong> HTML5, CSS3, JS (ES6+).<br>
                 <strong>Libraries:</strong> <a href="https://www.chartjs.org/" target="_blank" style="color: var(--primary); text-decoration: none;">Chart.js</a>, <a href="https://fontawesome.com/" target="_blank" style="color: var(--primary); text-decoration: none;">FontAwesome</a>.<br>
-                Open Source. Wishing you peace and diligence!
+                Download Link & Source Code: <a href="https://github.com/buddhanussati/meditator-journal"><b>here.</b></a> Wishing you peace and diligence!
             </div>
         </div>
         
@@ -806,13 +824,14 @@
                 this.currentMonth = new Date(this.today.getFullYear(), this.today.getMonth(), 1); 
                 this.currentWeekStart = this.getStartOfWeek(this.today); 
                 this.charts = { weekly: null, breakdown: null, monthly: null, dayChart: null, session: null };
-                
+                this.reportMode = 'time'; // Mặc định là xem thời gian
                 this.meditationState = {
                     active: false, paused: false, goalId: null, count: 0,
                     startTime: null, timerRef: null, remainingSeconds: 0,
                     totalDurationSeconds: 0, touches: [] 
                 };
-
+this.currentViewDate = null; // Biến nhớ ngày đang xem trong modal
+this.dayChartMode = 'time';  // Chế độ mặc định của modal
                 this.init();
             }
   openIntroModal() {
@@ -1256,7 +1275,7 @@ concludeMeditationSession(type = 'manual') {
     if (!log || !log.touches) return;
 
     document.getElementById('graph-modal').style.display = 'flex';
-    document.getElementById('graph-date').innerText = new Date(log.timestamp).toLocaleString('vi-VN');
+    document.getElementById('graph-date').innerText = new Date(log.timestamp).toLocaleString('en-US');
 
     const ctx = document.getElementById('sessionGraph').getContext('2d');
     if (this.charts.session) this.charts.session.destroy();
@@ -1373,7 +1392,7 @@ gradient.addColorStop(1, 'rgba(167, 139, 250, 0.05)');   // Đáy: Trong suốt 
                 const btn = document.getElementById('btn-save-goal');
                 const catSelect = document.getElementById('g-cat');
                 catSelect.innerHTML = '';
-                const cats = type === 'meditation' ? ['Sitting Meditation', 'Walking Meditation'] : ['Work', 'Study', 'Health', 'Creative', 'Merit', 'Other'];
+                const cats = type === 'meditation' ? ['Sitting Meditation', 'Walking Meditation', 'Bhavana'] : ['Work', 'Study', 'Health', 'Creative', 'Merit', 'Other'];
                 cats.forEach(c => { const opt = document.createElement('option'); opt.value = c; opt.innerText = c; catSelect.appendChild(opt); });
 
                 const dailyHint = document.getElementById('g-daily-hint');
@@ -1429,137 +1448,296 @@ gradient.addColorStop(1, 'rgba(167, 139, 250, 0.05)');   // Đáy: Trong suốt 
                     grid.appendChild(dayEl);
                 }
             }
-
+switchDayChart(mode) {
+    this.dayChartMode = mode;
+    
+    // Cập nhật giao diện nút
+    const btnTime = document.getElementById('btn-modal-time');
+    const btnMind = document.getElementById('btn-modal-mind');
+    
+    if (mode === 'time') {
+        btnTime.className = 'btn';
+        btnMind.className = 'btn btn-secondary';
+    } else {
+        btnTime.className = 'btn btn-secondary';
+        btnMind.className = 'btn';
+    }
+    
+    // Vẽ lại chart
+    if (this.currentViewDate) {
+        this.renderDayChartOnly(this.currentViewDate);
+    }
+}
 openDayStats(dateStr) {
-                 const modal = document.getElementById('day-details-modal');
-                 const ctx = document.getElementById('dayBreakdownChart').getContext('2d');
-                 
-                 document.getElementById('day-modal-title').innerText = new Date(dateStr).toLocaleDateString('vi-VN');
-                 
-                 // Sort logs by time (newest first)
-                 const dayLogs = this.data.logs.filter(l => l.date === dateStr).sort((a,b) => b.timestamp - a.timestamp);
-                 
-                 // Prepare Chart Data
-                 const goalStats = {};
-                 dayLogs.forEach(log => {
-                     if(!goalStats[log.goalId]) {
-                         const goal = this.data.goals.find(g => g.id === log.goalId);
-                         goalStats[log.goalId] = { name: goal ? goal.name : 'Đã xóa', color: goal ? goal.color : '#ccc', minutes: 0 };
-                     }
-                     goalStats[log.goalId].minutes += log.minutes;
-                 });
-                 
-                 if(this.charts.dayChart) this.charts.dayChart.destroy();
-                 this.charts.dayChart = new Chart(ctx, {
-                     type: 'doughnut',
-                     data: { labels: Object.values(goalStats).map(s => s.name), datasets: [{ data: Object.values(goalStats).map(s => s.minutes), backgroundColor: Object.values(goalStats).map(s => s.color), borderWidth: 1, borderColor: '#1f2937' }] },
-                     options: { maintainAspectRatio: false, plugins: { legend: { position: 'right', labels: { color: '#9ca3af' } } } }
-                 });
+    this.currentViewDate = dateStr;
+    const modal = document.getElementById('day-details-modal');
+    document.getElementById('day-modal-title').innerText = new Date(dateStr).toLocaleDateString('en-US', {weekday: 'long', day: 'numeric', month: 'numeric'});
+    
+    // Reset về chế độ time khi mới mở
+    this.switchDayChart('time'); 
 
-                 // --- LIST GENERATION WITH GRAPH BUTTON ---
-                 const listContainer = document.getElementById('day-session-list');
-                 listContainer.innerHTML = dayLogs.length ? '' : '<p class="empty-state">Không có hoạt động.</p>';
-                 
-                 const ul = document.createElement('ul'); 
-                 ul.style.listStyle = 'none';
-                 
-                 dayLogs.forEach(log => {
-                     const goal = this.data.goals.find(g => g.id === log.goalId);
-                     const li = document.createElement('li');
-                     li.style.cssText = 'padding: 8px 0; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; font-size: 13px; align-items:center;';
-                     
-                     // 1. Check if we need a graph button (Meditation type + has touch data)
-                     let graphBtnHtml = '';
-                     if (goal && goal.type === 'meditation' && log.touches && log.touches.length > 0) {
-                         graphBtnHtml = `<button class="btn-icon" style="background:transparent; color:var(--zen); height:24px; width:24px; margin-right:5px; cursor:pointer;" onclick="app.showSessionGraph('${log.timestamp}')" title="Xem biểu đồ"><i class="fas fa-chart-area" style="font-size:12px;"></i></button>`;
-                     }
+    // 1. RENDER LIST (Luôn hiển thị đầy đủ cả Time và Sati)
+    const dayLogs = this.data.logs.filter(l => l.date === dateStr).sort((a,b) => b.timestamp - a.timestamp);
+    const listContainer = document.getElementById('day-session-list');
+    listContainer.innerHTML = dayLogs.length ? '' : '<p class="empty-state">No Activities.</p>';
+    
+    const ul = document.createElement('ul'); 
+    ul.style.listStyle = 'none';
+    
+    dayLogs.forEach(log => {
+        const goal = this.data.goals.find(g => g.id === log.goalId);
+        const li = document.createElement('li');
+        li.style.cssText = 'padding: 8px 0; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; font-size: 13px; align-items:center;';
+        
+        // Nút xem biểu đồ sóng não (nếu có touch data)
+        let graphBtnHtml = '';
+        if (goal && goal.type === 'meditation' && log.touches && log.touches.length > 0) {
+            graphBtnHtml = `<button class="btn-icon" style="background:transparent; color:var(--zen); height:24px; width:24px; margin-right:5px; cursor:pointer;" onclick="app.showSessionGraph('${log.timestamp}')"><i class="fas fa-chart-area" style="font-size:12px;"></i></button>`;
+        }
 
-                     // 2. Build the HTML
-                     const leftSide = `<div><span style="font-weight:600; color:${goal?goal.color:'#ccc'}">${goal?goal.name:'Đã xóa'}</span><span style="margin-left:5px;">${log.minutes}p</span></div>`;
-                     
-                     const rightSide = `<div style="display:flex; align-items:center;">
-                                            ${graphBtnHtml}
-                                            <div style="font-size: 11px; color: var(--text-light); width:35px; text-align:right;">
-                                                ${new Date(log.timestamp).toLocaleTimeString('vi-VN', {hour: '2-digit', minute:'2-digit'})}
-                                            </div>
-                                        </div>`;
+        // Hiển thị số Sati (nếu có)
+        const satiCount = log.count !== undefined ? log.count : (log.touches ? log.touches.length : 0);
+        const satiInfo = satiCount > 0 ? `<span style="color: var(--zen); font-size: 11px; margin-left: 5px; font-weight:bold;">(${satiCount} niệm)</span>` : '';
 
-                     li.innerHTML = leftSide + rightSide;
-                     ul.appendChild(li);
-                 });
-                 listContainer.appendChild(ul);
-                 modal.style.display = 'flex';
-            }
+        const leftSide = `<div>
+                           <span style="font-weight:600; color:${goal?goal.color:'#ccc'}">${goal?goal.name:'Đã xóa'}</span>
+                           <span style="margin-left:5px;">${log.minutes}p</span>
+                           ${satiInfo}
+                         </div>`;
+        
+        const rightSide = `<div style="display:flex; align-items:center;">
+                               ${graphBtnHtml}
+                               <div style="font-size: 11px; color: var(--text-light); width:35px; text-align:right;">
+                                   ${new Date(log.timestamp).toLocaleTimeString('en-US', {hour: '2-digit', minute:'2-digit'})}
+                               </div>
+                           </div>`;
+
+        li.innerHTML = leftSide + rightSide;
+        ul.appendChild(li);
+    });
+    listContainer.appendChild(ul);
+    
+    modal.style.display = 'flex';
+}
+
+// Hàm riêng để vẽ chart trong modal
+renderDayChartOnly(dateStr) {
+    const ctx = document.getElementById('dayBreakdownChart').getContext('2d');
+    const isMindfulness = this.dayChartMode === 'mindfulness';
+    const unitLabel = isMindfulness ? 'mindfulness' : 'mins';
+
+    const dayLogs = this.data.logs.filter(l => l.date === dateStr);
+    const goalStats = {};
+
+    dayLogs.forEach(log => {
+        // Nếu đang xem mode chánh niệm, chỉ lấy log có số liệu đó
+        if (isMindfulness) {
+             const val = log.count !== undefined ? log.count : (log.touches ? log.touches.length : 0);
+             if (val === 0) return;
+        }
+
+        if(!goalStats[log.goalId]) {
+            const goal = this.data.goals.find(g => g.id === log.goalId);
+            goalStats[log.goalId] = { 
+                name: goal ? goal.name : 'Đã xóa', 
+                color: goal ? goal.color : '#ccc', 
+                value: 0 
+            };
+        }
+        
+        if (isMindfulness) {
+            goalStats[log.goalId].value += (log.count !== undefined ? log.count : (log.touches ? log.touches.length : 0));
+        } else {
+            goalStats[log.goalId].value += log.minutes;
+        }
+    });
+
+    if(this.charts.dayChart) this.charts.dayChart.destroy();
+    
+    const dataValues = Object.values(goalStats).map(s => s.value);
+
+    this.charts.dayChart = new Chart(ctx, {
+        type: 'doughnut',
+        data: { 
+            labels: Object.values(goalStats).map(s => s.name), 
+            datasets: [{ 
+                data: dataValues, 
+                backgroundColor: Object.values(goalStats).map(s => s.color), 
+                borderWidth: 1, 
+                borderColor: '#1f2937' 
+            }] 
+        },
+        options: { 
+            maintainAspectRatio: false, 
+            plugins: { 
+                legend: { position: 'right', labels: { color: '#9ca3af', font: {size: 11} } },
+                title: { 
+                    display: dataValues.length === 0, 
+                    text: isMindfulness ? 'No mindfulness data' : 'No data', 
+                    position: 'bottom', 
+                    color: '#6b7280' 
+                },
+                tooltip: {
+                    callbacks: {
+                        label: function(context) {
+                            return ` ${context.label}: ${context.raw} ${unitLabel}`;
+                        }
+                    }
+                }
+            } 
+        }
+    });
+}
             closeDayModal() { document.getElementById('day-details-modal').style.display = 'none'; }
+setReportMode(mode) {
+    this.reportMode = mode;
+    
+    // Cập nhật giao diện nút bấm
+    const btnTime = document.getElementById('btn-rep-time');
+    const btnMind = document.getElementById('btn-rep-mind');
+    
+    if (mode === 'time') {
+        btnTime.className = 'btn'; // Active styling
+        btnMind.className = 'btn btn-secondary';
+    } else {
+        btnTime.className = 'btn btn-secondary';
+        btnMind.className = 'btn'; // Active styling (sẽ lấy màu primary)
+    }
 
+    this.renderReports();
+}
             // --- REPORTING LOGIC ---
-            renderReports() {
-                if(!document.getElementById('weeklyChart')) return;
-                
-                // Weekly
-                const weekDays = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
-                const weekStart = new Date(this.currentWeekStart);
-                const weekEnd = new Date(this.currentWeekStart); weekEnd.setDate(weekEnd.getDate() + 6);
-                document.getElementById('weekly-report-title').innerText = `Weekly (${weekStart.toLocaleDateString('en-US', {month:'numeric', day:'numeric'})} - ${weekEnd.toLocaleDateString('en-US', {month:'numeric', day:'numeric'})})`;
-                
-                // Monthly
-                const mYear = this.currentMonth.getFullYear();
-                const mMonth = this.currentMonth.getMonth();
-                const monthlyLabels = Array.from({length: new Date(mYear, mMonth + 1, 0).getDate()}, (_, i) => i + 1);
-                document.getElementById('monthly-report-title').innerText = `Monthly (${new Date(mYear, mMonth).toLocaleDateString('default', { month: 'long' })})`;
+renderReports() {
+    if(!document.getElementById('weeklyChart')) return;
+    
+    const isMindfulness = this.reportMode === 'mindfulness';
+    const unitLabel = isMindfulness ? 'Mindfulness' : 'Minutes';
+    
+    // Cập nhật tiêu đề biểu đồ tròn
+    document.getElementById('breakdown-title').innerText = isMindfulness ? 'Time distribution' : 'Mindfulness distribution';
 
-                const goalDatasets = {};
-                this.data.goals.forEach(goal => { 
-                    goalDatasets[goal.id] = { 
-                        name: goal.name, 
-                        color: goal.color, 
-                        total: 0, 
-                        weekly: new Array(7).fill(0),
-                        monthly: new Array(monthlyLabels.length).fill(0) 
-                    }; 
-                });
-                
-                this.data.logs.forEach(log => {
-                    if(!goalDatasets[log.goalId]) return;
-                    goalDatasets[log.goalId].total += log.minutes;
-                    const logDate = new Date(log.date);
-                    const logTime = logDate.getTime();
-                    
-                  // Weekly Binning (Map JS day 0-6 to Array 0-6 where Mon is 0)
-                    if(logTime >= weekStart.getTime() && logTime <= weekEnd.getTime()) { 
-                        // JS: Sun=0, Mon=1...
-                        // Map: Mon(1)->0, Sun(0)->6
-                        let dayIdx = logDate.getDay();
-                        dayIdx = (dayIdx === 0 ? 6 : dayIdx - 1);
-                        goalDatasets[log.goalId].weekly[dayIdx] += log.minutes; 
+    // Xử lý tiêu đề Tuần
+    const weekDays = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+    const weekStart = new Date(this.currentWeekStart);
+    const weekEnd = new Date(this.currentWeekStart); weekEnd.setDate(weekEnd.getDate() + 6);
+    document.getElementById('weekly-report-title').innerText = `Week (${weekStart.toLocaleDateString('en-US', {month:'numeric', day:'numeric'})} - ${weekEnd.toLocaleDateString('en-US', {month:'numeric', day:'numeric'})})`;
+    
+    // Xử lý tiêu đề Tháng
+    const mYear = this.currentMonth.getFullYear();
+    const mMonth = this.currentMonth.getMonth();
+    const monthlyLabels = Array.from({length: new Date(mYear, mMonth + 1, 0).getDate()}, (_, i) => i + 1);
+    document.getElementById('monthly-report-title').innerText = `Month ${new Date(mYear, mMonth).toLocaleDateString('en-US', { month: 'numeric', year: 'numeric' })}`;
+
+    const goalDatasets = {};
+    
+    // LỌC MỤC TIÊU: Nếu xem Chánh niệm, chỉ lấy mục tiêu type='meditation'
+    this.data.goals.forEach(goal => { 
+        if (isMindfulness && goal.type !== 'meditation') return;
+
+        goalDatasets[goal.id] = { 
+            name: goal.name, 
+            color: goal.color, 
+            total: 0, 
+            weekly: new Array(7).fill(0),
+            monthly: new Array(monthlyLabels.length).fill(0) 
+        }; 
+    });
+    
+    // TÍNH TOÁN DỮ LIỆU
+    this.data.logs.forEach(log => {
+        if(!goalDatasets[log.goalId]) return;
+
+        // LẤY GIÁ TRỊ DỰA TRÊN CHẾ ĐỘ
+        let value = 0;
+        if (isMindfulness) {
+            // Lấy count, nếu không có thì lấy độ dài mảng touches
+            value = log.count !== undefined ? log.count : (log.touches ? log.touches.length : 0);
+        } else {
+            value = log.minutes;
+        }
+
+        goalDatasets[log.goalId].total += value;
+        
+        const logDate = new Date(log.date);
+        const logTime = logDate.getTime();
+        
+        // Tính cho Tuần
+        if(logTime >= weekStart.getTime() && logTime <= weekEnd.getTime()) { 
+            let dayIdx = logDate.getDay();
+            dayIdx = (dayIdx === 0 ? 6 : dayIdx - 1);
+            goalDatasets[log.goalId].weekly[dayIdx] += value; 
+        }
+        
+        // Tính cho Tháng
+        if(logDate.getFullYear() === mYear && logDate.getMonth() === mMonth) {
+            goalDatasets[log.goalId].monthly[logDate.getDate() - 1] += value;
+        }
+    });
+    
+    const activeGoals = Object.values(goalDatasets).filter(d => d.total > 0);
+    
+    // CẤU HÌNH CHART
+    const commonOptions = { 
+        maintainAspectRatio: false, 
+        scales: { 
+            x: {stacked: true, grid:{color:'#374151'}}, 
+            y: {
+                stacked: true, 
+                grid:{color:'#374151'},
+                title: { display: true, text: unitLabel } // Hiện tên trục Y
+            } 
+        }, 
+        plugins: {
+            legend:{labels:{color:'#9ca3af'}},
+            tooltip: {
+                callbacks: {
+                    label: function(context) {
+                        return context.dataset.label + ': ' + context.raw + ' ' + unitLabel;
                     }
-                    
-                    // Monthly Binning
-                    if(logDate.getFullYear() === mYear && logDate.getMonth() === mMonth) {
-                        goalDatasets[log.goalId].monthly[logDate.getDate() - 1] += log.minutes;
-                    }
-                });
-                
-                const activeGoals = Object.values(goalDatasets).filter(d => d.total > 0);
-                
-                // Charts
-                const commonOptions = { maintainAspectRatio: false, scales: { x: {stacked: true, grid:{color:'#374151'}}, y: {stacked: true, grid:{color:'#374151'}} }, plugins: {legend:{labels:{color:'#9ca3af'}}} };
-                
-                // Breakdown
-                const ctxBreakdown = document.getElementById('goalBreakdownChart').getContext('2d');
-                if(this.charts.breakdown) this.charts.breakdown.destroy();
-                this.charts.breakdown = new Chart(ctxBreakdown, { type: 'doughnut', data: { labels: activeGoals.map(d=>d.name), datasets: [{ data: activeGoals.map(d=>d.total), backgroundColor: activeGoals.map(d=>d.color), borderWidth: 1, borderColor: '#1f2937' }] }, options: { maintainAspectRatio: false, plugins: { legend: { labels: { color: '#9ca3af' } } } } });
-                
-                // Weekly
-                const ctxWeek = document.getElementById('weeklyChart').getContext('2d');
-                if(this.charts.weekly) this.charts.weekly.destroy();
-                this.charts.weekly = new Chart(ctxWeek, { type: 'bar', data: { labels: weekDays, datasets: activeGoals.map(g => ({ label: g.name, data: g.weekly, backgroundColor: g.color, stack: '0' })) }, options: commonOptions });
-                
-                // Monthly (Restored)
-                const ctxMonth = document.getElementById('monthlyChart').getContext('2d');
-                if(this.charts.monthly) this.charts.monthly.destroy();
-                this.charts.monthly = new Chart(ctxMonth, { type: 'bar', data: { labels: monthlyLabels, datasets: activeGoals.map(g => ({ label: g.name, data: g.monthly, backgroundColor: g.color, stack: '0' })) }, options: commonOptions });
+                }
             }
+        } 
+    };
+    
+    // 1. Breakdown Chart (Tròn)
+    const ctxBreakdown = document.getElementById('goalBreakdownChart').getContext('2d');
+    if(this.charts.breakdown) this.charts.breakdown.destroy();
+    
+    // Nếu không có dữ liệu chánh niệm nào
+    if (activeGoals.length === 0 && isMindfulness) {
+        // Vẽ chart rỗng hoặc không làm gì, ChartJS xử lý mảng rỗng tốt
+    }
+
+    this.charts.breakdown = new Chart(ctxBreakdown, { 
+        type: 'doughnut', 
+        data: { 
+            labels: activeGoals.map(d=>d.name), 
+            datasets: [{ 
+                data: activeGoals.map(d=>d.total), 
+                backgroundColor: activeGoals.map(d=>d.color), 
+                borderWidth: 1, 
+                borderColor: '#1f2937' 
+            }] 
+        }, 
+        options: { 
+            maintainAspectRatio: false, 
+            plugins: { 
+                legend: { labels: { color: '#9ca3af' } },
+                title: { display: activeGoals.length === 0, text: 'Chưa có dữ liệu', position: 'bottom', color: '#6b7280' }
+            } 
+        } 
+    });
+    
+    // 2. Weekly Chart
+    const ctxWeek = document.getElementById('weeklyChart').getContext('2d');
+    if(this.charts.weekly) this.charts.weekly.destroy();
+    this.charts.weekly = new Chart(ctxWeek, { type: 'bar', data: { labels: weekDays, datasets: activeGoals.map(g => ({ label: g.name, data: g.weekly, backgroundColor: g.color, stack: '0' })) }, options: commonOptions });
+    
+    // 3. Monthly Chart
+    const ctxMonth = document.getElementById('monthlyChart').getContext('2d');
+    if(this.charts.monthly) this.charts.monthly.destroy();
+    this.charts.monthly = new Chart(ctxMonth, { type: 'bar', data: { labels: monthlyLabels, datasets: activeGoals.map(g => ({ label: g.name, data: g.monthly, backgroundColor: g.color, stack: '0' })) }, options: commonOptions });
+}
 
             changeReportWeek(dir) { this.currentWeekStart.setDate(this.currentWeekStart.getDate() + (dir * 7)); this.renderReports(); }
             changeReportMonth(dir) { this.currentMonth.setMonth(this.currentMonth.getMonth() + dir); this.renderReports(); }
