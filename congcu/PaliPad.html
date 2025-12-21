@@ -169,6 +169,7 @@
       gap: 10px;
     }
 
+    /* UPDATED: Thêm style cho nút bấm */
     .key-item {
       background: #fdfdfd;
       border: 1px solid #eee;
@@ -177,6 +178,22 @@
       text-align: center;
       font-size: 0.9rem;
       color: var(--text-color);
+      cursor: pointer; /* Biến con trỏ thành bàn tay */
+      transition: all 0.2s ease;
+      user-select: none; /* Ngăn bôi đen text khi click nhanh */
+    }
+
+    /* UPDATED: Hiệu ứng khi di chuột và nhấn */
+    .key-item:hover {
+      background-color: #fff8e1;
+      border-color: var(--accent-color);
+      transform: translateY(-2px);
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    
+    .key-item:active {
+      transform: translateY(0);
+      background-color: #f0e6ce;
     }
 
     .key-item strong {
@@ -221,7 +238,7 @@
           <circle cx="82" cy="82" r="3" fill="currentColor"/>
         </svg>
       </div> 
-      &nbsp;Bảng Gõ Tiếng Pali
+      &nbsp;Bảng Gõ Tiếng&nbsp;Pali
     </h1>
 
     <textarea id="pad" class="form-control" 
@@ -235,25 +252,69 @@
       </button>
     </div>
 
-        <div class="key-map-container">
-      <div class="key-map-title">Hướng dẫn gõ </div>
+    <div class="key-map-container">
+      <div class="key-map-title">Ấn để chèn hoặc gõ theo hướng&nbsp;dẫn:</div>
       <div class="key-grid">
-        <div class="key-item"><strong>ā</strong> <span>= aa</span></div>
-        <div class="key-item"><strong>ī</strong> <span>= ii</span></div>
-        <div class="key-item"><strong>ū</strong> <span>= uu</span></div>
-        <div class="key-item"><strong>ṇ</strong> <span>= .n</span></div>
-        <div class="key-item"><strong>ṅ</strong> <span>= "n</span></div>
-        <div class="key-item"><strong>ñ</strong> <span>= ~n</span></div>
-        <div class="key-item"><strong>ṭ</strong> <span>= .t</span></div>
-        <div class="key-item"><strong>ḍ</strong> <span>= .d</span></div>
-        <div class="key-item"><strong>ḷ</strong> <span>= .l</span></div>
-        <div class="key-item"><strong>ṃ</strong> <span>= .m</span></div>
-        <div class="key-item"><strong>ṁ</strong> <span>= "m</span></div>
+        <div class="key-item" onclick="insertAtCaret('pad', 'ā');"><strong>ā</strong> <span>= aa</span></div>
+        <div class="key-item" onclick="insertAtCaret('pad', 'ī');"><strong>ī</strong> <span>= ii</span></div>
+        <div class="key-item" onclick="insertAtCaret('pad', 'ū');"><strong>ū</strong> <span>= uu</span></div>
+        <div class="key-item" onclick="insertAtCaret('pad', 'ṇ');"><strong>ṇ</strong> <span>= .n</span></div>
+        <div class="key-item" onclick="insertAtCaret('pad', 'ṅ');"><strong>ṅ</strong> <span>= "n</span></div>
+        <div class="key-item" onclick="insertAtCaret('pad', 'ñ');"><strong>ñ</strong> <span>= ~n</span></div>
+        <div class="key-item" onclick="insertAtCaret('pad', 'ṭ');"><strong>ṭ</strong> <span>= .t</span></div>
+        <div class="key-item" onclick="insertAtCaret('pad', 'ḍ');"><strong>ḍ</strong> <span>= .d</span></div>
+        <div class="key-item" onclick="insertAtCaret('pad', 'ḷ');"><strong>ḷ</strong> <span>= .l</span></div>
+        <div class="key-item" onclick="insertAtCaret('pad', 'ṃ');"><strong>ṃ</strong> <span>= .m</span></div>
+        <div class="key-item" onclick="insertAtCaret('pad', 'ṁ');"><strong>ṁ</strong> <span>= "m</span></div>
       </div>
     </div>
   </div>
 
   <script>
+    // --- UPDATED: Hàm Insert Script Của Bạn ---
+    function insertAtCaret(areaId, text) {
+        var txtarea = document.getElementById(areaId);
+        if (!txtarea) return; // Safety check
+
+        var scrollPos = txtarea.scrollTop;
+        var strPos = 0;
+        var br = ((txtarea.selectionStart || txtarea.selectionStart == '0') ?
+            "ff" : (document.selection ? "ie" : false ) );
+        
+        if (br == "ie") {
+            txtarea.focus();
+            var range = document.selection.createRange();
+            range.moveStart ('character', -txtarea.value.length);
+            strPos = range.text.length;
+        }
+        else if (br == "ff") strPos = txtarea.selectionStart;
+
+        var front = (txtarea.value).substring(0,strPos);
+        var back = (txtarea.value).substring(strPos,txtarea.value.length);
+        txtarea.value=front+text+back;
+        strPos = strPos + text.length;
+        
+        if (br == "ie") {
+            txtarea.focus();
+            var range = document.selection.createRange();
+            range.moveStart ('character', -txtarea.value.length);
+            range.moveStart ('character', strPos);
+            range.moveEnd ('character', 0);
+            range.select();
+        }
+        else if (br == "ff") {
+            txtarea.selectionStart = strPos;
+            txtarea.selectionEnd = strPos;
+            txtarea.focus();
+        }
+        txtarea.scrollTop = scrollPos;
+        
+        // Kích hoạt sự kiện input để palipad.js (nếu có theo dõi) biết văn bản đã thay đổi
+        if (typeof $ !== 'undefined') {
+            $(txtarea).trigger('input');
+        }
+    }
+
     $(function() {
       // 1. Khởi tạo palipad
       if (typeof palipad !== 'undefined') {
@@ -266,22 +327,17 @@
       // 2. Xử lý nút Copy
       $('#btnCopy').on('click', function() {
         var copyText = document.getElementById("pad");
-        
-        // Chọn nội dung
         copyText.select();
-        copyText.setSelectionRange(0, 99999); /* Cho thiết bị di động */
+        copyText.setSelectionRange(0, 99999); 
 
-        // Thực hiện lệnh copy
         try {
           navigator.clipboard.writeText(copyText.value).then(function() {
             showCopySuccess();
           }, function(err) {
-             // Fallback nếu browser cũ không hỗ trợ navigator.clipboard
             document.execCommand("copy");
             showCopySuccess();
           });
         } catch (err) {
-           // Fallback cơ bản nhất
            document.execCommand("copy");
            showCopySuccess();
         }
@@ -290,8 +346,6 @@
       function showCopySuccess() {
         var msg = $('#copyMsg');
         msg.addClass('show');
-        
-        // Ẩn thông báo sau 2 giây
         setTimeout(function(){
           msg.removeClass('show');
         }, 2000);
