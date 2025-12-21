@@ -595,9 +595,12 @@
             <div style="height: 300px; width: 100%;">
                 <canvas id="sessionGraph"></canvas>
             </div>
-            <div style="display: flex; justify-content: flex-end; margin-top: 20px;">
-                <button class="btn btn-secondary" onclick="document.getElementById('graph-modal').style.display='none'">Close</button>
-            </div>
+            <div style="display: flex; justify-content: flex-end; gap: 10px; margin-top: 20px;">
+    <button class="btn btn-secondary" id="btn-export-session" title="Copy JSON Data">
+        <i class="fas fa-file-code"></i> Copy Data
+    </button>
+    <button class="btn btn-secondary" onclick="document.getElementById('graph-modal').style.display='none'">Close</button>
+</div>
         </div>
     </div>
 
@@ -1257,12 +1260,12 @@ concludeMeditationSession(type = 'manual') {
                     
                     // 1. Nút xem biểu đồ (Chỉ hiện nếu là thiền và có dữ liệu chạm)
                     if (isMeditation && log.touches && log.touches.length > 0) {
-                        actionButtons += `<button class="btn-icon" style="background:transparent; color:var(--zen); height:24px; width:24px;" onclick="app.showSessionGraph('${log.timestamp}')" title="Xem biểu đồ"><i class="fas fa-chart-area" style="font-size:12px;"></i></button>`;
+                        actionButtons += `<button class="btn-icon" style="background:transparent; color:var(--zen); height:24px; width:24px;" onclick="app.showSessionGraph('${log.timestamp}')" title="Show graph"><i class="fas fa-chart-area" style="font-size:12px;"></i></button>`;
                     }
                     
                     // 2. Nút chỉnh sửa (Luôn hiện cho tất cả các loại)
                     // Lưu ý: log.timestamp được truyền vào làm ID để sửa
-                    actionButtons += `<button class="btn-icon" style="background:transparent; color:var(--text-light); height:24px; width:24px;" onclick="app.openSessionModal('${goalId}', ${log.minutes}, ${log.timestamp}, ${log.timestamp})" title="Sửa chi tiết"><i class="fas fa-edit" style="font-size:12px;"></i></button>`;
+                    actionButtons += `<button class="btn-icon" style="background:transparent; color:var(--text-light); height:24px; width:24px;" onclick="app.openSessionModal('${goalId}', ${log.minutes}, ${log.timestamp}, ${log.timestamp})" title="Edit details"><i class="fas fa-edit" style="font-size:12px;"></i></button>`;
                     
                     actionButtons += '</div>';
                     // ---------------------------------
@@ -1280,6 +1283,11 @@ concludeMeditationSession(type = 'manual') {
             }
             
             showSessionGraph(timestamp) {
+	const exportBtn = document.getElementById('btn-export-session');
+    if (exportBtn) {
+        // Unbind previous events to prevent stacking
+        exportBtn.onclick = () => this.exportSessionData(timestamp);
+    }		
     const log = this.data.logs.find(l => l.timestamp == timestamp);
     if (!log || !log.touches) return;
 
@@ -1390,7 +1398,53 @@ gradient.addColorStop(1, 'rgba(167, 139, 250, 0.05)');   // Đáy: Trong suốt 
         }
     });
 }
+exportSessionData(timestamp) {
+    const log = this.data.logs.find(l => l.timestamp == timestamp);
+    if (!log) {
+        this.showToast('Could not copy text!');
+        return;
+    }
 
+    const dataStr = JSON.stringify(log);
+
+    // Copy to clipboard logic
+    if (navigator.clipboard) {
+        navigator.clipboard.writeText(dataStr).then(() => {
+            this.showToast('JSON data has been copied!');
+        }).catch((err) => {
+            console.error('Async: Could not copy text: ', err);
+            this.fallbackCopyText(dataStr);
+        });
+    } else {
+        this.fallbackCopyText(dataStr);
+    }
+}
+
+// Helper for older browsers or webviews
+fallbackCopyText(text) {
+    const textArea = document.createElement("textarea");
+    textArea.value = text;
+    
+    // Ensure it's not visible but part of DOM
+    textArea.style.position = 'fixed';
+    textArea.style.left = '-9999px';
+    document.body.appendChild(textArea);
+    
+    textArea.focus();
+    textArea.select();
+    
+    try {
+        const successful = document.execCommand('copy');
+        if(successful) this.showToast('JSON data has been copied!');
+        else this.showToast('Oops, unable to copy');
+    } catch (err) {
+        console.error('Fallback: Oops, unable to copy', err);
+        this.showToast('Oops, unable to copy');
+    }
+
+    
+    document.body.removeChild(textArea);
+}
             openChoiceModal() { document.getElementById('choice-modal').style.display = 'flex'; }
             closeChoiceModal() { document.getElementById('choice-modal').style.display = 'none'; }
 

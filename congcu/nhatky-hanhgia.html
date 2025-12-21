@@ -596,9 +596,12 @@
             <div style="height: 300px; width: 100%;">
                 <canvas id="sessionGraph"></canvas>
             </div>
-            <div style="display: flex; justify-content: flex-end; margin-top: 20px;">
-                <button class="btn btn-secondary" onclick="document.getElementById('graph-modal').style.display='none'">Đóng</button>
-            </div>
+            <div style="display: flex; justify-content: flex-end; gap: 10px; margin-top: 20px;">
+    <button class="btn btn-secondary" id="btn-export-session" title="Sao chép dữ liệu JSON">
+        <i class="fas fa-file-code"></i> Sao chép
+    </button>
+    <button class="btn btn-secondary" onclick="document.getElementById('graph-modal').style.display='none'">Đóng</button>
+</div>
         </div>
     </div>
 
@@ -1293,7 +1296,14 @@ get totalMindfulnessCounts() {
             }
             
             showSessionGraph(timestamp) {
-    const log = this.data.logs.find(l => l.timestamp == timestamp);
+    const exportBtn = document.getElementById('btn-export-session');
+    if (exportBtn) {
+        // Unbind previous events to prevent stacking
+        exportBtn.onclick = () => this.exportSessionData(timestamp);
+    }
+    // ----------------------
+
+	const log = this.data.logs.find(l => l.timestamp == timestamp);
     if (!log || !log.touches) return;
 
     document.getElementById('graph-modal').style.display = 'flex';
@@ -1403,7 +1413,52 @@ gradient.addColorStop(1, 'rgba(167, 139, 250, 0.05)');   // Đáy: Trong suốt 
         }
     });
 }
+exportSessionData(timestamp) {
+    const log = this.data.logs.find(l => l.timestamp == timestamp);
+    if (!log) {
+        this.showToast('Không tìm thấy dữ liệu!');
+        return;
+    }
 
+    const dataStr = JSON.stringify(log);
+
+    // Copy to clipboard logic
+    if (navigator.clipboard) {
+        navigator.clipboard.writeText(dataStr).then(() => {
+            this.showToast('Đã sao chép dữ liệu JSON!');
+        }).catch((err) => {
+            console.error('Async: Could not copy text: ', err);
+            this.fallbackCopyText(dataStr);
+        });
+    } else {
+        this.fallbackCopyText(dataStr);
+    }
+}
+
+// Helper for older browsers or webviews
+fallbackCopyText(text) {
+    const textArea = document.createElement("textarea");
+    textArea.value = text;
+    
+    // Ensure it's not visible but part of DOM
+    textArea.style.position = 'fixed';
+    textArea.style.left = '-9999px';
+    document.body.appendChild(textArea);
+    
+    textArea.focus();
+    textArea.select();
+    
+    try {
+        const successful = document.execCommand('copy');
+        if(successful) this.showToast('Đã sao chép dữ liệu JSON!');
+        else this.showToast('Không thể sao chép');
+    } catch (err) {
+        console.error('Fallback: Oops, unable to copy', err);
+        this.showToast('Lỗi sao chép');
+    }
+    
+    document.body.removeChild(textArea);
+}
             openChoiceModal() { document.getElementById('choice-modal').style.display = 'flex'; }
             closeChoiceModal() { document.getElementById('choice-modal').style.display = 'none'; }
 
