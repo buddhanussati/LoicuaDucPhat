@@ -2208,12 +2208,25 @@ logSessionConfirm(e) {
     this.closeSessionModal(); 
     this.showToast(logId ? 'Đã cập nhật!' : 'Đã ghi!');
 }
-            deleteGoal(id) {
-                if(confirm('Xóa mục tiêu? Lịch sử vẫn sẽ được giữ.')) {
-                    this.data.goals = this.data.goals.filter(g => g.id !== id);
-                    this.save(); this.renderGoals(); this.renderReports(); 
-                }
-            }
+         deleteGoal(id) {
+    // 1. Change the message to warn that history will also be deleted
+    if(confirm('Xóa mục tiêu này và TOÀN BỘ lịch sử liên quan? Hành động này không thể hoàn tác.')) {
+        
+        // 2. Remove the goal from the goals list
+        this.data.goals = this.data.goals.filter(g => g.id !== id);
+        
+        // 3. Remove all logs associated with this goalId
+        this.data.logs = this.data.logs.filter(log => log.goalId !== id);
+        
+        // 4. Save and refresh all UI components
+        this.save(); 
+        this.renderGoals(); 
+        this.renderReports(); 
+        this.renderCalendar(); // Added this to refresh the calendar view
+        
+        this.showToast('Đã xóa mục tiêu và lịch sử!');
+    }
+}
             renderDate() {
                  document.getElementById('current-date').innerText = new Date().toLocaleDateString('vi-VN', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
             }

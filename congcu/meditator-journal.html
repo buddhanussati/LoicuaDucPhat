@@ -2188,11 +2188,25 @@ clearBackupArea() {
     this.showToast(logId ? 'Session Updated!' : 'Session Logged!');
 }
             deleteGoal(id) {
-                if(confirm('Delete goal? History kept.')) {
-                    this.data.goals = this.data.goals.filter(g => g.id !== id);
-                    this.save(); this.renderGoals(); this.renderReports(); 
-                }
-            }
+    // 1. Update the confirmation message
+    if(confirm('Delete this goal and ALL associated history? This action cannot be undone.')) {
+        
+        // 2. Remove the goal from the goals list
+        this.data.goals = this.data.goals.filter(g => g.id !== id);
+        
+        // 3. Remove all logs associated with this goalId
+        this.data.logs = this.data.logs.filter(log => log.goalId === id ? false : true);
+        // Alternative shorter syntax: this.data.logs = this.data.logs.filter(log => log.goalId !== id);
+        
+        // 4. Save and refresh the UI components
+        this.save(); 
+        this.renderGoals(); 
+        this.renderReports(); 
+        this.renderCalendar(); // Refresh the calendar to remove dots/data for this goal
+        
+        this.showToast('Goal and history deleted!');
+    }
+}
             renderDate() {
                  document.getElementById('current-date').innerText = new Date().toLocaleDateString('en-GB', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
             }
