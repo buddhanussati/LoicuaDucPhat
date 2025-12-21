@@ -285,10 +285,7 @@
             var elem = document.createElement('div');
             // HTML with no header title
             elem.innerHTML = '\
-                <div class="content">\
-                    <pre class="chars"></pre>\
-                    <button class="convert btn btn-primary button">Convert selection</button>\
-                </div>\
+                \
             ';
             return elem;
         },
