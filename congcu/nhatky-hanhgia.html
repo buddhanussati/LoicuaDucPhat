@@ -1706,24 +1706,29 @@ renderReports() {
     const isMindfulness = this.reportMode === 'mindfulness';
     const unitLabel = isMindfulness ? 'Chánh Niệm' : 'Phút';
     
-    // Cập nhật tiêu đề biểu đồ tròn
+    // Update Breakdown Title
     document.getElementById('breakdown-title').innerText = isMindfulness ? 'Biểu đồ Chánh niệm' : 'Biểu đồ Thời gian';
 
-    // Xử lý tiêu đề Tuần
-    const weekDays = ['T2', 'T3', 'T4', 'T5', 'T6', 'T7', 'CN'];
-    const weekStart = new Date(this.currentWeekStart);
-    const weekEnd = new Date(this.currentWeekStart); weekEnd.setDate(weekEnd.getDate() + 6);
-    document.getElementById('weekly-report-title').innerText = `Tuần (${weekStart.toLocaleDateString('vi-VN', {month:'numeric', day:'numeric'})} - ${weekEnd.toLocaleDateString('vi-VN', {month:'numeric', day:'numeric'})})`;
+    // 1. Setup Week Boundaries (Local Time)
+    // weekStart is already set to Monday 00:00:00 by getStartOfWeek
+    const weekStartMs = this.currentWeekStart.getTime();
+    // weekEnd is exactly 7 days later
+    const weekEndMs = weekStartMs + (7 * 24 * 60 * 60 * 1000);
+
+    // Update Week Title UI
+    const weekEndDisp = new Date(weekEndMs - 1); // Display Sunday date
+    document.getElementById('weekly-report-title').innerText = `Tuần (${this.currentWeekStart.toLocaleDateString('vi-VN', {month:'numeric', day:'numeric'})} - ${weekEndDisp.toLocaleDateString('vi-VN', {month:'numeric', day:'numeric'})})`;
     
-    // Xử lý tiêu đề Tháng
+    // Setup Month Boundaries
     const mYear = this.currentMonth.getFullYear();
     const mMonth = this.currentMonth.getMonth();
     const monthlyLabels = Array.from({length: new Date(mYear, mMonth + 1, 0).getDate()}, (_, i) => i + 1);
     document.getElementById('monthly-report-title').innerText = `Tháng ${new Date(mYear, mMonth).toLocaleDateString('vi-VN', { month: 'numeric', year: 'numeric' })}`;
 
     const goalDatasets = {};
+    const weekDays = ['T2', 'T3', 'T4', 'T5', 'T6', 'T7', 'CN'];
     
-    // LỌC MỤC TIÊU: Nếu xem Chánh niệm, chỉ lấy mục tiêu type='meditation'
+    // Initialize Datasets
     this.data.goals.forEach(goal => { 
         if (isMindfulness && goal.type !== 'meditation') return;
 
@@ -1736,14 +1741,13 @@ renderReports() {
         }; 
     });
     
-    // TÍNH TOÁN DỮ LIỆU
+    // PROCESS LOGS
     this.data.logs.forEach(log => {
         if(!goalDatasets[log.goalId]) return;
 
-        // LẤY GIÁ TRỊ DỰA TRÊN CHẾ ĐỘ
+        // Get value based on mode
         let value = 0;
         if (isMindfulness) {
-            // Lấy count, nếu không có thì lấy độ dài mảng touches
             value = log.count !== undefined ? log.count : (log.touches ? log.touches.length : 0);
         } else {
             value = log.minutes;
@@ -1751,25 +1755,38 @@ renderReports() {
 
         goalDatasets[log.goalId].total += value;
         
-        const logDate = new Date(log.date);
-        const logTime = logDate.getTime();
+        // Use exact timestamp for accurate comparison
+        // Fallback to date string parsing if timestamp is missing (old data compatibility)
+        let logTime = log.timestamp;
+        let logDateObj;
         
-        // Tính cho Tuần
-        if(logTime >= weekStart.getTime() && logTime <= weekEnd.getTime()) { 
-            let dayIdx = logDate.getDay();
+        if (!logTime) {
+             // Compatibility fix for very old data without timestamps
+             logDateObj = new Date(log.date); 
+             logTime = logDateObj.getTime();
+        } else {
+             logDateObj = new Date(logTime);
+        }
+        
+        // --- WEEKLY LOGIC FIXED ---
+        // Check if log is strictly within the 7-day window
+        if(logTime >= weekStartMs && logTime < weekEndMs) { 
+            let dayIdx = logDateObj.getDay();
+            // Convert Sunday(0) to 6, Mon(1) to 0, etc.
             dayIdx = (dayIdx === 0 ? 6 : dayIdx - 1);
             goalDatasets[log.goalId].weekly[dayIdx] += value; 
         }
         
-        // Tính cho Tháng
-        if(logDate.getFullYear() === mYear && logDate.getMonth() === mMonth) {
-            goalDatasets[log.goalId].monthly[logDate.getDate() - 1] += value;
+        // --- MONTHLY LOGIC ---
+        // Check year and month matches current view
+        if(logDateObj.getFullYear() === mYear && logDateObj.getMonth() === mMonth) {
+            goalDatasets[log.goalId].monthly[logDateObj.getDate() - 1] += value;
         }
     });
     
     const activeGoals = Object.values(goalDatasets).filter(d => d.total > 0);
     
-    // CẤU HÌNH CHART
+    // CHART CONFIGURATION
     const commonOptions = { 
         maintainAspectRatio: false, 
         scales: { 
@@ -1777,7 +1794,7 @@ renderReports() {
             y: {
                 stacked: true, 
                 grid:{color:'#374151'},
-                title: { display: true, text: unitLabel } // Hiện tên trục Y
+                title: { display: true, text: unitLabel } 
             } 
         }, 
         plugins: {
@@ -1792,60 +1809,68 @@ renderReports() {
         } 
     };
     
-    // 1. Breakdown Chart (Tròn)
-    // 1. Định nghĩa đơn vị dựa trên mode (đặt dòng này ở đầu hàm renderReports)
+    // 1. Breakdown Chart (Doughnut)
+    const ctxBreakdown = document.getElementById('goalBreakdownChart').getContext('2d');
+    if(this.charts.breakdown) this.charts.breakdown.destroy();
 
-// 2. Cấu hình Chart
-const ctxBreakdown = document.getElementById('goalBreakdownChart').getContext('2d');
-if(this.charts.breakdown) this.charts.breakdown.destroy();
-
-this.charts.breakdown = new Chart(ctxBreakdown, { 
-    type: 'doughnut', 
-    data: { 
-        labels: activeGoals.map(d => d.name), 
-        datasets: [{ 
-            data: activeGoals.map(d => d.total), 
-            backgroundColor: activeGoals.map(d => d.color), 
-            borderWidth: 1, 
-            borderColor: '#1f2937' 
-        }] 
-    }, 
-    options: { 
-        maintainAspectRatio: false, 
-        plugins: { 
-            legend: { labels: { color: '#9ca3af' } },
-            title: { 
-                display: activeGoals.length === 0, 
-                text: 'Chưa có dữ liệu', 
-                position: 'bottom', 
-                color: '#6b7280' 
-            },
-            // --- PHẦN THÊM VÀO ĐỂ HIỂN THỊ ĐƠN VỊ ---
-            tooltip: {
-                callbacks: {
-                    label: function(context) {
-                        const value = context.raw || 0;
-                       return ` ${value} ${unitLabel}`;
+    this.charts.breakdown = new Chart(ctxBreakdown, { 
+        type: 'doughnut', 
+        data: { 
+            labels: activeGoals.map(d => d.name), 
+            datasets: [{ 
+                data: activeGoals.map(d => d.total), 
+                backgroundColor: activeGoals.map(d => d.color), 
+                borderWidth: 1, 
+                borderColor: '#1f2937' 
+            }] 
+        }, 
+        options: { 
+            maintainAspectRatio: false, 
+            plugins: { 
+                legend: { labels: { color: '#9ca3af' } },
+                title: { 
+                    display: activeGoals.length === 0, 
+                    text: 'Chưa có dữ liệu', 
+                    position: 'bottom', 
+                    color: '#6b7280' 
+                },
+                tooltip: {
+                    callbacks: {
+                        label: function(context) {
+                            const value = context.raw || 0;
+                           return ` ${context.label}: ${value} ${unitLabel}`;
+                        }
                     }
                 }
-            }
-            // ---------------------------------------
+            } 
         } 
-    } 
-});
+    });
     
     // 2. Weekly Chart
     const ctxWeek = document.getElementById('weeklyChart').getContext('2d');
     if(this.charts.weekly) this.charts.weekly.destroy();
-    this.charts.weekly = new Chart(ctxWeek, { type: 'bar', data: { labels: weekDays, datasets: activeGoals.map(g => ({ label: g.name, data: g.weekly, backgroundColor: g.color, stack: '0' })) }, options: commonOptions });
+    this.charts.weekly = new Chart(ctxWeek, { 
+        type: 'bar', 
+        data: { 
+            labels: weekDays, 
+            datasets: activeGoals.map(g => ({ label: g.name, data: g.weekly, backgroundColor: g.color, stack: '0' })) 
+        }, 
+        options: commonOptions 
+    });
     
     // 3. Monthly Chart
     const ctxMonth = document.getElementById('monthlyChart').getContext('2d');
     if(this.charts.monthly) this.charts.monthly.destroy();
-    this.charts.monthly = new Chart(ctxMonth, { type: 'bar', data: { labels: monthlyLabels, datasets: activeGoals.map(g => ({ label: g.name, data: g.monthly, backgroundColor: g.color, stack: '0' })) }, options: commonOptions });
+    this.charts.monthly = new Chart(ctxMonth, { 
+        type: 'bar', 
+        data: { 
+            labels: monthlyLabels, 
+            datasets: activeGoals.map(g => ({ label: g.name, data: g.monthly, backgroundColor: g.color, stack: '0' })) 
+        }, 
+        options: commonOptions 
+    });
 }
-
-            changeReportWeek(dir) { this.currentWeekStart.setDate(this.currentWeekStart.getDate() + (dir * 7)); this.renderReports(); }
+changeReportWeek(dir) { this.currentWeekStart.setDate(this.currentWeekStart.getDate() + (dir * 7)); this.renderReports(); }
             changeReportMonth(dir) { this.currentMonth.setMonth(this.currentMonth.getMonth() + dir); this.renderReports(); }
             changeMonth(dir) { this.currentMonth.setMonth(this.currentMonth.getMonth() + dir); this.renderCalendar(); }
             
