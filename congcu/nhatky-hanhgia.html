@@ -278,6 +278,9 @@
         <div class="nav-item" onclick="app.switchView('reports')">
             <i class="fas fa-chart-pie"></i><span class="nav-text">Tổng hợp</span>
         </div>
+		<div class="nav-item" onclick="app.switchView('analytics')">
+    <i class="fas fa-microscope"></i><span class="nav-text">Phân tích</span>
+</div>
         <div class="nav-item" onclick="app.switchView('achievements')">
             <i class="fas fa-trophy"></i><span class="nav-text">Thành tựu</span>
         </div>
@@ -395,7 +398,64 @@
         </div>
     </div>
 </section>
+<section id="view-analytics" class="view-section">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; flex-wrap: wrap; gap: 10px;">
+        <h2 style="margin: 0;">Phân tích Thiền tập</h2>
+        <select id="ana-time-range" class="form-control" style="width: auto;" onchange="app.renderAnalytics()">
+            <option value="7" selected>7 ngày qua</option>
+            <option value="30">30 ngày qua</option>
+            <option value="90">3 tháng qua</option>
+            <option value="365">Toàn bộ</option>
+        </select>
+    </div>
 
+    <div class="dashboard-grid" style="grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); margin-bottom: 20px;">
+        <div class="card" style="text-align: center; border-left: 4px solid var(--zen);">
+            <div style="font-size: 12px; color: var(--text-light); text-transform: uppercase;">Chất lượng trung bình</div>
+            <div style="font-size: 28px; font-weight: bold; margin: 5px 0;" id="ana-avg-quality">0%</div>
+            <div style="font-size: 11px; color: var(--text-light);">Tỷ lệ tỉnh thức/thời gian</div>
+        </div>
+        <div class="card" style="text-align: center; border-left: 4px solid var(--primary);">
+            <div style="font-size: 12px; color: var(--text-light); text-transform: uppercase;">Chất lượng Chánh niệm</div>
+            <div style="font-size: 28px; font-weight: bold; margin: 5px 0;" id="ana-avg-density">0</div>
+            <div style="font-size: 11px; color: var(--text-light);">Chánh niệm / phút</div>
+        </div>
+        <div class="card" style="text-align: center; border-left: 4px solid var(--danger);">
+            <div style="font-size: 12px; color: var(--text-light); text-transform: uppercase;">Tổng thất niệm</div>
+            <div style="font-size: 28px; font-weight: bold; margin: 5px 0;" id="ana-total-distracted">0h</div>
+            <div style="font-size: 11px; color: var(--text-light);">Thời gian lãng phí</div>
+        </div>
+    </div>
+
+    <div class="dashboard-grid" style="grid-template-columns: 1fr; gap: 20px;">
+        <div class="card">
+            <h3>📈 Xu hướng Tỉnh thức (Theo phiên)</h3>
+            <p style="font-size: 12px; color: var(--text-light); margin-bottom: 15px;">So sánh tỷ lệ chánh niệm giữa các phiên thiền gần đây.</p>
+            <div style="height: 300px;">
+                <canvas id="analyticsTrendChart"></canvas>
+            </div>
+        </div>
+
+        <div class="card">
+            <h3>📊 So sánh Kết quả</h3>
+            <div style="overflow-x: auto; margin-top: 15px;">
+                <table style="width: 100%; border-collapse: collapse; font-size: 13px;">
+                    <thead>
+                        <tr style="border-bottom: 2px solid var(--border); color: var(--text-light);">
+                            <th style="text-align: left; padding: 10px;">Thời gian</th>
+                            <th style="text-align: center; padding: 10px;">Số phiên</th>
+                            <th style="text-align: center; padding: 10px;">Tổng giờ</th>
+                            <th style="text-align: center; padding: 10px;">Chất lượng</th>
+                            <th style="text-align: center; padding: 10px;">Chánh niệm/Phút</th>
+                        </tr>
+                    </thead>
+                    <tbody id="ana-comparison-table">
+                        </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</section>
         <section id="view-achievements" class="view-section">
             <div class="card">
                 <h2><i class="fas fa-medal"></i> Thành tựu</h2>
@@ -782,8 +842,12 @@
                     <tr><td style="padding: 8px; border: 1px solid var(--border);">Sơ Cơ</td><td style="padding: 8px; border: 1px solid var(--border);">5,000</td></tr>
                     <tr><td style="padding: 8px; border: 1px solid var(--border);">Thiền Sinh</td><td style="padding: 8px; border: 1px solid var(--border);">10,000</td></tr>
                     <tr><td style="padding: 8px; border: 1px solid var(--border);">Hành Giả</td><td style="padding: 8px; border: 1px solid var(--border);">20,000</td></tr>
-                    <tr><td style="padding: 8px; border: 1px solid var(--border);">Thiền Giả</td><td style="padding: 8px; border: 1px solid var(--border);">80,000</td></tr>
-                    <tr><td style="padding: 8px; border: 1px solid var(--border);">Thiền Sư</td><td style="padding: 8px; border: 1px solid var(--border);">500,000</td></tr>
+                    <tr><td style="padding: 8px; border: 1px solid var(--border);">Thiền Giả</td><td style="padding: 8px; border: 1px solid var(--border);">50,000</td></tr>
+					<tr><td style="padding: 8px; border: 1px solid var(--border);">Gương Sáng</td><td style="padding: 8px; border: 1px solid var(--border);">80,000</td></tr>
+					<tr><td style="padding: 8px; border: 1px solid var(--border);">Mặt Hồ Tĩnh Lặng</td><td style="padding: 8px; border: 1px solid var(--border);">100,000</td></tr>
+					<tr><td style="padding: 8px; border: 1px solid var(--border);">Núi Đá</td><td style="padding: 8px; border: 1px solid var(--border);">200,000</td></tr>
+                    <tr><td style="padding: 8px; border: 1px solid var(--border);">Thừa tự Pháp</td><td style="padding: 8px; border: 1px solid var(--border);">500,000</td></tr>
+					
                 </tbody>
             </table>
 
@@ -887,7 +951,263 @@ closeIntroModal() {
                 const diff = d.getDate() - day + 1; // Lui về ngày 1 (Thứ Hai)
                 return new Date(d.getFullYear(), d.getMonth(), diff);
             }
+// --- ANALYTICS MODULE START ---
 
+renderAnalytics() {
+    const range = parseInt(document.getElementById('ana-time-range').value) || 7;
+    const ctxTrend = document.getElementById('analyticsTrendChart').getContext('2d');
+    
+    // 1. Filter Data: Only Meditation Logs within Range
+    const now = Date.now();
+    const cutoff = now - (range * 24 * 60 * 60 * 1000);
+    
+    // Get all meditation goals ID
+    const medGoalIds = this.data.goals.filter(g => g.type === 'meditation').map(g => g.id);
+    
+    // Filter logs
+    const logs = this.data.logs
+        .filter(l => medGoalIds.includes(l.goalId) && l.timestamp >= cutoff)
+        .sort((a, b) => a.timestamp - b.timestamp);
+
+    if (logs.length === 0) {
+        // Handle empty state
+        if(this.charts.analyticsTrend) this.charts.analyticsTrend.destroy();
+        document.getElementById('ana-avg-quality').innerText = "---";
+        document.getElementById('ana-avg-density').innerText = "---";
+        document.getElementById('ana-total-distracted').innerText = "---";
+        document.getElementById('ana-comparison-table').innerHTML = '<tr><td colspan="5" style="padding:20px; text-align:center;">Chưa có dữ liệu thiền trong khoảng thời gian này.</td></tr>';
+        return;
+    }
+
+    // 2. Process Logs for Metrics
+    let totalTimeSec = 0;
+    let totalDistractedSec = 0;
+    let totalTouches = 0;
+    
+    const sessionData = logs.map(log => {
+        const result = this.analyzeSingleSession(log);
+        totalTimeSec += log.minutes * 60;
+        totalDistractedSec += result.distractedSec;
+        const count = log.count !== undefined ? log.count : (log.touches ? log.touches.length : 0);
+        totalTouches += count;
+        
+        return {
+            date: new Date(log.timestamp).toLocaleDateString('vi-VN', {day: '2-digit', month:'2-digit'}),
+            quality: result.qualityPct,
+            density: (count / log.minutes).toFixed(1)
+        };
+    });
+
+    // 3. Update Summary Cards
+    const avgQuality = ((1 - (totalDistractedSec / totalTimeSec)) * 100).toFixed(1);
+    const avgDensity = (totalTouches / (totalTimeSec / 60)).toFixed(1);
+    const distractedHours = (totalDistractedSec / 3600).toFixed(1);
+
+    document.getElementById('ana-avg-quality').innerText = `${avgQuality}%`;
+    document.getElementById('ana-avg-density').innerText = avgDensity;
+    document.getElementById('ana-total-distracted').innerText = `${distractedHours}h`;
+
+    // 4. Render Trend Chart
+    if (this.charts.analyticsTrend) this.charts.analyticsTrend.destroy();
+    
+    // We only take last 15 sessions for the chart to keep it readable
+    const chartData = sessionData.slice(-15);
+
+    this.charts.analyticsTrend = new Chart(ctxTrend, {
+        type: 'line',
+        data: {
+            labels: chartData.map(d => d.date),
+            datasets: [
+                {
+                    label: 'Chất lượng (%)',
+                    data: chartData.map(d => d.quality),
+                    borderColor: '#34d399', // Success Green
+                    backgroundColor: 'rgba(52, 211, 153, 0.1)',
+                    yAxisID: 'y',
+                    fill: true,
+                    tension: 0.3
+                },
+                {
+                    label: 'Chánh niệm/phút',
+                    data: chartData.map(d => d.density),
+                    borderColor: '#818cf8', // Primary Blue
+                    borderDash: [5, 5],
+                    yAxisID: 'y1',
+                    tension: 0.3
+                }
+            ]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            interaction: { mode: 'index', intersect: false },
+			plugins: {  
+        tooltip: {
+            titleColor: '#f3f4f6',
+            bodyColor: '#f3f4f6',
+            borderColor: '#374151',
+            borderWidth: 1,
+            padding: 10,
+            displayColors: true, // Shows the square box
+            
+            callbacks: {
+                // THIS FIXES THE HOVER BOX COLOR
+                labelColor: function(context) {
+                    const dataset = context.dataset;
+                    return {
+                        borderColor: dataset.borderColor,
+                        backgroundColor: dataset.borderColor, // FORCES SOLID COLOR IN HOVER BOX
+                        borderWidth: 0,
+                        borderRadius: 2,
+                    };
+                }
+            }
+        }
+    },
+            scales: {
+                y: {
+                    type: 'linear',
+                    display: true,
+                    position: 'left',
+                    min: 0, max: 100,
+                    title: { display: true, text: 'Chất lượng %' },
+                    grid: { color: '#374151' }
+                },
+                y1: {
+                    type: 'linear',
+                    display: true,
+                    position: 'right',
+                    grid: { drawOnChartArea: false },
+                    title: { display: true, text: 'Chánh niệm / phút' }
+                }
+            }
+        }
+    });
+
+    // 5. Render Comparison Table
+    this.renderComparisonTable(medGoalIds);
+}
+
+// Logic: Gap Analysis
+// If gap > threshold (20s), assume mind wandered.
+analyzeSingleSession(log) {
+    // Basic fallback if no touches data
+    if (!log.touches || log.touches.length < 2) {
+        return { distractedSec: log.minutes * 60 * 0.5, qualityPct: 50 }; // Assume 50% if no data
+    }
+
+    const sortedTouches = [...log.touches].sort((a,b) => a - b);
+    const thresholdSec = 12; // Seconds before considering it "Distraction"
+    let distractedSec = 0;
+    
+    // Check gap from Start to First Touch
+    const startGap = (sortedTouches[0] - log.timestamp) / 1000;
+    if (startGap > thresholdSec) distractedSec += (startGap - thresholdSec);
+
+    // Check gaps between touches
+    for (let i = 1; i < sortedTouches.length; i++) {
+        const gap = (sortedTouches[i] - sortedTouches[i-1]) / 1000;
+        if (gap > thresholdSec) {
+            distractedSec += (gap - thresholdSec);
+        }
+    }
+
+    // Check gap from Last Touch to End
+    const endTime = log.timestamp + (log.minutes * 60 * 1000);
+    const endGap = (endTime - sortedTouches[sortedTouches.length - 1]) / 1000;
+    if (endGap > thresholdSec) distractedSec += (endGap - thresholdSec);
+
+    // Cap distracted seconds to total minutes (to avoid calculation errors)
+    const totalSec = log.minutes * 60;
+    distractedSec = Math.min(distractedSec, totalSec);
+    
+    const qualityPct = ((totalSec - distractedSec) / totalSec) * 100;
+    
+    return { distractedSec, qualityPct: parseFloat(qualityPct.toFixed(1)) };
+}
+
+renderComparisonTable(medGoalIds) {
+    const tbody = document.getElementById('ana-comparison-table');
+    tbody.innerHTML = '';
+
+    const now = new Date();
+    const todayStart = new Date(now.getFullYear(), now.getMonth(), now.getDate()).getTime();
+    
+    // 1. Yesterday Calculation
+    const startOfYesterday = todayStart - (24 * 60 * 60 * 1000);
+    
+    // 2. Start of This Week (Monday)
+    const dayOfWeek = now.getDay(); 
+    const diffToMonday = (dayOfWeek === 0 ? 6 : dayOfWeek - 1);
+    const startOfThisWeek = new Date(now.getFullYear(), now.getMonth(), now.getDate() - diffToMonday).getTime();
+    const startOfLastWeek = startOfThisWeek - (7 * 24 * 60 * 60 * 1000);
+
+    // 3. Start of This Month
+    const startOfThisMonth = new Date(now.getFullYear(), now.getMonth(), 1).getTime();
+    const startOfLastMonth = new Date(now.getFullYear(), now.getMonth() - 1, 1).getTime();
+
+    // 4. Period Definitions
+    const periods = [
+        { label: 'Hôm nay', start: todayStart, end: Date.now() },
+        { label: 'Hôm qua', start: startOfYesterday, end: todayStart },
+        { label: 'Tuần này', start: startOfThisWeek, end: Date.now() },
+        { label: 'Tuần trước', start: startOfLastWeek, end: startOfThisWeek },
+        { label: 'Tháng này', start: startOfThisMonth, end: Date.now() },
+        { label: 'Tháng trước', start: startOfLastMonth, end: startOfThisMonth }
+    ];
+
+    periods.forEach(p => {
+        const stats = this.getStatsForRange(p.start, p.end, medGoalIds);
+        const row = document.createElement('tr');
+        row.style.borderBottom = '1px solid var(--border)';
+        
+        let qualityColor = 'var(--text)';
+        if(stats.count > 0) {
+            if(stats.quality > 80) qualityColor = 'var(--success)';
+            else if(stats.quality < 50) qualityColor = 'var(--danger)';
+        }
+
+        row.innerHTML = `
+            <td style="padding: 12px 10px; font-weight: 500;">${p.label}</td>
+            <td style="padding: 12px 10px; text-align: center;">${stats.count}</td>
+            <td style="padding: 12px 10px; text-align: center;">${(stats.minutes/60).toFixed(1)}h</td>
+            <td style="padding: 12px 10px; text-align: center; color: ${qualityColor}; font-weight:bold;">${stats.count > 0 ? stats.quality + '%' : '-'}</td>
+            <td style="padding: 12px 10px; text-align: center;">${stats.count > 0 ? stats.density : '-'}</td>
+        `;
+        tbody.appendChild(row);
+    });
+}
+
+// Helper method to filter by exact timestamp range
+getStatsForRange(startTime, endTime, goalIds) {
+    const logs = this.data.logs.filter(l => 
+        goalIds.includes(l.goalId) && 
+        l.timestamp >= startTime && 
+        l.timestamp < endTime
+    );
+
+    if (logs.length === 0) return { count: 0, minutes: 0, quality: 0, density: 0 };
+
+    let totalMinutes = 0;
+    let totalTouches = 0;
+    let weightedQualitySum = 0;
+
+    logs.forEach(l => {
+        totalMinutes += l.minutes;
+        const count = l.count !== undefined ? l.count : (l.touches ? l.touches.length : 0);
+        totalTouches += count;
+        const analysis = this.analyzeSingleSession(l);
+        weightedQualitySum += (l.minutes * analysis.qualityPct);
+    });
+
+    return {
+        count: logs.length,
+        minutes: totalMinutes,
+        quality: (weightedQualitySum / totalMinutes).toFixed(1),
+        density: (totalTouches / totalMinutes).toFixed(1)
+    };
+}
+// --- ANALYTICS MODULE END ---
             init() {
                 try {
                     this.renderDate();
@@ -2019,11 +2339,16 @@ updateStats() {
 					{ id: 'streak_120', title: 'Nhiệt Tâm', desc: 'Hành trì 120 ngày liên tục', condition: () => this.data.streak >= 120 },
 					{ id: 'streak_365', title: 'Tinh Tấn Giác Chi', desc: 'Hành trì 365 ngày liên tục', condition: () => this.data.streak >= 365 },
 
-					{ id: 'beginner', title: 'Sơ Cơ', desc: 'Tích luỹ 5000 Chánh niệm (Sati)', condition: () => this.totalMindfulnessCounts >= 5000 },
+					{ id: 'beginner', title: 'Sơ Cơ', desc: 'Tích luỹ 5.000 Chánh niệm (Sati)', condition: () => this.totalMindfulnessCounts >= 5000 },
 					{ id: 'level2', title: 'Thiền Sinh', desc: 'Tích luỹ 10.000 Chánh niệm (Sati)', condition: () => this.totalMindfulnessCounts >= 10000 },
 					{ id: 'practitioner', title: 'Hành Giả', desc: 'Tích luỹ 20.000 Chánh niệm (Sati)', condition: () => this.totalMindfulnessCounts >= 20000 },
-					{ id: 'meditator', title: 'Thiền Giả', desc: 'Tích luỹ 80.000 Chánh niệm (Sati)', condition: () => this.totalMindfulnessCounts >= 80000 },
-					{ id: 'master', title: 'Thiền Sư', desc: 'Tích luỹ 500.000 Chánh niệm (Sati)', condition: () => this.totalMindfulnessCounts >= 500000 }
+					{ id: 'meditator', title: 'Thiền Giả', desc: 'Tích luỹ 50.000 Chánh niệm (Sati)', condition: () => this.totalMindfulnessCounts >= 50000 },
+					{ id: 'clear-mirror', title: 'Gương Sáng', desc: 'Tích luỹ 80.000 Chánh niệm (Sati)', condition: () => this.totalMindfulnessCounts >= 80000 },
+					{ id: 'still-lake', title: 'Mặt Hồ Tĩnh Lặng', desc: 'Tích luỹ 100.000 Chánh niệm (Sati)', condition: () => this.totalMindfulnessCounts >= 100000 },
+					{ id: 'mountain', title: 'Núi Đá', desc: 'Tích luỹ 200.000 Chánh niệm (Sati)', condition: () => this.totalMindfulnessCounts >= 200000 },
+					{ id: 'morning-star', title: 'Sao Mai', desc: 'Tích luỹ 300.000 Chánh niệm (Sati)', condition: () => this.totalMindfulnessCounts >= 300000 },
+					{ id: 'dhammaheir', title: 'Thừa Tự Pháp', desc: 'Tích luỹ 500.000 Chánh niệm (Sati)', condition: () => this.totalMindfulnessCounts >= 500000 },
+					{ id: 'not-self', title: 'Tỉnh Thức', desc: 'Tích luỹ 1.000.000 Chánh niệm (Sati)', condition: () => this.totalMindfulnessCounts >= 1000000 }
                 ];
                 const container = document.getElementById('achievement-list');
                 if (!container) return; container.innerHTML = '';
@@ -2079,12 +2404,14 @@ updateStats() {
                     'dashboard': 'Nhật ký',
                     'calendar': 'Lịch',
                     'reports': 'Tổng hợp',
+					'analytics': 'Phân tích',
                     'achievements': 'Thành tựu'
                 };
                 
                 document.getElementById('page-title').innerText = titles[viewName] || 'Nhật ký';
                 if (viewName === 'reports') { this.renderReports(); }
                 if (viewName === 'calendar') this.renderCalendar();
+				if (viewName === 'analytics') this.renderAnalytics();
             }
             
             // --- KHU VỰC BACKUP / RESTORE ---
