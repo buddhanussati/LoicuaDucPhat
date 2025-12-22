@@ -591,17 +591,27 @@
 
     <div class="modal" id="graph-modal" style="overflow-y: auto; z-index: 150;">
         <div class="modal-content" style="width: 600px;">
-            <h2 style="margin-bottom: 10px;">Thời thiền</h2>
-            <p id="graph-date" style="color: var(--text-light); margin-bottom: 20px; font-size: 14px;"></p>
+            <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom: 20px;">
+                <div>
+                    <h2 style="margin-bottom: 5px;">Thời thiền</h2>
+                    <p id="graph-date" style="color: var(--text-light); font-size: 14px; margin: 0;"></p>
+                </div>
+                <select id="graph-type-select" class="form-control" style="width: auto; padding: 5px 25px 5px 10px; height: 36px; font-size: 13px; cursor: pointer;" onchange="app.updateSessionChart()">
+                    <option value="intensity">🌱 Chánh niệm</option>
+                    <option value="interval">☁️ Thất niệm</option>
+                </select>
+            </div>
+
             <div style="height: 300px; width: 100%;">
                 <canvas id="sessionGraph"></canvas>
             </div>
+            
             <div style="display: flex; justify-content: flex-end; gap: 10px; margin-top: 20px;">
-    <button class="btn btn-secondary" id="btn-export-session" title="Sao chép dữ liệu JSON">
-        <i class="fas fa-file-code"></i> Sao chép
-    </button>
-    <button class="btn btn-secondary" onclick="document.getElementById('graph-modal').style.display='none'">Đóng</button>
-</div>
+                <button class="btn btn-secondary" id="btn-export-session" title="Sao chép dữ liệu JSON">
+                    <i class="fas fa-file-code"></i> Sao chép
+                </button>
+                <button class="btn btn-secondary" onclick="document.getElementById('graph-modal').style.display='none'">Đóng</button>
+            </div>
         </div>
     </div>
 
@@ -1014,7 +1024,7 @@ get totalMindfulnessCounts() {
 
     // ------------------------------- MEDITATION LOGIC ---
             startMeditationSetup(goal) {
-                const minStr = prompt('Thời gian thiền (phút):', '10');
+                const minStr = prompt('Thời gian thiền (phút):', '30');
                 if (!minStr) return;
                 const min = parseInt(minStr);
                 if (isNaN(min) || min <= 0) return;
@@ -1295,39 +1305,57 @@ get totalMindfulnessCounts() {
                 container.appendChild(ol);
             }
             
-            showSessionGraph(timestamp) {
+           // --- NEW GRAPH LOGIC START ---
+
+showSessionGraph(timestamp) {
     const exportBtn = document.getElementById('btn-export-session');
     if (exportBtn) {
-        // Unbind previous events to prevent stacking
         exportBtn.onclick = () => this.exportSessionData(timestamp);
     }
-    // ----------------------
 
-	const log = this.data.logs.find(l => l.timestamp == timestamp);
-    if (!log || !log.touches) return;
+    const log = this.data.logs.find(l => l.timestamp == timestamp);
+    if (!log || !log.touches) {
+        this.showToast("Không có dữ liệu chi tiết cho phiên này");
+        return;
+    }
+    
+    // Store current log for switching views
+    this.currentGraphLog = log;
 
     document.getElementById('graph-modal').style.display = 'flex';
     document.getElementById('graph-date').innerText = new Date(log.timestamp).toLocaleString('vi-VN');
+    
+    // Reset selector to default and render
+    document.getElementById('graph-type-select').value = 'intensity';
+    this.updateSessionChart();
+}
 
+updateSessionChart() {
+    if (!this.currentGraphLog) return;
+    const type = document.getElementById('graph-type-select').value;
     const ctx = document.getElementById('sessionGraph').getContext('2d');
+    
+    // Destroy previous instance
     if (this.charts.session) this.charts.session.destroy();
 
+    if (type === 'interval') {
+        this.renderIntervalChart(ctx, this.currentGraphLog);
+    } else {
+        this.renderIntensityChart(ctx, this.currentGraphLog);
+    }
+}
+
+renderIntensityChart(ctx, log) {
     const startTime = log.timestamp;
     const durationSeconds = (log.minutes * 60) || Math.ceil((Date.now() - startTime) / 1000);
     
     const dataPoints = [];
     const labels = [];
-
-    // --- CẢI TIẾN: ĐỘ PHÂN GIẢI THÔNG MINH ---
-    // Luôn chia phiên thiền thành 50 điểm để biểu đồ luôn đầy đặn và mượt mà
     const totalPoints = 30; 
     const step = durationSeconds / totalPoints; 
 
     for (let s = 0; s <= durationSeconds; s += step) {
-        // Label thông minh: < 2 phút hiện giây (s), > 2 phút hiện phút (m)
-        labels.push(durationSeconds < 120 ? Math.round(s) + 's' : (s / 60).toFixed(1));
-
-        // Cửa sổ tính mật độ (Window) là 1 phút (60s)
+        labels.push(durationSeconds < 120 ? Math.round(s) + 's' : (s / 60).toFixed(0));
         const windowSizeMs = 60000; 
         const windowStart = (s * 1000) - (windowSizeMs / 2);
         const windowEnd = (s * 1000) + (windowSizeMs / 2);
@@ -1336,18 +1364,14 @@ get totalMindfulnessCounts() {
             const touchTime = t - startTime;
             return touchTime >= windowStart && touchTime <= windowEnd;
         }).length;
-
         dataPoints.push(intensity);
     }
-   
 
-// Thay vì dùng con số 900 cố định, hãy dùng logic này bên trong Chart.js hoặc ngay trước khi vẽ
-const chartHeight = ctx.canvas.clientHeight; 
-const gradient = ctx.createLinearGradient(0, 0, 0, chartHeight);
-
-gradient.addColorStop(0, 'rgba(167, 139, 250, 0.6)'); // Đỉnh: Tím rõ hơn
-gradient.addColorStop(0.5, 'rgba(167, 139, 250, 0.3)'); // Xuống gần đáy: Mờ dần
-gradient.addColorStop(1, 'rgba(167, 139, 250, 0.05)');   // Đáy: Trong suốt hoàn toàn
+    const chartHeight = ctx.canvas.clientHeight || 300; 
+    const gradient = ctx.createLinearGradient(0, 0, 0, chartHeight);
+    gradient.addColorStop(0, 'rgba(167, 139, 250, 0.6)'); 
+    gradient.addColorStop(0.5, 'rgba(167, 139, 250, 0.3)'); 
+    gradient.addColorStop(1, 'rgba(167, 139, 250, 0.05)');   
 
     this.charts.session = new Chart(ctx, {
         type: 'line',
@@ -1356,56 +1380,109 @@ gradient.addColorStop(1, 'rgba(167, 139, 250, 0.05)');   // Đáy: Trong suốt 
             datasets: [{
                 label: 'Chánh niệm',
                 data: dataPoints,
-                borderColor: '#a78bfa',
-                backgroundColor: gradient, // Sử dụng gradient đã tạo
+                borderColor: '#a78bfa', // Purple
+                backgroundColor: gradient,
                 borderWidth: 3,
                 fill: true,
                 tension: 0.4,
                 pointRadius: 0,
                 pointHoverRadius: 5,
-				pointBackgroundColor: '#c7b6fc', // Màu của điểm khi hiện lên
-    pointBorderWidth: 1
+                pointBackgroundColor: '#c7b6fc',
+                pointBorderWidth: 1
             }]
         },
         options: {
             responsive: true,
             maintainAspectRatio: false,
-			interaction: {
-        mode: 'index',       // Tìm điểm theo trục X
-        intersect: false     // Chỉ cần di chuột gần đường cong là hiện điểm, không cần trỏ chính xác vào đường
-    },
+            interaction: { mode: 'index', intersect: false },
             scales: {
-                x: {
-                    title: { display: true, text: 'Thời gian (phút)', color: '#9ca3af' },
-                    grid: { display: false },
-                    ticks: { maxTicksLimit: 10, color: '#9ca3af' }
+                x: { title: { display: true, text: 'Thời điểm (phút)', color: '#9ca3af' }, grid: { display: true }, ticks: { maxTicksLimit: 20, color: '#9ca3af' } },
+                y: { beginAtZero: true, title: { display: true, text: 'Mật độ', color: '#9ca3af' }, grid: { color: 'rgba(55, 65, 81, 0.5)' }, ticks: { color: '#9ca3af' } }
+            },
+            plugins: {
+                tooltip: {
+                    mode: 'index', intersect: false, displayColors: false,
+                    callbacks: { label: (c) => c.raw >= 1 ? "🌱 Chánh niệm (" + c.raw + ")" : "☁️ Thất niệm" }
                 },
-                y: {
-                    beginAtZero: true,
-                    // Tên trục Y mới theo yêu cầu của bạn
-                    title: { display: true, text: 'Chánh niệm', color: '#9ca3af' },
-                    grid: { color: 'rgba(55, 65, 81, 0.5)' },
-                    ticks: { 
-                        stepSize: 1, 
-                        precision: 0, 
-                        color: '#9ca3af'
-                    }
+                legend: { display: false }
+            }
+        }
+    });
+}
+
+renderIntervalChart(ctx, log) {
+    const touches = log.touches.sort((a, b) => a - b);
+    const startTime = log.timestamp;
+    
+    // Create Data Points: Y = Gap Duration (seconds), Label = Time of occurrence
+    const dataPoints = [];
+    const labels = [];
+    let previousTime = startTime;
+
+    // Process touches to calculate gaps
+    touches.forEach(t => {
+        const gapSeconds = (t - previousTime) / 1000;
+        const timeFromStartMins = ((t - startTime) / 1000 / 60).toFixed(0);
+        
+        dataPoints.push(gapSeconds.toFixed(1));
+        labels.push(timeFromStartMins);
+        previousTime = t;
+    });
+
+    // Add final gap (from last touch to end of session)
+    const endTime = startTime + (log.minutes * 60 * 1000);
+    if (endTime > previousTime) {
+        const finalGap = (endTime - previousTime) / 1000;
+        dataPoints.push(finalGap.toFixed(1));
+        labels.push(log.minutes.toFixed(1));
+    }
+
+    // Gradient Red Style
+    const chartHeight = ctx.canvas.clientHeight || 300;
+    const gradient = ctx.createLinearGradient(0, 0, 0, chartHeight);
+    gradient.addColorStop(0, 'rgba(248, 113, 113, 0.6)'); // Red Top
+    gradient.addColorStop(0.5, 'rgba(248, 113, 113, 0.3)'); 
+    gradient.addColorStop(1, 'rgba(248, 113, 113, 0.05)'); // Red Bottom
+
+    this.charts.session = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: labels, // X-Axis labels (timestamps of touches)
+            datasets: [{
+                label: 'Khoảng cách thất niệm',
+                data: dataPoints,
+                borderColor: '#f87171', // Red Border
+                backgroundColor: gradient,
+                borderWidth: 2,
+                fill: true,
+                tension: 0.2, // Sharper lines for intervals
+                pointRadius: 0,
+                pointBackgroundColor: '#f87171',
+                pointHoverRadius: 4
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            interaction: { mode: 'index', intersect: false },
+            scales: {
+                x: { 
+                    title: { display: true, text: 'Thời điểm (phút)', color: '#9ca3af' }, 
+                    grid: { display: true }, // Hide X grid for cleaner look on event-based data
+                    ticks: { color: '#9ca3af', maxTicksLimit: 15 } 
+                },
+                y: { 
+                    beginAtZero: true, 
+                    title: { display: true, text: 'Độ trễ', color: '#9ca3af' }, 
+                    ticks: { color: '#9ca3af' } 
                 }
             },
             plugins: {
                 tooltip: {
-                    mode: 'index',
-                    intersect: false,
-					displayColors: false,
+                    displayColors: false,
                     callbacks: {
-                        label: function(context) {
-                            const val = context.raw;
-                            // Giải thích mức độ bằng Icon và Chữ
-                            if (val >= 8) return "✨ Chánh niệm (" + val + ")";
-                            if (val >= 4) return "🙏 Chánh niệm (" + val + ")";
-                            if (val >= 1) return "🌱 Chánh niệm (" + val + ")";
-                            return "☁️ Thất niệm";
-                        }
+                        title: (items) => `Phút thứ ${items[0].label}`,
+                        label: (c) => `Độ trễ: ${c.raw} giây`
                     }
                 },
                 legend: { display: false }
@@ -1413,6 +1490,7 @@ gradient.addColorStop(1, 'rgba(167, 139, 250, 0.05)');   // Đáy: Trong suốt 
         }
     });
 }
+// --- NEW GRAPH LOGIC END ---
 exportSessionData(timestamp) {
     const log = this.data.logs.find(l => l.timestamp == timestamp);
     if (!log) {
@@ -1838,7 +1916,7 @@ renderReports() {
                     callbacks: {
                         label: function(context) {
                             const value = context.raw || 0;
-                           return ` ${context.label}: ${value} ${unitLabel}`;
+                           return ` ${value} ${unitLabel}`;
                         }
                     }
                 }
