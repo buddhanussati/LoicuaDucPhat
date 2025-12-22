@@ -520,8 +520,16 @@
 </div>
 </div></div>
     <div class="modal" id="session-modal">
-        <div class="modal-content">
-            <h2 id="session-title" style="margin-bottom: 20px;">Ghi nhận phiên</h2>
+    <div class="modal-content">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+            <h2 id="session-title" style="margin: 0;">Ghi nhận phiên</h2>
+            <button type="button" id="btn-delete-session" class="btn-icon" 
+                style="background: transparent; color: var(--danger); display: none; width: 30px; height: 30px;" 
+                onclick="app.deleteSession()"
+                title="Xóa phiên này">
+                <i class="fas fa-trash"></i>
+            </button>
+        </div>
             <form onsubmit="app.logSessionConfirm(event)">
                 <input type="hidden" id="s-goal-id" />
                 <input type="hidden" id="s-log-id" />
@@ -588,7 +596,6 @@
             </div>
         </div>
     </div>
-
     <div class="modal" id="graph-modal" style="overflow-y: auto; z-index: 150;">
         <div class="modal-content" style="width: 600px;">
             <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom: 20px;">
@@ -604,13 +611,14 @@
             </div>
             
             <div style="display: flex; justify-content: center; gap: 10px; margin-top: 20px;">
+			<button class="btn btn-secondary" id="btn-export-session" title="Sao chép dữ liệu JSON">
+                    <i class="fas fa-file-code"></i>
+                </button>
 			<select id="graph-type-select" class="form-control" style="width: auto; padding: 5px 5px 5px; height: 36px; font-size: 13px; cursor: pointer;" onchange="app.updateSessionChart()">
                     <option value="intensity">🌱 Chánh niệm</option>
                     <option value="interval">☁️ Thất niệm</option>
                 </select>
-                <button class="btn btn-secondary" id="btn-export-session" title="Sao chép dữ liệu JSON">
-                    <i class="fas fa-file-code"></i>
-                </button>
+                
                 <button class="btn btn-secondary" onclick="document.getElementById('graph-modal').style.display='none'" title="Đóng"><i class="fas fa-xmark"></i></button>
 				 
             </div>
@@ -792,7 +800,7 @@
              <div style="margin-top: 20px; text-align: center; color: var(--text-light); font-size: 12px; border-top: 1px solid var(--border); padding-top: 10px;">
                 <strong>Công nghệ:</strong> HTML5, CSS3, JS (ES6+).<br>
                 <strong>Thư viện:</strong> <a href="https://www.chartjs.org/" target="_blank" style="color: var(--primary); text-decoration: none;">Chart.js</a>, <a href="https://fontawesome.com/" target="_blank" style="color: var(--primary); text-decoration: none;">FontAwesome</a>.<br>
-                Link Tải & Mã Nguồn: <a href="https://github.com/buddhanussati/nhatky-hanhgia"><b>tại đây.</b></a> Chúc bạn an lạc và tinh tấn!
+                Link Tải & Mã Nguồn: <a href="https://github.com/buddhanussati/nhatky-hanhgia/releases"><b>tại đây.</b></a> Chúc bạn an lạc và tinh tấn!
             </div>
         </div>
         
@@ -2191,14 +2199,64 @@ updateStats() {
             resetApp() {
                 if (confirm('Xóa TẤT CẢ dữ liệu?')) { localStorage.removeItem('chronoData'); location.reload(); }
             }
+			
+deleteSession() {
+    const logId = document.getElementById('s-log-id').value;
+    const goalId = document.getElementById('s-goal-id').value;
+
+    if (!logId) return; // Safety check
+
+    if (confirm('Bạn có chắc chắn muốn xóa vĩnh viễn phiên này khỏi lịch sử?')) {
+        // 1. Find the log index
+        const logIndex = this.data.logs.findIndex(l => l.timestamp == logId);
+        if (logIndex === -1) return;
+        
+        const log = this.data.logs[logIndex];
+        const goal = this.data.goals.find(g => g.id === goalId);
+
+        // 2. Subtract stats from the goal totals
+        if (goal) {
+            goal.totalMinutes -= log.minutes;
+            if (goal.totalMinutes < 0) goal.totalMinutes = 0;
+
+            if (goal.type === 'meditation') {
+                const count = log.count !== undefined ? log.count : (log.touches ? log.touches.length : 0);
+                goal.totalMindfulness -= count;
+                if (goal.totalMindfulness < 0) goal.totalMindfulness = 0;
+            }
+        }
+
+        // 3. Remove the log
+        this.data.logs.splice(logIndex, 1);
+
+        // 4. Save and Update UI
+        this.save();
+        this.renderGoals();      // Updates the list immediately
+        this.renderCalendar();   // Updates calendar colors
+        this.renderReports();    // Updates charts
+        this.updateStats();      // Updates streaks/XP
+        
+        this.closeSessionModal();
+        this.showToast('Đã xóa phiên!');
+    }
+}			
 openSessionModal(goalId, minutes = 0, logId = null, startTime = Date.now()) {
     document.getElementById('session-modal').style.display = 'flex';
     document.getElementById('s-goal-id').value = goalId;
     document.getElementById('s-log-id').value = logId || '';
     document.getElementById('s-date').value = this.toDateTimeInput(startTime);
     document.getElementById('s-minutes').value = minutes;
+
+    // --- NEW: Toggle Delete Button Visibility ---
+    const deleteBtn = document.getElementById('btn-delete-session');
+    if (logId) {
+        deleteBtn.style.display = 'block'; // Show if editing
+    } else {
+        deleteBtn.style.display = 'none';  // Hide if new
+    }
+    // --------------------------------------------
     
-    // --- NEW LOGIC START ---
+    // ... (rest of your existing code for mindfulness check) ...
     const goal = this.data.goals.find(g => g.id === goalId);
     const mindGroup = document.getElementById('s-mindfulness-group');
     const mindInput = document.getElementById('s-mindfulness');
@@ -2208,7 +2266,6 @@ openSessionModal(goalId, minutes = 0, logId = null, startTime = Date.now()) {
         let currentCount = 0;
         if (logId) {
             const log = this.data.logs.find(l => l.timestamp == logId);
-            // Check for explicit 'count' or fall back to 'touches' length
             if (log) currentCount = log.count !== undefined ? log.count : (log.touches ? log.touches.length : 0);
         }
         mindInput.value = currentCount;
@@ -2216,7 +2273,6 @@ openSessionModal(goalId, minutes = 0, logId = null, startTime = Date.now()) {
         mindGroup.style.display = 'none';
         mindInput.value = 0;
     }
-    // --- NEW LOGIC END ---
 
     let notes = ''; 
     if(logId) { 

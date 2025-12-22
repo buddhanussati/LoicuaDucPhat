@@ -519,9 +519,17 @@
     </div>
 </div>
     <div class="modal" id="session-modal">
-        <div class="modal-content">
-            <h2 id="session-title" style="margin-bottom: 20px;">Log Session</h2>
-            <form onsubmit="app.logSessionConfirm(event)">
+    <div class="modal-content">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+            <h2 id="session-title" style="margin: 0;">Log Session</h2>
+            <button type="button" id="btn-delete-session" class="btn-icon" 
+                style="background: transparent; color: var(--danger); display: none; width: 30px; height: 30px;" 
+                onclick="app.deleteSession()"
+                title="Delete this session">
+                <i class="fas fa-trash"></i>
+            </button>
+        </div>
+        <form onsubmit="app.logSessionConfirm(event)">
                 <input type="hidden" id="s-goal-id" />
                 <input type="hidden" id="s-log-id" />
                 
@@ -594,22 +602,23 @@
                 <div>
                     <h2 style="margin-bottom: 5px;">Meditation Session</h2>
                     <p id="graph-date" style="color: var(--text-light); font-size: 14px; margin: 0;"></p>
-                </div>
-                <select id="graph-type-select" class="form-control" style="width: auto; padding: 5px 25px 5px 10px; height: 36px; font-size: 13px; cursor: pointer;" onchange="app.updateSessionChart()">
-                    <option value="intensity">🌱 Mindfulness</option>
-                    <option value="interval">☁️ Forgetfulness</option>
-                </select>
+             </div>
+               
             </div>
 
             <div style="height: 300px; width: 100%;">
                 <canvas id="sessionGraph"></canvas>
             </div>
             
-            <div style="display: flex; justify-content: flex-end; gap: 10px; margin-top: 20px;">
-                <button class="btn btn-secondary" id="btn-export-session" title="Copy JSON Data">
-                    <i class="fas fa-file-code"></i> Copy data
+            <div style="display: flex; justify-content: center; gap: 10px; margin-top: 20px;">
+			 <button class="btn btn-secondary" id="btn-export-session" title="Copy JSON Data">
+                    <i class="fas fa-file-code"></i>
                 </button>
-                <button class="btn btn-secondary" onclick="document.getElementById('graph-modal').style.display='none'">Close</button>
+			<select id="graph-type-select" class="form-control" style="width: auto; padding: 5px 5px 5px; height: 36px; font-size: 13px; cursor: pointer;" onchange="app.updateSessionChart()">
+                    <option value="intensity">🌱 Mindfulness</option>
+                    <option value="interval">☁️ Forgetfulness</option>
+                </select>
+               <button class="btn btn-secondary" onclick="document.getElementById('graph-modal').style.display='none'" title="Close"><i class="fas fa-xmark"></i></button>
             </div>
         </div>
     </div>
@@ -2172,14 +2181,63 @@ clearBackupArea() {
             resetApp() {
                 if (confirm('Delete ALL data?')) { localStorage.removeItem('chronoData'); location.reload(); }
             }
+			deleteSession() {
+    const logId = document.getElementById('s-log-id').value;
+    const goalId = document.getElementById('s-goal-id').value;
+
+    if (!logId) return; // Safety check
+
+    if (confirm('Permanently delete this session from history?')) {
+        // 1. Find the log index
+        const logIndex = this.data.logs.findIndex(l => l.timestamp == logId);
+        if (logIndex === -1) return;
+        
+        const log = this.data.logs[logIndex];
+        const goal = this.data.goals.find(g => g.id === goalId);
+
+        // 2. Subtract stats from the goal totals
+        if (goal) {
+            goal.totalMinutes -= log.minutes;
+            if (goal.totalMinutes < 0) goal.totalMinutes = 0;
+
+            if (goal.type === 'meditation') {
+                const count = log.count !== undefined ? log.count : (log.touches ? log.touches.length : 0);
+                goal.totalMindfulness -= count;
+                if (goal.totalMindfulness < 0) goal.totalMindfulness = 0;
+            }
+        }
+
+        // 3. Remove the log
+        this.data.logs.splice(logIndex, 1);
+
+        // 4. Save and Update UI
+        this.save();
+        this.renderGoals();      // Updates the list immediately
+        this.renderCalendar();   // Updates calendar colors
+        this.renderReports();    // Updates charts
+        this.updateStats();      // Updates streaks/XP
+        
+        this.closeSessionModal();
+        this.showToast('Session deleted!');
+    }
+}
             openSessionModal(goalId, minutes = 0, logId = null, startTime = Date.now()) {
     document.getElementById('session-modal').style.display = 'flex';
     document.getElementById('s-goal-id').value = goalId;
     document.getElementById('s-log-id').value = logId || '';
     document.getElementById('s-date').value = this.toDateTimeInput(startTime);
     document.getElementById('s-minutes').value = minutes;
+
+    // --- NEW: Toggle Delete Button Visibility ---
+    const deleteBtn = document.getElementById('btn-delete-session');
+    if (logId) {
+        deleteBtn.style.display = 'block'; // Show if editing
+    } else {
+        deleteBtn.style.display = 'none';  // Hide if new
+    }
+    // --------------------------------------------
     
-    // --- NEW LOGIC START ---
+    // ... (rest of your existing code for mindfulness check) ...
     const goal = this.data.goals.find(g => g.id === goalId);
     const mindGroup = document.getElementById('s-mindfulness-group');
     const mindInput = document.getElementById('s-mindfulness');
@@ -2189,7 +2247,6 @@ clearBackupArea() {
         let currentCount = 0;
         if (logId) {
             const log = this.data.logs.find(l => l.timestamp == logId);
-            // Check for explicit 'count' or fall back to 'touches' length
             if (log) currentCount = log.count !== undefined ? log.count : (log.touches ? log.touches.length : 0);
         }
         mindInput.value = currentCount;
@@ -2197,7 +2254,6 @@ clearBackupArea() {
         mindGroup.style.display = 'none';
         mindInput.value = 0;
     }
-    // --- NEW LOGIC END ---
 
     let notes = ''; 
     if(logId) { 
@@ -2205,7 +2261,7 @@ clearBackupArea() {
         if(log && log.notes) notes = log.notes; 
     }
     document.getElementById('s-notes').value = notes;
-    document.getElementById('session-title').innerText = logId ? 'Update Log' : 'Add Log';
+    document.getElementById('session-title').innerText = logId ? 'Update log' : 'Add log';
 }
             closeSessionModal() { document.getElementById('session-modal').style.display = 'none'; }
             logSessionConfirm(e) {
