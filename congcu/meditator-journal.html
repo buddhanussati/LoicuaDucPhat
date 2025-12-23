@@ -534,20 +534,22 @@
                 <i class="fas fa-box-archive"></i> <strong>Backup & restore data from file:</strong>
             </p>
             <div style="display: flex;  justify-content: center; gap: 10px;">
-                <button class="btn"" onclick="app.downloadFile()">
+                <button class="btn" style="flex: 1;" onclick="app.downloadFile()">
                     <i class="fas fa-download"></i> Backup
                 </button>
-                <button class="btn btn-secondary";" onclick="document.getElementById('backup-file-input').click()">
+                <button class="btn btn-secondary"; style="flex: 1;" onclick="document.getElementById('backup-file-input').click()">
                     <i class="fas fa-file-import"></i> Restore
                 </button>
                 <input type="file" id="backup-file-input" style="display: none;" accept=".json, .txt" onchange="app.handleFileUpload(this)">
             </div>
         </div>
+<div style="margin-top: 20px; display: flex; justify-content: center; gap: 10px;">
+    
+    <button class="btn btn-secondary" style="flex: 1;" onclick="app.shareBackup()">
+        <i class="fas fa-share-alt"></i> Share
+    </button>
 
-           
-        
-        <div style="margin-top: 20px; display: flex; justify-content: center; gap: 10px;">
-    <button class="btn btn-secondary" style="border-color: var(--danger); color: var(--danger);" onclick="app.closeBackupModal()">
+    <button class="btn btn-secondary" style="flex: 1; border-color: var(--danger); color: var(--danger);" onclick="app.closeBackupModal()">
         Close
     </button>
 </div>
@@ -2292,12 +2294,12 @@ updateStats() {
     { id: 'practitioner', title: 'Practitioner', desc: 'Accumulate 10,000 Mindfulness (Sati)', condition: () => this.totalMindfulnessCounts >= 10000 },
     { id: 'yogi', title: 'Yogi', desc: 'Accumulate 20,000 Mindfulness (Sati)', condition: () => this.totalMindfulnessCounts >= 20000 },
     { id: 'meditator', title: 'Meditator', desc: 'Accumulate 50,000 Mindfulness (Sati)', condition: () => this.totalMindfulnessCounts >= 50000 },
-    { id: 'clear-mirror', title: 'Clear Mirror', desc: 'Accumulate 80.000 Mindfulness (Sati)', condition: () => this.totalMindfulnessCounts >= 80000 },
-					{ id: 'still-lake', title: 'Still Lake', desc: 'Accumulate 100.000 Mindfulness (Sati)', condition: () => this.totalMindfulnessCounts >= 100000 },
-					{ id: 'mountain', title: 'Mountain', desc: 'Accumulate 200.000 Mindfulness (Sati)', condition: () => this.totalMindfulnessCounts >= 200000 },
-					{ id: 'morning-star', title: 'Morning Star', desc: 'Accumulate 300.000 Mindfulness (Sati)', condition: () => this.totalMindfulnessCounts >= 300000 },
-					{ id: 'dhammaheir', title: 'Heir of the Dhamma', desc: 'Accumulate 500.000 Mindfulness (Sati)', condition: () => this.totalMindfulnessCounts >= 500000 },
-					{ id: 'not-self', title: 'Awareness Itself', desc: 'Accumulate 1.000.000 Mindfulness (Sati)', condition: () => this.totalMindfulnessCounts >= 1000000 }
+    { id: 'clear-mirror', title: 'Clear Mirror', desc: 'Accumulate 80,000 Mindfulness (Sati)', condition: () => this.totalMindfulnessCounts >= 80000 },
+					{ id: 'still-lake', title: 'Still Lake', desc: 'Accumulate 100,000 Mindfulness (Sati)', condition: () => this.totalMindfulnessCounts >= 100000 },
+					{ id: 'mountain', title: 'Mountain', desc: 'Accumulate 200,000 Mindfulness (Sati)', condition: () => this.totalMindfulnessCounts >= 200000 },
+					{ id: 'morning-star', title: 'Morning Star', desc: 'Accumulate 300,000 Mindfulness (Sati)', condition: () => this.totalMindfulnessCounts >= 300000 },
+					{ id: 'dhammaheir', title: 'Heir of the Dhamma', desc: 'Accumulate 500,000 Mindfulness (Sati)', condition: () => this.totalMindfulnessCounts >= 500000 },
+					{ id: 'not-self', title: 'Awareness Itself', desc: 'Accumulate 1,000,000 Mindfulness (Sati)', condition: () => this.totalMindfulnessCounts >= 1000000 }
 ];
                 const container = document.getElementById('achievement-list');
                 if (!container) return; container.innerHTML = '';
@@ -2354,7 +2356,7 @@ updateStats() {
                     'calendar': 'Calendar',
                     'reports': 'Statistics',
 					'analytics': 'Analytics',
-                    'achievements': 'Achievements'
+                    'achievements': 'Achieve'
                 };
                 
                 document.getElementById('page-title').innerText = titles[viewName] || 'Journal';
@@ -2375,33 +2377,114 @@ updateStats() {
         document.getElementById('backup-modal').style.display = 'none';
     }
 
-    // --- OPTION 1: FILE (PC) ---
-    
-    // Download .json file
-     downloadFile() {
+    shareBackup() {
     const dataStr = JSON.stringify(this.data);
+    const now = new Date();
+    const datePart = now.toISOString().split('T')[0];
+    const hours = String(now.getHours()).padStart(2, '0');
+    const minutes = String(now.getMinutes()).padStart(2, '0');
+    const fileName = `backup_${datePart}-${hours}h${minutes}.txt`;
 
-    // Check if Website2APK and shareIntent are available
+    // 1. Ưu tiên Android App (Website2APK)
     if (typeof Website2APK !== 'undefined' && Website2APK.shareIntent) {
-        // Share JSON data instead of downloading
         Website2APK.shareIntent(dataStr, "Backup", "");
+        return;
+    }
+
+    // 2. Web Share API (Dành cho iOS Safari, Chrome Android...)
+    if (navigator.share) {
+        const file = new File([dataStr], fileName, { type: "application/json" });
+        if (navigator.canShare && navigator.canShare({ files: [file] })) {
+            navigator.share({
+                files: [file],
+                title: 'Meditator Journal Backup',
+                text: 'Backup data file.'
+            })
+            .then(() => this.showToast('Shared successfully!'))
+            .catch((error) => {
+                // Nếu người dùng hủy (AbortError), không làm gì cả, 
+                // nhưng nếu lỗi khác thì copy vào clipboard
+                if (error.name !== 'AbortError') this.copyToClipboard(dataStr);
+            });
+            return;
+        } 
+    } 
+
+    // 3. Fallback cuối cùng: Tự động copy vào Clipboard (Dành cho PC/Trình duyệt cũ)
+    this.copyToClipboard(dataStr);
+}
+
+// Hàm hỗ trợ Copy
+copyToClipboard(text) {
+    // Thử dùng API hiện đại trước
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(() => {
+            this.showToast('Data copied to clipboard!');
+        }).catch(err => {
+            this.fallbackCopyText(text);
+        });
     } else {
-        // Fallback: download as JSON file
+        this.fallbackCopyText(text);
+    }
+}
+
+// Cách copy cũ nếu trình duyệt quá hạn chế
+fallbackCopyText(text) {
+    const textArea = document.createElement("textarea");
+    textArea.value = text;
+    textArea.style.position = "fixed"; // Tránh làm nhảy trang
+    textArea.style.left = "-9999px";
+    textArea.style.top = "0";
+    document.body.appendChild(textArea);
+    textArea.focus();
+    textArea.select();
+    try {
+        const successful = document.execCommand('copy');
+        if (successful) {
+            this.showToast('Backup data copied!');
+        } else {
+            this.showToast('Copy failed. Please use the Backup button to download the file.');
+        }
+    } catch (err) {
+        this.showToast('Error copying data.');
+    }
+    document.body.removeChild(textArea);
+}
+    
+    // Tải xuống file .json
+   downloadFile() {
+    const dataStr = JSON.stringify(this.data);
+    const now = new Date();
+    const datePart = now.toISOString().split('T')[0];
+    const hours = String(now.getHours()).padStart(2, '0');
+    const minutes = String(now.getMinutes()).padStart(2, '0');
+    const fileName = `backup_${datePart}-${hours}h${minutes}.txt`;
+
+    // Nếu đang chạy trên App Android (có interface Website2APK)
+    if (typeof Website2APK !== 'undefined') {
+        // Kiểm tra xem hàm saveBackup mình sắp thêm có tồn tại không
+        if (Website2APK.saveBackup) {
+            // Convert sang Base64 để tránh lỗi ký tự đặc biệt
+            // Dùng btoa (binary to ascii) - cần encodeURIComponent để xử lý tiếng Việt
+            const base64 = btoa(unescape(encodeURIComponent(dataStr)));
+            
+            // Gọi xuống Java/Smali
+            Website2APK.saveBackup(base64, fileName);
+            this.showToast('Saving file to Download...');
+        } 
+    } else {
+        // Code chạy trên máy tính (như cũ)
         const blob = new Blob([dataStr], { type: "application/json" });
         const url = URL.createObjectURL(blob);
-
         const a = document.createElement('a');
         a.href = url;
-        a.download = `backup_${new Date().toISOString().split('T')[0]}.json`;
+        a.download = fileName;
         document.body.appendChild(a);
         a.click();
-
-        // Cleanup
         setTimeout(() => {
             document.body.removeChild(a);
             window.URL.revokeObjectURL(url);
         }, 0);
-
         this.showToast('File downloaded successfully!');
     }
 }

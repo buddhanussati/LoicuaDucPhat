@@ -535,20 +535,22 @@
                 <i class="fas fa-box-archive"></i> <strong>Tự động sao lưu & khôi phục dữ liệu:</strong>
             </p>
             <div style="display: flex;  justify-content: center; gap: 10px;">
-                <button class="btn"" onclick="app.downloadFile()">
+                <button class="btn" style="flex: 1;" onclick="app.downloadFile()">
                     <i class="fas fa-download"></i> Sao lưu
                 </button>
-                <button class="btn btn-secondary";" onclick="document.getElementById('backup-file-input').click()">
+                <button class="btn btn-secondary"; style="flex: 1;" " onclick="document.getElementById('backup-file-input').click()">
                     <i class="fas fa-file-import"></i> Khôi&nbsp;phục
                 </button>
                 <input type="file" id="backup-file-input" style="display: none;" accept=".json, .txt" onchange="app.handleFileUpload(this)">
             </div>
         </div>
+<div style="margin-top: 20px; display: flex; justify-content: center; gap: 10px;">
+    
+    <button class="btn btn-secondary" style="flex: 1;" onclick="app.shareBackup()">
+        <i class="fas fa-share-alt"></i> Chia&nbsp;sẻ
+    </button>
 
-           
-        
-        <div style="margin-top: 20px; display: flex; justify-content: center; gap: 10px;">
-    <button class="btn btn-secondary" style="border-color: var(--danger); color: var(--danger);" onclick="app.closeBackupModal()">
+    <button class="btn btn-secondary" style="flex: 1; border-color: var(--danger); color: var(--danger);" onclick="app.closeBackupModal()">
         Đóng
     </button>
 </div>
@@ -2401,33 +2403,116 @@ updateStats() {
         document.getElementById('backup-modal').style.display = 'none';
     }
 
-    // --- PHƯƠNG ÁN 1: FILE (PC) ---
+  shareBackup() {
+    const dataStr = JSON.stringify(this.data);
+    // Create custom filename with date and time
+    const now = new Date();
+    const datePart = now.toISOString().split('T')[0];
+    const hours = String(now.getHours()).padStart(2, '0');
+    const minutes = String(now.getMinutes()).padStart(2, '0');
+    const fileName = `backup_${datePart}-${hours}h${minutes}.txt`;
+
+    // 1. Ưu tiên Android App (Website2APK)
+    if (typeof Website2APK !== 'undefined' && Website2APK.shareIntent) {
+        Website2APK.shareIntent(dataStr, "Backup", "");
+        return;
+    }
+
+    // 2. Web Share API (Dành cho iOS Safari, Chrome Android...)
+    if (navigator.share) {
+        const file = new File([dataStr], fileName, { type: "application/json" });
+        if (navigator.canShare && navigator.canShare({ files: [file] })) {
+            navigator.share({
+                files: [file],
+                title: 'Sao lưu Nhật Ký Hành Giả',
+                text: 'File dữ liệu sao lưu.'
+            })
+            .then(() => this.showToast('Đã chia sẻ thành công!'))
+            .catch((error) => {
+                // Nếu người dùng hủy (AbortError), không làm gì cả, 
+                // nhưng nếu lỗi khác thì copy vào clipboard
+                if (error.name !== 'AbortError') this.copyToClipboard(dataStr);
+            });
+            return;
+        } 
+    } 
+
+    // 3. Fallback cuối cùng: Tự động copy vào Clipboard (Dành cho PC/Trình duyệt cũ)
+    this.copyToClipboard(dataStr);
+}
+
+// Hàm hỗ trợ Copy
+copyToClipboard(text) {
+    // Thử dùng API hiện đại trước
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(() => {
+            this.showToast('Đã chép dữ liệu vào bộ nhớ tạm!');
+        }).catch(err => {
+            this.fallbackCopyText(text);
+        });
+    } else {
+        this.fallbackCopyText(text);
+    }
+}
+
+// Cách copy cũ nếu trình duyệt quá hạn chế
+fallbackCopyText(text) {
+    const textArea = document.createElement("textarea");
+    textArea.value = text;
+    textArea.style.position = "fixed"; // Tránh làm nhảy trang
+    textArea.style.left = "-9999px";
+    textArea.style.top = "0";
+    document.body.appendChild(textArea);
+    textArea.focus();
+    textArea.select();
+    try {
+        const successful = document.execCommand('copy');
+        if (successful) {
+            this.showToast('Đã chép dữ liệu sao lưu!');
+        } else {
+            this.showToast('Không thể chép, hãy dùng nút Sao lưu tải file.');
+        }
+    } catch (err) {
+        this.showToast('Lỗi khi sao chép dữ liệu.');
+    }
+    document.body.removeChild(textArea);
+}
     
     // Tải xuống file .json
    downloadFile() {
     const dataStr = JSON.stringify(this.data);
+    // Create custom filename with date and time
+    const now = new Date();
+    const datePart = now.toISOString().split('T')[0];
+    const hours = String(now.getHours()).padStart(2, '0');
+    const minutes = String(now.getMinutes()).padStart(2, '0');
+    const fileName = `backup_${datePart}-${hours}h${minutes}.txt`;
 
-    // Check if Website2APK and shareIntent are available
-    if (typeof Website2APK !== 'undefined' && Website2APK.shareIntent) {
-        // Share JSON data instead of downloading
-        Website2APK.shareIntent(dataStr, "Backup Nhật Ký", "");
+    // Nếu đang chạy trên App Android (có interface Website2APK)
+    if (typeof Website2APK !== 'undefined') {
+        // Kiểm tra xem hàm saveBackup mình sắp thêm có tồn tại không
+        if (Website2APK.saveBackup) {
+            // Convert sang Base64 để tránh lỗi ký tự đặc biệt
+            // Dùng btoa (binary to ascii) - cần encodeURIComponent để xử lý tiếng Việt
+            const base64 = btoa(unescape(encodeURIComponent(dataStr)));
+            
+            // Gọi xuống Java/Smali
+            Website2APK.saveBackup(base64, fileName);
+            this.showToast('Đang lưu file vào thư mục Download...');
+        } 
     } else {
-        // Fallback: download as JSON file
+        // Code chạy trên máy tính (như cũ)
         const blob = new Blob([dataStr], { type: "application/json" });
         const url = URL.createObjectURL(blob);
-
         const a = document.createElement('a');
         a.href = url;
-        a.download = `backup_hanh_gia_${new Date().toISOString().split('T')[0]}.json`;
+        a.download = fileName;
         document.body.appendChild(a);
         a.click();
-
-        // Cleanup
         setTimeout(() => {
             document.body.removeChild(a);
             window.URL.revokeObjectURL(url);
         }, 0);
-
         this.showToast('Đã tải xuống file!');
     }
 }
