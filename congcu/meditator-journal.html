@@ -230,13 +230,9 @@
             background: radial-gradient(circle, #818cf8 0%, transparent 70%);
             display: flex; justify-content: center; align-items: center;
             font-size: 60px; font-weight: bold; color: white;
-            animation: breathe 6s infinite ease-in-out;
             pointer-events: none; /* Let clicks pass through to container */
         }
-        @keyframes breathe {
-            0%, 100% { transform: scale(1); opacity: 0.5; }
-            50% { transform: scale(1.2); opacity: 0.8; }
-        }
+
         .med-controls { position: absolute; top: 20px; right: 20px; display: flex; gap: 15px; z-index: 1000; }
         .med-timer-disp { position: absolute; top: 20px; left: 20px; font-size: 24px; font-family: monospace; color: #9ca3af; z-index: 1000;}
         .med-instruction { position: absolute; bottom: 50px; color: #6b7280; font-size: 14px; text-transform: uppercase; letter-spacing: 2px;}
@@ -717,7 +713,7 @@
             <ul style="padding-left: 20px;">
                 <li><strong>Two main types of goals:</strong>
                     <ul>
-                        <li><strong>ॐ Meditation:</strong> Tracks meditation duration and counts mindfulness ("Sati") recognitions. The interface features a breathing circle to support focus.</li>
+                        <li><strong>ॐ Meditation:</strong> Tracks meditation duration and counts mindfulness ("Sati") recognitions.</li>
                         <li><strong>⚡ Work:</strong> A traditional countdown timer used for work, study (similar to Pomodoro), or other habits.</li>
                     </ul>
                 </li>
@@ -728,7 +724,6 @@
             <ul style="padding-left: 20px;">
                 <li><strong>Meditation Mode:</strong>
                     <ul>
-                        <li>Visual "breathing" effect (expand/contract) helps regulate breathing rhythm.</li>
                         <li><strong>Tap-to-Track:</strong> Touch the screen (or click) every time you acknowledge your focus returning to the breath. These counts accumulate as Mindfulness (Sati) points.</li>
                     </ul>
                 </li>
@@ -972,9 +967,26 @@ renderAnalytics() {
     document.getElementById('ana-total-distracted').innerText = `${distractedHours}h`;
 
     // 4. Render Trend Chart
-    if (this.charts.analyticsTrend) this.charts.analyticsTrend.destroy();
-    
-    const chartData = sessionData.slice(-15);
+if (this.charts.analyticsTrend) this.charts.analyticsTrend.destroy();
+
+// NEW: Smart Downsampling
+// If we have more than 15 sessions, pick 15 evenly distributed points.
+// If we have 15 or fewer, show them all.
+let chartData = sessionData;
+const maxPoints = 15;
+
+if (sessionData.length > maxPoints) {
+    chartData = [];
+    // Calculate the "step" size. 
+    // Example: If 30 items, step is roughly 2. We pick index 0, 2, 4...
+    const step = (sessionData.length - 1) / (maxPoints - 1);
+
+    for (let i = 0; i < maxPoints; i++) {
+        // Math.round ensures we get a valid integer index
+        const index = Math.round(i * step);
+        chartData.push(sessionData[index]);
+    }
+}
 
     this.charts.analyticsTrend = new Chart(ctxTrend, {
         type: 'line',
@@ -1096,25 +1108,29 @@ renderComparisonTable(medGoalIds) {
     
     // 1. Yesterday Calculation
     const startOfYesterday = todayStart - (24 * 60 * 60 * 1000);
+	const startOfDaybefore = todayStart - (48 * 60 * 60 * 1000);
     
     // 2. Start of This Week (Monday)
     const dayOfWeek = now.getDay(); 
     const diffToMonday = (dayOfWeek === 0 ? 6 : dayOfWeek - 1);
     const startOfThisWeek = new Date(now.getFullYear(), now.getMonth(), now.getDate() - diffToMonday).getTime();
     const startOfLastWeek = startOfThisWeek - (7 * 24 * 60 * 60 * 1000);
-
+    const startOfWeekBefore = startOfThisWeek - (14 * 24 * 60 * 60 * 1000);
     // 3. Start of This Month
     const startOfThisMonth = new Date(now.getFullYear(), now.getMonth(), 1).getTime();
     const startOfLastMonth = new Date(now.getFullYear(), now.getMonth() - 1, 1).getTime();
-
+	const startOfMonthBefore = new Date(now.getFullYear(), now.getMonth() - 2, 1).getTime();
     // 4. Period Definitions
     const periods = [
         { label: 'Today', start: todayStart, end: Date.now() },
-        { label: 'Yesterday', start: startOfYesterday, end: todayStart },
+        { label: 'Yester&#8203;day', start: startOfYesterday, end: todayStart },
+		{ label: 'Day Before', start: startOfDaybefore, end: startOfYesterday },
         { label: 'This Week', start: startOfThisWeek, end: Date.now() },
         { label: 'Last Week', start: startOfLastWeek, end: startOfThisWeek },
+		{ label: 'Week Before', start: startOfWeekBefore, end: startOfLastWeek },
         { label: 'This Month', start: startOfThisMonth, end: Date.now() },
-        { label: 'Last Month', start: startOfLastMonth, end: startOfThisMonth }
+        { label: 'Last Month', start: startOfLastMonth, end: startOfThisMonth },
+		{ label: 'Month Before', start: startOfMonthBefore, end: startOfLastMonth }
     ];
 
     periods.forEach(p => {
@@ -1349,8 +1365,6 @@ get totalMindfulnessCounts() {
                 this.meditationState.touches.push(Date.now());
                 const el = document.getElementById('med-counter');
                 el.innerText = this.meditationState.count;
-                el.style.transform = 'scale(1.1)';
-                setTimeout(() => el.style.transform = 'scale(1)', 100);
             }
 
             togglePauseMeditation() {
@@ -2299,7 +2313,7 @@ updateStats() {
 					{ id: 'mountain', title: 'Mountain', desc: 'Accumulate 200,000 Mindfulness (Sati)', condition: () => this.totalMindfulnessCounts >= 200000 },
 					{ id: 'morning-star', title: 'Morning Star', desc: 'Accumulate 300,000 Mindfulness (Sati)', condition: () => this.totalMindfulnessCounts >= 300000 },
 					{ id: 'dhammaheir', title: 'Heir of the Dhamma', desc: 'Accumulate 500,000 Mindfulness (Sati)', condition: () => this.totalMindfulnessCounts >= 500000 },
-					{ id: 'not-self', title: 'Awareness Itself', desc: 'Accumulate 1,000,000 Mindfulness (Sati)', condition: () => this.totalMindfulnessCounts >= 1000000 }
+					{ id: 'bodhi', title: 'Ancient Bodhi', desc: 'Accumulate 1,000,000 Mindfulness (Sati)', condition: () => this.totalMindfulnessCounts >= 1000000 }
 ];
                 const container = document.getElementById('achievement-list');
                 if (!container) return; container.innerHTML = '';
