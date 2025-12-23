@@ -527,58 +527,31 @@
     </div>
 <div class="modal" id="backup-modal">
     <div class="modal-content">
-        <h2 style="margin-bottom: 10px; text-align: center;">Backup & Restore</h2>
+        <h2 style="margin-bottom: 10px; text-align: center;">Back up & Restore</h2>
         
         <div class="desktop-actions" style="margin-bottom: 20px;">
             <p style="color: var(--text-light); text-align: center; font-size: 12px; margin-bottom: 10px;">
-                <i class="fas fa-box-archive"></i> <strong>Backup & restore data from JSON file automatically:</strong>
+                <i class="fas fa-box-archive"></i> <strong>Backup & restore data from file:</strong>
             </p>
-            <div style="display: flex; gap: 10px;">
-                <button class="btn" style="flex: 1;" onclick="app.downloadFile()">
+            <div style="display: flex;  justify-content: center; gap: 10px;">
+                <button class="btn"" onclick="app.downloadFile()">
                     <i class="fas fa-download"></i> Backup
                 </button>
-                <button class="btn btn-secondary" style="flex: 1;" onclick="document.getElementById('backup-file-input').click()">
+                <button class="btn btn-secondary";" onclick="document.getElementById('backup-file-input').click()">
                     <i class="fas fa-file-import"></i> Restore
                 </button>
-                <input type="file" id="backup-file-input" style="display: none;" accept=".json" onchange="app.handleFileUpload(this)">
+                <input type="file" id="backup-file-input" style="display: none;" accept=".json, .txt" onchange="app.handleFileUpload(this)">
             </div>
         </div>
 
-        <div style="display: flex; align-items: center; margin: 15px 0; color: var(--text-light);">
-            <div style="flex: 1; height: 1px; background: var(--border);"></div>
-            <span style="padding: 0 10px; font-size: 10px; text-transform: uppercase;">Or Manually Copy & Paste</span>
-            <div style="flex: 1; height: 1px; background: var(--border);"></div>
-        </div>
-
-        <div class="mobile-actions">
-            <p style="color: var(--text-light); font-size: 12px; margin-bottom: 5px;">
-                <i class="fas fa-file-lines"></i> <strong>Copy / paste data here:</strong>
-            </p>
-            <div class="form-group">
-                <textarea id="backup-data-area" class="form-control" 
-                    style="height: 80px; font-family: monospace; font-size: 10px; color: var(--text-light);" 
-                    placeholder="Paste JSON data here..."></textarea>
-            </div>
-            <div style="display: flex; gap: 10px; justify-content: center;">
-                <button class="btn" style="flex: 1;" onclick="app.copyBackupData()">
-                    <i class="fas fa-copy"></i> Copy
-                </button>
-                <button class="btn btn-secondary" style="flex: 1;" onclick="app.restoreFromText()">
-                    <i class="fas fa-file-import"></i> Restore
-                </button>
-            </div>
-        </div>
-
-        <div style="margin-top: 20px; display: flex; gap: 10px;">
-    <button class="btn btn-secondary" style="flex: 1;" onclick="app.clearBackupArea()">
-        <i class="fas fa-eraser"></i> Clear
-    </button>
-    <button class="btn btn-secondary" style="flex: 1; border-color: var(--danger); color: var(--danger);" onclick="app.closeBackupModal()">
+           
+        
+        <div style="margin-top: 20px; display: flex; justify-content: center; gap: 10px;">
+    <button class="btn btn-secondary" style="border-color: var(--danger); color: var(--danger);" onclick="app.closeBackupModal()">
         Close
     </button>
-        </div>
-    </div>
 </div>
+</div></div>
     <div class="modal" id="session-modal">
     <div class="modal-content">
         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
@@ -2394,9 +2367,7 @@ updateStats() {
         // Added null, 2 for pretty printing so it looks better in the textarea
         const dataStr = JSON.stringify(this.data); 
         const modal = document.getElementById('backup-modal');
-        const textarea = document.getElementById('backup-data-area');
         
-        textarea.value = dataStr;
         modal.style.display = 'flex';
     }
 
@@ -2407,26 +2378,33 @@ updateStats() {
     // --- OPTION 1: FILE (PC) ---
     
     // Download .json file
-    downloadFile() {
-        const dataStr = JSON.stringify(this.data);
+     downloadFile() {
+    const dataStr = JSON.stringify(this.data);
+
+    // Check if Website2APK and shareIntent are available
+    if (typeof Website2APK !== 'undefined' && Website2APK.shareIntent) {
+        // Share JSON data instead of downloading
+        Website2APK.shareIntent(dataStr, "Backup", "");
+    } else {
+        // Fallback: download as JSON file
         const blob = new Blob([dataStr], { type: "application/json" });
         const url = URL.createObjectURL(blob);
-        
+
         const a = document.createElement('a');
         a.href = url;
-        // Translated filename to "backup_data_[date].json"
-        a.download = `backup_data_${new Date().toISOString().split('T')[0]}.json`;
+        a.download = `backup_${new Date().toISOString().split('T')[0]}.json`;
         document.body.appendChild(a);
         a.click();
-        
+
         // Cleanup
         setTimeout(() => {
             document.body.removeChild(a);
             window.URL.revokeObjectURL(url);
         }, 0);
-        
+
         this.showToast('File downloaded successfully!');
     }
+}
 
     // Handle file selection from computer
     handleFileUpload(inputElement) {
@@ -2444,40 +2422,7 @@ updateStats() {
         inputElement.value = '';
     }
 
-    // --- OPTION 2: TEXT (MOBILE/WEBVIEW) ---
-
-    // Copy text from textarea
-    copyBackupData() {
-        const textarea = document.getElementById('backup-data-area');
-        textarea.select();
-        textarea.setSelectionRange(0, 99999); // Mobile fix
-
-        if (navigator.clipboard) {
-            navigator.clipboard.writeText(textarea.value).then(() => {
-                this.showToast('Copied to clipboard!');
-            }).catch(() => {
-                document.execCommand('copy');
-                this.showToast('Copied!');
-            });
-        } else {
-            document.execCommand('copy');
-            this.showToast('Copied!');
-        }
-    }
-clearBackupArea() {
-        document.getElementById('backup-data-area').value = '';
-    }
-    // "Restore from text" button
-    restoreFromText() {
-        const textarea = document.getElementById('backup-data-area');
-        const rawData = textarea.value.trim();
-        if (!rawData) {
-            this.showToast('Data field is empty!');
-            return;
-        }
-        this.processRestoreData(rawData);
-    }
-
+  
     // --- COMMON LOGIC ---
     processRestoreData(jsonString) {
         try {
