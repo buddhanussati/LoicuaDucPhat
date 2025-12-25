@@ -90,8 +90,6 @@ if (meaning) {
     $(this).append(textBox);
     
     // 1. Reset position to measure naturally
-    textBox.css({ left: '0', right: 'auto', visibility: 'hidden', display: 'block' });
-
     // 2. Get the ACTUAL width of the popup as rendered by the browser
     var actualWidth = textBox.outerWidth(); 
     var offset = $(this).offset();
@@ -101,9 +99,7 @@ if (meaning) {
         textBox.css({ left: 'auto', right: 0 });
     }
 
-    // 4. Finally, make it visible (if you aren't handling visibility via CSS hover)
-    textBox.css({ visibility: 'visible' });
-}
+   }
 }
 
 function lookupWord(word) {
