@@ -85,10 +85,25 @@ function lookupWordHandler(event){
 
  word = word.replace(/ṁg/g, 'ṅg').replace(/ṁk/g, 'ṅk').replace(/ṁ/g, 'ṁ').replace(/ṁ/g, 'ṁ');
  var meaning = lookupWord(word);
- if (meaning) {
- var textBox = $('<span class="meaning">'+meaning+'</span>');
- $(this).append(textBox);
- }
+if (meaning) {
+    var textBox = $('<span class="meaning">' + meaning + '</span>');
+    $(this).append(textBox);
+    
+    // 1. Reset position to measure naturally
+    textBox.css({ left: '0', right: 'auto', visibility: 'hidden', display: 'block' });
+
+    // 2. Get the ACTUAL width of the popup as rendered by the browser
+    var actualWidth = textBox.outerWidth(); 
+    var offset = $(this).offset();
+
+    // 3. Check for overflow using the real width
+    if (offset.left + actualWidth > $(window).width()) {
+        textBox.css({ left: 'auto', right: 0 });
+    }
+
+    // 4. Finally, make it visible (if you aren't handling visibility via CSS hover)
+    textBox.css({ visibility: 'visible' });
+}
 }
 
 function lookupWord(word) {
