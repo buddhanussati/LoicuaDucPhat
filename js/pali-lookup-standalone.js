@@ -80,34 +80,47 @@ function lookupWordHandler(event) {
     if ($(this).children().is("span.meaning")) return;
 
     var word = $(this).text().toLowerCase().trim();
-    word = word.replace(/­/g, ''); 
-    word = word.replace(/ṁg/g, 'ṅg').replace(/ṁk/g, 'ṅk');
+    word = word.replace(/­/g, '').replace(/ṁg/g, 'ṅg').replace(/ṁk/g, 'ṅk');
 
     var meaning = lookupWord(word);
     if (meaning) {
         var textBox = $('<span class="meaning">' + meaning + '</span>');
         $(this).append(textBox);
 
-        // Đợi một chút để trình duyệt render kích thước thật
+        // Lấy các thông số kích thước
         var popupWidth = textBox.outerWidth();
+        var popupHeight = textBox.outerHeight();
         var screenWidth = $(window).width();
-        var wordOffset = $(this).offset().left;
+        var screenHeight = $(window).height();
+        var offset = $(this).offset();
+        var scrollTop = $(window).scrollTop();
 
-        var offsetToShift = 0;
-
-        // Kiểm tra tràn lề phải (ScreenWidth - 15px để chừa lề)
-        if (wordOffset + popupWidth > screenWidth - 15) {
-            offsetToShift = screenWidth - (wordOffset + popupWidth) - 15;
+        // 1. Xử lý tràn lề ngang (Trái/Phải)
+        var leftPosition = 0;
+        if (offset.left + popupWidth > screenWidth - 10) {
+            leftPosition = screenWidth - (offset.left + popupWidth) - 10;
+        }
+        if (offset.left + leftPosition < 10) {
+            leftPosition = -offset.left + 10;
         }
 
-        // Kiểm tra tràn lề trái
-        if (wordOffset + offsetToShift < 15) {
-            offsetToShift = -wordOffset + 15;
+        // 2. Xử lý tràn lề dọc (Trên/Dưới) - CHỐNG GIẬT TRANG
+        // Tính khoảng cách từ từ đó đến đáy màn hình hiện tại
+        var spaceBelow = screenHeight - (offset.top - scrollTop + $(this).height());
+        
+        if (spaceBelow < popupHeight + 20) {
+            // Nếu không đủ chỗ trống bên dưới, đẩy popup lên trên từ đó
+            textBox.css({
+                'top': 'auto',
+                'bottom': '1.4em',
+                'left': leftPosition + 'px'
+            });
+        } else {
+            // Đủ chỗ thì để ở dưới như bình thường
+            textBox.css({
+                'left': leftPosition + 'px'
+            });
         }
-
-        textBox.css({
-            'left': offsetToShift + 'px'
-        });
     }
 }
 
