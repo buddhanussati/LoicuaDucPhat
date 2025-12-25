@@ -76,44 +76,39 @@ function disablePaliLookup(){
 }
 
 function lookupWordHandler(event) {
-  if (!'paliDictionary' in window) return;
-  if ($(this).children().is("span.meaning")) return;
+    if (!'paliDictionary' in window) return;
+    if ($(this).children().is("span.meaning")) return;
 
-  var word = $(this).text().toLowerCase().trim();
-  word = word.replace(/­/g, ''); 
-  word = word.replace(/ṁg/g, 'ṅg').replace(/ṁk/g, 'ṅk');
+    var word = $(this).text().toLowerCase().trim();
+    word = word.replace(/­/g, ''); 
+    word = word.replace(/ṁg/g, 'ṅg').replace(/ṁk/g, 'ṅk');
 
-  var meaning = lookupWord(word);
-  if (meaning) {
-    var textBox = $('<span class="meaning">' + meaning + '</span>');
-    $(this).append(textBox);
+    var meaning = lookupWord(word);
+    if (meaning) {
+        var textBox = $('<span class="meaning">' + meaning + '</span>');
+        $(this).append(textBox);
 
-    // Lấy thông số thực tế sau khi đã append vào DOM
-    var popupWidth = textBox.outerWidth();
-    var screenWidth = $(window).width();
-    var wordLeft = $(this).offset().left; // Tọa độ X của từ
+        // Đợi một chút để trình duyệt render kích thước thật
+        var popupWidth = textBox.outerWidth();
+        var screenWidth = $(window).width();
+        var wordOffset = $(this).offset().left;
 
-    // Tính toán độ tràn lề phải
-    // $RightEdge = wordLeft + popupWidth$
-    var rightEdge = wordLeft + popupWidth;
-    var offsetToShift = 0;
+        var offsetToShift = 0;
 
-    if (rightEdge > screenWidth - 10) {
-        // Nếu tràn phải, tính số pixel cần đẩy sang trái (dấu âm)
-        // Cộng thêm 10px padding để không dính sát mép màn hình
-        offsetToShift = (screenWidth - rightEdge) - 10;
+        // Kiểm tra tràn lề phải (ScreenWidth - 15px để chừa lề)
+        if (wordOffset + popupWidth > screenWidth - 15) {
+            offsetToShift = screenWidth - (wordOffset + popupWidth) - 15;
+        }
+
+        // Kiểm tra tràn lề trái
+        if (wordOffset + offsetToShift < 15) {
+            offsetToShift = -wordOffset + 15;
+        }
+
+        textBox.css({
+            'left': offsetToShift + 'px'
+        });
     }
-
-    // Kiểm tra nếu sau khi đẩy trái mà lại làm tràn lề trái
-    if (wordLeft + offsetToShift < 10) {
-        // Cố định popup cách lề trái màn hình đúng 10px
-        offsetToShift = -wordLeft + 10;
-    }
-
-    textBox.css({
-      'left': offsetToShift + 'px'
-    });
-  }
 }
 
 function lookupWord(word) {
@@ -326,5 +321,4 @@ function previousInOrder(node, permissables) {
  else if (permissables.indexOf(node.nodeType) != -1)
  return node;
  return previousInOrder(node, permissables);
-
 }
