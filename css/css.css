@@ -1495,10 +1495,9 @@ font-weight: bold;
  visibility:hidden;
  display:block;
  opacity: 0;
- bottom: 2.2em;
- margin-left: 40px;
- margin-right: auto;
+ top: 1.5em;
  z-index: 2002;
+ left: 0;
  border: 1px solid blue;
  background: #ececcd;
  border-radius: 5px;
@@ -1509,8 +1508,14 @@ font-weight: bold;
  text-align: left;
  padding: 0.1em 0.5em;
  margin-top:1em;
- min-width:20em;
- max-width:550px;
+    min-width: 250px;       /* Minimum readable width */
+    max-width: 550px;        /* Prevents it from being wider than the screen */
+    width: max-content;     /* Expands to fit the dictionary text */
+    
+    /* TEXT WRAPPING: Ensures long definitions don't break the box */
+    white-space: normal;
+    word-wrap: break-word;
+    line-height: 1.4;
  height: auto;
  transition: 100ms;
 }
