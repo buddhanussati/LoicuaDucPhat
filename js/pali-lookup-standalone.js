@@ -80,7 +80,7 @@ function lookupWordHandler(event) {
   if ($(this).children().is("span.meaning")) return;
 
   var word = $(this).text().toLowerCase().trim();
-  word = word.replace(/­/g, ''); // optional hyphen
+  word = word.replace(/­/g, ''); 
   word = word.replace(/ṁg/g, 'ṅg').replace(/ṁk/g, 'ṅk');
 
   var meaning = lookupWord(word);
@@ -88,28 +88,30 @@ function lookupWordHandler(event) {
     var textBox = $('<span class="meaning">' + meaning + '</span>');
     $(this).append(textBox);
 
-    // Tính toán vị trí để không bị tràn màn hình
-    var actualWidth = textBox.outerWidth();
+    // Lấy thông số thực tế sau khi đã append vào DOM
+    var popupWidth = textBox.outerWidth();
     var screenWidth = $(window).width();
-    var offset = $(this).offset(); // Vị trí của từ đang được hover
+    var wordLeft = $(this).offset().left; // Tọa độ X của từ
 
-    // Mặc định popup nằm sát lề trái của từ (left: 0)
-    var leftPosition = 0;
+    // Tính toán độ tràn lề phải
+    // $RightEdge = wordLeft + popupWidth$
+    var rightEdge = wordLeft + popupWidth;
+    var offsetToShift = 0;
 
-    // 1. Kiểm tra tràn lề phải
-    if (offset.left + actualWidth > screenWidth) {
-      // Đẩy popup sang trái để nó vừa khít lề phải màn hình (cách 10px cho đẹp)
-      leftPosition = screenWidth - (offset.left + actualWidth) - 10;
+    if (rightEdge > screenWidth - 10) {
+        // Nếu tràn phải, tính số pixel cần đẩy sang trái (dấu âm)
+        // Cộng thêm 10px padding để không dính sát mép màn hình
+        offsetToShift = (screenWidth - rightEdge) - 10;
     }
 
-    // 2. Kiểm tra tràn lề trái (sau khi đã đẩy sang trái ở bước 1)
-    if (offset.left + leftPosition < 10) {
-      // Nếu đẩy quá đà làm tràn lề trái, thì ghim nó cách lề trái màn hình 10px
-      leftPosition = -offset.left + 10;
+    // Kiểm tra nếu sau khi đẩy trái mà lại làm tràn lề trái
+    if (wordLeft + offsetToShift < 10) {
+        // Cố định popup cách lề trái màn hình đúng 10px
+        offsetToShift = -wordLeft + 10;
     }
 
     textBox.css({
-      'left': leftPosition + 'px'
+      'left': offsetToShift + 'px'
     });
   }
 }
@@ -324,4 +326,5 @@ function previousInOrder(node, permissables) {
  else if (permissables.indexOf(node.nodeType) != -1)
  return node;
  return previousInOrder(node, permissables);
+
 }
