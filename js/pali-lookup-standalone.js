@@ -75,20 +75,43 @@ function disablePaliLookup(){
  });
 }
 
-function lookupWordHandler(event){
- if (! 'paliDictionary' in window) return;
+function lookupWordHandler(event) {
+  if (!'paliDictionary' in window) return;
+  if ($(this).children().is("span.meaning")) return;
 
- if ($(this).children().is("span.meaning")) return;
+  var word = $(this).text().toLowerCase().trim();
+  word = word.replace(/­/g, ''); // optional hyphen
+  word = word.replace(/ṁg/g, 'ṅg').replace(/ṁk/g, 'ṅk');
 
- var word = $(this).text().toLowerCase().trim();
- word = word.replace(/­/g, '')//optional hyphen
+  var meaning = lookupWord(word);
+  if (meaning) {
+    var textBox = $('<span class="meaning">' + meaning + '</span>');
+    $(this).append(textBox);
 
- word = word.replace(/ṁg/g, 'ṅg').replace(/ṁk/g, 'ṅk').replace(/ṁ/g, 'ṁ').replace(/ṁ/g, 'ṁ');
- var meaning = lookupWord(word);
- if (meaning) {
- var textBox = $('<span class="meaning">'+meaning+'</span>');
- $(this).append(textBox);
- }
+    // Tính toán vị trí để không bị tràn màn hình
+    var actualWidth = textBox.outerWidth();
+    var screenWidth = $(window).width();
+    var offset = $(this).offset(); // Vị trí của từ đang được hover
+
+    // Mặc định popup nằm sát lề trái của từ (left: 0)
+    var leftPosition = 0;
+
+    // 1. Kiểm tra tràn lề phải
+    if (offset.left + actualWidth > screenWidth) {
+      // Đẩy popup sang trái để nó vừa khít lề phải màn hình (cách 10px cho đẹp)
+      leftPosition = screenWidth - (offset.left + actualWidth) - 10;
+    }
+
+    // 2. Kiểm tra tràn lề trái (sau khi đã đẩy sang trái ở bước 1)
+    if (offset.left + leftPosition < 10) {
+      // Nếu đẩy quá đà làm tràn lề trái, thì ghim nó cách lề trái màn hình 10px
+      leftPosition = -offset.left + 10;
+    }
+
+    textBox.css({
+      'left': leftPosition + 'px'
+    });
+  }
 }
 
 function lookupWord(word) {
