@@ -1490,29 +1490,34 @@ font-weight: bold;
 }
 
 .meaning {
- font-family: Tahoma;
- position:absolute;
- visibility:hidden;
- display:block;
- opacity: 0;
- top: 1.4em;
- margin-left: 40px;
- margin-right: auto;
- z-index: 2002;
- border: 1px solid blue;
- background: #ececcd;
- border-radius: 5px;
- font-size:16px;   
- font-weight:normal;
- font-style:normal;
- text-decoration: none;
- text-align: left;
- padding: 0.1em 0.5em;
- margin-top:1em;
- min-width:20em;
- max-width:550px;
- height: auto;
- transition: 100ms;
+    font-family: Tahoma;
+    position: absolute;
+    visibility: hidden;
+    display: block;
+    opacity: 0;
+    top: 1.4em;
+    
+    /* 1. Xóa bỏ hoàn toàn margin-left cũ */
+    margin-left: 0 !important; 
+    left: 0;
+
+    /* 2. Đảm bảo padding không cộng thêm vào chiều rộng */
+    box-sizing: border-box; 
+    
+    z-index: 2002;
+    border: 1px solid blue;
+    background: #ececcd;
+    border-radius: 5px;
+    font-size: 16px;   
+    padding: 0.4em 0.6em;
+    margin-top: 0.5em;
+
+    /* 3. Giới hạn độ rộng thông minh hơn cho mobile */
+    min-width: 200px;
+    max-width: 85vw; /* Luôn chừa ra 15% bề ngang màn hình */
+    word-wrap: break-word;
+    white-space: normal; /* Đảm bảo chữ tự xuống dòng */
+    transition: 100ms;
 }
 
 [light-mode=dark] .meaning {
