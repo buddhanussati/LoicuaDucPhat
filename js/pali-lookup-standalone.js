@@ -91,20 +91,23 @@ function lookupWordHandler(event){
     $(this).append(textBox);
 
     // --- POSITIONING LOGIC ---
-    var popup = textBox[0];
+var popup = textBox[0];
     var rect = popup.getBoundingClientRect();
     var viewportWidth = window.innerWidth || document.documentElement.clientWidth;
 
-    // Check if the popup goes off the RIGHT side of the screen
-    if (rect.right > viewportWidth) {
-        textBox.css({
-            'left': 'auto',   // Un-anchor from the left
-            'right': '0'      // Anchor to the right edge of the word instead
-        });
-    }
+    // Apply boundary detection for Tablet and PC (screens wider than 760px)
+    if (viewportWidth >= 760) { 
+        // Check if the popup goes off the RIGHT side of the screen
+        if (rect.right > viewportWidth) {
+            textBox.css({
+                'left': 'auto',   // Un-anchor from the left
+                'right': '0'      // Anchor to the right edge of the word instead
+            });
+        }
     // --- POSITIONING LOGIC END ---
  }
-}
+}}
+
 function lookupWord(word) {
   let out = "";
   console.log("---");
