@@ -1507,6 +1507,7 @@ font-weight: bold;
     box-sizing: border-box;
     transition: 100ms;
     line-height: 1.4;
+ text-align: left;
 
     /* --- GIẢI PHÁP CHO ĐỘ RỘNG --- */
     /* Trên PC: Rộng tối thiểu 300px, tối đa 550px */
@@ -1522,10 +1523,33 @@ font-weight: bold;
 }
 
 /* Tùy chỉnh cho điện thoại rất nhỏ (như iPhone SE) */
-@media (max-width: 350px) {
+/* Tối ưu riêng cho mobile dưới 768px */
+@media (max-width: 768px) {
     .meaning {
-        min-width: 260px;
+        /* Chuyển sang position fixed để không phụ thuộc vào vị trí chữ */
+        position: fixed !important; 
+        
+        /* Căn giữa màn hình hoặc dính đáy */
+        top: auto !important;
+        bottom: 20px !important; /* Cách đáy 20px */
+        left: 50% !important; /* Canh giữa */
+        transform: translateX(-50%); /* Kỹ thuật canh giữa chuẩn */
+        
+        /* Giới hạn kích thước */
+        width: 90% !important;
+        max-width: 500px !important;
+        max-height: 40vh; /* Không quá 40% chiều cao màn hình */
+        overflow-y: auto; /* Cho phép cuộn nếu nghĩa quá dài */
+        
+        /* Thẩm mỹ */
+        box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        z-index: 9999;
     }
+}
+
+/* Chỉ transition độ mờ, KHÔNG transition vị trí (left/top) để tránh giật */
+.meaning {
+    transition: opacity 0.2s ease-in-out;
 }
 
 [light-mode=dark] .meaning {
