@@ -81,16 +81,30 @@ function lookupWordHandler(event){
  if ($(this).children().is("span.meaning")) return;
 
  var word = $(this).text().toLowerCase().trim();
- word = word.replace(/­/g, '')//optional hyphen
+ word = word.replace(/­/g, '') //optional hyphen
 
  word = word.replace(/ṁg/g, 'ṅg').replace(/ṁk/g, 'ṅk').replace(/ṁ/g, 'ṁ').replace(/ṁ/g, 'ṁ');
  var meaning = lookupWord(word);
+ 
  if (meaning) {
- var textBox = $('<span class="meaning">'+meaning+'</span>');
- $(this).append(textBox);
+    var textBox = $('<span class="meaning">'+meaning+'</span>');
+    $(this).append(textBox);
+
+    // --- POSITIONING LOGIC ---
+    var popup = textBox[0];
+    var rect = popup.getBoundingClientRect();
+    var viewportWidth = window.innerWidth || document.documentElement.clientWidth;
+
+    // Check if the popup goes off the RIGHT side of the screen
+    if (rect.right > viewportWidth) {
+        textBox.css({
+            'left': 'auto',   // Un-anchor from the left
+            'right': '0'      // Anchor to the right edge of the word instead
+        });
+    }
+    // --- POSITIONING LOGIC END ---
  }
 }
-
 function lookupWord(word) {
   let out = "";
   console.log("---");
