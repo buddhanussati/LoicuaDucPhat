@@ -396,7 +396,26 @@
 </section>
 <section id="view-analytics" class="view-section">
     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; flex-wrap: wrap; gap: 10px;">
-        <h2 style="margin: 0;">Phân tích Thiền tập</h2>
+    <h2 style="margin: 0;">Phân tích Thiền tập</h2>
+    
+   <div id="threshold-config" style="display: flex; align-items: center; gap: 5px; background: var(--surface); padding: 5px 12px; border-radius: 20px; border: 1px solid var(--border);">
+    <span style="font-size: 12px; color: var(--text-light); white-space: nowrap;">
+        <i class="fas fa-stopwatch"></i> Độ trễ tối đa:
+    </span>
+    <input type="number" id="ana-threshold" 
+           style="width: 45px; 
+                  background: rgba(17, 24, 39,0.7); 
+                  border: 1px solid var(--border); 
+                  border-radius: 4px; 
+                  color: var(--primary); 
+                  font-weight: bold; 
+                  text-align: center; 
+                  outline: none;
+                  cursor: pointer;" 
+           value="12" min="1" onchange="app.saveThreshold(this.value)">
+    <span style="font-size: 11px; color: var(--text-light);">giây</span>
+</div>
+
         <select id="ana-time-range" class="form-control" style="width: auto;" onchange="app.renderAnalytics()">
             <option value="7" selected>7 ngày qua</option>
             <option value="30">30 ngày qua</option>
@@ -404,6 +423,7 @@
             <option value="365">Toàn bộ</option>
         </select>
     </div>
+</div>
 
     <div class="dashboard-grid" style="grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); margin-bottom: 20px;">
         <div class="card" style="text-align: center; border-left: 4px solid var(--zen);">
@@ -1075,7 +1095,11 @@ if (sessionData.length > maxPoints) {
     // 5. Render Comparison Table
     this.renderComparisonTable(medGoalIds);
 }
-
+saveThreshold(val) {
+        localStorage.setItem('ana_threshold', val);
+        this.renderAnalytics(); 
+        this.showToast("Đã cập nhật độ trễ tối đa: " + val + "s");
+    }
 // Logic: Gap Analysis
 // If gap > threshold (20s), assume mind wandered.
 analyzeSingleSession(log) {
@@ -1085,25 +1109,27 @@ analyzeSingleSession(log) {
     }
 
     const sortedTouches = [...log.touches].sort((a,b) => a - b);
-    const thresholdSec = 12; // Seconds before considering it "Distraction"
+	const thresholdSec = parseInt(document.getElementById('ana-threshold').value) || 12; 
+    
     let distractedSec = 0;
+
     
     // Check gap from Start to First Touch
     const startGap = (sortedTouches[0] - log.timestamp) / 1000;
-    if (startGap > thresholdSec) distractedSec += (startGap - thresholdSec);
+    if (startGap > thresholdSec) distractedSec += (startGap - thresholdSec/2);
 
     // Check gaps between touches
     for (let i = 1; i < sortedTouches.length; i++) {
         const gap = (sortedTouches[i] - sortedTouches[i-1]) / 1000;
         if (gap > thresholdSec) {
-            distractedSec += (gap - thresholdSec);
+            distractedSec += (gap - thresholdSec/2);
         }
     }
 
     // Check gap from Last Touch to End
     const endTime = log.timestamp + (log.minutes * 60 * 1000);
     const endGap = (endTime - sortedTouches[sortedTouches.length - 1]) / 1000;
-    if (endGap > thresholdSec) distractedSec += (endGap - thresholdSec);
+    if (endGap > thresholdSec) distractedSec += (endGap - thresholdSec/2);
 
     // Cap distracted seconds to total minutes (to avoid calculation errors)
     const totalSec = log.minutes * 60;
@@ -1225,6 +1251,11 @@ getStatsForRange(startTime, endTime, goalIds) {
 				if (!localStorage.getItem('intro_seen')) {
         this.openIntroModal();
     }
+	// Add this where you initialize the app
+const savedThreshold = localStorage.getItem('ana_threshold');
+if (savedThreshold) {
+    document.getElementById('ana-threshold').value = savedThreshold;
+}
             }
 
             save() {
