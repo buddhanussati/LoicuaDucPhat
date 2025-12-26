@@ -88,6 +88,11 @@ function lookupWordHandler(event){
  if (meaning) {
  var textBox = $('<span class="meaning">'+meaning+'</span>');
  $(this).append(textBox);
+         var offset = $(this).offset();
+        var width = 300; // approx max width
+        if (offset.left + width > $(window).width()) {
+             textBox.css({left: 'auto', right: 0});
+        }
  }
 }
 
