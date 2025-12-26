@@ -1490,29 +1490,48 @@ font-weight: bold;
 }
 
 .meaning {
- font-family: Tahoma;
- position:absolute;
- visibility:hidden;
- display:block;
- opacity: 0;
- bottom: 2.2em;
- margin-left: 40px;
- margin-right: auto;
- z-index: 2002;
- border: 1px solid blue;
- background: #ececcd;
- border-radius: 5px;
- font-size:16px;   
- font-weight:normal;
- font-style:normal;
- text-decoration: none;
- text-align: left;
- padding: 0.1em 0.5em;
- margin-top:1em;
- min-width:20em;
- max-width:550px;
- height: auto;
- transition: 100ms;
+    /* Giữ nguyên các thuộc tính giao diện */
+    font-family: Tahoma;
+    position: absolute;
+    visibility: hidden;
+    display: block;
+    opacity: 0;
+    top: 1.4em;
+    z-index: 2002;
+    border: 1px solid blue;
+    background: #ececcd;
+    border-radius: 5px;
+    font-size: 16px;   
+    padding: 0.5em 0.8em;
+    margin-top: 0.5em;
+    box-sizing: border-box;
+    transition: 100ms;
+    line-height: 1.4;
+    text-align: left;
+    
+    /* --- SỬA LỖI TRÀN TRÁI TRÊN DESKTOP --- */
+    /* Thay vì căn giữa tuyệt đối, hãy thử neo bên trái */
+    left: 0; 
+    /* Hoặc nếu vẫn muốn căn giữa, bạn phải chấp nhận rủi ro hoặc dùng JS. 
+       Nếu muốn giữ căn giữa như cũ, hãy giữ nguyên left: 50% và transform, 
+       nhưng thêm min-width nhỏ hơn */
+    
+    width: 300px; /* Đặt chiều rộng cố định hoặc max-content */
+    white-space: normal;
+}
+
+/* --- QUAN TRỌNG: SỬA LỖI TRÀN TRÊN MOBILE --- */
+@media (max-width: 480px) {
+    .meaning {
+        position: fixed; /* Neo vào màn hình thay vì thẻ cha */
+        top: 50%;        /* Giữa màn hình dọc */
+        left: 50%;       /* Giữa màn hình ngang */
+        transform: translate(-50%, -50%); /* Căn chính giữa tâm */
+        
+        width: 90vw;     /* Rộng 90% màn hình */
+        max-width: none;
+        margin: 0;
+    }
 }
 
 [light-mode=dark] .meaning {
