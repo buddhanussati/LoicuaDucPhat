@@ -88,7 +88,20 @@ function lookupWordHandler(event){
  if (meaning) {
  var textBox = $('<span class="meaning">'+meaning+'</span>');
  $(this).append(textBox);
- }
+// Only apply custom positioning if the screen width is greater than 768px
+if ($(window).width() > 768) {
+    var offset = $(this).offset();
+    var width = 550; // approx max width
+    
+    if (offset.left + width > $(window).width()) {
+        textBox.css({
+            'left': 'auto',
+            'right': 0,
+            'position': 'absolute' // Ensure it's absolute to respect the right:0
+        });
+    }
+}
+}
 }
 
 function lookupWord(word) {
