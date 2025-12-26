@@ -89,9 +89,9 @@ function lookupWordHandler(event){
  var textBox = $('<span class="meaning">'+meaning+'</span>');
  $(this).append(textBox);
 // Only apply custom positioning if the screen width is greater than 768px
-if ($(window).width() > 768) {
+if ($(window).width() >= 768) {
     var offset = $(this).offset();
-    var width = 550; // approx max width
+    var width = 450; // approx max width
     
     if (offset.left + width > $(window).width()) {
         textBox.css({
