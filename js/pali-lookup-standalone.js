@@ -85,18 +85,10 @@ function lookupWordHandler(event){
 
  word = word.replace(/ṁg/g, 'ṅg').replace(/ṁk/g, 'ṅk').replace(/ṁ/g, 'ṁ').replace(/ṁ/g, 'ṁ');
  var meaning = lookupWord(word);
-if (meaning) {
-    var textBox = $('<span class="meaning">' + meaning + '</span>');
-    $(this).append(textBox);
-    
-  
-    var actualWidth = textBox.outerWidth(); 
-    var offset = $(this).offset();
-    if (offset.left + actualWidth > $(window).width()) {
-        textBox.css({ left: 'auto', right: 0 });
-    }
-
-   }
+ if (meaning) {
+ var textBox = $('<span class="meaning">'+meaning+'</span>');
+ $(this).append(textBox);
+ }
 }
 
 function lookupWord(word) {
