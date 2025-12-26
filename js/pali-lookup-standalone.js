@@ -76,24 +76,50 @@ function disablePaliLookup(){
 }
 
 function lookupWordHandler(event){
- if (! 'paliDictionary' in window) return;
+    if (! 'paliDictionary' in window) return;
 
- if ($(this).children().is("span.meaning")) return;
+    if ($(this).children().is("span.meaning")) return;
 
- var word = $(this).text().toLowerCase().trim();
- word = word.replace(/­/g, '')//optional hyphen
+    var word = $(this).text().toLowerCase().trim();
+    word = word.replace(/­/g, '')//optional hyphen
+    word = word.replace(/ṁg/g, 'ṅg').replace(/ṁk/g, 'ṅk').replace(/ṁ/g, 'ṁ').replace(/ṁ/g, 'ṁ');
+    
+    var meaning = lookupWord(word);
+    
+    if (meaning) {
+        var textBox = $('<span class="meaning">'+meaning+'</span>');
+        $(this).append(textBox);
+        
+        // --- BẮT ĐẦU LOGIC SỬA LỖI TRÀN MÀN HÌNH ---
+        var wordOffset = $(this).offset(); // Vị trí của từ trên màn hình
+        var boxWidth = textBox.outerWidth(); // Chiều rộng thực tế của popup
+        var windowWidth = $(window).width();
+        
+        // Mặc định left: 0 (từ CSS). Tính toán vị trí tương đối mới:
+        var newLeft = 0;
 
- word = word.replace(/ṁg/g, 'ṅg').replace(/ṁk/g, 'ṅk').replace(/ṁ/g, 'ṁ').replace(/ṁ/g, 'ṁ');
- var meaning = lookupWord(word);
- if (meaning) {
- var textBox = $('<span class="meaning">'+meaning+'</span>');
- $(this).append(textBox);
-         var offset = $(this).offset();
-        var width = 300; // approx max width
-        if (offset.left + width > $(window).width()) {
-             textBox.css({left: 'auto', right: 0});
+        // 1. Kiểm tra tràn bên PHẢI
+        // Nếu vị trí từ + chiều rộng popup > chiều rộng màn hình
+        if (wordOffset.left + boxWidth > windowWidth) {
+            // Dịch sang trái để mép phải popup cách lề phải màn hình 5px
+            // Công thức: (Mép phải màn hình - padding) - (Mép phải popup hiện tại)
+            var shift = (wordOffset.left + boxWidth) - (windowWidth - 5);
+            newLeft = -shift;
         }
- }
+
+        // 2. Kiểm tra tràn bên TRÁI (sau khi đã dịch hoặc mặc định)
+        // Nếu vị trí từ + newLeft < 0 (tức là bị đẩy ra ngoài bên trái)
+        if (wordOffset.left + newLeft < 0) {
+            // Đặt lại để mép trái popup cách lề trái màn hình 5px
+            newLeft = -wordOffset.left + 5;
+        }
+
+        // Áp dụng vị trí mới
+        textBox.css({left: newLeft + 'px', right: 'auto'});
+        // --- KẾT THÚC LOGIC SỬA LỖI ---
+
+    
+    }
 }
 
 function lookupWord(word) {
