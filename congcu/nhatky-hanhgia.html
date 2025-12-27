@@ -171,10 +171,51 @@
             font-size: 12px; cursor: pointer; position: relative; border: 1px solid var(--border);
             color: var(--text-light);
         }
-        .calendar-day.has-data { background: #4b5563; color: white; border-color: #6b7280; }
-        .calendar-day.level-1 { background: rgba(99, 102, 241, 0.4); border-color: var(--primary); color: white;} 
-        .calendar-day.level-2 { background: rgba(99, 102, 241, 0.7); border-color: var(--primary); color: white; } 
-        .calendar-day.level-3 { background: var(--primary); border-color: var(--primary-dark); color: white; } 
+       /* Level 1-5: The Foundation (Indigo spectrum) */
+.calendar-day.level-1 { background: rgba(99, 102, 241, 0.3); border-color: rgba(99, 102, 241, 0.3); color: white; } 
+.calendar-day.level-2 { background: rgba(99, 102, 241, 0.6); border-color: rgba(99, 102, 241, 0.5); color: white; } 
+.calendar-day.level-3 { background: rgba(99, 102, 241, 1); border-color: var(--primary); color: white; } 
+ .calendar-day.level-4 { 
+ 
+background: #4d5eff ; 
+    border: 1px solid rgba(255,255,255,0.2);
+    color: white; 
+}
+.calendar-day.level-5 
+{ background: var(--primary); border-color: var(--primary-dark); color: white; } 
+
+.calendar-day.level-6 { 
+background:  linear-gradient(135deg, var(--primary), #a78bfa);    box-shadow: inset 0 0 8px rgba(255,255,255,0.3);  border: 1px solid rgba(255,255,255,0.2);
+	    color: white; 
+			border-color: gold;
+box-shadow: 0 0 20px #ffffff, 0 0 40px var(--primary);	}
+
+/* Level 7: Right Mindfulness (Deep Royal Purple with a Soft Glow) */
+.calendar-day.level-7 { 
+background: linear-gradient(135deg, #a78bfa, #f472b6);
+    border: 1px solid rgba(255,255,255,0.4);
+box-shadow: 0 0 20px #ffffff, 0 0 40px var(--primary);	    color: white; 
+
+border-color: rgba(251, 191, 36, 1);
+
+}
+
+/* Level 8: Right Concentration (Golden/Sunlight - The Peak) */
+.calendar-day.level-8 { 
+    background: linear-gradient(135deg, #6d28d9, #8b5cf6);
+    border: 1px solid #a78bfa;
+	color: white; 
+    box-shadow: 0 0 12px rgba(139, 92, 246, 0.6);
+	border-color: gold;
+	animation: pulse-gold 2s infinite;
+}
+
+
+@keyframes pulse-gold {
+    0% { transform: scale(1); }
+    50% { box-shadow: 0 0 25px rgba(251, 191, 36, 1); }
+    100% { transform: scale(1); }
+}
         .calendar-day:hover { transform: scale(1.1); z-index: 2; box-shadow: 0 0 10px var(--primary); border: 1px solid white; }
 
         /* --- Modal & Inputs --- */
@@ -1961,12 +2002,19 @@ fallbackCopyText(text) {
                     const dayEl = document.createElement('div');
                     dayEl.className = 'calendar-day'; dayEl.innerText = i;
                     const totalMins = this.data.logs.filter(l => l.date === dStr).reduce((sum, l) => sum + l.minutes, 0);
-                    if(totalMins > 0) {
-                        dayEl.classList.add('has-data');
-                        if (totalMins > 120) dayEl.classList.add('level-3');
-                        else if (totalMins > 60) dayEl.classList.add('level-2');
-                        else dayEl.classList.add('level-1');
-                    }
+if(totalMins > 0) {
+    dayEl.classList.add('has-data');
+    
+    // The 8-Fold Path Tiers
+    if (totalMins >= 240) dayEl.classList.add('level-8');      // 4h+ (Right Concentration)
+    else if (totalMins >= 180) dayEl.classList.add('level-7'); // 3h+ (Right Mindfulness)
+    else if (totalMins >= 150) dayEl.classList.add('level-6'); // 2.5h+ (Right Effort)
+    else if (totalMins >= 120) dayEl.classList.add('level-5'); // 2h+
+    else if (totalMins >= 90) dayEl.classList.add('level-4');  // 1.5h
+    else if (totalMins >= 60) dayEl.classList.add('level-3');  // 1h
+    else if (totalMins >= 30) dayEl.classList.add('level-2');  // 30m
+    else dayEl.classList.add('level-1');                     // < 30m
+}
                     dayEl.onclick = () => this.openDayStats(dStr);
                     grid.appendChild(dayEl);
                 }
