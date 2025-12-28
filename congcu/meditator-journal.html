@@ -436,7 +436,9 @@ border-color: rgba(251, 191, 36, 1);
 <section id="view-analytics" class="view-section">
      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; flex-wrap: wrap; gap: 10px;">
     <h2 style="margin: 0;">Meditation Analytics</h2>
-    
+     <div style="display:flex; gap:10px; flex-wrap:wrap; align-items:center;">
+            <select id="ana-goal-select" class="form-control" style="width: auto; min-width: 150px;" onchange="app.renderAnalytics()">
+                </select>
    <div id="threshold-config" style="display: flex; align-items: center; gap: 5px; background: var(--surface); padding: 5px 12px; border-radius: 20px; border: 1px solid var(--border);">
     <span style="font-size: 12px; color: var(--text-light); white-space: nowrap;">
         <i class="fas fa-stopwatch"></i> Distraction threshold:
@@ -462,7 +464,7 @@ border-color: rgba(251, 191, 36, 1);
             <option value="365">All time</option>
         </select>
     </div>
-
+</div>
     <div class="dashboard-grid" style="grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); margin-bottom: 20px;">
         <div class="card" style="text-align: center; border-left: 4px solid var(--zen);">
             <div style="font-size: 12px; color: var(--text-light); text-transform: uppercase;">Average Quality</div>
@@ -978,14 +980,52 @@ closeIntroModal() {
 renderAnalytics() {
     const range = parseInt(document.getElementById('ana-time-range').value) || 7;
     const ctxTrend = document.getElementById('analyticsTrendChart').getContext('2d');
+    const goalSelect = document.getElementById('ana-goal-select');
+    const thresholdInput = document.getElementById('ana-threshold');
+	   
+
+	   const medGoals = this.data.goals.filter(g => g.type === 'meditation');
     
-    // 1. Filter Data
+    if (medGoals.length === 0) {
+        document.getElementById('ana-comparison-table').innerHTML = '<tr><td colspan="5" style="text-align:center; padding:20px;">There is no meditation goals.</td></tr>';
+        return;
+    }
+
+    // 2. Populate Dropdown (if needed or empty)
+    // We rebuild it if the number of options doesn't match data (simple sync check)
+    if (goalSelect.options.length !== medGoals.length) {
+        const currentVal = goalSelect.value;
+        goalSelect.innerHTML = '';
+        medGoals.forEach(g => {
+            const opt = document.createElement('option');
+            opt.value = g.id;
+            opt.innerText = g.name;
+            goalSelect.appendChild(opt);
+        });
+        // Restore selection or select first
+        if (currentVal && medGoals.find(g => g.id === currentVal)) {
+            goalSelect.value = currentVal;
+        } else {
+            goalSelect.value = medGoals[0].id;
+        }
+    }
+
+    // 3. Get Selected Goal Data
+    const selectedGoalId = goalSelect.value;
+    const selectedGoal = this.data.goals.find(g => g.id === selectedGoalId);
+    
+    // 4. Load Specific Threshold
+    // Default to 12s if not set in the goal yet
+    const currentThreshold = selectedGoal.threshold || 12;
+    thresholdInput.value = currentThreshold;
+	
+
+    // 5. Filter Logs for THIS GOAL ONLY within Time Range
     const now = Date.now();
     const cutoff = now - (range * 24 * 60 * 60 * 1000);
-    const medGoalIds = this.data.goals.filter(g => g.type === 'meditation').map(g => g.id);
     
     const logs = this.data.logs
-        .filter(l => medGoalIds.includes(l.goalId) && l.timestamp >= cutoff)
+        .filter(l => l.goalId === selectedGoalId && l.timestamp >= cutoff)
         .sort((a, b) => a.timestamp - b.timestamp);
 
     if (logs.length === 0) {
@@ -998,55 +1038,51 @@ renderAnalytics() {
         return;
     }
 
-    // 2. Process Logs
+    // 6. Process Logs using the GOAL SPECIFIC Threshold
     let totalTimeSec = 0;
     let totalDistractedSec = 0;
     let totalTouches = 0;
     
     const sessionData = logs.map(log => {
-        const result = this.analyzeSingleSession(log);
+        // Pass the threshold explicitly
+        const result = this.analyzeSingleSession(log, currentThreshold);
+        
         totalTimeSec += log.minutes * 60;
         totalDistractedSec += result.distractedSec;
         const count = log.count !== undefined ? log.count : (log.touches ? log.touches.length : 0);
         totalTouches += count;
         
-        return {
+               return {
             date: new Date(log.timestamp).toLocaleDateString('en-GB', {day: '2-digit', month:'2-digit'}),
             quality: result.qualityPct,
-            density: (count / log.minutes).toFixed(1)
+            density: log.minutes > 0 ? (count / log.minutes).toFixed(1) : 0
         };
     });
 
-    // 3. Update Summary Cards
-    const avgQuality = ((1 - (totalDistractedSec / totalTimeSec)) * 100).toFixed(1);
-    const avgDensity = (totalTouches / (totalTimeSec / 60)).toFixed(1);
+// 7. Update Summary Cards
+    // Prevent divide by zero
+    const avgQuality = totalTimeSec > 0 ? ((1 - (totalDistractedSec / totalTimeSec)) * 100).toFixed(1) : 0;
+    const avgDensity = totalTimeSec > 0 ? (totalTouches / (totalTimeSec / 60)).toFixed(1) : 0;
     const distractedHours = (totalDistractedSec / 3600).toFixed(1);
 
     document.getElementById('ana-avg-quality').innerText = `${avgQuality}%`;
     document.getElementById('ana-avg-density').innerText = avgDensity;
     document.getElementById('ana-total-distracted').innerText = `${distractedHours}h`;
 
-    // 4. Render Trend Chart
-if (this.charts.analyticsTrend) this.charts.analyticsTrend.destroy();
+    // 8. Render Trend Chart
+    if (this.charts.analyticsTrend) this.charts.analyticsTrend.destroy();
 
-// NEW: Smart Downsampling
-// If we have more than 15 sessions, pick 15 evenly distributed points.
-// If we have 15 or fewer, show them all.
-let chartData = sessionData;
-const maxPoints = 15;
-
-if (sessionData.length > maxPoints) {
-    chartData = [];
-    // Calculate the "step" size. 
-    // Example: If 30 items, step is roughly 2. We pick index 0, 2, 4...
-    const step = (sessionData.length - 1) / (maxPoints - 1);
-
-    for (let i = 0; i < maxPoints; i++) {
-        // Math.round ensures we get a valid integer index
-        const index = Math.round(i * step);
-        chartData.push(sessionData[index]);
+    // Downsampling logic
+    let chartData = sessionData;
+    const maxPoints = 15;
+    if (sessionData.length > maxPoints) {
+        chartData = [];
+        const step = (sessionData.length - 1) / (maxPoints - 1);
+        for (let i = 0; i < maxPoints; i++) {
+            const index = Math.round(i * step);
+            chartData.push(sessionData[index]);
+        }
     }
-}
 
     this.charts.analyticsTrend = new Chart(ctxTrend, {
         type: 'line',
@@ -1119,26 +1155,41 @@ if (sessionData.length > maxPoints) {
         }
     });
 
-    this.renderComparisonTable(medGoalIds);
+    this.renderComparisonTable([selectedGoalId], currentThreshold);
 }
-
 saveThreshold(val) {
-        localStorage.setItem('ana_threshold', val);
-        this.renderAnalytics(); 
+    const goalSelect = document.getElementById('ana-goal-select');
+    const selectedGoalId = goalSelect.value;
+    
+    if (!selectedGoalId) return;
+
+    const goal = this.data.goals.find(g => g.id === selectedGoalId);
+    if (goal) {
+        goal.threshold = parseInt(val);
+        this.save();
+        this.renderAnalytics(); // Re-calc with new threshold
         this.showToast("Threshold updated: " + val + "s");
     }
+}
 // If gap > threshold (20s), assume mind wandered.
-analyzeSingleSession(log) {
+analyzeSingleSession(log, thresholdOverride = null) {
     // Basic fallback if no touches data
     if (!log.touches || log.touches.length < 2) {
-        return { distractedSec: log.minutes * 60 * 0.5, qualityPct: 50 }; // Assume 50% if no data
+        return { distractedSec: log.minutes * 60 * 0.5, qualityPct: 50 };
     }
 
     const sortedTouches = [...log.touches].sort((a,b) => a - b);
-   const thresholdSec = parseInt(document.getElementById('ana-threshold').value) || 12; 
+    
+    // Use override if provided, else check DOM, else default 12
+    let thresholdSec;
+    if (thresholdOverride) {
+        thresholdSec = thresholdOverride;
+    } else {
+        thresholdSec = parseInt(document.getElementById('ana-threshold').value) || 12; 
+    }
     
     let distractedSec = 0;
-    
+
     // Check gap from Start to First Touch
     const startGap = (sortedTouches[0] - log.timestamp) / 1000;
     if (startGap > thresholdSec) distractedSec += (startGap - thresholdSec/2);
@@ -1156,7 +1207,7 @@ analyzeSingleSession(log) {
     const endGap = (endTime - sortedTouches[sortedTouches.length - 1]) / 1000;
     if (endGap > thresholdSec) distractedSec += (endGap - thresholdSec/2);
 
-    // Cap distracted seconds to total minutes (to avoid calculation errors)
+    // Cap distracted seconds to total minutes
     const totalSec = log.minutes * 60;
     distractedSec = Math.min(distractedSec, totalSec);
     
@@ -1164,7 +1215,8 @@ analyzeSingleSession(log) {
     
     return { distractedSec, qualityPct: parseFloat(qualityPct.toFixed(1)) };
 }
-renderComparisonTable(medGoalIds) {
+
+renderComparisonTable(medGoalIds, threshold) {
     const tbody = document.getElementById('ana-comparison-table');
     tbody.innerHTML = '';
 
@@ -1199,7 +1251,8 @@ renderComparisonTable(medGoalIds) {
     ];
 
     periods.forEach(p => {
-        const stats = this.getStatsForRange(p.start, p.end, medGoalIds);
+        // Pass the threshold to getStatsForRange
+        const stats = this.getStatsForRange(p.start, p.end, medGoalIds, threshold);
         const row = document.createElement('tr');
         row.style.borderBottom = '1px solid var(--border)';
         
@@ -1221,7 +1274,7 @@ renderComparisonTable(medGoalIds) {
 }
 
 // Helper method to filter by exact timestamp range
-getStatsForRange(startTime, endTime, goalIds) {
+getStatsForRange(startTime, endTime, goalIds, threshold) {
     const logs = this.data.logs.filter(l => 
         goalIds.includes(l.goalId) && 
         l.timestamp >= startTime && 
@@ -1238,7 +1291,8 @@ getStatsForRange(startTime, endTime, goalIds) {
         totalMinutes += l.minutes;
         const count = l.count !== undefined ? l.count : (l.touches ? l.touches.length : 0);
         totalTouches += count;
-        const analysis = this.analyzeSingleSession(l);
+        // Pass threshold here
+        const analysis = this.analyzeSingleSession(l, threshold);
         weightedQualitySum += (l.minutes * analysis.qualityPct);
     });
 
