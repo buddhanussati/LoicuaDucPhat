@@ -1510,8 +1510,10 @@ font-weight: bold;
  margin-top:1em;
  min-width:20em;
  max-width:550px;
- height: auto;
- transition: 100ms;
+height: auto;          /* Allow it to shrink if content is small */
+  max-height: 200px;     /* Stop growing after 300px (adjust as needed) */
+  overflow-y: auto;      /* Add a scrollbar if content exceeds max-height */
+  overflow-x: hidden;    /* Prevent horizontal scrolling */ transition: 100ms;
 }
 @media (min-width: 768px) { .meaning { left: 0;  /* optional: reset margin if needed */ } }
 [light-mode=dark] .meaning {
