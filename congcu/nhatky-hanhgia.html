@@ -711,8 +711,8 @@ border-color: rgba(251, 191, 36, 1);
                     <i class="fas fa-file-code"></i>
                 </button>
 			<select id="graph-type-select" class="form-control" style="width: auto; padding: 5px 5px 5px; height: 36px; font-size: 13px; cursor: pointer;" onchange="app.updateSessionChart()">
+			                    <option value="interval">☁️ Thất niệm</option>
                     <option value="intensity">🌱 Chánh niệm</option>
-                    <option value="interval">☁️ Thất niệm</option>
                 </select>
                 
                 <button class="btn btn-secondary" onclick="document.getElementById('graph-modal').style.display='none'" title="Đóng"><i class="fas fa-xmark"></i></button>
@@ -814,8 +814,31 @@ border-color: rgba(251, 191, 36, 1);
                     </ul>
                 </li>
             </ul>
-
-            <h4 style="color: var(--primary); margin-top: 15px;">4. Riêng Tư & An Toàn Dữ Liệu</h4>
+<h4 style="color: var(--primary); margin-top: 15px;">4. Phân Tích Thiền Tập (Mới)</h4>
+            <p>Tab <strong>"Phân tích"</strong> giúp bạn soi chiếu lại chất lượng tâm trong các thời thiền với độ chính xác cao hơn.</p>
+            <ul style="padding-left: 20px;">
+                <li><strong>Phân tích theo từng mục tiêu:</strong> Bạn có thể chọn xem số liệu của riêng "Thiền Tọa" hay "Thiền Hành" để so sánh sự tiến bộ của từng phương pháp tu tập.</li>
+                
+                <li style="margin-top: 10px;">
+                    <strong> Ngưỡng mất tập trung:</strong>
+                    <p style="font-size: 13px; color: var(--text-light); margin-top: 5px;">
+                        Đây là khái niệm quan trọng nhất để tính toán "Chất lượng thiền".
+                    </p>
+                    <div style="background: rgba(255, 255, 255, 0.05); padding: 10px; border-radius: 6px; border-left: 3px solid var(--warning); margin: 5px 0;">
+                        <em>"Ngưỡng mất tập trung" là khoảng cách tối đa cho phép giữa hai lần ghi nhận; nếu vượt quá thời gian này, hệ thống sẽ xem là bạn đang mất tập trung.</em>
+                    </div>
+                    <ul style="margin-top: 5px;">
+                        <li><strong>Cơ chế hoạt động:</strong> Ví dụ bạn đặt ngưỡng là <strong>12 giây</strong>.
+                            <ul>
+                                <li>Nếu bạn chạm màn hình sau <strong>5 giây</strong>: Toàn bộ thời gian đó là Tỉnh thức.</li>
+                                <li>Nếu bạn chạm sau <strong>20 giây</strong>: Hệ thống hiểu rằng bạn đã lơ là hoặc hôn trầm mất <strong>8 giây</strong> (20 - 12 = 8).</li>
+                            </ul>
+                        </li>
+                        <li><strong>Tùy chỉnh riêng biệt:</strong> Mỗi loại thiền cần một nhịp độ khác nhau. Bạn có thể cài đặt ngưỡng thấp (ví dụ 5s) cho các bài tập ghi nhận nhanh, hoặc ngưỡng cao (30s) cho các bài tập định tâm sâu. Hệ thống sẽ tự động nhớ cài đặt này cho từng mục tiêu.</li>
+                    </ul>
+                </li>
+            </ul>
+            <h4 style="color: var(--primary); margin-top: 15px;">5. Riêng Tư & An Toàn Dữ Liệu</h4>
             <ul style="padding-left: 20px;">
                 <li><strong>Offline Hoàn Toàn:</strong> 100% dữ liệu được lưu trữ trực tiếp trên trình duyệt và thiết bị của bạn. Không có dữ liệu nào được gửi về máy chủ.</li>
                 <li><strong>Sao lưu & Khôi phục:</strong> Dễ dàng xuất dữ liệu ra file <code>.json</code> để cất giữ hoặc chuyển sang thiết bị khác.</li>
@@ -1761,7 +1784,7 @@ showSessionGraph(timestamp) {
     document.getElementById('graph-date').innerText = new Date(log.timestamp).toLocaleString('vi-VN');
     
     // Reset selector to default and render
-    document.getElementById('graph-type-select').value = 'intensity';
+    document.getElementById('graph-type-select').value = 'interval';
     this.updateSessionChart();
 }
 
