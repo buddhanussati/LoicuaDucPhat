@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Từ Điển Pali-Việt</title>
 <script>/**
  * Fuse.js v7.0.0 - Lightweight fuzzy-search (http://fusejs.io)
@@ -18,7 +19,7 @@ var e,t;e=this,t=function(){"use strict";function e(e,t){var n=Object.keys(e);if
     font-family: "Segoe UI", Arial, sans-serif; 
     margin: 40px; 
     background-color: #ffd;
-background-image: url('imgbk.png')
+    /* background-image: url('imgbk.png'); Un-comment if image exists */
   }
 
   h1 { 
@@ -29,11 +30,16 @@ background-image: url('imgbk.png')
     letter-spacing: 1px;
   }
 
+  /* Search Box Container */
+  .search-container {
+    max-width: 700px;
+    margin: 20px auto;
+    text-align: center;
+  }
+
   #search { 
     width: 100%; 
-    max-width: 700px; 
-    margin: 20px auto; 
-    display: block;
+    box-sizing: border-box; /* Ensures padding doesn't widen element */
     padding: 14px; 
     font-size: 20px; 
     border: 2px solid #c49b63; /* vàng đất */
@@ -49,12 +55,43 @@ background-image: url('imgbk.png')
     outline: none;
   }
   
-/* Mặc định cho PC */
-#search::placeholder {
-  font-size: 14px;
-}
+  #search::placeholder {
+    font-size: 14px;
+    color: #888;
+  }
 
+  /* Virtual Keyboard Styling */
+  .virtual-keyboard {
+    margin-top: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 5px;
+  }
 
+  .vk-btn {
+    background-color: #eaddcf;
+    border: 1px solid #c49b63;
+    color: #5e3b22;
+    padding: 8px 12px;
+    font-size: 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-family: "Segoe UI", Arial, sans-serif;
+    transition: background 0.2s;
+    min-width: 35px;
+  }
+
+  .vk-btn:hover {
+    background-color: #dcc0a3;
+  }
+
+  .vk-btn:active {
+    background-color: #c49b63;
+    color: white;
+  }
+
+  /* Results Area */
   #results { 
     max-width: 800px; 
     margin: 0 auto; 
@@ -62,36 +99,12 @@ background-image: url('imgbk.png')
 
   .entry {
     background: #fafafa; 
-	
     margin: 14px 0; 
     padding: 18px;
     border-radius: 10px; 
     box-shadow: 0 2px 10px rgba(0,0,0,0.08);
     line-height: 1.7;
-    border-left: 5px solid #c49b63; /* nhấn bằng viền vàng đất */
-  }
-
-  .key { 
-    font-weight: bold; 
-    font-size: 1.4em; 
-    color: #a63c2f; /* đỏ đất */
-  }
-
-  .meaning { 
-    margin: 10px 0; 
-    font-size: 1.05em;
-  }
-
-  .etym { 
-    color: #7f8c8d; 
-    font-size: 0.9em; 
-    font-style: italic;
-  }
-
-  .highlight { 
-    background: #ffe799; /* vàng nhạt */
-    font-weight: bold; 
-    border-radius: 4px;
+    border-left: 5px solid #c49b63; 
   }
 
   .count { 
@@ -99,23 +112,100 @@ background-image: url('imgbk.png')
     color: #7f6f5f; 
     margin: 18px 0; 
     font-size: 0.95em; 
-    font-style: italic;
+    font-style: italic; 
   }
 </style>
 </head>
 <body>
 
-<h1>Từ Điển Pali-Việt (69,000+ mục từ)</h1>
+<h1>
+  Từ Điển Pali&#8209;Việt
+  <span style="font-size: 0.5em; font-weight: normal; vertical-align: middle; color: #7f6f5f; display: block; margin-top: 5px;">
+    (69,000+ mục từ)
+  </span>
+</h1>
+<div class="search-container">
+    <input type="text" id="search" placeholder='Gõ Pali: [ā = aa] [ṃ = .m] [ṅ = "n] [ñ = ~n] [ṭ = .t]…' autofocus>
 
-<input type="text" id="search"  placeholder='Gõ Pali: [ā = aa] [ṃ = .m] [ṅ = "n] [ñ = ~n] [ṭ = .t]…' autofocus>
- 	<script src="../js/jquery-1.10.2.min.js"></script>
- <script src="../js/palipad.js"></script>
+    <div class="virtual-keyboard">
+        <button class="vk-btn" onclick="insertAtCaret('search', 'ā');"><strong>ā</strong></button>
+        <button class="vk-btn" onclick="insertAtCaret('search', 'ī');"><strong>ī</strong></button>
+        <button class="vk-btn" onclick="insertAtCaret('search', 'ū');"><strong>ū</strong></button>
+        <button class="vk-btn" onclick="insertAtCaret('search', 'ṇ');"><strong>ṇ</strong></button>
+        <button class="vk-btn" onclick="insertAtCaret('search', 'ṅ');"><strong>ṅ</strong></button>
+        <button class="vk-btn" onclick="insertAtCaret('search', 'ñ');"><strong>ñ</strong></button>
+        <button class="vk-btn" onclick="insertAtCaret('search', 'ṭ');"><strong>ṭ</strong></button>
+        <button class="vk-btn" onclick="insertAtCaret('search', 'ḍ');"><strong>ḍ</strong></button>
+        <button class="vk-btn" onclick="insertAtCaret('search', 'ḷ');"><strong>ḷ</strong></button>
+        <button class="vk-btn" onclick="insertAtCaret('search', 'ṃ');"><strong>ṃ</strong></button>
+        <button class="vk-btn" onclick="insertAtCaret('search', 'ṁ');"><strong>ṁ</strong></button>
+        
+    </div>
+</div>
+
+
+
+<script src="../js/jquery-1.10.2.min.js"></script>
+
+<script src="../js/palipad.js"></script>
 
 <script>
-  $(function() {
-    window.pad = new palipad.Pad('#search');
-    $('.palipad-status').hide(); // ẩn hộp trạng thái
-  });
+    // Initialize Palipad
+    $(function() {
+        if(window.palipad) {
+            window.pad = new palipad.Pad('#search');
+            $('.palipad-status').hide(); // Hide status box if not needed
+        } else {
+            console.error("Palipad.js not loaded");
+        }
+    });
+
+    /**
+     * Modernized Insert Function
+     * inserts text at cursor, restores focus, and triggers input event
+     */
+    function insertAtCaret(areaId, text) {
+        var txtarea = document.getElementById(areaId);
+        if (!txtarea) return;
+
+        var scrollPos = txtarea.scrollTop;
+        var strPos = 0;
+        var browser = ((txtarea.selectionStart || txtarea.selectionStart == '0') ? 
+            "ff" : (document.selection ? "ie" : false ) );
+
+        // Modern Browsers (Chrome, FF, Edge)
+        if (browser == "ff") {
+            strPos = txtarea.selectionStart;
+            var front = (txtarea.value).substring(0, strPos);
+            var back = (txtarea.value).substring(txtarea.selectionEnd, txtarea.value.length);
+            txtarea.value = front + text + back;
+            strPos = strPos + text.length;
+            txtarea.selectionStart = strPos;
+            txtarea.selectionEnd = strPos;
+        } 
+        // Legacy IE
+        else if (browser == "ie") {
+            txtarea.focus();
+            var range = document.selection.createRange();
+            range.moveStart('character', -txtarea.value.length);
+            strPos = range.text.length;
+            range.text = text;
+        } 
+        else {
+            txtarea.value += text;
+        }
+
+        txtarea.scrollTop = scrollPos;
+        txtarea.focus();
+
+        // IMPORTANT: Trigger the 'input' event manually.
+        // This ensures Palipad and any search listeners know the text changed.
+        var event = new Event('input', {
+            bubbles: true,
+            cancelable: true,
+        });
+        txtarea.dispatchEvent(event);
+    }
 </script>
 <div id="results">
   <div class="count">Bắt đầu gõ để tìm kiếm…</div>
@@ -125,7 +215,6 @@ background-image: url('imgbk.png')
 
 <script>
 // ←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←
-// PASTE YOUR FULL 65,000-ENTRY OBJECT HERE
 // ←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←←
 const dictionary = {
   "a 2.1": "(tiền tố) <b>tiền tố ā được rút gọn trước phụ âm đôi</b> [ā]",
@@ -687,6 +776,7 @@ const dictionary = {
   "agadagandha": "(dt.nam) <b>mùi thuốc</b>",
   "agadaṅgāra": "(dt.nam) <b>tro đốt; (chú giải) cây bị đốt</b>; (nghĩa đen) than thuốc [agada + aṅgāra]",
   "agadasama": "(tính từ) <b>như thuốc</b>",
+  "agada": "(dt.trung) <b>thuốc; thang thuốc</b>",
   "agadhita": "(qkpt) <b>không bị trói buộc; không bị ràng buộc; không bị nô lệ</b> [na + √gadh + ita]",
   "agantabba": "(thể bị động) <b>không nên đi</b>",
   "agantar": "(dt.nam) <b>người không đi; người không đi</b> [na + √gam + tar]",
@@ -856,7 +946,7 @@ const dictionary = {
   "aggi": "(dt.nam) <b>lửa</b> [√agg + i]",
   "aggika": "(tính từ) <b>thờ lửa</b>; (nghĩa đen) liên quan đến lửa [√agg + i + ka]",
   "aggikajaṭilaupamā": "(dt.nữ) <b>ví dụ về vị khổ hạnh tóc bện thờ lửa</b> [aggika + jaṭila + upamā]",
-  "aggikabhāradvāja": "(dt.nam) <b>tên riêng của một vị sư A-la-hán</b>",
+  "aggikabhāradvāja": "(dt.nam) <b>tên riêng của một vị Tỷ-kheo A-la-hán</b>",
   "aggikabhāradvājajātaka": "(dt.trung) <b>Chuyện Tiền thân số 129 (JA129)</b>",
   "aggikaraṇīya": "(dt.trung) <b>thứ gì đó có thể làm bằng lửa</b>; (nghĩa đen) phải làm bằng lửa [aggi + karaṇīya]",
   "aggikasutta": "(dt.trung) <b>Tương Ưng Bộ Kinh 7.8 (SN7.8)</b>",
@@ -980,8 +1070,8 @@ const dictionary = {
   "aṅgaṇa 1.1": "(dt.trung) <b>vết; vết bẩn; vết ố</b>; (nghĩa đen) vết lem [√añj + aṇa]",
   "aṅgaṇa 1.2": "(dt.trung) <b>(của tâm) cấu uế; tạp chất; sự bại hoại</b>; (nghĩa đen) vết lem [√añj + aṇa]",
   "aṅgaṇa 2.1": "(dt.trung) <b>sân</b>; (nghĩa đen) đi bộ [√aṅg + aṇa]",
-  "aṅgaṇika": "(dt.nam) <b>tên của một vị sư A-la-hán</b>; (nghĩa đen) từ Bengal [√añj + a + ika]",
-  "aṅgaṇikabhāradvāja": "(dt.nam) <b>tên của một vị sư A-la-hán</b>; (nghĩa đen) Bà-la-môn Bharadvāja từ Bengal [aṅgaṇika + bhāradvāja]",
+  "aṅgaṇika": "(dt.nam) <b>tên của một vị Tỷ-kheo A-la-hán</b>; (nghĩa đen) từ Bengal [√añj + a + ika]",
+  "aṅgaṇikabhāradvāja": "(dt.nam) <b>tên của một vị Tỷ-kheo A-la-hán</b>; (nghĩa đen) Bà-la-môn Bharadvāja từ Bengal [aṅgaṇika + bhāradvāja]",
   "aṅgaṇikabhāradvājattheragāthā": "(dt.nữ) <b>Trưởng Lão Tăng Kệ 170, chương 3.1, câu 219-221 (TH170)</b>",
   "aṅgatā": "(dt.nữ) <b>việc có tứ chi; việc có các bộ phận</b>; (nghĩa đen) trạng thái tứ chi [√añj + a + tā]",
   "aṅganteva": "(liên từ) <b>thậm chí là một chi</b> [aṅgaṃ + eva]",
@@ -1049,7 +1139,7 @@ const dictionary = {
   "aṅgulipabba": "(dt.trung) <b>đốt ngón tay; khớp ngón tay</b> [aṅguli + pabba]",
   "aṅgulipabbatemanamatta": "(tính từ) <b>đủ để làm ướt khớp ngón tay</b>; (nghĩa đen) lượng làm ướt khớp ngón tay [aṅguli + pabba + temana + matta]",
   "aṅgulipabbamatta": "(tính từ) <b>sâu bằng khớp ngón tay; cao bằng một đốt ngón chân</b> [aṅgulipabba + matta]",
-  "aṅgulimāla": "(dt.nam) <b>tên của một vị sư A-la-hán</b>; (nghĩa đen) vòng hoa bằng ngón tay [aṅguli + mālā + a]",
+  "aṅgulimāla": "(dt.nam) <b>tên của một vị Tỷ-kheo A-la-hán</b>; (nghĩa đen) vòng hoa bằng ngón tay [aṅguli + mālā + a]",
   "aṅgulimālacoravatthu": "(dt.trung) <b>chuyện về tên tội phạm Aṅgulimāla</b> [aṅgulimāla + cora + vatthu]",
   "aṅgulimālattheragāthā": "(dt.nữ) <b>Trưởng Lão Tăng Kệ 255, chương 16.8, câu 866-891 (TH255)</b>",
   "aṅgulimālasutta": "(dt.trung) <b>Trung Bộ Kinh 86; Bài Kinh về Aṅgulimāla (MN86)</b> [aṅgulimāla + sutta]",
@@ -1383,6 +1473,7 @@ const dictionary = {
   "ajayuddha": "(dt.trung) <b>trận chiến dê; cuộc chiến dê</b> [aja + yuddha]",
   "ajayūtha": "(dt.trung) <b>đàn dê</b> [aja + yūtha]",
   "ajaras": "(dt.nam) <b>không già đi; không suy tàn; sự không suy tàn; (chú giải) không thất bại</b> [a + √jar + as]",
+  "ajaraṃ": "(dt.nam) <b>không già đi; không suy tàn; sự không suy tàn; (chú giải) không thất bại</b> [a + √jar]",
   "ajarasāsutta": "(dt.trung) <b>Tương Ưng Bộ Kinh 1.52 (SN1.52)</b>",
   "ajarāmara": "(tính từ) <b>không có tuổi già và cái chết; không suy tàn và bất tử</b> [ajara + amara]",
   "ajalakkhaṇa 1": "(dt.trung) <b>dấu hiệu tốt lành của dê</b> [aja + lakkhaṇa]",
@@ -2022,6 +2113,7 @@ const dictionary = {
   "aṭṭhañāṇa": "(dt.trung) <b>tám tri kiến</b> [aṭṭha + ñāṇa]",
   "aṭṭhatālīsā": "(số đếm) <b>bốn mươi tám (48)</b>",
   "aṭṭhatiṃsati": "(số đếm) <b>ba mươi tám (38)</b> [aṭṭha + tiṃsati]",
+  "aṭṭhatiṃsa": "(số đếm) <b>ba mươi tám (38)</b> [aṭṭha + tiṃsati]",
   "aṭṭhatiṃsatima": "(số thứ tự) <b>thứ ba mươi tám (thứ 38)</b>",
   "aṭṭhadivasaparimāṇa": "(tính từ) <b>đo lường tám ngày; dài tám ngày</b>",
   "aṭṭhadoṇa": "(dt.trung) <b>tám đấu</b> [aṭṭha + doṇa]",
@@ -5201,8 +5293,8 @@ const dictionary = {
   "anupekkhī": "(tính từ) <b>cẩn thận cân nhắc; liên tục xem xét; quan tâm về</b> [anu + pa + √ikkh + ī]",
   "anupeta": "(qkpt) <b>chưa dính mắc (với); chưa đến gần</b> [na + upa + √i + a + ta]",
   "anupeti": "(htại) <b>đi qua (đến); chuyển sang (thành); trở thành</b>; (nghĩa đen) đi dọc theo phía trước [anu + pa + √i + a + ti]",
-  "anupesi": "(qkhứ) <b>đã sai phái sau</b>",
-  "anupeseti": "(htại) <b>sai phái sau</b>",
+  "anupesi": "(qkhứ) <b>đã sai đi theo sau, đã gửi đi tiếp</b>",
+  "anupeseti": "(htại) <b>sai đi theo sau, gửi đi tiếp</b>",
   "anuposatha": "(dt.nam) <b>không phải ngày Bố-tát (Uposatha)</b>",
   "anuposathika": "(tính từ) <b>người không giữ giới ngày rằm và mùng một; người bỏ qua các ngày trai giới</b>; (nghĩa đen) không sống gần [na + upa + √vas + a + tha + ika]",
   "anuposathikaṃ": "(bất biến) <b>mỗi ngày rằm và mùng một; mỗi ngày trai giới</b> [anu + uposathika + aṃ]",
@@ -6396,7 +6488,7 @@ const dictionary = {
 "apaṇṇakasutta 3": "(dt.trung) <b>Tăng Chi Bộ Kinh 3.119 (AN3.119)</b>",
 "apaṇṇakaṃ": "(bất biến) <b>chắc chắn; xác định; không nghi ngờ gì; không thể hỏi lại</b>; (nghĩa đen) không có phần thứ năm [na + pañca + ka + aṃ]",
 "apaṇṇatti": "(dt.nữ) <b>sự không chỉ định</b> [pa + √ñā]",
-"apaṇṇattika": "(tính từ) <b>bất khả danh; không thể nhận dạng; không thể phân biệt; không thể nghĩ bàn</b> [na + pa + √ñā + *āpe + ti + ka]",
+"apaṇṇattika": "(tính từ) <b>bất khả tư nghì; không thể nhận dạng; không thể phân biệt; không thể nghĩ bàn</b> [na + pa + √ñā + *āpe + ti + ka]",
 "apaṇṇattivācaka": "(tính từ) <b>không chỉ định tên</b> []",
 "apatacchika": "(tính từ) <b>bóc đi; gọt đi</b> [apa + √tacch + a + ika]",
 "apatanatthaṃ": "(bất biến) <b>để không rơi</b>; (nghĩa đen) vì mục đích không rơi [na + patana + attha + aṃ]",
@@ -7241,6 +7333,7 @@ const dictionary = {
 "appaṭivekkhitvā": "(thể h.thành) <b>sau khi không kiểm tra; sau khi không thanh tra</b> [na + pati + ava + √ikkh + itvā]",
 "appaṭivedita": "(qkpt) <b>chưa được thông báo; chưa được cho biết</b> [pati + √vid]",
 "appaṭivedha": "(dt.nam) <b>sự không thâm nhập; sự không thấu hiểu; sự không thông đạt</b>; (nghĩa đen) sự không đâm xuyên lại [na + pati + √vidh + *a]",
+"paṭivedha": "(dt.nam) <b>sự thâm nhập; sự thấu hiểu; sự thông đạt</b>; (nghĩa đen) sự đâm xuyên [na + pati + √vidh + *a]",
 "appaṭisaṅkhā": "(danh động từ) <b>không suy xét; không cân nhắc kỹ lưỡng; không cân nhắc kỹ</b> [na + pati + saṃ + √khā + ya]",
 "appaṭisaṅkhāya": "(danh động từ) <b>không suy xét; không cân nhắc kỹ lưỡng; không cân nhắc kỹ</b> [na + pati + saṃ + √khā + ya]",
 "appaṭisandhika 1": "(tính từ) <b>không thể sửa chữa được; không thể phục hồi được</b>; (nghĩa đen) sự không đặt trở lại cùng nhau [na + pati + saṃ + √dhā + i + ka]",
@@ -10710,6 +10803,7 @@ const dictionary = {
 "asanthavavissāsī": "(tính từ) <b>tin tưởng những người mình không thân mật</b> [asanthava + vissāsī]",
 "asanthutavissāsī": "(tính từ) <b>tin tưởng những người mình không quen biết</b> [asanthuta + vissāsī]",
 "asandiṭṭhiparāmāsī": "(tính từ) <b>không bám vào quan điểm của mình; người không tuân thủ hệ thống niềm tin của mình</b> [na + sandiṭṭhi + parāmāsī]",
+"asandiṭṭhi": "(tính từ) <b>tà kiến</b> [na + sandiṭṭhi]",
 "asandiddha": "(qkpt) <b>tự tin; chắc chắn; không nghi ngờ; không do dự</b>; (nghĩa đen) không bị bôi bẩn [na + saṃ + √dih + ta]",
 "asandiddhaṃ": "(bất biến) <b>một cách rõ ràng; một cách chắc chắn; một cách tự tin; không do dự</b>; (nghĩa đen) không bị bôi bẩn [na + saṃ + √dih + ta + aṃ]",
 "asandhanta": "(qkpt) <b>(của vàng) không được nung chảy; không được nấu chảy</b> [na + saṃ + √dham + ta]",
@@ -12104,6 +12198,7 @@ const dictionary = {
 "ādiya 1.1": "(danh động từ) <b>nắm lấy</b> [√ādā + ya]",
 "ādiya 2.1": "(thể khả năng) <b>đáng trách; đáng khiển trách</b>; (nghĩa đen) sẽ được chỉ ra [ā + √dis + ya]",
 "ādiyati 1": "(htại) <b>lấy; nắm lấy; ôm lấy</b> [√ādā + ya + ti]",
+"mādiyati": "(htại) <b>không lấy; không thọ nhận</b> [ma + ādiyati]",
 "ādiyati 2": "(htại) <b>trộm; lấy</b> [√ādā + ya + ti]",
 "ādiyati 3": "(htại) <b>tuân theo; theo sau; chấp nhận</b>; (nghĩa đen) lấy [√ādā + ya + ti]",
 "ādiyanapaccayā": "(bất biến) <b>vì sự nắm lấy</b>",
@@ -12250,6 +12345,27 @@ const dictionary = {
 "ānandasutta 6": "(dt.trung) <b>Tương Ưng Bộ 22.159 (SN22.159)</b>",
 "ānandasutta 7": "(dt.trung) <b>Tương Ưng Bộ 44.10 (SN44.10)</b>",
 "ānandasutta 8": "(dt.trung) <b>Tăng Chi Bộ 3.32 (AN3.32)</b>",
+"paṇidhāna 1": "(dt.trung) <b>sự quyết tâm;</b> (nghĩa đen) đặt xuống phía trước [pa + ni + √dhā]", 
+
+"paṇidhāna 2": "(dt.trung) <b>sự phát nguyện; ý định; sự hướng tâm;</b> (nghĩa đen) đặt xuống phía trước [pa + ni + √dhā + ana]", 
+
+"paṭṭhāya": "(danh động từ) <b>kể từ; bắt đầu từ; tính từ lúc;</b> (nghĩa đen) đứng thẳng về phía trước [pa + √ṭhā + ya]",
+
+"upapāramī": "(dt.nữ) <b>bậc trung Ba-la-mật; sự hoàn thiện bậc cao;</b> (nghĩa đen) cận Ba-la-mật [upa + para + ma + *ī]",
+
+"paramatthapāramī": "(dt.nữ) <b>bậc thượng Ba-la-mật; sự hoàn thiện tối thắng; đức hạnh siêu thế tối cao.</b> [paramattha + pāramī]",
+
+"samatiṃsā": "(số đếm) <b>đúng ba mươi; tròn ba mươi</b> [sama + tiṃsā]", 
+
+"mahāpariccāga": "(dt.nam) <b>đại thí; sự từ bỏ vĩ đại</b>", 
+
+"lokatthacariyā": "(dt.nữ) <b>thế gian hạnh; hành động vì lợi ích của thế gian.</b> [loka + atthacariyā]", 
+
+"bodhipallaṅka": "(dt.nam) <b>Bồ-đoàn; tòa ngồi giác ngộ; tòa Kim Cang</b> [bodhi + pallaṅka]", 
+
+"āvajjetvā": "(thể hoàn thành) <b>sau khi xem xét; sau khi suy xét; sau khi hướng tâm đến</b> [ā + √vajj]",
+
+"tiyāmarattiṃ": "(bất biến) <b>trong suốt ba canh đêm</b> (từ 6-10pm, 10pm-2am và 2am-6am) [ti + yāma + ratti + iṃ]", 
 "ānandasutta 9": "(dt.trung) <b>Tăng Chi Bộ 4.174 (AN4.174)</b>",
 "ānandasomanassa": "(dt.trung) <b>hạnh phúc và hoan hỷ; sự vui thích và niềm vui trong tâm</b> [ānanda + somanassa]",
 "ānandācchariyasutta": "(dt.trung) <b>Tăng Chi Bộ 4.129 (AN4.129)</b>",
@@ -13178,7 +13294,7 @@ const dictionary = {
 "āvajji 1": "(qkhứ) <b>đã suy ngẫm về</b> [ā + √vajj]",
 "āvajji 2": "(qkhứ) <b>đã lật đổ (một cái bình)</b>",
 "āvajjeti 1": "(htại) <b>đang trầm ngâm; đang suy ngẫm; đang cân nhắc</b>",
-"āvajjeti 2": "(htại) <b>quan sát</b>",
+"āvajjeti 2": "(htại) <b>quán sát; suy ngẫm</b>",
 "āvajjeti 3": "(htại) <b>lật ngược</b>",
 "āvajjesi 1": "(qkhứ) <b>đã trầm ngâm</b>",
 "āvajjesi 2": "(qkhứ) <b>đã quan sát</b>",
@@ -13668,7 +13784,7 @@ const dictionary = {
 "āhita 1": "(qkpt) <b>được tích trữ; được chất đống; được cung cấp nhiên liệu</b>; (nghĩa đen) được đặt tại đây [ā + √dhā + ita]",
 "āhita 2": "(qkpt) <b>được đặt vào, được dựng lên</b>; (nghĩa đen) được đặt tại đây [ā + √dhā]",
 "āhitvā": "(thể h.thành) <b>đã mang đến; đã đi lấy</b> [ā + √har + tvā]",
-"āhu": "perf. <b>họ nói</b>; (nghĩa đen) họ đã nói [a + √ah + a + u]",
+"āhu": "(qkpt). <b>họ nói</b>; (nghĩa đen) họ đã nói [a + √ah + a + u]",
 "āhuṇa": "(dt.trung) <b>sự tôn thờ, sự dâng cúng</b> [ā + √hu]",
 "āhuṇeyya": "(thể khả năng) <b>xứng đáng được tôn thờ hoặc cúng dường</b> [ā + √hu]",
 "āhuta": "(tính từ) <b>được tạo ra, đến từ</b>",
@@ -14105,6 +14221,7 @@ const dictionary = {
 "idhekacca": "(đại từ) <b>ở đây một số; ở đây một số nào đó; trong trường hợp này một số; một vài người ở đây</b> [idha + ekacca]",
 "idheva": "(sandhi) <b>ngay tại đây; chỉ ở đây; chỉ ở đây</b> [idha + eva]",
 "idhevāhaṃ": "(sandhi) <b>ngay tại đây tôi</b> [idha + eva + ahaṃ]",
+"ina": "(dt.nam). <b>chúa tể; chủ nhân</b>",
 "inda 1": "(dt.nam) <b>chúa tể; vua; người cai trị</b>",
 "inda 2": "(dt.nam) <b>thần Inda; vua của các vị chư thiên</b>",
 "indaka": "(dt.nam) <b>tên của một vị chư thiên</b> [inda + ka]",
@@ -14113,7 +14230,7 @@ const dictionary = {
 "indakūṭa": "(dt.nam) <b>tên của một ngọn núi</b>; (nghĩa đen) đỉnh của Inda [inda + kūṭa]",
 "indakhilupama": "(tính từ) <b>giống như cột của Inda; tương tự như cột cổng thành</b> [indakhīla + upama]",
 "indakhīla 1": "(dt.nam) <b>(của một thành phố) cột của Inda; cột cổng thành</b> [inda + khīla]",
-"indakhīla 2": "(dt.nam) <b>lối vào; bậc thềm; ngưỡng cửa; lối vào</b>; (nghĩa đen) cột của Inda [inda + khīla]",
+"indakhīla 2": "(dt.nam) <b>cột trụ; lối vào; bậc thềm; ngưỡng cửa; lối vào</b>; (nghĩa đen) cột của Inda [inda + khīla]",
 "indakhīlasutta": "(dt.trung) <b>Tương Ưng Bộ Kinh 56.39 (SN56.39)</b>",
 "indakhīlūpama": "(tính từ) <b>giống như cột của Inda; tương tự như cột cổng thành</b> [indakhīla + upama]",
 "indagajjita": "(dt.trung) <b>sấm sét</b> []",
@@ -14950,7 +15067,7 @@ const dictionary = {
 "utta 2.1": "(qkpt) <b>đã nói; đã được nói; đã được thốt ra</b> [√vac + ta]",
 "utta 2.2": "(dt.trung) <b>sự thốt ra</b> [√vac]",
 "uttanta": "(tính từ) <b>thở một cách khó khăn, ngất đi</b>",
-"uttama 1": "(tính từ) <b>tốt nhất; cao nhất; tối thượng; tối cao; đỉnh cao</b> [ud + tama]",
+"uttama": "(tính từ) <b>tốt nhất; cao nhất; tối thượng; tối cao; đỉnh cao</b> [ud + tama]",
 "uttamakulīna": "(tính từ) <b>gia đình tuyệt vời, cao quý nhất</b>",
 "uttamaggarasadāyaka": "(dt.nam) <b>người cho những món ngon nhất</b> [uttama + aggarasa + dāyaka]",
 "uttamaṅga": "(dt.trung) <b>đầu</b>; (nghĩa đen) chi cao nhất [uttama + aṅga]",
@@ -16683,7 +16800,7 @@ const dictionary = {
 "upāhanāruḷhasikkhāpada": "(dt.trung) <b>Sekhiya 62</b>; (nghĩa đen) giới luật về (việc giảng Pháp cho ai đó) đang mang dép [upāhanāruḷha + sikkhāpada]",
 "upāhanārūḷha": "(tính từ) <b>đang mang dép</b>; (nghĩa đen) sự buộc đã được mang [upāhana + ārūḷha]",
 "upiya": "(tính từ) <b>thích hợp; phù hợp</b> [upa + iya]",
-"upekkha": "(tính từ) <b>vô tư, không bị ảnh hưởng</b> [upa + √ikkh]",
+"upekkha": "(tính từ) <b>tâm xả, vô tư, bình thản</b> [upa + √ikkh]",
 "upekkhaka": "(tính từ) <b>tâm bình thản; tâm thăng bằng; xả; không phản ứng; nhìn vào; bỏ qua</b>; (nghĩa đen) người nhìn vào [upa + √ikkh + a + ā + ka]",
 "upekkhati": "(htại) <b>nhìn vào; vô tư; thờ ơ</b> [upa + √ikkh + a + ti]",
 "upekkhatī": "(htại) <b>nhìn vào; không quan tâm; thờ ơ</b> [upa + √ikkh + a + ti]",
@@ -17220,7 +17337,7 @@ const dictionary = {
 "uruvelavagga": "(dt.nam) <b>Chương 3 của Catukkanipāta, Tăng Chi Bộ 4.21-30</b>",
 "uruvelavāsi": "(dt.nữ) <b>cư dân của Uruvelā</b> [uruvelā + vāsi]",
 "uruvelā": "(dt.nữ) <b>tên của một thị trấn ở Magadha</b>; (nghĩa đen) bờ rộng [uru + velā]",
-"uruveḷakassapa": "(dt.nam) <b>tên của một vị sư A-la-hán</b>",
+"uruveḷakassapa": "(dt.nam) <b>tên của một vị Tỷ-kheo A-la-hán</b>",
 "uruveḷakassapattheragāthā": "(dt.nữ) <b>Theragāthā 210, chương 6.1, câu 375-380 (TH210)</b>",
 "uruveḷā": "(dt.nữ) <b>tên của một thị trấn ở Magadha</b>; (nghĩa đen) bờ rộng [uru + veḷā]",
 "urūḷhavant 1": "(tính từ) <b>đồ sộ; mạnh mẽ; khổng lồ</b>; (nghĩa đen) có phẩm chất đã thăng lên [ud + √ruh + ta + vant]",
@@ -17293,8 +17410,8 @@ const dictionary = {
 "usabha 2": "(dt.nam) <b>người đứng đầu; ví dụ tốt nhất; lãnh đạo</b>; (nghĩa đen) bò giống",
 "usabha 3": "(dt.trung) <b>đơn vị đo chiều dài; 140 cubits; khoảng 64 mét</b>",
 "usabha 4": "(dt.nam) <b>tên của một vị Phật Độc Giác</b>; (nghĩa đen) bò giống",
-"usabha 5": "(dt.nam) <b>tên của một vị sư A-la-hán</b>; (nghĩa đen) bò giống",
-"usabha 6": "(dt.nam) <b>tên của một vị sư A-la-hán</b>; (nghĩa đen) bò giống",
+"usabha 5": "(dt.nam) <b>tên của một vị Tỷ-kheo A-la-hán</b>; (nghĩa đen) bò giống",
+"usabha 6": "(dt.nam) <b>tên của một vị Tỷ-kheo A-la-hán</b>; (nghĩa đen) bò giống",
 "usabhachinnavisāṇasama": "(tính từ) <b>giống như một con bò đực đã bị cắt sừng</b> [usabha + chinnavisāṇa + sama]",
 "usabhattheragāthā 1": "(dt.nữ) <b>Theragāthā 110, chương 1.110, câu 110 (TH110)</b>",
 "usabhattheragāthā 2": "(dt.nữ) <b>Theragāthā 159, chương 2.39, câu 197-198 (TH159)</b>",
@@ -21392,6 +21509,8 @@ const dictionary = {
 "kālusiya": "(dt.trung) <b>sự tối tăm; sự xáo trộn</b>; (nghĩa đen) tình trạng bẩn thỉu [kalusa + *iya]",
 "kālussiya": "(dt.trung) <b>sự ô nhiễm; sự không tinh khiết</b>",
 "kāle": "(bất biến) <b>đúng lúc; vào thời điểm thích hợp</b> [√kal + *a + e]",
+"tisaraṇasaraṇā": "(qkhứ) đã nương tựa vào ba ngôi báu",
+ "lokantara": "(dt.trung) thế giới khác, giữa các thế giới",
 "kālena": "(bất biến) <b>kịp thời; đúng lúc; vào một khoảnh khắc thích hợp</b> [√kal + *a + ena]",
 "kālena kālaṃ": "(thành ngữ) <b>thỉnh thoảng</b> [kālena + kālaṃ]",
 "kālepi": "(sandhi) <b>ngay cả đúng lúc; ngay cả vào thời điểm thích hợp</b> [kāle + api]",
@@ -22742,10 +22861,10 @@ const dictionary = {
 "kesī 2": "(tính từ) <b>có tóc; có một loại tóc nhất định</b> [kesa + ī]",
 "kesī 3": "(dt.nam) <b>tên của một vị Bồ Tát độc giác</b>; (nghĩa đen) với mái tóc dài [kesa + ī]",
 "kesu": "(đại từ) <b>trong điều gì?; hướng về ai?</b>; (nghĩa đen) trong ai? [ka + esu]",
-"kesūdha": "hợp từ. <b>trong số ai ở đây; trong ai ở đây</b> [ka + idha]",
+"kesūdha": "(sandhi) <b>trong số ai ở đây; trong ai ở đây</b> [ka + idha]",
 "kesohāraka": "(dt.nam) <b>người cắt tóc; tức là thợ cạo</b>",
 "kehici": "(đại từ) <b>bởi bất cứ ai; với bất cứ điều gì</b> [ka + ehi + ci]",
-"keḷāyati": "động từ. <b>quan tâm, trân trọng; quý trọng; cố chấp</b>",
+"keḷāyati": "(động từ) <b>quan tâm, trân trọng; quý trọng; cố chấp</b>",
 "keḷisīlajātaka": "(dt.trung) <b>Tiểu Bộ kinh Jātaka 202 (JA202)</b>",
 "ko": "(đại từ) <b>ai?; cái gì?; nào?</b> [ka + o]",
 "ko ca 1": "(thành ngữ) <b>(khi lặp lại) sự khác biệt lớn giữa A và B là dường nào!; A cách B bao xa !; sự khác biệt giữa A và B là gì?</b>",
@@ -22773,12 +22892,12 @@ const dictionary = {
 "kokila": "(dt.nam) <b>chim cu cu</b>",
 "kokilajātaka": "(dt.trung) <b>Tiểu Bộ kinh Jātaka 331 (JA331)</b>",
 "kokilā": "(dt.nữ) <b>chim cu cu mái</b> [kokila + ā]",
-"kocañño": "hợp từ. <b>người khác; bất cứ ai khác</b> [koci + añño]",
+"kocañño": "(sandhi) <b>người khác; bất cứ ai khác</b> [koci + añño]",
 "koci 1": "(đại từ) <b>ai đó; điều gì đó; bất cứ ai; bất cứ điều gì; bất kể ai</b> [ko + ci]",
 "koci 2": "(bất biến) <b>ở đâu đó; bất cứ đâu</b> [kva + ci]",
 "kocid eva": "(thành ngữ) <b>vân vân, người nào đó; điều gì đó</b>",
-"kocideva": "hợp từ. <b>thậm chí một số; chỉ một số; một số nào đó</b> [koci + eva]",
-"kocideso": "hợp từ. <b>vài việc; vài điểm; vài chi tiết</b> [koci + deso]",
+"kocideva": "(sandhi) <b>thậm chí một số; chỉ một số; một số nào đó</b> [koci + eva]",
+"kocideso": "(sandhi) <b>vài việc; vài điểm; vài chi tiết</b> [koci + deso]",
 "koccha 1": "(dt.trung) <b>ghế đan; ghế mây; ghế song mây</b>",
 "koccha 2": "(dt.trung) <b>bàn chải</b>",
 "kocchasūcivicitaggasobhita": "(tính từ) <b>được làm đẹp, với các lọn tóc riêng biệt được chải và ghim lại</b> [koccha + sūci + vicitagga + sobhita]",
@@ -22787,7 +22906,7 @@ const dictionary = {
 "kojavaka": "(dt.nam) <b>thảm trải sàn</b>",
 "koñca": "(dt.nam) <b>diệc; cò mỏ cong; chim nước</b> [√kuñc + *a]",
 "koñcanāda": "(dt.nam) <b>tiếng voi rống</b>",
-"koṭayati": "động từ. <b>cắt, chặt; nghiền, giã; đánh, đập; cào (mặt đất); đóng (đinh)</b> [√kuṭ]",
+"koṭayati": "(động từ) <b>cắt, chặt; nghiền, giã; đánh, đập; cào (mặt đất); đóng (đinh)</b> [√kuṭ]",
 "koṭarohita": "(tính từ) <b>đặt trong lỗ; đặt trong khoang; (chú giải) đặt trong thân cây rỗng</b> [koṭara + ohita]",
 "koṭasimbalijātaka": "(dt.trung) <b>Tiểu Bộ kinh Jātaka 412 (JA412)</b>",
 "koṭi 1": "(số đếm) <b>mười triệu (10 000 000)</b> [√kuṭ + *i]",
@@ -22802,16 +22921,16 @@ const dictionary = {
 "koṭippakoṭi": "(số đếm) <b>10²¹ (10 000 000 pakoṭi = 1 koṭippakoṭi)</b> []",
 "koṭimajjhikūpamā": "(dt.nữ) <b>?? ví dụ về trung điểm của đỉnh</b> [koṭi + majjhika + upamā]",
 "koṭiyā koṭiṃ": "(thành ngữ) <b>từ đầu đến cuối; từ trên xuống dưới</b>",
-"koṭisata": "(số đếm) <b>một tỷ (1 000 000 000); một trăm crore</b> [koṭi + sata]",
-"koṭisatasahassa": "(số đếm) <b>một tỷ (EU); một nghìn tỷ (US) (1 000 000 000 000)</b> [koṭi + sata + sahassa]",
+"koṭisata": "(số đếm) <b>một tỷ (1 000 000 000); một nghìn triệu</b> [koṭi + sata]",
+"koṭisatasahassa": "(số đếm) <b>một tỷ; một nghìn tỷ (1 000 000 000 000)</b> [koṭi + sata + sahassa]",
 "koṭisatasahassaguṇa": "(tính từ) <b>(trị giá) một tỷ lần</b> [koṭisatasahassa + guṇa]",
 "koṭenta": "(htpt) <b>đang đóng đinh; đang đánh</b> [√kuṭ + *e + nta]",
 "koṭṭayamāna": "(htpt) <b>đang cắt; đang chặt; đang nghiền</b>",
-"koṭṭāpetabba": "phân từ cần thiết. <b>nên được khiến cho nghiền; nên được khiến cho giã</b>; (nghĩa đen) để khiến cho bị đập vỡ [√kuṭṭ + *āpe + tabba]",
-"koṭṭāpeti": "động từ. <b>khiến cho nghiền; khiến cho giã; khiến cho đập vỡ</b> [√kuṭṭ + *āpe + ti]",
+"koṭṭāpetabba": "(thể khả năng) <b>nên được khiến cho nghiền; nên được khiến cho giã</b>; (nghĩa đen) để khiến cho bị đập vỡ [√kuṭṭ + *āpe + tabba]",
+"koṭṭāpeti": "(động từ) <b>khiến cho nghiền; khiến cho giã; khiến cho đập vỡ</b> [√kuṭṭ + *āpe + ti]",
 "koṭṭāpetvā": "(thể h.thành) <b>sau khi khiến cho nghiền; sau khi khiến cho giã; sau khi khiến cho đập vỡ</b> [√kuṭṭ + *āpe + tvā]",
-"koṭṭeti 1": "động từ. <b>giã; nghiền; đập nát</b> [√kuṭṭ + *e + ti]",
-"koṭṭeti 2": "động từ. <b>đập vỡ, đánh</b> [√kuṭṭ]",
+"koṭṭeti 1": "(động từ) <b>giã; nghiền; đập nát</b> [√kuṭṭ + *e + ti]",
+"koṭṭeti 2": "(động từ) <b>đập vỡ, đánh</b> [√kuṭṭ]",
 "koṭṭetvā 1": "(thể h.thành) <b>sau khi đập vỡ; sau khi giã nhuyễn; sau khi đánh (cái gì đó) thành bột</b> [√kuṭṭ + *e + tvā]",
 "koṭṭetvā 2": "(thể h.thành) <b>sau khi giã; sau khi nghiền; sau khi đập nát</b> [√kuṭṭ + *e + tvā]",
 "koṭṭesi": "(qkhứ) <b>đập vỡ; giã; giã nhuyễn</b> [√kuṭṭ + *e + si]",
@@ -22867,7 +22986,7 @@ const dictionary = {
 "kotthuka": "(dt.nam) <b>chó rừng nhỏ</b> [kotthu + ka]",
 "kodaṇḍa": "(dt.nam) <b>nỏ</b> [ku + daṇḍa]",
 "kodha 1.1": "(dt.nam) <b>sân hận; phẫn nộ; giận dữ; nóng nảy</b> [√kudh + *a]",
-"kodha 2.1": "hợp từ. <b>ai ở đây</b> [ko + idha]",
+"kodha 2.1": "(sandhi) <b>ai ở đây</b> [ko + idha]",
 "kodhagaru": "(tính từ) <b>coi trọng sân hận; người coi trọng giận dữ</b> [kodha + garu]",
 "kodhagarutā": "(dt.nữ) <b>việc coi trọng sân hận; việc coi trọng giận dữ</b> [kodha + garutā]",
 "kodhagarusutta": "(dt.trung) <b>Tăng Chi Bộ Kinh 4.84 (AN4.84)</b>",
@@ -22905,7 +23024,7 @@ const dictionary = {
 "kodhūpāyāsa": "(dt.nam) <b>sân hận và bực bội; giận dữ và khó chịu</b> [kodha + upāyāsa]",
 "kodhūpāyāsapaccayā": "(bất biến) <b>tùy thuộc vào sân hận và bực bội; do giận dữ và khó chịu</b> [kodhūpāyāsa + paccaya + ā]",
 "kodhūpāyāsī": "(tính từ) <b>người sân hận và dễ cáu kỉnh; người đầy giận dữ và khó chịu</b> [kodha + upāyāsa + ī]",
-"konāmo": "hợp từ. <b>tên là gì? gọi là gì?</b> [ko + nāmo]",
+"konāmo": "(sandhi) <b>tên là gì? gọi là gì?</b> [ko + nāmo]",
 "kopa 1": "(dt.nam) <b>sân hận; phẫn nộ; giận dữ; nóng nảy</b>; (nghĩa đen) sự rung chuyển [√kup + *a]",
 "kopa 2": "(dt.nam) <b>sự quấy rầy; sự nhiễu loạn; sự xáo động</b>; (nghĩa đen) sự rung chuyển [√kup + *a]",
 "kopaṇīya": "(tính từ) <b>có xu hướng làm cho sân hận; (cái) làm xáo động</b>",
@@ -22919,9 +23038,9 @@ const dictionary = {
 "kopiyamāna": "(htpt) <b>đang bị làm sân hận (bởi); đang bị làm khó chịu (bởi)</b>; (nghĩa đen) đang bị khiến cho rung chuyển [√kup + *e + iya + māna]",
 "kopī": "(tính từ) <b>nóng tính</b>; (nghĩa đen) đang rung chuyển",
 "kopīnanidaṃsana": "(tính từ) <b>lộ bộ phận sinh dục; phơi bày bộ phận kín</b>",
-"kopeti 1": "động từ. <b>làm xáo động; làm gián đoạn; làm khó chịu</b>; (nghĩa đen) khiến cho rung chuyển [√kup + *e + ti]",
-"kopeti 2": "động từ. <b>làm cho sân hận</b>; (nghĩa đen) khiến cho rung chuyển [√kup]",
-"kopeti 3": "động từ. <b>(của một tăng sự) làm mất hiệu lực</b>; (nghĩa đen) khiến cho rung chuyển [√kup + *e + ti]",
+"kopeti 1": "(động từ) <b>làm xáo động; làm gián đoạn; làm khó chịu</b>; (nghĩa đen) khiến cho rung chuyển [√kup + *e + ti]",
+"kopeti 2": "(động từ) <b>làm cho sân hận</b>; (nghĩa đen) khiến cho rung chuyển [√kup]",
+"kopeti 3": "(động từ) <b>(của một tăng sự) làm mất hiệu lực</b>; (nghĩa đen) khiến cho rung chuyển [√kup + *e + ti]",
 "kopetukāma": "(tính từ) <b>muốn làm xáo động; mong muốn làm gián đoạn</b> [kopetuṃ + kāma]",
 "kopetuṃ 1": "(nguyên thể) <b>làm cho sân hận</b>; (nghĩa đen) khiến cho rung chuyển [√kup]",
 "kopetuṃ 2": "(nguyên thể) <b>làm xáo động; làm gián đoạn</b>; (nghĩa đen) khiến cho rung chuyển [√kup + *e + tuṃ]",
@@ -22930,9 +23049,9 @@ const dictionary = {
 "komāraka 2": "(tính từ) <b>trẻ; chưa trưởng thành; thanh thiếu niên</b> [kumāra + *aka]",
 "komāraputtajātaka": "(dt.trung) <b>Tiểu Bộ kinh Jātaka 299 (JA299)</b>",
 "komārabrahmacariyā": "(dt.nữ) <b>lời thề giữ gìn sự trong sạch ngay từ thời thơ ấu (thanh tịnh phạm hạnh)</b> [komāra + brahmacariyā]",
-"komārabhacca 1": "(dt.nam) <b>y sĩ nhi khoa; (chú giải) được nuôi dưỡng bởi một hoàng tử</b>; (nghĩa đen) nuôi dưỡng người trẻ tuổi [komāra + bhacca]",
-"komārabhacca 2": "(dt.trung) <b>điều trị y tế cho trẻ em; nhi khoa</b>; (nghĩa đen) trạng thái nuôi dưỡng tuổi trẻ [kumāra + bhata + *ya]",
-"komārabhaccajīvakakathā": "(dt.nữ) <b>cuộc đàm luận với Jīvaka y sĩ nhi khoa</b>",
+"komārabhacca 1": "(dt.nam) <b>y sĩ cho trẻ em; (chú giải) được nuôi dưỡng bởi một hoàng tử</b>; (nghĩa đen) nuôi dưỡng người trẻ tuổi [komāra + bhacca]",
+"komārabhacca 2": "(dt.trung) <b>điều trị thuốc thang cho trẻ em; chữa trị cho trẻ nhỏ</b>; (nghĩa đen) trạng thái nuôi dưỡng tuổi trẻ [kumāra + bhata + *ya]",
+"komārabhaccajīvakakathā": "(dt.nữ) <b>cuộc đàm luận với Jīvaka y sĩ cho trẻ em</b>",
 "komārika 1": "(tính từ) <b>trẻ; thuộc về thời thơ ấu hoặc tuổi trẻ; thanh thiếu niên; liên quan đến trẻ em hoặc người trẻ tuổi; trinh khiết, trong sạch</b>",
 "komārika 2": "(dt.trung) <b>cái thuộc về thời thơ ấu; tính trẻ con</b>",
 "komārikā 1": "(dt.nữ) <b>cô gái trẻ</b>",
@@ -23022,7 +23141,7 @@ const dictionary = {
 "kosātakī": "(dt.nữ) <b>quả mướp hương; mướp khía; Luffa acutangula</b>",
 "kosātakībīja": "(dt.trung) <b>hạt của quả mướp hương</b> [kosātakī + bīja]",
 "kosārakkha": "(dt.nam) <b>thủ quỹ; người bảo vệ kho bạc</b> [kosa + ārakkha]",
-"kosi 1.1": "hợp từ. <b>bạn là ai?</b> [ko + asi]",
+"kosi 1.1": "(sandhi) <b>bạn là ai?</b> [ko + asi]",
 "kosi 2.1": "(dt.nữ) <b>(của một thanh kiếm) vỏ; bao kiếm</b> [√kus + *i]",
 "kosika": "(dt.nam) <b>con cú</b>",
 "kosikaṃsu": "(dt.nam) <b>sợi tơ lụa</b>",
@@ -23038,7 +23157,7 @@ const dictionary = {
 "kosiyavagga": "(dt.nam) <b>chương về lụa</b> [kosiya + vagga]",
 "kosiyasikkhāpada": "(dt.trung) <b>giới luật về lụa (y phục); Tát Xá (Nissaggiya) 11</b> [kosiya + sikkhāpada]",
 "kosiyaṃsu": "(dt.nam) <b>sợi tơ lụa; thớ lụa</b> [kosiya + aṃsu]",
-"kosu": "hợp từ. <b>chắc chắn ai?; chắc chắn cái gì?</b> [ko + su]",
+"kosu": "(sandhi) <b>chắc chắn ai?; chắc chắn cái gì?</b> [ko + su]",
 "kosu nāma": "(thành ngữ) <b>chắc chắn ai?; chắc chắn người nào?</b> [ko + su + nāma]",
 "koseyya 1": "(tính từ) <b>bằng lụa; làm bằng lụa</b>; (nghĩa đen) từ kén [√kus + *a + eyya]",
 "koseyya 2": "(dt.trung) <b>lụa</b>; (nghĩa đen) từ kén [√kus + *a + eyya]",
@@ -23059,29 +23178,29 @@ const dictionary = {
 "koḷīya": "(dt.nam) <b>tên của một thị tộc láng giềng với người Sakyan</b>",
 "koḷīyaputta": "(dt.nam) <b>thanh niên Koḷiyan</b> [koḷīya + putta]",
 "ky": "(đại từ) <b>ai?; cái gì?; nào?</b> [ka]",
-"kyassa": "hợp từ. <b>ai cho người ấy?; ai bởi người ấy?</b> [ke + assa]",
-"kyassu": "hợp từ. <b>có lẽ là ai?; nên là ai?</b> [ke + assu]",
+"kyassa": "(sandhi) <b>ai cho người ấy?; ai bởi người ấy?</b> [ke + assa]",
+"kyassu": "(sandhi) <b>có lẽ là ai?; nên là ai?</b> [ke + assu]",
 "kyāhaṃ karomi": "(thành ngữ) <b>tôi (có thể) làm gì?; điều đó liên quan gì đến tôi?</b>; (nghĩa đen) tôi làm gì? [kiṃ + ahaṃ + karomi]",
-"kyāhaṃ 1": "hợp từ. <b>tôi (có thể) làm gì?</b> [kiṃ + ahaṃ]",
-"kyāhaṃ 2": "hợp từ. <b>tại sao tôi lại?; (chú giải) vì lý do gì tôi lại?</b> [kiṃ + ahaṃ]",
+"kyāhaṃ 1": "(sandhi) <b>tôi (có thể) làm gì?</b> [kiṃ + ahaṃ]",
+"kyāhaṃ 2": "(sandhi) <b>tại sao tôi lại?; (chú giải) vì lý do gì tôi lại?</b> [kiṃ + ahaṃ]",
 "kriyavāda": "(dt.nam) <b>(người đề xướng) chủ thuyết hành động; chủ thuyết về hiệu quả của hành động</b> [kriyā + vāda]",
 "kriyā 1": "(dt.nữ) <b>hành động; hoạt động; việc làm; sự thực hiện; tiến trình</b> [√kar + iyā]",
 "kriyā 2": "(dt.nữ) <b>(tâm hay ý) hữu dụng; chức năng</b> [√kar]",
 "kriyā 3": "(dt.nữ) <b>(ngữ pháp) động từ</b> [√kar]",
-"krubbati": "động từ. <b>làm, chế tạo; hành động; thực hiện; hành động vì lợi ích hoặc gây hại cho người khác; (đặc biệt là phân từ tuyệt đối) đặt, để</b> [√kar]",
+"krubbati": "(động từ) <b>làm, chế tạo; hành động; thực hiện; hành động vì lợi ích hoặc gây hại cho người khác; (đặc biệt là phân từ tuyệt đối) đặt, để</b> [√kar]",
 "krubbanta": "(htpt) <b>đang làm; đang chế tạo</b> [√kar + o + nta]",
-"klissati 1": "động từ. <b>bị phiền não, bị đau khổ; cảm thấy đau đớn</b>",
-"klissati 2": "động từ. <b>bị hoặc trở nên dơ bẩn hoặc ô uế; bị ô uế về mặt đạo đức</b>",
+"klissati 1": "(động từ) <b>bị phiền não, bị đau khổ; cảm thấy đau đớn</b>",
+"klissati 2": "(động từ) <b>bị hoặc trở nên dơ bẩn hoặc ô uế; bị ô uế về mặt đạo đức</b>",
 "klesa": "(dt.nam) <b>phiền não; bất tịnh</b> [√kilis + *a]",
 "klesamala": "(dt.trung) <b>cấu uế của phiền não; vết nhơ của bất tịnh</b> [klesa + mala]",
 "kva": "(bất biến) <b>ở đâu?</b>",
 "kvacani": "(bất biến) <b>trong cái gì đó; ở bất kỳ nơi nào; về một điều gì đó</b> [kva + cani]",
 "kvaci 1": "(bất biến) <b>ở đâu đó; bất cứ đâu</b> [kva + ci]",
-"kvajja": "hợp từ. <b>hôm nay ở đâu?; tối nay ở đâu?</b> [kva + ajja]",
+"kvajja": "(sandhi) <b>hôm nay ở đâu?; tối nay ở đâu?</b> [kva + ajja]",
 "kvanu": "(bất biến) <b>ở đâu?</b> [kva + nu]",
 "kvannu": "(bất biến) <b>ở đâu?</b> [kva + nu]",
-"kvāssa": "hợp từ. <b>nó có thể ở đâu?; nó sẽ ở đâu?</b> [kva + assa]",
-"kvettha": "hợp từ. <b>bạn là ai?</b>; (nghĩa đen) ai ở đây [ko + ettha]",
+"kvāssa": "(sandhi) <b>nó có thể ở đâu?; nó sẽ ở đâu?</b> [kva + assa]",
+"kvettha": "(sandhi) <b>bạn là ai?</b>; (nghĩa đen) ai ở đây [ko + ettha]",
 "kha 1": "(bất biến) <b>mục thứ 2 trong danh sách số</b>; (nghĩa đen) chữ kh",
 "kha 2": "(dt.trung) <b>không gian, bầu trời</b>",
 "khaga": "(dt.nam) <b>chim</b>",
@@ -23100,15 +23219,15 @@ const dictionary = {
 "khaggavisāṇasuttaniddesa": "(dt.nam) <b>phân tích chi tiết Kinh Sừng tê ngưu được tìm thấy trong Cūḷaniddesa</b> [khaggavisāṇasutta + niddesa]",
 "khaggahattha": "(dt.nam) <b>lính canh có vũ trang; lính có vũ trang</b>; (nghĩa đen) gươm trong tay [khagga + hattha]",
 "khaggāhaka": "(dt.nam) <b>người mang gươm</b>",
-"khacati": "động từ. <b>khảm, trang trí bằng</b>",
+"khacati": "(động từ) <b>khảm, trang trí bằng</b>",
 "khaci": "(qkhứ) <b>đã khảm, đã trang trí bằng</b>",
 "khajja 1": "(dt.trung) <b>thức ăn cứng</b>; (nghĩa đen) để nhai [√khād + ya]",
 "khajja 2": "phân từ cần thiết. <b>để ăn hoặc nhai</b>; (nghĩa đen) để nhai [√khād]",
 "khajjakā": "(dt.trung) <b>bánh kẹo và bánh ngọt; (chú giải) tất cả thực phẩm không phải là thực phẩm ổn định</b>; (nghĩa đen) cái để nhai [√khād + ya + ka]",
 "khajjakantara": "(dt.trung) <b>các loại bánh kẹo khác nhau</b>",
 "khajjakabhājaka": "(dt.nam) <b>người phân phát thức ăn cứng, bánh, v.v.</b>",
-"khajjati 1": "động từ. <b>đang bị ăn (bởi); đang bị gặm (bởi)</b>; (nghĩa đen) đang bị nhai [√khād + ya + ti]",
-"khajjati 2": "động từ. <b>bị ngứa</b> [√khād]",
+"khajjati 1": "(động từ) <b>đang bị ăn (bởi); đang bị gặm (bởi)</b>; (nghĩa đen) đang bị nhai [√khād + ya + ti]",
+"khajjati 2": "(động từ) <b>bị ngứa</b> [√khād]",
 "khajjanī": "(tính từ) <b>đang được ăn; đang được nhai</b> [√khād + ya + ana + ī]",
 "khajjanīya": "phân từ cần thiết. <b>có thể ăn được; có thể nhai được</b>; (nghĩa đen) để nhai [√khād + ya + anīya]",
 "khajjanīyavagga": "(dt.nam) <b>Chương 8 của Khandasaṃyuttaṃ, Quyển 3 của Tương Ưng Bộ Kinh</b>",
@@ -23126,12 +23245,12 @@ const dictionary = {
 "khajjopanaka": "(dt.nam) <b>đom đóm</b>; (nghĩa đen) chiếu sáng bầu trời",
 "khajjopanakajātaka": "(dt.trung) <b>Tiểu Bộ kinh Jātaka 364 (JA364)</b>",
 "khañja": "(tính từ) <b>què; tập tễnh</b> [√khañj + a]",
-"khañjati": "động từ. <b>đi tập tễnh</b>",
+"khañjati": "(động từ) <b>đi tập tễnh</b>",
 "khañjana 1": "(dt.trung) <b>sự đi tập tễnh</b>",
 "khañjana 2": "(dt.nam) <b>chim chìa vôi</b>",
 "khañji": "(qkhứ) <b>đã đi tập tễnh</b>",
 "khaññakhantika": "(tính từ) <b>thuộc về một tín ngưỡng khác</b>",
-"khaññati": "động từ. <b>bị tổn thương; bị làm hại; bị phá hủy</b> [√khan + ya + ti]",
+"khaññati": "(động từ) <b>bị tổn thương; bị làm hại; bị phá hủy</b> [√khan + ya + ti]",
 "khaṭaka": "(dt.nam) <b>cú đấm; đòn đánh bằng nắm đấm</b>",
 "khaṭakhaṭasadda 1": "(tính từ) <b>gây ra tiếng lách cách hoặc kêu lách cách</b>",
 "khaṭakhaṭasadda 2": "(dt.trung) <b>tiếng lách cách hoặc kêu lách cách</b>",
@@ -23139,13 +23258,13 @@ const dictionary = {
 "khaṇa": "(dt.nam) <b>sát-na (khoảnh khắc); chốc lát; thời điểm; cơ hội</b>",
 "khaṇakicca": "(tính từ) <b>hành động khi cơ hội đến; việc cần làm ngay lập tức</b> [khaṇa + kicca]",
 "khaṇaññū": "(tính từ) <b>biết thời điểm thích hợp, nhận ra cơ hội</b>",
-"khaṇati": "động từ. <b>đào; đào lên; nhổ tận gốc</b> [√khaṇ + a + ti]",
+"khaṇati": "(động từ) <b>đào; đào lên; nhổ tận gốc</b> [√khaṇ + a + ti]",
 "khaṇana": "(dt.trung) <b>sự đào</b> [√khaṇ + ana]",
 "khaṇanta 1": "(htpt) <b>đang đào</b> [√khaṇ + a + nta]",
 "khaṇanta 2": "(htpt) <b>đang đào lên; đang nhổ tận gốc</b> [√khaṇ]",
 "khaṇasutta": "(dt.trung) <b>Tương Ưng Bộ Kinh 35.135 (SN35.135)</b>",
 "khaṇātīta": "(dt.nam) <b>người đã bỏ lỡ cơ hội; người đã mất cơ hội</b>; (nghĩa đen) khoảnh khắc đã qua [khaṇa + atīta]",
-"khaṇāpeti": "động từ. <b>khiến cho đào; làm cho đào</b> [√khaṇ + *āpe + ti]",
+"khaṇāpeti": "(động từ) <b>khiến cho đào; làm cho đào</b> [√khaṇ + *āpe + ti]",
 "khaṇi": "(qkhứ) <b>đã đào, đã nhổ tận gốc</b> [√khaṇ]",
 "khaṇika": "(tính từ) <b>sát-na (khoảnh khắc); tạm thời; chóng qua; thay đổi</b>; (nghĩa đen) trong một khoảnh khắc [khaṇa]",
 "khaṇita": "(qkpt) <b>đã đào; đã khai quật</b> [√khaṇ]",
@@ -23232,7 +23351,7 @@ const dictionary = {
 "khadiravaniyattheragāthā": "(dt.nữ) <b>Trưởng Lão Tăng Kệ 42, chương 1.42, kệ 42 (TH42)</b>",
 "khadiravaniyarevata": "(dt.nam) <b>tên của một vị tỳ kheo A La Hán</b>",
 "khadiravaniyarevatattheragāthā": "(dt.nữ) <b>Trưởng Lão Tăng Kệ 244, chương 14.1, kệ 645-658 (TH244)</b>",
-"khanati": "động từ. <b>tổn thương; làm hại; làm bị thương</b> [√khan + a + ti]",
+"khanati": "(động từ) <b>tổn thương; làm hại; làm bị thương</b> [√khan + a + ti]",
 "khananta 1": "(htpt) <b>đang đào; đang đào lên</b> [√khaṇ + a + nta]",
 "khananta 2": "(htpt) <b>đang nhổ tận gốc</b> [√khaṇ]",
 "khanittī": "(dt.nữ) <b>dụng cụ để đào; xẻng; bay</b>",
@@ -23295,33 +23414,33 @@ const dictionary = {
 "khandhimant": "(tính từ) <b>có thân lớn</b> [√khandh + a + imant]",
 "khama 1": "(tính từ) <b>nhẫn nại (với); chịu đựng (với); bền bỉ (với); khoan dung (với)</b> [√kham + a]",
 "khama 2": "(tính từ) <b>phù hợp (cho); có khả năng (của); thích hợp (cho);</b> [√kham + a]",
-"khamati 1": "động từ. <b>chịu đựng; khoan dung; gánh chịu; chống lại</b> [√kham + a + ti]",
-"khamati 2": "động từ. <b>có vẻ tốt (đối với); được chấp nhận (đối với); thích hợp (cho); làm hài lòng (đối với)</b>; (nghĩa đen) chịu đựng [√kham + a + ti]",
-"khamati 3": "động từ. <b>tha thứ; chấp nhận lời xin lỗi (của); tha thứ</b>; (nghĩa đen) chịu đựng [√kham + a + ti]",
+"khamati 1": "(động từ) <b>chịu đựng; khoan dung; gánh chịu; chống lại</b> [√kham + a + ti]",
+"khamati 2": "(động từ) <b>có vẻ tốt (đối với); được chấp nhận (đối với); thích hợp (cho); làm hài lòng (đối với)</b>; (nghĩa đen) chịu đựng [√kham + a + ti]",
+"khamati 3": "(động từ) <b>tha thứ; chấp nhận lời xin lỗi (của); tha thứ</b>; (nghĩa đen) chịu đựng [√kham + a + ti]",
 "khamanīya": "phân từ cần thiết. <b>có thể chịu đựng được (bởi); có thể khoan dung được (bởi)</b>; (nghĩa đen) để chịu đựng [√kham + anīya]",
 "khamanta": "(htpt) <b>đang nhẫn nại, đang chịu đựng, đang khoan dung, đang tha thứ</b> [√kham]",
 "khamamāna": "(htpt) <b>đang nhẫn nại, đang chịu đựng, đang khoan dung, đang tha thứ</b> [√kham]",
 "khamā": "(dt.nữ) <b>khoan dung, nhẫn nại, chịu đựng</b> [√kham]",
 "khamāpana": "(dt.trung) <b>sự xin lỗi; sự xin tha thứ</b> [√kham]",
-"khamāpayati": "động từ. <b>xin lỗi (cho); xin tha thứ</b> [√kham]",
+"khamāpayati": "(động từ) <b>xin lỗi (cho); xin tha thứ</b> [√kham]",
 "khamāpayi": "(qkhứ) <b>đã xin lỗi; đã xin tha thứ</b> [√kham + *āpaya + i]",
 "khamāpita": "(qkpt) <b>đã xin lỗi; đã xin tha thứ</b> [√kham]",
 "khamāpiyamāna": "(htpt) <b>đang được xin tha thứ</b> [√kham + *āpe + iya + māna]",
 "khamāpetabba": "phân từ cần thiết. <b>nên xin lỗi; nên xin tha thứ</b>; (nghĩa đen) để khiến cho được khoan dung [√kham + *āpe + tabba]",
-"khamāpeti": "động từ. <b>xin lỗi; xin tha thứ</b> [√kham + *āpe + ti]",
+"khamāpeti": "(động từ) <b>xin lỗi; xin tha thứ</b> [√kham + *āpe + ti]",
 "khamāpetuṃ": "(nguyên thể) <b>để xin lỗi; để xin tha thứ</b>",
 "khamāpetvā 1": "(thể h.thành) <b>sau khi xin lỗi; sau khi xin tha thứ</b> [√kham + *āpe + tvā]",
 "khamāpetvā 2": "(thể h.thành) <b>sau khi chấp nhận; sau khi tán thành</b> [√kham + *āpe + tvā]",
 "khamāpenta": "(htpt) <b>đang xin lỗi; đang xin tha thứ</b> [√kham]",
 "khamāpesi": "(qkhứ) <b>đã xin lỗi; đã xin tha thứ</b> [√kham]",
-"khamāmahaṃ": "hợp từ. <b>tôi tha thứ; tôi chấp nhận lời xin lỗi (của); tôi tha thứ</b> [khamāmi + ahaṃ]",
+"khamāmahaṃ": "(sandhi) <b>tôi tha thứ; tôi chấp nhận lời xin lỗi (của); tôi tha thứ</b> [khamāmi + ahaṃ]",
 "khami": "(qkhứ) <b>đã nhẫn nại, đã chịu đựng, đã khoan dung, đã tha thứ</b> [√kham]",
 "khamitabba 1": "phân từ cần thiết. <b>nên được chịu đựng; nên được khoan dung; nên được nhẫn nại chịu đựng (bởi)</b>; (nghĩa đen) để chịu đựng [√kham + itabba]",
 "khamitabba 2": "phân từ cần thiết. <b>nên được xin lỗi</b>; (nghĩa đen) để chịu đựng [√kham]",
 "khamituṃ": "(nguyên thể) <b>để tha thứ; để chấp nhận lời xin lỗi; để tha thứ</b> [√kham + ituṃ]",
 "khamitvā 1": "(thể h.thành) <b>sau khi chấp nhận; sau khi thích</b> [√kham]",
 "khamitvā 2": "(thể h.thành) <b>sau khi tha thứ hoặc chịu đựng</b> [√kham]",
-"khameti": "động từ. <b>tha thứ; chấp nhận lời xin lỗi; tha thứ</b>; (nghĩa đen) khiến cho chịu đựng [√kham + *e + ti]",
+"khameti": "(động từ) <b>tha thứ; chấp nhận lời xin lỗi; tha thứ</b>; (nghĩa đen) khiến cho chịu đựng [√kham + *e + ti]",
 "khambha 1": "(dt.nam) <b>cột chống; sự hỗ trợ</b> [√khambh + a]",
 "khambha 2": "(dt.nam) <b>sự tê liệt; sự cứng đơ; sự đông cứng</b> [√khambh + a]",
 "khambhakata": "(tính từ) <b>(của cánh tay) chống nạnh; đặt ở hai bên</b>; (nghĩa đen) làm thành cột chống [khambha + kata]",
@@ -23679,7 +23798,7 @@ const dictionary = {
   "kheṭaka": "(dt.trung) <b>cái khiên</b>",
   "khetta 1": "(dt.trung) <b>cánh đồng; thửa đất</b> [√khi + *tta]",
   "khetta 2": "(dt.trung) <b>nơi chốn; vị trí; khu đất</b>; (nghĩa đen) cánh đồng [√khi + *tta]",
-  "khetta 3": "(dt.trung) <b>phạm vi nghiệp báo (kamma); cõi giới (plane of existence)</b> [√khi + *tta]",
+  "khetta 3": "(dt.trung) <b>phạm vi nghiệp báo (kamma); cõi giới</b> [√khi + *tta]",
   "khetta 4": "(dt.trung) <b>phạm vi; lĩnh vực; giới hạn</b>; (nghĩa đen) cánh đồng [√khi + *tta]",
   "khettakamma": "(dt.trung) <b>công việc đồng áng</b>",
   "khettakammantasāmantasabyohārā": "(dt.nam) <b>nông dân lân cận</b> [khetta + kammanta + sāmanta + sabyohāra + ā]",
@@ -24159,7 +24278,7 @@ const dictionary = {
 "gandhūpahāra": "(dt.nam) <b>việc cung cấp hương; việc sắp xếp thứ gì để ngửi</b>; (nghĩa đen) mang một mùi đến gần [gandha + upahāra]",
 "gandhūhana": "(dt.trung) <b>sự xem xét một chất thơm</b>",
 "gabbita": "(tính từ) <b>kiêu căng, ngã mạn</b> [√gabbh]",
-"gabbha 1": "(dt.nam) <b>bào thai (buồng thai)</b>",
+"gabbha 1": "(dt.nam) <b>bào thai</b>",
 "gabbha 2": "(dt.nam) <b>thai nhi</b>",
 "gabbha 3": "(dt.nam) <b>phòng; phòng bên trong; nội thất</b>; (nghĩa đen) bào thai",
 "gabbha 4": "(dt.nam) <b>con cái; thế hệ; sự nảy mầm</b>; (nghĩa đen) bào thai",
@@ -27777,6 +27896,7 @@ const dictionary = {
 "jātarūparajatasutta": "(dt.trung) <b>Tương Ưng Bộ Kinh 56.83 (SN56.83)</b>",
 "jātavaddha": "(tính từ) <b>sinh ra và lớn lên (ở); sinh ra và trưởng thành (ở)</b> [jāta + vaddha]",
 "jātavedas": "(dt.nam) <b>lửa</b>; (nghĩa đen) từ đó kiến thức được sinh ra; (hoặc) cái mang lại kiến thức cho người phàm [jāta + vedas]",
+"jātaveda": "(dt.nam) <b>lửa</b>; (nghĩa đen) từ đó kiến thức được sinh ra; (hoặc) cái mang lại kiến thức cho người phàm [jāta + veda]",
 "jātasaṃvaddha": "(tính từ) <b>sinh ra và lớn lên (ở)</b> [jāta + saṃvaddha]",
 "jātasaṃvega": "(tính từ) <b>cảm giác cấp bách đã khởi lên (đối với)</b>",
 "jātassara": "(dt.nam) <b>hồ tự nhiên; ao hồ tự nhiên</b> [jāta + sara]",
@@ -28560,7 +28680,7 @@ const dictionary = {
 "ṭhāti": "(htại) <b>đứng; ở lại</b> [√ṭhā + a + ti]",
 "ṭhātukāmosi": "(sandhi) <b>bạn muốn đứng</b>",
 "ṭhātuṃ": "(thể mục đích) <b>để đứng; để ở lại; để ở lại</b> [√ṭhā + tuṃ]",
-"ṭhāna 01": "(dt.trung) <b>nơi (vật lý)</b>; theo nghĩa đen, sự đứng [√ṭhā + ana]",
+"ṭhāna 01": "(dt.trung) <b>nơi, chốn, chỗ đứng</b>; theo nghĩa đen, sự đứng [√ṭhā + ana]",
 "ṭhāna 02": "(dt.trung) <b>lý do; cơ sở; căn cứ; nguyên nhân</b>; theo nghĩa đen, sự đứng [√ṭhā + ana]",
 "ṭhāna 03": "(dt.trung) <b>nhóm; bộ phận</b>; theo nghĩa đen, sự đứng [√ṭhā + ana]",
 "ṭhāna 04": "(dt.trung) <b>trạng thái; điều kiện</b>; theo nghĩa đen, sự đứng [√ṭhā + ana]",
@@ -30993,22 +31113,22 @@ const dictionary = {
 "theyyasaṃvāsaka": "(tính từ) <b>người sống lén lút trong cộng đồng tu sĩ; người sống bằng cách giả danh</b>; (nghĩa đen) sống trộm cắp [theyya + saṃvāsaka]",
 "theyyasaṃvāsakavatthu": "(dt.trung) <b>trường hợp sống lén lút giữa các Tỳ-kheo</b>; (nghĩa đen) trường hợp sống trộm cắp [theyyasaṃvāsaka + vatthu]",
 "theyyasaṃvāsakupajjhāya": "(dt.nam) <b>vị bổn sư đang sống bằng cách giả danh</b> [theyyasaṃvāsaka + upajjhāya]",
-"thera 1.1": "(tính từ) <b>già; lớn tuổi; thượng cấp</b>; (nghĩa đen) lâu dài [√ṭhā + ira]",
-"thera 1.2": "(dt.nam) <b>Trưởng lão; Tỳ-kheo thượng cấp; Tỳ-kheo có mười năm tuổi hạ hoặc hơn</b>; (nghĩa đen) lâu dài [√ṭhā + ira]",
+"thera 1.1": "(tính từ) <b>già; lớn tuổi; trưởng lão</b>; (nghĩa đen) lâu dài [√ṭhā + ira]",
+"thera 1.2": "(dt.nam) <b>Trưởng lão; Tỳ-kheo thượng toạ; Tỳ-kheo có mười năm tuổi hạ hoặc hơn</b>; (nghĩa đen) lâu dài [√ṭhā + ira]",
 "thera 1.3": "(tính từ) <b>vững chắc; rắn chắc; ổn định</b>; (nghĩa đen) lâu dài [√ṭhā + ira]",
 "thera 2.1": "(viết tắt) <b>viết tắt của Therāpadāna</b>",
-"theraapadāna": "(dt.trung) <b>chuyện của vị Trưởng lão; truyền thuyết của vị Tỳ-kheo thượng cấp</b>",
+"theraapadāna": "(dt.trung) <b>chuyện của vị Trưởng lão; truyền thuyết của vị Tỳ-kheo trưởng lão</b>",
 "theraka": "(tính từ) <b>dày</b>",
-"therakaraṇa": "(tính từ) <b>mà các Trưởng lão làm; do các thượng cấp làm</b> [thera + karaṇa]",
+"therakaraṇa": "(tính từ) <b>mà các Trưởng lão làm; do các trưởng lão làm</b> [thera + karaṇa]",
 "theragā": "(viết tắt) <b>viết tắt của Theragāthā</b>",
 "theragāthā": "(dt.nữ) <b>quyển 8 của Tiểu Bộ Nikāya</b>; (nghĩa đen) kệ tụng của các vị Trưởng lão Tỳ-kheo [thera + gāthā]",
 "theragāthāpāḷi": "(dt.nữ) <b>quyển 8 của Tiểu Bộ Nikāya</b>; (nghĩa đen) bản kinh điển kệ tụng của các vị Trưởng lão Tỳ-kheo [theragāthā + pāḷi]",
-"theraññatara": "(tính từ) <b>một vị Tỳ-kheo thượng cấp nào đó</b> [thera + aññatara]",
-"theratara": "(tính từ) <b>thượng cấp hơn; lớn tuổi hơn</b> [√ṭhā + ira + tara]",
+"theraññatara": "(tính từ) <b>một vị Tỳ-kheo trưởng lão nào đó</b> [thera + aññatara]",
+"theratara": "(tính từ) <b>trưởng lão hơn; lớn tuổi hơn</b> [√ṭhā + ira + tara]",
 "theradhika": "(tính từ) <b>có một Trưởng lão phụ trách</b>",
-"theranavamajjhimā": "(dt.nam) <b>các Tỳ-kheo thượng cấp, hạ cấp và trung cấp</b> [thera + nava + majjhima + ā]",
-"theranāma": "(tính từ) <b>được gọi là 'Thượng cấp'</b> [thera + nāma]",
-"theranāmaka": "(tính từ) <b>được gọi là 'Thượng cấp'</b> [thera + nāmaka]",
+"theranavamajjhimā": "(dt.nam) <b>các Tỳ-kheo thượng toạ, trung toạ, và tân học</b> [thera + nava + majjhima + ā]",
+"theranāma": "(tính từ) <b>được gọi là 'trưởng lão'</b> [thera + nāma]",
+"theranāmaka": "(tính từ) <b>được gọi là 'trưởng lão'</b> [thera + nāmaka]",
 "theranāmakasutta": "(dt.trung) <b>kinh Tương Ưng Bộ 21.10 (SN21.10)</b>",
 "therapāḷi": "(dt.nữ) <b>danh sách tinh túy, danh sách, của các Trưởng lão</b>",
 "theravagga 1": "(dt.nam) <b>Chương 9 của Khandasaṃyuttaṃ, Quyển 3 của Tương Ưng Bộ Nikāya</b>",
@@ -31019,11 +31139,11 @@ const dictionary = {
 "theravāda 2": "(dt.nam) <b>Giáo lý của các Trưởng lão, Phật giáo Nam truyền (Theravāda)</b> []",
 "therasutta 1": "(dt.trung) <b>kinh Tăng Chi Bộ 5.88 (AN5.88)</b>",
 "therasutta 2": "(dt.trung) <b>kinh Tăng Chi Bộ 10.98 (AN10.98)</b>",
-"therassāpadāna": "(dt.trung) <b>chuyện của vị Trưởng lão; truyền thuyết của vị Tỳ-kheo thượng cấp</b>",
-"therānukampita": "(tính từ) <b>được các Tỳ-kheo thượng cấp chăm sóc; được các Trưởng lão đối xử với lòng từ bi</b> [thera + anukampita]",
+"therassāpadāna": "(dt.trung) <b>chuyện của vị Trưởng lão; truyền thuyết của vị Tỳ-kheo trưởng lão</b>",
+"therānukampita": "(tính từ) <b>được các Tỳ-kheo trưởng lão chăm sóc; được các Trưởng lão đối xử với lòng từ bi</b> [thera + anukampita]",
 "therānutherā": "(dt.nam) <b>các vị Trưởng lão và những vị kế cận về cấp bậc</b>",
-"therika": "(tính từ) <b>thuộc về các Trưởng lão; thuộc về các thượng cấp</b>",
-"therikā": "(dt.nữ) <b>nữ Trưởng lão; nữ tu thượng cấp; ni cô lớn tuổi</b>; (nghĩa đen) lâu dài [√ṭhā + ira + ikā]",
+"therika": "(tính từ) <b>thuộc về các Trưởng lão; thuộc về các trưởng lão</b>",
+"therikā": "(dt.nữ) <b>nữ Trưởng lão; trưởng lão ni; ni cô lớn tuổi</b>; (nghĩa đen) lâu dài [√ṭhā + ira + ikā]",
 "therigāthā": "(dt.nữ) <b>quyển 9 của Tiểu Bộ Nikāya</b>; (nghĩa đen) kệ tụng của các vị Trưởng lão Ni [therī + gāthā]",
 "theriya": "(tính từ) <b>thuộc về các Trưởng lão</b>",
 "therī": "(dt.nữ) <b>nữ Trưởng lão; nữ tu có mười năm tuổi hạ</b>; (nghĩa đen) phụ nữ lớn tuổi [√ṭhā + ira + ī]",
@@ -31979,8 +32099,8 @@ const dictionary = {
 "dippati": "(htại) <b>tỏa sáng; nổi bật</b> [√dīp + ya + ti]",
 "dippana": "(dt.trung) <b>sự chiếu sáng</b> [√dīp]",
 "dippi": "(qkhứ) <b>đã chiếu sáng</b> [√dīp]",
-"dibba": "(tính từ) <b>thiêng liêng; thiên đàng; cõi trời</b> [√div + ya]",
-"dibbakāma": "(dt.nam) <b>khoái lạc thiên đàng; khoái lạc nhục dục của cõi trời; khoái lạc của các vị chư thiên</b> [dibba + kāma]",
+"dibba": "(tính từ) <b>thần linh; cõi chư thiên; cõi trời</b> [√div + ya]",
+"dibbakāma": "(dt.nam) <b>khoái lạc cõi chư thiên; khoái lạc nhục dục của cõi trời; khoái lạc của các vị chư thiên</b> [dibba + kāma]",
 "dibbacakkhānubhāva": "(dt.nam) <b>sức mạnh của thiên nhãn</b> [dibbacakkhu + ānubhāva]",
 "dibbacakkhu": "(dt.trung) <b>thần nhãn thông; tuệ nhãn siêu phàm</b>; (nghĩa đen) mắt của chư thiên [dibba + cakkhu]",
 "dibbacakkhuka": "(tính từ) <b>có thần nhãn thông; sở hữu tuệ nhãn siêu phàm</b>; (nghĩa đen) với mắt của chư thiên [dibba + cakkhu + ka]",
@@ -32001,7 +32121,7 @@ const dictionary = {
 "dibbi 1": "(qkhứ) <b>đã chơi súc sắc; đã cờ bạc</b> [√div + ya + i]",
 "dibbi 2": "(qkhứ) <b>đã chơi đùa, đã giải trí</b> [√div]",
 "dibbenādhipateyyena": "(sandhi) <b>bằng quyền lực của chư thiên; với sức mạnh của cõi trời; bằng sự ảnh hưởng của cõi trời</b> [dibbena + ādhipateyyena]",
-"dibya": "(tính từ) <b>thiêng liêng; thiên đàng; cõi trời</b> [√div + ya]",
+"dibya": "(tính từ) <b>thiêng liêng; cõi chư thiên; cõi trời</b> [√div + ya]",
 "diyaḍḍha": "(tính từ) <b>một và một nửa</b>; (nghĩa đen) hai nửa [dvi + aḍḍha]",
 "diyaḍḍhasata": "(số đếm) <b>một trăm năm mươi</b>; (nghĩa đen) một trăm rưỡi [diyaḍḍha + sata]",
 "diyaḍḍhasikkhāpadasata": "(dt.trung) <b>một trăm năm mươi giới luật</b> [diyaḍḍha + sikkhāpada + sata]",
@@ -32045,9 +32165,9 @@ const dictionary = {
 "divāsaññā": "(dt.nữ) <b>sự nhận thức về ánh sáng ban ngày; khái niệm về ngày</b> [divā + saññā]",
 "divāseyyaṃ upagata": "(thành ngữ) <b>đi ngủ trưa; có một giấc ngủ ngắn</b>",
 "divāseyyā": "(dt.nữ) <b>giấc ngủ trưa; sự nghỉ ngơi giữa trưa; giấc ngủ ngắn</b> [divā + seyyā]",
-"divi": "(tính từ) <b>thiêng liêng; cõi trời; thiên đàng</b> [√div + i]",
-"diviya": "(tính từ) <b>thiêng liêng; cõi trời; thiên đàng</b> [√div]",
-"divya": "(tính từ) <b>thiêng liêng; cõi trời; thiên đàng</b> [√div]",
+"divi": "(tính từ) <b>thiêng liêng; cõi trời; cõi chư thiên</b> [√div + i]",
+"diviya": "(tính từ) <b>thiêng liêng; cõi trời; cõi chư thiên</b> [√div]",
+"divya": "(tính từ) <b>thiêng liêng; cõi trời; cõi chư thiên</b> [√div]",
 "disa 1.1": "(dt.nam) <b>kẻ thù; đối thủ; địch thủ; đối thủ</b> [√dis + a]",
 "disa 2.1": "(tính từ) <b>như; giống; như là; ám chỉ đến</b> [√dis + a]",
 "disaka": "(dt.trung) <b>hướng; điểm chính</b>; (nghĩa đen) trạng thái của hướng [√dis + ā + ka]",
@@ -33944,7 +34064,7 @@ const dictionary = {
 "dhamma 1.01": "(dt.nam) <b>bản chất; đặc tính</b> [√dhar + ma]",
 "dhamma 1.02": "(dt.nam) <b>phẩm chất; đặc trưng; đặc điểm; phẩm chất nội tại</b> [√dhar + ma]",
 "dhamma 1.03": "(dt.nam) <b>giáo pháp; bài giảng; luận thuyết</b> [√dhar + ma]",
-"dhamma 1.04": "(dt.nam) <b>pháp (các hiện tượng tâm linh); ý nghĩ</b> [√dhar + ma]",
+"dhamma 1.04": "(dt.nam) <b>pháp (các hiện tượng tinh thần); ý nghĩ</b> [√dhar + ma]",
 "dhamma 1.05": "(dt.nam) <b>các trạng thái tâm</b> [√dhar + ma]",
 "dhamma 1.06": "(dt.nam) <b>vật chất; sự vật; hiện tượng</b> [√dhar + ma]",
 "dhamma 1.07": "(dt.nam) <b>chân lý; thực tại; nguyên lý; chân lý đằng sau giáo pháp</b> [√dhar + ma]",
@@ -34158,8 +34278,8 @@ const dictionary = {
 "dhammarāga 1": "(dt.nam) <b>sự ham muốn giáo pháp; tình yêu với Pháp</b> [dhamma + rāga]",
 "dhammarāga 2": "(tính từ) <b>tham ái đối với các hiện tượng tâm; khao khát các tư tưởng</b> [dhamma + rāga]",
 "dhammarāgappaṭisaṃvedī": "(tính từ) <b>trải nghiệm tham ái đối với các hiện tượng tâm; kinh nghiệm khao khát các tư tưởng</b> [dhamma + rāga + paṭisaṃvedī]",
-"dhammarāja 1": "(dt.nam) <b>vua công chính; nhà cai trị hợp lẽ phải; nhà độc tài nhân từ</b> [dhamma + rāja]",
-"dhammarāja 2": "(dt.nam) <b>Vua Pháp; tôn hiệu của Đức Phật</b> [dhamma + rāja]",
+"dhammarāja 1": "(dt.nam) <b>đấng anh quân; nhà trị vì đúng pháp; vị minh vương nhân từ</b> [dhamma + rāja]",
+"dhammarāja 2": "(dt.nam) <b>Pháp Vương; tôn hiệu của Đức Phật</b> [dhamma + rāja]",
 "dhammarājāsutta": "(dt.trung) <b>Tăng Chi Bộ 5.133 (AN5.133)</b>",
 "dhammaladdha": "(tính từ) <b>được nhận hợp lẽ; đạt được chính đáng; có được hợp pháp; thu được chính đáng</b> [dhamma + laddha]",
 "dhammalābha": "(dt.nam) <b>sự đạt được các hiện tượng tâm; sự thu nhận các tư tưởng</b> [dhamma + lābha]",
@@ -34485,7 +34605,7 @@ const dictionary = {
 "dhīra 2.1": "(tính từ) <b>khôn ngoan; thông minh; trí tuệ</b> [√dhī + ra]",
 "dhīra 2.2": "(dt.nam) <b>người khôn ngoan; hiền triết; người thông minh</b> [√dhī + ra]",
 "dhīrasammata": "(tính từ) <b>được coi là khôn ngoan; được xem là thông minh</b> [dhīra + sammata]",
-"dhīrā": "(dt.nữ) <b>tên của một ni sư A-la-hán</b>; (nghĩa đen) người phụ nữ khôn ngoan [√dhī + ra + ā]",
+"dhīrā": "(dt.nữ) <b>tên của một Tỷ-kheo ni A-la-hán</b>; (nghĩa đen) người phụ nữ khôn ngoan [√dhī + ra + ā]",
 "dhīrātherīgāthā": "(dt.nữ) <b>Trưởng Lão Ni Kệ 6, chương 1.6, kệ 6 (THI6)</b>",
 "dhīrūpasevanā": "(dt.nữ) <b>sự giao thiệp với người hiền trí</b>",
 "dhīvara": "(dt.nam) <b>ngư dân; người đánh cá</b>",
@@ -34930,8 +35050,8 @@ const dictionary = {
 "nandasutta 2": "(dt.trung) <b>Tương Ưng Nikaya 21.8 (SN21.8)</b>",
 "nandasutta 3": "(dt.trung) <b>Tăng Chi Nikaya 8.9 (AN8.9)</b>",
 "nandasutta 4": "(dt.trung) <b>Udāna 22 (UD22)</b>",
-"nandā 1": "(dt.nữ) <b>tên của một ni sư A-la-hán</b>; (nghĩa đen) hạnh phúc [√nand + a + ā]",
-"nandā 2": "(dt.nữ) <b>tên của một ni sư A-la-hán</b>; (nghĩa đen) hạnh phúc [√nand + a + ā]",
+"nandā 1": "(dt.nữ) <b>tên của một Tỷ-kheo ni A-la-hán</b>; (nghĩa đen) hạnh phúc [√nand + a + ā]",
+"nandā 2": "(dt.nữ) <b>tên của một Tỷ-kheo ni A-la-hán</b>; (nghĩa đen) hạnh phúc [√nand + a + ā]",
 "nandāpetivatthu": "(dt.trung) <b>Chuyện Ngạ Quỷ 16 (PV16)</b>",
 "nandi 1": "(dt.nữ) <b>niềm vui; sự tận hưởng; sự thích thú; sự hoan hỉ</b> [√nand + i]",
 "nandi 2": "(qkhứ) <b>đã vui mừng; đã tìm thấy niềm vui (trong); đã thích; đã tận hưởng</b> [√nand + i]",
@@ -34972,7 +35092,7 @@ const dictionary = {
 "nandīsamudaya": "(dt.nam) <b>sự khởi lên của sự tận hưởng; sự xuất hiện của niềm vui</b> [nandī + samudaya]",
 "nandīsambandhana": "(tính từ) <b>có sự hoan hỉ là một sự trói buộc; có sự tận hưởng là kiết sử</b> [nandī + sambandhana]",
 "nandīsaṃyojana": "(tính từ) <b>có sự hoan hỉ là một sự trói buộc; có sự tận hưởng là kiết sử</b>; (nghĩa đen) kiết sử hoan hỉ [nandī + saṃyojana]",
-"nanduttarā": "(dt.nữ) <b>tên của một ni sư A-la-hán</b>; (nghĩa đen) phía bắc hạnh phúc [nanda + uttarā]",
+"nanduttarā": "(dt.nữ) <b>tên của một Tỷ-kheo ni A-la-hán</b>; (nghĩa đen) phía bắc hạnh phúc [nanda + uttarā]",
 "nanduttarātherīgāthā": "(dt.nữ) <b>Trưởng Lão Ni Kệ 42, chương 5.5, câu 87-91 (THI42)</b>",
 "nandūpasecana": "(tính từ) <b>được rưới bằng sự hoan hỉ; được nuôi dưỡng bằng sự tận hưởng</b> [nandi + upasecana]",
 "nandhati": "(htại) <b>quấn, xoắn với, buộc</b> [√nadh]",
@@ -35199,6 +35319,9 @@ const dictionary = {
 "navayime": "(sandhi) <b>chín cái này</b> [nava + ime]",
 "navaratta": "(tính từ) <b>mới được nhuộm</b>",
 "navalokuttaradhammasannissita": "(tính từ) <b>liên quan đến chín pháp siêu thế (bốn đạo, bốn quả và Niết Bàn)</b> [nava + lokuttaradhamma + sannissita]",
+"navalokuttaradhamma": "(tính từ) <b>chín pháp siêu thế (bốn đạo, bốn quả và Niết Bàn)</b> [nava + lokuttaradhamma]",
+"lokuttaradhamma": "(tính từ) <b>pháp siêu thế</b>",
+
 "navavāda 1": "(dt.nam) <b>từ 'mới'</b> [nava + vāda]",
 "navavāda 2": "(dt.nam) <b>từ 'tỳ kheo mới'</b> [nava + vāda]",
 "navavidha": "(tính từ) <b>chín phần; chín loại</b> [nava + vidha]",
@@ -37352,7 +37475,7 @@ const dictionary = {
 "nisāmenta": "(htpt) <b>đang lắng nghe, đang quan sát, đang chú ý</b>",
 "nisāmesi": "(qkhứ) <b>đã lắng nghe, đã quan sát, đã chú ý</b>",
 "nisinna 1": "(qkpt) <b>đã ngồi (trong)</b> [ni + √sad + a + na]",
-"nisinna 2": "(dt.trung) <b>sự ngồi</b>; (nghĩa đen) đã ngồi [ni + √sad + a + na]",
+"nisinna 2": "(dt.trung) <b>sự ngồi; chỗ ngồi</b>; (nghĩa đen) đã ngồi [ni + √sad + a + na]",
 "nisinnaka": "(tính từ) <b>đang ngồi; đã ngồi</b> [ni + √sad + a + na + ka]",
 "nisinnapubba": "(tính từ) <b>đã ngồi trước; đã tham dự trước đây</b> [nisinna + pubba]",
 "nisinnokāsa": "(dt.nam) <b>chỗ ngồi (của)</b> [nisinna + okāsa]",
@@ -37794,6 +37917,7 @@ const dictionary = {
 "nerayika 2": "(tính từ) <b>sinh ra ở địa ngục; sống ở địa ngục; liên quan đến địa ngục</b> [nir + √i + *a + *ika]",
 "nerayika 3": "(dt.nam) <b>có số mệnh vào địa ngục; sẽ tái sinh vào địa ngục</b> [nir + √i + *a + *ika]",
 "nerujātaka": "(dt.trung) <b>Jātaka 379 (JA379)</b>",
+"bhīsana": "(dt.trung) <b>đáng sợ; ghê sợ</b>",
 "nereti": "(htại) <b>không kích động; không khơi dậy</b>; (nghĩa đen) không gây ra sự chuyển động [na + √īr + *e + ti]",
 "nela": "(tính từ) <b>lịch sự; hiền lành; vô hại</b>; (nghĩa đen) không có lỗi [na + ela]",
 "nelaṅga": "(tính từ) <b>có những phần không có lỗi</b> [na + ela + aṅga]",
@@ -38514,6 +38638,8 @@ const dictionary = {
   "paccekapallaṅka": "(dt.nam) <b>chiếc ghế dài riêng</b> [pacceka + pallaṅka]",
   "paccekapuṭṭha": "(tính từ) <b>được hỏi riêng; được hỏi một mình</b> [paccekaṃ + puṭṭha]",
   "paccekabuddha": "(dt.nam) <b>Bậc Bích Chi Phật</b> [pacceka + buddha]",
+  "paccekānaṃ": "(dt.nam) <b>của chư Phật Độc Giác.</b>",
+
   "paccekabuddhasata": "(dt.trung) <b>một trăm vị Bích Chi Phật</b> [paccekabuddha + sata]",
   "paccekabodhi": "(dt.nữ) <b>sự giác ngộ cá nhân; sự giác ngộ riêng lẻ</b> [pacceka + bodhi]",
   "paccekabrahma": "(dt.nam) <b>vị phạm thiên riêng; vị Phạm thiên độc lập</b> [pacceka + brahma]",
@@ -39441,15 +39567,15 @@ const dictionary = {
 "paṭipattivagga": "(dt.nam) <b>Chương 5 của Maggasaṃyuttaṃ, Tương Ưng Bộ 5</b>",
 "paṭipattisāraka": "(tính từ) <b>với sự hành thiền là cốt lõi</b>",
 "paṭipatha": "(dt.nam) <b>đường trở lại; hướng đối diện</b>; (nghĩa đen) con đường đối diện [pati + √path + a]",
-"paṭipada 1": "(dt.trung) <b>con đường; con đường tiến bộ; con đường hành thiền</b> [pati + √pad + a]",
-"paṭipada 2": "(tính từ) <b>người đang đi trên con đường; người đang hành thiền; đang đi dọc theo</b>",
-"paṭipadantagū": "(tính từ) <b>người đã đạt đến cuối con đường hành thiền</b> [paṭipadā + antagū]",
-"paṭipadā 1": "(dt.nữ) <b>con đường; con đường tiến bộ; con đường hành thiền</b> [pati + √pad + ā]",
+"paṭipada 1": "(dt.trung) <b>con đường; con đường tiến bộ; con đường thực hành</b> [pati + √pad + a]",
+"paṭipada 2": "(tính từ) <b>người đang đi trên con đường; người đang thực hành; đang đi dọc theo</b>",
+"paṭipadantagū": "(tính từ) <b>người đã đạt đến cuối con đường thực hành</b> [paṭipadā + antagū]",
+"paṭipadā 1": "(dt.nữ) <b>con đường; con đường tiến bộ; con đường thực hành</b> [pati + √pad + ā]",
 "paṭipadā 2": "(dt.nữ) <b>(trong cuộc tranh luận) thủ tục; cách thức cư xử; quy tắc tham gia</b> [pati + √pad + ā]",
 "paṭipadā 3": "(dt.nữ) <b>tên của một số kinh</b>",
-"paṭipadāñāṇadassanavisuddhattha": "(dt.nam) <b>vì sự thanh tịnh của sự hiểu biết và tuệ giác về con đường hành thiền; vì mục đích thanh tịnh của kiến thức và tuệ giác về con đường</b> [paṭipadā + ñāṇa + dassana + visuddhi + attha]",
-"paṭipadāñāṇadassanavisuddhi": "(dt.nữ) <b>sự thanh tịnh của sự hiểu biết và tuệ giác về con đường hành thiền; sự thanh tịnh của kiến thức và tuệ giác về con đường</b> [paṭipadā + ñāṇa + dassana + visuddhi]",
-"paṭipadādesanā": "(dt.nữ) <b>lời giảng về con đường hành thiền</b> [paṭipadā + desanā]",
+"paṭipadāñāṇadassanavisuddhattha": "(dt.nam) <b>vì sự thanh tịnh của sự hiểu biết và tuệ giác về con đường thực hành; vì mục đích thanh tịnh của kiến thức và tuệ giác về con đường</b> [paṭipadā + ñāṇa + dassana + visuddhi + attha]",
+"paṭipadāñāṇadassanavisuddhi": "(dt.nữ) <b>sự thanh tịnh của sự hiểu biết và tuệ giác về con đường thực hành; sự thanh tịnh của kiến thức và tuệ giác về con đường</b> [paṭipadā + ñāṇa + dassana + visuddhi]",
+"paṭipadādesanā": "(dt.nữ) <b>lời giảng về con đường thực hành</b> [paṭipadā + desanā]",
 "paṭipadānuttariya": "(dt.trung) <b>sự xuất sắc của con đường; sự siêu việt của sự hành thiền</b> [paṭipadā + anuttariya]",
 "paṭipadāvagga": "(dt.nam) <b>Chương 17 của Catukkanipāta, Tăng Chi Bộ 4.161-170</b> []",
 "paṭipadāsutta 1": "(dt.trung) <b>Tương Ưng Bộ 12.3 (SN12.3)</b>",
@@ -41377,6 +41503,7 @@ const dictionary = {
 "pabhavita": "(qkpt) <b>đã chảy xuống, đã có nguồn gốc</b> [pa + √bhū]",
 "pabhavitvā": "(thể h.thành) <b>sau khi đã chảy xuống, sau khi đã có nguồn gốc</b> [pa + √bhū]",
 "pabhassara 1": "(tính từ) <b>rực rỡ; tỏa sáng; sáng; chói lọi</b> [pa + √bhās + ara]",
+"pabhāsa": "(dt.nam) <b>ánh sáng; sự rực rỡ; sự sáng sủa; sự chói lọi</b> [pa + √bhās]",
 "pabhassara 2": "(dt.nam) <b>ánh sáng; sự rực rỡ; sự sáng sủa; sự chói lọi; sự phát quang</b> [pa + √bhās + ara]",
 "pabhassara 3": "(tính từ) <b>trong suốt, trong trẻo</b> [pa + √bhās]",
 "pabhassaratara": "(tính từ) <b>rực rỡ hơn; sáng hơn; chói hơn; chói lọi hơn</b> [pa + √bhās + ara + tara]",
@@ -43194,7 +43321,7 @@ const dictionary = {
 "palobheti": "(htại) <b>mê hoặc; dụ dỗ; lôi kéo</b>; (nghĩa đen) gây ra sự đánh lừa [pa + √lubh + *e + ti]",
 "palobhesi": "(qkhứ) <b>đã dụ dỗ, đã mê hoặc</b> [pa + √lubh]",
 "palosati": "(htại) <b>đốt; làm nám; làm sém</b> [√palus + *a + ti]",
-"pallaṅka 1": "(dt.nam) <b>ghế dài; chỗ ngồi; ghế sô pha</b> [pari + √añc + a]",
+"pallaṅka 1": "(dt.nam) <b>ghế dài; chỗ ngồi; ghế bành</b> [pari + √añc + a]",
 "pallaṅka 2": "(dt.nam) <b>tư thế ngồi kiết già; tư thế thiền định</b> [pari + √añc + a]",
 "pallaṅkavimānavatthu": "(dt.trung) <b>Phật Thuyết Bỉ Ngạn (Vimānavatthu) 31 (VV31)</b>",
 "pallaṅkasahassāni": "(dt.trung) <b>một nghìn ghế dài/chỗ ngồi</b> [pallaṅka + sahassa + āni]",
@@ -45030,7 +45157,11 @@ const dictionary = {
   "puggalavagga 2": "(dt.nam) <b>Phẩm 3 của Tikanipāta (Chương Ba Pháp), Tăng Chi Bộ Kinh 3.21-30</b>",
   "puggalavagga 3": "(dt.nam) <b>Phẩm 14 của Catukkanipāta (Chương Bốn Pháp), Tăng Chi Bộ Kinh 4.131-140</b>",
   "puggalavagga 4": "(dt.nam) <b>Phẩm 16 của Dasakanipāta (Chương Mười Pháp), Tăng Chi Bộ Kinh 10.155-166</b>",
+
+  "puthuvīpukkhala": "(dt.nam) <b>nơi thù thắng trên mặt đất</b>",
+
   "puggalavemattatā": "(dt.nữ) <b>trạng thái khác biệt giữa người với người</b>; (nghĩa đen) trạng thái khác biệt của người [puggala + vemattatā]",
+
   "puggalaverī": "(dt.nam) <b>người bị ghét bỏ; người bị thù hận</b>",
   "puggalasutta 1": "(dt.trung) <b>Tương Ưng Bộ Kinh 3.21 (SN3.21)</b>",
   "puggalasutta 2": "(dt.trung) <b>Tương Ưng Bộ Kinh 15.10 (SN15.10)</b>",
@@ -45620,6 +45751,7 @@ const dictionary = {
   "purisakicca 2": "(dt.trung) <b>sự giao hợp</b>; (nghĩa đen) việc cần làm của một người đàn ông [purisa + kicca]",
   "purisakutta": "(dt.trung) <b>hành vi nam tính; phong cách của người đàn ông; dáng vẻ nam tính</b>; (nghĩa đen) hình thành người đàn ông [purisa + kutta]",
   "purisakoṭisahassa": "(dt.trung) <b>mười tỷ người</b> [purisa + koṭisahassa]",
+  "koṭisahassa": "(dt.trung) <b>mười tỷ</b> [koṭi + sahassa]",
   "purisakhaḷuṅka": "(dt.nam) <b>người đàn ông không thể huấn luyện; người đàn ông không thể quản lý; người đàn ông bướng bỉnh</b> [purisa + khaḷuṅka]",
   "purisakhaḷuṅkajhāyita": "(dt.trung) <b>suy nghĩ của một người đàn ông không thể quản lý; thiền định của một người đàn ông không thể huấn luyện; sự quán tưởng về một người đàn ông kém cỏi</b> [purisa + khaḷuṅka + jhāyita]",
   "purisagaṇanā": "(dt.nữ) <b>số lượng người đàn ông</b> [purisa + gaṇanā]",
@@ -47068,6 +47200,8 @@ const dictionary = {
   "buddhagarahī": "(tính từ) <b>người chê trách Phật; người tìm lỗi của Bậc Giác Ngộ</b> [buddha + garahī]",
   "buddhagāthābhigītomhi": "(sandhi) <b>tôi đã được tụng niệm bằng bài kệ của Phật</b> [buddha + gāthā + abhigīto + amhi]",
   "buddhaguṇakathā": "(dt.nữ) <b>sự đàm luận về phẩm chất của Phật</b> [buddhaguṇa + kathā]",
+  "buddhaguṇa": "(dt.nam) <b>phẩm chất của Đức Phật, ân đức Phật</b> [buddha + guṇa]",
+
   "buddhacakkhu": "(dt.trung) <b>nhãn của sự hiểu biết toàn diện</b>; (nghĩa đen) mắt Phật [buddha + cakkhu]",
   "buddhañāṇa": "(dt.trung) <b>trí tuệ của Bậc Giác Ngộ, trí tuệ vô biên</b>",
   "buddhadāyāda": "(dt.nam) <b>người thừa kế của Phật; người thừa hưởng sự giác ngộ</b> [buddha + dāyāda]",
@@ -47746,7 +47880,7 @@ const dictionary = {
   "bhaṇamāna": "(htpt) <b>đang nói; đang kể; đang đàm thoại</b> [√bhaṇ + a + māna]",
   "bhaṇāpeti": "(htại) <b>khiến nói; bắt nói; khiến kể</b> [√bhaṇ + *āpe + ti]",
   "bhaṇāpetuṃ": "(thể mục đích) <b>để khiến nói; để bắt nói; để khiến kể</b> [√bhaṇ + *āpe + tuṃ]",
-  "bhaṇāpetvāna": "(thể h.thành) <b>sau khi khiến tụng; sau khi khiến niệm</b> [√bhaṇ + *āpe + tvāna]",
+  "bhaṇāpetvāna": "(thể h.thành) <b>sau khi khiến ai đó tụng đọc; sau khi khiến ai đó đọc lên</b> [√bhaṇ + *āpe + tvāna]",
   "bhaṇāmase": "(thể mệnh lệnh) <b>chúng ta phải nói!; chúng ta hãy nói!</b> [√bhaṇ + a + mase]",
   "bhaṇi": "(qkhứ) <b>đã nói; đã kể</b> [√bhaṇ + i]",
   "bhaṇita 1": "(dt.trung) <b>lời nói; cuộc đàm thoại</b>; (nghĩa đen) đã được nói [√bhaṇ + ita]",
@@ -48060,6 +48194,7 @@ const dictionary = {
   "bhavantaṃ": "(dt.nam) <b>Ngài; bậc thầy; người tốt (đối tượng)</b> [√bhū + a + nta + aṃ]",
   "bhavanti vattāro": "(thành ngữ) <b>sẽ có những người nói (với)</b>; (nghĩa đen) có những người nói",
   "bhavanto": "(dt.nam) <b>các Ngài; các bậc thầy; những người tốt</b> [√bhū + a + nto]",
+   "bhavantu": "(đại từ) <b>xin cho, mong cho, xin hãy</b> [√bhū + a + ntu]",
   "bhavapaccayā": "(bất biến) <b>phụ thuộc vào sự tồn tại; do sự hiện hữu</b>; (nghĩa đen) từ điều kiện của sự tồn tại [bhava + paccaya + ā]",
   "bhavapañhāsutta": "(dt.trung) <b>Tương Ưng Bộ Kinh 38.13 (SN38.13)</b>",
   "bhavapaṭilābhiya": "(tính từ) <b>dẫn đến việc có được sự tồn tại; liên quan đến việc có (một) sự tồn tại khác</b> [bhava + paṭilābhiya]",
@@ -49348,6 +49483,7 @@ const dictionary = {
   "maṇivitāna": "(dt.trung) <b>mái che ngọc; mái hiên đá quý</b> [maṇi + vitāna]",
   "maṇisahassa": "(dt.trung) <b>một nghìn viên ngọc</b> [maṇi + sahassa]",
   "maṇisūkarajātaka": "(dt.trung) <b>Bổn Sanh 285 (JA285)</b>",
+  "maṇisappa": "(dt.nam) một loại rắn lục",
   "maṇḍa 1": "(dt.nam) <b>phần tốt nhất; kem; tinh chất; chất chiết xuất tinh tế</b> [√maṇḍ + a]",
   "maṇḍa 2": "(tính từ) <b>được trang hoàng (với); được trang trí (với)</b> [√maṇḍ + a]",
   "maṇḍa 3": "(dt.nam) <b>rất trong</b> [√maṇḍ]",
@@ -49887,6 +50023,7 @@ const dictionary = {
 "mammaṭṭhāna": "(dt.trung) <b>điểm yếu trên cơ thể, trung tâm thần kinh</b>",
 "mammana": "(tính từ) <b>nói lắp; người nói lắp</b>",
 "maya": "(tính từ) <b>làm bằng; được xây dựng bằng; được làm bằng</b> [√mā + ya]",
+"kanaka": "(dt.trung) <b>vàng</b>; (nghĩa đen) sáng chói</b>",
 "mayañhi": "(sandhi) <b>chúng tôi thật</b> [mayaṃ + hi]",
 "mayamettha": "(sandhi) <b>trong trường hợp này chúng tôi</b> [mayaṃ + ettha]",
 "mayampi": "(sandhi) <b>chúng tôi cũng</b> [mayaṃ + api]",
@@ -50092,6 +50229,8 @@ const dictionary = {
   "mahāakālamegha": "(dt.nam) <b>cơn mưa trái mùa khổng lồ; trận mưa lớn trái mùa</b> [mahā + akāla + megha]",
   "mahāaggikkhandha": "(dt.nam) <b>đống lửa lớn; đám cháy lớn</b>; (nghĩa đen) khối lửa lớn [mahā + aggikkhandha]",
   "mahāaggiḍāha": "(dt.nam) <b>đám cháy lớn; đám cháy rừng lớn</b> [mahā + aggi + ḍāha]",
+  "mahāsatta": "(dt.nam) <b>bậc Đại Chúng Sanh</b> [mahā + satta]",
+
   "mahāariṭṭhaka": "(tính từ) <b>đen khổng lồ; tối lớn</b> [mahā + ariṭṭhaka]",
   "mahāassapurasutta": "(dt.trung) <b>Trung Bộ 39; Đại Kinh Assapura (MN39)</b> [mahā + assapura + sutta]",
   "mahāassārohajātaka": "(dt.trung) <b>Bổn Sanh 302 (JA302)</b>",
@@ -50874,7 +51013,7 @@ const dictionary = {
   "mārasutta 1": "(dt.trung) <b>Tương Ưng Bộ 23.1 (SN23.1)</b>",
   "mārasutta 2": "(dt.trung) <b>Tương Ưng Bộ 23.11 (SN23.11)</b>",
   "mārasutta 3": "(dt.trung) <b>Tương Ưng Bộ 46.43 (SN46.43)</b>",
-  "mārasenappamaddana": "(tính từ) <b>đè bẹp đội quân của cái chết</b> [mārasenā + pamaddana]",
+  "mārasenappamaddana": "(tính từ) <b>đè bẹp đội quân của Ma Vương</b> [mārasenā + pamaddana]",
   "mārasenā": "(dt.nữ) <b>đội quân của cái chết; quân đội của Ma vương</b> [māra + senā]",
   "mārasenāpamaddī": "(tính từ) <b>đè bẹp quân đội của Ma vương</b> [mārasenā + pamaddī]",
   "mārādisuttaekādasaka 1": "(dt.trung) <b>Tương Ưng Bộ 23.23-33 (SN23.23-33)</b>",
@@ -51920,14 +52059,14 @@ const dictionary = {
   "yakanapeḷa": "(dt.nam) <b>khối gan</b> [yakana + peḷa]",
   "yakapeḷa": "(dt.nam) <b>khối gan</b> [yaka + peḷa]",
   "yakāra 2.1": "(dt.nam) <b>thêm âm tiết -ya vào tên; bị coi là miệt thị</b> [ya + kāra]",
-  "yakkha 1": "(dt.nam) <b>(hoặc bảo vệ hoặc ác độc) dạ xoa; siêu nhiên; dạ xoa/quỷ thần</b> [√yakkh + a]",
-  "yakkha 2": "(dt.nam) <b>linh hồn; tinh thần; cá thể</b> [√yakkh + a]",
+  "yakkha 1": "(dt.nam) <b>(hoặc thiện hoặc ác) dạ xoa; siêu nhiên; quỷ thần</b> [√yakkh + a]",
+  "yakkha 2": "(dt.nam) <b>linh hồn; quỷ thần; dạ xoa</b> [√yakkh + a]",
   "yakkhagaṇa": "(dt.nam) <b>đám đông dạ xoa/quỷ thần</b>",
   "yakkhagāha": "(dt.nam) <b>sự bị dạ xoa/quỷ thần chiếm hữu</b>",
   "yakkhatta": "(dt.trung) <b>sự thật là một dạ xoa/quỷ thần</b>; (nghĩa đen) trạng thái dạ xoa [√yakkh + a + tta]",
   "yakkhapacāra": "(dt.nam) <b>người hầu/trợ lý của dạ xoa/quỷ thần</b> [yakkha + pacāra]",
   "yakkhapahārasutta": "(dt.trung) <b>kinh Udāna 34 (UD34)</b>",
-  "yakkhapārisajja": "(dt.nam) <b>thành viên hội đồng dạ xoa/quỷ thần</b> [yakkha + pārisajja]",
+  "yakkhapārisajja": "(dt.nam) <b>thành viên hội chúng dạ xoa/quỷ thần</b> [yakkha + pārisajja]",
   "yakkhapotaka": "(dt.nam) <b>dạ xoa/quỷ thần non</b> [yakkha + potaka]",
   "yakkhapotikā": "(dt.nữ) <b>dạ xoa/quỷ thần cái non</b> [yakkha + potikā]",
   "yakkhamahāmatta": "(dt.nam) <b>đại thần của các dạ xoa/quỷ thần</b> [yakkha + mahāmatta]",
@@ -51937,7 +52076,7 @@ const dictionary = {
   "yakkhasenā": "(dt.nữ) <b>quân đội dạ xoa/quỷ thần</b> [yakkha + senā]",
   "yakkhādhipa": "(dt.nam) <b>vua của các dạ xoa/quỷ thần</b>",
   "yakkhinī": "(dt.nữ) <b>nữ dạ xoa/nữ quỷ thần</b> [√yakkh + a + inī]",
-  "yakkhī": "(dt.nữ) <b>nữ siêu nhiên; nữ dạ xoa; dạ xoa cái</b> [√yakkh + a + ī]",
+  "yakkhī": "(dt.nữ) <b>nữ quỷ; nữ dạ xoa; dạ xoa cái</b> [√yakkh + a + ī]",
   "yagghe": "(bất biến) <b>nào! xem kìa!</b> [yaṃ + gha]",
   "yaggheyye": "(sandhi) <b>thật sự thưa quý ni! làm ơn thưa quý ni!</b> [yagghe + ayye]",
   "yaṅkhantika": "(tính từ) <b>với bất kỳ niềm tin nào; chấp nhận bất cứ điều gì</b> [yaṃ + khanti + ka]",
@@ -53320,14 +53459,14 @@ const dictionary = {
   "rāja 1": "(dt.nam) <b>vua; quốc vương; chúa tể; người cai trị</b> [√rāj + a]",
   "rāja 2": "(tính từ) <b>hoàng tộc; của vua</b> [√rāj + a + a]",
   "rājaaparihāniyadhamma": "(dt.nam) <b>nguyên tắc không gây suy vong cho một vị vua (pháp bất thối chuyển của vua)</b>",
-  "rājaka": "(tính từ) <b>hoàng tộc; liên quan đến người cai trị</b> [√rāj + a + ka]",
+  "rājaka": "(tính từ) <b>thuộc về vua; liên quan đến người cai trị</b> [√rāj + a + ka]",
   "rājakaññā": "(dt.nữ) <b>công chúa</b>; (nghĩa đen) cô gái trẻ của vua [rāja + kaññā]",
-  "rājakattar": "(dt.nam) <b>người bổ nhiệm hoàng tộc; người đề cử hoàng tộc</b>; (nghĩa đen) người tạo vua [rāja + kattar]",
+  "rājakattar": "(dt.nam) <b>người bổ nhiệm vua chúa; người đề cử vua chúa</b>; (nghĩa đen) người tạo vua [rāja + kattar]",
   "rājakathā": "(dt.nữ) <b>câu chuyện về các vị vua; cuộc thảo luận về những người cai trị</b> [rāja + kathā]",
   "rājakammika": "(dt.nam) <b>quan chức chính phủ</b>",
   "rājakaraṇīya 1": "(dt.trung) <b>nghĩa vụ đối với vua; trách nhiệm đối với người cai trị</b> [rāja + karaṇīya]",
-  "rājakaraṇīya 2": "(dt.trung) <b>nhiệm vụ của vua; công việc hoàng tộc</b> []",
-  "rājakārāma": "(dt.nam) <b>tên của một tu viện</b>; (nghĩa đen) công viên hoàng tộc [rājaka + ārāma]",
+  "rājakaraṇīya 2": "(dt.trung) <b>nhiệm vụ của vua; công việc của vua</b> []",
+  "rājakārāma": "(dt.nam) <b>tên của một tu viện</b>; (nghĩa đen) công viên của vua [rājaka + ārāma]",
 "rājakārāmavagga": "(dt.nam) <b>Chương 2 của Tương Ưng Nhập Lưu (Sotāpattisaṃyuttaṃ), Tập 5 của Tương Ưng Bộ (Tương Ưng Bộ)</b>",
   "rājakicca": "(dt.trung) <b>bổn phận đối với vua; trách nhiệm triều đình</b> [rāja + kicca]",
   "rājakumāra": "(dt.nam) <b>hoàng tử; con trai vua</b> [rāja + kumāra]",
@@ -55289,6 +55428,7 @@ const dictionary = {
   "vanamogayha": "(sandhi) <b>đang lặn vào rừng</b>",
   "vanarāmaṇeyyaka": "(dt.trung) <b>sự thú vị của một khu rừng; sự đáng yêu của một lùm cây</b> [vana + rāmaṇeyyaka]",
   "vanaropa": "(dt.nam) <b>người trồng rừng</b> [vana + ropa]",
+  "vanecarā": "(dt.nam) <b>người thợ săn</b>; (nghĩa đen) người lang thang trong rừng [vana + cara]",
   "vanaropasutta": "(dt.trung) <b>Tương Ưng Bộ 1.47 (SN1.47)</b>",
   "vanavagga": "(dt.nam) <b>chương về rừng</b> [vana + vagga]",
   "vanavaccha 1": "(dt.nam) <b>tên của một vị Tỳ-kheo A-la-hán</b>; (nghĩa đen) cây rừng [vana + vaccha]",
@@ -57720,7 +57860,7 @@ const dictionary = {
   "viratatta": "(dt.trung) <b>sự thật về việc đã kiêng cữ (khỏi); sự thật về việc đã từ bỏ</b> [vi + √ram + ta + tta]",
   "virati": "(dt.nữ) <b>sự dừng lại; sự kiêng cữ (khỏi); sự chấm dứt</b> [vi + √ram + ti]",
   "viratta": "(qkpt) <b>ly dục (khỏi); không ham muốn (đối với); trở nên bàng quan (đối với); mất hứng thú (với)</b> [vi + √raj + ta]",
-  "virattacitta": "(dt.nam) <b>tâm không còn ham muốn (đối với); người đã ly dục tâm lý (khỏi)</b> [viratta + citta]",
+  "virattacitta": "(dt.nam) <b>tâm không còn ham muốn (đối với); tâm đã ly dục (khỏi)</b> [viratta + citta]",
   "virattarūpa": "(tính từ) <b>bàng quan (đối với); mất hứng thú (với); thay đổi thái độ (đối với); (chú giải) không có tình yêu</b> [viratta + rūpa]",
   "viraddha 1": "(qkpt) <b>thất bại; bỏ bê; bị mất</b> [vi + √rādh + ta]",
   "viraddha 2": "(qkpt) <b>(của một cú bắn) bị trật</b>; (nghĩa đen) thất bại [vi + √rādh + ta]",
@@ -58782,7 +58922,7 @@ const dictionary = {
  "vuṭṭhāti 4": "(htại) <b>(của bệnh tật) tốt hơn (từ); hồi phục (từ)</b>; (nghĩa đen) đứng dậy [ud + √ṭhā + a + ti]",
  "vuṭṭhātuṃ 1": "(thể mục đích) <b>(của thiền) để xuất định (từ); để thoát ra (khỏi)</b>; (nghĩa đen) để đứng dậy [ud + √ṭhā + tuṃ]",
  "vuṭṭhātuṃ 2": "(thể mục đích) <b>để đứng dậy (từ); để đứng lên (từ)</b> [ud + √ṭhā]",
- "vuṭṭhāna 1": "(dt.trung) <b>sự xuất ra; sự xuất hiện; sự đứng lên</b>; (nghĩa đen) sự đứng dậy [ud + √ṭhā + ana]",
+ "vuṭṭhāna 1": "(dt.trung) <b>sự xuất ra; sự xuất hiện; sự sinh ra; sự đứng lên</b>; (nghĩa đen) sự đứng dậy [ud + √ṭhā + ana]",
  "vuṭṭhāna 2": "(dt.trung) <b>(của một lỗi lầm) sự phục hồi</b>; (nghĩa đen) sự đứng dậy [ud + √ṭhā + ana]",
  "vuṭṭhāna 3": "(dt.trung) <b>sự vượt qua; sự siêu việt; sự vươn lên cấp độ tiếp theo</b>; (nghĩa đen) sự đứng dậy [ud + √ṭhā + ana]",
  "vuṭṭhāna 4": "(dt.trung) <b>sự nỗ lực; sự cố gắng; sự chủ động; sự hoạt động</b>; (nghĩa đen) sự đứng dậy [ud + √ṭhā + ana]",
@@ -59275,8 +59415,8 @@ const dictionary = {
   "vehapphala 1": "(dt.nam) <b>tên một cõi trời; tên một loại chúng sanh cõi trời</b>; (nghĩa đen) quả trời [veha + phala]",
   "vehapphala 2": "(tính từ) <b>danh hiệu của một loại chư thiên</b>; (nghĩa đen) quả trời [veha + phala]",
   "vehapphalatta": "(dt.trung) <b>sự thật về việc là một vị chư thiên Vehapphala</b> [veha + phala + tta]",
-  "vehāyasa": "(dt.nam) <b>không khí; bầu trời; thiên đàng</b> [vehāsa + ya]",
-  "vehāsa": "(dt.nam) <b>không khí; bầu trời; thiên đàng</b> [viha + āya + sa]",
+  "vehāyasa": "(dt.nam) <b>không khí; bầu trời; cõi chư thiên</b> [vehāsa + ya]",
+  "vehāsa": "(dt.nam) <b>không khí; bầu trời; cõi chư thiên</b> [viha + āya + sa]",
   "vehāsakuṭi": "(dt.nữ) <b>gác lửng; phòng trên; tầng lửng</b>; (nghĩa đen) chòi trời [vehāsa + kuṭi]",
   "vehāsakuṭisikkhāpada": "(dt.trung) <b>giới luật về gác lửng; Ba-dật-đề 18 (Pācittiya 18)</b> [vehāsakuṭi + sikkhāpada]",
   "vehāsagata": "(tính từ) <b>được cất trong gác lửng; được giữ trong phòng áp mái</b>; (nghĩa đen) đã đi lên trời [vehāsa + gata]",
@@ -59812,24 +59952,25 @@ const dictionary = {
  "saguṇa": "(tính từ) <b>có những phẩm chất tốt; có những đặc tính tích cực</b>",
  "sagotta": "(tính từ) <b>thuộc dòng tộc; có họ hàng với; người bà con của; một phần của gia đình</b> [sa + go + tta]",
  "sagga 1.1": "(tính từ) <b>thiên thượng</b> [√sar + ga]",
- "sagga 1.2": "(dt.nam) <b>thiên đàng; thiên giới</b> [√sar + ga]",
+ "sagga 1.2": "(dt.nam) <b>cõi chư thiên; thiên giới</b> [√sar + ga]",
  "sagga 2.1": "(dt.nam) <b>sự từ bỏ</b> [√sajj]",
- "saggakathā": "(dt.nữ) <b>cuộc nói chuyện về thiên đàng</b> [sagga + kathā]",
- "saggakāma": "(tính từ) <b>muốn thiên đàng; khao khát thiên giới</b> [sagga + kāma]",
- "saggakāya": "(dt.nam) <b>đoàn chúng thiên thượng; hội đồng thần thánh</b> [sagga + kāya]",
- "saggakāyamagamaṃ": "(sandhi) <b>tôi đã đi đến đoàn chúng thiên thượng</b> [saggakāyaṃ + agamaṃ]",
- "saggagata": "(tính từ) <b>đã đi đến thiên đàng</b> [sagga + gata]",
+ "saggakathā": "(dt.nữ) <b>cuộc nói chuyện về cõi chư thiên</b> [sagga + kathā]",
+ "saggakāma": "(tính từ) <b>muốn cõi chư thiên; khao khát thiên giới</b> [sagga + kāma]",
+ "saggakāya": "(dt.nam) <b>hội chúng chư thiên</b> [sagga + kāya]",
+ "saggakāyamagamaṃ": "(sandhi) <b>tôi đã đi đến hội chúng chư thiên</b> [saggakāyaṃ + agamaṃ]",
+ "saggagata": "(tính từ) <b>đã đi đến thiên giới</b> [sagga + gata]",
  "saggagatisaṅkhāta": "(tính từ) <b>cái được gọi là cõi trời</b> [sagga + gati + saṅkhāta]",
- "saggagāmī": "(tính từ) <b>đi đến thiên đàng; hướng về thiên giới</b> [sagga + gāmī]",
- "saggatthāya": "(bất biến) <b>vì thiên đàng</b>; (nghĩa đen) vì lợi ích của thiên đàng [sagga + attha + āya]",
- "saggapaṭilābha": "(dt.nam) <b>sự đạt đến thiên đàng; sự thành tựu thiên giới</b> [sagga + paṭilābha]",
- "saggamagamā": "(qkhứ hthành) <b>đã đi đến thiên đàng</b> [saggaṃ + agamā]",
- "saggamupeti": "(htại) <b>đi đến thiên đàng; đến gần thiên giới</b> [saggaṃ + upeti]",
+ "saggagāmī": "(tính từ) <b>đi đến cõi chư thiên; hướng về thiên giới</b> [sagga + gāmī]",
+ "saggamokkhadaṃ": "(dt.nam) <b>mang đến (sự chứng đạt) cõi trời và giải thoát</b> [sagga + mokkha + daṃ]",
+ "saggatthāya": "(bất biến) <b>vì cõi chư thiên</b>; (nghĩa đen) vì lợi ích của cõi chư thiên [sagga + attha + āya]",
+ "saggapaṭilābha": "(dt.nam) <b>sự đạt đến cõi chư thiên; sự thành tựu thiên giới</b> [sagga + paṭilābha]",
+ "saggamagamā": "(qkhứ hthành) <b>đã đi đến cõi chư thiên</b> [saggaṃ + agamā]",
+ "saggamupeti": "(htại) <b>đi đến cõi chư thiên; đến gần thiên giới</b> [saggaṃ + upeti]",
  "saggaloka": "(dt.nam) <b>cõi trời</b>",
- "saggasaṃvattanika": "(tính từ) <b>dẫn đến thiên đàng</b> [sagga + saṃvattanika]",
- "saggāpāya": "(dt.nam) <b>thiên đàng và địa ngục</b> [sagga + apāya]",
+ "saggasaṃvattanika": "(tính từ) <b>dẫn đến cõi chư thiên</b> [sagga + saṃvattanika]",
+ "saggāpāya": "(dt.nam) <b>cõi chư thiên và địa ngục</b> [sagga + apāya]",
  "sagguṇa": "(dt.nam) <b>phẩm chất tốt</b>",
- "saggūpaga": "(tính từ) <b>đi đến thiên đàng; hướng về thiên giới</b> [sagga + upaga]",
+ "saggūpaga": "(tính từ) <b>đi đến cõi chư thiên; hướng về thiên giới</b> [sagga + upaga]",
  "saṅka": "(dt.nam) <b>rác rưởi; đồ bỏ đi</b> [saṃ + √kar + *a]",
  "saṅkaccika": "(dt.trung) <b>áo lót; áo cộc; áo nịt ngực</b>; (nghĩa đen) buộc chặt lại [saṃ + √kañc + a + ika]",
  "saṅkaṭīra": "(dt.trung) <b>bãi rác; đống rác; bãi đổ rác</b>; (nghĩa đen) bờ của rác [saṅka + ṭīra]",
@@ -61229,6 +61370,8 @@ const dictionary = {
   "sadosakathā": "(dt.nữ) <b>lời nói khiếm khuyết; lời nói sai sót</b> [sadosa + kathā]",
   "sadosatta": "(dt.trung) <b>sự sai sót; sự khiếm khuyết</b>; (nghĩa đen) trạng thái có lỗi [sa + √dus + *a + tta]",
   "sadda 1": "(dt.nam) <b>âm thanh; tiếng động</b> [√sadd + a]",
+   "sādara": "(tính từ) <b>ân cần, tỏ lòng quan tâm, với sự cân nhắc, với sự kính trọng</b> [ā + √dar + a]",
+
   "sadda 2": "(dt.trung) <b>âm thanh; tiếng động</b> [√sadd + a]",
   "sadda 3": "(dt.nam) <b>từ ngữ</b>; (nghĩa đen) âm thanh [√sadd + a]",
   "sadda 4": "(dt.nam) <b>giọng nói</b>; (nghĩa đen) âm thanh [√sadd + a]",
@@ -62057,6 +62200,7 @@ const dictionary = {
   "sabbajjhāna": "(dt.trung) <b>mọi giai đoạn thiền định</b> [sabba + jhāna]",
   "sabbañjaha": "(tính từ) <b>để lại mọi thứ; từ bỏ mọi thứ; buông bỏ tất cả</b> [sabbaṃ + jaha]",
   "sabbaññutaññāṇavara": "(tính từ) <b>người có tri kiến vô hạn và sự hiểu biết siêu việt</b> [sabbaññutā + ñāṇavara]",
+   "sabbaññutaññāṇa": "(tính từ) <b>người có tri kiến vô hạn và sự hiểu biết siêu việt</b> [sabbaññutā + ñāṇa]",
   "sabbaññutabhūmi": "(dt.nữ) <b>căn bản của sự toàn tri</b> []",
   "sabbaññutā": "(dt.nữ) <b>toàn tri; tri kiến vô hạn</b>; (nghĩa đen) trạng thái biết mọi thứ [sabba + ñū + tā]",
   "sabbaññuvara": "(tính từ) <b>bậc toàn tri siêu việt</b> [sabbaññu + vara]",
@@ -62202,6 +62346,7 @@ const dictionary = {
   "sabbalokādhipacca": "(dt.trung) <b>quyền lực tối cao đối với toàn bộ thế giới; sự thống trị toàn bộ vũ trụ</b>; (nghĩa đen) trạng thái làm chủ toàn bộ thế giới [sabba + loka + ādhipacca]",
   "sabbalokānukampaka": "(tính từ) <b>có lòng từ bi đối với toàn bộ thế giới; quan tâm đến toàn bộ thế giới</b> [sabbaloka + anukampaka]",
   "sabbalokābhibhū": "(dt.nam) <b>người chinh phục toàn bộ thế giới; bậc thầy của toàn bộ vũ trụ</b> [sabbaloka + abhibhū]",
+    "hitatthāya": "(bất biến) <b>vì lợi ích, vì hạnh phúc</b>",
   "sabbaloke anabhiratasaññā": "(thành ngữ) <b>sự nhận biết về sự chán ghét đối với toàn bộ thế giới; sự nhận thức về sự không hài lòng với toàn bộ thế giới</b> [sabba + loke + anabhirata + saññā]",
   "sabbavagga": "(dt.nam) <b>Chương 3 của Tương Ưng Sáu Căn, Tương Ưng Bộ 4</b>",
   "sabbavaṅkadosanihitaninnītakasāva": "(tính từ) <b>thoát khỏi mọi sự cong vẹo và lỗi lầm, với mọi tạp nhiễm được loại bỏ</b> [sabba + vaṅka + dosa + nihita + ninnītakasāva]",
@@ -62237,6 +62382,7 @@ const dictionary = {
   "sabbasampadā": "(dt.nữ) <b>thành công tối thượng; thành tựu tuyệt đối</b>; (nghĩa đen) mọi thành công [sabba + sampadā]",
   "sabbasassa": "(dt.trung) <b>mọi mùa màng; toàn bộ vụ thu hoạch; mọi loại cây trồng</b> [sabba + sassa]",
   "sabbasassā": "(dt.nam) <b>mọi mùa màng; toàn bộ vụ thu hoạch; mọi loại cây trồng</b> [sabba + sassa + ā]",
+  "sādhaka": "(tính từ) <b>hoàn thành, đạt được, thành tựu.</b>",
   "sabbasaṃyoga": "(dt.nam) <b>mọi trói buộc; mọi ràng buộc; mọi sự chấp thủ</b> [sabba + saṃyoga]",
   "sabbasaṃyojana": "(dt.trung) <b>mọi trói buộc; mọi ràng buộc; mọi kiết sử</b> [sabba + saṃyojana]",
   "sabbasaṃyojanakkhaya": "(dt.nam) <b>sự diệt trừ mọi trói buộc; sự hủy diệt mọi kiết sử</b> [sabba + saṃyojana + khaya]",
@@ -62255,8 +62401,8 @@ const dictionary = {
   "sabbasutta 2": "(dt.trung) <b>tất cả các bài kinh</b> [sabba + sutta]",
   "sabbasubha": "(tính từ) <b>tất cả đều đẹp; mọi thứ đều hấp dẫn</b> [sabba + subha]",
   "sabbaseta": "(tính từ) <b>tất cả đều trắng; trắng tinh</b> [sabba + seta]",
-  "sabbaso 1": "(bất biến) <b>theo mọi cách; hoàn toàn; hoàn toàn</b>; (nghĩa đen) từ tất cả [sabba + so]",
-  "sabbaso 2": "(bất biến) <b>khắp mọi nơi; khắp mọi nơi; từ mọi phía</b>; (nghĩa đen) từ tất cả [sabba + so]",
+  "sabbaso 1": "(bất biến) <b>theo mọi cách; hoàn toàn;</b>; (nghĩa đen) từ tất cả [sabba + so]",
+  "sabbaso 2": "(bất biến) <b>khắp mọi nơi; từ mọi phía</b>; (nghĩa đen) từ tất cả [sabba + so]",
   "sabbasoka": "(dt.nam) <b>mọi đau khổ; mọi nỗi buồn</b> [sabba + soka]",
   "sabbasovaṇṇamaya": "(tính từ) <b>làm hoàn toàn bằng vàng</b> [sabba + sovaṇṇamaya]",
   "sabbassa": "(dt.trung) <b>tất cả tài sản của một người; mọi thứ một người sở hữu</b>; (nghĩa đen) tất cả của riêng một người [sabba + sa]",
@@ -62300,6 +62446,7 @@ const dictionary = {
   "sabbūpadhiparikkhaya": "(dt.nam) <b>sự diệt vong của mọi sự chấp thủ; sự hủy diệt mọi sự đồng nhất hóa</b> [sabba + upadhi + parikkhaya]",
   "sabbūpadhippaṭinissagga": "(dt.nam) <b>buông bỏ mọi sự chấp thủ; giải thoát mọi sự tạo tác của tôi</b> [sabba + upadhi + paṭinissagga]",
   "sabbe": "(đại từ) <b>tất cả; mọi; mọi thứ; mọi người</b> [sabba + e]",
+  "sabbepi": "(sandhi) <b>tất cả; mọi; toàn thảy; mọi thứ;</b> [sabbe + api]",
   "sabbe te": "(thành ngữ) <b>tất cả bọn họ</b>",
   "sabbete": "(sandhi) <b>tất cả bọn họ; tất cả những điều này</b> [sabbe + ete]",
   "sabbena sabbaṃ": "(thành ngữ) <b>hoàn toàn</b>; (nghĩa đen) mọi thứ với mọi thứ",
@@ -63766,6 +63913,7 @@ const dictionary = {
   "sambhañjitvā": "(thể h.thành) <b>sau khi đã bẻ gãy, sau khi đã làm vỡ</b> [saṃ + √bhañj]",
   "sambhata 1": "(dt.trung) <b>thu nhập; tiền tiết kiệm; tài sản</b>; (nghĩa đen) cùng nhau mang đến [saṃ + √bhar + ta]",
   "sambhata 2": "(qkpt) <b>đã thu thập; đã tích lũy; đã tích trữ; đã mang đến cùng nhau; đã cất giữ</b>; (nghĩa đen) cùng nhau mang đến [saṃ + √bhar + ta]",
+"sambhutaṃ": "(qkpt) <b>đã mang đến cùng nhau; đã tích lũy</b>; (nghĩa đen) cùng nhau mang đến [saṃ + √bhar + ta]",
   "sambhata 3": "(dt.trung) <b>sự thu thập; sự tích lũy</b>; (nghĩa đen) cùng nhau mang đến [saṃ + √bhar + ta]",
   "sambhatta": "(dt.nam) <b>bạn hữu; cộng sự; đồng hành; đồng nghiệp</b>; (nghĩa đen) cùng nhau kết hợp [saṃ + √bhaj + ta]",
   "sambhattatā": "(dt.nữ) <b>sự kiện kết hợp; sự kiện đồng hành</b>; (nghĩa đen) trạng thái cùng nhau kết hợp [saṃ + √bhaj + ta + tā]",
@@ -66346,7 +66494,7 @@ const dictionary = {
   "sīsupacālā": "(dt.nữ) <b>tên một ni sư</b> [sīsa + upacālā]",
   "sīsupacālāsutta": "(dt.trung) <b>Tương Ưng Bộ 5.8 (SN5.8)</b>",
   "sīsūpaga": "(tính từ) <b>(của đồ trang sức) vương miện; mão</b>; (nghĩa đen) thích hợp cho đầu [sīsa + upaga]",
-  "sīsūpacālā": "(dt.nữ) <b>tên một ni sư A-la-hán</b> [sīsa + upacālā]",
+  "sīsūpacālā": "(dt.nữ) <b>tên một Tỷ-kheo ni A-la-hán</b> [sīsa + upacālā]",
   "sīsūpacālātherīgāthā": "(dt.nữ) <b>Trưởng Lão Ni Kệ 61, chương 8.1, câu 196-203 (THI61)</b>",
   "sīsena": "(bất biến) <b>đứng đầu bởi; dưới tiêu đề của</b> [sīsa + ena]",
   "sīha 1": "(dt.nam) <b>sư tử</b>",
@@ -66395,7 +66543,7 @@ const dictionary = {
   "sīhahanu": "(tính từ) <b>với hàm giống sư tử; thứ hai mươi hai trong ba mươi hai tướng tốt của bậc đại nhân</b> [sīha + hanu]",
   "sīhahanulakkhaṇa": "(dt.trung) <b>tướng tốt có hàm giống sư tử</b> [sīhahanu + lakkhaṇa]",
   "sīhaṃvekacaraṃ": "(sandhi) <b>đơn độc như sư tử; sống một mình như sư tử; lang thang một mình như sư tử</b> [sīhaṃ + iva + ekacaraṃ]",
-  "sīhā": "(dt.nữ) <b>tên một ni sư A-la-hán</b>; (nghĩa đen) sư tử cái [sīha + ā]",
+  "sīhā": "(dt.nữ) <b>tên một Tỷ-kheo ni A-la-hán</b>; (nghĩa đen) sư tử cái [sīha + ā]",
   "sīhātherīgāthā": "(dt.nữ) <b>Trưởng Lão Ni Kệ 40, chương 5.3, câu 77-81 (THI40)</b>",
   "sīhāsana": "(dt.trung) <b>ngai vàng; chỗ ngồi thiền</b>; (nghĩa đen) chỗ ngồi của sư tử [sīha + āsana]",
   "su 1": "(bất biến) <b>(tiểu từ nghi vấn & nhấn mạnh)</b>",
@@ -66459,7 +66607,7 @@ const dictionary = {
   "sukkasutta": "(dt.trung) <b>Tăng Chi Bộ 2.8 (AN2.8)</b>",
   "sukkaṃsa": "(dt.nam) <b>vận may; số phận tốt</b>; (nghĩa đen) phần sáng [sukka + aṃsa]",
   "sukkā 1": "(dt.nam) <b>tên một nhóm chư thiên</b>; (nghĩa đen) thuần khiết; tươi sáng [√suc]",
-  "sukkā 2": "(dt.nữ) <b>tên một ni sư A-la-hán</b>; (nghĩa đen) thuần khiết [√suc + ra + ā]",
+  "sukkā 2": "(dt.nữ) <b>tên một Tỷ-kheo ni A-la-hán</b>; (nghĩa đen) thuần khiết [√suc + ra + ā]",
   "sukkātherīgāthā": "(dt.nữ) <b>Trưởng Lão Ni Kệ 34, chương 3.6, câu 54-56 (THI34)</b>",
   "sukkābhijāti": "(dt.nữ) <b>loài chúng sinh trắng</b>; (nghĩa đen) sự sinh ra trắng [sukka + abhijāti]",
   "sukkābhijātika": "(tính từ) <b>thuộc dòng dõi cao; được sinh ra tốt</b> [sukka + abhijātika]",
@@ -68597,6 +68745,8 @@ const dictionary = {
   "haṭṭhapahaṭṭha": "(tính từ) <b>hớn hở và run lên vì sung sướng; rất hài lòng</b> [haṭṭha + pahaṭṭha]",
   "haṭṭhaloma": "(tính từ) <b>với lông tóc dựng đứng</b>",
   "haṭha": "(dt.nam) <b>bạo lực; sự cưỡng bức</b>",
+    "maggahatā": "(dt.nam) <b>đã được đoạn tận nhờ Thánh Đạo (đạt đến Niết Bàn)</b>",
+
   "hata 1": "(qkpt) <b>bị đánh (bởi); bị đấm (bởi); bị hành hạ (bởi)</b> [√han + ta]",
   "hata 2": "(qkpt) <b>bị giết (bởi); bị sát hại (bởi)</b> [√han + ta]",
   "hata 3": "(dt.trung) <b>sự đánh đập; sự va chạm; sự tấn công</b>; (nghĩa đen) bị đánh [√han + ta]",
@@ -68869,7 +69019,7 @@ const dictionary = {
   "haritvā 2": "(thể h.thành) <b>đã lấy đi</b>; (nghĩa đen) đã gây ra để mang [√har]",
   "hariyati": "(htại) <b>được mang; được mang đi (bởi)</b> [√har + iya + ti]",
   "hariyamāna": "(htpt) <b>đang bị mang đi; đang bị lấy đi (bởi)</b>; (nghĩa đen) đang được mang [√har + iya + māna]",
-  "harissa": "(dt.nam) <b>mặt trời</b>; (nghĩa đen) ngựa vàng; ngựa palomino [hari + assa]",
+  "harissa": "(dt.nam) <b>mặt trời</b>; (nghĩa đen) ngựa vàng [hari + assa]",
   "harī": "(dt.nam) <b>tên của một nhóm các vị chư thiên</b>; (nghĩa đen) mang [√har + i + ī]",
   "harītaka": "(dt.trung) <b>quả bàng hôi vàng</b>",
   "harītakī": "(dt.nữ) <b>quả bàng hôi vàng</b>",
