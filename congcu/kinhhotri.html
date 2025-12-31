@@ -394,7 +394,7 @@ gap: 3px; /* Tighter gap for the rightmost controls */
     (Định dạng ZIM được mở bằng Kiwix, một ứng dụng miễn phí cung cấp khả năng truy cập ngoại tuyến vào các nội dung giáo dục. 
     Để tìm hiểu thêm, xem tại đây: <a href="https://kiwix.org/en/about_us/" target="_blank">kiwix.org/en/about_us/</a>).
 </p>
-<p>Đường Link Tải xuống & Mã Nguồn: <a href="https://github.com/buddhanussati/patimokkha-memorize"><b>tại đây.</b></a></p>
+<p>Đường Link Tải xuống & Mã Nguồn: <a href="https://github.com/buddhanussati/loicuaducphat/"><b>tại đây.</b></a></p>
 
 <h4>⚖️ Giấy Phép & Sử Dụng</h4>
 <p>
@@ -2141,14 +2141,18 @@ Arogā sukhitā hotha, saha sabbehi ñātibhi. [8.455]`
              if (btn) btn.innerHTML = "🌙";
         }
         const savedDictState = localStorage.getItem('dictionaryEnabled');
-    if (savedDictState === 'true') {
-        isLookupEnabled = true;
-        const btn = document.getElementById('btn-dictionary');
-        if (btn) btn.style.backgroundColor = "#d35400";
-        // We must wait a tiny bit to ensure the text is rendered before enabling lookup, 
-        // or simply call this, as enablePaliLookup attaches events to '.word' which are dynamic
-        enablePaliLookup(); 
-    }
+        // If it is 'true' OR null (first time user), turn it ON
+        if (savedDictState === 'true' || savedDictState === null) {
+            isLookupEnabled = true;
+            const dictBtn = document.getElementById('btn-dictionary');
+            if (dictBtn) dictBtn.style.backgroundColor = "#d35400";
+            // Wait slightly or call directly
+            enablePaliLookup(); 
+        } else {
+            // Explicitly 'false'
+            isLookupEnabled = false;
+            // No need to set color, default is none
+        }
         const savedInterval = localStorage.getItem('overrideInterval');
         const intervalInput = document.getElementById('recitation-interval');
         const speedControlArea = document.getElementById('speed-control-area');
