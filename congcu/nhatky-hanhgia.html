@@ -423,12 +423,24 @@ border-color: rgba(251, 191, 36, 1);
 
     <div class="dashboard-grid" style="grid-template-columns: 1fr;">
             <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 20px;">
-            <div class="card">
-                <h3 id="breakdown-title">Biểu đồ Thời gian</h3>
-                <div style="height: 300px; display:flex; justify-content:center;">
-                    <canvas id="goalBreakdownChart"></canvas>
-                </div>
-            </div>
+<div class="card">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+        <h3 id="breakdown-title" style="margin: 0;">Thời gian</h3>
+        
+        <select id="report-range-select" class="form-control" style="width: auto; padding: 5px; font-size: 13px; height: 32px;" onchange="app.renderReports()">
+            <option value="all">Toàn bộ</option>
+            <option value="today">Hôm nay</option>
+            <option value="this_week" selected>Tuần này</option>
+            <option value="last_week">Tuần trước</option>
+            <option value="this_month">Tháng này</option>
+            <option value="last_month">Tháng trước</option>
+        </select>
+    </div>
+    
+    <div style="height: 300px; display:flex; justify-content:center;">
+        <canvas id="goalBreakdownChart"></canvas>
+    </div>
+</div>
             <div class="card">
                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
                     <button class="btn btn-secondary" style="padding: 5px 10px;" onclick="app.changeReportWeek(-1)"><i class="fas fa-chevron-left"></i></button>
@@ -1872,69 +1884,88 @@ get totalMindfulnessCounts() {
                 }
             }
 
-            toggleTimer(id) {
-                const goal = this.data.goals.find(g => g.id === id);
-                if (!goal) return;
+toggleTimer(id) {
+    const goal = this.data.goals.find(g => g.id === id);
+    if (!goal) return;
 
-                this.data.goals.forEach(g => {
-                    if(g.isActive && g.id !== id && g.type === 'standard') this.toggleTimer(g.id); 
-                });
+    // Stop other timers if running
+    this.data.goals.forEach(g => {
+        if(g.isActive && g.id !== id && g.type === 'standard') this.toggleTimer(g.id); 
+    });
 
-                if (goal.type === 'meditation') {
-                    this.startMeditationSetup(goal);
-                    return;
-                }
+    if (goal.type === 'meditation') {
+        this.startMeditationSetup(goal);
+        return;
+    }
 
-                if (goal.isActive) {
-                    clearInterval(this.timers[id]);
-                    goal.isActive = false;
-                    const spentSeconds = goal.sessionTargetSeconds - goal.remainingSeconds;
-                    const minutesSpent = Math.floor(spentSeconds / 60);
-                    const startTime = goal.currentSessionStartTime || Date.now();
-                    goal.sessionTargetSeconds = 0; goal.remainingSeconds = 0; goal.currentSessionStartTime = null;
-                    if (minutesSpent > 0) this.openSessionModal(id, minutesSpent, null, startTime);
-                    else this.showToast('Phiên quá ngắn.');
-                } else {
-                    const minStr = prompt('Thời lượng (phút):', '25');
-                    if (!minStr) return;
-                    const min = parseInt(minStr);
-                    if (isNaN(min) || min <= 0) return;
+    if (goal.isActive) {
+        clearInterval(this.timers[id]);
+        goal.isActive = false;
+        const spentSeconds = goal.sessionTargetSeconds - goal.remainingSeconds;
+        const minutesSpent = Math.floor(spentSeconds / 60);
+        const startTime = goal.currentSessionStartTime || Date.now();
+        goal.sessionTargetSeconds = 0; goal.remainingSeconds = 0; goal.currentSessionStartTime = null;
+        if (minutesSpent > 0) this.openSessionModal(id, minutesSpent, null, startTime);
+        else this.showToast('Phiên quá ngắn.');
+    } else {
+        // --- MODIFIED CODE STARTS HERE ---
+        // Use saved duration or default to 20
+        const defaultTime = goal.lastDuration || '20'; 
+        const minStr = prompt('Thời lượng (phút):', defaultTime);
+        
+        if (!minStr) return;
+        const min = parseInt(minStr);
+        if (isNaN(min) || min <= 0) return;
 
-                    goal.sessionTargetSeconds = min * 60;
-                    goal.remainingSeconds = goal.sessionTargetSeconds;
-                    goal.isActive = true;
-                    goal.currentSessionStartTime = Date.now(); 
+        // Save this duration for next time
+        goal.lastDuration = min; 
+        this.save(); // Save to local storage immediately
+        // --- MODIFIED CODE ENDS HERE ---
 
-                    this.timers[id] = setInterval(() => {
-                        if (goal.remainingSeconds > 0) {
-                            goal.remainingSeconds--;
-                        } else {
-                            // TIMER FINISHED LOGIC
-                            clearInterval(this.timers[id]);
-                            this.playBell(); // Play sound
-                            
-                            goal.isActive = false;
-                            const minutesSpent = Math.floor(goal.sessionTargetSeconds / 60);
-                            const startTime = goal.currentSessionStartTime;
-                            goal.sessionTargetSeconds = 0; goal.remainingSeconds = 0; goal.currentSessionStartTime = null;
-                            this.openSessionModal(id, minutesSpent, null, startTime);
-                            this.showToast('Hoàn thành!');
-                            this.renderGoals(); 
-                        }
-                    }, 1000);
-                }
-                this.renderGoals();
+        goal.sessionTargetSeconds = min * 60;
+        goal.remainingSeconds = goal.sessionTargetSeconds;
+        goal.isActive = true;
+        goal.currentSessionStartTime = Date.now(); 
+
+        this.timers[id] = setInterval(() => {
+            if (goal.remainingSeconds > 0) {
+                goal.remainingSeconds--;
+            } else {
+                // TIMER FINISHED LOGIC
+                clearInterval(this.timers[id]);
+                this.playBell(); // Play sound
+                
+                goal.isActive = false;
+                const minutesSpent = Math.floor(goal.sessionTargetSeconds / 60);
+                const startTime = goal.currentSessionStartTime;
+                goal.sessionTargetSeconds = 0; goal.remainingSeconds = 0; goal.currentSessionStartTime = null;
+                this.openSessionModal(id, minutesSpent, null, startTime);
+                this.showToast('Hoàn thành!');
+                this.renderGoals(); 
             }
+        }, 1000);
+    }
+    this.renderGoals();
+}
             
             // -// --- THÊM ĐOẠN NÀY VÀO ĐÂY ---
     // Kiểm tra xem có đang chạy trên App Android không để tránh lỗi trên trình duyệt web
 
     // ------------------------------- MEDITATION LOGIC ---
 startMeditationSetup(goal) {
-    const minStr = prompt('Thời gian thiền (phút):', '20');
+    // --- MODIFIED CODE STARTS HERE ---
+    // Use saved duration or default to 20
+    const defaultTime = goal.lastDuration || '20';
+    const minStr = prompt('Thời gian thiền (phút):', defaultTime);
+    
     if (!minStr) return;
     const min = parseInt(minStr);
     if (isNaN(min) || min <= 0) return;
+
+    // Save this duration for next time
+    goal.lastDuration = min;
+    this.save(); // Save to local storage immediately
+    // --- MODIFIED CODE ENDS HERE ---
     
     if (typeof Website2APK !== 'undefined') {
         Website2APK.keepScreenOn(true); 
@@ -1957,7 +1988,7 @@ startMeditationSetup(goal) {
         if(!this.meditationState.paused) {
             this.updateMeditationQuote(false);
         }
-    }, 10000); // 120,000ms = 2 Minutes
+    }, 8000); // 8 seconds per quote
     // --- NEW CODE END ---
 
     this.meditationState.timerRef = setInterval(() => {
@@ -2784,16 +2815,47 @@ renderReports() {
     const unitLabel = isMindfulness ? 'Chánh Niệm' : 'Phút';
     
     // Update Breakdown Title
-    document.getElementById('breakdown-title').innerText = isMindfulness ? 'Biểu đồ Chánh niệm' : 'Biểu đồ Thời gian';
+    document.getElementById('breakdown-title').innerText = isMindfulness ? 'Chánh niệm' : 'Thời gian';
 
-    // 1. Setup Week Boundaries (Local Time)
-    // weekStart is already set to Monday 00:00:00 by getStartOfWeek
+    // --- 1. SETUP DATE RANGES FOR BREAKDOWN CHART (DOUGHNUT) ---
+    const rangeSelect = document.getElementById('report-range-select');
+    const rangeMode = rangeSelect ? rangeSelect.value : 'all';
+    
+    const now = new Date();
+    // Reset to start of today (00:00:00)
+    const todayStart = new Date(now.getFullYear(), now.getMonth(), now.getDate()).getTime();
+    const currentDay = now.getDay() || 7; // Mon=1 ... Sun=7
+    // Start of This Week (Monday)
+    const thisWeekStart = new Date(now.getFullYear(), now.getMonth(), now.getDate() - currentDay + 1).getTime();
+    // Start of This Month (1st)
+    const thisMonthStart = new Date(now.getFullYear(), now.getMonth(), 1).getTime();
+
+    let filterStart = 0;
+    let filterEnd = Date.now() + 86400000; // Future buffer
+
+    if (rangeMode === 'today') {
+        filterStart = todayStart;
+    } else if (rangeMode === 'this_week') {
+        filterStart = thisWeekStart;
+    } else if (rangeMode === 'last_week') {
+        filterEnd = thisWeekStart;
+        filterStart = thisWeekStart - (7 * 24 * 60 * 60 * 1000);
+    } else if (rangeMode === 'this_month') {
+        filterStart = thisMonthStart;
+    } else if (rangeMode === 'last_month') {
+        filterEnd = thisMonthStart;
+        // Set to 1st of previous month
+        filterStart = new Date(now.getFullYear(), now.getMonth() - 1, 1).getTime();
+    } 
+    // 'all' leaves start at 0
+
+    // --- 2. SETUP RANGES FOR BAR CHARTS (Independent of Dropdown) ---
+    // weekStart is set by global navigation variables
     const weekStartMs = this.currentWeekStart.getTime();
-    // weekEnd is exactly 7 days later
     const weekEndMs = weekStartMs + (7 * 24 * 60 * 60 * 1000);
 
     // Update Week Title UI
-    const weekEndDisp = new Date(weekEndMs - 1); // Display Sunday date
+    const weekEndDisp = new Date(weekEndMs - 1); 
     document.getElementById('weekly-report-title').innerText = `Tuần (${this.currentWeekStart.toLocaleDateString('vi-VN', {month:'numeric', day:'numeric'})} - ${weekEndDisp.toLocaleDateString('vi-VN', {month:'numeric', day:'numeric'})})`;
     
     // Setup Month Boundaries
@@ -2802,23 +2864,23 @@ renderReports() {
     const monthlyLabels = Array.from({length: new Date(mYear, mMonth + 1, 0).getDate()}, (_, i) => i + 1);
     document.getElementById('monthly-report-title').innerText = `Tháng ${new Date(mYear, mMonth).toLocaleDateString('vi-VN', { month: 'numeric', year: 'numeric' })}`;
 
+    // --- 3. INITIALIZE DATASETS ---
     const goalDatasets = {};
     const weekDays = ['T2', 'T3', 'T4', 'T5', 'T6', 'T7', 'CN'];
     
-    // Initialize Datasets
     this.data.goals.forEach(goal => { 
         if (isMindfulness && goal.type !== 'meditation') return;
 
         goalDatasets[goal.id] = { 
             name: goal.name, 
             color: goal.color, 
-            total: 0, 
+            breakdownTotal: 0, // Used for Doughnut (Filtered)
             weekly: new Array(7).fill(0),
             monthly: new Array(monthlyLabels.length).fill(0) 
         }; 
     });
     
-    // PROCESS LOGS
+    // --- 4. PROCESS LOGS ---
     this.data.logs.forEach(log => {
         if(!goalDatasets[log.goalId]) return;
 
@@ -2830,38 +2892,38 @@ renderReports() {
             value = log.minutes;
         }
 
-        goalDatasets[log.goalId].total += value;
-        
-        // Use exact timestamp for accurate comparison
-        // Fallback to date string parsing if timestamp is missing (old data compatibility)
+        // Handle timestamps
         let logTime = log.timestamp;
         let logDateObj;
-        
         if (!logTime) {
-             // Compatibility fix for very old data without timestamps
              logDateObj = new Date(log.date); 
              logTime = logDateObj.getTime();
         } else {
              logDateObj = new Date(logTime);
         }
+
+        // A. DOUGHNUT FILTER LOGIC
+        if (logTime >= filterStart && logTime < filterEnd) {
+            goalDatasets[log.goalId].breakdownTotal += value;
+        }
         
-        // --- WEEKLY LOGIC FIXED ---
-        // Check if log is strictly within the 7-day window
+        // B. WEEKLY BAR LOGIC (Independent)
         if(logTime >= weekStartMs && logTime < weekEndMs) { 
             let dayIdx = logDateObj.getDay();
-            // Convert Sunday(0) to 6, Mon(1) to 0, etc.
             dayIdx = (dayIdx === 0 ? 6 : dayIdx - 1);
             goalDatasets[log.goalId].weekly[dayIdx] += value; 
         }
         
-        // --- MONTHLY LOGIC ---
-        // Check year and month matches current view
+        // C. MONTHLY BAR LOGIC (Independent)
         if(logDateObj.getFullYear() === mYear && logDateObj.getMonth() === mMonth) {
             goalDatasets[log.goalId].monthly[logDateObj.getDate() - 1] += value;
         }
     });
     
-    const activeGoals = Object.values(goalDatasets).filter(d => d.total > 0);
+    // Filter active goals based on Breakdown Total (so hidden goals don't show in doughnut)
+    // Note: We map activeGoals based on whether they have data in the *Selected Range*
+    const activeGoalsForDoughnut = Object.values(goalDatasets).filter(d => d.breakdownTotal > 0);
+    const allGoalsForBars = Object.values(goalDatasets).filter(d => d.weekly.some(v=>v>0) || d.monthly.some(v=>v>0) || d.breakdownTotal > 0);
     
     // CHART CONFIGURATION
     const commonOptions = { 
@@ -2886,54 +2948,48 @@ renderReports() {
         } 
     };
     
-    // 1. Breakdown Chart (Doughnut)
+    // 5. RENDER BREAKDOWN CHART (DOUGHNUT)
     const ctxBreakdown = document.getElementById('goalBreakdownChart').getContext('2d');
     if(this.charts.breakdown) this.charts.breakdown.destroy();
 
-    // --- NEW: Custom Plugin to Draw Center Text ---
+    // Center Text Plugin
     const centerTextPlugin = {
-    id: 'centerText',
-    afterDraw: function(chart) {
-        const { ctx, chartArea: { top, bottom, left, right } } = chart;
-        ctx.save();
-        
-        // 1. Calculate Total
-        let total = 0;
-        const data = chart.data.datasets[0].data;
-        data.forEach(val => total += val);
-        
-        // 2. Format Text (Checks for both 'Phút' and 'phút')
-        let text = total;
-        const currentUnit = typeof unitLabel !== 'undefined' ? unitLabel.toLowerCase() : '';
-        if (currentUnit === 'phút') {
-            text = (total / 60).toFixed(1) + "h"; 
-        } else {
-            text = total.toLocaleString();
+        id: 'centerText',
+        afterDraw: function(chart) {
+            const { ctx, chartArea: { top, bottom, left, right } } = chart;
+            ctx.save();
+            let total = 0;
+            const data = chart.data.datasets[0].data;
+            data.forEach(val => total += val);
+            
+            let text = total;
+            const currentUnit = typeof unitLabel !== 'undefined' ? unitLabel.toLowerCase() : '';
+            if (currentUnit === 'phút') {
+                text = (total / 60).toFixed(1) + "h"; 
+            } else {
+                text = total.toLocaleString();
+            }
+            
+            const centerX = (left + right) / 2;
+            const centerY = (top + bottom) / 2;
+            const fontSize = (chart.chartArea.bottom - chart.chartArea.top) / 15; 
+            
+            ctx.font = `bold ${fontSize}px sans-serif`;
+            ctx.textBaseline = "middle";
+            ctx.textAlign = "center";
+            ctx.fillStyle = "#FFFFFF"; 
+            ctx.fillText(text, centerX, centerY);
+            ctx.restore();
         }
-        
-        // 3. Set Styling
-        const centerX = (left + right) / 2;
-        const centerY = (top + bottom) / 2;
-        const fontSize = (chart.chartArea.bottom - chart.chartArea.top) / 15; // Dynamic sizing
-        
-        ctx.font = `bold ${fontSize}px sans-serif`;
-        ctx.textBaseline = "middle";
-        ctx.textAlign = "center";
-        ctx.fillStyle = "#FFFFFF"; // Pure white
-        
-        // 4. Draw text at the calculated center
-        ctx.fillText(text, centerX, centerY);
-        ctx.restore();
-    }
-};
+    };
 
     this.charts.breakdown = new Chart(ctxBreakdown, { 
         type: 'doughnut', 
         data: { 
-            labels: activeGoals.map(d => d.name), 
+            labels: activeGoalsForDoughnut.map(d => d.name), 
             datasets: [{ 
-                data: activeGoals.map(d => d.total), 
-                backgroundColor: activeGoals.map(d => d.color), 
+                data: activeGoalsForDoughnut.map(d => d.breakdownTotal), 
+                backgroundColor: activeGoalsForDoughnut.map(d => d.color), 
                 borderWidth: 1, 
                 borderColor: '#1f2937' 
             }] 
@@ -2943,8 +2999,8 @@ renderReports() {
             plugins: { 
                 legend: { labels: { color: '#9ca3af' } },
                 title: { 
-                    display: activeGoals.length === 0, 
-                    text: 'Chưa có dữ liệu', 
+                    display: activeGoalsForDoughnut.length === 0, 
+                    text: 'Không có dữ liệu trong khoảng thời gian này', 
                     position: 'bottom', 
                     color: '#6b7280' 
                 },
@@ -2952,7 +3008,6 @@ renderReports() {
                     callbacks: {
                         label: function(context) {
                             const value = context.raw || 0;
-                            // --- NEW: Convert Tooltip to Hours ---
                             if (unitLabel === 'Phút') {
                                 return ` ${context.label}: ${(value / 60).toFixed(1)}h`;
                             }
@@ -2962,29 +3017,29 @@ renderReports() {
                 }
             } 
         },
-        plugins: [centerTextPlugin] // Activate the center text plugin
+        plugins: [centerTextPlugin] 
     });
     
-    // 2. Weekly Chart
+    // 6. RENDER WEEKLY CHART
     const ctxWeek = document.getElementById('weeklyChart').getContext('2d');
     if(this.charts.weekly) this.charts.weekly.destroy();
     this.charts.weekly = new Chart(ctxWeek, { 
         type: 'bar', 
         data: { 
             labels: weekDays, 
-            datasets: activeGoals.map(g => ({ label: g.name, data: g.weekly, backgroundColor: g.color, stack: '0' })) 
+            datasets: allGoalsForBars.map(g => ({ label: g.name, data: g.weekly, backgroundColor: g.color, stack: '0' })) 
         }, 
         options: commonOptions 
     });
     
-    // 3. Monthly Chart
+    // 7. RENDER MONTHLY CHART
     const ctxMonth = document.getElementById('monthlyChart').getContext('2d');
     if(this.charts.monthly) this.charts.monthly.destroy();
     this.charts.monthly = new Chart(ctxMonth, { 
         type: 'bar', 
         data: { 
             labels: monthlyLabels, 
-            datasets: activeGoals.map(g => ({ label: g.name, data: g.monthly, backgroundColor: g.color, stack: '0' })) 
+            datasets: allGoalsForBars.map(g => ({ label: g.name, data: g.monthly, backgroundColor: g.color, stack: '0' })) 
         }, 
         options: commonOptions 
     });
