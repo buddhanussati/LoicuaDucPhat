@@ -224,7 +224,7 @@ border-color: rgba(251, 191, 36, 1);
             background: rgba(0,0,0,0.8); display: none; justify-content: center; align-items: center; z-index: 100;
             backdrop-filter: blur(2px);
         }
-        .modal-content { background: var(--surface); padding: 30px; border-radius: 16px; width: 400px; max-width: 90%; border: 1px solid var(--border); }
+       .modal-content { background: var(--surface); padding: 30px; border-radius: 16px; width: 400px; max-width: 90%;  max-height: 100vh; overflow-y: auto; border: 1px solid var(--border); }
         .form-group { margin-bottom: 15px; }
         .form-group label { display: block; margin-bottom: 5px; font-weight: 500; color: var(--text-light); }
         
@@ -427,8 +427,8 @@ border-color: rgba(251, 191, 36, 1);
         
         <select id="report-range-select" class="form-control" style="width: auto; padding: 5px; font-size: 13px; height: 32px;" onchange="app.renderReports()">
             <option value="all">All Time</option>
-            <option value="today">Today</option>
-            <option value="this_week" selected>This Week</option>
+            <option value="today" selected>Today</option>
+            <option value="this_week">This Week</option>
             <option value="last_week">Last Week</option>
             <option value="this_month">This Month</option>
             <option value="last_month">Last Month</option>
@@ -466,29 +466,10 @@ border-color: rgba(251, 191, 36, 1);
 <section id="view-analytics" class="view-section">
      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; flex-wrap: wrap; gap: 10px;">
     <h2 style="margin: 0;">Meditation Analytics</h2>
-     <div style="display:flex; gap:10px; flex-wrap:wrap; align-items:center;">
-            <select id="ana-goal-select" class="form-control" style="width: auto; min-width: 150px;" onchange="app.renderAnalytics()">
-                </select>
-   <div id="threshold-config" style="display: flex; align-items: center; gap: 5px; background: var(--surface); padding: 5px 12px; border-radius: 20px; border: 1px solid var(--border);">
-    <span style="font-size: 12px; color: var(--text-light); white-space: nowrap;">
-        <i class="fas fa-stopwatch"></i> Distraction threshold:
-    </span>
-    <input type="number" id="ana-threshold" 
-           style="width: 45px; 
-                  background: rgba(17, 24, 39,0.7); 
-                  border: 1px solid var(--border); 
-                  border-radius: 4px; 
-                  color: var(--primary); 
-                  font-weight: bold; 
-                  text-align: center; 
-                  outline: none;
-                  cursor: pointer;" 
-           value="12" min="1" onchange="app.saveThreshold(this.value)">
-    <span style="font-size: 11px; color: var(--text-light);">secs</span>
-</div>
-
-        <select id="ana-time-range" class="form-control" style="width: auto;" onchange="app.renderAnalytics()">
-            <option value="7" selected>Last 7 days</option>
+ <div style="display:flex; gap:10px; flex-wrap:wrap; align-items:center;">
+            <select id="ana-time-range" class="form-control" style="width: auto;" onchange="app.renderAnalytics()">
+			<option value="3" selected>Last 3 days</option>
+            <option value="7">Last 7 days</option>
             <option value="30">Last 30 days</option>
             <option value="90">Last 3 months</option>
             <option value="365">All time</option>
@@ -496,10 +477,10 @@ border-color: rgba(251, 191, 36, 1);
     </div>
 </div>
     <div class="dashboard-grid" style="grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); margin-bottom: 20px;">
-        <div class="card" style="text-align: center; border-left: 4px solid var(--zen);">
+        <div class="card" style="text-align: center; border-left: 4px solid var(--success);">
             <div style="font-size: 12px; color: var(--text-light); text-transform: uppercase;">Average Quality</div>
             <div style="font-size: 28px; font-weight: bold; margin: 5px 0;" id="ana-avg-quality">0%</div>
-            <div style="font-size: 11px; color: var(--text-light);">Mindfulness / Time Ratio</div>
+            <div style="font-size: 11px; color: var(--text-light);">Mindfulness / Time</div>
         </div>
         <div class="card" style="text-align: center; border-left: 4px solid var(--primary);">
             <div style="font-size: 12px; color: var(--text-light); text-transform: uppercase;">Mindfulness Quality</div>
@@ -516,7 +497,7 @@ border-color: rgba(251, 191, 36, 1);
     <div class="dashboard-grid" style="grid-template-columns: 1fr; gap: 20px;">
         <div class="card">
             <h3>📈 Mindfulness Trend</h3>
-            <p style="font-size: 12px; color: var(--text-light); margin-bottom: 15px;">Tracking mindfulness ratio across recent sessions.</p>
+            <p style="font-size: 12px; color: var(--text-light); margin-bottom: 15px;">Tracking mindfulness ratio across sessions</p>
             <div style="height: 300px;">
                 <canvas id="analyticsTrendChart"></canvas>
             </div>
@@ -669,6 +650,10 @@ border-color: rgba(251, 191, 36, 1);
 <div class="form-group" id="s-mindfulness-group" style="display:none; background: rgba(167, 139, 250, 0.1); padding: 10px; border-radius: 8px; border: 1px solid rgba(167, 139, 250, 0.3);">
     <label style="color: var(--zen);">Mindfulness (Count)</label>
     <input type="number" id="s-mindfulness" class="form-control" min="0" value="0" />
+	    <div style="margin-top: 10px; border-top: 1px solid rgba(167, 139, 250, 0.3); padding-top: 10px;">
+        <label style="color: var(--zen); font-size: 12px;">Distraction Threshold (secs)</label>
+        <input type="number" id="s-threshold" class="form-control" min="1" value="12" style="background: rgba(0,0,0,0.2);" />
+    </div>
 </div>
                 <div class="form-group">
                     <label>Notes (Optional)</label>
@@ -796,7 +781,7 @@ border-color: rgba(251, 191, 36, 1);
             <p>To use the app effectively, you should understand the following indicators:</p>
             <ul style="padding-left: 20px; margin-bottom: 15px;">
                 <li><strong>Mindfulness (Sati):</strong> A unit for measuring awareness. Every time you recognize your breath or mental state and touch the screen, one "Mindfulness" point is recorded.</li>
-                <li><strong>Mindful State:</strong> A state where the frequency of recording (Sati) remains stable and regular.</li>
+                <li><strong>Mindful State:</strong> A state where the frequency of noting (Sati) remains stable and regular.</li>
                 <li><strong>Unmindful:</strong> A state where the mind is distracted or drowsy, resulting in few or no recordings over a period of time.</li>
                 <li><strong>Diligence Streak:</strong> The number of consecutive days you have maintained your practice.</li>
             </ul>
@@ -1457,55 +1442,63 @@ closeIntroModal() {
                 const diff = d.getDate() - day + 1; // Lui về ngày 1 (Thứ Hai)
                 return new Date(d.getFullYear(), d.getMonth(), diff);
             }
-renderAnalytics() {
-    const range = parseInt(document.getElementById('ana-time-range').value) || 7;
-    const ctxTrend = document.getElementById('analyticsTrendChart').getContext('2d');
-    const goalSelect = document.getElementById('ana-goal-select');
-    const thresholdInput = document.getElementById('ana-threshold');
-	   
+			
+// --- ANALYTICS MODULE START ---
 
-	   const medGoals = this.data.goals.filter(g => g.type === 'meditation');
+// Logic: Gap Analysis using PER-SESSION threshold
+analyzeSingleSession(log) {
+    if (!log.touches || log.touches.length < 2) {
+        return { distractedSec: log.minutes * 60 * 0.5, qualityPct: 50 };
+    }
+
+    const sortedTouches = [...log.touches].sort((a,b) => a - b);
+    
+    // IMPORTANT: Use the threshold stored in the log, fallback to 12s if old data
+    const thresholdSec = log.threshold || 10;
+    
+    let distractedSec = 0;
+
+    const startGap = (sortedTouches[0] - log.timestamp) / 1000;
+    if (startGap > thresholdSec) distractedSec += (startGap - thresholdSec/2);
+
+    for (let i = 1; i < sortedTouches.length; i++) {
+        const gap = (sortedTouches[i] - sortedTouches[i-1]) / 1000;
+        if (gap > thresholdSec) {
+            distractedSec += (gap - thresholdSec/2);
+        }
+    }
+
+    const endTime = log.timestamp + (log.minutes * 60 * 1000);
+    const endGap = (endTime - sortedTouches[sortedTouches.length - 1]) / 1000;
+    if (endGap > thresholdSec) distractedSec += (endGap - thresholdSec/2);
+
+    const totalSec = log.minutes * 60;
+    distractedSec = Math.min(distractedSec, totalSec);
+    
+    const qualityPct = ((totalSec - distractedSec) / totalSec) * 100;
+    
+    return { distractedSec, qualityPct: parseFloat(qualityPct.toFixed(1)) };
+}
+
+renderAnalytics() {
+    const range = parseInt(document.getElementById('ana-time-range').value) || 3;
+    const ctxTrend = document.getElementById('analyticsTrendChart').getContext('2d');
+
+    // 1. Filter ALL Meditation Logs (Combine goals)
+    const medGoals = this.data.goals.filter(g => g.type === 'meditation');
+    const medGoalIds = medGoals.map(g => g.id); // Get list of IDs
     
     if (medGoals.length === 0) {
         document.getElementById('ana-comparison-table').innerHTML = '<tr><td colspan="5" style="text-align:center; padding:20px;">There is no meditation goals.</td></tr>';
         return;
     }
 
-    // 2. Populate Dropdown (if needed or empty)
-    // We rebuild it if the number of options doesn't match data (simple sync check)
-    if (goalSelect.options.length !== medGoals.length) {
-        const currentVal = goalSelect.value;
-        goalSelect.innerHTML = '';
-        medGoals.forEach(g => {
-            const opt = document.createElement('option');
-            opt.value = g.id;
-            opt.innerText = g.name;
-            goalSelect.appendChild(opt);
-        });
-        // Restore selection or select first
-        if (currentVal && medGoals.find(g => g.id === currentVal)) {
-            goalSelect.value = currentVal;
-        } else {
-            goalSelect.value = medGoals[0].id;
-        }
-    }
-
-    // 3. Get Selected Goal Data
-    const selectedGoalId = goalSelect.value;
-    const selectedGoal = this.data.goals.find(g => g.id === selectedGoalId);
-    
-    // 4. Load Specific Threshold
-    // Default to 12s if not set in the goal yet
-    const currentThreshold = selectedGoal.threshold || 12;
-    thresholdInput.value = currentThreshold;
-	
-
-    // 5. Filter Logs for THIS GOAL ONLY within Time Range
+    // 2. Filter Logs for ALL MEDITATION GOALS within Time Range
     const now = Date.now();
     const cutoff = now - (range * 24 * 60 * 60 * 1000);
     
     const logs = this.data.logs
-        .filter(l => l.goalId === selectedGoalId && l.timestamp >= cutoff)
+        .filter(l => medGoalIds.includes(l.goalId) && l.timestamp >= cutoff)
         .sort((a, b) => a.timestamp - b.timestamp);
 
     if (logs.length === 0) {
@@ -1513,47 +1506,44 @@ renderAnalytics() {
         document.getElementById('ana-avg-quality').innerText = "---";
         document.getElementById('ana-avg-density').innerText = "---";
         document.getElementById('ana-total-mindful').innerText = "---";
-        // Translated Empty State Message
         document.getElementById('ana-comparison-table').innerHTML = '<tr><td colspan="5" style="padding:20px; text-align:center;">No meditation data found for this period.</td></tr>';
         return;
     }
 
-    // 6. Process Logs using the GOAL SPECIFIC Threshold
+    // 3. Process Logs
     let totalTimeSec = 0;
     let totalDistractedSec = 0;
     let totalTouches = 0;
     
     const sessionData = logs.map(log => {
-        // Pass the threshold explicitly
-        const result = this.analyzeSingleSession(log, currentThreshold);
+        // Function now reads internal threshold, no need to pass it
+        const result = this.analyzeSingleSession(log);
         
         totalTimeSec += log.minutes * 60;
         totalDistractedSec += result.distractedSec;
         const count = log.count !== undefined ? log.count : (log.touches ? log.touches.length : 0);
         totalTouches += count;
         
-               return {
+        return {
             date: new Date(log.timestamp).toLocaleDateString('en-GB', {day: '2-digit', month:'2-digit'}),
             quality: result.qualityPct,
             density: log.minutes > 0 ? (count / log.minutes).toFixed(1) : 0
         };
     });
 
-// 7. Update Summary Cards
-    // Prevent divide by zero
+    // 4. Update Summary Cards
     const avgQuality = totalTimeSec > 0 ? ((1 - (totalDistractedSec / totalTimeSec)) * 100).toFixed(1) : 0;
     const avgDensity = totalTimeSec > 0 ? (totalTouches / (totalTimeSec / 60)).toFixed(1) : 0;
     const mindfulSeconds = Math.max(0, totalTimeSec - totalDistractedSec);
     const mindfulHours = (mindfulSeconds / 3600).toFixed(1);
-
+    
     document.getElementById('ana-avg-quality').innerText = `${avgQuality}%`;
     document.getElementById('ana-avg-density').innerText = avgDensity;
     document.getElementById('ana-total-mindful').innerText = `${mindfulHours}h`;
 
-    // 8. Render Trend Chart
+    // 5. Render Trend Chart
     if (this.charts.analyticsTrend) this.charts.analyticsTrend.destroy();
 
-    // Downsampling logic
     let chartData = sessionData;
     const maxPoints = 15;
     if (sessionData.length > maxPoints) {
@@ -1565,13 +1555,13 @@ renderAnalytics() {
         }
     }
 
-    this.charts.analyticsTrend = new Chart(ctxTrend, {
+        this.charts.analyticsTrend = new Chart(ctxTrend, {
         type: 'line',
         data: {
             labels: chartData.map(d => d.date),
             datasets: [
                 {
-                    label: 'Quality (%)', // Translated
+                    label: 'Quality (%)',
                     data: chartData.map(d => d.quality),
                     borderColor: '#34d399',
                     backgroundColor: 'rgba(52, 211, 153, 0.1)',
@@ -1580,7 +1570,7 @@ renderAnalytics() {
                     tension: 0.3
                 },
                 {
-                    label: 'Mindfulness', // Translated
+                    label: 'Mindfulness/min',
                     data: chartData.map(d => d.density),
                     borderColor: '#818cf8',
                     borderDash: [5, 5],
@@ -1593,133 +1583,95 @@ renderAnalytics() {
             responsive: true,
             maintainAspectRatio: false,
             interaction: { mode: 'index', intersect: false },
-			plugins: {  
-        tooltip: {
-            titleColor: '#f3f4f6',
-            bodyColor: '#f3f4f6',
-            borderColor: '#374151',
-            borderWidth: 1,
-            padding: 10,
-            displayColors: true, // Shows the square box
-            
-            callbacks: {
-                // THIS FIXES THE HOVER BOX COLOR
-                labelColor: function(context) {
-                    const dataset = context.dataset;
-                    return {
-                        borderColor: dataset.borderColor,
-                        backgroundColor: dataset.borderColor, // FORCES SOLID COLOR IN HOVER BOX
-                        borderWidth: 0,
-                        borderRadius: 2,
-                    };
+            plugins: {  
+                tooltip: {
+                    titleColor: '#f3f4f6',
+                    bodyColor: '#f3f4f6',
+                    borderColor: '#374151',
+                    borderWidth: 1,
+                    padding: 10,
+                    displayColors: true,
+                    callbacks: {
+                        labelColor: function(context) {
+                            const dataset = context.dataset;
+                            return {
+                                borderColor: dataset.borderColor,
+                                backgroundColor: dataset.borderColor,
+                                borderWidth: 0,
+                                borderRadius: 2,
+                            };
+                        }
+                    }
                 }
-            }
-        }
-    },
+            },
             scales: {
                 y: {
-                    type: 'linear',
-                    display: true,
-                    position: 'left',
-                    min: 0, max: 100,
-                    title: { display: true, text: 'Quality %' }, // Translated
+                    type: 'linear', display: true, position: 'left', min: 0, max: 100,
                     grid: { color: '#374151' }
                 },
                 y1: {
-                    type: 'linear',
-                    display: true,
-                    position: 'right',
-                    grid: { drawOnChartArea: false },
-                    title: { display: true, text: 'Mindfulness / Min' } // Translated
+                    type: 'linear', display: true, position: 'right',
+                    grid: { drawOnChartArea: false }
                 }
             }
         }
     });
 
-    this.renderComparisonTable([selectedGoalId], currentThreshold);
-}
-saveThreshold(val) {
-    const goalSelect = document.getElementById('ana-goal-select');
-    const selectedGoalId = goalSelect.value;
-    
-    if (!selectedGoalId) return;
-
-    const goal = this.data.goals.find(g => g.id === selectedGoalId);
-    if (goal) {
-        goal.threshold = parseInt(val);
-        this.save();
-        this.renderAnalytics(); // Re-calc with new threshold
-        this.showToast("Threshold updated: " + val + "s");
-    }
-}
-// If gap > threshold (20s), assume mind wandered.
-analyzeSingleSession(log, thresholdOverride = null) {
-    // Basic fallback if no touches data
-    if (!log.touches || log.touches.length < 2) {
-        return { distractedSec: log.minutes * 60 * 0.5, qualityPct: 50 };
-    }
-
-    const sortedTouches = [...log.touches].sort((a,b) => a - b);
-    
-    // Use override if provided, else check DOM, else default 12
-    let thresholdSec;
-    if (thresholdOverride) {
-        thresholdSec = thresholdOverride;
-    } else {
-        thresholdSec = parseInt(document.getElementById('ana-threshold').value) || 12; 
-    }
-    
-    let distractedSec = 0;
-
-    // Check gap from Start to First Touch
-    const startGap = (sortedTouches[0] - log.timestamp) / 1000;
-    if (startGap > thresholdSec) distractedSec += (startGap - thresholdSec/2);
-
-    // Check gaps between touches
-    for (let i = 1; i < sortedTouches.length; i++) {
-        const gap = (sortedTouches[i] - sortedTouches[i-1]) / 1000;
-        if (gap > thresholdSec) {
-            distractedSec += (gap - thresholdSec/2);
-        }
-    }
-
-    // Check gap from Last Touch to End
-    const endTime = log.timestamp + (log.minutes * 60 * 1000);
-    const endGap = (endTime - sortedTouches[sortedTouches.length - 1]) / 1000;
-    if (endGap > thresholdSec) distractedSec += (endGap - thresholdSec/2);
-
-    // Cap distracted seconds to total minutes
-    const totalSec = log.minutes * 60;
-    distractedSec = Math.min(distractedSec, totalSec);
-    
-    const qualityPct = ((totalSec - distractedSec) / totalSec) * 100;
-    
-    return { distractedSec, qualityPct: parseFloat(qualityPct.toFixed(1)) };
+    // 6. Render Comparison Table (Pass ALL Med Goal IDs)
+    this.renderComparisonTable(medGoalIds);
 }
 
-renderComparisonTable(medGoalIds, threshold) {
+// Update helper to not require threshold arg (it reads from log internally)
+getStatsForRange(startTime, endTime, goalIds) {
+    const logs = this.data.logs.filter(l => 
+        goalIds.includes(l.goalId) && 
+        l.timestamp >= startTime && 
+        l.timestamp < endTime
+    );
+
+    if (logs.length === 0) return { count: 0, minutes: 0, quality: 0, density: 0 };
+
+    let totalMinutes = 0;
+    let totalTouches = 0;
+    let weightedQualitySum = 0;
+
+    logs.forEach(l => {
+        totalMinutes += l.minutes;
+        const count = l.count !== undefined ? l.count : (l.touches ? l.touches.length : 0);
+        totalTouches += count;
+        // Function handles internal threshold reading
+        const analysis = this.analyzeSingleSession(l);
+        weightedQualitySum += (l.minutes * analysis.qualityPct);
+    });
+
+    return {
+        count: logs.length,
+        minutes: totalMinutes,
+        quality: (weightedQualitySum / totalMinutes).toFixed(1),
+        density: (totalTouches / totalMinutes).toFixed(1)
+    };
+}
+
+renderComparisonTable(medGoalIds) {
     const tbody = document.getElementById('ana-comparison-table');
     tbody.innerHTML = '';
 
     const now = new Date();
     const todayStart = new Date(now.getFullYear(), now.getMonth(), now.getDate()).getTime();
     
-    // 1. Yesterday Calculation
+    // Period definitions (same as before)
     const startOfYesterday = todayStart - (24 * 60 * 60 * 1000);
-	const startOfDaybefore = todayStart - (48 * 60 * 60 * 1000);
-    
-    // 2. Start of This Week (Monday)
+    const startOfDaybefore = todayStart - (48 * 60 * 60 * 1000);
     const dayOfWeek = now.getDay(); 
     const diffToMonday = (dayOfWeek === 0 ? 6 : dayOfWeek - 1);
     const startOfThisWeek = new Date(now.getFullYear(), now.getMonth(), now.getDate() - diffToMonday).getTime();
     const startOfLastWeek = startOfThisWeek - (7 * 24 * 60 * 60 * 1000);
     const startOfWeekBefore = startOfThisWeek - (14 * 24 * 60 * 60 * 1000);
-    // 3. Start of This Month
     const startOfThisMonth = new Date(now.getFullYear(), now.getMonth(), 1).getTime();
     const startOfLastMonth = new Date(now.getFullYear(), now.getMonth() - 1, 1).getTime();
-	const startOfMonthBefore = new Date(now.getFullYear(), now.getMonth() - 2, 1).getTime();
-    // 4. Period Definitions
-    const periods = [
+    const startOfMonthBefore = new Date(now.getFullYear(), now.getMonth() - 2, 1).getTime();
+
+   const periods = [
         { label: 'Today', start: todayStart, end: Date.now() },
         { label: 'Yester&#8203;day', start: startOfYesterday, end: todayStart },
 		{ label: 'Day Before', start: startOfDaybefore, end: startOfYesterday },
@@ -1732,8 +1684,8 @@ renderComparisonTable(medGoalIds, threshold) {
     ];
 
     periods.forEach(p => {
-        // Pass the threshold to getStatsForRange
-        const stats = this.getStatsForRange(p.start, p.end, medGoalIds, threshold);
+        // No longer passing threshold arg
+        const stats = this.getStatsForRange(p.start, p.end, medGoalIds);
         const row = document.createElement('tr');
         row.style.borderBottom = '1px solid var(--border)';
         
@@ -1754,36 +1706,8 @@ renderComparisonTable(medGoalIds, threshold) {
     });
 }
 
-// Helper method to filter by exact timestamp range
-getStatsForRange(startTime, endTime, goalIds, threshold) {
-    const logs = this.data.logs.filter(l => 
-        goalIds.includes(l.goalId) && 
-        l.timestamp >= startTime && 
-        l.timestamp < endTime
-    );
 
-    if (logs.length === 0) return { count: 0, minutes: 0, quality: 0, density: 0 };
-
-    let totalMinutes = 0;
-    let totalTouches = 0;
-    let weightedQualitySum = 0;
-
-    logs.forEach(l => {
-        totalMinutes += l.minutes;
-        const count = l.count !== undefined ? l.count : (l.touches ? l.touches.length : 0);
-        totalTouches += count;
-        // Pass threshold here
-        const analysis = this.analyzeSingleSession(l, threshold);
-        weightedQualitySum += (l.minutes * analysis.qualityPct);
-    });
-
-    return {
-        count: logs.length,
-        minutes: totalMinutes,
-        quality: (weightedQualitySum / totalMinutes).toFixed(1),
-        density: (totalTouches / totalMinutes).toFixed(1)
-    };
-}
+// --- ANALYTICS MODULE END ---
             init() {
                 try {
                     this.renderDate();
@@ -1807,10 +1731,7 @@ getStatsForRange(startTime, endTime, goalIds, threshold) {
 				if (!localStorage.getItem('intro_seen')) {
         this.openIntroModal();
     }
-	const savedThreshold = localStorage.getItem('ana_threshold');
-if (savedThreshold) {
-    document.getElementById('ana-threshold').value = savedThreshold;
-}
+
             }
 
             save() {
@@ -1940,8 +1861,7 @@ toggleTimer(id) {
             
             // --- MEDITATION LOGIC ---
 startMeditationSetup(goal) {
-    // --- MODIFIED CODE STARTS HERE ---
-    // Use saved duration or default to 20
+    // 1. Ask for Duration
     const defaultTime = goal.lastDuration || '20';
     const minStr = prompt('Meditation duration (mins):', defaultTime);
     
@@ -1949,10 +1869,20 @@ startMeditationSetup(goal) {
     const min = parseInt(minStr);
     if (isNaN(min) || min <= 0) return;
 
-    // Save this duration for next time
+    // 2. Ask for Threshold (New Step)
+    // Default to last used for this goal, or 12s if new
+    const defaultThreshold = goal.lastThreshold || '10';
+    const threshStr = prompt('Distraction Threshold (secs):\n(The maximum allowed gap between two mindfulness logs)', defaultThreshold);
+    let threshold = 10; // Default fallback
+    
+    if (threshStr && !isNaN(parseInt(threshStr)) && parseInt(threshStr) > 0) {
+        threshold = parseInt(threshStr);
+    }
+
+    // Save defaults for next time
     goal.lastDuration = min;
-    this.save(); // Save to local storage immediately
-    // --- MODIFIED CODE ENDS HERE ---
+    goal.lastThreshold = threshold;
+    this.save(); 
     
     if (typeof Website2APK !== 'undefined') {
         Website2APK.keepScreenOn(true); 
@@ -1962,21 +1892,20 @@ startMeditationSetup(goal) {
         active: true, paused: false, goalId: goal.id, count: 0,
         startTime: Date.now(), totalDurationSeconds: min * 60,
         remainingSeconds: min * 60, touches: [],
-        quoteInterval: null // Initialize quoteInterval
+        threshold: threshold, // Store threshold in active session state
+        quoteInterval: null 
     };
 
     document.getElementById('meditation-overlay').style.display = 'flex';
     document.getElementById('med-counter').innerText = '0';
     this.updateMedTimerDisplay();
 
-    // --- NEW CODE START: Initial Quote & Interval ---
-    this.updateMeditationQuote(true); // Show first quote immediately
+    this.updateMeditationQuote(true); 
     this.meditationState.quoteInterval = setInterval(() => {
         if(!this.meditationState.paused) {
             this.updateMeditationQuote(false);
         }
-    }, 8000); // 8 seconds per quote
-    // --- NEW CODE END ---
+    }, 8000); 
 
     this.meditationState.timerRef = setInterval(() => {
         if (!this.meditationState.paused) {
@@ -2052,7 +1981,7 @@ concludeMeditationSession(type = 'manual') {
     const minutes = Math.ceil(durationSeconds / 60);
     
     if (minutes <= 0) {
-        this.showToast("Phiên quá ngắn");
+        this.showToast("Session too short");
         this.meditationState.active = false;
         return;
     }
@@ -2070,36 +1999,37 @@ concludeMeditationSession(type = 'manual') {
             }
 
             saveMeditationLog() {
-                // Get data from state
-                const durationSeconds = this.meditationState.totalDurationSeconds - this.meditationState.remainingSeconds;
-                const minutes = Math.ceil(durationSeconds / 60);
-                const notes = document.getElementById('med-finish-notes').value;
+    const durationSeconds = this.meditationState.totalDurationSeconds - this.meditationState.remainingSeconds;
+    const minutes = Math.ceil(durationSeconds / 60);
+    const notes = document.getElementById('med-finish-notes').value;
 
-                const goal = this.data.goals.find(g => g.id === this.meditationState.goalId);
-                const log = {
-                    goalId: goal.id,
-                    date: this.toIsoDate(new Date(this.meditationState.startTime)),
-                    timestamp: this.meditationState.startTime,
-                    minutes: minutes,
-                    notes: `Mindfulness: ${this.meditationState.count}. ${notes}`, // Combine count and notes
-                    touches: this.meditationState.touches
-                };
+    const goal = this.data.goals.find(g => g.id === this.meditationState.goalId);
+    
+    const log = {
+        goalId: goal.id,
+        date: this.toIsoDate(new Date(this.meditationState.startTime)),
+        timestamp: this.meditationState.startTime,
+        minutes: minutes,
+        notes: `Mindfulness: ${this.meditationState.count}. ${notes}`,
+        touches: this.meditationState.touches,
+        threshold: this.meditationState.threshold // Save specific threshold
+    };
 
-                this.data.logs.push(log);
-                goal.totalMinutes += minutes;
-                if (!goal.totalMindfulness) goal.totalMindfulness = 0;
-                goal.totalMindfulness += this.meditationState.count;
+    this.data.logs.push(log);
+    goal.totalMinutes += minutes;
+    if (!goal.totalMindfulness) goal.totalMindfulness = 0;
+    goal.totalMindfulness += this.meditationState.count;
 
-                this.meditationState.active = false;
-                this.save();
-                this.recalculateStreak();
-                this.renderGoals();
-                this.renderReports();
-                this.checkAchievements();
-                
-                document.getElementById('meditation-finish-modal').style.display = 'none';
-                this.showToast(`Session Saved! +${this.meditationState.count} mindfulness.`);
-            }
+    this.meditationState.active = false;
+    this.save();
+    this.recalculateStreak();
+    this.renderGoals();
+    this.renderReports();
+    this.checkAchievements();
+    
+    document.getElementById('meditation-finish-modal').style.display = 'none';
+    this.showToast(`Session Saved! +${this.meditationState.count} mindfulness.`);
+}
 
             // --- STANDARD TIMER UI UPDATES ---
             updateTimerUI() {
@@ -3093,7 +3023,7 @@ updateStats() {
     { id: 'streak_120', title: 'Viriya', desc: 'Practice for 120 consecutive days', condition: () => this.data.streak >= 120 },
     { id: 'streak_365', title: 'Viriya-sambojjhanga', desc: 'Practice for 365 consecutive days', condition: () => this.data.streak >= 365 },
 
-    { id: 'beginner', title: 'Novice', desc: 'Accumulate 5,000 Mindfulness (Sati)', condition: () => this.totalMindfulnessCounts >= 5000 },
+    { id: 'beginner', title: 'Beginner', desc: 'Accumulate 5,000 Mindfulness (Sati)', condition: () => this.totalMindfulnessCounts >= 5000 },
     { id: 'practitioner', title: 'Practitioner', desc: 'Accumulate 10,000 Mindfulness (Sati)', condition: () => this.totalMindfulnessCounts >= 10000 },
     { id: 'yogi', title: 'Yogi', desc: 'Accumulate 20,000 Mindfulness (Sati)', condition: () => this.totalMindfulnessCounts >= 20000 },
     { id: 'meditator', title: 'Meditator', desc: 'Accumulate 50,000 Mindfulness (Sati)', condition: () => this.totalMindfulnessCounts >= 50000 },
@@ -3377,28 +3307,30 @@ fallbackCopyText(text) {
     document.getElementById('s-date').value = this.toDateTimeInput(startTime);
     document.getElementById('s-minutes').value = minutes;
 
-    // --- NEW: Toggle Delete Button Visibility ---
     const deleteBtn = document.getElementById('btn-delete-session');
-    if (logId) {
-        deleteBtn.style.display = 'block'; // Show if editing
-    } else {
-        deleteBtn.style.display = 'none';  // Hide if new
-    }
-    // --------------------------------------------
+    if (logId) deleteBtn.style.display = 'block'; 
+    else deleteBtn.style.display = 'none';  
     
-    // ... (rest of your existing code for mindfulness check) ...
     const goal = this.data.goals.find(g => g.id === goalId);
     const mindGroup = document.getElementById('s-mindfulness-group');
     const mindInput = document.getElementById('s-mindfulness');
+    const thresholdInput = document.getElementById('s-threshold');
     
     if (goal && goal.type === 'meditation') {
         mindGroup.style.display = 'block';
         let currentCount = 0;
+        let currentThreshold = goal.lastThreshold || 10; // Default to last used
+
         if (logId) {
             const log = this.data.logs.find(l => l.timestamp == logId);
-            if (log) currentCount = log.count !== undefined ? log.count : (log.touches ? log.touches.length : 0);
+            if (log) {
+                currentCount = log.count !== undefined ? log.count : (log.touches ? log.touches.length : 0);
+                // Load existing threshold from log, or fallback to default
+                if(log.threshold) currentThreshold = log.threshold;
+            }
         }
         mindInput.value = currentCount;
+        thresholdInput.value = currentThreshold;
     } else {
         mindGroup.style.display = 'none';
         mindInput.value = 0;
@@ -3413,54 +3345,48 @@ fallbackCopyText(text) {
     document.getElementById('session-title').innerText = logId ? 'Update log' : 'Add log';
 }
             closeSessionModal() { document.getElementById('session-modal').style.display = 'none'; }
-            logSessionConfirm(e) {
+           logSessionConfirm(e) {
     e.preventDefault();
     const goalId = document.getElementById('s-goal-id').value;
     const logId = document.getElementById('s-log-id').value;
     const dateTimeStr = document.getElementById('s-date').value;
     const minutes = parseInt(document.getElementById('s-minutes').value);
     
-    // 1. Get Mindfulness and Raw Notes
     const mindfulness = parseInt(document.getElementById('s-mindfulness').value) || 0;
+    const threshold = parseInt(document.getElementById('s-threshold').value) || 10; // Get threshold
     let notes = document.getElementById('s-notes').value;
     
     if (minutes <= 0) return;
     
     const goal = this.data.goals.find(g => g.id === goalId);
     
-    // --- NEW LOGIC: AUTO-FORMAT NOTES ---
     if (goal && goal.type === 'meditation') {
-        // A. Remove any existing "Mindfulness: X" string (to prevent duplicates if editing)
-        // Regex explains: Starts with "Chánh niệm:", followed by numbers, optional dot/space
         let cleanNotes = notes.replace(/^Mindfulness: \d+(\.\s*)?/, '').trim();
-        
-        // B. Add the new count if it's greater than 0
         if (mindfulness > 0) {
             notes = `Mindfulness: ${mindfulness}. ${cleanNotes}`;
         } else {
             notes = cleanNotes;
         }
-        // Result example: "Chánh niệm: 10. Cảm thấy bình an"
+        // Update preference for next time
+        goal.lastThreshold = threshold;
     }
-    // ------------------------------------
 
     const dateObj = new Date(dateTimeStr);
     const timestamp = dateObj.getTime();
     const dateKey = dateTimeStr.split('T')[0]; 
     
     if (logId) {
-        // --- EDIT EXISTING LOG ---
         const log = this.data.logs.find(l => l.timestamp == logId);
         if (log) {
             const oldMinutes = log.minutes;
-            // Use saved count or fallback to touches length
             const oldMindfulness = log.count !== undefined ? log.count : (log.touches ? log.touches.length : 0);
             
             log.minutes = minutes; 
             log.date = dateKey; 
             log.timestamp = timestamp; 
-            log.notes = notes; // Save the formatted notes
+            log.notes = notes; 
             log.count = mindfulness;
+            log.threshold = threshold; // Save threshold
             
             if (goal) {
                 goal.totalMinutes += (minutes - oldMinutes);
@@ -3471,15 +3397,15 @@ fallbackCopyText(text) {
             }
         }
     } else {
-        // --- CREATE NEW LOG ---
         this.data.logs.push({ 
             goalId, 
             date: dateKey, 
             timestamp, 
             minutes, 
-            notes, // Save the formatted notes
+            notes, 
             count: mindfulness, 
-            touches: [] 
+            touches: [],
+            threshold: threshold // Save threshold
         });
         
         if (goal) {
