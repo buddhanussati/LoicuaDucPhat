@@ -809,7 +809,7 @@ border-color: rgba(251, 191, 36, 1);
             <ul style="padding-left: 20px;">
                 <li><strong>Chế độ Thiền:</strong>
                     <ul>
-                        <li><strong>Chạm để đếm:</strong> Chạm vào màn hình (hoặc click chuột) mỗi khi bạn ghi nhận được sự chú tâm quay về hơi thở. Số đếm này được tích lũy thành điểm Chánh niệm (Thiện).</li>
+                        <li><strong>Chạm để đếm:</strong> Chạm vào màn hình (hoặc click chuột) mỗi khi bạn ghi nhận được sự chú tâm quay về hơi thở. Số đếm này được tích lũy thành điểm Chánh niệm (Sati).</li>
                     </ul>
                 </li>
             </ul>
@@ -1887,7 +1887,7 @@ startMeditationSetup(goal) {
 
     // 2. Ask for Threshold (New Step)
     // Default to last used for this goal, or 12s if new
-    const defaultThreshold = goal.lastThreshold || '12';
+    const defaultThreshold = goal.lastThreshold || '10';
     const threshStr = prompt('Ngưỡng mất tập trung (giây):', defaultThreshold);
     let threshold = 10; // Default fallback
     
@@ -2996,7 +2996,7 @@ updateStats() {
 
     // 3. Display on UI
     document.getElementById('streak-disp').innerText = `${this.data.streak} 🔥`;
-    document.getElementById('xp-disp').innerText = `${this.data.xp} Thiện`;
+    document.getElementById('xp-disp').innerText = `${this.data.xp} Sati`;
     document.getElementById('level-disp').innerText = Math.floor(this.data.xp / 1000) + 1;
 
     // ... (keep the rest of the function: daily goal calculation etc.) ...
@@ -3038,16 +3038,16 @@ updateStats() {
 					{ id: 'streak_120', title: 'Nhiệt Tâm', desc: 'Hành trì 120 ngày liên tục', condition: () => this.data.streak >= 120 },
 					{ id: 'streak_365', title: 'Tinh Tấn Giác Chi', desc: 'Hành trì 365 ngày liên tục', condition: () => this.data.streak >= 365 },
 
-					{ id: 'beginner', title: 'Sơ Cơ', desc: 'Tích luỹ 5.000 Chánh niệm (Thiện)', condition: () => this.totalMindfulnessCounts >= 5000 },
-					{ id: 'practitioner', title: 'Thiền Sinh', desc: 'Tích luỹ 10.000 Chánh niệm (Thiện)', condition: () => this.totalMindfulnessCounts >= 10000 },
-					{ id: 'yogi', title: 'Hành Giả', desc: 'Tích luỹ 20.000 Chánh niệm (Thiện)', condition: () => this.totalMindfulnessCounts >= 20000 },
-					{ id: 'meditator', title: 'Thiền Giả', desc: 'Tích luỹ 50.000 Chánh niệm (Thiện)', condition: () => this.totalMindfulnessCounts >= 50000 },
-					{ id: 'clear-mirror', title: 'Gương Sáng', desc: 'Tích luỹ 80.000 Chánh niệm (Thiện)', condition: () => this.totalMindfulnessCounts >= 80000 },
-					{ id: 'still-lake', title: 'Mặt Hồ Tĩnh Lặng', desc: 'Tích luỹ 100.000 Chánh niệm (Thiện)', condition: () => this.totalMindfulnessCounts >= 100000 },
-					{ id: 'mountain', title: 'Núi Đá', desc: 'Tích luỹ 200.000 Chánh niệm (Thiện)', condition: () => this.totalMindfulnessCounts >= 200000 },
-					{ id: 'morning-star', title: 'Sao Mai', desc: 'Tích luỹ 300.000 Chánh niệm (Thiện)', condition: () => this.totalMindfulnessCounts >= 300000 },
-					{ id: 'dhammaheir', title: 'Thừa Tự Pháp', desc: 'Tích luỹ 500.000 Chánh niệm (Thiện)', condition: () => this.totalMindfulnessCounts >= 500000 },
-					{ id: 'bodhi', title: 'Cội Bồ Đề', desc: 'Tích luỹ 1.000.000 Chánh niệm (Thiện)', condition: () => this.totalMindfulnessCounts >= 1000000 }
+					{ id: 'beginner', title: 'Sơ Cơ', desc: 'Tích luỹ 5.000 Chánh niệm (Sati)', condition: () => this.totalMindfulnessCounts >= 5000 },
+					{ id: 'practitioner', title: 'Thiền Sinh', desc: 'Tích luỹ 10.000 Chánh niệm (Sati)', condition: () => this.totalMindfulnessCounts >= 10000 },
+					{ id: 'yogi', title: 'Hành Giả', desc: 'Tích luỹ 20.000 Chánh niệm (Sati)', condition: () => this.totalMindfulnessCounts >= 20000 },
+					{ id: 'meditator', title: 'Thiền Giả', desc: 'Tích luỹ 50.000 Chánh niệm (Sati)', condition: () => this.totalMindfulnessCounts >= 50000 },
+					{ id: 'clear-mirror', title: 'Gương Sáng', desc: 'Tích luỹ 80.000 Chánh niệm (Sati)', condition: () => this.totalMindfulnessCounts >= 80000 },
+					{ id: 'still-lake', title: 'Mặt Hồ Tĩnh Lặng', desc: 'Tích luỹ 100.000 Chánh niệm (Sati)', condition: () => this.totalMindfulnessCounts >= 100000 },
+					{ id: 'mountain', title: 'Núi Đá', desc: 'Tích luỹ 200.000 Chánh niệm (Sati)', condition: () => this.totalMindfulnessCounts >= 200000 },
+					{ id: 'morning-star', title: 'Sao Mai', desc: 'Tích luỹ 300.000 Chánh niệm (Sati)', condition: () => this.totalMindfulnessCounts >= 300000 },
+					{ id: 'dhammaheir', title: 'Thừa Tự Pháp', desc: 'Tích luỹ 500.000 Chánh niệm (Sati)', condition: () => this.totalMindfulnessCounts >= 500000 },
+					{ id: 'bodhi', title: 'Cội Bồ Đề', desc: 'Tích luỹ 1.000.000 Chánh niệm (Sati)', condition: () => this.totalMindfulnessCounts >= 1000000 }
                 ];
                 const container = document.getElementById('achievement-list');
                 if (!container) return; container.innerHTML = '';
