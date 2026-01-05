@@ -369,8 +369,8 @@ border-color: rgba(251, 191, 36, 1);
                     <span class="stat-label">Streak</span>
                 </div>
                 <div class="stat-item">
-                    <span class="stat-val" id="xp-disp">0 XP</span>
-                    <span class="stat-label">Level <span id="level-disp">1</span></span>
+                    <span class="stat-val" id="xp-disp">0</span>
+                    <span class="stat-label">Mindfulness</span>
                 </div>
 				 <div class="stat-item clickable" onclick="app.openIntroModal()">
     <span class="stat-val" style="
@@ -398,6 +398,34 @@ border-color: rgba(251, 191, 36, 1);
         </section>
 
         <section id="view-calendar" class="view-section">
+		<div class="card" 
+     onclick="app.renderRandomQuote()" 
+     title="Tap to reflect on another verse"
+     style="margin: 0 auto 20px auto; text-align: center; border-left: 5px solid var(--zen); cursor: pointer; transition: transform 0.2s; user-select: none; max-width: 450px;"
+     onmouseover="this.style.transform='translateY(-2px)'" 
+     onmouseout="this.style.transform='translateY(0)'">
+    
+    <h3 style="color: var(--zen); margin-bottom: 15px;">
+        <i class="fas fa-dharmachakra"></i> Dhammapada
+    </h3>
+    
+    <div id="dhammapada-display" style="
+        font-style: italic; 
+        font-size: 15px; 
+        line-height: 1.6; 
+        color: var(--text); 
+        min-height: 60px; 
+        padding: 0 10px;
+        display: flex; 
+        align-items: center; 
+        justify-content: center;
+        transition: opacity 0.3s ease;">
+        </div>
+
+    <div style="font-size: 11px; color: var(--text-light); margin-top: 15px; opacity: 0.7;">
+        (Tap to reflect on another verse)
+    </div>
+</div>
             <div class="card">
                 <h2>Activity Calendar</h2>
                 <div style="display: flex; justify-content: space-between; align-items: center; margin: 20px 0;">
@@ -407,6 +435,7 @@ border-color: rgba(251, 191, 36, 1);
                 </div>
                 <div class="calendar-grid" id="calendar-grid"></div>
             </div>
+			
         </section>
 
         <section id="view-reports" class="view-section">
@@ -466,7 +495,10 @@ border-color: rgba(251, 191, 36, 1);
 <section id="view-analytics" class="view-section">
      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; flex-wrap: wrap; gap: 10px;">
     <h2 style="margin: 0;">Meditation Analytics</h2>
- <div style="display:flex; gap:10px; flex-wrap:wrap; align-items:center;">
+  <div style="display:flex; gap:10px; flex-wrap:wrap; align-items:center;">
+            <select id="ana-goal-select" class="form-control" style="width: auto; max-width: 150px;" onchange="app.renderAnalytics(true)">
+                </select>
+
             <select id="ana-time-range" class="form-control" style="width: auto;" onchange="app.renderAnalytics()">
 			<option value="3" selected>Last 3 days</option>
             <option value="7">Last 7 days</option>
@@ -780,8 +812,8 @@ border-color: rgba(251, 191, 36, 1);
             <h3 style="color: var(--text); margin-top: 20px;">✨ Core Concepts</h3>
             <p>To use the app effectively, you should understand the following indicators:</p>
             <ul style="padding-left: 20px; margin-bottom: 15px;">
-                <li><strong>Mindfulness (Sati):</strong> A unit for measuring awareness. Every time you recognize your breath or mental state and touch the screen, one "Mindfulness" point is recorded.</li>
-                <li><strong>Mindful State:</strong> A state where the frequency of noting (Sati) remains stable and regular.</li>
+                <li><strong>Mindfulness:</strong> A unit for measuring awareness. Every time you recognize your breath or mental state and touch the screen, one "Mindfulness" point is recorded.</li>
+                <li><strong>Mindful State:</strong> A state where the frequency of noting remains stable and regular.</li>
                 <li><strong>Unmindful:</strong> A state where the mind is distracted or drowsy, resulting in few or no recordings over a period of time.</li>
                 <li><strong>Diligence Streak:</strong> The number of consecutive days you have maintained your practice.</li>
             </ul>
@@ -792,7 +824,7 @@ border-color: rgba(251, 191, 36, 1);
             <ul style="padding-left: 20px;">
                 <li><strong>Two main types of goals:</strong>
                     <ul>
-                        <li><strong>ॐ Meditation:</strong> Tracks meditation duration and counts mindfulness ("Sati") recognitions.</li>
+                        <li><strong>ॐ Meditation:</strong> Tracks meditation duration and counts mindfulness recognitions.</li>
                         <li><strong>⚡ Work:</strong> A traditional countdown timer used for work, study (similar to Pomodoro), or other habits.</li>
                     </ul>
                 </li>
@@ -803,7 +835,7 @@ border-color: rgba(251, 191, 36, 1);
             <ul style="padding-left: 20px;">
                 <li><strong>Meditation Mode:</strong>
                     <ul>
-                        <li><strong>Tap-to-Track:</strong> Touch the screen (or click) every time you acknowledge your focus returning to the breath. These counts accumulate as Mindfulness (Sati) points.</li>
+                        <li><strong>Tap-to-Track:</strong> Touch the screen (or click) every time you acknowledge your focus returning to the breath. These counts accumulate as Mindfulness points.</li>
                     </ul>
                 </li>
             </ul>
@@ -901,12 +933,12 @@ border-color: rgba(251, 191, 36, 1);
                 </tbody>
             </table>
 
-            <p><strong>Mindfulness Milestones (Sati):</strong></p>
+            <p><strong>Mindfulness Milestones:</strong></p>
             <table class="intro-table" style="width: 100%; border-collapse: collapse; margin-bottom: 20px; font-size: 13px;">
                 <thead>
                    <tr style="background: var(--bg);">
                         <th style="padding: 8px; border: 1px solid var(--border); text-align: left;">Level</th>
-                        <th style="padding: 8px; border: 1px solid var(--border); text-align: left;">Sati Points</th>
+                        <th style="padding: 8px; border: 1px solid var(--border); text-align: left;">Mindfulness</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -1480,43 +1512,76 @@ analyzeSingleSession(log) {
     return { distractedSec, qualityPct: parseFloat(qualityPct.toFixed(1)) };
 }
 
-renderAnalytics() {
+renderAnalytics(saveState = false) {
     const range = parseInt(document.getElementById('ana-time-range').value) || 3;
     const ctxTrend = document.getElementById('analyticsTrendChart').getContext('2d');
+    const goalSelect = document.getElementById('ana-goal-select');
 
-    // 1. Filter ALL Meditation Logs (Combine goals)
+    // 1. HANDLE DROPDOWN & STATE
+    if (saveState) {
+        // If triggered by change, save new preference
+        this.analyticsGoalFilter = goalSelect.value;
+        localStorage.setItem('anaGoalFilter', this.analyticsGoalFilter);
+    }
+
+    // Get all meditation goals
     const medGoals = this.data.goals.filter(g => g.type === 'meditation');
-    const medGoalIds = medGoals.map(g => g.id); // Get list of IDs
     
-    if (medGoals.length === 0) {
+    // Populate Dropdown (Clear and Rebuild to ensure latest goals)
+    goalSelect.innerHTML = '<option value="all">All Sessions</option>';
+    medGoals.forEach(g => {
+        const opt = document.createElement('option');
+        opt.value = g.id;
+        opt.innerText = g.name;
+        goalSelect.appendChild(opt);
+    });
+
+    // Set selected value based on saved state
+    // Check if saved goal still exists, if not fallback to 'all'
+    const goalExists = this.analyticsGoalFilter === 'all' || medGoals.some(g => g.id === this.analyticsGoalFilter);
+    if (!goalExists) {
+        this.analyticsGoalFilter = 'all';
+        localStorage.setItem('anaGoalFilter', 'all');
+    }
+    goalSelect.value = this.analyticsGoalFilter;
+
+    // 2. DETERMINE TARGET GOAL IDs
+    let targetGoalIds = [];
+    if (this.analyticsGoalFilter === 'all') {
+        targetGoalIds = medGoals.map(g => g.id);
+    } else {
+        targetGoalIds = [this.analyticsGoalFilter];
+    }
+
+    if (targetGoalIds.length === 0) {
         document.getElementById('ana-comparison-table').innerHTML = '<tr><td colspan="5" style="text-align:center; padding:20px;">There is no meditation goals.</td></tr>';
         return;
     }
 
-    // 2. Filter Logs for ALL MEDITATION GOALS within Time Range
+    // 3. FILTER LOGS based on Target IDs & Time Range
     const now = Date.now();
     const cutoff = now - (range * 24 * 60 * 60 * 1000);
     
     const logs = this.data.logs
-        .filter(l => medGoalIds.includes(l.goalId) && l.timestamp >= cutoff)
+        .filter(l => targetGoalIds.includes(l.goalId) && l.timestamp >= cutoff)
         .sort((a, b) => a.timestamp - b.timestamp);
 
+    // --- STANDARD ANALYTICS LOGIC (Same as before) ---
     if (logs.length === 0) {
         if(this.charts.analyticsTrend) this.charts.analyticsTrend.destroy();
         document.getElementById('ana-avg-quality').innerText = "---";
         document.getElementById('ana-avg-density').innerText = "---";
         document.getElementById('ana-total-mindful').innerText = "---";
-        document.getElementById('ana-comparison-table').innerHTML = '<tr><td colspan="5" style="padding:20px; text-align:center;">No meditation data found for this period.</td></tr>';
+        document.getElementById('ana-comparison-table').innerHTML = '<tr><td colspan="5" style="padding:20px; text-align:center;">No meditation data for this period.</td></tr>';
         return;
     }
 
-    // 3. Process Logs
+    // Process Logs
     let totalTimeSec = 0;
     let totalDistractedSec = 0;
     let totalTouches = 0;
     
     const sessionData = logs.map(log => {
-        // Function now reads internal threshold, no need to pass it
         const result = this.analyzeSingleSession(log);
         
         totalTimeSec += log.minutes * 60;
@@ -1531,7 +1596,7 @@ renderAnalytics() {
         };
     });
 
-    // 4. Update Summary Cards
+    // Update Cards
     const avgQuality = totalTimeSec > 0 ? ((1 - (totalDistractedSec / totalTimeSec)) * 100).toFixed(1) : 0;
     const avgDensity = totalTimeSec > 0 ? (totalTouches / (totalTimeSec / 60)).toFixed(1) : 0;
     const mindfulSeconds = Math.max(0, totalTimeSec - totalDistractedSec);
@@ -1541,7 +1606,7 @@ renderAnalytics() {
     document.getElementById('ana-avg-density').innerText = avgDensity;
     document.getElementById('ana-total-mindful').innerText = `${mindfulHours}h`;
 
-    // 5. Render Trend Chart
+    // Render Chart
     if (this.charts.analyticsTrend) this.charts.analyticsTrend.destroy();
 
     let chartData = sessionData;
@@ -1555,7 +1620,7 @@ renderAnalytics() {
         }
     }
 
-        this.charts.analyticsTrend = new Chart(ctxTrend, {
+    this.charts.analyticsTrend = new Chart(ctxTrend, {
         type: 'line',
         data: {
             labels: chartData.map(d => d.date),
@@ -1593,10 +1658,9 @@ renderAnalytics() {
                     displayColors: true,
                     callbacks: {
                         labelColor: function(context) {
-                            const dataset = context.dataset;
                             return {
-                                borderColor: dataset.borderColor,
-                                backgroundColor: dataset.borderColor,
+                                borderColor: context.dataset.borderColor,
+                                backgroundColor: context.dataset.borderColor,
                                 borderWidth: 0,
                                 borderRadius: 2,
                             };
@@ -1617,8 +1681,8 @@ renderAnalytics() {
         }
     });
 
-    // 6. Render Comparison Table (Pass ALL Med Goal IDs)
-    this.renderComparisonTable(medGoalIds);
+    // 4. Update Table with filtered Goal IDs
+    this.renderComparisonTable(targetGoalIds);
 }
 
 // Update helper to not require threshold arg (it reads from log internally)
@@ -1710,6 +1774,7 @@ renderComparisonTable(medGoalIds) {
 // --- ANALYTICS MODULE END ---
             init() {
                 try {
+				    this.analyticsGoalFilter = localStorage.getItem('anaGoalFilter') || 'all';
                     this.renderDate();
                     this.renderGoals();
                     this.updateStats();
@@ -2511,8 +2576,34 @@ if(totalMins > 0) {
      
                     dayEl.onclick = () => this.openDayStats(dStr);
                     grid.appendChild(dayEl);
-                }
+                               }
+				const quoteBox = document.getElementById('dhammapada-display');
+    if (quoteBox && !quoteBox.hasAttribute('data-loaded')) {
+        this.renderRandomQuote();
+    }
             }
+renderRandomQuote() {
+    const display = document.getElementById('dhammapada-display');
+    if (!display) return;
+
+    // Fade out
+    display.style.opacity = '0';
+
+    setTimeout(() => {
+        // 1. Get Random Verse
+        const randomIndex = Math.floor(Math.random() * DHAMMAPADA.length);
+        const verse = DHAMMAPADA[randomIndex];
+
+        // 2. Set Text
+        display.innerHTML = verse.t;
+        
+        // 3. Mark as loaded (Important for the fix)
+        display.setAttribute('data-loaded', 'true');
+
+        // 4. Fade in
+        display.style.opacity = '1';
+    }, 200); // Short delay for transition effect
+}
 switchDayChart(mode) {
     this.dayChartMode = mode;
     
@@ -2981,8 +3072,7 @@ updateStats() {
 
     // 3. Display on UI
     document.getElementById('streak-disp').innerText = `${this.data.streak} 🔥`;
-    document.getElementById('xp-disp').innerText = `${this.data.xp} Sati`;
-    document.getElementById('level-disp').innerText = Math.floor(this.data.xp / 1000) + 1;
+    document.getElementById('xp-disp').innerText = `${this.data.xp}`;
 
     // ... (keep the rest of the function: daily goal calculation etc.) ...
     const todayStr = this.toIsoDate(new Date());
@@ -3023,16 +3113,16 @@ updateStats() {
     { id: 'streak_120', title: 'Viriya', desc: 'Practice for 120 consecutive days', condition: () => this.data.streak >= 120 },
     { id: 'streak_365', title: 'Viriya-sambojjhanga', desc: 'Practice for 365 consecutive days', condition: () => this.data.streak >= 365 },
 
-    { id: 'beginner', title: 'Beginner', desc: 'Accumulate 5,000 Mindfulness (Sati)', condition: () => this.totalMindfulnessCounts >= 5000 },
-    { id: 'practitioner', title: 'Practitioner', desc: 'Accumulate 10,000 Mindfulness (Sati)', condition: () => this.totalMindfulnessCounts >= 10000 },
-    { id: 'yogi', title: 'Yogi', desc: 'Accumulate 20,000 Mindfulness (Sati)', condition: () => this.totalMindfulnessCounts >= 20000 },
-    { id: 'meditator', title: 'Meditator', desc: 'Accumulate 50,000 Mindfulness (Sati)', condition: () => this.totalMindfulnessCounts >= 50000 },
-    { id: 'clear-mirror', title: 'Clear Mirror', desc: 'Accumulate 80,000 Mindfulness (Sati)', condition: () => this.totalMindfulnessCounts >= 80000 },
-					{ id: 'still-lake', title: 'Still Lake', desc: 'Accumulate 100,000 Mindfulness (Sati)', condition: () => this.totalMindfulnessCounts >= 100000 },
-					{ id: 'mountain', title: 'Mountain', desc: 'Accumulate 200,000 Mindfulness (Sati)', condition: () => this.totalMindfulnessCounts >= 200000 },
-					{ id: 'morning-star', title: 'Morning Star', desc: 'Accumulate 300,000 Mindfulness (Sati)', condition: () => this.totalMindfulnessCounts >= 300000 },
-					{ id: 'dhammaheir', title: 'Heir of the Dhamma', desc: 'Accumulate 500,000 Mindfulness (Sati)', condition: () => this.totalMindfulnessCounts >= 500000 },
-					{ id: 'bodhi', title: 'Ancient Bodhi', desc: 'Accumulate 1,000,000 Mindfulness (Sati)', condition: () => this.totalMindfulnessCounts >= 1000000 }
+    { id: 'beginner', title: 'Beginner', desc: 'Accumulate 5,000 Mindfulness', condition: () => this.totalMindfulnessCounts >= 5000 },
+    { id: 'practitioner', title: 'Practitioner', desc: 'Accumulate 10,000 Mindfulness', condition: () => this.totalMindfulnessCounts >= 10000 },
+    { id: 'yogi', title: 'Yogi', desc: 'Accumulate 20,000 Mindfulness', condition: () => this.totalMindfulnessCounts >= 20000 },
+    { id: 'meditator', title: 'Meditator', desc: 'Accumulate 50,000 Mindfulness', condition: () => this.totalMindfulnessCounts >= 50000 },
+    { id: 'clear-mirror', title: 'Clear Mirror', desc: 'Accumulate 80,000 Mindfulness', condition: () => this.totalMindfulnessCounts >= 80000 },
+					{ id: 'still-lake', title: 'Still Lake', desc: 'Accumulate 100,000 Mindfulness', condition: () => this.totalMindfulnessCounts >= 100000 },
+					{ id: 'mountain', title: 'Mountain', desc: 'Accumulate 200,000 Mindfulness', condition: () => this.totalMindfulnessCounts >= 200000 },
+					{ id: 'morning-star', title: 'Morning Star', desc: 'Accumulate 300,000 Mindfulness', condition: () => this.totalMindfulnessCounts >= 300000 },
+					{ id: 'dhammaheir', title: 'Heir of the Dhamma', desc: 'Accumulate 500,000 Mindfulness', condition: () => this.totalMindfulnessCounts >= 500000 },
+					{ id: 'bodhi', title: 'Ancient Bodhi', desc: 'Accumulate 1,000,000 Mindfulness', condition: () => this.totalMindfulnessCounts >= 1000000 }
 ];
                 const container = document.getElementById('achievement-list');
                 if (!container) return; container.innerHTML = '';

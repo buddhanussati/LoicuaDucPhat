@@ -369,8 +369,8 @@ border-color: rgba(251, 191, 36, 1);
     </div>
 
     <div class="stat-item">
-        <span class="stat-val" id="xp-disp">0 XP</span>
-        <span class="stat-label">Mức độ <span id="level-disp">1</span></span>
+        <span class="stat-val" id="xp-disp">0</span>
+        <span class="stat-label">Chánh Niệm</span>
     </div>
 
  <div class="stat-item clickable" onclick="app.openIntroModal()">
@@ -400,6 +400,34 @@ border-color: rgba(251, 191, 36, 1);
         </section>
 
         <section id="view-calendar" class="view-section">
+		<div class="card" 
+     onclick="app.renderRandomQuote()" 
+     title="Chạm để đổi câu khác"
+     style="margin: 0 auto 20px auto; text-align: center; border-left: 5px solid var(--zen); cursor: pointer; transition: transform 0.2s; user-select: none; max-width: 450px;"
+     onmouseover="this.style.transform='translateY(-2px)'" 
+     onmouseout="this.style.transform='translateY(0)'">
+    
+    <h3 style="color: var(--zen); margin-bottom: 15px;">
+        <i class="fas fa-dharmachakra"></i> Kinh Pháp Cú
+    </h3>
+    
+    <div id="dhammapada-display" style="
+        font-style: italic; 
+        font-size: 15px; 
+        line-height: 1.6; 
+        color: var(--text); 
+        min-height: 60px; 
+        padding: 0 10px;
+        display: flex; 
+        align-items: center; 
+        justify-content: center;
+        transition: opacity 0.3s ease;">
+        </div>
+
+    <div style="font-size: 11px; color: var(--text-light); margin-top: 15px; opacity: 0.7;">
+        (Chạm để suy ngẫm câu khác)
+    </div>
+</div>
             <div class="card">
                 <h2>Lịch Tu Tập</h2>
                 <div style="display: flex; justify-content: space-between; align-items: center; margin: 20px 0;">
@@ -409,6 +437,7 @@ border-color: rgba(251, 191, 36, 1);
                 </div>
                 <div class="calendar-grid" id="calendar-grid"></div>
             </div>
+			
         </section>
 
         <section id="view-reports" class="view-section">
@@ -470,9 +499,12 @@ border-color: rgba(251, 191, 36, 1);
         <h2 style="margin: 0;">Phân tích Thiền tập</h2>
 
         <div style="display:flex; gap:10px; flex-wrap:wrap; align-items:center;">
+            <select id="ana-goal-select" class="form-control" style="width: auto; max-width: 150px;" onchange="app.renderAnalytics(true)">
+                </select>
+
             <select id="ana-time-range" class="form-control" style="width: auto;" onchange="app.renderAnalytics()">
                 <option value="3" selected>3 ngày qua</option>
-				<option value="7">7 ngày qua</option>
+                <option value="7">7 ngày qua</option>
                 <option value="30">30 ngày qua</option>
                 <option value="90">3 tháng qua</option>
                 <option value="365">Toàn bộ</option>
@@ -809,7 +841,7 @@ border-color: rgba(251, 191, 36, 1);
             <ul style="padding-left: 20px;">
                 <li><strong>Chế độ Thiền:</strong>
                     <ul>
-                        <li><strong>Chạm để đếm:</strong> Chạm vào màn hình (hoặc click chuột) mỗi khi bạn ghi nhận được sự chú tâm quay về hơi thở. Số đếm này được tích lũy thành điểm Chánh niệm (Sati).</li>
+                        <li><strong>Chạm để đếm:</strong> Chạm vào màn hình (hoặc click chuột) mỗi khi bạn ghi nhận được sự chú tâm quay về hơi thở. Số đếm này được tích lũy thành điểm Chánh niệm.</li>
                     </ul>
                 </li>
             </ul>
@@ -1491,43 +1523,76 @@ analyzeSingleSession(log) {
     return { distractedSec, qualityPct: parseFloat(qualityPct.toFixed(1)) };
 }
 
-renderAnalytics() {
+renderAnalytics(saveState = false) {
     const range = parseInt(document.getElementById('ana-time-range').value) || 3;
     const ctxTrend = document.getElementById('analyticsTrendChart').getContext('2d');
+    const goalSelect = document.getElementById('ana-goal-select');
 
-    // 1. Filter ALL Meditation Logs (Combine goals)
+    // 1. HANDLE DROPDOWN & STATE
+    if (saveState) {
+        // If triggered by change, save new preference
+        this.analyticsGoalFilter = goalSelect.value;
+        localStorage.setItem('anaGoalFilter', this.analyticsGoalFilter);
+    }
+
+    // Get all meditation goals
     const medGoals = this.data.goals.filter(g => g.type === 'meditation');
-    const medGoalIds = medGoals.map(g => g.id); // Get list of IDs
     
-    if (medGoals.length === 0) {
+    // Populate Dropdown (Clear and Rebuild to ensure latest goals)
+    goalSelect.innerHTML = '<option value="all">Tất cả thời thiền</option>';
+    medGoals.forEach(g => {
+        const opt = document.createElement('option');
+        opt.value = g.id;
+        opt.innerText = g.name;
+        goalSelect.appendChild(opt);
+    });
+
+    // Set selected value based on saved state
+    // Check if saved goal still exists, if not fallback to 'all'
+    const goalExists = this.analyticsGoalFilter === 'all' || medGoals.some(g => g.id === this.analyticsGoalFilter);
+    if (!goalExists) {
+        this.analyticsGoalFilter = 'all';
+        localStorage.setItem('anaGoalFilter', 'all');
+    }
+    goalSelect.value = this.analyticsGoalFilter;
+
+    // 2. DETERMINE TARGET GOAL IDs
+    let targetGoalIds = [];
+    if (this.analyticsGoalFilter === 'all') {
+        targetGoalIds = medGoals.map(g => g.id);
+    } else {
+        targetGoalIds = [this.analyticsGoalFilter];
+    }
+
+    if (targetGoalIds.length === 0) {
         document.getElementById('ana-comparison-table').innerHTML = '<tr><td colspan="5" style="text-align:center; padding:20px;">Chưa có mục tiêu thiền nào.</td></tr>';
         return;
     }
 
-    // 2. Filter Logs for ALL MEDITATION GOALS within Time Range
+    // 3. FILTER LOGS based on Target IDs & Time Range
     const now = Date.now();
     const cutoff = now - (range * 24 * 60 * 60 * 1000);
     
     const logs = this.data.logs
-        .filter(l => medGoalIds.includes(l.goalId) && l.timestamp >= cutoff)
+        .filter(l => targetGoalIds.includes(l.goalId) && l.timestamp >= cutoff)
         .sort((a, b) => a.timestamp - b.timestamp);
 
+    // --- STANDARD ANALYTICS LOGIC (Same as before) ---
     if (logs.length === 0) {
         if(this.charts.analyticsTrend) this.charts.analyticsTrend.destroy();
         document.getElementById('ana-avg-quality').innerText = "---";
         document.getElementById('ana-avg-density').innerText = "---";
         document.getElementById('ana-total-mindful').innerText = "---";
-        document.getElementById('ana-comparison-table').innerHTML = '<tr><td colspan="5" style="padding:20px; text-align:center;">Chưa có dữ liệu thiền trong khoảng thời gian đã chọn.</td></tr>';
+        document.getElementById('ana-comparison-table').innerHTML = '<tr><td colspan="5" style="padding:20px; text-align:center;">Chưa có dữ liệu trong khoảng thời gian này.</td></tr>';
         return;
     }
 
-    // 3. Process Logs
+    // Process Logs
     let totalTimeSec = 0;
     let totalDistractedSec = 0;
     let totalTouches = 0;
     
     const sessionData = logs.map(log => {
-        // Function now reads internal threshold, no need to pass it
         const result = this.analyzeSingleSession(log);
         
         totalTimeSec += log.minutes * 60;
@@ -1542,7 +1607,7 @@ renderAnalytics() {
         };
     });
 
-    // 4. Update Summary Cards
+    // Update Cards
     const avgQuality = totalTimeSec > 0 ? ((1 - (totalDistractedSec / totalTimeSec)) * 100).toFixed(1) : 0;
     const avgDensity = totalTimeSec > 0 ? (totalTouches / (totalTimeSec / 60)).toFixed(1) : 0;
     const mindfulSeconds = Math.max(0, totalTimeSec - totalDistractedSec);
@@ -1552,7 +1617,7 @@ renderAnalytics() {
     document.getElementById('ana-avg-density').innerText = avgDensity;
     document.getElementById('ana-total-mindful').innerText = `${mindfulHours}h`;
 
-    // 5. Render Trend Chart
+    // Render Chart
     if (this.charts.analyticsTrend) this.charts.analyticsTrend.destroy();
 
     let chartData = sessionData;
@@ -1566,7 +1631,7 @@ renderAnalytics() {
         }
     }
 
-        this.charts.analyticsTrend = new Chart(ctxTrend, {
+    this.charts.analyticsTrend = new Chart(ctxTrend, {
         type: 'line',
         data: {
             labels: chartData.map(d => d.date),
@@ -1604,10 +1669,9 @@ renderAnalytics() {
                     displayColors: true,
                     callbacks: {
                         labelColor: function(context) {
-                            const dataset = context.dataset;
                             return {
-                                borderColor: dataset.borderColor,
-                                backgroundColor: dataset.borderColor,
+                                borderColor: context.dataset.borderColor,
+                                backgroundColor: context.dataset.borderColor,
                                 borderWidth: 0,
                                 borderRadius: 2,
                             };
@@ -1628,8 +1692,8 @@ renderAnalytics() {
         }
     });
 
-    // 6. Render Comparison Table (Pass ALL Med Goal IDs)
-    this.renderComparisonTable(medGoalIds);
+    // 4. Update Table with filtered Goal IDs
+    this.renderComparisonTable(targetGoalIds);
 }
 
 // Update helper to not require threshold arg (it reads from log internally)
@@ -1721,6 +1785,7 @@ renderComparisonTable(medGoalIds) {
 // --- ANALYTICS MODULE END ---
             init() {
                 try {
+				    this.analyticsGoalFilter = localStorage.getItem('anaGoalFilter') || 'all';
                     this.renderDate();
                     this.renderGoals();
                     this.updateStats();
@@ -2217,7 +2282,7 @@ showSessionGraph(timestamp) {
 
     const log = this.data.logs.find(l => l.timestamp == timestamp);
     if (!log || !log.touches) {
-        this.showToast("Không có dữ liệu chi tiết cho phiên này");
+        this.showToast("Chưa có dữ liệu chi tiết cho thời thiền này");
         return;
     }
     
@@ -2526,8 +2591,33 @@ if(totalMins > 0) {
                     dayEl.onclick = () => this.openDayStats(dStr);
                     grid.appendChild(dayEl);
                 }
+				const quoteBox = document.getElementById('dhammapada-display');
+    if (quoteBox && !quoteBox.hasAttribute('data-loaded')) {
+        this.renderRandomQuote();
+    }
             }
+renderRandomQuote() {
+    const display = document.getElementById('dhammapada-display');
+    if (!display) return;
 
+    // Fade out
+    display.style.opacity = '0';
+
+    setTimeout(() => {
+        // 1. Get Random Verse
+        const randomIndex = Math.floor(Math.random() * DHAMMAPADA.length);
+        const verse = DHAMMAPADA[randomIndex];
+
+        // 2. Set Text
+        display.innerHTML = verse.t;
+        
+        // 3. Mark as loaded (Important for the fix)
+        display.setAttribute('data-loaded', 'true');
+
+        // 4. Fade in
+        display.style.opacity = '1';
+    }, 200); // Short delay for transition effect
+}
             openDayStats(dateStr) {
     this.currentViewDate = dateStr;
     const modal = document.getElementById('day-details-modal');
@@ -2933,7 +3023,7 @@ renderReports() {
                 legend: { labels: { color: '#9ca3af' } },
                 title: { 
                     display: activeGoalsForDoughnut.length === 0, 
-                    text: 'Không có dữ liệu trong khoảng thời gian này', 
+                    text: 'Chưa có dữ liệu', 
                     position: 'bottom', 
                     color: '#6b7280' 
                 },
@@ -2996,8 +3086,7 @@ updateStats() {
 
     // 3. Display on UI
     document.getElementById('streak-disp').innerText = `${this.data.streak} 🔥`;
-    document.getElementById('xp-disp').innerText = `${this.data.xp} Sati`;
-    document.getElementById('level-disp').innerText = Math.floor(this.data.xp / 1000) + 1;
+    document.getElementById('xp-disp').innerText = `${this.data.xp}`;
 
     // ... (keep the rest of the function: daily goal calculation etc.) ...
     const todayStr = this.toIsoDate(new Date());
@@ -3038,16 +3127,16 @@ updateStats() {
 					{ id: 'streak_120', title: 'Nhiệt Tâm', desc: 'Hành trì 120 ngày liên tục', condition: () => this.data.streak >= 120 },
 					{ id: 'streak_365', title: 'Tinh Tấn Giác Chi', desc: 'Hành trì 365 ngày liên tục', condition: () => this.data.streak >= 365 },
 
-					{ id: 'beginner', title: 'Sơ Cơ', desc: 'Tích luỹ 5.000 Chánh niệm (Sati)', condition: () => this.totalMindfulnessCounts >= 5000 },
-					{ id: 'practitioner', title: 'Thiền Sinh', desc: 'Tích luỹ 10.000 Chánh niệm (Sati)', condition: () => this.totalMindfulnessCounts >= 10000 },
-					{ id: 'yogi', title: 'Hành Giả', desc: 'Tích luỹ 20.000 Chánh niệm (Sati)', condition: () => this.totalMindfulnessCounts >= 20000 },
-					{ id: 'meditator', title: 'Thiền Giả', desc: 'Tích luỹ 50.000 Chánh niệm (Sati)', condition: () => this.totalMindfulnessCounts >= 50000 },
-					{ id: 'clear-mirror', title: 'Gương Sáng', desc: 'Tích luỹ 80.000 Chánh niệm (Sati)', condition: () => this.totalMindfulnessCounts >= 80000 },
-					{ id: 'still-lake', title: 'Mặt Hồ Tĩnh Lặng', desc: 'Tích luỹ 100.000 Chánh niệm (Sati)', condition: () => this.totalMindfulnessCounts >= 100000 },
-					{ id: 'mountain', title: 'Núi Đá', desc: 'Tích luỹ 200.000 Chánh niệm (Sati)', condition: () => this.totalMindfulnessCounts >= 200000 },
-					{ id: 'morning-star', title: 'Sao Mai', desc: 'Tích luỹ 300.000 Chánh niệm (Sati)', condition: () => this.totalMindfulnessCounts >= 300000 },
-					{ id: 'dhammaheir', title: 'Thừa Tự Pháp', desc: 'Tích luỹ 500.000 Chánh niệm (Sati)', condition: () => this.totalMindfulnessCounts >= 500000 },
-					{ id: 'bodhi', title: 'Cội Bồ Đề', desc: 'Tích luỹ 1.000.000 Chánh niệm (Sati)', condition: () => this.totalMindfulnessCounts >= 1000000 }
+					{ id: 'beginner', title: 'Sơ Cơ', desc: 'Tích luỹ 5.000 Chánh niệm', condition: () => this.totalMindfulnessCounts >= 5000 },
+					{ id: 'practitioner', title: 'Thiền Sinh', desc: 'Tích luỹ 10.000 Chánh niệm', condition: () => this.totalMindfulnessCounts >= 10000 },
+					{ id: 'yogi', title: 'Hành Giả', desc: 'Tích luỹ 20.000 Chánh niệm', condition: () => this.totalMindfulnessCounts >= 20000 },
+					{ id: 'meditator', title: 'Thiền Giả', desc: 'Tích luỹ 50.000 Chánh niệm', condition: () => this.totalMindfulnessCounts >= 50000 },
+					{ id: 'clear-mirror', title: 'Gương Sáng', desc: 'Tích luỹ 80.000 Chánh niệm', condition: () => this.totalMindfulnessCounts >= 80000 },
+					{ id: 'still-lake', title: 'Mặt Hồ Tĩnh Lặng', desc: 'Tích luỹ 100.000 Chánh niệm', condition: () => this.totalMindfulnessCounts >= 100000 },
+					{ id: 'mountain', title: 'Núi Đá', desc: 'Tích luỹ 200.000 Chánh niệm', condition: () => this.totalMindfulnessCounts >= 200000 },
+					{ id: 'morning-star', title: 'Sao Mai', desc: 'Tích luỹ 300.000 Chánh niệm', condition: () => this.totalMindfulnessCounts >= 300000 },
+					{ id: 'dhammaheir', title: 'Thừa Tự Pháp', desc: 'Tích luỹ 500.000 Chánh niệm', condition: () => this.totalMindfulnessCounts >= 500000 },
+					{ id: 'bodhi', title: 'Cội Bồ Đề', desc: 'Tích luỹ 1.000.000 Chánh niệm', condition: () => this.totalMindfulnessCounts >= 1000000 }
                 ];
                 const container = document.getElementById('achievement-list');
                 if (!container) return; container.innerHTML = '';
