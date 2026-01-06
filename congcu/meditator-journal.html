@@ -318,6 +318,31 @@ border-color: rgba(251, 191, 36, 1);
             .user-stats .btn { width: 100%; margin-top: 10px; justify-content: center; background-color: var(--primary); color: #000; }
             .dashboard-grid { grid-template-columns: 1fr; }
         }
+		
+	.btn-mode-active {
+    background-color: var(--primary) !important;
+    color: white !important;
+    border-color: var(--primary) !important;
+}
+
+/* Ensure range slider looks good in dark mode */
+input[type=range] {
+    -webkit-appearance: none; 
+    background: transparent; 
+}
+input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    height: 16px; width: 16px;
+    border-radius: 50%;
+    background: var(--primary);
+    cursor: pointer;
+    margin-top: -6px; 
+}
+input[type=range]::-webkit-slider-runnable-track {
+    width: 100%; height: 4px;
+    background: #374151;
+    border-radius: 2px;
+}	
     </style>
 </head>
 <body>
@@ -422,15 +447,14 @@ border-color: rgba(251, 191, 36, 1);
         transition: opacity 0.3s ease;">
         </div>
 
-    <div style="font-size: 11px; color: var(--text-light); margin-top: 15px; opacity: 0.7;">
-        (Tap to reflect on another verse)
-    </div>
+    <div id="dhammapada-source" style="font-size: 11px; color: var(--text-light); margin-top: 15px; opacity: 0.7;">
+</div>
 </div>
             <div class="card">
-                <h2>Activity Calendar</h2>
+                <h3 style="text-align: center;">Activity Calendar</h3>
                 <div style="display: flex; justify-content: space-between; align-items: center; margin: 20px 0;">
                     <button class="btn btn-secondary" onclick="app.changeMonth(-1)"><i class="fas fa-chevron-left"></i></button>
-                    <h3 id="cal-month-year">Month Year</h3>
+                    <h4 id="cal-month-year">Month Year</h4>
                     <button class="btn btn-secondary" onclick="app.changeMonth(1)"><i class="fas fa-chevron-right"></i></button>
                 </div>
                 <div class="calendar-grid" id="calendar-grid"></div>
@@ -534,9 +558,17 @@ border-color: rgba(251, 191, 36, 1);
                 <canvas id="analyticsTrendChart"></canvas>
             </div>
         </div>
-
+<div class="card" style="margin-top: 20px;">
+    <h3>📊 Daily Awareness</h3>
+    <p style="font-size: 12px; color: var(--text-light); margin-bottom: 15px;">
+        Average mindfulness quality throughout the day
+    </p>
+    <div style="height: 250px;">
+        <canvas id="analyticsHourlyChart"></canvas>
+    </div>
+</div>
         <div class="card">
-  <h3>📊 Performance Comparison</h3>
+  <h3><i class="fas fa-chart-area"></i> Performance Comparison</h3>
   <div style="margin-top: 15px;">
     <table style="width: 100%; border-collapse: collapse; font-size: 13px; table-layout: fixed;">
       <thead>
@@ -703,9 +735,13 @@ border-color: rgba(251, 191, 36, 1);
     <div id="meditation-overlay">
         <div class="med-timer-disp" id="med-timer">00:00</div>
         <div class="med-controls">
-            <button class="btn btn-secondary" onclick="app.togglePauseMeditation()" id="med-pause-btn"><i class="fas fa-pause"></i></button>
-            <button class="btn" style="background-color: var(--danger); color: white;" onclick="app.concludeMeditationSession()"><i class="fas fa-stop"></i></button>
-        </div>
+    <button class="btn btn-secondary" onclick="app.openMedSettings()" title="Touch settings">
+        <i class="fas fa-cog"></i>
+    </button>
+    
+    <button class="btn btn-secondary" onclick="app.togglePauseMeditation()" id="med-pause-btn"><i class="fas fa-pause"></i></button>
+    <button class="btn" style="background-color: var(--danger); color: white;" onclick="app.concludeMeditationSession()"><i class="fas fa-stop"></i></button>
+</div>
         <div id="med-quote-container" class="med-quote-box">
     <div id="med-quote-text" style="font-style: italic; font-size: 14px; margin-bottom: 8px; line-height: 1.4; text-shadow: 0 2px 4px rgba(0,0,0,0.8);"></div>
 </div>
@@ -795,6 +831,46 @@ border-color: rgba(251, 191, 36, 1);
     <div id="toast" class="toast">
         <i class="fas fa-info-circle"></i> <span id="toast-msg">Message</span>
     </div>
+	
+	<div class="modal" id="med-settings-modal" style="z-index: 2000;">
+    <div class="modal-content" style="max-width: 350px;">
+        <h3 style="margin-bottom: 20px; text-align: center;">Interaction Settings</h3>
+        
+        <div class="form-group">
+            <label>Input Mode</label>
+            <div style="display: flex; gap: 10px;">
+                <button type="button" class="btn btn-secondary" id="btn-mode-hold" style="flex:1" onclick="app.setMedMode('hold')">Hold</button>
+                <button type="button" class="btn btn-secondary" id="btn-mode-tap" style="flex:1" onclick="app.setMedMode('tap')">Tap</button>
+            </div>
+        </div>
+
+        <div id="setting-hold-group" class="form-group">
+            <label>Hold Duration: <span id="disp-hold-time" style="color:var(--primary)">0.4s</span></label>
+            <input type="range" id="inp-hold-time" class="form-control" min="200" max="2000" step="100" oninput="app.updateMedSettingDisplay()">
+            <small style="color:var(--text-light)">Press and hold to count one mindfulness.</small>
+        </div>
+
+        <div id="setting-tap-group" class="form-group" style="display:none;">
+            <label>Taps Required to Count</label>
+            <select id="inp-tap-count" class="form-control" onchange="app.saveMedSettings()">
+                <option value="1">1 (Single Tap)</option>
+                <option value="2">2 (Double Tap)</option>
+                <option value="3">3 (Triple Tap)</option>
+                <option value="4">4 (Quadruple Tap)</option>
+            </select>
+            <small style="color:var(--text-light)">Tap consecutively to count one mindfulness.</small>
+        </div>
+
+        <div class="form-group" style="display: flex; justify-content: space-between; align-items: center; margin-top: 15px; background: rgba(255,255,255,0.05); padding: 10px; border-radius: 8px;">
+            <label style="margin:0"><i class="fas fa-mobile-alt"></i> Haptic Feedback</label>
+            <input type="checkbox" id="inp-vibrate" style="width: 20px; height: 20px;" onchange="app.saveMedSettings()">
+        </div>
+
+        <div style="margin-top: 25px;">
+            <button class="btn" style="width: 100%;" onclick="app.closeMedSettings()">Save & Close</button>
+        </div>
+    </div>
+</div>
 	<div class="modal" id="intro-modal" style="z-index: 9999;">
     <div class="modal-content" style="max-width: 800px; width: 95%; max-height: 90vh; display: flex; flex-direction: column; padding: 0;">
         
@@ -1323,7 +1399,7 @@ border-color: rgba(251, 191, 36, 1);
  {t:"\"People governed by thirst,<br> crawl about like a trapped rabbit.<br> That’s why one who longs for dispassion<br> should dispel thirst.\""},
  {t:"\"Unsnarled, they set out for the jungle,<br> then they run right back to the jungle they left behind.<br> Just look at this individual!<br> Freed, they run to bondage.\""},
  {t:"\"The attentive say that shackle is not strong<br> that’s made of iron, wood, or knots.<br> But obsession with jeweled earrings,<br> concern for your partners and children:\""},
- {t:"\"this, say the attentive, is a strong shackle<br> dragging the indulgent down, hard to escape.<br> Having cut this one too they go forth,<br> unconcerned, having given up sensual pleasures.\""},
+ {t:"\"This, say the attentive, is a strong shackle<br> dragging the indulgent down, hard to escape.<br> Having cut this one too they go forth,<br> unconcerned, having given up sensual pleasures.\""},
  {t:"\"Besotted by lust they fall into the stream,<br> like a spider caught in the web she wove.<br> The attentive proceed, having cut this one too,<br> unconcerned, having given up all suffering.\""},
  {t:"\"Let go of the past, let go of the future,<br> let go of the present, having gone beyond rebirth.<br> With your heart freed in every respect,<br> you’ll not come again to rebirth and old age.\""},
  {t:"\"For a personage churned by thoughts,<br> very lustful, focusing on beauty,<br> their craving grows and grows,<br> tying them with a stout bond.\""},
@@ -1428,7 +1504,21 @@ border-color: rgba(251, 191, 36, 1);
                         achievements: []
                     };
                 }
-                
+                if (!this.data.medSettings) {
+        this.data.medSettings = {
+            mode: 'tab',       // 'hold' or 'tap'
+            holdDuration: 400,  // ms
+            tapRequired: 1,     // 1, 2, 3...
+            vibration: true
+        };
+    }
+    
+    // Internal state for tap counting
+    this.tapState = {
+        count: 0,
+        lastTapTime: 0,
+        timer: null
+    };
                 // MIGRATION / SANITY CHECK
                 this.data.goals.forEach(goal => {
                     if (!goal.type) goal.type = 'standard'; 
@@ -1479,37 +1569,66 @@ closeIntroModal() {
 
 // Logic: Gap Analysis using PER-SESSION threshold
 analyzeSingleSession(log) {
-    if (!log.touches || log.touches.length < 2) {
-        return { distractedSec: log.minutes * 60 * 0.5, qualityPct: 50 };
-    }
+    // 1. Prepare Basic Variables
+    const totalSec = log.minutes * 60;
+    if (totalSec === 0) return { distractedSec: 0, qualityPct: 0 }; // Avoid division by zero
 
-    const sortedTouches = [...log.touches].sort((a,b) => a - b);
-    
-    // IMPORTANT: Use the threshold stored in the log, fallback to 12s if old data
+    // Use the threshold stored in the log, fallback to 10s (default) if missing
     const thresholdSec = log.threshold || 10;
     
-    let distractedSec = 0;
+    // 2. Check if we have detailed touch data (Automatic Mode)
+    // We need at least 2 touches to calculate specific gaps
+    if (log.touches && log.touches.length >= 2) {
+        const sortedTouches = [...log.touches].sort((a,b) => a - b);
+        let distractedSec = 0;
 
-    const startGap = (sortedTouches[0] - log.timestamp) / 1000;
-    if (startGap > thresholdSec) distractedSec += (startGap - thresholdSec/2);
+        // Gap from start to first touch
+        const startGap = (sortedTouches[0] - log.timestamp) / 1000;
+        if (startGap > thresholdSec) distractedSec += (startGap - thresholdSec/2);
 
-    for (let i = 1; i < sortedTouches.length; i++) {
-        const gap = (sortedTouches[i] - sortedTouches[i-1]) / 1000;
-        if (gap > thresholdSec) {
-            distractedSec += (gap - thresholdSec/2);
+        // Gaps between touches
+        for (let i = 1; i < sortedTouches.length; i++) {
+            const gap = (sortedTouches[i] - sortedTouches[i-1]) / 1000;
+            if (gap > thresholdSec) {
+                distractedSec += (gap - thresholdSec/2);
+            }
         }
+
+        // Gap from last touch to end
+        const endTime = log.timestamp + (log.minutes * 60 * 1000);
+        const endGap = (endTime - sortedTouches[sortedTouches.length - 1]) / 1000;
+        if (endGap > thresholdSec) distractedSec += (endGap - thresholdSec/2);
+
+        // Ensure distracted seconds don't exceed total time
+        distractedSec = Math.min(distractedSec, totalSec);
+        const qualityPct = ((totalSec - distractedSec) / totalSec) * 100;
+
+        return { distractedSec, qualityPct: parseFloat(qualityPct.toFixed(1)) };
+    } 
+    
+    // 3. Manual Entry Mode (or insufficient touch data)
+    // Formula: Average Quality = [(Count * Threshold) / 60] / DurationMinutes
+    else {
+        // Get count (prefer explicit count, fallback to touch length, or 0)
+        const count = log.count !== undefined ? log.count : (log.touches ? log.touches.length : 0);
+        
+        // Calculate Total Mindful Seconds directly based on your formula
+        // Mindful Time = Count * Threshold
+        let mindfulSec = count * thresholdSec;
+        
+        // Clamp: Mindful time cannot exceed Total time (e.g. if user enters huge count for short time)
+        mindfulSec = Math.min(mindfulSec, totalSec);
+        
+        // Calculate Distracted Seconds (Total - Mindful)
+        const distractedSec = totalSec - mindfulSec;
+        
+        // Calculate Percentage
+        // Formula breakdown: (MindfulSec / 60) gives Mindful Minutes. 
+        // Divided by Duration Minutes gives the Ratio. Multiply by 100 for Percentage.
+        const qualityPct = (mindfulSec / totalSec) * 100;
+        
+        return { distractedSec, qualityPct: parseFloat(qualityPct.toFixed(1)) };
     }
-
-    const endTime = log.timestamp + (log.minutes * 60 * 1000);
-    const endGap = (endTime - sortedTouches[sortedTouches.length - 1]) / 1000;
-    if (endGap > thresholdSec) distractedSec += (endGap - thresholdSec/2);
-
-    const totalSec = log.minutes * 60;
-    distractedSec = Math.min(distractedSec, totalSec);
-    
-    const qualityPct = ((totalSec - distractedSec) / totalSec) * 100;
-    
-    return { distractedSec, qualityPct: parseFloat(qualityPct.toFixed(1)) };
 }
 
 renderAnalytics(saveState = false) {
@@ -1626,7 +1745,7 @@ renderAnalytics(saveState = false) {
             labels: chartData.map(d => d.date),
             datasets: [
                 {
-                    label: 'Quality (%)',
+                    label: 'Quality',
                     data: chartData.map(d => d.quality),
                     borderColor: '#34d399',
                     backgroundColor: 'rgba(52, 211, 153, 0.1)',
@@ -1657,6 +1776,20 @@ renderAnalytics(saveState = false) {
                     padding: 10,
                     displayColors: true,
                     callbacks: {
+					label: function(context) {
+                    let label = context.dataset.label || '';
+                    if (label) {
+                        label += ': ';
+                    }
+                    if (context.parsed.y !== null) {
+                        label += context.parsed.y;
+                        // Only add % for the Quality dataset
+                        if (context.dataset.label === 'Quality') {
+                            label += '%';
+                        }
+                    }
+                    return label;
+                },
                         labelColor: function(context) {
                             return {
                                 borderColor: context.dataset.borderColor,
@@ -1682,7 +1815,113 @@ renderAnalytics(saveState = false) {
     });
 
     // 4. Update Table with filtered Goal IDs
-    this.renderComparisonTable(targetGoalIds);
+        this.renderComparisonTable(targetGoalIds);
+this.renderHourlyAnalysis(logs);
+}
+// Add this method inside class GoalTracker
+
+renderHourlyAnalysis(logs) {
+    const canvas = document.getElementById('analyticsHourlyChart');
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+
+    // 1. Aggregate Data for each of the 24 hours
+    const hourlyData = Array.from({ length: 24 }, (_, i) => ({
+        hour: i,
+        totalQuality: 0,
+        totalDensity: 0,
+        count: 0
+    }));
+
+    logs.forEach(log => {
+        const hour = new Date(log.timestamp).getHours();
+        const result = this.analyzeSingleSession(log);
+        
+        // Calculate Density (Mindfulness per minute)
+        const density = log.minutes > 0 ? (log.count || log.touches?.length || 0) / log.minutes : 0;
+        
+        hourlyData[hour].totalQuality += result.qualityPct;
+        hourlyData[hour].totalDensity += density;
+        hourlyData[hour].count++;
+    });
+
+    // 2. Prepare datasets
+    const labels = hourlyData.map(d => `${d.hour}h`);
+    const qualityPoints = hourlyData.map(d => d.count > 0 ? parseFloat((d.totalQuality / d.count).toFixed(1)) : 0);
+    const densityPoints = hourlyData.map(d => d.count > 0 ? parseFloat((d.totalDensity / d.count).toFixed(2)) : 0);
+
+    if (this.charts.hourlyChart) this.charts.hourlyChart.destroy();
+
+    // 3. Render Chart - EXACT replica of Trend Chart styling
+this.charts.hourlyChart = new Chart(ctx, {
+    type: 'line',
+    data: {
+        labels: labels,
+        datasets: [
+            {
+                label: 'Quality',
+                data: qualityPoints,
+                // Changed to a Zen/Buddhist Purple
+                borderColor: '#a78bfa', 
+                backgroundColor: 'rgba(167, 139, 250, 0.1)',
+                yAxisID: 'y',
+                fill: true,
+                tension: 0.3,
+            }
+        ]
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        interaction: { mode: 'index', intersect: false },
+        plugins: {  
+            legend: { display: false },
+            tooltip: {
+                titleColor: '#f3f4f6',
+                bodyColor: '#f3f4f6',
+                borderColor: '#374151',
+                borderWidth: 1,
+                padding: 10,
+                displayColors: true,
+                callbacks: {
+                    title: (items) => `${items[0].label} - ${parseInt(items[0].label) + 1}h`,
+                    // New label callback to add the % symbol
+                    label: function(context) {
+                        let label = context.dataset.label || '';
+                        if (label) {
+                            label += ': ';
+                        }
+                        if (context.parsed.y !== null) {
+                            label += context.parsed.y + '%';
+                        }
+                        return label;
+                    },
+                    labelColor: function(context) {
+                        return {
+                            borderColor: context.dataset.borderColor,
+                            backgroundColor: context.dataset.borderColor,
+                            borderWidth: 0,
+                            borderRadius: 2,
+                        };
+                    }
+                }
+            }
+        },
+        scales: {
+            y: {
+                type: 'linear', display: true, position: 'left', min: 0, max: 100,
+                grid: { color: '#374151' },
+                ticks: { 
+                    color: '#9ca3af',
+                }
+            },
+            x: {
+                ticks: { color: '#9ca3af' },
+                grid: { color: 'rgba(55, 65, 81, 0.5)', display: true }
+            }
+        }
+    }
+});
 }
 
 // Update helper to not require threshold arg (it reads from log internally)
@@ -1772,32 +2011,123 @@ renderComparisonTable(medGoalIds) {
 
 
 // --- ANALYTICS MODULE END ---
-            init() {
-                try {
-				    this.analyticsGoalFilter = localStorage.getItem('anaGoalFilter') || 'all';
-                    this.renderDate();
-                    this.renderGoals();
-                    this.updateStats();
-                    this.checkAchievements();
-                    this.renderCalendar();
-                    setInterval(() => this.updateTimerUI(), 1000);
+           init() {
+    try {
+        this.analyticsGoalFilter = localStorage.getItem('anaGoalFilter') || 'all';
+        this.renderDate();
+        this.renderGoals();
+        this.updateStats();
+        this.checkAchievements();
+        this.renderCalendar();
+        setInterval(() => this.updateTimerUI(), 1000);
 
-                    const medOverlay = document.getElementById('meditation-overlay');
-                    if(medOverlay) {
-                        medOverlay.addEventListener('pointerdown', (e) => {
-                            if(e.target.closest('.med-controls')) return;
-                            this.handleMeditationTouch();
-                        });
+        // --- UPDATED INTERACTION LOGIC ---
+        const medOverlay = document.getElementById('meditation-overlay');
+        const counterEl = document.getElementById('med-counter');
+        
+        let pressTimer = null;
+        
+        if (medOverlay) {
+            // 1. POINTER DOWN (Touching screen)
+            medOverlay.addEventListener('pointerdown', (e) => {
+                if (e.target.closest('.med-controls') || e.target.closest('.modal')) return;
+                e.preventDefault(); // Prevent text selection/scrolling
+
+                const settings = this.data.medSettings;
+
+                // VISUAL FEEDBACK: Slight shrink on touch
+                counterEl.style.transform = "scale(0.9)";
+                counterEl.style.transition = "transform 0.1s";
+
+                if (settings.mode === 'hold') {
+                    // --- HOLD MODE LOGIC ---
+                    pressTimer = setTimeout(() => {
+                        // SUCCESS: Held long enough
+                        this.triggerMindfulnessSuccess();
+                        pressTimer = null; 
+                    }, settings.holdDuration);
+                } 
+            });
+
+            // 2. POINTER UP (Lifting finger)
+            const handleRelease = (e) => {
+                if (e.target.closest('.med-controls')) return;
+                
+                const settings = this.data.medSettings;
+                
+                if (settings.mode === 'hold') {
+                    // --- HOLD MODE CLEANUP ---
+                    if (pressTimer) {
+                        clearTimeout(pressTimer); // Cancel if lifted too early
+                        pressTimer = null;
+                        // Revert visual
+                        counterEl.style.transform = "scale(1)";
                     }
-                } catch (err) {
-                    console.error("Error during init:", err);
-                    alert("App failed to initialize. Try resetting data via the sidebar button.");
+                } else {
+                    // --- TAP MODE LOGIC ---
+                    // 1. Clear any previous reset timer (user is tapping fast)
+                    if (this.tapState.timer) clearTimeout(this.tapState.timer);
+
+                    // 2. Increment Count
+                    this.tapState.count++;
+
+                    // 3. Visual feedback for intermediate taps (small bounce)
+                    if (this.tapState.count < settings.tapRequired) {
+                         counterEl.style.transform = "scale(0.95)";
+                         setTimeout(() => counterEl.style.transform = "scale(1)", 100);
+                    }
+
+                    // 4. Check if target reached
+                    if (this.tapState.count >= settings.tapRequired) {
+                        this.triggerMindfulnessSuccess();
+                        this.tapState.count = 0; // Reset immediately
+                    } else {
+                        // 5. Start reset timer (if user stops tapping before reaching target)
+                        this.tapState.timer = setTimeout(() => {
+                            this.tapState.count = 0;
+                            counterEl.style.transform = "scale(1)";
+                        }, 400); // 400ms window to tap again
+                    }
                 }
-				if (!localStorage.getItem('intro_seen')) {
+            };
+
+            medOverlay.addEventListener('pointerup', handleRelease);
+            medOverlay.addEventListener('pointerleave', () => {
+                // Cancel everything on leave
+                if(pressTimer) clearTimeout(pressTimer);
+                counterEl.style.transform = "scale(1)";
+            });
+        }
+    } catch (err) {
+        console.error("Lỗi khởi tạo:", err);
+    }
+    if (!localStorage.getItem('intro_seen')) {
         this.openIntroModal();
     }
+}
 
-            }
+// Helper function to handle success event (Vibration + Visuals + Logic)
+triggerMindfulnessSuccess() {
+    const settings = this.data.medSettings;
+    
+    // 1. Logic
+    this.handleMeditationTouch();
+    
+    // 2. Vibration (Check setting)
+    if (settings.vibration && navigator.vibrate) {
+        navigator.vibrate(50);
+    }
+    
+    // 3. Visual Feedback (Big Pulse)
+    const counterEl = document.getElementById('med-counter');
+    counterEl.style.transform = "scale(1.3)";
+    counterEl.style.borderColor = "var(--success)";
+    
+    setTimeout(() => {
+        counterEl.style.transform = "scale(1)";
+        counterEl.style.borderColor = "transparent"; // Or whatever original border was
+    }, 150);
+}
 
             save() {
                 localStorage.setItem('chronoData', JSON.stringify(this.data));
@@ -2117,7 +2447,68 @@ concludeMeditationSession(type = 'manual') {
                 });
                 this.updateStats(); 
             }
+// --- MEDITATION SETTINGS METHODS ---
 
+openMedSettings() {
+    const s = this.data.medSettings;
+    
+    // Set UI State based on data
+    this.setMedModeUI(s.mode);
+    document.getElementById('inp-hold-time').value = s.holdDuration;
+    document.getElementById('disp-hold-time').innerText = (s.holdDuration / 1000) + 's';
+    document.getElementById('inp-tap-count').value = s.tapRequired;
+    document.getElementById('inp-vibrate').checked = s.vibration;
+    
+    document.getElementById('med-settings-modal').style.display = 'flex';
+}
+
+closeMedSettings() {
+    this.saveMedSettings();
+    document.getElementById('med-settings-modal').style.display = 'none';
+}
+
+setMedMode(mode) {
+    this.setMedModeUI(mode);
+    this.saveMedSettings();
+}
+
+setMedModeUI(mode) {
+    const btnHold = document.getElementById('btn-mode-hold');
+    const btnTap = document.getElementById('btn-mode-tap');
+    const groupHold = document.getElementById('setting-hold-group');
+    const groupTap = document.getElementById('setting-tap-group');
+
+    if (mode === 'hold') {
+        btnHold.classList.add('btn-mode-active');
+        btnTap.classList.remove('btn-mode-active');
+        groupHold.style.display = 'block';
+        groupTap.style.display = 'none';
+    } else {
+        btnTap.classList.add('btn-mode-active');
+        btnHold.classList.remove('btn-mode-active');
+        groupHold.style.display = 'none';
+        groupTap.style.display = 'block';
+    }
+}
+
+updateMedSettingDisplay() {
+    const ms = document.getElementById('inp-hold-time').value;
+    document.getElementById('disp-hold-time').innerText = (ms / 1000) + 's';
+    // Debounce save or just save on close. Saving here is fine.
+    this.data.medSettings.holdDuration = parseInt(ms);
+}
+
+saveMedSettings() {
+    const mode = document.getElementById('btn-mode-hold').classList.contains('btn-mode-active') ? 'hold' : 'tap';
+    
+    this.data.medSettings = {
+        mode: mode,
+        holdDuration: parseInt(document.getElementById('inp-hold-time').value),
+        tapRequired: parseInt(document.getElementById('inp-tap-count').value),
+        vibration: document.getElementById('inp-vibrate').checked
+    };
+    this.save();
+}
             renderGoals() {
                 const container = document.getElementById('active-goals-container');
                 const emptyMsg = document.getElementById('empty-msg');
@@ -2499,7 +2890,7 @@ fallbackCopyText(text) {
                 const btn = document.getElementById('btn-save-goal');
                 const catSelect = document.getElementById('g-cat');
                 catSelect.innerHTML = '';
-                const cats = type === 'meditation' ? ['Sitting Meditation', 'Walking Meditation', 'Bhavana'] : ['Work', 'Study', 'Health', 'Creative', 'Merit', 'Other'];
+                const cats = type === 'meditation' ? ['Sitting', 'Walking', 'Contemplation', 'Bhavana'] : ['Work', 'Study', 'Health', 'Creative', 'Merit', 'Other'];
                 cats.forEach(c => { const opt = document.createElement('option'); opt.value = c; opt.innerText = c; catSelect.appendChild(opt); });
 
                 const dailyHint = document.getElementById('g-daily-hint');
@@ -2584,25 +2975,36 @@ if(totalMins > 0) {
             }
 renderRandomQuote() {
     const display = document.getElementById('dhammapada-display');
+    const sourceDisplay = document.getElementById('dhammapada-source'); // 1. Lấy thẻ chứa số thứ tự
+    
     if (!display) return;
 
-    // Fade out
+    // Fade out (Làm mờ đi để chuyển cảnh)
     display.style.opacity = '0';
+    if(sourceDisplay) sourceDisplay.style.opacity = '0';
 
     setTimeout(() => {
         // 1. Get Random Verse
         const randomIndex = Math.floor(Math.random() * DHAMMAPADA.length);
         const verse = DHAMMAPADA[randomIndex];
 
-        // 2. Set Text
+        // 2. Set Text (Nội dung kinh)
         display.innerHTML = verse.t;
         
-        // 3. Mark as loaded (Important for the fix)
+        // --- CẬP NHẬT SỐ THỨ TỰ ---
+        if (sourceDisplay) {
+            // randomIndex bắt đầu từ 0, nên cần +1 để bắt đầu từ 1
+            sourceDisplay.innerText = `Dhammapada ${randomIndex + 1}`;
+            sourceDisplay.style.opacity = '0.7'; // Hiện lại
+        }
+        // ---------------------------
+
+        // 3. Mark as loaded
         display.setAttribute('data-loaded', 'true');
 
-        // 4. Fade in
+        // 4. Fade in (Hiện nội dung kinh)
         display.style.opacity = '1';
-    }, 200); // Short delay for transition effect
+    }, 200); 
 }
 switchDayChart(mode) {
     this.dayChartMode = mode;
@@ -3409,7 +3811,7 @@ fallbackCopyText(text) {
     if (goal && goal.type === 'meditation') {
         mindGroup.style.display = 'block';
         let currentCount = 0;
-        let currentThreshold = goal.lastThreshold || 10; // Default to last used
+        let currentThreshold = 6; // Default to last used
 
         if (logId) {
             const log = this.data.logs.find(l => l.timestamp == logId);
