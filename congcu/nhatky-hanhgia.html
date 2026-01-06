@@ -344,7 +344,39 @@ input[type=range]::-webkit-slider-runnable-track {
     background: #374151;
     border-radius: 2px;
 }	
-		
+/* --- Quick Tags --- */
+.tag-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 10px;
+    /* Add these lines if you have many tags: */
+    max-height: 100px; 
+    overflow-y: auto;
+}
+
+.quick-tag {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 5px 12px;
+    font-size: 11px;
+    cursor: pointer;
+    transition: all 0.2s;
+    color: var(--text-light);
+    user-select: none;
+}
+
+.quick-tag:hover {
+    background: var(--primary);
+    color: white;
+    border-color: var(--primary);
+    transform: translateY(-1px);
+}
+
+.quick-tag:active {
+    transform: scale(0.95);
+}		
     </style>
 </head>
 <body>
@@ -725,10 +757,11 @@ input[type=range]::-webkit-slider-runnable-track {
         <input type="number" id="s-threshold" class="form-control" min="1" value="12" style="background: rgba(0,0,0,0.2);" />
     </div>
 </div>
-                <div class="form-group">
-                    <label>Ghi chú (Tùy chọn)</label>
-                    <textarea id="s-notes" class="form-control" placeholder="Bạn đã tập trung vào điều gì?"></textarea>
-                </div>
+               <div class="form-group">
+    <label>Ghi chú (Tùy chọn)</label>
+    <textarea id="s-notes" class="form-control" placeholder="Bạn đã tập trung vào điều gì?"></textarea>
+    <div id="session-tags" class="tag-container"></div>
+</div>
 
                 <div style="display: flex; justify-content: flex-end; gap: 10px;">
                     <button type="button" class="btn btn-secondary" onclick="app.closeSessionModal()">Hủy</button>
@@ -772,9 +805,10 @@ input[type=range]::-webkit-slider-runnable-track {
                 </div>
             </div>
             <div class="form-group">
-                <label>Nhật ký</label>
-                <textarea id="med-finish-notes" class="form-control" placeholder="Chánh niệm của bạn có tốt không?"></textarea>
-            </div>
+    <label>Nhật ký</label>
+    <textarea id="med-finish-notes" class="form-control" placeholder="Chánh niệm của bạn có tốt không?"></textarea>
+    <div id="finish-tags" class="tag-container"></div>
+</div>
             <div style="display:flex; gap:10px; justify-content:flex-end; margin-top:20px;">
                  <button class="btn btn-secondary" onclick="app.discardMeditation()">Hủy bỏ</button>
                  <button class="btn" style="background:var(--zen); color:white" onclick="app.saveMeditationLog()">Lưu nhật ký</button>
@@ -1557,6 +1591,20 @@ input[type=range]::-webkit-slider-runnable-track {
                 };
 this.currentViewDate = null; // Biến nhớ ngày đang xem trong modal
 this.dayChartMode = 'time'; 
+this.QUICK_TAGS = [
+    // ✨ TRẠNG THÁI TÍCH CỰC (Good States)
+    'Tỉnh Thức', 'Chánh Niệm', 'Định Tĩnh', 'An Lạc', 'Hỷ Lạc', 
+    'Khinh An', 'Thư Thái', 'Sáng Suốt', 'Rỗng Rang', 'Định Sâu', 
+    'Xả Ly', 'Biết Ơn', 'Nhẹ Nhàng', 'Ánh Sáng',
+
+    // 🌪️ CHƯỚNG NGẠI & KHÓ KHĂN (Bad/Struggle States)
+    'Phóng Tâm', 'Vọng Tưởng', 'Trạo Cử', 'Hôn Trầm', 'Buồn Ngủ', 
+    'Thụy Miên', 'Tâm Tán Loạn', 'Lo Lắng', 'Sân Giận', 'Tham Ái',
+    'Hoài Nghi', 'Nhiều Tính Toán', 'Hồi Tưởng', 'Căng Thẳng',
+
+    // 🧘 CẢM THỌ THÂN (Physical Sensations)
+    'Đau Lưng', 'Tê Chân', 'Ngứa', 'Mỏi Cổ', 'Nóng Nực', 'Lạnh'
+];
                 this.init();
             }
 openIntroModal() {
@@ -1569,7 +1617,34 @@ closeIntroModal() {
     localStorage.setItem('intro_seen', 'true'); // Save so it doesn't pop up every time
 }
 
-// Trong constructor()
+// Add this method to class GoalTracker
+renderQuickTags(containerId, inputId) {
+    const container = document.getElementById(containerId);
+    if (!container) return;
+    
+    container.innerHTML = ''; // Clear previous tags
+    
+    this.QUICK_TAGS.forEach(tag => {
+        const span = document.createElement('span');
+        span.className = 'quick-tag';
+        span.innerText = tag;
+        
+        span.onclick = () => {
+            const input = document.getElementById(inputId);
+            // Append logic: Add comma if text exists
+            if (input.value.trim().length > 0) {
+                // Check if tag already exists to avoid duplicates (optional)
+                if(!input.value.includes(tag)) {
+                    input.value += ', ' + tag;
+                }
+            } else {
+                input.value = tag;
+            }
+        };
+        
+        container.appendChild(span);
+    });
+}
  // Chế độ mặc định của modal
             // Fix: Week starts on Monday
             getStartOfWeek(date) {
@@ -1779,7 +1854,19 @@ renderAnalytics(saveState = false) {
         options: {
             responsive: true,
             maintainAspectRatio: false,
-            interaction: { mode: 'index', intersect: false },
+            interaction: {
+            mode: 'nearest',
+            axis: 'x',
+            intersect: true
+        },
+        
+        // 2. INCREASE TOUCH AREA (The fix for "too difficult")
+        elements: {
+            point: {
+                hitRadius: 30,     // <--- Creates a large 30px touch target
+                hoverRadius: 4     // Dot size when touched
+            }
+        },
             plugins: {  
                 tooltip: {
                     titleColor: '#f3f4f6',
@@ -1886,7 +1973,19 @@ this.charts.hourlyChart = new Chart(ctx, {
     options: {
         responsive: true,
         maintainAspectRatio: false,
-        interaction: { mode: 'index', intersect: false },
+        interaction: {
+            mode: 'nearest',
+            axis: 'x',
+            intersect: true
+        },
+        
+        // 2. INCREASE TOUCH AREA (The fix for "too difficult")
+        elements: {
+            point: {
+                hitRadius: 30,     // <--- Creates a large 30px touch target
+                hoverRadius: 4     // Dot size when touched
+            }
+        },
         plugins: {  
             legend: { display: false },
             tooltip: {
@@ -2398,6 +2497,7 @@ startMeditationSetup(goal) {
     document.getElementById('med-finish-count').innerText = this.meditationState.count;
     document.getElementById('med-finish-time').innerText = minutes + 'm';
     document.getElementById('med-finish-notes').value = '';
+	this.renderQuickTags('finish-tags', 'med-finish-notes');
     document.getElementById('meditation-finish-modal').style.display = 'flex';
 }
             
@@ -3855,6 +3955,7 @@ openSessionModal(goalId, minutes = 0, logId = null, startTime = Date.now()) {
         if(log && log.notes) notes = log.notes; 
     }
     document.getElementById('s-notes').value = notes;
+	this.renderQuickTags('session-tags', 's-notes');
     document.getElementById('session-title').innerText = logId ? 'Chỉnh sửa' : 'Nhập thủ công';
 }
             closeSessionModal() { document.getElementById('session-modal').style.display = 'none'; }

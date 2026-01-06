@@ -343,6 +343,40 @@ input[type=range]::-webkit-slider-runnable-track {
     background: #374151;
     border-radius: 2px;
 }	
+
+/* --- Quick Tags --- */
+.tag-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 10px;
+    /* Add these lines if you have many tags: */
+    max-height: 100px; 
+    overflow-y: auto;
+}
+
+.quick-tag {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 5px 12px;
+    font-size: 11px;
+    cursor: pointer;
+    transition: all 0.2s;
+    color: var(--text-light);
+    user-select: none;
+}
+
+.quick-tag:hover {
+    background: var(--primary);
+    color: white;
+    border-color: var(--primary);
+    transform: translateY(-1px);
+}
+
+.quick-tag:active {
+    transform: scale(0.95);
+}	
     </style>
 </head>
 <body>
@@ -722,7 +756,8 @@ input[type=range]::-webkit-slider-runnable-track {
                 <div class="form-group">
                     <label>Notes (Optional)</label>
                     <textarea id="s-notes" class="form-control" placeholder="What did you focus on?"></textarea>
-                </div>
+                    <div id="session-tags" class="tag-container"></div>
+                   </div>
 
                 <div style="display: flex; justify-content: flex-end; gap: 10px;">
                     <button type="button" class="btn btn-secondary" onclick="app.closeSessionModal()">Cancel</button>
@@ -756,7 +791,7 @@ input[type=range]::-webkit-slider-runnable-track {
             <div style="text-align:center; margin: 20px 0; display:flex; justify-content:space-around; align-items:center;">
                 <div>
                     <div style="font-size: 30px; font-weight:bold; color:var(--zen)" id="med-finish-count">0</div>
-                    <div style="color:var(--text-light); font-size:12px;">Mindful Moments</div>
+                    <div style="color:var(--text-light); font-size:12px;">Mindfulness</div>
                 </div>
                 <div style="height:40px; width:1px; background:var(--border);"></div>
                 <div>
@@ -767,6 +802,7 @@ input[type=range]::-webkit-slider-runnable-track {
             <div class="form-group">
                 <label>Journal Notes</label>
                 <textarea id="med-finish-notes" class="form-control" placeholder="Any insights or distractions?"></textarea>
+				<div id="finish-tags" class="tag-container"></div>
             </div>
             <div style="display:flex; gap:10px; justify-content:flex-end; margin-top:20px;">
                  <button class="btn btn-secondary" onclick="app.discardMeditation()">Discard</button>
@@ -1546,7 +1582,21 @@ input[type=range]::-webkit-slider-runnable-track {
                 };
 this.currentViewDate = null; // Biến nhớ ngày đang xem trong modal
 this.dayChartMode = 'time';  // Chế độ mặc định của modal
-                this.init();
+this.QUICK_TAGS = [
+    // ✨ POSITIVE STATES (Trạng thái Tích cực)
+    'Awake', 'Mindful', 'Calm/Still', 'Peaceful', 'Joyful', 
+    'Tranquil', 'Relaxed', 'Clear/Lucid', 'Spacious', 'Deep Concentration', 
+    'Letting Go', 'Grateful', 'Gentle', 'Inner Light',
+
+    // 🌪️ HINDRANCES & STRUGGLES (Chướng ngại & Khó khăn)
+    'Wandering Mind', 'Delusion', 'Restlessness', 'Dullness', 'Sleepy', 
+    'Drowsiness', 'Scattered Mind', 'Anxious', 'Anger/Irritation', 'Cravings',
+    'Doubt', 'Overthinking', 'Reminiscing', 'Stressed',
+
+    // 🧘 PHYSICAL SENSATIONS (Cảm thọ Thân)
+    'Back Pain', 'Numb Legs', 'Itchy', 'Neck Pain', 'Hot', 'Cold'
+];
+             this.init();
             }
   openIntroModal() {
         const modal = document.getElementById('intro-modal');
@@ -1557,7 +1607,35 @@ closeIntroModal() {
     document.getElementById('intro-modal').style.display = 'none';
     localStorage.setItem('intro_seen', 'true'); // Save so it doesn't pop up every time
 }          
-           // Fix: Week starts on Monday
+
+// Add this method to class GoalTracker
+renderQuickTags(containerId, inputId) {
+    const container = document.getElementById(containerId);
+    if (!container) return;
+    
+    container.innerHTML = ''; // Clear previous tags
+    
+    this.QUICK_TAGS.forEach(tag => {
+        const span = document.createElement('span');
+        span.className = 'quick-tag';
+        span.innerText = tag;
+        
+        span.onclick = () => {
+            const input = document.getElementById(inputId);
+            // Append logic: Add comma if text exists
+            if (input.value.trim().length > 0) {
+                // Check if tag already exists to avoid duplicates (optional)
+                if(!input.value.includes(tag)) {
+                    input.value += ', ' + tag;
+                }
+            } else {
+                input.value = tag;
+            }
+        };
+        
+        container.appendChild(span);
+    });
+}
             getStartOfWeek(date) {
                 const d = new Date(date);
                 const day = d.getDay() || 7; // CN=0 đổi thành 7, T2=1 giữ nguyên
@@ -1766,7 +1844,19 @@ renderAnalytics(saveState = false) {
         options: {
             responsive: true,
             maintainAspectRatio: false,
-            interaction: { mode: 'index', intersect: false },
+            interaction: {
+            mode: 'nearest',
+            axis: 'x',
+            intersect: true
+        },
+        
+        // 2. INCREASE TOUCH AREA (The fix for "too difficult")
+        elements: {
+            point: {
+                hitRadius: 30,     // <--- Creates a large 30px touch target
+                hoverRadius: 4     // Dot size when touched
+            }
+        },
             plugins: {  
                 tooltip: {
                     titleColor: '#f3f4f6',
@@ -1873,7 +1963,19 @@ this.charts.hourlyChart = new Chart(ctx, {
     options: {
         responsive: true,
         maintainAspectRatio: false,
-        interaction: { mode: 'index', intersect: false },
+        interaction: {
+            mode: 'nearest',
+            axis: 'x',
+            intersect: true
+        },
+        
+        // 2. INCREASE TOUCH AREA (The fix for "too difficult")
+        elements: {
+            point: {
+                hitRadius: 30,     // <--- Creates a large 30px touch target
+                hoverRadius: 4     // Dot size when touched
+            }
+        },
         plugins: {  
             legend: { display: false },
             tooltip: {
@@ -2384,6 +2486,7 @@ concludeMeditationSession(type = 'manual') {
     document.getElementById('med-finish-count').innerText = this.meditationState.count;
     document.getElementById('med-finish-time').innerText = minutes + 'm';
     document.getElementById('med-finish-notes').value = '';
+	this.renderQuickTags('finish-tags', 'med-finish-notes');
     document.getElementById('meditation-finish-modal').style.display = 'flex';
 }
             
@@ -3834,6 +3937,7 @@ fallbackCopyText(text) {
         if(log && log.notes) notes = log.notes; 
     }
     document.getElementById('s-notes').value = notes;
+	this.renderQuickTags('session-tags', 's-notes');
     document.getElementById('session-title').innerText = logId ? 'Update log' : 'Add log';
 }
             closeSessionModal() { document.getElementById('session-modal').style.display = 'none'; }
