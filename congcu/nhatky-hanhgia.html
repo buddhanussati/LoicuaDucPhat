@@ -351,7 +351,7 @@ input[type=range]::-webkit-slider-runnable-track {
     gap: 8px;
     margin-top: 10px;
     /* Add these lines if you have many tags: */
-    max-height: 100px; 
+    max-height: 83px; 
     overflow-y: auto;
 }
 
@@ -599,7 +599,7 @@ input[type=range]::-webkit-slider-runnable-track {
 <div class="card" style="margin-top: 20px;">
     <h3>📊 Tỉnh giác trong ngày</h3>
     <p style="font-size: 12px; color: var(--text-light); margin-bottom: 15px;">
-        Chất lượng chánh niệm trung bình trong ngày
+        Chất lượng & tổng thời lượng tu tập hàng ngày
     </p>
     <div style="height: 250px;">
         <canvas id="analyticsHourlyChart"></canvas>
@@ -1593,7 +1593,7 @@ this.currentViewDate = null; // Biến nhớ ngày đang xem trong modal
 this.dayChartMode = 'time'; 
 this.QUICK_TAGS = [
     // ✨ TRẠNG THÁI TÍCH CỰC (Good States)
-    'Tỉnh Thức', 'Chánh Niệm', 'Định Tĩnh', 'An Lạc', 'Hỷ Lạc', 
+    'Tỉnh Thức', 'Định Tĩnh', 'An Lạc', 'Hỷ Lạc', 
     'Khinh An', 'Thư Thái', 'Sáng Suốt', 'Rỗng Rang', 'Định Sâu', 
     'Xả Ly', 'Biết Ơn', 'Nhẹ Nhàng', 'Ánh Sáng',
 
@@ -1925,11 +1925,11 @@ renderHourlyAnalysis(logs) {
     if (!canvas) return;
     const ctx = canvas.getContext('2d');
 
-    // 1. Aggregate Data for each of the 24 hours
+    // 1. Tổng hợp dữ liệu
     const hourlyData = Array.from({ length: 24 }, (_, i) => ({
         hour: i,
         totalQuality: 0,
-        totalDensity: 0,
+        totalMinutes: 0,
         count: 0
     }));
 
@@ -1937,103 +1937,128 @@ renderHourlyAnalysis(logs) {
         const hour = new Date(log.timestamp).getHours();
         const result = this.analyzeSingleSession(log);
         
-        // Calculate Density (Mindfulness per minute)
-        const density = log.minutes > 0 ? (log.count || log.touches?.length || 0) / log.minutes : 0;
-        
         hourlyData[hour].totalQuality += result.qualityPct;
-        hourlyData[hour].totalDensity += density;
+        hourlyData[hour].totalMinutes += log.minutes;
         hourlyData[hour].count++;
     });
 
-    // 2. Prepare datasets
     const labels = hourlyData.map(d => `${d.hour}h`);
     const qualityPoints = hourlyData.map(d => d.count > 0 ? parseFloat((d.totalQuality / d.count).toFixed(1)) : 0);
-    const densityPoints = hourlyData.map(d => d.count > 0 ? parseFloat((d.totalDensity / d.count).toFixed(2)) : 0);
+    // Vẫn tính toán theo giờ để vẽ cột Bar đồng bộ với trục y1
+    const hourPoints = hourlyData.map(d => parseFloat((d.totalMinutes / 60).toFixed(2)));
 
     if (this.charts.hourlyChart) this.charts.hourlyChart.destroy();
 
-    // 3. Render Chart - EXACT replica of Trend Chart styling
-this.charts.hourlyChart = new Chart(ctx, {
-    type: 'line',
-    data: {
-        labels: labels,
-        datasets: [
-            {
-                label: 'Chất lượng',
-                data: qualityPoints,
-                // Changed to a Zen/Buddhist Purple
-                borderColor: '#a78bfa', 
-                backgroundColor: 'rgba(167, 139, 250, 0.1)',
-                yAxisID: 'y',
-                fill: true,
-                tension: 0.3,
-            }
-        ]
-    },
-    options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        interaction: {
-            mode: 'nearest',
-            axis: 'x',
-            intersect: true
-        },
-        
-        // 2. INCREASE TOUCH AREA (The fix for "too difficult")
-        elements: {
-            point: {
-                hitRadius: 30,     // <--- Creates a large 30px touch target
-                hoverRadius: 4     // Dot size when touched
-            }
-        },
-        plugins: {  
-            legend: { display: false },
-            tooltip: {
-                titleColor: '#f3f4f6',
-                bodyColor: '#f3f4f6',
-                borderColor: '#374151',
-                borderWidth: 1,
-                padding: 10,
-                displayColors: true,
-                callbacks: {
-                    title: (items) => `${items[0].label} - ${parseInt(items[0].label) + 1}h`,
-                    // New label callback to add the % symbol
-                    label: function(context) {
-                        let label = context.dataset.label || '';
-                        if (label) {
-                            label += ': ';
-                        }
-                        if (context.parsed.y !== null) {
-                            label += context.parsed.y + '%';
-                        }
-                        return label;
-                    },
-                    labelColor: function(context) {
-                        return {
-                            borderColor: context.dataset.borderColor,
-                            backgroundColor: context.dataset.borderColor,
-                            borderWidth: 0,
-                            borderRadius: 2,
-                        };
-                    }
+    this.charts.hourlyChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: labels,
+            datasets: [
+                {
+                    label: 'Chất lượng',
+                    data: qualityPoints,
+                    borderColor: '#a78bfa',
+                    backgroundColor: 'rgba(167, 139, 250, 0.05)',
+                    borderWidth: 1.5,
+                    yAxisID: 'y',
+                    fill: true,
+                    tension: 0.3,
+                    order: 1
+                },
+                {
+                    label: 'Thời lượng tu tập', 
+                    data: hourPoints,
+                    type: 'bar',
+                    backgroundColor: 'rgba(56, 189, 248, 0.2)',
+                    borderColor: 'rgba(56, 189, 248, 0.5)',
+                    borderWidth: 1,
+                    yAxisID: 'y1',
+                    order: 2
                 }
-            }
+            ]
         },
-        scales: {
-            y: {
-                type: 'linear', display: true, position: 'left', min: 0, max: 100,
-                grid: { color: '#374151' },
-                ticks: { 
-                    color: '#9ca3af',
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            interaction: {
+                mode: 'nearest',
+                axis: 'x',
+                intersect: true
+            },
+            elements: {
+                point: {
+                    hitRadius: 30,
+                    hoverRadius: 2.5,
+                    radius: 1.3
                 }
             },
-            x: {
-                ticks: { color: '#9ca3af' },
-                grid: { color: 'rgba(55, 65, 81, 0.5)', display: true }
+            plugins: {
+                legend: { display: true },
+                tooltip: {
+                    titleColor: '#f3f4f6',
+                    bodyColor: '#f3f4f6',
+                    borderColor: '#374151',
+                    borderWidth: 1,
+                    padding: 10,
+                    displayColors: true,
+                    callbacks: {
+                        title: (items) => `${items[0].label} - ${parseInt(items[0].label) + 1}h`,
+                        label: function(context) {
+                            let label = context.dataset.label || '';
+                            if (label) label += ': ';
+                            if (context.parsed.y !== null) {
+                                if (context.dataset.yAxisID === 'y') {
+                                    label += context.parsed.y + '%';
+                                } else {
+                                    const totalHours = context.parsed.y;
+                                    // Hiển thị phút nếu < 1h, ngược lại hiển thị giờ
+                                    if (totalHours < 1) {
+                                        label += Math.round(totalHours * 60) + ' phút';
+                                    } else {
+                                        label += totalHours.toFixed(1) + ' giờ';
+                                    }
+                                }
+                            }
+                            return label;
+                        },
+                        labelColor: function(context) {
+                            return {
+                                borderColor: context.dataset.borderColor,
+                                backgroundColor: context.dataset.borderColor,
+                                borderWidth: 0,
+                                borderRadius: 2,
+                            };
+                        }
+                    }
+                }
+            },
+            scales: {
+                y: {
+                    type: 'linear', display: true, position: 'left', min: 0, max: 100,
+                    grid: { color: '#374151' },
+                    ticks: { color: '#9ca3af' }
+                },
+                y1: {
+                    type: 'linear', display: true, position: 'right',
+                    beginAtZero: true,
+                    grid: { drawOnChartArea: false },
+                    ticks: { 
+                        color: '#6b7280',
+                        // CẬP NHẬT: Hiển thị đơn vị phút trên trục tọa độ nếu giá trị nhỏ
+                        callback: function(value) { 
+                            if (value === 0) return 0;
+                            if (value < 1) return Math.round(value * 60) + 'p';
+                            return value + 'h'; 
+                        }
+                    }
+                },
+                x: {
+                    ticks: { color: '#9ca3af' },
+                    grid: { color: 'rgba(55, 65, 81, 0.5)', display: true }
+                }
             }
         }
-    }
-});
+    });
 }
 // Update helper to not require threshold arg (it reads from log internally)
 getStatsForRange(startTime, endTime, goalIds) {
