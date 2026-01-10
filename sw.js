@@ -37,7 +37,6 @@ var cacheAssets = [
 	'../images/headerlogo.png',
 	'../images/buddha192.png',
 	'../images/buddha512.png',
-	'../fonts/font-awesome.min.css',	
 	];
 
 // Call install Event
@@ -100,3 +99,4 @@ self.addEventListener('fetch', e => {
 		)
 	);
 });
+
