@@ -1023,36 +1023,39 @@ renderComparisonTable(medGoalIds) {
         
         this.holdTriggered = false; 
         let pressTimer = null;
-        let pressStartTime = 0; 
         
         if (medOverlay) {
             medOverlay.addEventListener('pointerdown', (e) => {
-                if (e.target.closest('.med-controls') || e.target.closest('.modal')) return;
-                e.preventDefault(); 
+    if (e.target.closest('.med-controls') || e.target.closest('.modal')) return;
+    e.preventDefault(); 
 
-                const settings = this.data.medSettings;
-                const mode = settings.mode;
-                this.holdTriggered = false;
-                pressStartTime = Date.now(); 
+    const settings = this.data.medSettings;
+    const mode = settings.mode;
+    this.holdTriggered = false; // Reset flag
 
-                counterEl.style.transform = "scale(0.9)";
-                counterEl.style.transition = "transform 0.1s";
+    counterEl.style.transform = "scale(0.9)";
+    counterEl.style.transition = "transform 0.1s";
 
-                if (mode === 'hold' || mode === 'auto') {
-                    pressTimer = setTimeout(() => {
-                        this.triggerMindfulnessSuccess(1);
-                        this.holdTriggered = true; 
-                        pressTimer = null; 
-                    }, settings.holdDuration);
-                }
-            });
+    if (mode === 'hold' || mode === 'auto' || mode === 'pro') {
+        
+        pressTimer = setTimeout(() => {
+            if (mode === 'pro') {
+                this.triggerMindfulnessSuccess(1); 
+            } else {
+                this.triggerMindfulnessSuccess(1);
+            }
+            
+            this.holdTriggered = true; 
+            pressTimer = null; 
+        }, settings.holdDuration);
+    } 
+});
 
-            const handleRelease = (e) => {
+const handleRelease = (e) => {
     if (e.target.closest('.med-controls')) return;
     
     const settings = this.data.medSettings;
     const mode = settings.mode;
-    const duration = Date.now() - pressStartTime;
 
     if (pressTimer) {
         clearTimeout(pressTimer); 
@@ -1060,58 +1063,60 @@ renderComparisonTable(medGoalIds) {
     }
     counterEl.style.transform = "scale(1)";
 
-    if (this.holdTriggered && (mode === 'hold' || mode === 'auto')) {
+    if (this.holdTriggered) {
         this.holdTriggered = false;
-        this.tapState.count = 0; 
-        return;
-    }
-
-    if (mode === 'pro' && duration >= settings.holdDuration) {
-        this.triggerMindfulnessSuccess(1); 
-        this.tapState.count = 0; 
+        this.tapState.count = 0;
         return;
     }
 
     if (mode === 'tap' || mode === 'auto' || mode === 'pro') {
+        
         if (this.tapState.timer) clearTimeout(this.tapState.timer);
+
         this.tapState.count++;
         
         counterEl.style.transform = "scale(0.95)";
         setTimeout(() => counterEl.style.transform = "scale(1)", 80);
 
         if (mode === 'auto' || mode === 'pro') {
+            
             this.tapState.timer = setTimeout(() => {
                 const taps = this.tapState.count;
                 let qualityVal = 1; 
 
                 if (mode === 'pro') {
-                    if (taps === 1) qualityVal = 4;
-                    else if (taps === 2) qualityVal = 3;
-                    else qualityVal = 2;
+                    if (taps === 1) qualityVal = 4;      
+                    else if (taps === 2) qualityVal = 3; 
+                    else qualityVal = 2;                 
                 } 
+                else {
+                    qualityVal = 1; 
+                }
 
-                
                 this.triggerMindfulnessSuccess(qualityVal);
-                this.tapState.count = 0;
+                this.tapState.count = 0; 
             }, 400); 
         } 
+        
         else if (mode === 'tap') {
             if (this.tapState.count >= settings.tapRequired) {
                 this.triggerMindfulnessSuccess(1);
                 this.tapState.count = 0; 
             } else {
-                this.tapState.timer = setTimeout(() => { this.tapState.count = 0; }, 400);
+                this.tapState.timer = setTimeout(() => {
+                    this.tapState.count = 0;
+                }, 400);
             }
         }
     }
 };
 
-            medOverlay.addEventListener('pointerup', handleRelease);
-            medOverlay.addEventListener('pointerleave', () => {
-                if(pressTimer) clearTimeout(pressTimer);
-                counterEl.style.transform = "scale(1)";
-                this.holdTriggered = false;
-            });
+medOverlay.addEventListener('pointerup', handleRelease);
+medOverlay.addEventListener('pointerleave', () => {
+    if(pressTimer) clearTimeout(pressTimer);
+    counterEl.style.transform = "scale(1)";
+    this.holdTriggered = false;
+});
         }
     } catch (err) {
         console.error("Lỗi khởi tạo:", err);
@@ -1776,7 +1781,7 @@ renderProChart(ctx, log) {
         '#f87171'  
     ];
     
-    const labels = ['Mạnh', 'Tốt', 'Trung bình', 'Yếu'];
+    const labels = ['Tốt', 'Khá', 'Trung bình', 'Yếu'];
 
     const centerTextPlugin = {
         id: 'centerText',
