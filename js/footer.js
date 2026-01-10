@@ -1,3 +1,9 @@
+ if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('/sw.js')
+      .then(() => console.log('Service Worker registered'))
+      .catch((error) => console.error('Error registering Service Worker', error));
+  }
+
 "use strict";
 var next_sutta = $("#next-sutta").attr("title", "Kinh Tiếp"),
   previous_sutta = $("#previous-sutta").attr("title", "Kinh Trước");
