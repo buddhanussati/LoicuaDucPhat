@@ -3,6 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="icon" type="image/x-icon" href="./images/favicon.ico">
+	<link rel="manifest" href="./manifest2.json">
+    <meta name="theme-color" content="#8b5cf6">
+    <link rel="apple-touch-icon" href="./images/icon-192.png">
     <title>Meditator's Journal</title>
     <link href="./css/css.css" rel="stylesheet">
 	<link href="./css/css2.css" rel="stylesheet">
@@ -531,9 +535,9 @@
         <div id="setting-pro-legend" style="display:none; background: rgba(167, 139, 250, 0.1); padding: 10px; border-radius: 8px; border: 1px solid rgba(167, 139, 250, 0.3); margin-bottom: 15px;">
     <div style="font-size: 11px; margin-bottom: 5px; color: var(--text-light)">💎 Focus Quality (Pro):</div>
     <div style="font-size: 12px; display:grid; grid-template-columns: 1fr 1fr; gap:5px;">
-        <div class="text-q1">Hold: <strong>Strong</strong></div>
-        <div class="text-q2">3 Taps: <strong>Good</strong></div>
-        <div class="text-q3">2 Taps: <strong>Average</strong></div>
+        <div class="text-q1">Hold: <strong>Good</strong></div>
+        <div class="text-q2">3 Taps: <strong>Steady</strong></div>
+        <div class="text-q3">2 Taps: <strong>Moderate</strong></div>
         <div class="text-q4">1 Tap: <strong>Weak</strong></div>
     </div>
 </div>
@@ -729,7 +733,15 @@
     </div>
 </div>
     <audio id="bell" src="./audio/bell.mp3" preload="auto"></audio>
-
+<script>
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('./sw2.js')
+        .then(reg => console.log('PWA ready:', reg.scope))
+        .catch(err => console.log('PWA error:', err));
+    });
+  }
+</script>
    <script src="./js/mj.js"></script>
 </body>
 </html>
