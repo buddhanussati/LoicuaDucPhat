@@ -29,11 +29,11 @@
 		<div class="nav-item" onclick="app.switchView('analytics')">
     <i class="fas fa-microscope"></i><span class="nav-text">Analytics</span>
 </div>
-        <div class="nav-item" onclick="app.switchView('achievements')">
-            <i class="fas fa-trophy"></i><span class="nav-text">Achieve</span>
-        </div>
+  
+<div class="nav-item" onclick="app.switchView('pro')">
+    <i class="fas fa-gem"></i><span class="nav-text">Advanced</span>
+</div>
         
-        <div style="margin-top: auto;" class="desktop-only"></div>
         
         <div class="nav-item" onclick="app.exportData()">
     <i class="fas fa-save"></i><span class="nav-text">Backup</span>
@@ -146,10 +146,10 @@
     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
         <h3 id="breakdown-title" style="margin: 0;">Time</h3>
         
-        <select id="report-range-select" class="form-control" style="width: auto; padding: 5px; font-size: 13px; height: 32px;" onchange="app.renderReports()">
+        <select id="report-range-select" class="form-control" style="width: auto; padding: 5px; font-size: 13px; height: 32px;" onchange="app.renderReports(true)">
             <option value="all">All Time</option>
-            <option value="today" selected>Today</option>
-            <option value="this_week">This Week</option>
+            <option value="today">Today</option>
+            <option value="this_week" selected>This Week</option>
             <option value="last_week">Last Week</option>
             <option value="this_month">This Month</option>
             <option value="last_month">Last Month</option>
@@ -183,6 +183,11 @@
             </div>
         </div>
     </div>
+	<div class="card" style="margin-top: 30px;">
+                <h2 style="text-align: center;"><i class="fas fa-medal"></i> Achievements</h2>
+                <div id="achievement-list" style="margin-top: 20px; display: grid; gap: 10px;"></div>
+            </div>
+	
 </section>
 <section id="view-analytics" class="view-section">
      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; flex-wrap: wrap; gap: 10px;">
@@ -256,12 +261,50 @@
 
     </div>
 </section>
-        <section id="view-achievements" class="view-section">
+     <section id="view-pro" class="view-section">
+    <div class="dashboard-grid" style="grid-template-columns: 1fr;">
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 20px;">
             <div class="card">
-                <h2><i class="fas fa-medal"></i> Achievements</h2>
-                <div id="achievement-list" style="margin-top: 20px; display: grid; gap: 10px;"></div>
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                    <h3 style="margin: 0;">Focus quality (Pro)</h3>
+                    <select id="pro-range-select" class="form-control" style="width: auto; padding: 5px; font-size: 13px; height: 32px;" onchange="app.renderProAnalytics(true)">
+                        <option value="all">All Time</option>
+            <option value="today" >Today</option>
+            <option value="this_week" selected>This Week</option>
+            <option value="last_week">Last Week</option>
+            <option value="this_month">This Month</option>
+            <option value="last_month">Last Month</option>
+                    </select>
+                </div>
+                <div style="height: 300px; display:flex; justify-content:center;">
+                    <canvas id="proBreakdownChart"></canvas>
+                </div>
             </div>
-        </section>
+
+            <div class="card">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                    <button class="btn btn-secondary" style="padding: 5px 10px;" onclick="app.changeProWeek(-1)"><i class="fas fa-chevron-left"></i></button>
+                    <h3 id="pro-weekly-title">This Week</h3>
+                    <button class="btn btn-secondary" style="padding: 5px 10px;" onclick="app.changeProWeek(1)"><i class="fas fa-chevron-right"></i></button>
+                </div>
+                <div style="height: 300px;">
+                    <canvas id="proWeeklyChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <div class="card" style="margin-top: 20px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                <button class="btn btn-secondary" style="padding: 5px 10px;" onclick="app.changeProMonth(-1)"><i class="fas fa-chevron-left"></i></button>
+                <h3 id="pro-monthly-title">This Month</h3>
+                <button class="btn btn-secondary" style="padding: 5px 10px;" onclick="app.changeProMonth(1)"><i class="fas fa-chevron-right"></i></button>
+            </div>
+            <div style="height: 300px;">
+                <canvas id="proMonthlyChart"></canvas>
+            </div>
+        </div>
+    </div>
+</section>
     </main>
 
     <div class="modal" id="choice-modal">
