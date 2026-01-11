@@ -423,76 +423,179 @@
  {t:"\"Captain of the herd, excellent hero,<br> great seer and victor;<br> unstirred, washed, awakened:<br> that’s who I declare a brahmin.\""},
  {t:"\"One who knows their past lives,<br> sees heaven and places of loss,<br> and has attained the end of rebirth;<br> a sage of perfect insight<br> at the summit of spiritual perfection:<br> that’s who I declare a brahmin.\""},
 ];
-		
+// --- DATABASE HELPER START ---
+const DB_CONFIG = {
+    name: 'HanhGiaDB',
+    version: 1,
+    stores: {
+        goals: 'id',
+        logs: 'timestamp',
+        meta: 'key' // For simple values like xp, streak, settings
+    }
+};
+
+const dbHelper = {
+    db: null,
+    
+    open() {
+        return new Promise((resolve, reject) => {
+            const req = indexedDB.open(DB_CONFIG.name, DB_CONFIG.version);
+            
+            req.onupgradeneeded = (e) => {
+                const db = e.target.result;
+                // Create stores if they don't exist
+                if (!db.objectStoreNames.contains('goals')) db.createObjectStore('goals', { keyPath: 'id' });
+                if (!db.objectStoreNames.contains('logs')) db.createObjectStore('logs', { keyPath: 'timestamp' });
+                if (!db.objectStoreNames.contains('meta')) db.createObjectStore('meta', { keyPath: 'key' });
+            };
+
+            req.onsuccess = (e) => {
+                this.db = e.target.result;
+                resolve(this.db);
+            };
+            req.onerror = (e) => reject("DB Error: " + e.target.error);
+        });
+    },
+
+async deleteGoalData(goalId) {
+        if (!this.db) await this.open();
+        return new Promise((resolve, reject) => {
+            // Mở transaction để ghi vào goals và logs
+            const tx = this.db.transaction(['goals', 'logs'], 'readwrite');
+            
+            // 1. Xóa Mục tiêu trong store 'goals'
+            const goalStore = tx.objectStore('goals');
+            goalStore.delete(goalId);
+
+            // 2. Xóa các Nhật ký liên quan trong store 'logs'
+            const logStore = tx.objectStore('logs');
+            const req = logStore.openCursor();
+            
+            req.onsuccess = (e) => {
+                const cursor = e.target.result;
+                if (cursor) {
+                    // Nếu nhật ký này thuộc về goalId đang xóa -> Xóa nó
+                    if (cursor.value.goalId === goalId) {
+                        cursor.delete();
+                    }
+                    cursor.continue();
+                }
+            };
+
+            tx.oncomplete = () => resolve();
+            tx.onerror = (e) => reject(e);
+        });
+    },
+
+    async saveAll(data) {
+        if (!this.db) await this.open();
+        
+        return new Promise((resolve, reject) => {
+            const tx = this.db.transaction(['goals', 'logs', 'meta'], 'readwrite');
+            
+            // 1. Save Goals
+            const goalStore = tx.objectStore('goals');
+            data.goals.forEach(g => goalStore.put(g));
+            
+            // 2. Save Logs (Only need to save new/modified ones strictly, 
+            // but for simplicity we save all current logic, IDB handles existing keys well)
+            const logStore = tx.objectStore('logs');
+            data.logs.forEach(l => logStore.put(l));
+            
+            // 3. Save Meta (xp, streak, settings, etc)
+            const metaStore = tx.objectStore('meta');
+            metaStore.put({ key: 'xp', value: data.xp });
+            metaStore.put({ key: 'streak', value: data.streak });
+            metaStore.put({ key: 'globalDailyGoal', value: data.globalDailyGoal });
+            metaStore.put({ key: 'achievements', value: data.achievements });
+            metaStore.put({ key: 'medSettings', value: data.medSettings });
+            
+            tx.oncomplete = () => resolve();
+            tx.onerror = (e) => reject(e);
+        });
+    },
+
+    // Load entire state back into the format app expects
+    async loadAll() {
+        if (!this.db) await this.open();
+
+        return new Promise((resolve, reject) => {
+            const tx = this.db.transaction(['goals', 'logs', 'meta'], 'readonly');
+            const data = { goals: [], logs: [], xp: 0, streak: 0, globalDailyGoal: 120, achievements: [], medSettings: {} };
+            
+            // Helper to wrap request in Promise
+            const getAll = (storeName) => {
+                return new Promise((res, rej) => {
+                    const req = tx.objectStore(storeName).getAll();
+                    req.onsuccess = () => res(req.result);
+                    req.onerror = () => rej(req.error);
+                });
+            };
+
+            Promise.all([getAll('goals'), getAll('logs'), getAll('meta')])
+                .then(([goals, logs, metaItems]) => {
+                    data.goals = goals || [];
+                    data.logs = logs || [];
+                    
+                    // Reconstruct meta object
+                    metaItems.forEach(item => {
+                        if (item.key === 'xp') data.xp = item.value;
+                        if (item.key === 'streak') data.streak = item.value;
+                        if (item.key === 'globalDailyGoal') data.globalDailyGoal = item.value;
+                        if (item.key === 'achievements') data.achievements = item.value;
+                        if (item.key === 'medSettings') data.medSettings = item.value;
+                    });
+                    resolve(data);
+                })
+                .catch(reject);
+        });
+    },
+
+    // Check if we need to migrate
+    async isEmpty() {
+        if (!this.db) await this.open();
+        return new Promise(resolve => {
+            const tx = this.db.transaction(['meta'], 'readonly');
+            const req = tx.objectStore('meta').count();
+            req.onsuccess = () => resolve(req.result === 0);
+        });
+    }
+};
+// --- DATABASE HELPER END ---		
         Chart.defaults.color = '#9ca3af';
         Chart.defaults.borderColor = '#374151';
 
         class GoalTracker {
             constructor() {
+                // We define the structure but don't load data yet
+                this.data = {
+                    goals: [],
+                    logs: [],
+                    xp: 0,
+                    streak: 0,
+                    globalDailyGoal: 120,
+                    achievements: [],
+                    medSettings: { mode: 'tap', holdDuration: 400, tapRequired: 1, vibration: true }
+                };
 
-                try {
-                    this.data = JSON.parse(localStorage.getItem('chronoData'));
-                } catch(e) {
-                    console.error("Data corrupted", e);
-                    this.data = null;
-                }
-
-                if (!this.data || !Array.isArray(this.data.goals)) {
-                    this.data = {
-                        goals: [],
-                        logs: [],
-                        xp: 0,
-                        streak: 0,
-                        globalDailyGoal: 120,
-                        achievements: []
-                    };
-                }
-                if (!this.data.medSettings) {
-    this.data.medSettings = {
-        mode: 'tap',       
-        holdDuration: 400,
-        tapRequired: 1,     
-        vibration: true,
-        proMode: false 
-    };
-} else if (typeof this.data.medSettings.proMode === 'undefined') {
-
-    this.data.medSettings.proMode = false; 
-}
-
-    this.tapState = {
-        count: 0,
-        lastTapTime: 0,
-        timer: null
-    };
-
-                this.data.goals.forEach(goal => {
-                    if (!goal.type) goal.type = 'standard'; 
-                    if (!goal.sessionTargetSeconds) goal.sessionTargetSeconds = 0;
-                    if (!goal.remainingSeconds) goal.remainingSeconds = 0;
-                    if (typeof goal.dailyTargetMinutes === 'undefined') goal.dailyTargetMinutes = 30;
-                    if (goal.type === 'meditation' && !goal.currentMindfulness) goal.currentMindfulness = 0;
-                    if (goal.type === 'meditation' && !goal.totalMindfulness) goal.totalMindfulness = 0;
-                });
-                
-                if (!this.data.globalDailyGoal) this.data.globalDailyGoal = 120;
-                if (!this.data.achievements) this.data.achievements = [];
-                if (!this.data.logs) this.data.logs = [];
-
+                // Other initializations remain the same
+                this.tapState = { count: 0, lastTapTime: 0, timer: null };
                 this.timers = {}; 
                 this.today = new Date();
                 this.currentMonth = new Date(this.today.getFullYear(), this.today.getMonth(), 1); 
                 this.currentWeekStart = this.getStartOfWeek(this.today); 
                 this.charts = { weekly: null, breakdown: null, monthly: null, dayChart: null, session: null };
-                this.reportMode = 'time'; 
+                this.reportMode = 'time';
                 this.meditationState = {
                     active: false, paused: false, goalId: null, count: 0,
                     startTime: null, timerRef: null, remainingSeconds: 0,
                     totalDurationSeconds: 0, touches: [] 
                 };
-this.currentViewDate = null; 
-this.dayChartMode = 'time';  
-this.QUICK_TAGS = [
+                this.currentViewDate = null; 
+                this.dayChartMode = 'time'; 
+                
+                // Define quick tags...
+                this.QUICK_TAGS = [
 
     'Awake', 'Calm/Still', 'Peaceful', 'Joyful', 
     'Tranquil', 'Relaxed', 'Clear/Lucid', 'Spacious', 'Deep Concentration', 
@@ -504,7 +607,166 @@ this.QUICK_TAGS = [
 
     'Back Pain', 'Numb Legs', 'Itchy', 'Neck Pain', 'Hot', 'Cold'
 ];
-             this.init();
+
+                // CALL THE ASYNC INIT
+                this.init();
+            }
+			
+			 async init() {
+                try {
+                    // 1. Open Database
+                    await dbHelper.open();
+
+                    // 2. Check for migration (If DB is empty but LocalStorage has data)
+                    const isDbEmpty = await dbHelper.isEmpty();
+                    const localDataStr = localStorage.getItem('chronoData');
+
+                    if (isDbEmpty && localDataStr) {
+                        console.log("Detecting legacy data. Migrating to IndexedDB...");
+                        try {
+                            const localData = JSON.parse(localDataStr);
+                            
+                            // Ensure structure integrity before saving
+                            if (!localData.goals) localData.goals = [];
+                            if (!localData.logs) localData.logs = [];
+                            if (!localData.achievements) localData.achievements = [];
+                            
+                            // Perform migration
+                            await dbHelper.saveAll(localData);
+                            this.data = localData; // Load into memory
+                            
+                            // Optional: Rename legacy data to backup so we don't migrate again
+                            localStorage.setItem('chronoData_backup', localDataStr);
+                            localStorage.removeItem('chronoData');
+                            
+                            this.showToast("Data migration success!");
+                        } catch (e) {
+                            console.error("Migration failed", e);
+                            alert("Data migration failed.");
+                        }
+                    } else {
+                        // 3. Normal Load from DB
+                        const dbData = await dbHelper.loadAll();
+                        
+                        // Merge loaded data with defaults if fields are missing
+                        if (dbData.goals.length > 0 || dbData.logs.length > 0 || dbData.xp > 0) {
+                             this.data = { ...this.data, ...dbData };
+                        }
+                    }
+
+                    // --- LEGACY FIXES & INIT UI ---
+                    // (This code was in your original constructor)
+                    if (!this.data.medSettings) {
+                        this.data.medSettings = { mode: 'tap', holdDuration: 400, tapRequired: 1, vibration: true };
+                    }
+                    if (this.data.medSettings.proMode === true) {
+                        this.data.medSettings.mode = 'pro';
+                        delete this.data.medSettings.proMode; 
+                    }
+
+                    // Ensure goals have correct properties
+                    this.data.goals.forEach(goal => {
+                        if (!goal.type) goal.type = 'standard'; 
+                        if (!goal.sessionTargetSeconds) goal.sessionTargetSeconds = 0;
+                        if (!goal.remainingSeconds) goal.remainingSeconds = 0;
+                        if (typeof goal.dailyTargetMinutes === 'undefined') goal.dailyTargetMinutes = 30;
+                        if (goal.type === 'meditation' && !goal.currentMindfulness) goal.currentMindfulness = 0;
+                        if (goal.type === 'meditation' && !goal.totalMindfulness) goal.totalMindfulness = 0;
+                    });
+
+                    // Render UI
+                    this.analyticsGoalFilter = localStorage.getItem('anaGoalFilter') || 'all';
+                    this.renderDate();
+                    this.renderGoals();
+                    this.updateStats();
+                    this.checkAchievements();
+                    this.renderCalendar();
+                    
+                    // Setup listeners
+                    setInterval(() => this.updateTimerUI(), 1000);
+                    this.setupMeditationListeners(); // I moved the event listener setup to a function
+
+                } catch (err) {
+                    console.error("Lỗi khởi tạo:", err);
+                    this.showToast("Lỗi tải dữ liệu!");
+                }
+                
+                if (!localStorage.getItem('intro_seen')) {
+                    this.openIntroModal();
+                }
+            }
+setupMeditationListeners() {
+                const medOverlay = document.getElementById('meditation-overlay');
+                const counterEl = document.getElementById('med-counter');
+                let pressTimer = null;
+                
+                if (medOverlay) {
+                    
+                     medOverlay.addEventListener('pointerdown', (e) => {
+                        if (e.target.closest('.med-controls') || e.target.closest('.modal')) return;
+                        e.preventDefault(); 
+                        const settings = this.data.medSettings;
+                        const mode = settings.mode;
+                        this.holdTriggered = false; 
+                        counterEl.style.transform = "scale(0.9)";
+                        counterEl.style.transition = "transform 0.1s";
+                        if (mode === 'hold' || mode === 'auto' || mode === 'pro') {
+                            pressTimer = setTimeout(() => {
+                                if (mode === 'pro') { this.triggerMindfulnessSuccess(1); } 
+                                else { this.triggerMindfulnessSuccess(1); }
+                                this.holdTriggered = true; 
+                                pressTimer = null; 
+                            }, settings.holdDuration);
+                        } 
+                    });
+
+                    const handleRelease = (e) => {
+                        if (e.target.closest('.med-controls')) return;
+                        const settings = this.data.medSettings;
+                        const mode = settings.mode;
+                        if (pressTimer) { clearTimeout(pressTimer); pressTimer = null; }
+                        counterEl.style.transform = "scale(1)";
+                        if (this.holdTriggered) {
+                            this.holdTriggered = false;
+                            this.tapState.count = 0;
+                            return;
+                        }
+                        if (mode === 'tap' || mode === 'auto' || mode === 'pro') {
+                            if (this.tapState.timer) clearTimeout(this.tapState.timer);
+                            this.tapState.count++;
+                            counterEl.style.transform = "scale(0.95)";
+                            setTimeout(() => counterEl.style.transform = "scale(1)", 80);
+                            if (mode === 'auto' || mode === 'pro') {
+                                this.tapState.timer = setTimeout(() => {
+                                    const taps = this.tapState.count;
+                                    let qualityVal = 1; 
+                                    if (mode === 'pro') {
+                                        if (taps === 1) qualityVal = 4;      
+                                        else if (taps === 2) qualityVal = 3; 
+                                        else qualityVal = 2;                 
+                                    } 
+                                    this.triggerMindfulnessSuccess(qualityVal);
+                                    this.tapState.count = 0; 
+                                }, 400); 
+                            } else if (mode === 'tap') {
+                                if (this.tapState.count >= settings.tapRequired) {
+                                    this.triggerMindfulnessSuccess(1);
+                                    this.tapState.count = 0; 
+                                } else {
+                                    this.tapState.timer = setTimeout(() => {
+                                        this.tapState.count = 0;
+                                    }, 400);
+                                }
+                            }
+                        }
+                    };
+                    medOverlay.addEventListener('pointerup', handleRelease);
+                    medOverlay.addEventListener('pointerleave', () => {
+                        if(pressTimer) clearTimeout(pressTimer);
+                        counterEl.style.transform = "scale(1)";
+                        this.holdTriggered = false;
+                    });
+                }
             }
   openIntroModal() {
         const modal = document.getElementById('intro-modal');
@@ -549,10 +811,30 @@ renderQuickTags(containerId, inputId) {
                 const diff = d.getDate() - day + 1; 
                 return new Date(d.getFullYear(), d.getMonth(), diff);
             }
+changeProWeek(dir) { 
+    this.currentWeekStart.setDate(this.currentWeekStart.getDate() + (dir * 7)); 
+    this.renderProAnalytics(); 
+}
 
-getTouchTimestamp(t) {
+changeProMonth(dir) { 
+    this.currentMonth.setMonth(this.currentMonth.getMonth() + dir); 
+    this.renderProAnalytics(); 
+}
 
-    return (typeof t === 'object' && t !== null) ? t.t : t;
+getTouchTimestamp(t, startTime) {
+    if (typeof t === 'object' && t !== null) {
+        if (t.d !== undefined) return startTime + t.d; 
+        if (t.t !== undefined) return t.t;             
+    }
+    
+    if (typeof t === 'number') {
+        if (t > 1000000000000) {
+            return t; 
+        }
+        return startTime + t;
+    }
+    
+    return 0;
 }
 
 analyzeSingleSession(log) {
@@ -562,7 +844,7 @@ analyzeSingleSession(log) {
     
     if (log.touches && log.touches.length >= 2) {
 
-        const timestamps = log.touches.map(t => this.getTouchTimestamp(t)).sort((a,b) => a - b);
+        const timestamps = log.touches.map(t => this.getTouchTimestamp(t, log.timestamp)).sort((a,b) => a - b);
         
         let distractedSec = 0;
         const startGap = (timestamps[0] - log.timestamp) / 1000;
@@ -639,6 +921,7 @@ renderAnalytics(saveState = false) {
 
     if (logs.length === 0) {
         if(this.charts.analyticsTrend) this.charts.analyticsTrend.destroy();
+		if(this.charts.hourlyChart) this.charts.hourlyChart.destroy();
         document.getElementById('ana-avg-quality').innerText = "---";
         document.getElementById('ana-avg-density').innerText = "---";
         document.getElementById('ana-total-mindful').innerText = "---";
@@ -1000,125 +1283,293 @@ renderComparisonTable(medGoalIds) {
         tbody.appendChild(row);
     });
 }
-
-           init() {
-    try {
-        this.analyticsGoalFilter = localStorage.getItem('anaGoalFilter') || 'all';
-        this.renderDate();
-        this.renderGoals();
-        this.updateStats();
-        this.checkAchievements();
-        this.renderCalendar();
-        setInterval(() => this.updateTimerUI(), 1000);
-
-        const medOverlay = document.getElementById('meditation-overlay');
-        const counterEl = document.getElementById('med-counter');
         
-        this.holdTriggered = false; 
-        let pressTimer = null;
-        
-        if (medOverlay) {
-            medOverlay.addEventListener('pointerdown', (e) => {
-    if (e.target.closest('.med-controls') || e.target.closest('.modal')) return;
-    e.preventDefault(); 
+renderProAnalytics(resetDates = false) { // 1. Add resetDates parameter
+    if (!document.getElementById('proWeeklyChart')) return;
 
-    const settings = this.data.medSettings;
-    const mode = settings.mode;
-    this.holdTriggered = false; // Reset flag
-
-    counterEl.style.transform = "scale(0.9)";
-    counterEl.style.transition = "transform 0.1s";
-
-    if (mode === 'hold' || mode === 'auto' || mode === 'pro') {
-        
-        pressTimer = setTimeout(() => {
-            if (mode === 'pro') {
-                this.triggerMindfulnessSuccess(1); 
-            } else {
-                this.triggerMindfulnessSuccess(1);
-            }
-            
-            this.holdTriggered = true; 
-            pressTimer = null; 
-        }, settings.holdDuration);
-    } 
-});
-
-const handleRelease = (e) => {
-    if (e.target.closest('.med-controls')) return;
+    // --- 1. SETUP DATES & RANGES ---
+    const rangeSelect = document.getElementById('pro-range-select');
+    const rangeMode = rangeSelect ? rangeSelect.value : 'this_week';
+    const now = new Date();
     
-    const settings = this.data.medSettings;
-    const mode = settings.mode;
+    const realCurrentDay = now.getDay() || 7; 
+    const realThisWeekStart = new Date(now.getFullYear(), now.getMonth(), now.getDate() - realCurrentDay + 1);
+    const realThisMonthStart = new Date(now.getFullYear(), now.getMonth(), 1);
 
-    if (pressTimer) {
-        clearTimeout(pressTimer); 
-        pressTimer = null;
-    }
-    counterEl.style.transform = "scale(1)";
-
-    if (this.holdTriggered) {
-        this.holdTriggered = false;
-        this.tapState.count = 0;
-        return;
-    }
-
-    if (mode === 'tap' || mode === 'auto' || mode === 'pro') {
-        
-        if (this.tapState.timer) clearTimeout(this.tapState.timer);
-
-        this.tapState.count++;
-        
-        counterEl.style.transform = "scale(0.95)";
-        setTimeout(() => counterEl.style.transform = "scale(1)", 80);
-
-        if (mode === 'auto' || mode === 'pro') {
+    // 2. Wrap the sync logic in the if(resetDates) block
+    if (resetDates) {
+        if (rangeMode === 'last_week') {
+            // If "Last Week" selected: Set Weekly Chart to Last Week
+            this.currentWeekStart = new Date(realThisWeekStart);
+            this.currentWeekStart.setDate(this.currentWeekStart.getDate() - 7);
             
-            this.tapState.timer = setTimeout(() => {
-                const taps = this.tapState.count;
-                let qualityVal = 1; 
+            // Sync Monthly chart to the month of that week
+            this.currentMonth = new Date(this.currentWeekStart.getFullYear(), this.currentWeekStart.getMonth(), 1);
+        } 
+        else if (rangeMode === 'last_month') {
+            // If "Last Month" selected: Set Monthly Chart to Last Month
+            this.currentMonth = new Date(realThisMonthStart);
+            this.currentMonth.setMonth(this.currentMonth.getMonth() - 1);
+            
+            // Sync Weekly chart to the first week of that past month
+            this.currentWeekStart = this.getStartOfWeek(new Date(this.currentMonth.getFullYear(), this.currentMonth.getMonth(), 1));
+        }
+        else {
+            // If "Today", "This Week", or "This Month": Reset charts to current time
+            this.currentWeekStart = new Date(realThisWeekStart);
+            this.currentMonth = new Date(realThisMonthStart);
+        }
+    }
+    // -----------------------------------------------------
 
-                if (mode === 'pro') {
-                    if (taps === 1) qualityVal = 4;      
-                    else if (taps === 2) qualityVal = 3; 
-                    else qualityVal = 2;                 
-                } 
-                else {
-                    qualityVal = 1; 
+    // ... (Keep the rest of the function exactly as it was) ...
+    // Calculate Breakdown Range (Doughnut Chart Logic)
+    let filterStart = 0;
+    let filterEnd = Date.now() + 86400000;
+    const todayStart = new Date(now.getFullYear(), now.getMonth(), now.getDate()).getTime();
+
+    if (rangeMode === 'today') filterStart = todayStart;
+    else if (rangeMode === 'this_week') filterStart = realThisWeekStart.getTime();
+    else if (rangeMode === 'last_week') {
+        filterEnd = realThisWeekStart.getTime();
+        filterStart = realThisWeekStart.getTime() - (7 * 24 * 60 * 60 * 1000);
+    } else if (rangeMode === 'this_month') filterStart = realThisMonthStart.getTime();
+    else if (rangeMode === 'last_month') {
+        filterEnd = realThisMonthStart.getTime();
+        filterStart = new Date(now.getFullYear(), now.getMonth() - 1, 1).getTime();
+    }
+
+    // Calculate Week Range for Bar Chart
+    const weekStartMs = this.currentWeekStart.getTime();
+    const weekEndMs = weekStartMs + (7 * 24 * 60 * 60 * 1000);
+    const weekEndDisp = new Date(weekEndMs - 1);
+    document.getElementById('pro-weekly-title').innerText = `Week (${this.currentWeekStart.toLocaleDateString('en-GB', {month:'numeric', day:'numeric'})} - ${weekEndDisp.toLocaleDateString('en-GB', {month:'numeric', day:'numeric'})})`;
+
+    // Calculate Month Range for Bar Chart
+    const mYear = this.currentMonth.getFullYear();
+    const mMonth = this.currentMonth.getMonth();
+    const monthlyLabels = Array.from({length: new Date(mYear, mMonth + 1, 0).getDate()}, (_, i) => i + 1);
+    document.getElementById('pro-monthly-title').innerText = `Month ${new Date(mYear, mMonth).toLocaleDateString('en-GB', { month: 'numeric', year: 'numeric' })}`;
+
+    // ... (Rest of function remains unchanged) ...
+    // --- 2. PREPARE DATA CONTAINERS ---
+    const qualities = {
+        1: { label: 'Good', color: '#34d399' },
+        2: { label: 'Steady', color: '#60a5fa' },
+        3: { label: 'Moderate', color: '#fbbf24' },
+        4: { label: 'Weak', color: '#f87171' }
+    };
+
+    const breakdownData = { 1: 0, 2: 0, 3: 0, 4: 0 };
+    const weeklyData = { 1: new Array(7).fill(0), 2: new Array(7).fill(0), 3: new Array(7).fill(0), 4: new Array(7).fill(0) };
+    const monthlyData = { 
+        1: new Array(monthlyLabels.length).fill(0), 
+        2: new Array(monthlyLabels.length).fill(0), 
+        3: new Array(monthlyLabels.length).fill(0), 
+        4: new Array(monthlyLabels.length).fill(0) 
+    };
+
+    this.data.logs.forEach(log => {
+        if (!log.touches || log.touches.length === 0) return;
+
+        let logTime = log.timestamp;
+        let logDateObj = new Date(logTime);
+
+        log.touches.forEach(t => {
+            if (t.v && breakdownData[t.v] !== undefined) {
+                const val = t.v;
+
+                if (logTime >= filterStart && logTime < filterEnd) {
+                    breakdownData[val]++;
                 }
 
-                this.triggerMindfulnessSuccess(qualityVal);
-                this.tapState.count = 0; 
-            }, 400); 
-        } 
+                if (logTime >= weekStartMs && logTime < weekEndMs) {
+                    let dayIdx = logDateObj.getDay();
+                    dayIdx = (dayIdx === 0 ? 6 : dayIdx - 1);
+                    weeklyData[val][dayIdx]++;
+                }
+
+                if (logDateObj.getFullYear() === mYear && logDateObj.getMonth() === mMonth) {
+                    monthlyData[val][logDateObj.getDate() - 1]++;
+                }
+            }
+        });
+    });
+
+    const weekDays = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+    
+    const commonOptions = {
+        maintainAspectRatio: false,
+        scales: {
+            x: { stacked: true, grid: { color: '#374151' } },
+            y: { stacked: true, grid: { color: '#374151' }, title: { display: true, text: 'Focus quality' } }
+        },
+        plugins: {
+            legend: { labels: { color: '#9ca3af' } },
+            tooltip: {
+                callbacks: {
+                    label: function(context) {
+                        const val = context.raw;
+                        const pct = totalBreakdown > 0 ? ((val / totalBreakdown) * 100).toFixed(1) : 0;
+                        return `${context.dataset.label} Mindfulness: ${val} (${pct}%)`;
+            }}
+        }}
+    };
+
+    const ctxBreakdown = document.getElementById('proBreakdownChart').getContext('2d');
+if (this.charts.proBreakdown) this.charts.proBreakdown.destroy();
+
+const totalBreakdown = Object.values(breakdownData).reduce((a, b) => a + b, 0);
+
+this.charts.proBreakdown = new Chart(ctxBreakdown, {
+    type: 'bar',
+    data: {
+        labels: ['Mindfulness'], // Single bar
+        datasets: [
+            {
+                label: qualities[1].label,
+                data: [breakdownData[1]],
+                backgroundColor: qualities[1].color,
+                borderRadius: { topLeft: 8, bottomLeft: 8 } // Round only the start
+            },
+            {
+                label: qualities[2].label,
+                data: [breakdownData[2]],
+                backgroundColor: qualities[2].color
+            },
+            {
+                label: qualities[3].label,
+                data: [breakdownData[3]],
+                backgroundColor: qualities[3].color
+            },
+            {
+                label: qualities[4].label,
+                data: [breakdownData[4]],
+                backgroundColor: qualities[4].color,
+                borderRadius: { topRight: 8, bottomRight: 8 } // Round only the end
+            }
+        ]
+    },
+    options: {
+        indexAxis: 'y', // Makes it horizontal
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+            x: {
+                stacked: true,
+                display: true, // Hide X axis for a cleaner "progress bar" look
+                max: totalBreakdown > 0 ? totalBreakdown : 100
+            },
+            y: {
+                stacked: true,
+                display: false // Hide label since it's obvious
+            }
+        },
+        plugins: {
+            legend: {
+                display: true,
+                position: 'bottom',
+                labels: {
+                    color: '#9ca3af',
+                    usePointStyle: true,
+                    padding: 20,
+                    font: { size: 12 },
+                    // Show percentage in legend
+                    generateLabels: function(chart) {
+    const data = chart.data;
+    return data.datasets.map((dataset, i) => {
+        const val = dataset.data[0];
+        const pct = totalBreakdown > 0 ? ((val / totalBreakdown) * 100).toFixed(1) : 0;
         
-        else if (mode === 'tap') {
-            if (this.tapState.count >= settings.tapRequired) {
-                this.triggerMindfulnessSuccess(1);
-                this.tapState.count = 0; 
-            } else {
-                this.tapState.timer = setTimeout(() => {
-                    this.tapState.count = 0;
-                }, 400);
+        // Kiểm tra xem dataset này có đang bị ẩn hay không
+        const isHidden = !chart.isDatasetVisible(i);
+
+        return {
+            text: `${dataset.label} (${pct}%)`,
+            fillStyle: dataset.backgroundColor,
+            strokeStyle: 'transparent',
+            fontColor: isHidden ? '#6b7280' : '#9ca3af', // Làm mờ chữ khi ẩn
+            pointStyle: 'circle',
+            datasetIndex: i,
+            hidden: isHidden // QUAN TRỌNG: Thuộc tính này tạo ra đường gạch ngang chữ
+        };
+    });
+}
+                }
+            },
+            tooltip: {
+                backgroundColor: '#1f2937',
+                callbacks: {
+                    label: function(context) {
+                        const val = context.raw;
+                        const pct = totalBreakdown > 0 ? ((val / totalBreakdown) * 100).toFixed(1) : 0;
+                        return ` ${context.dataset.label}: ${val} (${pct}%)`;
+                    }
+                }
+            },
+            // Custom text showing total in the top right
+            title: {
+                display: totalBreakdown === 0,
+                text: 'No focus quality (pro) data available',
+                color: '#6b7280',
+                font: { size: 14, style: 'italic' },
+                padding: { top: 10, bottom: 10 }
             }
         }
     }
-};
-
-medOverlay.addEventListener('pointerup', handleRelease);
-medOverlay.addEventListener('pointerleave', () => {
-    if(pressTimer) clearTimeout(pressTimer);
-    counterEl.style.transform = "scale(1)";
-    this.holdTriggered = false;
 });
-        }
-    } catch (err) {
-        console.error("Error:", err);
-    }
-    if (!localStorage.getItem('intro_seen')) {
-        this.openIntroModal();
-    }
-}
 
+    const ctxWeekly = document.getElementById('proWeeklyChart').getContext('2d');
+    if (this.charts.proWeekly) this.charts.proWeekly.destroy();
+
+    this.charts.proWeekly = new Chart(ctxWeekly, {
+        type: 'bar',
+        data: {
+            labels: weekDays,
+            datasets: [
+                { label: qualities[1].label, data: weeklyData[1], backgroundColor: qualities[1].color },
+                { label: qualities[2].label, data: weeklyData[2], backgroundColor: qualities[2].color },
+                { label: qualities[3].label, data: weeklyData[3], backgroundColor: qualities[3].color },
+                { label: qualities[4].label, data: weeklyData[4], backgroundColor: qualities[4].color }
+            ]
+        },
+        options: commonOptions
+    });
+
+    const ctxMonthly = document.getElementById('proMonthlyChart').getContext('2d');
+    if (this.charts.proMonthly) this.charts.proMonthly.destroy();
+
+    const monthlyOptions = {
+        ...commonOptions,
+        plugins: {
+            ...commonOptions.plugins,
+            tooltip: {
+                ...commonOptions.plugins.tooltip,
+                callbacks: {
+                    ...commonOptions.plugins.tooltip.callbacks,
+                    title: (context) => {
+                         const d = context[0].label;
+                         return `${String(d).padStart(2, '0')}/${String(mMonth + 1).padStart(2, '0')}`;
+                    }
+                }
+            }
+        }
+    };
+
+    this.charts.proMonthly = new Chart(ctxMonthly, {
+        type: 'bar',
+        data: {
+            labels: monthlyLabels,
+            datasets: [
+                { label: qualities[1].label, data: monthlyData[1], backgroundColor: qualities[1].color },
+                { label: qualities[2].label, data: monthlyData[2], backgroundColor: qualities[2].color },
+                { label: qualities[3].label, data: monthlyData[3], backgroundColor: qualities[3].color },
+                { label: qualities[4].label, data: monthlyData[4], backgroundColor: qualities[4].color }
+            ]
+        },
+        options: monthlyOptions
+    });
+}
 triggerMindfulnessSuccess(quality = 1) {
     const settings = this.data.medSettings;
 
@@ -1128,10 +1579,10 @@ triggerMindfulnessSuccess(quality = 1) {
         if (settings.mode === 'pro') {
 
             switch(quality) {
-                case 1: navigator.vibrate([80, 80]); break;          
-                case 2: navigator.vibrate([50, 50]); break; 
-                case 3: navigator.vibrate([50, 50]); break;     
-                case 4: navigator.vibrate([50, 50]); break;           
+                case 1: navigator.vibrate(90); break;          
+                case 2: navigator.vibrate([80, 80, 80]); break; 
+                case 3: navigator.vibrate([60, 40, 40]); break;     
+                case 4: navigator.vibrate(40); break;            
             }
         } else {
 
@@ -1440,7 +1891,11 @@ concludeMeditationSession(type = 'manual') {
         timestamp: this.meditationState.startTime,
         minutes: minutes,
         notes: `Mindfulness: ${this.meditationState.count}. ${notes}`,
-        touches: this.meditationState.touches,
+        touches: this.meditationState.touches.map(t => {
+    const delta = Math.max(0, t.t - this.meditationState.startTime);
+    // If it has a value (Pro mode), keep it. Otherwise just save the number.
+    return t.v ? { d: delta, v: t.v } : delta;
+}),
         threshold: this.meditationState.threshold 
     };
 
@@ -1539,6 +1994,7 @@ setMedModeUI(mode) {
         desc.innerText = "Automatically detects Tap or Hold mode.";
     } 
     else if (mode === 'pro') {
+		groupHold.style.display = 'block';
         groupLegend.style.display = 'block';
         desc.innerText = "Classifies focus quality based on touch style.";
     }
@@ -1742,105 +2198,134 @@ updateSessionChart() {
 }
 
 renderProChart(ctx, log) {
+    const startTime = log.timestamp;
+    // 1. Calculate Duration & Setup similar to Intensity Chart
+    const durationSeconds = (log.minutes * 60) || Math.ceil((Date.now() - startTime) / 1000);
+    
+    // Filter only touches that have a value (v) (Pro mode touches)
+    const rawTouches = (log.touches || []).filter(t => t.v);
 
-    const counts = { 1: 0, 2: 0, 3: 0, 4: 0 };
-    let totalProTouches = 0;
-
-    if (log.touches && log.touches.length > 0) {
-        log.touches.forEach(t => {
-
-            if (t.v) {
-                counts[t.v]++;
-                totalProTouches++;
-            }
-        });
-    }
-
-    if (totalProTouches === 0) {
+    if (rawTouches.length === 0) {
         ctx.font = "14px Arial";
-        ctx.fillStyle = "#9ca3af"; 
+        ctx.fillStyle = "#9ca3af";
         ctx.textAlign = "center";
         ctx.fillText("No focus quality data for this session", ctx.canvas.width / 2, ctx.canvas.height / 2);
         return;
     }
 
-    const dataValues = [counts[1], counts[2], counts[3], counts[4]];
-    
-    const bgColors = [
-        '#34d399', 
-        '#60a5fa', 
-        '#fbbf24', 
-        '#f87171'  
-    ];
-    
-    const labels = ['Good', 'Steady', 'Moderate', 'Weak'];
+    const dataPoints = [];
+    const labels = [];
+    const totalPoints = 30; // Fixed number of points for smoothness (like Intensity chart)
+    const step = durationSeconds / totalPoints; 
 
-    const centerTextPlugin = {
-        id: 'centerText',
-        beforeDraw: function(chart) {
-            const { ctx, chartArea: { top, left, width, height } } = chart;
-            ctx.save();
+    // 2. Iterate through time steps
+    for (let s = 0; s <= durationSeconds; s += step) {
+        // Label logic
+        labels.push(durationSeconds < 120 ? Math.round(s) + 's' : (s / 60).toFixed(0));
+        
+        // Define a window around this point to calculate average grade
+        // We use a dynamic window (1.5x step) or minimum 20s to ensure smooth transitions
+        const windowSizeSec = Math.max(step * 1.5, 20); 
+        const windowStart = (s * 1000) - (windowSizeSec * 1000 / 2);
+        const windowEnd = (s * 1000) + (windowSizeSec * 1000 / 2);
+
+        // Find touches in this window
+        const touchesInWindow = rawTouches.filter(t => {
+            const touchTime = this.getTouchTimestamp(t, log.timestamp) - startTime;
+            return touchTime >= windowStart && touchTime <= windowEnd;
+        });
+
+        if (touchesInWindow.length > 0) {
+            // Calculate Average Grade (1=Good, 4=Weak)
+            const sum = touchesInWindow.reduce((acc, t) => acc + t.v, 0);
+            const avg = sum / touchesInWindow.length;
             
-            const centerX = left + width / 2;
-            const centerY = top + height / 2;
-
-            const fontSize = (height / 12).toFixed(2);
-            ctx.font = `bold ${fontSize}px sans-serif`;
-            ctx.textAlign = 'center';
-            ctx.textBaseline = 'middle';
-            ctx.fillStyle = "#f3f4f6"; 
-            ctx.fillText(totalProTouches, centerX, centerY - 10);
-
-            ctx.font = `normal ${(height / 24).toFixed(2)}px sans-serif`;
-            ctx.fillStyle = "#9ca3af"; 
-            ctx.fillText("Mindfulness", centerX, centerY + 15);
-
-            ctx.restore();
+            // Map 1..4 to Chart Height (Higher is better visually)
+            // Input 1 -> Output 4
+            // Input 4 -> Output 1
+            dataPoints.push(5 - avg); 
+        } else {
+            // No data -> 0 (Thất niệm)
+            dataPoints.push(0); 
         }
-    };
+    }
+
+    // 3. Styling - Emerald Green Gradient (Similar style to Intensity but green)
+    const chartHeight = ctx.canvas.clientHeight || 300;
+    const gradient = ctx.createLinearGradient(0, 0, 0, chartHeight);
+    gradient.addColorStop(0, 'rgba(16, 185, 129, 0.6)');   // Top
+    gradient.addColorStop(0.5, 'rgba(16, 185, 129, 0.3)'); // Middle
+    gradient.addColorStop(1, 'rgba(16, 185, 129, 0.05)');  // Bottom
+
+    // 4. Render Chart
+    if (this.charts.session) this.charts.session.destroy();
 
     this.charts.session = new Chart(ctx, {
-        type: 'doughnut',
+        type: 'line',
         data: {
             labels: labels,
             datasets: [{
-                data: dataValues,
-                backgroundColor: bgColors,
-                borderWidth: 0,
-                hoverOffset: 4
+                label: 'Focus quality',
+                data: dataPoints,
+                borderColor: '#10b981', // Emerald-500
+                backgroundColor: gradient,
+                borderWidth: 3,         // Thicker line like intensity chart
+                tension: 0.4,           // Smooth curves
+                fill: true,   
+                pointRadius: 0,         // Hide points by default
+                pointHoverRadius: 6,
+                pointBackgroundColor: '#34d399',
+                pointBorderWidth: 1
             }]
         },
         options: {
             responsive: true,
             maintainAspectRatio: false,
-            cutout: '55%', 
-            plugins: {
-                legend: {
-                    display: true,
-                    position: 'right',
-                    labels: {
-                        color: '#9ca3af',
-                        usePointStyle: true, 
-                        padding: 15,
-                        font: { size: 12 }
-                    }
+            interaction: {
+                mode: 'index',
+                intersect: false,
+            },
+            scales: {
+                x: {
+                    title: { display: true, text: 'Time (mins)', color: '#9ca3af' }, 
+                    grid: { display: true }, 
+                    ticks: { maxTicksLimit: 20, color: '#9ca3af' }
                 },
+                y: {
+                    min: 0, 
+                    max: 4.5, 
+                    title: { display: false, text: 'Focus level', color: '#9ca3af' },
+                    ticks: {
+                        stepSize: 1,
+                        callback: (val) => {
+                            if (val === 4) return '(4) ✨';      // Avg Grade 1
+                            if (val === 3) return '(3) 🌿';      // Avg Grade 2
+                            if (val === 2) return '(2) 🌱';       // Avg Grade 3
+                            if (val === 1) return '(1) ☁️';      // Avg Grade 4
+                            if (val === 0) return '(0) ⚠️';   // No data
+                            return '';
+                        },
+                        color: (context) => context.tick.value === 0 ? '#9ca3af' : '#9ca3af',
+                        font: { size: 11 }
+                    },
+                    grid: { color: 'rgba(55, 65, 81, 0.5)' }
+                }
+            },
+            plugins: {
+                legend: { display: false },
                 tooltip: {
-                    backgroundColor: 'rgba(31, 41, 55, 0.95)',
-                    titleColor: '#818cf8',
-                    bodyColor: '#f3f4f6',
-                    padding: 12,
-                    callbacks: {
+                    mode: 'index', intersect: false, displayColors: false,
+                    callbacks: { title: () => '', 
                         label: function(context) {
                             const val = context.raw;
-                            const pct = ((val / totalProTouches) * 100).toFixed(1);
-                            return ` ${context.label} Mindfulness: ${val} (${pct}%)`;
+                            if (val === 0) return ' Distraction';
+                            // Calculate real average back from chart value
+                            return ' Level: ' + val.toFixed(1) + ' / 4.0';
                         }
                     }
                 }
             }
-        },
-        plugins: [centerTextPlugin]
+        }
     });
 }
 renderIntensityChart(ctx, log) {
@@ -1860,7 +2345,7 @@ renderIntensityChart(ctx, log) {
 
         const intensity = log.touches.filter(t => {
 
-            const touchTime = this.getTouchTimestamp(t) - startTime;
+            const touchTime = this.getTouchTimestamp(t, log.timestamp) - startTime;
             return touchTime >= windowStart && touchTime <= windowEnd;
         }).length;
         dataPoints.push(intensity);
@@ -1877,7 +2362,7 @@ renderIntensityChart(ctx, log) {
         data: {
             labels: labels,
             datasets: [{
-                label: 'Chánh niệm',
+                label: 'Mindfulness',
                 data: dataPoints,
                 borderColor: '#a78bfa', 
                 backgroundColor: gradient,
@@ -1895,13 +2380,13 @@ renderIntensityChart(ctx, log) {
             maintainAspectRatio: false,
             interaction: { mode: 'index', intersect: false },
             scales: {
-                x: { title: { display: true, text: 'Thời điểm (phút)', color: '#9ca3af' }, grid: { display: true }, ticks: { maxTicksLimit: 20, color: '#9ca3af' } },
-                y: { beginAtZero: true, title: { display: true, text: 'Số lần Chánh niệm', color: '#9ca3af' }, grid: { color: 'rgba(55, 65, 81, 0.5)' }, ticks: { color: '#9ca3af' } }
+                x: { title: { display: true, text: 'Time (mins)', color: '#9ca3af' }, grid: { display: true }, ticks: { maxTicksLimit: 20, color: '#9ca3af' } },
+                y: { beginAtZero: true, title: { display: true, text: 'Mindfulness counts', color: '#9ca3af' }, grid: { color: 'rgba(55, 65, 81, 0.5)' }, ticks: { color: '#9ca3af' } }
             },
             plugins: {
                 tooltip: {
                     mode: 'index', intersect: false, displayColors: false,
-                    callbacks: { label: (c) => c.raw >= 1 ? "🌱 Chánh niệm (" + c.raw + ")" : "☁️ Thất niệm" }
+                    callbacks: {title: () => '',  label: (c) => c.raw >= 1 ? "🌱 Mindfulness (" + c.raw + ")" : "☁️ Unmindful" }
                 },
                 legend: { display: false }
             }
@@ -1912,7 +2397,7 @@ renderIntensityChart(ctx, log) {
 renderIntervalChart(ctx, log) {
 
     const timestamps = log.touches
-        .map(t => this.getTouchTimestamp(t))
+        .map(t => this.getTouchTimestamp(t, log.timestamp))
         .sort((a, b) => a - b);
         
     const startTime = log.timestamp;
@@ -1948,7 +2433,7 @@ renderIntervalChart(ctx, log) {
         data: {
             labels: labels, 
             datasets: [{
-                label: 'Khoảng cách thất niệm',
+                label: 'Forgetfulness Interval',
                 data: dataPoints,
                 borderColor: '#f87171', 
                 backgroundColor: gradient,
@@ -1966,13 +2451,13 @@ renderIntervalChart(ctx, log) {
             interaction: { mode: 'index', intersect: false },
             scales: {
                 x: { 
-                    title: { display: true, text: 'Thời điểm (phút)', color: '#9ca3af' }, 
+                    title: { display: true, text: 'Time (mins)', color: '#9ca3af' }, 
                     grid: { display: true }, 
                     ticks: { color: '#9ca3af', maxTicksLimit: 15 } 
                 },
                 y: { 
                     beginAtZero: true, 
-                    title: { display: true, text: 'Độ trễ', color: '#9ca3af' }, 
+                    title: { display: true, text: 'Delays', color: '#9ca3af' }, 
                     ticks: { color: '#9ca3af' } 
                 }
             },
@@ -1980,8 +2465,8 @@ renderIntervalChart(ctx, log) {
                 tooltip: {
                     displayColors: false,
                     callbacks: {
-                        title: (items) => `Phút thứ ${items[0].label}`,
-                        label: (c) => `Độ trễ: ${c.raw} giây`
+                        title: (items) => `Minute ${items[0].label}`,
+                        label: (c) => `Delay: ${c.raw} secs`
                     }
                 },
                 legend: { display: false }
@@ -2348,7 +2833,7 @@ setReportMode(mode) {
     this.renderReports();
 }
 
-renderReports() {
+renderReports(resetDates = false) { // 1. Add parameter
     if(!document.getElementById('weeklyChart')) return;
     
     const isMindfulness = this.reportMode === 'mindfulness';
@@ -2360,29 +2845,51 @@ renderReports() {
     const rangeMode = rangeSelect ? rangeSelect.value : 'all';
     
     const now = new Date();
+    const realCurrentDay = now.getDay() || 7; 
+    const realThisWeekStart = new Date(now.getFullYear(), now.getMonth(), now.getDate() - realCurrentDay + 1);
+    const realThisMonthStart = new Date(now.getFullYear(), now.getMonth(), 1);
 
+    // 2. Wrap the sync logic in if(resetDates)
+    if (resetDates) {
+        if (rangeMode === 'last_week') {
+            // Sync Weekly Chart to Last Week
+            this.currentWeekStart = new Date(realThisWeekStart);
+            this.currentWeekStart.setDate(this.currentWeekStart.getDate() - 7);
+            // Sync Monthly Chart to the month of that week
+            this.currentMonth = new Date(this.currentWeekStart.getFullYear(), this.currentWeekStart.getMonth(), 1);
+        } 
+        else if (rangeMode === 'last_month') {
+            // Sync Monthly Chart to Last Month
+            this.currentMonth = new Date(realThisMonthStart);
+            this.currentMonth.setMonth(this.currentMonth.getMonth() - 1);
+            // Sync Weekly Chart to start of that month
+            this.currentWeekStart = this.getStartOfWeek(new Date(this.currentMonth.getFullYear(), this.currentMonth.getMonth(), 1));
+        }
+        else if (rangeMode === 'this_week' || rangeMode === 'this_month' || rangeMode === 'today') {
+            // Reset charts to current
+            this.currentWeekStart = new Date(realThisWeekStart);
+            this.currentMonth = new Date(realThisMonthStart);
+        }
+    }
+    // ---------------------------------------------
+    
+    // ... (The rest of the function remains exactly the same as provided) ...
+    // Define filter range for the Doughnut Chart (Breakdown)
     const todayStart = new Date(now.getFullYear(), now.getMonth(), now.getDate()).getTime();
-    const currentDay = now.getDay() || 7; 
-
-    const thisWeekStart = new Date(now.getFullYear(), now.getMonth(), now.getDate() - currentDay + 1).getTime();
-
-    const thisMonthStart = new Date(now.getFullYear(), now.getMonth(), 1).getTime();
-
     let filterStart = 0;
     let filterEnd = Date.now() + 86400000; 
 
     if (rangeMode === 'today') {
         filterStart = todayStart;
     } else if (rangeMode === 'this_week') {
-        filterStart = thisWeekStart;
+        filterStart = realThisWeekStart.getTime();
     } else if (rangeMode === 'last_week') {
-        filterEnd = thisWeekStart;
-        filterStart = thisWeekStart - (7 * 24 * 60 * 60 * 1000);
+        filterEnd = realThisWeekStart.getTime();
+        filterStart = realThisWeekStart.getTime() - (7 * 24 * 60 * 60 * 1000);
     } else if (rangeMode === 'this_month') {
-        filterStart = thisMonthStart;
+        filterStart = realThisMonthStart.getTime();
     } else if (rangeMode === 'last_month') {
-        filterEnd = thisMonthStart;
-
+        filterEnd = realThisMonthStart.getTime();
         filterStart = new Date(now.getFullYear(), now.getMonth() - 1, 1).getTime();
     } 
 
@@ -2390,12 +2897,12 @@ renderReports() {
     const weekEndMs = weekStartMs + (7 * 24 * 60 * 60 * 1000);
 
     const weekEndDisp = new Date(weekEndMs - 1); 
-    document.getElementById('weekly-report-title').innerText = `Week (${this.currentWeekStart.toLocaleDateString('en-GB', {month:'numeric', day:'numeric'})} - ${weekEndDisp.toLocaleDateString('en-GB', {month:'numeric', day:'numeric'})})`;
+    document.getElementById('weekly-report-title').innerText = `Tuần (${this.currentWeekStart.toLocaleDateString('en-GB', {month:'numeric', day:'numeric'})} - ${weekEndDisp.toLocaleDateString('en-GB', {month:'numeric', day:'numeric'})})`;
 
     const mYear = this.currentMonth.getFullYear();
     const mMonth = this.currentMonth.getMonth();
     const monthlyLabels = Array.from({length: new Date(mYear, mMonth + 1, 0).getDate()}, (_, i) => i + 1);
-    document.getElementById('monthly-report-title').innerText = `Month ${new Date(mYear, mMonth).toLocaleDateString('en-GB', { month: 'numeric', year: 'numeric' })}`;
+    document.getElementById('monthly-report-title').innerText = `Tháng ${new Date(mYear, mMonth).toLocaleDateString('en-GB', { month: 'numeric', year: 'numeric' })}`;
 
     const goalDatasets = {};
     const weekDays = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
@@ -2529,7 +3036,7 @@ renderReports() {
                     callbacks: {
                         label: function(context) {
                             const value = context.raw || 0;
-                            if (unitLabel === 'Minutes') {
+                            if (unitLabel === 'Phút') {
                                 return ` ${context.label}: ${(value / 60).toFixed(1)}h`;
                             }
                             return ` ${context.label}: ${value} ${unitLabel}`;
@@ -2554,13 +3061,31 @@ renderReports() {
 
     const ctxMonth = document.getElementById('monthlyChart').getContext('2d');
     if(this.charts.monthly) this.charts.monthly.destroy();
+
+    const monthlyOptions = {
+        ...commonOptions,
+        plugins: {
+            ...commonOptions.plugins,
+            tooltip: {
+                ...commonOptions.plugins.tooltip,
+                callbacks: {
+                    ...commonOptions.plugins.tooltip.callbacks,
+                    title: function(context) {
+                        const d = context[0].label;
+                        return `${String(d).padStart(2, '0')}/${String(mMonth + 1).padStart(2, '0')}`;
+                    }
+                }
+            }
+        }
+    };
+
     this.charts.monthly = new Chart(ctxMonth, { 
         type: 'bar', 
         data: { 
             labels: monthlyLabels, 
             datasets: allGoalsForBars.map(g => ({ label: g.name, data: g.monthly, backgroundColor: g.color, stack: '0' })) 
         }, 
-        options: commonOptions 
+        options: monthlyOptions 
     });
 }
 
@@ -2685,13 +3210,14 @@ updateStats() {
                     'calendar': 'Calendar',
                     'reports': 'Statistics',
 					'analytics': 'Analytics',
-                    'achievements': 'Achieve'
+					'pro': 'Advanced'
                 };
                 
                 document.getElementById('page-title').innerText = titles[viewName] || 'Journal';
                 if (viewName === 'reports') { this.renderReports(); }
                 if (viewName === 'calendar') this.renderCalendar();
 				if (viewName === 'analytics') this.renderAnalytics();
+				if (viewName === 'pro') this.renderProAnalytics(); // <-- Add this line
             }
             
             exportData() {
@@ -2822,7 +3348,7 @@ fallbackCopyText(text) {
         inputElement.value = '';
     }
 
-    processRestoreData(jsonString) {
+    async processRestoreData(jsonString) {
         try {
             const json = JSON.parse(jsonString);
 
@@ -2831,7 +3357,9 @@ fallbackCopyText(text) {
             }
 
             if (confirm(`Found ${json.goals.length} goals and ${json.logs.length} logs.\nAre you sure you want to overwrite current data?`)) {
-                localStorage.setItem('chronoData', JSON.stringify(json));
+                // Save to IndexedDB
+                await dbHelper.saveAll(json);
+                alert("Restore success. The app will reload.");
                 location.reload(); 
             }
         } catch (err) {
@@ -2839,8 +3367,41 @@ fallbackCopyText(text) {
         }
     }
             resetApp() {
-                if (confirm('Delete ALL data?')) { localStorage.removeItem('chronoData'); location.reload(); }
-            }
+    if (confirm('Delete ALL data & associated history? This action cannot be undone.')) {
+        // 1. QUAN TRỌNG: Đóng kết nối DB đang mở
+        // Nếu không đóng, trình duyệt sẽ chặn (block) lệnh xóa và chờ mãi mãi.
+        if (dbHelper.db) {
+            dbHelper.db.close();
+        }
+
+        // 2. Xóa dữ liệu LocalStorage (Legacy & Config)
+        localStorage.removeItem('chronoData');
+        localStorage.removeItem('chronoData_backup');
+        localStorage.removeItem('anaGoalFilter');
+        localStorage.removeItem('intro_seen'); // Tùy chọn: Xóa cái này để hiện lại intro
+
+        // 3. Gửi yêu cầu xóa IndexedDB
+        const req = indexedDB.deleteDatabase(DB_CONFIG.name);
+
+        // Xử lý khi thành công
+        req.onsuccess = () => {
+            console.log("DB Deleted successfully");
+            location.reload();
+        };
+
+        // Xử lý khi bị lỗi
+        req.onerror = () => {
+            console.error("Could not delete DB");
+            location.reload(); // Vẫn reload để đảm bảo UI được làm mới
+        };
+
+        // Xử lý khi bị chặn (Blocked) - Đây là trường hợp dự phòng
+        req.onblocked = () => {
+            console.warn("DB Delete blocked - forcing reload");
+            location.reload();
+        };
+    }
+}
 			deleteSession() {
     const logId = document.getElementById('s-log-id').value;
     const goalId = document.getElementById('s-goal-id').value;
@@ -3004,22 +3565,32 @@ fallbackCopyText(text) {
     this.closeSessionModal(); 
     this.showToast(logId ? 'Session Updated!' : 'Session Logged!');
 }
-            deleteGoal(id) {
+             deleteGoal(id) {
+                if(confirm('Delete this goal and ALL associated history? This action cannot be undone.')) {
+                    
+                    // 1. Xóa trong bộ nhớ tạm (để UI phản hồi nhanh)
+                    this.data.goals = this.data.goals.filter(g => g.id !== id);
+                    this.data.logs = this.data.logs.filter(log => log.goalId !== id);
 
-    if(confirm('Delete this goal and ALL associated history? This action cannot be undone.')) {
-
-        this.data.goals = this.data.goals.filter(g => g.id !== id);
-
-        this.data.logs = this.data.logs.filter(log => log.goalId === id ? false : true);
-
-        this.save(); 
-        this.renderGoals(); 
-        this.renderReports(); 
-        this.renderCalendar(); 
-        
-        this.showToast('Goal and history deleted!');
-    }
-}
+                    // 2. Gọi hàm xóa vĩnh viễn trong Database
+                    dbHelper.deleteGoalData(id)
+                        .then(() => {
+                            // Sau khi xóa DB thành công thì lưu các chỉ số phụ (xp, streak...)
+                            this.save(); 
+                            
+                            // Cập nhật giao diện
+                            this.renderGoals(); 
+                            this.renderReports(); 
+                            this.renderCalendar(); 
+                            
+                            this.showToast('Goal and history deleted!');
+                        })
+                        .catch(err => {
+                            console.error(err);
+                            this.showToast('Error!');
+                        });
+                }
+            }
             renderDate() {
                  document.getElementById('current-date').innerText = new Date().toLocaleDateString('en-GB', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
             }
