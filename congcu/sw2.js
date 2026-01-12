@@ -1,10 +1,11 @@
-const CACHE_NAME = 'meditator-journal-app-v2';
+const CACHE_NAME = 'meditator-journal-app-v3';
 // Danh sách các file cần lưu để chạy offline
 const ASSETS = [
   './',
   './meditator-journal.html',
   './css/css.css',
   './js/chart.js',
+   './js/mj.js',
   './images/1en.png',
   './images/2en.png',
   './webfonts/fa-brands-400.woff2',
@@ -17,9 +18,9 @@ const ASSETS = [
 
 // 1. Cài đặt Service Worker và lưu cache
 self.addEventListener('install', (event) => {
+  self.skipWaiting(); // Ép service worker mới kích hoạt ngay
   event.waitUntil(
     caches.open(CACHE_NAME).then((cache) => {
-      console.log('Caching...');
       return cache.addAll(ASSETS);
     })
   );
