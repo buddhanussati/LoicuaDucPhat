@@ -1534,7 +1534,7 @@ this.charts.proBreakdown = new Chart(ctxBreakdown, {
                 color: totalBreakdown === 0 ? '#6b7280' : '#f3f4f6',
                 font: { 
                     size: 14, 
-                    style: totalBreakdown === 0 ? 'italic' : 'normal',
+                    style: totalBreakdown === 0 ? 'italic' : 'italic',
                     weight: totalBreakdown === 0 ? 'normal' : '600'
                 },
                 padding: { top: 10, bottom: 10 }
