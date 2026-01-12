@@ -1,13 +1,17 @@
-const CACHE_NAME = 'meditator-journal-app-v1';
+const CACHE_NAME = 'meditator-journal-app-v2';
 // Danh sách các file cần lưu để chạy offline
 const ASSETS = [
   './',
   './meditator-journal.html',
   './css/css.css',
-  './css/css2.css',
   './js/chart.js',
-  './js/nh.js',
-  './images/icon-192.png', 
+  './images/1en.png',
+  './images/2en.png',
+  './webfonts/fa-brands-400.woff2',
+  './webfonts/fa-regular-400.woff2',
+  './webfonts/fa-solid-900.woff2',
+  './webfonts/fa-v4compatibility.woff2',
+  './images/icon-192.png',   
   './images/icon-512.png'
 ];
 
