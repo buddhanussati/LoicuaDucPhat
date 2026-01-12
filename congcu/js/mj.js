@@ -1009,7 +1009,8 @@ renderAnalytics(saveState = false) {
                 hoverRadius: 4     
             }
         },
-            plugins: {  
+            plugins: { 
+                legend: { display: true, labels: { font: {size: 11}} },			
                 tooltip: {
                     titleColor: '#f3f4f6',
                     bodyColor: '#f3f4f6',
@@ -1046,11 +1047,13 @@ renderAnalytics(saveState = false) {
             scales: {
                 y: {
                     type: 'linear', display: true, position: 'left', min: 0, max: 100,
-                    grid: { color: '#374151' }
+                    grid: { color: '#374151' }, ticks: { color: '#9ca3af', font: { size: 10 }, },
                 },
+				x: {
+                    ticks: { color: '#9ca3af', font: { size: 10 }, } },
                 y1: {
                     type: 'linear', display: true, position: 'right',
-                    grid: { drawOnChartArea: false }
+                    grid: { drawOnChartArea: false }, ticks: { color: '#9ca3af', font: { size: 10 }, },
                 }
             }
         }
@@ -1133,7 +1136,7 @@ renderHourlyAnalysis(logs) {
                 }
             },
             plugins: {
-                legend: { display: true },
+                legend: { display: true, labels: { font: {size: 11}} },	        
                 tooltip: {
                     titleColor: '#f3f4f6',
                     bodyColor: '#f3f4f6',
@@ -1176,15 +1179,15 @@ renderHourlyAnalysis(logs) {
                 y: {
                     type: 'linear', display: true, position: 'left', min: 0, max: 100,
                     grid: { color: '#374151' },
-                    ticks: { color: '#9ca3af' }
+                    ticks: { color: '#9ca3af', font: { size: 10 }}
                 },
                 y1: {
                     type: 'linear', display: true, position: 'right',
                     beginAtZero: true,
                     grid: { drawOnChartArea: false },
                     ticks: { 
-                        color: '#6b7280',
-
+                        color: '#9ca3af',
+                         font: { size: 10 },
                         callback: function(value) { 
                             if (value === 0) return 0;
                             if (value < 1) return Math.round(value * 60) + 'm';
@@ -1193,7 +1196,7 @@ renderHourlyAnalysis(logs) {
                     }
                 },
                 x: {
-                    ticks: { color: '#9ca3af' },
+                    ticks: { color: '#9ca3af', font: { size: 10 }, },
                     grid: { color: 'rgba(55, 65, 81, 0.5)', display: true }
                 }
             }
@@ -1354,10 +1357,10 @@ renderProAnalytics(resetDates = false) { // 1. Add resetDates parameter
     // ... (Rest of function remains unchanged) ...
     // --- 2. PREPARE DATA CONTAINERS ---
     const qualities = {
-        1: { label: 'Good', color: '#34d399' },
-        2: { label: 'Steady', color: '#60a5fa' },
-        3: { label: 'Moderate', color: '#fbbf24' },
-        4: { label: 'Weak', color: '#f87171' }
+        1: { label: 'High', color: '#34d399' },
+        2: { label: 'Good', color: '#60a5fa' },
+        3: { label: 'Medium', color: '#fbbf24' },
+        4: { label: 'Low', color: '#f87171' }
     };
 
     const breakdownData = { 1: 0, 2: 0, 3: 0, 4: 0 };
@@ -1408,12 +1411,21 @@ renderProAnalytics(resetDates = false) { // 1. Add resetDates parameter
             legend: { labels: { color: '#9ca3af' } },
             tooltip: {
                 callbacks: {
-                    label: function(context) {
-                        const val = context.raw;
-                        const pct = totalBreakdown > 0 ? ((val / totalBreakdown) * 100).toFixed(1) : 0;
-                        return `${context.dataset.label} Mindfulness: ${val} (${pct}%)`;
-            }}
-        }}
+                    label: (context) => {
+                        const label = context.dataset.label || '';
+                        const value = context.raw;
+                        let total = 0;
+                        context.chart.data.datasets.forEach((dataset, i) => {
+                            if (context.chart.isDatasetVisible(i)) {
+                                total += dataset.data[context.dataIndex];
+                            }
+                        });
+                        const percentage = total > 0 ? ((value / total) * 100).toFixed(1) : 0;
+                        return `${label}: ${value} (${percentage}%)`;
+                    }
+                }
+            }
+        }
     };
 
     const ctxBreakdown = document.getElementById('proBreakdownChart').getContext('2d');
@@ -1421,16 +1433,27 @@ if (this.charts.proBreakdown) this.charts.proBreakdown.destroy();
 
 const totalBreakdown = Object.values(breakdownData).reduce((a, b) => a + b, 0);
 
+
+let averageScore = 0;
+if (totalBreakdown > 0) {
+    const weightedSum = (breakdownData[1] * 4) + 
+                        (breakdownData[2] * 3) + 
+                        (breakdownData[3] * 2) + 
+                        (breakdownData[4] * 1);
+    averageScore = (weightedSum / totalBreakdown).toFixed(2); // e.g., "3.52"
+}
+// -----------------------------
+
 this.charts.proBreakdown = new Chart(ctxBreakdown, {
     type: 'bar',
     data: {
-        labels: ['Mindfulness'], // Single bar
+        labels: ['Focus quality'],
         datasets: [
             {
                 label: qualities[1].label,
                 data: [breakdownData[1]],
                 backgroundColor: qualities[1].color,
-                borderRadius: { topLeft: 8, bottomLeft: 8 } // Round only the start
+                borderRadius: { topLeft: 8, bottomLeft: 8 }
             },
             {
                 label: qualities[2].label,
@@ -1446,24 +1469,23 @@ this.charts.proBreakdown = new Chart(ctxBreakdown, {
                 label: qualities[4].label,
                 data: [breakdownData[4]],
                 backgroundColor: qualities[4].color,
-                borderRadius: { topRight: 8, bottomRight: 8 } // Round only the end
+                borderRadius: { topRight: 8, bottomRight: 8 }
             }
         ]
     },
     options: {
-        indexAxis: 'y', // Makes it horizontal
+        indexAxis: 'y',
         responsive: true,
         maintainAspectRatio: false,
         scales: {
             x: {
                 stacked: true,
-                display: true, // Hide X axis for a cleaner "progress bar" look
-                max: totalBreakdown > 0 ? totalBreakdown : 100
+                display: true,
+                max: totalBreakdown > 0 ? totalBreakdown : 100,
+                grid: { display: true, drawBorder: false }, // Cleaner look
+                ticks: { display: true }
             },
-            y: {
-                stacked: true,
-                display: false // Hide label since it's obvious
-            }
+            y: { stacked: true, display: false }
         },
         plugins: {
             legend: {
@@ -1474,27 +1496,23 @@ this.charts.proBreakdown = new Chart(ctxBreakdown, {
                     usePointStyle: true,
                     padding: 20,
                     font: { size: 12 },
-                    // Show percentage in legend
                     generateLabels: function(chart) {
-    const data = chart.data;
-    return data.datasets.map((dataset, i) => {
-        const val = dataset.data[0];
-        const pct = totalBreakdown > 0 ? ((val / totalBreakdown) * 100).toFixed(1) : 0;
-        
-        // Kiểm tra xem dataset này có đang bị ẩn hay không
-        const isHidden = !chart.isDatasetVisible(i);
-
-        return {
-            text: `${dataset.label} (${pct}%)`,
-            fillStyle: dataset.backgroundColor,
-            strokeStyle: 'transparent',
-            fontColor: isHidden ? '#6b7280' : '#9ca3af', // Làm mờ chữ khi ẩn
-            pointStyle: 'circle',
-            datasetIndex: i,
-            hidden: isHidden // QUAN TRỌNG: Thuộc tính này tạo ra đường gạch ngang chữ
-        };
-    });
-}
+                        const data = chart.data;
+                        return data.datasets.map((dataset, i) => {
+                            const val = dataset.data[0];
+                            const pct = totalBreakdown > 0 ? ((val / totalBreakdown) * 100).toFixed(1) : 0;
+                            const isHidden = !chart.isDatasetVisible(i);
+                            return {
+                                text: `${dataset.label} (${pct}%)`,
+                                fillStyle: dataset.backgroundColor,
+                                strokeStyle: 'transparent',
+                                fontColor: isHidden ? '#6b7280' : '#9ca3af',
+                                pointStyle: 'circle',
+                                datasetIndex: i,
+                                hidden: isHidden
+                            };
+                        });
+                    }
                 }
             },
             tooltip: {
@@ -1507,14 +1525,20 @@ this.charts.proBreakdown = new Chart(ctxBreakdown, {
                     }
                 }
             },
-            // Custom text showing total in the top right
+            // --- UPDATED TITLE ---
             title: {
-                display: totalBreakdown === 0,
-                text: 'No focus quality (pro) data available',
-                color: '#6b7280',
-                font: { size: 14, style: 'italic' },
+                display: true,
+                text: totalBreakdown === 0 
+                    ? 'No focus quality (pro) data available' 
+                    : `Average focus quality: ${averageScore} / 4.0`,
+                color: totalBreakdown === 0 ? '#6b7280' : '#f3f4f6',
+                font: { 
+                    size: 14, 
+                    style: totalBreakdown === 0 ? 'italic' : 'normal',
+                    weight: totalBreakdown === 0 ? 'normal' : '600'
+                },
                 padding: { top: 10, bottom: 10 }
-            }
+            },
         }
     }
 });
@@ -1582,7 +1606,7 @@ triggerMindfulnessSuccess(quality = 1) {
                 case 1: navigator.vibrate(90); break;          
                 case 2: navigator.vibrate([80, 80, 80]); break; 
                 case 3: navigator.vibrate([60, 40, 40]); break;     
-                case 4: navigator.vibrate(40); break;            
+                case 4: navigator.vibrate(50); break;            
             }
         } else {
 
@@ -1613,7 +1637,12 @@ triggerMindfulnessSuccess(quality = 1) {
 }
 
             save() {
-                localStorage.setItem('chronoData', JSON.stringify(this.data));
+                // We perform a "fire and forget" save to DB
+                dbHelper.saveAll(this.data).catch(err => {
+                    console.error("Save failed:", err);
+                    this.showToast("Lỗi lưu dữ liệu!");
+                });
+                
                 this.updateStats();
             }
 get totalMindfulnessCounts() {
@@ -2287,7 +2316,7 @@ renderProChart(ctx, log) {
             },
             scales: {
                 x: {
-                    title: { display: true, text: 'Time (mins)', color: '#9ca3af' }, 
+                    title: { display: true, text: 'Time (mins)', color: '#9ca3af', font: { size: 11 } }, 
                     grid: { display: true }, 
                     ticks: { maxTicksLimit: 20, color: '#9ca3af' }
                 },
@@ -2297,16 +2326,17 @@ renderProChart(ctx, log) {
                     title: { display: false, text: 'Focus level', color: '#9ca3af' },
                     ticks: {
                         stepSize: 1,
+						padding: 0.1,
                         callback: (val) => {
-                            if (val === 4) return '(4) ✨';      // Avg Grade 1
-                            if (val === 3) return '(3) 🌿';      // Avg Grade 2
-                            if (val === 2) return '(2) 🌱';       // Avg Grade 3
-                            if (val === 1) return '(1) ☁️';      // Avg Grade 4
-                            if (val === 0) return '(0) ⚠️';   // No data
+                            if (val === 4) return 'High';      // Avg Grade 1
+                            if (val === 3) return 'Good';      // Avg Grade 2
+                            if (val === 2) return 'Med';       // Avg Grade 3
+                            if (val === 1) return 'Low';      // Avg Grade 4
+                            if (val === 0) return '⚠️';   // No data
                             return '';
                         },
                         color: (context) => context.tick.value === 0 ? '#9ca3af' : '#9ca3af',
-                        font: { size: 11 }
+                        font: { size: 10 }
                     },
                     grid: { color: 'rgba(55, 65, 81, 0.5)' }
                 }
@@ -2380,8 +2410,8 @@ renderIntensityChart(ctx, log) {
             maintainAspectRatio: false,
             interaction: { mode: 'index', intersect: false },
             scales: {
-                x: { title: { display: true, text: 'Time (mins)', color: '#9ca3af' }, grid: { display: true }, ticks: { maxTicksLimit: 20, color: '#9ca3af' } },
-                y: { beginAtZero: true, title: { display: true, text: 'Mindfulness counts', color: '#9ca3af' }, grid: { color: 'rgba(55, 65, 81, 0.5)' }, ticks: { color: '#9ca3af' } }
+                x: { title: { display: true, font: { size: 11 }, text: 'Time (mins)', color: '#9ca3af' }, grid: { display: true }, ticks: { maxTicksLimit: 20, color: '#9ca3af' } },
+                y: { beginAtZero: true, title: { display: true, font: { size: 11 }, text: 'Mindfulness counts', color: '#9ca3af', padding: 0.1, }, grid: { color: 'rgba(55, 65, 81, 0.5)' }, ticks: { color: '#9ca3af' } }
             },
             plugins: {
                 tooltip: {
@@ -2451,13 +2481,13 @@ renderIntervalChart(ctx, log) {
             interaction: { mode: 'index', intersect: false },
             scales: {
                 x: { 
-                    title: { display: true, text: 'Time (mins)', color: '#9ca3af' }, 
+                    title: { display: true, text: 'Time (mins)', color: '#9ca3af', font: { size: 11 } }, 
                     grid: { display: true }, 
                     ticks: { color: '#9ca3af', maxTicksLimit: 15 } 
                 },
                 y: { 
                     beginAtZero: true, 
-                    title: { display: true, text: 'Delays', color: '#9ca3af' }, 
+                    title: { display: true, text: 'Delays', color: '#9ca3af', padding: 0.1, font: { size: 11 } }, 
                     ticks: { color: '#9ca3af' } 
                 }
             },
