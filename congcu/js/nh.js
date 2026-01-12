@@ -1407,11 +1407,11 @@ renderComparisonTable(medGoalIds) {
     const commonOptions = {
         maintainAspectRatio: false,
         scales: {
-            x: { stacked: true, grid: { color: '#374151' } },
-            y: { stacked: true, grid: { color: '#374151' }, title: { display: true, text: 'Mức chú tâm' } }
+            x: { stacked: true, grid: { color: '#374151' }, ticks: { color: '#9ca3af', font: { size: 11 },} },
+            y: { stacked: true, grid: { color: '#374151' }, title: { display: false, text: 'Mức chú tâm' }, ticks: { color: '#9ca3af', font: { size: 11 },} }
         },
         plugins: {
-            legend: { labels: { color: '#9ca3af' } },
+            legend: { labels: { color: '#9ca3af', font: {size: 11} } },
             tooltip: {
                 callbacks: {
                     label: (context) => {
@@ -1424,7 +1424,7 @@ renderComparisonTable(medGoalIds) {
                             }
                         });
                         const percentage = total > 0 ? ((value / total) * 100).toFixed(1) : 0;
-                        return `${label}: ${value} (${percentage}%)`;
+                        return `Mức chú tâm: ${label} (${percentage}%)`;
                     }
                 }
             }
@@ -2812,32 +2812,39 @@ renderDayChartOnly(dateStr) {
             }] 
         },
         options: { 
-            maintainAspectRatio: false, 
-            plugins: { 
-                legend: { 
-                    position: 'right', 
-                    labels: { color: '#9ca3af', font: {size: 11} } 
-                },
-                title: { 
-                    display: dataValues.length === 0, 
-                    text: 'Chưa có dữ liệu', 
-                    position: 'bottom', 
-                    color: '#6b7280' 
-                },
-                tooltip: {
-                    callbacks: {
-                        label: function(context) {
-                            const value = context.raw || 0;
+        maintainAspectRatio: false, 
+        plugins: { 
+            legend: { 
+                position: 'right', 
+                labels: { color: '#9ca3af', font: {size: 11} } 
+            },
+            title: { 
+                display: dataValues.length === 0, 
+                text: 'Chưa có dữ liệu', 
+                position: 'bottom', 
+                color: '#6b7280' 
+            },
+            tooltip: {
+                callbacks: {
+                    label: function(context) {
+                        const value = context.raw || 0;
+                        
+                        // 1. Calculate the total sum of the dataset
+                        const total = context.dataset.data.reduce((acc, curr) => acc + curr, 0);
+                        
+                        // 2. Calculate percentage (prevent division by zero)
+                        const percentage = total > 0 ? ((value / total) * 100).toFixed(0) : 0;
 
-                            if (!isMindfulness) {
-                                return ` ${context.label}: ${value} ${unitLabel}`;
-                            }
-                            return ` ${context.label}: ${value} ${unitLabel}`;
+                        // 3. Return the formatted string
+                        if (!isMindfulness) {
+                            return ` ${value} ${unitLabel} (${percentage}%)`;
                         }
+                        return ` ${value} ${unitLabel} (${percentage}%)`;
                     }
                 }
-            } 
-        },
+            }
+        } 
+    },
         plugins: [centerTextPlugin]
     });
 }
@@ -3003,15 +3010,18 @@ renderReports(resetDates = false) { // 1. Add parameter
     const commonOptions = { 
         maintainAspectRatio: false, 
         scales: { 
-            x: {stacked: true, grid:{color:'#374151'}}, 
+            x: {stacked: true, grid:{color:'#374151'}, ticks: { color: '#9ca3af', font: { size: 11 }, },
+}, 
             y: {
                 stacked: true, 
                 grid:{color:'#374151'},
-                title: { display: true, text: unitLabel } 
+                title: { display: false, text: unitLabel }, 
+				ticks: { color: '#9ca3af', font: { size: 11 }, },
+
             } 
         }, 
         plugins: {
-            legend:{labels:{color:'#9ca3af'}},
+            legend: { labels: { color: '#9ca3af', font: {size: 11} } },
             tooltip: {
                 callbacks: {
                     label: function(context) {
@@ -3022,35 +3032,90 @@ renderReports(resetDates = false) { // 1. Add parameter
         } 
     };
 
+    const breakdownOptions = {
+        maintainAspectRatio: false,
+        plugins: {
+            legend: { labels: { color: '#9ca3af' } },
+            title: {
+                display: activeGoalsForDoughnut.length === 0,
+                text: 'Chưa có dữ liệu',
+                position: 'bottom',
+                color: '#6b7280'
+            },
+            tooltip: {
+                callbacks: {
+                    label: function(context) {
+                        const value = context.raw || 0;
+                        
+                        // Tính tổng để ra phần trăm
+                        const total = context.chart._metasets[context.datasetIndex].total;
+                        const percentage = total > 0 ? ((value / total) * 100).toFixed(0) + '%' : '0%';
+
+                        // Format hiển thị giá trị
+                        let formattedValue = '';
+                        if (unitLabel === 'Phút') {
+                            formattedValue = `${(value / 60).toFixed(1)}h`;
+                        } else {
+                            formattedValue = `${value} ${unitLabel}`;
+                        }
+
+                        // Kết quả: "Tên mục: 2h (25.5%)"
+                        return ` ${formattedValue} (${percentage})`;
+                    }
+                }
+            }
+        }
+    };
+
     const ctxBreakdown = document.getElementById('goalBreakdownChart').getContext('2d');
     if(this.charts.breakdown) this.charts.breakdown.destroy();
 
+    // 2. CẬP NHẬT PLUGIN VẼ CHỮ Ở GIỮA (Số ở trên, chữ ở dưới)
     const centerTextPlugin = {
         id: 'centerText',
         afterDraw: function(chart) {
             const { ctx, chartArea: { top, bottom, left, right } } = chart;
             ctx.save();
+            
             let total = 0;
             const data = chart.data.datasets[0].data;
             data.forEach(val => total += val);
             
-            let text = total;
-            const currentUnit = typeof unitLabel !== 'undefined' ? unitLabel.toLowerCase() : '';
-            if (currentUnit === 'phút') {
-                text = (total / 60).toFixed(1) + "h"; 
+            let mainText = total;
+            const currentUnit = typeof unitLabel !== 'undefined' ? unitLabel : '';
+            
+            if (currentUnit === 'Phút') {
+                mainText = (total / 60).toFixed(1) + "h"; 
             } else {
-                text = total.toLocaleString();
+                mainText = total.toLocaleString();
             }
             
             const centerX = (left + right) / 2;
             const centerY = (top + bottom) / 2;
-            const fontSize = (chart.chartArea.bottom - chart.chartArea.top) / 15; 
             
-            ctx.font = `bold ${fontSize}px sans-serif`;
-            ctx.textBaseline = "middle";
+            const chartHeight = bottom - top;
+            const fontSizeMain = chartHeight / 13;
+            const fontSizeSub = chartHeight / 26;
+            
             ctx.textAlign = "center";
-            ctx.fillStyle = "#FFFFFF"; 
-            ctx.fillText(text, centerX, centerY);
+            ctx.textBaseline = "middle";
+
+            if (isMindfulness) {
+                // --- CHẾ ĐỘ CHÁNH NIỆM: Vẽ 2 dòng ---
+                ctx.font = `bold ${fontSizeMain}px sans-serif`;
+                ctx.fillStyle = "#FFFFFF"; 
+                ctx.fillText(mainText, centerX, centerY - (fontSizeMain * 0.15));
+
+                ctx.font = `normal ${fontSizeSub}px sans-serif`;
+                ctx.fillStyle = "#9ca3af"; 
+                ctx.fillText(currentUnit, centerX, centerY + (fontSizeMain * 0.65));
+            } else {
+                // --- CHẾ ĐỘ THỜI GIAN: Chỉ vẽ con số ở ngay chính giữa ---
+                ctx.font = `bold ${fontSizeMain}px sans-serif`;
+                ctx.fillStyle = "#FFFFFF"; 
+                ctx.fillText(mainText, centerX, centerY); 
+            }
+
             ctx.restore();
         }
     };
@@ -3066,29 +3131,7 @@ renderReports(resetDates = false) { // 1. Add parameter
                 borderColor: '#1f2937' 
             }] 
         }, 
-        options: { 
-            maintainAspectRatio: false, 
-            plugins: { 
-                legend: { labels: { color: '#9ca3af' } },
-                title: { 
-                    display: activeGoalsForDoughnut.length === 0, 
-                    text: 'Chưa có dữ liệu', 
-                    position: 'bottom', 
-                    color: '#6b7280' 
-                },
-                tooltip: {
-                    callbacks: {
-                        label: function(context) {
-                            const value = context.raw || 0;
-                            if (unitLabel === 'Phút') {
-                                return ` ${context.label}: ${(value / 60).toFixed(1)}h`;
-                            }
-                            return ` ${context.label}: ${value} ${unitLabel}`;
-                        }
-                    }
-                }
-            } 
-        },
+        options: breakdownOptions, // Sử dụng biến options mới đã khai báo ở trên
         plugins: [centerTextPlugin] 
     });
 
