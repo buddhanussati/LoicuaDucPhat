@@ -1,4 +1,4 @@
-const CACHE_NAME = 'hanhgia-app-v3';
+const CACHE_NAME = 'hanhgia-app-v4';
 // Danh sách các file cần lưu để chạy offline
 const ASSETS = [
   './',
