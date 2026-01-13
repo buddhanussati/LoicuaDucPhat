@@ -53,7 +53,7 @@
             
             <div class="user-stats">
                 <div class="stat-item clickable" onclick="app.setGlobalDailyGoal()" title="Click to edit total daily goal">
-                    <span class="stat-val"><span id="daily-current">0</span> / <span id="daily-target">60</span>m</span>
+                    <span class="stat-val"><span id="daily-current">0</span> / <span id="daily-target">120</span>m</span>
                     <div class="daily-bar-bg"><div id="daily-bar-fill" class="daily-bar-fill"></div></div>
                     <span class="stat-label">Daily Goal</span>
                 </div>
@@ -144,11 +144,12 @@
             <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 20px;">
             <div class="card">
     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
-        <h3 id="breakdown-title" style="margin: 0;">Time</h3>
+        <h4 id="breakdown-title" style="margin: 0;">Time</h4>
         
         <select id="report-range-select" class="form-control" style="width: auto; padding: 5px; font-size: 13px; height: 32px;" onchange="app.renderReports(true)">
             <option value="all">All Time</option>
             <option value="today">Today</option>
+			<option value="yesterday">Yesterday</option>
             <option value="this_week" selected>This Week</option>
             <option value="last_week">Last Week</option>
             <option value="this_month">This Month</option>
@@ -199,6 +200,7 @@
             <select id="ana-time-range" class="form-control" style="width: auto;" onchange="app.renderAnalytics()">
 			<option value="3" selected>Last 3 days</option>
             <option value="7">Last 7 days</option>
+			<option value="14">Last 14 days</option>
             <option value="30">Last 30 days</option>
             <option value="90">Last 3 months</option>
             <option value="365">All time</option>
@@ -270,6 +272,7 @@
                     <select id="pro-range-select" class="form-control" style="width: auto; padding: 5px; font-size: 13px; height: 32px;" onchange="app.renderProAnalytics(true)">
                         <option value="all">All Time</option>
             <option value="today" >Today</option>
+			<option value="yesterday">Yesterday</option>
             <option value="this_week" selected>This Week</option>
             <option value="last_week">Last Week</option>
             <option value="this_month">This Month</option>
@@ -292,7 +295,24 @@
                 </div>
             </div>
         </div>
-
+<div class="card" style="margin-top: 20px;">
+    <div style="display: flex; justify-content: space-between; align-items: center;">
+        <h4 style="margin: 0;">📈 Focus Trend</h4>
+        <select id="pro-trend-select" class="form-control" style="width: auto; padding: 5px; font-size: 13px; height: 32px;" onchange="app.renderProTrendChart()">
+            <option value="3" selected>Last 3 days</option>
+            <option value="7">Last 7 days</option>
+            <option value="14">Last 14 days</option>
+            <option value="30">Last 30 days</option>
+            <option value="all">All time</option>
+        </select>
+    </div>
+    <p style="font-size: 11px; color: var(--text-light); margin-bottom: 15px;">
+        Average focus quality across meditation sessions
+    </p>
+    <div style="height: 300px;">
+        <canvas id="proTrendChart"></canvas>
+    </div>
+</div>
         <div class="card" style="margin-top: 20px;">
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
                 <button class="btn btn-secondary" style="padding: 5px 10px;" onclick="app.changeProMonth(-1)"><i class="fas fa-chevron-left"></i></button>
@@ -578,10 +598,10 @@
         <div id="setting-pro-legend" style="display:none; background: rgba(167, 139, 250, 0.1); padding: 10px; border-radius: 8px; border: 1px solid rgba(167, 139, 250, 0.3); margin-bottom: 15px;">
     <div style="font-size: 11px; margin-bottom: 5px; color: var(--text-light)">💎 Focus Quality (Pro):</div>
     <div style="font-size: 12px; display:grid; grid-template-columns: 1fr 1fr; gap:5px;">
-        <div class="text-q1">Hold: <strong>High</strong></div>
-        <div class="text-q2">3 Taps: <strong>Good</strong></div>
-        <div class="text-q3">2 Taps: <strong>Medium</strong></div>
         <div class="text-q4">1 Tap: <strong>Low</strong></div>
+		<div class="text-q2">Hold: <strong>Good</strong></div>
+		<div class="text-q3">2 Taps: <strong>Medium</strong></div>
+        <div class="text-q1">10+ Good: <strong>High</strong></div>
     </div>
 </div>
 
@@ -640,15 +660,17 @@
                     <li style="margin-bottom: 8px;"><strong>✨ Auto:</strong> Automatically detects both Tap and Hold gestures.</li>
                     <li><strong>💎 Pro Mode (Grading):</strong> Assess the focus quality at the moment of noting. The system saves a "quality score" based on your hand gesture:
                         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 8px; font-size: 13px;">
-                            <div style="color: #34d399;">● Hold: <strong>High</strong></div>
-                            <div style="color: #60a5fa;">● 3 Taps: <strong>Good</strong></div>
-                            <div style="color: #fbbf24;">● 2 Taps: <strong>Medium</strong></div>
                             <div style="color: #f87171;">● 1 Tap: <strong>Low</strong></div>
+                            <div style="color: #60a5fa;">● Hold: <strong>Good</strong></div>
+                            <div style="color: #fbbf24;">● 2 Taps: <strong>Medium</strong></div>
+                            <div style="color: #34d399;">● 10+ Good*: <strong>High</strong></div>
                         </div>
                     </li>
                 </ul>
             </div>
-            <p style="font-size: 13px; color: var(--text-light); margin-top: 10px;"><strong>Note:</strong> Haptic feedback requires a device that supports vibration mode.</p>
+<p style="font-size: 13px; color: var(--text-light); margin-top: 10px;">
+    <strong>10+ Good:</strong> Focus at 'Good' level for 10 consecutive times or more; each consecutive subsequent will be counted as 'High' level.<br>
+	<strong>Note:</strong> Haptic feedback requires a device that supports vibration mode.</p>
 <div style="text-align: center; margin: 15px 0;">
                 <img src="./images/2en.png" alt="Meditation Mode" style="max-width: 300px; width: 100%; border-radius: 8px; border: 1px solid var(--border);">
             </div>

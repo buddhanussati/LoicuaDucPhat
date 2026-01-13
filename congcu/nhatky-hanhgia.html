@@ -50,7 +50,7 @@
             
             <div class="user-stats">
     <div class="stat-item clickable" onclick="app.setGlobalDailyGoal()" title="Nhấn để sửa mục tiêu ngày">
-        <span class="stat-val"><span id="daily-current">0</span> / <span id="daily-target">60</span>m</span>
+        <span class="stat-val"><span id="daily-current">0</span> / <span id="daily-target">120</span>p</span>
         <div class="daily-bar-bg"><div id="daily-bar-fill" class="daily-bar-fill"></div></div>
         <span class="stat-label">Hàng ngày</span>
     </div>
@@ -144,11 +144,12 @@
             <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 20px;">
 <div class="card">
     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
-        <h3 id="breakdown-title" style="margin: 0;">Thời gian</h3>
+        <h4 id="breakdown-title" style="margin: 0;">Thời gian</h4>
         
         <select id="report-range-select" class="form-control" style="width: auto; padding: 5px; font-size: 13px; height: 32px;" onchange="app.renderReports(true)">
             <option value="all">Toàn bộ</option>
             <option value="today">Hôm nay</option>
+			<option value="yesterday">Hôm qua</option>
             <option value="this_week" selected>Tuần này</option>
             <option value="last_week">Tuần trước</option>
             <option value="this_month">Tháng này</option>
@@ -200,6 +201,7 @@
             <select id="ana-time-range" class="form-control" style="width: auto;" onchange="app.renderAnalytics()">
                 <option value="3" selected>3 ngày qua</option>
                 <option value="7">7 ngày qua</option>
+				<option value="14">14 ngày qua</option>
                 <option value="30">30 ngày qua</option>
                 <option value="90">3 tháng qua</option>
                 <option value="365">Toàn bộ</option>
@@ -271,6 +273,7 @@
                     <select id="pro-range-select" class="form-control" style="width: auto; padding: 5px; font-size: 13px; height: 32px;" onchange="app.renderProAnalytics(true)">
                         <option value="all">Toàn bộ</option>
                         <option value="today">Hôm nay</option>
+						<option value="yesterday">Hôm qua</option>
                         <option value="this_week" selected>Tuần này</option>
                         <option value="last_week">Tuần trước</option>
                         <option value="this_month">Tháng này</option>
@@ -293,7 +296,25 @@
                 </div>
             </div>
         </div>
-
+<div class="card" style="margin-top: 20px;">
+    <div style="display: flex; justify-content: space-between; align-items: center;">
+        <h4 style="margin: 0;">📈 Xu hướng Chú tâm</h4>
+        <select id="pro-trend-select" class="form-control" style="width: auto; padding: 5px; font-size: 13px; height: 32px;" onchange="app.renderProTrendChart()">
+            <option value="3" selected>3 ngày qua</option>
+			<option value="7">7 ngày qua</option>
+            <option value="14">14 ngày qua</option>
+            <option value="30">30 ngày qua</option>
+			<option value="90">3 tháng qua</option>
+            <option value="all">Toàn bộ</option>
+        </select>
+    </div>
+    <p style="font-size: 11px; color: var(--text-light); margin-bottom: 15px;">
+        Mức chú tâm trung bình qua các thời thiền
+    </p>
+    <div style="height: 300px;">
+        <canvas id="proTrendChart"></canvas>
+    </div>
+</div>
         <div class="card" style="margin-top: 20px;">
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
                 <button class="btn btn-secondary" style="padding: 5px 10px;" onclick="app.changeProMonth(-1)"><i class="fas fa-chevron-left"></i></button>
@@ -304,6 +325,8 @@
                 <canvas id="proMonthlyChart"></canvas>
             </div>
         </div>
+		
+		
     </div>
 </section>
     </main>
@@ -581,10 +604,10 @@
         <div id="setting-pro-legend" style="display:none; background: rgba(167, 139, 250, 0.1); padding: 10px; border-radius: 8px; border: 1px solid rgba(167, 139, 250, 0.3); margin-bottom: 15px;">
     <div style="font-size: 11px; margin-bottom: 5px; color: var(--text-light)">💎 Mức chú tâm (Pro):</div>
     <div style="font-size: 12px; display:grid; grid-template-columns: 1fr 1fr; gap:5px;">
-        <div class="text-q1">Ấn giữ: <strong>Cao</strong></div>
-        <div class="text-q2">3 Chạm: <strong>Tốt</strong></div>
-        <div class="text-q3">2 Chạm: <strong>Trung bình</strong></div>
         <div class="text-q4">1 Chạm: <strong>Thấp</strong></div>
+		<div class="text-q2">Ấn Giữ: <strong>Tốt</strong></div>
+		<div class="text-q3">2 Chạm: <strong>Trung bình</strong></div>
+        <div class="text-q1">10+ Tốt: <strong>Cao</strong></div>
     </div>
 </div>
 
@@ -645,15 +668,16 @@
                     <li style="margin-bottom: 8px;"><strong>✨ Auto:</strong> Tự động nhận diện cả thao tác Chạm và Giữ.</li>
                     <li><strong>💎 Chế độ Pro (Chuyên sâu):</strong> Đánh giá mức độ chú tâm ngay lúc ghi nhận. Hệ thống sẽ lưu lại "điểm chú tâm" dựa trên thao tác tay của bạn:
                         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 8px; font-size: 13px;">
-                            <div style="color: #34d399;">● Ấn giữ: <strong>Cao</strong></div>
-                            <div style="color: #60a5fa;">● 3 Chạm: <strong>Tốt</strong></div>
-                            <div style="color: #fbbf24;">● 2 Chạm: <strong>Trung bình</strong></div>
                             <div style="color: #f87171;">● 1 Chạm: <strong>Thấp</strong></div>
+                            <div style="color: #60a5fa;">● Ấn giữ: <strong>Tốt</strong></div>
+                            <div style="color: #fbbf24;">● 2 Chạm: <strong>Trung bình</strong></div>
+                            <div style="color: #34d399;">● 10+ Tốt*: <strong>Cao</strong></div>
                         </div>
                     </li>
                 </ul>
             </div>
-            <p style="font-size: 13px; color: var(--text-light); margin-top: 10px;"><strong>Lưu ý:</strong> Phản hồi xúc giác yêu cầu thiết bị có hỗ trợ chế độ rung.</p>
+			<p style="font-size: 13px; color: var(--text-light); margin-top: 10px;"><strong>10+ Tốt:</strong> Mức chú tâm Tốt từ 10 lần liên tục trở lên, mỗi lần liên tục tiếp theo sẽ được tính là ở mức Cao.<br>
+            <strong>Lưu ý:</strong> Phản hồi xúc giác yêu cầu thiết bị có hỗ trợ chế độ rung.</p>
  <div style="text-align: center; margin: 15px 0;">
                 <img src="./images/2vi.png" alt="Meditation Mode" style="max-width: 300px; width: 100%; border-radius: 8px; border: 1px solid var(--border);">
             </div>
@@ -781,5 +805,6 @@
     });
   }
 </script>
+
 </body>
 </html>
