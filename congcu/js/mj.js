@@ -456,7 +456,17 @@ const dbHelper = {
             req.onerror = (e) => reject("DB Error: " + e.target.error);
         });
     },
-
+async deleteLog(timestamp) {
+        if (!this.db) await this.open();
+        return new Promise((resolve, reject) => {
+            const tx = this.db.transaction(['logs'], 'readwrite');
+            const store = tx.objectStore('logs');
+            // Ensure timestamp is a Number because DB keys are numbers
+            store.delete(Number(timestamp)); 
+            tx.oncomplete = () => resolve();
+            tx.onerror = (e) => reject(e);
+        });
+    },
 async deleteGoalData(goalId) {
         if (!this.db) await this.open();
         return new Promise((resolve, reject) => {
@@ -701,7 +711,6 @@ setupMeditationListeners() {
                 let pressTimer = null;
                 
                 if (medOverlay) {
-                    
                      medOverlay.addEventListener('pointerdown', (e) => {
                         if (e.target.closest('.med-controls') || e.target.closest('.modal')) return;
                         e.preventDefault(); 
@@ -712,8 +721,14 @@ setupMeditationListeners() {
                         counterEl.style.transition = "transform 0.1s";
                         if (mode === 'hold' || mode === 'auto' || mode === 'pro') {
                             pressTimer = setTimeout(() => {
-                                if (mode === 'pro') { this.triggerMindfulnessSuccess(1); } 
-                                else { this.triggerMindfulnessSuccess(1); }
+                                // --- MODIFIED FOR PRO MODE ---
+                                // In Pro mode, Hold now triggers 'Tốt' (Level 2) instead of 'Cao' (Level 1)
+                                if (mode === 'pro') { 
+                                    this.triggerMindfulnessSuccess(2); 
+                                } else { 
+                                    this.triggerMindfulnessSuccess(1); 
+                                }
+                                // -----------------------------
                                 this.holdTriggered = true; 
                                 pressTimer = null; 
                             }, settings.holdDuration);
@@ -743,7 +758,7 @@ setupMeditationListeners() {
                                     if (mode === 'pro') {
                                         if (taps === 1) qualityVal = 4;      
                                         else if (taps === 2) qualityVal = 3; 
-                                        else qualityVal = 2;                 
+                                        else qualityVal = 3; // 3+ taps = Tốt (Level 2)
                                     } 
                                     this.triggerMindfulnessSuccess(qualityVal);
                                     this.tapState.count = 0; 
@@ -941,8 +956,17 @@ renderAnalytics(saveState = false) {
         const count = log.count !== undefined ? log.count : (log.touches ? log.touches.length : 0);
         totalTouches += count;
         
+        // --- ADD DATE FORMATTING LOGIC HERE ---
+        const d = new Date(log.timestamp);
+        const timeStr = d.getHours().toString().padStart(2, '0') + ':' + 
+                        d.getMinutes().toString().padStart(2, '0');
+        const dateStr = d.getDate().toString().padStart(2, '0') + '/' + 
+                        (d.getMonth() + 1).toString().padStart(2, '0') + '/' + 
+                        d.getFullYear();
+        
         return {
-            date: new Date(log.timestamp).toLocaleDateString('en-GB', {day: '2-digit', month:'2-digit'}),
+            date: d.toLocaleDateString('en-GB', {day: '2-digit', month:'2-digit'}),
+            fullDateTime: `${timeStr}, ${dateStr}`, // New property for tooltip
             quality: result.qualityPct,
             density: log.minutes > 0 ? (count / log.minutes).toFixed(1) : 0
         };
@@ -1019,6 +1043,9 @@ renderAnalytics(saveState = false) {
                     padding: 10,
                     displayColors: true,
                     callbacks: {
+                    title: function(context) {
+                        return chartData[context[0].dataIndex].fullDateTime;
+                    },
 					label: function(context) {
                     let label = context.dataset.label || '';
                     if (label) {
@@ -1287,7 +1314,7 @@ renderComparisonTable(medGoalIds) {
     });
 }
         
-renderProAnalytics(resetDates = false) { // 1. Add resetDates parameter
+renderProAnalytics(resetDates = false) {
     if (!document.getElementById('proWeeklyChart')) return;
 
     // --- 1. SETUP DATES & RANGES ---
@@ -1299,39 +1326,33 @@ renderProAnalytics(resetDates = false) { // 1. Add resetDates parameter
     const realThisWeekStart = new Date(now.getFullYear(), now.getMonth(), now.getDate() - realCurrentDay + 1);
     const realThisMonthStart = new Date(now.getFullYear(), now.getMonth(), 1);
 
-    // 2. Wrap the sync logic in the if(resetDates) block
     if (resetDates) {
         if (rangeMode === 'last_week') {
-            // If "Last Week" selected: Set Weekly Chart to Last Week
             this.currentWeekStart = new Date(realThisWeekStart);
             this.currentWeekStart.setDate(this.currentWeekStart.getDate() - 7);
-            
-            // Sync Monthly chart to the month of that week
             this.currentMonth = new Date(this.currentWeekStart.getFullYear(), this.currentWeekStart.getMonth(), 1);
         } 
         else if (rangeMode === 'last_month') {
-            // If "Last Month" selected: Set Monthly Chart to Last Month
             this.currentMonth = new Date(realThisMonthStart);
             this.currentMonth.setMonth(this.currentMonth.getMonth() - 1);
-            
-            // Sync Weekly chart to the first week of that past month
             this.currentWeekStart = this.getStartOfWeek(new Date(this.currentMonth.getFullYear(), this.currentMonth.getMonth(), 1));
         }
         else {
-            // If "Today", "This Week", or "This Month": Reset charts to current time
             this.currentWeekStart = new Date(realThisWeekStart);
             this.currentMonth = new Date(realThisMonthStart);
         }
     }
-    // -----------------------------------------------------
 
-    // ... (Keep the rest of the function exactly as it was) ...
-    // Calculate Breakdown Range (Doughnut Chart Logic)
+    // Calculate Breakdown Range
     let filterStart = 0;
     let filterEnd = Date.now() + 86400000;
     const todayStart = new Date(now.getFullYear(), now.getMonth(), now.getDate()).getTime();
 
     if (rangeMode === 'today') filterStart = todayStart;
+    else if (rangeMode === 'yesterday') {
+        filterEnd = todayStart;
+        filterStart = todayStart - 86400000; 
+    }
     else if (rangeMode === 'this_week') filterStart = realThisWeekStart.getTime();
     else if (rangeMode === 'last_week') {
         filterEnd = realThisWeekStart.getTime();
@@ -1342,7 +1363,7 @@ renderProAnalytics(resetDates = false) { // 1. Add resetDates parameter
         filterStart = new Date(now.getFullYear(), now.getMonth() - 1, 1).getTime();
     }
 
-    // Calculate Week Range for Bar Chart
+    // Ranges for Weekly/Monthly Charts
     const weekStartMs = this.currentWeekStart.getTime();
     const weekEndMs = weekStartMs + (7 * 24 * 60 * 60 * 1000);
     const weekEndDisp = new Date(weekEndMs - 1);
@@ -1354,8 +1375,7 @@ renderProAnalytics(resetDates = false) { // 1. Add resetDates parameter
     const monthlyLabels = Array.from({length: new Date(mYear, mMonth + 1, 0).getDate()}, (_, i) => i + 1);
     document.getElementById('pro-monthly-title').innerText = `Month ${new Date(mYear, mMonth).toLocaleDateString('en-GB', { month: 'numeric', year: 'numeric' })}`;
 
-    // ... (Rest of function remains unchanged) ...
-    // --- 2. PREPARE DATA CONTAINERS ---
+    // --- 2. PREPARE DATA CONTAINERS (STORING MINUTES) ---
     const qualities = {
         1: { label: 'High', color: '#34d399' },
         2: { label: 'Good', color: '#60a5fa' },
@@ -1372,40 +1392,184 @@ renderProAnalytics(resetDates = false) { // 1. Add resetDates parameter
         4: new Array(monthlyLabels.length).fill(0) 
     };
 
+    // --- 3. DATA AGGREGATION LOGIC (UPDATED FOR MINUTES) ---
     this.data.logs.forEach(log => {
+        // Skip logs without touches
         if (!log.touches || log.touches.length === 0) return;
 
-        let logTime = log.timestamp;
-        let logDateObj = new Date(logTime);
+        // 1. Calculate Total Mindful Time (in Seconds)
+        const analysis = this.analyzeSingleSession(log);
+        const totalSec = log.minutes * 60;
+        const distractedSec = analysis.distractedSec;
+        const mindfulSec = Math.max(0, totalSec - distractedSec);
+
+        // 2. Count Pro touches in this log to calculate ratios
+        const logCounts = { 1: 0, 2: 0, 3: 0, 4: 0 };
+        let totalLogProTouches = 0;
 
         log.touches.forEach(t => {
-            if (t.v && breakdownData[t.v] !== undefined) {
-                const val = t.v;
+            if (t.v) {
+                logCounts[t.v]++;
+                totalLogProTouches++;
+            }
+        });
 
+        // If no Pro touches recorded, we skip distribution
+        if (totalLogProTouches === 0) return;
+
+        // 3. Distribute time to accumulators
+        const logTime = log.timestamp;
+        const logDateObj = new Date(logTime);
+
+        // Determine array indices
+        let weekDayIdx = -1;
+        if (logTime >= weekStartMs && logTime < weekEndMs) {
+            let d = logDateObj.getDay();
+            weekDayIdx = (d === 0 ? 6 : d - 1);
+        }
+        
+        let monthDayIdx = -1;
+        if (logDateObj.getFullYear() === mYear && logDateObj.getMonth() === mMonth) {
+            monthDayIdx = logDateObj.getDate() - 1;
+        }
+
+        // Distribute minutes to each level
+        [1, 2, 3, 4].forEach(level => {
+            if (logCounts[level] > 0) {
+                // Ratio calculation: (Count Level / Total Count) * Mindful Seconds
+                const levelSeconds = (logCounts[level] / totalLogProTouches) * mindfulSec;
+                const levelMinutes = levelSeconds / 60; // Convert to Minutes
+
+                // Add to Breakdown (if within selected range)
                 if (logTime >= filterStart && logTime < filterEnd) {
-                    breakdownData[val]++;
+                    breakdownData[level] += levelMinutes;
                 }
 
-                if (logTime >= weekStartMs && logTime < weekEndMs) {
-                    let dayIdx = logDateObj.getDay();
-                    dayIdx = (dayIdx === 0 ? 6 : dayIdx - 1);
-                    weeklyData[val][dayIdx]++;
+                // Add to Weekly
+                if (weekDayIdx !== -1) {
+                    weeklyData[level][weekDayIdx] += levelMinutes;
                 }
 
-                if (logDateObj.getFullYear() === mYear && logDateObj.getMonth() === mMonth) {
-                    monthlyData[val][logDateObj.getDate() - 1]++;
+                // Add to Monthly
+                if (monthDayIdx !== -1) {
+                    monthlyData[level][monthDayIdx] += levelMinutes;
                 }
             }
         });
     });
+const formatTime = (mins) => {
+        if (mins >= 60) {
+            return (mins / 60).toFixed(1) + 'h';
+        }
+        return mins.toFixed(0) + 'm';
+    };
 
+    const formatTimeDetailed = (mins) => {
+        if (mins >= 60) {
+            return (mins / 60).toFixed(1) + 'h';
+        }
+        return mins.toFixed(1) + 'm';
+    };
     const weekDays = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
     
+    // --- 4. RENDER BREAKDOWN CHART ---
+    const ctxBreakdown = document.getElementById('proBreakdownChart').getContext('2d');
+    if (this.charts.proBreakdown) this.charts.proBreakdown.destroy();
+
+    const totalBreakdown = Object.values(breakdownData).reduce((a, b) => a + b, 0);
+
+    // Calculate Weighted Average Score based on MINUTES
+    let averageScore = 0;
+    if (totalBreakdown > 0) {
+        const weightedSum = (breakdownData[1] * 4) + 
+                            (breakdownData[2] * 3) + 
+                            (breakdownData[3] * 2) + 
+                            (breakdownData[4] * 1);
+        averageScore = (weightedSum / totalBreakdown).toFixed(2);
+    }
+
+    this.charts.proBreakdown = new Chart(ctxBreakdown, {
+        type: 'bar',
+        data: {
+            labels: ['Focus quality'],
+            datasets: [
+                { label: qualities[1].label, data: [breakdownData[1]], backgroundColor: qualities[1].color, borderRadius: { topLeft: 8, bottomLeft: 8 } },
+                { label: qualities[2].label, data: [breakdownData[2]], backgroundColor: qualities[2].color },
+                { label: qualities[3].label, data: [breakdownData[3]], backgroundColor: qualities[3].color },
+                { label: qualities[4].label, data: [breakdownData[4]], backgroundColor: qualities[4].color, borderRadius: { topRight: 8, bottomRight: 8 } }
+            ]
+        },
+        options: {
+            indexAxis: 'y',
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+                x: {
+                    stacked: true, display: true,
+                    grid: { display: true, color: 'rgba(55, 65, 81, 0.5)' },
+                    ticks: { 
+                        display: true, color: '#9ca3af', font: { size: 10 },
+                        callback: function(value) { return formatTime(value); } // Show minutes on X axis
+                    }
+                },
+                y: { stacked: true, display: false }
+            },
+            plugins: {
+                legend: {
+                    display: true, position: 'bottom',
+                    labels: {
+                        color: '#9ca3af', usePointStyle: true, padding: 20, font: { size: 12 },
+                        generateLabels: function(chart) {
+                            const data = chart.data;
+                            return data.datasets.map((dataset, i) => {
+                                const val = dataset.data[0];
+                                const pct = totalBreakdown > 0 ? ((val / totalBreakdown) * 100).toFixed(1) : 0;
+                                const isHidden = !chart.isDatasetVisible(i);
+                                return {
+                                    text: `${dataset.label} (${pct}%)`,
+                                    fillStyle: dataset.backgroundColor, strokeStyle: 'transparent',
+                                    fontColor: isHidden ? '#6b7280' : '#9ca3af',
+                                    pointStyle: 'circle', datasetIndex: i, hidden: isHidden
+                                };
+                            });
+                        }
+                    }
+                },
+                tooltip: {
+                    backgroundColor: '#1f2937',
+                    callbacks: {
+                        label: function(context) {
+                            const val = context.raw; 
+                            const pct = totalBreakdown > 0 ? ((val / totalBreakdown) * 100).toFixed(1) : 0;
+                            return ` ${context.dataset.label}: ${formatTimeDetailed(val)} (${pct}%)`;
+                        }
+                    }
+                },
+                title: {
+                    display: true,
+                    text: totalBreakdown === 0 ? 'No focus quality (pro) data available' : `Average focus quality: ${averageScore} / 4.0`,
+                    color: totalBreakdown === 0 ? '#6b7280' : '#f3f4f6',
+                    font: { size: 14, style: 'italic', weight: totalBreakdown === 0 ? 'normal' : '600' },
+                    padding: { top: 10, bottom: 10 }
+                },
+            }
+        }
+    });
+
+    // --- 5. RENDER WEEKLY & MONTHLY CHARTS ---
     const commonOptions = {
         maintainAspectRatio: false,
         scales: {
-            x: { stacked: true, grid: { color: '#374151' }, ticks: { color: '#9ca3af', font: { size: 11 },} },
-            y: { stacked: true, grid: { color: '#374151' }, title: { display: false, text: 'Focus quality' }, ticks: { color: '#9ca3af', font: { size: 11 },} }
+            x: { stacked: true, grid: { color: '#374151' }, ticks: { color: '#9ca3af', font: { size: 11 } } },
+            y: { 
+                stacked: true, 
+                grid: { color: '#374151' }, 
+                title: { display: false }, 
+                ticks: { 
+                    color: '#9ca3af', font: { size: 10 },
+                    callback: function(value) { return formatTime(value); }
+                } 
+            }
         },
         plugins: {
             legend: { labels: { color: '#9ca3af', font: {size: 11} } },
@@ -1421,131 +1585,37 @@ renderProAnalytics(resetDates = false) { // 1. Add resetDates parameter
                             }
                         });
                         const percentage = total > 0 ? ((value / total) * 100).toFixed(1) : 0;
-                        return `Focus quality: ${label} (${percentage}%)`;
+                        return `Focus quality: ${label}, ${formatTimeDetailed(value)} (${percentage}%)`;
                     }
                 }
             }
         }
     };
 
-    const ctxBreakdown = document.getElementById('proBreakdownChart').getContext('2d');
-if (this.charts.proBreakdown) this.charts.proBreakdown.destroy();
-
-const totalBreakdown = Object.values(breakdownData).reduce((a, b) => a + b, 0);
-
-
-let averageScore = 0;
-if (totalBreakdown > 0) {
-    const weightedSum = (breakdownData[1] * 4) + 
-                        (breakdownData[2] * 3) + 
-                        (breakdownData[3] * 2) + 
-                        (breakdownData[4] * 1);
-    averageScore = (weightedSum / totalBreakdown).toFixed(2); // e.g., "3.52"
-}
-// -----------------------------
-
-this.charts.proBreakdown = new Chart(ctxBreakdown, {
-    type: 'bar',
-    data: {
-        labels: ['Focus quality'],
-        datasets: [
-            {
-                label: qualities[1].label,
-                data: [breakdownData[1]],
-                backgroundColor: qualities[1].color,
-                borderRadius: { topLeft: 8, bottomLeft: 8 }
-            },
-            {
-                label: qualities[2].label,
-                data: [breakdownData[2]],
-                backgroundColor: qualities[2].color
-            },
-            {
-                label: qualities[3].label,
-                data: [breakdownData[3]],
-                backgroundColor: qualities[3].color
-            },
-            {
-                label: qualities[4].label,
-                data: [breakdownData[4]],
-                backgroundColor: qualities[4].color,
-                borderRadius: { topRight: 8, bottomRight: 8 }
-            }
-        ]
-    },
-    options: {
-        indexAxis: 'y',
-        responsive: true,
-        maintainAspectRatio: false,
-        scales: {
-            x: {
-                stacked: true,
-                display: true,
-                max: totalBreakdown > 0 ? totalBreakdown : 100,
-                grid: { display: true, drawBorder: false }, // Cleaner look
-                ticks: { display: true }
-            },
-            y: { stacked: true, display: false }
-        },
+    // Weekly Chart
+    const weeklyOptions = {
+        ...commonOptions,
         plugins: {
-            legend: {
-                display: true,
-                position: 'bottom',
-                labels: {
-                    color: '#9ca3af',
-                    usePointStyle: true,
-                    padding: 20,
-                    font: { size: 12 },
-                    generateLabels: function(chart) {
-                        const data = chart.data;
-                        return data.datasets.map((dataset, i) => {
-                            const val = dataset.data[0];
-                            const pct = totalBreakdown > 0 ? ((val / totalBreakdown) * 100).toFixed(1) : 0;
-                            const isHidden = !chart.isDatasetVisible(i);
-                            return {
-                                text: `${dataset.label} (${pct}%)`,
-                                fillStyle: dataset.backgroundColor,
-                                strokeStyle: 'transparent',
-                                fontColor: isHidden ? '#6b7280' : '#9ca3af',
-                                pointStyle: 'circle',
-                                datasetIndex: i,
-                                hidden: isHidden
-                            };
-                        });
-                    }
-                }
-            },
+            ...commonOptions.plugins,
             tooltip: {
-                backgroundColor: '#1f2937',
+                ...commonOptions.plugins.tooltip,
                 callbacks: {
-                    label: function(context) {
-                        const val = context.raw;
-                        const pct = totalBreakdown > 0 ? ((val / totalBreakdown) * 100).toFixed(1) : 0;
-                        return ` ${context.dataset.label}: ${val} (${pct}%)`;
+                    ...commonOptions.plugins.tooltip.callbacks,
+                    title: (context) => {
+                        const dayIndex = context[0].dataIndex;
+                        const date = new Date(this.currentWeekStart);
+                        date.setDate(date.getDate() + dayIndex);
+                        const day = String(date.getDate()).padStart(2, '0');
+                        const month = String(date.getMonth() + 1).padStart(2, '0');
+                        return `${context[0].label} (${day}/${month})`;
                     }
                 }
-            },
-            // --- UPDATED TITLE ---
-            title: {
-                display: true,
-                text: totalBreakdown === 0 
-                    ? 'No focus quality (pro) data available' 
-                    : `Average focus quality: ${averageScore} / 4.0`,
-                color: totalBreakdown === 0 ? '#6b7280' : '#f3f4f6',
-                font: { 
-                    size: 14, 
-                    style: totalBreakdown === 0 ? 'italic' : 'italic',
-                    weight: totalBreakdown === 0 ? 'normal' : '600'
-                },
-                padding: { top: 10, bottom: 10 }
-            },
+            }
         }
-    }
-});
+    };
 
     const ctxWeekly = document.getElementById('proWeeklyChart').getContext('2d');
     if (this.charts.proWeekly) this.charts.proWeekly.destroy();
-
     this.charts.proWeekly = new Chart(ctxWeekly, {
         type: 'bar',
         data: {
@@ -1557,12 +1627,10 @@ this.charts.proBreakdown = new Chart(ctxBreakdown, {
                 { label: qualities[4].label, data: weeklyData[4], backgroundColor: qualities[4].color }
             ]
         },
-        options: commonOptions
+        options: weeklyOptions 
     });
 
-    const ctxMonthly = document.getElementById('proMonthlyChart').getContext('2d');
-    if (this.charts.proMonthly) this.charts.proMonthly.destroy();
-
+    // Monthly Chart
     const monthlyOptions = {
         ...commonOptions,
         plugins: {
@@ -1580,6 +1648,8 @@ this.charts.proBreakdown = new Chart(ctxBreakdown, {
         }
     };
 
+    const ctxMonthly = document.getElementById('proMonthlyChart').getContext('2d');
+    if (this.charts.proMonthly) this.charts.proMonthly.destroy();
     this.charts.proMonthly = new Chart(ctxMonthly, {
         type: 'bar',
         data: {
@@ -1593,23 +1663,189 @@ this.charts.proBreakdown = new Chart(ctxBreakdown, {
         },
         options: monthlyOptions
     });
+
+    this.renderProTrendChart();
+}
+renderProTrendChart() {
+    const ctxTrend = document.getElementById('proTrendChart');
+    if (!ctxTrend) return;
+    const ctx = ctxTrend.getContext('2d');
+
+    // 1. Determine Time Range based on the specific trend selector
+    const selectEl = document.getElementById('pro-trend-select');
+    const rangeVal = selectEl ? selectEl.value : '30';
+    
+    let filterStart = 0;
+    const now = Date.now();
+
+    if (rangeVal === 'all') {
+        filterStart = 0;
+    } else {
+        const days = parseInt(rangeVal);
+        filterStart = now - (days * 24 * 60 * 60 * 1000);
+    }
+
+    // 2. Filter Logs
+    // We only care about logs that have Pro data (touches with 'v' property)
+    let trendLogs = this.data.logs
+        .filter(l => l.timestamp >= filterStart)
+        .filter(l => l.touches && l.touches.some(t => t.v)) 
+        .sort((a, b) => a.timestamp - b.timestamp);
+
+    if (trendLogs.length === 0) {
+        if (this.charts.proTrend) this.charts.proTrend.destroy();
+        // Optional: Render "No Data" text on canvas if desired, 
+        // or just leave it empty.
+        return;
+    }
+
+    // 3. Process Data: Calculate Average Score per Session
+    let trendData = trendLogs.map(log => {
+    const proTouches = log.touches.filter(t => t.v);
+    const totalScore = proTouches.reduce((sum, t) => sum + (5 - t.v), 0);
+    const avg = proTouches.length > 0 ? (totalScore / proTouches.length) : 0;
+    
+    const d = new Date(log.timestamp);
+    // Format: hh:mm
+    const timeStr = d.getHours().toString().padStart(2, '0') + ':' + 
+                    d.getMinutes().toString().padStart(2, '0');
+    // Format: dd/mm/yyyy
+    const dateStr = d.getDate().toString().padStart(2, '0') + '/' + 
+                    (d.getMonth() + 1).toString().padStart(2, '0') + '/' + 
+                    d.getFullYear();
+
+    return {
+        date: new Date(log.timestamp).toLocaleDateString('vi-VN', {day: '2-digit', month:'2-digit'}),
+        score: parseFloat(avg.toFixed(2)),
+        formattedDateTime: `${timeStr}, ${dateStr}` // Created the specific format here
+    };
+});
+
+    // 4. Downsample data if too many points (Limit to ~15 points for readability)
+    const maxPoints = 15;
+    if (trendData.length > maxPoints) {
+        const sampledData = [];
+        const step = (trendData.length - 1) / (maxPoints - 1);
+        for (let i = 0; i < maxPoints; i++) {
+            const index = Math.round(i * step);
+            sampledData.push(trendData[index]);
+        }
+        trendData = sampledData;
+    }
+
+    // 5. Render Chart
+    if (this.charts.proTrend) this.charts.proTrend.destroy();
+
+    this.charts.proTrend = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: trendData.map(d => d.date),
+            datasets: [
+                {
+                    label: 'Average focus quality',
+                    data: trendData.map(d => d.score),
+                    borderColor: '#818cf8', // Emerald-500
+                    backgroundColor: 'rgba(129, 140, 248, 0.1)', // Emerald tint
+                    borderWidth: 2,
+                    fill: true,
+                    tension: 0.3,
+                    
+                }
+            ]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            interaction: {
+                mode: 'nearest',
+                axis: 'x',
+                intersect: true
+            },
+			elements: {
+            point: {
+                hitRadius: 30,     
+                hoverRadius: 4     
+            }
+        },
+            scales: {
+                y: {
+                    type: 'linear',
+                    display: true,
+                    min: 1,
+                    max: 4.2, // Slight padding above 4
+                    grid: { color: '#374151' },
+                    ticks: {
+                        color: '#9ca3af',
+                        font: { size: 10 },
+                        stepSize: 1,
+                        callback: function(value) {
+                            if(value === 1) return 'Low (1)';
+                            if(value === 2) return 'Med (2)';
+                            if(value === 3) return 'Good (3)';
+                            if(value === 4) return 'High (4)';
+                            return '';
+                        }
+                    }
+                },
+                x: {
+                    ticks: { color: '#9ca3af', font: { size: 10 } },
+                    grid: { color: 'rgba(55, 65, 81, 0.5)' }
+                }
+            },
+            plugins: {
+                legend: { display: false },
+                tooltip: {
+                    titleColor: '#f3f4f6',
+                    bodyColor: '#f3f4f6',
+                    borderColor: '#374151',
+                    borderWidth: 1,
+                    padding: 10,
+                    displayColors: false,
+                    callbacks: {
+            // Change this line to use the new formatted string
+            title: (context) => trendData[context[0].dataIndex].formattedDateTime,
+            label: function(context) {
+                return `Focus quality: ${context.parsed.y} / 4.0`;
+            }
+        }
+                }
+            }
+        }
+    });
 }
 triggerMindfulnessSuccess(quality = 1) {
     const settings = this.data.medSettings;
+
+    // --- PRO MODE COMBO LOGIC (UPDATED) ---
+    if (settings.mode === 'pro') {
+        if (quality === 2) {
+            // If Tốt (Level 2), increment combo count
+            this.meditationState.consecutiveGoodCount = (this.meditationState.consecutiveGoodCount || 0) + 1;
+            
+            // If 10 OR MORE consecutive 'Tốt', upgrade this touch (and subsequent ones) to 'Cao' (Level 1)
+            if (this.meditationState.consecutiveGoodCount >= 10) {
+                quality = 1; 
+                // We DO NOT reset the count here anymore. 
+                // This ensures the 11th, 12th, etc. continue to be counted as 'Cao'.
+            }
+        } else {
+            // Any other quality (TB, Thấp) breaks the combo immediately
+            this.meditationState.consecutiveGoodCount = 0;
+        }
+    }
+    // ----------------------------
 
     this.handleMeditationTouch(quality);
 
     if (settings.vibration && navigator.vibrate) {
         if (settings.mode === 'pro') {
-
             switch(quality) {
-                case 1: navigator.vibrate(90); break;          
-                case 2: navigator.vibrate([80, 80, 80]); break; 
-                case 3: navigator.vibrate([60, 40, 40]); break;     
+                case 1: navigator.vibrate([80, 50, 80]); break;          
+                case 2: navigator.vibrate(80); break; 
+                case 3: navigator.vibrate([60, 40, 60]); break;     
                 case 4: navigator.vibrate(50); break;            
             }
         } else {
-
             navigator.vibrate(50); 
         }
     }
@@ -1766,14 +2002,14 @@ toggleTimer(id) {
 startMeditationSetup(goal) {
 
     const defaultTime = goal.lastDuration || '20';
-    const minStr = prompt('Meditation duration (mins):', defaultTime);
+    const minStr = prompt('Thời gian thiền (phút):', defaultTime);
     
     if (!minStr) return;
     const min = parseInt(minStr);
     if (isNaN(min) || min <= 0) return;
 
     const defaultThreshold = goal.lastThreshold || '10';
-    const threshStr = prompt('Distraction Threshold (secs):', defaultThreshold);
+    const threshStr = prompt('Ngưỡng mất tập trung (giây):', defaultThreshold);
     let threshold = 10; 
     
     if (threshStr && !isNaN(parseInt(threshStr)) && parseInt(threshStr) > 0) {
@@ -1793,7 +2029,8 @@ startMeditationSetup(goal) {
         startTime: Date.now(), totalDurationSeconds: min * 60,
         remainingSeconds: min * 60, touches: [],
         threshold: threshold, 
-        quoteInterval: null 
+        quoteInterval: null,
+        consecutiveGoodCount: 0 // --- NEW: Track consecutive 'Tốt' for combo ---
     };
 
     document.getElementById('meditation-overlay').style.display = 'flex';
@@ -2227,132 +2464,197 @@ updateSessionChart() {
 }
 
 renderProChart(ctx, log) {
-    const startTime = log.timestamp;
-    // 1. Calculate Duration & Setup similar to Intensity Chart
-    const durationSeconds = (log.minutes * 60) || Math.ceil((Date.now() - startTime) / 1000);
+    // 1. Calculate Mindfulness vs Distraction
+    const analysis = this.analyzeSingleSession(log); 
+    const totalSec = log.minutes * 60;
     
-    // Filter only touches that have a value (v) (Pro mode touches)
-    const rawTouches = (log.touches || []).filter(t => t.v);
+    // Distracted Seconds (Thất niệm)
+    const distractedSec = analysis.distractedSec;
+    
+    // Mindful Seconds (Tỉnh thức)
+    const mindfulSec = Math.max(0, totalSec - distractedSec);
 
-    if (rawTouches.length === 0) {
-        ctx.font = "14px Arial";
-        ctx.fillStyle = "#9ca3af";
-        ctx.textAlign = "center";
-        ctx.fillText("No focus quality data for this session", ctx.canvas.width / 2, ctx.canvas.height / 2);
-        return;
-    }
-
-    const dataPoints = [];
-    const labels = [];
-    const totalPoints = 30; // Fixed number of points for smoothness (like Intensity chart)
-    const step = durationSeconds / totalPoints; 
-
-    // 2. Iterate through time steps
-    for (let s = 0; s <= durationSeconds; s += step) {
-        // Label logic
-        labels.push(durationSeconds < 120 ? Math.round(s) + 's' : (s / 60).toFixed(0));
-        
-        // Define a window around this point to calculate average grade
-        // We use a dynamic window (1.5x step) or minimum 20s to ensure smooth transitions
-        const windowSizeSec = Math.max(step * 1.5, 20); 
-        const windowStart = (s * 1000) - (windowSizeSec * 1000 / 2);
-        const windowEnd = (s * 1000) + (windowSizeSec * 1000 / 2);
-
-        // Find touches in this window
-        const touchesInWindow = rawTouches.filter(t => {
-            const touchTime = this.getTouchTimestamp(t, log.timestamp) - startTime;
-            return touchTime >= windowStart && touchTime <= windowEnd;
+    // 2. Count Pro Touches
+    const counts = { 1: 0, 2: 0, 3: 0, 4: 0 };
+    let proCount = 0;
+    
+    if (log.touches && log.touches.length > 0) {
+        log.touches.forEach(t => {
+            if (t.v) {
+                counts[t.v]++;
+                proCount++;
+            }
         });
-
-        if (touchesInWindow.length > 0) {
-            // Calculate Average Grade (1=Good, 4=Weak)
-            const sum = touchesInWindow.reduce((acc, t) => acc + t.v, 0);
-            const avg = sum / touchesInWindow.length;
-            
-            // Map 1..4 to Chart Height (Higher is better visually)
-            // Input 1 -> Output 4
-            // Input 4 -> Output 1
-            dataPoints.push(5 - avg); 
-        } else {
-            // No data -> 0 (Thất niệm)
-            dataPoints.push(0); 
-        }
     }
 
-    // 3. Styling - Emerald Green Gradient (Similar style to Intensity but green)
-    const chartHeight = ctx.canvas.clientHeight || 300;
-    const gradient = ctx.createLinearGradient(0, 0, 0, chartHeight);
-    gradient.addColorStop(0, 'rgba(16, 185, 129, 0.6)');   // Top
-    gradient.addColorStop(0.5, 'rgba(16, 185, 129, 0.3)'); // Middle
-    gradient.addColorStop(1, 'rgba(16, 185, 129, 0.05)');  // Bottom
+    // 3. Distribute Mindful Time
+    // We use key '0' for Standard/Basic mindfulness (No Pro data)
+    const dataSeconds = { 1: 0, 2: 0, 3: 0, 4: 0, 0: 0 };
 
-    // 4. Render Chart
+    if (proCount > 0) {
+        // Distribute based on Pro ratios
+        dataSeconds[1] = (counts[1] / proCount) * mindfulSec;
+        dataSeconds[2] = (counts[2] / proCount) * mindfulSec;
+        dataSeconds[3] = (counts[3] / proCount) * mindfulSec;
+        dataSeconds[4] = (counts[4] / proCount) * mindfulSec;
+    } else {
+        // No Pro data found -> Assign all mindful time to "Basic" (Level 0)
+        dataSeconds[0] = mindfulSec;
+    }
+
+    // 4. Define Colors & Labels
+    const qualities = {
+        1: { label: 'High', color: '#34d399' },      // Green
+        2: { label: 'Good', color: '#60a5fa' },      // Blue
+        3: { label: 'Medium', color: '#fbbf24' },       // Yellow
+        4: { label: 'Low', color: '#f87171' },     // Red
+        0: { label: 'Mindfulness',  color: '#a78bfa' },      // Purple (New Standard Level)
+        5: { label: 'Distraction', color: '#6b7280' }     // Gray (Updated from White)
+    };
+
+    // 5. Cleanup Old Chart
     if (this.charts.session) this.charts.session.destroy();
 
+    // 6. Render Chart
     this.charts.session = new Chart(ctx, {
-        type: 'line',
+        type: 'bar',
         data: {
-            labels: labels,
-            datasets: [{
-                label: 'Focus quality',
-                data: dataPoints,
-                borderColor: '#10b981', // Emerald-500
-                backgroundColor: gradient,
-                borderWidth: 3,         // Thicker line like intensity chart
-                tension: 0.4,           // Smooth curves
-                fill: true,   
-                pointRadius: 0,         // Hide points by default
-                pointHoverRadius: 6,
-                pointBackgroundColor: '#34d399',
-                pointBorderWidth: 1
-            }]
+            labels: ['Meditation Session'],
+            datasets: [
+                // Only show Pro levels if Pro data exists, otherwise show Basic
+                ...(proCount > 0 ? [
+                    {
+                        label: qualities[1].label,
+                        data: [dataSeconds[1]],
+                        backgroundColor: qualities[1].color,
+                        barPercentage: 0.6,
+                        borderRadius: { topLeft: 8, bottomLeft: 8 }
+                    },
+                    {
+                        label: qualities[2].label,
+                        data: [dataSeconds[2]],
+                        backgroundColor: qualities[2].color,
+                        barPercentage: 0.6
+                    },
+                    {
+                        label: qualities[3].label,
+                        data: [dataSeconds[3]],
+                        backgroundColor: qualities[3].color,
+                        barPercentage: 0.6
+                    },
+                    {
+                        label: qualities[4].label,
+                        data: [dataSeconds[4]],
+                        backgroundColor: qualities[4].color,
+                        barPercentage: 0.6
+                    }
+                ] : [
+                    {
+                        label: qualities[0].label,
+                        data: [dataSeconds[0]],
+                        backgroundColor: qualities[0].color,
+                        barPercentage: 0.6,
+                        borderRadius: { topLeft: 8, bottomLeft: 8 }
+                    }
+                ]),
+                // Always add Distracted time at the end
+                {
+                    label: qualities[5].label,
+                    data: [distractedSec],
+                    backgroundColor: qualities[5].color,
+                    barPercentage: 0.6,
+                    borderRadius: { topRight: 8, bottomRight: 8 }
+                }
+            ]
         },
         options: {
+            indexAxis: 'y', // Horizontal
             responsive: true,
             maintainAspectRatio: false,
-            interaction: {
-                mode: 'index',
-                intersect: false,
-            },
             scales: {
                 x: {
-                    title: { display: true, text: 'Time (mins)', color: '#9ca3af', font: { size: 11 } }, 
-                    grid: { display: true }, 
-                    ticks: { maxTicksLimit: 20, color: '#9ca3af' }
-                },
+                    stacked: true,
+                    display: true, 
+                    max: totalSec, 
+					grid: {
+            color: 'rgba(156, 163, 175, 0.1)' // Light grid lines to match theme
+        },
+        ticks: {
+            color: '#9ca3af',
+            // This function converts the seconds value to a minute label
+            callback: function(value) {
+                return (value / 60).toFixed(0) + 'p';
+            }
+        }
+    },
+                
                 y: {
-                    min: 0, 
-                    max: 4.5, 
-                    title: { display: false, text: 'Focus level', color: '#9ca3af' },
-                    ticks: {
-                        stepSize: 1,
-						padding: 0.1,
-                        callback: (val) => {
-                            if (val === 4) return 'High';      // Avg Grade 1
-                            if (val === 3) return 'Good';      // Avg Grade 2
-                            if (val === 2) return 'Med';       // Avg Grade 3
-                            if (val === 1) return 'Low';      // Avg Grade 4
-                            if (val === 0) return '⚠️';   // No data
-                            return '';
-                        },
-                        color: (context) => context.tick.value === 0 ? '#9ca3af' : '#9ca3af',
-                        font: { size: 10 }
-                    },
-                    grid: { color: 'rgba(55, 65, 81, 0.5)' }
+                    stacked: true,
+                    display: false 
                 }
             },
             plugins: {
-                legend: { display: false },
-                tooltip: {
-                    mode: 'index', intersect: false, displayColors: false,
-                    callbacks: { title: () => '', 
-                        label: function(context) {
-                            const val = context.raw;
-                            if (val === 0) return ' Distraction';
-                            // Calculate real average back from chart value
-                            return ' Level: ' + val.toFixed(1) + ' / 4.0';
+                legend: {
+                    display: true,
+                    position: 'bottom',
+                    labels: {
+                        color: '#9ca3af',
+                        usePointStyle: true,
+                        padding: 20,
+                        font: { size: 11 },
+                        generateLabels: function(chart) {
+                            const data = chart.data;
+                            return data.datasets.map((dataset, i) => {
+                                const val = dataset.data[0];
+                                const pct = totalSec > 0 ? ((val / totalSec) * 100).toFixed(1) : 0;
+                                const isHidden = !chart.isDatasetVisible(i);
+                                return {
+                                    text: `${dataset.label}: ${pct}%`,
+                                    fillStyle: dataset.backgroundColor,
+                                    strokeStyle: 'transparent',
+                                    fontColor: isHidden ? '#6b7280' : '#9ca3af',
+                                    pointStyle: 'circle',
+                                    datasetIndex: i,
+                                    hidden: isHidden
+                                };
+                            });
                         }
                     }
+                },
+                tooltip: {
+                    backgroundColor: '#1f2937',
+                    titleColor: '#f3f4f6',
+                    bodyColor: '#f3f4f6',
+                    borderColor: '#374151',
+                    borderWidth: 1,
+                    padding: 10,
+                    callbacks: {
+                        title: () => null,
+                        label: function(context) {
+                            const val = context.raw;
+                            const pct = totalSec > 0 ? ((val / totalSec) * 100).toFixed(1) : 0;
+                            let timeStr = "";
+                            if (val < 60) timeStr = Math.round(val) + "s";
+                            else timeStr = (val/60).toFixed(1) + "m";
+                            
+                            const rawLabel = context.dataset.label;
+
+                            // IF Level 0 (Cơ bản) OR Level 5 (Thất niệm) -> Show label as is
+                            if (rawLabel.includes('Mindfulness') || rawLabel.includes('Distraction')) {
+                                return `${rawLabel}: ${pct}% (${timeStr})`;
+                            } 
+                            
+                            // ELSE (Levels 1-4) -> Add prefix and lowercase
+                            return `Focus quality: ${rawLabel} - ${pct}% (${timeStr})`;
+                        }
+                    }
+                },
+                title: {
+                    display: true,
+                    text: `Total duration: ${log.minutes} minutes`,
+                    color: '#9ca3af',
+                    font: { size: 13, style: 'italic', weight: 'normal' },
+                    padding: { bottom: 10 }
                 }
             }
         }
@@ -2708,7 +3010,7 @@ openDayStats(dateStr) {
         }
 
         const satiCount = log.count !== undefined ? log.count : (log.touches ? log.touches.length : 0);
-        const satiInfo = satiCount > 0 ? `<span style="color: var(--zen); font-size: 11px; margin-left: 5px; font-weight:bold;">(${satiCount} mindfulness)</span>` : '';
+        const satiInfo = satiCount > 0 ? `<span style="color: var(--zen); font-size: 11px; margin-left: 5px; font-weight:bold;">(${satiCount} Mindfulness)</span>` : '';
 
         const leftSide = `<div>
                            <span style="font-weight:600; color:${goal?goal.color:'#ccc'}">${goal?goal.name:'Deleted'}</span>
@@ -2734,7 +3036,7 @@ openDayStats(dateStr) {
 renderDayChartOnly(dateStr) {
     const ctx = document.getElementById('dayBreakdownChart').getContext('2d');
     const isMindfulness = this.dayChartMode === 'mindfulness';
-    const unitLabel = isMindfulness ? 'mindfulness' : 'mins';
+    const unitLabel = isMindfulness ? 'Mindfulness' : 'Minutes';
 
     const dayLogs = this.data.logs.filter(l => l.date === dateStr);
     const goalStats = {};
@@ -2767,9 +3069,8 @@ renderDayChartOnly(dateStr) {
 
     const centerTextPlugin = {
         id: 'centerText',
-        beforeDraw: function(chart) {
-            const { ctx } = chart;
-            const { top, left, width, height } = chart.chartArea; 
+        afterDatasetsDraw: function(chart) {
+            const { ctx, chartArea: { top, bottom, left, right } } = chart;
             
             ctx.save();
 
@@ -2779,31 +3080,50 @@ renderDayChartOnly(dateStr) {
                 data.forEach(val => total += val);
             }
 
-            let text = total;
+            let mainText = "";
             if (!isMindfulness) {
-
-                text = (total / 60).toFixed(1) + "h"; 
+                // Hour/Minute logic
+                if (total < 60) {
+                    mainText = total + "m";
+                } else {
+                    mainText = (total / 60).toFixed(1) + "h";
+                }
             } else {
-                text = total.toLocaleString(); 
+                mainText = total.toLocaleString(); 
             }
 
-            const x = left + width / 2;
-            const y = top + height / 2;
+            const centerX = (left + right) / 2;
+            const centerY = (top + bottom) / 2;
 
-            const fontSize = (height / 10).toFixed(2); 
-            ctx.font = `bold ${fontSize}px sans-serif`;
+            const chartHeight = bottom - top;
+            const fontSizeMain = chartHeight / 10; // Larger for the number
+            const fontSizeSub = chartHeight / 20;  // Smaller for the label
+
             ctx.textAlign = 'center';
             ctx.textBaseline = 'middle';
-            ctx.fillStyle = "#f3f4f6"; 
 
-            if (dataValues.length > 0) {
-                ctx.fillText(text, x, y);
-            }
-            
-            ctx.restore();
+            if (isMindfulness) {
+                // --- LINE 1: The Value (White/Bold) ---
+                ctx.font = `bold ${fontSizeMain}px sans-serif`;
+                ctx.fillStyle = "#FFFFFF"; 
+                // Offset slightly upwards
+                ctx.fillText(mainText, centerX, centerY - (fontSizeMain * 0.15));
+
+                // --- LINE 2: The Unit Label (Gray/Normal) ---
+                ctx.font = `normal ${fontSizeSub}px sans-serif`;
+                ctx.fillStyle = "#9ca3af"; 
+                // Offset slightly downwards
+                ctx.fillText(unitLabel, centerX, centerY + (fontSizeMain * 0.65));
+           } else {
+            // --- TIME MODE: Only draw the number in the center ---
+            ctx.font = `bold ${fontSizeMain}px sans-serif`;
+            ctx.fillStyle = "#FFFFFF"; 
+            ctx.fillText(mainText, centerX, centerY); 
         }
-    };
 
+        ctx.restore();
+    }
+};
     this.charts.dayChart = new Chart(ctx, {
         type: 'doughnut',
         data: { 
@@ -2829,6 +3149,13 @@ renderDayChartOnly(dateStr) {
                 color: '#6b7280' 
             },
             tooltip: {
+				backgroundColor: '#121821', // Màu Solid (Hex) trùng với var(--surface), chắn hoàn toàn chữ bên dưới
+                titleColor: '#f3f4f6',      // Màu chữ sáng (var(--text))
+                bodyColor: '#f3f4f6',
+                borderColor: '#374151',     // Viền xám (var(--border)) để tooltip nổi bật hơn
+                borderWidth: 1,
+                padding: 10,
+				z: 999,
                 callbacks: {
                     label: function(context) {
                         const value = context.raw || 0;
@@ -2876,7 +3203,7 @@ renderReports(resetDates = false) { // 1. Add parameter
     const isMindfulness = this.reportMode === 'mindfulness';
     const unitLabel = isMindfulness ? 'Mindfulness' : 'Minutes';
 
-    document.getElementById('breakdown-title').innerText = isMindfulness ? 'Mindfulness' : 'Time';
+    document.getElementById('breakdown-title').innerText = isMindfulness ? 'Mindfulness Chart' : 'Time Chart';
 
     const rangeSelect = document.getElementById('report-range-select');
     const rangeMode = rangeSelect ? rangeSelect.value : 'all';
@@ -2915,10 +3242,11 @@ renderReports(resetDates = false) { // 1. Add parameter
     const todayStart = new Date(now.getFullYear(), now.getMonth(), now.getDate()).getTime();
     let filterStart = 0;
     let filterEnd = Date.now() + 86400000; 
-
-    if (rangeMode === 'today') {
-        filterStart = todayStart;
-    } else if (rangeMode === 'this_week') {
+if (rangeMode === 'today') filterStart = todayStart;
+	else if (rangeMode === 'yesterday') {
+        filterEnd = todayStart;
+        filterStart = todayStart - 86400000; }
+     else if (rangeMode === 'this_week') {
         filterStart = realThisWeekStart.getTime();
     } else if (rangeMode === 'last_week') {
         filterEnd = realThisWeekStart.getTime();
@@ -3027,82 +3355,88 @@ renderReports(resetDates = false) { // 1. Add parameter
                 color: '#6b7280'
             },
             tooltip: {
-                callbacks: {
-                    label: function(context) {
-                        const value = context.raw || 0;
-                        
-                        // Tính tổng để ra phần trăm
-                        const total = context.chart._metasets[context.datasetIndex].total;
-                        const percentage = total > 0 ? ((value / total) * 100).toFixed(0) + '%' : '0%';
+            callbacks: {
+                label: function(context) {
+                    // 1. Get the raw value
+                    let value = context.raw; 
+                    let label = context.label || '';
+                    let formattedValue = "";
 
-                        // Format hiển thị giá trị
-                        let formattedValue = '';
-                        if (unitLabel === 'Minutes') {
-                            formattedValue = `${(value / 60).toFixed(1)}h`;
+                    // 2. Apply your Minute -> Hour logic
+                    if (unitLabel === 'Minutes') {
+                        if (value < 60) {
+                            formattedValue = value + " minutes"; 
                         } else {
-                            formattedValue = `${value} ${unitLabel}`;
+                            formattedValue = (value / 60).toFixed(1) + " hours";
                         }
-
-                        // Kết quả: "Tên mục: 2h (25.5%)"
-                        return ` ${formattedValue} (${percentage})`;
+                    } else {
+                        formattedValue = value.toLocaleString();
                     }
+
+                    return ` ${label}: ${formattedValue}`;
                 }
             }
         }
-    };
+    }
+};
 
     const ctxBreakdown = document.getElementById('goalBreakdownChart').getContext('2d');
     if(this.charts.breakdown) this.charts.breakdown.destroy();
 
     // 2. CẬP NHẬT PLUGIN VẼ CHỮ Ở GIỮA (Số ở trên, chữ ở dưới)
-    const centerTextPlugin = {
-        id: 'centerText',
-        afterDraw: function(chart) {
-            const { ctx, chartArea: { top, bottom, left, right } } = chart;
-            ctx.save();
-            
-            let total = 0;
-            const data = chart.data.datasets[0].data;
-            data.forEach(val => total += val);
-            
-            let mainText = total;
-            const currentUnit = typeof unitLabel !== 'undefined' ? unitLabel : '';
-            
-            if (currentUnit === 'Minutes') {
-                mainText = (total / 60).toFixed(1) + "h"; 
+   const centerTextPlugin = {
+    id: 'centerText',
+    afterDraw: function(chart) {
+        const { ctx, chartArea: { top, bottom, left, right } } = chart;
+        ctx.save();
+        
+        let total = 0;
+        const data = chart.data.datasets[0].data;
+        data.forEach(val => total += val);
+        
+        let mainText = "";
+        let currentUnit = typeof unitLabel !== 'undefined' ? unitLabel : '';
+        
+        if (currentUnit === 'Minutes') {
+            // Logic: If less than 60 minutes, show 'p'. Otherwise show 'h'.
+            if (total < 60) {
+                mainText = total + "m"; // Display minutes
             } else {
-                mainText = total.toLocaleString();
+                mainText = (total / 60).toFixed(1) + "h"; // Display hours
             }
-            
-            const centerX = (left + right) / 2;
-            const centerY = (top + bottom) / 2;
-            
-            const chartHeight = bottom - top;
-            const fontSizeMain = chartHeight / 13;
-            const fontSizeSub = chartHeight / 26;
-            
-            ctx.textAlign = "center";
-            ctx.textBaseline = "middle";
-
-            if (isMindfulness) {
-                // --- CHẾ ĐỘ CHÁNH NIỆM: Vẽ 2 dòng ---
-                ctx.font = `bold ${fontSizeMain}px sans-serif`;
-                ctx.fillStyle = "#FFFFFF"; 
-                ctx.fillText(mainText, centerX, centerY - (fontSizeMain * 0.15));
-
-                ctx.font = `normal ${fontSizeSub}px sans-serif`;
-                ctx.fillStyle = "#9ca3af"; 
-                ctx.fillText(currentUnit, centerX, centerY + (fontSizeMain * 0.65));
-            } else {
-                // --- CHẾ ĐỘ THỜI GIAN: Chỉ vẽ con số ở ngay chính giữa ---
-                ctx.font = `bold ${fontSizeMain}px sans-serif`;
-                ctx.fillStyle = "#FFFFFF"; 
-                ctx.fillText(mainText, centerX, centerY); 
-            }
-
-            ctx.restore();
+        } else {
+            mainText = total.toLocaleString();
         }
-    };
+        
+        const centerX = (left + right) / 2;
+        const centerY = (top + bottom) / 2;
+        
+        const chartHeight = bottom - top;
+        const fontSizeMain = chartHeight / 13;
+        const fontSizeSub = chartHeight / 26;
+        
+        ctx.textAlign = "center";
+        ctx.textBaseline = "middle";
+
+        if (isMindfulness) {
+            // --- MINDFULNESS MODE: Draw 2 lines ---
+            ctx.font = `bold ${fontSizeMain}px sans-serif`;
+            ctx.fillStyle = "#FFFFFF"; 
+            ctx.fillText(mainText, centerX, centerY - (fontSizeMain * 0.15));
+
+            ctx.font = `normal ${fontSizeSub}px sans-serif`;
+            ctx.fillStyle = "#9ca3af"; 
+            ctx.fillText(currentUnit, centerX, centerY + (fontSizeMain * 0.65));
+        } else {
+            // --- TIME MODE: Only draw the number in the center ---
+            ctx.font = `bold ${fontSizeMain}px sans-serif`;
+            ctx.fillStyle = "#FFFFFF"; 
+            ctx.fillText(mainText, centerX, centerY); 
+        }
+
+        ctx.restore();
+    }
+};
 
     this.charts.breakdown = new Chart(ctxBreakdown, { 
         type: 'doughnut', 
@@ -3120,15 +3454,43 @@ renderReports(resetDates = false) { // 1. Add parameter
     });
 
     const ctxWeek = document.getElementById('weeklyChart').getContext('2d');
-    if(this.charts.weekly) this.charts.weekly.destroy();
-    this.charts.weekly = new Chart(ctxWeek, { 
-        type: 'bar', 
-        data: { 
-            labels: weekDays, 
-            datasets: allGoalsForBars.map(g => ({ label: g.name, data: g.weekly, backgroundColor: g.color, stack: '0' })) 
-        }, 
-        options: commonOptions 
-    });
+if(this.charts.weekly) this.charts.weekly.destroy();
+
+// Create specific options for the Weekly Chart to include the date
+const weeklyOptions = {
+    ...commonOptions,
+    plugins: {
+        ...commonOptions.plugins,
+        tooltip: {
+            ...commonOptions.plugins.tooltip,
+            callbacks: {
+                ...commonOptions.plugins.tooltip.callbacks,
+                title: (context) => {
+                    // Get the index of the bar (0 for Mon, 1 for Tue, etc.)
+                    const index = context[0].dataIndex;
+                    // Calculate the date by adding the index to the week start
+                    const date = new Date(this.currentWeekStart);
+                    date.setDate(date.getDate() + index);
+                    
+                    const day = String(date.getDate()).padStart(2, '0');
+                    const month = String(date.getMonth() + 1).padStart(2, '0');
+                    
+                    // Return "DayName (dd/mm)"
+                    return `${context[0].label} (${day}/${month})`;
+                }
+            }
+        }
+    }
+};
+
+this.charts.weekly = new Chart(ctxWeek, { 
+    type: 'bar', 
+    data: { 
+        labels: weekDays, 
+        datasets: allGoalsForBars.map(g => ({ label: g.name, data: g.weekly, backgroundColor: g.color, stack: '0' })) 
+    }, 
+    options: weeklyOptions // Use the new weeklyOptions here
+});
 
     const ctxMonth = document.getElementById('monthlyChart').getContext('2d');
     if(this.charts.monthly) this.charts.monthly.destroy();
@@ -3499,7 +3861,11 @@ fallbackCopyText(text) {
         }
 
         this.data.logs.splice(logIndex, 1);
-
+dbHelper.deleteLog(parseInt(logId)).then(() => {
+            this.showToast('Đã xóa phiên!');
+        }).catch(err => console.error(err));
+        
+        this.save();
         this.save();
         this.renderGoals();      
         this.renderCalendar();   
@@ -3591,7 +3957,10 @@ fallbackCopyText(text) {
         if (log) {
             const oldMinutes = log.minutes;
             const oldMindfulness = log.count !== undefined ? log.count : (log.touches ? log.touches.length : 0);
-            
+                    
+                if (Number(logId) !== timestamp) {
+                    dbHelper.deleteLog(logId);
+                }
             log.minutes = minutes; 
             log.date = dateKey; 
             log.timestamp = timestamp; 
