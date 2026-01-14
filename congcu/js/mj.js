@@ -426,11 +426,11 @@
 // --- DATABASE HELPER START ---
 const DB_CONFIG = {
     name: 'HanhGiaDB',
-    version: 1,
+    version: 2, // <--- UPDATE VERSION TO 2
     stores: {
         goals: 'id',
         logs: 'timestamp',
-        meta: 'key' // For simple values like xp, streak, settings
+        meta: 'key'
     }
 };
 
@@ -443,10 +443,23 @@ const dbHelper = {
             
             req.onupgradeneeded = (e) => {
                 const db = e.target.result;
+                const tx = e.target.transaction;
+
                 // Create stores if they don't exist
                 if (!db.objectStoreNames.contains('goals')) db.createObjectStore('goals', { keyPath: 'id' });
-                if (!db.objectStoreNames.contains('logs')) db.createObjectStore('logs', { keyPath: 'timestamp' });
                 if (!db.objectStoreNames.contains('meta')) db.createObjectStore('meta', { keyPath: 'key' });
+                
+                let logStore;
+                if (!db.objectStoreNames.contains('logs')) {
+                    logStore = db.createObjectStore('logs', { keyPath: 'timestamp' });
+                } else {
+                    logStore = tx.objectStore('logs');
+                }
+
+                // --- NEW: Create Index for fast deletion ---
+                if (!logStore.indexNames.contains('goalId')) {
+                    logStore.createIndex('goalId', 'goalId', { unique: false });
+                }
             };
 
             req.onsuccess = (e) => {
@@ -456,46 +469,61 @@ const dbHelper = {
             req.onerror = (e) => reject("DB Error: " + e.target.error);
         });
     },
-async deleteLog(timestamp) {
+
+    async deleteLog(timestamp) {
         if (!this.db) await this.open();
         return new Promise((resolve, reject) => {
             const tx = this.db.transaction(['logs'], 'readwrite');
             const store = tx.objectStore('logs');
-            // Ensure timestamp is a Number because DB keys are numbers
             store.delete(Number(timestamp)); 
             tx.oncomplete = () => resolve();
             tx.onerror = (e) => reject(e);
         });
     },
-async deleteGoalData(goalId) {
+
+    // --- OPTIMIZED DELETE FUNCTION ---
+    async deleteGoalData(goalId) {
         if (!this.db) await this.open();
         return new Promise((resolve, reject) => {
-            // Mở transaction để ghi vào goals và logs
             const tx = this.db.transaction(['goals', 'logs'], 'readwrite');
             
-            // 1. Xóa Mục tiêu trong store 'goals'
+            // 1. Delete the Goal itself
             const goalStore = tx.objectStore('goals');
             goalStore.delete(goalId);
 
-            // 2. Xóa các Nhật ký liên quan trong store 'logs'
+            // 2. Delete related Logs using the INDEX (Instant)
             const logStore = tx.objectStore('logs');
-            const req = logStore.openCursor();
             
-            req.onsuccess = (e) => {
-                const cursor = e.target.result;
-                if (cursor) {
-                    // Nếu nhật ký này thuộc về goalId đang xóa -> Xóa nó
-                    if (cursor.value.goalId === goalId) {
-                        cursor.delete();
+            try {
+                // Use the index we created in version 2
+                const index = logStore.index('goalId');
+                const req = index.openKeyCursor(IDBKeyRange.only(goalId));
+
+                req.onsuccess = (e) => {
+                    const cursor = e.target.result;
+                    if (cursor) {
+                        logStore.delete(cursor.primaryKey); // Delete by specific key
+                        cursor.continue();
                     }
-                    cursor.continue();
-                }
-            };
+                };
+            } catch (err) {
+                // Fallback for safety if index is missing (rare)
+                console.warn("Index missing, falling back to slow delete", err);
+                const req = logStore.openCursor();
+                req.onsuccess = (e) => {
+                    const cursor = e.target.result;
+                    if (cursor) {
+                        if (cursor.value.goalId === goalId) cursor.delete();
+                        cursor.continue();
+                    }
+                };
+            }
 
             tx.oncomplete = () => resolve();
             tx.onerror = (e) => reject(e);
         });
     },
+    // ------------------------------------------
 
     async saveAll(data) {
         if (!this.db) await this.open();
@@ -503,16 +531,12 @@ async deleteGoalData(goalId) {
         return new Promise((resolve, reject) => {
             const tx = this.db.transaction(['goals', 'logs', 'meta'], 'readwrite');
             
-            // 1. Save Goals
             const goalStore = tx.objectStore('goals');
             data.goals.forEach(g => goalStore.put(g));
             
-            // 2. Save Logs (Only need to save new/modified ones strictly, 
-            // but for simplicity we save all current logic, IDB handles existing keys well)
             const logStore = tx.objectStore('logs');
             data.logs.forEach(l => logStore.put(l));
             
-            // 3. Save Meta (xp, streak, settings, etc)
             const metaStore = tx.objectStore('meta');
             metaStore.put({ key: 'xp', value: data.xp });
             metaStore.put({ key: 'streak', value: data.streak });
@@ -525,7 +549,6 @@ async deleteGoalData(goalId) {
         });
     },
 
-    // Load entire state back into the format app expects
     async loadAll() {
         if (!this.db) await this.open();
 
@@ -533,7 +556,6 @@ async deleteGoalData(goalId) {
             const tx = this.db.transaction(['goals', 'logs', 'meta'], 'readonly');
             const data = { goals: [], logs: [], xp: 0, streak: 0, globalDailyGoal: 120, achievements: [], medSettings: {} };
             
-            // Helper to wrap request in Promise
             const getAll = (storeName) => {
                 return new Promise((res, rej) => {
                     const req = tx.objectStore(storeName).getAll();
@@ -547,7 +569,6 @@ async deleteGoalData(goalId) {
                     data.goals = goals || [];
                     data.logs = logs || [];
                     
-                    // Reconstruct meta object
                     metaItems.forEach(item => {
                         if (item.key === 'xp') data.xp = item.value;
                         if (item.key === 'streak') data.streak = item.value;
@@ -561,7 +582,6 @@ async deleteGoalData(goalId) {
         });
     },
 
-    // Check if we need to migrate
     async isEmpty() {
         if (!this.db) await this.open();
         return new Promise(resolve => {
@@ -571,7 +591,6 @@ async deleteGoalData(goalId) {
         });
     }
 };
-// --- DATABASE HELPER END ---		
         Chart.defaults.color = '#9ca3af';
         Chart.defaults.borderColor = '#374151';
 
@@ -623,88 +642,53 @@ async deleteGoalData(goalId) {
             }
 			
 			 async init() {
-                try {
-                    // 1. Open Database
-                    await dbHelper.open();
+    try {
+        await dbHelper.open();
 
-                    // 2. Check for migration (If DB is empty but LocalStorage has data)
-                    const isDbEmpty = await dbHelper.isEmpty();
-                    const localDataStr = localStorage.getItem('chronoData');
+        const dbData = await dbHelper.loadAll();
 
-                    if (isDbEmpty && localDataStr) {
-                        console.log("Detecting legacy data. Migrating to IndexedDB...");
-                        try {
-                            const localData = JSON.parse(localDataStr);
-                            
-                            // Ensure structure integrity before saving
-                            if (!localData.goals) localData.goals = [];
-                            if (!localData.logs) localData.logs = [];
-                            if (!localData.achievements) localData.achievements = [];
-                            
-                            // Perform migration
-                            await dbHelper.saveAll(localData);
-                            this.data = localData; // Load into memory
-                            
-                            // Optional: Rename legacy data to backup so we don't migrate again
-                            localStorage.setItem('chronoData_backup', localDataStr);
-                            localStorage.removeItem('chronoData');
-                            
-                            this.showToast("Data migration success!");
-                        } catch (e) {
-                            console.error("Migration failed", e);
-                            alert("Data migration failed.");
-                        }
-                    } else {
-                        // 3. Normal Load from DB
-                        const dbData = await dbHelper.loadAll();
-                        
-                        // Merge loaded data with defaults if fields are missing
-                        if (dbData.goals.length > 0 || dbData.logs.length > 0 || dbData.xp > 0) {
-                             this.data = { ...this.data, ...dbData };
-                        }
-                    }
+        if (dbData) {
+            this.data = { ...this.data, ...dbData };
+        }
 
-                    // --- LEGACY FIXES & INIT UI ---
-                    // (This code was in your original constructor)
-                    if (!this.data.medSettings) {
-                        this.data.medSettings = { mode: 'tap', holdDuration: 400, tapRequired: 1, vibration: true };
-                    }
-                    if (this.data.medSettings.proMode === true) {
-                        this.data.medSettings.mode = 'pro';
-                        delete this.data.medSettings.proMode; 
-                    }
+        
+        if (!this.data.medSettings) {
+            this.data.medSettings = { mode: 'tap', holdDuration: 400, tapRequired: 1, vibration: true };
+        }
+        
+        if (this.data.medSettings.proMode === true) {
+            this.data.medSettings.mode = 'pro';
+            delete this.data.medSettings.proMode; 
+        }
 
-                    // Ensure goals have correct properties
-                    this.data.goals.forEach(goal => {
-                        if (!goal.type) goal.type = 'standard'; 
-                        if (!goal.sessionTargetSeconds) goal.sessionTargetSeconds = 0;
-                        if (!goal.remainingSeconds) goal.remainingSeconds = 0;
-                        if (typeof goal.dailyTargetMinutes === 'undefined') goal.dailyTargetMinutes = 30;
-                        if (goal.type === 'meditation' && !goal.currentMindfulness) goal.currentMindfulness = 0;
-                        if (goal.type === 'meditation' && !goal.totalMindfulness) goal.totalMindfulness = 0;
-                    });
+        this.data.goals.forEach(goal => {
+            if (!goal.type) goal.type = 'standard'; 
+            if (!goal.sessionTargetSeconds) goal.sessionTargetSeconds = 0;
+            if (!goal.remainingSeconds) goal.remainingSeconds = 0;
+            if (typeof goal.dailyTargetMinutes === 'undefined') goal.dailyTargetMinutes = 30;
+            if (goal.type === 'meditation' && !goal.currentMindfulness) goal.currentMindfulness = 0;
+            if (goal.type === 'meditation' && !goal.totalMindfulness) goal.totalMindfulness = 0;
+        });
 
-                    // Render UI
-                    this.analyticsGoalFilter = localStorage.getItem('anaGoalFilter') || 'all';
-                    this.renderDate();
-                    this.renderGoals();
-                    this.updateStats();
-                    this.checkAchievements();
-                    this.renderCalendar();
-                    
-                    // Setup listeners
-                    setInterval(() => this.updateTimerUI(), 1000);
-                    this.setupMeditationListeners(); // I moved the event listener setup to a function
+        this.analyticsGoalFilter = localStorage.getItem('anaGoalFilter') || 'all';
+        this.renderDate();
+        this.renderGoals();
+        this.updateStats();
+        this.checkAchievements();
+        this.renderCalendar();
+        
+        setInterval(() => this.updateTimerUI(), 1000);
+        this.setupMeditationListeners();
 
-                } catch (err) {
-                    console.error("Lỗi khởi tạo:", err);
-                    this.showToast("Lỗi tải dữ liệu!");
-                }
-                
-                if (!localStorage.getItem('intro_seen')) {
-                    this.openIntroModal();
-                }
-            }
+    } catch (err) {
+        console.error("Error loading data!", err);
+        this.showToast("Error loading data!");
+    }
+    
+    if (!localStorage.getItem('intro_seen')) {
+        this.openIntroModal();
+    }
+}
 setupMeditationListeners() {
                 const medOverlay = document.getElementById('meditation-overlay');
                 const counterEl = document.getElementById('med-counter');
@@ -856,34 +840,65 @@ analyzeSingleSession(log) {
     const totalSec = log.minutes * 60;
     if (totalSec === 0) return { distractedSec: 0, qualityPct: 0 };
     const thresholdSec = log.threshold || 10;
-    
-    if (log.touches && log.touches.length >= 2) {
 
-        const timestamps = log.touches.map(t => this.getTouchTimestamp(t, log.timestamp)).sort((a,b) => a - b);
+    // Helper function to calculate smooth penalty
+    const calculatePenalty = (gap) => {
+        if (gap <= thresholdSec) return 0;
         
-        let distractedSec = 0;
-        const startGap = (timestamps[0] - log.timestamp) / 1000;
-        if (startGap > thresholdSec) distractedSec += (startGap - thresholdSec/2);
-
-        for (let i = 1; i < timestamps.length; i++) {
-            const gap = (timestamps[i] - timestamps[i-1]) / 1000;
-            if (gap > thresholdSec) distractedSec += (gap - thresholdSec/2);
+        const overage = gap - thresholdSec;
+        const heavyPenalty = gap - (thresholdSec / 2);
+        
+        // If the gap is between Threshold and Threshold + 3s
+        if (overage <= 3) {
+            // We "lerp" from 0 penalty up to the heavy penalty value
+            // This closes the gap smoothly over 3 seconds
+            const progress = overage / 3; 
+            return heavyPenalty * progress;
         }
         
+        // Beyond +3s, use your preferred half-threshold logic
+        return heavyPenalty;
+    };
+
+    if (log.touches && log.touches.length >= 1) {
+        const timestamps = log.touches
+            .map(t => this.getTouchTimestamp(t, log.timestamp))
+            .sort((a, b) => a - b);
+
+        let distractedSec = 0;
+
+        // 1. Start Gap
+        const startGap = (timestamps[0] - log.timestamp) / 1000;
+        distractedSec += calculatePenalty(startGap);
+
+        // 2. Middle Gaps
+        for (let i = 1; i < timestamps.length; i++) {
+            const gap = (timestamps[i] - timestamps[i - 1]) / 1000;
+            distractedSec += calculatePenalty(gap);
+        }
+
+        // 3. End Gap
         const endTime = log.timestamp + (log.minutes * 60 * 1000);
         const endGap = (endTime - timestamps[timestamps.length - 1]) / 1000;
-        if (endGap > thresholdSec) distractedSec += (endGap - thresholdSec/2);
+        distractedSec += calculatePenalty(endGap);
 
         distractedSec = Math.min(distractedSec, totalSec);
-        const qualityPct = ((totalSec - distractedSec) / totalSec) * 100;
-        return { distractedSec, qualityPct: parseFloat(qualityPct.toFixed(1)) };
+        const qualityPct = Math.max(0, ((totalSec - distractedSec) / totalSec) * 100);
+        
+        return { 
+            distractedSec: parseFloat(distractedSec.toFixed(1)), 
+            qualityPct: parseFloat(qualityPct.toFixed(1)) 
+        };
     } 
     else {
-
+        // Fallback for sessions with 0 or low interaction
         const count = log.count !== undefined ? log.count : (log.touches ? log.touches.length : 0);
         let mindfulSec = count * thresholdSec;
         mindfulSec = Math.min(mindfulSec, totalSec);
-        return { distractedSec: totalSec - mindfulSec, qualityPct: parseFloat(((mindfulSec/totalSec)*100).toFixed(1)) };
+        return { 
+            distractedSec: totalSec - mindfulSec, 
+            qualityPct: parseFloat(((mindfulSec / totalSec) * 100).toFixed(1)) 
+        };
     }
 }
 
@@ -965,7 +980,7 @@ renderAnalytics(saveState = false) {
                         d.getFullYear();
         
         return {
-            date: d.toLocaleDateString('en-GB', {day: '2-digit', month:'2-digit'}),
+            date: d.toLocaleDateString('vi-VN', {day: '2-digit', month:'2-digit'}),
             fullDateTime: `${timeStr}, ${dateStr}`, // New property for tooltip
             quality: result.qualityPct,
             density: log.minutes > 0 ? (count / log.minutes).toFixed(1) : 0
@@ -1778,6 +1793,7 @@ renderProTrendChart() {
                         color: '#9ca3af',
                         font: { size: 10 },
                         stepSize: 1,
+						padding: 0.1,
                         callback: function(value) {
                             if(value === 1) return 'Low (1)';
                             if(value === 2) return 'Med (2)';
@@ -2135,6 +2151,20 @@ concludeMeditationSession(type = 'manual') {
     document.getElementById('med-finish-time').innerText = minutes + 'm';
     document.getElementById('med-finish-notes').value = '';
 	this.renderQuickTags('finish-tags', 'med-finish-notes');
+	const discardBtn = document.getElementById('btn-med-discard');
+    const actionContainer = document.getElementById('med-finish-actions');
+
+    if (discardBtn && actionContainer) {
+        if (type === 'auto') {
+            // Khi hết giờ: Ẩn nút Hủy và căn giữa nút Lưu
+            discardBtn.style.display = 'none';
+            actionContainer.style.justifyContent = 'center';
+        } else {
+            // Khi bấm dừng thủ công: Hiện đầy đủ và căn phải như cũ
+            discardBtn.style.display = 'block';
+            actionContainer.style.justifyContent = 'flex-end';
+        }
+    }
     document.getElementById('meditation-finish-modal').style.display = 'flex';
 }
             
@@ -2501,7 +2531,20 @@ renderProChart(ctx, log) {
         // No Pro data found -> Assign all mindful time to "Basic" (Level 0)
         dataSeconds[0] = mindfulSec;
     }
+// --- NEW: Calculate Average Score for Title ---
+    let titleText = `Total duration: ${log.minutes} minutes`;
+    let titleWeight = 'normal';
+    let titleColor = '#9ca3af';
 
+    if (proCount > 0) {
+        // Weighted Sum: Level 1 (Cao)=4, Level 2 (Tốt)=3, Level 3 (TB)=2, Level 4 (Thấp)=1
+        const weightedSum = (counts[1] * 4) + (counts[2] * 3) + (counts[3] * 2) + (counts[4] * 1);
+        const averageScore = (weightedSum / proCount).toFixed(2);
+        
+        titleText = `Average focus quality: ${averageScore} / 4.0`;
+        titleWeight = '600';
+        titleColor = '#f3f4f6';
+    }
     // 4. Define Colors & Labels
     const qualities = {
         1: { label: 'High', color: '#34d399' },      // Green
@@ -2651,9 +2694,9 @@ renderProChart(ctx, log) {
                 },
                 title: {
                     display: true,
-                    text: `Total duration: ${log.minutes} minutes`,
-                    color: '#9ca3af',
-                    font: { size: 13, style: 'italic', weight: 'normal' },
+                    text: titleText,
+                    color: titleColor,
+                    font: { size: 13, style: 'italic', weight: titleWeight },
                     padding: { bottom: 10 }
                 }
             }
@@ -2713,8 +2756,7 @@ renderIntensityChart(ctx, log) {
             interaction: { mode: 'index', intersect: false },
             scales: {
                 x: { title: { display: true, font: { size: 11 }, text: 'Time (mins)', color: '#9ca3af' }, grid: { display: true }, ticks: { maxTicksLimit: 20, color: '#9ca3af' } },
-                y: { beginAtZero: true, title: { display: true, font: { size: 11 }, text: 'Mindfulness counts', color: '#9ca3af', padding: 0.1, }, grid: { color: 'rgba(55, 65, 81, 0.5)' }, ticks: { color: '#9ca3af' } }
-            },
+                y: { beginAtZero: true, title: { display: true, font: { size: 11 }, text: 'Mindfulness counts', color: '#9ca3af', padding: 0.1, }, grid: { color: 'rgba(55, 65, 81, 0.5)' }, ticks: { color: '#9ca3af', precision: 0, } }},
             plugins: {
                 tooltip: {
                     mode: 'index', intersect: false, displayColors: false,
@@ -3361,7 +3403,7 @@ if (rangeMode === 'today') filterStart = todayStart;
                     let value = context.raw; 
                     let label = context.label || '';
                     let formattedValue = "";
-
+                    const total = context.dataset.data.reduce((acc, curr) => acc + curr, 0);                           const percentage = total > 0 ? ((value / total) * 100).toFixed(0) : 0;
                     // 2. Apply your Minute -> Hour logic
                     if (unitLabel === 'Minutes') {
                         if (value < 60) {
@@ -3370,10 +3412,10 @@ if (rangeMode === 'today') filterStart = todayStart;
                             formattedValue = (value / 60).toFixed(1) + " hours";
                         }
                     } else {
-                        formattedValue = value.toLocaleString();
+                        formattedValue = value.toLocaleString() + " " + unitLabel;
                     }
 
-                    return ` ${label}: ${formattedValue}`;
+                    return ` ${formattedValue} (${percentage}%)`;
                 }
             }
         }
@@ -4005,32 +4047,40 @@ dbHelper.deleteLog(parseInt(logId)).then(() => {
     this.closeSessionModal(); 
     this.showToast(logId ? 'Session Updated!' : 'Session Logged!');
 }
-             deleteGoal(id) {
-                if(confirm('Delete this goal and ALL associated history? This action cannot be undone.')) {
-                    
-                    // 1. Xóa trong bộ nhớ tạm (để UI phản hồi nhanh)
-                    this.data.goals = this.data.goals.filter(g => g.id !== id);
-                    this.data.logs = this.data.logs.filter(log => log.goalId !== id);
+                      deleteGoal(id) {
+    if(confirm('Delete this goal and ALL associated history? This action cannot be undone.')) {
+        
+        this.data.goals = this.data.goals.filter(g => g.id !== id);
+        this.data.logs = this.data.logs.filter(log => log.goalId !== id);
+        
+        this.updateStats(); 
 
-                    // 2. Gọi hàm xóa vĩnh viễn trong Database
-                    dbHelper.deleteGoalData(id)
-                        .then(() => {
-                            // Sau khi xóa DB thành công thì lưu các chỉ số phụ (xp, streak...)
-                            this.save(); 
-                            
-                            // Cập nhật giao diện
-                            this.renderGoals(); 
-                            this.renderReports(); 
-                            this.renderCalendar(); 
-                            
-                            this.showToast('Goal and history deleted!');
-                        })
-                        .catch(err => {
-                            console.error(err);
-                            this.showToast('Error!');
-                        });
-                }
-            }
+        dbHelper.deleteGoalData(id)
+            .then(() => {
+                
+                dbHelper.saveAll({
+                    goals: this.data.goals,
+                    logs: [], 
+                    xp: this.data.xp,
+                    streak: this.data.streak,
+                    globalDailyGoal: this.data.globalDailyGoal,
+                    achievements: this.data.achievements,
+                    medSettings: this.data.medSettings
+                }).catch(e => console.log("Meta save update")); 
+
+                // 3. Update UI
+                this.renderGoals(); 
+                this.renderReports(); 
+                this.renderCalendar(); 
+                
+                this.showToast('Goal and history deleted!');
+            })
+            .catch(err => {
+                console.error(err);
+                this.showToast('Error!');
+            });
+    }
+}
             renderDate() {
                  document.getElementById('current-date').innerText = new Date().toLocaleDateString('en-GB', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
             }
