@@ -4374,7 +4374,7 @@ closeBadgePicker() {
         
         // Only show toast if a badge was actually picked during this session
         if (this.lastSelectedBadgeTitle) {
-            this.showToast(`Đã hiển thị Pāramī: ${this.lastSelectedBadgeTitle}`);
+            this.showToast(`Đã chọn Pāramī: ${this.lastSelectedBadgeTitle}`);
             this.lastSelectedBadgeTitle = null; // Reset
         }
     }
