@@ -576,7 +576,7 @@ const BADGES = [
 ];
 const DB_CONFIG = {
     name: 'HanhGiaDB',
-    version: 2, // <--- UPDATE VERSION TO 2
+    version: 2, 
     stores: {
         goals: 'id',
         logs: 'timestamp',
@@ -4374,7 +4374,7 @@ closeBadgePicker() {
         
         // Only show toast if a badge was actually picked during this session
         if (this.lastSelectedBadgeTitle) {
-            this.showToast(`Đã hiển thị huy hiệu: ${this.lastSelectedBadgeTitle}`);
+            this.showToast(`Đã hiển thị Pāramī: ${this.lastSelectedBadgeTitle}`);
             this.lastSelectedBadgeTitle = null; // Reset
         }
     }
