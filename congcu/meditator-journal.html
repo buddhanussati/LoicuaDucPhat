@@ -16,7 +16,7 @@
 <body>
 
 <nav class="sidebar">
-        <div class="logo"><i class="fas fa-hourglass-half"></i></div>
+        <div class="logo"><i class="fas fa-hourglass-empty"></i></div>
         <div class="nav-item active" onclick="app.switchView('dashboard')">
             <i class="fas fa-spa"></i><span class="nav-text">Journal</span>
         </div>
@@ -35,9 +35,9 @@
 </div>
         
         
-        <div class="nav-item" onclick="app.exportData()">
-    <i class="fas fa-save"></i><span class="nav-text">Backup</span>
-</div>
+         <div class="nav-item" onclick="app.switchView('achievements')">
+            <i class="fas fa-medal"></i><span class="nav-text">Pāramī</span>
+        </div>
 
         <div class="nav-item" onclick="app.resetApp()" style="color: var(--danger);"> <i class="fas fa-trash-alt"></i><span class="nav-text">Reset</span>
         </div>
@@ -52,11 +52,11 @@
             </div>
             
             <div class="user-stats">
-                <div class="stat-item clickable" onclick="app.setGlobalDailyGoal()" title="Click to edit total daily goal">
-                    <span class="stat-val"><span id="daily-current">0</span> / <span id="daily-target">120</span>m</span>
-                    <div class="daily-bar-bg"><div id="daily-bar-fill" class="daily-bar-fill"></div></div>
-                    <span class="stat-label">Daily Goal</span>
-                </div>
+                <div class="stat-item active-badge-container" onclick="app.openBadgePicker()" title="Nhấn để đổi huy hiệu hiển thị">
+    <div id="current-active-badge" class="badge-display">
+        <i class="fas fa-award"></i>
+    </div>
+</div>
                 <div class="stat-item">
                     <span class="stat-val" id="streak-disp">0 🔥</span>
                     <span class="stat-label">Streak</span>
@@ -65,6 +65,17 @@
                     <span class="stat-val" id="xp-disp">0</span>
                     <span class="stat-label">Mindfulness</span>
                 </div>
+				
+				<div class="stat-item clickable" onclick="app.exportData()">
+    <span class="stat-val" style="
+        width: 24px; 
+        height: 24px; 
+        display: flex; 
+        align-items: center; 
+        justify-content: center; 
+        font-size: 15px;"><i class="fas fa-save"></i></span>
+</div>
+
 				 <div class="stat-item clickable" onclick="app.openIntroModal()">
     <span class="stat-val" style="
         border: 2px solid var(--text-light); 
@@ -184,10 +195,27 @@
             </div>
         </div>
     </div>
-	<div class="card" style="margin-top: 30px;">
-                <h3 style="text-align: center;"><i class="fas fa-medal"></i> Achievements</h3>
-                <div id="achievement-list" style="margin-top: 20px; display: grid; gap: 10px;"></div>
-            </div>
+	<div class="card" style="margin-top: 20px;">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+        <button class="btn btn-secondary" style="padding: 5px 10px;" onclick="app.changeReportMonth(-1)">
+            <i class="fas fa-chevron-left"></i>
+        </button>
+        <div>
+            <h4 style="margin: 0; display:inline-block;">Mindfulness Ratio</h4>
+            <p id="density-month-title" style="font-size: 12px; color: var(--text-light); margin: 0; text-align: center; margin-top:2px;">
+                This month
+            </p>
+        </div>
+        <button class="btn btn-secondary" style="padding: 5px 10px;" onclick="app.changeReportMonth(1)">
+            <i class="fas fa-chevron-right"></i>
+        </button>
+    </div>
+
+  
+    <div style="height: 250px;">
+        <canvas id="reportDensityChart"></canvas>
+    </div>
+</div>
 	
 </section>
 <section id="view-analytics" class="view-section">
@@ -214,7 +242,7 @@
             <div style="font-size: 11px; color: var(--text-light);">Mindfulness / Time</div>
         </div>
         <div class="card" style="text-align: center; border-left: 4px solid var(--primary);">
-            <div style="font-size: 12px; color: var(--text-light); text-transform: uppercase;">Mindfulness Quality</div>
+            <div style="font-size: 12px; color: var(--text-light); text-transform: uppercase;">Mindfulness Ratio</div>
             <div style="font-size: 28px; font-weight: bold; margin: 5px 0;" id="ana-avg-density">0</div>
             <div style="font-size: 11px; color: var(--text-light);">Mindfulness per minute</div>
         </div>
@@ -228,7 +256,7 @@
     <div class="dashboard-grid" style="grid-template-columns: 1fr; gap: 20px;">
         <div class="card">
             <h3>📈 Mindfulness Trend</h3>
-            <p style="font-size: 12px; color: var(--text-light); margin-bottom: 15px;">Tracking mindfulness ratio across sessions</p>
+            <p style="font-size: 12px; color: var(--text-light); margin-bottom: 15px;">Track mindfulness quality across sessions</p>
             <div style="height: 300px;">
                 <canvas id="analyticsTrendChart"></canvas>
             </div>
@@ -268,7 +296,7 @@
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 20px;">
             <div class="card">
                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
-                    <h4 style="margin: 0;">💎 Focus Quality (Pro)</h4>
+                    <h4 style="margin: 0;">💎 Focus Quality</h4>
                     <select id="pro-range-select" class="form-control" style="width: auto; padding: 5px; font-size: 13px; height: 32px;" onchange="app.renderProAnalytics(true)">
                         <option value="all">All Time</option>
             <option value="today" >Today</option>
@@ -325,6 +353,12 @@
         </div>
     </div>
 </section>
+<section id="view-achievements" class="view-section">
+            <div class="card" style="margin-top: 30px;">
+                <h3 style="text-align: center;"><i class="fas fa-award"></i> Pāramī</h3>
+                <div id="achievement-list" style="margin-top: 20px; display: grid; gap: 10px;"></div>
+            </div>
+        </section>
     </main>
 
     <div class="modal" id="choice-modal">
@@ -471,7 +505,6 @@
         <i class="fas fa-cog"></i>
     </button>
     
-    <button class="btn btn-secondary" onclick="app.togglePauseMeditation()" id="med-pause-btn"><i class="fas fa-pause"></i></button>
     <button class="btn" style="background-color: var(--danger); color: white;" onclick="app.concludeMeditationSession()"><i class="fas fa-stop"></i></button>
 </div>
         <div id="med-quote-container" class="med-quote-box">
@@ -529,7 +562,7 @@
 			<select id="graph-type-select" class="form-control" style="width: auto; padding: 5px 5px 5px; height: 36px; font-size: 13px; cursor: pointer;" onchange="app.updateSessionChart()">
 			                    <option value="interval">☁️ Distraction</option>
                     <option value="intensity">🌱 Mindfulness</option>
-                <option value="pro">💎 Focus Quality (Pro)</option> </select>
+                <option value="pro">💎 Focus Quality</option> </select>
                <button class="btn btn-secondary" onclick="document.getElementById('graph-modal').style.display='none'" title="Close"><i class="fas fa-xmark"></i></button>
             </div>
         </div>
@@ -596,7 +629,7 @@
         </div>
 
         <div id="setting-pro-legend" style="display:none; background: rgba(167, 139, 250, 0.1); padding: 10px; border-radius: 8px; border: 1px solid rgba(167, 139, 250, 0.3); margin-bottom: 15px;">
-    <div style="font-size: 11px; margin-bottom: 5px; color: var(--text-light)">💎 Focus Quality (Pro):</div>
+    <div style="font-size: 11px; margin-bottom: 5px; color: var(--text-light)">Focus Quality:</div>
     <div style="font-size: 12px; display:grid; grid-template-columns: 1fr 1fr; gap:5px;">
         <div class="text-q4">1 Tap: <strong>Low</strong></div>
 		<div class="text-q2">Hold: <strong>Good</strong></div>
@@ -604,7 +637,22 @@
         <div class="text-q1">10+ Good: <strong>High</strong></div>
     </div>
 </div>
-
+<div class="form-group" style="background: rgba(251, 191, 36, 0.1); padding: 10px; border-radius: 8px; border: 1px solid rgba(251, 191, 36, 0.3); margin-top: 15px;">
+    <div style="display:flex; justify-content:space-between; align-items:center;">
+        <label style="margin:0; color: var(--warning);"><i class="fas fa-check-double"></i> Confirmation Mode</label>
+        <input type="checkbox" id="inp-confirm-mode" style="width: 20px; height: 20px; accent-color: var(--warning);" onchange="app.toggleConfirmSlider()">
+    </div>
+    
+    <div id="confirm-slider-group" style="margin-top: 10px; display:none; border-top: 1px solid rgba(251, 191, 36, 0.3); padding-top: 10px;">
+    <label style="font-size:12px; color: var(--text-light);">Appearance Frequency: <span id="disp-confirm-prob" style="color:var(--warning); font-weight:bold;">100%</span></label>
+    <input type="range" id="inp-confirm-prob" class="form-control" min="10" max="100" step="10" oninput="app.updateConfirmProbDisplay()">
+    <div style="font-size: 11px; color: var(--text-light); margin-top: 5px; font-style: italic; line-height: 1.4;">
+        <i class="fas fa-random"></i> Appear randomly based on your selected %.<br>
+        <i class="fas fa-info-circle"></i> 1st touch to "wait", 2nd touch to "confirm".<br>
+            (Only applies to <strong>Low</strong> level).
+    </div>
+</div>
+</div>
         <div class="form-group" style="display: flex; justify-content: space-between; align-items: center; margin-top: 15px; background: rgba(255,255,255,0.05); padding: 10px; border-radius: 8px;">
             <label style="margin:0"><i class="fas fa-mobile-alt"></i> Haptic Feedback</label>
             <input type="checkbox" id="inp-vibrate" style="width: 20px; height: 20px;" onchange="app.saveMedSettings()">
@@ -650,7 +698,7 @@
                 </li>
                 <li><strong>Customization:</strong> Set daily goals (minutes), target completion time, representative colors, and management categories.</li>
             </ul>
-            <h4 style="color: var(--primary); margin-top: 15px;">2. Interaction Settings & Pro Mode</h4>
+            <h4 style="color: var(--primary); margin-top: 15px;">2. Interaction Settings</h4>
             <p>In the meditation interface, click the <i class="fas fa-cog"></i> button to open interaction settings. The app supports haptic feedback (vibration) & 4 recording modes:</p>
             
             <div style="background: rgba(255, 255, 255, 0.05); padding: 15px; border-radius: 8px; border: 1px solid var(--border);">
@@ -658,7 +706,8 @@
                     <li style="margin-bottom: 8px;"><strong>Tap:</strong> Basic mode. Lightly tap the screen to count. You can set it to require 1, 2, 3, or 4 taps to register as 1 mindfulness count (helps filter accidental touches).</li>
                     <li style="margin-bottom: 8px;"><strong>Hold:</strong> Press and hold the screen for a set duration (default 0.4s) to record. Helps keep the mind grounded and steady.</li>
                     <li style="margin-bottom: 8px;"><strong>✨ Auto:</strong> Automatically detects both Tap and Hold gestures.</li>
-                    <li><strong>💎 Pro Mode (Grading):</strong> Assess the focus quality at the moment of noting. The system saves a "quality score" based on your hand gesture:
+					<li style="margin-bottom: 8px;"><i><strong>Combo Mechanism:</strong></i> All modes start at the <b>Low</b> focus level. For every 10 consecutive entries (or 20 for Medium level) with a time gap ≤ <i>Distraction Threshold</i>, the focus level will upgrade by one tier (Low → Mid → Good → High). If the time gap exceeds the threshold, the combo resets to Low.</li>
+                    <li><strong style="color: #34d399;">💎 Pro Mode (Manual):</strong> Allows you to <strong>actively categorize</strong> your focus level based on specific hand gestures:
                         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 8px; font-size: 13px;">
                             <div style="color: #f87171;">● 1 Tap: <strong>Low</strong></div>
                             <div style="color: #60a5fa;">● Hold: <strong>Good</strong></div>
@@ -666,6 +715,14 @@
                             <div style="color: #34d399;">● 10+ Good*: <strong>High</strong></div>
                         </div>
                     </li>
+					<li style="margin-top: 10px; border-top: 1px solid rgba(251, 191, 36, 0.2); padding-top: 10px;">
+    <strong style="color: var(--warning);"><i class="fas fa-check-double"></i> Confirmation Mode:</strong> 
+    Designed for users who may tap the screen mindlessly. When enabled, the first touch is not counted immediately. You must tap a second time (within 1-3 seconds) to confirm it was a mindful action.
+    <ul style="font-size: 12px; margin-top: 5px; color: var(--text-light);">
+        <li>Only the timestamp of the <strong>first</strong> touch is recorded.</li>
+        <li>Confirmation mode only applies to the <strong>Low</strong> level.</li>
+    </ul>
+</li>
                 </ul>
             </div>
 <p style="font-size: 13px; color: var(--text-light); margin-top: 10px;">
@@ -722,46 +779,49 @@
             </ul>
 
             <hr style="border: 0; border-top: 1px solid var(--border); margin: 25px 0;">
-            <h3 style="color: var(--text); margin-top: 20px;">✨ Practice Achievement System</h3>
-            
-            <p><strong>Consistency Milestones (Streak):</strong></p>
+<h3 style="color: var(--text); margin-top: 20px;">✨ The Pāramī System (Achievements)</h3>
+
+<p> The achievements system is organized into Pāramīs (Virtues) to encourage your diligence. Your progress is further categorized into spiritual faculties (Indrīya) & powers (Bala). Here are some key milestones:</p>
+
+            <p><strong>Consistency Milestones (Saddhā-bala):</strong></p>
             <table class="intro-table" style="width: 100%; border-collapse: collapse; margin-bottom: 20px; font-size: 13px;">
                 <thead>
                     <tr style="background: var(--bg);">
-                        <th style="padding: 8px; border: 1px solid var(--border); text-align: left;">Title</th>
-                        <th style="padding: 8px; border: 1px solid var(--border); text-align: left;">Condition</th>
-                        <th style="padding: 8px; border: 1px solid var(--border); text-align: left;">Meaning</th>
+                        <th style="padding: 8px; border: 1px solid var(--border); text-align: left;">Streak</th>
+                        <th style="padding: 8px; border: 1px solid var(--border); text-align: left;">Badge Title</th>
+                        <th style="padding: 8px; border: 1px solid var(--border); text-align: left;">Significance</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr><td style="padding: 8px; border: 1px solid var(--border);">Effort</td><td style="padding: 8px; border: 1px solid var(--border);">3 days</td><td style="padding: 8px; border: 1px solid var(--border);">Initially overcoming inertia.</td></tr>
-                    <tr><td style="padding: 8px; border: 1px solid var(--border);">Striving</td><td style="padding: 8px; border: 1px solid var(--border);">10 days</td><td style="padding: 8px; border: 1px solid var(--border);">Starting to form a habit.</td></tr>
-                    <tr><td style="padding: 8px; border: 1px solid var(--border);">Diligence</td><td style="padding: 8px; border: 1px solid var(--border);">30 days</td><td style="padding: 8px; border: 1px solid var(--border);">Habit is becoming stable.</td></tr>
-                    <tr><td style="padding: 8px; border: 1px solid var(--border);">Ardor</td><td style="padding: 8px; border: 1px solid var(--border);">60 days</td><td style="padding: 8px; border: 1px solid var(--border);">Practice becomes firm and steady.</td></tr>
-                    <tr><td style="padding: 8px; border: 1px solid var(--border);">Viriya-sambojjhanga</td><td style="padding: 8px; border: 1px solid var(--border);">365 days</td><td style="padding: 8px; border: 1px solid var(--border);">Extraordinary perseverance.</td></tr>
+                    <tr><td style="padding: 8px; border: 1px solid var(--border);">3 Days</td><td style="padding: 8px; border: 1px solid var(--border);">Walking Path</td><td style="padding: 8px; border: 1px solid var(--border);">Stepping onto the path.</td></tr>
+                    <tr><td style="padding: 8px; border: 1px solid var(--border);">7 Days</td><td style="padding: 8px; border: 1px solid var(--border);">Blessings</td><td style="padding: 8px; border: 1px solid var(--border);">Generating wholesome roots.</td></tr>
+                    <tr><td style="padding: 8px; border: 1px solid var(--border);">30 Days</td><td style="padding: 8px; border: 1px solid var(--border);">Willpower</td><td style="padding: 8px; border: 1px solid var(--border);">Determination becomes habit.</td></tr>
+                    <tr><td style="padding: 8px; border: 1px solid var(--border);">100 Days</td><td style="padding: 8px; border: 1px solid var(--border);">Lion’s Roar</td><td style="padding: 8px; border: 1px solid var(--border);">Fearless consistency.</td></tr>
+                    <tr><td style="padding: 8px; border: 1px solid var(--border);">365 Days</td><td style="padding: 8px; border: 1px solid var(--border);">Timeless</td><td style="padding: 8px; border: 1px solid var(--border);">Practice beyond time.</td></tr>
                 </tbody>
             </table>
 
-            <p><strong>Mindfulness Milestones:</strong></p>
+            <p><strong>Mindfulness Milestones (Sati-indrīya):</strong></p>
             <table class="intro-table" style="width: 100%; border-collapse: collapse; margin-bottom: 20px; font-size: 13px;">
                 <thead>
                    <tr style="background: var(--bg);">
-                        <th style="padding: 8px; border: 1px solid var(--border); text-align: left;">Level</th>
-                        <th style="padding: 8px; border: 1px solid var(--border); text-align: left;">Mindfulness</th>
+                        <th style="padding: 8px; border: 1px solid var(--border); text-align: left;">Count</th>
+                        <th style="padding: 8px; border: 1px solid var(--border); text-align: left;">Badge Title</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr><td style="padding: 8px; border: 1px solid var(--border);">Beginner</td><td style="padding: 8px; border: 1px solid var(--border);">5,000</td></tr>
-                    <tr><td style="padding: 8px; border: 1px solid var(--border);">Practitioner</td><td style="padding: 8px; border: 1px solid var(--border);">10,000</td></tr>
-                    <tr><td style="padding: 8px; border: 1px solid var(--border);">Yogi</td><td style="padding: 8px; border: 1px solid var(--border);">20,000</td></tr>
-                    <tr><td style="padding: 8px; border: 1px solid var(--border);">Meditator</td><td style="padding: 8px; border: 1px solid var(--border);">50,000</td></tr>
-                    <tr><td style="padding: 8px; border: 1px solid var(--border);">Clear Mirror</td><td style="padding: 8px; border: 1px solid var(--border);">80,000</td></tr>
-                    <tr><td style="padding: 8px; border: 1px solid var(--border);">Still Lake</td><td style="padding: 8px; border: 1px solid var(--border);">100,000</td></tr>
-                    <tr><td style="padding: 8px; border: 1px solid var(--border);">The Mountain</td><td style="padding: 8px; border: 1px solid var(--border);">200,000</td></tr>
-                    <tr><td style="padding: 8px; border: 1px solid var(--border);">Heir of the Dhamma</td><td style="padding: 8px; border: 1px solid var(--border);">500,000</td></tr>
+                    <tr><td style="padding: 8px; border: 1px solid var(--border);">100</td><td style="padding: 8px; border: 1px solid var(--border);">One-Pointedness</td></tr>
+                    <tr><td style="padding: 8px; border: 1px solid var(--border);">1,000</td><td style="padding: 8px; border: 1px solid var(--border);">Contentment</td></tr>
+                    <tr><td style="padding: 8px; border: 1px solid var(--border);">10,000</td><td style="padding: 8px; border: 1px solid var(--border);">Offering</td></tr>
+                    <tr><td style="padding: 8px; border: 1px solid var(--border);">50,000</td><td style="padding: 8px; border: 1px solid var(--border);">Bliss</td></tr>
+                    <tr><td style="padding: 8px; border: 1px solid var(--border);">100,000</td><td style="padding: 8px; border: 1px solid var(--border);">Suchness</td></tr>
                 </tbody>
             </table>
-
+            
+            <p style="font-size: 13px; color: var(--text-light); font-style: italic;">
+                * Other achievements track <strong>Total Time (Viriya)</strong>, <strong>Session Frequency</strong>, and <strong>Concentration Levels (Samādhi)</strong>.
+            </p>
+<br>
             <div style="background: rgba(251, 191, 36, 0.1); border: 1px solid var(--warning); padding: 15px; border-radius: 8px; color: #fbbf24; font-size: 13px;">
                 <strong>⚠️ Important Data Notice:</strong>
                 <ul style="margin: 5px 0 0 15px;">

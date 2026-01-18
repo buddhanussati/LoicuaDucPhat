@@ -14,7 +14,7 @@
 <body>
 
 <nav class="sidebar">
-        <div class="logo"><i class="fas fa-hourglass-half"></i></div>
+        <div class="logo"><i class="fas fa-hourglass-empty"></i></div>
         <div class="nav-item active" onclick="app.switchView('dashboard')">
             <i class="fas fa-spa"></i><span class="nav-text">Nhật Ký</span>
         </div>
@@ -33,9 +33,9 @@
 </div>
         
         
-        <div class="nav-item" onclick="app.exportData()">
-    <i class="fas fa-save"></i><span class="nav-text">Sao lưu</span>
-</div>
+       <div class="nav-item" onclick="app.switchView('achievements')">
+            <i class="fas fa-medal"></i><span class="nav-text">Pāramī</span>
+        </div>
         <div class="nav-item" onclick="app.resetApp()" style="color: var(--danger);"> <i class="fas fa-trash-alt"></i><span class="nav-text">Đặt lại</span>
         </div>
     </nav>
@@ -49,11 +49,11 @@
             </div>
             
             <div class="user-stats">
-    <div class="stat-item clickable" onclick="app.setGlobalDailyGoal()" title="Nhấn để sửa mục tiêu ngày">
-        <span class="stat-val"><span id="daily-current">0</span> / <span id="daily-target">120</span>p</span>
-        <div class="daily-bar-bg"><div id="daily-bar-fill" class="daily-bar-fill"></div></div>
-        <span class="stat-label">Hàng ngày</span>
+   <div class="stat-item active-badge-container" onclick="app.openBadgePicker()" title="Nhấn để đổi huy hiệu hiển thị">
+    <div id="current-active-badge" class="badge-display">
+        <i class="fas fa-award"></i>
     </div>
+</div>
     <div class="stat-item">
         <span class="stat-val" id="streak-disp">0 🔥</span>
         <span class="stat-label">Liên tục</span>
@@ -63,6 +63,16 @@
         <span class="stat-val" id="xp-disp">0</span>
         <span class="stat-label">Chánh Niệm</span>
     </div>
+
+<div class="stat-item clickable" onclick="app.exportData()">
+    <span class="stat-val" style="
+        width: 24px; 
+        height: 24px; 
+        display: flex; 
+        align-items: center; 
+        justify-content: center; 
+        font-size: 15px;"><i class="fas fa-save"></i></span>
+</div>
 
  <div class="stat-item clickable" onclick="app.openIntroModal()">
     <span class="stat-val" style="
@@ -184,11 +194,28 @@
             </div>
         </div>
     </div>
-	
-		<div class="card" style="margin-top: 30px;">
-                <h3 style="text-align: center;"><i class="fas fa-medal"></i> Thành tựu</h3>
-                <div id="achievement-list" style="margin-top: 20px; display: grid; gap: 10px;"></div>
-            </div>
+	<div class="card" style="margin-top: 20px;">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+        <button class="btn btn-secondary" style="padding: 5px 10px;" onclick="app.changeReportMonth(-1)">
+            <i class="fas fa-chevron-left"></i>
+        </button>
+        <div>
+            <h4 style="margin: 0; display:inline-block;">Tỉ lệ Chánh niệm</h4>
+            <p id="density-month-title" style="font-size: 12px; color: var(--text-light); margin: 0; text-align: center; margin-top:2px;">
+                Tháng này
+            </p>
+        </div>
+        <button class="btn btn-secondary" style="padding: 5px 10px;" onclick="app.changeReportMonth(1)">
+            <i class="fas fa-chevron-right"></i>
+        </button>
+    </div>
+
+  
+    <div style="height: 250px;">
+        <canvas id="reportDensityChart"></canvas>
+    </div>
+</div>
+		
 </section>
 <section id="view-analytics" class="view-section">
     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; flex-wrap: wrap; gap: 10px;">
@@ -216,7 +243,7 @@
             <div style="font-size: 11px; color: var(--text-light);">Tỷ lệ tỉnh thức/thời gian</div>
         </div>
         <div class="card" style="text-align: center; border-left: 4px solid var(--primary);">
-            <div style="font-size: 12px; color: var(--text-light); text-transform: uppercase;">Chất lượng Chánh niệm</div>
+            <div style="font-size: 12px; color: var(--text-light); text-transform: uppercase;">Tỉ lệ Chánh niệm</div>
             <div style="font-size: 28px; font-weight: bold; margin: 5px 0;" id="ana-avg-density">0</div>
             <div style="font-size: 11px; color: var(--text-light);">Chánh niệm / phút</div>
         </div>
@@ -230,7 +257,7 @@
     <div class="dashboard-grid" style="grid-template-columns: 1fr; gap: 20px;">
         <div class="card">
             <h3>📈 Chiều hướng Tỉnh thức</h3>
-            <p style="font-size: 12px; color: var(--text-light); margin-bottom: 15px;">So sánh tỷ lệ chánh niệm giữa các thời thiền</p>
+            <p style="font-size: 12px; color: var(--text-light); margin-bottom: 15px;">So sánh chất lượng chánh niệm các thời thiền</p>
             <div style="height: 300px;">
                 <canvas id="analyticsTrendChart"></canvas>
             </div>
@@ -269,7 +296,7 @@
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 20px;">
             <div class="card">
                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
-                    <h4 style="margin: 0;">💎 Mức chú tâm (Pro)</h4>
+                    <h4 style="margin: 0;">💎 Mức chú tâm</h4>
                     <select id="pro-range-select" class="form-control" style="width: auto; padding: 5px; font-size: 13px; height: 32px;" onchange="app.renderProAnalytics(true)">
                         <option value="all">Toàn bộ</option>
                         <option value="today">Hôm nay</option>
@@ -329,6 +356,12 @@
 		
     </div>
 </section>
+<section id="view-achievements" class="view-section">
+            <div class="card" style="margin-top: 30px;">
+                <h3 style="text-align: center;"><i class="fas fa-award"></i> Pāramī</h3>
+                <div id="achievement-list" style="margin-top: 20px; display: grid; gap: 10px;"></div>
+            </div>
+        </section>
     </main>
 
     <div class="modal" id="choice-modal">
@@ -475,8 +508,7 @@
     <button class="btn btn-secondary" onclick="app.openMedSettings()" title="Cài đặt chạm">
         <i class="fas fa-cog"></i>
     </button>
-    
-    <button class="btn btn-secondary" onclick="app.togglePauseMeditation()" id="med-pause-btn"><i class="fas fa-pause"></i></button>
+ 
     <button class="btn" style="background-color: var(--danger); color: white;" onclick="app.concludeMeditationSession()"><i class="fas fa-stop"></i></button>
 </div>
 	
@@ -534,7 +566,7 @@
 			<select id="graph-type-select" class="form-control" style="width: auto; padding: 5px; height: 36px; font-size: 13px; cursor: pointer;" onchange="app.updateSessionChart()">
     <option value="interval">☁️ Thất niệm</option>
     <option value="intensity">🌱 Chánh niệm</option>
-    <option value="pro">💎 Mức chú tâm (Pro)</option> </select>
+    <option value="pro">💎 Mức chú tâm</option> </select>
                 
                 <button class="btn btn-secondary" onclick="document.getElementById('graph-modal').style.display='none'" title="Đóng"><i class="fas fa-xmark"></i></button>
 				 
@@ -610,7 +642,22 @@
         <div class="text-q1">10+ Tốt: <strong>Cao</strong></div>
     </div>
 </div>
-
+<div class="form-group" style="background: rgba(251, 191, 36, 0.1); padding: 10px; border-radius: 8px; border: 1px solid rgba(251, 191, 36, 0.3); margin-top: 15px;">
+    <div style="display:flex; justify-content:space-between; align-items:center;">
+        <label style="margin:0; color: var(--warning);"><i class="fas fa-check-double"></i> Chế độ Xác nhận</label>
+        <input type="checkbox" id="inp-confirm-mode" style="width: 20px; height: 20px; accent-color: var(--warning);" onchange="app.toggleConfirmSlider()">
+    </div>
+    
+    <div id="confirm-slider-group" style="margin-top: 10px; display:none; border-top: 1px solid rgba(251, 191, 36, 0.3); padding-top: 10px;">
+    <label style="font-size:12px; color: var(--text-light);">Tần suất xuất hiện: <span id="disp-confirm-prob" style="color:var(--warning); font-weight:bold;">100%</span></label>
+    <input type="range" id="inp-confirm-prob" class="form-control" min="10" max="100" step="10" oninput="app.updateConfirmProbDisplay()">
+    <div style="font-size: 11px; color: var(--text-light); margin-top: 5px; font-style: italic; line-height: 1.4;">
+        <i class="fas fa-random"></i> Xuất hiện ngẫu nhiên dựa trên % bạn chọn.<br>
+         Chạm lần 1 để "chờ", chạm lần 2 để "xác nhận".<br>
+            (Chỉ áp dụng cho mức <strong>Thấp</strong>).
+    </div>
+</div>
+</div>
         <div class="form-group" style="display: flex; justify-content: space-between; align-items: center; margin-top: 15px; background: rgba(255,255,255,0.05); padding: 10px; border-radius: 8px;">
             <label style="margin:0"><i class="fas fa-mobile-alt"></i> Rung phản hồi</label>
             <input type="checkbox" id="inp-vibrate" style="width: 20px; height: 20px;" onchange="app.saveMedSettings()">
@@ -658,15 +705,16 @@
                 <li><strong>Tùy biến:</strong> Tự đặt mục tiêu hàng ngày (số phút), thời gian cần dành để hoàn thành mục tiêu, màu sắc đại diện và danh mục quản lý.</li>
             </ul>
 
-            <h4 style="color: var(--primary); margin-top: 15px;">2. Cấu hình Tương Tác & Chế Độ Pro </h4>
-            <p>Trong giao diện thiền, nhấn nút <i class="fas fa-cog"></i> để mở cài đặt tương tác. Ứng dụng hỗ trợ rung phản hồi xúc giác & 4 chế độ ghi nhận:</p>
+            <h4 style="color: var(--primary); margin-top: 15px;">2. Cấu hình Tương Tác</h4>
+            <p>Trong giao diện thiền, nhấn nút <i class="fas fa-cog"></i> để mở cài đặt tương tác. Ứng dụng hỗ trợ rung phản hồi xúc giác & 4 chế độ ghi nhận cùng 4 thang điểm cho mức độ chú tâm.</p>
             
             <div style="background: rgba(255, 255, 255, 0.05); padding: 15px; border-radius: 8px; border: 1px solid var(--border);">
                 <ul style="padding-left: 20px; margin: 0;">
-                    <li style="margin-bottom: 8px;"><strong>Chạm:</strong> Chế độ cơ bản. Chạm nhẹ màn hình để đếm. Có thể cài đặt chạm 1, 2, 3 hoặc 4 lần mới tính là 1 niệm (giúp lọc bớt tà niệm).</li>
+                    <li style="margin-bottom: 8px;"><strong>Chạm:</strong> Chế độ cơ bản. Chạm nhẹ màn hình để đếm. Có thể cài đặt chạm 1, 2, 3 hoặc 4 lần mới tính là 1 niệm.</li>
                     <li style="margin-bottom: 8px;"><strong>Giữ:</strong> Ấn và giữ màn hình trong một khoảng thời gian (mặc định 0.4s) để ghi nhận chánh niệm.</li>
                     <li style="margin-bottom: 8px;"><strong>✨ Auto:</strong> Tự động nhận diện cả thao tác Chạm và Giữ.</li>
-                    <li><strong>💎 Chế độ Pro (Chuyên sâu):</strong> Đánh giá mức độ chú tâm ngay lúc ghi nhận. Hệ thống sẽ lưu lại "điểm chú tâm" dựa trên thao tác tay của bạn:
+					<li style="margin-bottom: 8px;"><i><strong>Cơ chế Chuỗi (Combo):</strong></i> Mọi chế độ đều bắt đầu ở mức chú tâm <b>Thấp</b>. Cứ mỗi 10 lần (hoặc 20 lần ở mức Trung Bình) ghi nhận liên tục với khoảng cách thời gian ≤ <i>Ngưỡng mất tập trung</i>, mức chú tâm sẽ được nâng lên một bậc (Thấp → TB → Tốt → Cao). Nếu để quá ngưỡng thời gian, chuỗi sẽ reset về mức Thấp.</li>
+                    <li><strong style="color: #34d399;">💎 Chế độ Pro (Thủ công):</strong> :</strong> Cho phép bạn <strong>chủ động phân loại</strong> mức độ chú tâm dựa trên thao tác tay của bạn:
                         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 8px; font-size: 13px;">
                             <div style="color: #f87171;">● 1 Chạm: <strong>Thấp</strong></div>
                             <div style="color: #60a5fa;">● Ấn giữ: <strong>Tốt</strong></div>
@@ -674,8 +722,16 @@
                             <div style="color: #34d399;">● 10+ Tốt*: <strong>Cao</strong></div>
                         </div>
                     </li>
-                </ul>
-            </div>
+        <li style="margin-top: 10px; border-top: 1px solid rgba(251, 191, 36, 0.2); padding-top: 10px;">
+            <strong style="color: var(--warning);"><i class="fas fa-check-double"></i> Chế độ Xác nhận:</strong> 
+            Dành cho người dùng hay chạm máy vô thức. Khi bật, một lần chạm đầu tiên sẽ không được tính ngay. Bạn cần chạm thêm lần thứ 2 (trong khoảng 1-3 giây) để xác nhận đó là hành động có ý thức.
+            <ul style="font-size: 12px; margin-top: 5px; color: var(--text-light);">
+                <li>Chỉ ghi nhận thời gian của lần chạm <strong>đầu tiên</strong>.</li>
+                <li>Chế độ xác nhận chỉ áp dụng cho mức <strong>Thấp</strong>.</li>
+            </ul>
+        </li>
+    </ul>
+</div>
 			<p style="font-size: 13px; color: var(--text-light); margin-top: 10px;"><strong>10+ Tốt:</strong> Mức chú tâm Tốt từ 10 lần liên tục trở lên, mỗi lần liên tục tiếp theo sẽ được tính là ở mức Cao.<br>
             <strong>Lưu ý:</strong> Phản hồi xúc giác yêu cầu thiết bị có hỗ trợ chế độ rung.</p>
  <div style="text-align: center; margin: 15px 0;">
@@ -730,46 +786,63 @@
             </ul>
 
             <hr style="border: 0; border-top: 1px solid var(--border); margin: 25px 0;">
-            <h3 style="color: var(--text); margin-top: 20px;">✨ Hệ Thống Ghi Nhận</h3>
-            
-            <p><strong>Mốc Liên Tục:</strong></p>
-            <table class="intro-table" style="width: 100%; border-collapse: collapse; margin-bottom: 20px; font-size: 13px;">
-                <thead>
-                    <tr style="background: var(--bg);">
-                        <th style="padding: 8px; border: 1px solid var(--border); text-align: left;">Danh hiệu</th>
-                        <th style="padding: 8px; border: 1px solid var(--border); text-align: left;">Điều kiện</th>
-                        <th style="padding: 8px; border: 1px solid var(--border); text-align: left;">Ý nghĩa</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr><td style="padding: 8px; border: 1px solid var(--border);">Cố Gắng</td><td style="padding: 8px; border: 1px solid var(--border);">3 ngày</td><td style="padding: 8px; border: 1px solid var(--border);">Bước đầu vượt qua sức ỳ.</td></tr>
-                    <tr><td style="padding: 8px; border: 1px solid var(--border);">Nỗ Lực</td><td style="padding: 8px; border: 1px solid var(--border);">10 ngày</td><td style="padding: 8px; border: 1px solid var(--border);">Bắt đầu hình thành thói quen.</td></tr>
-                    <tr><td style="padding: 8px; border: 1px solid var(--border);">Tinh Cần</td><td style="padding: 8px; border: 1px solid var(--border);">30 ngày</td><td style="padding: 8px; border: 1px solid var(--border);">Thói quen đã dần ổn định.</td></tr>
-                    <tr><td style="padding: 8px; border: 1px solid var(--border);">Nhiệt Tâm</td><td style="padding: 8px; border: 1px solid var(--border);">60 ngày</td><td style="padding: 8px; border: 1px solid var(--border);">Sự tu tập trở nên vững chãi.</td></tr>
-                    <tr><td style="padding: 8px; border: 1px solid var(--border);">Tinh Tấn Giác Chi</td><td style="padding: 8px; border: 1px solid var(--border);">365 ngày</td><td style="padding: 8px; border: 1px solid var(--border);">Sự kiên trì phi thường.</td></tr>
-                </tbody>
-            </table>
+<h3 style="color: var(--text); margin-top: 20px;">✨ Hệ Thống Pāramī (Thành Tựu)</h3>
 
-            <p><strong>Mốc Chánh Niệm:</strong></p>
-            <table class="intro-table" style="width: 100%; border-collapse: collapse; margin-bottom: 20px; font-size: 13px;">
-                <thead>
-                   <tr style="background: var(--bg);">
-                        <th style="padding: 8px; border: 1px solid var(--border); text-align: left;">Mức độ</th>
-                        <th style="padding: 8px; border: 1px solid var(--border); text-align: left;">Số Chánh Niệm</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr><td style="padding: 8px; border: 1px solid var(--border);">Sơ Cơ</td><td style="padding: 8px; border: 1px solid var(--border);">5,000</td></tr>
-                    <tr><td style="padding: 8px; border: 1px solid var(--border);">Thiền Sinh</td><td style="padding: 8px; border: 1px solid var(--border);">10,000</td></tr>
-                    <tr><td style="padding: 8px; border: 1px solid var(--border);">Hành Giả</td><td style="padding: 8px; border: 1px solid var(--border);">20,000</td></tr>
-                    <tr><td style="padding: 8px; border: 1px solid var(--border);">Thiền Giả</td><td style="padding: 8px; border: 1px solid var(--border);">50,000</td></tr>
-                    <tr><td style="padding: 8px; border: 1px solid var(--border);">Gương Sáng</td><td style="padding: 8px; border: 1px solid var(--border);">80,000</td></tr>
-                    <tr><td style="padding: 8px; border: 1px solid var(--border);">Mặt Hồ Tĩnh Lặng</td><td style="padding: 8px; border: 1px solid var(--border);">100,000</td></tr>
-                    <tr><td style="padding: 8px; border: 1px solid var(--border);">Núi Đá</td><td style="padding: 8px; border: 1px solid var(--border);">200,000</td></tr>
-                    <tr><td style="padding: 8px; border: 1px solid var(--border);">Thừa tự Pháp</td><td style="padding: 8px; border: 1px solid var(--border);">500,000</td></tr>
-                    
-                </tbody>
-            </table>
+<p>Hệ thống danh hiệu đã được nhóm thành các Pāramī (Phẩm chất) để khích lệ sự tinh tấn. Dưới đây là một số cột mốc tiêu biểu:</p>
+
+<p><strong>🔥 Chuỗi Tinh Tấn (Liên tục):</strong></p>
+<table class="intro-table" style="width: 100%; border-collapse: collapse; margin-bottom: 20px; font-size: 13px;">
+    <thead>
+        <tr style="background: var(--bg);">
+            <th style="padding: 8px; border: 1px solid var(--border); text-align: left;">Danh hiệu</th>
+            <th style="padding: 8px; border: 1px solid var(--border); text-align: left;">Điều kiện</th>
+            <th style="padding: 8px; border: 1px solid var(--border); text-align: left;">Ý nghĩa</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr><td style="padding: 8px; border: 1px solid var(--border);">Kinh Hành</td><td style="padding: 8px; border: 1px solid var(--border);">3 ngày</td><td style="padding: 8px; border: 1px solid var(--border);">Bước đi đầu tiên của hành giả.</td></tr>
+        <tr><td style="padding: 8px; border: 1px solid var(--border);">Phước Báu</td><td style="padding: 8px; border: 1px solid var(--border);">7 ngày</td><td style="padding: 8px; border: 1px solid var(--border);">Tích lũy thiện pháp trong một tuần.</td></tr>
+        <tr><td style="padding: 8px; border: 1px solid var(--border);">Như Ý Túc</td><td style="padding: 8px; border: 1px solid var(--border);">30 ngày</td><td style="padding: 8px; border: 1px solid var(--border);">Thói quen tu tập đã vững vàng.</td></tr>
+        <tr><td style="padding: 8px; border: 1px solid var(--border);">Tứ Niệm Xứ</td><td style="padding: 8px; border: 1px solid var(--border);">49 ngày</td><td style="padding: 8px; border: 1px solid var(--border);">Bảy tuần tu tập miên mật.</td></tr>
+        <tr><td style="padding: 8px; border: 1px solid var(--border);">Đại Hùng</td><td style="padding: 8px; border: 1px solid var(--border);">90 ngày</td><td style="padding: 8px; border: 1px solid var(--border);">Sức mạnh tinh tấn phi thường.</td></tr>
+        <tr><td style="padding: 8px; border: 1px solid var(--border);">Vô Thủy</td><td style="padding: 8px; border: 1px solid var(--border);">365 ngày</td><td style="padding: 8px; border: 1px solid var(--border);">Sự kiên trì không giới hạn.</td></tr>
+    </tbody>
+</table>
+
+<p><strong>🌱 Tích Lũy Chánh Niệm (Tổng số lần ghi nhận):</strong></p>
+<table class="intro-table" style="width: 100%; border-collapse: collapse; margin-bottom: 20px; font-size: 13px;">
+    <thead>
+        <tr style="background: var(--bg);">
+            <th style="padding: 8px; border: 1px solid var(--border); text-align: left;">Danh hiệu</th>
+            <th style="padding: 8px; border: 1px solid var(--border); text-align: left;">Số Chánh Niệm</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr><td style="padding: 8px; border: 1px solid var(--border);">Nhất Tâm</td><td style="padding: 8px; border: 1px solid var(--border);">100</td></tr>
+        <tr><td style="padding: 8px; border: 1px solid var(--border);">Thanh Tịnh</td><td style="padding: 8px; border: 1px solid var(--border);">500</td></tr>
+        <tr><td style="padding: 8px; border: 1px solid var(--border);">Biết Đủ</td><td style="padding: 8px; border: 1px solid var(--border);">1,000</td></tr>
+        <tr><td style="padding: 8px; border: 1px solid var(--border);">Cúng Dường</td><td style="padding: 8px; border: 1px solid var(--border);">10,000</td></tr>
+        <tr><td style="padding: 8px; border: 1px solid var(--border);">An Lạc</td><td style="padding: 8px; border: 1px solid var(--border);">50,000</td></tr>
+        <tr><td style="padding: 8px; border: 1px solid var(--border);">Chân Như</td><td style="padding: 8px; border: 1px solid var(--border);">100,000</td></tr>
+    </tbody>
+</table>
+
+<p><strong>⏳ Tích Lũy Thời Gian (Tổng giờ tu tập):</strong></p>
+<table class="intro-table" style="width: 100%; border-collapse: collapse; margin-bottom: 20px; font-size: 13px;">
+    <thead>
+        <tr style="background: var(--bg);">
+            <th style="padding: 8px; border: 1px solid var(--border); text-align: left;">Danh hiệu</th>
+            <th style="padding: 8px; border: 1px solid var(--border); text-align: left;">Thời lượng</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr><td style="padding: 8px; border: 1px solid var(--border);">Sát Na</td><td style="padding: 8px; border: 1px solid var(--border);">1 giờ</td></tr>
+        <tr><td style="padding: 8px; border: 1px solid var(--border);">Chánh Niệm</td><td style="padding: 8px; border: 1px solid var(--border);">10 giờ</td></tr>
+        <tr><td style="padding: 8px; border: 1px solid var(--border);">Nhập Dòng</td><td style="padding: 8px; border: 1px solid var(--border);">50 giờ</td></tr>
+        <tr><td style="padding: 8px; border: 1px solid var(--border);">Nhiệt Thành</td><td style="padding: 8px; border: 1px solid var(--border);">100 giờ</td></tr>
+        <tr><td style="padding: 8px; border: 1px solid var(--border);">Hư Không</td><td style="padding: 8px; border: 1px solid var(--border);">1,000 giờ</td></tr>
+    </tbody>
+</table>
 
             <div style="background: rgba(251, 191, 36, 0.1); border: 1px solid var(--warning); padding: 15px; border-radius: 8px; color: #fbbf24; font-size: 13px;">
                 <strong>⚠️ Lưu Ý Quan Trọng Về Dữ Liệu:</strong>
