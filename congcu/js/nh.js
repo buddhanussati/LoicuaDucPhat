@@ -340,7 +340,7 @@ const DHAMMAPADA = [
   {t:"\"Cỏ làm hại ruộng vườn,<br>        Si làm hại người đời,<br>        Bố thí người ly si,<br>        Do vậy được quả lớn.\""},
   {t:"\"Cỏ làm hại ruộng vườn,<br>        Dục làm hại người đời.<br>        Bố thí người ly dục,<br>        Do vậy được quả lớn.\""},
   {t:"\"Lành thay, phòng hộ mắt!<br>        Lành thay, phòng hộ tai.<br>        Lành thay, phòng hộ mũi,<br>        Lành thay, phòng hộ lưỡi.\""},
-  {t:"\"Lành thay,phòng hộ thân!<br>        Lành thay, phòng hộ lời,<br>        Lành thay, phòng hộ ý.<br>        Lành thay, phòng tất cả.<br>        Tỷ kheo phòng tất cả.<br>        Thoát được mọi khổ đau.\""},
+  {t:"\"Lành thay, phòng hộ thân!<br>        Lành thay, phòng hộ lời,<br>        Lành thay, phòng hộ ý.<br>        Lành thay, phòng tất cả.<br>        Tỷ kheo phòng tất cả.<br>        Thoát được mọi khổ đau.\""},
   {t:"\"Người chế ngự tay chân,<br>        Chế ngự lời và đầu,<br>        Vui thích nội thiền định.<br>        Ðộc thân, biết vừa đủ,<br>        Thật xứng gọi tỷ kheo.\""},
   {t:"\"Tỷ kheo chế ngự miệng,<br>        Vừa lời, không cống cao,<br>        Khi trình bày pháp nghĩa,<br>        Lời lẽ dịu ngọt ngào.\""},
   {t:"\"Vị tỷ kheo thích pháp,<br>        Mến pháp, suy tư Pháp.<br>        Tâm tư niệm chánh Pháp,<br>        Không rời bỏ chánh Pháp.\""},
@@ -423,7 +423,157 @@ const DHAMMAPADA = [
   {t:"\"Bậc trâu chúa, thù thắng<br>        Bậc anh hùng, đại sĩ,<br>        Bậc chiến thắng, không nhiễm,<br>        Bậc tẩy sạch, giác ngộ,<br>        Ta gọi Bà-la-môn.\""},
   {t:"\"Ai biết được đời trước,<br>        Thấy thiên giới, đọa xứ,<br>        Ðạt được sanh diệt tận<br>        Thắng trí, tự viên thành<br>        Bậc mâu ni đạo sĩ.<br>        Viên mãn mọi thành tựu<br>        Ta gọi Bà-la-môn.\""},
 ];
-// --- DATABASE HELPER START ---
+const BADGES = [
+    // --- Log Counts (Effort/Viriya) ---
+    { id: 'log_1', icon: 'fas fa-fingerprint', color: '#a29bfe', title: 'Vô Ngã', desc: 'Hoàn thành thời thiền đầu tiên', condition: (data) => data.logs.length >= 1 },
+    { id: 'log_10', icon: 'fas fa-seedling', color: '#00b894', title: 'Duyên Khởi', desc: 'Hoàn thành 10 thời thiền', condition: (data) => data.logs.length >= 10 },
+    { id: 'log_25', icon: 'fab fa-pagelines', color: '#55efc4', title: 'Thiện Căn', desc: 'Hoàn thành 25 thời thiền', condition: (data) => data.logs.length >= 25 },
+    { id: 'log_50', icon: 'fas fa-leaf', color: '#fdcb6e', title: 'Thiện Pháp', desc: 'Hoàn thành 50 thời thiền', condition: (data) => data.logs.length >= 50 },
+    { id: 'log_100', icon: 'fab fa-envira', color: '#00cec9', title: 'Thiện Nghiệp', desc: 'Hoàn thành 100 thời thiền', condition: (data) => data.logs.length >= 100 },
+    { id: 'log_150', icon: 'fas fa-cloud-sun', color: '#ff7675', title: 'Ly Cấu', desc: 'Hoàn thành 150 thời thiền', condition: (data) => data.logs.length >= 150 },
+    { id: 'log_200', icon: 'fas fa-rainbow', color: '#e056fd', title: 'Thiện Thú', desc: 'Hoàn thành 200 thời thiền', condition: (data) => data.logs.length >= 200 },
+    { id: 'log_250', icon: 'fas fa-mountain', color: '#48dbfb', title: 'Núi Tuyết', desc: 'Hoàn thành 250 thời thiền', condition: (data) => data.logs.length >= 250 },
+    { id: 'log_300', icon: 'fas fa-gopuram', color: '#fd79a8', title: 'Hướng Thượng', desc: 'Hoàn thành 300 thời thiền', condition: (data) => data.logs.length >= 300 },
+    { id: 'log_350', icon: 'fas fa-vihara', color: '#ff9f43', title: 'An Trú', desc: 'Hoàn thành 350 thời thiền', condition: (data) => data.logs.length >= 350 },
+    { id: 'log_400', icon: 'fas fa-archway', color: '#fab1a0', title: 'Cửa Bất Tử', desc: 'Hoàn thành 400 thời thiền', condition: (data) => data.logs.length >= 400 },
+    { id: 'log_450', icon: 'fas fa-kaaba', color: '#74b9ff', title: 'Thạch Trụ', desc: 'Hoàn thành 450 thời thiền', condition: (data) => data.logs.length >= 450 },
+    { id: 'log_500', icon: 'fas fa-monument', color: '#ffbe76', title: 'Bảo Tháp', desc: 'Hoàn thành 500 thời thiền', condition: (data) => data.logs.length >= 500 },
+    { id: 'log_600', icon: 'fab fa-fort-awesome', color: '#a29bfe', title: 'Pháp Thành', desc: 'Hoàn thành 600 thời thiền', condition: (data) => data.logs.length >= 600 },
+    { id: 'log_700', icon: 'fa-dungeon', color: '#6ab04c', title: 'Độc Cư', desc: 'Hoàn thành 700 thời thiền', condition: (data) => data.logs.length >= 700 },
+    { id: 'log_800', icon: 'fab fa-d-and-d', color: '#eb4d4b', title: 'Long Tượng', desc: 'Hoàn thành 800 thời thiền', condition: (data) => data.logs.length >= 800 },
+    { id: 'log_1000', icon: 'fas fa-dharmachakra', color: '#f9ca24', title: 'Chuyển Pháp Luân', desc: 'Hoàn thành 1000 thời thiền', condition: (data) => data.logs.length >= 1000 },
+
+    { id: 'streak_3', icon: 'fas fa-shoe-prints', color: '#bdc3c7', title: 'Kinh Hành', desc: 'Hành trì 3 ngày liên tục', condition: (data) => data.streak >= 3 },
+    { id: 'streak_5', icon: 'fas fa-bridge-water', color: '#48dbfb', title: 'Thánh Cầu', desc: 'Hành trì 5 ngày liên tục', condition: (data) => data.streak >= 5 },
+    { id: 'streak_7', icon: 'fas fa-clover', color: '#2ecc71', title: 'Phước Báu', desc: 'Hành trì 7 ngày liên tục', condition: (data) => data.streak >= 7 },
+    { id: 'streak_14', icon: 'fas fa-certificate', color: '#f1c40f', title: 'Phạm Hạnh', desc: 'Hành trì 14 ngày liên tục', condition: (data) => data.streak >= 14 },
+    { id: 'streak_21', icon: 'fas fa-book-open-reader', color: '#e17055', title: 'Đa Văn', desc: 'Hành trì 21 ngày liên tục', condition: (data) => data.streak >= 21 },
+    { id: 'streak_30', icon: 'fab fa-sketch', color: '#ff9f43', title: 'Như Ý Túc', desc: 'Hành trì 30 ngày liên tục', condition: (data) => data.streak >= 30 },
+    { id: 'streak_49', icon: 'fab fa-jira', color: '#54a0ff', title: 'Tứ Niệm Xứ', desc: 'Hành trì 49 ngày liên tục', condition: (data) => data.streak >= 49 },
+    { id: 'streak_60', icon: 'fas fa-link', color: '#a29bfe', title: 'Khổ Đế', desc: 'Hành trì 60 ngày liên tục', condition: (data) => data.streak >= 60 },
+    { id: 'streak_90', icon: 'fab fa-brave', color: '#ff6b6b', title: 'Đại Hùng', desc: 'Hành trì 90 ngày liên tục', condition: (data) => data.streak >= 90 },
+    { id: 'streak_100', icon: 'fab fa-brave-reverse', color: '#d63031', title: 'Sư Tử Hống', desc: 'Hành trì 100 ngày liên tục', condition: (data) => data.streak >= 100 },
+    { id: 'streak_180', icon: 'fab fa-wolf-pack-battalion', color: '#81ecec', title: 'Ngưu Vương', desc: 'Hành trì 180 ngày liên tục', condition: (data) => data.streak >= 180 },
+    { id: 'streak_365', icon: 'fas fa-infinity', color: '#0984e3', title: 'Vô Thủy', desc: 'Hành trì 365 ngày liên tục', condition: (data) => data.streak >= 365 },
+
+ { id: 'time_1h', icon: 'fas fa-hourglass-empty', color: '#f1c40f', title: 'Sát Na', desc: 'Tích lũy 1 giờ tu tập', condition: (data) => data.logs.reduce((s, l) => s + l.minutes, 0) >= 60 },
+    { id: 'time_5h', icon: 'fas fa-circle-notch', color: '#ffbe76', title: 'Không Tánh', desc: 'Tích lũy 5 giờ tu tập', condition: (data) => data.logs.reduce((s, l) => s + l.minutes, 0) >= 300 },
+    { id: 'time_10h', icon: 'fas fa-record-vinyl', color: '#badc58', title: 'Chánh Niệm', desc: 'Tích lũy 10 giờ tu tập', condition: (data) => data.logs.reduce((s, l) => s + l.minutes, 0) >= 600 },
+    { id: 'time_20h', icon: 'fab fa-files-pinwheel', color: '#686de0', title: 'Chánh Nghiệp', desc: 'Tích lũy 20 giờ tu tập', condition: (data) => data.logs.reduce((s, l) => s + l.minutes, 0) >= 1200 },
+    { id: 'time_30h', icon: 'fas fa-snowflake', color: '#48dbfb', title: 'Tịch Tịnh', desc: 'Tích lũy 30 giờ tu tập', condition: (data) => data.logs.reduce((s, l) => s + l.minutes, 0) >= 1800 },
+    { id: 'time_50h', icon: 'fas fa-water', color: '#0abde3', title: 'Nhập Dòng', desc: 'Tích lũy 50 giờ tu tập', condition: (data) => data.logs.reduce((s, l) => s + l.minutes, 0) >= 3000 },
+    { id: 'time_80h', icon: 'fas fa-wind', color: '#c7ecee', title: 'Hơi Thở', desc: 'Tích lũy 80 giờ tu tập', condition: (data) => data.logs.reduce((s, l) => s + l.minutes, 0) >= 4800 },
+	{ id: 'time_100h', icon: 'fas fa-fire-burner', color: '#ee5253', title: 'Nhiệt Thành', desc: 'Tích lũy 100 giờ tu tập', condition: (data) => data.logs.reduce((s, l) => s + l.minutes, 0) >= 6000 },
+	    { id: 'time_250h', icon: 'fas fa-burn', color: '#f368e0', title: 'Nhiệt Tâm', desc: 'Tích lũy 150 giờ tu tập', condition: (data) => data.logs.reduce((s, l) => s + l.minutes, 0) >= 9000 },
+    { id: 'time_150h', icon: 'fas fa-fire', color: '#ff6b6b', title: 'Lửa Tuệ', desc: 'Tích lũy 200 giờ tu tập', condition: (data) => data.logs.reduce((s, l) => s + l.minutes, 0) >= 12000 },
+    { id: 'time_200h', icon: 'fas fa-fire-flame-curved', color: '#ff9f43', title: 'Lửa Thiền', desc: 'Tích lũy 250 giờ tu tập', condition: (data) => data.logs.reduce((s, l) => s + l.minutes, 0) >= 15000 },
+    { id: 'time_300h', icon: 'fas fa-bolt', color: '#feca57', title: 'Tuệ Căn', desc: 'Tích lũy 300 giờ tu tập', condition: (data) => data.logs.reduce((s, l) => s + l.minutes, 0) >= 18000 },
+    { id: 'time_400h', icon: 'fas fa-bolt-lightning', color: '#ff9ff3', title: 'Tuệ Lực', desc: 'Tích lũy 400 giờ tu tập', condition: (data) => data.logs.reduce((s, l) => s + l.minutes, 0) >= 24000 },
+    { id: 'time_500h', icon: 'fas fa-sun', color: '#ffaf40', title: 'Minh Kiến', desc: 'Tích lũy 500 giờ tu tập', condition: (data) => data.logs.reduce((s, l) => s + l.minutes, 0) >= 30000 },
+    { id: 'time_800h', icon: 'fas fa-moon', color: '#dfe6e9', title: 'Nhất Dạ Hiền', desc: 'Tích lũy 800 giờ tu tập', condition: (data) => data.logs.reduce((s, l) => s + l.minutes, 0) >= 48000 },
+    { id: 'time_1000h', icon: 'fab fa-skyatlas', color: '#74b9ff', title: 'Hư Không', desc: 'Tích lũy 1000 giờ tu tập', condition: (data) => data.logs.reduce((s, l) => s + l.minutes, 0) >= 60000 },
+
+    { id: 'sit_15', icon: 'fab fa-deskpro', color: '#48dbfb', title: 'Voi Chúa', desc: 'Thời thiền >= 15 phút', condition: (data) => data.logs.some(l => l.minutes >= 15) },
+    { id: 'sit_30', icon: 'fab fa-medapps', color: '#feca57', title: 'Ngọn Đèn', desc: 'Thời thiền >= 30 phút', condition: (data) => data.logs.some(l => l.minutes >= 30) },
+    { id: 'sit_45', icon: 'fas fa-hand-holding-hand', color: '#cd84f1', title: 'Từ Bi', desc: 'Thời thiền >= 45 phút', condition: (data) => data.logs.some(l => l.minutes >= 45) },
+    { id: 'sit_60', icon: 'fas fa-gem', color: '#7d5fff', title: 'Định Tĩnh', desc: 'Thời thiền >= 60 phút', condition: (data) => data.logs.some(l => l.minutes >= 60) },
+    { id: 'sit_90', icon: 'fab fa-ethereum', color: '#dfe6e9', title: 'Hỷ Tâm', desc: 'Thời thiền >= 90 phút', condition: (data) => data.logs.some(l => l.minutes >= 90) },
+    { id: 'sit_120', icon: 'fas fa-anchor', color: '#ff9ff3', title: 'Pháp Trụ', desc: 'Thời thiền >= 2 giờ', condition: (data) => data.logs.some(l => l.minutes >= 120) },
+    { id: 'sit_180', icon: 'fas fa-balance-scale', color: '#00d2d3', title: 'Buông Xả', desc: 'Thời thiền >= 3 giờ', condition: (data) => data.logs.some(l => l.minutes >= 180) },
+    { id: 'sit_240', icon: 'fab fa-jedi-order', color: '#d980fa', title: 'Định Lực', desc: 'Thời thiền >= 4 giờ', condition: (data) => data.logs.some(l => l.minutes >= 240) },
+
+   
+    { id: 'mind_100', icon: 'fas fa-bullseye', color: '#ff7675', title: 'Nhất Tâm', desc: 'Ghi nhận được 100 Chánh niệm', condition: (data) => data.logs.reduce((s, l) => s + (l.count||0), 0) >= 100 },
+    { id: 'mind_500', icon: 'fas fa-circle-half-stroke', color: '#dfe6e9', title: 'Thanh Tịnh', desc: 'Ghi nhận được 500 Chánh niệm', condition: (data) => data.logs.reduce((s, l) => s + (l.count||0), 0) >= 500 },
+    { id: 'mind_1k', icon: 'fab fa-superpowers', color: '#f1c40f', title: 'Biết Đủ', desc: 'Ghi nhận được 1.000 Chánh niệm', condition: (data) => data.logs.reduce((s, l) => s + (l.count||0), 0) >= 1000 },
+    { id: 'mind_2k', icon: 'fab fa-servicestack', color: '#74b9ff', title: 'Vượt Bộc Lưu', desc: 'Ghi nhận được 2.000 Chánh niệm', condition: (data) => data.logs.reduce((s, l) => s + (l.count||0), 0) >= 2000 },
+    { id: 'mind_3k', icon: 'fas fa-layer-group', color: '#a29bfe', title: 'Ngũ Uẩn', desc: 'Ghi nhận được 3.000 Chánh niệm', condition: (data) => data.logs.reduce((s, l) => s + (l.count||0), 0) >= 3000 },
+    { id: 'mind_4k', icon: 'fab fa-schlix', color: '#d980fa', title: 'Chánh Ngữ', desc: 'Ghi nhận được 4.000 Chánh niệm', condition: (data) => data.logs.reduce((s, l) => s + (l.count||0), 0) >= 4000 },
+    { id: 'mind_5k', icon: 'fab fa-modx', color: '#81ecec', title: 'Biết Ơn', desc: 'Ghi nhận được 5.000 Chánh niệm', condition: (data) => data.logs.reduce((s, l) => s + (l.count||0), 0) >= 5000 },
+    { id: 'mind_6k', icon: 'fab fa-fulcrum', color: '#55efc4', title: 'Ẩn Sĩ', desc: 'Ghi nhận được 6.000 Chánh niệm', condition: (data) => data.logs.reduce((s, l) => s + (l.count||0), 0) >= 6000 },
+    { id: 'mind_7k', icon: 'fab fa-first-order', color: '#fab1a0', title: 'Sáu Xúc Xứ', desc: 'Ghi nhận được 7.000 Chánh niệm', condition: (data) => data.logs.reduce((s, l) => s + (l.count||0), 0) >= 7000 },
+    { id: 'mind_8k', icon: 'fab fa-first-order-alt', color: '#e17055', title: 'Tàm Quý', desc: 'Ghi nhận được 8.000 Chánh niệm', condition: (data) => data.logs.reduce((s, l) => s + (l.count||0), 0) >= 8000 },
+    { id: 'mind_10k', icon: 'fab fa-medrt', color: '#eb4d4b', title: 'Cúng Dường', desc: 'Ghi nhận được 10.000 Chánh niệm', condition: (data) => data.logs.reduce((s, l) => s + (l.count||0), 0) >= 10000 },
+    { id: 'mind_15k', icon: 'fab fa-studiovinari', color: '#00cec9', title: 'Ly Dục', desc: 'Ghi nhận được 15.000 Chánh niệm', condition: (data) => data.logs.reduce((s, l) => s + (l.count||0), 0) >= 15000 },
+    { id: 'mind_20k', icon: 'fab fa-connectdevelop', color: '#74b9ff', title: 'Trạch Pháp', desc: 'Ghi nhận được 20.000 Chánh niệm', condition: (data) => data.logs.reduce((s, l) => s + (l.count||0), 0) >= 20000 },
+    { id: 'mind_25k', icon: 'fab fa-linktree', color: '#00b894', title: 'Vô Ưu', desc: 'Ghi nhận được 25.000 Chánh niệm', condition: (data) => data.logs.reduce((s, l) => s + (l.count||0), 0) >= 25000 },
+    { id: 'mind_30k', icon: 'fas fa-hexagon-nodes', color: '#e056fd', title: 'Tuệ Quán', desc: 'Ghi nhận được 30.000 Chánh niệm', condition: (data) => data.logs.reduce((s, l) => s + (l.count||0), 0) >= 30000 },
+    { id: 'mind_40k', icon: 'fab fa-slack', color: '#ff7675', title: 'Giới Hạnh', desc: 'Ghi nhận được 40.000 Chánh niệm', condition: (data) => data.logs.reduce((s, l) => s + (l.count||0), 0) >= 40000 },
+    { id: 'mind_50k', icon: 'fab fa-hornbill', color: '#feca57', title: 'An Lạc', desc: 'Ghi nhận được 50.000 Chánh niệm', condition: (data) => data.logs.reduce((s, l) => s + (l.count||0), 0) >= 50000 },
+    { id: 'mind_80k', icon: 'fas fa-dragon', color: '#d63031', title: 'Nhiếp Phục', desc: 'Ghi nhận được 80.000 Chánh niệm', condition: (data) => data.logs.reduce((s, l) => s + (l.count||0), 0) >= 80000 },
+    { id: 'mind_100k', icon: 'fas fa-om', color: '#f9ca24', title: 'Chân Như', desc: 'Ghi nhận được 100.000 Chánh niệm', condition: (data) => data.logs.reduce((s, l) => s + (l.count||0), 0) >= 100000 },
+
+    // --- DAILY MINDFULNESS (Intensity) ---
+    { id: 'mindf_200', icon: 'fab fa-linode', color: '#48dbfb', title: 'Trung Đạo', desc: 'Ghi nhận > 200 Chánh niệm trong 1 ngày', condition: (data) => { const daily = {}; data.logs.forEach(l => { const c = l.count || (l.touches ? l.touches.length : 0); daily[l.date] = (daily[l.date]||0) + c; }); return Object.values(daily).some(c => c >= 200); }},
+    { id: 'mindf_400', icon: 'fab fa-shoelace', color: '#a29bfe', title: 'Kham Nhẫn', desc: 'Ghi nhận > 400 Chánh niệm trong 1 ngày', condition: (data) => { const daily = {}; data.logs.forEach(l => { const c = l.count || (l.touches ? l.touches.length : 0); daily[l.date] = (daily[l.date]||0) + c; }); return Object.values(daily).some(c => c >= 400); }},
+    { id: 'mindf_600', icon: 'fas fa-people-roof', color: '#f1c40f', title: 'Hoà Hợp', desc: 'Ghi nhận > 600 Chánh niệm trong 1 ngày', condition: (data) => { const daily = {}; data.logs.forEach(l => { const c = l.count || (l.touches ? l.touches.length : 0); daily[l.date] = (daily[l.date]||0) + c; }); return Object.values(daily).some(c => c >= 600); }},
+    { id: 'mindf_1000', icon: 'fas fa-user-shield', color: '#686de0', title: 'Tự Điều Phục', desc: 'Ghi nhận > 1000 Chánh niệm trong 1 ngày', condition: (data) => { const daily = {}; data.logs.forEach(l => { const c = l.count || (l.touches ? l.touches.length : 0); daily[l.date] = (daily[l.date]||0) + c; }); return Object.values(daily).some(c => c >= 1000); }},
+
+   
+	
+
+    // --- QUALITY (Qualities/Phẩm Chất) ---
+    { id: 'qual_5_min', icon: 'fas fa-feather-pointed', color: '#81ecec', title: 'Khinh An', desc: 'Đạt được > 5 chánh niệm/phút (thời >10p)', condition: (data) => data.logs.some(l => l.minutes >= 10 && (l.count/l.minutes) >= 5) },
+    { id: 'qual_6_min', icon: 'fas fa-shield-alt', color: '#badc58', title: 'Phòng Hộ', desc: 'Đạt được > 6 chánh niệm/phút (thời >10p)', condition: (data) => data.logs.some(l => l.minutes >= 10 && (l.count/l.minutes) >= 6) },
+    { id: 'qual_7_min', icon: 'fas fa-bahai', color: '#ffeaa7', title: 'Thất Giác Chi', desc: 'Đạt được > 7 chánh niệm/phút (thời >10p)', condition: (data) => data.logs.some(l => l.minutes >= 10 && (l.count/l.minutes) >= 7) },
+    { id: 'qual_8_min', icon: 'fas fa-life-ring', color: '#fab1a0', title: 'Bát Chánh Đạo', desc: 'Đạt được > 8 chánh niệm/phút (thời >10p)', condition: (data) => data.logs.some(l => l.minutes >= 10 && (l.count/l.minutes) >= 8) },
+    { id: 'qual_9_min', icon: 'fab fa-debian', color: '#e17055', title: 'Nghiệp', desc: 'Đạt được > 9 chánh niệm/phút (thời >10p)', condition: (data) => data.logs.some(l => l.minutes >= 10 && (l.count/l.minutes) >= 9) },
+    { id: 'qual_10_min', icon: 'fas fa-hands-holding-circle', color: '#ff7675', title: 'Bố Thí', desc: 'Đạt được > 10 chánh niệm/phút (thời >10p)', condition: (data) => data.logs.some(l => l.minutes >= 10 && (l.count/l.minutes) >= 10) },
+    { id: 'qual_12_min', icon: 'fas fa-ranking-star', color: '#f9ca24', title: 'Diệu Pháp', desc: 'Đạt được > 12 chánh niệm/phút (thời >10p)', condition: (data) => data.logs.some(l => l.minutes >= 10 && (l.count/l.minutes) >= 12) },
+
+    // --- FOCUS SCORES (Samadhi Levels) ---
+    
+		
+		
+
+	
+	
+    { id: 'focus_1_5', icon: 'fab fa-free-code-camp', color: '#ff7979', title: 'Chánh Cần', desc: 'Mức chú tâm TB > 1.5 trong phiên <= 20p', condition: (data) => data.logs.some(l => { if (l.minutes > 20 || !l.touches) return false; const proT = l.touches.filter(t => t.v); if(proT.length < 5) return false; const score = proT.reduce((s, t) => s + (5-t.v), 0) / proT.length; return score >= 1.5; }) },
+    { id: 'focus_2_0', icon: 'fab fa-react', color: '#7ed6df', title: 'Danh Sắc', desc: 'Mức chú tâm TB > 2 trong phiên <= 20p', condition: (data) => data.logs.some(l => { if (l.minutes > 20 || !l.touches) return false; const proT = l.touches.filter(t => t.v); if(proT.length < 5) return false; const score = proT.reduce((s, t) => s + (5-t.v), 0) / proT.length; return score >= 2.0; }) },
+    { id: 'focus_2_5', icon: 'fa-meteor', color: '#badc58', title: 'Tấn Lực', desc: 'Mức chú tâm TB > 2.5 trong phiên <= 20p', condition: (data) => data.logs.some(l => { if (l.minutes > 20 || !l.touches) return false; const proT = l.touches.filter(t => t.v); if(proT.length < 5) return false; const score = proT.reduce((s, t) => s + (5-t.v), 0) / proT.length; return score >= 2.5; }) },
+    { id: 'focus_3_0', icon: 'fas fa-jedi', color: '#e056fd', title: 'Chiến Sĩ', desc: 'Mức chú tâm TB > 3 trong phiên <= 20p', condition: (data) => data.logs.some(l => { if (l.minutes > 20 || !l.touches) return false; const proT = l.touches.filter(t => t.v); if(proT.length < 5) return false; const score = proT.reduce((s, t) => s + (5-t.v), 0) / proT.length; return score >= 3.0; }) },
+	{ id: 'focus_3_5', icon: 'fas fa-hanukiah', color: '#f9ca24', title: 'Không Phóng Dật', desc: 'Mức chú tâm TB > 3.5 trong phiên <= 20p', condition: (data) => data.logs.some(l => { if (l.minutes > 20 || !l.touches) return false; const proT = l.touches.filter(t => t.v); if (proT.length < 5) return false; const score = proT.reduce((s, t) => s + (5-t.v), 0) / proT.length; return score >= 3.5; }) },
+
+	{ id: 'sfocus_2', icon: 'fas fa-globe-asia', color: '#22a6b3', title: 'Hải Đảo', desc: 'Mức chú tâm TB > 2 trong phiên >= 45p', condition: (data) => data.logs.some(l => { if (l.minutes < 45 || !l.touches) return false; const proT = l.touches.filter(t => t.v); if(proT.length < 5) return false; const score = proT.reduce((s, t) => s + (5-t.v), 0) / proT.length; return score >= 2.0; }) },
+	{ id: 'sfocus_2_5', icon: 'fab fa-drupal', color: '#2ed573', title: 'Tu Tập', desc: 'Mức chú tâm TB > 2.5 trong phiên >= 45p', condition: (data) => data.logs.some(l => { if (l.minutes < 45 || !l.touches) return false; const proT = l.touches.filter(t => t.v); if(proT.length < 5) return false; const score = proT.reduce((s, t) => s + (5-t.v), 0) / proT.length; return score >= 2.5; }) },
+    { id: 'sfocus_3', icon: 'fa-spa', color: '#6c5ce7', title: 'Thiền Tịnh', desc: 'Mức chú tâm TB > 2.5 trong phiên >= 45p', condition: (data) => data.logs.some(l => { if (l.minutes < 45 || !l.touches) return false; const proT = l.touches.filter(t => t.v); if(proT.length < 5) return false; const score = proT.reduce((s, t) => s + (5-t.v), 0) / proT.length; return score >= 3.0; }) },
+	{ id: 'sfocus_3_5', icon: 'fas fa-dove', color: '#dfe6e9', title: 'Vô Lậu', desc: 'Mức chú tâm TB > 3.5 trong phiên >= 45p', condition: (data) => data.logs.some(l => { if (l.minutes < 45 || !l.touches) return false; const proT = l.touches.filter(t => t.v); if(proT.length < 5) return false; const score = proT.reduce((s, t) => s + (5-t.v), 0) / proT.length; return score >= 3.5; }) },
+
+
+{ id: 'note_long', icon: 'fa-pen-nib', color: '#ff9f43', title: 'Học Giới', desc: 'Viết ghi chú dài hơn 50 ký tự', condition: (data) => data.logs.some(l => l.notes && l.notes.length > 50) },
+    { id: 'note_many', icon: 'fa-scroll', color: '#a29bfe', title: 'Thừa Tự Pháp', desc: 'Có 50 thời thiền đi kèm ghi chú > 50 ký tự', condition: (data) => data.logs.filter(l => l.notes && l.notes.length > 100).length >= 50 },
+    // --- MISC / SPECIAL ---
+	{ id: 'goal-early_4am', icon: 'fas fa-star-half-stroke', color: '#ff6b6b', title: 'Sao Mai', desc: 'Hoàn thành thời thiền trước 4:00 sáng', condition: (data) => data.logs.some(l => new Date(l.timestamp).getHours() < 4) },
+    { id: 'goal-early_5am', icon: 'fab fa-tidal', color: '#7ed6df', title: 'Tứ Diệu Đế', desc: 'Hoàn thành thời thiền trước 5:00 sáng', condition: (data) => data.logs.some(l => new Date(l.timestamp).getHours() < 5) },
+    { id: 'goal-early_3d', icon: 'fas fa-star', color: '#ffbe76', title: 'Ước Nguyện', desc: '3 ngày liên tiếp thiền trước 5:00 sáng', condition: (data) => { const earlyLogs = data.logs.filter(l => new Date(l.timestamp).getHours() < 5).map(l => l.date); const uniqueDays = [...new Set(earlyLogs)].sort(); let streak = 0; for(let i=0; i<uniqueDays.length-1; i++) { const d1 = new Date(uniqueDays[i]); const d2 = new Date(uniqueDays[i+1]); if ((d2-d1) <= 86400000) streak++; else streak = 0; if(streak >= 2) return true; } return false; }},
+	{ id: 'goal-early_7d', icon: 'fa-ribbon', color: '#2ecc71', title: 'Cứu Cánh', desc: '7 ngày liên tiếp thiền trước 5:00 sáng', condition: (data) => { const earlyLogs = data.logs.filter(l => new Date(l.timestamp).getHours() < 5).map(l => l.date); const uniqueDays = [...new Set(earlyLogs)].sort(); let streak = 0; for(let i=0; i<uniqueDays.length-1; i++) { const d1 = new Date(uniqueDays[i]); const d2 = new Date(uniqueDays[i+1]); if ((d2-d1) <= 86400000) streak++; else streak = 0; if(streak >= 6) return true; } return false; }},
+    { id: 'lunch', icon: 'fab fa-viadeo', color: '#badc58', title: 'Quả Tuệ', desc: 'Thiền vào giờ nghỉ trưa (11h-13h)', condition: (data) => data.logs.some(l => { const h = new Date(l.timestamp).getHours(); return h >= 11 && h <= 13; }) },
+    { id: 'goal-evening', icon: 'fas fa-cloud-showers-heavy', color: '#0984e3', title: 'Mùa An Cư', desc: 'Thiền vào chiều tối (17h-19h)', condition: (data) => data.logs.some(l => { const h = new Date(l.timestamp).getHours(); return h >= 17 && h <= 19; }) },
+    { id: 'goal-night', icon: 'fab fa-squarespace', color: '#a29bfe', title: 'Nhân Duyên', desc: 'Thiền sau 22:00 đêm', condition: (data) => data.logs.some(l => new Date(l.timestamp).getHours() >= 22) },
+	 { id: 'goal_100', icon: 'fab fa-think-peaks', color: '#f9ca24', title: 'Viễn Ly', desc: 'Thành tựu 100% 1 mục tiêu thiền', condition: (data) => data.goals.some(g => { const target = g.type === 'meditation' ? g.totalMindfulness : g.totalMinutes; return g.lifetimeTargetMinutes > 0 && target >= g.lifetimeTargetMinutes; }) },
+    { id: 'goal_80', icon: 'fas fa-heart', color: '#ff7675', title: 'Tâm Từ', desc: 'Thành tựu 80% mục tiêu thiền', condition: (data) => data.goals.some(g => { const target = g.type === 'meditation' ? g.totalMindfulness : g.totalMinutes; return g.lifetimeTargetMinutes > 0 && target >= (g.lifetimeTargetMinutes / 2); }) },
+    
+	
+	 { id: 'daily_volume_30p', icon: 'fab fa-canadian-maple-leaf', color: '#e58e26', title: 'Vô Thường', desc: 'Tổng thời gian thiền > 30 phút trong 1 ngày', condition: (data) => { const daily = {}; data.logs.forEach(l => daily[l.date] = (daily[l.date]||0) + l.minutes); return Object.values(daily).some(m => m >= 30); }},
+    { id: 'daily_volume_1h', icon: 'fab fa-phoenix-framework', color: '#fa983a', title: 'Chế Ngự', desc: 'Tổng thời gian thiền > 1 giờ trong 1 ngày', condition: (data) => { const daily = {}; data.logs.forEach(l => daily[l.date] = (daily[l.date]||0) + l.minutes); return Object.values(daily).some(m => m >= 60); }},
+    { id: 'daily_volume_2h', icon: 'fab fa-phoenix-squadron', color: '#eb2f06', title: 'Bất Tử', desc: 'Tổng thời gian thiền > 2 giờ trong 1 ngày', condition: (data) => { const daily = {}; data.logs.forEach(l => daily[l.date] = (daily[l.date]||0) + l.minutes); return Object.values(daily).some(m => m >= 120); }},
+    { id: 'daily_volume_3h', icon: 'fab fa-gripfire', color: '#e55039', title: 'Tinh Cần', desc: 'Tổng thời gian thiền > 3 giờ trong 1 ngày', condition: (data) => { const daily = {}; data.logs.forEach(l => daily[l.date] = (daily[l.date]||0) + l.minutes); return Object.values(daily).some(m => m >= 180); }},
+    { id: 'daily_volume_4h', icon: 'fab fa-rebel', color: '#74b9ff', title: 'Bất Hại', desc: 'Tổng thời gian thiền > 4 giờ trong 1 ngày', condition: (data) => { const daily = {}; data.logs.forEach(l => daily[l.date] = (daily[l.date]||0) + l.minutes); return Object.values(daily).some(m => m >= 240); }},
+    { id: 'daily_volume_5h', icon: 'fab fa-sith', color: '#badc58', title: 'Tỉnh Giác', desc: 'Tổng thời gian thiền > 5 giờ trong 1 ngày', condition: (data) => { const daily = {}; data.logs.forEach(l => daily[l.date] = (daily[l.date]||0) + l.minutes); return Object.values(daily).some(m => m >= 300); }},
+    { id: 'daily_volume_8h', icon: 'fab fa-battle-net', color: '#6a89cc', title: 'Như lý Tác Ý', desc: 'Tổng thời gian thiền > 8 giờ trong 1 ngày', condition: (data) => { const daily = {}; data.logs.forEach(l => daily[l.date] = (daily[l.date]||0) + l.minutes); return Object.values(daily).some(m => m >= 480); }},
+    { id: 'freq_3_day', icon: 'fas fa-users', color: '#f0932b', title: 'Tăng Bảo', desc: 'Thiền 3 lần trong một ngày', condition: (data) => { const counts = {}; data.logs.forEach(l => counts[l.date] = (counts[l.date]||0)+1); return Object.values(counts).some(c => c >= 3); }},
+    { id: 'freq_5_day', icon: 'fas fa-hand-sparkles', color: '#48dbfb', title: 'Ngũ Giới', desc: 'Thiền 5 lần trong một ngày', condition: (data) => { const counts = {}; data.logs.forEach(l => counts[l.date] = (counts[l.date]||0)+1); return Object.values(counts).some(c => c >= 5); }},
+    { id: 'freq_10_day', icon: 'fas fa-hands-praying', color: '#ffbe76', title: 'Tịnh Tín', desc: 'Thiền 10 lần trong một ngày', condition: (data) => { const counts = {}; data.logs.forEach(l => counts[l.date] = (counts[l.date]||0)+1); return Object.values(counts).some(c => c >= 5); }},
+    { id: 'dedicated_day', icon: 'fa-landmark', color: '#2ecc71', title: 'Tam Bảo', desc: 'Thực hiện 3 thời thiền riêng biệt > 30p trong ngày', condition: (data) => { const goodLogs = data.logs.filter(l => l.minutes >= 15); const counts = {}; goodLogs.forEach(l => counts[l.date] = (counts[l.date]||0)+1); return Object.values(counts).some(c => c >= 3); }},
+    { id: 'quick_fix', icon: 'fas fa-user-plus', color: '#f6e58d', title: 'Tự Thắng', desc: 'Hoàn thành 10 phiên ngắn (<10p)', condition: (data) => data.logs.filter(l => l.minutes < 10).length >= 10 },
+	{ id: 'quick_fix2', icon: 'fa-fan', color: '#a29bfe', title: 'Quán Bất Tịnh', desc: 'Hoàn thành 30 phiên ngắn (<10p)', condition: (data) => data.logs.filter(l => l.minutes < 10).length >= 30 },
+    { id: 'long_haul', icon: 'fa-tree', color: '#badc58', title: 'Kiên Trì', desc: 'Hoàn thành 10 phiên dài (>60p)', condition: (data) => data.logs.filter(l => l.minutes >= 60).length >= 10 },
+    { id: 'long_haul2', icon: 'fab fa-watchman-monitoring', color: '#ff6b6b', title: 'Hải Đăng', desc: 'Hoàn thành 20 phiên dài (>60p)', condition: (data) => data.logs.filter(l => l.minutes >= 60).length >= 20 },
+    { id: 'long_haul3', icon: 'fab fa-codepen', color: '#55efc4', title: 'Ly Sân', desc: 'Hoàn thành 50 phiên dài (>60p)', condition: (data) => data.logs.filter(l => l.minutes >= 60).length >= 50 },
+{ id: 'overachiever', icon: 'fa-sailboat', color: '#74b9ff', title: 'Hiền Thiện', desc: 'Hoàn thành 200% mục tiêu ngày', condition: (data) => { return data.goals.some(g => { if(!g.dailyMinMedTarget) return false; const todayStr = new Date().toISOString().split('T')[0]; const todayVal = data.logs.filter(l => l.goalId === g.id && l.date === todayStr).reduce((s,l)=>s+(g.type==='meditation'? (l.count||0) : l.minutes), 0); return todayVal >= (g.dailyMinMedTarget * 2); }); }},
+    
+   
+];
 const DB_CONFIG = {
     name: 'HanhGiaDB',
     version: 2, // <--- UPDATE VERSION TO 2
@@ -532,9 +682,9 @@ const dbHelper = {
             const metaStore = tx.objectStore('meta');
             metaStore.put({ key: 'xp', value: data.xp });
             metaStore.put({ key: 'streak', value: data.streak });
-            metaStore.put({ key: 'globalDailyGoal', value: data.globalDailyGoal });
             metaStore.put({ key: 'achievements', value: data.achievements });
             metaStore.put({ key: 'medSettings', value: data.medSettings });
+			metaStore.put({ key: 'activeBadge', value: data.activeBadge });
             
             tx.oncomplete = () => resolve();
             tx.onerror = (e) => reject(e);
@@ -546,7 +696,7 @@ const dbHelper = {
 
         return new Promise((resolve, reject) => {
             const tx = this.db.transaction(['goals', 'logs', 'meta'], 'readonly');
-            const data = { goals: [], logs: [], xp: 0, streak: 0, globalDailyGoal: 120, achievements: [], medSettings: {} };
+            const data = { goals: [], logs: [], xp: 0, streak: 0, achievements: [], medSettings: {} };
             
             const getAll = (storeName) => {
                 return new Promise((res, rej) => {
@@ -564,9 +714,9 @@ const dbHelper = {
                     metaItems.forEach(item => {
                         if (item.key === 'xp') data.xp = item.value;
                         if (item.key === 'streak') data.streak = item.value;
-                        if (item.key === 'globalDailyGoal') data.globalDailyGoal = item.value;
                         if (item.key === 'achievements') data.achievements = item.value;
                         if (item.key === 'medSettings') data.medSettings = item.value;
+						if (item.key === 'activeBadge') data.activeBadge = item.value;
                     });
                     resolve(data);
                 })
@@ -594,7 +744,6 @@ const dbHelper = {
                     logs: [],
                     xp: 0,
                     streak: 0,
-                    globalDailyGoal: 120,
                     achievements: [],
                     medSettings: { mode: 'tap', holdDuration: 400, tapRequired: 1, vibration: true }
                 };
@@ -638,9 +787,19 @@ const dbHelper = {
             this.data = { ...this.data, ...dbData };
         }
 
-        if (!this.data.medSettings) {
-            this.data.medSettings = { mode: 'tap', holdDuration: 400, tapRequired: 1, vibration: true };
-        }
+       if (!this.data.medSettings || !this.data.medSettings.mode) {
+    this.data.medSettings = { 
+        mode: 'tap', 
+        holdDuration: 400, 
+        tapRequired: 1, 
+        vibration: true,
+        confirmMode: false,     
+        confirmProbability: 100      
+    };
+}
+if (typeof this.data.medSettings.confirmProbability === 'undefined') {
+    this.data.medSettings.confirmProbability = 100; // Mặc định 100%
+}
         
         if (this.data.medSettings.proMode === true) {
             this.data.medSettings.mode = 'pro';
@@ -662,7 +821,7 @@ const dbHelper = {
         this.updateStats();
         this.checkAchievements();
         this.renderCalendar();
-        
+        this.loadActiveBadge();
         setInterval(() => this.updateTimerUI(), 1000);
         this.setupMeditationListeners();
 
@@ -674,6 +833,18 @@ const dbHelper = {
     if (!localStorage.getItem('intro_seen')) {
         this.openIntroModal();
     }
+}
+hexToRgba(hex, alpha) {
+    let c;
+    if (/^#([A-Fa-f0-9]{3}){1,2}$/.test(hex)) {
+        c = hex.substring(1).split('');
+        if (c.length === 3) {
+            c = [c[0], c[0], c[1], c[1], c[2], c[2]];
+        }
+        c = '0x' + c.join('');
+        return 'rgba(' + [(c >> 16) & 255, (c >> 8) & 255, c & 255].join(',') + ',' + alpha + ')';
+    }
+    return `rgba(156, 163, 175, ${alpha})`; // Fallback gray
 }
 setupMeditationListeners() {
                 const medOverlay = document.getElementById('meditation-overlay');
@@ -883,7 +1054,6 @@ renderAnalytics(saveState = false) {
     const goalSelect = document.getElementById('ana-goal-select');
 
     if (saveState) {
-
         this.analyticsGoalFilter = goalSelect.value;
         localStorage.setItem('anaGoalFilter', this.analyticsGoalFilter);
     }
@@ -926,7 +1096,7 @@ renderAnalytics(saveState = false) {
 
     if (logs.length === 0) {
         if(this.charts.analyticsTrend) this.charts.analyticsTrend.destroy();
-		if(this.charts.hourlyChart) this.charts.hourlyChart.destroy();
+        if(this.charts.hourlyChart) this.charts.hourlyChart.destroy();
         document.getElementById('ana-avg-quality').innerText = "---";
         document.getElementById('ana-avg-density').innerText = "---";
         document.getElementById('ana-total-mindful').innerText = "---";
@@ -938,6 +1108,7 @@ renderAnalytics(saveState = false) {
     let totalDistractedSec = 0;
     let totalTouches = 0;
     
+    // 1. Map data and include raw timestamp for calculation
     const sessionData = logs.map(log => {
         const result = this.analyzeSingleSession(log);
         
@@ -953,13 +1124,13 @@ renderAnalytics(saveState = false) {
                         d.getFullYear();
         
         return {
+            timestamp: log.timestamp, // Keep raw timestamp for bucketing
             date: d.toLocaleDateString('vi-VN', {day: '2-digit', month:'2-digit'}),
-            fullDateTime: `${timeStr}, ${dateStr}`, // New property for tooltip
+            fullDateTime: `${timeStr}, ${dateStr}`,
             quality: result.qualityPct,
             density: log.minutes > 0 ? (count / log.minutes).toFixed(1) : 0
         };
     });
-       
 
     const avgQuality = totalTimeSec > 0 ? ((1 - (totalDistractedSec / totalTimeSec)) * 100).toFixed(1) : 0;
     const avgDensity = totalTimeSec > 0 ? (totalTouches / (totalTimeSec / 60)).toFixed(1) : 0;
@@ -972,14 +1143,54 @@ renderAnalytics(saveState = false) {
 
     if (this.charts.analyticsTrend) this.charts.analyticsTrend.destroy();
 
+    // 2. Trend Chart Logic with Time-Window Averaging
     let chartData = sessionData;
-    const maxPoints = 15;
+    const maxPoints = 30;
+
     if (sessionData.length > maxPoints) {
         chartData = [];
-        const step = (sessionData.length - 1) / (maxPoints - 1);
+        // Determine the total time span of the visible data
+        const startTime = sessionData[0].timestamp;
+        const endTime = sessionData[sessionData.length - 1].timestamp;
+        const totalDuration = endTime - startTime;
+        
+        // Calculate the time step for each point
+        const step = totalDuration / maxPoints;
+
         for (let i = 0; i < maxPoints; i++) {
-            const index = Math.round(i * step);
-            chartData.push(sessionData[index]);
+            const bucketStart = startTime + (i * step);
+            const bucketEnd = bucketStart + step;
+
+            // Find all logs that fall into this time bucket
+            const bucketLogs = sessionData.filter(d => 
+                d.timestamp >= bucketStart && d.timestamp < bucketEnd
+            );
+
+            // Edge case: Ensure the very last log is included in the last bucket
+            if (i === maxPoints - 1) {
+                const lastLog = sessionData[sessionData.length - 1];
+                if (!bucketLogs.includes(lastLog)) bucketLogs.push(lastLog);
+            }
+
+            if (bucketLogs.length > 0) {
+                // Calculate Average Quality for this time frame
+                const totalQ = bucketLogs.reduce((sum, item) => sum + item.quality, 0);
+                const avgQ = totalQ / bucketLogs.length;
+
+                // Create label based on the bucket start time
+                const d = new Date(bucketStart);
+                const timeStr = d.getHours().toString().padStart(2, '0') + ':' + 
+                                d.getMinutes().toString().padStart(2, '0');
+                const dateStr = d.getDate().toString().padStart(2, '0') + '/' + 
+                                (d.getMonth() + 1).toString().padStart(2, '0');
+
+                chartData.push({
+                    date: dateStr,
+                    fullDateTime: `${dateStr} (TB ${bucketLogs.length} thời)`, // Indication of averaging
+                    quality: parseFloat(avgQ.toFixed(1)),
+                    timestamp: bucketStart
+                });
+            }
         }
     }
 
@@ -989,7 +1200,7 @@ renderAnalytics(saveState = false) {
             labels: chartData.map(d => d.date),
             datasets: [
                 {
-                    label: 'Chất lượng',
+                    label: 'Chất lượng chánh niệm (%)',
                     data: chartData.map(d => d.quality),
                     borderColor: '#34d399',
                     backgroundColor: 'rgba(52, 211, 153, 0.1)',
@@ -997,33 +1208,24 @@ renderAnalytics(saveState = false) {
                     fill: true,
                     tension: 0.3
                 },
-                {
-                    label: 'Chánh niệm/phút',
-                    data: chartData.map(d => d.density),
-                    borderColor: '#818cf8',
-                    borderDash: [5, 5],
-                    yAxisID: 'y1',
-                    tension: 0.3
-                }
             ]
         },
         options: {
             responsive: true,
             maintainAspectRatio: false,
             interaction: {
-            mode: 'nearest',
-            axis: 'x',
-            intersect: true
-        },
-
-        elements: {
-            point: {
-                hitRadius: 30,     
-                hoverRadius: 4     
-            }
-        },
+                mode: 'nearest',
+                axis: 'x',
+                intersect: true
+            },
+            elements: {
+                point: {
+                    hitRadius: 30,     
+                    hoverRadius: 4     
+                }
+            },
             plugins: {
-                legend: { display: true, labels: { font: {size: 11}} },				
+                legend: { display: true, labels: { font: {size: 11}} },             
                 tooltip: {
                     titleColor: '#f3f4f6',
                     bodyColor: '#f3f4f6',
@@ -1032,23 +1234,33 @@ renderAnalytics(saveState = false) {
                     padding: 10,
                     displayColors: true,
                     callbacks: {
-                    title: function(context) {
-                        return chartData[context[0].dataIndex].fullDateTime;
-                    },
-					label: function(context) {
-                    let label = context.dataset.label || '';
-                    if (label) {
-                        label += ': ';
-                    }
-                    if (context.parsed.y !== null) {
-                        label += context.parsed.y;
+                        title: function(context) {
+                            return chartData[context[0].dataIndex].fullDateTime;
+                        },
+                        label: function(context) {
+                // 1. Get the original label from the dataset (e.g., "Chất lượng trung bình")
+                let label = context.dataset.label || '';
 
-                        if (context.dataset.label === 'Chất lượng') {
-                            label += '%';
-                        }
+                // 2. Override the text ONLY for the tooltip display
+                if (label === 'Chất lượng chánh niệm (%)') {
+                    label = 'Chất lượng';
+                }
+
+                // 3. Construct the final string
+                if (label) {
+                    label += ': ';
+                }
+                
+                if (context.parsed.y !== null) {
+                    label += context.parsed.y;
+
+                    // 4. Add the % sign if it corresponds to the quality dataset
+                    if (context.dataset.label === 'Chất lượng chánh niệm (%)') {
+                        label += '%';
                     }
-                    return label;
-                },
+                }
+                return label;
+            },
                         labelColor: function(context) {
                             return {
                                 borderColor: context.dataset.borderColor,
@@ -1062,21 +1274,33 @@ renderAnalytics(saveState = false) {
             },
             scales: {
                 y: {
-                    type: 'linear', display: true, position: 'left', min: 0, max: 100,
-                    grid: { color: '#374151' }, ticks: { color: '#9ca3af', font: { size: 10 }, },
+                    type: 'linear', display: true, position: 'right', min: 0, max: 100,
+                    grid: { color: '#374151' }, ticks: { color: '#9ca3af', font: { size: 10 }, callback: function(value) {
+                return value + '%';
+            } },
                 },
-				x: {
-                    ticks: { color: '#9ca3af', font: { size: 10 }, } },
-                y1: {
-                    type: 'linear', display: true, position: 'right',
-                    grid: { drawOnChartArea: false }, ticks: { color: '#9ca3af', font: { size: 10 }, },
-                }
+				y1: {
+        type: 'linear',
+        display: true,
+        position: 'left', 
+        min: 0,
+        max: 100,
+        grid: { drawOnChartArea: false }, 
+        ticks: {
+            color: '#9ca3af',
+            font: { size: 10 },
+            callback: value => value + '%'
+        }
+    },
+                x: {
+                    ticks: { color: '#9ca3af', font: { size: 10 }, } 
+                },
             }
         }
     });
 
     this.renderComparisonTable(targetGoalIds);
-this.renderHourlyAnalysis(logs);
+    this.renderHourlyAnalysis(logs);
 }
 
 
@@ -1368,30 +1592,39 @@ renderComparisonTable(medGoalIds) {
         1: { label: 'Cao', color: '#34d399' },
         2: { label: 'Tốt', color: '#60a5fa' },
         3: { label: 'Trung bình', color: '#fbbf24' },
-        4: { label: 'Thấp', color: '#f87171' }
+        4: { label: 'Thấp', color: '#f87171' },
+        0: { label: 'Thất niệm', color: '#6b7280' } // Added Level 0
     };
 
-    const breakdownData = { 1: 0, 2: 0, 3: 0, 4: 0 };
-    const weeklyData = { 1: new Array(7).fill(0), 2: new Array(7).fill(0), 3: new Array(7).fill(0), 4: new Array(7).fill(0) };
+    // Initialize with 0 for levels 1-0
+    const breakdownData = { 1: 0, 2: 0, 3: 0, 4: 0, 0: 0 };
+    const weeklyData = { 
+        1: new Array(7).fill(0), 
+        2: new Array(7).fill(0), 
+        3: new Array(7).fill(0), 
+        4: new Array(7).fill(0),
+        0: new Array(7).fill(0) 
+    };
     const monthlyData = { 
         1: new Array(monthlyLabels.length).fill(0), 
         2: new Array(monthlyLabels.length).fill(0), 
         3: new Array(monthlyLabels.length).fill(0), 
-        4: new Array(monthlyLabels.length).fill(0) 
+        4: new Array(monthlyLabels.length).fill(0),
+        0: new Array(monthlyLabels.length).fill(0) 
     };
 
-    // --- 3. DATA AGGREGATION LOGIC (UPDATED FOR MINUTES) ---
+    // --- 3. DATA AGGREGATION LOGIC ---
     this.data.logs.forEach(log => {
-        // Skip logs without touches
+        // Skip logs without touches (or handle standard logs differently if needed, but Pro view focuses on touches)
         if (!log.touches || log.touches.length === 0) return;
 
-        // 1. Calculate Total Mindful Time (in Seconds)
+        // 1. Calculate Total Mindful Time vs Distracted Time (in Seconds)
         const analysis = this.analyzeSingleSession(log);
         const totalSec = log.minutes * 60;
         const distractedSec = analysis.distractedSec;
         const mindfulSec = Math.max(0, totalSec - distractedSec);
 
-        // 2. Count Pro touches in this log to calculate ratios
+        // 2. Count Pro touches to calculate ratios for Mindful Time
         const logCounts = { 1: 0, 2: 0, 3: 0, 4: 0 };
         let totalLogProTouches = 0;
 
@@ -1402,13 +1635,10 @@ renderComparisonTable(medGoalIds) {
             }
         });
 
-        // If no Pro touches recorded, we skip distribution
-        if (totalLogProTouches === 0) return;
-
-        // 3. Distribute time to accumulators
+        // 3. Prepare Time Buckets
         const logTime = log.timestamp;
         const logDateObj = new Date(logTime);
-
+        
         // Determine array indices
         let weekDayIdx = -1;
         if (logTime >= weekStartMs && logTime < weekEndMs) {
@@ -1421,41 +1651,38 @@ renderComparisonTable(medGoalIds) {
             monthDayIdx = logDateObj.getDate() - 1;
         }
 
-        // Distribute minutes to each level
-        [1, 2, 3, 4].forEach(level => {
-            if (logCounts[level] > 0) {
-                // Ratio calculation: (Count Level / Total Count) * Mindful Seconds
-                const levelSeconds = (logCounts[level] / totalLogProTouches) * mindfulSec;
-                const levelMinutes = levelSeconds / 60; // Convert to Minutes
-
-                // Add to Breakdown (if within selected range)
-                if (logTime >= filterStart && logTime < filterEnd) {
-                    breakdownData[level] += levelMinutes;
-                }
-
-                // Add to Weekly
-                if (weekDayIdx !== -1) {
-                    weeklyData[level][weekDayIdx] += levelMinutes;
-                }
-
-                // Add to Monthly
-                if (monthDayIdx !== -1) {
-                    monthlyData[level][monthDayIdx] += levelMinutes;
-                }
+        // Helper to add minutes
+        const addMinutes = (level, minutes) => {
+            if (logTime >= filterStart && logTime < filterEnd) {
+                breakdownData[level] += minutes;
             }
-        });
-    });
-const formatTime = (mins) => {
-        if (mins >= 60) {
-            return (mins / 60).toFixed(1) + 'h';
+            if (weekDayIdx !== -1) weeklyData[level][weekDayIdx] += minutes;
+            if (monthDayIdx !== -1) monthlyData[level][monthDayIdx] += minutes;
+        };
+
+        // 4. Distribute "Distracted" Time (Level 0)
+        if (distractedSec > 0) {
+            addMinutes(0, distractedSec / 60);
         }
+
+        // 5. Distribute "Mindful" Time (Levels 1-4)
+        if (totalLogProTouches > 0) {
+            [1, 2, 3, 4].forEach(level => {
+                if (logCounts[level] > 0) {
+                    const levelSeconds = (logCounts[level] / totalLogProTouches) * mindfulSec;
+                    addMinutes(level, levelSeconds / 60);
+                }
+            });
+        }
+    });
+
+    const formatTime = (mins) => {
+        if (mins >= 60) return (mins / 60).toFixed(1) + 'h';
         return mins.toFixed(0) + 'p';
     };
 
     const formatTimeDetailed = (mins) => {
-        if (mins >= 60) {
-            return (mins / 60).toFixed(1) + 'h';
-        }
+        if (mins >= 60) return (mins / 60).toFixed(1) + 'h';
         return mins.toFixed(1) + 'p';
     };
     const weekDays = ['T2', 'T3', 'T4', 'T5', 'T6', 'T7', 'CN'];
@@ -1464,16 +1691,19 @@ const formatTime = (mins) => {
     const ctxBreakdown = document.getElementById('proBreakdownChart').getContext('2d');
     if (this.charts.proBreakdown) this.charts.proBreakdown.destroy();
 
+    // Total Minutes (Mindful + Distracted)
     const totalBreakdown = Object.values(breakdownData).reduce((a, b) => a + b, 0);
 
-    // Calculate Weighted Average Score based on MINUTES
+    // Calculate Average Score (Only based on Mindful time, i.e., levels 1-4)
     let averageScore = 0;
-    if (totalBreakdown > 0) {
+    const totalMindfulMinutes = breakdownData[1] + breakdownData[2] + breakdownData[3] + breakdownData[4];
+    
+    if (totalMindfulMinutes > 0) {
         const weightedSum = (breakdownData[1] * 4) + 
                             (breakdownData[2] * 3) + 
                             (breakdownData[3] * 2) + 
                             (breakdownData[4] * 1);
-        averageScore = (weightedSum / totalBreakdown).toFixed(2);
+        averageScore = (weightedSum / totalMindfulMinutes).toFixed(2);
     }
 
     this.charts.proBreakdown = new Chart(ctxBreakdown, {
@@ -1484,7 +1714,8 @@ const formatTime = (mins) => {
                 { label: qualities[1].label, data: [breakdownData[1]], backgroundColor: qualities[1].color, borderRadius: { topLeft: 8, bottomLeft: 8 } },
                 { label: qualities[2].label, data: [breakdownData[2]], backgroundColor: qualities[2].color },
                 { label: qualities[3].label, data: [breakdownData[3]], backgroundColor: qualities[3].color },
-                { label: qualities[4].label, data: [breakdownData[4]], backgroundColor: qualities[4].color, borderRadius: { topRight: 8, bottomRight: 8 } }
+                { label: qualities[4].label, data: [breakdownData[4]], backgroundColor: qualities[4].color },
+                { label: qualities[0].label, data: [breakdownData[0]], backgroundColor: qualities[0].color, borderRadius: { topRight: 8, bottomRight: 8 } }
             ]
         },
         options: {
@@ -1497,7 +1728,7 @@ const formatTime = (mins) => {
                     grid: { display: true, color: 'rgba(55, 65, 81, 0.5)' },
                     ticks: { 
                         display: true, color: '#9ca3af', font: { size: 10 },
-                        callback: function(value) { return formatTime(value); } // Show minutes on X axis
+                        callback: function(value) { return formatTime(value); }
                     }
                 },
                 y: { stacked: true, display: false }
@@ -1573,7 +1804,7 @@ const formatTime = (mins) => {
                             }
                         });
                         const percentage = total > 0 ? ((value / total) * 100).toFixed(1) : 0;
-                        return `Mức chú tâm: ${label}, ${formatTimeDetailed(value)} (${percentage}%)`;
+                        return `${label}: ${formatTimeDetailed(value)} (${percentage}%)`;
                     }
                 }
             }
@@ -1612,7 +1843,8 @@ const formatTime = (mins) => {
                 { label: qualities[1].label, data: weeklyData[1], backgroundColor: qualities[1].color },
                 { label: qualities[2].label, data: weeklyData[2], backgroundColor: qualities[2].color },
                 { label: qualities[3].label, data: weeklyData[3], backgroundColor: qualities[3].color },
-                { label: qualities[4].label, data: weeklyData[4], backgroundColor: qualities[4].color }
+                { label: qualities[4].label, data: weeklyData[4], backgroundColor: qualities[4].color },
+                { label: qualities[0].label, data: weeklyData[0], backgroundColor: qualities[0].color }
             ]
         },
         options: weeklyOptions 
@@ -1646,7 +1878,8 @@ const formatTime = (mins) => {
                 { label: qualities[1].label, data: monthlyData[1], backgroundColor: qualities[1].color },
                 { label: qualities[2].label, data: monthlyData[2], backgroundColor: qualities[2].color },
                 { label: qualities[3].label, data: monthlyData[3], backgroundColor: qualities[3].color },
-                { label: qualities[4].label, data: monthlyData[4], backgroundColor: qualities[4].color }
+                { label: qualities[4].label, data: monthlyData[4], backgroundColor: qualities[4].color },
+                { label: qualities[0].label, data: monthlyData[0], backgroundColor: qualities[0].color }
             ]
         },
         options: monthlyOptions
@@ -1659,7 +1892,7 @@ renderProTrendChart() {
     if (!ctxTrend) return;
     const ctx = ctxTrend.getContext('2d');
 
-    // 1. Determine Time Range based on the specific trend selector
+    // 1. Determine Time Range
     const selectEl = document.getElementById('pro-trend-select');
     const rangeVal = selectEl ? selectEl.value : '30';
     
@@ -1673,8 +1906,7 @@ renderProTrendChart() {
         filterStart = now - (days * 24 * 60 * 60 * 1000);
     }
 
-    // 2. Filter Logs
-    // We only care about logs that have Pro data (touches with 'v' property)
+    // 2. Filter Logs (Only logs with Pro data)
     let trendLogs = this.data.logs
         .filter(l => l.timestamp >= filterStart)
         .filter(l => l.touches && l.touches.some(t => t.v)) 
@@ -1682,43 +1914,81 @@ renderProTrendChart() {
 
     if (trendLogs.length === 0) {
         if (this.charts.proTrend) this.charts.proTrend.destroy();
-        // Optional: Render "No Data" text on canvas if desired, 
-        // or just leave it empty.
         return;
     }
 
-    // 3. Process Data: Calculate Average Score per Session
-    let trendData = trendLogs.map(log => {
-    const proTouches = log.touches.filter(t => t.v);
-    const totalScore = proTouches.reduce((sum, t) => sum + (5 - t.v), 0);
-    const avg = proTouches.length > 0 ? (totalScore / proTouches.length) : 0;
-    
-    const d = new Date(log.timestamp);
-    // Format: hh:mm
-    const timeStr = d.getHours().toString().padStart(2, '0') + ':' + 
-                    d.getMinutes().toString().padStart(2, '0');
-    // Format: dd/mm/yyyy
-    const dateStr = d.getDate().toString().padStart(2, '0') + '/' + 
-                    (d.getMonth() + 1).toString().padStart(2, '0') + '/' + 
-                    d.getFullYear();
+    // 3. Pre-calculate score for every valid session
+    const sessionData = trendLogs.map(log => {
+        const proTouches = log.touches.filter(t => t.v);
+        const totalScore = proTouches.reduce((sum, t) => sum + (5 - t.v), 0);
+        const avg = proTouches.length > 0 ? (totalScore / proTouches.length) : 0;
+        
+        const d = new Date(log.timestamp);
+        // Formats for tooltip and labels
+        const timeStr = d.getHours().toString().padStart(2, '0') + ':' + 
+                        d.getMinutes().toString().padStart(2, '0');
+        const dateStr = d.getDate().toString().padStart(2, '0') + '/' + 
+                        (d.getMonth() + 1).toString().padStart(2, '0');
 
-    return {
-        date: new Date(log.timestamp).toLocaleDateString('vi-VN', {day: '2-digit', month:'2-digit'}),
-        score: parseFloat(avg.toFixed(2)),
-        formattedDateTime: `${timeStr}, ${dateStr}` // Created the specific format here
-    };
-});
+        return {
+            timestamp: log.timestamp,
+            date: dateStr,
+            fullDateTime: `${timeStr}, ${dateStr}`, 
+            score: avg
+        };
+    });
 
-    // 4. Downsample data if too many points (Limit to ~15 points for readability)
-    const maxPoints = 15;
-    if (trendData.length > maxPoints) {
-        const sampledData = [];
-        const step = (trendData.length - 1) / (maxPoints - 1);
+    // 4. Data Aggregation (Time-Window Averaging)
+    // Similar to analyticsTrend: Bin data into buckets to show a true trend
+    let chartData = [];
+    const maxPoints = 30; // Match analytics chart density
+
+    if (sessionData.length <= maxPoints) {
+        // If we have fewer logs than maxPoints, show them all directly
+        chartData = sessionData.map(d => ({
+            label: d.date,
+            score: parseFloat(d.score.toFixed(2)),
+            tooltipTitle: d.fullDateTime
+        }));
+    } else {
+        // Otherwise, bucket them by time
+        const startTime = sessionData[0].timestamp;
+        const endTime = sessionData[sessionData.length - 1].timestamp;
+        const totalDuration = endTime - startTime;
+        const step = totalDuration / maxPoints;
+
         for (let i = 0; i < maxPoints; i++) {
-            const index = Math.round(i * step);
-            sampledData.push(trendData[index]);
+            const bucketStart = startTime + (i * step);
+            const bucketEnd = bucketStart + step;
+
+            // Find all sessions in this time window
+            const bucketLogs = sessionData.filter(d => 
+                d.timestamp >= bucketStart && d.timestamp < bucketEnd
+            );
+
+            // Ensure the very last log is included
+            if (i === maxPoints - 1) {
+                const lastLog = sessionData[sessionData.length - 1];
+                if (!bucketLogs.includes(lastLog)) bucketLogs.push(lastLog);
+            }
+
+            if (bucketLogs.length > 0) {
+                // Calculate Average Score for this bucket
+                const totalQ = bucketLogs.reduce((sum, item) => sum + item.score, 0);
+                const avgQ = totalQ / bucketLogs.length;
+
+                const d = new Date(bucketStart);
+                const dateStr = d.getDate().toString().padStart(2, '0') + '/' + 
+                                (d.getMonth() + 1).toString().padStart(2, '0');
+
+                chartData.push({
+                    label: dateStr,
+                    score: parseFloat(avgQ.toFixed(2)),
+                    // Tooltip indicates this is an average
+                    tooltipTitle: `${dateStr} (TB ${bucketLogs.length} thời)` 
+                });
+            }
         }
-        trendData = sampledData;
     }
 
     // 5. Render Chart
@@ -1727,17 +1997,16 @@ renderProTrendChart() {
     this.charts.proTrend = new Chart(ctx, {
         type: 'line',
         data: {
-            labels: trendData.map(d => d.date),
+            labels: chartData.map(d => d.label),
             datasets: [
                 {
                     label: 'Điểm chú tâm TB',
-                    data: trendData.map(d => d.score),
-                    borderColor: '#818cf8', // Emerald-500
-                    backgroundColor: 'rgba(129, 140, 248, 0.1)', // Emerald tint
+                    data: chartData.map(d => d.score),
+                    borderColor: '#818cf8', // Emerald-500 equivalent style
+                    backgroundColor: 'rgba(129, 140, 248, 0.1)',
                     borderWidth: 2,
                     fill: true,
                     tension: 0.3,
-                    
                 }
             ]
         },
@@ -1749,29 +2018,30 @@ renderProTrendChart() {
                 axis: 'x',
                 intersect: true
             },
-			elements: {
-            point: {
-                hitRadius: 30,     
-                hoverRadius: 4     
-            }
-        },
+            elements: {
+                point: {
+                    hitRadius: 30,     
+                    hoverRadius: 4     
+                }
+            },
             scales: {
                 y: {
                     type: 'linear',
                     display: true,
-                    min: 1,
-                    max: 4.2, // Slight padding above 4
+                    min: 0,
+                    max: 4.2, 
                     grid: { color: '#374151' },
                     ticks: {
                         color: '#9ca3af',
                         font: { size: 10 },
                         stepSize: 1,
-						padding: 0.1,
+                        padding: 0.1,
                         callback: function(value) {
                             if(value === 1) return 'Thấp (1)';
                             if(value === 2) return 'TB (2)';
                             if(value === 3) return 'Tốt (3)';
                             if(value === 4) return 'Cao (4)';
+							if(value === 0) return '☁️ (0)';
                             return '';
                         }
                     }
@@ -1791,80 +2061,163 @@ renderProTrendChart() {
                     padding: 10,
                     displayColors: false,
                     callbacks: {
-            // Change this line to use the new formatted string
-            title: (context) => trendData[context[0].dataIndex].formattedDateTime,
-            label: function(context) {
-                return `Mức chú tâm: ${context.parsed.y} / 4.0`;
-            }
-        }
+                        title: (context) => chartData[context[0].dataIndex].tooltipTitle,
+                        label: function(context) {
+                            return `Mức chú tâm: ${context.parsed.y} / 4.0`;
+                        }
+                    }
                 }
             }
         }
     });
 }
-triggerMindfulnessSuccess(quality = 1) {
-    const settings = this.data.medSettings;
+triggerMindfulnessSuccess(quality = 1) 
 
-    // --- PRO MODE COMBO LOGIC (UPDATED) ---
-    if (settings.mode === 'pro') {
-        if (quality === 2) {
-            // If Tốt (Level 2), increment combo count
-            this.meditationState.consecutiveGoodCount = (this.meditationState.consecutiveGoodCount || 0) + 1;
-            
-            // If 10 OR MORE consecutive 'Tốt', upgrade this touch (and subsequent ones) to 'Cao' (Level 1)
-            if (this.meditationState.consecutiveGoodCount >= 10) {
-                quality = 1; 
-                // We DO NOT reset the count here anymore. 
-                // This ensures the 11th, 12th, etc. continue to be counted as 'Cao'.
-            }
-        } else {
-            // Any other quality (TB, Thấp) breaks the combo immediately
-            this.meditationState.consecutiveGoodCount = 0;
-        }
-    }
-    // ----------------------------
-
-    this.handleMeditationTouch(quality);
-
-    if (settings.vibration && navigator.vibrate) {
-        if (settings.mode === 'pro') {
-            switch(quality) {
-                case 1: navigator.vibrate([80, 50, 80]); break;          
-                case 2: navigator.vibrate(80); break; 
-                case 3: navigator.vibrate([60, 40, 60]); break;     
-                case 4: navigator.vibrate(50); break;            
-            }
-        } else {
-            navigator.vibrate(50); 
-        }
-    }
-
-    const counterEl = document.getElementById('med-counter');
-
-    const colors = { 
-        1: 'var(--q-1)', 
-        2: 'var(--q-2)', 
-        3: 'var(--q-3)', 
-        4: 'var(--q-4)' 
-    }; 
-
-    const pulseColor = (settings.mode === 'pro') ? colors[quality] : 'var(--success)';
-
-    counterEl.style.transform = "scale(1.3)";
-    counterEl.style.borderColor = pulseColor;
-    counterEl.style.color = (settings.mode === 'pro') ? pulseColor : 'white'; 
+{ const settings = this.data.medSettings; const now = Date.now();
     
-    setTimeout(() => {
-        counterEl.style.transform = "scale(1)";
-        counterEl.style.borderColor = "transparent";
-        counterEl.style.color = "white";
-    }, 200);
+   const thresholdMs = this.meditationState.threshold * 1000;
+const timeDiff = now - this.meditationState.lastTouchTime;
+
+let nextAutoLevel = this.meditationState.currentAutoLevel;
+let nextComboCounter = this.meditationState.comboCounter;
+
+if (timeDiff > thresholdMs) {
+   
+    nextAutoLevel = 4;
+    nextComboCounter = 0;
+} else {
+    if (nextAutoLevel > 1) {
+        nextComboCounter++;
+        
+        
+        const hitsRequired = (nextAutoLevel === 3 || nextAutoLevel === 2) ? 20 : 10;
+        if (nextComboCounter >= hitsRequired) {
+            nextAutoLevel--;    
+            nextComboCounter = 0;
+        }
+    }
 }
 
-            // Existing sync save is now async but we don't await it everywhere
-            // to keep the app feeling responsive.
+
+let finalQuality = 4; 
+
+if (settings.mode === 'pro') {
+   
+    let potentialProQuality = quality;
+    if (quality === 2) {
+        const currentGoodCount = this.meditationState.consecutiveGoodCount || 0;
+        if (currentGoodCount + 1 >= 10) {
+            potentialProQuality = 1;
+        }
+    }
+    
+    finalQuality = Math.min(potentialProQuality, nextAutoLevel);
+
+} else {
+    finalQuality = nextAutoLevel;
+}
+
+
+const isProLow = (settings.mode === 'pro' && finalQuality === 4);
+const isStandardLow = (settings.mode !== 'pro' && finalQuality === 4);
+
+// Logic MỚI: Kiểm tra chế độ bật + Là mức Thấp + Random trúng tỷ lệ
+let needConfirm = false;
+
+if (settings.confirmMode && (isProLow || isStandardLow)) {
+    // Nếu đang chờ xác nhận thì không cần random lại, coi như cần xác nhận tiếp
+    if (this.meditationState.pendingConfirmation) {
+        needConfirm = true; 
+    } else {
+        // Nếu là lần chạm đầu, tung xúc xắc
+        const chance = settings.confirmProbability || 100;
+        const roll = Math.random() * 100;
+        if (roll <= chance) {
+            needConfirm = true;
+        }
+    }
+}
+
+if (needConfirm) {
+    const counterEl = document.getElementById('med-counter');
+
+    if (!this.meditationState.pendingConfirmation) {
+        this.meditationState.pendingConfirmation = true;
+        this.meditationState.pendingTouchData = { 
+            quality: finalQuality, 
+            timestamp: now 
+        };
+        
+        counterEl.style.transition = "all 0.2s";
+        counterEl.style.borderColor = "var(--warning)";
+        counterEl.style.color = "var(--warning)";
+        counterEl.style.transform = "scale(0.85)";
+      
+        // HARDCODE THỜI GIAN 3000ms (3 giây)
+        this.meditationState.confirmationTimeout = setTimeout(() => {
+            this.meditationState.pendingConfirmation = false;
+            this.meditationState.pendingTouchData = null;
+            
+            counterEl.style.borderColor = "transparent";
+            counterEl.style.color = "white";
+            counterEl.style.transform = "scale(1)";
+        }, 3000); 
+
+        return; // Dừng lại, chờ chạm lần 2
+
+    } else {
+        // Đã chạm lần 2 thành công
+        clearTimeout(this.meditationState.confirmationTimeout);
+        this.meditationState.pendingConfirmation = false;
+        // Tiếp tục chạy xuống logic ghi nhận bên dưới...
+    }
+}
+
+
+this.meditationState.currentAutoLevel = nextAutoLevel;
+this.meditationState.comboCounter = nextComboCounter;
+this.meditationState.lastTouchTime = now;
+
+if (settings.mode === 'pro') {
+    if (quality === 2) {
+        this.meditationState.consecutiveGoodCount = (this.meditationState.consecutiveGoodCount || 0) + 1;
+    } else {
+        this.meditationState.consecutiveGoodCount = 0;
+    }
+}
+
+
+this.handleMeditationTouch(finalQuality);
+
+
+if (settings.vibration && navigator.vibrate) {
+    switch(finalQuality) {
+        case 1: navigator.vibrate([80, 50, 80]); break; 
+        case 2: navigator.vibrate([60, 40, 60]); break; 
+        case 3: navigator.vibrate([40, 30, 40]); break; 
+        case 4: navigator.vibrate(50); break;           
+        default: navigator.vibrate(50);
+    }
+}
+
+const counterEl = document.getElementById('med-counter');
+const colors = { 1: 'var(--q-1)', 2: 'var(--q-2)', 3: 'var(--q-3)', 4: 'var(--q-4)' }; 
+const pulseColor = colors[finalQuality] || 'var(--q-4)';
+
+counterEl.style.transition = "transform 0.1s";
+counterEl.style.transform = "scale(1.3)";
+counterEl.style.borderColor = pulseColor;
+counterEl.style.color = pulseColor; 
+
+setTimeout(() => {
+    counterEl.style.transform = "scale(1)";
+    counterEl.style.borderColor = "transparent";
+    counterEl.style.color = "white";
+}, 200);
+}
+            
             save() {
-                // We perform a "fire and forget" save to DB
+               
                 dbHelper.saveAll(this.data).catch(err => {
                     console.error("Save failed:", err);
                     this.showToast("Lỗi lưu dữ liệu!");
@@ -1919,15 +2272,7 @@ get totalMindfulnessCounts() {
                 this.closeModal();
             }
 
-            setGlobalDailyGoal() {
-                const current = this.data.globalDailyGoal || 120;
-                const input = prompt("Nhập mục tiêu hàng ngày (phút):", current);
-                if (input && !isNaN(input) && parseInt(input) > 0) {
-                    this.data.globalDailyGoal = parseInt(input);
-                    this.save();
-                    this.showToast("Đã cập nhật!");
-                }
-            }
+          
 
 toggleTimer(id) {
     const goal = this.data.goals.find(g => g.id === id);
@@ -2021,7 +2366,18 @@ startMeditationSetup(goal) {
         remainingSeconds: min * 60, touches: [],
         threshold: threshold, 
         quoteInterval: null,
-        consecutiveGoodCount: 0 // --- NEW: Track consecutive 'Tốt' for combo ---
+        
+        // --- NEW: Time-Based Streak Variables (For Auto-Upgrading) ---
+        currentAutoLevel: 4,      // Starts at 'Thấp'
+        comboCounter: 0,          // Counts successful time-consecutive touches
+        lastTouchTime: Date.now(), // Tracks time gaps
+        
+        // --- EXISTING: Pro-Mode "Good" Streak (Time Independent) ---
+        consecutiveGoodCount: 0, 
+
+        pendingConfirmation: false,
+        pendingTouchData: null,
+        confirmationTimeout: null
     };
 
     document.getElementById('meditation-overlay').style.display = 'flex';
@@ -2054,28 +2410,21 @@ startMeditationSetup(goal) {
                 document.getElementById('med-timer').innerText = `${m}:${sec.toString().padStart(2, '0')}`;
             }
 
-            handleMeditationTouch(value = 1) {
-                if (!this.meditationState.active || this.meditationState.paused) return;
-                this.meditationState.count++;
+            handleMeditationTouch(value = 1, customTimestamp = null) {
+    if (!this.meditationState.active || this.meditationState.paused) return;
+    this.meditationState.count++;
 
-                const touchData = { t: Date.now() };
+    const touchTime = customTimestamp || Date.now();
+    const touchData = { t: touchTime };
+    touchData.v = value;
 
-                if (this.data.medSettings.mode === 'pro') {
-                    touchData.v = value;
-                }
+    this.meditationState.touches.push(touchData);
+    
+    const el = document.getElementById('med-counter');
+    el.innerText = this.meditationState.count;
+}
 
-
-                this.meditationState.touches.push(touchData);
-                
-                const el = document.getElementById('med-counter');
-                el.innerText = this.meditationState.count;
-            }
-
-            togglePauseMeditation() {
-                this.meditationState.paused = !this.meditationState.paused;
-                const btn = document.getElementById('med-pause-btn');
-                btn.innerHTML = this.meditationState.paused ? '<i class="fas fa-play"></i>' : '<i class="fas fa-pause"></i>';
-            }
+            
        updateMeditationQuote(isFirstTime = false) {
     const container = document.getElementById('med-quote-container');
     const txt = document.getElementById('med-quote-text');
@@ -2097,6 +2446,12 @@ startMeditationSetup(goal) {
 }   
 
             concludeMeditationSession(type = 'manual') {
+				if (type === 'manual') {
+        // If user clicks "Cancel" (Hủy), return immediately to keep the session running
+        if (!confirm("Bạn có chắc muốn kết thúc thời thiền không?")) {
+            return;
+        }
+    }
     clearInterval(this.meditationState.timerRef);
 
     if (this.meditationState.quoteInterval) {
@@ -2212,18 +2567,32 @@ startMeditationSetup(goal) {
 
 openMedSettings() {
     const s = this.data.medSettings;
-
     if(!s.mode) s.mode = s.proMode ? 'pro' : 'tap';
-    
     this.setMedModeUI(s.mode);
     
     document.getElementById('inp-hold-time').value = s.holdDuration;
     document.getElementById('disp-hold-time').innerText = (s.holdDuration / 1000) + 's';
     document.getElementById('inp-tap-count').value = s.tapRequired || 1;
     document.getElementById('inp-vibrate').checked = s.vibration;
-
-    document.getElementById('med-settings-modal').style.display = 'flex';
+    
+    // Cập nhật Confirm UI
+    document.getElementById('inp-confirm-mode').checked = s.confirmMode || false;
+    
+    // Load Probability thay vì Time
+    const prob = (typeof s.confirmProbability !== 'undefined') ? s.confirmProbability : 100;
+    document.getElementById('inp-confirm-prob').value = prob;
+    document.getElementById('disp-confirm-prob').innerText = prob + '%';
+    
+    this.toggleConfirmSlider(); 
+    
+    const modal = document.getElementById('med-settings-modal');
+    modal.style.display = 'flex';
 }
+toggleConfirmSlider() {
+    const isChecked = document.getElementById('inp-confirm-mode').checked;
+    document.getElementById('confirm-slider-group').style.display = isChecked ? 'block' : 'none';
+}
+
 
 closeMedSettings() {
     this.saveMedSettings();
@@ -2274,7 +2643,6 @@ setMedModeUI(mode) {
 }
 
 saveMedSettings() {
-
     let mode = 'tap';
     if(document.getElementById('btn-mode-hold').classList.contains('btn-mode-active')) mode = 'hold';
     else if(document.getElementById('btn-mode-auto').classList.contains('btn-mode-active')) mode = 'auto';
@@ -2284,10 +2652,20 @@ saveMedSettings() {
         mode: mode,
         holdDuration: parseInt(document.getElementById('inp-hold-time').value),
         tapRequired: parseInt(document.getElementById('inp-tap-count').value),
-        vibration: document.getElementById('inp-vibrate').checked
-
+        vibration: document.getElementById('inp-vibrate').checked,
+        confirmMode: document.getElementById('inp-confirm-mode').checked,
+        
+        // Lưu giá trị xác suất, bỏ confirmWindow
+        confirmProbability: parseInt(document.getElementById('inp-confirm-prob').value)
     };
+
     this.save();
+}
+
+// 3. Hàm Helper mới (Thay thế updateConfirmDisplay cũ)
+updateConfirmProbDisplay() {
+    const val = document.getElementById('inp-confirm-prob').value;
+    document.getElementById('disp-confirm-prob').innerText = val + '%';
 }
 
 updateMedSettingDisplay() {
@@ -2303,99 +2681,148 @@ toggleProModeUI() {
     document.getElementById('pro-tap-options').style.display = isPro ? 'block' : 'none';
 }
 
+setDailyMinMedTarget(id) {
+    const goal = this.data.goals.find(g => g.id === id);
+    if (!goal) return;
 
-            renderGoals() {
-                const container = document.getElementById('active-goals-container');
-                const emptyMsg = document.getElementById('empty-msg');
-                container.innerHTML = '';
-                if (this.data.goals.length === 0) { emptyMsg.style.display = 'block'; return; }
-                emptyMsg.style.display = 'none';
-                const todayStr = this.toIsoDate(new Date());
+    const current = goal.dailyMinMedTarget || 120;
+    const input = prompt(`Đặt mục tiêu thời gian hàng ngày (phút) cho "${goal.name}":`, current);
 
-                this.data.goals.forEach(goal => {
-    const isMeditation = goal.type === 'meditation';
-    const unitLabel = isMeditation ? 'chánh niệm' : 'phút';
-    const targetProp = isMeditation ? 'totalMindfulness' : 'totalMinutes';
-    const overallPct = goal.lifetimeTargetMinutes > 0 ? Math.min((goal[targetProp] / goal.lifetimeTargetMinutes) * 100, 100) : 0;
-
-    let todayVal = 0;
-    if (isMeditation) {
-
-        todayVal = this.data.logs
-            .filter(l => l.goalId === goal.id && l.date === todayStr)
-            .reduce((sum, l) => sum + (l.count !== undefined ? l.count : (l.touches ? l.touches.length : 0)), 0);
-    } else {
-        todayVal = this.data.logs.filter(l => l.goalId === goal.id && l.date === todayStr).reduce((sum, l) => sum + l.minutes, 0);
+    if (input !== null) {
+        const val = parseInt(input);
+        if (!isNaN(val) && val > 0) {
+            goal.dailyMinMedTarget = val;
+            this.save();
+            this.renderGoals();
+            this.showToast(`Đã cập nhật: ${val} phút/ngày`);
+        }
     }
-                    
-                    const dailyTarget = goal.dailyTargetMinutes || 0;
-                    let dailyPct = 0;
-                    let dailyBarColor = goal.color;
-                    if (dailyTarget > 0) {
-                        dailyPct = Math.min((todayVal / dailyTarget) * 100, 100);
-                        if (todayVal >= dailyTarget) dailyBarColor = 'var(--success)';
-                    }
-                    
-                    const div = document.createElement('div');
-                    div.className = 'card goal-card';
-                    div.style.borderLeft = `5px solid ${goal.color}`;
-                    
-                    let controlsHtml = '', dailySectionHtml = '', sessionSectionHtml = '';
-                    if (dailyTarget > 0) {
-                        dailySectionHtml = `
-                            <div style="margin-bottom: 15px; background: rgba(0,0,0,0.2); padding: 10px; border-radius: 8px;">
-                                <div style="display:flex; justify-content:space-between; font-size:12px; margin-bottom:5px; align-items:center;">
-                                    <strong style="color:var(--text);">Hôm nay</strong>
-                                    <span style="font-weight:600;">${todayVal} / ${dailyTarget} ${unitLabel}</span>
-                                </div>
-                                <div class="progress-container" style="height: 6px;"><div class="progress-bar" style="width: ${dailyPct}%; background: ${dailyBarColor}"></div></div>
-                            </div>`;
-                    }
+}
+            renderGoals() {
+    const container = document.getElementById('active-goals-container');
+    const emptyMsg = document.getElementById('empty-msg');
+    container.innerHTML = '';
+    if (this.data.goals.length === 0) { emptyMsg.style.display = 'block'; return; }
+    emptyMsg.style.display = 'none';
+    const todayStr = this.toIsoDate(new Date());
 
-                    if (isMeditation) {
-                        controlsHtml = `
-                             <div class="timer-controls">
-                                <div style="font-size: 14px; color: var(--text-light); text-transform: uppercase;">Hành Thiền</div>
-                                <div style="display:flex; gap: 10px;">
-                                    <button class="btn-icon btn-play" style="background: var(--zen); color: white;" onclick="app.toggleTimer('${goal.id}')" title="Hành thiền"><i class="fas fa-om"></i></button>
-                                    
-                                    <button class="btn-icon" style="background:var(--warning); color:#000;" onclick="app.openSessionModal('${goal.id}')" title="Nhập thủ công"><i class="fas fa-plus"></i></button>
-                                </div>
-                            </div>`;
-                    } else {
-                        sessionSectionHtml = `
-                            <div class="section-label">Phiên hiện tại</div>
-                            <div class="progress-container"><div id="bar-session-${goal.id}" class="progress-bar" style="background:var(--success); width:0%;"></div></div>
-                            <div style="display:flex; justify-content:space-between; font-size:12px; color:var(--text-light);"><span id="prog-text-session-${goal.id}">Sẵn sàng</span></div>`;
-                        controlsHtml = `
-                            <div class="timer-controls">
-                                <div id="timer-${goal.id}" class="timer-display">00:00</div>
-                                <div style="display:flex; gap: 10px;">
-                                    <button class="btn-icon ${goal.isActive ? 'btn-stop' : 'btn-play'}" onclick="app.toggleTimer('${goal.id}')"><i class="fas ${goal.isActive ? 'fa-stop' : 'fa-play'}"></i></button>
-                                    <button class="btn-icon" style="background:var(--warning); color:#000;" onclick="app.openSessionModal('${goal.id}')"><i class="fas fa-plus"></i></button>
-                                </div>
-                            </div>`;
-                    }
+    this.data.goals.forEach(goal => {
+        const isMeditation = goal.type === 'meditation';
+        const unitLabel = isMeditation ? 'chánh niệm' : 'phút';
+        const targetProp = isMeditation ? 'totalMindfulness' : 'totalMinutes';
+        const overallPct = goal.lifetimeTargetMinutes > 0 ? Math.min((goal[targetProp] / goal.lifetimeTargetMinutes) * 100, 100) : 0;
 
-                    div.innerHTML = `
-                        <div class="goal-header">
-                            <div><div class="goal-title">${goal.name}</div><span class="goal-tag" style="color:#b1b1c9 ; background: rgba(255,255,255,0.1)">${goal.category}</span></div>
-                            <div style="display:flex; gap: 5px;">
-                                <button class="btn-icon" style="color: var(--text-light)" onclick="app.openModal('${goal.id}', '${goal.type}')"><i class="fas fa-pencil-alt"></i></button>
-                                <button class="btn-icon" style="color: var(--text-light)" onclick="app.deleteGoal('${goal.id}')"><i class="fas fa-trash"></i></button>
-                            </div>
-                        </div>
-                        ${dailySectionHtml}
-                        <div class="section-label">Mức độ thành tựu</div>
-                        <div class="progress-container"><div class="progress-bar" style="width: ${overallPct}%; background: ${goal.color}"></div></div>
-                        <div style="display:flex; justify-content:space-between; font-size:12px; color:var(--text-light); margin-bottom: 15px;"><span>${goal[targetProp]} / ${goal.lifetimeTargetMinutes} ${unitLabel}</span><span>${(overallPct).toFixed(1)}%</span></div>
-                        ${sessionSectionHtml} ${controlsHtml}
-                        <div class="sessions-list" style="margin-top: 15px; max-height: 150px; overflow-y: auto;"><div id="sessions-${goal.id}"></div></div>
-                    `;
-                    container.appendChild(div);
-                    this.renderSessions(goal.id, isMeditation);
-                });
+        // 1. Calculate Today's Primary Value (Counts for Med, Mins for Standard)
+        let todayVal = 0;
+        if (isMeditation) {
+            todayVal = this.data.logs
+                .filter(l => l.goalId === goal.id && l.date === todayStr)
+                .reduce((sum, l) => sum + (l.count !== undefined ? l.count : (l.touches ? l.touches.length : 0)), 0);
+        } else {
+            todayVal = this.data.logs.filter(l => l.goalId === goal.id && l.date === todayStr).reduce((sum, l) => sum + l.minutes, 0);
+        }
+        
+        const todayMinutes = this.data.logs
+            .filter(l => l.goalId === goal.id && l.date === todayStr)
+            .reduce((sum, l) => sum + l.minutes, 0);
+
+        const dailyTarget = goal.dailyTargetMinutes || 0;
+		const dailyminmedTarget = goal.dailyMinMedTarget || 120;
+        let dailyPct = 0;
+        let dailyBarColor = goal.color;
+        
+        // Calculate percentage for the Primary Bar
+        if (dailyTarget > 0) {
+            dailyPct = Math.min((todayVal / dailyTarget) * 100, 100);
+            if (todayVal >= dailyTarget) dailyBarColor = 'var(--success)';
+        }
+        
+        const div = document.createElement('div');
+        div.className = 'card goal-card';
+        div.style.borderLeft = `5px solid ${goal.color}`;
+        
+        let controlsHtml = '', dailySectionHtml = '', sessionSectionHtml = '';
+        
+        // --- DAILY SECTIONS ---
+        if (dailyTarget > 0) {
+            // 1. ORIGINAL BAR (Chánh niệm / Phút)
+            dailySectionHtml = `
+                <div style="margin-bottom: 10px; background: rgba(0,0,0,0.2); padding: 10px; border-radius: 8px;">
+                    <div style="display:flex; justify-content:space-between; font-size:12px; margin-bottom:5px; align-items:center;">
+                        <strong style="color:var(--text);">Hôm nay</strong>
+                        <span style="font-weight:600;">${todayVal} / ${dailyTarget} ${unitLabel}</span>
+                    </div>
+                    <div class="progress-container" style="height: 6px;"><div class="progress-bar" style="width: ${dailyPct}%; background: ${dailyBarColor}"></div></div>
+                </div>`;
+
+            // 2. NEW BAR (Minutes) - Only for Meditation Goals
+            if (isMeditation) {
+                const minPct = Math.min((todayMinutes / dailyminmedTarget) * 100, 100);
+                let minBarColor = goal.color;
+                if (todayMinutes >= dailyminmedTarget) minBarColor = 'var(--success)';
+
+                // CHANGE 2: Added onclick event, cursor pointer, and hover visual cues
+                dailySectionHtml += `
+                <div 
+                    onclick="app.setDailyMinMedTarget('${goal.id}')"
+                    title="Chạm để thay đổi mục tiêu thời gian"
+                    style="margin-bottom: 15px; background: rgba(0,0,0,0.2); padding: 10px; border-radius: 8px; cursor: pointer; transition: background 0.2s;"
+                    onmouseover="this.style.background='rgba(0,0,0,0.3)'"
+                    onmouseout="this.style.background='rgba(0,0,0,0.2)'"
+                >
+                    <div style="display:flex; justify-content:space-between; font-size:12px; margin-bottom:5px; align-items:center;">
+                        <strong style="color:var(--text);">Thời gian</strong>
+                        <span style="font-weight:600;">${todayMinutes} / ${dailyminmedTarget} phút <i class="fas fa-pen" style="font-size:10px; opacity:0.5; margin-left:4px;"></i></span>
+                    </div>
+                    <div class="progress-container" style="height: 6px;"><div class="progress-bar" style="width: ${minPct}%; background: ${minBarColor}"></div></div>
+                </div>`;
             }
+        }
+
+        if (isMeditation) {
+            controlsHtml = `
+                 <div class="timer-controls">
+                    <div style="font-size: 14px; color: var(--text-light); text-transform: uppercase;">Hành Thiền</div>
+                    <div style="display:flex; gap: 10px;">
+                        <button class="btn-icon btn-play" style="background: var(--zen); color: white;" onclick="app.toggleTimer('${goal.id}')" title="Hành thiền"><i class="fas fa-om"></i></button>
+                        
+                        <button class="btn-icon" style="background:var(--warning); color:#000;" onclick="app.openSessionModal('${goal.id}')" title="Nhập thủ công"><i class="fas fa-plus"></i></button>
+                    </div>
+                </div>`;
+        } else {
+            sessionSectionHtml = `
+                <div class="section-label">Phiên hiện tại</div>
+                <div class="progress-container"><div id="bar-session-${goal.id}" class="progress-bar" style="background:var(--success); width:0%;"></div></div>
+                <div style="display:flex; justify-content:space-between; font-size:12px; color:var(--text-light);"><span id="prog-text-session-${goal.id}">Sẵn sàng</span></div>`;
+            controlsHtml = `
+                <div class="timer-controls">
+                    <div id="timer-${goal.id}" class="timer-display">00:00</div>
+                    <div style="display:flex; gap: 10px;">
+                        <button class="btn-icon ${goal.isActive ? 'btn-stop' : 'btn-play'}" onclick="app.toggleTimer('${goal.id}')"><i class="fas ${goal.isActive ? 'fa-stop' : 'fa-play'}"></i></button>
+                        <button class="btn-icon" style="background:var(--warning); color:#000;" onclick="app.openSessionModal('${goal.id}')"><i class="fas fa-plus"></i></button>
+                    </div>
+                </div>`;
+        }
+
+        div.innerHTML = `
+            <div class="goal-header">
+                <div><div class="goal-title">${goal.name}</div><span class="goal-tag" style="color:#b1b1c9 ; background: rgba(255,255,255,0.1)">${goal.category}</span></div>
+                <div style="display:flex; gap: 5px;">
+                    <button class="btn-icon" style="color: var(--text-light)" onclick="app.openModal('${goal.id}', '${goal.type}')"><i class="fas fa-pencil-alt"></i></button>
+                    <button class="btn-icon" style="color: var(--text-light)" onclick="app.deleteGoal('${goal.id}')"><i class="fas fa-trash"></i></button>
+                </div>
+            </div>
+            ${dailySectionHtml}
+            <div class="section-label">Mức độ thành tựu</div>
+            <div class="progress-container"><div class="progress-bar" style="width: ${overallPct}%; background: ${goal.color}"></div></div>
+            <div style="display:flex; justify-content:space-between; font-size:12px; color:var(--text-light); margin-bottom: 15px;"><span>${goal[targetProp]} / ${goal.lifetimeTargetMinutes} ${unitLabel}</span><span>${(overallPct).toFixed(1)}%</span></div>
+            ${sessionSectionHtml} ${controlsHtml}
+            <div class="sessions-list" style="margin-top: 15px; max-height: 150px; overflow-y: auto;"><div id="sessions-${goal.id}"></div></div>
+        `;
+        container.appendChild(div);
+        this.renderSessions(goal.id, isMeditation);
+    });
+}
             
             renderSessions(goalId, isMeditation) {
                 const container = document.getElementById(`sessions-${goalId}`);
@@ -3379,6 +3806,13 @@ renderReports(resetDates = false) { // 1. Add parameter
                 color: '#6b7280'
             },
             tooltip: {
+			backgroundColor: '#121821', // Màu Solid (Hex) trùng với var(--surface), chắn hoàn toàn chữ bên dưới
+                titleColor: '#f3f4f6',      // Màu chữ sáng (var(--text))
+                bodyColor: '#f3f4f6',
+                borderColor: '#374151',     // Viền xám (var(--border)) để tooltip nổi bật hơn
+                borderWidth: 1,
+                padding: 10,
+				z: 999,
             callbacks: {
                 label: function(context) {
                     // 1. Get the raw value
@@ -3410,7 +3844,7 @@ renderReports(resetDates = false) { // 1. Add parameter
     // 2. CẬP NHẬT PLUGIN VẼ CHỮ Ở GIỮA (Số ở trên, chữ ở dưới)
     const centerTextPlugin = {
     id: 'centerText',
-    afterDraw: function(chart) {
+    afterDatasetsDraw: function(chart) {
         const { ctx, chartArea: { top, bottom, left, right } } = chart;
         ctx.save();
         
@@ -3544,7 +3978,117 @@ this.charts.weekly = new Chart(ctxWeek, {
         }, 
         options: monthlyOptions 
     });
-}
+	
+const ctxDensity = document.getElementById('reportDensityChart');
+if (ctxDensity) {
+    // 1. Update the Title
+    const densityTitle = document.getElementById('density-month-title');
+    if (densityTitle) {
+         densityTitle.innerText = `Tháng ${new Date(mYear, mMonth).toLocaleDateString('vi-VN', { month: 'numeric', year: 'numeric' })}`;
+    }
+
+    // 2. Prepare Data (Calculate this BEFORE checking chart existence)
+    const daysInMonth = monthlyLabels.length;
+    const dailyMinutes = new Array(daysInMonth).fill(0);
+    const dailyCounts = new Array(daysInMonth).fill(0);
+
+    this.data.logs.forEach(log => {
+        const goal = this.data.goals.find(g => g.id === log.goalId);
+        if (!goal || goal.type !== 'meditation') return;
+
+        const logDateObj = new Date(log.timestamp || log.date);
+        if (logDateObj.getFullYear() !== mYear || logDateObj.getMonth() !== mMonth) return;
+
+        const dayIdx = logDateObj.getDate() - 1;
+        
+        const minutes = log.minutes;
+        const count = log.count !== undefined ? log.count : (log.touches ? log.touches.length : 0);
+
+        if (minutes > 0) {
+            dailyMinutes[dayIdx] += minutes;
+            dailyCounts[dayIdx] += count;
+        }
+    });
+
+    const densityData = dailyMinutes.map((mins, i) => {
+        return mins > 0 ? (dailyCounts[i] / mins).toFixed(1) : 0;
+    });
+
+    // 3. Logic: Update if exists, Create if new
+    if (this.charts.reportDensity) {
+        // SMOOTH UPDATE: Just swap data and call update()
+        this.charts.reportDensity.data.labels = monthlyLabels;
+        this.charts.reportDensity.data.datasets[0].data = densityData;
+        this.charts.reportDensity.update();
+    } else {
+        // INITIAL CREATE
+        const ctxD = ctxDensity.getContext('2d');
+        this.charts.reportDensity = new Chart(ctxD, {
+            type: 'line',
+            data: {
+                labels: monthlyLabels,
+                datasets: [{
+                    label: 'Chánh niệm/phút',
+                    data: densityData,
+                    borderColor: '#818cf8',
+                    backgroundColor: 'rgba(129, 140, 248, 0.1)',
+                    borderWidth: 1.5,
+                    fill: true,
+                    tension: 0.3,
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                interaction: {
+                    mode: 'nearest',
+                    axis: 'x',
+                    intersect: true
+                },
+                elements: {
+                    point: {
+                        hitRadius: 30,     
+                        hoverRadius: 3,
+                        radius: 1.3,					
+                    }
+                },
+                plugins: {
+                    legend: { display: false },
+                    tooltip: {
+                        callbacks: {
+                            title: function(context) {
+                                const d = context[0].label;
+                                return `${String(d).padStart(2, '0')}/${String(mMonth + 1).padStart(2, '0')}`;
+                            },
+                            label: function(context) {
+                                return ` ${context.raw} Chánh niệm/phút`;
+                            },
+                            labelColor: function(context) {
+                                return {
+                                    borderColor: context.dataset.borderColor,
+                                    backgroundColor: context.dataset.borderColor,
+                                    borderWidth: 0,
+                                    borderRadius: 2,
+                                };
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    x: {
+                        ticks: { color: '#9ca3af', font: { size: 10 } },
+                        grid: { color: 'rgba(55, 65, 81, 0.3)' }
+                    },
+                    y: {
+                        beginAtZero: true,
+                        grid: { color: '#374151' },
+                        ticks: { color: '#9ca3af', font: { size: 10 } }
+                    }
+                }
+            }
+        });
+    }
+} }
 changeReportWeek(dir) { this.currentWeekStart.setDate(this.currentWeekStart.getDate() + (dir * 7)); this.renderReports(); }
             changeReportMonth(dir) { this.currentMonth.setMonth(this.currentMonth.getMonth() + dir); this.renderReports(); }
             changeMonth(dir) { this.currentMonth.setMonth(this.currentMonth.getMonth() + dir); this.renderCalendar(); }
@@ -3562,19 +4106,8 @@ updateStats() {
     document.getElementById('streak-disp').innerText = `${this.data.streak} 🔥`;
     document.getElementById('xp-disp').innerText = `${this.data.xp}`;
 
-    const todayStr = this.toIsoDate(new Date());
-    let totalTodayMins = this.data.logs.filter(l => l.date === todayStr).reduce((sum, l) => sum + l.minutes, 0);
-    this.data.goals.forEach(g => {
-        if (g.isActive && g.type !== 'meditation') {
-            const spent = g.sessionTargetSeconds - g.remainingSeconds;
-            totalTodayMins += Math.floor(spent / 60);
-        }
-    });
-    const globalTarget = this.data.globalDailyGoal || 120;
-    const dailyPct = Math.min((totalTodayMins / globalTarget) * 100, 100);
-    document.getElementById('daily-current').innerText = totalTodayMins;
-    document.getElementById('daily-target').innerText = globalTarget;
-    document.getElementById('daily-bar-fill').style.width = `${dailyPct}%`;
+   
+   
 }
             
             recalculateStreak() {
@@ -3592,40 +4125,298 @@ updateStats() {
             }
 
             checkAchievements() {
-                const list = [
-                    { id: 'streak_3', title: 'Cố Gắng', desc: 'Hành trì 3 ngày liên tục', condition: () => this.data.streak >= 3 },
-					{ id: 'streak_10', title: 'Nỗ Lực', desc: 'Hành trì 10 ngày liên tục', condition: () => this.data.streak >= 10 },
-					{ id: 'streak_30', title: 'Tinh Cần', desc: 'Hành trì 30 ngày liên tục', condition: () => this.data.streak >= 30 },
-					{ id: 'streak_60', title: 'Tinh Tấn', desc: 'Hành trì 60 ngày liên tục', condition: () => this.data.streak >= 60 },
-					{ id: 'streak_120', title: 'Nhiệt Tâm', desc: 'Hành trì 120 ngày liên tục', condition: () => this.data.streak >= 120 },
-					{ id: 'streak_365', title: 'Tinh Tấn Giác Chi', desc: 'Hành trì 365 ngày liên tục', condition: () => this.data.streak >= 365 },
+    let newUnlock = false;
+    BADGES.forEach(badge => {
+        // Manual badges are triggered by unlockBadge(), so skip them here
+        if (badge.id === 'explorer' || badge.id === 'safe_keeper') return;
 
-					{ id: 'beginner', title: 'Sơ Cơ', desc: 'Tích luỹ 5.000 Chánh niệm', condition: () => this.totalMindfulnessCounts >= 5000 },
-					{ id: 'practitioner', title: 'Thiền Sinh', desc: 'Tích luỹ 10.000 Chánh niệm', condition: () => this.totalMindfulnessCounts >= 10000 },
-					{ id: 'yogi', title: 'Hành Giả', desc: 'Tích luỹ 20.000 Chánh niệm', condition: () => this.totalMindfulnessCounts >= 20000 },
-					{ id: 'meditator', title: 'Thiền Giả', desc: 'Tích luỹ 50.000 Chánh niệm', condition: () => this.totalMindfulnessCounts >= 50000 },
-					{ id: 'clear-mirror', title: 'Gương Sáng', desc: 'Tích luỹ 80.000 Chánh niệm', condition: () => this.totalMindfulnessCounts >= 80000 },
-					{ id: 'still-lake', title: 'Mặt Hồ Tĩnh Lặng', desc: 'Tích luỹ 100.000 Chánh niệm', condition: () => this.totalMindfulnessCounts >= 100000 },
-					{ id: 'mountain', title: 'Núi Đá', desc: 'Tích luỹ 200.000 Chánh niệm', condition: () => this.totalMindfulnessCounts >= 200000 },
-					{ id: 'morning-star', title: 'Sao Mai', desc: 'Tích luỹ 300.000 Chánh niệm', condition: () => this.totalMindfulnessCounts >= 300000 },
-					{ id: 'dhammaheir', title: 'Thừa Tự Pháp', desc: 'Tích luỹ 500.000 Chánh niệm', condition: () => this.totalMindfulnessCounts >= 500000 },
-					{ id: 'bodhi', title: 'Cội Bồ Đề', desc: 'Tích luỹ 1.000.000 Chánh niệm', condition: () => this.totalMindfulnessCounts >= 1000000 }
-                ];
-                const container = document.getElementById('achievement-list');
-                if (!container) return; container.innerHTML = '';
-                list.forEach(ach => {
-                    const unlocked = this.data.achievements.includes(ach.id) || ach.condition();
-                    if(unlocked && !this.data.achievements.includes(ach.id)) {
-                        this.data.achievements.push(ach.id); this.showToast(`Mở khóa: ${ach.title}`, true); this.save();
-                    }
-                    const div = document.createElement('div');
-                    div.style.cssText = `padding: 15px; border: 1px solid ${unlocked ? 'var(--success)' : 'var(--border)'}; border-radius: 8px; background: ${unlocked ? 'rgba(16, 185, 129, 0.1)' : 'rgba(255,255,255,0.05)'}; display: flex; align-items: center; gap: 15px; opacity: ${unlocked ? 1 : 0.6}`;
-                    div.innerHTML = `<div style="font-size: 24px; width: 40px; text-align: center;">${unlocked ? '🏆' : '🔒'}</div><div><div style="font-weight: bold; ${unlocked ? 'color: var(--text)' : 'color: var(--text-light)'}">${ach.title}</div><div style="font-size: 12px; color: var(--text-light);">${ach.desc}</div></div>`;
-                    container.appendChild(div);
-                });
-            }
+        if (!this.data.achievements.includes(badge.id) && badge.condition(this.data)) {
+            this.data.achievements.push(badge.id);
+            this.showToast(`🏆 Mở khóa: ${badge.title}`);
+            newUnlock = true;
+        }
+    });
+    if (newUnlock) this.save();
+    this.renderAchievementsUI();
+}
 
-            formatTime(seconds) {
+// 2. Manual trigger for "Explorer" and "Safe Keeper"
+unlockBadge(id) {
+    if (!this.data.achievements.includes(id)) {
+        this.data.achievements.push(id);
+        const badge = BADGES.find(b => b.id === id);
+        this.showToast(`🏆 Mở khóa: ${badge.title}`);
+        this.save();
+        this.renderAchievementsUI();
+    }
+}
+renderAchievementsUI() {
+    const container = document.getElementById('achievement-list');
+    if (!container) return;
+    container.innerHTML = '';
+
+    const LOCKED_COLOR = '#4b5563'; 
+
+    const counters = {
+        'log': 0,    
+        'time': 0,   
+        'streak': 0, 
+        'sit': 0,    
+        'focus': 0,
+		'sfocus': 0,
+        'mind': 0,   
+        'mindf': 0,  
+        'qual': 0,   
+        'other': 0   
+    };
+
+    const getGenericInfo = (id) => {
+        let prefix = id.split('_')[0];
+        
+        if (['daily', 'freq', 'dedicated', 'early', 'night'].includes(prefix)) prefix = 'other'; 
+        if (['zero', 'empty'].includes(prefix)) prefix = 'focus'; 
+        
+        let name = '';
+        switch(prefix) {
+            case 'log': name = 'Tín Căn'; break;
+            case 'time': name = 'Tấn Căn'; break;
+            case 'streak': name = 'Tín Lực'; break;
+            case 'sit': name = 'Tấn Lực'; break;
+            case 'focus': name = 'Định Căn'; break;
+			case 'sfocus': name = 'Định Lực'; break;
+            case 'mind': name = 'Niệm Căn'; break;
+            case 'mindf': name = 'Niệm Lực'; break;
+            case 'qual': name = 'Niệm Lực'; break;
+            case 'note': name = 'Đa Văn'; break;
+            case 'goal': name = 'Trì Giới'; break;
+            default: name = 'Trì Giới';
+        }
+
+       
+        if (!counters[name]) counters[name] = 0;
+        counters[name]++;
+        
+        if (name === 'Trì Giới') {
+            return `${name} ${counters[name]}`;
+        }
+        
+        return `${name} bậc ${counters[name]}`;
+    };
+
+    BADGES.forEach(badge => {
+        const isUnlocked = this.data.achievements.includes(badge.id);
+        
+        const genericTitle = getGenericInfo(badge.id);
+        
+        const badgeColor = isUnlocked ? (badge.color || '#cd7f32') : LOCKED_COLOR;
+        
+        // Dynamic Styles based on the specific badge color
+        const bgColor = this.hexToRgba(badgeColor, 0.1);
+        const borderColor = badgeColor;
+        const iconColor = badgeColor;
+        const textColor = isUnlocked ? '#ffffff' : '#9ca3af';
+
+        const div = document.createElement('div');
+        div.style.cssText = `
+            display: flex; 
+            align-items: center; 
+            gap: 15px; 
+            padding: 12px;
+            background: ${bgColor}; 
+            border: 1px solid ${borderColor};
+            border-radius: 8px; 
+            margin-bottom: 10px;
+            transition: all 0.4s ease;
+        `;
+
+        div.innerHTML = `
+            <div style="
+                min-width: 42px; height: 42px; border-radius: 50%;
+                display: flex; align-items: center; justify-content: center;
+                border: 2px solid ${iconColor}; 
+                color: ${iconColor}; 
+                font-size: 18px;
+                background: rgba(0,0,0,0.2);
+                ${isUnlocked ? `box-shadow: 0 0 10px ${this.hexToRgba(badgeColor, 0.4)};` : ''}
+            ">
+                <i class="${badge.icon.includes('fab') ? badge.icon : 'fas ' + badge.icon}"></i>
+            </div>
+            <div style="flex: 1;">
+                <div style="font-weight: 600; color: ${textColor}; font-size: 14px; display: flex; justify-content: space-between;">
+                    ${genericTitle} 
+                    <span style="font-size: 10px; color: ${iconColor}; text-transform: uppercase; letter-spacing: 1px; font-weight:bold;">
+                        ${isUnlocked ? 'Đã đạt' : ''}
+                    </span>
+                </div>
+                <div style="font-size: 11px; color: #9ca3af; margin-top: 2px;">
+                    ${badge.desc}
+                </div>
+            </div>
+        `;
+        container.appendChild(div);
+    });
+}
+
+openBadgePicker() {
+    this.lastSelectedBadgeTitle = null;
+    if (document.getElementById('badge-picker-modal')) {
+        document.getElementById('badge-picker-modal').remove();
+    }
+
+    const modalHtml = `
+        <div id="badge-picker-modal" class="modal" style="display:flex; z-index: 3000; align-items: center; justify-content: center;">
+            <div class="modal-content" style="max-width: 550px; width: 95%; max-height: 85vh; display: flex; flex-direction: column; padding: 0; border-radius: 16px;">
+                
+                <div style="padding: 15px 20px; border-bottom: 1px solid var(--border); position: relative; display: flex; justify-content: center; align-items: center; background: var(--surface); border-radius: 16px 16px 0 0;">
+                    <h3 style="margin: 0; font-size: 18px;"><i class="fas fa-award"></i> Chọn Pāramī</h3>
+                    <button class="btn-icon" onclick="app.closeBadgePicker()" style="position: absolute; right: 20px; color: var(--text-light); background: transparent;"><i class="fas fa-times"></i></button>
+                </div>
+
+                <div style="padding: 20px; overflow-y: auto; background: var(--bg);">
+                    <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(90px, 1fr)); gap: 12px;">
+                        ${BADGES.map(badge => {
+                            // --- MODIFICATION: ALWAYS UNLOCKED FOR PICKER ---
+                            const isUnlocked = true; // Force unlock in picker
+                            const isActive = this.data.activeBadge === badge.id;
+                            
+                            // Color Logic
+                            const badgeColor = badge.color || '#cd7f32'; // Use actual color
+                            let opacity = '1'; // Full opacity
+                            let cursor = 'pointer'; // Clickable
+                            
+                            // Active State
+                            let bg = isActive ? this.hexToRgba(badgeColor, 0.15) : 'rgba(255, 255, 255, 0.03)';
+                            let border = isActive ? `2px solid ${badgeColor}` : '1px solid var(--border)';
+                            let transformHover = 'translateY(-2px)';
+                            
+                            const checkMarkDisplay = isActive ? 'block' : 'none';
+
+                            return `
+                                <div id="badge-option-${badge.id}"
+                                     class="badge-option-item"
+                                     onclick="app.selectBadge('${badge.id}')" 
+                                     style="
+                                        position: relative;
+                                        display: flex; flex-direction: column; align-items: center; justify-content: center;
+                                        padding: 15px 5px;
+                                        background: ${bg};
+                                        border: ${border};
+                                        border-radius: 12px;
+                                        opacity: ${opacity};
+                                        cursor: ${cursor};
+                                        transition: all 0.2s ease;
+                                        text-align: center;
+                                        min-height: 90px;
+                                     "
+                                     onmouseover="this.style.transform='${transformHover}'"
+                                     onmouseout="this.style.transform='translateY(0)'"
+                                     title="${badge.title} - ${badge.desc}"
+                                >
+                                    <div id="check-${badge.id}" style="display: ${checkMarkDisplay}; position:absolute; top:5px; right:5px; color:${badgeColor}; font-size:12px;">
+                                        <i class="fas fa-check-circle"></i>
+                                    </div>
+                                    <div style="font-size: 24px; color: ${badgeColor}; margin-bottom: 8px; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));">
+                                    <i class="${badge.icon.includes('fab') ? badge.icon : 'fas ' + badge.icon}"></i>
+                                    </div>
+                                    <div style="font-size: 11px; font-weight: 600; color: var(--text); line-height: 1.3;">${badge.title}</div>
+                                </div>
+                            `;
+                        }).join('')}
+                    </div>
+                </div>
+
+                <div style="padding: 15px 20px; border-top: 1px solid var(--border); display: flex; justify-content: flex-end; background: var(--surface); border-radius: 0 0 16px 16px;">
+                    <button class="btn" onclick="app.closeBadgePicker()">Lưu & Áp dụng</button>
+                </div>
+            </div>
+        </div>
+    `;
+    document.body.insertAdjacentHTML('beforeend', modalHtml);
+}
+selectBadge(badgeId) {
+    // 1. Update Data & Save
+    this.data.activeBadge = badgeId;
+    this.save();
+    
+    // 2. Update the main display header immediately
+    this.loadActiveBadge(); 
+    
+    // 3. Update Modal Visuals (Highlighting the selected item)
+    const badge = BADGES.find(b => b.id === badgeId);
+    this.lastSelectedBadgeTitle = badge.title;
+
+    // Reset all options in the modal
+    const allOptions = document.querySelectorAll('.badge-option-item');
+    allOptions.forEach(el => {
+        el.style.borderColor = 'var(--border)';
+        el.style.borderWidth = '1px';
+        el.style.background = 'rgba(255, 255, 255, 0.03)';
+        const check = el.querySelector('div[id^="check-"]');
+        if(check) check.style.display = 'none';
+    });
+
+    // Highlight the clicked option
+    const activeEl = document.getElementById(`badge-option-${badgeId}`);
+    if (activeEl) {
+        const color = badge.color || '#cd7f32';
+        activeEl.style.borderColor = color;
+        activeEl.style.borderWidth = '2px';
+        activeEl.style.background = this.hexToRgba(color, 0.15);
+        const activeCheck = document.getElementById(`check-${badgeId}`);
+        if(activeCheck) activeCheck.style.display = 'block';
+    }
+}
+
+closeBadgePicker() {
+    const modal = document.getElementById('badge-picker-modal');
+    if (modal) {
+        modal.remove();
+        
+        // Only show toast if a badge was actually picked during this session
+        if (this.lastSelectedBadgeTitle) {
+            this.showToast(`Đã hiển thị huy hiệu: ${this.lastSelectedBadgeTitle}`);
+            this.lastSelectedBadgeTitle = null; // Reset
+        }
+    }
+}
+
+loadActiveBadge() {
+    const container = document.getElementById('current-active-badge');
+    if (!container) return;
+
+    if (this.data.activeBadge) {
+        const badge = BADGES.find(b => b.id === this.data.activeBadge);
+        if (badge) {
+            const color = badge.color || '#cd7f32'; 
+
+            container.innerHTML = `<i class="${badge.icon.includes('fab') ? badge.icon : 'fas ' + badge.icon}"></i>`;
+            
+            
+            container.style.color = '#ffffff'; 
+            
+            container.style.textShadow = `0 0 5px ${color}`;
+
+            container.style.borderColor = color;
+
+            container.style.backgroundColor = this.hexToRgba(color, 0.2); 
+            
+            container.style.boxShadow = `0 0 15px ${this.hexToRgba(color, 0.6)}`;
+            
+          
+            container.classList.remove('silver');
+        }
+    } else {
+        container.innerHTML = `<i class="fas fa-award"></i>`;
+        
+        container.style.color = '#ffffff';
+        container.style.textShadow = 'none'; // Reset text shadow
+        container.style.borderColor = '#c0c0c0'; // Silver border
+        container.style.backgroundColor = 'rgba(192, 192, 192, 0.2)';
+        container.style.boxShadow = '0 0 15px rgba(192, 192, 192, 0.4)';
+    }
+}
+
+   formatTime(seconds) {
                 const h = Math.floor(seconds / 3600);
                 const m = Math.floor((seconds % 3600) / 60);
                 const s = seconds % 60;
@@ -3667,6 +4458,7 @@ updateStats() {
                     'reports': 'Tổng hợp',
 					'analytics': 'Phân tích',
 					'pro': 'Chuyên sâu',
+					'achievements': 'Pāramī'
                 };
                 
                 document.getElementById('page-title').innerText = titles[viewName] || 'Nhật ký';
@@ -4052,7 +4844,6 @@ logSessionConfirm(e) {
                     logs: [], 
                     xp: this.data.xp,
                     streak: this.data.streak,
-                    globalDailyGoal: this.data.globalDailyGoal,
                     achievements: this.data.achievements,
                     medSettings: this.data.medSettings
                 }).catch(e => console.log("Meta save update")); 
