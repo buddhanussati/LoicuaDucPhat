@@ -1000,65 +1000,34 @@ analyzeSingleSession(log) {
     const totalSec = log.minutes * 60;
     if (totalSec === 0) return { distractedSec: 0, qualityPct: 0 };
     const thresholdSec = log.threshold || 10;
+    
+    if (log.touches && log.touches.length >= 2) {
 
-    // Helper function to calculate smooth penalty
-    const calculatePenalty = (gap) => {
-        if (gap <= thresholdSec) return 0;
+        const timestamps = log.touches.map(t => this.getTouchTimestamp(t, log.timestamp)).sort((a,b) => a - b);
         
-        const overage = gap - thresholdSec;
-        const heavyPenalty = gap - (thresholdSec / 2);
-        
-        // If the gap is between Threshold and Threshold + 3s
-        if (overage <= 3) {
-            // We "lerp" from 0 penalty up to the heavy penalty value
-            // This closes the gap smoothly over 3 seconds
-            const progress = overage / 3; 
-            return heavyPenalty * progress;
-        }
-        
-        // Beyond +3s, use your preferred half-threshold logic
-        return heavyPenalty;
-    };
-
-    if (log.touches && log.touches.length >= 1) {
-        const timestamps = log.touches
-            .map(t => this.getTouchTimestamp(t, log.timestamp))
-            .sort((a, b) => a - b);
-
         let distractedSec = 0;
-
-        // 1. Start Gap
         const startGap = (timestamps[0] - log.timestamp) / 1000;
-        distractedSec += calculatePenalty(startGap);
+        if (startGap > thresholdSec) distractedSec += (startGap - thresholdSec/2);
 
-        // 2. Middle Gaps
         for (let i = 1; i < timestamps.length; i++) {
-            const gap = (timestamps[i] - timestamps[i - 1]) / 1000;
-            distractedSec += calculatePenalty(gap);
+            const gap = (timestamps[i] - timestamps[i-1]) / 1000;
+            if (gap > thresholdSec) distractedSec += (gap - thresholdSec/2);
         }
-
-        // 3. End Gap
+        
         const endTime = log.timestamp + (log.minutes * 60 * 1000);
         const endGap = (endTime - timestamps[timestamps.length - 1]) / 1000;
-        distractedSec += calculatePenalty(endGap);
+        if (endGap > thresholdSec) distractedSec += (endGap - thresholdSec/2);
 
         distractedSec = Math.min(distractedSec, totalSec);
-        const qualityPct = Math.max(0, ((totalSec - distractedSec) / totalSec) * 100);
-        
-        return { 
-            distractedSec: parseFloat(distractedSec.toFixed(1)), 
-            qualityPct: parseFloat(qualityPct.toFixed(1)) 
-        };
+        const qualityPct = ((totalSec - distractedSec) / totalSec) * 100;
+        return { distractedSec, qualityPct: parseFloat(qualityPct.toFixed(1)) };
     } 
     else {
-        // Fallback for sessions with 0 or low interaction
+
         const count = log.count !== undefined ? log.count : (log.touches ? log.touches.length : 0);
         let mindfulSec = count * thresholdSec;
         mindfulSec = Math.min(mindfulSec, totalSec);
-        return { 
-            distractedSec: totalSec - mindfulSec, 
-            qualityPct: parseFloat(((mindfulSec / totalSec) * 100).toFixed(1)) 
-        };
+        return { distractedSec: totalSec - mindfulSec, qualityPct: parseFloat(((mindfulSec/totalSec)*100).toFixed(1)) };
     }
 }
 
