@@ -824,6 +824,9 @@ if (typeof this.data.medSettings.confirmProbability === 'undefined') {
         this.loadActiveBadge();
         setInterval(() => this.updateTimerUI(), 1000);
         this.setupMeditationListeners();
+		this.noSleepAudio = new Audio('data:audio/wav;base64,UklGRiQAAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQAAAAA=');
+        this.noSleepAudio.loop = true;
+        this.noSleepAudio.volume = 0.01;
 
     } catch (err) {
         console.error("Lỗi khởi tạo:", err);
@@ -1489,8 +1492,8 @@ renderComparisonTable(medGoalIds) {
         
         let qualityColor = 'var(--text)';
         if(stats.count > 0) {
-            if(stats.quality > 80) qualityColor = 'var(--success)';
-            else if(stats.quality < 50) qualityColor = 'var(--danger)';
+            if(stats.quality > 70) qualityColor = 'var(--success)';
+            else if(stats.quality < 40) qualityColor = 'var(--danger)';
         }
 
         row.innerHTML = `
@@ -2255,27 +2258,45 @@ toggleTimer(id) {
     const goal = this.data.goals.find(g => g.id === id);
     if (!goal) return;
 
+    // Tắt các timer khác đang chạy (để chỉ chạy 1 cái một lúc)
     this.data.goals.forEach(g => {
-        if(g.isActive && g.id !== id && g.type === 'standard') this.toggleTimer(g.id); 
+        if (g.isActive && g.id !== id && g.type === 'standard') this.toggleTimer(g.id);
     });
 
+    // Nếu là Thiền (Meditation) -> Chuyển sang hàm khác (không áp dụng fix này ở đây)
     if (goal.type === 'meditation') {
         this.startMeditationSetup(goal);
         return;
     }
 
     if (goal.isActive) {
+        // --- KHI BẤM DỪNG (STOP) ---
         clearInterval(this.timers[id]);
         goal.isActive = false;
+
+        // [QUAN TRỌNG] Tắt âm thanh nền để tiết kiệm pin khi không đếm giờ
+        if (this.noSleepAudio) {
+            this.noSleepAudio.pause();
+            this.noSleepAudio.currentTime = 0;
+        }
+        
+        // Tính toán thời gian đã trôi qua
         const spentSeconds = goal.sessionTargetSeconds - goal.remainingSeconds;
         const minutesSpent = Math.floor(spentSeconds / 60);
         const startTime = goal.currentSessionStartTime || Date.now();
-        goal.sessionTargetSeconds = 0; goal.remainingSeconds = 0; goal.currentSessionStartTime = null;
+        
+        // Reset
+        goal.sessionTargetSeconds = 0; 
+        goal.remainingSeconds = 0; 
+        goal.currentSessionStartTime = null;
+        goal.targetEndTime = null;
+
         if (minutesSpent > 0) this.openSessionModal(id, minutesSpent, null, startTime);
         else this.showToast('Phiên quá ngắn.');
-    } else {
 
-        const defaultTime = goal.lastDuration || '20'; 
+    } else {
+        // --- KHI BẮT ĐẦU (START) ---
+        const defaultTime = goal.lastDuration || '20';
         const minStr = prompt('Thời lượng (phút):', defaultTime);
         
         if (!minStr) return;
@@ -2285,24 +2306,48 @@ toggleTimer(id) {
         goal.lastDuration = min; 
         this.save(); 
 
+        // [QUAN TRỌNG] Bật âm thanh nền để giữ trình duyệt thức
+        if (this.noSleepAudio) {
+            this.noSleepAudio.play().catch(e => console.log("Audio block: cần tương tác"));
+        }
 
         goal.sessionTargetSeconds = min * 60;
         goal.remainingSeconds = goal.sessionTargetSeconds;
         goal.isActive = true;
         goal.currentSessionStartTime = Date.now(); 
+        
+        // [FIX] Tính thời điểm kết thúc (Target Time)
+        goal.targetEndTime = Date.now() + (goal.remainingSeconds * 1000);
 
         this.timers[id] = setInterval(() => {
-            if (goal.remainingSeconds > 0) {
-                goal.remainingSeconds--;
-            } else {
+            // [FIX] Tính giây còn lại dựa trên thời gian thực
+            const now = Date.now();
+            const secondsLeft = Math.ceil((goal.targetEndTime - now) / 1000);
+            
+            goal.remainingSeconds = secondsLeft > 0 ? secondsLeft : 0;
 
+            if (secondsLeft <= 0) {
+                // --- HOÀN THÀNH ---
                 clearInterval(this.timers[id]);
+                
+                // Chuông sẽ reo đúng giờ nhờ Audio giữ trình duyệt thức
                 this.playBell(); 
                 
+                // Tắt âm thanh nền
+                if (this.noSleepAudio) {
+                    this.noSleepAudio.pause();
+                    this.noSleepAudio.currentTime = 0;
+                }
+
                 goal.isActive = false;
+                goal.targetEndTime = null;
+                
                 const minutesSpent = Math.floor(goal.sessionTargetSeconds / 60);
                 const startTime = goal.currentSessionStartTime;
-                goal.sessionTargetSeconds = 0; goal.remainingSeconds = 0; goal.currentSessionStartTime = null;
+                goal.sessionTargetSeconds = 0; 
+                goal.remainingSeconds = 0; 
+                goal.currentSessionStartTime = null;
+                
                 this.openSessionModal(id, minutesSpent, null, startTime);
                 this.showToast('Hoàn thành!');
                 this.renderGoals(); 
