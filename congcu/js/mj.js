@@ -780,37 +780,35 @@ const dbHelper = {
                 this.init();
             }
 			
-			 async init() {
+			 // Tìm hàm init() và thay thế nội dung đoạn đầu như sau:
+async init() {
     try {
         await dbHelper.open();
 
         const dbData = await dbHelper.loadAll();
-
         if (dbData) {
             this.data = { ...this.data, ...dbData };
         }
 
+        // --- THAY ĐỔI: Cấu hình mặc định mới ---
+        if (!this.data.medSettings) this.data.medSettings = {};
         
-         if (!this.data.medSettings || !this.data.medSettings.mode) {
-    this.data.medSettings = { 
-        mode: 'tap', 
-        holdDuration: 400, 
-        tapRequired: 1, 
-        vibration: true,
-        confirmMode: false,     
-        confirmProbability: 100 
-    };
-}
-if (typeof this.data.medSettings.confirmProbability === 'undefined') {
-    this.data.medSettings.confirmProbability = 100; 
-}
-        if (this.data.medSettings.proMode === true) {
-            this.data.medSettings.mode = 'pro';
-            delete this.data.medSettings.proMode; 
-        }
+        // Luôn luôn ép về chế độ thống nhất
+        this.data.medSettings.mode = 'unified'; 
+        
+        // Đảm bảo các chỉ số khác có giá trị mặc định
+        if (!this.data.medSettings.holdDuration) this.data.medSettings.holdDuration = 400;
+        if (typeof this.data.medSettings.vibration === 'undefined') this.data.medSettings.vibration = true;
+        if (typeof this.data.medSettings.confirmMode === 'undefined') this.data.medSettings.confirmMode = false;
+        if (typeof this.data.medSettings.confirmProbability === 'undefined') this.data.medSettings.confirmProbability = 100;
+        
+        // Xóa các thuộc tính cũ không dùng nữa để nhẹ data
+        delete this.data.medSettings.proMode;
+        delete this.data.medSettings.tapRequired;
+        // ---------------------------------------
 
         this.data.goals.forEach(goal => {
-            if (!goal.type) goal.type = 'standard'; 
+            if (!goal.type) goal.type = 'standard';
             if (!goal.sessionTargetSeconds) goal.sessionTargetSeconds = 0;
             if (!goal.remainingSeconds) goal.remainingSeconds = 0;
             if (typeof goal.dailyTargetMinutes === 'undefined') goal.dailyTargetMinutes = 30;
@@ -830,12 +828,12 @@ if (typeof this.data.medSettings.confirmProbability === 'undefined') {
         this.noSleepAudio = new Audio('data:audio/wav;base64,UklGRiQAAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQAAAAA=');
         this.noSleepAudio.loop = true;
         this.noSleepAudio.volume = 0.01;
-		
+
     } catch (err) {
         console.error("Error loading data!", err);
         this.showToast("Error loading data!");
     }
-    
+
     if (!localStorage.getItem('intro_seen')) {
         this.openIntroModal();
     }
@@ -853,83 +851,95 @@ hexToRgba(hex, alpha) {
     return `rgba(156, 163, 175, ${alpha})`; // Fallback gray
 }
 setupMeditationListeners() {
-                const medOverlay = document.getElementById('meditation-overlay');
-                const counterEl = document.getElementById('med-counter');
-                let pressTimer = null;
-                
-                if (medOverlay) {
-                     medOverlay.addEventListener('pointerdown', (e) => {
-                        if (e.target.closest('.med-controls') || e.target.closest('.modal')) return;
-                        e.preventDefault(); 
-                        const settings = this.data.medSettings;
-                        const mode = settings.mode;
-                        this.holdTriggered = false; 
-                        counterEl.style.transform = "scale(0.9)";
-                        counterEl.style.transition = "transform 0.1s";
-                        if (mode === 'hold' || mode === 'auto' || mode === 'pro') {
-                            pressTimer = setTimeout(() => {
-                                // --- MODIFIED FOR PRO MODE ---
-                                // In Pro mode, Hold now triggers 'Tốt' (Level 2) instead of 'Cao' (Level 1)
-                                if (mode === 'pro') { 
-                                    this.triggerMindfulnessSuccess(2); 
-                                } else { 
-                                    this.triggerMindfulnessSuccess(1); 
-                                }
-                                // -----------------------------
-                                this.holdTriggered = true; 
-                                pressTimer = null; 
-                            }, settings.holdDuration);
-                        } 
-                    });
+    const medOverlay = document.getElementById('meditation-overlay');
+    const counterEl = document.getElementById('med-counter');
+    let pressTimer = null;
 
-                    const handleRelease = (e) => {
-                        if (e.target.closest('.med-controls')) return;
-                        const settings = this.data.medSettings;
-                        const mode = settings.mode;
-                        if (pressTimer) { clearTimeout(pressTimer); pressTimer = null; }
-                        counterEl.style.transform = "scale(1)";
-                        if (this.holdTriggered) {
-                            this.holdTriggered = false;
-                            this.tapState.count = 0;
-                            return;
-                        }
-                        if (mode === 'tap' || mode === 'auto' || mode === 'pro') {
-                            if (this.tapState.timer) clearTimeout(this.tapState.timer);
-                            this.tapState.count++;
-                            counterEl.style.transform = "scale(0.95)";
-                            setTimeout(() => counterEl.style.transform = "scale(1)", 80);
-                            if (mode === 'auto' || mode === 'pro') {
-                                this.tapState.timer = setTimeout(() => {
-                                    const taps = this.tapState.count;
-                                    let qualityVal = 1; 
-                                    if (mode === 'pro') {
-                                        if (taps === 1) qualityVal = 4;      
-                                        else if (taps === 2) qualityVal = 3; 
-                                        else qualityVal = 3; // 3+ taps = Tốt (Level 2)
-                                    } 
-                                    this.triggerMindfulnessSuccess(qualityVal);
-                                    this.tapState.count = 0; 
-                                }, 400); 
-                            } else if (mode === 'tap') {
-                                if (this.tapState.count >= settings.tapRequired) {
-                                    this.triggerMindfulnessSuccess(1);
-                                    this.tapState.count = 0; 
-                                } else {
-                                    this.tapState.timer = setTimeout(() => {
-                                        this.tapState.count = 0;
-                                    }, 400);
-                                }
-                            }
-                        }
-                    };
-                    medOverlay.addEventListener('pointerup', handleRelease);
-                    medOverlay.addEventListener('pointerleave', () => {
-                        if(pressTimer) clearTimeout(pressTimer);
-                        counterEl.style.transform = "scale(1)";
-                        this.holdTriggered = false;
-                    });
-                }
+    if (medOverlay) {
+        medOverlay.addEventListener('pointerdown', (e) => {
+            if (e.target.closest('.med-controls') || e.target.closest('.modal')) return;
+            e.preventDefault();
+            
+            this.holdTriggered = false;
+            
+            // Hiệu ứng visual khi nhấn xuống
+            counterEl.style.transform = "scale(0.9)";
+            counterEl.style.transition = "transform 0.1s";
+
+            // Bắt đầu đếm giờ cho hành động "Giữ" -> TỈNH GIÁC
+            const settings = this.data.medSettings;
+            pressTimer = setTimeout(() => {
+                // Nếu giữ đủ lâu -> Ghi nhận TỈNH GIÁC
+                this.triggerAwarenessSuccess(); // <--- GỌI HÀM MỚI
+                this.holdTriggered = true;
+                pressTimer = null;
+            }, settings.holdDuration || 400);
+        });
+
+        const handleRelease = (e) => {
+            if (e.target.closest('.med-controls')) return;
+            
+            // Hủy timer giữ nếu thả tay ra sớm
+            if (pressTimer) {
+                clearTimeout(pressTimer);
+                pressTimer = null;
             }
+
+            // Trả lại kích thước visual
+            counterEl.style.transform = "scale(1)";
+
+            // Nếu đã kích hoạt "Giữ" (holdTriggered = true) thì không làm gì thêm
+            if (this.holdTriggered) {
+                this.holdTriggered = false;
+                return;
+            }
+
+            // Nếu chưa kích hoạt "Giữ", thì đây là một cú "Chạm" (Tap) -> CHÁNH NIỆM
+            this.triggerMindfulnessSuccess(1);
+        };
+
+        medOverlay.addEventListener('pointerup', handleRelease);
+        
+        medOverlay.addEventListener('pointerleave', () => {
+            if (pressTimer) clearTimeout(pressTimer);
+            counterEl.style.transform = "scale(1)";
+            this.holdTriggered = false;
+        });
+    }
+}
+
+triggerAwarenessSuccess() {
+    if (!this.meditationState.active || this.meditationState.paused) return;
+    
+    // Tăng biến đếm Tỉnh giác
+    this.meditationState.awarenessCount++;
+    
+    // Rung phản hồi (Kiểu rung khác: 2 nhịp ngắn nhanh để phân biệt)
+    const settings = this.data.medSettings;
+    if (settings.vibration && navigator.vibrate) {
+        navigator.vibrate([30, 30, 30]); 
+    }
+
+    // Hiệu ứng Visual 
+    const counterEl = document.getElementById('med-counter');
+    const awarenessColor = '#a78bfa'; 
+
+    counterEl.style.transition = "transform 0.1s";
+    counterEl.style.transform = "scale(1.2)";
+    counterEl.style.borderColor = awarenessColor;
+    counterEl.style.color = awarenessColor;
+    
+   
+    const currentMindfulness = this.meditationState.count;
+   counterEl.innerHTML = '<i class="fas fa-shield-alt"></i>'
+
+    setTimeout(() => {
+        counterEl.style.transform = "scale(1)";
+        counterEl.style.borderColor = "transparent";
+        counterEl.style.color = "white";
+        counterEl.innerText = currentMindfulness; // Trả lại số hiển thị Chánh niệm
+    }, 400);
+}
   openIntroModal() {
         const modal = document.getElementById('intro-modal');
         if (modal) modal.style.display = 'flex';
@@ -1003,12 +1013,12 @@ analyzeSingleSession(log) {
     const totalSec = log.minutes * 60;
     if (totalSec === 0) return { distractedSec: 0, qualityPct: 0 };
     const thresholdSec = log.threshold || 10;
-    
-    if (log.touches && log.touches.length >= 2) {
+    let distractedSec = 0;
 
+    // 1. Tính toán thời gian xao nhãng dựa trên khoảng cách Touch (Chánh niệm)
+    if (log.touches && log.touches.length >= 2) {
         const timestamps = log.touches.map(t => this.getTouchTimestamp(t, log.timestamp)).sort((a,b) => a - b);
         
-        let distractedSec = 0;
         const startGap = (timestamps[0] - log.timestamp) / 1000;
         if (startGap > thresholdSec) distractedSec += (startGap - thresholdSec/2);
 
@@ -1020,18 +1030,27 @@ analyzeSingleSession(log) {
         const endTime = log.timestamp + (log.minutes * 60 * 1000);
         const endGap = (endTime - timestamps[timestamps.length - 1]) / 1000;
         if (endGap > thresholdSec) distractedSec += (endGap - thresholdSec/2);
-
-        distractedSec = Math.min(distractedSec, totalSec);
-        const qualityPct = ((totalSec - distractedSec) / totalSec) * 100;
-        return { distractedSec, qualityPct: parseFloat(qualityPct.toFixed(1)) };
     } 
     else {
-
+        // Fallback nếu ít touch
         const count = log.count !== undefined ? log.count : (log.touches ? log.touches.length : 0);
         let mindfulSec = count * thresholdSec;
         mindfulSec = Math.min(mindfulSec, totalSec);
-        return { distractedSec: totalSec - mindfulSec, qualityPct: parseFloat(((mindfulSec/totalSec)*100).toFixed(1)) };
+        distractedSec = totalSec - mindfulSec;
     }
+
+    
+    const awarenessCount = log.awarenessCount || 0;
+    const recoveryTime = awarenessCount * 0.3;
+    
+    distractedSec -= recoveryTime;
+
+    // Đảm bảo không âm và không vượt quá tổng thời gian
+    if (distractedSec < 0) distractedSec = 0;
+    distractedSec = Math.min(distractedSec, totalSec);
+
+    const qualityPct = ((totalSec - distractedSec) / totalSec) * 100;
+    return { distractedSec, qualityPct: parseFloat(qualityPct.toFixed(1)) };
 }
 
 renderAnalytics(saveState = false) {
@@ -2060,155 +2079,119 @@ renderProTrendChart() {
         }
     });
 }
-triggerMindfulnessSuccess(quality = 1) 
+triggerMindfulnessSuccess(baseQuality = 1) {
+    const settings = this.data.medSettings;
+    const now = Date.now();
 
-{ const settings = this.data.medSettings; const now = Date.now();
-    
-   const thresholdMs = this.meditationState.threshold * 1000;
-const timeDiff = now - this.meditationState.lastTouchTime;
+    // 1. Logic tính Combo (Tự động nâng Level dựa trên sự liên tục)
+    const thresholdMs = this.meditationState.threshold * 1000;
+    const timeDiff = now - this.meditationState.lastTouchTime;
 
-let nextAutoLevel = this.meditationState.currentAutoLevel;
-let nextComboCounter = this.meditationState.comboCounter;
+    let nextAutoLevel = this.meditationState.currentAutoLevel;
+    let nextComboCounter = this.meditationState.comboCounter;
 
-if (timeDiff > thresholdMs) {
-   
-    nextAutoLevel = 4;
-    nextComboCounter = 0;
-} else {
-    if (nextAutoLevel > 1) {
-        nextComboCounter++;
-        
-        
-        const hitsRequired = (nextAutoLevel === 3 || nextAutoLevel === 2) ? 20 : 10;
-
-        if (nextComboCounter >= hitsRequired) {
-            nextAutoLevel--;    
-            nextComboCounter = 0;
-        }
-    }
-}
-
-
-let finalQuality = 4; 
-
-if (settings.mode === 'pro') {
-   
-    let potentialProQuality = quality;
-    if (quality === 2) {
-        const currentGoodCount = this.meditationState.consecutiveGoodCount || 0;
-        if (currentGoodCount + 1 >= 10) {
-            potentialProQuality = 1;
-        }
-    }
-    
-    finalQuality = Math.min(potentialProQuality, nextAutoLevel);
-
-} else {
-    finalQuality = nextAutoLevel;
-}
-
-
-const isProLow = (settings.mode === 'pro' && finalQuality === 4);
-const isStandardLow = (settings.mode !== 'pro' && finalQuality === 4);
-let needConfirm = false;
-
-if (settings.confirmMode && (isProLow || isStandardLow)) {
-    // Nếu đang chờ xác nhận thì không cần random lại, coi như cần xác nhận tiếp
-    if (this.meditationState.pendingConfirmation) {
-        needConfirm = true; 
+    if (timeDiff > thresholdMs) {
+        // Mất tập trung -> Reset về mức Thấp (4)
+        nextAutoLevel = 4;
+        nextComboCounter = 0;
     } else {
-        // Nếu là lần chạm đầu, tung xúc xắc
-        const chance = settings.confirmProbability || 100;
-        const roll = Math.random() * 100;
-        if (roll <= chance) {
-            needConfirm = true;
+        // Có sự liên tục -> Tăng Combo
+        if (nextAutoLevel > 1) {
+            nextComboCounter++;
+            // Nếu là mức 3 hoặc 2 cần 20 lần, mức khác cần 10 lần để lên cấp
+            const hitsRequired = (nextAutoLevel === 3 || nextAutoLevel === 2) ? 20 : 12;
+            if (nextComboCounter >= hitsRequired) {
+                nextAutoLevel--; // Giảm số là tăng cấp (4->3->2->1)
+                nextComboCounter = 0;
+            }
         }
     }
-}
 
-if (needConfirm) {
-    const counterEl = document.getElementById('med-counter');
+    // Chất lượng cuối cùng chính là Level hiện tại (do tốc độ quyết định)
+    let finalQuality = nextAutoLevel;
 
-    if (!this.meditationState.pendingConfirmation) {
-        this.meditationState.pendingConfirmation = true;
-        this.meditationState.pendingTouchData = { 
-            quality: finalQuality, 
-            timestamp: now 
-        };
-        
-        counterEl.style.transition = "all 0.2s";
-        counterEl.style.borderColor = "var(--warning)";
-        counterEl.style.color = "var(--warning)";
-        counterEl.style.transform = "scale(0.85)";
-      
-        // HARDCODE THỜI GIAN 3000ms (3 giây)
-        this.meditationState.confirmationTimeout = setTimeout(() => {
-            this.meditationState.pendingConfirmation = false;
-            this.meditationState.pendingTouchData = null;
+    // 2. Logic Xác Nhận (Confirm Mode) - Chỉ áp dụng cho mức Thấp (Level 4)
+    let needConfirm = false;
+    if (settings.confirmMode && finalQuality === 4) {
+        if (this.meditationState.pendingConfirmation) {
+            needConfirm = true; // Đang chờ xác nhận -> Đây là lần 2 -> Thành công
+        } else {
+            // Lần chạm đầu -> Kiểm tra xác suất
+            const chance = settings.confirmProbability || 100;
+            const roll = Math.random() * 100;
+            if (roll <= chance) {
+                needConfirm = true;
+            }
+        }
+    }
+
+    if (needConfirm) {
+        const counterEl = document.getElementById('med-counter');
+        if (!this.meditationState.pendingConfirmation) {
+            // --- TRẠNG THÁI CHỜ (Lần 1) ---
+            this.meditationState.pendingConfirmation = true;
             
-            counterEl.style.borderColor = "transparent";
-            counterEl.style.color = "white";
-            counterEl.style.transform = "scale(1)";
-        }, 3000); 
+            counterEl.style.transition = "all 0.2s";
+            counterEl.style.borderColor = "var(--warning)";
+            counterEl.style.color = "var(--warning)";
+            counterEl.style.transform = "scale(0.85)";
+            
+            // Chờ 3 giây, nếu không chạm tiếp thì hủy
+            this.meditationState.confirmationTimeout = setTimeout(() => {
+                this.meditationState.pendingConfirmation = false;
+                counterEl.style.borderColor = "transparent";
+                counterEl.style.color = "white";
+                counterEl.style.transform = "scale(1)";
+            }, 3000);
 
-        return; // Dừng lại, chờ chạm lần 2
-
-    } else {
-        // Đã chạm lần 2 thành công
-        clearTimeout(this.meditationState.confirmationTimeout);
-        this.meditationState.pendingConfirmation = false;
-        // Tiếp tục chạy xuống logic ghi nhận bên dưới...
+            return; // Dừng lại, chưa ghi nhận
+        } else {
+            // --- XÁC NHẬN THÀNH CÔNG (Lần 2) ---
+            clearTimeout(this.meditationState.confirmationTimeout);
+            this.meditationState.pendingConfirmation = false;
+        }
     }
-}
 
+    // 3. Ghi nhận dữ liệu
+    this.meditationState.currentAutoLevel = nextAutoLevel;
+    this.meditationState.comboCounter = nextComboCounter;
+    this.meditationState.lastTouchTime = now;
 
-this.meditationState.currentAutoLevel = nextAutoLevel;
-this.meditationState.comboCounter = nextComboCounter;
-this.meditationState.lastTouchTime = now;
+    this.handleMeditationTouch(finalQuality);
 
-if (settings.mode === 'pro') {
-    if (quality === 2) {
-        this.meditationState.consecutiveGoodCount = (this.meditationState.consecutiveGoodCount || 0) + 1;
-    } else {
-        this.meditationState.consecutiveGoodCount = 0;
+    // 4. Phản hồi xúc giác (Rung)
+    if (settings.vibration && navigator.vibrate) {
+        switch (finalQuality) {
+            case 1: navigator.vibrate([80, 50, 80]); break; // Cao: Rung mạnh
+            case 2: navigator.vibrate([60, 40, 60]); break; // Tốt
+            case 3: navigator.vibrate([40, 30, 40]); break; // TB
+            case 4: navigator.vibrate(50); break;           // Thấp: Rung ngắn
+            default: navigator.vibrate(50);
+        }
     }
-}
 
+    // 5. Hiệu ứng Visual
+    const counterEl = document.getElementById('med-counter');
+    const colors = { 1: 'var(--q-1)', 2: 'var(--q-2)', 3: 'var(--q-3)', 4: 'var(--q-4)' };
+    const pulseColor = colors[finalQuality] || 'var(--q-4)';
 
-this.handleMeditationTouch(finalQuality);
+    counterEl.style.transition = "transform 0.1s";
+    counterEl.style.transform = "scale(1.3)";
+    counterEl.style.borderColor = pulseColor;
+    counterEl.style.color = pulseColor;
 
-
-if (settings.vibration && navigator.vibrate) {
-    switch(finalQuality) {
-        case 1: navigator.vibrate([80, 50, 80]); break; 
-        case 2: navigator.vibrate([60, 40, 60]); break; 
-        case 3: navigator.vibrate([40, 30, 40]); break; 
-        case 4: navigator.vibrate(50); break;           
-        default: navigator.vibrate(50);
-    }
-}
-
-const counterEl = document.getElementById('med-counter');
-const colors = { 1: 'var(--q-1)', 2: 'var(--q-2)', 3: 'var(--q-3)', 4: 'var(--q-4)' }; 
-const pulseColor = colors[finalQuality] || 'var(--q-4)';
-
-counterEl.style.transition = "transform 0.1s";
-counterEl.style.transform = "scale(1.3)";
-counterEl.style.borderColor = pulseColor;
-counterEl.style.color = pulseColor; 
-
-setTimeout(() => {
-    counterEl.style.transform = "scale(1)";
-    counterEl.style.borderColor = "transparent";
-    counterEl.style.color = "white";
-}, 200);
+    setTimeout(() => {
+        counterEl.style.transform = "scale(1)";
+        counterEl.style.borderColor = "transparent";
+        counterEl.style.color = "white";
+    }, 200);
 }
 
             save() {
                 // We perform a "fire and forget" save to DB
                 dbHelper.saveAll(this.data).catch(err => {
                     console.error("Save failed:", err);
-                    this.showToast("Lỗi lưu dữ liệu!");
+                    this.showToast("Save failed!");
                 });
                 
                 this.updateStats();
@@ -2365,7 +2348,6 @@ toggleTimer(id) {
 }
 
 startMeditationSetup(goal) {
-
     const defaultTime = goal.lastDuration || '20';
     const minStr = prompt('Meditation duration (mins):', defaultTime);
     
@@ -2390,7 +2372,9 @@ startMeditationSetup(goal) {
     }
 
     this.meditationState = {
-        active: true, paused: false, goalId: goal.id, count: 0,
+        active: true, paused: false, goalId: goal.id, 
+        count: 0,           // Đếm Chánh niệm (Tap)
+        awarenessCount: 0,  // Đếm Tỉnh giác (Hold) - MỚI
         startTime: Date.now(), totalDurationSeconds: min * 60,
         remainingSeconds: min * 60, touches: [],
         threshold: threshold, 
@@ -2399,7 +2383,6 @@ startMeditationSetup(goal) {
         currentAutoLevel: 4,      
         comboCounter: 0,          
         lastTouchTime: Date.now(), 
-        
         
         consecutiveGoodCount: 0, 
 
@@ -2540,17 +2523,23 @@ concludeMeditationSession(type = 'manual') {
 
     const goal = this.data.goals.find(g => g.id === this.meditationState.goalId);
     
+    // Định dạng ghi chú tự động
+    const autoNote = `Mindfulness: ${this.meditationState.count} | Awareness: ${this.meditationState.awarenessCount}.`;
+
     const log = {
         goalId: goal.id,
         date: this.toIsoDate(new Date(this.meditationState.startTime)),
         timestamp: this.meditationState.startTime,
         minutes: minutes,
-        notes: `Mindfulness: ${this.meditationState.count}. ${notes}`,
+        notes: `${autoNote} ${notes}`,
+        
+        count: this.meditationState.count,                  // Chỉ lưu số Chánh niệm (Tap)
+        awarenessCount: this.meditationState.awarenessCount,// Lưu số Tỉnh giác (Hold)
+        
         touches: this.meditationState.touches.map(t => {
-    const delta = Math.max(0, t.t - this.meditationState.startTime);
-    // If it has a value (Pro mode), keep it. Otherwise just save the number.
-    return t.v ? { d: delta, v: t.v } : delta;
-}),
+            const delta = Math.max(0, t.t - this.meditationState.startTime);
+            return t.v ? { d: delta, v: t.v } : delta;
+        }),
         threshold: this.meditationState.threshold 
     };
 
@@ -2567,7 +2556,7 @@ concludeMeditationSession(type = 'manual') {
     this.checkAchievements();
     
     document.getElementById('meditation-finish-modal').style.display = 'none';
-    this.showToast(`Session Saved! +${this.meditationState.count} mindfulness.`);
+    this.showToast(`Session saved! +${this.meditationState.count} mindfulness, +${this.meditationState.awarenessCount} awareness.`);
 }
 
             updateTimerUI() {
@@ -2594,26 +2583,36 @@ concludeMeditationSession(type = 'manual') {
 
 openMedSettings() {
     const s = this.data.medSettings;
-    if(!s.mode) s.mode = s.proMode ? 'pro' : 'tap';
-    this.setMedModeUI(s.mode);
     
-    document.getElementById('inp-hold-time').value = s.holdDuration;
-    document.getElementById('disp-hold-time').innerText = (s.holdDuration / 1000) + 's';
-    document.getElementById('inp-tap-count').value = s.tapRequired || 1;
+    // Gán giá trị vào input
+    document.getElementById('inp-hold-time').value = s.holdDuration || 400;
+    document.getElementById('disp-hold-time').innerText = ((s.holdDuration || 400) / 1000) + 's';
+    
     document.getElementById('inp-vibrate').checked = s.vibration;
-    
-    // Cập nhật Confirm UI
     document.getElementById('inp-confirm-mode').checked = s.confirmMode || false;
     
-    // Load Probability thay vì Time
     const prob = (typeof s.confirmProbability !== 'undefined') ? s.confirmProbability : 100;
     document.getElementById('inp-confirm-prob').value = prob;
     document.getElementById('disp-confirm-prob').innerText = prob + '%';
     
     this.toggleConfirmSlider(); 
     
+    // Hiển thị modal
     const modal = document.getElementById('med-settings-modal');
     modal.style.display = 'flex';
+}
+
+// Cập nhật hàm saveMedSettings
+saveMedSettings() {
+    this.data.medSettings = {
+        mode: 'unified', // Luôn cố định
+        holdDuration: parseInt(document.getElementById('inp-hold-time').value),
+        vibration: document.getElementById('inp-vibrate').checked,
+        confirmMode: document.getElementById('inp-confirm-mode').checked,
+        confirmProbability: parseInt(document.getElementById('inp-confirm-prob').value)
+    };
+
+    this.save();
 }
 toggleConfirmSlider() {
     const isChecked = document.getElementById('inp-confirm-mode').checked;
@@ -2626,48 +2625,6 @@ closeMedSettings() {
     document.getElementById('med-settings-modal').style.display = 'none';
 }
 
-setMedMode(mode) {
-    this.setMedModeUI(mode);
-    this.saveMedSettings();
-}
-
-setMedModeUI(mode) {
-
-    ['tap', 'hold', 'auto', 'pro'].forEach(m => {
-        const btn = document.getElementById(`btn-mode-${m}`);
-        if (btn) {
-            if (m === mode) btn.classList.add('btn-mode-active');
-            else btn.classList.remove('btn-mode-active');
-        }
-    });
-
-    const groupHold = document.getElementById('setting-hold-group');     
-    const groupTap = document.getElementById('setting-tap-group');       
-    const groupLegend = document.getElementById('setting-pro-legend');   
-    const desc = document.getElementById('mode-desc');                   
-
-    groupHold.style.display = 'none';
-    groupTap.style.display = 'none';
-    groupLegend.style.display = 'none';
-
-    if (mode === 'hold') {
-        groupHold.style.display = 'block';
-        desc.innerText = "Press and hold to count one mindfulness.";
-    } 
-    else if (mode === 'tap') {
-        groupTap.style.display = 'block'; 
-        desc.innerText = "Tap to count one mindfulness.";
-    } 
-    else if (mode === 'auto') {
-        groupHold.style.display = 'block';
-        desc.innerText = "Automatically detects Tap or Hold mode.";
-    } 
-    else if (mode === 'pro') {
-		groupHold.style.display = 'block';
-        groupLegend.style.display = 'block';
-        desc.innerText = "Classifies focus quality based on touch style.";
-    }
-}
 
 
 
@@ -2677,25 +2634,6 @@ toggleProModeUI() {
     document.getElementById('pro-tap-options').style.display = isPro ? 'block' : 'none';
 }
 
-saveMedSettings() {
-    let mode = 'tap';
-    if(document.getElementById('btn-mode-hold').classList.contains('btn-mode-active')) mode = 'hold';
-    else if(document.getElementById('btn-mode-auto').classList.contains('btn-mode-active')) mode = 'auto';
-    else if(document.getElementById('btn-mode-pro').classList.contains('btn-mode-active')) mode = 'pro';
-
-    this.data.medSettings = {
-        mode: mode,
-        holdDuration: parseInt(document.getElementById('inp-hold-time').value),
-        tapRequired: parseInt(document.getElementById('inp-tap-count').value),
-        vibration: document.getElementById('inp-vibrate').checked,
-        confirmMode: document.getElementById('inp-confirm-mode').checked,
-        
-        // Lưu giá trị xác suất, bỏ confirmWindow
-        confirmProbability: parseInt(document.getElementById('inp-confirm-prob').value)
-    };
-
-    this.save();
-}
 
 // 3. Hàm Helper mới (Thay thế updateConfirmDisplay cũ)
 updateConfirmProbDisplay() {
@@ -3672,56 +3610,48 @@ setReportMode(mode) {
     this.renderReports();
 }
 
-renderReports(resetDates = false) { // 1. Add parameter
-    if(!document.getElementById('weeklyChart')) return;
-    
+renderReports(resetDates = false) {
+    if (!document.getElementById('weeklyChart')) return;
+
     const isMindfulness = this.reportMode === 'mindfulness';
-    const unitLabel = isMindfulness ? 'Mindfulness' : 'Minutes';
+    const unitLabel = isMindfulness ? 'Logs' : 'Minutes'; // Đổi đơn vị hiển thị
 
     document.getElementById('breakdown-title').innerText = isMindfulness ? 'Mindfulness Chart' : 'Time Chart';
 
     const rangeSelect = document.getElementById('report-range-select');
     const rangeMode = rangeSelect ? rangeSelect.value : 'all';
-    
+
     const now = new Date();
-    const realCurrentDay = now.getDay() || 7; 
+    const realCurrentDay = now.getDay() || 7;
     const realThisWeekStart = new Date(now.getFullYear(), now.getMonth(), now.getDate() - realCurrentDay + 1);
     const realThisMonthStart = new Date(now.getFullYear(), now.getMonth(), 1);
 
-    // 2. Wrap the sync logic in if(resetDates)
+    // --- Xử lý Reset ngày tháng khi đổi filter ---
     if (resetDates) {
         if (rangeMode === 'last_week') {
-            // Sync Weekly Chart to Last Week
             this.currentWeekStart = new Date(realThisWeekStart);
             this.currentWeekStart.setDate(this.currentWeekStart.getDate() - 7);
-            // Sync Monthly Chart to the month of that week
             this.currentMonth = new Date(this.currentWeekStart.getFullYear(), this.currentWeekStart.getMonth(), 1);
-        } 
-        else if (rangeMode === 'last_month') {
-            // Sync Monthly Chart to Last Month
+        } else if (rangeMode === 'last_month') {
             this.currentMonth = new Date(realThisMonthStart);
             this.currentMonth.setMonth(this.currentMonth.getMonth() - 1);
-            // Sync Weekly Chart to start of that month
             this.currentWeekStart = this.getStartOfWeek(new Date(this.currentMonth.getFullYear(), this.currentMonth.getMonth(), 1));
-        }
-        else if (rangeMode === 'this_week' || rangeMode === 'this_month' || rangeMode === 'today') {
-            // Reset charts to current
+        } else if (rangeMode === 'this_week' || rangeMode === 'this_month' || rangeMode === 'today') {
             this.currentWeekStart = new Date(realThisWeekStart);
             this.currentMonth = new Date(realThisMonthStart);
         }
     }
-    // ---------------------------------------------
-    
-    // ... (The rest of the function remains exactly the same as provided) ...
-    // Define filter range for the Doughnut Chart (Breakdown)
+
+    // --- Định nghĩa khoảng thời gian Filter cho biểu đồ Tròn ---
     const todayStart = new Date(now.getFullYear(), now.getMonth(), now.getDate()).getTime();
     let filterStart = 0;
-    let filterEnd = Date.now() + 86400000; 
-if (rangeMode === 'today') filterStart = todayStart;
-	else if (rangeMode === 'yesterday') {
+    let filterEnd = Date.now() + 86400000;
+
+    if (rangeMode === 'today') filterStart = todayStart;
+    else if (rangeMode === 'yesterday') {
         filterEnd = todayStart;
-        filterStart = todayStart - 86400000; }
-     else if (rangeMode === 'this_week') {
+        filterStart = todayStart - 86400000;
+    } else if (rangeMode === 'this_week') {
         filterStart = realThisWeekStart.getTime();
     } else if (rangeMode === 'last_week') {
         filterEnd = realThisWeekStart.getTime();
@@ -3731,251 +3661,279 @@ if (rangeMode === 'today') filterStart = todayStart;
     } else if (rangeMode === 'last_month') {
         filterEnd = realThisMonthStart.getTime();
         filterStart = new Date(now.getFullYear(), now.getMonth() - 1, 1).getTime();
-    } 
+    }
 
+    // --- Định nghĩa khoảng thời gian cho biểu đồ Tuần/Tháng ---
     const weekStartMs = this.currentWeekStart.getTime();
     const weekEndMs = weekStartMs + (7 * 24 * 60 * 60 * 1000);
-
-    const weekEndDisp = new Date(weekEndMs - 1); 
+    const weekEndDisp = new Date(weekEndMs - 1);
     document.getElementById('weekly-report-title').innerText = `Week (${this.currentWeekStart.toLocaleDateString('en-GB', {month:'numeric', day:'numeric'})} - ${weekEndDisp.toLocaleDateString('en-GB', {month:'numeric', day:'numeric'})})`;
 
     const mYear = this.currentMonth.getFullYear();
     const mMonth = this.currentMonth.getMonth();
-    const monthlyLabels = Array.from({length: new Date(mYear, mMonth + 1, 0).getDate()}, (_, i) => i + 1);
+    const monthlyLabels = Array.from({ length: new Date(mYear, mMonth + 1, 0).getDate() }, (_, i) => i + 1);
     document.getElementById('monthly-report-title').innerText = `Month ${new Date(mYear, mMonth).toLocaleDateString('en-GB', { month: 'numeric', year: 'numeric' })}`;
 
-    const goalDatasets = {};
+    // --- CHUẨN BỊ DỮ LIỆU ---
+    let datasets = [];
+
+    if (isMindfulness) {
+        // === CHẾ ĐỘ CHÁNH NIỆM: GỘP TOÀN BỘ GOAL, CHIA THEO LOẠI TÂM ===
+        // Tạo 2 nhóm dữ liệu cố định
+        const mindData = {
+            id: 'mindfulness', name: 'Mindfulness', color: '#34d399', // Xanh ngọc
+            breakdownTotal: 0, weekly: new Array(7).fill(0), monthly: new Array(monthlyLabels.length).fill(0)
+        };
+        const awareData = {
+            id: 'awareness', name: 'Awareness', color: '#818cf8', // Tím
+            breakdownTotal: 0, weekly: new Array(7).fill(0), monthly: new Array(monthlyLabels.length).fill(0)
+        };
+
+        this.data.logs.forEach(log => {
+            // Lấy thời gian log
+            let logTime = log.timestamp;
+            let logDateObj;
+            if (!logTime) { logDateObj = new Date(log.date); logTime = logDateObj.getTime(); }
+            else { logDateObj = new Date(logTime); }
+
+            // Lấy giá trị Chánh niệm & Tỉnh giác
+            const countVal = log.count !== undefined ? log.count : (log.touches ? log.touches.length : 0);
+            const awareVal = log.awarenessCount || 0;
+
+            // 1. Cộng tổng cho biểu đồ Tròn (theo filter range)
+            if (logTime >= filterStart && logTime < filterEnd) {
+                mindData.breakdownTotal += countVal;
+                awareData.breakdownTotal += awareVal;
+            }
+
+            // 2. Cộng vào biểu đồ Tuần
+            if (logTime >= weekStartMs && logTime < weekEndMs) {
+                let dayIdx = logDateObj.getDay();
+                dayIdx = (dayIdx === 0 ? 6 : dayIdx - 1);
+                mindData.weekly[dayIdx] += countVal;
+                awareData.weekly[dayIdx] += awareVal;
+            }
+
+            // 3. Cộng vào biểu đồ Tháng
+            if (logDateObj.getFullYear() === mYear && logDateObj.getMonth() === mMonth) {
+                mindData.monthly[logDateObj.getDate() - 1] += countVal;
+                awareData.monthly[logDateObj.getDate() - 1] += awareVal;
+            }
+        });
+
+        datasets = [mindData, awareData];
+
+    } else {
+        // === CHẾ ĐỘ THỜI GIAN: CHIA THEO MỤC TIÊU (GOAL) ===
+        const goalDatasets = {};
+        this.data.goals.forEach(goal => {
+            goalDatasets[goal.id] = {
+                name: goal.name, color: goal.color,
+                breakdownTotal: 0, weekly: new Array(7).fill(0), monthly: new Array(monthlyLabels.length).fill(0)
+            };
+        });
+
+        this.data.logs.forEach(log => {
+            if (!goalDatasets[log.goalId]) return;
+
+            const value = log.minutes; // Lấy số phút
+            let logTime = log.timestamp;
+            let logDateObj;
+            if (!logTime) { logDateObj = new Date(log.date); logTime = logDateObj.getTime(); }
+            else { logDateObj = new Date(logTime); }
+
+            if (logTime >= filterStart && logTime < filterEnd) {
+                goalDatasets[log.goalId].breakdownTotal += value;
+            }
+            if (logTime >= weekStartMs && logTime < weekEndMs) {
+                let dayIdx = logDateObj.getDay();
+                dayIdx = (dayIdx === 0 ? 6 : dayIdx - 1);
+                goalDatasets[log.goalId].weekly[dayIdx] += value;
+            }
+            if (logDateObj.getFullYear() === mYear && logDateObj.getMonth() === mMonth) {
+                goalDatasets[log.goalId].monthly[logDateObj.getDate() - 1] += value;
+            }
+        });
+        datasets = Object.values(goalDatasets);
+    }
+
+    // Lọc dữ liệu hiển thị
+    // Biểu đồ tròn: Chỉ hiện những cái > 0
+    const activeDataForDoughnut = datasets.filter(d => d.breakdownTotal > 0);
+    // Biểu đồ cột: Hiện tất cả (hoặc lọc nếu muốn gọn)
+    const allDataForBars = datasets; 
+
     const weekDays = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
-    
-    this.data.goals.forEach(goal => { 
-        if (isMindfulness && goal.type !== 'meditation') return;
 
-        goalDatasets[goal.id] = { 
-            name: goal.name, 
-            color: goal.color, 
-            breakdownTotal: 0, 
-            weekly: new Array(7).fill(0),
-            monthly: new Array(monthlyLabels.length).fill(0) 
-        }; 
-    });
-
-    this.data.logs.forEach(log => {
-        if(!goalDatasets[log.goalId]) return;
-
-        let value = 0;
-        if (isMindfulness) {
-            value = log.count !== undefined ? log.count : (log.touches ? log.touches.length : 0);
-        } else {
-            value = log.minutes;
-        }
-
-        let logTime = log.timestamp;
-        let logDateObj;
-        if (!logTime) {
-             logDateObj = new Date(log.date); 
-             logTime = logDateObj.getTime();
-        } else {
-             logDateObj = new Date(logTime);
-        }
-
-        if (logTime >= filterStart && logTime < filterEnd) {
-            goalDatasets[log.goalId].breakdownTotal += value;
-        }
-
-        if(logTime >= weekStartMs && logTime < weekEndMs) { 
-            let dayIdx = logDateObj.getDay();
-            dayIdx = (dayIdx === 0 ? 6 : dayIdx - 1);
-            goalDatasets[log.goalId].weekly[dayIdx] += value; 
-        }
-
-        if(logDateObj.getFullYear() === mYear && logDateObj.getMonth() === mMonth) {
-            goalDatasets[log.goalId].monthly[logDateObj.getDate() - 1] += value;
-        }
-    });
-
-    const activeGoalsForDoughnut = Object.values(goalDatasets).filter(d => d.breakdownTotal > 0);
-    const allGoalsForBars = Object.values(goalDatasets).filter(d => d.weekly.some(v=>v>0) || d.monthly.some(v=>v>0) || d.breakdownTotal > 0);
-
-    const commonOptions = { 
-        maintainAspectRatio: false, 
-        scales: { 
-            x: {stacked: true, grid:{color:'#374151'}, ticks: { color: '#9ca3af', font: { size: 11 },} }, 
+    // --- CẤU HÌNH CHART CHUNG ---
+    const commonOptions = {
+        maintainAspectRatio: false,
+        scales: {
+            x: { stacked: true, grid: { color: '#374151' }, ticks: { color: '#9ca3af', font: { size: 11 } } },
             y: {
-                stacked: true, 
-                grid:{color:'#374151'},
-                title: { display: false, text: unitLabel },
-                ticks: { color: '#9ca3af', font: { size: 11 },}				
-            } 
-        }, 
+                stacked: true,
+                grid: { color: '#374151' },
+                title: { display: false },
+                ticks: { color: '#9ca3af', font: { size: 11 } }
+            }
+        },
         plugins: {
-            legend: { labels: { color: '#9ca3af', font: {size: 11} } },
+            legend: { labels: { color: '#9ca3af', font: { size: 11 } } },
             tooltip: {
+                
                 callbacks: {
                     label: function(context) {
-                        return context.dataset.label + ': ' + context.raw + ' ' + unitLabel;
+                        let label = context.dataset.label || '';
+                        let value = context.raw || 0;
+                        let total = 0;
+                        
+                        // Calculate the total of the stack (Sum of all visible datasets at this index)
+                        context.chart.data.datasets.forEach((dataset, i) => {
+                            if (context.chart.isDatasetVisible(i)) {
+                                total += dataset.data[context.dataIndex] || 0;
+                            }
+                        });
+
+                        // Calculate percentage
+                        let percentage = total > 0 ? ((value / total) * 100).toFixed(0) : 0;
+                        
+                        // Format the value (Minutes vs Hours)
+                        let formattedValue = "";
+                        if (unitLabel === 'Minutes') {
+                            if (value < 60) formattedValue = value + " minutes";
+                            else formattedValue = (value / 60).toFixed(1) + " hours";
+                        } else {
+                            formattedValue = value.toLocaleString() + " " + unitLabel;
+                        }
+                        
+                        return `${label}: ${formattedValue} (${percentage}%)`;
                     }
                 }
             }
-        } 
+        }
     };
 
-        const breakdownOptions = {
-        maintainAspectRatio: false,
-        plugins: {
-            legend: { labels: { color: '#9ca3af' } },
-            title: {
-                display: activeGoalsForDoughnut.length === 0,
-                text: 'No data available',
-                position: 'bottom',
-                color: '#6b7280'
-            },
-            tooltip: {
-			backgroundColor: '#121821', // Màu Solid (Hex) trùng với var(--surface), chắn hoàn toàn chữ bên dưới
-                titleColor: '#f3f4f6',      // Màu chữ sáng (var(--text))
-                bodyColor: '#f3f4f6',
-                borderColor: '#374151',     // Viền xám (var(--border)) để tooltip nổi bật hơn
-                borderWidth: 1,
-                padding: 10,
-				z: 999,
-            callbacks: {
-                label: function(context) {
-                    // 1. Get the raw value
-                    let value = context.raw; 
-                    let label = context.label || '';
-                    let formattedValue = "";
-                    const total = context.dataset.data.reduce((acc, curr) => acc + curr, 0);                           const percentage = total > 0 ? ((value / total) * 100).toFixed(0) : 0;
-                    // 2. Apply your Minute -> Hour logic
-                    if (unitLabel === 'Minutes') {
-                        if (value < 60) {
-                            formattedValue = value + " minutes"; 
-                        } else {
-                            formattedValue = (value / 60).toFixed(1) + " hours";
-                        }
-                    } else {
-                        formattedValue = value.toLocaleString() + " " + unitLabel;
-                    }
+    // --- VẼ BIỂU ĐỒ TRÒN (BREAKDOWN) ---
+    const ctxBreakdown = document.getElementById('goalBreakdownChart').getContext('2d');
+    if (this.charts.breakdown) this.charts.breakdown.destroy();
 
-                    return ` ${formattedValue} (${percentage}%)`;
+    const centerTextPlugin = {
+        id: 'centerText',
+        afterDatasetsDraw: function(chart) {
+            const { ctx, chartArea: { top, bottom, left, right } } = chart;
+            ctx.save();
+            let total = 0;
+            const data = chart.data.datasets[0].data;
+            data.forEach(val => total += val);
+
+            let mainText = "";
+            let currentUnit = typeof unitLabel !== 'undefined' ? unitLabel : '';
+
+            if (currentUnit === 'Minutes') {
+                if (total < 60) mainText = total + "m";
+                else mainText = (total / 60).toFixed(1) + "h";
+            } else {
+                mainText = total.toLocaleString();
+            }
+
+            const centerX = (left + right) / 2;
+            const centerY = (top + bottom) / 2;
+            const chartHeight = bottom - top;
+            const fontSizeMain = chartHeight / 13;
+            const fontSizeSub = chartHeight / 26;
+
+            ctx.textAlign = "center";
+            ctx.textBaseline = "middle";
+
+            if (isMindfulness) {
+                ctx.font = `bold ${fontSizeMain}px sans-serif`;
+                ctx.fillStyle = "#FFFFFF";
+                ctx.fillText(mainText, centerX, centerY - (fontSizeMain * 0.15));
+                ctx.font = `normal ${fontSizeSub}px sans-serif`;
+                ctx.fillStyle = "#9ca3af";
+                ctx.fillText("Logs", centerX, centerY + (fontSizeMain * 0.65));
+            } else {
+                ctx.font = `bold ${fontSizeMain}px sans-serif`;
+                ctx.fillStyle = "#FFFFFF";
+                ctx.fillText(mainText, centerX, centerY);
+            }
+            ctx.restore();
+        }
+    };
+
+    this.charts.breakdown = new Chart(ctxBreakdown, {
+        type: 'doughnut',
+        data: {
+            labels: activeDataForDoughnut.map(d => d.name),
+            datasets: [{
+                data: activeDataForDoughnut.map(d => d.breakdownTotal),
+                backgroundColor: activeDataForDoughnut.map(d => d.color),
+                borderWidth: 1, borderColor: '#1f2937'
+            }]
+        },
+        options: {
+            maintainAspectRatio: false,
+            plugins: {
+                legend: { labels: { color: '#9ca3af' } },
+                title: { display: activeDataForDoughnut.length === 0, text: 'No data available', position: 'bottom', color: '#6b7280' },
+                tooltip: {
+                    backgroundColor: '#121821', titleColor: '#f3f4f6', bodyColor: '#f3f4f6', borderColor: '#374151', borderWidth: 1, padding: 10, z: 999,
+                    callbacks: {
+                        label: function(context) {
+                            let value = context.raw;
+                            let formattedValue = "";
+                            const total = context.dataset.data.reduce((acc, curr) => acc + curr, 0);
+                            const percentage = total > 0 ? ((value / total) * 100).toFixed(0) : 0;
+                            if (unitLabel === 'Minutes') {
+                                if (value < 60) formattedValue = value + " minutes";
+                                else formattedValue = (value / 60).toFixed(1) + " hours";
+                            } else {
+                                formattedValue = value.toLocaleString() + " " + unitLabel;
+                            }
+                            return ` ${formattedValue} (${percentage}%)`;
+                        }
+                    }
                 }
             }
-        }
-    }
-};
-
-    const ctxBreakdown = document.getElementById('goalBreakdownChart').getContext('2d');
-    if(this.charts.breakdown) this.charts.breakdown.destroy();
-
-    // 2. CẬP NHẬT PLUGIN VẼ CHỮ Ở GIỮA (Số ở trên, chữ ở dưới)
-   const centerTextPlugin = {
-    id: 'centerText',
-    afterDatasetsDraw: function(chart) {
-        const { ctx, chartArea: { top, bottom, left, right } } = chart;
-        ctx.save();
-        
-        let total = 0;
-        const data = chart.data.datasets[0].data;
-        data.forEach(val => total += val);
-        
-        let mainText = "";
-        let currentUnit = typeof unitLabel !== 'undefined' ? unitLabel : '';
-        
-        if (currentUnit === 'Minutes') {
-            // Logic: If less than 60 minutes, show 'p'. Otherwise show 'h'.
-            if (total < 60) {
-                mainText = total + "m"; // Display minutes
-            } else {
-                mainText = (total / 60).toFixed(1) + "h"; // Display hours
-            }
-        } else {
-            mainText = total.toLocaleString();
-        }
-        
-        const centerX = (left + right) / 2;
-        const centerY = (top + bottom) / 2;
-        
-        const chartHeight = bottom - top;
-        const fontSizeMain = chartHeight / 13;
-        const fontSizeSub = chartHeight / 26;
-        
-        ctx.textAlign = "center";
-        ctx.textBaseline = "middle";
-
-        if (isMindfulness) {
-            // --- MINDFULNESS MODE: Draw 2 lines ---
-            ctx.font = `bold ${fontSizeMain}px sans-serif`;
-            ctx.fillStyle = "#FFFFFF"; 
-            ctx.fillText(mainText, centerX, centerY - (fontSizeMain * 0.15));
-
-            ctx.font = `normal ${fontSizeSub}px sans-serif`;
-            ctx.fillStyle = "#9ca3af"; 
-            ctx.fillText(currentUnit, centerX, centerY + (fontSizeMain * 0.65));
-        } else {
-            // --- TIME MODE: Only draw the number in the center ---
-            ctx.font = `bold ${fontSizeMain}px sans-serif`;
-            ctx.fillStyle = "#FFFFFF"; 
-            ctx.fillText(mainText, centerX, centerY); 
-        }
-
-        ctx.restore();
-    }
-};
-
-    this.charts.breakdown = new Chart(ctxBreakdown, { 
-        type: 'doughnut', 
-        data: { 
-            labels: activeGoalsForDoughnut.map(d => d.name), 
-            datasets: [{ 
-                data: activeGoalsForDoughnut.map(d => d.breakdownTotal), 
-                backgroundColor: activeGoalsForDoughnut.map(d => d.color), 
-                borderWidth: 1, 
-                borderColor: '#1f2937' 
-            }] 
-        }, 
-        options: breakdownOptions, // Sử dụng biến options mới đã khai báo ở trên
-        plugins: [centerTextPlugin] 
+        },
+        plugins: [centerTextPlugin]
     });
 
+    // --- VẼ BIỂU ĐỒ TUẦN ---
     const ctxWeek = document.getElementById('weeklyChart').getContext('2d');
-if(this.charts.weekly) this.charts.weekly.destroy();
+    if (this.charts.weekly) this.charts.weekly.destroy();
 
-// Create specific options for the Weekly Chart to include the date
-const weeklyOptions = {
-    ...commonOptions,
-    plugins: {
-        ...commonOptions.plugins,
-        tooltip: {
-            ...commonOptions.plugins.tooltip,
-            callbacks: {
-                ...commonOptions.plugins.tooltip.callbacks,
-                title: (context) => {
-                    // Get the index of the bar (0 for Mon, 1 for Tue, etc.)
-                    const index = context[0].dataIndex;
-                    // Calculate the date by adding the index to the week start
-                    const date = new Date(this.currentWeekStart);
-                    date.setDate(date.getDate() + index);
-                    
-                    const day = String(date.getDate()).padStart(2, '0');
-                    const month = String(date.getMonth() + 1).padStart(2, '0');
-                    
-                    // Return "DayName (dd/mm)"
-                    return `${context[0].label} (${day}/${month})`;
+    const weeklyOptions = {
+        ...commonOptions,
+        plugins: {
+            ...commonOptions.plugins,
+            tooltip: {
+                ...commonOptions.plugins.tooltip,
+                callbacks: {
+                    ...commonOptions.plugins.tooltip.callbacks,
+                    title: (context) => {
+                        const index = context[0].dataIndex;
+                        const date = new Date(this.currentWeekStart);
+                        date.setDate(date.getDate() + index);
+                        return `${context[0].label} (${String(date.getDate()).padStart(2, '0')}/${String(date.getMonth() + 1).padStart(2, '0')})`;
+                    }
                 }
             }
         }
-    }
-};
+    };
 
-this.charts.weekly = new Chart(ctxWeek, { 
-    type: 'bar', 
-    data: { 
-        labels: weekDays, 
-        datasets: allGoalsForBars.map(g => ({ label: g.name, data: g.weekly, backgroundColor: g.color, stack: '0' })) 
-    }, 
-    options: weeklyOptions // Use the new weeklyOptions here
-});
+    this.charts.weekly = new Chart(ctxWeek, {
+        type: 'bar',
+        data: {
+            labels: weekDays,
+            datasets: allDataForBars.map(d => ({ label: d.name, data: d.weekly, backgroundColor: d.color, stack: '0' }))
+        },
+        options: weeklyOptions
+    });
 
+    // --- VẼ BIỂU ĐỒ THÁNG ---
     const ctxMonth = document.getElementById('monthlyChart').getContext('2d');
-    if(this.charts.monthly) this.charts.monthly.destroy();
+    if (this.charts.monthly) this.charts.monthly.destroy();
 
     const monthlyOptions = {
         ...commonOptions,
@@ -3985,133 +3943,174 @@ this.charts.weekly = new Chart(ctxWeek, {
                 ...commonOptions.plugins.tooltip,
                 callbacks: {
                     ...commonOptions.plugins.tooltip.callbacks,
-                    title: function(context) {
-                        const d = context[0].label;
-                        return `${String(d).padStart(2, '0')}/${String(mMonth + 1).padStart(2, '0')}`;
-                    }
+                    title: (context) => `${String(context[0].label).padStart(2, '0')}/${String(mMonth + 1).padStart(2, '0')}`
                 }
             }
         }
     };
 
-    this.charts.monthly = new Chart(ctxMonth, { 
-        type: 'bar', 
-        data: { 
-            labels: monthlyLabels, 
-            datasets: allGoalsForBars.map(g => ({ label: g.name, data: g.monthly, backgroundColor: g.color, stack: '0' })) 
-        }, 
-        options: monthlyOptions 
+    this.charts.monthly = new Chart(ctxMonth, {
+        type: 'bar',
+        data: {
+            labels: monthlyLabels,
+            datasets: allDataForBars.map(d => ({ label: d.name, data: d.monthly, backgroundColor: d.color, stack: '0' }))
+        },
+        options: monthlyOptions
     });
-const ctxDensity = document.getElementById('reportDensityChart');
-if (ctxDensity) {
-    // 1. Update the Title
-    const densityTitle = document.getElementById('density-month-title');
-    if (densityTitle) {
-         densityTitle.innerText = `${new Date(mYear, mMonth).toLocaleDateString('en-GB', { month: 'numeric', year: 'numeric' })}`;
-    }
 
-    // 2. Prepare Data (Calculate this BEFORE checking chart existence)
-    const daysInMonth = monthlyLabels.length;
-    const dailyMinutes = new Array(daysInMonth).fill(0);
-    const dailyCounts = new Array(daysInMonth).fill(0);
-
-    this.data.logs.forEach(log => {
-        const goal = this.data.goals.find(g => g.id === log.goalId);
-        if (!goal || goal.type !== 'meditation') return;
-
-        const logDateObj = new Date(log.timestamp || log.date);
-        if (logDateObj.getFullYear() !== mYear || logDateObj.getMonth() !== mMonth) return;
-
-        const dayIdx = logDateObj.getDate() - 1;
-        
-        const minutes = log.minutes;
-        const count = log.count !== undefined ? log.count : (log.touches ? log.touches.length : 0);
-
-        if (minutes > 0) {
-            dailyMinutes[dayIdx] += minutes;
-            dailyCounts[dayIdx] += count;
+    // --- Cập nhật biểu đồ Tỷ lệ (Density) ---
+    // --- Cập nhật biểu đồ Tỷ lệ (Density) ---
+    const ctxDensity = document.getElementById('reportDensityChart');
+    if (ctxDensity) {
+        // 1. Update the Title
+        const densityTitle = document.getElementById('density-month-title');
+        if (densityTitle) {
+            densityTitle.innerText = `Month ${new Date(mYear, mMonth).toLocaleDateString('en-GB', { month: 'numeric', year: 'numeric' })}`;
         }
-    });
 
-    const densityData = dailyMinutes.map((mins, i) => {
-        return mins > 0 ? (dailyCounts[i] / mins).toFixed(1) : 0;
-    });
+        // 2. Prepare Data (Calculate this BEFORE checking chart existence)
+        const daysInMonth = monthlyLabels.length;
+        const dailyMinutes = new Array(daysInMonth).fill(0);
+        const dailyCounts = new Array(daysInMonth).fill(0);
+        const dailyAwareCounts = new Array(daysInMonth).fill(0); // MỚI: Mảng chứa dữ liệu Tỉnh giác
 
-    // 3. Logic: Update if exists, Create if new
-    if (this.charts.reportDensity) {
-        // SMOOTH UPDATE: Just swap data and call update()
-        this.charts.reportDensity.data.labels = monthlyLabels;
-        this.charts.reportDensity.data.datasets[0].data = densityData;
-        this.charts.reportDensity.update();
-    } else {
-        // INITIAL CREATE
-        const ctxD = ctxDensity.getContext('2d');
-        this.charts.reportDensity = new Chart(ctxD, {
-            type: 'line',
-            data: {
-                labels: monthlyLabels,
-                datasets: [{
-                    label: 'Mindfulness/min',
-                    data: densityData,
-                    borderColor: '#818cf8',
-                    backgroundColor: 'rgba(129, 140, 248, 0.1)',
-                    borderWidth: 2,
-                    fill: true,
-                    tension: 0.3,
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                interaction: {
-                    mode: 'nearest',
-                    axis: 'x',
-                    intersect: true
-                },
-                elements: {
-                    point: {
-                        hitRadius: 30,     
-                        hoverRadius: 3,
-                        radius: 1.3,					
-                    }
-                },
-                plugins: {
-                    legend: { display: false },
-                    tooltip: {
-                        callbacks: {
-                            title: function(context) {
-                                const d = context[0].label;
-                                return `${String(d).padStart(2, '0')}/${String(mMonth + 1).padStart(2, '0')}`;
-                            },
-                            label: function(context) {
-                                return ` ${context.raw} Mindfulness/min`;
-                            },
-                            labelColor: function(context) {
-                                return {
-                                    borderColor: context.dataset.borderColor,
-                                    backgroundColor: context.dataset.borderColor,
-                                    borderWidth: 0,
-                                    borderRadius: 2,
-                                };
-                            }
-                        }
-                    }
-                },
-                scales: {
-                    x: {
-                        ticks: { color: '#9ca3af', font: { size: 10 } },
-                        grid: { color: 'rgba(55, 65, 81, 0.3)' }
-                    },
-                    y: {
-                        beginAtZero: true,
-                        grid: { color: '#374151' },
-                        ticks: { color: '#9ca3af', font: { size: 10 } }
-                    }
-                }
+        this.data.logs.forEach(log => {
+            const goal = this.data.goals.find(g => g.id === log.goalId);
+            if (!goal || goal.type !== 'meditation') return;
+
+            const logDateObj = new Date(log.timestamp || log.date);
+            if (logDateObj.getFullYear() !== mYear || logDateObj.getMonth() !== mMonth) return;
+
+            const dayIdx = logDateObj.getDate() - 1;
+
+            const minutes = log.minutes;
+            const count = log.count !== undefined ? log.count : (log.touches ? log.touches.length : 0);
+            const awareCount = log.awarenessCount || 0; // MỚI: Lấy số liệu Tỉnh giác
+
+            if (minutes > 0) {
+                dailyMinutes[dayIdx] += minutes;
+                dailyCounts[dayIdx] += count;
+                dailyAwareCounts[dayIdx] += awareCount; // MỚI: Cộng dồn
             }
         });
-    }
-} }
+
+        // Tính tỷ lệ Chánh niệm/phút
+        const densityData = dailyMinutes.map((mins, i) => {
+            return mins > 0 ? (dailyCounts[i] / mins).toFixed(1) : 0;
+        });
+
+        // MỚI: Tính tỷ lệ Tỉnh giác/phút
+        const awareDensityData = dailyMinutes.map((mins, i) => {
+            return mins > 0 ? (dailyAwareCounts[i] / mins).toFixed(1) : 0;
+        });
+
+        // 3. Logic: Update if exists, Create if new
+        if (this.charts.reportDensity) {
+            // SMOOTH UPDATE: Swap data and call update()
+            this.charts.reportDensity.data.labels = monthlyLabels;
+            this.charts.reportDensity.data.datasets[0].data = densityData;
+            this.charts.reportDensity.data.datasets[1].data = awareDensityData; // Update dataset 2
+            this.charts.reportDensity.update();
+        } else {
+            // INITIAL CREATE
+            const ctxD = ctxDensity.getContext('2d');
+            this.charts.reportDensity = new Chart(ctxD, {
+                type: 'line',
+                data: {
+                    labels: monthlyLabels,
+                    datasets: [
+                        {
+                            label: 'Mindfulness/min',
+                            data: densityData,
+                            borderColor: '#34d399', // Màu xanh (Emerald) cho Chánh niệm
+                            backgroundColor: 'rgba(52, 211, 153, 0.1)',
+                            borderWidth: 1.5,
+                            fill: true,
+                            tension: 0.3,
+                            yAxisID: 'y', // Gắn vào trục trái
+                        },
+                        {
+                            label: 'Awareness/min', // Dataset MỚI
+                            data: awareDensityData,
+                            borderColor: '#818cf8',
+                            backgroundColor: 'rgba(129, 140, 248, 0.1)',
+                            borderWidth: 1.5,
+                            fill: true,
+                            tension: 0.3,
+                            yAxisID: 'y1', // Gắn vào trục phải
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    interaction: {
+                        mode: 'nearest',
+                        axis: 'x',
+                        intersect: true
+                    },
+                    elements: {
+                        point: {
+                            hitRadius: 30,
+                            hoverRadius: 3,
+                            radius: 1.3,
+                        }
+                    },
+                    plugins: {
+                        legend: { 
+                            display: true, // Hiển thị chú thích để phân biệt 2 đường
+                            labels: { color: '#9ca3af', font: { size: 10 }, boxWidth: 10 }
+                        },
+                        tooltip: {
+                            callbacks: {
+                                title: function(context) {
+                                    const d = context[0].label;
+                                    return `${String(d).padStart(2, '0')}/${String(mMonth + 1).padStart(2, '0')}`;
+                                },
+                                label: function(context) {
+                                    // Hiển thị label tương ứng với dataset
+                                    return ` ${context.dataset.label}: ${context.raw}`;
+                                },
+                                labelColor: function(context) {
+                                    return {
+                                        borderColor: context.dataset.borderColor,
+                                        backgroundColor: context.dataset.borderColor,
+                                        borderWidth: 0,
+                                        borderRadius: 2,
+                                    };
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        x: {
+                            ticks: { color: '#9ca3af', font: { size: 10 } },
+                            grid: { color: 'rgba(55, 65, 81, 0.3)' }
+                        },
+                        y: {
+                            type: 'linear',
+                            display: true,
+                            position: 'left',
+                            beginAtZero: true,
+                            grid: { color: '#374151' },
+                            ticks: { color: '#9ca3af', font: { size: 10 } },
+                            title: { display: false } // Ẩn tên trục để tiết kiệm chỗ
+                        },
+                        y1: { // Trục MỚI cho Tỉnh giác
+                            type: 'linear',
+                            display: true,
+                            position: 'right',
+                            beginAtZero: true,
+                            grid: { 
+                                drawOnChartArea: false, // Ẩn lưới ngang của trục này để tránh rối
+                            },
+                            ticks: { color: '#a78bfa', font: { size: 10 } } // Màu tím cho text trục
+                        }
+                    }
+                }
+            });
+        }
+    } }
 
 changeReportWeek(dir) { this.currentWeekStart.setDate(this.currentWeekStart.getDate() + (dir * 7)); this.renderReports(); }
             changeReportMonth(dir) { this.currentMonth.setMonth(this.currentMonth.getMonth() + dir); this.renderReports(); }
@@ -4549,7 +4548,11 @@ loadActiveBadge() {
 
     this.copyToClipboard(dataStr);
 }
-
+showInteractionInfo() {
+    const msg = "• MINDFULNESS: Maintaining awareness of the chosen object and noting each occurrence. E.g., one tap per breath cycle.\n\n" +
+                "• AWARENESS: Recognizing the state of mind, detecting distractions (mind-wandering), and returning to the object.";
+    alert(msg);
+}
 copyToClipboard(text) {
 
     if (navigator.clipboard && navigator.clipboard.writeText) {
