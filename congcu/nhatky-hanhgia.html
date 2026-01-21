@@ -200,7 +200,7 @@
             <i class="fas fa-chevron-left"></i>
         </button>
         <div>
-            <h4 style="margin: 0; display:inline-block;">Tỉ lệ Chánh niệm</h4>
+            <h4 style="margin: 0; display:inline-block;">Chánh niệm - Tỉnh giác</h4>
             <p id="density-month-title" style="font-size: 12px; color: var(--text-light); margin: 0; text-align: center; margin-top:2px;">
                 Tháng này
             </p>
@@ -432,7 +432,7 @@
         
         <div class="desktop-actions" style="margin-bottom: 20px;">
             <p style="color: var(--text-light); text-align: center; font-size: 12px; margin-bottom: 10px;">
-                <i class="fas fa-box-archive"></i> <strong>Tự động sao lưu & khôi phục dữ liệu:</strong>
+                <i class="fas fa-box-archive"></i> <strong>Sao lưu & khôi phục dữ liệu:</strong>
             </p>
             <div style="display: flex;  justify-content: center; gap: 10px;">
                 <button class="btn" style="flex: 1;" onclick="app.downloadFile()">
@@ -605,59 +605,40 @@
     </div>
 	<div class="modal" id="med-settings-modal" style="z-index: 2000;">
     <div class="modal-content" style="max-width: 350px;">
-        <h3 style="margin-bottom: 15px; text-align: center;">Cấu hình Tương tác</h3>
+       <h3 style="margin-bottom: 10px; text-align: center;">
+            Cấu hình Tương tác 
+            <i class="fas fa-info-circle" 
+               style="cursor: help; color: var(--primary); margin-left: 5px;" 
+               onclick="app.showInteractionInfo()" 
+               title="Nhấn để xem định nghĩa"></i>
+        </h3>
         
-        <div class="form-group">
-            <label style="margin-bottom: 8px;">Chế độ ghi nhận</label>
-            <div class="mode-grid">
-                <button type="button" class="btn btn-secondary" id="btn-mode-tap" onclick="app.setMedMode('tap')">Chạm</button>
-                <button type="button" class="btn btn-secondary" id="btn-mode-hold" onclick="app.setMedMode('hold')">Giữ</button>
-                <button type="button" class="btn btn-secondary" id="btn-mode-auto" onclick="app.setMedMode('auto')">✨ Auto</button>
-                <button type="button" class="btn btn-secondary" id="btn-mode-pro" onclick="app.setMedMode('pro')">💎 Pro</button>
-            </div>
-            <div id="mode-desc" style="font-size: 11px; color: var(--zen); font-style: italic; margin-top: -5px; margin-bottom: 15px; min-height: 18px;"></div>
+        <div style="background: rgba(255,255,255,0.05); padding: 12px; border-radius: 8px; margin-bottom: 10px; font-size: 13px; color: var(--text-light); margin-left:20px; text-align: left;">
+            <i class="fas fa-fingerprint"></i> <strong>Chạm</strong> để ghi nhận chánh niệm,<br>
+			<i class="fas fa-hand-pointer"></i> <strong>Ấn giữ</strong> để ghi nhận tỉnh giác.
         </div>
 
-        <div id="setting-hold-group" class="form-group" style="display:none;">
-            <label>Thời gian giữ: <span id="disp-hold-time" style="color:var(--primary)">0.4s</span></label>
+        <div class="form-group">
+            <label>Thời gian ấn giữ: <span id="disp-hold-time" style="color:var(--primary)">0.4s</span></label>
             <input type="range" id="inp-hold-time" class="form-control" min="200" max="2000" step="100" oninput="app.updateMedSettingDisplay()">
         </div>
 
-        <div id="setting-tap-group" class="form-group" style="display:none;">
-            <label>Số lần chạm để ghi nhận</label>
-            <select id="inp-tap-count" class="form-control" onchange="app.saveMedSettings()">
-                <option value="1">1 lần (Chạm đơn)</option>
-                <option value="2">2 lần (Chạm đúp)</option>
-                <option value="3">3 lần (Chạm ba)</option>
-                <option value="4">4 lần (Chạm bốn)</option>
-            </select>
+        <div class="form-group" style="background: rgba(251, 191, 36, 0.1); padding: 10px; border-radius: 8px; border: 1px solid rgba(251, 191, 36, 0.3); margin-top: 15px;">
+            <div style="display:flex; justify-content:space-between; align-items:center;">
+                <label style="margin:0; color: var(--warning);"><i class="fas fa-check-double"></i> Chế độ Xác nhận</label>
+                <input type="checkbox" id="inp-confirm-mode" style="width: 20px; height: 20px; accent-color: var(--warning);" onchange="app.toggleConfirmSlider()">
+            </div>
+            
+            <div id="confirm-slider-group" style="margin-top: 10px; display:none; border-top: 1px solid rgba(251, 191, 36, 0.3); padding-top: 10px;">
+                <label style="font-size:12px; color: var(--text-light);">Tần suất xuất hiện: <span id="disp-confirm-prob" style="color:var(--warning); font-weight:bold;">100%</span></label>
+                <input type="range" id="inp-confirm-prob" class="form-control" min="10" max="100" step="10" oninput="app.updateConfirmProbDisplay()">
+                <div style="font-size: 11px; color: var(--text-light); margin-top: 5px; font-style: italic; line-height: 1.4;">
+                    Chạm lần 1 để "chờ", chạm lần 2 để "xác nhận".<br>
+                    (Chỉ áp dụng cho mức chú tâm <strong>Thấp</strong>).
+                </div>
+            </div>
         </div>
 
-        <div id="setting-pro-legend" style="display:none; background: rgba(167, 139, 250, 0.1); padding: 10px; border-radius: 8px; border: 1px solid rgba(167, 139, 250, 0.3); margin-bottom: 15px;">
-    <div style="font-size: 11px; margin-bottom: 5px; color: var(--text-light)">💎 Mức chú tâm (Pro):</div>
-    <div style="font-size: 12px; display:grid; grid-template-columns: 1fr 1fr; gap:5px;">
-        <div class="text-q4">1 Chạm: <strong>Thấp</strong></div>
-		<div class="text-q2">Ấn Giữ: <strong>Tốt</strong></div>
-		<div class="text-q3">2 Chạm: <strong>Trung bình</strong></div>
-        <div class="text-q1">10+ Tốt: <strong>Cao</strong></div>
-    </div>
-</div>
-<div class="form-group" style="background: rgba(251, 191, 36, 0.1); padding: 10px; border-radius: 8px; border: 1px solid rgba(251, 191, 36, 0.3); margin-top: 15px;">
-    <div style="display:flex; justify-content:space-between; align-items:center;">
-        <label style="margin:0; color: var(--warning);"><i class="fas fa-check-double"></i> Chế độ Xác nhận</label>
-        <input type="checkbox" id="inp-confirm-mode" style="width: 20px; height: 20px; accent-color: var(--warning);" onchange="app.toggleConfirmSlider()">
-    </div>
-    
-    <div id="confirm-slider-group" style="margin-top: 10px; display:none; border-top: 1px solid rgba(251, 191, 36, 0.3); padding-top: 10px;">
-    <label style="font-size:12px; color: var(--text-light);">Tần suất xuất hiện: <span id="disp-confirm-prob" style="color:var(--warning); font-weight:bold;">100%</span></label>
-    <input type="range" id="inp-confirm-prob" class="form-control" min="10" max="100" step="10" oninput="app.updateConfirmProbDisplay()">
-    <div style="font-size: 11px; color: var(--text-light); margin-top: 5px; font-style: italic; line-height: 1.4;">
-        <i class="fas fa-random"></i> Xuất hiện ngẫu nhiên dựa trên % bạn chọn.<br>
-         Chạm lần 1 để "chờ", chạm lần 2 để "xác nhận".<br>
-            (Chỉ áp dụng cho mức <strong>Thấp</strong>).
-    </div>
-</div>
-</div>
         <div class="form-group" style="display: flex; justify-content: space-between; align-items: center; margin-top: 15px; background: rgba(255,255,255,0.05); padding: 10px; border-radius: 8px;">
             <label style="margin:0"><i class="fas fa-mobile-alt"></i> Rung phản hồi</label>
             <input type="checkbox" id="inp-vibrate" style="width: 20px; height: 20px;" onchange="app.saveMedSettings()">
@@ -706,34 +687,35 @@
             </ul>
 
             <h4 style="color: var(--primary); margin-top: 15px;">2. Cấu hình Tương Tác</h4>
-            <p>Trong giao diện thiền, nhấn nút <i class="fas fa-cog"></i> để mở cài đặt tương tác. Ứng dụng hỗ trợ rung phản hồi xúc giác & 4 chế độ ghi nhận cùng 4 thang điểm cho mức độ chú tâm.</p>
-            
-            <div style="background: rgba(255, 255, 255, 0.05); padding: 15px; border-radius: 8px; border: 1px solid var(--border);">
-                <ul style="padding-left: 20px; margin: 0;">
-                    <li style="margin-bottom: 8px;"><strong>Chạm:</strong> Chế độ cơ bản. Chạm nhẹ màn hình để đếm. Có thể cài đặt chạm 1, 2, 3 hoặc 4 lần mới tính là 1 niệm.</li>
-                    <li style="margin-bottom: 8px;"><strong>Giữ:</strong> Ấn và giữ màn hình trong một khoảng thời gian (mặc định 0.4s) để ghi nhận chánh niệm.</li>
-                    <li style="margin-bottom: 8px;"><strong>✨ Auto:</strong> Tự động nhận diện cả thao tác Chạm và Giữ.</li>
-					<li style="margin-bottom: 8px;"><i><strong>Cơ chế Chuỗi (Combo):</strong></i> Mọi chế độ đều bắt đầu ở mức chú tâm <b>Thấp</b>. Cứ mỗi 10 lần (hoặc 20 lần ở mức Trung Bình) ghi nhận liên tục với khoảng cách thời gian ≤ <i>Ngưỡng mất tập trung</i>, mức chú tâm sẽ được nâng lên một bậc (Thấp → TB → Tốt → Cao). Nếu để quá ngưỡng thời gian, chuỗi sẽ reset về mức Thấp.</li>
-                    <li><strong style="color: #34d399;">💎 Chế độ Pro (Thủ công):</strong> :</strong> Cho phép bạn <strong>chủ động phân loại</strong> mức độ chú tâm dựa trên thao tác tay của bạn:
-                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 8px; font-size: 13px;">
-                            <div style="color: #f87171;">● 1 Chạm: <strong>Thấp</strong></div>
-                            <div style="color: #60a5fa;">● Ấn giữ: <strong>Tốt</strong></div>
-                            <div style="color: #fbbf24;">● 2 Chạm: <strong>Trung bình</strong></div>
-                            <div style="color: #34d399;">● 10+ Tốt*: <strong>Cao</strong></div>
-                        </div>
-                    </li>
-        <li style="margin-top: 10px; border-top: 1px solid rgba(251, 191, 36, 0.2); padding-top: 10px;">
+<p>Trong giao diện thiền, nhấn nút <i class="fas fa-cog"></i> để mở cài đặt tương tác. Ứng dụng hỗ trợ rung phản hồi xúc giác & giúp bạn ghi nhận đồng thời 2 trạng thái tâm cùng 4 thang điểm cho mức độ chú tâm. </p>
+
+<div style="background: rgba(255, 255, 255, 0.05); padding: 15px; border-radius: 8px; border: 1px solid var(--border);">
+    <ul style="padding-left: 20px; margin: 0;">
+        <li style="margin-bottom: 12px;">
+            <i class="fas fa-fingerprint" style="color: var(--zen); width: 20px;"></i> <strong>Chạm = Chánh Niệm (giữ tâm trên đề mục):</strong> 
+            <br>Chạm nhẹ màn hình để ghi nhận sự chú tâm vào đề mục thiền, ví dụ: 1 lần chạm cho 1 hơi thở vào ra tính là 1 chánh niệm.
+            <div style="font-size: 13px; color: var(--text-light); margin-top: 4px;">
+                <em>*Áp dụng <strong>Cơ chế Chuỗi (Combo):</strong></em> Mọi phiên đều bắt đầu ở mức chú tâm <b>Thấp</b>. Cứ mỗi 12 hoặc 20 lần ghi nhận liên tục với khoảng cách thời gian ≤ <i>Ngưỡng mất tập trung</i>, mức chú tâm sẽ được nâng lên một bậc (Thấp → TB → Tốt → Cao). Nếu để quá ngưỡng, chuỗi sẽ reset về mức Thấp.
+            </div>
+        </li>
+        
+        <li style="margin-bottom: 12px;">
+            <i class="fas fa-hand-pointer" style="color: #818cf8; width: 20px;"></i> <strong>Ấn giữ = Tỉnh Giác (nhận biết trạng thái tâm, phát hiện xao nhãng):</strong> 
+            <br>Ấn và giữ màn hình để ghi nhận Tỉnh Giác. Tỉnh giác là khi bạn <b>nhận biết</b> được trạng thái tâm mình (ví dụ: chợt nhận ra mình đang phóng tâm, đang có tạp niệm, hoặc đang mất tập trung trên đề mục thiền). Đây là khoảnh khắc của sự nhận biết & quay trở lại.
+        </li>
+
+        <li style="margin-top: 5px; border-top: 1px solid rgba(251, 191, 36, 0.2); padding-top: 10px;">
             <strong style="color: var(--warning);"><i class="fas fa-check-double"></i> Chế độ Xác nhận:</strong> 
             Dành cho người dùng hay chạm máy vô thức. Khi bật, một lần chạm đầu tiên sẽ không được tính ngay. Bạn cần chạm thêm lần thứ 2 (trong khoảng 1-3 giây) để xác nhận đó là hành động có ý thức.
             <ul style="font-size: 12px; margin-top: 5px; color: var(--text-light);">
                 <li>Chỉ ghi nhận thời gian của lần chạm <strong>đầu tiên</strong>.</li>
-                <li>Chế độ xác nhận chỉ áp dụng cho mức <strong>Thấp</strong>.</li>
-            </ul>
+                <li>Chế độ xác nhận chỉ áp dụng khi mức chú tâm đang ở mức <strong>Thấp</strong>.</li>
+				<li>Lưu ý: Phản hồi xúc giác yêu cầu thiết bị có hỗ trợ chế độ rung.</li>
+
+				</ul>
         </li>
     </ul>
 </div>
-			<p style="font-size: 13px; color: var(--text-light); margin-top: 10px;"><strong>10+ Tốt:</strong> Mức chú tâm Tốt từ 10 lần liên tục trở lên, mỗi lần liên tục tiếp theo sẽ được tính là ở mức Cao.<br>
-            <strong>Lưu ý:</strong> Phản hồi xúc giác yêu cầu thiết bị có hỗ trợ chế độ rung.</p>
  <div style="text-align: center; margin: 15px 0;">
                 <img src="./images/2vi.png" alt="Meditation Mode" style="max-width: 300px; width: 100%; border-radius: 8px; border: 1px solid var(--border);">
             </div>

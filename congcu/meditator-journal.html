@@ -201,7 +201,7 @@
             <i class="fas fa-chevron-left"></i>
         </button>
         <div>
-            <h4 style="margin: 0; display:inline-block;">Mindfulness Ratio</h4>
+            <h4 style="margin: 0; display:inline-block;">Mindful-Awareness</h4>
             <p id="density-month-title" style="font-size: 12px; color: var(--text-light); margin: 0; text-align: center; margin-top:2px;">
                 This month
             </p>
@@ -600,59 +600,40 @@
 	
 	<div class="modal" id="med-settings-modal" style="z-index: 2000;">
     <div class="modal-content" style="max-width: 350px;">
-        <h3 style="margin-bottom: 15px; text-align: center;">Interaction Settings</h3>
+        <h3 style="margin-bottom: 10px; text-align: center;">
+            Interaction Settings 
+            <i class="fas fa-info-circle" 
+               style="cursor: help; color: var(--primary); margin-left: 5px;" 
+               onclick="app.showInteractionInfo()" 
+               title="Nhấn để xem định nghĩa"></i>
+        </h3>
         
-        <div class="form-group">
-            <label style="margin-bottom: 8px;">Input Mode</label>
-            <div class="mode-grid">
-                <button type="button" class="btn btn-secondary" id="btn-mode-tap" onclick="app.setMedMode('tap')">Tap</button>
-                <button type="button" class="btn btn-secondary" id="btn-mode-hold" onclick="app.setMedMode('hold')">Hold</button>
-                <button type="button" class="btn btn-secondary" id="btn-mode-auto" onclick="app.setMedMode('auto')">✨ Auto</button>
-                <button type="button" class="btn btn-secondary" id="btn-mode-pro" onclick="app.setMedMode('pro')">💎 Pro</button>
-            </div>
-            <div id="mode-desc" style="font-size: 11px; color: var(--zen); font-style: italic; margin-top: -5px; margin-bottom: 15px; min-height: 18px;"></div>
+        <div style="background: rgba(255,255,255,0.05); padding: 12px; border-radius: 8px; margin-bottom: 10px; font-size: 13px; color: var(--text-light); text-align: center;">
+            <i class="fas fa-fingerprint"></i> <strong>Tap</strong> to record mindfulness,<br>
+			<i class="fas fa-hand-pointer"></i> <strong>Hold</strong> to record awareness.
         </div>
 
-        <div id="setting-hold-group" class="form-group" style="display:none;">
+        <div class="form-group">
             <label>Hold Duration: <span id="disp-hold-time" style="color:var(--primary)">0.4s</span></label>
             <input type="range" id="inp-hold-time" class="form-control" min="200" max="2000" step="100" oninput="app.updateMedSettingDisplay()">
         </div>
 
-        <div id="setting-tap-group" class="form-group" style="display:none;">
-            <label>Taps Required to Count</label>
-            <select id="inp-tap-count" class="form-control" onchange="app.saveMedSettings()">
-                <option value="1">1 (Single Tap)</option>
-            <option value="2">2 (Double Tap)</option>
-            <option value="3">3 (Triple Tap)</option>
-            <option value="4">4 (Quadruple Tap)</option>
-            </select>
+        <div class="form-group" style="background: rgba(251, 191, 36, 0.1); padding: 10px; border-radius: 8px; border: 1px solid rgba(251, 191, 36, 0.3); margin-top: 15px;">
+            <div style="display:flex; justify-content:space-between; align-items:center;">
+                <label style="margin:0; color: var(--warning);"><i class="fas fa-check-double"></i> Confirmation Mode</label>
+                <input type="checkbox" id="inp-confirm-mode" style="width: 20px; height: 20px; accent-color: var(--warning);" onchange="app.toggleConfirmSlider()">
+            </div>
+            
+            <div id="confirm-slider-group" style="margin-top: 10px; display:none; border-top: 1px solid rgba(251, 191, 36, 0.3); padding-top: 10px;">
+                <label style="font-size:12px; color: var(--text-light);">Appearance Frequency: <span id="disp-confirm-prob" style="color:var(--warning); font-weight:bold;">100%</span></label>
+                <input type="range" id="inp-confirm-prob" class="form-control" min="10" max="100" step="10" oninput="app.updateConfirmProbDisplay()">
+                <div style="font-size: 11px; color: var(--text-light); margin-top: 5px; font-style: italic; line-height: 1.4;">
+                    1st touch to "wait", 2nd touch to "confirm".<br>
+                    (Only applies to <strong>Low</strong> focus level).
+                </div>
+            </div>
         </div>
 
-        <div id="setting-pro-legend" style="display:none; background: rgba(167, 139, 250, 0.1); padding: 10px; border-radius: 8px; border: 1px solid rgba(167, 139, 250, 0.3); margin-bottom: 15px;">
-    <div style="font-size: 11px; margin-bottom: 5px; color: var(--text-light)">Focus Quality:</div>
-    <div style="font-size: 12px; display:grid; grid-template-columns: 1fr 1fr; gap:5px;">
-        <div class="text-q4">1 Tap: <strong>Low</strong></div>
-		<div class="text-q2">Hold: <strong>Good</strong></div>
-		<div class="text-q3">2 Taps: <strong>Medium</strong></div>
-        <div class="text-q1">10+ Good: <strong>High</strong></div>
-    </div>
-</div>
-<div class="form-group" style="background: rgba(251, 191, 36, 0.1); padding: 10px; border-radius: 8px; border: 1px solid rgba(251, 191, 36, 0.3); margin-top: 15px;">
-    <div style="display:flex; justify-content:space-between; align-items:center;">
-        <label style="margin:0; color: var(--warning);"><i class="fas fa-check-double"></i> Confirmation Mode</label>
-        <input type="checkbox" id="inp-confirm-mode" style="width: 20px; height: 20px; accent-color: var(--warning);" onchange="app.toggleConfirmSlider()">
-    </div>
-    
-    <div id="confirm-slider-group" style="margin-top: 10px; display:none; border-top: 1px solid rgba(251, 191, 36, 0.3); padding-top: 10px;">
-    <label style="font-size:12px; color: var(--text-light);">Appearance Frequency: <span id="disp-confirm-prob" style="color:var(--warning); font-weight:bold;">100%</span></label>
-    <input type="range" id="inp-confirm-prob" class="form-control" min="10" max="100" step="10" oninput="app.updateConfirmProbDisplay()">
-    <div style="font-size: 11px; color: var(--text-light); margin-top: 5px; font-style: italic; line-height: 1.4;">
-        <i class="fas fa-random"></i> Appear randomly based on your selected %.<br>
-        <i class="fas fa-info-circle"></i> 1st touch to "wait", 2nd touch to "confirm".<br>
-            (Only applies to <strong>Low</strong> level).
-    </div>
-</div>
-</div>
         <div class="form-group" style="display: flex; justify-content: space-between; align-items: center; margin-top: 15px; background: rgba(255,255,255,0.05); padding: 10px; border-radius: 8px;">
             <label style="margin:0"><i class="fas fa-mobile-alt"></i> Haptic Feedback</label>
             <input type="checkbox" id="inp-vibrate" style="width: 20px; height: 20px;" onchange="app.saveMedSettings()">
@@ -699,38 +680,40 @@
                 <li><strong>Customization:</strong> Set daily goals (minutes), target completion time, representative colors, and management categories.</li>
             </ul>
             <h4 style="color: var(--primary); margin-top: 15px;">2. Interaction Settings</h4>
-            <p>In the meditation interface, click the <i class="fas fa-cog"></i> button to open interaction settings. The app supports haptic feedback (vibration) & 4 recording modes:</p>
-            
-            <div style="background: rgba(255, 255, 255, 0.05); padding: 15px; border-radius: 8px; border: 1px solid var(--border);">
-                <ul style="padding-left: 20px; margin: 0;">
-                    <li style="margin-bottom: 8px;"><strong>Tap:</strong> Basic mode. Lightly tap the screen to count. You can set it to require 1, 2, 3, or 4 taps to register as 1 mindfulness count (helps filter accidental touches).</li>
-                    <li style="margin-bottom: 8px;"><strong>Hold:</strong> Press and hold the screen for a set duration (default 0.4s) to record. Helps keep the mind grounded and steady.</li>
-                    <li style="margin-bottom: 8px;"><strong>✨ Auto:</strong> Automatically detects both Tap and Hold gestures.</li>
-					<li style="margin-bottom: 8px;"><i><strong>Combo Mechanism:</strong></i> All modes start at the <b>Low</b> focus level. For every 10 consecutive entries (or 20 for Medium level) with a time gap ≤ <i>Distraction Threshold</i>, the focus level will upgrade by one tier (Low → Mid → Good → High). If the time gap exceeds the threshold, the combo resets to Low.</li>
-                    <li><strong style="color: #34d399;">💎 Pro Mode (Manual):</strong> Allows you to <strong>actively categorize</strong> your focus level based on specific hand gestures:
-                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 8px; font-size: 13px;">
-                            <div style="color: #f87171;">● 1 Tap: <strong>Low</strong></div>
-                            <div style="color: #60a5fa;">● Hold: <strong>Good</strong></div>
-                            <div style="color: #fbbf24;">● 2 Taps: <strong>Medium</strong></div>
-                            <div style="color: #34d399;">● 10+ Good*: <strong>High</strong></div>
-                        </div>
-                    </li>
-					<li style="margin-top: 10px; border-top: 1px solid rgba(251, 191, 36, 0.2); padding-top: 10px;">
-    <strong style="color: var(--warning);"><i class="fas fa-check-double"></i> Confirmation Mode:</strong> 
-    Designed for users who may tap the screen mindlessly. When enabled, the first touch is not counted immediately. You must tap a second time (within 1-3 seconds) to confirm it was a mindful action.
-    <ul style="font-size: 12px; margin-top: 5px; color: var(--text-light);">
-        <li>Only the timestamp of the <strong>first</strong> touch is recorded.</li>
-        <li>Confirmation mode only applies to the <strong>Low</strong> level.</li>
+<p>In the meditation interface, tap the <i class="fas fa-cog"></i> button to open interaction settings. The app supports haptic feedback vibration and helps you record two mental states simultaneously with 4 levels of mindfulness intensity.</p>
+
+<div style="background: rgba(255, 255, 255, 0.05); padding: 15px; border-radius: 8px; border: 1px solid var(--border);">
+    <ul style="padding-left: 20px; margin: 0;">
+        <li style="margin-bottom: 12px;">
+            <i class="fas fa-fingerprint" style="color: var(--zen); width: 20px;"></i> <strong>Tap = Mindfulness (Keeping the mind on the Object):</strong> 
+            <br>Lightly tap the screen to record focus on your meditation object. For example: one tap for each full breath (in & out) counts as one mindfulness.
+            <div style="font-size: 13px; color: var(--text-light); margin-top: 4px;">
+                <em>*<strong>Combo Mechanism:</strong></em> Every session starts at <b>Low</b> intensity. For every 12 or 20 consecutive entries with a time gap ≤ <i>Distraction Threshold</i>, the mindfulness level increases by one tier (Low → Mid → Good → High). Exceeding the threshold resets the combo to Low.
+            </div>
+        </li>
+        
+        <li style="margin-bottom: 12px;">
+            <i class="fas fa-hand-pointer" style="color: #818cf8; width: 20px;"></i> <strong>Hold = Awareness (Recognizing mental states, Detecting distractions):</strong> 
+            <br>Press and hold the screen to record Awareness. Awareness is when you <b>realize</b> your current state of mind (e.g., catching your mind wandering, having stray thoughts, or losing focus on the object). This is the moment of recognition and returning.
+        </li>
+
+        <li style="margin-top: 5px; border-top: 1px solid rgba(251, 191, 36, 0.2); padding-top: 10px;">
+            <strong style="color: var(--warning);"><i class="fas fa-check-double"></i> Confirmation Mode:</strong> 
+            Designed for users who may tap unconsciously. When enabled, the first tap won't be recorded immediately. You must tap a second time (within 1-3 seconds) to confirm it as a conscious action.
+            <ul style="font-size: 12px; margin-top: 5px; color: var(--text-light);">
+                <li>Only the timestamp of the <strong>first</strong> tap is recorded.</li>
+                <li>Confirmation mode only applies when the mindfulness level is at <strong>Low</strong>.</li>
+				<li>Note: Haptic feedback requires a device that supports vibration mode.</li>
+            </ul>
+        </li>
     </ul>
-</li>
-                </ul>
-            </div>
-<p style="font-size: 13px; color: var(--text-light); margin-top: 10px;">
-    <strong>10+ Good:</strong> Focus at 'Good' level for 10 consecutive times or more; each consecutive subsequent will be counted as 'High' level.<br>
-	<strong>Note:</strong> Haptic feedback requires a device that supports vibration mode.</p>
+</div>
+
 <div style="text-align: center; margin: 15px 0;">
-                <img src="./images/2en.png" alt="Meditation Mode" style="max-width: 300px; width: 100%; border-radius: 8px; border: 1px solid var(--border);">
-            </div>
+    <img src="./images/2en.png" alt="Meditation Mode" style="max-width: 300px; width: 100%; border-radius: 8px; border: 1px solid var(--border);">
+</div>
+
+
             <ul style="padding-left: 20px;">
                 <li><strong>Manual Entry:</strong> Forgot to start the timer? You can manually log a session or edit previous records.</li>
             </ul>
