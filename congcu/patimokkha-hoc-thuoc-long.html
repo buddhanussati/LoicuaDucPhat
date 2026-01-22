@@ -342,7 +342,7 @@ gap: 3px; /* Tighter gap for the rightmost controls */
 /* Container for the boxes */
 #recitation-dashboard {
     display: none; /* Hidden by default */
-    width: 96%;
+    width: 90%;
     max-width: 800px;
     background-color: var(--box-bg);
     padding: 15px;
@@ -578,12 +578,12 @@ gap: 3px; /* Tighter gap for the rightmost controls */
         </div>
     <div class="dashboard-stats">
         <div class="progress-bar-container">
-            <span style="width: 120px;">Tiến độ phần này:</span>
+            <span style="width: 120px;">Học thuộc phần này:</span>
             <div class="progress-track"><div id="bar-session" class="progress-fill" style="background-color: #3498db;"></div></div>
             <span id="text-session">0%</span>
         </div>
         <div class="progress-bar-container">
-            <span style="width: 120px;">Đã thuộc lòng:</span>
+            <span style="width: 120px;">Học thuộc tất cả:</span>
             <div class="progress-track"><div id="bar-total" class="progress-fill" style="background-color: #27ae60;"></div></div>
             <span id="text-total">0%</span>
         </div>
@@ -2869,14 +2869,9 @@ Dứt Giới Bổn Pātimokkha Của Tỳ Khưu.`
                 }
             }
         });        
-// Change this block:
+
 audioPlayer.addEventListener('play', () => {
-    // OLD: if (displayArea.classList.contains('recitation-active') && !recitationTimeout) runRecitationStep();
     
-    // NEW: Only start the timer if in recitation mode AND the user didn't just click 'PLAY'
-    // where a timer was already calculated and set in toggleRecitationAction.
-    // If recitationTimeout is null, it means the audio player's 'play' event is the first one 
-    // after a change (like a new section load or the end of a previous sequence).
     if (displayArea.classList.contains('recitation-active') && !recitationTimeout) {
         runRecitationStep();
     }
