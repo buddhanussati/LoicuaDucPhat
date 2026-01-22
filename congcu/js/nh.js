@@ -473,14 +473,14 @@ const BADGES = [
     { id: 'time_800h', icon: 'fas fa-moon', color: '#dfe6e9', title: 'Nhất Dạ Hiền', desc: 'Tích lũy 800 giờ tu tập', condition: (data) => data.logs.reduce((s, l) => s + l.minutes, 0) >= 48000 },
     { id: 'time_1000h', icon: 'fab fa-skyatlas', color: '#74b9ff', title: 'Hư Không', desc: 'Tích lũy 1000 giờ tu tập', condition: (data) => data.logs.reduce((s, l) => s + l.minutes, 0) >= 60000 },
 
-    { id: 'sit_15', icon: 'fab fa-deskpro', color: '#48dbfb', title: 'Voi Chúa', desc: 'Thời thiền >= 15 phút', condition: (data) => data.logs.some(l => l.minutes >= 15) },
-    { id: 'sit_30', icon: 'fab fa-medapps', color: '#feca57', title: 'Ngọn Đèn', desc: 'Thời thiền >= 30 phút', condition: (data) => data.logs.some(l => l.minutes >= 30) },
-    { id: 'sit_45', icon: 'fas fa-hand-holding-hand', color: '#cd84f1', title: 'Từ Bi', desc: 'Thời thiền >= 45 phút', condition: (data) => data.logs.some(l => l.minutes >= 45) },
-    { id: 'sit_60', icon: 'fas fa-gem', color: '#7d5fff', title: 'Định Tĩnh', desc: 'Thời thiền >= 60 phút', condition: (data) => data.logs.some(l => l.minutes >= 60) },
-    { id: 'sit_90', icon: 'fab fa-ethereum', color: '#dfe6e9', title: 'Hỷ Tâm', desc: 'Thời thiền >= 90 phút', condition: (data) => data.logs.some(l => l.minutes >= 90) },
-    { id: 'sit_120', icon: 'fas fa-anchor', color: '#ff9ff3', title: 'Pháp Trụ', desc: 'Thời thiền >= 2 giờ', condition: (data) => data.logs.some(l => l.minutes >= 120) },
-    { id: 'sit_180', icon: 'fas fa-balance-scale', color: '#00d2d3', title: 'Buông Xả', desc: 'Thời thiền >= 3 giờ', condition: (data) => data.logs.some(l => l.minutes >= 180) },
-    { id: 'sit_240', icon: 'fab fa-jedi-order', color: '#d980fa', title: 'Định Lực', desc: 'Thời thiền >= 4 giờ', condition: (data) => data.logs.some(l => l.minutes >= 240) },
+    { id: 'sit_15', icon: 'fab fa-deskpro', color: '#48dbfb', title: 'Voi Chúa', desc: 'Thời thiền ≥ 15 phút', condition: (data) => data.logs.some(l => l.minutes >= 15) },
+    { id: 'sit_30', icon: 'fab fa-medapps', color: '#feca57', title: 'Ngọn Đèn', desc: 'Thời thiền ≥ 30 phút', condition: (data) => data.logs.some(l => l.minutes >= 30) },
+    { id: 'sit_45', icon: 'fas fa-hand-holding-hand', color: '#cd84f1', title: 'Từ Bi', desc: 'Thời thiền ≥ 45 phút', condition: (data) => data.logs.some(l => l.minutes >= 45) },
+    { id: 'sit_60', icon: 'fas fa-gem', color: '#7d5fff', title: 'Định Tĩnh', desc: 'Thời thiền ≥ 60 phút', condition: (data) => data.logs.some(l => l.minutes >= 60) },
+    { id: 'sit_90', icon: 'fab fa-ethereum', color: '#dfe6e9', title: 'Hỷ Tâm', desc: 'Thời thiền ≥ 90 phút', condition: (data) => data.logs.some(l => l.minutes >= 90) },
+    { id: 'sit_120', icon: 'fas fa-anchor', color: '#ff9ff3', title: 'Pháp Trụ', desc: 'Thời thiền ≥ 2 giờ', condition: (data) => data.logs.some(l => l.minutes >= 120) },
+    { id: 'sit_180', icon: 'fas fa-balance-scale', color: '#00d2d3', title: 'Buông Xả', desc: 'Thời thiền ≥ 3 giờ', condition: (data) => data.logs.some(l => l.minutes >= 180) },
+    { id: 'sit_240', icon: 'fab fa-jedi-order', color: '#d980fa', title: 'Định Lực', desc: 'Thời thiền ≥ 4 giờ', condition: (data) => data.logs.some(l => l.minutes >= 240) },
 
    
     { id: 'mind_100', icon: 'fas fa-bullseye', color: '#ff7675', title: 'Nhất Tâm', desc: 'Ghi nhận được 100 Chánh niệm', condition: (data) => data.logs.reduce((s, l) => s + (l.count||0), 0) >= 100 },
@@ -504,22 +504,22 @@ const BADGES = [
     { id: 'mind_100k', icon: 'fas fa-om', color: '#f9ca24', title: 'Chân Như', desc: 'Ghi nhận được 100.000 Chánh niệm', condition: (data) => data.logs.reduce((s, l) => s + (l.count||0), 0) >= 100000 },
 
     // --- DAILY MINDFULNESS (Intensity) ---
-    { id: 'mindf_200', icon: 'fab fa-linode', color: '#48dbfb', title: 'Trung Đạo', desc: 'Ghi nhận > 200 Chánh niệm trong 1 ngày', condition: (data) => { const daily = {}; data.logs.forEach(l => { const c = l.count || (l.touches ? l.touches.length : 0); daily[l.date] = (daily[l.date]||0) + c; }); return Object.values(daily).some(c => c >= 200); }},
-    { id: 'mindf_400', icon: 'fab fa-shoelace', color: '#a29bfe', title: 'Kham Nhẫn', desc: 'Ghi nhận > 400 Chánh niệm trong 1 ngày', condition: (data) => { const daily = {}; data.logs.forEach(l => { const c = l.count || (l.touches ? l.touches.length : 0); daily[l.date] = (daily[l.date]||0) + c; }); return Object.values(daily).some(c => c >= 400); }},
-    { id: 'mindf_600', icon: 'fas fa-people-roof', color: '#f1c40f', title: 'Hoà Hợp', desc: 'Ghi nhận > 600 Chánh niệm trong 1 ngày', condition: (data) => { const daily = {}; data.logs.forEach(l => { const c = l.count || (l.touches ? l.touches.length : 0); daily[l.date] = (daily[l.date]||0) + c; }); return Object.values(daily).some(c => c >= 600); }},
-    { id: 'mindf_1000', icon: 'fas fa-user-shield', color: '#686de0', title: 'Tự Điều Phục', desc: 'Ghi nhận > 1000 Chánh niệm trong 1 ngày', condition: (data) => { const daily = {}; data.logs.forEach(l => { const c = l.count || (l.touches ? l.touches.length : 0); daily[l.date] = (daily[l.date]||0) + c; }); return Object.values(daily).some(c => c >= 1000); }},
+    { id: 'mindf_200', icon: 'fab fa-linode', color: '#48dbfb', title: 'Trung Đạo', desc: 'Ghi nhận ≥ 600 Chánh niệm trong 1 ngày', condition: (data) => { const daily = {}; data.logs.forEach(l => { const c = l.count || (l.touches ? l.touches.length : 0); daily[l.date] = (daily[l.date]||0) + c; }); return Object.values(daily).some(c => c >= 600); }},
+    { id: 'mindf_400', icon: 'fab fa-shoelace', color: '#a29bfe', title: 'Kham Nhẫn', desc: 'Ghi nhận ≥ 1200 Chánh niệm trong 1 ngày', condition: (data) => { const daily = {}; data.logs.forEach(l => { const c = l.count || (l.touches ? l.touches.length : 0); daily[l.date] = (daily[l.date]||0) + c; }); return Object.values(daily).some(c => c >= 1200); }},
+    { id: 'mindf_600', icon: 'fas fa-people-roof', color: '#f1c40f', title: 'Hoà Hợp', desc: 'Ghi nhận ≥ 2400 Chánh niệm trong 1 ngày', condition: (data) => { const daily = {}; data.logs.forEach(l => { const c = l.count || (l.touches ? l.touches.length : 0); daily[l.date] = (daily[l.date]||0) + c; }); return Object.values(daily).some(c => c >= 2400); }},
+    { id: 'mindf_1000', icon: 'fas fa-user-shield', color: '#686de0', title: 'Tự Điều Phục', desc: 'Ghi nhận ≥ 3600 Chánh niệm trong 1 ngày', condition: (data) => { const daily = {}; data.logs.forEach(l => { const c = l.count || (l.touches ? l.touches.length : 0); daily[l.date] = (daily[l.date]||0) + c; }); return Object.values(daily).some(c => c >= 3600); }},
 
    
 	
 
     // --- QUALITY (Qualities/Phẩm Chất) ---
-    { id: 'qual_5_min', icon: 'fas fa-feather-pointed', color: '#81ecec', title: 'Khinh An', desc: 'Đạt được > 5 chánh niệm/phút (thời >10p)', condition: (data) => data.logs.some(l => l.minutes >= 10 && (l.count/l.minutes) >= 5) },
-    { id: 'qual_6_min', icon: 'fas fa-shield-alt', color: '#badc58', title: 'Phòng Hộ', desc: 'Đạt được > 6 chánh niệm/phút (thời >10p)', condition: (data) => data.logs.some(l => l.minutes >= 10 && (l.count/l.minutes) >= 6) },
-    { id: 'qual_7_min', icon: 'fas fa-bahai', color: '#ffeaa7', title: 'Thất Giác Chi', desc: 'Đạt được > 7 chánh niệm/phút (thời >10p)', condition: (data) => data.logs.some(l => l.minutes >= 10 && (l.count/l.minutes) >= 7) },
-    { id: 'qual_8_min', icon: 'fas fa-life-ring', color: '#fab1a0', title: 'Bát Chánh Đạo', desc: 'Đạt được > 8 chánh niệm/phút (thời >10p)', condition: (data) => data.logs.some(l => l.minutes >= 10 && (l.count/l.minutes) >= 8) },
-    { id: 'qual_9_min', icon: 'fab fa-debian', color: '#e17055', title: 'Nghiệp', desc: 'Đạt được > 9 chánh niệm/phút (thời >10p)', condition: (data) => data.logs.some(l => l.minutes >= 10 && (l.count/l.minutes) >= 9) },
-    { id: 'qual_10_min', icon: 'fas fa-hands-holding-circle', color: '#ff7675', title: 'Bố Thí', desc: 'Đạt được > 10 chánh niệm/phút (thời >10p)', condition: (data) => data.logs.some(l => l.minutes >= 10 && (l.count/l.minutes) >= 10) },
-    { id: 'qual_12_min', icon: 'fas fa-ranking-star', color: '#f9ca24', title: 'Diệu Pháp', desc: 'Đạt được > 12 chánh niệm/phút (thời >10p)', condition: (data) => data.logs.some(l => l.minutes >= 10 && (l.count/l.minutes) >= 12) },
+    { id: 'focus_5_min', icon: 'fas fa-feather-pointed', color: '#81ecec', title: 'Khinh An', desc: 'Đạt được ≥ 5 chánh niệm/phút (thời ≥ 20p)', condition: (data) => data.logs.some(l => l.minutes >= 20 && (l.count/l.minutes) >= 5) },
+    { id: 'focus_6_min', icon: 'fas fa-shield-alt', color: '#badc58', title: 'Phòng Hộ', desc: 'Đạt được ≥ 6 chánh niệm/phút (thời ≥ 20p)', condition: (data) => data.logs.some(l => l.minutes >= 20 && (l.count/l.minutes) >= 6) },
+    { id: 'focus_7_min', icon: 'fas fa-bahai', color: '#ffeaa7', title: 'Thất Giác Chi', desc: 'Đạt được ≥ 7 chánh niệm/phút (thời ≥ 20p)', condition: (data) => data.logs.some(l => l.minutes >= 20 && (l.count/l.minutes) >= 7) },
+    { id: 'focus_8_min', icon: 'fas fa-life-ring', color: '#fab1a0', title: 'Bát Chánh Đạo', desc: 'Đạt được ≥ 8 chánh niệm/phút (thời ≥ 20p)', condition: (data) => data.logs.some(l => l.minutes >= 20 && (l.count/l.minutes) >= 8) },
+    { id: 'focus_9_min', icon: 'fab fa-debian', color: '#e17055', title: 'Nghiệp', desc: 'Đạt được ≥ 9 chánh niệm/phút (thời ≥ 20p)', condition: (data) => data.logs.some(l => l.minutes >= 20 && (l.count/l.minutes) >= 9) },
+    { id: 'focus_10_min', icon: 'fas fa-hands-holding-circle', color: '#ff7675', title: 'Bố Thí', desc: 'Đạt được ≥ 10 chánh niệm/phút (thời ≥ 20p)', condition: (data) => data.logs.some(l => l.minutes >= 20 && (l.count/l.minutes) >= 10) },
+    { id: 'focus_12_min', icon: 'fas fa-ranking-star', color: '#f9ca24', title: 'Diệu Pháp', desc: 'Đạt được ≥ 12 chánh niệm/phút (thời ≥ 20p)', condition: (data) => data.logs.some(l => l.minutes >= 20 && (l.count/l.minutes) >= 12) },
 
     // --- FOCUS SCORES (Samadhi Levels) ---
     
@@ -528,20 +528,20 @@ const BADGES = [
 
 	
 	
-    { id: 'focus_1_5', icon: 'fab fa-free-code-camp', color: '#ff7979', title: 'Chánh Cần', desc: 'Mức chú tâm TB > 1.5 trong phiên <= 20p', condition: (data) => data.logs.some(l => { if (l.minutes > 20 || !l.touches) return false; const proT = l.touches.filter(t => t.v); if(proT.length < 5) return false; const score = proT.reduce((s, t) => s + (5-t.v), 0) / proT.length; return score >= 1.5; }) },
-    { id: 'focus_2_0', icon: 'fab fa-react', color: '#7ed6df', title: 'Danh Sắc', desc: 'Mức chú tâm TB > 2 trong phiên <= 20p', condition: (data) => data.logs.some(l => { if (l.minutes > 20 || !l.touches) return false; const proT = l.touches.filter(t => t.v); if(proT.length < 5) return false; const score = proT.reduce((s, t) => s + (5-t.v), 0) / proT.length; return score >= 2.0; }) },
-    { id: 'focus_2_5', icon: 'fa-meteor', color: '#badc58', title: 'Tấn Lực', desc: 'Mức chú tâm TB > 2.5 trong phiên <= 20p', condition: (data) => data.logs.some(l => { if (l.minutes > 20 || !l.touches) return false; const proT = l.touches.filter(t => t.v); if(proT.length < 5) return false; const score = proT.reduce((s, t) => s + (5-t.v), 0) / proT.length; return score >= 2.5; }) },
-    { id: 'focus_3_0', icon: 'fas fa-jedi', color: '#e056fd', title: 'Chiến Sĩ', desc: 'Mức chú tâm TB > 3 trong phiên <= 20p', condition: (data) => data.logs.some(l => { if (l.minutes > 20 || !l.touches) return false; const proT = l.touches.filter(t => t.v); if(proT.length < 5) return false; const score = proT.reduce((s, t) => s + (5-t.v), 0) / proT.length; return score >= 3.0; }) },
-	{ id: 'focus_3_5', icon: 'fas fa-hanukiah', color: '#f9ca24', title: 'Không Phóng Dật', desc: 'Mức chú tâm TB > 3.5 trong phiên <= 20p', condition: (data) => data.logs.some(l => { if (l.minutes > 20 || !l.touches) return false; const proT = l.touches.filter(t => t.v); if (proT.length < 5) return false; const score = proT.reduce((s, t) => s + (5-t.v), 0) / proT.length; return score >= 3.5; }) },
+    { id: 'sfocus_1_5', icon: 'fab fa-free-code-camp', color: '#ff7979', title: 'Chánh Cần', desc: 'Mức chú tâm TB ≥ 1.5 trong phiên ≤ 20p', condition: (data) => data.logs.some(l => { if (l.minutes > 20 || !l.touches) return false; const proT = l.touches.filter(t => t.v); if(proT.length < 5) return false; const score = proT.reduce((s, t) => s + (5-t.v), 0) / proT.length; return score >= 1.5; }) },
+    { id: 'sfocus_2_0', icon: 'fab fa-react', color: '#7ed6df', title: 'Danh Sắc', desc: 'Mức chú tâm TB ≥ 2 trong phiên ≤ 20p', condition: (data) => data.logs.some(l => { if (l.minutes > 20 || !l.touches) return false; const proT = l.touches.filter(t => t.v); if(proT.length < 5) return false; const score = proT.reduce((s, t) => s + (5-t.v), 0) / proT.length; return score >= 2.0; }) },
+    { id: 'sfocus_2_5', icon: 'fa-meteor', color: '#badc58', title: 'Tấn Lực', desc: 'Mức chú tâm TB ≥ 2.5 trong phiên ≤ 20p', condition: (data) => data.logs.some(l => { if (l.minutes > 20 || !l.touches) return false; const proT = l.touches.filter(t => t.v); if(proT.length < 5) return false; const score = proT.reduce((s, t) => s + (5-t.v), 0) / proT.length; return score >= 2.5; }) },
+    { id: 'sfocus_3_0', icon: 'fas fa-jedi', color: '#e056fd', title: 'Chiến Sĩ', desc: 'Mức chú tâm TB ≥ 3 trong phiên ≤ 20p', condition: (data) => data.logs.some(l => { if (l.minutes > 20 || !l.touches) return false; const proT = l.touches.filter(t => t.v); if(proT.length < 5) return false; const score = proT.reduce((s, t) => s + (5-t.v), 0) / proT.length; return score >= 3.0; }) },
+	{ id: 'sfocus_3_5', icon: 'fas fa-hanukiah', color: '#f9ca24', title: 'Không Phóng Dật', desc: 'Mức chú tâm TB ≥ 3.5 trong phiên ≤ 20p', condition: (data) => data.logs.some(l => { if (l.minutes > 20 || !l.touches) return false; const proT = l.touches.filter(t => t.v); if (proT.length < 5) return false; const score = proT.reduce((s, t) => s + (5-t.v), 0) / proT.length; return score >= 3.5; }) },
 
-	{ id: 'sfocus_2', icon: 'fas fa-globe-asia', color: '#22a6b3', title: 'Hải Đảo', desc: 'Mức chú tâm TB > 2 trong phiên >= 45p', condition: (data) => data.logs.some(l => { if (l.minutes < 45 || !l.touches) return false; const proT = l.touches.filter(t => t.v); if(proT.length < 5) return false; const score = proT.reduce((s, t) => s + (5-t.v), 0) / proT.length; return score >= 2.0; }) },
-	{ id: 'sfocus_2_5', icon: 'fab fa-drupal', color: '#2ed573', title: 'Tu Tập', desc: 'Mức chú tâm TB > 2.5 trong phiên >= 45p', condition: (data) => data.logs.some(l => { if (l.minutes < 45 || !l.touches) return false; const proT = l.touches.filter(t => t.v); if(proT.length < 5) return false; const score = proT.reduce((s, t) => s + (5-t.v), 0) / proT.length; return score >= 2.5; }) },
-    { id: 'sfocus_3', icon: 'fa-spa', color: '#6c5ce7', title: 'Thiền Tịnh', desc: 'Mức chú tâm TB > 2.5 trong phiên >= 45p', condition: (data) => data.logs.some(l => { if (l.minutes < 45 || !l.touches) return false; const proT = l.touches.filter(t => t.v); if(proT.length < 5) return false; const score = proT.reduce((s, t) => s + (5-t.v), 0) / proT.length; return score >= 3.0; }) },
-	{ id: 'sfocus_3_5', icon: 'fas fa-dove', color: '#dfe6e9', title: 'Vô Lậu', desc: 'Mức chú tâm TB > 3.5 trong phiên >= 45p', condition: (data) => data.logs.some(l => { if (l.minutes < 45 || !l.touches) return false; const proT = l.touches.filter(t => t.v); if(proT.length < 5) return false; const score = proT.reduce((s, t) => s + (5-t.v), 0) / proT.length; return score >= 3.5; }) },
+	{ id: 'sfocus_2', icon: 'fas fa-globe-asia', color: '#22a6b3', title: 'Hải Đảo', desc: 'Mức chú tâm TB ≥ 2 trong phiên ≥ 45p', condition: (data) => data.logs.some(l => { if (l.minutes < 45 || !l.touches) return false; const proT = l.touches.filter(t => t.v); if(proT.length < 5) return false; const score = proT.reduce((s, t) => s + (5-t.v), 0) / proT.length; return score >= 2.0; }) },
+	{ id: 'sfocus_2_5', icon: 'fab fa-drupal', color: '#2ed573', title: 'Tu Tập', desc: 'Mức chú tâm TB ≥ 2.5 trong phiên ≥ 45p', condition: (data) => data.logs.some(l => { if (l.minutes < 45 || !l.touches) return false; const proT = l.touches.filter(t => t.v); if(proT.length < 5) return false; const score = proT.reduce((s, t) => s + (5-t.v), 0) / proT.length; return score >= 2.5; }) },
+    { id: 'sfocus_3', icon: 'fa-spa', color: '#6c5ce7', title: 'Thiền Tịnh', desc: 'Mức chú tâm TB ≥ 2.5 trong phiên ≥ 45p', condition: (data) => data.logs.some(l => { if (l.minutes < 45 || !l.touches) return false; const proT = l.touches.filter(t => t.v); if(proT.length < 5) return false; const score = proT.reduce((s, t) => s + (5-t.v), 0) / proT.length; return score >= 3.0; }) },
+	{ id: 'sfocus_3_5', icon: 'fas fa-dove', color: '#dfe6e9', title: 'Vô Lậu', desc: 'Mức chú tâm TB ≥ 3.5 trong phiên ≥ 45p', condition: (data) => data.logs.some(l => { if (l.minutes < 45 || !l.touches) return false; const proT = l.touches.filter(t => t.v); if(proT.length < 5) return false; const score = proT.reduce((s, t) => s + (5-t.v), 0) / proT.length; return score >= 3.5; }) },
 
 
 { id: 'note_long', icon: 'fa-pen-nib', color: '#ff9f43', title: 'Học Giới', desc: 'Viết ghi chú dài hơn 50 ký tự', condition: (data) => data.logs.some(l => l.notes && l.notes.length > 50) },
-    { id: 'note_many', icon: 'fa-scroll', color: '#a29bfe', title: 'Thừa Tự Pháp', desc: 'Có 50 thời thiền đi kèm ghi chú > 50 ký tự', condition: (data) => data.logs.filter(l => l.notes && l.notes.length > 100).length >= 50 },
+    { id: 'note_many', icon: 'fa-scroll', color: '#a29bfe', title: 'Thừa Tự Pháp', desc: 'Có 50 thời thiền đi kèm ghi chú ≥ 50 ký tự', condition: (data) => data.logs.filter(l => l.notes && l.notes.length > 100).length >= 50 },
     // --- MISC / SPECIAL ---
 	{ id: 'goal-early_4am', icon: 'fas fa-star-half-stroke', color: '#ff6b6b', title: 'Sao Mai', desc: 'Hoàn thành thời thiền trước 4:00 sáng', condition: (data) => data.logs.some(l => new Date(l.timestamp).getHours() < 4) },
     { id: 'goal-early_5am', icon: 'fab fa-tidal', color: '#7ed6df', title: 'Tứ Diệu Đế', desc: 'Hoàn thành thời thiền trước 5:00 sáng', condition: (data) => data.logs.some(l => new Date(l.timestamp).getHours() < 5) },
@@ -554,22 +554,22 @@ const BADGES = [
     { id: 'goal_80', icon: 'fas fa-heart', color: '#ff7675', title: 'Tâm Từ', desc: 'Thành tựu 80% mục tiêu thiền', condition: (data) => data.goals.some(g => { const target = g.type === 'meditation' ? g.totalMindfulness : g.totalMinutes; return g.lifetimeTargetMinutes > 0 && target >= (g.lifetimeTargetMinutes / 2); }) },
     
 	
-	 { id: 'daily_volume_30p', icon: 'fab fa-canadian-maple-leaf', color: '#e58e26', title: 'Vô Thường', desc: 'Tổng thời gian thiền > 30 phút trong 1 ngày', condition: (data) => { const daily = {}; data.logs.forEach(l => daily[l.date] = (daily[l.date]||0) + l.minutes); return Object.values(daily).some(m => m >= 30); }},
-    { id: 'daily_volume_1h', icon: 'fab fa-phoenix-framework', color: '#fa983a', title: 'Chế Ngự', desc: 'Tổng thời gian thiền > 1 giờ trong 1 ngày', condition: (data) => { const daily = {}; data.logs.forEach(l => daily[l.date] = (daily[l.date]||0) + l.minutes); return Object.values(daily).some(m => m >= 60); }},
-    { id: 'daily_volume_2h', icon: 'fab fa-phoenix-squadron', color: '#eb2f06', title: 'Bất Tử', desc: 'Tổng thời gian thiền > 2 giờ trong 1 ngày', condition: (data) => { const daily = {}; data.logs.forEach(l => daily[l.date] = (daily[l.date]||0) + l.minutes); return Object.values(daily).some(m => m >= 120); }},
-    { id: 'daily_volume_3h', icon: 'fab fa-gripfire', color: '#e55039', title: 'Tinh Cần', desc: 'Tổng thời gian thiền > 3 giờ trong 1 ngày', condition: (data) => { const daily = {}; data.logs.forEach(l => daily[l.date] = (daily[l.date]||0) + l.minutes); return Object.values(daily).some(m => m >= 180); }},
-    { id: 'daily_volume_4h', icon: 'fab fa-rebel', color: '#74b9ff', title: 'Bất Hại', desc: 'Tổng thời gian thiền > 4 giờ trong 1 ngày', condition: (data) => { const daily = {}; data.logs.forEach(l => daily[l.date] = (daily[l.date]||0) + l.minutes); return Object.values(daily).some(m => m >= 240); }},
-    { id: 'daily_volume_5h', icon: 'fab fa-sith', color: '#badc58', title: 'Tỉnh Giác', desc: 'Tổng thời gian thiền > 5 giờ trong 1 ngày', condition: (data) => { const daily = {}; data.logs.forEach(l => daily[l.date] = (daily[l.date]||0) + l.minutes); return Object.values(daily).some(m => m >= 300); }},
-    { id: 'daily_volume_8h', icon: 'fab fa-battle-net', color: '#6a89cc', title: 'Như lý Tác Ý', desc: 'Tổng thời gian thiền > 8 giờ trong 1 ngày', condition: (data) => { const daily = {}; data.logs.forEach(l => daily[l.date] = (daily[l.date]||0) + l.minutes); return Object.values(daily).some(m => m >= 480); }},
+	 { id: 'daily_volume_30p', icon: 'fab fa-canadian-maple-leaf', color: '#e58e26', title: 'Vô Thường', desc: 'Tổng thời gian thiền ≥ 30 phút trong 1 ngày', condition: (data) => { const daily = {}; data.logs.forEach(l => daily[l.date] = (daily[l.date]||0) + l.minutes); return Object.values(daily).some(m => m >= 30); }},
+    { id: 'daily_volume_1h', icon: 'fab fa-phoenix-framework', color: '#fa983a', title: 'Chế Ngự', desc: 'Tổng thời gian thiền ≥ 1 giờ trong 1 ngày', condition: (data) => { const daily = {}; data.logs.forEach(l => daily[l.date] = (daily[l.date]||0) + l.minutes); return Object.values(daily).some(m => m >= 60); }},
+    { id: 'daily_volume_2h', icon: 'fab fa-phoenix-squadron', color: '#eb2f06', title: 'Bất Tử', desc: 'Tổng thời gian thiền ≥ 2 giờ trong 1 ngày', condition: (data) => { const daily = {}; data.logs.forEach(l => daily[l.date] = (daily[l.date]||0) + l.minutes); return Object.values(daily).some(m => m >= 120); }},
+    { id: 'daily_volume_3h', icon: 'fab fa-gripfire', color: '#e55039', title: 'Tinh Cần', desc: 'Tổng thời gian thiền ≥ 3 giờ trong 1 ngày', condition: (data) => { const daily = {}; data.logs.forEach(l => daily[l.date] = (daily[l.date]||0) + l.minutes); return Object.values(daily).some(m => m >= 180); }},
+    { id: 'daily_volume_4h', icon: 'fab fa-rebel', color: '#74b9ff', title: 'Bất Hại', desc: 'Tổng thời gian thiền ≥ 4 giờ trong 1 ngày', condition: (data) => { const daily = {}; data.logs.forEach(l => daily[l.date] = (daily[l.date]||0) + l.minutes); return Object.values(daily).some(m => m >= 240); }},
+    { id: 'daily_volume_5h', icon: 'fab fa-sith', color: '#badc58', title: 'Tỉnh Giác', desc: 'Tổng thời gian thiền ≥ 5 giờ trong 1 ngày', condition: (data) => { const daily = {}; data.logs.forEach(l => daily[l.date] = (daily[l.date]||0) + l.minutes); return Object.values(daily).some(m => m >= 300); }},
+    { id: 'daily_volume_8h', icon: 'fab fa-battle-net', color: '#6a89cc', title: 'Như lý Tác Ý', desc: 'Tổng thời gian thiền ≥ 8 giờ trong 1 ngày', condition: (data) => { const daily = {}; data.logs.forEach(l => daily[l.date] = (daily[l.date]||0) + l.minutes); return Object.values(daily).some(m => m >= 480); }},
     { id: 'freq_3_day', icon: 'fas fa-users', color: '#f0932b', title: 'Tăng Bảo', desc: 'Thiền 3 lần trong một ngày', condition: (data) => { const counts = {}; data.logs.forEach(l => counts[l.date] = (counts[l.date]||0)+1); return Object.values(counts).some(c => c >= 3); }},
     { id: 'freq_5_day', icon: 'fas fa-hand-sparkles', color: '#48dbfb', title: 'Ngũ Giới', desc: 'Thiền 5 lần trong một ngày', condition: (data) => { const counts = {}; data.logs.forEach(l => counts[l.date] = (counts[l.date]||0)+1); return Object.values(counts).some(c => c >= 5); }},
     { id: 'freq_10_day', icon: 'fas fa-hands-praying', color: '#ffbe76', title: 'Tịnh Tín', desc: 'Thiền 10 lần trong một ngày', condition: (data) => { const counts = {}; data.logs.forEach(l => counts[l.date] = (counts[l.date]||0)+1); return Object.values(counts).some(c => c >= 5); }},
-    { id: 'dedicated_day', icon: 'fa-landmark', color: '#2ecc71', title: 'Tam Bảo', desc: 'Thực hiện 3 thời thiền riêng biệt > 30p trong ngày', condition: (data) => { const goodLogs = data.logs.filter(l => l.minutes >= 15); const counts = {}; goodLogs.forEach(l => counts[l.date] = (counts[l.date]||0)+1); return Object.values(counts).some(c => c >= 3); }},
-    { id: 'quick_fix', icon: 'fas fa-user-plus', color: '#f6e58d', title: 'Tự Thắng', desc: 'Hoàn thành 10 phiên ngắn (<10p)', condition: (data) => data.logs.filter(l => l.minutes < 10).length >= 10 },
-	{ id: 'quick_fix2', icon: 'fa-fan', color: '#a29bfe', title: 'Quán Bất Tịnh', desc: 'Hoàn thành 30 phiên ngắn (<10p)', condition: (data) => data.logs.filter(l => l.minutes < 10).length >= 30 },
-    { id: 'long_haul', icon: 'fa-tree', color: '#badc58', title: 'Kiên Trì', desc: 'Hoàn thành 10 phiên dài (>60p)', condition: (data) => data.logs.filter(l => l.minutes >= 60).length >= 10 },
-    { id: 'long_haul2', icon: 'fab fa-watchman-monitoring', color: '#ff6b6b', title: 'Hải Đăng', desc: 'Hoàn thành 20 phiên dài (>60p)', condition: (data) => data.logs.filter(l => l.minutes >= 60).length >= 20 },
-    { id: 'long_haul3', icon: 'fab fa-codepen', color: '#55efc4', title: 'Ly Sân', desc: 'Hoàn thành 50 phiên dài (>60p)', condition: (data) => data.logs.filter(l => l.minutes >= 60).length >= 50 },
+    { id: 'dedicated_day', icon: 'fa-landmark', color: '#2ecc71', title: 'Tam Bảo', desc: 'Thực hiện 3 thời thiền riêng biệt ≥ 60p trong ngày', condition: (data) => { const goodLogs = data.logs.filter(l => l.minutes >= 60); const counts = {}; goodLogs.forEach(l => counts[l.date] = (counts[l.date]||0)+1); return Object.values(counts).some(c => c >= 3); }},
+    { id: 'quick_fix', icon: 'fas fa-user-plus', color: '#f6e58d', title: 'Tự Thắng', desc: 'Hoàn thành 10 phiên ngắn (≤ 10p)', condition: (data) => data.logs.filter(l => l.minutes < 10).length >= 10 },
+	{ id: 'quick_fix2', icon: 'fa-fan', color: '#a29bfe', title: 'Quán Bất Tịnh', desc: 'Hoàn thành 30 phiên ngắn (≤ 10p)', condition: (data) => data.logs.filter(l => l.minutes < 10).length >= 30 },
+    { id: 'long_haul', icon: 'fa-tree', color: '#badc58', title: 'Kiên Trì', desc: 'Hoàn thành 10 phiên dài (≥ 60p)', condition: (data) => data.logs.filter(l => l.minutes >= 60).length >= 10 },
+    { id: 'long_haul2', icon: 'fab fa-watchman-monitoring', color: '#ff6b6b', title: 'Hải Đăng', desc: 'Hoàn thành 20 phiên dài (≥ 60p)', condition: (data) => data.logs.filter(l => l.minutes >= 60).length >= 20 },
+    { id: 'long_haul3', icon: 'fab fa-codepen', color: '#55efc4', title: 'Ly Sân', desc: 'Hoàn thành 50 phiên dài (≥ 60p)', condition: (data) => data.logs.filter(l => l.minutes >= 60).length >= 50 },
 { id: 'overachiever', icon: 'fa-sailboat', color: '#74b9ff', title: 'Hiền Thiện', desc: 'Hoàn thành 200% mục tiêu ngày', condition: (data) => { return data.goals.some(g => { if(!g.dailyMinMedTarget) return false; const todayStr = new Date().toISOString().split('T')[0]; const todayVal = data.logs.filter(l => l.goalId === g.id && l.date === todayStr).reduce((s,l)=>s+(g.type==='meditation'? (l.count||0) : l.minutes), 0); return todayVal >= (g.dailyMinMedTarget * 2); }); }},
     
    
@@ -888,11 +888,21 @@ setupMeditationListeners() {
             // Nếu đã kích hoạt "Giữ" (holdTriggered = true) thì không làm gì thêm
             if (this.holdTriggered) {
                 this.holdTriggered = false;
+                this.tapCount = 0; 
                 return;
             }
 
-            // Nếu chưa kích hoạt "Giữ", thì đây là một cú "Chạm" (Tap) -> CHÁNH NIỆM
-            this.triggerMindfulnessSuccess(1);
+            
+            this.tapCount++;
+
+            if (this.tapTimeout) clearTimeout(this.tapTimeout);
+
+            this.tapTimeout = setTimeout(() => {
+               
+                this.triggerMindfulnessSuccess(1); 
+                
+                this.tapCount = 0;
+            }, 400); 
         };
 
         medOverlay.addEventListener('pointerup', handleRelease);
@@ -1038,7 +1048,7 @@ analyzeSingleSession(log) {
 
     
     const awarenessCount = log.awarenessCount || 0;
-    const recoveryTime = awarenessCount * 0.3;
+    const recoveryTime = awarenessCount * 0.5;
     
     distractedSec -= recoveryTime;
 
@@ -2084,9 +2094,11 @@ triggerMindfulnessSuccess(baseQuality = 1) {
     let nextComboCounter = this.meditationState.comboCounter;
 
     if (timeDiff > thresholdMs) {
-        // Mất tập trung -> Reset về mức Thấp (4)
-        nextAutoLevel = 4;
-        nextComboCounter = 0;
+       
+        if (nextAutoLevel < 4) {
+            nextAutoLevel++; 
+        }
+        nextComboCounter = 0; 
     } else {
         // Có sự liên tục -> Tăng Combo
         if (nextAutoLevel > 1) {
@@ -2548,11 +2560,22 @@ startMeditationSetup(goal) {
     this.recalculateStreak();
     this.renderGoals();
     this.renderReports();
-    this.checkAchievements();
+    const newBadges = this.checkAchievements(true);
     
     document.getElementById('meditation-finish-modal').style.display = 'none';
     this.showToast(`Đã lưu! +${this.meditationState.count} Chánh niệm, +${this.meditationState.awarenessCount} Tỉnh giác.`);
+	if (newBadges.length > 0) {
+        setTimeout(() => {
+            newBadges.forEach((title, index) => {
+                // Nếu mở khóa nhiều cái cùng lúc, hiện lần lượt cách nhau 3.5s
+                setTimeout(() => {
+                    this.showToast(`💎 Thành tựu Pāramī: ${title}`, true);
+                }, index * 3500); 
+            });
+        }, 1500); 
+    }
 }
+
 
             updateTimerUI() {
                 const todayStr = this.toIsoDate(new Date());
@@ -3958,8 +3981,7 @@ renderReports(resetDates = false) {
         options: monthlyOptions
     });
 
-    // --- Cập nhật biểu đồ Tỷ lệ (Density) ---
-    // --- Cập nhật biểu đồ Tỷ lệ (Density) ---
+   
     const ctxDensity = document.getElementById('reportDensityChart');
     if (ctxDensity) {
         // 1. Update the Title
@@ -4037,7 +4059,7 @@ renderReports(resetDates = false) {
                             borderWidth: 1.5,
                             fill: true,
                             tension: 0.3,
-                            yAxisID: 'y1', // Gắn vào trục phải
+                            yAxisID: 'y', // Gắn vào trục phải
                         }
                     ]
                 },
@@ -4096,16 +4118,7 @@ renderReports(resetDates = false) {
                             ticks: { color: '#9ca3af', font: { size: 10 } },
                             title: { display: false } // Ẩn tên trục để tiết kiệm chỗ
                         },
-                        y1: { // Trục MỚI cho Tỉnh giác
-                            type: 'linear',
-                            display: true,
-                            position: 'right',
-                            beginAtZero: true,
-                            grid: { 
-                                drawOnChartArea: false, // Ẩn lưới ngang của trục này để tránh rối
-                            },
-                            ticks: { color: '#a78bfa', font: { size: 10 } } // Màu tím cho text trục
-                        }
+                        
                     }
                 }
             });
@@ -4146,20 +4159,30 @@ updateStats() {
                 if ((now - last) / (1000 * 60 * 60 * 24) > 1) this.data.streak = 0; else this.data.streak = streak;
             }
 
-            checkAchievements() {
+            checkAchievements(silent = false) {
     let newUnlock = false;
+    const unlockedTitles = []; // Danh sách các huy hiệu vừa mở
+
     BADGES.forEach(badge => {
-        // Manual badges are triggered by unlockBadge(), so skip them here
+        // Bỏ qua các badge thủ công
         if (badge.id === 'explorer' || badge.id === 'safe_keeper') return;
 
         if (!this.data.achievements.includes(badge.id) && badge.condition(this.data)) {
             this.data.achievements.push(badge.id);
-            this.showToast(`🏆 Mở khóa: ${badge.title}`);
+            unlockedTitles.push(badge.title);
+            
+            // Chỉ hiện toast nếu không bật chế độ im lặng
+            if (!silent) {
+                this.showToast(`💎 Thành tựu Pāramī: ${badge.title}`, true);
+            }
             newUnlock = true;
         }
     });
+
     if (newUnlock) this.save();
     this.renderAchievementsUI();
+    
+    return unlockedTitles; // Trả về danh sách để xử lý hiển thị sau
 }
 
 // 2. Manual trigger for "Explorer" and "Safe Keeper"
@@ -4167,7 +4190,7 @@ unlockBadge(id) {
     if (!this.data.achievements.includes(id)) {
         this.data.achievements.push(id);
         const badge = BADGES.find(b => b.id === id);
-        this.showToast(`🏆 Mở khóa: ${badge.title}`);
+        this.showToast(`💎 Thành tựu Pāramī: ${badge.title}`);
         this.save();
         this.renderAchievementsUI();
     }
@@ -4852,10 +4875,19 @@ logSessionConfirm(e) {
         this.renderGoals(); 
         this.renderCalendar(); 
         this.renderReports(); 
-        this.checkAchievements();
+        const newBadges = this.checkAchievements(true);
         this.closeSessionModal(); 
         this.showToast(logId ? 'Đã cập nhật!' : 'Đã ghi!');
+        if (newBadges.length > 0) {
+        setTimeout(() => {
+            newBadges.forEach((title, index) => {
+                setTimeout(() => {
+                    this.showToast(`💎 Thành tựu Pāramī: ${title}`, true);
+                }, index * 3500);
+            });
+        }, 1500);
     }
+}
          deleteGoal(id) {
     if(confirm('Xóa mục tiêu này và TOÀN BỘ lịch sử liên quan? Hành động này không thể hoàn tác.')) {
         

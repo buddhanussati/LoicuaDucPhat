@@ -476,14 +476,14 @@ const BADGES = [
     { id: 'time_1000h', icon: 'fab fa-skyatlas', color: '#74b9ff', title: 'The Void', desc: 'Accumulate 1000 hours of practice', condition: (data) => data.logs.reduce((s, l) => s + l.minutes, 0) >= 60000 },
 
     // --- Session Length ---
-    { id: 'sit_15', icon: 'fab fa-deskpro', color: '#48dbfb', title: 'Elephant King', desc: 'Session length >= 15 minutes', condition: (data) => data.logs.some(l => l.minutes >= 15) },
-    { id: 'sit_30', icon: 'fab fa-medapps', color: '#feca57', title: 'The Lamp', desc: 'Session length >= 30 minutes', condition: (data) => data.logs.some(l => l.minutes >= 30) },
-    { id: 'sit_45', icon: 'fas fa-hand-holding-hand', color: '#cd84f1', title: 'Compassion', desc: 'Session length >= 45 minutes', condition: (data) => data.logs.some(l => l.minutes >= 45) },
-    { id: 'sit_60', icon: 'fas fa-gem', color: '#7d5fff', title: 'Composure', desc: 'Session length >= 60 minutes', condition: (data) => data.logs.some(l => l.minutes >= 60) },
-    { id: 'sit_90', icon: 'fab fa-ethereum', color: '#dfe6e9', title: 'Joyful Mind', desc: 'Session length >= 90 minutes', condition: (data) => data.logs.some(l => l.minutes >= 90) },
-    { id: 'sit_120', icon: 'fas fa-anchor', color: '#ff9ff3', title: 'Dhamma Pillar', desc: 'Session length >= 2 hours', condition: (data) => data.logs.some(l => l.minutes >= 120) },
-    { id: 'sit_180', icon: 'fas fa-balance-scale', color: '#00d2d3', title: 'Letting Go', desc: 'Session length >= 3 hours', condition: (data) => data.logs.some(l => l.minutes >= 180) },
-    { id: 'sit_240', icon: 'fab fa-jedi-order', color: '#d980fa', title: 'Samadhi', desc: 'Session length >= 4 hours', condition: (data) => data.logs.some(l => l.minutes >= 240) },
+    { id: 'sit_15', icon: 'fab fa-deskpro', color: '#48dbfb', title: 'Elephant King', desc: 'Session length ≥ 15 minutes', condition: (data) => data.logs.some(l => l.minutes >= 15) },
+    { id: 'sit_30', icon: 'fab fa-medapps', color: '#feca57', title: 'The Lamp', desc: 'Session length ≥ 30 minutes', condition: (data) => data.logs.some(l => l.minutes >= 30) },
+    { id: 'sit_45', icon: 'fas fa-hand-holding-hand', color: '#cd84f1', title: 'Compassion', desc: 'Session length ≥ 45 minutes', condition: (data) => data.logs.some(l => l.minutes >= 45) },
+    { id: 'sit_60', icon: 'fas fa-gem', color: '#7d5fff', title: 'Composure', desc: 'Session length ≥ 60 minutes', condition: (data) => data.logs.some(l => l.minutes >= 60) },
+    { id: 'sit_90', icon: 'fab fa-ethereum', color: '#dfe6e9', title: 'Joyful Mind', desc: 'Session length ≥ 90 minutes', condition: (data) => data.logs.some(l => l.minutes >= 90) },
+    { id: 'sit_120', icon: 'fas fa-anchor', color: '#ff9ff3', title: 'Dhamma Pillar', desc: 'Session length ≥ 2 hours', condition: (data) => data.logs.some(l => l.minutes >= 120) },
+    { id: 'sit_180', icon: 'fas fa-balance-scale', color: '#00d2d3', title: 'Letting Go', desc: 'Session length ≥ 3 hours', condition: (data) => data.logs.some(l => l.minutes >= 180) },
+    { id: 'sit_240', icon: 'fab fa-jedi-order', color: '#d980fa', title: 'Samadhi', desc: 'Session length ≥ 4 hours', condition: (data) => data.logs.some(l => l.minutes >= 240) },
 
     // --- Mindfulness Counts ---
     { id: 'mind_100', icon: 'fas fa-bullseye', color: '#ff7675', title: 'One-Pointedness', desc: 'Recorded 100 mindfulness', condition: (data) => data.logs.reduce((s, l) => s + (l.count||0), 0) >= 100 },
@@ -507,34 +507,34 @@ const BADGES = [
     { id: 'mind_100k', icon: 'fas fa-om', color: '#f9ca24', title: 'Suchness', desc: 'Recorded 100,000 mindfulness', condition: (data) => data.logs.reduce((s, l) => s + (l.count||0), 0) >= 100000 },
 
     // --- DAILY MINDFULNESS (Intensity) ---
-    { id: 'mindf_200', icon: 'fab fa-linode', color: '#48dbfb', title: 'Middle Way', desc: 'Recorded > 200 mindfulness in a day', condition: (data) => { const daily = {}; data.logs.forEach(l => { const c = l.count || (l.touches ? l.touches.length : 0); daily[l.date] = (daily[l.date]||0) + c; }); return Object.values(daily).some(c => c >= 200); }},
-    { id: 'mindf_400', icon: 'fab fa-shoelace', color: '#a29bfe', title: 'Patience', desc: 'Recorded > 400 mindfulness in a day', condition: (data) => { const daily = {}; data.logs.forEach(l => { const c = l.count || (l.touches ? l.touches.length : 0); daily[l.date] = (daily[l.date]||0) + c; }); return Object.values(daily).some(c => c >= 400); }},
-    { id: 'mindf_600', icon: 'fas fa-people-roof', color: '#f1c40f', title: 'Harmony', desc: 'Recorded > 600 mindfulness in a day', condition: (data) => { const daily = {}; data.logs.forEach(l => { const c = l.count || (l.touches ? l.touches.length : 0); daily[l.date] = (daily[l.date]||0) + c; }); return Object.values(daily).some(c => c >= 600); }},
-    { id: 'mindf_1000', icon: 'fas fa-user-shield', color: '#686de0', title: 'Self-Control', desc: 'Recorded > 1000 mindfulness in a day', condition: (data) => { const daily = {}; data.logs.forEach(l => { const c = l.count || (l.touches ? l.touches.length : 0); daily[l.date] = (daily[l.date]||0) + c; }); return Object.values(daily).some(c => c >= 1000); }},
+    { id: 'mindf_200', icon: 'fab fa-linode', color: '#48dbfb', title: 'Middle Way', desc: 'Recorded ≥ 600 mindfulness in a day', condition: (data) => { const daily = {}; data.logs.forEach(l => { const c = l.count || (l.touches ? l.touches.length : 0); daily[l.date] = (daily[l.date]||0) + c; }); return Object.values(daily).some(c => c >= 600); }},
+    { id: 'mindf_400', icon: 'fab fa-shoelace', color: '#a29bfe', title: 'Patience', desc: 'Recorded ≥ 1200 mindfulness in a day', condition: (data) => { const daily = {}; data.logs.forEach(l => { const c = l.count || (l.touches ? l.touches.length : 0); daily[l.date] = (daily[l.date]||0) + c; }); return Object.values(daily).some(c => c >= 1200); }},
+    { id: 'mindf_600', icon: 'fas fa-people-roof', color: '#f1c40f', title: 'Harmony', desc: 'Recorded ≥ 2400 mindfulness in a day', condition: (data) => { const daily = {}; data.logs.forEach(l => { const c = l.count || (l.touches ? l.touches.length : 0); daily[l.date] = (daily[l.date]||0) + c; }); return Object.values(daily).some(c => c >= 2400); }},
+    { id: 'mindf_1000', icon: 'fas fa-user-shield', color: '#686de0', title: 'Self-Control', desc: 'Recorded ≥ 3600 mindfulness in a day', condition: (data) => { const daily = {}; data.logs.forEach(l => { const c = l.count || (l.touches ? l.touches.length : 0); daily[l.date] = (daily[l.date]||0) + c; }); return Object.values(daily).some(c => c >= 3600); }},
 
     // --- QUALITY (Qualities/Phẩm Chất) ---
-    { id: 'qual_5_min', icon: 'fas fa-feather-pointed', color: '#81ecec', title: 'Tranquillity', desc: 'Achieved > 5 mindfulness/minute (session >10m)', condition: (data) => data.logs.some(l => l.minutes >= 10 && (l.count/l.minutes) >= 5) },
-    { id: 'qual_6_min', icon: 'fas fa-shield-alt', color: '#badc58', title: 'Guardian', desc: 'Achieved > 6 mindfulness/minute (session >10m)', condition: (data) => data.logs.some(l => l.minutes >= 10 && (l.count/l.minutes) >= 6) },
-    { id: 'qual_7_min', icon: 'fas fa-bahai', color: '#ffeaa7', title: 'Awakening', desc: 'Achieved > 7 mindfulness/minute (session >10m)', condition: (data) => data.logs.some(l => l.minutes >= 10 && (l.count/l.minutes) >= 7) },
-    { id: 'qual_8_min', icon: 'fas fa-life-ring', color: '#fab1a0', title: 'Eightfold Path', desc: 'Achieved > 8 mindfulness/minute (session >10m)', condition: (data) => data.logs.some(l => l.minutes >= 10 && (l.count/l.minutes) >= 8) },
-    { id: 'qual_9_min', icon: 'fab fa-debian', color: '#e17055', title: 'Kamma', desc: 'Achieved > 9 mindfulness/minute (session >10m)', condition: (data) => data.logs.some(l => l.minutes >= 10 && (l.count/l.minutes) >= 9) },
-    { id: 'qual_10_min', icon: 'fas fa-hands-holding-circle', color: '#ff7675', title: 'Generosity', desc: 'Achieved > 10 mindfulness/minute (session >10m)', condition: (data) => data.logs.some(l => l.minutes >= 10 && (l.count/l.minutes) >= 10) },
-    { id: 'qual_12_min', icon: 'fas fa-ranking-star', color: '#f9ca24', title: 'Sublime Dhamma', desc: 'Achieved > 12 mindfulness/minute (session >10m)', condition: (data) => data.logs.some(l => l.minutes >= 10 && (l.count/l.minutes) >= 12) },
+    { id: 'focus_5_min', icon: 'fas fa-feather-pointed', color: '#81ecec', title: 'Tranquillity', desc: 'Achieved ≥ 5 mindfulness/minute (session ≥ 20m)', condition: (data) => data.logs.some(l => l.minutes >= 20 && (l.count/l.minutes) >= 5) },
+    { id: 'focus_6_min', icon: 'fas fa-shield-alt', color: '#badc58', title: 'Guardian', desc: 'Achieved ≥ 6 mindfulness/minute (session ≥ 20m)', condition: (data) => data.logs.some(l => l.minutes >= 20 && (l.count/l.minutes) >= 6) },
+    { id: 'focus_7_min', icon: 'fas fa-bahai', color: '#ffeaa7', title: 'Awakening', desc: 'Achieved ≥ 7 mindfulness/minute (session ≥ 20m)', condition: (data) => data.logs.some(l => l.minutes >= 20 && (l.count/l.minutes) >= 7) },
+    { id: 'focus_8_min', icon: 'fas fa-life-ring', color: '#fab1a0', title: 'Eightfold Path', desc: 'Achieved ≥ 8 mindfulness/minute (session ≥ 20m)', condition: (data) => data.logs.some(l => l.minutes >= 20 && (l.count/l.minutes) >= 8) },
+    { id: 'focus_9_min', icon: 'fab fa-debian', color: '#e17055', title: 'Kamma', desc: 'Achieved ≥ 9 mindfulness/minute (session ≥ 20m)', condition: (data) => data.logs.some(l => l.minutes >= 20 && (l.count/l.minutes) >= 9) },
+    { id: 'focus_10_min', icon: 'fas fa-hands-holding-circle', color: '#ff7675', title: 'Generosity', desc: 'Achieved ≥ 10 mindfulness/minute (session ≥ 20m)', condition: (data) => data.logs.some(l => l.minutes >= 20 && (l.count/l.minutes) >= 10) },
+    { id: 'focus_12_min', icon: 'fas fa-ranking-star', color: '#f9ca24', title: 'Sublime Dhamma', desc: 'Achieved ≥ 12 mindfulness/minute (session ≥ 20m)', condition: (data) => data.logs.some(l => l.minutes >= 20 && (l.count/l.minutes) >= 12) },
 
     // --- FOCUS SCORES (Samadhi Levels) ---
-    { id: 'focus_1_5', icon: 'fab fa-free-code-camp', color: '#ff7979', title: 'Right Effort', desc: 'Avg Focus > 1.5 in session <= 20m', condition: (data) => data.logs.some(l => { if (l.minutes > 20 || !l.touches) return false; const proT = l.touches.filter(t => t.v); if(proT.length < 5) return false; const score = proT.reduce((s, t) => s + (5-t.v), 0) / proT.length; return score >= 1.5; }) },
-    { id: 'focus_2_0', icon: 'fab fa-react', color: '#7ed6df', title: 'Name & Form', desc: 'Avg Focus > 2 in session <= 20m', condition: (data) => data.logs.some(l => { if (l.minutes > 20 || !l.touches) return false; const proT = l.touches.filter(t => t.v); if(proT.length < 5) return false; const score = proT.reduce((s, t) => s + (5-t.v), 0) / proT.length; return score >= 2.0; }) },
-    { id: 'focus_2_5', icon: 'fa-meteor', color: '#badc58', title: 'Effort', desc: 'Avg Focus > 2.5 in session <= 20m', condition: (data) => data.logs.some(l => { if (l.minutes > 20 || !l.touches) return false; const proT = l.touches.filter(t => t.v); if(proT.length < 5) return false; const score = proT.reduce((s, t) => s + (5-t.v), 0) / proT.length; return score >= 2.5; }) },
-    { id: 'focus_3_0', icon: 'fas fa-jedi', color: '#e056fd', title: 'The Warrior', desc: 'Avg Focus > 3 in session <= 20m', condition: (data) => data.logs.some(l => { if (l.minutes > 20 || !l.touches) return false; const proT = l.touches.filter(t => t.v); if(proT.length < 5) return false; const score = proT.reduce((s, t) => s + (5-t.v), 0) / proT.length; return score >= 3.0; }) },
-    { id: 'focus_3_5', icon: 'fas fa-hanukiah', color: '#f9ca24', title: 'Heedfulness', desc: 'Avg Focus > 3.5 in session <= 20m', condition: (data) => data.logs.some(l => { if (l.minutes > 20 || !l.touches) return false; const proT = l.touches.filter(t => t.v); if (proT.length < 5) return false; const score = proT.reduce((s, t) => s + (5-t.v), 0) / proT.length; return score >= 3.5; }) },
+    { id: 'sfocus_1_5', icon: 'fab fa-free-code-camp', color: '#ff7979', title: 'Right Effort', desc: 'Avg Focus ≥ 1.5 in session ≤ 20m', condition: (data) => data.logs.some(l => { if (l.minutes > 20 || !l.touches) return false; const proT = l.touches.filter(t => t.v); if(proT.length < 5) return false; const score = proT.reduce((s, t) => s + (5-t.v), 0) / proT.length; return score >= 1.5; }) },
+    { id: 'sfocus_2_0', icon: 'fab fa-react', color: '#7ed6df', title: 'Name & Form', desc: 'Avg Focus ≥ 2 in session ≤ 20m', condition: (data) => data.logs.some(l => { if (l.minutes > 20 || !l.touches) return false; const proT = l.touches.filter(t => t.v); if(proT.length < 5) return false; const score = proT.reduce((s, t) => s + (5-t.v), 0) / proT.length; return score >= 2.0; }) },
+    { id: 'sfocus_2_5', icon: 'fa-meteor', color: '#badc58', title: 'Effort', desc: 'Avg Focus ≥ 2.5 in session ≤ 20m', condition: (data) => data.logs.some(l => { if (l.minutes > 20 || !l.touches) return false; const proT = l.touches.filter(t => t.v); if(proT.length < 5) return false; const score = proT.reduce((s, t) => s + (5-t.v), 0) / proT.length; return score >= 2.5; }) },
+    { id: 'sfocus_3_0', icon: 'fas fa-jedi', color: '#e056fd', title: 'The Warrior', desc: 'Avg Focus ≥ 3 in session ≤ 20m', condition: (data) => data.logs.some(l => { if (l.minutes > 20 || !l.touches) return false; const proT = l.touches.filter(t => t.v); if(proT.length < 5) return false; const score = proT.reduce((s, t) => s + (5-t.v), 0) / proT.length; return score >= 3.0; }) },
+    { id: 'sfocus_3_5', icon: 'fas fa-hanukiah', color: '#f9ca24', title: 'Heedfulness', desc: 'Avg Focus ≥ 3.5 in session ≤ 20m', condition: (data) => data.logs.some(l => { if (l.minutes > 20 || !l.touches) return false; const proT = l.touches.filter(t => t.v); if (proT.length < 5) return false; const score = proT.reduce((s, t) => s + (5-t.v), 0) / proT.length; return score >= 3.5; }) },
 
-    { id: 'sfocus_2', icon: 'fas fa-globe-asia', color: '#22a6b3', title: 'The Island', desc: 'Avg Focus > 2 in session >= 45m', condition: (data) => data.logs.some(l => { if (l.minutes < 45 || !l.touches) return false; const proT = l.touches.filter(t => t.v); if(proT.length < 5) return false; const score = proT.reduce((s, t) => s + (5-t.v), 0) / proT.length; return score >= 2.0; }) },
-    { id: 'sfocus_2_5', icon: 'fab fa-drupal', color: '#2ed573', title: 'Cultivation', desc: 'Avg Focus > 2.5 in session >= 45m', condition: (data) => data.logs.some(l => { if (l.minutes < 45 || !l.touches) return false; const proT = l.touches.filter(t => t.v); if(proT.length < 5) return false; const score = proT.reduce((s, t) => s + (5-t.v), 0) / proT.length; return score >= 2.5; }) },
-    { id: 'sfocus_3', icon: 'fa-spa', color: '#6c5ce7', title: 'Quietude', desc: 'Avg Focus > 3.0 in session >= 45m', condition: (data) => data.logs.some(l => { if (l.minutes < 45 || !l.touches) return false; const proT = l.touches.filter(t => t.v); if(proT.length < 5) return false; const score = proT.reduce((s, t) => s + (5-t.v), 0) / proT.length; return score >= 3.0; }) },
-    { id: 'sfocus_3_5', icon: 'fas fa-dove', color: '#dfe6e9', title: 'Stainless', desc: 'Avg Focus > 3.5 in session >= 45m', condition: (data) => data.logs.some(l => { if (l.minutes < 45 || !l.touches) return false; const proT = l.touches.filter(t => t.v); if(proT.length < 5) return false; const score = proT.reduce((s, t) => s + (5-t.v), 0) / proT.length; return score >= 3.5; }) },
+    { id: 'sfocus_2', icon: 'fas fa-globe-asia', color: '#22a6b3', title: 'The Island', desc: 'Avg Focus ≥ 2 in session ≥ 45m', condition: (data) => data.logs.some(l => { if (l.minutes < 45 || !l.touches) return false; const proT = l.touches.filter(t => t.v); if(proT.length < 5) return false; const score = proT.reduce((s, t) => s + (5-t.v), 0) / proT.length; return score >= 2.0; }) },
+    { id: 'sfocus_2_5', icon: 'fab fa-drupal', color: '#2ed573', title: 'Cultivation', desc: 'Avg Focus ≥ 2.5 in session ≥ 45m', condition: (data) => data.logs.some(l => { if (l.minutes < 45 || !l.touches) return false; const proT = l.touches.filter(t => t.v); if(proT.length < 5) return false; const score = proT.reduce((s, t) => s + (5-t.v), 0) / proT.length; return score >= 2.5; }) },
+    { id: 'sfocus_3', icon: 'fa-spa', color: '#6c5ce7', title: 'Quietude', desc: 'Avg Focus ≥ 3.0 in session ≥ 45m', condition: (data) => data.logs.some(l => { if (l.minutes < 45 || !l.touches) return false; const proT = l.touches.filter(t => t.v); if(proT.length < 5) return false; const score = proT.reduce((s, t) => s + (5-t.v), 0) / proT.length; return score >= 3.0; }) },
+    { id: 'sfocus_3_5', icon: 'fas fa-dove', color: '#dfe6e9', title: 'Stainless', desc: 'Avg Focus ≥ 3.5 in session ≥ 45m', condition: (data) => data.logs.some(l => { if (l.minutes < 45 || !l.touches) return false; const proT = l.touches.filter(t => t.v); if(proT.length < 5) return false; const score = proT.reduce((s, t) => s + (5-t.v), 0) / proT.length; return score >= 3.5; }) },
 
     { id: 'note_long', icon: 'fa-pen-nib', color: '#ff9f43', title: 'The Learner', desc: 'Write a note longer than 50 chars', condition: (data) => data.logs.some(l => l.notes && l.notes.length > 50) },
-    { id: 'note_many', icon: 'fa-scroll', color: '#a29bfe', title: 'Dhamma Heir', desc: '50 sessions with notes > 50 chars', condition: (data) => data.logs.filter(l => l.notes && l.notes.length > 100).length >= 50 },
+    { id: 'note_many', icon: 'fa-scroll', color: '#a29bfe', title: 'Dhamma Heir', desc: '50 sessions with notes ≥ 50 chars', condition: (data) => data.logs.filter(l => l.notes && l.notes.length > 100).length >= 50 },
     
     // --- MISC / SPECIAL ---
     { id: 'goal-early_4am', icon: 'fas fa-star-half-stroke', color: '#ff6b6b', title: 'Morning Star', desc: 'Complete a session before 4:00 AM', condition: (data) => data.logs.some(l => new Date(l.timestamp).getHours() < 4) },
@@ -547,22 +547,22 @@ const BADGES = [
     { id: 'goal_100', icon: 'fab fa-think-peaks', color: '#f9ca24', title: 'Seclusion', desc: 'Achieve 100% of a meditation goal', condition: (data) => data.goals.some(g => { const target = g.type === 'meditation' ? g.totalMindfulness : g.totalMinutes; return g.lifetimeTargetMinutes > 0 && target >= g.lifetimeTargetMinutes; }) },
     { id: 'goal_80', icon: 'fas fa-heart', color: '#ff7675', title: 'Loving-Kindness', desc: 'Achieve 80% of a meditation goal', condition: (data) => data.goals.some(g => { const target = g.type === 'meditation' ? g.totalMindfulness : g.totalMinutes; return g.lifetimeTargetMinutes > 0 && target >= (g.lifetimeTargetMinutes / 2); }) },
     
-    { id: 'daily_volume_30p', icon: 'fab fa-canadian-maple-leaf', color: '#e58e26', title: 'Impermanence', desc: 'Total meditation > 30 minutes in a day', condition: (data) => { const daily = {}; data.logs.forEach(l => daily[l.date] = (daily[l.date]||0) + l.minutes); return Object.values(daily).some(m => m >= 30); }},
-    { id: 'daily_volume_1h', icon: 'fab fa-phoenix-framework', color: '#fa983a', title: 'Restraint', desc: 'Total meditation > 1 hour in a day', condition: (data) => { const daily = {}; data.logs.forEach(l => daily[l.date] = (daily[l.date]||0) + l.minutes); return Object.values(daily).some(m => m >= 60); }},
-    { id: 'daily_volume_2h', icon: 'fab fa-phoenix-squadron', color: '#eb2f06', title: 'The Deathless', desc: 'Total meditation > 2 hours in a day', condition: (data) => { const daily = {}; data.logs.forEach(l => daily[l.date] = (daily[l.date]||0) + l.minutes); return Object.values(daily).some(m => m >= 120); }},
-    { id: 'daily_volume_3h', icon: 'fab fa-gripfire', color: '#e55039', title: 'Diligence', desc: 'Total meditation > 3 hours in a day', condition: (data) => { const daily = {}; data.logs.forEach(l => daily[l.date] = (daily[l.date]||0) + l.minutes); return Object.values(daily).some(m => m >= 180); }},
-    { id: 'daily_volume_4h', icon: 'fab fa-rebel', color: '#74b9ff', title: 'Non-Violence', desc: 'Total meditation > 4 hours in a day', condition: (data) => { const daily = {}; data.logs.forEach(l => daily[l.date] = (daily[l.date]||0) + l.minutes); return Object.values(daily).some(m => m >= 240); }},
-    { id: 'daily_volume_5h', icon: 'fab fa-sith', color: '#badc58', title: 'Wakefulness', desc: 'Total meditation > 5 hours in a day', condition: (data) => { const daily = {}; data.logs.forEach(l => daily[l.date] = (daily[l.date]||0) + l.minutes); return Object.values(daily).some(m => m >= 300); }},
-    { id: 'daily_volume_8h', icon: 'fab fa-battle-net', color: '#6a89cc', title: 'Wise Attention', desc: 'Total meditation > 8 hours in a day', condition: (data) => { const daily = {}; data.logs.forEach(l => daily[l.date] = (daily[l.date]||0) + l.minutes); return Object.values(daily).some(m => m >= 480); }},
+    { id: 'daily_volume_30p', icon: 'fab fa-canadian-maple-leaf', color: '#e58e26', title: 'Impermanence', desc: 'Total meditation ≥ 30 minutes in a day', condition: (data) => { const daily = {}; data.logs.forEach(l => daily[l.date] = (daily[l.date]||0) + l.minutes); return Object.values(daily).some(m => m >= 30); }},
+    { id: 'daily_volume_1h', icon: 'fab fa-phoenix-framework', color: '#fa983a', title: 'Restraint', desc: 'Total meditation ≥ 1 hour in a day', condition: (data) => { const daily = {}; data.logs.forEach(l => daily[l.date] = (daily[l.date]||0) + l.minutes); return Object.values(daily).some(m => m >= 60); }},
+    { id: 'daily_volume_2h', icon: 'fab fa-phoenix-squadron', color: '#eb2f06', title: 'The Deathless', desc: 'Total meditation ≥ 2 hours in a day', condition: (data) => { const daily = {}; data.logs.forEach(l => daily[l.date] = (daily[l.date]||0) + l.minutes); return Object.values(daily).some(m => m >= 120); }},
+    { id: 'daily_volume_3h', icon: 'fab fa-gripfire', color: '#e55039', title: 'Diligence', desc: 'Total meditation ≥ 3 hours in a day', condition: (data) => { const daily = {}; data.logs.forEach(l => daily[l.date] = (daily[l.date]||0) + l.minutes); return Object.values(daily).some(m => m >= 180); }},
+    { id: 'daily_volume_4h', icon: 'fab fa-rebel', color: '#74b9ff', title: 'Non-Violence', desc: 'Total meditation ≥ 4 hours in a day', condition: (data) => { const daily = {}; data.logs.forEach(l => daily[l.date] = (daily[l.date]||0) + l.minutes); return Object.values(daily).some(m => m >= 240); }},
+    { id: 'daily_volume_5h', icon: 'fab fa-sith', color: '#badc58', title: 'Wakefulness', desc: 'Total meditation ≥ 5 hours in a day', condition: (data) => { const daily = {}; data.logs.forEach(l => daily[l.date] = (daily[l.date]||0) + l.minutes); return Object.values(daily).some(m => m >= 300); }},
+    { id: 'daily_volume_8h', icon: 'fab fa-battle-net', color: '#6a89cc', title: 'Wise Attention', desc: 'Total meditation ≥ 8 hours in a day', condition: (data) => { const daily = {}; data.logs.forEach(l => daily[l.date] = (daily[l.date]||0) + l.minutes); return Object.values(daily).some(m => m >= 480); }},
     { id: 'freq_3_day', icon: 'fas fa-users', color: '#f0932b', title: 'Sangha', desc: 'Meditate 3 times in one day', condition: (data) => { const counts = {}; data.logs.forEach(l => counts[l.date] = (counts[l.date]||0)+1); return Object.values(counts).some(c => c >= 3); }},
     { id: 'freq_5_day', icon: 'fas fa-hand-sparkles', color: '#48dbfb', title: 'Five Precepts', desc: 'Meditate 5 times in one day', condition: (data) => { const counts = {}; data.logs.forEach(l => counts[l.date] = (counts[l.date]||0)+1); return Object.values(counts).some(c => c >= 5); }},
     { id: 'freq_10_day', icon: 'fas fa-hands-praying', color: '#ffbe76', title: 'Pure Faith', desc: 'Meditate 10 times in one day', condition: (data) => { const counts = {}; data.logs.forEach(l => counts[l.date] = (counts[l.date]||0)+1); return Object.values(counts).some(c => c >= 5); }},
-    { id: 'dedicated_day', icon: 'fa-landmark', color: '#2ecc71', title: 'Three Jewels', desc: 'Complete 3 separate sessions > 30m in a day', condition: (data) => { const goodLogs = data.logs.filter(l => l.minutes >= 15); const counts = {}; goodLogs.forEach(l => counts[l.date] = (counts[l.date]||0)+1); return Object.values(counts).some(c => c >= 3); }},
-    { id: 'quick_fix', icon: 'fas fa-user-plus', color: '#f6e58d', title: 'Self-Victory', desc: 'Complete 10 short sessions (<10m)', condition: (data) => data.logs.filter(l => l.minutes < 10).length >= 10 },
-    { id: 'quick_fix2', icon: 'fa-fan', color: '#a29bfe', title: 'Disenchantment', desc: 'Complete 30 short sessions (<10m)', condition: (data) => data.logs.filter(l => l.minutes < 10).length >= 30 },
-    { id: 'long_haul', icon: 'fa-tree', color: '#badc58', title: 'Perseverance', desc: 'Complete 10 long sessions (>60m)', condition: (data) => data.logs.filter(l => l.minutes >= 60).length >= 10 },
-    { id: 'long_haul2', icon: 'fab fa-watchman-monitoring', color: '#ff6b6b', title: 'Lighthouse', desc: 'Complete 20 long sessions (>60m)', condition: (data) => data.logs.filter(l => l.minutes >= 60).length >= 20 },
-    { id: 'long_haul3', icon: 'fab fa-codepen', color: '#55efc4', title: 'Non-Ill Will', desc: 'Complete 50 long sessions (>60m)', condition: (data) => data.logs.filter(l => l.minutes >= 60).length >= 50 },
+    { id: 'dedicated_day', icon: 'fa-landmark', color: '#2ecc71', title: 'Three Jewels', desc: 'Complete 3 separate sessions ≥ 60m in a day', condition: (data) => { const goodLogs = data.logs.filter(l => l.minutes >= 60); const counts = {}; goodLogs.forEach(l => counts[l.date] = (counts[l.date]||0)+1); return Object.values(counts).some(c => c >= 3); }},
+    { id: 'quick_fix', icon: 'fas fa-user-plus', color: '#f6e58d', title: 'Self-Victory', desc: 'Complete 10 short sessions (≤ 10m)', condition: (data) => data.logs.filter(l => l.minutes < 10).length >= 10 },
+    { id: 'quick_fix2', icon: 'fa-fan', color: '#a29bfe', title: 'Disenchantment', desc: 'Complete 30 short sessions (≤ 10m)', condition: (data) => data.logs.filter(l => l.minutes < 10).length >= 30 },
+    { id: 'long_haul', icon: 'fa-tree', color: '#badc58', title: 'Perseverance', desc: 'Complete 10 long sessions (≥ 60m)', condition: (data) => data.logs.filter(l => l.minutes >= 60).length >= 10 },
+    { id: 'long_haul2', icon: 'fab fa-watchman-monitoring', color: '#ff6b6b', title: 'Lighthouse', desc: 'Complete 20 long sessions (≥ 60m)', condition: (data) => data.logs.filter(l => l.minutes >= 60).length >= 20 },
+    { id: 'long_haul3', icon: 'fab fa-codepen', color: '#55efc4', title: 'Non-Ill Will', desc: 'Complete 50 long sessions (≥ 60m)', condition: (data) => data.logs.filter(l => l.minutes >= 60).length >= 50 },
     { id: 'overachiever', icon: 'fa-sailboat', color: '#74b9ff', title: 'Virtuous', desc: 'Complete 200% of daily goal', condition: (data) => { return data.goals.some(g => { if(!g.dailyMinMedTarget) return false; const todayStr = new Date().toISOString().split('T')[0]; const todayVal = data.logs.filter(l => l.goalId === g.id && l.date === todayStr).reduce((s,l)=>s+(g.type==='meditation'? (l.count||0) : l.minutes), 0); return todayVal >= (g.dailyMinMedTarget * 2); }); }},
 ];
 const DB_CONFIG = {
@@ -891,11 +891,21 @@ setupMeditationListeners() {
             // Nếu đã kích hoạt "Giữ" (holdTriggered = true) thì không làm gì thêm
             if (this.holdTriggered) {
                 this.holdTriggered = false;
+                this.tapCount = 0; 
                 return;
             }
 
-            // Nếu chưa kích hoạt "Giữ", thì đây là một cú "Chạm" (Tap) -> CHÁNH NIỆM
-            this.triggerMindfulnessSuccess(1);
+            
+            this.tapCount++;
+
+            if (this.tapTimeout) clearTimeout(this.tapTimeout);
+
+            this.tapTimeout = setTimeout(() => {
+               
+                this.triggerMindfulnessSuccess(1); 
+                
+                this.tapCount = 0;
+            }, 400); 
         };
 
         medOverlay.addEventListener('pointerup', handleRelease);
@@ -922,7 +932,7 @@ triggerAwarenessSuccess() {
 
     // Hiệu ứng Visual 
     const counterEl = document.getElementById('med-counter');
-    const awarenessColor = '#a78bfa'; 
+    const awarenessColor = '#55efc4'; 
 
     counterEl.style.transition = "transform 0.1s";
     counterEl.style.transform = "scale(1.2)";
@@ -1041,7 +1051,7 @@ analyzeSingleSession(log) {
 
     
     const awarenessCount = log.awarenessCount || 0;
-    const recoveryTime = awarenessCount * 0.3;
+    const recoveryTime = awarenessCount * 0.5;
     
     distractedSec -= recoveryTime;
 
@@ -2091,9 +2101,11 @@ triggerMindfulnessSuccess(baseQuality = 1) {
     let nextComboCounter = this.meditationState.comboCounter;
 
     if (timeDiff > thresholdMs) {
-        // Mất tập trung -> Reset về mức Thấp (4)
-        nextAutoLevel = 4;
-        nextComboCounter = 0;
+       
+        if (nextAutoLevel < 4) {
+            nextAutoLevel++; 
+        }
+        nextComboCounter = 0; 
     } else {
         // Có sự liên tục -> Tăng Combo
         if (nextAutoLevel > 1) {
@@ -2553,10 +2565,20 @@ concludeMeditationSession(type = 'manual') {
     this.recalculateStreak();
     this.renderGoals();
     this.renderReports();
-    this.checkAchievements();
+    const newBadges = this.checkAchievements(true);
     
     document.getElementById('meditation-finish-modal').style.display = 'none';
     this.showToast(`Session saved! +${this.meditationState.count} mindfulness, +${this.meditationState.awarenessCount} awareness.`);
+	if (newBadges.length > 0) {
+        setTimeout(() => {
+            newBadges.forEach((title, index) => {
+                // Nếu mở khóa nhiều cái cùng lúc, hiện lần lượt cách nhau 3.5s
+                setTimeout(() => {
+                    this.showToast(`💎 Achieved Pāramī: ${title}`, true);
+                }, index * 3500); 
+            });
+        }, 1500); 
+    }
 }
 
             updateTimerUI() {
@@ -3958,8 +3980,7 @@ renderReports(resetDates = false) {
         options: monthlyOptions
     });
 
-    // --- Cập nhật biểu đồ Tỷ lệ (Density) ---
-    // --- Cập nhật biểu đồ Tỷ lệ (Density) ---
+   
     const ctxDensity = document.getElementById('reportDensityChart');
     if (ctxDensity) {
         // 1. Update the Title
@@ -4037,7 +4058,7 @@ renderReports(resetDates = false) {
                             borderWidth: 1.5,
                             fill: true,
                             tension: 0.3,
-                            yAxisID: 'y1', // Gắn vào trục phải
+                            yAxisID: 'y', // Gắn vào trục phải
                         }
                     ]
                 },
@@ -4096,16 +4117,7 @@ renderReports(resetDates = false) {
                             ticks: { color: '#9ca3af', font: { size: 10 } },
                             title: { display: false } // Ẩn tên trục để tiết kiệm chỗ
                         },
-                        y1: { // Trục MỚI cho Tỉnh giác
-                            type: 'linear',
-                            display: true,
-                            position: 'right',
-                            beginAtZero: true,
-                            grid: { 
-                                drawOnChartArea: false, // Ẩn lưới ngang của trục này để tránh rối
-                            },
-                            ticks: { color: '#a78bfa', font: { size: 10 } } // Màu tím cho text trục
-                        }
+                    
                     }
                 }
             });
@@ -4146,20 +4158,30 @@ updateStats() {
                 if ((now - last) / (1000 * 60 * 60 * 24) > 1) this.data.streak = 0; else this.data.streak = streak;
             }
 
-           checkAchievements() {
+           checkAchievements(silent = false) {
     let newUnlock = false;
+    const unlockedTitles = []; // Danh sách các huy hiệu vừa mở
+
     BADGES.forEach(badge => {
-        // Manual badges are triggered by unlockBadge(), so skip them here
+        // Bỏ qua các badge thủ công
         if (badge.id === 'explorer' || badge.id === 'safe_keeper') return;
 
         if (!this.data.achievements.includes(badge.id) && badge.condition(this.data)) {
             this.data.achievements.push(badge.id);
-            this.showToast(`🏆 Achieved: ${badge.title}`);
+            unlockedTitles.push(badge.title);
+            
+            // Chỉ hiện toast nếu không bật chế độ im lặng
+            if (!silent) {
+                this.showToast(`💎 Achieved Pāramī: ${badge.title}`, true);
+            }
             newUnlock = true;
         }
     });
+
     if (newUnlock) this.save();
     this.renderAchievementsUI();
+    
+    return unlockedTitles; // Trả về danh sách để xử lý hiển thị sau
 }
 
 // 2. Manual trigger for "Explorer" and "Safe Keeper"
@@ -4167,7 +4189,7 @@ unlockBadge(id) {
     if (!this.data.achievements.includes(id)) {
         this.data.achievements.push(id);
         const badge = BADGES.find(b => b.id === id);
-        this.showToast(`🏆 Unlocked: ${badge.title}`);
+        this.showToast(`💎 Achieved Pāramī: ${badge.title}`);
         this.save();
         this.renderAchievementsUI();
     }
@@ -4856,9 +4878,18 @@ dbHelper.deleteLog(parseInt(logId)).then(() => {
     this.renderGoals(); 
     this.renderCalendar(); 
     this.renderReports(); 
-    this.checkAchievements();
+    const newBadges = this.checkAchievements(true);
     this.closeSessionModal(); 
     this.showToast(logId ? 'Session Updated!' : 'Session Logged!');
+	if (newBadges.length > 0) {
+        setTimeout(() => {
+            newBadges.forEach((title, index) => {
+                setTimeout(() => {
+                    this.showToast(`💎 Achieved Pāramī: ${title}`, true);
+                }, index * 3500);
+            });
+        }, 1500);
+    }
 }
                       deleteGoal(id) {
     if(confirm('Delete this goal and ALL associated history? This action cannot be undone.')) {
