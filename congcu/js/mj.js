@@ -743,7 +743,7 @@ const dbHelper = {
                     xp: 0,
                     streak: 0,
                     achievements: [],
-                    medSettings: { mode: 'tap', holdDuration: 400, tapRequired: 1, vibration: true }
+                    medSettings: { mode: 'tap', holdDuration: 500, tapRequired: 1, vibration: true }
                 };
 
                 // Other initializations remain the same
@@ -797,7 +797,7 @@ async init() {
         this.data.medSettings.mode = 'unified'; 
         
         // Đảm bảo các chỉ số khác có giá trị mặc định
-        if (!this.data.medSettings.holdDuration) this.data.medSettings.holdDuration = 400;
+        if (!this.data.medSettings.holdDuration) this.data.medSettings.holdDuration = 500;
         if (typeof this.data.medSettings.vibration === 'undefined') this.data.medSettings.vibration = true;
         if (typeof this.data.medSettings.confirmMode === 'undefined') this.data.medSettings.confirmMode = false;
         if (typeof this.data.medSettings.confirmProbability === 'undefined') this.data.medSettings.confirmProbability = 100;
@@ -873,7 +873,7 @@ setupMeditationListeners() {
                 this.triggerAwarenessSuccess(); // <--- GỌI HÀM MỚI
                 this.holdTriggered = true;
                 pressTimer = null;
-            }, settings.holdDuration || 400);
+            }, settings.holdDuration || 500);
         });
 
         const handleRelease = (e) => {
@@ -1022,7 +1022,7 @@ getTouchTimestamp(t, startTime) {
 analyzeSingleSession(log) {
     const totalSec = log.minutes * 60;
     if (totalSec === 0) return { distractedSec: 0, qualityPct: 0 };
-    const thresholdSec = log.threshold || 10;
+    const thresholdSec = log.threshold || 6;
     let distractedSec = 0;
 
     // 1. Tính toán thời gian xao nhãng dựa trên khoảng cách Touch (Chánh niệm)
@@ -1030,16 +1030,16 @@ analyzeSingleSession(log) {
         const timestamps = log.touches.map(t => this.getTouchTimestamp(t, log.timestamp)).sort((a,b) => a - b);
         
         const startGap = (timestamps[0] - log.timestamp) / 1000;
-        if (startGap > thresholdSec) distractedSec += (startGap - thresholdSec/2);
+        if (startGap > thresholdSec) distractedSec += (startGap - thresholdSec);
 
         for (let i = 1; i < timestamps.length; i++) {
             const gap = (timestamps[i] - timestamps[i-1]) / 1000;
-            if (gap > thresholdSec) distractedSec += (gap - thresholdSec/2);
+            if (gap > thresholdSec) distractedSec += (gap - thresholdSec);
         }
         
         const endTime = log.timestamp + (log.minutes * 60 * 1000);
         const endGap = (endTime - timestamps[timestamps.length - 1]) / 1000;
-        if (endGap > thresholdSec) distractedSec += (endGap - thresholdSec/2);
+        if (endGap > thresholdSec) distractedSec += (endGap - thresholdSec);
     } 
     else {
         // Fallback nếu ít touch
@@ -1051,7 +1051,8 @@ analyzeSingleSession(log) {
 
     
     const awarenessCount = log.awarenessCount || 0;
-    const recoveryTime = awarenessCount * 0.5;
+    const holdDurationSec = (this.data.medSettings.holdDuration || 500) / 1000;
+    const recoveryTime = awarenessCount * holdDurationSec;
     
     distractedSec -= recoveryTime;
 
@@ -1435,7 +1436,9 @@ renderHourlyAnalysis(logs) {
                 y: {
                     type: 'linear', display: true, position: 'left', min: 0, max: 100,
                     grid: { color: '#374151' },
-                    ticks: { color: '#9ca3af', font: { size: 10 }}
+                    ticks: { color: '#9ca3af', font: { size: 10 }, callback: function(value) {
+                return value + '%';
+            } }
                 },
                 y1: {
                     type: 'linear', display: true, position: 'right',
@@ -1605,30 +1608,32 @@ renderComparisonTable(medGoalIds) {
 
     // --- 2. PREPARE DATA CONTAINERS (STORING MINUTES) ---
     const qualities = {
-		0: { label: 'Distraction', color: '#6b7280' },
+		
         1: { label: 'High', color: '#34d399' },
         2: { label: 'Good', color: '#60a5fa' },
         3: { label: 'Medium', color: '#fbbf24' },
         4: { label: 'Low', color: '#f87171' },
+        5: { label: 'Alertness', color: '#a78bfa' }, // Added Level 5 for Awareness
+        0: { label: 'Distraction', color: '#6b7280' }, 
     };
 
-    // Initialize with 0 for levels 1-5
-    const breakdownData = { 0: 0, 1: 0, 2: 0, 3: 0, 4: 0 };
+    // Initialize with 0 for levels 1-5 and 0
+    const breakdownData = { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 0: 0 };
     const weeklyData = { 
-	    0: new Array(7).fill(0), 
         1: new Array(7).fill(0), 
         2: new Array(7).fill(0), 
         3: new Array(7).fill(0), 
         4: new Array(7).fill(0),
-        
+        5: new Array(7).fill(0),
+        0: new Array(7).fill(0) 
     };
     const monthlyData = { 
-	    0: new Array(monthlyLabels.length).fill(0),
         1: new Array(monthlyLabels.length).fill(0), 
         2: new Array(monthlyLabels.length).fill(0), 
         3: new Array(monthlyLabels.length).fill(0), 
         4: new Array(monthlyLabels.length).fill(0),
-         
+        5: new Array(monthlyLabels.length).fill(0),
+        0: new Array(monthlyLabels.length).fill(0) 
     };
 
     // --- 3. DATA AGGREGATION LOGIC ---
@@ -1640,7 +1645,14 @@ renderComparisonTable(medGoalIds) {
         const analysis = this.analyzeSingleSession(log);
         const totalSec = log.minutes * 60;
         const distractedSec = analysis.distractedSec;
-        const mindfulSec = Math.max(0, totalSec - distractedSec);
+
+        // Calculate Recovery Time (Tỉnh giác)
+        const holdDurationSec = (this.data.medSettings.holdDuration || 500) / 1000;
+        const recoverySec = (log.awarenessCount || 0) * holdDurationSec;
+
+        // Pure Mindful Time = Total - Distracted - Recovery
+        // (Note: analyzeSingleSession already reduces distractedSec by recoverySec, so Total - Distracted includes Recovery. We subtract it here to separate them.)
+        const mindfulSec = Math.max(0, totalSec - distractedSec - recoverySec);
 
         // 2. Count Pro touches to calculate ratios for Mindful Time
         const logCounts = { 1: 0, 2: 0, 3: 0, 4: 0 };
@@ -1678,12 +1690,17 @@ renderComparisonTable(medGoalIds) {
             if (monthDayIdx !== -1) monthlyData[level][monthDayIdx] += minutes;
         };
 
-        // 4. Distribute "Distracted" Time (Level 5)
+        // 4. Distribute "Distracted" Time (Level 0)
         if (distractedSec > 0) {
             addMinutes(0, distractedSec / 60);
         }
 
-        // 5. Distribute "Mindful" Time (Levels 1-4)
+        // 5. Distribute "Awareness" Time (Level 5 - Tỉnh giác)
+        if (recoverySec > 0) {
+            addMinutes(5, recoverySec / 60);
+        }
+
+        // 6. Distribute "Mindful" Time (Levels 1-4)
         if (totalLogProTouches > 0) {
             [1, 2, 3, 4].forEach(level => {
                 if (logCounts[level] > 0) {
@@ -1709,7 +1726,7 @@ renderComparisonTable(medGoalIds) {
     const ctxBreakdown = document.getElementById('proBreakdownChart').getContext('2d');
     if (this.charts.proBreakdown) this.charts.proBreakdown.destroy();
 
-    // Total Minutes (Mindful + Distracted)
+    // Total Minutes (Mindful + Awareness + Distracted)
     const totalBreakdown = Object.values(breakdownData).reduce((a, b) => a + b, 0);
 
     // Calculate Average Score (Only based on Mindful time, i.e., levels 1-4)
@@ -1733,6 +1750,7 @@ renderComparisonTable(medGoalIds) {
                 { label: qualities[2].label, data: [breakdownData[2]], backgroundColor: qualities[2].color },
                 { label: qualities[3].label, data: [breakdownData[3]], backgroundColor: qualities[3].color },
                 { label: qualities[4].label, data: [breakdownData[4]], backgroundColor: qualities[4].color },
+                { label: qualities[5].label, data: [breakdownData[5]], backgroundColor: qualities[5].color }, // Awareness
                 { label: qualities[0].label, data: [breakdownData[0]], backgroundColor: qualities[0].color, borderRadius: { topRight: 8, bottomRight: 8 } }
             ]
         },
@@ -1862,6 +1880,7 @@ renderComparisonTable(medGoalIds) {
                 { label: qualities[2].label, data: weeklyData[2], backgroundColor: qualities[2].color },
                 { label: qualities[3].label, data: weeklyData[3], backgroundColor: qualities[3].color },
                 { label: qualities[4].label, data: weeklyData[4], backgroundColor: qualities[4].color },
+                { label: qualities[5].label, data: weeklyData[5], backgroundColor: qualities[5].color }, // Awareness
                 { label: qualities[0].label, data: weeklyData[0], backgroundColor: qualities[0].color }
             ]
         },
@@ -1897,6 +1916,7 @@ renderComparisonTable(medGoalIds) {
                 { label: qualities[2].label, data: monthlyData[2], backgroundColor: qualities[2].color },
                 { label: qualities[3].label, data: monthlyData[3], backgroundColor: qualities[3].color },
                 { label: qualities[4].label, data: monthlyData[4], backgroundColor: qualities[4].color },
+                { label: qualities[5].label, data: monthlyData[5], backgroundColor: qualities[5].color }, // Awareness
                 { label: qualities[0].label, data: monthlyData[0], backgroundColor: qualities[0].color }
             ]
         },
@@ -2367,9 +2387,9 @@ startMeditationSetup(goal) {
     const min = parseInt(minStr);
     if (isNaN(min) || min <= 0) return;
 
-    const defaultThreshold = goal.lastThreshold || '10';
-    const threshStr = prompt('Distraction Threshold (secs):', defaultThreshold);
-    let threshold = 10; 
+    const defaultThreshold = goal.lastThreshold || '6';
+    const threshStr = prompt('Mindfulness Threshold (secs):\n(is the maximum allowed time for 1 mindfulness log)', defaultThreshold);
+    let threshold = 6; 
     
     if (threshStr && !isNaN(parseInt(threshStr)) && parseInt(threshStr) > 0) {
         threshold = parseInt(threshStr);
@@ -2536,7 +2556,7 @@ concludeMeditationSession(type = 'manual') {
     const goal = this.data.goals.find(g => g.id === this.meditationState.goalId);
     
     // Định dạng ghi chú tự động
-    const autoNote = `Mindfulness: ${this.meditationState.count} | Awareness: ${this.meditationState.awarenessCount}.`;
+    const autoNote = `Mindfulness: ${this.meditationState.count} | Alertness: ${this.meditationState.awarenessCount}.`;
 
     const log = {
         goalId: goal.id,
@@ -2574,10 +2594,10 @@ concludeMeditationSession(type = 'manual') {
             newBadges.forEach((title, index) => {
                 // Nếu mở khóa nhiều cái cùng lúc, hiện lần lượt cách nhau 3.5s
                 setTimeout(() => {
-                    this.showToast(`💎 Achieved Pāramī: ${title}`, true);
+                    this.showToast(`💎 Unlocked Pāramī: ${title}`, true);
                 }, index * 3500); 
             });
-        }, 1500); 
+        }, 1000); 
     }
 }
 
@@ -2607,8 +2627,8 @@ openMedSettings() {
     const s = this.data.medSettings;
     
     // Gán giá trị vào input
-    document.getElementById('inp-hold-time').value = s.holdDuration || 400;
-    document.getElementById('disp-hold-time').innerText = ((s.holdDuration || 400) / 1000) + 's';
+    document.getElementById('inp-hold-time').value = s.holdDuration || 500;
+    document.getElementById('disp-hold-time').innerText = ((s.holdDuration || 500) / 1000) + 's';
     
     document.getElementById('inp-vibrate').checked = s.vibration;
     document.getElementById('inp-confirm-mode').checked = s.confirmMode || false;
@@ -2893,9 +2913,10 @@ renderProChart(ctx, log) {
     
     // Distracted Seconds (Thất niệm)
     const distractedSec = analysis.distractedSec;
-    
+    const holdDurationSec = (this.data.medSettings.holdDuration || 500) / 1000;
+    const recoverySec = (log.awarenessCount || 0) * holdDurationSec;
     // Mindful Seconds (Tỉnh thức)
-    const mindfulSec = Math.max(0, totalSec - distractedSec);
+    const mindfulSec = Math.max(0, totalSec - distractedSec - recoverySec);
 
     // 2. Count Pro Touches
     const counts = { 1: 0, 2: 0, 3: 0, 4: 0 };
@@ -2912,18 +2933,14 @@ renderProChart(ctx, log) {
 
     // 3. Distribute Mindful Time
     // We use key '0' for Standard/Basic mindfulness (No Pro data)
-    const dataSeconds = { 1: 0, 2: 0, 3: 0, 4: 0, 0: 0 };
+     const dataSeconds = { 1: 0, 2: 0, 3: 0, 4: 0 };
 
-    if (proCount > 0) {
-        // Distribute based on Pro ratios
+    
         dataSeconds[1] = (counts[1] / proCount) * mindfulSec;
         dataSeconds[2] = (counts[2] / proCount) * mindfulSec;
         dataSeconds[3] = (counts[3] / proCount) * mindfulSec;
         dataSeconds[4] = (counts[4] / proCount) * mindfulSec;
-    } else {
-        // No Pro data found -> Assign all mindful time to "Basic" (Level 0)
-        dataSeconds[0] = mindfulSec;
-    }
+   
 // --- NEW: Calculate Average Score for Title ---
     let titleText = `Total duration: ${log.minutes} minutes`;
     let titleWeight = 'normal';
@@ -2944,7 +2961,7 @@ renderProChart(ctx, log) {
         2: { label: 'Good', color: '#60a5fa' },      // Blue
         3: { label: 'Medium', color: '#fbbf24' },       // Yellow
         4: { label: 'Low', color: '#f87171' },     // Red
-        0: { label: 'Mindfulness',  color: '#a78bfa' },      // Purple (New Standard Level)
+        0: { label: 'Alertness',  color: '#a78bfa' },      // Purple (New Standard Level)
         5: { label: 'Distraction', color: '#6b7280' }     // Gray (Updated from White)
     };
 
@@ -2958,7 +2975,7 @@ renderProChart(ctx, log) {
             labels: ['Meditation Session'],
             datasets: [
                 // Only show Pro levels if Pro data exists, otherwise show Basic
-                ...(proCount > 0 ? [
+               
                     {
                         label: qualities[1].label,
                         data: [dataSeconds[1]],
@@ -2983,24 +3000,22 @@ renderProChart(ctx, log) {
                         data: [dataSeconds[4]],
                         backgroundColor: qualities[4].color,
                         barPercentage: 0.6
-                    }
-                ] : [
-                    {
+                    },
+					{
                         label: qualities[0].label,
-                        data: [dataSeconds[0]],
+                        data: [recoverySec],
                         backgroundColor: qualities[0].color,
                         barPercentage: 0.6,
                         borderRadius: { topLeft: 8, bottomLeft: 8 }
-                    }
-                ]),
-                // Always add Distracted time at the end
+                    },
+               
                 {
                     label: qualities[5].label,
                     data: [distractedSec],
                     backgroundColor: qualities[5].color,
                     barPercentage: 0.6,
                     borderRadius: { topRight: 8, bottomRight: 8 }
-                }
+                },
             ]
         },
         options: {
@@ -3707,7 +3722,7 @@ renderReports(resetDates = false) {
             breakdownTotal: 0, weekly: new Array(7).fill(0), monthly: new Array(monthlyLabels.length).fill(0)
         };
         const awareData = {
-            id: 'awareness', name: 'Awareness', color: '#818cf8', // Tím
+            id: 'awareness', name: 'Alertness', color: '#818cf8', // Tím
             breakdownTotal: 0, weekly: new Array(7).fill(0), monthly: new Array(monthlyLabels.length).fill(0)
         };
 
@@ -4051,7 +4066,7 @@ renderReports(resetDates = false) {
                             yAxisID: 'y', // Gắn vào trục trái
                         },
                         {
-                            label: 'Awareness/min', // Dataset MỚI
+                            label: 'Alertness/min', // Dataset MỚI
                             data: awareDensityData,
                             borderColor: '#818cf8',
                             backgroundColor: 'rgba(129, 140, 248, 0.1)',
@@ -4172,7 +4187,7 @@ updateStats() {
             
             // Chỉ hiện toast nếu không bật chế độ im lặng
             if (!silent) {
-                this.showToast(`💎 Achieved Pāramī: ${badge.title}`, true);
+                this.showToast(`💎 Unlocked Pāramī: ${badge.title}`, true);
             }
             newUnlock = true;
         }
@@ -4189,7 +4204,7 @@ unlockBadge(id) {
     if (!this.data.achievements.includes(id)) {
         this.data.achievements.push(id);
         const badge = BADGES.find(b => b.id === id);
-        this.showToast(`💎 Achieved Pāramī: ${badge.title}`);
+        this.showToast(`💎 Unlocked Pāramī: ${badge.title}`);
         this.save();
         this.renderAchievementsUI();
     }
@@ -4199,66 +4214,20 @@ renderAchievementsUI() {
     if (!container) return;
     container.innerHTML = '';
 
-    const LOCKED_COLOR = '#4b5563'; 
-
-    const counters = {
-        'log': 0,    
-        'time': 0,   
-        'streak': 0, 
-        'sit': 0,    
-        'focus': 0,
-		'sfocus': 0,
-        'mind': 0,   
-        'mindf': 0,  
-        'qual': 0,   
-        'other': 0   
-    };
-
-    const getGenericInfo = (id) => {
-        let prefix = id.split('_')[0];
-        
-        if (['daily', 'freq', 'dedicated', 'early', 'night'].includes(prefix)) prefix = 'other'; 
-        if (['zero', 'empty'].includes(prefix)) prefix = 'focus'; 
-        
-        let name = '';
-switch(prefix) {
-    case 'log': name = 'Saddhā-indrīya'; break;      // Tín Căn
-    case 'time': name = 'Viriya-indrīya'; break;    // Tấn Căn
-    case 'streak': name = 'Saddhā-bala'; break;  // Tín Lực
-    case 'sit': name = 'Viriya-bala'; break;    // Tấn Lực
-    case 'focus': name = 'Samādhi-indrīya'; break;    // Định Căn
-    case 'sfocus': name = 'Samādhi-bala'; break;  // Định Lực
-    case 'mind': name = 'Sati-indrīya'; break;   // Niệm Căn
-    case 'mindf': name = 'Sati-bala'; break; // Niệm Lực
-    case 'qual': name = 'Sati-bala'; break;  // Niệm Lực (Same as above)
-    case 'note': name = 'Great Learning'; break;      // Đa Văn (Literally "Great Learning")
-    case 'goal': name = 'Discipline'; break;     // Trì Giới (Sila/Ethical Conduct)
-    default: name = 'Discipline';
-}
-
-       
-        if (!counters[name]) counters[name] = 0;
-        counters[name]++;
-        
-        if (name === 'Discipline') {
-            return `${name} ${counters[name]}`;
-        }
-        
-        return `${name} level ${counters[name]}`;
-    };
+    // Default Locked Style (Gray)
+    const LOCKED_COLOR = '#4b5563';
 
     BADGES.forEach(badge => {
         const isUnlocked = this.data.achievements.includes(badge.id);
         
-        const genericTitle = getGenericInfo(badge.id);
         
-        const badgeColor = isUnlocked ? (badge.color || '#cd7f32') : LOCKED_COLOR;
+        const badgeColor = isUnlocked ? badge.color : LOCKED_COLOR;
         
         // Dynamic Styles based on the specific badge color
         const bgColor = this.hexToRgba(badgeColor, 0.1);
         const borderColor = badgeColor;
-        const iconColor = badgeColor;
-        const textColor = isUnlocked ? '#ffffff' : '#9ca3af';
+        const iconColor = isUnlocked ? badge.color : '#6b7280';
+        const textColor = isUnlocked ? '#f3f4f6' : '#9ca3af';
 
         const div = document.createElement('div');
         div.style.cssText = `
@@ -4266,16 +4235,17 @@ switch(prefix) {
             align-items: center; 
             gap: 15px; 
             padding: 12px;
-            background: ${bgColor}; 
-            border: 1px solid ${borderColor};
+            background: ${isUnlocked ? bgColor : 'rgba(255,255,255,0.03)'};
+            border: 1px solid ${isUnlocked ?  borderColor: 'var(--border)'};
             border-radius: 8px; 
             margin-bottom: 10px;
             transition: all 0.4s ease;
+			opacity: ${isUnlocked ? '1' : '0.7'};
         `;
 
         div.innerHTML = `
             <div style="
-                min-width: 42px; height: 42px; border-radius: 50%;
+                min-width: 42px; height: 42px; border-radius: 10px;
                 display: flex; align-items: center; justify-content: center;
                 border: 2px solid ${iconColor}; 
                 color: ${iconColor}; 
@@ -4287,7 +4257,7 @@ switch(prefix) {
             </div>
             <div style="flex: 1;">
                 <div style="font-weight: 600; color: ${textColor}; font-size: 14px; display: flex; justify-content: space-between;">
-                    ${genericTitle} 
+                    ${badge.title}
                     <span style="font-size: 10px; color: ${iconColor}; text-transform: uppercase; letter-spacing: 1px; font-weight:bold;">
                         ${isUnlocked ? 'Achieved' : ''}
                     </span>
@@ -4320,13 +4290,13 @@ openBadgePicker() {
                     <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(90px, 1fr)); gap: 12px;">
                         ${BADGES.map(badge => {
                             // --- MODIFICATION: ALWAYS UNLOCKED FOR PICKER ---
-                            const isUnlocked = true; // Force unlock in picker
+                            const isUnlocked = this.data.achievements.includes(badge.id);
                             const isActive = this.data.activeBadge === badge.id;
                             
                             // Color Logic
-                            const badgeColor = badge.color || '#cd7f32'; // Use actual color
-                            let opacity = '1'; // Full opacity
-                            let cursor = 'pointer'; // Clickable
+                            const badgeColor = isUnlocked ? (badge.color || '#cd7f32') : '#4b5563';
+                            let opacity = isUnlocked ? '1' : '0.4';
+                            let cursor = isUnlocked ? 'pointer' : 'not-allowed';
                             
                             // Active State
                             let bg = isActive ? this.hexToRgba(badgeColor, 0.15) : 'rgba(255, 255, 255, 0.03)';
@@ -4572,7 +4542,7 @@ loadActiveBadge() {
 }
 showInteractionInfo() {
     const msg = "• MINDFULNESS: Maintaining awareness of the chosen object and noting each occurrence. E.g., one tap per breath cycle.\n\n" +
-                "• AWARENESS: Recognizing the state of mind, detecting distractions (mind-wandering), and returning to the object.";
+                "• ALERTNESS: Recognizing the state of mind, detecting distractions (mind-wandering) & returning to the object.\n Mindfulness time for a single moment of alertness = hold duration";
     alert(msg);
 }
 copyToClipboard(text) {
@@ -4739,7 +4709,7 @@ fallbackCopyText(text) {
 
         this.data.logs.splice(logIndex, 1);
 dbHelper.deleteLog(parseInt(logId)).then(() => {
-            this.showToast('Đã xóa phiên!');
+            this.showToast('Session deleted!');
         }).catch(err => console.error(err));
         
         this.save();
@@ -4885,10 +4855,10 @@ dbHelper.deleteLog(parseInt(logId)).then(() => {
         setTimeout(() => {
             newBadges.forEach((title, index) => {
                 setTimeout(() => {
-                    this.showToast(`💎 Achieved Pāramī: ${title}`, true);
+                    this.showToast(`💎 Unlocked Pāramī: ${title}`, true);
                 }, index * 3500);
             });
-        }, 1500);
+        }, 1000);
     }
 }
                       deleteGoal(id) {
