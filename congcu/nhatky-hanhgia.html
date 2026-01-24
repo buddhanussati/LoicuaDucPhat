@@ -6,6 +6,7 @@
 	<link rel="icon" type="image/x-icon" href="./images/favicon.ico">
 	<link rel="manifest" href="./manifest.json">
     <meta name="theme-color" content="#8b5cf6">
+	<link rel="apple-touch-icon" href="./images/icon-192.png">
     <title>Nhật Ký Hành Giả</title>
     <link href="./css/css.css" rel="stylesheet">
 	<link href="./css/css2.css" rel="stylesheet">
@@ -484,7 +485,7 @@
     <input type="number" id="s-mindfulness" class="form-control" min="0" value="0" />
     
     <div style="margin-top: 10px; border-top: 1px solid rgba(167, 139, 250, 0.3); padding-top: 10px;">
-        <label style="color: var(--zen); font-size: 12px;">Ngưỡng chánh niệm (giây)</label>
+        <label style="color: var(--zen); font-size: 12px;">Ngưỡng mất tập trung (giây)</label>
         <input type="number" id="s-threshold" class="form-control" min="1" value="12" style="background: rgba(0,0,0,0.2);" />
     </div>
 </div>
@@ -622,6 +623,14 @@
             <label>Thời gian ấn giữ: <span id="disp-hold-time" style="color:var(--primary)">0.5s</span></label>
             <input type="range" id="inp-hold-time" class="form-control" min="400" max="1000" step="100" oninput="app.updateMedSettingDisplay()">
         </div>
+<div id="setting-pro-legend" style="background: rgba(167, 139, 250, 0.1); padding: 10px; border-radius: 8px; border: 1px solid rgba(167, 139, 250, 0.3); margin-bottom: 15px;">
+    <div style="font-size: 11px; margin-bottom: 5px; color: var(--text-light)">💎 Mức chú tâm:</div>
+    <div style="font-size: 12px; display:flex; gap:10px;text-align: center;"> <div class="text-q4">1 Chạm: <strong>Thấp;</strong></div> <div class="text-q3">2 Chạm: <strong>TB;</strong></div> <div class="text-q2">3 Chạm: <strong>Tốt.</strong></div> </div>
+	<div style="font-size: 11px; text-align: center; margin-top: 5px">
+        <div><span style="color: var(--text-light)">15 lần ghi nhận liên tục ≤ <i>Ngưỡng mất tập trung:</i></span><br> <span class="text-q4"><strong>Thấp</strong></span> → <span class="text-q3"><strong>TB</strong></span> → <span class="text-q2"><strong>Tốt</strong></span> → <span class="text-q1"><strong>Cao</strong></span></div>
+    </div>
+</div>
+
 
         <div class="form-group" style="background: rgba(251, 191, 36, 0.1); padding: 10px; border-radius: 8px; border: 1px solid rgba(251, 191, 36, 0.3); margin-top: 15px;">
             <div style="display:flex; justify-content:space-between; align-items:center;">
@@ -695,9 +704,12 @@
             <i class="fas fa-fingerprint" style="color: var(--zen); width: 20px;"></i> <strong>Chạm = Chánh Niệm (giữ tâm trên đề mục):</strong> 
             <br>Chạm nhẹ màn hình để ghi nhận sự chú tâm vào đề mục thiền, ví dụ: 1 lần chạm cho 1 hơi thở vào ra tính là 1 chánh niệm.
             <div style="font-size: 13px; color: var(--text-light); margin-top: 4px;">
-                <em>*Áp dụng <strong>Cơ chế Chuỗi (Combo):</strong></em> Mọi phiên đều bắt đầu ở mức chú tâm <b>Thấp</b>. Cứ mỗi 12 hoặc 20 lần ghi nhận liên tục với khoảng cách thời gian ≤ <i>Ngưỡng chánh niệm</i>, mức chú tâm sẽ được nâng lên một bậc (Thấp → TB → Tốt → Cao). Nếu để quá ngưỡng, chuỗi sẽ reset về mức Thấp.
-            </div>
-        </li>
+                <em>*<strong>Cơ chế Chuỗi (Combo):</strong></em> Mọi phiên đều bắt đầu ở mức chú tâm <b>Thấp</b>. Cứ mỗi 15 lần ghi nhận liên tục với khoảng cách thời gian ≤ <i>Ngưỡng mất tập trung</i>, mức chú tâm sẽ được nâng lên một bậc (<span class="text-q4"><strong>Thấp</strong></span> → <span class="text-q3"><strong>TB</strong></span> → <span class="text-q2"><strong>Tốt</strong></span> → <span class="text-q1"><strong>Cao</strong></span>). Nếu để quá ngưỡng, chuỗi sẽ reset về mức Thấp.
+            <br>
+			 <em>*<strong>Chế độ Thủ công:</strong></em> Cho phép bạn <strong>chủ động phân loại</strong> mức độ chú tâm dựa trên thao tác tay của bạn:
+                        <div style="font-size: 12px; display:flex; gap:10px;text-align: center;"> <div class="text-q4">1 Chạm: <strong>Thấp;</strong></div> <div class="text-q3">2 Chạm: <strong>TB;</strong></div> <div class="text-q2">3 Chạm: <strong>Tốt.</strong></div> </div>
+                    
+        </div>
         
         <li style="margin-bottom: 12px;">
             <i class="fas fa-hand-pointer" style="color: #818cf8; width: 20px;"></i> <strong>Ấn giữ = Tỉnh Giác (nhận biết trạng thái tâm, phát hiện xao nhãng):</strong> 
@@ -742,12 +754,12 @@
                 <li><strong>Phân tích theo từng mục tiêu:</strong> Bạn có thể chọn xem số liệu của riêng "Thiền Tọa" hay "Thiền Hành" để so sánh sự tiến bộ của từng phương pháp tu tập.</li>
                 
                 <li style="margin-top: 10px;">
-                    <strong> Ngưỡng chánh niệm:</strong>
+                    <strong> Ngưỡng mất tập trung:</strong>
                     <p style="font-size: 13px; color: var(--text-light); margin-top: 5px;">
                         Đây là khái niệm quan trọng nhất để tính toán "Chất lượng thiền".
                     </p>
                     <div style="background: rgba(255, 255, 255, 0.05); padding: 10px; border-radius: 6px; border-left: 3px solid var(--warning); margin: 5px 0;">
-                        <em>"Ngưỡng chánh niệm" là khoảng thời gian tối đa cho phép giữa hai lần ghi nhận; nếu vượt quá thời gian này, hệ thống sẽ xem là bạn đang mất tập trung.</em>
+                        <em>"Ngưỡng mất tập trung" là khoảng thời gian tối đa cho phép giữa hai lần ghi nhận; nếu vượt quá thời gian này, hệ thống sẽ xem là bạn đang mất tập trung.</em>
                     </div>
                     <ul style="margin-top: 5px;">
                         <li><strong>Cơ chế hoạt động:</strong> Ví dụ bạn đặt ngưỡng là <strong>12 giây</strong>.

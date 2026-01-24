@@ -296,7 +296,7 @@
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 20px;">
             <div class="card">
                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
-                    <h4 style="margin: 0;">💎 Focus Quality</h4>
+                    <h4 style="margin: 0;">💎 Focus Level</h4>
                     <select id="pro-range-select" class="form-control" style="width: auto; padding: 5px; font-size: 13px; height: 32px;" onchange="app.renderProAnalytics(true)">
                         <option value="all">All Time</option>
             <option value="today" >Today</option>
@@ -335,7 +335,7 @@
         </select>
     </div>
     <p style="font-size: 11px; color: var(--text-light); margin-bottom: 15px;">
-        Average focus quality across meditation sessions
+        Average focus level across meditation sessions
     </p>
     <div style="height: 300px;">
         <canvas id="proTrendChart"></canvas>
@@ -480,7 +480,7 @@
     <label style="color: var(--zen);">Mindfulness (Count)</label>
     <input type="number" id="s-mindfulness" class="form-control" min="0" value="0" />
 	    <div style="margin-top: 10px; border-top: 1px solid rgba(167, 139, 250, 0.3); padding-top: 10px;">
-        <label style="color: var(--zen); font-size: 12px;">Mindfulness Threshold (secs)</label>
+        <label style="color: var(--zen); font-size: 12px;">Distraction Threshold (secs)</label>
         <input type="number" id="s-threshold" class="form-control" min="1" value="12" style="background: rgba(0,0,0,0.2);" />
     </div>
 </div>
@@ -562,7 +562,7 @@
 			<select id="graph-type-select" class="form-control" style="width: auto; padding: 5px 5px 5px; height: 36px; font-size: 13px; cursor: pointer;" onchange="app.updateSessionChart()">
 			                    <option value="interval">☁️ Distraction</option>
                     <option value="intensity">🌱 Mindfulness</option>
-                <option value="pro">💎 Focus Quality</option> </select>
+                <option value="pro">💎 Focus Level</option> </select>
                <button class="btn btn-secondary" onclick="document.getElementById('graph-modal').style.display='none'" title="Close"><i class="fas fa-xmark"></i></button>
             </div>
         </div>
@@ -617,7 +617,13 @@
             <label>Hold Duration: <span id="disp-hold-time" style="color:var(--primary)">0.5s</span></label>
             <input type="range" id="inp-hold-time" class="form-control" min="400" max="1000" step="100" oninput="app.updateMedSettingDisplay()">
         </div>
-
+<div id="setting-pro-legend" style="background: rgba(167, 139, 250, 0.1); padding: 10px; border-radius: 8px; border: 1px solid rgba(167, 139, 250, 0.3); margin-bottom: 15px;">
+    <div style="font-size: 11px; margin-bottom: 5px; color: var(--text-light)">💎 Focus Level:</div>
+    <div style="font-size: 12px; display:flex; gap:10px;text-align: center;"> <div class="text-q4">1 Tap: <strong>Low;</strong></div> <div class="text-q3">2 Taps: <strong>Medium;</strong></div> <div class="text-q2">3 Taps: <strong>Good.</strong></div> </div>
+	<div style="font-size: 11px; text-align: center; margin-top: 5px">
+        <div><span style="color: var(--text-light)">15 consecutive logs ≤ <i>Distraction Threshold:</i></span> <br><span class="text-q4"><strong>Low</strong></span> → <span class="text-q3"><strong>Medium</strong></span> → <span class="text-q2"><strong>Good</strong></span> → <span class="text-q1"><strong>High</strong></span></div>
+    </div>
+</div>
         <div class="form-group" style="background: rgba(251, 191, 36, 0.1); padding: 10px; border-radius: 8px; border: 1px solid rgba(251, 191, 36, 0.3); margin-top: 15px;">
             <div style="display:flex; justify-content:space-between; align-items:center;">
                 <label style="margin:0; color: var(--warning);"><i class="fas fa-check-double"></i> Confirmation Mode</label>
@@ -688,9 +694,12 @@
             <i class="fas fa-fingerprint" style="color: var(--zen); width: 20px;"></i> <strong>Tap = Mindfulness (Keeping the mind on the Object):</strong> 
             <br>Lightly tap the screen to record focus on your meditation object. For example: one tap for each full breath (in & out) counts as one mindfulness.
             <div style="font-size: 13px; color: var(--text-light); margin-top: 4px;">
-                <em>*<strong>Combo Mechanism:</strong></em> Every session starts at <b>Low</b> intensity. For every 12 or 20 consecutive entries with a time gap ≤ <i>Mindfulness Threshold</i>, the mindfulness level increases by one tier (Low → Mid → Good → High). Exceeding the threshold resets the combo to Low.
-            </div>
-        </li>
+                <em>*<strong>Combo Mechanism:</strong></em> Every session starts at <b>Low</b> intensity. For every 15 consecutive entries with a time gap ≤ <i>Distraction Threshold</i>, the focus level increases by one tier (<span class="text-q4"><strong>Low</strong></span> → <span class="text-q3"><strong>Medium</strong></span> → <span class="text-q2"><strong>Good</strong></span> → <span class="text-q1"><strong>High</strong></span>). Exceeding the threshold resets the combo to Low.
+            <br>
+			 <em>*<strong>Manual control:</strong></em> Allows you to <strong>actively categorize</strong> your focus level based on specific hand gestures:
+                        <div style="font-size: 12px; display:flex; gap:10px;text-align: center;"> <div class="text-q4">1 Tap: <strong>Low;</strong></div> <div class="text-q3">2 Taps: <strong>Medium;</strong></div> <div class="text-q2">3 Taps: <strong>Good.</strong></div> </div>
+                    
+        </div>
         
         <li style="margin-bottom: 12px;">
             <i class="fas fa-hand-pointer" style="color: #818cf8; width: 20px;"></i> <strong>Hold = Alertness (Recognizing mental states, Detecting distractions):</strong> 
@@ -725,7 +734,7 @@
                     <ul>
                         <li><strong>Session Graph:</strong> Review mindfulness levels <em>within a specific session</em> (line chart).</li>
                         <li><strong>Weekly/Monthly Statistics:</strong> Compare performance over real-time intervals.</li>
-                        <li><strong>💎 Pro Chart:</strong> The "Advanced" tab displays the distribution of focus quality (High/Low) over weeks.</li>
+                        <li><strong>💎 Pro Chart:</strong> The "Advanced" tab displays the distribution of focus level (High/Low) over weeks.</li>
                     </ul>
                 </li>
             </ul>
@@ -736,12 +745,12 @@
                 <li><strong>Goal-specific analysis:</strong> You can view data for specific goals (e.g., "Sitting Meditation" or "Walking Meditation") to compare the progress of different practices.</li>
                 
                 <li style="margin-top: 10px;">
-                    <strong> Mindfulness Threshold:</strong>
+                    <strong> Distraction Threshold:</strong>
                     <p style="font-size: 13px; color: var(--text-light); margin-top: 5px;">
                         This is the most important concept for calculating your "Meditation Quality."
                     </p>
                     <div style="background: rgba(255, 255, 255, 0.05); padding: 10px; border-radius: 6px; border-left: 3px solid var(--warning); margin: 5px 0;">
-            <em>"Mindfulness Threshold" is the maximum allowed gap between two mindfulness logs; if this time is exceeded, the system considers you were distracted.</em>
+            <em>"Distraction Threshold" is the maximum allowed gap between two mindfulness logs; if this time is exceeded, the system considers you were distracted.</em>
         </div>
         <ul style="margin-top: 5px;">
             <li><strong>How it works:</strong> For example, if you set the threshold to <strong>12 seconds</strong>:
@@ -764,9 +773,9 @@
             <hr style="border: 0; border-top: 1px solid var(--border); margin: 25px 0;">
 <h3 style="color: var(--text); margin-top: 20px;">✨ The Pāramī System</h3>
 
-<p> The achievements system is organized into Pāramīs (Perfections) to encourage your diligence. Your progress is further categorized into spiritual faculties (Indrīya) & powers (Bala). Here are some key milestones:</p>
+<p> The achievements system is organized into Pāramīs (Perfections) to encourage your diligence. Here are some key milestones:</p>
 
-            <p><strong>Consistency Milestones (Saddhā-bala):</strong></p>
+            <p><strong>Consistency Milestones:</strong></p>
             <table class="intro-table" style="width: 100%; border-collapse: collapse; margin-bottom: 20px; font-size: 13px;">
                 <thead>
                     <tr style="background: var(--bg);">
@@ -784,7 +793,7 @@
                 </tbody>
             </table>
 
-            <p><strong>Mindfulness Milestones (Sati-indrīya):</strong></p>
+            <p><strong>Mindfulness Milestones:</strong></p>
             <table class="intro-table" style="width: 100%; border-collapse: collapse; margin-bottom: 20px; font-size: 13px;">
                 <thead>
                    <tr style="background: var(--bg);">
@@ -801,10 +810,7 @@
                 </tbody>
             </table>
             
-            <p style="font-size: 13px; color: var(--text-light); font-style: italic;">
-                * Other achievements track <strong>Total Time (Viriya)</strong>, <strong>Session Frequency</strong>, and <strong>Concentration Levels (Samādhi)</strong>.
-            </p>
-<br>
+           
             <div style="background: rgba(251, 191, 36, 0.1); border: 1px solid var(--warning); padding: 15px; border-radius: 8px; color: #fbbf24; font-size: 13px;">
                 <strong>⚠️ Important Data Notice:</strong>
                 <ul style="margin: 5px 0 0 15px;">
