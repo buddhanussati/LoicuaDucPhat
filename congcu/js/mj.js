@@ -2401,7 +2401,7 @@ startMeditationSetup(goal) {
     if (isNaN(min) || min <= 0) return;
 
     const defaultThreshold = goal.lastThreshold || '9';
-    const threshStr = prompt('Distraction Threshold (secs):\n(maximum allowed time for 1 mindfulness log)', defaultThreshold);
+    const threshStr = prompt('Distraction Threshold (secs):\n(max allowed time for 1 mindfulness log)', defaultThreshold);
     let threshold = 9; 
     
     if (threshStr && !isNaN(parseInt(threshStr)) && parseInt(threshStr) > 0) {
@@ -2601,7 +2601,7 @@ concludeMeditationSession(type = 'manual') {
     const newBadges = this.checkAchievements(true);
     
     document.getElementById('meditation-finish-modal').style.display = 'none';
-    this.showToast(`Session saved! +${this.meditationState.count} mindfulness, +${this.meditationState.awarenessCount} awareness.`);
+    this.showToast(`Session saved! +${this.meditationState.count} mindfulness, +${this.meditationState.awarenessCount} alertness.`);
 	if (newBadges.length > 0) {
         setTimeout(() => {
             newBadges.forEach((title, index) => {
