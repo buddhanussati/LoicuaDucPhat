@@ -854,22 +854,21 @@ setupMeditationListeners() {
     const medOverlay = document.getElementById('meditation-overlay');
     const counterEl = document.getElementById('med-counter');
     let pressTimer = null;
-
+    
     if (medOverlay) {
-        medOverlay.addEventListener('pointerdown', (e) => {
+         medOverlay.addEventListener('pointerdown', (e) => {
             if (e.target.closest('.med-controls') || e.target.closest('.modal')) return;
-            e.preventDefault();
+            e.preventDefault(); 
             
-            this.holdTriggered = false;
+            const settings = this.data.medSettings;
+            // Luôn dùng logic holdDuration
+            this.holdTriggered = false; 
             
-            // Hiệu ứng visual khi nhấn xuống
             counterEl.style.transform = "scale(0.9)";
             counterEl.style.transition = "transform 0.1s";
-
-            // Bắt đầu đếm giờ cho hành động "Giữ" -> TỈNH GIÁC
-            const settings = this.data.medSettings;
+            
+            // Logic Giữ (Hold) -> Kích hoạt mức Tốt (Level 2) hoặc Cao (Level 1 - xử lý bên trong trigger)
             pressTimer = setTimeout(() => {
-                // Nếu giữ đủ lâu -> Ghi nhận TỈNH GIÁC
                 this.triggerAwarenessSuccess(); // <--- GỌI HÀM MỚI
                 this.holdTriggered = true;
                 pressTimer = null;
@@ -879,39 +878,41 @@ setupMeditationListeners() {
         const handleRelease = (e) => {
             if (e.target.closest('.med-controls')) return;
             
-            // Hủy timer giữ nếu thả tay ra sớm
-            if (pressTimer) {
-                clearTimeout(pressTimer);
-                pressTimer = null;
-            }
-
-            // Trả lại kích thước visual
+            if (pressTimer) { clearTimeout(pressTimer); pressTimer = null; }
             counterEl.style.transform = "scale(1)";
-
-            // Nếu đã kích hoạt "Giữ" (holdTriggered = true) thì không làm gì thêm
+            
+            // Nếu đã kích hoạt Hold (Giữ) thì bỏ qua logic Tap (Chạm)
             if (this.holdTriggered) {
                 this.holdTriggered = false;
-                this.tapCount = 0; 
+                this.tapState.count = 0;
                 return;
             }
 
+            // Logic Chạm (Tap) thống nhất
+            if (this.tapState.timer) clearTimeout(this.tapState.timer);
+            this.tapState.count++;
             
-            this.tapCount++;
-
-            if (this.tapTimeout) clearTimeout(this.tapTimeout);
-
-            this.tapTimeout = setTimeout(() => {
-               
-                this.triggerMindfulnessSuccess(1); 
+            counterEl.style.transform = "scale(0.95)";
+            setTimeout(() => counterEl.style.transform = "scale(1)", 80);
+            
+            // Đợi một chút để xem người dùng có chạm đúp (double tap) không
+            this.tapState.timer = setTimeout(() => {
+                const taps = this.tapState.count;
+                let qualityVal = 4; // Mặc định chạm 1 cái là Thấp (Level 4) hoặc Trung bình (Level 3)
                 
-                this.tapCount = 0;
+                // Logic phân loại của Pro cũ:
+                if (taps === 1) qualityVal = 4;      // 1 chạm: Thấp
+                else if (taps === 2) qualityVal = 3; // 2 chạm: Trung bình
+                else qualityVal = 2;                 
+                
+                this.triggerMindfulnessSuccess(qualityVal);
+                this.tapState.count = 0; 
             }, 400); 
         };
-
-        medOverlay.addEventListener('pointerup', handleRelease);
         
+        medOverlay.addEventListener('pointerup', handleRelease);
         medOverlay.addEventListener('pointerleave', () => {
-            if (pressTimer) clearTimeout(pressTimer);
+            if(pressTimer) clearTimeout(pressTimer);
             counterEl.style.transform = "scale(1)";
             this.holdTriggered = false;
         });
@@ -1030,16 +1031,16 @@ analyzeSingleSession(log) {
         const timestamps = log.touches.map(t => this.getTouchTimestamp(t, log.timestamp)).sort((a,b) => a - b);
         
         const startGap = (timestamps[0] - log.timestamp) / 1000;
-        if (startGap > thresholdSec) distractedSec += (startGap - thresholdSec);
+        if (startGap > thresholdSec) distractedSec += (startGap - thresholdSec/2);
 
         for (let i = 1; i < timestamps.length; i++) {
             const gap = (timestamps[i] - timestamps[i-1]) / 1000;
-            if (gap > thresholdSec) distractedSec += (gap - thresholdSec);
+            if (gap > thresholdSec) distractedSec += (gap - thresholdSec/2);
         }
         
         const endTime = log.timestamp + (log.minutes * 60 * 1000);
         const endGap = (endTime - timestamps[timestamps.length - 1]) / 1000;
-        if (endGap > thresholdSec) distractedSec += (endGap - thresholdSec);
+        if (endGap > thresholdSec) distractedSec += (endGap - thresholdSec/2);
     } 
     else {
         // Fallback nếu ít touch
@@ -1744,7 +1745,7 @@ renderComparisonTable(medGoalIds) {
     this.charts.proBreakdown = new Chart(ctxBreakdown, {
         type: 'bar',
         data: {
-            labels: ['Focus quality'],
+            labels: ['Focus level'],
             datasets: [
                 { label: qualities[1].label, data: [breakdownData[1]], backgroundColor: qualities[1].color, borderRadius: { topLeft: 8, bottomLeft: 8 } },
                 { label: qualities[2].label, data: [breakdownData[2]], backgroundColor: qualities[2].color },
@@ -1802,7 +1803,7 @@ renderComparisonTable(medGoalIds) {
                 },
                 title: {
                     display: true,
-                    text: totalBreakdown === 0 ? 'No data available' : `Average focus quality: ${averageScore} / 4.0`,
+                    text: totalBreakdown === 0 ? 'No data available' : `Average focus level: ${averageScore} / 4.0`,
                     color: totalBreakdown === 0 ? '#6b7280' : '#f3f4f6',
                     font: { size: 14, style: 'italic', weight: totalBreakdown === 0 ? 'normal' : '600' },
                     padding: { top: 10, bottom: 10 }
@@ -2038,7 +2039,7 @@ renderProTrendChart() {
             labels: chartData.map(d => d.label),
             datasets: [
                 {
-                    label: 'Average focus quality',
+                    label: 'Average focus level',
                     data: chartData.map(d => d.score),
                     borderColor: '#818cf8', // Emerald-500 equivalent style
                     backgroundColor: 'rgba(129, 140, 248, 0.1)',
@@ -2101,7 +2102,7 @@ renderProTrendChart() {
                     callbacks: {
                         title: (context) => chartData[context[0].dataIndex].tooltipTitle,
                         label: function(context) {
-                            return `Focus quality: ${context.parsed.y} / 4.0`;
+                            return `Focus level: ${context.parsed.y} / 4.0`;
                         }
                     }
                 }
@@ -2109,46 +2110,47 @@ renderProTrendChart() {
         }
     });
 }
-triggerMindfulnessSuccess(baseQuality = 1) {
+triggerMindfulnessSuccess(quality = 4) {
     const settings = this.data.medSettings;
     const now = Date.now();
-
-    // 1. Logic tính Combo (Tự động nâng Level dựa trên sự liên tục)
+    
+    // Logic Combo & Auto Level (Tự động tăng mức độ khó/chất lượng theo thời gian)
     const thresholdMs = this.meditationState.threshold * 1000;
     const timeDiff = now - this.meditationState.lastTouchTime;
 
     let nextAutoLevel = this.meditationState.currentAutoLevel;
     let nextComboCounter = this.meditationState.comboCounter;
 
+    // Nếu khoảng cách giữa 2 lần chạm quá lâu (thất niệm) -> Reset về mức thấp
     if (timeDiff > thresholdMs) {
-       
-        if (nextAutoLevel < 4) {
-            nextAutoLevel++; 
-        }
-        nextComboCounter = 0; 
+        nextAutoLevel = 4;
+        nextComboCounter = 0;
     } else {
-        // Có sự liên tục -> Tăng Combo
+        // Nếu duy trì tốt, tăng combo
         if (nextAutoLevel > 1) {
             nextComboCounter++;
-            // Nếu là mức 3 hoặc 2 cần 20 lần, mức khác cần 10 lần để lên cấp
-            const hitsRequired = (nextAutoLevel === 3 || nextAutoLevel === 2) ? 20 : 12;
+            const hitsRequired = 15;
             if (nextComboCounter >= hitsRequired) {
-                nextAutoLevel--; // Giảm số là tăng cấp (4->3->2->1)
+                nextAutoLevel--; // Giảm số Level (1 là cao nhất)
                 nextComboCounter = 0;
             }
         }
     }
 
-    // Chất lượng cuối cùng chính là Level hiện tại (do tốc độ quyết định)
-    let finalQuality = nextAutoLevel;
+    // --- LOGIC PRO THỐNG NHẤT ---
+    let finalQuality = nextAutoLevel; 
+    let potentialProQuality = quality;
+    
+    finalQuality = Math.min(potentialProQuality, nextAutoLevel);
 
-    // 2. Logic Xác Nhận (Confirm Mode) - Chỉ áp dụng cho mức Thấp (Level 4)
+    // --- LOGIC XÁC NHẬN (CONFIRM MODE) ---
+    const isLowQuality = (finalQuality === 4);
     let needConfirm = false;
-    if (settings.confirmMode && finalQuality === 4) {
+
+    if (settings.confirmMode && isLowQuality) {
         if (this.meditationState.pendingConfirmation) {
-            needConfirm = true; // Đang chờ xác nhận -> Đây là lần 2 -> Thành công
+            needConfirm = true; 
         } else {
-            // Lần chạm đầu -> Kiểm tra xác suất
             const chance = settings.confirmProbability || 100;
             const roll = Math.random() * 100;
             if (roll <= chance) {
@@ -2159,58 +2161,69 @@ triggerMindfulnessSuccess(baseQuality = 1) {
 
     if (needConfirm) {
         const counterEl = document.getElementById('med-counter');
+
         if (!this.meditationState.pendingConfirmation) {
-            // --- TRẠNG THÁI CHỜ (Lần 1) ---
             this.meditationState.pendingConfirmation = true;
+            this.meditationState.pendingTouchData = { 
+                quality: finalQuality, 
+                timestamp: now 
+            };
             
             counterEl.style.transition = "all 0.2s";
             counterEl.style.borderColor = "var(--warning)";
             counterEl.style.color = "var(--warning)";
             counterEl.style.transform = "scale(0.85)";
-            
-            // Chờ 3 giây, nếu không chạm tiếp thì hủy
+          
             this.meditationState.confirmationTimeout = setTimeout(() => {
                 this.meditationState.pendingConfirmation = false;
+                this.meditationState.pendingTouchData = null;
+                
                 counterEl.style.borderColor = "transparent";
                 counterEl.style.color = "white";
                 counterEl.style.transform = "scale(1)";
-            }, 3000);
+            }, 3000); 
 
-            return; // Dừng lại, chưa ghi nhận
+            return; // Dừng lại chờ xác nhận
         } else {
-            // --- XÁC NHẬN THÀNH CÔNG (Lần 2) ---
             clearTimeout(this.meditationState.confirmationTimeout);
             this.meditationState.pendingConfirmation = false;
         }
     }
 
-    // 3. Ghi nhận dữ liệu
+    // Cập nhật trạng thái
     this.meditationState.currentAutoLevel = nextAutoLevel;
     this.meditationState.comboCounter = nextComboCounter;
     this.meditationState.lastTouchTime = now;
 
+    // Đếm combo Good cho Pro
+    if (quality === 2) {
+        this.meditationState.consecutiveGoodCount = (this.meditationState.consecutiveGoodCount || 0) + 1;
+    } else {
+        this.meditationState.consecutiveGoodCount = 0;
+    }
+
     this.handleMeditationTouch(finalQuality);
 
-    // 4. Phản hồi xúc giác (Rung)
+    // Rung phản hồi
     if (settings.vibration && navigator.vibrate) {
-        switch (finalQuality) {
-            case 1: navigator.vibrate([80, 50, 80]); break; // Cao: Rung mạnh
-            case 2: navigator.vibrate([60, 40, 60]); break; // Tốt
-            case 3: navigator.vibrate([40, 30, 40]); break; // TB
-            case 4: navigator.vibrate(50); break;           // Thấp: Rung ngắn
+        switch(finalQuality) {
+            case 1: navigator.vibrate([80, 50, 80]); break; 
+            case 2: navigator.vibrate([60, 40, 60]); break; 
+            case 3: navigator.vibrate([40, 30, 40]); break; 
+            case 4: navigator.vibrate(50); break;           
             default: navigator.vibrate(50);
         }
     }
 
-    // 5. Hiệu ứng Visual
+    // Hiệu ứng Visual
     const counterEl = document.getElementById('med-counter');
-    const colors = { 1: 'var(--q-1)', 2: 'var(--q-2)', 3: 'var(--q-3)', 4: 'var(--q-4)' };
+    const colors = { 1: 'var(--q-1)', 2: 'var(--q-2)', 3: 'var(--q-3)', 4: 'var(--q-4)' }; 
     const pulseColor = colors[finalQuality] || 'var(--q-4)';
 
     counterEl.style.transition = "transform 0.1s";
     counterEl.style.transform = "scale(1.3)";
     counterEl.style.borderColor = pulseColor;
-    counterEl.style.color = pulseColor;
+    counterEl.style.color = pulseColor; 
 
     setTimeout(() => {
         counterEl.style.transform = "scale(1)";
@@ -2387,9 +2400,9 @@ startMeditationSetup(goal) {
     const min = parseInt(minStr);
     if (isNaN(min) || min <= 0) return;
 
-    const defaultThreshold = goal.lastThreshold || '6';
-    const threshStr = prompt('Mindfulness Threshold (secs):\n(is the maximum allowed time for 1 mindfulness log)', defaultThreshold);
-    let threshold = 6; 
+    const defaultThreshold = goal.lastThreshold || '9';
+    const threshStr = prompt('Distraction Threshold (secs):\n(maximum allowed time for 1 mindfulness log)', defaultThreshold);
+    let threshold = 9; 
     
     if (threshStr && !isNaN(parseInt(threshStr)) && parseInt(threshStr) > 0) {
         threshold = parseInt(threshStr);
@@ -2951,7 +2964,7 @@ renderProChart(ctx, log) {
         const weightedSum = (counts[1] * 4) + (counts[2] * 3) + (counts[3] * 2) + (counts[4] * 1);
         const averageScore = (weightedSum / proCount).toFixed(2);
         
-        titleText = `Average focus quality: ${averageScore} / 4.0`;
+        titleText = `Average focus level: ${averageScore} / 4.0`;
         titleWeight = '600';
         titleColor = '#f3f4f6';
     }
@@ -3096,7 +3109,7 @@ renderProChart(ctx, log) {
                             } 
                             
                             // ELSE (Levels 1-4) -> Add prefix and lowercase
-                            return `Focus quality: ${rawLabel} - ${pct}% (${timeStr})`;
+                            return `Focus level: ${rawLabel} - ${pct}% (${timeStr})`;
                         }
                     }
                 },
