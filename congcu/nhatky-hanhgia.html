@@ -30,12 +30,12 @@
 	
 </div>
        <div class="nav-item" onclick="app.switchView('pro')">
-    <i class="fas fa-gem"></i><span class="nav-text">Chuyên sâu</span>
+    <i class="fas fa-fire-flame-curved"></i><span class="nav-text">Chuyên sâu</span>
 </div>
         
         
        <div class="nav-item" onclick="app.switchView('achievements')">
-            <i class="fas fa-medal"></i><span class="nav-text">Pāramī</span>
+            <i class="fas fa-gem"></i><span class="nav-text">Pāramī</span>
         </div>
         <div class="nav-item" onclick="app.resetApp()" style="color: var(--danger);"> <i class="fas fa-trash-alt"></i><span class="nav-text">Đặt lại</span>
         </div>
@@ -297,7 +297,7 @@
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 20px;">
             <div class="card">
                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
-                    <h4 style="margin: 0;">💎 Mức chú tâm</h4>
+                    <h4 style="margin: 0;">🔥 Mức chú tâm</h4>
                     <select id="pro-range-select" class="form-control" style="width: auto; padding: 5px; font-size: 13px; height: 32px;" onchange="app.renderProAnalytics(true)">
                         <option value="all">Toàn bộ</option>
                         <option value="today">Hôm nay</option>
@@ -358,11 +358,30 @@
     </div>
 </section>
 <section id="view-achievements" class="view-section">
-            <div class="card" style="margin-top: 30px;">
-                <h3 style="text-align: center;"><i class="fas fa-award"></i> Pāramī</h3>
-                <div id="achievement-list" style="margin-top: 20px; display: grid; gap: 10px;"></div>
-            </div>
-        </section>
+    <div id="parami-altar" onclick="app.openBadgePicker()"; class="card" style="cursor: pointer;margin: 10px auto; text-align: center; position: relative; overflow: hidden; min-height: 200px; display: flex; flex-direction: column; align-items: center; justify-content: center; transition: all 0.5s ease; max-width: 400px;">
+        <div class="altar-bg-glow"></div>
+        
+        <div style="font-size: 12px; text-transform: uppercase; letter-spacing: 2px; color: var(--text-light); margin-bottom: 15px; z-index: 2;">
+            Pāramī Hành Trì
+        </div>
+
+        <div id="altar-icon" onclick="app.openBadgePicker()" style="font-size: 60px; margin-bottom: 15px; cursor: pointer; z-index: 2; filter: drop-shadow(0 0 15px rgba(0,0,0,0.5)); transition: transform 0.3s ease;" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
+            <i class="fas fa-award" style="color: var(--text-light);"></i>
+        </div>
+
+        <div id="altar-title" style="font-size: 24px; font-weight: bold; margin-bottom: 5px; z-index: 2; color: var(--text);">
+            Chưa chọn Pāramī
+        </div>
+
+        
+
+        
+    </div>
+    <div class="card" style="margin-top: 20px;">
+        <h3 style="text-align: center;"><i class="fas fa-gem"></i> Pāramī </h3>
+        <div id="achievement-list" style="margin-top: 20px; display: grid; gap: 10px;"></div>
+    </div>
+</section>
     </main>
 
     <div class="modal" id="choice-modal">
@@ -567,7 +586,7 @@
 			<select id="graph-type-select" class="form-control" style="width: auto; padding: 5px; height: 36px; font-size: 13px; cursor: pointer;" onchange="app.updateSessionChart()">
     <option value="interval">☁️ Thất niệm</option>
     <option value="intensity">🌱 Chánh niệm</option>
-    <option value="pro">💎 Mức chú tâm</option> </select>
+    <option value="pro">🔥 Mức chú tâm</option> </select>
                 
                 <button class="btn btn-secondary" onclick="document.getElementById('graph-modal').style.display='none'" title="Đóng"><i class="fas fa-xmark"></i></button>
 				 
@@ -624,7 +643,7 @@
             <input type="range" id="inp-hold-time" class="form-control" min="400" max="1000" step="100" oninput="app.updateMedSettingDisplay()">
         </div>
 <div id="setting-pro-legend" style="background: rgba(167, 139, 250, 0.1); padding: 10px; border-radius: 8px; border: 1px solid rgba(167, 139, 250, 0.3); margin-bottom: 15px;">
-    <div style="font-size: 11px; margin-bottom: 5px; color: var(--text-light)">💎 Mức chú tâm:</div>
+    <div style="font-size: 11px; margin-bottom: 5px; color: var(--text-light)">🔥 Mức chú tâm:</div>
     <div style="font-size: 12px; display:flex; gap:10px;text-align: center;"> <div class="text-q4">1 Chạm: <strong>Thấp;</strong></div> <div class="text-q3">2 Chạm: <strong>TB;</strong></div> <div class="text-q2">3 Chạm: <strong>Tốt.</strong></div> </div>
 	<div style="font-size: 11px; text-align: center; margin-top: 5px">
         <div><span style="color: var(--text-light)">15 lần ghi nhận liên tục ≤ <i>Ngưỡng mất tập trung:</i></span><br> <span class="text-q4"><strong>Thấp</strong></span> → <span class="text-q3"><strong>TB</strong></span> → <span class="text-q2"><strong>Tốt</strong></span> → <span class="text-q1"><strong>Cao</strong></span></div>
@@ -743,7 +762,7 @@
                     <ul>
                         <li><strong>Biểu đồ phiên:</strong> Xem lại mức độ chánh niệm <em>trong từng thời thiền</em> (biểu đồ đường).</li>
                         <li><strong>Báo cáo Tuần/Tháng:</strong> So sánh hiệu suất theo thời gian thực.</li>
-                        <li><strong>💎 Biểu đồ Chuyên sâu:</strong> Tab "Chuyên sâu" hiển thị biểu đồ phân bố mức độ chú tâm (Cao/Thấp) qua các tuần.</li>
+                        <li><strong>🔥 Biểu đồ Chuyên sâu:</strong> Tab "Chuyên sâu" hiển thị biểu đồ phân bố mức độ chú tâm (Cao/Thấp) qua các tuần.</li>
                     </ul>
                 </li>
             </ul>

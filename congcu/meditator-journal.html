@@ -31,12 +31,12 @@
 </div>
   
 <div class="nav-item" onclick="app.switchView('pro')">
-    <i class="fas fa-gem"></i><span class="nav-text">Advanced</span>
+    <i class="fas fa-fire-flame-curved"></i><span class="nav-text">Advanced</span>
 </div>
         
         
          <div class="nav-item" onclick="app.switchView('achievements')">
-            <i class="fas fa-medal"></i><span class="nav-text">Pāramī</span>
+            <i class="fas fa-gem"></i><span class="nav-text">Pāramī</span>
         </div>
 
         <div class="nav-item" onclick="app.resetApp()" style="color: var(--danger);"> <i class="fas fa-trash-alt"></i><span class="nav-text">Reset</span>
@@ -296,7 +296,7 @@
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 20px;">
             <div class="card">
                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
-                    <h4 style="margin: 0;">💎 Focus Level</h4>
+                    <h4 style="margin: 0;">🔥 Focus Level</h4>
                     <select id="pro-range-select" class="form-control" style="width: auto; padding: 5px; font-size: 13px; height: 32px;" onchange="app.renderProAnalytics(true)">
                         <option value="all">All Time</option>
             <option value="today" >Today</option>
@@ -354,11 +354,26 @@
     </div>
 </section>
 <section id="view-achievements" class="view-section">
-            <div class="card" style="margin-top: 30px;">
-                <h3 style="text-align: center;"><i class="fas fa-award"></i> Pāramī</h3>
-                <div id="achievement-list" style="margin-top: 20px; display: grid; gap: 10px;"></div>
-            </div>
-        </section>
+    <div id="parami-altar" onclick="app.openBadgePicker()"; class="card" style="cursor: pointer;margin: 10px auto; text-align: center; position: relative; overflow: hidden; min-height: 200px; display: flex; flex-direction: column; align-items: center; justify-content: center; transition: all 0.5s ease; max-width: 400px;">
+        <div class="altar-bg-glow"></div>
+        
+        <div style="font-size: 12px; text-transform: uppercase; letter-spacing: 2px; color: var(--text-light); margin-bottom: 15px; z-index: 2;">
+            Cultivating Pāramī
+        </div>
+
+        <div id="altar-icon" onclick="app.openBadgePicker()" style="font-size: 60px; margin-bottom: 15px; cursor: pointer; z-index: 2; filter: drop-shadow(0 0 15px rgba(0,0,0,0.5)); transition: transform 0.3s ease;" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
+            <i class="fas fa-award" style="color: var(--text-light);"></i>
+        </div>
+
+        <div id="altar-title" style="font-size: 24px; font-weight: bold; margin-bottom: 5px; z-index: 2; color: var(--text);">
+            Pāramī not selected
+        </div>   
+    </div>
+    <div class="card" style="margin-top: 20px;">
+        <h3 style="text-align: center;"><i class="fas fa-gem"></i> Pāramī</h3>
+        <div id="achievement-list" style="margin-top: 20px; display: grid; gap: 10px;"></div>
+    </div>
+</section>
     </main>
 
     <div class="modal" id="choice-modal">
@@ -562,7 +577,7 @@
 			<select id="graph-type-select" class="form-control" style="width: auto; padding: 5px 5px 5px; height: 36px; font-size: 13px; cursor: pointer;" onchange="app.updateSessionChart()">
 			                    <option value="interval">☁️ Distraction</option>
                     <option value="intensity">🌱 Mindfulness</option>
-                <option value="pro">💎 Focus Level</option> </select>
+                <option value="pro">🔥 Focus Level</option> </select>
                <button class="btn btn-secondary" onclick="document.getElementById('graph-modal').style.display='none'" title="Close"><i class="fas fa-xmark"></i></button>
             </div>
         </div>
@@ -618,7 +633,7 @@
             <input type="range" id="inp-hold-time" class="form-control" min="400" max="1000" step="100" oninput="app.updateMedSettingDisplay()">
         </div>
 <div id="setting-pro-legend" style="background: rgba(167, 139, 250, 0.1); padding: 10px; border-radius: 8px; border: 1px solid rgba(167, 139, 250, 0.3); margin-bottom: 15px;">
-    <div style="font-size: 11px; margin-bottom: 5px; color: var(--text-light)">💎 Focus Level:</div>
+    <div style="font-size: 11px; margin-bottom: 5px; color: var(--text-light)">🔥 Focus Level:</div>
     <div style="font-size: 12px; display:flex; gap:10px;text-align: center;"> <div class="text-q4">1 Tap: <strong>Low;</strong></div> <div class="text-q3">2 Taps: <strong>Medium;</strong></div> <div class="text-q2">3 Taps: <strong>Good.</strong></div> </div>
 	<div style="font-size: 11px; text-align: center; margin-top: 5px">
         <div><span style="color: var(--text-light)">15 consecutive logs ≤ <i>Distraction Threshold:</i></span> <br><span class="text-q4"><strong>Low</strong></span> → <span class="text-q3"><strong>Medium</strong></span> → <span class="text-q2"><strong>Good</strong></span> → <span class="text-q1"><strong>High</strong></span></div>
@@ -694,7 +709,7 @@
             <i class="fas fa-fingerprint" style="color: var(--zen); width: 20px;"></i> <strong>Tap = Mindfulness (Keeping the mind on the Object):</strong> 
             <br>Lightly tap the screen to record focus on your meditation object. For example: one tap for each full breath (in & out) counts as one mindfulness.
             <div style="font-size: 13px; color: var(--text-light); margin-top: 4px;">
-                <em>*<strong>Combo Mechanism:</strong></em> Every session starts at <b>Low</b> intensity. For every 15 consecutive entries with a time gap ≤ <i>Distraction Threshold</i>, the focus level increases by one tier (<span class="text-q4"><strong>Low</strong></span> → <span class="text-q3"><strong>Medium</strong></span> → <span class="text-q2"><strong>Good</strong></span> → <span class="text-q1"><strong>High</strong></span>). Exceeding the threshold resets the combo to Low.
+                <em>*<strong>Combo Mechanism:</strong></em> Every session starts at <b>Low</b> intensity. For every 15 consecutive entries with a time gap ≤ <i>Distraction Threshold</i>, the focus level increases by one tier (<span class="text-q4"><strong>Low</strong></span> → <span class="text-q3"><strong>Med</strong></span> → <span class="text-q2"><strong>Good</strong></span> → <span class="text-q1"><strong>High</strong></span>). Exceeding the threshold resets the combo to Low.
             <br>
 			 <em>*<strong>Manual control:</strong></em> Allows you to <strong>actively categorize</strong> your focus level based on specific hand gestures:
                         <div style="font-size: 12px; display:flex; gap:10px;text-align: center;"> <div class="text-q4">1 Tap: <strong>Low;</strong></div> <div class="text-q3">2 Taps: <strong>Medium;</strong></div> <div class="text-q2">3 Taps: <strong>Good.</strong></div> </div>
@@ -734,7 +749,7 @@
                     <ul>
                         <li><strong>Session Graph:</strong> Review mindfulness levels <em>within a specific session</em> (line chart).</li>
                         <li><strong>Weekly/Monthly Statistics:</strong> Compare performance over real-time intervals.</li>
-                        <li><strong>💎 Pro Chart:</strong> The "Advanced" tab displays the distribution of focus level (High/Low) over weeks.</li>
+                        <li><strong>🔥 Pro Chart:</strong> The "Advanced" tab displays the distribution of focus level (High/Low) over weeks.</li>
                     </ul>
                 </li>
             </ul>
