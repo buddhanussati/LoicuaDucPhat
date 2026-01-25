@@ -456,7 +456,7 @@ const BADGES = [
     { id: 'streak_180', icon: 'fab fa-wolf-pack-battalion', color: '#81ecec', title: 'Ngưu Vương', desc: 'Hành trì 180 ngày liên tục', condition: (data) => data.streak >= 180 },
     { id: 'streak_365', icon: 'fas fa-infinity', color: '#0984e3', title: 'Vô Thủy', desc: 'Hành trì 365 ngày liên tục', condition: (data) => data.streak >= 365 },
 
- { id: 'time_1h', icon: 'fas fa-hourglass-empty', color: '#f1c40f', title: 'Sát Na', desc: 'Tích lũy 1 giờ tu tập', condition: (data) => data.logs.reduce((s, l) => s + l.minutes, 0) >= 60 },
+ { id: 'time_1h', icon: 'fas fa-hourglass-empty', color: '#f1c40f', title: 'Hiện Tại', desc: 'Tích lũy 1 giờ tu tập', condition: (data) => data.logs.reduce((s, l) => s + l.minutes, 0) >= 60 },
     { id: 'time_5h', icon: 'fas fa-circle-notch', color: '#ffbe76', title: 'Không Tánh', desc: 'Tích lũy 5 giờ tu tập', condition: (data) => data.logs.reduce((s, l) => s + l.minutes, 0) >= 300 },
     { id: 'time_10h', icon: 'fas fa-record-vinyl', color: '#badc58', title: 'Chánh Niệm', desc: 'Tích lũy 10 giờ tu tập', condition: (data) => data.logs.reduce((s, l) => s + l.minutes, 0) >= 600 },
     { id: 'time_20h', icon: 'fab fa-files-pinwheel', color: '#686de0', title: 'Chánh Nghiệp', desc: 'Tích lũy 20 giờ tu tập', condition: (data) => data.logs.reduce((s, l) => s + l.minutes, 0) >= 1200 },
@@ -469,7 +469,7 @@ const BADGES = [
     { id: 'time_200h', icon: 'fas fa-fire-flame-curved', color: '#ff9f43', title: 'Lửa Thiền', desc: 'Tích lũy 250 giờ tu tập', condition: (data) => data.logs.reduce((s, l) => s + l.minutes, 0) >= 15000 },
     { id: 'time_300h', icon: 'fas fa-bolt', color: '#feca57', title: 'Tuệ Căn', desc: 'Tích lũy 300 giờ tu tập', condition: (data) => data.logs.reduce((s, l) => s + l.minutes, 0) >= 18000 },
     { id: 'time_400h', icon: 'fas fa-bolt-lightning', color: '#ff9ff3', title: 'Tuệ Lực', desc: 'Tích lũy 400 giờ tu tập', condition: (data) => data.logs.reduce((s, l) => s + l.minutes, 0) >= 24000 },
-    { id: 'time_500h', icon: 'fas fa-sun', color: '#ffaf40', title: 'Minh Kiến', desc: 'Tích lũy 500 giờ tu tập', condition: (data) => data.logs.reduce((s, l) => s + l.minutes, 0) >= 30000 },
+    { id: 'time_500h', icon: 'fas fa-sun', color: '#ffaf40', title: 'Minh Sát', desc: 'Tích lũy 500 giờ tu tập', condition: (data) => data.logs.reduce((s, l) => s + l.minutes, 0) >= 30000 },
     { id: 'time_800h', icon: 'fas fa-moon', color: '#dfe6e9', title: 'Nhất Dạ Hiền', desc: 'Tích lũy 800 giờ tu tập', condition: (data) => data.logs.reduce((s, l) => s + l.minutes, 0) >= 48000 },
     { id: 'time_1000h', icon: 'fab fa-skyatlas', color: '#74b9ff', title: 'Hư Không', desc: 'Tích lũy 1000 giờ tu tập', condition: (data) => data.logs.reduce((s, l) => s + l.minutes, 0) >= 60000 },
 
@@ -534,10 +534,10 @@ const BADGES = [
     { id: 'sfocus_3_0', icon: 'fas fa-jedi', color: '#e056fd', title: 'Chiến Sĩ', desc: 'Mức chú tâm TB ≥ 3 trong phiên ≤ 20p', condition: (data) => data.logs.some(l => { if (l.minutes > 20 || !l.touches) return false; const proT = l.touches.filter(t => t.v); if(proT.length < 5) return false; const score = proT.reduce((s, t) => s + (5-t.v), 0) / proT.length; return score >= 3.0; }) },
 	{ id: 'sfocus_3_5', icon: 'fas fa-hanukiah', color: '#f9ca24', title: 'Không Phóng Dật', desc: 'Mức chú tâm TB ≥ 3.5 trong phiên ≤ 20p', condition: (data) => data.logs.some(l => { if (l.minutes > 20 || !l.touches) return false; const proT = l.touches.filter(t => t.v); if (proT.length < 5) return false; const score = proT.reduce((s, t) => s + (5-t.v), 0) / proT.length; return score >= 3.5; }) },
 
-	{ id: 'sfocus_2', icon: 'fas fa-globe-asia', color: '#22a6b3', title: 'Hải Đảo', desc: 'Mức chú tâm TB ≥ 2 trong phiên ≥ 45p', condition: (data) => data.logs.some(l => { if (l.minutes < 45 || !l.touches) return false; const proT = l.touches.filter(t => t.v); if(proT.length < 5) return false; const score = proT.reduce((s, t) => s + (5-t.v), 0) / proT.length; return score >= 2.0; }) },
-	{ id: 'sfocus_2_5', icon: 'fab fa-drupal', color: '#2ed573', title: 'Tu Tập', desc: 'Mức chú tâm TB ≥ 2.5 trong phiên ≥ 45p', condition: (data) => data.logs.some(l => { if (l.minutes < 45 || !l.touches) return false; const proT = l.touches.filter(t => t.v); if(proT.length < 5) return false; const score = proT.reduce((s, t) => s + (5-t.v), 0) / proT.length; return score >= 2.5; }) },
-    { id: 'sfocus_3', icon: 'fa-spa', color: '#6c5ce7', title: 'Thiền Tịnh', desc: 'Mức chú tâm TB ≥ 2.5 trong phiên ≥ 45p', condition: (data) => data.logs.some(l => { if (l.minutes < 45 || !l.touches) return false; const proT = l.touches.filter(t => t.v); if(proT.length < 5) return false; const score = proT.reduce((s, t) => s + (5-t.v), 0) / proT.length; return score >= 3.0; }) },
-	{ id: 'sfocus_3_5', icon: 'fas fa-dove', color: '#dfe6e9', title: 'Vô Lậu', desc: 'Mức chú tâm TB ≥ 3.5 trong phiên ≥ 45p', condition: (data) => data.logs.some(l => { if (l.minutes < 45 || !l.touches) return false; const proT = l.touches.filter(t => t.v); if(proT.length < 5) return false; const score = proT.reduce((s, t) => s + (5-t.v), 0) / proT.length; return score >= 3.5; }) },
+	{ id: 'sfocus_2a', icon: 'fas fa-globe-asia', color: '#22a6b3', title: 'Hải Đảo', desc: 'Mức chú tâm TB ≥ 2 trong phiên ≥ 45p', condition: (data) => data.logs.some(l => { if (l.minutes < 45 || !l.touches) return false; const proT = l.touches.filter(t => t.v); if(proT.length < 5) return false; const score = proT.reduce((s, t) => s + (5-t.v), 0) / proT.length; return score >= 2.0; }) },
+	{ id: 'sfocus_2_5a', icon: 'fab fa-drupal', color: '#2ed573', title: 'Tu Tập', desc: 'Mức chú tâm TB ≥ 2.5 trong phiên ≥ 45p', condition: (data) => data.logs.some(l => { if (l.minutes < 45 || !l.touches) return false; const proT = l.touches.filter(t => t.v); if(proT.length < 5) return false; const score = proT.reduce((s, t) => s + (5-t.v), 0) / proT.length; return score >= 2.5; }) },
+    { id: 'sfocus_3a', icon: 'fa-spa', color: '#6c5ce7', title: 'Thiền Tịnh', desc: 'Mức chú tâm TB ≥ 2.5 trong phiên ≥ 45p', condition: (data) => data.logs.some(l => { if (l.minutes < 45 || !l.touches) return false; const proT = l.touches.filter(t => t.v); if(proT.length < 5) return false; const score = proT.reduce((s, t) => s + (5-t.v), 0) / proT.length; return score >= 3.0; }) },
+	{ id: 'sfocus_3_5a', icon: 'fas fa-dove', color: '#dfe6e9', title: 'Vô Lậu', desc: 'Mức chú tâm TB ≥ 3.5 trong phiên ≥ 45p', condition: (data) => data.logs.some(l => { if (l.minutes < 45 || !l.touches) return false; const proT = l.touches.filter(t => t.v); if(proT.length < 5) return false; const score = proT.reduce((s, t) => s + (5-t.v), 0) / proT.length; return score >= 3.5; }) },
 
 
 { id: 'note_long', icon: 'fa-pen-nib', color: '#ff9f43', title: 'Học Giới', desc: 'Viết ghi chú dài hơn 50 ký tự', condition: (data) => data.logs.some(l => l.notes && l.notes.length > 50) },
@@ -3905,7 +3905,7 @@ renderReports(resetDates = false) {
                 ctx.fillText(mainText, centerX, centerY - (fontSizeMain * 0.15));
                 ctx.font = `normal ${fontSizeSub}px sans-serif`;
                 ctx.fillStyle = "#9ca3af";
-                ctx.fillText("Ghi nhận", centerX, centerY + (fontSizeMain * 0.65));
+                ctx.fillText("Lần", centerX, centerY + (fontSizeMain * 0.65));
             } else {
                 ctx.font = `bold ${fontSizeMain}px sans-serif`;
                 ctx.fillStyle = "#FFFFFF";
@@ -4231,12 +4231,22 @@ renderAchievementsUI() {
     if (!container) return;
     container.innerHTML = '';
 
-    // Default Locked Style (Gray)
+    // [FIX] Sorting Logic
+    // 1. Get unlocked badges in order of acquisition (from data.achievements array)
+    const unlockedIds = this.data.achievements;
+    const unlockedBadges = unlockedIds
+        .map(id => BADGES.find(b => b.id === id))
+        .filter(b => b); // Safety check in case ID doesn't exist in constant
+
+    // 2. Get locked badges (filter out those already in unlockedIds)
+    const lockedBadges = BADGES.filter(b => !unlockedIds.includes(b.id));
+
+    // 3. Merge: Unlocked first, then Locked
+    const sortedBadges = [...unlockedBadges, ...lockedBadges];
     const LOCKED_COLOR = '#4b5563';
 
-    BADGES.forEach(badge => {
+   sortedBadges.forEach(badge => {
         const isUnlocked = this.data.achievements.includes(badge.id);
-        
         
         const badgeColor = isUnlocked ? badge.color : LOCKED_COLOR;
         
@@ -4294,26 +4304,33 @@ openBadgePicker() {
         document.getElementById('badge-picker-modal').remove();
     }
 
+    // [FIX] Sorting Logic (Same as renderAchievementsUI)
+    const unlockedIds = this.data.achievements;
+    const unlockedBadges = unlockedIds
+        .map(id => BADGES.find(b => b.id === id))
+        .filter(b => b); 
+    const lockedBadges = BADGES.filter(b => !unlockedIds.includes(b.id));
+    const sortedBadges = [...unlockedBadges, ...lockedBadges];
+
     const modalHtml = `
         <div id="badge-picker-modal" class="modal" style="display:flex; z-index: 3000; align-items: center; justify-content: center;">
             <div class="modal-content" style="max-width: 550px; width: 95%; max-height: 85vh; display: flex; flex-direction: column; padding: 0; border-radius: 16px;">
                 
                 <div style="padding: 15px 20px; border-bottom: 1px solid var(--border); position: relative; display: flex; justify-content: center; align-items: center; background: var(--surface); border-radius: 16px 16px 0 0;">
-                    <h3 style="margin: 0; font-size: 18px;"><i class="fas fa-award"></i> Chọn Pāramī</h3>
+                    <h3 style="margin: 0; font-size: 18px;"><i class="fas fa-gem"></i> Chọn Pāramī</h3>
                     <button class="btn-icon" onclick="app.closeBadgePicker()" style="position: absolute; right: 20px; color: var(--text-light); background: transparent;"><i class="fas fa-times"></i></button>
                 </div>
 
                 <div style="padding: 20px; overflow-y: auto; background: var(--bg);">
                     <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(90px, 1fr)); gap: 12px;">
-                        ${BADGES.map(badge => {
-                            // --- MODIFICATION: ALWAYS UNLOCKED FOR PICKER ---
+                        ${sortedBadges.map(badge => {
                             const isUnlocked = this.data.achievements.includes(badge.id);
                             const isActive = this.data.activeBadge === badge.id;
                             
                             // Color Logic
                             const badgeColor = isUnlocked ? (badge.color || '#cd7f32') : '#4b5563';
                             let opacity = isUnlocked ? '1' : '0.4';
-                            let cursor = isUnlocked ? 'pointer' : 'not-allowed';
+                            let cursor = isUnlocked ? 'pointer' : 'pointer';
                             
                             // Active State
                             let bg = isActive ? this.hexToRgba(badgeColor, 0.15) : 'rgba(255, 255, 255, 0.03)';
@@ -4365,20 +4382,87 @@ openBadgePicker() {
     document.body.insertAdjacentHTML('beforeend', modalHtml);
 }
 selectBadge(badgeId) {
-    // 1. Update Data & Save
+    const badge = BADGES.find(b => b.id === badgeId);
+    if (!badge) return;
+
+    const isUnlocked = this.data.achievements.includes(badgeId);
+
+    // --- 1. RESET PREVIOUS PREVIEWS ---
+    // Finds any badge currently in "preview" mode and resets it to the locked styling
+    document.querySelectorAll('.badge-option-item.is-previewing').forEach(el => {
+        el.classList.remove('is-previewing');
+        
+        // Revert Visuals to Locked State
+        el.style.transform = '';
+        el.style.zIndex = '';
+        el.style.opacity = '0.4';
+        el.style.borderColor = 'var(--border)';
+        el.style.backgroundColor = 'rgba(255, 255, 255, 0.03)';
+        el.style.boxShadow = '';
+        
+        // Revert Icon Color to Gray (#4b5563)
+        // We look for the div containing the icon which has the font-size style
+        const iconDiv = el.querySelector('div[style*="font-size: 24px"]'); 
+        if(iconDiv) iconDiv.style.color = '#4b5563';
+
+        // Remove the temporary description
+        const descEl = el.querySelector('.temp-desc');
+        if (descEl) descEl.remove();
+    });
+
+    // --- 2. HANDLE LOCKED BADGE CLICK ---
+    if (!isUnlocked) {
+        const el = document.getElementById(`badge-option-${badgeId}`);
+        if(el) {
+            el.classList.add('is-previewing');
+            
+            // Use the specific badge color
+            const realColor = badge.color || '#cd7f32';
+
+            // Pop Out Animation & Styling
+            el.style.transition = 'all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
+            el.style.transform = 'scale(1.1)';
+            el.style.zIndex = '100';
+            el.style.opacity = '1';
+            
+            // Apply TRUE Badge Color
+            el.style.borderColor = realColor;
+            el.style.boxShadow = `0 10px 25px -5px ${this.hexToRgba(realColor, 0.5)}`;
+            el.style.backgroundColor = '#1f2937'; // Dark background to stand out
+
+            // Change Icon Color to TRUE Badge Color
+            const iconDiv = el.querySelector('div[style*="font-size: 24px"]');
+            if(iconDiv) iconDiv.style.color = realColor;
+
+            // Append Description Below
+            const descDiv = document.createElement('div');
+            descDiv.className = 'temp-desc';
+            descDiv.style.marginTop = '10px';
+            descDiv.style.paddingTop = '8px';
+            descDiv.style.borderTop = `1px solid ${this.hexToRgba(realColor, 0.3)}`;
+            descDiv.style.fontSize = '11px';
+            descDiv.style.lineHeight = '1.3';
+            descDiv.style.color = '#d1d5db';
+            descDiv.style.width = '100%';
+            descDiv.style.textAlign = 'center';
+            descDiv.innerHTML = `
+                <div style="color:${realColor}; font-weight:bold; margin-bottom:3px;">${badge.desc}</div>
+                <div style="font-size:10px; opacity:0.6; font-style:italic;">🔒 Chưa mở khóa</div>
+            `;
+            el.appendChild(descDiv);
+        }
+        return; // Stop here (do not select as active)
+    }
+
+    // --- 3. HANDLE UNLOCKED BADGE CLICK (Standard Selection) ---
     this.data.activeBadge = badgeId;
     this.save();
-    
-    // 2. Update the main display header immediately
     this.loadActiveBadge(); 
-    
-    // 3. Update Modal Visuals (Highlighting the selected item)
-    const badge = BADGES.find(b => b.id === badgeId);
+	this.renderBadgeAltar();
     this.lastSelectedBadgeTitle = badge.title;
 
-    // Reset all options in the modal
-    const allOptions = document.querySelectorAll('.badge-option-item');
-    allOptions.forEach(el => {
+    // Reset styles for all items (to clear selection highlight)
+    document.querySelectorAll('.badge-option-item').forEach(el => {
         el.style.borderColor = 'var(--border)';
         el.style.borderWidth = '1px';
         el.style.background = 'rgba(255, 255, 255, 0.03)';
@@ -4386,7 +4470,7 @@ selectBadge(badgeId) {
         if(check) check.style.display = 'none';
     });
 
-    // Highlight the clicked option
+    // Highlight the selected active badge
     const activeEl = document.getElementById(`badge-option-${badgeId}`);
     if (activeEl) {
         const color = badge.color || '#cd7f32';
@@ -4446,7 +4530,56 @@ loadActiveBadge() {
         container.style.boxShadow = '0 0 15px rgba(192, 192, 192, 0.4)';
     }
 }
+renderBadgeAltar() {
+    const container = document.getElementById('parami-altar');
+    const iconEl = document.getElementById('altar-icon');
+    const titleEl = document.getElementById('altar-title');
+    const bgGlow = document.querySelector('.altar-bg-glow');
+    
+    if (!container || !iconEl) return;
 
+    if (this.data.activeBadge) {
+        const badge = BADGES.find(b => b.id === this.data.activeBadge);
+        if (badge) {
+            const color = badge.color || '#cd7f32';
+            
+            // Icon logic
+            iconEl.innerHTML = `<i class="${badge.icon.includes('fab') ? badge.icon : 'fas ' + badge.icon}"></i>`;
+            iconEl.style.color = color;
+            iconEl.classList.add('altar-floating'); // Add floating animation
+            
+            // Text logic
+            titleEl.innerText = badge.title;
+            titleEl.style.color = color;
+            titleEl.style.textShadow = `0 0 10px ${this.hexToRgba(color, 0.3)}`;
+            
+           
+            
+            // Background visual effects
+            container.style.borderColor = color;
+            container.style.boxShadow = `0 0 20px ${this.hexToRgba(color, 0.1)} inset`;
+            
+            bgGlow.style.background = `radial-gradient(circle, ${this.hexToRgba(color, 0.2)} 0%, rgba(0,0,0,0) 70%)`;
+            
+            return;
+        }
+    }
+
+    // Default state (No badge selected)
+    iconEl.innerHTML = `<i class="fas fa-award"></i>`;
+    iconEl.style.color = 'var(--text-light)';
+    iconEl.classList.remove('altar-floating');
+    
+    titleEl.innerText = 'Chưa chọn Pāramī';
+    titleEl.style.color = 'var(--text)';
+    titleEl.style.textShadow = 'none';
+    
+    
+    
+    container.style.borderColor = 'var(--border)';
+    container.style.boxShadow = 'none';
+    bgGlow.style.background = 'transparent';
+}
    formatTime(seconds) {
                 const h = Math.floor(seconds / 3600);
                 const m = Math.floor((seconds % 3600) / 60);
@@ -4497,7 +4630,10 @@ loadActiveBadge() {
                 if (viewName === 'calendar') this.renderCalendar();
 				if (viewName === 'analytics') this.renderAnalytics();
 			    if (viewName === 'pro') this.renderProAnalytics();
-            }
+				if (viewName === 'achievements') {
+        this.renderAchievementsUI();
+        this.renderBadgeAltar();
+            }}
 
     exportData() {
         const dataStr = JSON.stringify(this.data);
