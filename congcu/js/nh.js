@@ -556,21 +556,21 @@ const BADGES = [
 	
 	 { id: 'daily_volume_30p', icon: 'fab fa-canadian-maple-leaf', color: '#e58e26', title: 'Vô Thường', desc: 'Tổng thời gian thiền ≥ 30 phút trong 1 ngày', condition: (data) => { const daily = {}; data.logs.forEach(l => daily[l.date] = (daily[l.date]||0) + l.minutes); return Object.values(daily).some(m => m >= 30); }},
     { id: 'daily_volume_1h', icon: 'fab fa-phoenix-framework', color: '#fa983a', title: 'Chế Ngự', desc: 'Tổng thời gian thiền ≥ 1 giờ trong 1 ngày', condition: (data) => { const daily = {}; data.logs.forEach(l => daily[l.date] = (daily[l.date]||0) + l.minutes); return Object.values(daily).some(m => m >= 60); }},
-    { id: 'daily_volume_2h', icon: 'fab fa-phoenix-squadron', color: '#eb2f06', title: 'Bất Tử', desc: 'Tổng thời gian thiền ≥ 2 giờ trong 1 ngày', condition: (data) => { const daily = {}; data.logs.forEach(l => daily[l.date] = (daily[l.date]||0) + l.minutes); return Object.values(daily).some(m => m >= 120); }},
+    { id: 'daily_volume_2h', icon: 'fab fa-phoenix-squadron', color: '#fc4214', title: 'Bất Tử', desc: 'Tổng thời gian thiền ≥ 2 giờ trong 1 ngày', condition: (data) => { const daily = {}; data.logs.forEach(l => daily[l.date] = (daily[l.date]||0) + l.minutes); return Object.values(daily).some(m => m >= 120); }},
     { id: 'daily_volume_3h', icon: 'fab fa-gripfire', color: '#e55039', title: 'Tinh Cần', desc: 'Tổng thời gian thiền ≥ 3 giờ trong 1 ngày', condition: (data) => { const daily = {}; data.logs.forEach(l => daily[l.date] = (daily[l.date]||0) + l.minutes); return Object.values(daily).some(m => m >= 180); }},
     { id: 'daily_volume_4h', icon: 'fab fa-rebel', color: '#74b9ff', title: 'Bất Hại', desc: 'Tổng thời gian thiền ≥ 4 giờ trong 1 ngày', condition: (data) => { const daily = {}; data.logs.forEach(l => daily[l.date] = (daily[l.date]||0) + l.minutes); return Object.values(daily).some(m => m >= 240); }},
     { id: 'daily_volume_5h', icon: 'fab fa-sith', color: '#badc58', title: 'Tỉnh Giác', desc: 'Tổng thời gian thiền ≥ 5 giờ trong 1 ngày', condition: (data) => { const daily = {}; data.logs.forEach(l => daily[l.date] = (daily[l.date]||0) + l.minutes); return Object.values(daily).some(m => m >= 300); }},
     { id: 'daily_volume_8h', icon: 'fab fa-battle-net', color: '#6a89cc', title: 'Như lý Tác Ý', desc: 'Tổng thời gian thiền ≥ 8 giờ trong 1 ngày', condition: (data) => { const daily = {}; data.logs.forEach(l => daily[l.date] = (daily[l.date]||0) + l.minutes); return Object.values(daily).some(m => m >= 480); }},
-    { id: 'freq_3_day', icon: 'fas fa-users', color: '#f0932b', title: 'Tăng Bảo', desc: 'Thiền 3 lần trong một ngày', condition: (data) => { const counts = {}; data.logs.forEach(l => counts[l.date] = (counts[l.date]||0)+1); return Object.values(counts).some(c => c >= 3); }},
-    { id: 'freq_5_day', icon: 'fas fa-hand-sparkles', color: '#48dbfb', title: 'Ngũ Giới', desc: 'Thiền 5 lần trong một ngày', condition: (data) => { const counts = {}; data.logs.forEach(l => counts[l.date] = (counts[l.date]||0)+1); return Object.values(counts).some(c => c >= 5); }},
-    { id: 'freq_10_day', icon: 'fas fa-hands-praying', color: '#ffbe76', title: 'Tịnh Tín', desc: 'Thiền 10 lần trong một ngày', condition: (data) => { const counts = {}; data.logs.forEach(l => counts[l.date] = (counts[l.date]||0)+1); return Object.values(counts).some(c => c >= 5); }},
-    { id: 'dedicated_day', icon: 'fa-landmark', color: '#2ecc71', title: 'Tam Bảo', desc: 'Thực hiện 3 thời thiền riêng biệt ≥ 60p trong ngày', condition: (data) => { const goodLogs = data.logs.filter(l => l.minutes >= 60); const counts = {}; goodLogs.forEach(l => counts[l.date] = (counts[l.date]||0)+1); return Object.values(counts).some(c => c >= 3); }},
+    { id: 'freq_3_day', icon: 'fas fa-hand-sparkles', color: '#f0932b', title: 'Ngũ Giới', desc: 'Thiền 5 lần trong một ngày', condition: (data) => { const counts = {}; data.logs.forEach(l => counts[l.date] = (counts[l.date]||0)+1); return Object.values(counts).some(c => c >= 5); }},
+    { id: 'freq_5_day', icon: 'fas fa-hands-praying', color: '#48dbfb', title: 'Tịnh Tín', desc: 'Thiền 10 lần trong một ngày', condition: (data) => { const counts = {}; data.logs.forEach(l => counts[l.date] = (counts[l.date]||0)+1); return Object.values(counts).some(c => c >= 10); }},
+    { id: 'freq_10_day', icon: 'fas fa-users', color: '#ffbe76', title: 'Tăng Bảo', desc: 'Thiền 20 lần trong một ngày', condition: (data) => { const counts = {}; data.logs.forEach(l => counts[l.date] = (counts[l.date]||0)+1); return Object.values(counts).some(c => c >= 20); }},
+    { id: 'dedicated_day', icon: 'fa-landmark', color: '#2ecc71', title: 'Tam Bảo', desc: 'Thực hiện 3 thời thiền riêng biệt tổng ≥ 60p trong ngày', condition: (data) => { const goodLogs = data.logs.filter(l => l.minutes >= 60); const counts = {}; goodLogs.forEach(l => counts[l.date] = (counts[l.date]||0)+1); return Object.values(counts).some(c => c >= 3); }},
     { id: 'quick_fix', icon: 'fas fa-user-plus', color: '#f6e58d', title: 'Tự Thắng', desc: 'Hoàn thành 10 phiên ngắn (≤ 10p)', condition: (data) => data.logs.filter(l => l.minutes < 10).length >= 10 },
 	{ id: 'quick_fix2', icon: 'fa-fan', color: '#a29bfe', title: 'Quán Bất Tịnh', desc: 'Hoàn thành 30 phiên ngắn (≤ 10p)', condition: (data) => data.logs.filter(l => l.minutes < 10).length >= 30 },
     { id: 'long_haul', icon: 'fa-tree', color: '#badc58', title: 'Kiên Trì', desc: 'Hoàn thành 10 phiên dài (≥ 60p)', condition: (data) => data.logs.filter(l => l.minutes >= 60).length >= 10 },
     { id: 'long_haul2', icon: 'fab fa-watchman-monitoring', color: '#ff6b6b', title: 'Hải Đăng', desc: 'Hoàn thành 20 phiên dài (≥ 60p)', condition: (data) => data.logs.filter(l => l.minutes >= 60).length >= 20 },
     { id: 'long_haul3', icon: 'fab fa-codepen', color: '#55efc4', title: 'Ly Sân', desc: 'Hoàn thành 50 phiên dài (≥ 60p)', condition: (data) => data.logs.filter(l => l.minutes >= 60).length >= 50 },
-{ id: 'overachiever', icon: 'fa-sailboat', color: '#74b9ff', title: 'Hiền Thiện', desc: 'Hoàn thành 200% mục tiêu ngày', condition: (data) => { return data.goals.some(g => { if(!g.dailyMinMedTarget) return false; const todayStr = new Date().toISOString().split('T')[0]; const todayVal = data.logs.filter(l => l.goalId === g.id && l.date === todayStr).reduce((s,l)=>s+(g.type==='meditation'? (l.count||0) : l.minutes), 0); return todayVal >= (g.dailyMinMedTarget * 2); }); }},
+{ id: 'overachiever', icon: 'fa-sailboat', color: '#74b9ff', title: 'Hiền Thiện', desc: 'Hoàn thành 200% mục tiêu ngày', condition: (data) => { const today = new Date().toISOString().split('T')[0]; return data.goals.some(g => { const target = g.dailyTargetMinutes || 0; if (target <= 0) return false; const progress = data.logs.filter(l => l.goalId === g.id && l.date === today).reduce((s, l) => s + (g.type === 'meditation' ? (l.count !== undefined ? l.count : (l.touches ? l.touches.length : 0)) : (l.minutes || 0)), 0); return progress >= (target * 2); }); }},
     
    
 ];
@@ -2272,6 +2272,7 @@ get totalMindfulnessCounts() {
                     const newGoal = {
                         id: Date.now().toString(), type, name, category, color,
                         lifetimeTargetMinutes: lifetimeTarget, dailyTargetMinutes: dailyTarget || 0,
+						dailySessionTarget: 10,
                         totalMinutes: 0, totalMindfulness: 0, sessionTargetSeconds: 0,
                         remainingSeconds: 0, currentSessionStartTime: null, isActive: false
                     };
@@ -2681,7 +2682,47 @@ closeMedSettings() {
 }
 
 
+// Thêm hàm này vào trong class GoalTracker
+setDailySessionTarget(id) {
+    const goal = this.data.goals.find(g => g.id === id);
+    if (!goal) return;
 
+    let dataChanged = false;
+
+    // --- PROMPT 1: Daily Sessions (Số thời/phiên) ---
+    const currentSession = goal.dailySessionTarget || 10;
+    const inputSession = prompt(`(1/2) Đặt số thời thực hành hàng ngày cho "${goal.name}":`, currentSession);
+
+    if (inputSession !== null) {
+        const val = parseInt(inputSession);
+        if (!isNaN(val) && val >= 0) {
+            goal.dailySessionTarget = val;
+            dataChanged = true;
+        }
+    }
+
+    // --- PROMPT 2: Daily Target Amount (Minutes or Mindfulness Count) ---
+    const isMeditation = goal.type === 'meditation';
+    const unitLabel = isMeditation ? 'số chánh niệm' : 'số phút';
+    const currentTarget = goal.dailyTargetMinutes || 100;
+
+    const inputTarget = prompt(`(2/2) Đặt mục tiêu ${unitLabel} hàng ngày:`, currentTarget);
+
+    if (inputTarget !== null) {
+        const val = parseInt(inputTarget);
+        if (!isNaN(val) && val >= 0) {
+            goal.dailyTargetMinutes = val;
+            dataChanged = true;
+        }
+    }
+
+    // --- Save & Render if any changes occurred ---
+    if (dataChanged) {
+        this.save();
+        this.renderGoals();
+        this.showToast(`Đã cập nhật mục tiêu ngày!`);
+    }
+}
 
 
 
@@ -2729,7 +2770,7 @@ setDailyMinMedTarget(id) {
     emptyMsg.style.display = 'none';
     const todayStr = this.toIsoDate(new Date());
 
-    this.data.goals.forEach(goal => {
+    [...this.data.goals].reverse().forEach(goal => {
         const isMeditation = goal.type === 'meditation';
         const unitLabel = isMeditation ? 'chánh niệm' : 'phút';
         const targetProp = isMeditation ? 'totalMindfulness' : 'totalMinutes';
@@ -2768,14 +2809,61 @@ setDailyMinMedTarget(id) {
         
         // --- DAILY SECTIONS ---
         if (dailyTarget > 0) {
-            // 1. ORIGINAL BAR (Chánh niệm / Phút)
+            // 1. TÍNH TOÁN CHO PHẦN GRID (Ô VUÔNG)
+            const todaySessionCount = this.data.logs.filter(l => l.goalId === goal.id && l.date === todayStr).length;
+            const sessionTarget = goal.dailySessionTarget || 0;
+            let sessionGridHtml = '';
+
+            if (sessionTarget > 0) {
+                sessionGridHtml = `<div style="margin-top: 10px; display: flex; flex-wrap: wrap; gap: 5px; max-height: 85px; overflow-y: auto;">`;
+                for (let i = 1; i <= sessionTarget; i++) {
+                    const isDone = i <= todaySessionCount;
+                    // Nếu hoàn thành: Có viền màu goal.color, chữ đậm.
+                    // Nếu chưa: Không viền, nền mờ, chữ nhạt.
+                    const boxStyle = isDone 
+                        ? `border: 1px solid ${goal.color}; color: ${goal.color}; font-weight: bold; background: rgba(0,0,0,0.1);` 
+                        : `border: 1px solid transparent; background: rgba(255,255,255,0.05); color: var(--text-light);`;
+                    
+                    sessionGridHtml += `
+                        <div style="
+                            width: 24px; height: 24px; 
+                            display: flex; align-items: center; justify-content: center; 
+                            font-size: 11px; border-radius: 4px;
+                            ${boxStyle}
+                        ">${i}</div>`;
+                }
+				// --- NEW CODE START: Add Green Tick if Completed ---
+                if (todaySessionCount >= sessionTarget) {
+                    sessionGridHtml += `
+                        <div style="
+                            width: 24px; height: 24px; 
+                            display: flex; align-items: center; justify-content: center; 
+                            color: var(--success); font-size: 16px; margin-left: 2px;
+                            animation: fadeIn 0.5s ease;"
+                            title="Đã hoàn thành mục tiêu số thời hàng ngày!">
+                            <i class="fas fa-check-circle"></i>
+                        </div>`;
+                }
+                // --- NEW CODE END ---
+                sessionGridHtml += `</div>`;
+            }
+
+            // 2. CẬP NHẬT ORIGINAL BAR VỚI CLICK EVENT & GRID
             dailySectionHtml = `
-                <div style="margin-bottom: 10px; background: rgba(0,0,0,0.2); padding: 10px; border-radius: 8px;">
+                <div 
+                    onclick="app.setDailySessionTarget('${goal.id}')"
+                    title="Đặt số thời thực hành hàng ngày"
+                    style="margin-bottom: 10px; background: rgba(0,0,0,0.2); padding: 10px; border-radius: 8px; cursor: pointer; transition: background 0.2s;"
+                    onmouseover="this.style.background='rgba(0,0,0,0.3)'"
+                    onmouseout="this.style.background='rgba(0,0,0,0.2)'"
+                >
                     <div style="display:flex; justify-content:space-between; font-size:12px; margin-bottom:5px; align-items:center;">
                         <strong style="color:var(--text);">Hôm nay</strong>
-                        <span style="font-weight:600;">${todayVal} / ${dailyTarget} ${unitLabel}</span>
+                        <span style="font-weight:600;">${todayVal} / ${dailyTarget} ${unitLabel} <i class="fas fa-pen" style="font-size:10px; opacity:0.5; margin-left:4px;"></i></span>
                     </div>
                     <div class="progress-container" style="height: 6px;"><div class="progress-bar" style="width: ${dailyPct}%; background: ${dailyBarColor}"></div></div>
+                    
+                    ${sessionGridHtml}
                 </div>`;
 
             // 2. NEW BAR (Minutes) - Only for Meditation Goals
@@ -2788,7 +2876,7 @@ setDailyMinMedTarget(id) {
                 dailySectionHtml += `
                 <div 
                     onclick="app.setDailyMinMedTarget('${goal.id}')"
-                    title="Chạm để thay đổi mục tiêu thời gian"
+                    title="Thay đổi mục tiêu thời gian"
                     style="margin-bottom: 15px; background: rgba(0,0,0,0.2); padding: 10px; border-radius: 8px; cursor: pointer; transition: background 0.2s;"
                     onmouseover="this.style.background='rgba(0,0,0,0.3)'"
                     onmouseout="this.style.background='rgba(0,0,0,0.2)'"
@@ -4521,7 +4609,7 @@ loadActiveBadge() {
             container.classList.remove('silver');
         }
     } else {
-        container.innerHTML = `<i class="fas fa-award"></i>`;
+        container.innerHTML = `<i class="fas fa-gem"></i>`;
         
         container.style.color = '#ffffff';
         container.style.textShadow = 'none'; // Reset text shadow
@@ -4566,11 +4654,11 @@ renderBadgeAltar() {
     }
 
     // Default state (No badge selected)
-    iconEl.innerHTML = `<i class="fas fa-award"></i>`;
+    iconEl.innerHTML = `<i class="fas fa-gem"></i>`;
     iconEl.style.color = 'var(--text-light)';
     iconEl.classList.remove('altar-floating');
     
-    titleEl.innerText = 'Chưa chọn Pāramī';
+    titleEl.innerText = 'Chọn Pāramī';
     titleEl.style.color = 'var(--text)';
     titleEl.style.textShadow = 'none';
     

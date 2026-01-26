@@ -549,21 +549,22 @@ const BADGES = [
     
     { id: 'daily_volume_30p', icon: 'fab fa-canadian-maple-leaf', color: '#e58e26', title: 'Impermanence', desc: 'Total meditation ≥ 30 minutes in a day', condition: (data) => { const daily = {}; data.logs.forEach(l => daily[l.date] = (daily[l.date]||0) + l.minutes); return Object.values(daily).some(m => m >= 30); }},
     { id: 'daily_volume_1h', icon: 'fab fa-phoenix-framework', color: '#fa983a', title: 'Restraint', desc: 'Total meditation ≥ 1 hour in a day', condition: (data) => { const daily = {}; data.logs.forEach(l => daily[l.date] = (daily[l.date]||0) + l.minutes); return Object.values(daily).some(m => m >= 60); }},
-    { id: 'daily_volume_2h', icon: 'fab fa-phoenix-squadron', color: '#eb2f06', title: 'The Deathless', desc: 'Total meditation ≥ 2 hours in a day', condition: (data) => { const daily = {}; data.logs.forEach(l => daily[l.date] = (daily[l.date]||0) + l.minutes); return Object.values(daily).some(m => m >= 120); }},
+    { id: 'daily_volume_2h', icon: 'fab fa-phoenix-squadron', color: '#fc4214', title: 'The Deathless', desc: 'Total meditation ≥ 2 hours in a day', condition: (data) => { const daily = {}; data.logs.forEach(l => daily[l.date] = (daily[l.date]||0) + l.minutes); return Object.values(daily).some(m => m >= 120); }},
     { id: 'daily_volume_3h', icon: 'fab fa-gripfire', color: '#e55039', title: 'Diligence', desc: 'Total meditation ≥ 3 hours in a day', condition: (data) => { const daily = {}; data.logs.forEach(l => daily[l.date] = (daily[l.date]||0) + l.minutes); return Object.values(daily).some(m => m >= 180); }},
     { id: 'daily_volume_4h', icon: 'fab fa-rebel', color: '#74b9ff', title: 'Non-Violence', desc: 'Total meditation ≥ 4 hours in a day', condition: (data) => { const daily = {}; data.logs.forEach(l => daily[l.date] = (daily[l.date]||0) + l.minutes); return Object.values(daily).some(m => m >= 240); }},
     { id: 'daily_volume_5h', icon: 'fab fa-sith', color: '#badc58', title: 'Wakefulness', desc: 'Total meditation ≥ 5 hours in a day', condition: (data) => { const daily = {}; data.logs.forEach(l => daily[l.date] = (daily[l.date]||0) + l.minutes); return Object.values(daily).some(m => m >= 300); }},
     { id: 'daily_volume_8h', icon: 'fab fa-battle-net', color: '#6a89cc', title: 'Wise Attention', desc: 'Total meditation ≥ 8 hours in a day', condition: (data) => { const daily = {}; data.logs.forEach(l => daily[l.date] = (daily[l.date]||0) + l.minutes); return Object.values(daily).some(m => m >= 480); }},
-    { id: 'freq_3_day', icon: 'fas fa-users', color: '#f0932b', title: 'Sangha', desc: 'Meditate 3 times in one day', condition: (data) => { const counts = {}; data.logs.forEach(l => counts[l.date] = (counts[l.date]||0)+1); return Object.values(counts).some(c => c >= 3); }},
-    { id: 'freq_5_day', icon: 'fas fa-hand-sparkles', color: '#48dbfb', title: 'Five Precepts', desc: 'Meditate 5 times in one day', condition: (data) => { const counts = {}; data.logs.forEach(l => counts[l.date] = (counts[l.date]||0)+1); return Object.values(counts).some(c => c >= 5); }},
-    { id: 'freq_10_day', icon: 'fas fa-hands-praying', color: '#ffbe76', title: 'Pure Faith', desc: 'Meditate 10 times in one day', condition: (data) => { const counts = {}; data.logs.forEach(l => counts[l.date] = (counts[l.date]||0)+1); return Object.values(counts).some(c => c >= 5); }},
-    { id: 'dedicated_day', icon: 'fa-landmark', color: '#2ecc71', title: 'Three Jewels', desc: 'Complete 3 separate sessions ≥ 60m in a day', condition: (data) => { const goodLogs = data.logs.filter(l => l.minutes >= 60); const counts = {}; goodLogs.forEach(l => counts[l.date] = (counts[l.date]||0)+1); return Object.values(counts).some(c => c >= 3); }},
+    { id: 'freq_3_day', icon: 'fas fa-hand-sparkles', color: '#f0932b', title: 'Five Precepts', desc: 'Meditate 5 times in one day', condition: (data) => { const counts = {}; data.logs.forEach(l => counts[l.date] = (counts[l.date]||0)+1); return Object.values(counts).some(c => c >= 5); }},
+    { id: 'freq_5_day', icon: 'fas fa-hands-praying', color: '#48dbfb', title: 'Pure Faith', desc: 'Meditate 10 times in one day', condition: (data) => { const counts = {}; data.logs.forEach(l => counts[l.date] = (counts[l.date]||0)+1); return Object.values(counts).some(c => c >= 10); }},
+    { id: 'freq_10_day', icon: 'fas fa-users', color: '#ffbe76', title: 'Sangha', desc: 'Meditate 20 times in one day', condition: (data) => { const counts = {}; data.logs.forEach(l => counts[l.date] = (counts[l.date]||0)+1); return Object.values(counts).some(c => c >= 20); }},
+    { id: 'dedicated_day', icon: 'fa-landmark', color: '#2ecc71', title: 'Three Jewels', desc: 'Complete 3 separate sessions total ≥ 60m in a day', condition: (data) => { const goodLogs = data.logs.filter(l => l.minutes >= 60); const counts = {}; goodLogs.forEach(l => counts[l.date] = (counts[l.date]||0)+1); return Object.values(counts).some(c => c >= 3); }},
     { id: 'quick_fix', icon: 'fas fa-user-plus', color: '#f6e58d', title: 'Self-Victory', desc: 'Complete 10 short sessions (≤ 10m)', condition: (data) => data.logs.filter(l => l.minutes < 10).length >= 10 },
     { id: 'quick_fix2', icon: 'fa-fan', color: '#a29bfe', title: 'Disenchantment', desc: 'Complete 30 short sessions (≤ 10m)', condition: (data) => data.logs.filter(l => l.minutes < 10).length >= 30 },
     { id: 'long_haul', icon: 'fa-tree', color: '#badc58', title: 'Perseverance', desc: 'Complete 10 long sessions (≥ 60m)', condition: (data) => data.logs.filter(l => l.minutes >= 60).length >= 10 },
     { id: 'long_haul2', icon: 'fab fa-watchman-monitoring', color: '#ff6b6b', title: 'Lighthouse', desc: 'Complete 20 long sessions (≥ 60m)', condition: (data) => data.logs.filter(l => l.minutes >= 60).length >= 20 },
     { id: 'long_haul3', icon: 'fab fa-codepen', color: '#55efc4', title: 'Non-Ill Will', desc: 'Complete 50 long sessions (≥ 60m)', condition: (data) => data.logs.filter(l => l.minutes >= 60).length >= 50 },
-    { id: 'overachiever', icon: 'fa-sailboat', color: '#74b9ff', title: 'Virtuous', desc: 'Complete 200% of daily goal', condition: (data) => { return data.goals.some(g => { if(!g.dailyMinMedTarget) return false; const todayStr = new Date().toISOString().split('T')[0]; const todayVal = data.logs.filter(l => l.goalId === g.id && l.date === todayStr).reduce((s,l)=>s+(g.type==='meditation'? (l.count||0) : l.minutes), 0); return todayVal >= (g.dailyMinMedTarget * 2); }); }},
+	{ id: 'overachiever', icon: 'fa-sailboat', color: '#74b9ff', title: 'Virtuous', desc: 'Complete 200% of daily goal', condition: (data) => { const today = new Date().toISOString().split('T')[0]; return data.goals.some(g => { const target = g.dailyTargetMinutes || 0; if (target <= 0) return false; const progress = data.logs.filter(l => l.goalId === g.id && l.date === today).reduce((s, l) => s + (g.type === 'meditation' ? (l.count !== undefined ? l.count : (l.touches ? l.touches.length : 0)) : (l.minutes || 0)), 0); return progress >= (target * 2); }); }},
+   
 ];
 const DB_CONFIG = {
     name: 'HanhGiaDB',
@@ -2277,6 +2278,7 @@ get totalMindfulnessCounts() {
                     const newGoal = {
                         id: Date.now().toString(), type, name, category, color,
                         lifetimeTargetMinutes: lifetimeTarget, dailyTargetMinutes: dailyTarget || 0,
+						dailySessionTarget: 10,
                         totalMinutes: 0, totalMindfulness: 0, sessionTargetSeconds: 0,
                         remainingSeconds: 0, currentSessionStartTime: null, isActive: false
                     };
@@ -2680,7 +2682,47 @@ closeMedSettings() {
     document.getElementById('med-settings-modal').style.display = 'none';
 }
 
+// Add this method inside the GoalTracker class
+setDailySessionTarget(id) {
+    const goal = this.data.goals.find(g => g.id === id);
+    if (!goal) return;
 
+    let dataChanged = false;
+
+    // --- PROMPT 1: Daily Sessions ---
+    const currentSession = goal.dailySessionTarget || 10;
+    const inputSession = prompt(`(1/2) Set daily practice sessions for "${goal.name}":`, currentSession);
+
+    if (inputSession !== null) {
+        const val = parseInt(inputSession);
+        if (!isNaN(val) && val >= 0) {
+            goal.dailySessionTarget = val;
+            dataChanged = true;
+        }
+    }
+
+    // --- PROMPT 2: Daily Target Amount (Minutes or Mindfulness Count) ---
+    const isMeditation = goal.type === 'meditation';
+    const unitLabel = isMeditation ? 'mindfulness' : 'minutes';
+    const currentTarget = goal.dailyTargetMinutes || 100;
+
+    const inputTarget = prompt(`(2/2) Set daily ${unitLabel} goal:`, currentTarget);
+
+    if (inputTarget !== null) {
+        const val = parseInt(inputTarget);
+        if (!isNaN(val) && val >= 0) {
+            goal.dailyTargetMinutes = val;
+            dataChanged = true;
+        }
+    }
+
+    // --- Save & Render if any changes occurred ---
+    if (dataChanged) {
+        this.save();
+        this.renderGoals();
+        this.showToast(`Daily goals updated!`);
+    }
+}
 
 
 toggleProModeUI() {
@@ -2727,7 +2769,7 @@ setDailyMinMedTarget(id) {
     emptyMsg.style.display = 'none';
     const todayStr = this.toIsoDate(new Date());
 
-    this.data.goals.forEach(goal => {
+    [...this.data.goals].reverse().forEach(goal => {
         const isMeditation = goal.type === 'meditation';
         const unitLabel = isMeditation ? 'mindfulness' : 'mins';
         const targetProp = isMeditation ? 'totalMindfulness' : 'totalMinutes';
@@ -2766,13 +2808,61 @@ setDailyMinMedTarget(id) {
         
         // --- DAILY SECTIONS ---
         if (dailyTarget > 0) {
+            // 1. TÍNH TOÁN CHO PHẦN GRID (Ô VUÔNG)
+            const todaySessionCount = this.data.logs.filter(l => l.goalId === goal.id && l.date === todayStr).length;
+            const sessionTarget = goal.dailySessionTarget || 0;
+            let sessionGridHtml = '';
+
+            if (sessionTarget > 0) {
+                sessionGridHtml = `<div style="margin-top: 10px; display: flex; flex-wrap: wrap; gap: 5px; max-height: 85px; overflow-y: auto;">`;
+                for (let i = 1; i <= sessionTarget; i++) {
+                    const isDone = i <= todaySessionCount;
+                    // Nếu hoàn thành: Có viền màu goal.color, chữ đậm.
+                    // Nếu chưa: Không viền, nền mờ, chữ nhạt.
+                    const boxStyle = isDone 
+                        ? `border: 1px solid ${goal.color}; color: ${goal.color}; font-weight: bold; background: rgba(0,0,0,0.1);` 
+                        : `border: 1px solid transparent; background: rgba(255,255,255,0.05); color: var(--text-light);`;
+                    
+                    sessionGridHtml += `
+                        <div style="
+                            width: 24px; height: 24px; 
+                            display: flex; align-items: center; justify-content: center; 
+                            font-size: 11px; border-radius: 4px;
+                            ${boxStyle}
+                        ">${i}</div>`;
+                }
+				// --- NEW CODE START: Add Green Tick if Completed ---
+                if (todaySessionCount >= sessionTarget) {
+                    sessionGridHtml += `
+                        <div style="
+                            width: 24px; height: 24px; 
+                            display: flex; align-items: center; justify-content: center; 
+                            color: var(--success); font-size: 16px; margin-left: 2px;
+                            animation: fadeIn 0.5s ease;"
+                            title="Daily practice sessions goal accomplished!">
+                            <i class="fas fa-check-circle"></i>
+                        </div>`;
+                }
+                // --- NEW CODE END ---
+                sessionGridHtml += `</div>`;
+            }
+
+            // 2. CẬP NHẬT ORIGINAL BAR VỚI CLICK EVENT & GRID
             dailySectionHtml = `
-                <div style="margin-bottom: 10px; background: rgba(0,0,0,0.2); padding: 10px; border-radius: 8px;">
+                <div 
+                    onclick="app.setDailySessionTarget('${goal.id}')"
+                    title="Set daily session target"
+                    style="margin-bottom: 10px; background: rgba(0,0,0,0.2); padding: 10px; border-radius: 8px; cursor: pointer; transition: background 0.2s;"
+                    onmouseover="this.style.background='rgba(0,0,0,0.3)'"
+                    onmouseout="this.style.background='rgba(0,0,0,0.2)'"
+                >
                     <div style="display:flex; justify-content:space-between; font-size:12px; margin-bottom:5px; align-items:center;">
                         <strong style="color:var(--text);">Today's Goal</strong>
-                        <span style="font-weight:600;">${todayVal} / ${dailyTarget} ${unitLabel}</span>
+                        <span style="font-weight:600;">${todayVal} / ${dailyTarget} ${unitLabel} <i class="fas fa-pen" style="font-size:10px; opacity:0.5; margin-left:4px;"></i></span>
                     </div>
                     <div class="progress-container" style="height: 6px;"><div class="progress-bar" style="width: ${dailyPct}%; background: ${dailyBarColor}"></div></div>
+                    
+                    ${sessionGridHtml}
                 </div>`;
 
             // 2. NEW BAR (Minutes) - Only for Meditation Goals
@@ -4313,7 +4403,7 @@ openBadgePicker() {
             <div class="modal-content" style="max-width: 550px; width: 95%; max-height: 85vh; display: flex; flex-direction: column; padding: 0; border-radius: 16px;">
                 
                 <div style="padding: 15px 20px; border-bottom: 1px solid var(--border); position: relative; display: flex; justify-content: center; align-items: center; background: var(--surface); border-radius: 16px 16px 0 0;">
-                    <h3 style="margin: 0; font-size: 18px;"><i class="fas fa-gem"></i> Choose Pāramī</h3>
+                    <h3 style="margin: 0; font-size: 18px;"><i class="fas fa-gem"></i> Select Pāramī</h3>
                     <button class="btn-icon" onclick="app.closeBadgePicker()" style="position: absolute; right: 20px; color: var(--text-light); background: transparent;"><i class="fas fa-times"></i></button>
                 </div>
 
@@ -4530,7 +4620,7 @@ loadActiveBadge() {
         }
     } else {
         // Default state (No badge selected) - Keep as is
-        container.innerHTML = `<i class="fas fa-award"></i>`;
+        container.innerHTML = `<i class="fas fa-gem"></i>`;
         
         // Explicitly set default styles to match CSS .badge-display
         container.style.color = '#ffffff';
@@ -4575,11 +4665,11 @@ renderBadgeAltar() {
     }
 
     // Default state (No badge selected)
-    iconEl.innerHTML = `<i class="fas fa-award"></i>`;
+    iconEl.innerHTML = `<i class="fas fa-gem"></i>`;
     iconEl.style.color = 'var(--text-light)';
     iconEl.classList.remove('altar-floating');
     
-    titleEl.innerText = 'Pāramī not selected';
+    titleEl.innerText = 'Select Pāramī';
     titleEl.style.color = 'var(--text)';
     titleEl.style.textShadow = 'none';
     
