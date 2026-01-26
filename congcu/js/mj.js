@@ -747,7 +747,7 @@ const dbHelper = {
                     medSettings: { mode: 'tap', holdDuration: 500, tapRequired: 1, vibration: true }
                 };
 
-                // Other initializations remain the same
+                this.sessionLimits = {};
                 this.tapState = { count: 0, lastTapTime: 0, timer: null };
                 this.timers = {}; 
                 this.today = new Date();
@@ -2692,7 +2692,7 @@ setDailySessionTarget(id) {
     let dataChanged = false;
 
     // --- PROMPT 1: Daily Sessions ---
-    const currentSession = goal.dailySessionTarget || 10;
+    const currentSession = goal.dailySessionTarget || 8;
     const inputSession = prompt(`(1/2) Set daily practice sessions for "${goal.name}":`, currentSession);
 
     if (inputSession !== null) {
@@ -2817,7 +2817,7 @@ setDailyMinMedTarget(id) {
         if (dailyTarget > 0) {
             // 1. TÍNH TOÁN CHO PHẦN GRID (Ô VUÔNG)
             const todaySessionCount = this.data.logs.filter(l => l.goalId === goal.id && l.date === todayStr).length;
-            const sessionTarget = goal.dailySessionTarget || 0;
+            const sessionTarget = goal.dailySessionTarget || 8;
             let sessionGridHtml = '';
 
             if (sessionTarget > 0) {
@@ -2940,29 +2940,47 @@ setDailyMinMedTarget(id) {
                     this.renderSessions(goal.id, isMeditation);
                 });
 }
-            
-            renderSessions(goalId, isMeditation) {
-                const container = document.getElementById(`sessions-${goalId}`);
-                if (!container) return;
-                container.innerHTML = '';
+            loadMoreSessions(goalId, isMeditation) {
+    if (!this.sessionLimits[goalId]) this.sessionLimits[goalId] = 80;
+    this.sessionLimits[goalId] += 80; 
+    this.renderSessions(goalId, isMeditation);
+}
+           renderSessions(goalId, isMeditation) {
+    const container = document.getElementById(`sessions-${goalId}`);
+    if (!container) return;
+    container.innerHTML = '';
 
-                const sessions = this.data.logs.filter(l => l.goalId === goalId).sort((a,b) => b.timestamp - a.timestamp);
-                
-                if (sessions.length === 0) { 
-                    container.innerHTML = '<p style="font-size:12px; color:var(--text-light);">No sessions yet</p>'; 
-                    return; 
-                }
-                
-                const ol = document.createElement('ol');
-                sessions.forEach((log) => {
-                    const sLi = document.createElement('li');
-                    sLi.className = 'session-item';
-                    
-                    const notesDisplay = log.notes ? `<span class="session-notes">"${log.notes}"</span>` : '';
+    // 1. Get all sessions for this goal sorted by date (newest first)
+    const allSessions = this.data.logs
+        .filter(l => l.goalId === goalId)
+        .sort((a, b) => b.timestamp - a.timestamp);
+    
+    if (allSessions.length === 0) { 
+        container.innerHTML = '<p style="font-size:12px; color:var(--text-light);">Chưa có phiên nào</p>'; 
+        return; 
+    }
 
-                    let actionButtons = '<div style="display:flex; gap:5px;">';
+    // 2. Pagination Setup
+    // Initialize limit to 100 if not set
+    if (!this.sessionLimits[goalId]) this.sessionLimits[goalId] = 80;
+    
+    const limit = this.sessionLimits[goalId];
+    
+    // Slice only the visible portion based on current limit
+    const visibleSessions = allSessions.slice(0, limit);
+    
+    const ol = document.createElement('ol');
+    
+    // 3. Render visible sessions
+    visibleSessions.forEach((log) => {
+        const sLi = document.createElement('li');
+        sLi.className = 'session-item';
+        
+        const notesDisplay = log.notes ? `<span class="session-notes">"${log.notes}"</span>` : '';
 
-                    if (isMeditation && log.touches && log.touches.length > 0) {
+        let actionButtons = '<div style="display:flex; gap:5px;">';
+
+        if (isMeditation && log.touches && log.touches.length > 0) {
                         actionButtons += `<button class="btn-icon" style="background:transparent; color:var(--zen); height:24px; width:24px;" onclick="app.showSessionGraph('${log.timestamp}')" title="Show graph"><i class="fas fa-chart-area" style="font-size:12px;"></i></button>`;
                     }
 
@@ -2979,9 +2997,33 @@ setDailyMinMedTarget(id) {
                         ${actionButtons}
                     `;
                     ol.appendChild(sLi);
-                });
-                container.appendChild(ol);
-            }
+    });
+    container.appendChild(ol);
+
+    // 4. Render "Load More" Button if there are more items
+    if (allSessions.length > limit) {
+        const remaining = allSessions.length - limit;
+        const nextBatch = Math.min(remaining, 80); // Calculate how many will actually load next
+        
+        const btnDiv = document.createElement('div');
+        btnDiv.style.textAlign = 'center';
+        btnDiv.style.marginTop = '10px';
+        
+        const btn = document.createElement('button');
+        btn.className = 'btn btn-secondary';
+        btn.style.width = '100%';
+        btn.style.padding = '8px';
+        btn.style.fontSize = '12px';
+        
+        // Updated Text: Shows clearly we are loading the next batch, not everything
+        btn.innerHTML = `<i class="fas fa-chevron-down"></i> Load more (${nextBatch} sessions)`;
+        
+        btn.onclick = () => this.loadMoreSessions(goalId, isMeditation);
+        
+        btnDiv.appendChild(btn);
+        container.appendChild(btnDiv);
+    }
+}
             
             showSessionGraph(timestamp) {
     const exportBtn = document.getElementById('btn-export-session');
