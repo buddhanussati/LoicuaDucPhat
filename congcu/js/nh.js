@@ -2266,13 +2266,15 @@ get totalMindfulnessCounts() {
                     if (goal) {
                         goal.name = name; goal.category = category; goal.color = color;
                         goal.lifetimeTargetMinutes = lifetimeTarget; goal.dailyTargetMinutes = dailyTarget;
+						goal.lastUpdated = Date.now();
                         this.showToast('Đã cập nhật mục tiêu!');
                     }
                 } else {
                     const newGoal = {
                         id: Date.now().toString(), type, name, category, color,
                         lifetimeTargetMinutes: lifetimeTarget, dailyTargetMinutes: dailyTarget || 0,
-						dailySessionTarget: 10,
+						dailySessionTarget: 8,
+						lastUpdated: Date.now(),
                         totalMinutes: 0, totalMindfulness: 0, sessionTargetSeconds: 0,
                         remainingSeconds: 0, currentSessionStartTime: null, isActive: false
                     };
@@ -2718,6 +2720,7 @@ setDailySessionTarget(id) {
 
     // --- Save & Render if any changes occurred ---
     if (dataChanged) {
+		goal.lastUpdated = Date.now();
         this.save();
         this.renderGoals();
         this.showToast(`Đã cập nhật mục tiêu ngày!`);
@@ -2770,7 +2773,11 @@ setDailyMinMedTarget(id) {
     emptyMsg.style.display = 'none';
     const todayStr = this.toIsoDate(new Date());
 
-    [...this.data.goals].reverse().forEach(goal => {
+    const sortedGoals = [...this.data.goals].sort((a, b) => {
+            return (b.lastUpdated || 0) - (a.lastUpdated || 0);
+        });
+
+        sortedGoals.forEach(goal => {
         const isMeditation = goal.type === 'meditation';
         const unitLabel = isMeditation ? 'chánh niệm' : 'phút';
         const targetProp = isMeditation ? 'totalMindfulness' : 'totalMinutes';
