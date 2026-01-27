@@ -538,7 +538,141 @@ input:checked + .slider:before { transform: translateX(18px); }
     transition: all 0.5s ease;
 }
 
+/* Update this class in css/css2.css */
+.goal-medallion {
+    position: relative;
+    padding: 20px;
+    border-radius: 16px;
+    text-align: center;
+    cursor: pointer;
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s;
+    overflow: hidden;
+    border: 1px solid rgba(255,255,255,0.1);
+    
+    /* --- ADD THESE LINES TO FORCE CENTERING --- */
+    display: flex;
+    flex-direction: column;
+    align-items: center;      /* Centers items horizontally */
+    justify-content: center;  /* Centers items vertically */
+    max-height: 250px;       /* Optional: Gives the card a consistent height */
+}
+.goal-medallion:hover {
+    transform: translateY(-3px) scale(1.02);
+}
 
+.medallion-icon-container {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 15px auto;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 32px;
+    background: rgba(0,0,0,0.2);
+    border: 3px solid rgba(255,255,255,0.3);
+    box-shadow: 0 0 20px rgba(0,0,0,0.2);
+    position: relative;
+}
+
+.medallion-ribbon {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 5px;
+    opacity: 0.8;
+}
+
+.medallion-title {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 5px;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+}
+
+.medallion-stats {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    font-size: 11px;
+    opacity: 0.9;
+    margin-top: 10px;
+}
+
+.medallion-stat-item i {
+    margin-right: 4px;
+}
+
+/* Tiers */
+.tier-bronze {
+    background: linear-gradient(135deg, #3E2723 0%, #5D4037 100%);
+    box-shadow: 0 4px 15px rgba(93, 64, 55, 0.4);
+    border-color: #8D6E63;
+}
+.tier-bronze .medallion-icon-container { color: #CD7F32; border-color: #CD7F32; background: rgba(205, 127, 50, 0.1); }
+
+.tier-silver {
+    background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+    box-shadow: 0 4px 15px rgba(189, 195, 199, 0.3);
+    border-color: #BDC3C7;
+}
+.tier-silver .medallion-icon-container { color: #E0E0E0; border-color: #E0E0E0; background: rgba(224, 224, 224, 0.1); }
+
+.tier-gold {
+    /* Muted, deeper gold tones for better contrast */
+    background: linear-gradient(135deg, #926F15 0%, #C5A028 100%);
+    box-shadow: 0 4px 15px rgba(146, 111, 21, 0.3);
+    border: 1px solid #D4AF37;
+}
+
+.tier-gold .medallion-icon-container { 
+    color: #FFF; 
+    border-color: rgba(255, 255, 255, 0.5); 
+    background: rgba(0, 0, 0, 0.1); /* Darker overlay helps the icon stand out */
+}
+
+.tier-gold .medallion-title { 
+    color: #FFF;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2); /* Adds a "lift" for readability */
+}
+
+.tier-diamond {
+    /* Deeper midnight blue to sapphire gradient for better contrast */
+    background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%); 
+    box-shadow: 0 4px 20px rgba(59, 130, 246, 0.5);
+    border: 1px solid #60a5fa;
+    color: #ffffff;
+}
+
+.tier-diamond .medallion-icon-container { 
+    color: #ffffff; 
+    border-color: #ffffff; 
+    background: rgba(255, 255, 255, 0.2);
+    /* Glow effect that doesn't hide the icon shape */
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.4); 
+    /* Text shadow makes the white icon pop against light parts of the gradient */
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+.tier-diamond .medallion-title {
+    color: #ffffff;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.tier-diamond .medallion-ribbon {
+    color: #bfdbfe; /* Light blue ribbon text */
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+/* Animation for reveal */
+@keyframes flipIn {
+    from { transform: rotateX(90deg); opacity: 0; }
+    to { transform: rotateX(0deg); opacity: 1; }
+}
+.card-revealed {
+    animation: flipIn 0.4s ease forwards;
+    border: 2px solid var(--zen); /* Highlight expanded card */
+}
 
 
 
