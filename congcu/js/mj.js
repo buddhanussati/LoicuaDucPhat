@@ -241,7 +241,7 @@ async init() {
             if (!goal.type) goal.type = 'standard';
             if (!goal.sessionTargetSeconds) goal.sessionTargetSeconds = 0;
             if (!goal.remainingSeconds) goal.remainingSeconds = 0;
-            if (typeof goal.dailyTargetMinutes === 'undefined') goal.dailyTargetMinutes = 30;
+            if (typeof goal.dailyTargetMinutes === 'undefined') goal.dailyTargetMinutes = 100;
             if (goal.type === 'meditation' && !goal.currentMindfulness) goal.currentMindfulness = 0;
             if (goal.type === 'meditation' && !goal.totalMindfulness) goal.totalMindfulness = 0;
         });
@@ -2220,8 +2220,8 @@ calculateGoalTier(goal) {
 
     // 3. Targets
     const targetSessions = goal.dailySessionTarget || 8;
-    const targetValue = goal.dailyTargetMinutes || 30; // Min/Mindfulness target
-    const targetDuration = goal.dailyMinMedTarget || 0; // Med duration specific
+    const targetValue = goal.dailyTargetMinutes || 100; // Min/Mindfulness target
+    const targetDuration = goal.dailyMinMedTarget || 120; // Med duration specific
 
     // 4. Score Calculation
     let scoreSessions = 0;
@@ -2280,18 +2280,22 @@ calculateConsistencyScore(goal) {
     if (activeDays === 0) return "0.0";
 
     const targetSessions = goal.dailySessionTarget || 8;
-    const targetValue = goal.dailyTargetMinutes || 30;
-    const targetDuration = goal.dailyMinMedTarget || 0;
+    const targetValue = goal.dailyTargetMinutes || 100;
+    const targetDuration = goal.dailyMinMedTarget || 120;
 
     let scoreSessions = 0;
     let scoreValue = 0;
     let scoreDuration = 0;
 
     Object.values(dailyStats).forEach(stat => {
-        if (stat.sessions >= targetSessions) scoreSessions++;
-        if (stat.value >= targetValue) scoreValue++;
-        if (goal.type === 'meditation' && stat.minutes >= targetDuration) scoreDuration++;
-    });
+    // Thay vì if, ta cộng dồn tỷ lệ hoàn thành (tối đa là 100% hay 1.0 cho mỗi ngày)
+    scoreSessions += Math.min(1, stat.sessions / targetSessions);
+    scoreValue += Math.min(1, stat.value / targetValue);
+    
+    if (goal.type === 'meditation' && targetDuration > 0) {
+        scoreDuration += Math.min(1, stat.minutes / targetDuration);
+    }
+});
 
     const pctSessions = (scoreSessions / activeDays);
     const pctValue = (scoreValue / activeDays);
@@ -2397,7 +2401,7 @@ const cScore = this.calculateConsistencyScore(goal);
             .filter(l => l.goalId === goal.id && l.date === todayStr)
             .reduce((sum, l) => sum + l.minutes, 0);
 
-        const dailyTarget = goal.dailyTargetMinutes || 0;
+        const dailyTarget = goal.dailyTargetMinutes || 100;
         const dailyminmedTarget = goal.dailyMinMedTarget || 120;
         let dailyPct = 0;
         let dailyBarColor = goal.color;
