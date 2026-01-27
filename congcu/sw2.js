@@ -4,6 +4,7 @@ const ASSETS = [
   './',
   './meditator-journal.html',
   './css/css.css',
+  './css/css2.css',
   './js/chart.js',
   './js/dhammapada.js',
   './js/parami.js',
