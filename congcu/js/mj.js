@@ -235,10 +235,7 @@ async init() {
         if (typeof this.data.medSettings.confirmMode === 'undefined') this.data.medSettings.confirmMode = false;
         if (typeof this.data.medSettings.confirmProbability === 'undefined') this.data.medSettings.confirmProbability = 100;
         
-        // Xóa các thuộc tính cũ không dùng nữa để nhẹ data
-        delete this.data.medSettings.proMode;
-        delete this.data.medSettings.tapRequired;
-        // ---------------------------------------
+       
 
         this.data.goals.forEach(goal => {
             if (!goal.type) goal.type = 'standard';
@@ -2196,25 +2193,197 @@ setDailyMinMedTarget(id) {
         }
     }
 }
+calculateGoalTier(goal) {
+    // 1. Get logs for this goal
+    const logs = this.data.logs.filter(l => l.goalId === goal.id);
+    if (logs.length === 0) return { id: 'bronze', name: 'Bronze', class: 'tier-bronze', icon: 'fas fa-medal' };
+
+    // 2. Group by Date to calculate Daily Performance
+    const dailyStats = {};
+    logs.forEach(l => {
+        if (!dailyStats[l.date]) {
+            dailyStats[l.date] = { sessions: 0, value: 0, minutes: 0 };
+        }
+        dailyStats[l.date].sessions++;
+        
+        // Value: Mindfulness counts for Med, Minutes for Standard
+        const val = (goal.type === 'meditation') 
+            ? (l.count !== undefined ? l.count : (l.touches ? l.touches.length : 0))
+            : l.minutes;
+        
+        dailyStats[l.date].value += val;
+        dailyStats[l.date].minutes += l.minutes;
+    });
+
+    const activeDays = Object.keys(dailyStats).length;
+    if (activeDays === 0) return { id: 'bronze', name: 'Bronze', class: 'tier-bronze', icon: 'fas fa-medal' };
+
+    // 3. Targets
+    const targetSessions = goal.dailySessionTarget || 8;
+    const targetValue = goal.dailyTargetMinutes || 30; // Min/Mindfulness target
+    const targetDuration = goal.dailyMinMedTarget || 0; // Med duration specific
+
+    // 4. Score Calculation
+    let scoreSessions = 0;
+    let scoreValue = 0;
+    let scoreDuration = 0;
+
+    Object.values(dailyStats).forEach(stat => {
+        if (stat.sessions >= targetSessions) scoreSessions++;
+        if (stat.value >= targetValue) scoreValue++;
+        if (goal.type === 'meditation' && stat.minutes >= targetDuration) scoreDuration++;
+    });
+
+    // Calculate Percentages (Consistency on Active Days)
+    const pctSessions = (scoreSessions / activeDays);
+    const pctValue = (scoreValue / activeDays);
+    
+    let totalScore = 0;
+    
+    if (goal.type === 'meditation' && targetDuration > 0) {
+        const pctDuration = (scoreDuration / activeDays);
+        // Weighted average for Meditation (3 criteria)
+        totalScore = (pctSessions + pctValue + pctDuration) / 3;
+    } else {
+        // Weighted average for Standard (2 criteria)
+        totalScore = (pctSessions + pctValue) / 2;
+    }
+
+    // 5. Determine Tier
+    if (totalScore >= 0.9) return { id: 'diamond', name: 'Diamond', class: 'tier-diamond', icon: 'fab fa-sketch' };
+    if (totalScore >= 0.75) return { id: 'gold', name: 'Gold', class: 'tier-gold', icon: 'fas fa-jedi' };
+    if (totalScore >= 0.5) return { id: 'silver', name: 'Silver', class: 'tier-silver', icon: 'fab fa-ethereum' };
+    return { id: 'bronze', name: 'Bronze', class: 'tier-bronze', icon: 'fas fa-medal' };
+}
+
+// Add this method inside the GoalTracker class
+calculateConsistencyScore(goal) {
+    const logs = this.data.logs.filter(l => l.goalId === goal.id);
+    if (logs.length === 0) return "0.0";
+
+    const dailyStats = {};
+    logs.forEach(l => {
+        if (!dailyStats[l.date]) {
+            dailyStats[l.date] = { sessions: 0, value: 0, minutes: 0 };
+        }
+        dailyStats[l.date].sessions++;
+        
+        const val = (goal.type === 'meditation') 
+            ? (l.count !== undefined ? l.count : (l.touches ? l.touches.length : 0))
+            : l.minutes;
+        
+        dailyStats[l.date].value += val;
+        dailyStats[l.date].minutes += l.minutes;
+    });
+
+    const activeDays = Object.keys(dailyStats).length;
+    if (activeDays === 0) return "0.0";
+
+    const targetSessions = goal.dailySessionTarget || 8;
+    const targetValue = goal.dailyTargetMinutes || 30;
+    const targetDuration = goal.dailyMinMedTarget || 0;
+
+    let scoreSessions = 0;
+    let scoreValue = 0;
+    let scoreDuration = 0;
+
+    Object.values(dailyStats).forEach(stat => {
+        if (stat.sessions >= targetSessions) scoreSessions++;
+        if (stat.value >= targetValue) scoreValue++;
+        if (goal.type === 'meditation' && stat.minutes >= targetDuration) scoreDuration++;
+    });
+
+    const pctSessions = (scoreSessions / activeDays);
+    const pctValue = (scoreValue / activeDays);
+    
+    let totalScore = 0;
+    
+    if (goal.type === 'meditation' && targetDuration > 0) {
+        const pctDuration = (scoreDuration / activeDays);
+        totalScore = (pctSessions + pctValue + pctDuration) / 3;
+    } else {
+        totalScore = (pctSessions + pctValue) / 2;
+    }
+
+    // Convert 0.0-1.0 to 0.0-10.0 scale
+    return (totalScore * 10).toFixed(1);
+}
+
              renderGoals() {
     const container = document.getElementById('active-goals-container');
     const emptyMsg = document.getElementById('empty-msg');
+    
+    // Safety check
+    if (!container || !emptyMsg) return;
+
     container.innerHTML = '';
-    if (this.data.goals.length === 0) { emptyMsg.style.display = 'block'; return; }
+    
+    if (this.data.goals.length === 0) { 
+        emptyMsg.style.display = 'block'; 
+        return; 
+    }
     emptyMsg.style.display = 'none';
+
     const todayStr = this.toIsoDate(new Date());
 
-   const sortedGoals = [...this.data.goals].sort((a, b) => {
-            return (b.lastUpdated || 0) - (a.lastUpdated || 0);
-        });
+    // Sort: Updated recently first
+    const sortedGoals = [...this.data.goals].sort((a, b) => {
+        return (b.lastUpdated || 0) - (a.lastUpdated || 0);
+    });
 
-        sortedGoals.forEach(goal => {
+    sortedGoals.forEach(goal => {
         const isMeditation = goal.type === 'meditation';
-        const unitLabel = isMeditation ? 'mindfulness' : 'mins';
         const targetProp = isMeditation ? 'totalMindfulness' : 'totalMinutes';
+        
+        // --- CHECK COMPLETION ---
+        const isCompleted = goal.lifetimeTargetMinutes > 0 && goal[targetProp] >= goal.lifetimeTargetMinutes;
+        
+        // Check if user is currently "inspecting" this completed goal (to show card instead of badge)
+        // We store this transient state in the class instance (not DB)
+        const isInspecting = this.inspectingGoalId === goal.id;
+
+        // --- RENDER BADGE (If completed and not inspecting) ---
+        if (isCompleted && !isInspecting) {
+            const tier = this.calculateGoalTier(goal);
+            const unitLabel = isMeditation ? 'Mindfulness' : 'Mins';
+            
+            const badgeDiv = document.createElement('div');
+            badgeDiv.className = `goal-medallion ${tier.class}`;
+            badgeDiv.onclick = () => {
+                this.inspectingGoalId = goal.id; // Set inspect state
+                this.renderGoals(); // Re-render to show card
+            };
+const cScore = this.calculateConsistencyScore(goal);
+            badgeDiv.innerHTML = `
+                <div class="medallion-ribbon"><i class="fas fa-certificate"></i> Achievement</div>
+                <div class="medallion-icon-container">
+                    <i class="${tier.icon}"></i>
+                </div>
+                <div class="medallion-title">${goal.name}</div>
+                <div style="font-size: 12px; font-style:italic;">${tier.name} Tier</div>
+                
+                <div class="medallion-stats">
+                    <div class="medallion-stat-item" title="Total Achievements">
+                        <i class="fas fa-check-double"></i> ${goal[targetProp].toLocaleString()} ${unitLabel}
+                    </div>
+                    <div class="medallion-stat-item">
+                        🔥 ${cScore}/10
+                    </div>
+                </div>
+                <div style="font-size:10px; margin-top:10px; opacity:0.7;">(Click to see details)</div>
+            `;
+            container.appendChild(badgeDiv);
+            return; // Skip rendering standard card
+        }
+
+
+        // --- RENDER STANDARD CARD (In Progress OR Inspecting) ---
+        
+        // ... (Keep your existing standard card logic calculation variables here) ...
+        const unitLabel = isMeditation ? 'mindfulness' : 'mins';
         const overallPct = goal.lifetimeTargetMinutes > 0 ? Math.min((goal[targetProp] / goal.lifetimeTargetMinutes) * 100, 100) : 0;
 
-        // 1. Calculate Today's Primary Value (Counts for Med, Mins for Standard)
+        // Calculate Today's Values
         let todayVal = 0;
         if (isMeditation) {
             todayVal = this.data.logs
@@ -2229,19 +2398,32 @@ setDailyMinMedTarget(id) {
             .reduce((sum, l) => sum + l.minutes, 0);
 
         const dailyTarget = goal.dailyTargetMinutes || 0;
-		const dailyminmedTarget = goal.dailyMinMedTarget || 120;
+        const dailyminmedTarget = goal.dailyMinMedTarget || 120;
         let dailyPct = 0;
         let dailyBarColor = goal.color;
         
-        // Calculate percentage for the Primary Bar
         if (dailyTarget > 0) {
             dailyPct = Math.min((todayVal / dailyTarget) * 100, 100);
             if (todayVal >= dailyTarget) dailyBarColor = 'var(--success)';
         }
-        
+
         const div = document.createElement('div');
         div.className = 'card goal-card';
+        if (isInspecting) div.classList.add('card-revealed'); // Add animation class
         div.style.borderLeft = `5px solid ${goal.color}`;
+
+        // --- Close Button for Inspect Mode ---
+        let closeInspectHtml = '';
+        if (isInspecting) {
+            closeInspectHtml = `
+                <div style="text-align: center; margin-bottom: 10px; padding-bottom:10px; border-bottom:1px solid var(--border);">
+                    <button class="btn btn-secondary" onclick="app.closeInspect('${goal.id}')" style="font-size:12px; padding: 5px 15px;">
+                        <i class="fas fa-medal"></i> Minimize to Badge
+                    </button>
+                </div>
+            `;
+        }
+       
         
         let controlsHtml = '', dailySectionHtml = '', sessionSectionHtml = '';
         
@@ -2352,25 +2534,55 @@ setDailyMinMedTarget(id) {
                                 </div>
                             </div>`;
                     }
+const consistencyScore = this.calculateConsistencyScore(goal);
 
-                    div.innerHTML = `
-                        <div class="goal-header">
-                            <div><div class="goal-title">${goal.name}</div><span class="goal-tag" style="color:#b1b1c9; background: rgba(255,255,255,0.1)">${goal.category}</span></div>
-                            <div style="display:flex; gap: 5px;">
-                                <button class="btn-icon" style="color: var(--text-light)" onclick="app.openModal('${goal.id}', '${goal.type}')"><i class="fas fa-pencil-alt"></i></button>
-                                <button class="btn-icon" style="color: var(--text-light)" onclick="app.deleteGoal('${goal.id}')"><i class="fas fa-trash"></i></button>
-                            </div>
-                        </div>
-                        ${dailySectionHtml}
-                        <div class="section-label">Achievement Progress</div>
-                        <div class="progress-container"><div class="progress-bar" style="width: ${overallPct}%; background: ${goal.color}"></div></div>
-                        <div style="display:flex; justify-content:space-between; font-size:12px; color:var(--text-light); margin-bottom: 15px;"><span>${goal[targetProp]} / ${goal.lifetimeTargetMinutes} ${unitLabel}</span><span>${(overallPct).toFixed(1)}%</span></div>
-                        ${sessionSectionHtml} ${controlsHtml}
-                        <div class="sessions-list" style="margin-top: 15px; max-height: 150px; overflow-y: auto;"><div id="sessions-${goal.id}"></div></div>
-                    `;
-                    container.appendChild(div);
-                    this.renderSessions(goal.id, isMeditation);
-                });
+// 2. Define color based on score (Optional visual touch)
+let scoreColor = '#CD7F32';
+if (parseFloat(consistencyScore) >= 9.0) scoreColor = '#34d399';
+else if (parseFloat(consistencyScore) >= 7.5) scoreColor = '#D4AF37';
+else if (parseFloat(consistencyScore) >= 5.0) scoreColor = '#BDC3C7';
+
+
+
+        div.innerHTML = `
+    ${closeInspectHtml}
+    <div class="goal-header">
+        <div><div class="goal-title">${goal.name}</div><span class="goal-tag" style="color:#b1b1c9 ; background: rgba(255,255,255,0.1)">${goal.category}</span></div>
+        <div style="display:flex; gap: 5px;">
+            <button class="btn-icon" style="color: var(--text-light)" onclick="app.openModal('${goal.id}', '${goal.type}')"><i class="fas fa-pencil-alt"></i></button>
+            <button class="btn-icon" style="color: var(--text-light)" onclick="app.deleteGoal('${goal.id}')"><i class="fas fa-trash"></i></button>
+        </div>
+    </div>
+    ${dailySectionHtml}
+    
+    <div class="section-label">Achievement Progress</div>
+    <div class="progress-container">
+        <div class="progress-bar" style="width: ${overallPct}%; background: ${goal.color}"></div>
+    </div>
+    
+    <div style="display:flex; justify-content:space-between; font-size:12px; color:var(--text-light); margin-bottom: 5px;">
+        <span>${goal[targetProp]} / ${goal.lifetimeTargetMinutes} ${unitLabel}</span>
+        <span>${(overallPct).toFixed(1)}%</span>
+    </div>
+
+    <div style="font-size: 11px; color: var(--text-light); margin-bottom: 15px; font-style: italic;">
+        🔥 Dilligent score: <strong style="color: ${scoreColor}">${consistencyScore}</strong>/10
+    </div>
+
+    ${sessionSectionHtml} ${controlsHtml}
+    <div class="sessions-list" style="margin-top: 15px; max-height: 150px; overflow-y: auto;"><div id="sessions-${goal.id}"></div></div>
+`;
+container.appendChild(div);
+        this.renderSessions(goal.id, isMeditation);
+    });
+}
+
+// Helper to close inspect mode
+closeInspect(goalId) {
+    if (this.inspectingGoalId === goalId) {
+        this.inspectingGoalId = null;
+        this.renderGoals();
+    }
 }
             loadMoreSessions(goalId, isMeditation) {
     if (!this.sessionLimits[goalId]) this.sessionLimits[goalId] = 80;
