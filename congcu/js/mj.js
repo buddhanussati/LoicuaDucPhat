@@ -2604,7 +2604,7 @@ closeInspect(goalId) {
         .sort((a, b) => b.timestamp - a.timestamp);
     
     if (allSessions.length === 0) { 
-        container.innerHTML = '<p style="font-size:12px; color:var(--text-light);">Chưa có phiên nào</p>'; 
+        container.innerHTML = '<p style="font-size:12px; color:var(--text-light);">No sessions yet</p>'; 
         return; 
     }
 
