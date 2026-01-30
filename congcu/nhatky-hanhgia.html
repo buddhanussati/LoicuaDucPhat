@@ -17,12 +17,12 @@
 <body>
 
 <nav class="sidebar">
-        <div class="logo"><i class="fas fa-hourglass-empty"></i></div>
+        <div class="logo"><i class="fas fa-hourglass-half"></i></div>
         <div class="nav-item active" onclick="app.switchView('dashboard')">
-            <i class="fas fa-spa"></i><span class="nav-text">Nhật Ký</span>
+            <i class="fas fa-spa"></i><span class="nav-text">Nhật ký</span>
         </div>
         <div class="nav-item" onclick="app.switchView('calendar')">
-            <i class="fas fa-calendar-alt"></i><span class="nav-text">Lịch trình</span>
+            <i class="fas fa-ranking-star"></i><span class="nav-text">Lộ trình</span>
         </div>
         <div class="nav-item" onclick="app.switchView('reports')">
             <i class="fas fa-chart-pie"></i><span class="nav-text">Tổng hợp</span>
@@ -32,15 +32,14 @@
 	
 </div>
        <div class="nav-item" onclick="app.switchView('pro')">
-    <i class="fas fa-fire-flame-curved"></i><span class="nav-text">Chuyên sâu</span>
+    <i class="fas fa-gem"></i><span class="nav-text">Chuyên sâu</span>
 </div>
         
         
        <div class="nav-item" onclick="app.switchView('achievements')">
-            <i class="fas fa-gem"></i><span class="nav-text">Pāramī</span>
+            <i class="fas fa-wreath-laurel"></i><span class="nav-text">Pāramī</span>
         </div>
-        <div class="nav-item" onclick="app.resetApp()" style="color: var(--danger);"> <i class="fas fa-trash-alt"></i><span class="nav-text">Đặt lại</span>
-        </div>
+       
     </nav>
 
 
@@ -54,7 +53,7 @@
             <div class="user-stats">
    <div class="stat-item active-badge-container" onclick="app.openBadgePicker()" title="Nhấn để đổi Pāramī">
     <div id="current-active-badge" class="badge-display">
-        <i class="fas fa-gem"></i>
+        <i class="fas fa-wreath-laurel"></i>
     </div>
 </div>
     <div class="stat-item">
@@ -104,42 +103,15 @@
         </section>
 
         <section id="view-calendar" class="view-section">
-		<div class="card" 
-     onclick="app.renderRandomQuote()" 
-     title="Chạm để đổi câu khác"
-     style="margin: 0 auto 20px auto; text-align: center; border-left: 5px solid var(--zen); cursor: pointer; transition: transform 0.2s; user-select: none; max-width: 450px;"
-     onmouseover="this.style.transform='translateY(-2px)'" 
-     onmouseout="this.style.transform='translateY(0)'">
-    
-    <h3 style="color: var(--zen); margin-bottom: 15px;">
-        <i class="fas fa-dharmachakra"></i> Kinh Pháp Cú
-    </h3>
-    
-    <div id="dhammapada-display" style="
-        font-style: italic; 
-        font-size: 15px; 
-        line-height: 1.6; 
-        color: var(--text); 
-        min-height: 60px; 
-        padding: 0 10px;
-        display: flex; 
-        align-items: center; 
-        justify-content: center;
-        transition: opacity 0.3s ease;">
+		
+            <div style="max-width: 800px; margin: 0 auto;">
+        <div style="text-align: center; margin-bottom: 30px;">
+            <h2 style="font-size: 24px; margin-bottom: 10px;"><i class="fas fa-graduation-cap"></i> Chương Trình Tu Tập</h2>
+            <p style="color: var(--text-light);">Các khoá chứng chỉ hướng dẫn bạn từ người mới bắt đầu đến hành giả thuần thục.</p>
         </div>
 
-<div id="dhammapada-source" style="font-size: 11px; color: var(--text-light); margin-top: 15px; opacity: 0.7;">
-</div>
-</div>
-            <div class="card">
-                <h3 style="text-align: center;">Lịch Tu Tập</h3>
-                <div style="display: flex; justify-content: space-between; align-items: center; margin: 20px 0;">
-                    <button class="btn btn-secondary" onclick="app.changeMonth(-1)"><i class="fas fa-chevron-left"></i></button>
-                    <h4 id="cal-month-year">Tháng Năm</h4>
-                    <button class="btn btn-secondary" onclick="app.changeMonth(1)"><i class="fas fa-chevron-right"></i></button>
-                </div>
-                <div class="calendar-grid" id="calendar-grid"></div>
-            </div>
+        <div id="roadmap-container"></div>
+    </div>
 			
         </section>
 
@@ -197,28 +169,16 @@
             </div>
         </div>
     </div>
+	
 	<div class="card" style="margin-top: 20px;">
-    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
-        <button class="btn btn-secondary" style="padding: 5px 10px;" onclick="app.changeReportMonth(-1)">
-            <i class="fas fa-chevron-left"></i>
-        </button>
-        <div>
-            <h4 style="margin: 0; display:inline-block;">Chánh niệm - Tỉnh giác</h4>
-            <p id="density-month-title" style="font-size: 12px; color: var(--text-light); margin: 0; text-align: center; margin-top:2px;">
-                Tháng này
-            </p>
-        </div>
-        <button class="btn btn-secondary" style="padding: 5px 10px;" onclick="app.changeReportMonth(1)">
-            <i class="fas fa-chevron-right"></i>
-        </button>
-    </div>
-
-  
-    <div style="height: 250px;">
-        <canvas id="reportDensityChart"></canvas>
-    </div>
-</div>
-		
+                <h3 style="text-align: center;">Lịch Tu Tập</h3>
+                <div style="display: flex; justify-content: space-between; align-items: center; margin: 20px 0;">
+                    <button class="btn btn-secondary" onclick="app.changeMonth(-1)"><i class="fas fa-chevron-left"></i></button>
+                    <h4 id="cal-month-year">Tháng Năm</h4>
+                    <button class="btn btn-secondary" onclick="app.changeMonth(1)"><i class="fas fa-chevron-right"></i></button>
+                </div>
+                <div class="calendar-grid" id="calendar-grid"></div>
+            </div>	
 </section>
 <section id="view-analytics" class="view-section">
     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; flex-wrap: wrap; gap: 10px;">
@@ -273,6 +233,29 @@
     <div style="height: 250px;">
         <canvas id="analyticsHourlyChart"></canvas>
     </div>
+</div>
+
+<div class="card" style="margin-top: 20px;">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+        <button class="btn btn-secondary" style="padding: 5px 10px;" onclick="app.changeReportMonth(-1)">
+            <i class="fas fa-chevron-left"></i>
+        </button>
+        <div>
+            <h4 style="margin: 0; display:inline-block;">Chánh niệm - Tỉnh giác</h4>
+            <p id="density-month-title" style="font-size: 12px; color: var(--text-light); margin: 0; text-align: center; margin-top:2px;">
+                Tháng này
+            </p>
+        </div>
+        <button class="btn btn-secondary" style="padding: 5px 10px;" onclick="app.changeReportMonth(1)">
+            <i class="fas fa-chevron-right"></i>
+        </button>
+    </div>
+
+  
+    <div style="height: 250px;">
+        <canvas id="reportDensityChart"></canvas>
+    </div>
+	
 </div>
         <div class="card">
             <h3><i class="fas fa-chart-area"></i> So sánh Kết quả</h3>
@@ -359,28 +342,47 @@
 		
     </div>
 </section>
+
 <section id="view-achievements" class="view-section">
-    <div id="parami-altar" onclick="app.openBadgePicker()"; class="card" style="cursor: pointer;margin: 10px auto; text-align: center; position: relative; overflow: hidden; min-height: 200px; display: flex; flex-direction: column; align-items: center; justify-content: center; transition: all 0.5s ease; max-width: 400px;">
+<div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; align-items: stretch; width: 100%; padding: 10px 0;">
+    
+    <div id="parami-altar" onclick="app.openBadgePicker()" class="card" 
+         style="flex: 1; min-width: 320px; cursor: pointer; text-align: center; position: relative; overflow: hidden; min-height: 250px; display: flex; flex-direction: column; align-items: center; justify-content: center; transition: all 0.5s ease;">
+        
         <div class="altar-bg-glow"></div>
         
         <div style="font-size: 12px; text-transform: uppercase; letter-spacing: 2px; color: var(--text-light); margin-bottom: 15px; z-index: 2;">
             Pāramī Hành Trì
         </div>
 
-        <div id="altar-icon" onclick="app.openBadgePicker()" style="font-size: 60px; margin-bottom: 15px; cursor: pointer; z-index: 2; filter: drop-shadow(0 0 15px rgba(0,0,0,0.5)); transition: transform 0.3s ease;" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
-            <i class="fas fa-gem" style="color: var(--text-light);"></i>
+        <div id="altar-icon" style="font-size: 60px; margin-bottom: 15px; z-index: 2; filter: drop-shadow(0 0 15px rgba(0,0,0,0.5)); transition: transform 0.3s ease;" 
+             onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
+            <i class="fas fa-wreath-laurel" style="color: var(--text-light);"></i>
         </div>
 
         <div id="altar-title" style="font-size: 24px; font-weight: bold; margin-bottom: 5px; z-index: 2; color: var(--text);">
             Chọn Pāramī
         </div>
-
-        
-
-        
     </div>
+
+    <div class="card" 
+         onclick="app.renderRandomQuote()" 
+         title="Chạm để đổi câu khác"
+         style="flex: 1; min-width: 320px; text-align: center; border-left: 5px solid var(--zen); cursor: pointer; transition: transform 0.2s; user-select: none; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 30px;">
+        
+        <h3 style="color: var(--zen); margin-bottom: 15px;">
+            <i class="fas fa-dharmachakra"></i> Kinh Pháp Cú
+        </h3>
+        
+        <div id="dhammapada-display" style="font-style: italic; font-size: 16px; line-height: 1.6; color: var(--text); min-height: 80px; display: flex; align-items: center; justify-content: center; transition: opacity 0.3s ease;">
+            </div>
+
+        <div id="dhammapada-source" style="font-size: 11px; color: var(--text-light); margin-top: 15px; opacity: 0.7;">
+        </div>
+    </div>
+</div>
     <div class="card" style="margin-top: 20px;">
-        <h3 style="text-align: center;"><i class="fas fa-gem"></i> Pāramī </h3>
+        <h3 style="text-align: center;"><i class="fas fa-wreath-laurel"></i> Pāramī </h3>
         <div id="achievement-list" style="margin-top: 20px; display: grid; gap: 10px;"></div>
     </div>
 </section>
@@ -458,7 +460,7 @@
             </p>
             <div style="display: flex;  justify-content: center; gap: 10px;">
                 <button class="btn" style="flex: 1;" onclick="app.downloadFile()">
-                    <i class="fas fa-download"></i> Sao lưu
+                    <i class="fas fa-download"></i> Sao&nbsp;lưu
                 </button>
                 <button class="btn btn-secondary"; style="flex: 1;" " onclick="document.getElementById('backup-file-input').click()">
                     <i class="fas fa-file-import"></i> Khôi&nbsp;phục
@@ -562,8 +564,25 @@
     <div id="finish-tags" class="tag-container"></div>
 </div>
             <div id="med-finish-actions" style="display:flex; gap:10px; justify-content:flex-end; margin-top:20px;">
-             <button id="btn-med-discard" class="btn btn-secondary" onclick="app.discardMeditation()">Hủy bỏ</button>
+             <button id="btn-med-discard" class="btn btn-secondary" onclick="app.discardMeditation()">Thoát</button>
              <button id="btn-med-save" class="btn" style="background:var(--zen); color:white" onclick="app.saveMeditationLog()">Lưu nhật ký</button>
+        </div>
+    </div>
+</div>
+
+<div class="modal" id="quiz-modal" style="z-index: 5000;">
+    <div class="modal-content">
+        <h2 style="text-align: center; margin-bottom: 20px;"><i class="fas fa-question-circle"></i> Trắc Nghiệm</h2>
+        <p style="color: var(--text-light); font-size: 13px; text-align: center; margin-bottom: 20px;">
+            Trả lời đúng tất cả câu hỏi để hoàn thành bài học.
+        </p>
+        
+        <div id="quiz-container">
+            </div>
+
+        <div style="display: flex; justify-content: flex-end; gap: 10px; margin-top: 25px; border-top: 1px solid var(--border); padding-top: 15px;">
+            <button class="btn btn-secondary" onclick="document.getElementById('quiz-modal').style.display='none'">Đóng</button>
+            <button class="btn" onclick="app.submitQuiz()">Kiểm tra kết quả</button>
         </div>
     </div>
 </div>
@@ -697,7 +716,7 @@
             <h3 style="color: var(--text); margin-top: 20px;">✨ Các Khái Niệm Cốt Lõi</h3>
             <p>Để sử dụng ứng dụng hiệu quả, bạn cần nắm rõ các chỉ số sau:</p>
             <ul style="padding-left: 20px; margin-bottom: 15px;">
-                <li><strong>Chánh Niệm:</strong> Đơn vị đo lường sự tỉnh giác. Mỗi lần bạn nhận biết được hơi thở hoặc trạng thái tâm trí và chạm vào màn hình, một "Chánh Niệm" sẽ được ghi lại.</li>
+                <li><strong>Chánh Niệm</strong> là đơn vị đo lường sự tỉnh thức. Mỗi lần bạn nhận biết được hơi thở hoặc trạng thái tâm trí và chạm vào màn hình, một "Chánh Niệm" sẽ được ghi lại.</li>
                 <li><strong>Chánh niệm tốt:</strong> Trạng thái khi tần suất ghi nhận (Niệm) duy trì ở mức ổn định và đều đặn.</li>
                 <li><strong>Thất niệm:</strong> Trạng thái khi tâm trí bị xao nhãng hoặc buồn ngủ, dẫn đến việc không có hoặc có rất ít ghi nhận trong một khoảng thời gian.</li>
                 <li><strong>Chuỗi Tinh Tấn:</strong> Số ngày liên tiếp bạn thực hiện tu tập.</li>
@@ -876,9 +895,13 @@
             </div>
         </div>
         
-        <div style="padding: 15px; border-top: 1px solid var(--border); display: flex; justify-content: flex-end; background: var(--surface); border-radius: 0 0 16px 16px;">
-            <button class="btn btn-secondary" onclick="app.closeIntroModal()">Đóng</button>
-        </div>
+       <div style="padding: 15px; border-top: 1px solid var(--border); display: flex; justify-content: flex-end; gap: 10px; background: var(--surface); border-radius: 0 0 16px 16px;">
+    
+    <button class="btn btn-secondary" onclick="app.resetApp()" style="color: var(--danger); margin-right: auto;">Đặt lại
+    </button>
+    
+    <button class="btn btn-secondary" onclick="app.closeIntroModal()">Đóng</button>
+</div>
     </div>
 </div>
     <audio id="bell" src="./audio/bell.mp3" preload="auto"></audio>
