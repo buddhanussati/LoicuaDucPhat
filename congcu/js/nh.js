@@ -908,13 +908,7 @@ renderRoadmap() {
         } else {
             // Toggle ON
             this.data.courseProgress[courseId][stepId] = true;
-            
-          
-            // Close expansion automatically after short delay to show checkmark
-            setTimeout(() => {
-                this.expandedStepId = null;
-                this.renderRoadmap();
-            }, 1000);
+        
         }
 
         this.save();
@@ -1022,16 +1016,12 @@ submitQuiz() {
     // Tìm hoặc tạo mục tiêu ảo để chạy timer
     let goal = this.data.goals.find(g => g.type === 'meditation') || { id: 'temp_practice', name: 'Thực hành bài học', type: 'meditation' , lastDuration: params.duration};
 
-    // Khởi tạo trạng thái thiền
-    this.startMeditationSetup(goal);
+    // --- THAY ĐỔI Ở ĐÂY: Truyền params vào hàm setup ---
+    this.startMeditationSetup(goal, params);
     
-    // Ghi đè các thông số bài học
-    this.meditationState.totalDurationSeconds = params.duration * 60;
-    this.meditationState.remainingSeconds = params.duration * 60;
+    // Ghi nhận ID bài học để xử lý logic hoàn thành sau này
     this.meditationState.courseId = courseId;
     this.meditationState.courseStepId = stepId;
-    
-    
 }
 setupMeditationListeners() {
     const medOverlay = document.getElementById('meditation-overlay');
@@ -2577,17 +2567,27 @@ toggleTimer(id) {
     this.renderGoals();
 }
 
-startMeditationSetup(goal) {
+startMeditationSetup(goal, overrideParams = null) {
+    let min = 0;
+    let threshold = 9;
+
+    // --- LOGIC MỚI: Kiểm tra xem có phải bài học (có overrideParams) không ---
+    if (overrideParams) {
+        // Nếu là bài học: Lấy trực tiếp thông số, KHÔNG hiện prompt
+        min = overrideParams.duration;
+        // Nếu bài học quy định ngưỡng thì dùng, không thì lấy ngưỡng mặc định của user
+        threshold = overrideParams.threshold || (parseInt(goal.lastThreshold) || 9);
+    } else {
     const defaultTime = goal.lastDuration || '20';
     const minStr = prompt('Thời gian thiền (phút):', defaultTime);
     
     if (!minStr) return;
-    const min = parseInt(minStr);
+     min = parseInt(minStr);
     if (isNaN(min) || min <= 0) return;
 
     const defaultThreshold = goal.lastThreshold || '9';
     const threshStr = prompt('Ngưỡng mất tập trung (giây):\n(thời gian tối đa cho 1 lần chánh niệm)', defaultThreshold);
-    let threshold = 9; 
+    
     
     if (threshStr && !isNaN(parseInt(threshStr)) && parseInt(threshStr) > 0) {
         threshold = parseInt(threshStr);
@@ -2596,7 +2596,7 @@ startMeditationSetup(goal) {
     goal.lastDuration = min;
     goal.lastThreshold = threshold;
     this.save(); 
-    
+    }
     if (typeof Website2APK !== 'undefined') {
         Website2APK.keepScreenOn(true); 
     }
@@ -2751,7 +2751,12 @@ startMeditationSetup(goal) {
     const durationSeconds = this.meditationState.totalDurationSeconds - this.meditationState.remainingSeconds;
     const minutes = Math.ceil(durationSeconds / 60);
     const notes = document.getElementById('med-finish-notes').value;
-    const goal = this.data.goals.find(g => g.id === this.meditationState.goalId);
+    let goal = this.data.goals.find(g => g.id === this.meditationState.goalId);
+    if (!goal && this.meditationState.courseStepId) {
+        goal = { id: 'temp_practice', type: 'meditation', name: 'Bài thực hành' };
+    }
+
+    if (!goal) return;
     
     if (this.meditationState.courseStepId) {
         const course = COURSES.find(c => c.id === this.meditationState.courseId);
@@ -2903,7 +2908,9 @@ startMeditationSetup(goal) {
     const newBadges = this.checkAchievements(true);
     
      document.getElementById('meditation-finish-modal').style.display = 'none';
+    if (!this.meditationState.courseStepId) {
     this.showToast(`Đã lưu! +${this.meditationState.count} Chánh niệm, +${this.meditationState.awarenessCount} Tỉnh giác.`);
+}
 	if (newBadges.length > 0) {
         setTimeout(() => {
             newBadges.forEach((title, index) => {
@@ -2912,7 +2919,7 @@ startMeditationSetup(goal) {
                     this.showToast(`💎 Mở khoá Pāramī: ${title}`, true);
                 }, index * 3500); 
             });
-        }, 1000); 
+        }, 1200); 
     }
 }
 
@@ -5242,7 +5249,7 @@ loadActiveBadge() {
             container.classList.remove('silver');
         }
     } else {
-        container.innerHTML = `<i class="fas fa-wreath-laurel"></i>`;
+        container.innerHTML = `<i class="fas fa-gem"></i>`;
         
         container.style.color = '#ffffff';
         container.style.textShadow = 'none'; // Reset text shadow
@@ -5729,7 +5736,7 @@ logSessionConfirm(e) {
                     this.showToast(`💎 Mở khoá Pāramī: ${title}`, true);
                 }, index * 3500);
             });
-        }, 1000);
+        }, 1200);
     }
 }
          deleteGoal(id) {
