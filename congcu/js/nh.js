@@ -1,3 +1,281 @@
+
+const COURSES = [
+    {
+        id: 'c_basics',
+        title: 'Thiền Căn Bản',
+        desc: 'Làm quen với tư thế, hơi thở và cách định tâm cơ bản.',
+        icon: 'fas fa-award-simple',
+        color: '#74b9ff', 
+        steps: [
+            {
+                id: 's_0_intro',
+                title: 'Vì sao chọn Hơi Thở?',
+                desc: 'Hiểu tầm quan trọng của hơi thở - chiếc neo của hiện tại.',
+                content: `
+                    <p>Hơi thở không chỉ là sự sống mà còn là nhịp cầu nối liền giữa thân và tâm. Trong thiền tập, hơi thở đóng vai trò cốt yếu:</p>
+                    <ul>
+                        <li><strong>Chiếc neo của hiện tại:</strong> Tâm trí thường chạy về quá khứ, tương lai hoặc vọng tưởng. Hơi thở chỉ xảy ra ở <strong>ngay bây giờ</strong>. Quay về hơi thở là quay về thực tại.</li>
+                        <li><strong>Khách quan & tự nhiên:</strong> Hơi thở vận hành tự nhiên và luôn sẵn có, không phán xét, không gợi lên tham ái hay sân hận, là đối tượng an toàn để tâm nương tựa.</li>
+                        <li><strong>Tấm gương phản chiếu tâm:</strong> Khi giận hơi thở thô, khi an hơi thở nhẹ. Quan sát hơi thở giúp ta hiểu trạng thái tâm mình.</li>
+                    </ul>
+                    <p><em>Hãy trả lời đúng 3 câu hỏi dưới đây để mở khóa bài tiếp theo.</em></p>
+                `,
+                quiz: [
+                    {
+                        q: "Tại sao hơi thở là đề mục thiền căn bản phổ biến nhất?",
+                        options: ["Vì không tốn tiền mua dụng cụ", "Vì nó luôn hiện diện trong hiện tại và là đối tượng khách quan & tự nhiên", "Vì nó giúp ta suy nghĩ về quá khứ"],
+                        correct: 1
+                    },
+                    {
+                        q: "Mối liên hệ giữa hơi thở và tâm là gì?",
+                        options: ["Hơi thở phản ánh trạng thái của tâm", "Không có liên hệ gì", "Hơi thở quyết định tính cách"],
+                        correct: 0
+                    },
+                    {
+                        q: "Chức năng chính của hơi thở trong thiền là gì?",
+                        options: ["Giúp ngủ ngon hơn", "Giúp chữa bệnh", "Làm chiếc neo giữ tâm ở lại với thân"],
+                        correct: 2
+                    }
+                ]
+            },
+            // --- CẬP NHẬT BÀI 1: TƯ THẾ (THÊM QUIZ) ---
+            { 
+                id: 's_1_posture', 
+                title: 'Tư thế đúng', 
+                desc: 'Cách ngồi để lưng thẳng và tâm an.', 
+                content: '<p>Hãy tìm một nơi yên tĩnh. Ngồi chéo chân (xếp bằng, bán già hoặc kiết già) hoặc ngồi trên ghế.</p><ul><li><strong>Lưng:</strong> Giữ thẳng tự nhiên, không gồng cứng.</li><li><strong>Vai:</strong> Thả lỏng, hạ vai xuống tự nhiên.</li><li><strong>Tay:</strong> Đặt chồng lên nhau hoặc để trên đầu gối.</li><li><strong>Mắt:</strong> Khép hờ hoặc nhắm nhẹ.</li></ul><p><em>Trả lời trắc nghiệm để hoàn thành bài học.</em></p>',
+                quiz: [
+                    {
+                        q: "Nguyên tắc quan trọng nhất của lưng khi ngồi thiền là gì?",
+                        options: ["Phải dựa vào tường", "Càng cong càng tốt", "Giữ thẳng tự nhiên, không gồng cứng"],
+                        correct: 2
+                    },
+                    {
+                        q: "Nên để vai như thế nào?",
+                        options: ["Thả lỏng, hạ vai xuống tự nhiên", "Nhô cao lên gần tai", "Gồng cứng để giữ sức"],
+                        correct: 0
+                    },
+                    {
+                        q: "Tư thế thẳng lưng giúp ích gì?",
+                        options: ["Giúp tâm tỉnh táo và khí huyết lưu thông", "Giúp dễ ngủ gật hơn", "Không có tác dụng gì"],
+                        correct: 0
+                    }
+                ]
+            },
+            // --- CẬP NHẬT BÀI 2: HƠI THỞ (THÊM QUIZ) ---
+            { 
+                id: 's_2_breath', 
+                title: 'Nhận diện hơi thở', 
+                desc: 'Quan sát hơi thở tự nhiên đi vào và đi ra.', 
+                content: '<p>Không cố gắng điều khiển hơi thở. Chỉ đơn giản là <strong>biết</strong>:</p><ul><li>Khi hít vào, biết mình đang hít vào.</li><li>Khi thở ra, biết mình đang thở ra.</li></ul><p>Đặt tâm chú ý tại cửa mũi hoặc phồng xẹp của bụng.</p>',
+                quiz: [
+                    {
+                        q: "Thái độ đúng khi quan sát hơi thở là gì?",
+                        options: ["Cố gắng điều khiển nhịp thở", "Chỉ đơn giản ghi nhận (biết) như nó đang là", "Nín thở để tâm tĩnh lặng"],
+                        correct: 1
+                    },
+                    {
+                        q: "Nếu hơi thở đang ngắn hoặc thô, ta nên làm gì?",
+                        options: ["Cố ép cho nó dài ra", "Tự trách mình thiền sai", "Ghi nhận là nó đang ngắn hoặc thô"],
+                        correct: 2
+                    },
+                    {
+                        q: "Vị trí nào thường dùng để quan sát hơi thở?",
+                        options: ["Cửa mũi hoặc vùng bụng", "Đỉnh đầu", "Lòng bàn chân"],
+                        correct: 0
+                    }
+                ]
+            },
+            { 
+                id: 's_3_count', 
+                title: 'Phương pháp đếm & Ghi nhận Chánh niệm', 
+                desc: 'Cách sử dụng ứng dụng để ghi nhận Chánh niệm qua hơi thở.', 
+                content: `<p><strong>Để sử dụng ứng dụng hiệu quả, bạn cần nắm rõ các khái niệm sau:</strong></p>
+            <ul style="padding-left: 20px; margin-bottom: 15px;">
+                <li><strong>Chánh Niệm</strong> là đơn vị đo lường sự tỉnh thức, là sự giữ tâm, ghi nhận sự chú tâm vào đề mục thiền. Trong ứng dụng này, mỗi lần bạn nhận biết được hơi thở và chạm vào màn hình, một "Chánh Niệm" sẽ được ghi lại.</li>
+                
+                <li><strong>Thất niệm:</strong> Trạng thái khi tâm trí bị xao nhãng hoặc buồn ngủ, dẫn đến việc không có hoặc có rất ít ghi nhận trong một khoảng thời gian.</li> <li style="margin-top: 10px;">
+                    <strong> Ngưỡng mất tập trung:</strong>
+                    <p style="font-size: 13px; color: var(--text-light); margin-top: 5px;">
+                        Đây là khái niệm quan trọng nhất để tính toán "Chất lượng thiền".
+                    </p>
+                    <div style="background: rgba(255, 255, 255, 0.05); padding: 10px; border-radius: 6px; border-left: 3px solid var(--warning); margin: 5px 0;">
+                        <em>"Ngưỡng mất tập trung" là khoảng thời gian tối đa cho phép giữa hai lần ghi nhận; nếu vượt quá thời gian này, hệ thống sẽ xem là bạn đang mất tập trung.</em>
+                    </div>
+					<p style="font-size: 13px; color: var(--text-light); margin-top: 5px;">
+                        Một chu kỳ hơi thở vào ra của một người ở trạng thái bình thường là từ 4 đến 6 giây. Ngưỡng mất tập trung thường lấy khoảng này + thêm khoảng 2-3 giây, ứng dụng đặt mặc định là 9 giây, bạn có thể chỉnh lại tuỳ theo ý muốn.
+                    </p>
+					</ul>
+					<p><strong>Thực hành: Bước 1, để tránh phóng tâm, bạn hãy đếm thầm:</strong></p><ul><li>Hít vào, thở ra, đếm "Một".</li><li>Hít vào, thở ra, đếm "Hai".</li><li>Tiếp tục đến "Mười" rồi quay lại "Một".</li></ul><p>Nếu bị quên hoặc nhầm lẫn, hãy nhẹ nhàng quay lại đếm từ "Một".</p> <p><strong>Bước 2, bạn hãy phối hợp việc đếm thầm với việc ghi nhận trên ứng dụng.</strong></p><ul><li><strong>Chạm:</strong> Mỗi khi thở ra và đếm xong một số, hãy chạm nhẹ vào màn hình.</li><li><strong>Mục tiêu:</strong> Duy trì sự ghi nhận liên tục không gián đoạn.</li></ul><p><em>Để hoàn thành bài học này, hãy thực hành một phiên ngắn 5 phút.</em></p>`,
+                practiceParams: { duration: 5 }
+            },
+            {
+                id: 's_3_awareness',
+                title: 'Ghi nhận Tỉnh giác',
+                desc: 'Học cách nhận diện trạng thái tâm rõ ràng.',
+                content: `<p>Tỉnh giác là khi bạn <b>nhận biết</b> được trạng thái tâm mình (ví dụ: chợt nhận ra mình đang phóng tâm, đang có tạp niệm, hoặc đang mất tập trung trên đề mục thiền). Đây là khoảnh khắc của sự nhận biết & quay trở lại. Trong ứng dụng, chúng ta ghi nhận sự <strong>Tỉnh giác</strong> bằng cách <strong>Nhấn và Giữ</strong>:</p><ul><li><b>Tỉnh giác</b> được ví người giữ cửa thành hiền trí, thông minh, có trí, ngăn chặn những người lạ mặt, cho vào những người quen biết để bảo vệ những người ở trong thành <em>(chánh niệm)</em> và để chống cự những người bên ngoài <em>(tạp niệm)</em>. </li><li><b>Để thực hành</b>, khi bạn nhận ra tâm mình đang có tạp niệm, xao nhãng khỏi đề mục, hãy nhấn giữ vào màn hình cho đến khi thấy vòng tròn xanh <em>(khiên bảo vệ)</em> xuất hiện, và một "Tỉnh giác" sẽ được ghi lại.</li></ul><p><strong>Yêu cầu hoàn thành:</strong> Thực hiện một thời thiền 10 phút với ít nhất 10 lần ghi nhận Tỉnh giác.</p>`,
+                practiceParams: { duration: 10, minAwareness: 10 }
+            },
+            {
+    id: 's_3_confirm',
+    title: 'Chế độ Xác nhận',
+    desc: 'Phá vỡ thói quen phản xạ vô thức và rèn luyện sự trung thực.',
+    content: `
+        <p>Trong thiền tập, chúng ta rất dễ rơi vào trạng thái "tự động hóa" — tức là tay vẫn chạm ghi nhận nhưng tâm trí đã trôi dạt đi nơi khác. <strong>Chế độ Xác nhận</strong> là một "trạm kiểm soát" để thử thách sự hiện diện thực sự của bạn.</p>
+        
+        <div style="background: rgba(251, 191, 36, 0.1); border-left: 3px solid var(--warning); padding: 10px; margin: 15px 0; font-size: 14px;">
+            <strong style="color: var(--warning);"><i class="fas fa-microchip"></i> Cơ chế vận hành:</strong>
+            <p style="margin-top: 5px;">Khi bạn ghi nhận một hơi thở (chạm 1 lần), hệ thống sẽ ngẫu nhiên kích hoạt thử thách:</p>
+            <ul>
+                <li><strong>Dấu hiệu:</strong> Vòng tròn đếm số sẽ <strong>co nhỏ lại</strong> và chuyển sang <strong>màu vàng cảnh báo</strong>.</li>
+                <li><strong>Hành động:</strong> Bạn phải chạm thêm lần thứ 2 trong vòng <strong>3 giây</strong> để xác nhận đây là hành động có ý thức.</li>
+                <li><strong>Lưu ý:</strong> Ứng dụng chỉ ghi nhận thời gian của cú chạm <em>đầu tiên</em> để đảm bảo tính chính xác của dữ liệu nhịp thở.</li>
+            </ul>
+        </div>
+
+        <h4 style="color: var(--primary); margin-top: 15px;"><i class="fas fa-eye"></i> Ý nghĩa thiền tập:</h4>
+        <ul style="font-size: 13px; color: var(--text-light);">
+            <li><strong>Rèn luyện sự trung thực:</strong> Bạn có thực sự đang biết mình thở, hay chỉ đang bấm máy móc theo thói quen?</li>
+            <li><strong>Khoảng dừng tỉnh giác:</strong> Tạo ra một khe hở giữa "tác ý" và "hành động". Nếu bạn không kịp xác nhận, nghĩa là tâm bạn đang thiếu sự tỉnh giác ngay lúc đó.</li>
+            <li><strong>Đối trị phóng tâm:</strong> Việc thỉnh thoảng bị "hỏi lại" giúp kéo tâm trở về thực tại, nhắc nhở rằng mỗi cú chạm đều cần một sự chứng kiến trọn vẹn.</li>
+        </ul>
+
+        <p style="margin-top: 15px;"><strong>Hướng dẫn thực hành:</strong></p>
+        <ol>
+            <li>Nhấn vào biểu tượng <strong>Cấu hình (bánh răng)</strong> trong mục tiêu Thiền.</li>
+            <li>Bật <strong>"Chế độ Xác nhận"</strong>.</li>
+            <li>Thực hiện một thời thiền với tâm thế sẵn sàng đối diện với những lần "hỏi lại" của ứng dụng.</li>
+        </ol>
+
+        <p style="border-top: 1px solid var(--border); padding-top: 10px; font-size: 13px;">
+            <strong>Yêu cầu hoàn thành:</strong> Thực hiện phiên thiền tối thiểu 10 phút, ghi nhận ít nhất 20 Chánh niệm, 10 Tỉnh giác và bắt buộc phải bật Chế độ Xác nhận trong suốt phiên tập.
+        </p>
+    `,
+    practiceParams: { 
+        duration: 10, 
+        minAwareness: 10, 
+        minMindfulness: 20, 
+        requireConfirmMode: true 
+    }
+},
+			{
+    id: 's_3_levels',
+    title: 'Mức độ Chú tâm: Từ "Biết" đến "Hiểu"',
+    desc: 'Phân loại chất lượng ghi nhận để rèn luyện sự tinh tế của chánh niệm.',
+    content: `
+        <p>Trong thiền tập, chánh niệm không chỉ là "có" hay "không", mà còn có <strong>chiều sâu</strong>. Ứng dụng cung cấp hai cơ chế để bạn ghi nhận và rèn luyện sự vi tế này:</p>
+        
+        <div style="background: var(--surface); padding: 15px; border-radius: 8px; margin: 15px 0; border-left: 4px solid var(--primary);">
+            <h4 style="margin-top:0; color: var(--primary);"><i class="fas fa-hand-pointer"></i> 1. Chế độ Thủ công: Sự Tự Nhận Diện</h4>
+            <p>Bạn chủ động đánh giá chất lượng tâm ngay tại thời điểm ghi nhận bằng số lần chạm:</p>
+            <ul style="list-style: none; padding-left: 0;">
+                <li><span class="text-q4"><strong>1 Chạm (Thấp):</strong></span> Tâm vừa quay lại sau một cơn phóng dật, hoặc sự nhận biết còn mờ nhạt, nhiều tạp niệm</li>
+                <li><span class="text-q3"><strong>2 Chạm (Trung bình):</strong></span> Tâm nhận biết đối tượng rõ hơn nhưng chưa hoàn toàn sâu sắc, có tạp niệm nhưng ít hơn mức Thấp</li>
+                <li><span class="text-q2"><strong>3 Chạm (Tốt):</strong></span> Sự chú tâm vững chãi, nhận biết rõ hơi thở, rất ít bị tạp niệm quấy nhiễu.</li>
+            </ul>
+        </div>
+
+        <div style="background: var(--surface); padding: 15px; border-radius: 8px; margin: 15px 0; border-left: 4px solid var(--secondary);">
+            <h4 style="margin-top:0; color: var(--secondary);"><i class="fas fa-bolt"></i> 2. Cơ chế Chuỗi (Combo): Động Lực Của Định</h4>
+            <p>Nếu bạn duy trì sự ghi nhận liên tục (chạm 1 lần mỗi khi thở) với khoảng cách đều đặn, hệ thống sẽ tự nâng cấp mức chú tâm:</p>
+            <ul>
+                <li>Mọi phiên thiền đều bắt đầu ở mức <span class="text-q4"><strong>Thấp</strong></span>.</li>
+                <li><strong>Cứ mỗi 15 lần ghi nhận liên tục</strong> (< ngưỡng mất tập trung), mức chú tâm tự động tăng: <strong>Thấp → TB → Tốt → <span class="text-q1">Cao</span></strong>.</li>
+                <li><i class="fas fa-exclamation-triangle"></i> <strong>Reset:</strong> Nếu bạn quên ghi nhận quá lâu (phóng tâm), chuỗi sẽ reset về mức <strong>Thấp</strong>. Đây là lúc bắt đầu lại từ đầu với tâm thế mới.</li>
+            </ul>
+        </div>
+
+        <p><strong>Ý nghĩa thiền tập:</strong> Việc phân loại giúp bạn tránh thói quen bấm máy vô thức. Khi tâm nhận diện được chất lượng của chính nó, chánh niệm tỉnh giác sẽ trở nên sắc bén hơn.</p>
+        
+        <p><strong>Yêu cầu hoàn thành:</strong> Thực hiện thời thiền 10 phút. Trong đó, hãy nỗ lực duy trì chánh niệm để đạt được ít nhất 1 lần ghi nhận mức <strong>Trung bình</strong> và 1 lần mức <strong>Tốt</strong> (thông qua chạm nhiều lần hoặc tích lũy chuỗi).</p>
+    `,
+    practiceParams: { 
+        duration: 10,  // Thời gian 10 phút để đủ trải nghiệm combo
+        minAverage: 1, // Yêu cầu ít nhất 1 lần TB (quality = 3)
+        minGood: 1     // Yêu cầu ít nhất 1 lần Tốt (quality = 2)
+    }
+},
+			{
+    id: 's_4_cert',
+    title: 'Chứng Chỉ: Thiền Căn Bản',
+    desc: 'Thực hành chương trình tu tập.',
+    content: `
+        <p>Chúc mừng bạn đã hoàn thành phần lý thuyết và làm quen với các công cụ căn bản. Tuy nhiên, thiền tập không nằm ở việc "biết", mà nằm ở việc <strong>"hành"</strong>.</p>
+        
+        <div style="background: var(--surface); padding: 18px; border-radius: 12px; margin: 15px 0; border: 1px solid var(--primary); box-shadow: 0 4px 12px rgba(139, 92, 246, 0.1);">
+            <h4 style="margin-top:0; color: var(--primary); display: flex; align-items: center; gap: 8px;">
+                <i class="fas fa-scroll"></i> Chương Trình Chứng Chỉ: Thiền Căn Bản
+            </h4>
+            <p>Khi nhấn nút xác nhận bên dưới, bạn sẽ chính thức bước vào chương trình tu tập <strong>"Thiền Căn Bản"</strong> với những kỷ luật đặc thù:</p>
+            
+            <ul style="padding-left: 20px; line-height: 1.6;">
+                <li><strong>Mục tiêu:</strong> Tích lũy đủ <span class="text-q1"><strong>10.000 điểm Chánh niệm</strong></span>. Đây là con số nền tảng để tạo nên một sự tỉnh thức mới trong chiều sâu nhận thức.</li>
+                <li><strong>Kỷ luật bản thân:</strong> Mục tiêu này <strong>không thể sửa đổi</strong> và <strong>không thể nhập thủ công</strong>. Mọi ghi nhận phải đến từ những giây phút thực tọa "người thật - việc thật".</li>
+                <li><strong>Thi cuối khoá:</strong> Sau khi hoàn thành 10.000 chánh niệm, bạn sẽ thực hiện một thời thiền <strong>60 phút (Bài Thi Cuối Khoá)</strong>. Vượt qua bài thi này, bạn sẽ nhận được <strong>Huy Hiệu Danh Dự</strong> và <strong>Chứng Chỉ Thiền Định</strong> ghi dấu mốc quan trọng trên lộ trình tu học.</li>
+            </ul>
+        </div>
+
+        <p style="font-style: italic; color: var(--text-light); text-align: center;">"Hành trình chánh niệm bắt đầu từ một bước chân tỉnh giác."</p>
+        
+        <p><strong>Bạn đã sẵn sàng để thực hành?</strong></p>
+    `,
+    isCertAction: true // Flag để render nút "Bắt đầu lộ trình"
+}
+        ]
+    },
+   
+
+   
+{
+        id: 'c_intermediate',
+        title: 'Thiền Trung Cấp',
+        desc: 'Nâng cao định lực và sự ổn định của tâm.',
+        icon: 'fas fa-award',
+        color: '#ff9f43', 
+        steps: [
+            { 
+                id: 's_inter_cert', 
+                title: 'Chương trình Chứng chỉ', 
+                desc: 'Chương trình tu tập với mục tiêu Thiền Trung Cấp.', 
+                content: '<p>Bước vào giai đoạn định tâm vững chắc hơn.</p><ul><li><strong>Mục tiêu:</strong> Đạt 15,000 Chánh niệm.</li><li><strong>Thi Cuối Khoá:</strong> 60 phút.</li></ul>',
+                isCertAction: true 
+            }
+        ]
+    },
+    {
+        id: 'c_advanced',
+        title: 'Thiền Nâng Cao',
+        desc: 'Mở rộng tâm và sức chịu đựng.',
+        icon: 'far fa-award-simple',
+        color: '#8b5cf6', // Purple
+        steps: [
+            { 
+                id: 's_adv_cert', 
+                title: 'Chương trình Chứng chỉ', 
+                desc: 'Chương trình tu tập với mục tiêu Thiền Nâng Cao.', 
+                content: '<p>Rèn luyện sự kiên trì và định sâu.</p><ul><li><strong>Mục tiêu:</strong> Đạt 20,000 Chánh niệm.</li><li><strong>Thi Cuối Khoá:</strong> 120 phút.</li></ul>',
+                isCertAction: true 
+            }
+        ]
+    },
+    {
+        id: 'c_intensive',
+        title: 'Thiền Chuyên Sâu',
+        desc: 'Thành tựu chánh niệm trọn vẹn.',
+        icon: 'far fa-award',
+        color: '#ef4444', // Red
+        steps: [
+            { 
+                id: 's_master_cert', 
+                title: 'Chương trình Chứng chỉ', 
+                desc: 'Chương trình tu tập với mục tiêu Thiền Chuyên Sâu.', 
+                content: '<p>Lộ trình tu tập chuyên sâu dành cho những hành giả kiên định.</p><ul><li><strong>Mục tiêu:</strong> Đạt 40,000 Chánh niệm.</li><li><strong>Thi Cuối Khoá:</strong> 120 phút.</li></ul>',
+                isCertAction: true 
+            }
+        ]
+    }
+];
+
 const DB_CONFIG = {
     name: 'HanhGiaDB',
     version: 2, 
@@ -109,7 +387,7 @@ const dbHelper = {
             metaStore.put({ key: 'achievements', value: data.achievements });
             metaStore.put({ key: 'medSettings', value: data.medSettings });
 			metaStore.put({ key: 'activeBadge', value: data.activeBadge });
-            
+            metaStore.put({ key: 'courseProgress', value: data.courseProgress });
             tx.oncomplete = () => resolve();
             tx.onerror = (e) => reject(e);
         });
@@ -120,7 +398,7 @@ const dbHelper = {
 
         return new Promise((resolve, reject) => {
             const tx = this.db.transaction(['goals', 'logs', 'meta'], 'readonly');
-            const data = { goals: [], logs: [], xp: 0, streak: 0, achievements: [], medSettings: {} };
+            const data = { goals: [], logs: [], xp: 0, streak: 0, achievements: [], medSettings: {}, courseProgress: {} };
             
             const getAll = (storeName) => {
                 return new Promise((res, rej) => {
@@ -141,6 +419,7 @@ const dbHelper = {
                         if (item.key === 'achievements') data.achievements = item.value;
                         if (item.key === 'medSettings') data.medSettings = item.value;
 						if (item.key === 'activeBadge') data.activeBadge = item.value;
+						if (item.key === 'courseProgress') data.courseProgress = item.value;
                     });
                     resolve(data);
                 })
@@ -169,7 +448,8 @@ const dbHelper = {
                     xp: 0,
                     streak: 0,
                     achievements: [],
-                    medSettings: { mode: 'tap', holdDuration: 500, tapRequired: 1, vibration: true }
+                    medSettings: { mode: 'tap', holdDuration: 500, tapRequired: 1, vibration: true },
+					courseProgress: {},
                 };
 
                 this.sessionLimits = {};
@@ -198,7 +478,8 @@ const dbHelper = {
                     'Hoài Nghi', 'Nhiều Toan Tính', 'Hồi Tưởng', 'Căng Thẳng',
                     'Đau Lưng', 'Tê Chân', 'Ngứa', 'Mỏi Cổ', 'Nóng Nực', 'Lạnh'
                 ];
-
+    this.activeCourseId = null;
+    this.expandedStepId = null;
                 this.init();
             }
 			
@@ -211,7 +492,7 @@ const dbHelper = {
             this.data = { ...this.data, ...dbData };
         }
 
-        // --- THAY ĐỔI: Cấu hình mặc định mới ---
+        if (!this.data.courseProgress) this.data.courseProgress = {};
         if (!this.data.medSettings) this.data.medSettings = {};
         
         // Luôn luôn ép về chế độ thống nhất
@@ -266,6 +547,491 @@ hexToRgba(hex, alpha) {
         return 'rgba(' + [(c >> 16) & 255, (c >> 8) & 255, c & 255].join(',') + ',' + alpha + ')';
     }
     return `rgba(156, 163, 175, ${alpha})`; // Fallback gray
+}
+enrollCertification(courseId = 'c_basics') {
+    let certConfig = {};
+    
+    // Define configuration for each course
+    switch(courseId) {
+        case 'c_intermediate':
+            certConfig = {
+                id: 'cert_inter_1',
+                name: 'Thiền Trung Cấp',
+				dailyTarget: 600,
+				dailyMinMed: 60,
+                target: 15000,
+                color: '#ff9f43'
+            };
+            break;
+        case 'c_advanced':
+            certConfig = {
+                id: 'cert_adv_1',
+                name: 'Thiền Nâng Cao',
+				dailyTarget: 1200,
+				dailyMinMed: 120,
+                target: 20000,
+                color: '#8b5cf6'
+            };
+            break;
+        case 'c_intensive':
+            certConfig = {
+                id: 'cert_master_1',
+                name: 'Thiền Chuyên Sâu',
+				dailyTarget: 1200,
+				dailyMinMed: 120,
+                target: 40000,
+                color: '#ef4444'
+            };
+            break;
+        case 'c_basics':
+        default:
+            certConfig = {
+                id: 'cert_basic_1',
+                name: 'Thiền Căn Bản',
+				dailyTarget: 600,
+				dailyMinMed: 60,
+                target: 10000,
+                color: '#74b9ff'
+            };
+            break;
+    }
+
+    // Check if exists
+    if (this.data.goals.find(g => g.id === certConfig.id)) {
+        this.showToast("Bạn đang thực hành lộ trình này rồi!");
+        return;
+    }
+
+    const newGoal = {
+        id: certConfig.id,
+        type: 'meditation',
+        name: certConfig.name,
+        category: 'Chương trình Chứng chỉ',
+        color: certConfig.color,
+        
+        // Locked Targets
+        dailyTargetMinutes: certConfig.dailyTarget, 
+        lifetimeTargetMinutes: certConfig.target,
+        dailySessionTarget: 8,
+        dailyMinMedTarget: certConfig.dailyMinMed, 
+        
+        // System Flags
+        isCertification: true,
+        certified: false, 
+        
+        // Standard Props
+        lastUpdated: Date.now(),
+        totalMinutes: 0, 
+        totalMindfulness: 0, 
+        sessionTargetSeconds: 0,
+        remainingSeconds: 0, 
+        currentSessionStartTime: null, 
+        isActive: false
+    };
+
+    this.data.goals.unshift(newGoal); 
+    this.save();
+    this.renderGoals();
+    this.showToast(`Đã bắt đầu: ${certConfig.name}`);
+    
+    // Close course view
+    this.activeCourseId = null;
+    this.renderRoadmap();
+    app.switchView('dashboard');
+}
+renderRoadmap() {
+        const container = document.getElementById('roadmap-container');
+        if (!container) return;
+        container.innerHTML = '';
+
+        if (!this.activeCourseId) {
+            this.renderCourseList(container);
+        } else {
+            this.renderCourseDetail(container, this.activeCourseId);
+        }
+    }
+
+    renderCourseList(container) {
+        // Render Level 1: List of Courses
+        COURSES.forEach(course => {
+            // Calculate Progress
+            const courseData = this.data.courseProgress[course.id] || {};
+            const completedSteps = Object.keys(courseData).length;
+            const totalSteps = course.steps.length;
+            const progressPct = Math.round((completedSteps / totalSteps) * 100);
+            const isFinished = progressPct === 100;
+
+            const div = document.createElement('div');
+            div.className = 'card';
+            // Styling similar to Achievements but clickable
+            div.style.cssText = `
+                display: flex; align-items: center; gap: 15px; padding: 20px;
+                margin-bottom: 15px; cursor: pointer; transition: transform 0.2s;
+                border-left: 5px solid ${course.color};
+            `;
+            div.onmouseover = () => div.style.transform = 'translateY(-3px)';
+            div.onmouseout = () => div.style.transform = 'translateY(0)';
+            div.onclick = () => {
+                this.activeCourseId = course.id;
+                this.expandedStepId = null; // Reset step expansion
+                this.renderRoadmap();
+            };
+
+            div.innerHTML = `
+                <div style="
+                    min-width: 50px; height: 50px; border-radius: 12px;
+                    display: flex; align-items: center; justify-content: center;
+                    background: ${this.hexToRgba(course.color, 0.1)};
+                    color: ${course.color}; font-size: 24px;
+                ">
+                    <i class="${course.icon}"></i>
+                </div>
+                <div style="flex: 1;">
+                    <div style="display:flex; justify-content:space-between; align-items:center;">
+                        <h3 style="margin: 0; font-size: 16px; color: var(--text);">${course.title}</h3>
+                        ${isFinished ? `<i class="fas fa-check-circle" style="color: var(--success);"></i>` : ''}
+                    </div>
+                    <p style="margin: 5px 0 0; font-size: 12px; color: var(--text-light);">${course.desc}</p>
+                    
+                    <div style="margin-top: 10px; display: flex; align-items: center; gap: 10px;">
+                        <div class="progress-container" style="flex:1; height: 6px;">
+                            <div class="progress-bar" style="width: ${progressPct}%; background: ${course.color};"></div>
+                        </div>
+                        <span style="font-size: 11px; color: var(--text-light);">${completedSteps}/${totalSteps} bài</span>
+                    </div>
+                </div>
+                <i class="fas fa-chevron-right" style="color: var(--text-light); opacity: 0.5;"></i>
+            `;
+            container.appendChild(div);
+        });
+    }
+
+    renderCourseDetail(container, courseId) {
+        const course = COURSES.find(c => c.id === courseId);
+        if (!course) { this.activeCourseId = null; this.renderRoadmap(); return; }
+
+        // 1. Header with Back Button
+        const header = document.createElement('div');
+        header.style.cssText = "display:flex; align-items:center; margin-bottom: 20px; gap: 15px;";
+        header.innerHTML = `
+            <button class="btn btn-secondary" onclick="app.exitCourseView()">
+                <i class="fas fa-arrow-left"></i>
+            </button>
+            <div>
+                <h3 style="margin:0; color:${course.color}">${course.title}</h3>
+                <span style="font-size:12px; color:var(--text-light)">Lộ trình khoá học</span>
+            </div>
+        `;
+        container.appendChild(header);
+
+        // 2. Render Steps
+        const progress = this.data.courseProgress[courseId] || {};
+        
+        course.steps.forEach((step, index) => {
+            const isCompleted = progress[step.id];
+            
+            // Logic Locked: If previous step is NOT complete, this one is locked.
+            // First step (index 0) is always unlocked.
+            let isLocked = false;
+            if (index > 0) {
+                const prevStepId = course.steps[index - 1].id;
+                if (!progress[prevStepId]) isLocked = true;
+            }
+
+            const isExpanded = this.expandedStepId === step.id;
+
+            // Styles
+            const opacity = isLocked ? '0.5' : '1';
+            const cursor = isLocked ? 'not-allowed' : 'pointer';
+            const icon = isCompleted ? 'fa-check-circle' : (isLocked ? 'fa-lock' : 'fa-play-circle');
+            const iconColor = isCompleted ? 'var(--success)' : (isLocked ? 'var(--text-light)' : course.color);
+            const borderStyle = isExpanded ? `1px solid ${course.color}` : '1px solid var(--border)';
+
+            const card = document.createElement('div');
+            card.className = 'card';
+            card.style.cssText = `
+                margin-bottom: 15px; padding: 0; overflow: hidden;
+                opacity: ${opacity}; border: ${borderStyle}; transition: all 0.3s ease;
+            `;
+
+            // Card Header (Clickable)
+            const cardHead = document.createElement('div');
+            cardHead.style.cssText = `padding: 15px; display: flex; align-items: center; gap: 15px; cursor: ${cursor}; background: var(--surface);`;
+            
+            cardHead.onclick = () => {
+                if (isLocked) {
+                    this.showToast("Hãy hoàn thành bài trước đó!");
+                    return;
+                }
+                // Toggle Expansion
+                this.expandedStepId = isExpanded ? null : step.id;
+                this.renderRoadmap(); // Re-render to show expansion
+            };
+
+            cardHead.innerHTML = `
+                <div style="font-size: 20px; color: ${iconColor}; width: 30px; text-align: center;">
+                    <i class="fas ${icon}"></i>
+                </div>
+                <div style="flex: 1;">
+                    <div style="font-weight: 600; font-size: 14px; margin-bottom: 3px;">${step.title}</div>
+                    <div style="font-size: 12px; color: var(--text-light);">${step.desc}</div>
+                </div>
+                <i class="fas fa-chevron-down" style="font-size: 12px; color: var(--text-light); transition: transform 0.3s; transform: ${isExpanded ? 'rotate(180deg)' : 'rotate(0)'}"></i>
+            `;
+            card.appendChild(cardHead);
+
+            // Card Body (Instructions) - Only if expanded
+            if (isExpanded && !isLocked) {
+                const cardBody = document.createElement('div');
+                cardBody.style.cssText = `
+                    padding: 15px; border-top: 1px solid var(--border); 
+                    background: rgba(255,255,255,0.02); animation: fadeIn 0.3s;
+                `;
+                
+                cardBody.innerHTML = `
+                    <div style="font-size: 14px; line-height: 1.6; color: var(--text-light); margin-bottom: 20px;">
+                        ${step.content}
+                    </div>
+                `;
+
+                // Action Button
+                const btnContainer = document.createElement('div');
+        btnContainer.style.textAlign = 'right';
+
+        const actionBtn = document.createElement('button');
+        
+        // --- MODIFIED HERE ---
+        if (step.isCertAction) {
+    // Determine the Goal ID associated with this course
+    let targetGoalId = 'cert_basic_1';
+    if(courseId === 'c_intermediate') targetGoalId = 'cert_inter_1';
+    else if(courseId === 'c_advanced') targetGoalId = 'cert_adv_1';
+    else if(courseId === 'c_intensive') targetGoalId = 'cert_master_1';
+
+    const existingGoal = this.data.goals.find(g => g.id === targetGoalId);
+    if (existingGoal) {
+            actionBtn.className = 'btn btn-secondary';
+            actionBtn.innerHTML = '<i class="fas fa-check"></i> Đã đăng ký';
+            actionBtn.disabled = true;
+    } else {
+            actionBtn.className = 'btn';
+            actionBtn.style.background = 'var(--warning)';
+            actionBtn.style.color = '#000';
+            actionBtn.innerHTML = 'Thực hành lộ trình';
+            actionBtn.onclick = (e) => {
+                e.stopPropagation();
+                this.enrollCertification(courseId); // Pass courseId here
+                this.toggleStepCompletion(courseId, step.id); 
+            };
+    }
+} else if (step.practiceParams) {
+    // Nút dành cho các bài học yêu cầu thực hành
+    actionBtn.className = isCompleted ? 'btn btn-secondary' : 'btn';
+    actionBtn.innerHTML = isCompleted ? '<i class="fas fa-check"></i> Đã hoàn thành' : `Bắt đầu thực hành (${step.practiceParams.duration} phút)`;
+    if (!isCompleted) actionBtn.style.background = course.color;
+    
+    actionBtn.onclick = (e) => {
+        e.stopPropagation();
+        if (isCompleted) {
+            this.showToast("Bạn đã hoàn thành bài tập này.");
+        } else {
+            this.startCoursePractice(course.id, step.id);
+        }
+    };
+} else {
+                // --- SỬA ĐOẠN NÀY: Logic cho bài học lý thuyết & Quiz ---
+                actionBtn.className = isCompleted ? 'btn btn-secondary' : 'btn';
+                
+                if (isCompleted) {
+                    actionBtn.innerHTML = '<i class="fas fa-check"></i> Đã hoàn thành';
+                    actionBtn.style.color = 'var(--success)';
+                    actionBtn.style.borderColor = 'var(--success)';
+                    // Cho phép làm lại quiz nếu muốn
+                    if(step.quiz) {
+                         actionBtn.onclick = (e) => {
+                            e.stopPropagation();
+                            if(confirm("Bạn đã hoàn thành. Bạn có muốn làm lại trắc nghiệm không?")) {
+                                this.openQuizModal(courseId, step.id);
+                            }
+                        };
+                    }
+                } else {
+                    // Nếu có Quiz, nút sẽ mở Quiz
+                    if (step.quiz) {
+                        actionBtn.innerHTML = '<i class="fas fa-question-circle"></i> Làm trắc nghiệm';
+                        actionBtn.style.background = course.color;
+                        actionBtn.style.color = '#fff';
+                        actionBtn.onclick = (e) => {
+                            e.stopPropagation();
+                            this.openQuizModal(courseId, step.id);
+                        };
+                   } else {
+                        // Logic cũ cho bài đọc không có quiz (nếu có)
+                        actionBtn.innerHTML = 'Hoàn thành bài học';
+                        actionBtn.style.background = course.color;
+                        actionBtn.style.color = '#fff';
+                        actionBtn.onclick = (e) => {
+                            e.stopPropagation();
+                            this.toggleStepCompletion(courseId, step.id);
+                        };
+                    }
+                }
+                // --------------------------------------------------------
+            }
+        // ---------------------
+
+        btnContainer.appendChild(actionBtn);
+                cardBody.appendChild(btnContainer);
+                card.appendChild(cardBody);
+            }
+
+            container.appendChild(card);
+        });
+    }
+
+    exitCourseView() {
+        this.activeCourseId = null;
+        this.expandedStepId = null;
+        this.renderRoadmap();
+    }
+
+    toggleStepCompletion(courseId, stepId) {
+        if (!this.data.courseProgress[courseId]) {
+            this.data.courseProgress[courseId] = {};
+        }
+
+        const isCurrentlyDone = this.data.courseProgress[courseId][stepId];
+        
+        if (isCurrentlyDone) {
+            // Optional: Toggle OFF (Un-complete)
+            delete this.data.courseProgress[courseId][stepId];
+        } else {
+            // Toggle ON
+            this.data.courseProgress[courseId][stepId] = true;
+            
+          
+            // Close expansion automatically after short delay to show checkmark
+            setTimeout(() => {
+                this.expandedStepId = null;
+                this.renderRoadmap();
+            }, 1000);
+        }
+
+        this.save();
+        this.renderRoadmap();
+    }
+	openQuizModal(courseId, stepId) {
+    const course = COURSES.find(c => c.id === courseId);
+    const step = course.steps.find(s => s.id === stepId);
+    
+    if (!step || !step.quiz) return;
+
+    // Lưu state hiện tại để dùng khi submit
+    this.currentQuiz = { courseId, stepId, data: step.quiz };
+
+    const container = document.getElementById('quiz-container');
+    container.innerHTML = '';
+
+    step.quiz.forEach((item, index) => {
+        const qDiv = document.createElement('div');
+        qDiv.style.marginBottom = '20px';
+        qDiv.style.padding = '15px';
+        qDiv.style.background = 'rgba(255,255,255,0.05)';
+        qDiv.style.borderRadius = '8px';
+        
+        const qTitle = document.createElement('div');
+        qTitle.style.fontWeight = 'bold';
+        qTitle.style.marginBottom = '10px';
+        qTitle.innerText = `Câu ${index + 1}: ${item.q}`;
+        qDiv.appendChild(qTitle);
+
+        item.options.forEach((opt, optIndex) => {
+            const label = document.createElement('label');
+            label.style.display = 'block';
+            label.style.padding = '5px 0';
+            label.style.cursor = 'pointer';
+            label.style.fontSize = '14px';
+            
+            const radio = document.createElement('input');
+            radio.type = 'radio';
+            radio.name = `q-${index}`;
+            radio.value = optIndex;
+            radio.style.marginRight = '10px';
+            
+            label.appendChild(radio);
+            label.appendChild(document.createTextNode(opt));
+            qDiv.appendChild(label);
+        });
+
+        container.appendChild(qDiv);
+    });
+
+    document.getElementById('quiz-modal').style.display = 'flex';
+}
+
+submitQuiz() {
+    if (!this.currentQuiz) return;
+    
+    const { courseId, stepId, data } = this.currentQuiz;
+    let correctCount = 0;
+    let allAnswered = true;
+
+    // Kiểm tra từng câu
+    data.forEach((item, index) => {
+        const radios = document.getElementsByName(`q-${index}`);
+        let selected = -1;
+        for (let i = 0; i < radios.length; i++) {
+            if (radios[i].checked) {
+                selected = parseInt(radios[i].value);
+                break;
+            }
+        }
+
+        if (selected === -1) {
+            allAnswered = false;
+        } else if (selected === item.correct) {
+            correctCount++;
+        }
+    });
+
+    if (!allAnswered) {
+        this.showToast("Vui lòng trả lời hết các câu hỏi!");
+        return;
+    }
+
+    if (correctCount === data.length) {
+        // Đúng hết
+        document.getElementById('quiz-modal').style.display = 'none';
+        this.showToast("🎉 Xuất sắc! Bạn đã trả lời đúng tất cả.");
+        
+        // Đánh dấu hoàn thành bài học
+        // Kiểm tra xem đã hoàn thành chưa để tránh toggle tắt đi
+        if (!this.data.courseProgress[courseId] || !this.data.courseProgress[courseId][stepId]) {
+             this.toggleStepCompletion(courseId, stepId);
+        }
+    } else {
+        // Sai
+        this.showToast(`Bạn trả lời đúng ${correctCount}/${data.length} câu. Hãy thử lại!`);
+    }
+}
+	startCoursePractice(courseId, stepId) {
+    const course = COURSES.find(c => c.id === courseId);
+    const step = course.steps.find(s => s.id === stepId);
+    const params = step.practiceParams;
+    
+    // Tìm hoặc tạo mục tiêu ảo để chạy timer
+    let goal = this.data.goals.find(g => g.type === 'meditation') || { id: 'temp_practice', name: 'Thực hành bài học', type: 'meditation' , lastDuration: params.duration};
+
+    // Khởi tạo trạng thái thiền
+    this.startMeditationSetup(goal);
+    
+    // Ghi đè các thông số bài học
+    this.meditationState.totalDurationSeconds = params.duration * 60;
+    this.meditationState.remainingSeconds = params.duration * 60;
+    this.meditationState.courseId = courseId;
+    this.meditationState.courseStepId = stepId;
+    
+    
 }
 setupMeditationListeners() {
     const medOverlay = document.getElementById('meditation-overlay');
@@ -1985,11 +2751,129 @@ startMeditationSetup(goal) {
     const durationSeconds = this.meditationState.totalDurationSeconds - this.meditationState.remainingSeconds;
     const minutes = Math.ceil(durationSeconds / 60);
     const notes = document.getElementById('med-finish-notes').value;
-
     const goal = this.data.goals.find(g => g.id === this.meditationState.goalId);
     
-    // Định dạng ghi chú tự động
-    const autoNote = `Chánh niệm: ${this.meditationState.count} | Tỉnh giác: ${this.meditationState.awarenessCount}.`;
+    if (this.meditationState.courseStepId) {
+        const course = COURSES.find(c => c.id === this.meditationState.courseId);
+        const step = course.steps.find(s => s.id === this.meditationState.courseStepId);
+        const params = step.practiceParams;
+        let isSuccess = true;
+
+        // 1. Kiểm tra thời gian
+        if (minutes < params.duration) isSuccess = false;
+
+        // 2. Kiểm tra Tỉnh giác (Hold)
+        if (params.minAwareness && this.meditationState.awarenessCount < params.minAwareness) isSuccess = false;
+
+        // 3. Kiểm tra Chánh niệm (Tap)
+        if (params.minMindfulness && this.meditationState.count < params.minMindfulness) isSuccess = false;
+
+        // 4. Kiểm tra Chế độ xác nhận
+        if (params.requireConfirmMode && !this.data.medSettings.confirmMode) isSuccess = false;
+
+        // --- BỔ SUNG MỚI: Kiểm tra mức chú tâm ---
+        if (params.minAverage || params.minGood) {
+            let avgCount = 0;
+            let goodCount = 0;
+            
+            this.meditationState.touches.forEach(t => {
+                if (t.v === 3) avgCount++;  // v=3 tương ứng với 2 chạm (Trung bình)
+                if (t.v === 2) goodCount++; // v=2 tương ứng với >2 chạm (Tốt)
+            });
+
+            if (params.minAverage && avgCount < params.minAverage) isSuccess = false;
+            if (params.minGood && goodCount < params.minGood) isSuccess = false;
+        }
+        // ------------------------------------------
+
+        if (isSuccess) {
+        this.toggleStepCompletion(this.meditationState.courseId, this.meditationState.courseStepId);
+        this.showToast("🙏 Tuyệt vời! Bạn đã đạt chỉ tiêu và hoàn thành bài học.");
+    } else {
+        this.showToast("Thời thiền chưa đạt yêu cầu của bài học. Hãy thử lại!");
+    }
+}
+    if (this.meditationState.isExam) {
+        // Construct a temp log object to use analyzeSingleSession
+        const tempLog = {
+        minutes: minutes,
+        timestamp: this.meditationState.startTime,
+        touches: this.meditationState.touches.map(t => {
+            const delta = Math.max(0, t.t - this.meditationState.startTime);
+            return t.v ? { d: delta, v: t.v } : delta;
+        }),
+        threshold: this.meditationState.threshold,
+        awarenessCount: this.meditationState.awarenessCount
+    };
+
+    const analysis = this.analyzeSingleSession(tempLog);
+    const qualityPct = analysis.qualityPct;
+    const totalCount = this.meditationState.count;
+    const density = minutes > 0 ? (totalCount / minutes) : 0;
+    
+    let weightedSum = 0;
+    let proCount = 0;
+    this.meditationState.touches.forEach(t => {
+        if (t.v) {
+            weightedSum += (5 - t.v); 
+            proCount++;
+        }
+    });
+    const avgScore = proCount > 0 ? (weightedSum / proCount) : 0;
+
+    // --- NEW LOGIC: Dynamic Criteria based on Goal ID ---
+    let reqMinTime = 59; // Allow 1 min buffer
+    let reqQuality = 50;
+    let reqScore = 1.2;
+    let reqDensity = 5;
+    let reqCount = 300;
+
+    if (goal.id === 'cert_inter_1') {
+        reqMinTime = 59;
+        reqQuality = 55;
+        reqScore = 1.5;
+        reqDensity = 6;
+        reqCount = 400;
+    } else if (goal.id === 'cert_adv_1') {
+        reqMinTime = 119;
+        reqQuality = 60;
+        reqScore = 1.5;
+        reqDensity = 7;
+        reqCount = 800;
+    } else if (goal.id === 'cert_master_1') {
+        reqMinTime = 119;
+        reqQuality = 65;
+        reqScore = 1.5;
+        reqDensity = 8;
+        reqCount = 900;
+    }
+
+    const passedDuration = minutes >= reqMinTime;
+    const passedQuality = qualityPct >= reqQuality;
+    const passedScore = avgScore >= reqScore;
+    const passedDensity = density >= reqDensity;
+    const passedCount = totalCount >= reqCount;
+
+    const passed = passedDuration && passedQuality && passedScore && passedDensity && passedCount;
+
+    if (passed) {
+        goal.certified = true;
+        this.showToast("🎉 CHÚC MỪNG! BẠN ĐÃ ĐẠT CHỨNG CHỈ!", true);
+        this.playBell(); 
+    } else {
+        alert(`❌ KẾT QUẢ BÀI THI: KHÔNG ĐẠT\n\n` +
+              `- Thời gian: ${minutes}p (Yêu cầu ${reqMinTime+1}p) ${passedDuration ? '✅':'❌'}\n` +
+              `- Chất lượng: ${qualityPct}% (Yêu cầu ≥ ${reqQuality}%) ${passedQuality ? '✅':'❌'}\n` +
+              `- Mức chú tâm: ${avgScore.toFixed(2)} (Yêu cầu ≥ ${reqScore}) ${passedScore ? '✅':'❌'}\n` +
+              `- Mật độ: ${density.toFixed(1)} (Yêu cầu ≥ ${reqDensity}) ${passedDensity ? '✅':'❌'}\n` +
+              `- Tổng chánh niệm: ${totalCount} (Yêu cầu ≥ ${reqCount}) ${passedCount ? '✅':'❌'}\n\n` +
+              `Đừng nản chí! Hãy nghỉ ngơi và thử lại.`);
+    }
+}
+    // --------------------------------
+
+    // Standard Saving Logic
+    const autoNote = `Chánh niệm: ${this.meditationState.count} | Tỉnh giác: ${this.meditationState.awarenessCount}. ${this.meditationState.isExam ? '[BÀI THI]' : ''}`;
 
     const log = {
         goalId: goal.id,
@@ -1997,10 +2881,8 @@ startMeditationSetup(goal) {
         timestamp: this.meditationState.startTime,
         minutes: minutes,
         notes: `${autoNote} ${notes}`,
-        
-        count: this.meditationState.count,                  // Chỉ lưu số Chánh niệm (Tap)
-        awarenessCount: this.meditationState.awarenessCount,// Lưu số Tỉnh giác (Hold)
-        
+        count: this.meditationState.count,
+        awarenessCount: this.meditationState.awarenessCount,
         touches: this.meditationState.touches.map(t => {
             const delta = Math.max(0, t.t - this.meditationState.startTime);
             return t.v ? { d: delta, v: t.v } : delta;
@@ -2020,7 +2902,7 @@ startMeditationSetup(goal) {
     this.renderReports();
     const newBadges = this.checkAchievements(true);
     
-    document.getElementById('meditation-finish-modal').style.display = 'none';
+     document.getElementById('meditation-finish-modal').style.display = 'none';
     this.showToast(`Đã lưu! +${this.meditationState.count} Chánh niệm, +${this.meditationState.awarenessCount} Tỉnh giác.`);
 	if (newBadges.length > 0) {
         setTimeout(() => {
@@ -2187,69 +3069,25 @@ setDailyMinMedTarget(id) {
 }
 
 calculateGoalTier(goal) {
-    // 1. Get logs for this goal
-    const logs = this.data.logs.filter(l => l.goalId === goal.id);
-    if (logs.length === 0) return { id: 'bronze', name: 'Đồng', class: 'tier-bronze', icon: 'fas fa-medal' };
+    const scoreStr = this.calculateConsistencyScore(goal);
+    const score = parseFloat(scoreStr); 
 
-    // 2. Group by Date to calculate Daily Performance
-    const dailyStats = {};
-    logs.forEach(l => {
-        if (!dailyStats[l.date]) {
-            dailyStats[l.date] = { sessions: 0, value: 0, minutes: 0 };
-        }
-        dailyStats[l.date].sessions++;
-        
-        // Value: Mindfulness counts for Med, Minutes for Standard
-        const val = (goal.type === 'meditation') 
-            ? (l.count !== undefined ? l.count : (l.touches ? l.touches.length : 0))
-            : l.minutes;
-        
-        dailyStats[l.date].value += val;
-        dailyStats[l.date].minutes += l.minutes;
-    });
-
-    const activeDays = Object.keys(dailyStats).length;
-    if (activeDays === 0) return { id: 'bronze', name: 'Đồng', class: 'tier-bronze', icon: 'fas fa-medal' };
-
-    // 3. Targets
-    const targetSessions = goal.dailySessionTarget || 8;
-    const targetValue = goal.dailyTargetMinutes || 100; // Min/Mindfulness target
-    const targetDuration = goal.dailyMinMedTarget || 120; // Med duration specific
-
-    // 4. Score Calculation
-    let scoreSessions = 0;
-    let scoreValue = 0;
-    let scoreDuration = 0;
-
-    Object.values(dailyStats).forEach(stat => {
-        if (stat.sessions >= targetSessions) scoreSessions++;
-        if (stat.value >= targetValue) scoreValue++;
-        if (goal.type === 'meditation' && stat.minutes >= targetDuration) scoreDuration++;
-    });
-
-    // Calculate Percentages (Consistency on Active Days)
-    const pctSessions = (scoreSessions / activeDays);
-    const pctValue = (scoreValue / activeDays);
-    
-    let totalScore = 0;
-    
-    if (goal.type === 'meditation' && targetDuration > 0) {
-        const pctDuration = (scoreDuration / activeDays);
-        // Weighted average for Meditation (3 criteria)
-        totalScore = (pctSessions + pctValue + pctDuration) / 3;
-    } else {
-        // Weighted average for Standard (2 criteria)
-        totalScore = (pctSessions + pctValue) / 2;
+    if (score >= 9.0) {
+        return { id: 'diamond', name: 'Hạng Kim Cương', class: 'tier-diamond', icon: 'fab fa-sketch' };
     }
-
-    // 5. Determine Tier
-    if (totalScore >= 0.9) return { id: 'diamond', name: 'Kim Cương', class: 'tier-diamond', icon: 'fab fa-sketch' };
-    if (totalScore >= 0.75) return { id: 'gold', name: 'Vàng', class: 'tier-gold', icon: 'fas fa-jedi' };
-    if (totalScore >= 0.5) return { id: 'silver', name: 'Bạc', class: 'tier-silver', icon: 'fab fa-ethereum' };
-    return { id: 'bronze', name: 'Đồng', class: 'tier-bronze', icon: 'fas fa-medal' };
+    
+    if (score >= 7.5) {
+        return { id: 'gold', name: 'Hạng Vàng', class: 'tier-gold', icon: 'fas fa-jedi' };
+    }
+    
+    if (score >= 5.0) {
+        return { id: 'silver', name: 'Hạng Bạc', class: 'tier-silver', icon: 'fab fa-ethereum' };
+    }
+    
+    return { id: 'bronze', name: 'Hạng Đồng', class: 'tier-bronze', icon: 'fas fa-medal' };
 }
 
-// Add this method inside the GoalTracker class
+
 calculateConsistencyScore(goal) {
     const logs = this.data.logs.filter(l => l.goalId === goal.id);
     if (logs.length === 0) return "0.0";
@@ -2306,11 +3144,9 @@ calculateConsistencyScore(goal) {
     return (totalScore * 10).toFixed(1);
 }
 
-            renderGoals() {
+renderGoals() {
     const container = document.getElementById('active-goals-container');
     const emptyMsg = document.getElementById('empty-msg');
-    
-    // Safety check
     if (!container || !emptyMsg) return;
 
     container.innerHTML = '';
@@ -2323,8 +3159,10 @@ calculateConsistencyScore(goal) {
 
     const todayStr = this.toIsoDate(new Date());
 
-    // Sort: Updated recently first
     const sortedGoals = [...this.data.goals].sort((a, b) => {
+        // Prioritize Certification goals at top if not certified
+        if (a.isCertification && !a.certified && (!b.isCertification || b.certified)) return -1;
+        if (b.isCertification && !b.certified && (!a.isCertification || a.certified)) return 1;
         return (b.lastUpdated || 0) - (a.lastUpdated || 0);
     });
 
@@ -2332,68 +3170,146 @@ calculateConsistencyScore(goal) {
         const isMeditation = goal.type === 'meditation';
         const targetProp = isMeditation ? 'totalMindfulness' : 'totalMinutes';
         
-        // --- CHECK COMPLETION ---
-        const isCompleted = goal.lifetimeTargetMinutes > 0 && goal[targetProp] >= goal.lifetimeTargetMinutes;
+        // --- CHECK COMPLETION & EXAM LOGIC ---
+        const targetMet = goal.lifetimeTargetMinutes > 0 && goal[targetProp] >= goal.lifetimeTargetMinutes;
+        const isCertGoal = goal.isCertification === true;
+        const isCertified = goal.certified === true;
         
-        // Check if user is currently "inspecting" this completed goal (to show card instead of badge)
-        // We store this transient state in the class instance (not DB)
+        // Inspecting logic
         const isInspecting = this.inspectingGoalId === goal.id;
 
-        // --- RENDER BADGE (If completed and not inspecting) ---
-        if (isCompleted && !isInspecting) {
+        // CASE 1: Certified (Show Badge)
+        // For Cert goals: Must be targetMet AND isCertified
+        // For Normal goals: Just targetMet
+        const showBadge = (isCertGoal ? (targetMet && isCertified) : targetMet) && !isInspecting;
+
+        if (showBadge) {
             const tier = this.calculateGoalTier(goal);
-            const unitLabel = isMeditation ? 'Chánh niệm' : 'Phút';
             
+            // --- NEW LOGIC: Dynamic Icons for Certificates ---
+             let certConfig = { icon: 'fas fa-award'};
+            
+            if (goal.id === 'cert_basic_1') {
+                certConfig = { icon: 'fas fa-award-simple'};
+            } else if (goal.id === 'cert_inter_1') {
+                certConfig = { icon: 'fas fa-award'};
+            } else if (goal.id === 'cert_adv_1') {
+                certConfig = { icon: 'far fa-award-simple'};
+            } else if (goal.id === 'cert_master_1') {
+                certConfig = { icon: 'far fa-award'};
+            }
+            const displayTier = isCertGoal 
+                ? { name: 'Chứng Chỉ Thiền Định', icon: certConfig.icon, class: 'tier-diamond' } 
+                : tier;
+            
+            const unitLabel = isMeditation ? 'Chánh niệm' : 'Phút';
+            const cScore = this.calculateConsistencyScore(goal);
+
             const badgeDiv = document.createElement('div');
-            badgeDiv.className = `goal-medallion ${tier.class}`;
+            badgeDiv.className = `goal-medallion ${displayTier.class}`;
+            
             badgeDiv.onclick = () => {
-                this.inspectingGoalId = goal.id; // Set inspect state
-                this.renderGoals(); // Re-render to show card
+                this.inspectingGoalId = goal.id;
+                this.renderGoals();
             };
-const cScore = this.calculateConsistencyScore(goal);
+            
             badgeDiv.innerHTML = `
-                <div class="medallion-ribbon"><i class="fas fa-certificate"></i> Thành Tựu</div>
+                <div class="medallion-ribbon"><i class="fas fa-certificate"></i> ${isCertGoal ? 'Chứng Nhận' : 'Thành Tựu'}</div>
                 <div class="medallion-icon-container">
-                    <i class="${tier.icon}"></i>
+                    <i class="${displayTier.icon}"></i>
                 </div>
                 <div class="medallion-title">${goal.name}</div>
-                <div style="font-size: 12px; font-style:italic;">Hạng ${tier.name}</div>
+                <div style="font-size: 12px; font-style:italic;">${displayTier.name}</div>
                 
-                <div class="medallion-stats">
-                    <div class="medallion-stat-item" title="Tổng thành tựu">
+               <div class="medallion-stats">
+                    <div class="medallion-stat-item" title="Tổng Chánh Niệm">
                         <i class="fas fa-check-double"></i> ${goal[targetProp].toLocaleString()} ${unitLabel}
                     </div>
-                    <div class="medallion-stat-item">
+                    <div class="medallion-stat-item" title="Điểm Chuyên Cần">
                         🔥 ${cScore}/10
                     </div>
                 </div>
-                <div style="font-size:10px; margin-top:10px; opacity:0.7;">(Ấn để xem chi tiết)</div>
             `;
             container.appendChild(badgeDiv);
-            return; // Skip rendering standard card
+            return; 
         }
 
+        // CASE 2: Exam Ready (Only for Cert Goal)
+        // Target Met but NOT certified
+       if (isCertGoal && targetMet && !isCertified) {
+     let reqHtml = '';
+     let durationText = '60 phút';
 
-        // --- RENDER STANDARD CARD (In Progress OR Inspecting) ---
-        
-        // ... (Keep your existing standard card logic calculation variables here) ...
+     if (goal.id === 'cert_inter_1') {
+        reqHtml = `
+            <li>Chất lượng ≥ 55%</li>
+            <li>Điểm chú tâm TB ≥ 1.5</li>
+            <li>Mật độ ≥ 6 chánh niệm/phút</li>
+            <li>Tổng ghi nhận ≥ 400</li>`;
+     } else if (goal.id === 'cert_adv_1') {
+        durationText = '120 phút';
+        reqHtml = `
+            <li>Chất lượng ≥ 60%</li>
+            <li>Điểm chú tâm TB ≥ 1.5</li>
+            <li>Mật độ ≥ 7 chánh niệm/phút</li>
+            <li>Tổng ghi nhận ≥ 800</li>`;
+     } else if (goal.id === 'cert_master_1') {
+        durationText = '120 phút';
+        reqHtml = `
+            <li>Chất lượng ≥ 65%</li>
+            <li>Điểm chú tâm TB ≥ 1.5</li>
+            <li>Mật độ ≥ 8 chánh niệm/phút</li>
+            <li>Tổng ghi nhận ≥ 900</li>`;
+     } else {
+         // Basic Default
+         reqHtml = `
+            <li>Chất lượng ≥ 50%</li>
+            <li>Điểm chú tâm TB ≥ 1.2</li>
+            <li>Mật độ ≥ 5 chánh niệm/phút</li>
+            <li>Tổng ghi nhận ≥ 300</li>`;
+     }
+
+     const div = document.createElement('div');
+     div.className = 'card';
+     div.style.cssText = "border: 2px solid var(--warning); text-align: center; padding: 30px;";
+     div.innerHTML = `
+        <div style="font-size: 40px; color: var(--warning); margin-bottom: 15px;">
+            <i class="fas fa-scroll"></i>
+        </div>
+        <h3>Đủ điều kiện thi cuối khoá!</h3>
+        <p style="color: var(--text-light); font-size: 13px; margin-bottom: 20px;">
+            Bạn đã hoàn thành ${goal.lifetimeTargetMinutes.toLocaleString()} chánh niệm. Hãy vượt qua bài kiểm tra cuối cùng để nhận chứng chỉ.
+        </p>
+        <div style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 8px; font-size: 12px; text-align: left; margin-bottom: 20px;">
+            <strong><i class="fas fa-tasks"></i> Yêu cầu bài thi (${durationText}):</strong>
+            <ul style="margin: 5px 0 0 15px; color: var(--text-light);">
+                ${reqHtml}
+            </ul>
+        </div>
+        <button class="btn" style="width: 100%; background: var(--warning); color: black; font-weight: bold;" onclick="app.startExamSession('${goal.id}')">
+            <i class="fas fa-play-circle"></i> Bắt đầu Thi
+        </button>
+     `;
+     container.appendChild(div);
+     return;
+}
+
+        // CASE 3: Standard Goal Card (In Progress)
+        // ... (Your existing card logic variables) ...
         const unitLabel = isMeditation ? 'chánh niệm' : 'phút';
         const overallPct = goal.lifetimeTargetMinutes > 0 ? Math.min((goal[targetProp] / goal.lifetimeTargetMinutes) * 100, 100) : 0;
-
+        
         // Calculate Today's Values
         let todayVal = 0;
+        let todayMinutes = 0;
         if (isMeditation) {
-            todayVal = this.data.logs
-                .filter(l => l.goalId === goal.id && l.date === todayStr)
-                .reduce((sum, l) => sum + (l.count !== undefined ? l.count : (l.touches ? l.touches.length : 0)), 0);
+            const logs = this.data.logs.filter(l => l.goalId === goal.id && l.date === todayStr);
+            todayVal = logs.reduce((sum, l) => sum + (l.count !== undefined ? l.count : (l.touches ? l.touches.length : 0)), 0);
+            todayMinutes = logs.reduce((sum, l) => sum + l.minutes, 0);
         } else {
             todayVal = this.data.logs.filter(l => l.goalId === goal.id && l.date === todayStr).reduce((sum, l) => sum + l.minutes, 0);
         }
         
-        const todayMinutes = this.data.logs
-            .filter(l => l.goalId === goal.id && l.date === todayStr)
-            .reduce((sum, l) => sum + l.minutes, 0);
-
         const dailyTarget = goal.dailyTargetMinutes || 100;
         const dailyminmedTarget = goal.dailyMinMedTarget || 120;
         let dailyPct = 0;
@@ -2406,114 +3322,77 @@ const cScore = this.calculateConsistencyScore(goal);
 
         const div = document.createElement('div');
         div.className = 'card goal-card';
-        if (isInspecting) div.classList.add('card-revealed'); // Add animation class
+        if (isInspecting) div.classList.add('card-revealed'); 
         div.style.borderLeft = `5px solid ${goal.color}`;
 
-        // --- Close Button for Inspect Mode ---
+        // Close Button
         let closeInspectHtml = '';
         if (isInspecting) {
-            closeInspectHtml = `
-                <div style="text-align: center; margin-bottom: 10px; padding-bottom:10px; border-bottom:1px solid var(--border);">
-                    <button class="btn btn-secondary" onclick="app.closeInspect('${goal.id}')" style="font-size:12px; padding: 5px 15px;">
-                        <i class="fas fa-medal"></i> Thu gọn về Huy Hiệu
-                    </button>
-                </div>
-            `;
+            closeInspectHtml = `<div style="text-align: center; margin-bottom: 10px; padding-bottom:10px; border-bottom:1px solid var(--border);"><button class="btn btn-secondary" onclick="app.closeInspect('${goal.id}')" style="font-size:12px; padding: 5px 15px;"><i class="fas fa-medal"></i> Thu gọn</button></div>`;
         }
         
         let controlsHtml = '', dailySectionHtml = '', sessionSectionHtml = '';
         
-        // --- DAILY SECTIONS ---
+        // Render Bars logic (Similar to old code but with LOCKED handlers for Cert Goals)
         if (dailyTarget > 0) {
-            // 1. TÍNH TOÁN CHO PHẦN GRID (Ô VUÔNG)
+             // Grid logic
             const todaySessionCount = this.data.logs.filter(l => l.goalId === goal.id && l.date === todayStr).length;
             const sessionTarget = goal.dailySessionTarget || 8;
             let sessionGridHtml = '';
-
             if (sessionTarget > 0) {
                 sessionGridHtml = `<div style="margin-top: 10px; display: flex; flex-wrap: wrap; gap: 5px; max-height: 85px; overflow-y: auto;">`;
                 for (let i = 1; i <= sessionTarget; i++) {
                     const isDone = i <= todaySessionCount;
-                    // Nếu hoàn thành: Có viền màu goal.color, chữ đậm.
-                    // Nếu chưa: Không viền, nền mờ, chữ nhạt.
-                    const boxStyle = isDone 
-                        ? `border: 1px solid ${goal.color}; color: ${goal.color}; font-weight: bold; background: rgba(0,0,0,0.1);` 
-                        : `border: 1px solid transparent; background: rgba(255,255,255,0.05); color: var(--text-light);`;
-                    
-                    sessionGridHtml += `
-                        <div style="
-                            width: 24px; height: 24px; 
-                            display: flex; align-items: center; justify-content: center; 
-                            font-size: 11px; border-radius: 4px;
-                            ${boxStyle}
-                        ">${i}</div>`;
+                    const boxStyle = isDone ? `border: 1px solid ${goal.color}; color: ${goal.color}; font-weight: bold; background: rgba(0,0,0,0.1);` : `border: 1px solid transparent; background: rgba(255,255,255,0.05); color: var(--text-light);`;
+                    sessionGridHtml += `<div style="width: 24px; height: 24px; display: flex; align-items: center; justify-content: center; font-size: 11px; border-radius: 4px; ${boxStyle}">${i}</div>`;
                 }
-				// --- NEW CODE START: Add Green Tick if Completed ---
-                if (todaySessionCount >= sessionTarget) {
-                    sessionGridHtml += `
-                        <div style="
-                            width: 24px; height: 24px; 
-                            display: flex; align-items: center; justify-content: center; 
-                            color: var(--success); font-size: 16px; margin-left: 2px;
-                            animation: fadeIn 0.5s ease;"
-                            title="Đã hoàn thành mục tiêu số thời hàng ngày!">
-                            <i class="fas fa-check-circle"></i>
-                        </div>`;
-                }
-                // --- NEW CODE END ---
+                if (todaySessionCount >= sessionTarget) sessionGridHtml += `<div style="width: 24px; height: 24px; display: flex; align-items: center; justify-content: center; color: var(--success); font-size: 16px; margin-left: 2px;"><i class="fas fa-check-circle"></i></div>`;
                 sessionGridHtml += `</div>`;
             }
 
-            // 2. CẬP NHẬT ORIGINAL BAR VỚI CLICK EVENT & GRID
+            // Click Handler: Prevent editing if Cert Goal
+            const sessionClick = isCertGoal ? `` : `onclick="app.setDailySessionTarget('${goal.id}')"`;
+            const pointerStyle = isCertGoal ? 'cursor: default;' : 'cursor: pointer;';
+            const iconDisplay = isCertGoal ? 'display:none;' : '';
+
             dailySectionHtml = `
-                <div 
-                    onclick="app.setDailySessionTarget('${goal.id}')"
-                    title="Đặt số thời thực hành hàng ngày"
-                    style="margin-bottom: 10px; background: rgba(0,0,0,0.2); padding: 10px; border-radius: 8px; cursor: pointer; transition: background 0.2s;"
-                    onmouseover="this.style.background='rgba(0,0,0,0.3)'"
-                    onmouseout="this.style.background='rgba(0,0,0,0.2)'"
-                >
+                <div ${sessionClick} style="margin-bottom: 10px; background: rgba(0,0,0,0.2); padding: 10px; border-radius: 8px; ${pointerStyle} transition: background 0.2s;">
                     <div style="display:flex; justify-content:space-between; font-size:12px; margin-bottom:5px; align-items:center;">
-                        <strong style="color:var(--text);">Hôm nay</strong>
-                        <span style="font-weight:600;">${todayVal} / ${dailyTarget} ${unitLabel} <i class="fas fa-pen" style="font-size:10px; opacity:0.5; margin-left:4px;"></i></span>
+                        <strong style="color:var(--text);">Hằng ngày</strong>
+                        <span style="font-weight:600;">${todayVal} / ${dailyTarget} ${unitLabel} <i class="fas fa-pen" style="font-size:10px; opacity:0.5; margin-left:4px; ${iconDisplay}"></i></span>
                     </div>
                     <div class="progress-container" style="height: 6px;"><div class="progress-bar" style="width: ${dailyPct}%; background: ${dailyBarColor}"></div></div>
-                    
                     ${sessionGridHtml}
                 </div>`;
 
-            // 2. NEW BAR (Minutes) - Only for Meditation Goals
             if (isMeditation) {
                 const minPct = Math.min((todayMinutes / dailyminmedTarget) * 100, 100);
                 let minBarColor = goal.color;
                 if (todayMinutes >= dailyminmedTarget) minBarColor = 'var(--success)';
+                
+                const minClick = isCertGoal ? `` : `onclick="app.setDailyMinMedTarget('${goal.id}')"`;
 
-                // CHANGE 2: Added onclick event, cursor pointer, and hover visual cues
                 dailySectionHtml += `
-                <div 
-                    onclick="app.setDailyMinMedTarget('${goal.id}')"
-                    title="Thay đổi mục tiêu thời gian"
-                    style="margin-bottom: 15px; background: rgba(0,0,0,0.2); padding: 10px; border-radius: 8px; cursor: pointer; transition: background 0.2s;"
-                    onmouseover="this.style.background='rgba(0,0,0,0.3)'"
-                    onmouseout="this.style.background='rgba(0,0,0,0.2)'"
-                >
+                <div ${minClick} style="margin-bottom: 15px; background: rgba(0,0,0,0.2); padding: 10px; border-radius: 8px; ${pointerStyle} transition: background 0.2s;">
                     <div style="display:flex; justify-content:space-between; font-size:12px; margin-bottom:5px; align-items:center;">
                         <strong style="color:var(--text);">Thời gian</strong>
-                        <span style="font-weight:600;">${todayMinutes} / ${dailyminmedTarget} phút <i class="fas fa-pen" style="font-size:10px; opacity:0.5; margin-left:4px;"></i></span>
+                        <span style="font-weight:600;">${todayMinutes} / ${dailyminmedTarget} phút <i class="fas fa-pen" style="font-size:10px; opacity:0.5; margin-left:4px; ${iconDisplay}"></i></span>
                     </div>
                     <div class="progress-container" style="height: 6px;"><div class="progress-bar" style="width: ${minPct}%; background: ${minBarColor}"></div></div>
                 </div>`;
             }
         }
 
+        // Controls Logic - HIDE MANUAL ENTRY FOR CERT
         if (isMeditation) {
+            const manualBtn = isCertGoal ? '' : `<button class="btn-icon" style="background:var(--warning); color:#000;" onclick="app.openSessionModal('${goal.id}')" title="Nhập thủ công"><i class="fas fa-plus"></i></button>`;
+            
             controlsHtml = `
                  <div class="timer-controls">
-                    <div style="font-size: 14px; color: var(--text-light); text-transform: uppercase;">Hành Thiền</div>
+                    <div style="font-size: 14px; color: var(--text-light); text-transform: uppercase;">${isCertGoal ? 'Hành Thiền' : 'Hành Thiền'}</div>
                     <div style="display:flex; gap: 10px;">
-                        <button class="btn-icon btn-play" style="background: var(--zen); color: white;" onclick="app.toggleTimer('${goal.id}')" title="Hành thiền"><i class="fas fa-om"></i></button>
-                        
-                        <button class="btn-icon" style="background:var(--warning); color:#000;" onclick="app.openSessionModal('${goal.id}')" title="Nhập thủ công"><i class="fas fa-plus"></i></button>
+                        <button class="btn-icon btn-play" style="background: var(--zen); color: white;" onclick="app.toggleTimer('${goal.id}')" title="Hành Thiền"><i class="fas fa-om"></i></button>
+                        ${manualBtn}
                     </div>
                 </div>`;
         } else {
@@ -2530,6 +3409,13 @@ const cScore = this.calculateConsistencyScore(goal);
                     </div>
                 </div>`;
         }
+		const headerButtons = isCertGoal 
+            ? `<span style="font-size:10px; background:var(--warning); color:#000; padding:2px 6px; border-radius:4px; font-weight:bold;">CHỨNG CHỈ</span>`
+            : `
+            <div style="display:flex; gap: 5px;">
+                <button class="btn-icon" style="color: var(--text-light)" onclick="app.openModal('${goal.id}', '${goal.type}')"><i class="fas fa-pencil-alt"></i></button>
+                <button class="btn-icon" style="color: var(--text-light)" onclick="app.deleteGoal('${goal.id}')"><i class="fas fa-trash"></i></button>
+            </div>`;
 const consistencyScore = this.calculateConsistencyScore(goal);
 
 // 2. Define color based on score (Optional visual touch)
@@ -2569,11 +3455,62 @@ else if (parseFloat(consistencyScore) >= 5.0) scoreColor = '#BDC3C7';
     <div class="sessions-list" style="margin-top: 15px; max-height: 150px; overflow-y: auto;"><div id="sessions-${goal.id}"></div></div>
 `;
 container.appendChild(div);
+        if (isCertGoal) {
+             // We need to modify renderSessions to not show edit buttons, 
+             // or simply handle it in openSessionModal (easier security)
+        }
         this.renderSessions(goal.id, isMeditation);
     });
 }
 
-// Helper to close inspect mode
+startExamSession(goalId) {
+    const goal = this.data.goals.find(g => g.id === goalId);
+    if (!goal) return;
+
+    // Determine Duration
+    let durationMins = 60;
+    if (goalId === 'cert_adv_1' || goalId === 'cert_master_1') {
+        durationMins = 120;
+    }
+
+    if (!confirm(`⚠️ BẮT ĐẦU THI CUỐI KHOÁ ⚠️\n\n- Thời gian: ${durationMins} phút.\n- Không được phép tạm dừng quá lâu.\n- Kết quả sẽ được tính toán ngay sau khi kết thúc.\n\nBạn đã sẵn sàng?`)) return;
+
+    // Force settings
+    if (typeof Website2APK !== 'undefined') Website2APK.keepScreenOn(true);
+
+    this.meditationState = {
+        active: true, paused: false, goalId: goal.id,
+        count: 0, awarenessCount: 0,
+        startTime: Date.now(), 
+        totalDurationSeconds: durationMins * 60, // Set dynamic duration
+        remainingSeconds: durationMins * 60, 
+        touches: [],
+        threshold: 9, // Standard threshold for exam
+        quoteInterval: null,
+        currentAutoLevel: 4, comboCounter: 0, lastTouchTime: Date.now(),
+        consecutiveGoodCount: 0,
+        
+        // EXAM FLAGS
+        isExam: true,
+        examResult: null
+    };
+
+    document.getElementById('meditation-overlay').style.display = 'flex';
+    document.getElementById('med-counter').innerText = '0';
+    this.updateMedTimerDisplay();
+    this.updateMeditationQuote(true); 
+
+    this.meditationState.timerRef = setInterval(() => {
+        if (!this.meditationState.paused) {
+            if (this.meditationState.remainingSeconds > 0) {
+                this.meditationState.remainingSeconds--;
+                this.updateMedTimerDisplay();
+            } else {
+                this.concludeMeditationSession('auto');
+            }
+        }
+    }, 1000);
+}
 closeInspect(goalId) {
     if (this.inspectingGoalId === goalId) {
         this.inspectingGoalId = null;
@@ -2585,12 +3522,14 @@ closeInspect(goalId) {
     this.sessionLimits[goalId] += 80; 
     this.renderSessions(goalId, isMeditation);
 }
-           renderSessions(goalId, isMeditation) {
+           renderSessions(goalId) {
     const container = document.getElementById(`sessions-${goalId}`);
     if (!container) return;
-    container.innerHTML = '';
 
-    // 1. Get all sessions for this goal sorted by date (newest first)
+    // Lấy thông tin mục tiêu để kiểm tra loại
+    const goal = this.data.goals.find(g => g.id === goalId);
+    const isCertGoal = goal && goal.isCertification; // Kiểm tra nếu là khóa chứng chỉ
+    const isMeditation = goal && goal.type === 'meditation';
     const allSessions = this.data.logs
         .filter(l => l.goalId === goalId)
         .sort((a, b) => b.timestamp - a.timestamp);
@@ -2624,9 +3563,11 @@ closeInspect(goalId) {
                         actionButtons += `<button class="btn-icon" style="background:transparent; color:var(--zen); height:24px; width:24px;" onclick="app.showSessionGraph('${log.timestamp}')" title="Xem biểu đồ"><i class="fas fa-chart-area" style="font-size:12px;"></i></button>`;
                     }
 
-                    actionButtons += `<button class="btn-icon" style="background:transparent; color:var(--text-light); height:24px; width:24px;" onclick="app.openSessionModal('${goalId}', ${log.minutes}, ${log.timestamp}, ${log.timestamp})" title="Sửa chi tiết"><i class="fas fa-edit" style="font-size:12px;"></i></button>`;
-                    
-                    actionButtons += '</div>';
+                    if (!isCertGoal) { 
+            actionButtons += `<button class="btn-icon" style="background:transparent; color:var(--text-light); height:24px; width:24px;" onclick="app.openSessionModal('${goalId}', ${log.minutes}, ${log.timestamp}, ${log.timestamp})" title="Sửa chi tiết"><i class="fas fa-edit" style="font-size:12px;"></i></button>`;
+        }
+
+        actionButtons += '</div>';
 
 
                     sLi.innerHTML = `
@@ -3104,7 +4045,7 @@ fallbackCopyText(text) {
                 const btn = document.getElementById('btn-save-goal');
                 const catSelect = document.getElementById('g-cat');
                 catSelect.innerHTML = '';
-                const cats = type === 'meditation' ? ['Thiền Toạ', 'Thiền Hành', 'Thiền Quán', 'Tu Tập'] : ['Công việc', 'Học tập', 'Sức khỏe', 'Sáng tạo', 'Tạo phước', 'Khác'];
+                const cats = type === 'meditation' ? ['Thiền Toạ', 'Thiền Hành', 'Niệm Hơi Thở', 'Thiền Quán', 'Tu Tập'] : ['Công việc', 'Học tập', 'Sức khỏe', 'Sáng tạo', 'Tạo phước', 'Khác'];
                 cats.forEach(c => { const opt = document.createElement('option'); opt.value = c; opt.innerText = c; catSelect.appendChild(opt); });
 
                 const dailyHint = document.getElementById('g-daily-hint');
@@ -3115,7 +4056,11 @@ fallbackCopyText(text) {
 
                 if (goalId) {
                     const goal = this.data.goals.find(g => g.id === goalId);
-                    if (goal) {
+					if (goal && goal.isCertification) {
+            alert("Mục tiêu Chứng chỉ không thể chỉnh sửa thông số.");
+            return;
+        }
+                    if (goalId) {
                         document.getElementById('g-id').value = goal.id;
                         document.getElementById('g-name').value = goal.name;
                         document.getElementById('g-cat').value = goal.category;
@@ -4093,7 +5038,7 @@ openBadgePicker() {
             <div class="modal-content" style="max-width: 550px; width: 95%; max-height: 85vh; display: flex; flex-direction: column; padding: 0; border-radius: 16px;">
                 
                 <div style="padding: 15px 20px; border-bottom: 1px solid var(--border); position: relative; display: flex; justify-content: center; align-items: center; background: var(--surface); border-radius: 16px 16px 0 0;">
-                    <h3 style="margin: 0; font-size: 18px;"><i class="fas fa-gem"></i> Chọn Pāramī</h3>
+                    <h3 style="margin: 0; font-size: 18px;"><i class="fas fa-wreath-laurel"></i> Chọn Pāramī</h3>
                     <button class="btn-icon" onclick="app.closeBadgePicker()" style="position: absolute; right: 20px; color: var(--text-light); background: transparent;"><i class="fas fa-times"></i></button>
                 </div>
 
@@ -4297,7 +5242,7 @@ loadActiveBadge() {
             container.classList.remove('silver');
         }
     } else {
-        container.innerHTML = `<i class="fas fa-gem"></i>`;
+        container.innerHTML = `<i class="fas fa-wreath-laurel"></i>`;
         
         container.style.color = '#ffffff';
         container.style.textShadow = 'none'; // Reset text shadow
@@ -4342,7 +5287,7 @@ renderBadgeAltar() {
     }
 
     // Default state (No badge selected)
-    iconEl.innerHTML = `<i class="fas fa-gem"></i>`;
+    iconEl.innerHTML = `<i class="fas fa-wreath-laurel"></i>`;
     iconEl.style.color = 'var(--text-light)';
     iconEl.classList.remove('altar-floating');
     
@@ -4394,7 +5339,7 @@ renderBadgeAltar() {
                 
                 const titles = {
                     'dashboard': 'Nhật ký',
-                    'calendar': 'Lịch trình',
+                    'calendar': 'Lộ trình',
                     'reports': 'Tổng hợp',
 					'analytics': 'Phân tích',
 					'pro': 'Chuyên sâu',
@@ -4403,7 +5348,7 @@ renderBadgeAltar() {
                 
                 document.getElementById('page-title').innerText = titles[viewName] || 'Nhật ký';
                 if (viewName === 'reports') { this.renderReports(); }
-                if (viewName === 'calendar') this.renderCalendar();
+                if (viewName === 'calendar') this.renderRoadmap();
 				if (viewName === 'analytics') this.renderAnalytics();
 			    if (viewName === 'pro') this.renderProAnalytics();
 				if (viewName === 'achievements') {
@@ -4655,6 +5600,7 @@ openSessionModal(goalId, minutes = 0, logId = null, startTime = Date.now()) {
     else deleteBtn.style.display = 'none';  
     
     const goal = this.data.goals.find(g => g.id === goalId);
+
     const mindGroup = document.getElementById('s-mindfulness-group');
     const mindInput = document.getElementById('s-mindfulness');
     const thresholdInput = document.getElementById('s-threshold');

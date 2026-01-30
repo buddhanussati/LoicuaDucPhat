@@ -7,6 +7,280 @@ const DB_CONFIG = {
         meta: 'key'
     }
 };
+const COURSES = [
+    {
+        id: 'c_basics',
+        title: 'Basic Meditation',
+        desc: 'Get familiar with posture, breath, and basic mindfulness.',
+        icon: 'fas fa-award-simple',
+        color: '#74b9ff', // Green
+        steps: [
+            {
+                id: 's_0_intro',
+                title: 'Why Choose the Breath?',
+                desc: 'Understand the importance of the breath - the anchor of the present.',
+                content: `
+                    <p>Breath is not only the essence of life but also the bridge that connects the body and the mind. In the practice of meditation, it serves as the core foundation:</p>
+                    <ul>
+                        <li><strong>The Anchor of the Present:</strong> The mind often runs to the past or the future or wanders aimlessly. The breath happens only <strong>right now</strong>. Returning to the breath is returning to reality.</li>
+                        <li><strong>Objective & Natural:</strong> Breath flows naturally and is always present; it does not judge or evoke craving or aversion, it is a safe object for the mind to rely upon.</li>
+                        <li><strong>The Mind's Mirror:</strong> When angry, the breath is rough; when peaceful, the breath is light. Observing the breath helps us understand our mental state.</li>
+                    </ul>
+                    <p><em>Answer the 3 questions below correctly to unlock the next lesson.</em></p>
+                `,
+                quiz: [
+                    {
+                        q: "Why is the breath the most common basic meditation object?",
+                        options: ["Because it doesn't cost money", "Because it is always present in the here & now and is objective & natural", "Because it helps us think about the past"],
+                        correct: 1
+                    },
+                    {
+                        q: "What is the connection between breath and mind?",
+                        options: ["The breath reflects the state of the mind", "There is no connection", "The breath determines personality"],
+                        correct: 0
+                    },
+                    {
+                        q: "What is the main function of the breath in meditation?",
+                        options: ["Helps sleep better", "Helps cure diseases", "Acts as an anchor to keep the mind with the body"],
+                        correct: 2
+                    }
+                ]
+            },
+            // --- UPDATE LESSON 1: POSTURE (ADDED QUIZ) ---
+            { 
+                id: 's_1_posture', 
+                title: 'Correct Posture', 
+                desc: 'How to sit so the back is straight and the mind is at peace.', 
+                content: '<p>Find a quiet place. Sit cross-legged (half-lotus or full-lotus) or sit on a chair.</p><ul><li><strong>Back:</strong> Keep it naturally straight, do not tense up.</li><li><strong>Shoulders:</strong> Relax and lower naturally.</li><li><strong>Hands:</strong> Stacked on top of each other or resting on the knees.</li><li><strong>Eyes:</strong> Half-closed or gently closed.</li></ul><p><em>Complete the quiz to finish the lesson.</em></p>',
+                quiz: [
+                    {
+                        q: "What is the most important principle for the back when meditating?",
+                        options: ["Must lean against a wall", "Curved as much as possible", "Naturally straight, not tense"],
+                        correct: 2
+                    },
+                    {
+                        q: "How should the shoulders be?",
+                        options: ["Relaxed and lowered naturally", "Hunched up near the ears", "Tensed to maintain strength"],
+                        correct: 0
+                    },
+                    {
+                        q: "What is the benefit of a straight back?",
+                        options: ["Helps the mind stay alert and energy flow", "Helps fall asleep easier", "Has no effect"],
+                        correct: 0
+                    }
+                ]
+            },
+            // --- UPDATE LESSON 2: BREATH (ADDED QUIZ) ---
+            { 
+                id: 's_2_breath', 
+                title: 'Recognizing the Breath', 
+                desc: 'Observe the natural breath coming in and going out.', 
+                content: '<p>Do not try to control the breath. Simply <strong>know</strong>:</p><ul><li>When inhaling, know you are inhaling.</li><li>When exhaling, know you are exhaling.</li></ul><p>Focus your attention at the entrance of the nostrils or the rising and falling of the abdomen.</p>',
+                quiz: [
+                    {
+                        q: "What is the correct attitude when observing the breath?",
+                        options: ["Try to control the rhythm", "Simply note (know) it as it is", "Hold breath to quiet the mind"],
+                        correct: 1
+                    },
+                    {
+                        q: "If the breath is short or rough, what should we do?",
+                        options: ["Force it to be long", "Blame yourself for meditating wrong", "Note that it is short or rough"],
+                        correct: 2
+                    },
+                    {
+                        q: "Which location is commonly used to observe the breath?",
+                        options: ["Nostrils or abdomen", "Top of the head", "Soles of the feet"],
+                        correct: 0
+                    }
+                ]
+            },
+            { 
+                id: 's_3_count', 
+                title: 'Counting Method & Mindfulness Noting', 
+                desc: 'How to use the app to note Mindfulness via the breath.', 
+                content: `<p><strong>To use the app effectively, you need to understand the following concepts:</strong></p>
+            <ul style="padding-left: 20px; margin-bottom: 15px;">
+                <li><strong>Mindfulness:</strong> A unit for measuring awareness; it is the act of keeping the mind and noting attention on the meditation object. In this app, every time you recognize the breath and tap the screen, one "Mindfulness" point is recorded.</li>
+                
+                <li><strong>Distraction:</strong> A state where the mind wanders or becomes drowsy, leading to no or very few recordings over a period of time.</li> <li style="margin-top: 10px;">
+                    <strong> Distraction Threshold:</strong>
+                    <p style="font-size: 13px; color: var(--text-light); margin-top: 5px;">
+                        This is the most important concept for calculating "Meditation Quality".
+                    </p>
+                    <div style="background: rgba(255, 255, 255, 0.05); padding: 10px; border-radius: 6px; border-left: 3px solid var(--warning); margin: 5px 0;">
+                        <em>"Distraction Threshold" is the maximum allowed time between two mindfulness logs; if this time is exceeded, the system considers you were distracted.</em>
+                    </div>
+					<p style="font-size: 13px; color: var(--text-light); margin-top: 5px;">
+                        A normal breathing cycle is 4 to 6 seconds. The threshold is usually this range + 2-3 seconds. The app defaults to 9 seconds, but you can adjust it.
+                    </p>
+					</ul>
+					<p><strong>Practice: Step 1, to avoid wandering, count silently:</strong></p><ul><li>Inhale, exhale, count "One".</li><li>Inhale, exhale, count "Two".</li><li>Continue to "Ten" then return to "One".</li></ul><p>If you forget or get confused, gently return to counting from "One".</p> <p><strong>Step 2, combine silent counting with noting on the app.</strong></p><ul><li><strong>Tap:</strong> Every time you exhale and finish a count, gently tap the screen.</li><li><strong>Goal:</strong> Maintain continuous noting without interruption.</li></ul><p><em>To complete this lesson, practice a short 5-minute session.</em></p>`,
+                practiceParams: { duration: 5 }
+            },
+            {
+                id: 's_3_awareness',
+                title: 'Noting Alertness',
+                desc: 'Learn to clearly recognize the state of mind.',
+                content: `<p>Alertness (sampajañña) is when you <b>recognize</b> your mental state (e.g., suddenly realizing you are wandering, having stray thoughts, or losing focus). This is the moment of recognition & return. In the app, we note <strong>Alertness</strong> by <strong>Pressing and Holding</strong>:</p><ul><li><b>Alertness</b> is likened to a wise gatekeeper—intelligent and sharp—stopping strangers and allowing acquaintances in to protect those inside <em>(mindfulness)</em> and resist those outside <em>(stray thoughts)</em>. </li><li><b>To practice</b>, when you realize your mind has stray thoughts or is distracted from the object, press and hold the screen until you see the green circle <em>(shield)</em> appear, and one "Alertness" will be recorded.</li></ul><p><strong>Completion Requirement:</strong> Perform a 10-minute session with at least 10 Alertness.</p>`,
+                practiceParams: { duration: 10, minAwareness: 10 }
+            },
+            {
+    id: 's_3_confirm',
+    title: 'Confirmation Mode',
+    desc: 'Break unconscious reflex habits and train honesty.',
+    content: `
+        <p>In meditation, it is easy to fall into "automation"—tapping while the mind has drifted elsewhere. <strong>Confirmation Mode</strong> is a "checkpoint" to challenge your true presence.</p>
+        
+        <div style="background: rgba(251, 191, 36, 0.1); border-left: 3px solid var(--warning); padding: 10px; margin: 15px 0; font-size: 14px;">
+            <strong style="color: var(--warning);"><i class="fas fa-microchip"></i> Mechanism:</strong>
+            <p style="margin-top: 5px;">When you note a breath (tap once), the system will randomly trigger a challenge:</p>
+            <ul>
+                <li><strong>Sign:</strong> The counting circle will <strong>shrink</strong> and turn <strong>warning yellow</strong>.</li>
+                <li><strong>Action:</strong> You must tap a second time within <strong>3 seconds</strong> to confirm this was a conscious act.</li>
+                <li><strong>Note:</strong> The app records the time of the <em>first</em> tap to ensure breathing data accuracy.</li>
+            </ul>
+        </div>
+
+        <h4 style="color: var(--primary); margin-top: 15px;"><i class="fas fa-eye"></i> Meditation Significance:</h4>
+        <ul style="font-size: 13px; color: var(--text-light);">
+            <li><strong>Train Honesty:</strong> Do you truly know you are breathing, or are you just tapping mechanically?</li>
+            <li><strong>Gap of Alertness:</strong> Creates a gap between "intention" and "action". If you fail to confirm, your mind lacked alertness at that moment.</li>
+            <li><strong>Countering Wandering:</strong> Being occasionally "questioned" helps pull the mind back to reality, reminding you that every tap needs full witnessing.</li>
+        </ul>
+
+        <p style="margin-top: 15px;"><strong>Practice Guide:</strong></p>
+        <ol>
+            <li>Tap the <strong>Settings (gear)</strong> icon in the Meditation goal.</li>
+            <li>Turn on <strong>"Confirmation Mode"</strong>.</li>
+            <li>Perform a session ready to face the app's "questions".</li>
+        </ol>
+
+        <p style="border-top: 1px solid var(--border); padding-top: 10px; font-size: 13px;">
+            <strong>Completion Requirement:</strong> Perform a session of at least 10 minutes, record at least 20 Mindfulness, 10 Alertness, and Confirmation Mode must be enabled.
+        </p>
+    `,
+    practiceParams: { 
+        duration: 10, 
+        minAwareness: 10, 
+        minMindfulness: 20, 
+        requireConfirmMode: true 
+    }
+},
+			{
+    id: 's_3_levels',
+    title: 'Focus Levels: From "Knowing" to "Insight"',
+    desc: 'Classify noting quality to train the subtlety of mindfulness.',
+    content: `
+        <p>In meditation, mindfulness is not just "yes" or "no", but has <strong>depth</strong>. The app provides two mechanisms for you to note and train this subtlety:</p>
+        
+        <div style="background: var(--surface); padding: 15px; border-radius: 8px; margin: 15px 0; border-left: 4px solid var(--primary);">
+            <h4 style="margin-top:0; color: var(--primary);"><i class="fas fa-hand-pointer"></i> 1. Manual Mode: Self-Recognition</h4>
+            <p>You actively evaluate the quality of mind at the moment of noting by the number of taps:</p>
+            <ul style="list-style: none; padding-left: 0;">
+                <li><span class="text-q4"><strong>1 Tap (Low):</strong></span> Mind just returned from wandering, or recognition is faint, many stray thoughts.</li>
+                <li><span class="text-q3"><strong>2 Taps (Medium):</strong></span> Mind recognizes object clearer but not deeply, stray thoughts exist but less than Low.</li>
+                <li><span class="text-q2"><strong>3 Taps (Good):</strong></span> Attention is steady, clearly recognizing breath, very little disturbance.</li>
+            </ul>
+        </div>
+
+        <div style="background: var(--surface); padding: 15px; border-radius: 8px; margin: 15px 0; border-left: 4px solid var(--secondary);">
+            <h4 style="margin-top:0; color: var(--secondary);"><i class="fas fa-bolt"></i> 2. Combo Mechanism: Momentum of Focus</h4>
+            <p>If you maintain continuous noting (1 tap per breath) with regular intervals, the system automatically upgrades the focus level:</p>
+            <ul>
+                <li>Every session starts at <span class="text-q4"><strong>Low</strong></span>.</li>
+                <li><strong>Every 15 continuous notes</strong> (< distraction threshold), focus level increases: <strong>Low → Med → Good → <span class="text-q1">High</span></strong>.</li>
+                <li><i class="fas fa-exclamation-triangle"></i> <strong>Reset:</strong> If you forget to note for too long (wandering), the chain resets to <strong>Low</strong>. This is a fresh start.</li>
+            </ul>
+        </div>
+
+        <p><strong>Meditation Significance:</strong> Classification helps avoid mechanical tapping. When the mind recognizes its own quality, mindfulness and alertness become sharper.</p>
+        
+        <p><strong>Completion Requirement:</strong> Perform a 10-minute session. Strive to maintain mindfulness to achieve at least 1 <strong>Medium</strong> focus level and 1 <strong>Good</strong> focus level (via multi-taps or accumulating combos).</p>
+    `,
+    practiceParams: { 
+        duration: 10,  // 10 mins to experience combos
+        minAverage: 1, // At least 1 Medium (quality = 3)
+        minGood: 1     // At least 1 Good (quality = 2)
+    }
+},
+			{
+    id: 's_4_cert',
+    title: 'Certification Program',
+    desc: 'Basic Meditation Course',
+    content: `
+        <p>Congratulations on completing the theory and getting used to basic tools. However, meditation lies not in "knowing", but in <strong>"doing"</strong>.</p>
+        
+        <div style="background: var(--surface); padding: 18px; border-radius: 12px; margin: 15px 0; border: 1px solid var(--primary); box-shadow: 0 4px 12px rgba(139, 92, 246, 0.1);">
+            <h4 style="margin-top:0; color: var(--primary); display: flex; align-items: center; gap: 8px;">
+                <i class="fas fa-scroll"></i> Certification Program: Basic Meditation
+            </h4>
+            <p>By clicking confirm below, you officially enter the <strong>"Basic Meditation"</strong> program with specific disciplines:</p>
+            
+            <ul style="padding-left: 20px; line-height: 1.6;">
+                <li><strong>Goal:</strong> Accumulate <span class="text-q1"><strong>10,000 Mindfulness points</strong></span>. This is the foundational number to achieve a new insight awareness.</li>
+                <li><strong>Self-Discipline:</strong> This goal <strong>cannot be edited</strong> and <strong>cannot be manually entered</strong>. All records must come from actual "real-time" sittings.</li>
+                <li><strong>Final Exam:</strong> After completing 10,000 mindfulness points, you will perform a <strong>60-minute session (Final Exam)</strong>. Passing this, you will receive a <strong>Badge of Distinction</strong> and a <strong>Meditation Certificate</strong> marking a milestone on your path.</li>
+            </ul>
+        </div>
+
+        <p style="font-style: italic; color: var(--text-light); text-align: center;">"The journey of mindfulness begins with a single step of alertness."</p>
+        
+        <p><strong>Are you ready to practice?</strong></p>
+    `,
+    isCertAction: true // Flag to render "Start Roadmap" button
+}
+        ]
+    },
+   
+{
+        id: 'c_intermediate',
+        title: 'Intermediate Meditation',
+        desc: 'Improve mindfulness ability and mental stability.',
+        icon: 'fas fa-award',
+        color: '#ff9f43',
+        steps: [
+            { 
+                id: 's_inter_cert', 
+                title: 'Certification Program', 
+                desc: 'Intermediate Meditation Course', 
+                content: '<p>Enter a stage of firmer concentration.</p><ul><li><strong>Goal:</strong> Reach 15,000 Mindfulness points.</li><li><strong>Final Exam:</strong> 60 minutes.</li></ul>',
+                isCertAction: true 
+            }
+        ]
+    },
+    {
+        id: 'c_advanced',
+        title: 'Advanced Meditation',
+        desc: 'Deepen focus and endurance.',
+        icon: 'far fa-award-simple',
+        color: '#8b5cf6', // Purple
+        steps: [
+            { 
+                id: 's_adv_cert', 
+                title: 'Certification Program', 
+                desc: 'Advanced Meditation Course', 
+                content: '<p>Train perseverance and deep concentration.</p><ul><li><strong>Goal:</strong> Reach 20,000 Mindfulness points.</li><li><strong>Final Exam:</strong> 120 minutes.</li></ul>',
+                isCertAction: true 
+            }
+        ]
+    },
+    {
+        id: 'c_intensive',
+        title: 'Intensive Meditation',
+        desc: 'Achieve complete mindfulness.',
+        icon: 'far fa-award',
+        color: '#ef4444', // Red
+        steps: [
+            { 
+                id: 's_master_cert', 
+                title: 'Certification Program', 
+                desc: 'Intensive Meditation Course', 
+                content: '<p>High level of practice.</p><ul><li><strong>Goal:</strong> Reach 40,000 Mindfulness points.</li><li><strong>Final Exam:</strong> 120 minutes.</li></ul>',
+                isCertAction: true 
+            }
+        ]
+    }
+];
 
 const dbHelper = {
     db: null,
@@ -117,6 +391,7 @@ const dbHelper = {
             metaStore.put({ key: 'achievements', value: data.achievements });
             metaStore.put({ key: 'medSettings', value: data.medSettings });
             metaStore.put({ key: 'activeBadge', value: data.activeBadge });
+			metaStore.put({ key: 'courseProgress', value: data.courseProgress });
             tx.oncomplete = () => resolve();
             tx.onerror = (e) => reject(e);
         });
@@ -127,7 +402,7 @@ const dbHelper = {
 
         return new Promise((resolve, reject) => {
             const tx = this.db.transaction(['goals', 'logs', 'meta'], 'readonly');
-            const data = { goals: [], logs: [], xp: 0, streak: 0, achievements: [], medSettings: {} };
+            const data = { goals: [], logs: [], xp: 0, streak: 0, achievements: [], medSettings: {}, courseProgress: {} };
             
             const getAll = (storeName) => {
                 return new Promise((res, rej) => {
@@ -148,6 +423,7 @@ const dbHelper = {
                         if (item.key === 'achievements') data.achievements = item.value;
                         if (item.key === 'medSettings') data.medSettings = item.value;
 						if (item.key === 'activeBadge') data.activeBadge = item.value;
+						if (item.key === 'courseProgress') data.courseProgress = item.value;
                     });
                     resolve(data);
                 })
@@ -176,7 +452,8 @@ const dbHelper = {
                     xp: 0,
                     streak: 0,
                     achievements: [],
-                    medSettings: { mode: 'tap', holdDuration: 500, tapRequired: 1, vibration: true }
+                    medSettings: { mode: 'tap', holdDuration: 500, tapRequired: 1, vibration: true },
+					courseProgress: {},
                 };
 
                 this.sessionLimits = {};
@@ -209,7 +486,8 @@ const dbHelper = {
     'Back Pain', 'Numb Legs', 'Itchy', 'Neck Pain', 'Hot', 'Cold'
 ];
 
-                // CALL THE ASYNC INIT
+                this.activeCourseId = null;
+                this.expandedStepId = null;
                 this.init();
             }
 			
@@ -226,7 +504,7 @@ async init() {
         // --- THAY ĐỔI: Cấu hình mặc định mới ---
         if (!this.data.medSettings) this.data.medSettings = {};
         
-        // Luôn luôn ép về chế độ thống nhất
+        if (!this.data.courseProgress) this.data.courseProgress = {};
         this.data.medSettings.mode = 'unified'; 
         
         // Đảm bảo các chỉ số khác có giá trị mặc định
@@ -279,6 +557,547 @@ hexToRgba(hex, alpha) {
         return 'rgba(' + [(c >> 16) & 255, (c >> 8) & 255, c & 255].join(',') + ',' + alpha + ')';
     }
     return `rgba(156, 163, 175, ${alpha})`; // Fallback gray
+}
+// --- ROADMAP / CURRICULUM SYSTEM ---
+
+   enrollCertification(courseId = 'c_basics') {
+    let certConfig = {};
+    
+    // Define configuration for each course
+    switch(courseId) {
+        case 'c_intermediate':
+            certConfig = {
+                id: 'cert_inter_1',
+                name: 'Intermediate Meditation',
+				dailyTarget: 600,
+				dailyMinMed: 60,
+                target: 15000,
+                color: '#ff9f43'
+            };
+            break;
+        case 'c_advanced':
+            certConfig = {
+                id: 'cert_adv_1',
+                name: 'Advanced Meditation',
+				dailyTarget: 1200,
+				dailyMinMed: 120,
+                target: 20000,
+                color: '#8b5cf6'
+            };
+            break;
+        case 'c_intensive':
+            certConfig = {
+                id: 'cert_master_1',
+                name: 'Intensive Meditation',
+				dailyTarget: 1200,
+				dailyMinMed: 120,
+                target: 40000,
+                color: '#ef4444'
+            };
+            break;
+        case 'c_basics':
+        default:
+            certConfig = {
+                id: 'cert_basic_1',
+                name: 'Basic Meditation',
+				dailyTarget: 500,
+				dailyMinMed: 60,
+                target: 10000,
+                color: '#74b9ff'
+            };
+            break;
+    }
+
+    // Check if exists
+    if (this.data.goals.find(g => g.id === certConfig.id)) {
+        this.showToast("You have already enrolled!");
+        return;
+    }
+
+    const newGoal = {
+        id: certConfig.id,
+        type: 'meditation',
+        name: certConfig.name,
+        category: 'Certification Program',
+        color: certConfig.color,
+        
+        // Locked Targets
+        dailyTargetMinutes: certConfig.dailyTarget, 
+        lifetimeTargetMinutes: certConfig.target, // Dynamic Target
+        dailySessionTarget: 8,
+        dailyMinMedTarget: certConfig.dailyMinMed, 
+        
+        // System Flags
+        isCertification: true,
+        certified: false, 
+        
+        // Standard Props
+        lastUpdated: Date.now(),
+        totalMinutes: 0, 
+        totalMindfulness: 0, 
+        sessionTargetSeconds: 0,
+        remainingSeconds: 0, 
+        currentSessionStartTime: null, 
+        isActive: false
+    };
+
+    this.data.goals.unshift(newGoal); 
+    this.save();
+    this.renderGoals();
+    this.showToast(`Enrolled: ${certConfig.name}`);
+    
+    // Close course view
+    this.activeCourseId = null;
+    this.renderRoadmap();
+    app.switchView('dashboard');
+}
+
+    renderRoadmap() {
+        const container = document.getElementById('roadmap-container');
+        if (!container) return;
+        container.innerHTML = '';
+
+        if (!this.activeCourseId) {
+            this.renderCourseList(container);
+        } else {
+            this.renderCourseDetail(container, this.activeCourseId);
+        }
+    }
+
+    renderCourseList(container) {
+        // Render Level 1: List of Courses
+        COURSES.forEach(course => {
+            // Calculate Progress
+            const courseData = this.data.courseProgress[course.id] || {};
+            const completedSteps = Object.keys(courseData).length;
+            const totalSteps = course.steps.length;
+            const progressPct = Math.round((completedSteps / totalSteps) * 100);
+            const isFinished = progressPct === 100;
+
+            const div = document.createElement('div');
+            div.className = 'card';
+            // Styling similar to Achievements but clickable
+            div.style.cssText = `
+                display: flex; align-items: center; gap: 15px; padding: 20px;
+                margin-bottom: 15px; cursor: pointer; transition: transform 0.2s;
+                border-left: 5px solid ${course.color};
+            `;
+            div.onmouseover = () => div.style.transform = 'translateY(-3px)';
+            div.onmouseout = () => div.style.transform = 'translateY(0)';
+            div.onclick = () => {
+                this.activeCourseId = course.id;
+                this.expandedStepId = null; // Reset step expansion
+                this.renderRoadmap();
+            };
+
+            div.innerHTML = `
+                <div style="
+                    min-width: 50px; height: 50px; border-radius: 12px;
+                    display: flex; align-items: center; justify-content: center;
+                    background: ${this.hexToRgba(course.color, 0.1)};
+                    color: ${course.color}; font-size: 24px;
+                ">
+                    <i class="${course.icon}"></i>
+                </div>
+                <div style="flex: 1;">
+                    <div style="display:flex; justify-content:space-between; align-items:center;">
+                        <h3 style="margin: 0; font-size: 16px; color: var(--text);">${course.title}</h3>
+                        ${isFinished ? `<i class="fas fa-check-circle" style="color: var(--success);"></i>` : ''}
+                    </div>
+                    <p style="margin: 5px 0 0; font-size: 12px; color: var(--text-light);">${course.desc}</p>
+                    
+                    <div style="margin-top: 10px; display: flex; align-items: center; gap: 10px;">
+                        <div class="progress-container" style="flex:1; height: 6px;">
+                            <div class="progress-bar" style="width: ${progressPct}%; background: ${course.color};"></div>
+                        </div>
+                        <span style="font-size: 11px; color: var(--text-light);">${completedSteps}/${totalSteps} lessons</span>
+                    </div>
+                </div>
+                <i class="fas fa-chevron-right" style="color: var(--text-light); opacity: 0.5;"></i>
+            `;
+            container.appendChild(div);
+        });
+    }
+renderCourseList(container) {
+        // Render Level 1: List of Courses
+        COURSES.forEach(course => {
+            // Calculate Progress
+            const courseData = this.data.courseProgress[course.id] || {};
+            const completedSteps = Object.keys(courseData).length;
+            const totalSteps = course.steps.length;
+            const progressPct = Math.round((completedSteps / totalSteps) * 100);
+            const isFinished = progressPct === 100;
+
+            const div = document.createElement('div');
+            div.className = 'card';
+            // Styling similar to Achievements but clickable
+            div.style.cssText = `
+                display: flex; align-items: center; gap: 15px; padding: 20px;
+                margin-bottom: 15px; cursor: pointer; transition: transform 0.2s;
+                border-left: 5px solid ${course.color};
+            `;
+            div.onmouseover = () => div.style.transform = 'translateY(-3px)';
+            div.onmouseout = () => div.style.transform = 'translateY(0)';
+            div.onclick = () => {
+                this.activeCourseId = course.id;
+                this.expandedStepId = null; // Reset step expansion
+                this.renderRoadmap();
+            };
+
+            div.innerHTML = `
+                <div style="
+                    min-width: 50px; height: 50px; border-radius: 12px;
+                    display: flex; align-items: center; justify-content: center;
+                    background: ${this.hexToRgba(course.color, 0.1)};
+                    color: ${course.color}; font-size: 24px;
+                ">
+                    <i class="${course.icon}"></i>
+                </div>
+                <div style="flex: 1;">
+                    <div style="display:flex; justify-content:space-between; align-items:center;">
+                        <h3 style="margin: 0; font-size: 16px; color: var(--text);">${course.title}</h3>
+                        ${isFinished ? `<i class="fas fa-check-circle" style="color: var(--success);"></i>` : ''}
+                    </div>
+                    <p style="margin: 5px 0 0; font-size: 12px; color: var(--text-light);">${course.desc}</p>
+                    
+                    <div style="margin-top: 10px; display: flex; align-items: center; gap: 10px;">
+                        <div class="progress-container" style="flex:1; height: 6px;">
+                            <div class="progress-bar" style="width: ${progressPct}%; background: ${course.color};"></div>
+                        </div>
+                        <span style="font-size: 11px; color: var(--text-light);">${completedSteps}/${totalSteps} lesson</span>
+                    </div>
+                </div>
+                <i class="fas fa-chevron-right" style="color: var(--text-light); opacity: 0.5;"></i>
+            `;
+            container.appendChild(div);
+        });
+    }
+    renderCourseDetail(container, courseId) {
+        const course = COURSES.find(c => c.id === courseId);
+        if (!course) { this.activeCourseId = null; this.renderRoadmap(); return; }
+
+        // 1. Header with Back Button
+        const header = document.createElement('div');
+        header.style.cssText = "display:flex; align-items:center; margin-bottom: 20px; gap: 15px;";
+        header.innerHTML = `
+            <button class="btn btn-secondary" onclick="app.exitCourseView()">
+                <i class="fas fa-arrow-left"></i>
+            </button>
+            <div>
+                <h3 style="margin:0; color:${course.color}">${course.title}</h3>
+                <span style="font-size:12px; color:var(--text-light)">Course Curriculum</span>
+            </div>
+        `;
+        container.appendChild(header);
+
+        // 2. Render Steps
+        const progress = this.data.courseProgress[courseId] || {};
+        
+        course.steps.forEach((step, index) => {
+            const isCompleted = progress[step.id];
+            
+            // Logic Locked: If previous step is NOT complete, this one is locked.
+            // First step (index 0) is always unlocked.
+            let isLocked = false;
+            if (index > 0) {
+                const prevStepId = course.steps[index - 1].id;
+                if (!progress[prevStepId]) isLocked = true;
+            }
+
+            const isExpanded = this.expandedStepId === step.id;
+
+            // Styles
+            const opacity = isLocked ? '0.5' : '1';
+            const cursor = isLocked ? 'not-allowed' : 'pointer';
+            const icon = isCompleted ? 'fa-check-circle' : (isLocked ? 'fa-lock' : 'fa-play-circle');
+            const iconColor = isCompleted ? 'var(--success)' : (isLocked ? 'var(--text-light)' : course.color);
+            const borderStyle = isExpanded ? `1px solid ${course.color}` : '1px solid var(--border)';
+
+            const card = document.createElement('div');
+            card.className = 'card';
+            card.style.cssText = `
+                margin-bottom: 15px; padding: 0; overflow: hidden;
+                opacity: ${opacity}; border: ${borderStyle}; transition: all 0.3s ease;
+            `;
+
+            // Card Header (Clickable)
+            const cardHead = document.createElement('div');
+            cardHead.style.cssText = `padding: 15px; display: flex; align-items: center; gap: 15px; cursor: ${cursor}; background: var(--surface);`;
+            
+            cardHead.onclick = () => {
+                if (isLocked) {
+                    this.showToast("Complete the previous lesson!");
+                    return;
+                }
+                // Toggle Expansion
+                this.expandedStepId = isExpanded ? null : step.id;
+                this.renderRoadmap(); // Re-render to show expansion
+            };
+
+            cardHead.innerHTML = `
+                <div style="font-size: 20px; color: ${iconColor}; width: 30px; text-align: center;">
+                    <i class="fas ${icon}"></i>
+                </div>
+                <div style="flex: 1;">
+                    <div style="font-weight: 600; font-size: 14px; margin-bottom: 3px;">${step.title}</div>
+                    <div style="font-size: 12px; color: var(--text-light);">${step.desc}</div>
+                </div>
+                <i class="fas fa-chevron-down" style="font-size: 12px; color: var(--text-light); transition: transform 0.3s; transform: ${isExpanded ? 'rotate(180deg)' : 'rotate(0)'}"></i>
+            `;
+            card.appendChild(cardHead);
+
+            // Card Body (Instructions) - Only if expanded
+            if (isExpanded && !isLocked) {
+                const cardBody = document.createElement('div');
+                cardBody.style.cssText = `
+                    padding: 15px; border-top: 1px solid var(--border); 
+                    background: rgba(255,255,255,0.02); animation: fadeIn 0.3s;
+                `;
+                
+                cardBody.innerHTML = `
+                    <div style="font-size: 14px; line-height: 1.6; color: var(--text-light); margin-bottom: 20px;">
+                        ${step.content}
+                    </div>
+                `;
+
+                // Action Button
+                const btnContainer = document.createElement('div');
+        btnContainer.style.textAlign = 'right';
+
+        const actionBtn = document.createElement('button');
+        
+        // --- MODIFIED HERE ---
+        if (step.isCertAction) {
+    // Determine the Goal ID associated with this course
+    let targetGoalId = 'cert_basic_1';
+    if(courseId === 'c_intermediate') targetGoalId = 'cert_inter_1';
+    else if(courseId === 'c_advanced') targetGoalId = 'cert_adv_1';
+    else if(courseId === 'c_intensive') targetGoalId = 'cert_master_1';
+
+    const existingGoal = this.data.goals.find(g => g.id === targetGoalId);
+    if (existingGoal) {
+            actionBtn.className = 'btn btn-secondary';
+            actionBtn.innerHTML = '<i class="fas fa-check"></i> Enrolled';
+            actionBtn.disabled = true;
+    } else {
+            actionBtn.className = 'btn';
+            actionBtn.style.background = 'var(--warning)';
+            actionBtn.style.color = '#000';
+            actionBtn.innerHTML = 'Get Certified';
+            actionBtn.onclick = (e) => {
+                e.stopPropagation();
+                this.enrollCertification(courseId); // Pass courseId here
+                this.toggleStepCompletion(courseId, step.id); 
+            };
+    }
+} else if (step.practiceParams) {
+    // Nút dành cho các bài học yêu cầu thực hành
+    actionBtn.className = isCompleted ? 'btn btn-secondary' : 'btn';
+    actionBtn.innerHTML = isCompleted ? '<i class="fas fa-check"></i> Completed' : `Start the exercise (${step.practiceParams.duration} minutes)`;
+    if (!isCompleted) actionBtn.style.background = course.color;
+    
+    actionBtn.onclick = (e) => {
+        e.stopPropagation();
+        if (isCompleted) {
+            this.showToast("You have completed this exercise.");
+        } else {
+            this.startCoursePractice(course.id, step.id);
+        }
+    };
+} else {
+                // --- SỬA ĐOẠN NÀY: Logic cho bài học lý thuyết & Quiz ---
+                actionBtn.className = isCompleted ? 'btn btn-secondary' : 'btn';
+                
+                if (isCompleted) {
+                    actionBtn.innerHTML = '<i class="fas fa-check"></i> Completed';
+                    actionBtn.style.color = 'var(--success)';
+                    actionBtn.style.borderColor = 'var(--success)';
+                    // Cho phép làm lại quiz nếu muốn
+                    if(step.quiz) {
+                         actionBtn.onclick = (e) => {
+                            e.stopPropagation();
+                            if(confirm("You have completed this quiz. Do you want to try again?")) {
+                                this.openQuizModal(courseId, step.id);
+                            }
+                        };
+                    }
+                } else {
+                    // Nếu có Quiz, nút sẽ mở Quiz
+                    if (step.quiz) {
+                        actionBtn.innerHTML = '<i class="fas fa-question-circle"></i> Start Quiz';
+                        actionBtn.style.background = course.color;
+                        actionBtn.style.color = '#fff';
+                        actionBtn.onclick = (e) => {
+                            e.stopPropagation();
+                            this.openQuizModal(courseId, step.id);
+                        };
+                   } else {
+                        // Logic cũ cho bài đọc không có quiz (nếu có)
+                        actionBtn.innerHTML = 'Mark as Completed';
+                        actionBtn.style.background = course.color;
+                        actionBtn.style.color = '#fff';
+                        actionBtn.onclick = (e) => {
+                            e.stopPropagation();
+                            this.toggleStepCompletion(courseId, step.id);
+                        };
+                    }
+                }
+                // --------------------------------------------------------
+            }
+        // ---------------------
+
+        btnContainer.appendChild(actionBtn);
+                cardBody.appendChild(btnContainer);
+                card.appendChild(cardBody);
+            }
+
+            container.appendChild(card);
+        });
+    }
+
+    exitCourseView() {
+        this.activeCourseId = null;
+        this.expandedStepId = null;
+        this.renderRoadmap();
+    }
+
+    toggleStepCompletion(courseId, stepId) {
+        if (!this.data.courseProgress[courseId]) {
+            this.data.courseProgress[courseId] = {};
+        }
+
+        const isCurrentlyDone = this.data.courseProgress[courseId][stepId];
+        
+        if (isCurrentlyDone) {
+            // Optional: Toggle OFF (Un-complete)
+            delete this.data.courseProgress[courseId][stepId];
+        } else {
+            // Toggle ON
+            this.data.courseProgress[courseId][stepId] = true;
+            
+          
+            // Close expansion automatically after short delay to show checkmark
+            setTimeout(() => {
+                this.expandedStepId = null;
+                this.renderRoadmap();
+            }, 1000);
+        }
+
+        this.save();
+        this.renderRoadmap();
+    }
+openQuizModal(courseId, stepId) {
+    const course = COURSES.find(c => c.id === courseId);
+    const step = course.steps.find(s => s.id === stepId);
+    
+    if (!step || !step.quiz) return;
+
+    // Lưu state hiện tại để dùng khi submit
+    this.currentQuiz = { courseId, stepId, data: step.quiz };
+
+    const container = document.getElementById('quiz-container');
+    container.innerHTML = '';
+
+    step.quiz.forEach((item, index) => {
+        const qDiv = document.createElement('div');
+        qDiv.style.marginBottom = '20px';
+        qDiv.style.padding = '15px';
+        qDiv.style.background = 'rgba(255,255,255,0.05)';
+        qDiv.style.borderRadius = '8px';
+        
+        const qTitle = document.createElement('div');
+        qTitle.style.fontWeight = 'bold';
+        qTitle.style.marginBottom = '10px';
+        qTitle.innerText = `Question ${index + 1}: ${item.q}`;
+        qDiv.appendChild(qTitle);
+
+        item.options.forEach((opt, optIndex) => {
+            const label = document.createElement('label');
+            label.style.display = 'block';
+            label.style.padding = '5px 0';
+            label.style.cursor = 'pointer';
+            label.style.fontSize = '14px';
+            
+            const radio = document.createElement('input');
+            radio.type = 'radio';
+            radio.name = `q-${index}`;
+            radio.value = optIndex;
+            radio.style.marginRight = '10px';
+            
+            label.appendChild(radio);
+            label.appendChild(document.createTextNode(opt));
+            qDiv.appendChild(label);
+        });
+
+        container.appendChild(qDiv);
+    });
+
+    document.getElementById('quiz-modal').style.display = 'flex';
+}
+
+submitQuiz() {
+    if (!this.currentQuiz) return;
+    
+    const { courseId, stepId, data } = this.currentQuiz;
+    let correctCount = 0;
+    let allAnswered = true;
+
+    // Kiểm tra từng câu
+    data.forEach((item, index) => {
+        const radios = document.getElementsByName(`q-${index}`);
+        let selected = -1;
+        for (let i = 0; i < radios.length; i++) {
+            if (radios[i].checked) {
+                selected = parseInt(radios[i].value);
+                break;
+            }
+        }
+
+        if (selected === -1) {
+            allAnswered = false;
+        } else if (selected === item.correct) {
+            correctCount++;
+        }
+    });
+
+    if (!allAnswered) {
+        this.showToast("Please answer all the questions!");
+        return;
+    }
+
+    if (correctCount === data.length) {
+        // Đúng hết
+        document.getElementById('quiz-modal').style.display = 'none';
+        this.showToast("🎉 Perfect! You answered all questions correctly.");
+        
+        // Đánh dấu hoàn thành bài học
+        // Kiểm tra xem đã hoàn thành chưa để tránh toggle tắt đi
+        if (!this.data.courseProgress[courseId] || !this.data.courseProgress[courseId][stepId]) {
+             this.toggleStepCompletion(courseId, stepId);
+        }
+    } else {
+        // Sai
+        this.showToast(`You answered ${correctCount}/${data.length} questions correctly. Try again!`);
+    }
+}	
+	startCoursePractice(courseId, stepId) {
+    const course = COURSES.find(c => c.id === courseId);
+    const step = course.steps.find(s => s.id === stepId);
+    const params = step.practiceParams;
+    
+    // Tìm hoặc tạo mục tiêu ảo để chạy timer
+    let goal = this.data.goals.find(g => g.type === 'meditation') || { id: 'temp_practice', name: 'Practice exercise', type: 'meditation' , lastDuration: params.duration};
+
+    // Khởi tạo trạng thái thiền
+    this.startMeditationSetup(goal);
+    
+    // Ghi đè các thông số bài học
+    this.meditationState.totalDurationSeconds = params.duration * 60;
+    this.meditationState.remainingSeconds = params.duration * 60;
+    this.meditationState.courseId = courseId;
+    this.meditationState.courseStepId = stepId;
+    
+    
 }
 setupMeditationListeners() {
     const medOverlay = document.getElementById('meditation-overlay');
@@ -1998,11 +2817,128 @@ concludeMeditationSession(type = 'manual') {
     const durationSeconds = this.meditationState.totalDurationSeconds - this.meditationState.remainingSeconds;
     const minutes = Math.ceil(durationSeconds / 60);
     const notes = document.getElementById('med-finish-notes').value;
-
     const goal = this.data.goals.find(g => g.id === this.meditationState.goalId);
+    if (this.meditationState.courseStepId) {
+        const course = COURSES.find(c => c.id === this.meditationState.courseId);
+        const step = course.steps.find(s => s.id === this.meditationState.courseStepId);
+        const params = step.practiceParams;
+        let isSuccess = true;
+
+        // 1. Kiểm tra thời gian
+        if (minutes < params.duration) isSuccess = false;
+
+        // 2. Kiểm tra Tỉnh giác (Hold)
+        if (params.minAwareness && this.meditationState.awarenessCount < params.minAwareness) isSuccess = false;
+
+        // 3. Kiểm tra Chánh niệm (Tap)
+        if (params.minMindfulness && this.meditationState.count < params.minMindfulness) isSuccess = false;
+
+        // 4. Kiểm tra Chế độ xác nhận
+        if (params.requireConfirmMode && !this.data.medSettings.confirmMode) isSuccess = false;
+
+        // --- BỔ SUNG MỚI: Kiểm tra mức chú tâm ---
+        if (params.minAverage || params.minGood) {
+            let avgCount = 0;
+            let goodCount = 0;
+            
+            this.meditationState.touches.forEach(t => {
+                if (t.v === 3) avgCount++;  // v=3 tương ứng với 2 chạm (Trung bình)
+                if (t.v === 2) goodCount++; // v=2 tương ứng với >2 chạm (Tốt)
+            });
+
+            if (params.minAverage && avgCount < params.minAverage) isSuccess = false;
+            if (params.minGood && goodCount < params.minGood) isSuccess = false;
+        }
+        // ------------------------------------------
+
+        if (isSuccess) {
+        this.toggleStepCompletion(this.meditationState.courseId, this.meditationState.courseStepId);
+        this.showToast("🙏 Awesome! You've met the goal and completed the lesson.");
+    } else {
+        this.showToast("This meditation session hasn't met the requirement yet. Try again!");
+    }
+}
+    // --- 1. EXAM VALIDATION LOGIC ---
+    if (this.meditationState.isExam) {
+        // Construct a temp log object to use analyzeSingleSession
+        const tempLog = {
+        minutes: minutes,
+        timestamp: this.meditationState.startTime,
+        touches: this.meditationState.touches.map(t => {
+            const delta = Math.max(0, t.t - this.meditationState.startTime);
+            return t.v ? { d: delta, v: t.v } : delta;
+        }),
+        threshold: this.meditationState.threshold,
+        awarenessCount: this.meditationState.awarenessCount
+    };
+
+    const analysis = this.analyzeSingleSession(tempLog);
+    const qualityPct = analysis.qualityPct;
+    const totalCount = this.meditationState.count;
+    const density = minutes > 0 ? (totalCount / minutes) : 0;
+    
+    let weightedSum = 0;
+    let proCount = 0;
+    this.meditationState.touches.forEach(t => {
+        if (t.v) {
+            weightedSum += (5 - t.v); 
+            proCount++;
+        }
+    });
+    const avgScore = proCount > 0 ? (weightedSum / proCount) : 0;
+
+    // --- NEW LOGIC: Dynamic Criteria based on Goal ID ---
+    let reqMinTime = 59; // Allow 1 min buffer
+    let reqQuality = 50;
+    let reqScore = 1.2;
+    let reqDensity = 5;
+    let reqCount = 300;
+
+    if (goal.id === 'cert_inter_1') {
+        reqMinTime = 59;
+        reqQuality = 55;
+        reqScore = 1.5;
+        reqDensity = 6;
+        reqCount = 400;
+    } else if (goal.id === 'cert_adv_1') {
+        reqMinTime = 119;
+        reqQuality = 60;
+        reqScore = 1.5;
+        reqDensity = 7;
+        reqCount = 800;
+    } else if (goal.id === 'cert_master_1') {
+        reqMinTime = 119;
+        reqQuality = 65;
+        reqScore = 1.5;
+        reqDensity = 8;
+        reqCount = 900;
+    }
+
+    const passedDuration = minutes >= reqMinTime;
+    const passedQuality = qualityPct >= reqQuality;
+    const passedScore = avgScore >= reqScore;
+    const passedDensity = density >= reqDensity;
+    const passedCount = totalCount >= reqCount;
+
+    const passed = passedDuration && passedQuality && passedScore && passedDensity && passedCount;
+
+    if (passed) {
+        goal.certified = true;
+        this.showToast("🎉 CONGRATULATIONS! YOU ARE NOW CERTIFIED!", true);
+        this.playBell(); 
+    } else {
+        alert(`❌ EXAM RESULT: FAILED\n\n` +
+              `- Duration: ${minutes}p (Required ${reqMinTime+1}p) ${passedDuration ? '✅':'❌'}\n` +
+              `- Quality: ${qualityPct}% (Required ≥ ${reqQuality}%) ${passedQuality ? '✅':'❌'}\n` +
+              `- Focus Level: ${avgScore.toFixed(2)} (Required ≥ ${reqScore}) ${passedScore ? '✅':'❌'}\n` +
+              `- Density: ${density.toFixed(1)} (Required ≥ ${reqDensity}) ${passedDensity ? '✅':'❌'}\n` +
+              `- Total Mindfulness: ${totalCount} (Required ≥ ${reqCount}) ${passedCount ? '✅':'❌'}\n\n` +
+              `Don't be discouraged! Take a rest and try again.`);
+    }
+}
     
     // Định dạng ghi chú tự động
-    const autoNote = `Mindfulness: ${this.meditationState.count} | Alertness: ${this.meditationState.awarenessCount}.`;
+    const autoNote = `Mindfulness: ${this.meditationState.count} | Alertness: ${this.meditationState.awarenessCount}. ${this.meditationState.isExam ? '[FINAL EXAM]' : ''}`;
 
     const log = {
         goalId: goal.id,
@@ -2194,69 +3130,20 @@ setDailyMinMedTarget(id) {
     }
 }
 calculateGoalTier(goal) {
-    // 1. Get logs for this goal
-    const logs = this.data.logs.filter(l => l.goalId === goal.id);
-    if (logs.length === 0) return { id: 'bronze', name: 'Bronze', class: 'tier-bronze', icon: 'fas fa-medal' };
-
-    // 2. Group by Date to calculate Daily Performance
-    const dailyStats = {};
-    logs.forEach(l => {
-        if (!dailyStats[l.date]) {
-            dailyStats[l.date] = { sessions: 0, value: 0, minutes: 0 };
-        }
-        dailyStats[l.date].sessions++;
-        
-        // Value: Mindfulness counts for Med, Minutes for Standard
-        const val = (goal.type === 'meditation') 
-            ? (l.count !== undefined ? l.count : (l.touches ? l.touches.length : 0))
-            : l.minutes;
-        
-        dailyStats[l.date].value += val;
-        dailyStats[l.date].minutes += l.minutes;
-    });
-
-    const activeDays = Object.keys(dailyStats).length;
-    if (activeDays === 0) return { id: 'bronze', name: 'Bronze', class: 'tier-bronze', icon: 'fas fa-medal' };
-
-    // 3. Targets
-    const targetSessions = goal.dailySessionTarget || 8;
-    const targetValue = goal.dailyTargetMinutes || 100; // Min/Mindfulness target
-    const targetDuration = goal.dailyMinMedTarget || 120; // Med duration specific
-
-    // 4. Score Calculation
-    let scoreSessions = 0;
-    let scoreValue = 0;
-    let scoreDuration = 0;
-
-    Object.values(dailyStats).forEach(stat => {
-        if (stat.sessions >= targetSessions) scoreSessions++;
-        if (stat.value >= targetValue) scoreValue++;
-        if (goal.type === 'meditation' && stat.minutes >= targetDuration) scoreDuration++;
-    });
-
-    // Calculate Percentages (Consistency on Active Days)
-    const pctSessions = (scoreSessions / activeDays);
-    const pctValue = (scoreValue / activeDays);
-    
-    let totalScore = 0;
-    
-    if (goal.type === 'meditation' && targetDuration > 0) {
-        const pctDuration = (scoreDuration / activeDays);
-        // Weighted average for Meditation (3 criteria)
-        totalScore = (pctSessions + pctValue + pctDuration) / 3;
-    } else {
-        // Weighted average for Standard (2 criteria)
-        totalScore = (pctSessions + pctValue) / 2;
+    const scoreStr = this.calculateConsistencyScore(goal);
+    const score = parseFloat(scoreStr);    
+    if (score >= 9.0) {
+        return { id: 'diamond', name: 'Diamond Class', class: 'tier-diamond', icon: 'fab fa-sketch' };
     }
-
-    // 5. Determine Tier
-    if (totalScore >= 0.9) return { id: 'diamond', name: 'Diamond', class: 'tier-diamond', icon: 'fab fa-sketch' };
-    if (totalScore >= 0.75) return { id: 'gold', name: 'Gold', class: 'tier-gold', icon: 'fas fa-jedi' };
-    if (totalScore >= 0.5) return { id: 'silver', name: 'Silver', class: 'tier-silver', icon: 'fab fa-ethereum' };
-    return { id: 'bronze', name: 'Bronze', class: 'tier-bronze', icon: 'fas fa-medal' };
+    if (score >= 7.5) {
+        return { id: 'gold', name: 'Gold Class', class: 'tier-gold', icon: 'fas fa-jedi' };
+    }
+    if (score >= 5.0) {
+        return { id: 'silver', name: 'Silver Class', class: 'tier-silver', icon: 'fab fa-ethereum' };
+    }   
+    return { id: 'bronze', name: 'Bronze Class', class: 'tier-bronze', icon: 'fas fa-medal' };
 }
 
-// Add this method inside the GoalTracker class
 calculateConsistencyScore(goal) {
     const logs = this.data.logs.filter(l => l.goalId === goal.id);
     if (logs.length === 0) return "0.0";
@@ -2316,8 +3203,6 @@ calculateConsistencyScore(goal) {
              renderGoals() {
     const container = document.getElementById('active-goals-container');
     const emptyMsg = document.getElementById('empty-msg');
-    
-    // Safety check
     if (!container || !emptyMsg) return;
 
     container.innerHTML = '';
@@ -2330,8 +3215,10 @@ calculateConsistencyScore(goal) {
 
     const todayStr = this.toIsoDate(new Date());
 
-    // Sort: Updated recently first
     const sortedGoals = [...this.data.goals].sort((a, b) => {
+        // Prioritize Certification goals at top if not certified
+        if (a.isCertification && !a.certified && (!b.isCertification || b.certified)) return -1;
+        if (b.isCertification && !b.certified && (!a.isCertification || a.certified)) return 1;
         return (b.lastUpdated || 0) - (a.lastUpdated || 0);
     });
 
@@ -2339,68 +3226,148 @@ calculateConsistencyScore(goal) {
         const isMeditation = goal.type === 'meditation';
         const targetProp = isMeditation ? 'totalMindfulness' : 'totalMinutes';
         
-        // --- CHECK COMPLETION ---
-        const isCompleted = goal.lifetimeTargetMinutes > 0 && goal[targetProp] >= goal.lifetimeTargetMinutes;
+        // --- CHECK COMPLETION & EXAM LOGIC ---
+        const targetMet = goal.lifetimeTargetMinutes > 0 && goal[targetProp] >= goal.lifetimeTargetMinutes;
+        const isCertGoal = goal.isCertification === true;
+        const isCertified = goal.certified === true;
         
-        // Check if user is currently "inspecting" this completed goal (to show card instead of badge)
-        // We store this transient state in the class instance (not DB)
+        // Inspecting logic
         const isInspecting = this.inspectingGoalId === goal.id;
 
-        // --- RENDER BADGE (If completed and not inspecting) ---
-        if (isCompleted && !isInspecting) {
+        // CASE 1: Certified (Show Badge)
+        // For Cert goals: Must be targetMet AND isCertified
+        // For Normal goals: Just targetMet
+        const showBadge = (isCertGoal ? (targetMet && isCertified) : targetMet) && !isInspecting;
+
+        if (showBadge) {
             const tier = this.calculateGoalTier(goal);
-            const unitLabel = isMeditation ? 'Mindfulness' : 'Mins';
             
+            // --- NEW LOGIC: Dynamic Icons for Certificates ---
+            let certConfig = { icon: 'fas fa-award'};
+            
+            if (goal.id === 'cert_basic_1') {
+                certConfig = { icon: 'fas fa-award-simple'};
+            } else if (goal.id === 'cert_inter_1') {
+                certConfig = { icon: 'fas fa-award'};
+            } else if (goal.id === 'cert_adv_1') {
+                certConfig = { icon: 'far fa-award-simple'};
+            } else if (goal.id === 'cert_master_1') {
+                certConfig = { icon: 'far fa-award'};
+            }
+
+            const displayTier = isCertGoal 
+                ? { name: 'Meditation Certificate', icon: certConfig.icon, class: 'tier-diamond' } 
+                : tier;
+            
+            const unitLabel = isMeditation ? 'Mindfulness' : 'Mins';
+            const cScore = this.calculateConsistencyScore(goal);
+
             const badgeDiv = document.createElement('div');
-            badgeDiv.className = `goal-medallion ${tier.class}`;
+            badgeDiv.className = `goal-medallion ${displayTier.class}`;
+            
+            
             badgeDiv.onclick = () => {
-                this.inspectingGoalId = goal.id; // Set inspect state
-                this.renderGoals(); // Re-render to show card
+                this.inspectingGoalId = goal.id;
+                this.renderGoals();
             };
-const cScore = this.calculateConsistencyScore(goal);
+            
             badgeDiv.innerHTML = `
-                <div class="medallion-ribbon"><i class="fas fa-certificate"></i> Achievement</div>
+                <div class="medallion-ribbon"><i class="fas fa-certificate"></i> ${isCertGoal ? 'Certification' : 'Achievement'}</div>
                 <div class="medallion-icon-container">
-                    <i class="${tier.icon}"></i>
+                    <i class="${displayTier.icon}"></i>
                 </div>
                 <div class="medallion-title">${goal.name}</div>
-                <div style="font-size: 12px; font-style:italic;">${tier.name} Tier</div>
+                <div style="font-size: 12px; font-style:italic;">${displayTier.name}</div>
                 
                 <div class="medallion-stats">
-                    <div class="medallion-stat-item" title="Total Achievements">
+                    <div class="medallion-stat-item" title="Total Mindfulness">
                         <i class="fas fa-check-double"></i> ${goal[targetProp].toLocaleString()} ${unitLabel}
                     </div>
-                    <div class="medallion-stat-item">
+                    <div class="medallion-stat-item" title="Dilligent Score">
                         🔥 ${cScore}/10
                     </div>
                 </div>
-                <div style="font-size:10px; margin-top:10px; opacity:0.7;">(Click to see details)</div>
             `;
             container.appendChild(badgeDiv);
-            return; // Skip rendering standard card
+            return; 
         }
 
+        // CASE 2: Exam Ready (Only for Cert Goal)
+        // Target Met but NOT certified
+        if (isCertGoal && targetMet && !isCertified) {
+     let reqHtml = '';
+     let durationText = '60 minutes';
 
-        // --- RENDER STANDARD CARD (In Progress OR Inspecting) ---
-        
-        // ... (Keep your existing standard card logic calculation variables here) ...
+     if (goal.id === 'cert_inter_1') {
+        reqHtml = `
+            <li>Quality ≥ 55%</li>
+            <li>Avg. Focus level ≥ 1.5</li>
+            <li>Density ≥ 6 mindfulness/min</li>
+            <li>Total Mindfulness ≥ 400</li>`;
+     } else if (goal.id === 'cert_adv_1') {
+        durationText = '120 minutes';
+        reqHtml = `
+            <li>Quality ≥ 60%</li>
+            <li>Avg. Focus level ≥ 1.5</li>
+            <li>Density ≥ 7 mindfulness/min</li>
+            <li>Total Mindfulness ≥ 800</li>`;
+     } else if (goal.id === 'cert_master_1') {
+        durationText = '120 minutes';
+        reqHtml = `
+            <li>Quality ≥ 65%</li>
+            <li>Avg. Focus level ≥ 1.5</li>
+            <li>Density ≥ 8 mindfulness/min</li>
+            <li>Total Mindfulness ≥ 900</li>`;
+     } else {
+         // Basic Default
+         reqHtml = `
+            <li>Quality ≥ 50%</li>
+            <li>Avg. Focus level ≥ 1.2</li>
+            <li>Density ≥ 5 mindfulness/min</li>
+            <li>Total Mindfulness ≥ 300</li>`;
+     }
+
+     const div = document.createElement('div');
+     div.className = 'card';
+     div.style.cssText = "border: 2px solid var(--warning); text-align: center; padding: 30px;";
+     div.innerHTML = `
+        <div style="font-size: 40px; color: var(--warning); margin-bottom: 15px;">
+            <i class="fas fa-scroll"></i>
+        </div>
+        <h3>Eligible for Final Exam!</h3>
+        <p style="color: var(--text-light); font-size: 13px; margin-bottom: 20px;">
+            You have completed ${goal.lifetimeTargetMinutes.toLocaleString()} mindfulness. Pass the final test to receive your certificate.
+        </p>
+        <div style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 8px; font-size: 12px; text-align: left; margin-bottom: 20px;">
+            <strong><i class="fas fa-tasks"></i> Exam Requirements (${durationText}):</strong>
+            <ul style="margin: 5px 0 0 15px; color: var(--text-light);">
+                ${reqHtml}
+            </ul>
+        </div>
+        <button class="btn" style="width: 100%; background: var(--warning); color: black; font-weight: bold;" onclick="app.startExamSession('${goal.id}')">
+            <i class="fas fa-play-circle"></i> Start the Exam
+        </button>
+     `;
+     container.appendChild(div);
+     return;
+}
+
+        // CASE 3: Standard Goal Card (In Progress)
+        // ... (Your existing card logic variables) ...
         const unitLabel = isMeditation ? 'mindfulness' : 'mins';
         const overallPct = goal.lifetimeTargetMinutes > 0 ? Math.min((goal[targetProp] / goal.lifetimeTargetMinutes) * 100, 100) : 0;
-
+        
         // Calculate Today's Values
         let todayVal = 0;
+        let todayMinutes = 0;
         if (isMeditation) {
-            todayVal = this.data.logs
-                .filter(l => l.goalId === goal.id && l.date === todayStr)
-                .reduce((sum, l) => sum + (l.count !== undefined ? l.count : (l.touches ? l.touches.length : 0)), 0);
+            const logs = this.data.logs.filter(l => l.goalId === goal.id && l.date === todayStr);
+            todayVal = logs.reduce((sum, l) => sum + (l.count !== undefined ? l.count : (l.touches ? l.touches.length : 0)), 0);
+            todayMinutes = logs.reduce((sum, l) => sum + l.minutes, 0);
         } else {
             todayVal = this.data.logs.filter(l => l.goalId === goal.id && l.date === todayStr).reduce((sum, l) => sum + l.minutes, 0);
         }
         
-        const todayMinutes = this.data.logs
-            .filter(l => l.goalId === goal.id && l.date === todayStr)
-            .reduce((sum, l) => sum + l.minutes, 0);
-
         const dailyTarget = goal.dailyTargetMinutes || 100;
         const dailyminmedTarget = goal.dailyMinMedTarget || 120;
         let dailyPct = 0;
@@ -2413,131 +3380,100 @@ const cScore = this.calculateConsistencyScore(goal);
 
         const div = document.createElement('div');
         div.className = 'card goal-card';
-        if (isInspecting) div.classList.add('card-revealed'); // Add animation class
+        if (isInspecting) div.classList.add('card-revealed'); 
         div.style.borderLeft = `5px solid ${goal.color}`;
 
-        // --- Close Button for Inspect Mode ---
+        // Close Button
         let closeInspectHtml = '';
         if (isInspecting) {
-            closeInspectHtml = `
-                <div style="text-align: center; margin-bottom: 10px; padding-bottom:10px; border-bottom:1px solid var(--border);">
-                    <button class="btn btn-secondary" onclick="app.closeInspect('${goal.id}')" style="font-size:12px; padding: 5px 15px;">
-                        <i class="fas fa-medal"></i> Minimize to Badge
-                    </button>
-                </div>
-            `;
+            closeInspectHtml = `<div style="text-align: center; margin-bottom: 10px; padding-bottom:10px; border-bottom:1px solid var(--border);"><button class="btn btn-secondary" onclick="app.closeInspect('${goal.id}')" style="font-size:12px; padding: 5px 15px;"><i class="fas fa-medal"></i> Minimize</button></div>`;
         }
-       
         
         let controlsHtml = '', dailySectionHtml = '', sessionSectionHtml = '';
         
-        // --- DAILY SECTIONS ---
+        // Render Bars logic (Similar to old code but with LOCKED handlers for Cert Goals)
         if (dailyTarget > 0) {
-            // 1. TÍNH TOÁN CHO PHẦN GRID (Ô VUÔNG)
+             // Grid logic
             const todaySessionCount = this.data.logs.filter(l => l.goalId === goal.id && l.date === todayStr).length;
             const sessionTarget = goal.dailySessionTarget || 8;
             let sessionGridHtml = '';
-
             if (sessionTarget > 0) {
                 sessionGridHtml = `<div style="margin-top: 10px; display: flex; flex-wrap: wrap; gap: 5px; max-height: 85px; overflow-y: auto;">`;
                 for (let i = 1; i <= sessionTarget; i++) {
                     const isDone = i <= todaySessionCount;
-                    // Nếu hoàn thành: Có viền màu goal.color, chữ đậm.
-                    // Nếu chưa: Không viền, nền mờ, chữ nhạt.
-                    const boxStyle = isDone 
-                        ? `border: 1px solid ${goal.color}; color: ${goal.color}; font-weight: bold; background: rgba(0,0,0,0.1);` 
-                        : `border: 1px solid transparent; background: rgba(255,255,255,0.05); color: var(--text-light);`;
-                    
-                    sessionGridHtml += `
-                        <div style="
-                            width: 24px; height: 24px; 
-                            display: flex; align-items: center; justify-content: center; 
-                            font-size: 11px; border-radius: 4px;
-                            ${boxStyle}
-                        ">${i}</div>`;
+                    const boxStyle = isDone ? `border: 1px solid ${goal.color}; color: ${goal.color}; font-weight: bold; background: rgba(0,0,0,0.1);` : `border: 1px solid transparent; background: rgba(255,255,255,0.05); color: var(--text-light);`;
+                    sessionGridHtml += `<div style="width: 24px; height: 24px; display: flex; align-items: center; justify-content: center; font-size: 11px; border-radius: 4px; ${boxStyle}">${i}</div>`;
                 }
-				// --- NEW CODE START: Add Green Tick if Completed ---
-                if (todaySessionCount >= sessionTarget) {
-                    sessionGridHtml += `
-                        <div style="
-                            width: 24px; height: 24px; 
-                            display: flex; align-items: center; justify-content: center; 
-                            color: var(--success); font-size: 16px; margin-left: 2px;
-                            animation: fadeIn 0.5s ease;"
-                            title="Daily practice sessions goal accomplished!">
-                            <i class="fas fa-check-circle"></i>
-                        </div>`;
-                }
-                // --- NEW CODE END ---
+                if (todaySessionCount >= sessionTarget) sessionGridHtml += `<div style="width: 24px; height: 24px; display: flex; align-items: center; justify-content: center; color: var(--success); font-size: 16px; margin-left: 2px;"><i class="fas fa-check-circle"></i></div>`;
                 sessionGridHtml += `</div>`;
             }
 
-            // 2. CẬP NHẬT ORIGINAL BAR VỚI CLICK EVENT & GRID
+            // Click Handler: Prevent editing if Cert Goal
+            const sessionClick = isCertGoal ? `` : `onclick="app.setDailySessionTarget('${goal.id}')"`;
+            const pointerStyle = isCertGoal ? 'cursor: default;' : 'cursor: pointer;';
+            const iconDisplay = isCertGoal ? 'display:none;' : '';
+
             dailySectionHtml = `
-                <div 
-                    onclick="app.setDailySessionTarget('${goal.id}')"
-                    title="Set daily session target"
-                    style="margin-bottom: 10px; background: rgba(0,0,0,0.2); padding: 10px; border-radius: 8px; cursor: pointer; transition: background 0.2s;"
-                    onmouseover="this.style.background='rgba(0,0,0,0.3)'"
-                    onmouseout="this.style.background='rgba(0,0,0,0.2)'"
-                >
+                <div ${sessionClick} style="margin-bottom: 10px; background: rgba(0,0,0,0.2); padding: 10px; border-radius: 8px; ${pointerStyle} transition: background 0.2s;">
                     <div style="display:flex; justify-content:space-between; font-size:12px; margin-bottom:5px; align-items:center;">
                         <strong style="color:var(--text);">Today's Goal</strong>
-                        <span style="font-weight:600;">${todayVal} / ${dailyTarget} ${unitLabel} <i class="fas fa-pen" style="font-size:10px; opacity:0.5; margin-left:4px;"></i></span>
+                        <span style="font-weight:600;">${todayVal} / ${dailyTarget} ${unitLabel} <i class="fas fa-pen" style="font-size:10px; opacity:0.5; margin-left:4px; ${iconDisplay}"></i></span>
                     </div>
                     <div class="progress-container" style="height: 6px;"><div class="progress-bar" style="width: ${dailyPct}%; background: ${dailyBarColor}"></div></div>
-                    
                     ${sessionGridHtml}
                 </div>`;
 
-            // 2. NEW BAR (Minutes) - Only for Meditation Goals
             if (isMeditation) {
                 const minPct = Math.min((todayMinutes / dailyminmedTarget) * 100, 100);
                 let minBarColor = goal.color;
                 if (todayMinutes >= dailyminmedTarget) minBarColor = 'var(--success)';
+                
+                const minClick = isCertGoal ? `` : `onclick="app.setDailyMinMedTarget('${goal.id}')"`;
 
-                // CHANGE 2: Added onclick event, cursor pointer, and hover visual cues
                 dailySectionHtml += `
-                <div 
-                    onclick="app.setDailyMinMedTarget('${goal.id}')"
-                    title="Edit daily time goal"
-                    style="margin-bottom: 15px; background: rgba(0,0,0,0.2); padding: 10px; border-radius: 8px; cursor: pointer; transition: background 0.2s;"
-                    onmouseover="this.style.background='rgba(0,0,0,0.3)'"
-                    onmouseout="this.style.background='rgba(0,0,0,0.2)'"
-                >
+                <div ${minClick} style="margin-bottom: 15px; background: rgba(0,0,0,0.2); padding: 10px; border-radius: 8px; ${pointerStyle} transition: background 0.2s;">
                     <div style="display:flex; justify-content:space-between; font-size:12px; margin-bottom:5px; align-items:center;">
                         <strong style="color:var(--text);">Daily Time Goal</strong>
-                        <span style="font-weight:600;">${todayMinutes} / ${dailyminmedTarget} minutes <i class="fas fa-pen" style="font-size:10px; opacity:0.5; margin-left:4px;"></i></span>
+                        <span style="font-weight:600;">${todayMinutes} / ${dailyminmedTarget} minutes <i class="fas fa-pen" style="font-size:10px; opacity:0.5; margin-left:4px; ${iconDisplay}"></i></span>
                     </div>
                     <div class="progress-container" style="height: 6px;"><div class="progress-bar" style="width: ${minPct}%; background: ${minBarColor}"></div></div>
                 </div>`;
             }
         }
 
+        // Controls Logic - HIDE MANUAL ENTRY FOR CERT
         if (isMeditation) {
+            const manualBtn = isCertGoal ? '' : `<button class="btn-icon" style="background:var(--warning); color:#000;" onclick="app.openSessionModal('${goal.id}')" title="Add Manually"><i class="fas fa-plus"></i></button>`;
+            
             controlsHtml = `
                  <div class="timer-controls">
-                    <div style="font-size: 14px; color: var(--text-light); text-transform: uppercase;">Meditation</div>
+                    <div style="font-size: 14px; color: var(--text-light); text-transform: uppercase;">${isCertGoal ? 'Meditation' : 'Meditation'}</div>
                     <div style="display:flex; gap: 10px;">
                         <button class="btn-icon btn-play" style="background: var(--zen); color: white;" onclick="app.toggleTimer('${goal.id}')" title="Start Meditate"><i class="fas fa-om"></i></button>
-                        
-                        <button class="btn-icon" style="background:var(--warning); color:#000;" onclick="app.openSessionModal('${goal.id}')" title="Add Manually"><i class="fas fa-plus"></i></button>
+                        ${manualBtn}
                     </div>
                 </div>`;
         } else {
             sessionSectionHtml = `
-                            <div class="section-label">Current Session</div>
-                            <div class="progress-container"><div id="bar-session-${goal.id}" class="progress-bar" style="background:var(--success); width:0%;"></div></div>
-                            <div style="display:flex; justify-content:space-between; font-size:12px; color:var(--text-light);"><span id="prog-text-session-${goal.id}">Ready</span></div>`;
-                        controlsHtml = `
-                            <div class="timer-controls">
-                                <div id="timer-${goal.id}" class="timer-display">00:00</div>
-                                <div style="display:flex; gap: 10px;">
-                                    <button class="btn-icon ${goal.isActive ? 'btn-stop' : 'btn-play'}" onclick="app.toggleTimer('${goal.id}')"><i class="fas ${goal.isActive ? 'fa-stop' : 'fa-play'}"></i></button>
-                                    <button class="btn-icon" style="background:var(--warning); color:#000;" onclick="app.openSessionModal('${goal.id}')"><i class="fas fa-plus"></i></button>
-                                </div>
-                            </div>`;
-                    }
+                <div class="section-label">Current Session</div>
+                <div class="progress-container"><div id="bar-session-${goal.id}" class="progress-bar" style="background:var(--success); width:0%;"></div></div>
+                <div style="display:flex; justify-content:space-between; font-size:12px; color:var(--text-light);"><span id="prog-text-session-${goal.id}">Ready</span></div>`;
+            controlsHtml = `
+                <div class="timer-controls">
+                    <div id="timer-${goal.id}" class="timer-display">00:00</div>
+                    <div style="display:flex; gap: 10px;">
+                        <button class="btn-icon ${goal.isActive ? 'btn-stop' : 'btn-play'}" onclick="app.toggleTimer('${goal.id}')"><i class="fas ${goal.isActive ? 'fa-stop' : 'fa-play'}"></i></button>
+                        <button class="btn-icon" style="background:var(--warning); color:#000;" onclick="app.openSessionModal('${goal.id}')"><i class="fas fa-plus"></i></button>
+                    </div>
+                </div>`;
+        }
+		const headerButtons = isCertGoal 
+            ? `<span style="font-size:10px; background:var(--warning); color:#000; padding:2px 6px; border-radius:4px; font-weight:bold;">CERTIFICATE</span>`
+            : `
+            <div style="display:flex; gap: 5px;">
+                <button class="btn-icon" style="color: var(--text-light)" onclick="app.openModal('${goal.id}', '${goal.type}')"><i class="fas fa-pencil-alt"></i></button>
+                <button class="btn-icon" style="color: var(--text-light)" onclick="app.deleteGoal('${goal.id}')"><i class="fas fa-trash"></i></button>
+            </div>`;
 const consistencyScore = this.calculateConsistencyScore(goal);
 
 // 2. Define color based on score (Optional visual touch)
@@ -2577,8 +3513,61 @@ else if (parseFloat(consistencyScore) >= 5.0) scoreColor = '#BDC3C7';
     <div class="sessions-list" style="margin-top: 15px; max-height: 150px; overflow-y: auto;"><div id="sessions-${goal.id}"></div></div>
 `;
 container.appendChild(div);
+        if (isCertGoal) {
+             // We need to modify renderSessions to not show edit buttons, 
+             // or simply handle it in openSessionModal (easier security)
+        }
         this.renderSessions(goal.id, isMeditation);
     });
+}
+
+startExamSession(goalId) {
+    const goal = this.data.goals.find(g => g.id === goalId);
+    if (!goal) return;
+
+    // Determine Duration
+    let durationMins = 60;
+    if (goalId === 'cert_adv_1' || goalId === 'cert_master_1') {
+        durationMins = 120;
+    }
+
+    if (!confirm(`⚠️ START FINAL EXAM ⚠️\n\n- Duration: ${durationMins} minutes.\n- Long pauses are not permitted.\n- Results will be calculated immediately after completion.\n\nAre you ready?`)) return;
+
+    // Force settings
+    if (typeof Website2APK !== 'undefined') Website2APK.keepScreenOn(true);
+
+    this.meditationState = {
+        active: true, paused: false, goalId: goal.id,
+        count: 0, awarenessCount: 0,
+        startTime: Date.now(), 
+        totalDurationSeconds: durationMins * 60, // Set dynamic duration
+        remainingSeconds: durationMins * 60, 
+        touches: [],
+        threshold: 9, // Standard threshold for exam
+        quoteInterval: null,
+        currentAutoLevel: 4, comboCounter: 0, lastTouchTime: Date.now(),
+        consecutiveGoodCount: 0,
+        
+        // EXAM FLAGS
+        isExam: true,
+        examResult: null
+    };
+
+    document.getElementById('meditation-overlay').style.display = 'flex';
+    document.getElementById('med-counter').innerText = '0';
+    this.updateMedTimerDisplay();
+    this.updateMeditationQuote(true); 
+
+    this.meditationState.timerRef = setInterval(() => {
+        if (!this.meditationState.paused) {
+            if (this.meditationState.remainingSeconds > 0) {
+                this.meditationState.remainingSeconds--;
+                this.updateMedTimerDisplay();
+            } else {
+                this.concludeMeditationSession('auto');
+            }
+        }
+    }, 1000);
 }
 
 // Helper to close inspect mode
@@ -2593,12 +3582,14 @@ closeInspect(goalId) {
     this.sessionLimits[goalId] += 80; 
     this.renderSessions(goalId, isMeditation);
 }
-           renderSessions(goalId, isMeditation) {
+           renderSessions(goalId) {
     const container = document.getElementById(`sessions-${goalId}`);
     if (!container) return;
-    container.innerHTML = '';
 
-    // 1. Get all sessions for this goal sorted by date (newest first)
+    // Lấy thông tin mục tiêu để kiểm tra loại
+    const goal = this.data.goals.find(g => g.id === goalId);
+    const isCertGoal = goal && goal.isCertification; // Kiểm tra nếu là khóa chứng chỉ
+    const isMeditation = goal && goal.type === 'meditation';
     const allSessions = this.data.logs
         .filter(l => l.goalId === goalId)
         .sort((a, b) => b.timestamp - a.timestamp);
@@ -2628,13 +3619,15 @@ closeInspect(goalId) {
 
         let actionButtons = '<div style="display:flex; gap:5px;">';
 
-        if (isMeditation && log.touches && log.touches.length > 0) {
+                    if (isMeditation && log.touches && log.touches.length > 0) {
                         actionButtons += `<button class="btn-icon" style="background:transparent; color:var(--zen); height:24px; width:24px;" onclick="app.showSessionGraph('${log.timestamp}')" title="Show graph"><i class="fas fa-chart-area" style="font-size:12px;"></i></button>`;
                     }
 
-                    actionButtons += `<button class="btn-icon" style="background:transparent; color:var(--text-light); height:24px; width:24px;" onclick="app.openSessionModal('${goalId}', ${log.minutes}, ${log.timestamp}, ${log.timestamp})" title="Edit details"><i class="fas fa-edit" style="font-size:12px;"></i></button>`;
-                    
-                    actionButtons += '</div>';
+                    if (!isCertGoal) { 
+            actionButtons += `<button class="btn-icon" style="background:transparent; color:var(--text-light); height:24px; width:24px;" onclick="app.openSessionModal('${goalId}', ${log.minutes}, ${log.timestamp}, ${log.timestamp})" title="Edit details"><i class="fas fa-edit" style="font-size:12px;"></i></button>`;
+        }
+
+        actionButtons += '</div>';
 
 
                     sLi.innerHTML = `
@@ -2645,7 +3638,7 @@ closeInspect(goalId) {
                         ${actionButtons}
                     `;
                     ol.appendChild(sLi);
-    });
+               });
     container.appendChild(ol);
 
     // 4. Render "Load More" Button if there are more items
@@ -3111,7 +4104,7 @@ fallbackCopyText(text) {
                 const btn = document.getElementById('btn-save-goal');
                 const catSelect = document.getElementById('g-cat');
                 catSelect.innerHTML = '';
-                const cats = type === 'meditation' ? ['Sitting', 'Walking', 'Contemplation', 'Bhavana'] : ['Work', 'Study', 'Health', 'Creative', 'Merit', 'Other'];
+                const cats = type === 'meditation' ? ['Sitting', 'Walking', 'Mindfulness of Breath', 'Contemplation', 'Bhavana'] : ['Work', 'Study', 'Health', 'Creative', 'Merit', 'Other'];
                 cats.forEach(c => { const opt = document.createElement('option'); opt.value = c; opt.innerText = c; catSelect.appendChild(opt); });
 
                 const dailyHint = document.getElementById('g-daily-hint');
@@ -3119,10 +4112,13 @@ fallbackCopyText(text) {
                 if (type === 'meditation') { dailyHint.innerText = "Mindfulness per day"; lifeHint.innerText = "Mindfulness"; } 
                 else { dailyHint.innerText = "Mins per day"; lifeHint.innerText = "Minutes"; }
                 document.getElementById('g-type').value = type;
-
-                if (goalId) {
+if (goalId) {
                     const goal = this.data.goals.find(g => g.id === goalId);
-                    if (goal) {
+					if (goal && goal.isCertification) {
+            alert("Certificate goal parameters cannot be edited.");
+            return;
+        }
+                    if (goalId) {
                         document.getElementById('g-id').value = goal.id;
                         document.getElementById('g-name').value = goal.name;
                         document.getElementById('g-cat').value = goal.category;
@@ -4100,7 +5096,7 @@ openBadgePicker() {
             <div class="modal-content" style="max-width: 550px; width: 95%; max-height: 85vh; display: flex; flex-direction: column; padding: 0; border-radius: 16px;">
                 
                 <div style="padding: 15px 20px; border-bottom: 1px solid var(--border); position: relative; display: flex; justify-content: center; align-items: center; background: var(--surface); border-radius: 16px 16px 0 0;">
-                    <h3 style="margin: 0; font-size: 18px;"><i class="fas fa-gem"></i> Select Pāramī</h3>
+                    <h3 style="margin: 0; font-size: 18px;"><i class="fas fa-wreath-laurel"></i> Select Pāramī</h3>
                     <button class="btn-icon" onclick="app.closeBadgePicker()" style="position: absolute; right: 20px; color: var(--text-light); background: transparent;"><i class="fas fa-times"></i></button>
                 </div>
 
@@ -4317,7 +5313,7 @@ loadActiveBadge() {
         }
     } else {
         // Default state (No badge selected) - Keep as is
-        container.innerHTML = `<i class="fas fa-gem"></i>`;
+        container.innerHTML = `<i class="fas fa-wreath-laurel"></i>`;
         
         // Explicitly set default styles to match CSS .badge-display
         container.style.color = '#ffffff';
@@ -4362,7 +5358,7 @@ renderBadgeAltar() {
     }
 
     // Default state (No badge selected)
-    iconEl.innerHTML = `<i class="fas fa-gem"></i>`;
+    iconEl.innerHTML = `<i class="fas fa-wreath-laurel"></i>`;
     iconEl.style.color = 'var(--text-light)';
     iconEl.classList.remove('altar-floating');
     
@@ -4414,8 +5410,8 @@ renderBadgeAltar() {
                 
                 const titles = {
                     'dashboard': 'Journal',
-                    'calendar': 'Calendar',
-                    'reports': 'Statistics',
+                    'calendar': 'Courses',
+                    'reports': 'Activities',
 					'analytics': 'Analytics',
 					'pro': 'Advanced',
 					'achievements': 'Pāramī'
@@ -4423,7 +5419,7 @@ renderBadgeAltar() {
                 
                 document.getElementById('page-title').innerText = titles[viewName] || 'Journal';
                 if (viewName === 'reports') { this.renderReports(); }
-                if (viewName === 'calendar') this.renderCalendar();
+                if (viewName === 'calendar') this.renderRoadmap();
 				if (viewName === 'analytics') this.renderAnalytics();
 				if (viewName === 'pro') this.renderProAnalytics();
 				if (viewName === 'achievements') {
@@ -4671,6 +5667,7 @@ dbHelper.deleteLog(parseInt(logId)).then(() => {
     else deleteBtn.style.display = 'none';  
     
     const goal = this.data.goals.find(g => g.id === goalId);
+	
     const mindGroup = document.getElementById('s-mindfulness-group');
     const mindInput = document.getElementById('s-mindfulness');
     const thresholdInput = document.getElementById('s-threshold');
