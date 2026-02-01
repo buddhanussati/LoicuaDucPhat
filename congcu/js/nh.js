@@ -113,8 +113,8 @@ const COURSES = [
                 id: 's_3_awareness',
                 title: 'Ghi nhận Tỉnh giác',
                 desc: 'Học cách nhận diện trạng thái tâm rõ ràng.',
-                content: `<p>Tỉnh giác là khi bạn <b>nhận biết</b> được trạng thái tâm mình (ví dụ: chợt nhận ra mình đang phóng tâm, đang có tạp niệm, hoặc đang mất tập trung trên đề mục thiền). Đây là khoảnh khắc của sự nhận biết & quay trở lại. Trong ứng dụng, chúng ta ghi nhận sự <strong>Tỉnh giác</strong> bằng cách <strong>Nhấn và Giữ</strong>:</p><ul><li><b>Tỉnh giác</b> được ví người giữ cửa thành hiền trí, thông minh, có trí, ngăn chặn những người lạ mặt, cho vào những người quen biết để bảo vệ những người ở trong thành <em>(chánh niệm)</em> và để chống cự những người bên ngoài <em>(tạp niệm)</em>. </li><li><b>Để thực hành</b>, khi bạn nhận ra tâm mình đang có tạp niệm, xao nhãng khỏi đề mục, hãy nhấn giữ vào màn hình cho đến khi thấy vòng tròn xanh <em>(khiên bảo vệ)</em> xuất hiện, và một "Tỉnh giác" sẽ được ghi lại.</li></ul><p><strong>Yêu cầu hoàn thành:</strong> Thực hiện một thời thiền 10 phút với ít nhất 10 lần ghi nhận Tỉnh giác.</p>`,
-                practiceParams: { duration: 10, minAwareness: 10 }
+                content: `<p>Tỉnh giác là khi bạn <b>nhận biết</b> được trạng thái tâm mình (ví dụ: chợt nhận ra mình đang phóng tâm, đang có tạp niệm, hoặc đang mất tập trung trên đề mục thiền). Đây là khoảnh khắc của sự nhận biết & quay trở lại. Trong ứng dụng, chúng ta ghi nhận sự <strong>Tỉnh giác</strong> bằng cách <strong>Nhấn và Giữ</strong>:</p><ul><li><b>Tỉnh giác</b> được ví người giữ cửa thành hiền trí, thông minh, có trí, ngăn chặn những người lạ mặt, cho vào những người quen biết để bảo vệ những người ở trong thành <em>(chánh niệm)</em> và để chống cự những người bên ngoài <em>(tạp niệm)</em>. </li><li><b>Để thực hành</b>, khi bạn nhận ra tâm mình đang có tạp niệm, xao nhãng khỏi đề mục, hãy nhấn giữ vào màn hình cho đến khi thấy vòng tròn xanh <em>(khiên bảo vệ)</em> xuất hiện, và một "Tỉnh giác" sẽ được ghi lại.</li></ul><p><strong>Yêu cầu hoàn thành:</strong> Thực hiện một thời thiền 10 phút với ít nhất 5 lần ghi nhận Tỉnh giác.</p>`,
+                practiceParams: { duration: 10, minAwareness: 5 }
             },
             {
     id: 's_3_confirm',
@@ -148,12 +148,12 @@ const COURSES = [
         </ol>
 
         <p style="border-top: 1px solid var(--border); padding-top: 10px; font-size: 13px;">
-            <strong>Yêu cầu hoàn thành:</strong> Thực hiện phiên thiền tối thiểu 10 phút, ghi nhận ít nhất 20 Chánh niệm, 10 Tỉnh giác và bắt buộc phải bật Chế độ Xác nhận trong suốt phiên tập.
+            <strong>Yêu cầu hoàn thành:</strong> Thực hiện phiên thiền tối thiểu 10 phút, ghi nhận ít nhất 20 Chánh niệm, 5 Tỉnh giác và bắt buộc phải bật Chế độ Xác nhận trong suốt phiên tập.
         </p>
     `,
     practiceParams: { 
         duration: 10, 
-        minAwareness: 10, 
+        minAwareness: 5, 
         minMindfulness: 20, 
         requireConfirmMode: true 
     }
@@ -263,7 +263,7 @@ const COURSES = [
         title: 'Thiền Chuyên Sâu',
         desc: 'Thành tựu chánh niệm trọn vẹn.',
         icon: 'far fa-award',
-        color: '#ef4444', // Red
+        color: '#ff6b6b', // Red
         steps: [
             { 
                 id: 's_master_cert', 
@@ -580,7 +580,7 @@ enrollCertification(courseId = 'c_basics') {
 				dailyTarget: 1200,
 				dailyMinMed: 120,
                 target: 40000,
-                color: '#ef4444'
+                color: '#ff6b6b'
             };
             break;
         case 'c_basics':
@@ -2836,13 +2836,13 @@ startMeditationSetup(goal, overrideParams = null) {
     if (goal.id === 'cert_inter_1') {
         reqMinTime = 59;
         reqQuality = 55;
-        reqScore = 1.5;
+        reqScore = 1.3;
         reqDensity = 6;
         reqCount = 400;
     } else if (goal.id === 'cert_adv_1') {
         reqMinTime = 119;
         reqQuality = 60;
-        reqScore = 1.5;
+        reqScore = 1.4;
         reqDensity = 7;
         reqCount = 800;
     } else if (goal.id === 'cert_master_1') {
@@ -3249,20 +3249,23 @@ renderGoals() {
 
      if (goal.id === 'cert_inter_1') {
         reqHtml = `
+		    <li>Ngưỡng = 9s</li>
             <li>Chất lượng ≥ 55%</li>
-            <li>Điểm chú tâm TB ≥ 1.5</li>
+            <li>Điểm chú tâm TB ≥ 1.3</li>
             <li>Mật độ ≥ 6 chánh niệm/phút</li>
             <li>Tổng ghi nhận ≥ 400</li>`;
      } else if (goal.id === 'cert_adv_1') {
         durationText = '120 phút';
         reqHtml = `
+		    <li>Ngưỡng = 9s</li>
             <li>Chất lượng ≥ 60%</li>
-            <li>Điểm chú tâm TB ≥ 1.5</li>
+            <li>Điểm chú tâm TB ≥ 1.4</li>
             <li>Mật độ ≥ 7 chánh niệm/phút</li>
             <li>Tổng ghi nhận ≥ 800</li>`;
      } else if (goal.id === 'cert_master_1') {
         durationText = '120 phút';
         reqHtml = `
+		    <li>Ngưỡng = 9s</li>
             <li>Chất lượng ≥ 65%</li>
             <li>Điểm chú tâm TB ≥ 1.5</li>
             <li>Mật độ ≥ 8 chánh niệm/phút</li>
@@ -3270,6 +3273,7 @@ renderGoals() {
      } else {
          // Basic Default
          reqHtml = `
+		    <li>Ngưỡng = 9s</li>
             <li>Chất lượng ≥ 50%</li>
             <li>Điểm chú tâm TB ≥ 1.2</li>
             <li>Mật độ ≥ 5 chánh niệm/phút</li>
@@ -5092,7 +5096,11 @@ openBadgePicker() {
                                         <i class="fas fa-check-circle"></i>
                                     </div>
                                     <div style="font-size: 24px; color: ${badgeColor}; margin-bottom: 8px; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));">
-                                    <i class="${badge.icon.includes('fab') ? badge.icon : 'fas ' + badge.icon}"></i>
+                                    <i class="${ 
+    ['fas', 'fab', 'far'].some(prefix => badge.icon.includes(prefix)) 
+    ? badge.icon 
+    : 'fas ' + badge.icon 
+}"></i>
                                     </div>
                                     <div style="font-size: 11px; font-weight: 600; color: var(--text); line-height: 1.3;">${badge.title}</div>
                                 </div>
@@ -5232,7 +5240,11 @@ loadActiveBadge() {
         if (badge) {
             const color = badge.color || '#cd7f32'; 
 
-            container.innerHTML = `<i class="${badge.icon.includes('fab') ? badge.icon : 'fas ' + badge.icon}"></i>`;
+            container.innerHTML = `<i class="${ 
+    ['fas', 'fab', 'far'].some(prefix => badge.icon.includes(prefix)) 
+    ? badge.icon 
+    : 'fas ' + badge.icon 
+}"></i>`;
             
             
             container.style.color = '#ffffff'; 
@@ -5272,7 +5284,11 @@ renderBadgeAltar() {
             const color = badge.color || '#cd7f32';
             
             // Icon logic
-            iconEl.innerHTML = `<i class="${badge.icon.includes('fab') ? badge.icon : 'fas ' + badge.icon}"></i>`;
+            iconEl.innerHTML = `<i class="${ 
+    ['fas', 'fab', 'far'].some(prefix => badge.icon.includes(prefix)) 
+    ? badge.icon 
+    : 'fas ' + badge.icon 
+}"></i>`;
             iconEl.style.color = color;
             iconEl.classList.add('altar-floating'); // Add floating animation
             
@@ -5349,7 +5365,7 @@ renderBadgeAltar() {
                     'calendar': 'Lộ trình',
                     'reports': 'Tổng hợp',
 					'analytics': 'Phân tích',
-					'pro': 'Chuyên sâu',
+					'pro': 'Tìm hiểu',
 					'achievements': 'Pāramī'
                 };
                 

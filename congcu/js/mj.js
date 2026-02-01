@@ -121,8 +121,8 @@ const COURSES = [
                 id: 's_3_awareness',
                 title: 'Noting Alertness',
                 desc: 'Learn to clearly recognize the state of mind.',
-                content: `<p>Alertness (sampajañña) is when you <b>recognize</b> your mental state (e.g., suddenly realizing you are wandering, having stray thoughts, or losing focus). This is the moment of recognition & return. In the app, we note <strong>Alertness</strong> by <strong>Pressing and Holding</strong>:</p><ul><li><b>Alertness</b> is likened to a wise gatekeeper—intelligent and sharp—stopping strangers and allowing acquaintances in to protect those inside <em>(mindfulness)</em> and resist those outside <em>(stray thoughts)</em>. </li><li><b>To practice</b>, when you realize your mind has stray thoughts or is distracted from the object, press and hold the screen until you see the green circle <em>(shield)</em> appear, and one "Alertness" will be recorded.</li></ul><p><strong>Completion Requirement:</strong> Perform a 10-minute session with at least 10 Alertness.</p>`,
-                practiceParams: { duration: 10, minAwareness: 10 }
+                content: `<p>Alertness (sampajañña) is when you <b>recognize</b> your mental state (e.g., suddenly realizing you are wandering, having stray thoughts, or losing focus). This is the moment of recognition & return. In the app, we note <strong>Alertness</strong> by <strong>Pressing and Holding</strong>:</p><ul><li><b>Alertness</b> is likened to a wise gatekeeper—intelligent and sharp—stopping strangers and allowing acquaintances in to protect those inside <em>(mindfulness)</em> and resist those outside <em>(stray thoughts)</em>. </li><li><b>To practice</b>, when you realize your mind has stray thoughts or is distracted from the object, press and hold the screen until you see the green circle <em>(shield)</em> appear, and one "Alertness" will be recorded.</li></ul><p><strong>Completion Requirement:</strong> Perform a 10-minute session with at least 5 Alertness.</p>`,
+                practiceParams: { duration: 10, minAwareness: 5 }
             },
             {
     id: 's_3_confirm',
@@ -156,12 +156,12 @@ const COURSES = [
         </ol>
 
         <p style="border-top: 1px solid var(--border); padding-top: 10px; font-size: 13px;">
-            <strong>Completion Requirement:</strong> Perform a session of at least 10 minutes, record at least 20 Mindfulness, 10 Alertness, and Confirmation Mode must be enabled.
+            <strong>Completion Requirement:</strong> Perform a session of at least 10 minutes, record at least 20 Mindfulness, 5 Alertness, and Confirmation Mode must be enabled.
         </p>
     `,
     practiceParams: { 
         duration: 10, 
-        minAwareness: 10, 
+        minAwareness: 5, 
         minMindfulness: 20, 
         requireConfirmMode: true 
     }
@@ -269,7 +269,7 @@ const COURSES = [
         title: 'Intensive Meditation',
         desc: 'Achieve complete mindfulness.',
         icon: 'far fa-award',
-        color: '#ef4444', // Red
+        color: '#ff6b6b', // Red
         steps: [
             { 
                 id: 's_master_cert', 
@@ -592,7 +592,7 @@ hexToRgba(hex, alpha) {
 				dailyTarget: 1200,
 				dailyMinMed: 120,
                 target: 40000,
-                color: '#ef4444'
+                color: '#ff6b6b'
             };
             break;
         case 'c_basics':
@@ -2903,13 +2903,13 @@ concludeMeditationSession(type = 'manual') {
     if (goal.id === 'cert_inter_1') {
         reqMinTime = 59;
         reqQuality = 55;
-        reqScore = 1.5;
+        reqScore = 1.3;
         reqDensity = 6;
         reqCount = 400;
     } else if (goal.id === 'cert_adv_1') {
         reqMinTime = 119;
         reqQuality = 60;
-        reqScore = 1.5;
+        reqScore = 1.4;
         reqDensity = 7;
         reqCount = 800;
     } else if (goal.id === 'cert_master_1') {
@@ -3308,20 +3308,23 @@ calculateConsistencyScore(goal) {
 
      if (goal.id === 'cert_inter_1') {
         reqHtml = `
+		    <li>Threshold = 9s</li>
             <li>Quality ≥ 55%</li>
-            <li>Avg. Focus level ≥ 1.5</li>
+            <li>Avg. Focus level ≥ 1.3</li>
             <li>Density ≥ 6 mindfulness/min</li>
             <li>Total Mindfulness ≥ 400</li>`;
      } else if (goal.id === 'cert_adv_1') {
         durationText = '120 minutes';
         reqHtml = `
+		    <li>Threshold = 9s</li>
             <li>Quality ≥ 60%</li>
-            <li>Avg. Focus level ≥ 1.5</li>
+            <li>Avg. Focus level ≥ 1.4</li>
             <li>Density ≥ 7 mindfulness/min</li>
             <li>Total Mindfulness ≥ 800</li>`;
      } else if (goal.id === 'cert_master_1') {
         durationText = '120 minutes';
         reqHtml = `
+		    <li>Threshold = 9s</li>
             <li>Quality ≥ 65%</li>
             <li>Avg. Focus level ≥ 1.5</li>
             <li>Density ≥ 8 mindfulness/min</li>
@@ -3329,6 +3332,7 @@ calculateConsistencyScore(goal) {
      } else {
          // Basic Default
          reqHtml = `
+		    <li>Threshold = 9s</li>
             <li>Quality ≥ 50%</li>
             <li>Avg. Focus level ≥ 1.2</li>
             <li>Density ≥ 5 mindfulness/min</li>
@@ -5151,7 +5155,11 @@ openBadgePicker() {
                                         <i class="fas fa-check-circle"></i>
                                     </div>
                                     <div style="font-size: 24px; color: ${badgeColor}; margin-bottom: 8px; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));">
-                                    <i class="${badge.icon.includes('fab') ? badge.icon : 'fas ' + badge.icon}"></i>
+                                    <i class="${ 
+    ['fas', 'fab', 'far'].some(prefix => badge.icon.includes(prefix)) 
+    ? badge.icon 
+    : 'fas ' + badge.icon 
+}"></i>
                                     </div>
                                     <div style="font-size: 11px; font-weight: 600; color: var(--text); line-height: 1.3;">${badge.title}</div>
                                 </div>
@@ -5295,7 +5303,11 @@ loadActiveBadge() {
             const color = badge.color || '#cd7f32'; 
 
             // Render Icon
-            container.innerHTML = `<i class="${badge.icon.includes('fab') ? badge.icon : 'fas ' + badge.icon}"></i>`;
+            container.innerHTML = `<i class="${ 
+    ['fas', 'fab', 'far'].some(prefix => badge.icon.includes(prefix)) 
+    ? badge.icon 
+    : 'fas ' + badge.icon 
+}"></i>`;
             
             // --- UPDATED STYLING FOR GLOW EFFECT ---
             
@@ -5345,7 +5357,11 @@ renderBadgeAltar() {
             const color = badge.color || '#cd7f32';
             
             // Icon logic
-            iconEl.innerHTML = `<i class="${badge.icon.includes('fab') ? badge.icon : 'fas ' + badge.icon}"></i>`;
+            iconEl.innerHTML = `<i class="${ 
+    ['fas', 'fab', 'far'].some(prefix => badge.icon.includes(prefix)) 
+    ? badge.icon 
+    : 'fas ' + badge.icon 
+}"></i>`;
             iconEl.style.color = color;
             iconEl.classList.add('altar-floating'); // Add floating animation
             
@@ -5421,7 +5437,7 @@ renderBadgeAltar() {
                     'calendar': 'Courses',
                     'reports': 'Activities',
 					'analytics': 'Analytics',
-					'pro': 'Advanced',
+					'pro': 'Explore',
 					'achievements': 'Pāramī'
                 };
                 
