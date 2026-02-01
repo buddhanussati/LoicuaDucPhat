@@ -5012,7 +5012,11 @@ renderAchievementsUI() {
                 background: rgba(0,0,0,0.2);
                 ${isUnlocked ? `box-shadow: 0 0 10px ${this.hexToRgba(badgeColor, 0.4)};` : ''}
             ">
-                <i class="${badge.icon.includes('fab') ? badge.icon : 'fas ' + badge.icon}"></i>
+                <i class="${ 
+    ['fas', 'fab', 'far'].some(prefix => badge.icon.includes(prefix)) 
+    ? badge.icon 
+    : 'fas ' + badge.icon 
+}"></i>
             </div>
             <div style="flex: 1;">
                 <div style="font-weight: 600; color: ${textColor}; font-size: 14px; display: flex; justify-content: space-between;">
