@@ -15,7 +15,7 @@ const BADGES = [
     { id: 'log_500', icon: 'fas fa-monument', color: '#ffbe76', title: 'Relics', desc: 'Complete 500 meditation sessions', condition: (data) => data.logs.length >= 500 },
     { id: 'log_600', icon: 'fab fa-fort-awesome', color: '#a29bfe', title: 'Dhamma Fortress', desc: 'Complete 600 meditation sessions', condition: (data) => data.logs.length >= 600 },
     { id: 'log_700', icon: 'fa-dungeon', color: '#6ab04c', title: 'Solitude', desc: 'Complete 700 meditation sessions', condition: (data) => data.logs.length >= 700 },
-    { id: 'log_800', icon: 'fab fa-d-and-d', color: '#eb4d4b', title: 'Naga', desc: 'Complete 800 meditation sessions', condition: (data) => data.logs.length >= 800 },
+    { id: 'log_800', icon: 'fas fa-dove', color: '#dfe6e9', title: 'Stainless', desc: 'Complete 800 meditation sessions', condition: (data) => data.logs.length >= 800 },
     { id: 'log_1000', icon: 'far fa-dharmachakra', color: '#f9ca24', title: 'Wheel Turner', desc: 'Complete 1000 meditation sessions', condition: (data) => data.logs.length >= 1000 },
 
     // --- Streaks (Consistency) ---
@@ -26,7 +26,7 @@ const BADGES = [
 	{ id: 'streak_21', icon: 'fas fa-caduceus', color: '#a29bfe', title: 'Discipline', desc: 'Practice for 21 consecutive days', condition: (data) => data.streak >= 21 },
     { id: 'streak_30', icon: 'fab fa-sketch', color: '#ff9f43', title: 'Willpower', desc: 'Practice for 30 consecutive days', condition: (data) => data.streak >= 30 },
     { id: 'streak_49', icon: 'fab fa-jira', color: '#54a0ff', title: 'Satipaṭṭhāna', desc: 'Practice for 49 consecutive days', condition: (data) => data.streak >= 49 },
-    { id: 'streak_60', icon: 'fas fa-link', color: '#a29bfe', title: 'The Cause', desc: 'Practice for 60 consecutive days', condition: (data) => data.streak >= 60 },
+    { id: 'streak_60', icon: 'fab fa-d-and-d', color: '#ff9f43', title: 'Naga', desc: 'Practice for 60 consecutive days', condition: (data) => data.streak >= 60 },
     { id: 'streak_90', icon: 'fab fa-brave', color: '#ff6b6b', title: 'Great Hero', desc: 'Practice for 90 consecutive days', condition: (data) => data.streak >= 90 },
     { id: 'streak_100', icon: 'fab fa-brave-reverse', color: '#d63031', title: 'Lion’s Roar', desc: 'Practice for 100 consecutive days', condition: (data) => data.streak >= 100 },
     { id: 'streak_180', icon: 'fab fa-wolf-pack-battalion', color: '#81ecec', title: 'The Great Tamer', desc: 'Practice for 180 consecutive days', condition: (data) => data.streak >= 180 },
@@ -49,10 +49,10 @@ const BADGES = [
     { id: 'time_800h', icon: 'fas fa-moon-cloud', color: '#dfe6e9', title: 'Auspicious Night', desc: 'Accumulate 800 hours of practice', condition: (data) => data.logs.reduce((s, l) => s + l.minutes, 0) >= 48000 },
     { id: 'time_1000h', icon: 'fab fa-skyatlas', color: '#74b9ff', title: 'The Void', desc: 'Accumulate 1000 hours of practice', condition: (data) => data.logs.reduce((s, l) => s + l.minutes, 0) >= 60000 },
 
-    // --- Session Length ---
-    { id: 'sit_15', icon: 'fab fa-deskpro', color: '#48dbfb', title: 'The Elephant', desc: 'Session length ≥ 15 minutes', condition: (data) => data.logs.some(l => l.minutes >= 15) },
+    { id: 'sit_20', icon: 'fas fa-hand-holding-hand', color: '#cd84f1', title: 'Compassion', desc: 'Session length ≥ 20 minutes', condition: (data) => data.logs.some(l => l.minutes >= 20) },
+
     { id: 'sit_30', icon: 'fab fa-medapps', color: '#feca57', title: 'The Lamp', desc: 'Session length ≥ 30 minutes', condition: (data) => data.logs.some(l => l.minutes >= 30) },
-    { id: 'sit_45', icon: 'fas fa-hand-holding-hand', color: '#cd84f1', title: 'Compassion', desc: 'Session length ≥ 45 minutes', condition: (data) => data.logs.some(l => l.minutes >= 45) },
+	    { id: 'sit_45', icon: 'fab fa-deskpro', color: '#48dbfb', title: 'The Elephant', desc: 'Session length ≥ 45 minutes', condition: (data) => data.logs.some(l => l.minutes >= 45) },
     { id: 'sit_60', icon: 'fas fa-gem', color: '#7d5fff', title: 'Composure', desc: 'Session length ≥ 60 minutes', condition: (data) => data.logs.some(l => l.minutes >= 60) },
     { id: 'sit_90', icon: 'fab fa-ethereum', color: '#dfe6e9', title: 'Joyful Mind', desc: 'Session length ≥ 90 minutes', condition: (data) => data.logs.some(l => l.minutes >= 90) },
     { id: 'sit_120', icon: 'fas fa-anchor', color: '#ff9ff3', title: 'The Anchor', desc: 'Session length ≥ 2 hours', condition: (data) => data.logs.some(l => l.minutes >= 120) },
@@ -83,8 +83,8 @@ const BADGES = [
     // --- DAILY MINDFULNESS (Intensity) ---
     { id: 'mindf_200', icon: 'fab fa-linode', color: '#48dbfb', title: 'Middle Way', desc: 'Recorded ≥ 600 mindfulness in a day', condition: (data) => { const daily = {}; data.logs.forEach(l => { const c = l.count || (l.touches ? l.touches.length : 0); daily[l.date] = (daily[l.date]||0) + c; }); return Object.values(daily).some(c => c >= 600); }},
     { id: 'mindf_400', icon: 'fab fa-shoelace', color: '#a29bfe', title: 'Patience', desc: 'Recorded ≥ 1200 mindfulness in a day', condition: (data) => { const daily = {}; data.logs.forEach(l => { const c = l.count || (l.touches ? l.touches.length : 0); daily[l.date] = (daily[l.date]||0) + c; }); return Object.values(daily).some(c => c >= 1200); }},
-    { id: 'mindf_600', icon: 'fas fa-people-roof', color: '#f1c40f', title: 'Harmony', desc: 'Recorded ≥ 2400 mindfulness in a day', condition: (data) => { const daily = {}; data.logs.forEach(l => { const c = l.count || (l.touches ? l.touches.length : 0); daily[l.date] = (daily[l.date]||0) + c; }); return Object.values(daily).some(c => c >= 2400); }},
-    { id: 'mindf_1000', icon: 'fas fa-user-shield', color: '#686de0', title: 'Self-Control', desc: 'Recorded ≥ 3600 mindfulness in a day', condition: (data) => { const daily = {}; data.logs.forEach(l => { const c = l.count || (l.touches ? l.touches.length : 0); daily[l.date] = (daily[l.date]||0) + c; }); return Object.values(daily).some(c => c >= 3600); }},
+    { id: 'mindf_600', icon: 'fas fa-people-roof', color: '#f1c40f', title: 'Harmony', desc: 'Recorded ≥ 2000 mindfulness in a day', condition: (data) => { const daily = {}; data.logs.forEach(l => { const c = l.count || (l.touches ? l.touches.length : 0); daily[l.date] = (daily[l.date]||0) + c; }); return Object.values(daily).some(c => c >= 2000); }},
+    { id: 'mindf_1000', icon: 'fas fa-user-shield', color: '#686de0', title: 'Self-Control', desc: 'Recorded ≥ 3000 mindfulness in a day', condition: (data) => { const daily = {}; data.logs.forEach(l => { const c = l.count || (l.touches ? l.touches.length : 0); daily[l.date] = (daily[l.date]||0) + c; }); return Object.values(daily).some(c => c >= 3000); }},
 
     // --- QUALITY (Qualities/Phẩm Chất) ---
     { id: 'focus_5_min', icon: 'fas fa-feather-pointed', color: '#81ecec', title: 'Tranquillity', desc: 'Achieved ≥ 5 mindfulness/minute (session ≥ 20m)', condition: (data) => data.logs.some(l => l.minutes >= 20 && (l.count/l.minutes) >= 5) },

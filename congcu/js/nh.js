@@ -121,7 +121,7 @@ const COURSES = [
     title: 'Chế độ Xác nhận',
     desc: 'Phá vỡ thói quen phản xạ vô thức và rèn luyện sự trung thực.',
     content: `
-        <p>Trong thiền tập, chúng ta rất dễ rơi vào trạng thái "tự động hóa" — tức là tay vẫn chạm ghi nhận nhưng tâm trí đã trôi dạt đi nơi khác. <strong>Chế độ Xác nhận</strong> là một "trạm kiểm soát" để thử thách sự hiện diện thực sự của bạn.</p>
+        <p>Trong thiền tập, chúng ta rất dễ rơi vào trạng thái "tự động" — tức là tay vẫn chạm ghi nhận nhưng tâm trí đã trôi dạt đi nơi khác. <strong>Chế độ Xác nhận</strong> là một "trạm kiểm soát" để thử thách sự hiện diện thực sự của bạn.</p>
         
         <div style="background: rgba(251, 191, 36, 0.1); border-left: 3px solid var(--warning); padding: 10px; margin: 15px 0; font-size: 14px;">
             <strong style="color: var(--warning);"><i class="fas fa-microchip"></i> Cơ chế vận hành:</strong>
@@ -5369,7 +5369,7 @@ renderBadgeAltar() {
                     'calendar': 'Lộ trình',
                     'reports': 'Tổng hợp',
 					'analytics': 'Phân tích',
-					'pro': 'Tìm hiểu',
+					'pro': 'Khám phá',
 					'achievements': 'Pāramī'
                 };
                 

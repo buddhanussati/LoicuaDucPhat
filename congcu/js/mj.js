@@ -121,7 +121,7 @@ const COURSES = [
                 id: 's_3_awareness',
                 title: 'Noting Alertness',
                 desc: 'Learn to clearly recognize the state of mind.',
-                content: `<p>Alertness (sampajañña) is when you <b>recognize</b> your mental state (e.g., suddenly realizing you are wandering, having stray thoughts, or losing focus). This is the moment of recognition & return. In the app, we note <strong>Alertness</strong> by <strong>Pressing and Holding</strong>:</p><ul><li><b>Alertness</b> is likened to a wise gatekeeper—intelligent and sharp—stopping strangers and allowing acquaintances in to protect those inside <em>(mindfulness)</em> and resist those outside <em>(stray thoughts)</em>. </li><li><b>To practice</b>, when you realize your mind has stray thoughts or is distracted from the object, press and hold the screen until you see the green circle <em>(shield)</em> appear, and one "Alertness" will be recorded.</li></ul><p><strong>Completion Requirement:</strong> Perform a 10-minute session with at least 5 Alertness.</p>`,
+                content: `<p>Alertness (sampajañña) is when you <b>recognize</b> your mental state (e.g., suddenly realizing you are wandering, having distracted thoughts, or losing focus). This is the moment of recognition & return. In the app, we note <strong>Alertness</strong> by <strong>Pressing and Holding</strong>:</p><ul><li><b>Alertness</b> is likened to a wise gatekeeper—intelligent and sharp—stopping strangers and allowing acquaintances in to protect those inside <em>(mindfulness)</em> and resist those outside <em>(stray thoughts)</em>. </li><li><b>To practice</b>, when you realize your mind has wandered in its thoughts and distracted from the object, press and hold the screen until you see the green circle <em>(shield)</em> appear, and one "Alertness" will be recorded.</li></ul><p><strong>Completion Requirement:</strong> Perform a 10-minute session with at least 5 Alertness.</p>`,
                 practiceParams: { duration: 10, minAwareness: 5 }
             },
             {
@@ -491,7 +491,7 @@ const dbHelper = {
                 this.init();
             }
 			
-			 // Tìm hàm init() và thay thế nội dung đoạn đầu như sau:
+			
 async init() {
     try {
         await dbHelper.open();
@@ -558,7 +558,7 @@ hexToRgba(hex, alpha) {
     }
     return `rgba(156, 163, 175, ${alpha})`; // Fallback gray
 }
-// --- ROADMAP / CURRICULUM SYSTEM ---
+
 
    enrollCertification(courseId = 'c_basics') {
     let certConfig = {};
