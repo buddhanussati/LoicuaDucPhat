@@ -151,7 +151,7 @@ const BADGES = [
         id: 'cert_basic_pass', 
         icon: 'fas fa-award-simple', 
         color: '#74b9ff', // Blue (Matches Basic Course)
-        title: 'Hành Giả', 
+        title: 'Hiền Giả', 
         desc: 'Vượt qua bài thi chứng chỉ Thiền Căn Bản', 
         condition: (data) => data.goals.some(g => g.id === 'cert_basic_1' && g.certified === true) 
     },
@@ -161,7 +161,7 @@ const BADGES = [
         id: 'cert_inter_pass', 
         icon: 'fas fa-award', 
         color: '#ff9f43', // Orange (Matches Intermediate Course)
-        title: 'Hiền Giả', 
+        title: 'Hành Giả', 
         desc: 'Vượt qua bài thi chứng chỉ Thiền Trung Cấp', 
         condition: (data) => data.goals.some(g => g.id === 'cert_inter_1' && g.certified === true) 
     },
