@@ -237,7 +237,7 @@ const COURSES = [
                 id: 's_inter_cert', 
                 title: 'Chương trình Chứng chỉ', 
                 desc: 'Chương trình tu tập với mục tiêu Thiền Trung Cấp.', 
-                content: '<p>Bước vào giai đoạn định tâm vững chắc hơn.</p><ul><li><strong>Mục tiêu:</strong> Đạt 15,000 Chánh niệm.</li><li><strong>Thi Cuối Khoá:</strong> 60 phút.</li></ul>',
+                content: '<p>Bước vào giai đoạn định tâm vững chắc hơn.</p><ul><li><strong>Mục tiêu:</strong> Đạt 20,000 Chánh niệm.</li><li><strong>Thi Cuối Khoá:</strong> 60 phút.</li></ul>',
                 isCertAction: true 
             }
         ]
@@ -253,7 +253,7 @@ const COURSES = [
                 id: 's_adv_cert', 
                 title: 'Chương trình Chứng chỉ', 
                 desc: 'Chương trình tu tập với mục tiêu Thiền Nâng Cao.', 
-                content: '<p>Rèn luyện sự kiên trì và định sâu.</p><ul><li><strong>Mục tiêu:</strong> Đạt 20,000 Chánh niệm.</li><li><strong>Thi Cuối Khoá:</strong> 120 phút.</li></ul>',
+                content: '<p>Rèn luyện sự kiên trì và định sâu.</p><ul><li><strong>Mục tiêu:</strong> Đạt 30,000 Chánh niệm.</li><li><strong>Thi Cuối Khoá:</strong> 120 phút.</li></ul>',
                 isCertAction: true 
             }
         ]
@@ -557,9 +557,9 @@ enrollCertification(courseId = 'c_basics') {
             certConfig = {
                 id: 'cert_inter_1',
                 name: 'Thiền Trung Cấp',
-				dailyTarget: 600,
-				dailyMinMed: 60,
-                target: 15000,
+				dailyTarget: 800,
+				dailyMinMed: 90,
+                target: 20000,
                 color: '#ff9f43'
             };
             break;
@@ -567,9 +567,9 @@ enrollCertification(courseId = 'c_basics') {
             certConfig = {
                 id: 'cert_adv_1',
                 name: 'Thiền Nâng Cao',
-				dailyTarget: 1200,
+				dailyTarget: 1000,
 				dailyMinMed: 120,
-                target: 20000,
+                target: 30000,
                 color: '#8b5cf6'
             };
             break;
@@ -578,7 +578,7 @@ enrollCertification(courseId = 'c_basics') {
                 id: 'cert_master_1',
                 name: 'Thiền Chuyên Sâu',
 				dailyTarget: 1200,
-				dailyMinMed: 120,
+				dailyMinMed: 150,
                 target: 40000,
                 color: '#ff6b6b'
             };
@@ -1490,6 +1490,7 @@ renderAnalytics(saveState = false) {
 
     this.renderComparisonTable(targetGoalIds);
     this.renderHourlyAnalysis(logs);
+	this.renderDensityChart();
 }
 
 
@@ -3362,14 +3363,14 @@ renderGoals() {
             }
 
             // Click Handler: Prevent editing if Cert Goal
-            const sessionClick = isCertGoal ? `` : `onclick="app.setDailySessionTarget('${goal.id}')"`;
-            const pointerStyle = isCertGoal ? 'cursor: default;' : 'cursor: pointer;';
-            const iconDisplay = isCertGoal ? 'display:none;' : '';
+            const sessionClick =  `onclick="app.setDailySessionTarget('${goal.id}')"`;
+            const pointerStyle =  'cursor: pointer;';
+            const iconDisplay =  '';
 
             dailySectionHtml = `
                 <div ${sessionClick} style="margin-bottom: 10px; background: rgba(0,0,0,0.2); padding: 10px; border-radius: 8px; ${pointerStyle} transition: background 0.2s;">
                     <div style="display:flex; justify-content:space-between; font-size:12px; margin-bottom:5px; align-items:center;">
-                        <strong style="color:var(--text);">Hằng ngày</strong>
+                        <strong style="color:var(--text);">Hằng ngày:</strong>
                         <span style="font-weight:600;">${todayVal} / ${dailyTarget} ${unitLabel} <i class="fas fa-pen" style="font-size:10px; opacity:0.5; margin-left:4px; ${iconDisplay}"></i></span>
                     </div>
                     <div class="progress-container" style="height: 6px;"><div class="progress-bar" style="width: ${dailyPct}%; background: ${dailyBarColor}"></div></div>
@@ -3381,12 +3382,12 @@ renderGoals() {
                 let minBarColor = goal.color;
                 if (todayMinutes >= dailyminmedTarget) minBarColor = 'var(--success)';
                 
-                const minClick = isCertGoal ? `` : `onclick="app.setDailyMinMedTarget('${goal.id}')"`;
+                const minClick =  `onclick="app.setDailyMinMedTarget('${goal.id}')"`;
 
                 dailySectionHtml += `
                 <div ${minClick} style="margin-bottom: 15px; background: rgba(0,0,0,0.2); padding: 10px; border-radius: 8px; ${pointerStyle} transition: background 0.2s;">
                     <div style="display:flex; justify-content:space-between; font-size:12px; margin-bottom:5px; align-items:center;">
-                        <strong style="color:var(--text);">Thời gian</strong>
+                        <strong style="color:var(--text);">Hằng ngày:</strong>
                         <span style="font-weight:600;">${todayMinutes} / ${dailyminmedTarget} phút <i class="fas fa-pen" style="font-size:10px; opacity:0.5; margin-left:4px; ${iconDisplay}"></i></span>
                     </div>
                     <div class="progress-container" style="height: 6px;"><div class="progress-bar" style="width: ${minPct}%; background: ${minBarColor}"></div></div>
@@ -4745,14 +4746,21 @@ renderReports(resetDates = false) {
     });
 
    
+     }
+	 renderDensityChart() {
     const ctxDensity = document.getElementById('reportDensityChart');
-    if (ctxDensity) {
-        // 1. Update the Title
-        const densityTitle = document.getElementById('density-month-title');
-        if (densityTitle) {
-            densityTitle.innerText = `Tháng ${new Date(mYear, mMonth).toLocaleDateString('vi-VN', { month: 'numeric', year: 'numeric' })}`;
-        }
+    if (!ctxDensity) return;
 
+    // Recalculate Month Data locally since we are outside renderReports
+    const mYear = this.currentMonth.getFullYear();
+    const mMonth = this.currentMonth.getMonth();
+    const monthlyLabels = Array.from({ length: new Date(mYear, mMonth + 1, 0).getDate() }, (_, i) => i + 1);
+
+    // 1. Update the Title
+    const densityTitle = document.getElementById('density-month-title');
+    if (densityTitle) {
+        densityTitle.innerText = `Tháng ${new Date(mYear, mMonth).toLocaleDateString('vi-VN', { month: 'numeric', year: 'numeric' })}`;
+    }
         // 2. Prepare Data (Calculate this BEFORE checking chart existence)
         const daysInMonth = monthlyLabels.length;
         const dailyMinutes = new Array(daysInMonth).fill(0);
@@ -4886,9 +4894,9 @@ renderReports(resetDates = false) {
                 }
             });
         }
-    } }
+    }    
 changeReportWeek(dir) { this.currentWeekStart.setDate(this.currentWeekStart.getDate() + (dir * 7)); this.renderReports(); }
-            changeReportMonth(dir) { this.currentMonth.setMonth(this.currentMonth.getMonth() + dir); this.renderReports(); }
+            changeReportMonth(dir) { this.currentMonth.setMonth(this.currentMonth.getMonth() + dir); this.renderReports();this.renderDensityChart(); }
             changeMonth(dir) { this.currentMonth.setMonth(this.currentMonth.getMonth() + dir); this.renderCalendar(); }
 
 updateStats() {

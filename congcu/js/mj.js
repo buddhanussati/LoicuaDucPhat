@@ -243,7 +243,7 @@ const COURSES = [
                 id: 's_inter_cert', 
                 title: 'Certification Program', 
                 desc: 'Intermediate Meditation Course', 
-                content: '<p>Enter a stage of firmer concentration.</p><ul><li><strong>Goal:</strong> Reach 15,000 Mindfulness points.</li><li><strong>Final Exam:</strong> 60 minutes.</li></ul>',
+                content: '<p>Enter a stage of firmer concentration.</p><ul><li><strong>Goal:</strong> Reach 20,000 Mindfulness points.</li><li><strong>Final Exam:</strong> 60 minutes.</li></ul>',
                 isCertAction: true 
             }
         ]
@@ -259,7 +259,7 @@ const COURSES = [
                 id: 's_adv_cert', 
                 title: 'Certification Program', 
                 desc: 'Advanced Meditation Course', 
-                content: '<p>Train perseverance and deep concentration.</p><ul><li><strong>Goal:</strong> Reach 20,000 Mindfulness points.</li><li><strong>Final Exam:</strong> 120 minutes.</li></ul>',
+                content: '<p>Train perseverance and deep concentration.</p><ul><li><strong>Goal:</strong> Reach 30,000 Mindfulness points.</li><li><strong>Final Exam:</strong> 120 minutes.</li></ul>',
                 isCertAction: true 
             }
         ]
@@ -569,9 +569,9 @@ hexToRgba(hex, alpha) {
             certConfig = {
                 id: 'cert_inter_1',
                 name: 'Intermediate Meditation',
-				dailyTarget: 600,
-				dailyMinMed: 60,
-                target: 15000,
+				dailyTarget: 800,
+				dailyMinMed: 90,
+                target: 20000,
                 color: '#ff9f43'
             };
             break;
@@ -579,9 +579,9 @@ hexToRgba(hex, alpha) {
             certConfig = {
                 id: 'cert_adv_1',
                 name: 'Advanced Meditation',
-				dailyTarget: 1200,
+				dailyTarget: 1000,
 				dailyMinMed: 120,
-                target: 20000,
+                target: 30000,
                 color: '#8b5cf6'
             };
             break;
@@ -590,7 +590,7 @@ hexToRgba(hex, alpha) {
                 id: 'cert_master_1',
                 name: 'Intensive Meditation',
 				dailyTarget: 1200,
-				dailyMinMed: 120,
+				dailyMinMed: 150,
                 target: 40000,
                 color: '#ff6b6b'
             };
@@ -600,7 +600,7 @@ hexToRgba(hex, alpha) {
             certConfig = {
                 id: 'cert_basic_1',
                 name: 'Basic Meditation',
-				dailyTarget: 500,
+				dailyTarget: 600,
 				dailyMinMed: 60,
                 target: 10000,
                 color: '#74b9ff'
@@ -1558,6 +1558,7 @@ renderAnalytics(saveState = false) {
 
     this.renderComparisonTable(targetGoalIds);
     this.renderHourlyAnalysis(logs);
+	this.renderDensityChart();
 }
 
 
@@ -3421,14 +3422,14 @@ calculateConsistencyScore(goal) {
             }
 
             // Click Handler: Prevent editing if Cert Goal
-            const sessionClick = isCertGoal ? `` : `onclick="app.setDailySessionTarget('${goal.id}')"`;
-            const pointerStyle = isCertGoal ? 'cursor: default;' : 'cursor: pointer;';
-            const iconDisplay = isCertGoal ? 'display:none;' : '';
+            const sessionClick =  `onclick="app.setDailySessionTarget('${goal.id}')"`;
+            const pointerStyle =  'cursor: pointer;';
+            const iconDisplay =  '';
 
             dailySectionHtml = `
                 <div ${sessionClick} style="margin-bottom: 10px; background: rgba(0,0,0,0.2); padding: 10px; border-radius: 8px; ${pointerStyle} transition: background 0.2s;">
                     <div style="display:flex; justify-content:space-between; font-size:12px; margin-bottom:5px; align-items:center;">
-                        <strong style="color:var(--text);">Today's Goal</strong>
+                        <strong style="color:var(--text);">Daily Goal:</strong>
                         <span style="font-weight:600;">${todayVal} / ${dailyTarget} ${unitLabel} <i class="fas fa-pen" style="font-size:10px; opacity:0.5; margin-left:4px; ${iconDisplay}"></i></span>
                     </div>
                     <div class="progress-container" style="height: 6px;"><div class="progress-bar" style="width: ${dailyPct}%; background: ${dailyBarColor}"></div></div>
@@ -3440,12 +3441,12 @@ calculateConsistencyScore(goal) {
                 let minBarColor = goal.color;
                 if (todayMinutes >= dailyminmedTarget) minBarColor = 'var(--success)';
                 
-                const minClick = isCertGoal ? `` : `onclick="app.setDailyMinMedTarget('${goal.id}')"`;
+                const minClick =  `onclick="app.setDailyMinMedTarget('${goal.id}')"`;
 
                 dailySectionHtml += `
                 <div ${minClick} style="margin-bottom: 15px; background: rgba(0,0,0,0.2); padding: 10px; border-radius: 8px; ${pointerStyle} transition: background 0.2s;">
                     <div style="display:flex; justify-content:space-between; font-size:12px; margin-bottom:5px; align-items:center;">
-                        <strong style="color:var(--text);">Daily Time Goal</strong>
+                        <strong style="color:var(--text);">Daily Goal:</strong>
                         <span style="font-weight:600;">${todayMinutes} / ${dailyminmedTarget} minutes <i class="fas fa-pen" style="font-size:10px; opacity:0.5; margin-left:4px; ${iconDisplay}"></i></span>
                     </div>
                     <div class="progress-container" style="height: 6px;"><div class="progress-bar" style="width: ${minPct}%; background: ${minBarColor}"></div></div>
@@ -4804,12 +4805,22 @@ renderReports(resetDates = false) {
     });
 
    
+    }
+
+
+ renderDensityChart() {
     const ctxDensity = document.getElementById('reportDensityChart');
-    if (ctxDensity) {
-        // 1. Update the Title
-        const densityTitle = document.getElementById('density-month-title');
-        if (densityTitle) {
-            densityTitle.innerText = `Month ${new Date(mYear, mMonth).toLocaleDateString('en-GB', { month: 'numeric', year: 'numeric' })}`;
+    if (!ctxDensity) return;
+
+    // Recalculate Month Data locally since we are outside renderReports
+    const mYear = this.currentMonth.getFullYear();
+    const mMonth = this.currentMonth.getMonth();
+    const monthlyLabels = Array.from({ length: new Date(mYear, mMonth + 1, 0).getDate() }, (_, i) => i + 1);
+
+    // 1. Update the Title
+    const densityTitle = document.getElementById('density-month-title');
+    if (densityTitle) {
+        densityTitle.innerText = `Month ${new Date(mYear, mMonth).toLocaleDateString('en-GB', { month: 'numeric', year: 'numeric' })}`;
         }
 
         // 2. Prepare Data (Calculate this BEFORE checking chart existence)
@@ -4945,10 +4956,10 @@ renderReports(resetDates = false) {
                 }
             });
         }
-    } }
+    }
 
 changeReportWeek(dir) { this.currentWeekStart.setDate(this.currentWeekStart.getDate() + (dir * 7)); this.renderReports(); }
-            changeReportMonth(dir) { this.currentMonth.setMonth(this.currentMonth.getMonth() + dir); this.renderReports(); }
+            changeReportMonth(dir) { this.currentMonth.setMonth(this.currentMonth.getMonth() + dir); this.renderReports();this.renderDensityChart(); }
             changeMonth(dir) { this.currentMonth.setMonth(this.currentMonth.getMonth() + dir); this.renderCalendar(); }
 
 updateStats() {
