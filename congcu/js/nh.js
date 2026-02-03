@@ -2688,8 +2688,7 @@ startMeditationSetup(goal, overrideParams = null) {
 }   
 
             concludeMeditationSession(type = 'manual') {
-				if (type === 'manual') {
-        // If user clicks "Cancel" (Hủy), return immediately to keep the session running
+    if (type === 'manual') {
         if (!confirm("Bạn có chắc muốn kết thúc thời thiền không?")) {
             return;
         }
@@ -2718,28 +2717,32 @@ startMeditationSetup(goal, overrideParams = null) {
         return;
     }
     
+    // --- UPDATED CODE START ---
+    // Reset Slider to 100%
+    const slider = document.getElementById('med-efficiency-slider');
+    const disp = document.getElementById('med-efficiency-disp');
+    if (slider) slider.value = 100;
+    if (disp) disp.innerText = '100%';
+    // --- UPDATED CODE END ---
+
     document.getElementById('med-finish-count').innerText = this.meditationState.count;
     document.getElementById('med-finish-time').innerText = minutes + 'p';
     document.getElementById('med-finish-notes').value = '';
-	this.renderQuickTags('finish-tags', 'med-finish-notes');
-	
-	const discardBtn = document.getElementById('btn-med-discard');
+    this.renderQuickTags('finish-tags', 'med-finish-notes');
+    
+    const discardBtn = document.getElementById('btn-med-discard');
     const actionContainer = document.getElementById('med-finish-actions');
 
     if (discardBtn && actionContainer) {
         if (type === 'auto') {
-            // Khi hết giờ: Ẩn nút Hủy và căn giữa nút Lưu
             discardBtn.style.display = 'none';
             actionContainer.style.justifyContent = 'center';
         } else {
-            // Khi bấm dừng thủ công: Hiện đầy đủ và căn phải như cũ
             discardBtn.style.display = 'block';
             actionContainer.style.justifyContent = 'flex-end';
         }
     }
     document.getElementById('meditation-finish-modal').style.display = 'flex';
-	
-	
 }
             
             discardMeditation() {
@@ -2747,11 +2750,35 @@ startMeditationSetup(goal, overrideParams = null) {
                 this.meditationState.active = false;
                 this.showToast("Đã ngưng thời thiền");
             }
+updateEfficiencyDisplay() {
+    const slider = document.getElementById('med-efficiency-slider');
+    const disp = document.getElementById('med-efficiency-disp');
+    const countDisp = document.getElementById('med-finish-count');
+    
+    if (!slider || !disp || !countDisp) return;
 
+    const percentage = parseInt(slider.value);
+    disp.innerText = percentage + '%';
+
+    // Calculate based on the raw count stored in state
+    const rawCount = this.meditationState.count || 0;
+    const adjustedCount = Math.floor(rawCount * (percentage / 100));
+
+    // Update the large number display
+    countDisp.innerText = adjustedCount;
+}
             saveMeditationLog() {
     const durationSeconds = this.meditationState.totalDurationSeconds - this.meditationState.remainingSeconds;
     const minutes = Math.ceil(durationSeconds / 60);
     const notes = document.getElementById('med-finish-notes').value;
+    
+    // --- UPDATED CODE START ---
+    // Calculate Adjusted Count based on Slider
+    const percentage = parseInt(document.getElementById('med-efficiency-slider').value) || 100;
+    const rawCount = this.meditationState.count;
+    const adjustedCount = Math.floor(rawCount * (percentage / 100));
+    // --- UPDATED CODE END ---
+
     let goal = this.data.goals.find(g => g.id === this.meditationState.goalId);
     if (!goal && this.meditationState.courseStepId) {
         goal = { id: 'temp_practice', type: 'meditation', name: 'Bài thực hành' };
@@ -2879,7 +2906,7 @@ startMeditationSetup(goal, overrideParams = null) {
     // --------------------------------
 
     // Standard Saving Logic
-    const autoNote = `Chánh niệm: ${this.meditationState.count} | Tỉnh giác: ${this.meditationState.awarenessCount}. ${this.meditationState.isExam ? '[BÀI THI]' : ''}`;
+    const autoNote = `Chánh niệm: ${adjustedCount} | Tỉnh giác: ${this.meditationState.awarenessCount}. ${this.meditationState.isExam ? '[BÀI THI]' : ''}`;
 
     const log = {
         goalId: goal.id,
@@ -2887,7 +2914,7 @@ startMeditationSetup(goal, overrideParams = null) {
         timestamp: this.meditationState.startTime,
         minutes: minutes,
         notes: `${autoNote} ${notes}`,
-        count: this.meditationState.count,
+        count: adjustedCount, // SAVE THE ADJUSTED COUNT
         awarenessCount: this.meditationState.awarenessCount,
         touches: this.meditationState.touches.map(t => {
             const delta = Math.max(0, t.t - this.meditationState.startTime);
@@ -2899,7 +2926,7 @@ startMeditationSetup(goal, overrideParams = null) {
     this.data.logs.push(log);
     goal.totalMinutes += minutes;
     if (!goal.totalMindfulness) goal.totalMindfulness = 0;
-    goal.totalMindfulness += this.meditationState.count;
+    goal.totalMindfulness += adjustedCount; // ADD ADJUSTED COUNT TO TOTAL
 
     this.meditationState.active = false;
     this.save();
@@ -2908,9 +2935,9 @@ startMeditationSetup(goal, overrideParams = null) {
     this.renderReports();
     const newBadges = this.checkAchievements(true);
     
-     document.getElementById('meditation-finish-modal').style.display = 'none';
+    document.getElementById('meditation-finish-modal').style.display = 'none';
     if (!this.meditationState.courseStepId) {
-    this.showToast(`Đã lưu! +${this.meditationState.count} Chánh niệm, +${this.meditationState.awarenessCount} Tỉnh giác.`);
+    this.showToast(`Đã lưu! +${adjustedCount} Chánh niệm, +${this.meditationState.awarenessCount} Tỉnh giác.`);
 }
 	if (newBadges.length > 0) {
         setTimeout(() => {
@@ -3003,7 +3030,7 @@ setDailySessionTarget(id) {
 
     // --- PROMPT 1: Daily Sessions (Số thời/phiên) ---
     const currentSession = goal.dailySessionTarget || 8;
-    const inputSession = prompt(`(1/2) Đặt số thời thực hành hàng ngày cho "${goal.name}":`, currentSession);
+    const inputSession = prompt(`(1/2) Đặt số thời thực hành hằng ngày cho "${goal.name}":`, currentSession);
 
     if (inputSession !== null) {
         const val = parseInt(inputSession);
@@ -3018,7 +3045,7 @@ setDailySessionTarget(id) {
     const unitLabel = isMeditation ? 'số chánh niệm' : 'số phút';
     const currentTarget = goal.dailyTargetMinutes || 100;
 
-    const inputTarget = prompt(`(2/2) Đặt mục tiêu ${unitLabel} hàng ngày:`, currentTarget);
+    const inputTarget = prompt(`(2/2) Đặt mục tiêu ${unitLabel} hằng ngày:`, currentTarget);
 
     if (inputTarget !== null) {
         const val = parseInt(inputTarget);
@@ -3063,7 +3090,7 @@ setDailyMinMedTarget(id) {
     if (!goal) return;
 
     const current = goal.dailyMinMedTarget || 120;
-    const input = prompt(`Đặt mục tiêu thời gian hàng ngày (phút) cho "${goal.name}":`, current);
+    const input = prompt(`Đặt mục tiêu thời gian hằng ngày (phút) cho "${goal.name}":`, current);
 
     if (input !== null) {
         const val = parseInt(input);
@@ -3575,9 +3602,9 @@ closeInspect(goalId) {
                         actionButtons += `<button class="btn-icon" style="background:transparent; color:var(--zen); height:24px; width:24px;" onclick="app.showSessionGraph('${log.timestamp}')" title="Xem biểu đồ"><i class="fas fa-chart-area" style="font-size:12px;"></i></button>`;
                     }
 
-                    if (!isCertGoal) { 
+                   
             actionButtons += `<button class="btn-icon" style="background:transparent; color:var(--text-light); height:24px; width:24px;" onclick="app.openSessionModal('${goalId}', ${log.minutes}, ${log.timestamp}, ${log.timestamp})" title="Sửa chi tiết"><i class="fas fa-edit" style="font-size:12px;"></i></button>`;
-        }
+     
 
         actionButtons += '</div>';
 
@@ -5642,6 +5669,11 @@ openSessionModal(goalId, minutes = 0, logId = null, startTime = Date.now()) {
     
     if (goal && goal.type === 'meditation') {
         mindGroup.style.display = 'block';
+        
+        // --- UPDATED: Clear any previous max constraints first ---
+        mindInput.removeAttribute('max');
+        mindInput.removeAttribute('title');
+        
         let currentCount = 0;
         let currentThreshold = 6; 
 
@@ -5651,6 +5683,12 @@ openSessionModal(goalId, minutes = 0, logId = null, startTime = Date.now()) {
                 currentCount = log.count !== undefined ? log.count : (log.touches ? log.touches.length : 0);
 
                 if(log.threshold) currentThreshold = log.threshold;
+                
+                // --- UPDATED: Constrain max value based on actual touches ---
+                if (log.touches && log.touches.length > 0) {
+                    mindInput.max = log.touches.length;
+                    mindInput.title = `Không thể vượt quá số lần chạm thực tế (${log.touches.length})`;
+                }
             }
         }
         mindInput.value = currentCount;
@@ -5658,6 +5696,7 @@ openSessionModal(goalId, minutes = 0, logId = null, startTime = Date.now()) {
     } else {
         mindGroup.style.display = 'none';
         mindInput.value = 0;
+        mindInput.removeAttribute('max'); // Ensure no limit for non-meditation goals if re-used
     }
 
     let notes = ''; 
@@ -5666,7 +5705,7 @@ openSessionModal(goalId, minutes = 0, logId = null, startTime = Date.now()) {
         if(log && log.notes) notes = log.notes; 
     }
     document.getElementById('s-notes').value = notes;
-	this.renderQuickTags('session-tags', 's-notes');
+    this.renderQuickTags('session-tags', 's-notes');
     document.getElementById('session-title').innerText = logId ? 'Chỉnh sửa' : 'Nhập thủ công';
 }
             closeSessionModal() { document.getElementById('session-modal').style.display = 'none'; }
