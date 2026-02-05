@@ -126,9 +126,9 @@
 
         .btn-nav, .btn-darkmode {
             background: transparent; border: 1px solid var(--primary-color);
-            color: var(--primary-color); padding: 5px 10px; border-radius: 5px; cursor: pointer;
+            color: var(--primary-color); padding: 7px 7px; border-radius: 5px; cursor: pointer;
         }
-        .btn-darkmode { background: #34495e; color: #fff; border: none; font-size: 18px; }
+        .btn-darkmode { background: #34495e; color: #fff; border: none; font-size: 14px; }
 
         h2 { text-align: center; color: var(--primary-color); margin: 5px 0 15px 0; font-size: 20px; }
 
@@ -284,7 +284,7 @@ gap: 7px; /* Tighter gap for the navigation arrows and select */
 justify-content: flex-end; /* Ensure controls are aligned right */
 }
 .btn-nav, .btn-darkmode {
-padding: 4px 8px; /* Slightly reduced button padding */
+padding: 7px 7px; /* Slightly reduced button padding */
 }
 #section-select {
 max-width: 180px; /* Force the select box to be much narrower on mobile */
@@ -568,11 +568,12 @@ gap: 3px; /* Tighter gap for the rightmost controls */
 
 .medal-icon {
     font-size: 80px;
-    color: #FDB931;
+    color: #e39802;
     margin-bottom: 20px;
     filter: drop-shadow(0 0 10px rgba(253, 185, 49, 0.8));
     animation: floatMedal 3s ease-in-out infinite;
 }
+[data-theme="dark"] .modal-icon { color: #FDB931;}
 
 .modal-title {
     font-size: 24px;
@@ -625,18 +626,17 @@ gap: 3px; /* Tighter gap for the rightmost controls */
 
 <div class="container" id="main-container">
 <div class="top-nav">
-    <button class="btn-darkmode" onclick="toggleTheme()">🌙</button> 
+    <button class="btn-darkmode" onclick="toggleTheme()"><i class="fas fa-moon"></i></button> 
     
 
         
-        <div class="nav-controls">
-
-            <button class="btn-nav" onclick="changeSection(-1)">❮</button>
+         <div class="nav-controls">
+            <button class="btn-nav" onclick="changeSection(-1)"><i class="fas fa-angle-left"></i></button>
             <select id="section-select" onchange="selectSection()"></select>
-            <button class="btn-nav" onclick="changeSection(1)">❯</button>
-	    <div id="top-right-controls" style="display: flex; gap: 5px; align-items: center;">
+            <button class="btn-nav" onclick="changeSection(1)"><i class="fas fa-angle-right"></i></button>
+	    <div id="top-right-controls" style="display: flex; gap: 3px; align-items: center;">
         
-        <button id="help-toggle" class="btn-nav" aria-expanded="false" title="Trợ giúp">&#9432;</button>		
+        <button id="help-toggle" class="btn-nav" style="text-align: center; " aria-expanded="false" title="Trợ giúp"><i class="fas fa-circle-info"></i></button>	
         </div>
     </div>
 </div>
@@ -644,97 +644,82 @@ gap: 3px; /* Tighter gap for the rightmost controls */
 <div id="section-achievement-banner">
     <h3>
         <i class="fas fa-wreath-laurel"></i> 
-        Hộ Trì Pháp Bảo
+        Hộ Trì Học Pháp
         <i class="fas fa-wreath-laurel"></i>
     </h3>
     <div style="font-size:12px; margin-top:5px;">Chứng Nhận Thành Tựu Hộ Trì Kinh Này</div>
 </div>
 <div id="help-container" style="display: none; padding: 20px; background-color: var(--box-bg); border: 1px solid var(--box-border); margin-bottom: 15px; border-radius: 8px;">
         <h3>Kinh Hộ Trì Paritta</h3>
-        <p>Đây là ứng dụng & công cụ trên nền tảng web được thiết kế để hỗ trợ các hành giả trong việc nghe, học, và tụng trì hàng ngày Kinh Hộ Trì Paritta. Ứng dụng có giao diện đồng bộ âm thanh & văn bản, làm nổi bật từng dòng chữ theo thời gian của âm thanh, cho phép thực hành tụng đọc chính xác, đồng thời bao gồm các bài tập ghi nhớ bằng cách ẩn ngẫu nhiên các từ.</p>
+    <p>Đây là ứng dụng & công cụ được thiết kế để hỗ trợ các hành giả trong việc nghe, học, và tụng trì hàng ngày Kinh Hộ Trì Paritta. Ứng dụng có tính năng đồng bộ văn bản với âm thanh cho phép thực hành tụng đọc theo chính xác, đồng thời bao gồm các bài tập ghi nhớ bằng cách ẩn ngẫu nhiên các từ, và một bảng điều khiển tương tác để theo dõi tiến độ học thuộc.</p>
 
+    <h4><i class="fas fa-book-open-reader"></i> Hướng Dẫn Sử Dụng</h4>
+    
+    <h4>1. Điều Hướng & Cơ Bản</h4>
+    <ul>
+        <li><b>Giao Diện (<i class="fas fa-moon"></i>/<i class="fas fa-sun-bright"></i>):</b> Chuyển đổi giữa Chế độ Sáng và Tối.</li>
+        <li><b>Chọn Mục:</b> Sử dụng menu thả xuống để chuyển đến một bài kinh cụ thể (ví dụ: Maṅgalasutta, Mettasutta)</li>
+        <li><b>Từ Điển (<i class="fas fa-book-open"></i>):</b> Bật để tra cứu Pāli. Di chuột qua từ để xem nghĩa.</li>
+    </ul>
 
-        <h4>📖 Hướng Dẫn Sử Dụng</h4>
-        
-        <h5>1. Điều Hướng (Thanh Trên Cùng)</h5>
-        <ul>
-            <li>Chuyển Đổi Chủ Đề (🌙/☀️): Chuyển đổi giữa Chế Độ Sáng và Chế Độ Tối để dễ đọc trong các điều kiện ánh sáng khác nhau.</li>
-            <li>Chọn Các Mục: Sử dụng menu thả xuống để chuyển đến một bài kinh cụ thể (ví dụ: Maṅgalasutta, Mettasutta).</li>
-            <li>Mũi Tên (❮ ❯): Điều hướng đến phần trước hoặc phần kế tiếp.</li>
-        </ul>
+    <h4>2. Chế Độ Tụng Đọc (<i class="fas fa-microphone"></i>)</h4>
+    <p>Nhấn nút Micro để vào Chế độ Tụng Đọc. Chữ sẽ phóng to và chạy theo âm thanh.</p>
+    <ul>
+        <li><b>Trạng thái:</b> Xanh Lá = Tự động chạy; Xanh Dương = Tạm dừng/Thủ công.</li>
+        <li><b>Điều hướng:</b> Dùng <b>«</b> và <b>»</b> để nhảy dòng.</li>
+    </ul>
 
-        <h5>2. Điều Khiển Âm Thanh & Tụng Đọc (Thanh Dưới Cùng)</h5>
-        <ul>
-            <li>Trình Phát Âm Thanh: Các nút điều khiển phát/tạm dừng và âm lượng tiêu chuẩn.
-                <ul>
-                    <li>Lưu ý: Khi một bản âm thanh kết thúc, trình phát sẽ tự động đặt lại về đầu (0:00).</li>
-                </ul>
-            </li>
-            <li>Nút Tụng Đọc (🎤):
-                <ul>
-                    <li>Nhấp để Bắt Đầu: Kích hoạt Chế độ Tụng Đọc. Chữ sẽ phóng to và từng dòng văn bản đồng bộ với âm thanh sẽ được làm nổi bật.</li>
-                    <li>Màu Trạng Thái:
-                        <ul>
-                            <li>Xanh Lá (Nhấp Nháy): Chế độ tự động phát đang hoạt động (đồng bộ).</li>
-                            <li>Xanh Dương: Chế độ thủ công/Tạm dừng.</li>
-                        </ul>
-                    </li>
-                </ul>
-            </li>
-            <li>Nút Điều Hướng (« »):
-                <ul>
-                    <li>« (Trước): Quay lại dòng văn bản trước đó và tua lại âm thanh.</li>
-                    <li>» (Tiếp): Chuyển tiếp đến dòng văn bản kế tiếp và tiến tới âm thanh.</li>
-                </ul>
-            </li>
-            <li>Thoát (✖): Chỉ xuất hiện trong Chế độ Tụng Đọc. Nhấp vào nút này để dừng chế độ và trở về chế độ xem toàn văn bản.</li>
-			</ul>
-               <h5>3. Từ Điển Pāli</h5>
-                <ul>
-                   <li><b>Bật/Tắt:</b> Sử dụng nút <b>📖</b> trên thanh điều khiển.</li>
-                   <li><b>Cách Tra Cứu:</b> Khi tính năng được bật, chỉ cần di chuột qua bất kỳ từ Pāli nào.</li>
-                   <li><b>Tính Năng:</b> Cho phép bạn tra cứu ý nghĩa của các từ Pāli ngay trong văn bản mà không cần rời khỏi trang. Cửa sổ giải nghĩa sẽ hiển thị ngay bên cạnh từ.</li>
-        </ul>
-        <h5>4. Cài Đặt & Công Cụ Ghi Nhớ (⚙️)</h5>
-        <p>Nhấp vào biểu tượng Bánh Răng (⚙️) để mở bảng cài đặt.</p>
-        
-        <h5>A. Bài Tập Ghi Nhớ (Ẩn Chữ)</h5>
-        <p>Tính năng này giúp kiểm tra trí nhớ của bạn bằng cách che khuất một số từ.</p>
-        <ul>
-            <li>Thanh Trượt Độ Khó: Kéo thanh trượt để chọn tỷ lệ phần trăm từ cần ẩn (10% đến 90%).</li>
-            <li>Nút Ẩn: Ẩn ngẫu nhiên các từ dựa trên tỷ lệ phần trăm đã chọn.</li>
-            <li>Tương Tác Hiển Thị: Nhấp vào bất kỳ từ bị ẩn nào (được đại diện bằng một hộp trống) để hiển thị nó ngay lập tức.</li>
-            <li>Nút Hiện: Đặt lại văn bản và hiển thị tất cả các từ.</li>
-        </ul>
+    <h4>3. Chế Độ Lặp (Ôn Luyện)</h4>
+    <ul>
+        <li><b>Lặp Một Câu:</b> Nhấn nút Lặp (<i class="fas fa-arrows-repeat"></i>) trên thanh điều khiển để lặp lại câu hiện tại liên tục.</li>
+        <li><b>Lặp Nhiều Câu (Tùy Chọn):</b> 
+            <ul>
+                <li>Trên <b>Lưới Tiến Độ</b> (các ô số màu), <b>Nhấn Giữ</b> vào một ô để chọn. Ô sẽ chuyển sang viền Đỏ.</li>
+                <li>Chọn nhiều ô để tạo vòng lặp tùy chỉnh (ví dụ: ôn một đoạn khó). Trình phát sẽ chỉ lặp qua các câu đã chọn.</li>
+                <li>Nhấn giữ lần nữa để bỏ chọn.</li>
+            </ul>
+        </li>
+		<li><b>Lặp Mặc Định:</b> Khi không ấn vào, nút Lặp sẽ phát lại toàn bộ mục hiện tại.</li>
+    </ul>
 
-        <h5>B. Điều Chỉnh Tốc Độ</h5>
-        <ul>
-            <li>Mặc Định: Sử dụng thời gian cụ thể được viết trong mã (ví dụ: [5.0] giây) để đồng bộ hóa chính xác với âm thanh tụng.</li>
-            <li>Tuỳ Chỉnh (🕒): Cho phép bạn ghi đè thời gian mặc định.
-                <ul>
-                    <li>Đặt một khoảng thời gian cố định (ví dụ: 3.0 giây) cho mỗi dòng.</li>
-                    <li>Hữu ích cho việc thực hành tụng đọc ở tốc độ ổn định, chậm hơn hoặc nhanh hơn mà không cần đồng bộ âm thanh.</li>
-                </ul>
-            </li>
-        </ul>
+    <h4>4. Bảng Tiến Độ & Ghi Nhớ</h4>
+    <p>Nằm phía trên văn bản khi ở Chế độ Tụng Đọc, bảng này giúp trực quan hóa mức độ thông thuộc của bạn.</p>
+    <ul>
+        <li><b>Lưới Màu:</b> Mỗi ô vuông đại diện cho một dòng.
+            <ul>
+                <li><b>Xám:</b> Chưa thuộc.</li>
+                <li><b>Xanh:</b> Đã thuộc.</li>
+            </ul>
+        </li>
+        <li><b>Đánh Dấu:</b> Khi dòng đang chạy, ô chọn <b>"Đã thuộc"</b> sẽ hiện dưới văn bản. Đánh dấu vào đó để xác nhận đã thuộc (100%).</li>
+        <li><b>Thống Kê:</b>
+            <ul>
+                <li><b>Đã thuộc phần này:</b> % hoàn thành của điều học hiện tại.</li>
+                <li><b>Đã thuộc tất cả:</b> % hoàn thành của toàn bộ các Kinh Hộ Trì.</li>
+            </ul>
+        </li>
+        <li><b>Thành Tựu:</b> Bạn sẽ nhận Biểu ngữ "Hộ Trì Học Pháp" khi thuộc xong một phần, và Huy chương "Bậc Hộ Trì Pháp" khi thuộc toàn bộ.</li>
+    </ul>
 
-<h4>💾 Sử Dụng Ngoại Tuyến</h4>
-<p>
-    Để sử dụng ngoại tuyến, hãy tải xuống tệp Apk cho Android, tệp Zip cho PC và tệp ZIM cho tất cả các hệ điều hành và thiết bị. 
-    (Định dạng ZIM được mở bằng Kiwix, một ứng dụng miễn phí cung cấp khả năng truy cập ngoại tuyến vào các nội dung giáo dục. 
-    Để tìm hiểu thêm, xem tại đây: <a href="https://kiwix.org/en/about_us/" target="_blank">kiwix.org/en/about_us/</a>).
-</p>
-<p>Đường Link Tải xuống & Mã Nguồn: <a href="https://github.com/buddhanussati/loicuaducphat/"><b>tại đây.</b></a></p>
+    <h4>5. Cài Đặt (<i class="fas fa-gear"></i>)</h4>
+    <ul>
+        <li><b>Ẩn Chữ:</b> Kéo thanh trượt để ẩn ngẫu nhiên các từ (10%-90%) để kiểm tra trí nhớ. Nhấn vào ô trống để hiện từ.</li>
+        <li><b>Tốc Độ (<i class="far fa-clock"></i>):</b> Ghi đè thời gian mặc định (ví dụ: cố định 5 giây/dòng) dùng cho việc thực hành tụng đọc ở tốc độ ổn định, chậm hơn hoặc nhanh hơn mà không cần đồng bộ âm thanh.</li>
+    </ul>
 
-<h4>⚖️ Giấy Phép & Sử Dụng</h4>
-<p>
-    Nội dung và mã nguồn của ứng dụng này được cấp phép theo Giấy phép Creative Commons Phi thương mại 4.0 Quốc tế. 
-    (<a href="https://creativecommons.org/licenses/by-nc/4.0/legalcode" target="_blank">CC BY-NC 4.0</a>).
-</p>
-<p>
-    Bạn được tự do Chia sẻ và Chuyển thể tài liệu này cho các mục đích <b>phi thương mại</b>. Mọi mục đích thương mại đều không được phép.
-</p>
-    </div>
+    <h4><i class="fas fa-floppy-disk"></i> Sử Dụng Ngoại Tuyến</h4>
+    <p>
+        Tải xuống tệp Apk cho Android, tệp Zip cho PC, hoặc tệp ZIM cho Kiwix.
+        (Tìm hiểu thêm về Kiwix: <a href="https://kiwix.org/en/" target="_blank">kiwix.org</a>).
+    </p>
+    <p>Tải xuống & Mã Nguồn: <a href="https://github.com/buddhanussati/patimokkha-memorize"><b>tại đây.</b></a></p>
+
+    <h4><i class="fas fa-scale-balanced"></i>&nbsp;&nbsp;Giấy Phép</h4>
+    <p>
+        Cấp phép theo <a href="https://creativecommons.org/licenses/by-nc/4.0/legalcode" target="_blank">CC BY-NC 4.0</a>.
+        Được phép Chia sẻ và Chuyển thể cho mục đích <b>phi thương mại</b>.
+    </p>
+</div>
 	<div id="recitation-dashboard">
     <div id="dashboard-grid" class="dashboard-grid">
         </div>
@@ -762,24 +747,18 @@ gap: 3px; /* Tighter gap for the rightmost controls */
 
         <div class="controls-cluster">
 		<button id="btn-vn-toggle" class="icon-btn" onclick="toggleVietnameseView()" title="Xem Tiếng Việt">VI</button>
-			<button id="btn-exit-recitation" class="icon-btn" onclick="exitRecitation()" title="Thoát Tụng Đọc">✖</button>
-            <button class="icon-btn" onclick="navigateRecitation(-1)" title="Lùi">«</button>
+			<button id="btn-exit-recitation" class="icon-btn" onclick="exitRecitation()" title="Thoát Tụng Đọc"><i class="fas fa-xmark"></i></button>
+            <button class="icon-btn" onclick="navigateRecitation(-1)" title="Lùi"><i class="fas fa-angles-left"></i></button>
             
-            <button id="recitation-toggle-btn" class="icon-btn btn-recitation" onclick="toggleRecitationAction()" title="Tụng Đọc">🎤</button>
+            <button id="recitation-toggle-btn" class="icon-btn btn-recitation" onclick="toggleRecitationAction()" title="Tụng Đọc"><i class="fas fa-microphone"></i></button>
             
 
-            <button class="icon-btn" onclick="navigateRecitation(1)" title="Tiến">»</button>
+            <button class="icon-btn" onclick="navigateRecitation(1)" title="Tiến"><i class="fas fa-angles-right"></i></button>
 			<button id="btn-loop" class="icon-btn" onclick="toggleLoopSentence()" title="Lặp câu hiện tại">
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
-        <polyline points="17 1 21 5 17 9"></polyline>
-        <path d="M3 11V9a4 4 0 0 1 4-4h14"></path>
-        <polyline points="7 23 3 19 7 15"></polyline>
-        <path d="M21 13v2a4 4 0 0 1-4 4H3"></path>
-        <text id="loop-count" x="12" y="15.5" font-family="Tahoma" font-size="8" font-weight="100" fill="currentColor" text-anchor="middle" style="display:none;">1</text>
-    </svg>
+    <i class="fas fa-arrows-repeat"></i>
 </button>
-            <button id="settings-btn" class="icon-btn btn-settings" onclick="toggleSettings()" title="Cài đặt">⚙️</button>
-<button id="btn-dictionary" class="icon-btn" onclick="togglePaliLookup()" title="Từ điển Pali">📖</button>
+            <button id="settings-btn" class="icon-btn btn-settings" onclick="toggleSettings()" title="Cài đặt"><i class="fas fa-gear"></i></button>
+<button id="btn-dictionary" class="icon-btn" onclick="togglePaliLookup()" title="Từ điển Pali"><i class="fas fa-book-open"></i></button>
         </div>
     </div>
 
@@ -796,7 +775,7 @@ gap: 3px; /* Tighter gap for the rightmost controls */
             <div class="setting-group">
                 <span style="font-size:13px; font-weight:600">Tốc độ:</span>
                 
-                <button id="btn-show-speed" class="btn-sm" onclick="toggleSpeedControl()" style="background:#2980b9; color:white;">🕒</button>
+                <button id="btn-show-speed" class="btn-sm" onclick="toggleSpeedControl()" style="background:#2980b9; color:white;"><i class="far fa-clock"></i></button>
 
                 <div id="speed-control-area" style="display:none; align-items:center; gap:5px;">
                     <input type="range" id="recitation-interval" min="1" max="10" step="0.5" value="3" oninput="updateRecitationInterval(this.value)" style="width:80px">
@@ -815,7 +794,7 @@ gap: 3px; /* Tighter gap for the rightmost controls */
         </div>
         <div class="modal-title">Bậc Hộ Trì Pháp</div>
        <p class="modal-text">
-    Lành thay! Bạn đã ghi nhớ trọn vẹn toàn bộ Kinh&nbsp;Hộ&nbsp;Trì&nbsp;Paritta.<br>
+    Chứng Nhận Thành Tựu Học&nbsp;Thuộc&nbsp;Lòng <b>Kinh&nbsp;Hộ&nbsp;Trì&nbsp;Paritta</b><br>
     <span style="display: block; color: #b35900; font-weight: 600; font-style: italic; margin-top: 15px;">
         "Ðệ tử Gotama<br>
         Luôn luôn tự tỉnh giác,<br>
@@ -3099,8 +3078,8 @@ function toggleLoopSentence() {
     const settingsPanel = document.getElementById('settings-panel');
     const helpButton = document.getElementById('help-toggle');
     const helpContainer = document.getElementById('help-container');
-    const symbolInfo = '&#9432;'; // Information symbol
-    const symbolClose = '✖'; // Close symbol
+    const symbolInfo = '<i class="fas fa-circle-info"></i>'; // Information symbol
+    const symbolClose = '<i class="fas fa-xmark"></i>'; // Close symbol
 
     function toggleHelp() {
         const isVisible = helpContainer.style.display !== 'none';
@@ -3133,10 +3112,10 @@ function toggleLoopSentence() {
 
         if (savedTheme === 'dark') {
             body.setAttribute('data-theme', 'dark');
-            if (btn) btn.innerHTML = "☀️";
+            if (btn) btn.innerHTML = '<i class="fas fa-sun-bright"></i>';
         } else {
              body.removeAttribute('data-theme');
-             if (btn) btn.innerHTML = "🌙";
+             if (btn) btn.innerHTML = '<i class="fas fa-moon"></i>';
         }
         const savedDictState = localStorage.getItem('dictionaryEnabled');
         // If it is 'true' OR null (first time user), turn it ON
@@ -3391,11 +3370,11 @@ audioPlayer.addEventListener('play', () => {
     function updateButtonVisuals(state) {
         recitationToggleBtn.classList.remove('active-auto', 'active-manual');
         if (state === 'auto') {
-            recitationToggleBtn.classList.add('active-auto'); recitationToggleBtn.innerHTML = "❚❚";
+            recitationToggleBtn.classList.add('active-auto'); recitationToggleBtn.innerHTML = '<i class="fas fa-pause"></i>';
         } else if (state === 'manual') {
-            recitationToggleBtn.classList.add('active-manual'); recitationToggleBtn.innerHTML = "▶";
+            recitationToggleBtn.classList.add('active-manual'); recitationToggleBtn.innerHTML = '<i class="fas fa-play"></i>';
         } else {
-            recitationToggleBtn.innerHTML = "🎤";
+            recitationToggleBtn.innerHTML = '<i class="fas fa-microphone"></i>';
         }
     }
 
@@ -3575,7 +3554,7 @@ function updateOverallStats() {
         // CASE B: USER MEMORIZED ONLY THIS SECTION (SESSION 100%)
         banner.style.display = 'block';
         // Update Title (Revert to default section title)
-        bannerTitle.innerHTML = '<i class="fas fa-wreath-laurel"></i> Hộ Trì Pháp Bảo <i class="fas fa-wreath-laurel"></i>';
+        bannerTitle.innerHTML = '<i class="fas fa-wreath-laurel"></i> Hộ Trì Học Pháp <i class="fas fa-wreath-laurel"></i>';
         // Update Subtitle
         bannerSubtitle.innerHTML = 'Chứng Nhận Thành Tựu Học&nbsp;Thuộc&nbsp;Lòng Bài&nbsp;Kinh&nbsp;Này';
 
@@ -3983,11 +3962,11 @@ function navigateRecitation(d) {
 
         if (isDark) {
             body.removeAttribute('data-theme');
-            btn.innerHTML = "🌙";
+            btn.innerHTML = '<i class="fas fa-moon"></i>';
             localStorage.setItem('themePreference', 'light');
         } else {
             body.setAttribute('data-theme', 'dark');
-            btn.innerHTML = "☀️";
+            btn.innerHTML = '<i class="fas fa-sun-bright"></i>';
             localStorage.setItem('themePreference', 'dark');
         }
     }
