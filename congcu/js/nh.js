@@ -4998,17 +4998,20 @@ renderAchievementsUI() {
     if (!container) return;
     container.innerHTML = '';
 
-    // [FIX] Sorting Logic
-    // 1. Get unlocked badges in order of acquisition (from data.achievements array)
-    const unlockedIds = this.data.achievements;
+    // [FIX] Sorting Logic: Newest Unlocked First
+    // 1. Create a copy and reverse it so the most recently added IDs come first
+    const unlockedIds = [...this.data.achievements].reverse();
+    
+    // 2. Map IDs to badge objects
     const unlockedBadges = unlockedIds
         .map(id => BADGES.find(b => b.id === id))
         .filter(b => b); // Safety check in case ID doesn't exist in constant
 
-    // 2. Get locked badges (filter out those already in unlockedIds)
-    const lockedBadges = BADGES.filter(b => !unlockedIds.includes(b.id));
+    // 3. Get locked badges (filter out those already in unlockedIds)
+    // Note: We check against the original data.achievements to ensure we catch everything
+    const lockedBadges = BADGES.filter(b => !this.data.achievements.includes(b.id));
 
-    // 3. Merge: Unlocked first, then Locked
+    // 4. Merge: Newest Unlocked -> Oldest Unlocked -> Locked
     const sortedBadges = [...unlockedBadges, ...lockedBadges];
     const LOCKED_COLOR = '#4b5563';
 
@@ -5075,12 +5078,19 @@ openBadgePicker() {
         document.getElementById('badge-picker-modal').remove();
     }
 
-    // [FIX] Sorting Logic (Same as renderAchievementsUI)
-    const unlockedIds = this.data.achievements;
+    // [FIX] Sorting Logic: Newest Unlocked First
+    // 1. Reverse the order of unlocked IDs
+    const unlockedIds = [...this.data.achievements].reverse();
+    
+    // 2. Map to badge objects
     const unlockedBadges = unlockedIds
         .map(id => BADGES.find(b => b.id === id))
         .filter(b => b); 
-    const lockedBadges = BADGES.filter(b => !unlockedIds.includes(b.id));
+        
+    // 3. Get locked badges
+    const lockedBadges = BADGES.filter(b => !this.data.achievements.includes(b.id));
+    
+    // 4. Merge: Newest -> Oldest -> Locked
     const sortedBadges = [...unlockedBadges, ...lockedBadges];
 
     const modalHtml = `
