@@ -170,24 +170,24 @@ const COURSES = [
             <p>Bạn chủ động đánh giá chất lượng tâm ngay tại thời điểm ghi nhận bằng số lần chạm:</p>
             <ul style="list-style: none; padding-left: 0;">
                 <li><span class="text-q4"><strong>1 Chạm (Thấp):</strong></span> Tâm vừa quay lại sau một cơn phóng dật, hoặc sự nhận biết còn mờ nhạt, nhiều tạp niệm</li>
-                <li><span class="text-q3"><strong>2 Chạm (Trung bình):</strong></span> Tâm nhận biết đối tượng rõ hơn nhưng chưa hoàn toàn sâu sắc, có tạp niệm nhưng ít hơn mức Thấp</li>
+                <li><span class="text-q3"><strong>2 Chạm (Trung bình):</strong></span> Tâm nhận biết đối tượng rõ hơn nhưng chưa sâu sắc, có tạp niệm nhưng ít hơn mức Thấp</li>
                 <li><span class="text-q2"><strong>3 Chạm (Tốt):</strong></span> Sự chú tâm vững chãi, nhận biết rõ hơi thở, rất ít bị tạp niệm quấy nhiễu.</li>
             </ul>
         </div>
 
-        <div style="background: var(--surface); padding: 15px; border-radius: 8px; margin: 15px 0; border-left: 4px solid var(--secondary);">
-            <h4 style="margin-top:0; color: var(--secondary);"><i class="fas fa-bolt"></i> 2. Cơ chế Chuỗi (Combo): Động Lực Của Định</h4>
+        <div style="background: var(--surface); padding: 15px; border-radius: 8px; margin: 15px 0; border-left: 4px solid var(--zen);">
+            <h4 style="margin-top:0; color: var(--zen);"><i class="fas fa-bolt"></i> 2. Cơ chế Chuỗi (Combo): Động Lực Của Định</h4>
             <p>Nếu bạn duy trì sự ghi nhận liên tục (chạm 1 lần mỗi khi thở) với khoảng cách đều đặn, hệ thống sẽ tự nâng cấp mức chú tâm:</p>
             <ul>
-                <li>Mọi phiên thiền đều bắt đầu ở mức <span class="text-q4"><strong>Thấp</strong></span>.</li>
-                <li><strong>Cứ mỗi 15 lần ghi nhận liên tục</strong> (< ngưỡng mất tập trung), mức chú tâm tự động tăng: <strong>Thấp → TB → Tốt → <span class="text-q1">Cao</span></strong>.</li>
-                <li><i class="fas fa-exclamation-triangle"></i> <strong>Reset:</strong> Nếu bạn quên ghi nhận quá lâu (phóng tâm), chuỗi sẽ reset về mức <strong>Thấp</strong>. Đây là lúc bắt đầu lại từ đầu với tâm thế mới.</li>
+                <li>Mọi thời thiền đều bắt đầu ở mức <span class="text-q4"><strong>Thấp</strong></span>.</li>
+                <li><strong>Cứ mỗi 15 lần ghi nhận liên tục</strong> (≤ ngưỡng mất tập trung), mức chú tâm tự động tăng: <strong><span class="text-q4">Thấp</span> → <span class="text-q3">TB</span> → <span class="text-q2">Tốt</span> → <span class="text-q1">Cao</span></strong>.</li>
+               <li><span class="text-q4"><i class="fas fa-exclamation-triangle"></i> <strong>Reset:</strong></span> Nếu bạn quên ghi nhận quá lâu (phóng tâm), chuỗi sẽ reset về mức <strong><span class="text-q4">Thấp</span></strong>. Đây là lúc bắt đầu lại từ đầu với tâm thế mới.</li>
             </ul>
         </div>
 
         <p><strong>Ý nghĩa thiền tập:</strong> Việc phân loại giúp bạn tránh thói quen bấm máy vô thức. Khi tâm nhận diện được chất lượng của chính nó, chánh niệm tỉnh giác sẽ trở nên sắc bén hơn.</p>
         
-        <p><strong>Yêu cầu hoàn thành:</strong> Thực hiện thời thiền 10 phút. Trong đó, hãy nỗ lực duy trì chánh niệm để đạt được ít nhất 1 lần ghi nhận mức <strong>Trung bình</strong> và 1 lần mức <strong>Tốt</strong> (thông qua chạm nhiều lần hoặc tích lũy chuỗi).</p>
+        <p><strong>Yêu cầu hoàn thành:</strong> Thực hiện thời thiền 10 phút. Trong đó, hãy nỗ lực duy trì chánh niệm để đạt được ít nhất 1 lần ghi nhận mức <strong><span class="text-q3">Trung bình</span></strong> và 1 lần mức <strong><span class="text-q2">Tốt</span></strong> (thông qua chạm nhiều lần hoặc tích lũy chuỗi).</p>
     `,
     practiceParams: { 
         duration: 10,  // Thời gian 10 phút để đủ trải nghiệm combo

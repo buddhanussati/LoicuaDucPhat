@@ -177,25 +177,25 @@ const COURSES = [
             <h4 style="margin-top:0; color: var(--primary);"><i class="fas fa-hand-pointer"></i> 1. Manual Mode: Self-Recognition</h4>
             <p>You actively evaluate the quality of mind at the moment of noting by the number of taps:</p>
             <ul style="list-style: none; padding-left: 0;">
-                <li><span class="text-q4"><strong>1 Tap (Low):</strong></span> Mind just returned from wandering, or recognition is faint, many stray thoughts.</li>
-                <li><span class="text-q3"><strong>2 Taps (Medium):</strong></span> Mind recognizes object clearer but not deeply, stray thoughts exist but less than Low.</li>
-                <li><span class="text-q2"><strong>3 Taps (Good):</strong></span> Attention is steady, clearly recognizing breath, very little disturbance.</li>
+                <li><span class="text-q4"><strong>1 Tap (Low):</strong></span> Mind just returned from wandering, or recognition is faint, many distracted thoughts.</li>
+                <li><span class="text-q3"><strong>2 Taps (Medium):</strong></span> Mind recognizes object clearer but not deeply, distracted thoughts exist but less than Low.</li>
+                <li><span class="text-q2"><strong>3 Taps (Good):</strong></span> Attention is steady, recognizing the breath clearly, very little disturbance.</li>
             </ul>
         </div>
 
-        <div style="background: var(--surface); padding: 15px; border-radius: 8px; margin: 15px 0; border-left: 4px solid var(--secondary);">
-            <h4 style="margin-top:0; color: var(--secondary);"><i class="fas fa-bolt"></i> 2. Combo Mechanism: Momentum of Focus</h4>
+        <div style="background: var(--surface); padding: 15px; border-radius: 8px; margin: 15px 0; border-left: 4px solid var(--zen);">
+            <h4 style="margin-top:0; color: var(--zen);"><i class="fas fa-bolt"></i> 2. Combo Mechanism: Momentum of Focus</h4>
             <p>If you maintain continuous noting (1 tap per breath) with regular intervals, the system automatically upgrades the focus level:</p>
             <ul>
                 <li>Every session starts at <span class="text-q4"><strong>Low</strong></span>.</li>
-                <li><strong>Every 15 continuous notes</strong> (< distraction threshold), focus level increases: <strong>Low → Med → Good → <span class="text-q1">High</span></strong>.</li>
-                <li><i class="fas fa-exclamation-triangle"></i> <strong>Reset:</strong> If you forget to note for too long (wandering), the chain resets to <strong>Low</strong>. This is a fresh start.</li>
+                <li><strong>Every 15 continuous notes</strong> (≤ distraction threshold), focus level increases: <strong><span class="text-q4">Low</span> → <span class="text-q3">Medium</span> → <span class="text-q2">Good</span> → <span class="text-q1">High</span></strong>.</li>
+                <li><span class="text-q4"><i class="fas fa-exclamation-triangle"></i> <strong>Reset:</strong></span> If you forget to note for too long (wandering), the chain resets to <strong><span class="text-q4">Low</span></strong>. This should be a fresh start.</li>
             </ul>
         </div>
 
         <p><strong>Meditation Significance:</strong> Classification helps avoid mechanical tapping. When the mind recognizes its own quality, mindfulness and alertness become sharper.</p>
         
-        <p><strong>Completion Requirement:</strong> Perform a 10-minute session. Strive to maintain mindfulness to achieve at least 1 <strong>Medium</strong> focus level and 1 <strong>Good</strong> focus level (via multi-taps or accumulating combos).</p>
+        <p><strong>Completion Requirement:</strong> Perform a 10-minute session. Strive to maintain mindfulness to achieve at least 1 <strong><span class="text-q3">Medium</span></strong> focus level and 1 <strong><span class="text-q2">Good</span></strong> focus level (via multi-taps or accumulating combos).</p>
     `,
     practiceParams: { 
         duration: 10,  // 10 mins to experience combos
