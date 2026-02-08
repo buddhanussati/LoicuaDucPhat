@@ -3,6 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="icon" type="image/x-icon" href="./images/favicon5.ico">
+	<link rel="apple-touch-icon" href="./images/icon-192-thotrai.png">
+	<link href="./css/weather-icons.min.css" rel="stylesheet">
     <title>Giờ Thọ Trai</title>
     <script>/*
  (c) 2011-2015, Vladimir Agafonkin
@@ -502,9 +505,11 @@ else window.SunCalc = SunCalc;
             font-size: 0.9rem;
         }
         .moon-phase-visual {
-            font-size: 2.5rem; 
-            margin-left: 15px;
-        }
+    font-size: 2.2rem; 
+    margin-left: 15px;
+    color: var(--gold); /* Added to color the font icon */
+    line-height: 1;     /* Ensures the icon sits vertically centered */
+}
         
         .next-uposatha-label {
             font-size: 0.75rem;
@@ -630,7 +635,7 @@ else window.SunCalc = SunCalc;
 
     <div id="app-ui" class="hidden">
         
-        <a href="Uposatha.html" style="text-decoration:none; color:inherit;">
+        <a href="uposatha.html" style="text-decoration:none; color:inherit;">
     <div class="card2">
         <div class="card-header2" 
             style="display:flex; justify-content:center; align-items:center;">
@@ -890,24 +895,7 @@ function getLunarDate(dd, mm, yyyy) {
     'auckland': { name: "Auckland, New Zealand", lat: -36.8485, lng: 174.7633, timezone: 'Pacific/Auckland' }
 };
     
-    // NEW: Định nghĩa các SVG cho Mặt trăng (dùng viewBox 0 0 24 24)
-    // Màu #FFC300 (gold) và #2c2c2c (card-bg)
-    const SVG_FULL_MOON = `<svg viewBox="0 0 24 24" width="30" height="30" style="display: block;"><circle cx="12" cy="12" r="10" fill="#FFC300"/></svg>`;
-    const SVG_NEW_MOON = `<svg viewBox="0 0 24 24" width="30" height="30" style="display: block;"><circle cx="12" cy="12" r="10" fill="#2c2c2c" stroke="#FFC300" stroke-width="1"/></svg>`;
-    
-    // Q.1 (8th): Half Moon, right side light
-    const SVG_FIRST_QUARTER = `<svg viewBox="0 0 24 24" width="30" height="30" style="display: block;">
-        <path d="M12 2a10 10 0 0 1 0 20V2z" fill="#FFC300"/>
-        <path d="M12 2a10 10 0 0 0 0 20V2z" fill="#2c2c2c"/>
-        <circle cx="12" cy="12" r="10" fill="none" stroke="#FFC300" stroke-width="1"/>
-    </svg>`;
-    
-    // Q.3 (23rd): Half Moon, left side light
-    const SVG_LAST_QUARTER = `<svg viewBox="0 0 24 24" width="30" height="30" style="display: block;">
-        <path d="M12 2a10 10 0 0 1 0 20V2z" fill="#2c2c2c"/>
-        <path d="M12 2a10 10 0 0 0 0 20V2z" fill="#FFC300"/>
-        <circle cx="12" cy="12" r="10" fill="none" stroke="#FFC300" stroke-width="1"/>
-    </svg>`;
+
     
 
 function getDateComponentsInTimeZone(timeZone) {
@@ -1281,13 +1269,21 @@ if (timezone) {
     }
 
     // NEW: Hàm sử dụng SVG tùy chỉnh
-    function getUposathaIcon(lunarDay) {
-        if (lunarDay === 15) return SVG_FULL_MOON;
-        if (lunarDay === 8) return SVG_FIRST_QUARTER;
-        if (lunarDay === 23) return SVG_LAST_QUARTER;
-        // Ngày 29/30 (Sóc)
-        return SVG_NEW_MOON; 
+   function getUposathaIcon(lunarDay) {
+    // Note: Weather Icons requires the base class "wi" + the specific icon class
+    let iconClass = 'wi-moon-alt-full'; // Default (30/1/New Moon)
+
+    if (lunarDay === 15) {
+        iconClass = 'wi-moon-alt-new';
+    } else if (lunarDay === 8) {
+        iconClass = 'wi-moon-alt-third-quarter';
+    } else if (lunarDay === 23) {
+        iconClass = 'wi-moon-alt-first-quarter';
     }
+    
+    // Return the font icon tag
+    return `<i class="wi ${iconClass}"></i>`; 
+}
 
     function calculateUposatha() {
         const today = new Date();
@@ -1329,7 +1325,7 @@ if (timezone) {
         } else {
              document.getElementById('uposatha-name').innerText = "Không tìm thấy";
              document.getElementById('uposatha-date').innerText = "--/--";
-             document.getElementById('moon-icon').innerHTML = SVG_NEW_MOON; // Hiển thị default
+             document.getElementById('moon-icon').innerHTML = `<i class="wi wi-moon-alt-new"></i>`;// Hiển thị default
         }
     }
 
