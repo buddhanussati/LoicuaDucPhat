@@ -10,10 +10,13 @@
  	<link rel="stylesheet" href="../css/w3.css">
  	<link rel="stylesheet" href="../css/css.css">
  	<link rel="stylesheet" href="../css/menu.css">
+    <link href="../congcu/css/weather-icons.min.css" rel="stylesheet">
+	<link href="../congcu/css/css.css" rel="stylesheet">
  	<script src="../js/jquery-1.10.2.min.js"></script>
  	<script src="../js/controlpanel2.js"></script>
  	<script src="../js/mousetrap.min.js"></script>
     <script src="../js/pali-lookup-standalone.js"></script>
+
 
  <script src="../js/suttaFiles.js"></script>
 
@@ -381,69 +384,25 @@ aspect-ratio: 1 / 1;
   vertical-align: middle;
 }
 
-/* 🌑 New Moon (Solid Black) */
-.moon.new::after {
-  background-image: url("data:image/svg+xml;charset=utf8,%3csvg width='20' height='20' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3e%3cdefs%3e%3cmask id='crescent-mask-flip'%3e%3crect width='24' height='24' fill='white'/%3e%3ccircle cx='1' cy='1' r='1' fill='black'/%3e%3c/mask%3e%3c/defs%3e%3ccircle cx='12' cy='12' r='10' fill='%236b5e4f' mask='url(%23crescent-mask-flip)'/%3e%3c/svg%3e");
+/* New Weather Icons Styling */
+.lunar i.wi {
+  margin-left: 3px;
+  font-size: 1em;      /* Adjust size of the moon */
+  line-height: 1;
+  vertical-align: middle;
+  position: relative;
+  top: 1px;
 }
 
-/* 🌓 First Quarter (Left Half Black, Right Half White - Straight Split) */
-.moon.first-quarter::after {
- background-image: url("data:image/svg+xml;charset=utf8,%3csvg width='20' height='20' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3e%3cpath d='M12 2a10 10 0 0 1 0 20V2z' fill='%23fdfdfd'/%3e%3cpath d='M12 2a10 10 0 0 0 0 20V2z' fill='%236b5e4f'/%3e%3ccircle cx='12' cy='12' r='10' fill='none' stroke='%236b5e4f' stroke-width='2'/%3e%3c/svg%3e");
+/* Ensure icons inherit the color of the text (Gold in dark, Brown in light) */
+.lunar {
+  display: inline-flex;  /* Keeps text and moon aligned */
+  align-items: center;
 }
-
-/* 🌕 Full Moon (White with Black Border) */
-.moon.full::after {
-  background-image: url("data:image/svg+xml;charset=utf8,%3csvg width='20' height='20' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3e%3ccircle cx='12' cy='12' r='10' fill='%23fdfdfd' stroke='%236b5e4f' stroke-width='2'/%3e%3c/svg%3e");
-}
-
-/* 🌙 Last Quarter (Fixed: Proper Curved Crescent on the Left) */
-.moon.last-quarter::after {
-   background-image: url("data:image/svg+xml;charset=utf8,%3csvg width='20' height='20' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3e%3cpath d='M12 2a10 10 0 0 1 0 20V2z' fill='%236b5e4f'/%3e%3cpath d='M12 2a10 10 0 0 0 0 20V2z' fill='%23fdfdfd'/%3e%3ccircle cx='12' cy='12' r='10' fill='none' stroke='%236b5e4f' stroke-width='2'/%3e%3c/svg%3e");
-}
-
-/* Dark Mode Overrides (Swapping Full and New) */
-[light-mode=dark] .moon.full::after {
-  background-image: url("data:image/svg+xml;charset=utf8,%3csvg width='20' height='20' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3e%3cdefs%3e%3cmask id='crescent-mask-flip'%3e%3crect width='24' height='24' fill='white'/%3e%3ccircle cx='1' cy='1' r='1' fill='black'/%3e%3c/mask%3e%3c/defs%3e%3ccircle cx='12' cy='12' r='10' fill='%23ffd27f' mask='url(%23crescent-mask-flip)'/%3e%3c/svg%3e");
-}
-[light-mode=dark] .moon.new::after {
-  background-image: url("data:image/svg+xml;charset=utf8,%3csvg width='20' height='20' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3e%3ccircle cx='12' cy='12' r='10' fill='%23222222' stroke='%23ffd27f' stroke-width='1.5'/%3e%3c/svg%3e");
-}
-
-[light-mode=dark] .moon.first-quarter::after {
-  background-image: url("data:image/svg+xml;charset=utf8,%3csvg width='20' height='20' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3e%3cpath d='M12 2a10 10 0 0 1 0 20V2z' fill='%23ffd27f'/%3e%3cpath d='M12 2a10 10 0 0 0 0 20V2z' fill='%23222222'/%3e%3ccircle cx='12' cy='12' r='10' fill='none' stroke='%23ffd27f' stroke-width='2'/%3e%3c/svg%3e");
-}
-
-[light-mode=dark] .moon.last-quarter::after {
-  background-image: url("data:image/svg+xml;charset=utf8,%3csvg width='20' height='20' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3e%3cpath d='M12 2a10 10 0 0 1 0 20V2z' fill='%23222222'/%3e%3cpath d='M12 2a10 10 0 0 0 0 20V2z' fill='%23ffd27f'/%3e%3ccircle cx='12' cy='12' r='10' fill='none' stroke='%23ffd27f' stroke-width='2'/%3e%3c/svg%3e");
-}
-.moon-icon {
-  width: 1em;
-  height: 1em;
-  vertical-align: -0.1em;
-  display: inline-block;
-}
-button.today-btn svg {
-  margin: 0;       /* no extra spacing */
-  padding: 0;
-}
-
-.moon-icon {
-  width: 1em;
-  height: 1em;
-  vertical-align: -0.1em;
-  display: inline-block;
-}
-
-/* Default: show light moons */
-.moon-icon.dark { display: none; }
-
-/* Dark mode: show dark moons instead */
-[light-mode=dark] .moon-icon.light { display: none; }
-[light-mode=dark] .moon-icon.dark { display: inline-block; }
 
 	  
 .today-btn {
-  margin: 5px;
+  margin: 3px;
   padding: 6px 12px;
   border: none;
   background: #7b5e57;
@@ -466,7 +425,33 @@ button.today-btn svg {
   background: #333;
   color: #fff;
 }
-	#calendar td.next-uposatha {
+
+.toda-btn {
+  padding: 6px 6px;
+  border: none;
+  background: #7b5e57;
+  color: white;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.toda-btn:hover {
+  background: #5c443f;
+}
+
+/* Dark mode override */
+[light-mode=dark] .toda-btn {
+  background: #444;
+  color: #ffd27f;
+}
+
+[light-mode=dark] .toda-btn:hover {
+  background: #333;
+  color: #fff;
+}
+
+
+#calendar td.next-uposatha {
   position: relative;
   background-color: linear-gradient(135deg, #cce5ff, #e6f2ff);
   color: inherit;
@@ -501,10 +486,37 @@ button.today-btn svg {
   border-radius: inherit;
   position: relative;
   z-index: 1;
+}
+
+
+
+[light-mode="dark"] .wi-moon-alt-full:before {
+  content: "\f0eb"; font-weight: normal
+}
+
+[light-mode="dark"] .wi-moon-alt-new:before {
+  content: "\f0dd"; font-weight: normal
+}
+
+[light-mode="dark"] .wi-moon-alt-first-quarter:before {
+  content: "\f0e4"; font-weight: normal
+}
+
+[light-mode="dark"] .wi-moon-alt-third-quarter:before {
+  content: "\f0d6"; font-weight: normal
+}
+
+[light-mode="light"] .lunar i.wi {
+  font-weight: bold;
+}
+
+  [light-mode="dark"] #phapcu-modal > div { background:#1e1e1e !important; color:#e0e0e0 !important; }
+  [light-mode="dark"] #phapcu-modal button { color:#ffd27f !important; }
+  [light-mode="dark"] #phapcu-content a { color:#ffd27f !important; }
 }  
 </style>
 <!-- Lịch Uposatha Theravāda -->
-<!-- Lịch Uposatha Theravāda -->
+
 <div class="w3-responsive bwcontainer4" style="margin-top:40px;">
   <h3 style="margin-right:40px; margin-bottom:16px; font-size:24px;">
     <svg viewBox="0 0 100 100" style="width: 0.8em; height: 0.8em; fill: none; stroke: currentColor; stroke-width: 4.5; display: inline-block; vertical-align: middle;">
@@ -555,17 +567,15 @@ button.today-btn svg {
   <div id="calendar"></div>
   <div class="legend" style="text-align:center; margin-top:12px;">
   
-      <button class="today-btn" title="Tháng sau" onclick="prevMonth()">◀</button>
+      <button class="toda-btn" title="Tháng sau" onclick="prevMonth()"><i class="fas fa-caret-left"></i></button>
 
 <button class="today-btn" onclick="goToday()">
-  Uposatha:
-  <!-- Light Mode -->
-  <svg class="moon-icon light" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="#fdfdfd" stroke="#fdfdfd" stroke-width="1"/></svg><svg class="moon-icon light" viewBox="0 0 24 24"><path d="M12 2a10 10 0 0 1 0 20V2z" fill="#6b5e4f"/><path d="M12 2a10 10 0 0 0 0 20V2z" fill="#fdfdfd"/><circle cx="12" cy="12" r="10" fill="none" stroke="#fdfdfd" stroke-width="1"/></svg><svg class="moon-icon light" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="#6b5e4f" stroke="#fdfdfd" stroke-width="1"/></svg><svg class="moon-icon light" viewBox="0 0 24 24"><path d="M12 2a10 10 0 0 1 0 20V2z" fill="#fdfdfd"/><path d="M12 2a10 10 0 0 0 0 20V2z" fill="#6b5e4f"/><circle cx="12" cy="12" r="10" fill="none" stroke="#fdfdfd" stroke-width="1"/></svg>
-
-  <!-- Dark Mode -->
-  <svg class="moon-icon dark" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="#ffd27f"/></svg><svg class="moon-icon dark" viewBox="0 0 24 24"><path d="M12 2a10 10 0 0 1 0 20V2z" fill="#222222"/><path d="M12 2a10 10 0 0 0 0 20V2z" fill="#ffd27f"/><circle cx="12" cy="12" r="10" fill="none" stroke="#ffd27f" stroke-width="2"/></svg><svg class="moon-icon dark" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="#222222" stroke="#ffd27f" stroke-width="2"/></svg><svg class="moon-icon dark" viewBox="0 0 24 24"><path d="M12 2a10 10 0 0 1 0 20V2z" fill="#ffd27f"/><path d="M12 2a10 10 0 0 0 0 20V2z" fill="#222222"/><circle cx="12" cy="12" r="10" fill="none" stroke="#ffd27f" stroke-width="2"/></svg>
-</button>
-      <button class="today-btn" title="Tháng trước" onclick="nextMonth()">▶</button>
+  Uposatha: 
+  <i class="wi wi-moon-alt-new"></i> 
+  <i class="wi wi-moon-alt-first-quarter"></i> 
+  <i class="wi wi-moon-alt-full"></i> 
+  <i class="wi wi-moon-alt-third-quarter"></i>
+</button>      <button class="toda-btn" title="Tháng trước" onclick="nextMonth()"><i class="fas fa-caret-right"></i></button>
 
 
 </div>
@@ -601,10 +611,10 @@ function generateCalendar(mm, yy) {
   const today = new Date();
 
   let table = "<table>";
-  table += "<tr><th colspan='7' style='text-align:center;'>"
-       + "<button class='nav-btn' onclick='prevMonth()'>◀ </button> "
+table += "<tr><th colspan='7' style='text-align:center;'>"
+       + "<button class='nav-btn' onclick='prevMonth()'><i class='fas fa-caret-left'></i></button> "
        + "" + mm + "/" + yy
-       + " <button class='nav-btn' onclick='nextMonth()'> ▶</button>"
+       + " <button class='nav-btn' onclick='nextMonth()'><i class='fas fa-caret-right'></i></button>"
        + "</th></tr>";
 
   table += "<tr><th>T2</th><th>T3</th><th>T4</th><th>T5</th><th>T6</th><th>T7</th><th>CN</th></tr>";
@@ -634,29 +644,34 @@ function generateCalendar(mm, yy) {
 const isEndOfLunarMonth = (lunar.day === 30) || (lunar.day === 29 && nextLunar.day === 1);
 const isUposatha = (lunar.day === 8) || (lunar.day === 15) || (lunar.day === 23) || isEndOfLunarMonth;
 
-let symbolClass = "";
+let iconHtml = ""; // Variable to hold the icon HTML
+
 if (isUposatha) {
   classes += "uposatha ";
-  if (lunar.day === 8) symbolClass = "moon first-quarter";
-  else if (lunar.day === 15) symbolClass = "moon full";
-  else if (lunar.day === 23) symbolClass = "moon last-quarter";
-  else symbolClass = "moon new";
+  if (lunar.day === 8) {
+     iconHtml = '<i class="wi wi-moon-alt-first-quarter"></i>';
+  } else if (lunar.day === 15) {
+     iconHtml = '<i class="wi wi-moon-alt-full"></i>';
+  } else if (lunar.day === 23) {
+     iconHtml = '<i class="wi wi-moon-alt-third-quarter"></i>';
+  } else {
+     iconHtml = '<i class="wi wi-moon-alt-new"></i>';
+  }
 }
 
 if (date === today.getDate() && mm === (today.getMonth() + 1) && yy === today.getFullYear()) {
   classes += "today ";
 }
+
 let lunarText = lunar.day;
 if (lunar.day === 1) {
   lunarText += "/" + lunar.month;
 }
 
-let displayText = date + "<span class='lunar " + symbolClass + "'>" + lunarText + "</span>";
+// Combine: Date number + Lunar container (Lunar Text + Moon Icon)
+let displayText = date + "<span class='lunar'>" + lunarText + " " + iconHtml + "</span>";
 
-
-
-
-        table += "<td class='cell " + classes + "'>" + displayText + "</td>";
+table += "<td class='cell " + classes + "'>" + displayText + "</td>";
 
         date++;
       }
