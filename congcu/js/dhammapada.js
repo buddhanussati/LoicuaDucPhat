@@ -1,5 +1,5 @@
-const DHAMMAPADA = [
-    {t:"\"Intention shapes experiences;<br> intention is first, they’re made by intention.<br> If with corrupt intent<br> you speak or act,<br> suffering follows you,<br> like a wheel, the ox’s foot.\""},
+ const DHAMMAPADA = [
+ {t:"\"Intention shapes experiences;<br> intention is first, they’re made by intention.<br> If with corrupt intent<br> you speak or act,<br> suffering follows you,<br> like a wheel, the ox’s foot.\""},
  {t:"\"Intention shapes experiences;<br> intention is first, they’re made by intention.<br> If with pure intent<br> you speak or act,<br> happiness follows you<br> like a shadow that never leaves.\""},
  {t:"\"“They abused me, they hit me!<br> They beat me, they robbed me!”<br> For those who bear such a grudge,<br> hatred is never laid to rest.\""},
  {t:"\"“They abused me, they hit me!<br> They beat me, they robbed me!”<br> For those who bear no such grudge,<br> hatred is laid to rest.\""},
@@ -136,7 +136,9 @@ const DHAMMAPADA = [
  {t:"\"As a cowherd drives the cows<br> to pasture with the rod,<br> so too old age and death<br> drive life from living beings.\""},
  {t:"\"The fool does not understand<br> the evil that they do.<br> But because of those deeds, that simpleton<br> is tormented as if burnt by fire.\""},
  {t:"\"One who violently attacks<br> the peaceful and the innocent<br> swiftly falls<br> to one of ten bad states:\""},
- {t:"\"Or else their home<br> is consumed by fire.<br> When their body breaks up, that witless person<br> is reborn in hell.\""},
+  {t:"\"Harsh pain; loss;<br> the breakup of the body;<br> serious illness;<br> mental distress;\""},
+ {t:"\"Hazards from rulers;<br> vicious slander;<br> loss of kin;<br> destruction of wealth;\""},
+{t:"\"Or else their home<br> is consumed by fire.<br> When their body breaks up, that witless person<br> is reborn in hell.\""},
  {t:"\"Not nudity, nor matted hair, nor mud,<br> nor fasting, nor lying on bare ground,<br> nor wearing dust and dirt, or squatting on the heels,<br> will cleanse a mortal not free of doubt.\""},
  {t:"\"Dressed up they may be, but if they live well—<br> peaceful, tamed, committed to the spiritual path,<br> having laid aside violence towards all creatures—<br> they are a brahmin, an ascetic, a mendicant.\""},
  {t:"\"Can a person constrained by conscience<br> be found in the world?<br> Who shies away from blame,<br> like a fine horse from the whip?\""},
@@ -412,7 +414,6 @@ const DHAMMAPADA = [
  {t:"\"Pure as the spotless moon,<br> clear and undisturbed,<br> they’ve ended relish for rebirth:<br> that’s who I declare a brahmin.\""},
  {t:"\"They’ve got past this grueling swamp<br> of delusion, transmigration.<br> Meditating in stillness, free of indecision,<br> they have crossed over to the far shore.<br> They’re quenched by not grasping:<br> that’s who I declare a brahmin.\""},
  {t:"\"They’ve given up sensual stimulations,<br> and have gone forth from lay life;<br> they’ve ended rebirth in the sensual realm:<br> that’s who I declare a brahmin.\""},
- {t:"\"They’ve given up craving,<br> and have gone forth from lay life;<br> they’ve ended craving to be reborn:<br> that’s who I declare a brahmin.\""},
  {t:"\"They’ve given up craving,<br> and have gone forth from lay life;<br> they’ve ended craving to be reborn:<br> that’s who I declare a brahmin.\""},
  {t:"\"They’ve thrown off the human yoke,<br> and slipped out of the heavenly yoke;<br> unyoked from all yokes:<br> that’s who I declare a brahmin.\""},
  {t:"\"Giving up desire and discontent,<br> they’re cooled and free of attachments;<br> a hero, master of the whole world:<br> that’s who I declare a brahmin.\""},

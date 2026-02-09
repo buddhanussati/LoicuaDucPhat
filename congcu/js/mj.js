@@ -5899,7 +5899,9 @@ dbHelper.deleteLog(parseInt(logId)).then(() => {
                     xp: this.data.xp,
                     streak: this.data.streak,
                     achievements: this.data.achievements,
-                    medSettings: this.data.medSettings
+                    medSettings: this.data.medSettings,
+					activeBadge: this.data.activeBadge,
+                    courseProgress: this.data.courseProgress
                 }).catch(e => console.log("Meta save update")); 
 
                 // 3. Update UI
