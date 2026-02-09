@@ -1,5 +1,4 @@
     /* Popup styling (Z-Index Fixed) */
-    /* Popup styling (Z-Index Fixed) */
     span.meaning {
         display: block;
         position: absolute;
@@ -95,7 +94,7 @@
     position: -webkit-sticky; /* For Safari */
     position: sticky;
     top: 0;
-    z-index: 1050; /* Keeps it above the scrolling text */
+    z-index: 2050; /* Keeps it above the scrolling text */
 
     /* Visuals: Background is required so text hides behind it */
     background-color: var(--bg-color);
@@ -719,14 +718,14 @@ gap: 3px; /* Tighter gap for the rightmost controls */
 .simple-modal-header h3 {
     margin: 0;
     color: var(--primary-color);
-    font-size: 20px;
+    font-size: 18px;
 }
 
 /* The X Close Icon */
 .btn-close-simple {
     background: none;
     border: none;
-    font-size: 24px;
+    font-size: 16px;
     color: var(--text-color);
     cursor: pointer;
     padding: 0;
@@ -785,22 +784,45 @@ gap: 3px; /* Tighter gap for the rightmost controls */
     animation: fadeIn 0.3s;
 }
 
+/* --- UPDATED HELP MODAL STYLES --- */
+
 .help-modal-content {
-    background-color: var(--box-bg); /* Keeps your original background color */
-    background-image: url('../images/imgbk.png'); /* Keeps your paper texture */
+    background-color: var(--box-bg);
+    background-image: url('../images/imgbk.png');
     color: var(--text-color);
     border: 1px solid var(--box-border);
     border-radius: 8px;
-    padding: 20px;
     width: 90%;
-    max-width: 800px; /* Match your container max-width */
-    max-height: 90vh; /* Prevents it from being taller than screen */
-    overflow-y: auto; /* Allows scrolling inside the modal */
+    max-width: 800px;
+    max-height: 90vh; /* Limits the height of the whole modal */
+    
+    /* FLEXBOX MAGIC: This makes the header stay and body scroll */
+    display: flex;
+    flex-direction: column; 
+    overflow: hidden; /* Prevents double scrollbars */
+    padding: 0; /* Padding is now moved inside header/body */
+    
     position: relative;
     box-shadow: 0 10px 25px rgba(0,0,0,0.5);
     line-height: 1.6;
 }
 
+/* New: Sticky Header Container */
+.help-modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* Pushes Title to left, X to right */
+    padding: 15px 20px;
+    border-bottom: 1px solid var(--box-border);
+    background-color: rgba(255, 255, 255, 0.1); /* Slight highlight */
+    flex-shrink: 0; /* Prevents header from shrinking */
+}
+
+/* Ensure title doesn't have extra margins messing up alignment */
+.help-modal-header h3 {
+    margin: 0; 
+    font-size: 18px;
+}
 .help-modal-content a {
         /* Đặt màu liên kết cố định */
         color: #007bff; /* Màu xanh dương sáng */
@@ -817,30 +839,36 @@ gap: 3px; /* Tighter gap for the rightmost controls */
     .help-modal-content a:hover {
         color: var(--highlight-color); /* Sử dụng màu nổi bật đã có của bạn */
     }
-/* The X Close Button */
+/* The X Close Button - Updated */
 .btn-close-help {
-    position: absolute;
-    top: 15px;
-    right: 20px;
+    /* No longer absolute position! It is now part of the flex header */
     color: var(--text-color);
     font-size: 24px;
-    font-weight: bold;
     cursor: pointer;
     background: none;
     border: none;
     transition: color 0.2s;
     line-height: 1;
-    z-index: 10;
+    padding: 0;
+    margin-left: 15px;
 }
 
 .btn-close-help:hover {
     color: var(--highlight-color);
 }
 
-/* Dark mode adjustment specific to help modal */
-[data-theme="dark"] .help-modal-content {
-    background-color: #2d2d2d;
-    border-color: #555;
+/* New: Scrollable Body Container */
+.help-modal-body {
+    padding: 20px;
+	padding-top: 5px;
+    overflow-y: auto; /* Scroll only this part */
+    flex-grow: 1; /* Takes up remaining space */
+}
+
+/* Dark mode adjustment (Ensure header border matches) */
+[data-theme="dark"] .help-modal-header {
+    border-bottom-color: #555;
+    background-color: rgba(0, 0, 0, 0.2);
 }
 
 .btn-bottom-close {
@@ -868,6 +896,6 @@ gap: 3px; /* Tighter gap for the rightmost controls */
 }
 
 .btn-close-help i {
-    font-size: 1.2rem;
+    font-size: 1rem;
     pointer-events: none; /* This is an alternative fix that makes clicks "pass through" the icon to the button */
 }
