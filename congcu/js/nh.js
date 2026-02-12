@@ -106,7 +106,7 @@ const COURSES = [
                         Một chu kỳ hơi thở vào ra của một người ở trạng thái bình thường là từ 4 đến 6 giây. Ngưỡng mất tập trung thường lấy khoảng này + thêm khoảng 2-3 giây, ứng dụng đặt mặc định là 9 giây, bạn có thể chỉnh lại tuỳ theo ý muốn.
                     </p>
 					</ul>
-					<p><strong>Thực hành: Bước 1, để tránh phóng tâm, bạn hãy đếm thầm:</strong></p><ul><li>Hít vào, thở ra, đếm "Một".</li><li>Hít vào, thở ra, đếm "Hai".</li><li>Tiếp tục đến "Mười" rồi quay lại "Một".</li></ul><p>Nếu bị quên hoặc nhầm lẫn, hãy nhẹ nhàng quay lại đếm từ "Một".</p> <p><strong>Bước 2, bạn hãy phối hợp việc đếm thầm với việc ghi nhận trên ứng dụng.</strong></p><ul><li><strong>Chạm:</strong> Mỗi khi thở ra và đếm xong một số, hãy chạm nhẹ vào màn hình.</li><li><strong>Mục tiêu:</strong> Duy trì sự ghi nhận liên tục không gián đoạn.</li></ul><p><em>Để hoàn thành bài học này, hãy thực hành một phiên ngắn 5 phút.</em></p>`,
+					<p><strong>Thực hành: Bước 1, để tránh phóng tâm, bạn hãy đếm thầm:</strong></p><ul><li>Hít vào, thở ra, đếm "Một".</li><li>Hít vào, thở ra, đếm "Hai".</li><li>Tiếp tục đến "Mười" rồi quay lại "Một".</li></ul><p>Nếu bị quên hoặc nhầm lẫn, hãy nhẹ nhàng quay lại đếm từ "Một".</p> <p><strong>Bước 2, bạn hãy phối hợp việc đếm thầm với việc ghi nhận trên ứng dụng.</strong></p><ul><li><strong>Chạm:</strong> Mỗi khi thở ra và đếm xong một số, hãy chạm nhẹ vào màn hình.</li><li><strong>Mục tiêu:</strong> Duy trì sự ghi nhận liên tục không gián đoạn.</li></ul><p><em>Để hoàn thành bài học này, hãy thực hành một thời ngắn 5 phút.</em></p>`,
                 practiceParams: { duration: 5 }
             },
             {
@@ -148,7 +148,7 @@ const COURSES = [
         </ol>
 
         <p style="border-top: 1px solid var(--border); padding-top: 10px; font-size: 13px;">
-            <strong>Yêu cầu hoàn thành:</strong> Thực hiện phiên thiền tối thiểu 10 phút, ghi nhận ít nhất 20 Chánh niệm, 5 Tỉnh giác và bắt buộc phải bật Chế độ Xác nhận trong suốt phiên tập.
+            <strong>Yêu cầu hoàn thành:</strong> Thực hiện thời thiền tối thiểu 10 phút, ghi nhận ít nhất 20 Chánh niệm, 5 Tỉnh giác và bắt buộc phải bật Chế độ Xác nhận trong suốt phiên tập.
         </p>
     `,
     practiceParams: { 
@@ -3564,6 +3564,7 @@ closeInspect(goalId) {
            renderSessions(goalId) {
     const container = document.getElementById(`sessions-${goalId}`);
     if (!container) return;
+    container.innerHTML = '';
 
     // Lấy thông tin mục tiêu để kiểm tra loại
     const goal = this.data.goals.find(g => g.id === goalId);
@@ -3636,7 +3637,7 @@ closeInspect(goalId) {
         btn.style.fontSize = '12px';
         
         // Updated Text: Shows clearly we are loading the next batch, not everything
-        btn.innerHTML = `<i class="fas fa-chevron-down"></i> Tải thêm (${nextBatch} phiên)`;
+        btn.innerHTML = `<i class="fas fa-chevron-down"></i> Tải thêm (${nextBatch} thời thiền)`;
         
         btn.onclick = () => this.loadMoreSessions(goalId, isMeditation);
         
@@ -3744,7 +3745,7 @@ renderProChart(ctx, log) {
     this.charts.session = new Chart(ctx, {
         type: 'bar',
         data: {
-            labels: ['Phân bổ phiên thiền'],
+            labels: ['Phân bổ thời thiền'],
             datasets: [
                 // Only show Pro levels if Pro data exists, otherwise show Basic
                

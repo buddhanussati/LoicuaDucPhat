@@ -3625,6 +3625,7 @@ closeInspect(goalId) {
            renderSessions(goalId) {
     const container = document.getElementById(`sessions-${goalId}`);
     if (!container) return;
+    container.innerHTML = '';
 
     // Lấy thông tin mục tiêu để kiểm tra loại
     const goal = this.data.goals.find(g => g.id === goalId);
