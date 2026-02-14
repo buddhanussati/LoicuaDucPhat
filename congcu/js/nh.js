@@ -5767,7 +5767,7 @@ openSessionModal(goalId, minutes = 0, logId = null, startTime = Date.now()) {
 const minLabel = document.getElementById('s-minutes-label');
 if (minLabel) {
     if (goal && goal.type === 'standard' && goal.unit === 'count') {
-        minLabel.innerText = 'Số Điểm';
+        minLabel.innerText = 'Số lượng (Điểm)';
     } else {
         minLabel.innerText = 'Thời lượng (Phút)';
     }
