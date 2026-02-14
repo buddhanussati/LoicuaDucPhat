@@ -115,10 +115,13 @@
         <section id="view-reports" class="view-section">
     <div style="display: flex; justify-content: center; gap: 15px; margin-bottom: 25px;">
         <button class="btn" id="btn-rep-time" onclick="app.setReportMode('time')">
-            <i class="fas fa-clock"></i> Thời gian
+            <i class="fas fa-clock"></i> 
         </button>
         <button class="btn btn-secondary" id="btn-rep-mind" onclick="app.setReportMode('mindfulness')">
-            <i class="fas fa-spa"></i> Chánh niệm
+            <i class="fas fa-spa"></i>
+        </button>
+        <button class="btn btn-secondary" id="btn-rep-count" onclick="app.setReportMode('count')">
+            <i class="fas fa-layer-group"></i> 
         </button>
     </div>
 
@@ -391,13 +394,13 @@
             <div class="choice-btn-container">
                 <div class="choice-card" onclick="app.openModal(null, 'meditation')">
                     <i class="fas fa-spa" style="color: var(--zen);"></i>
-                    <h3>Thiền Định</h3>
+                    <h3>Thiền</h3>
                     <p style="font-size:12px; color:var(--text-light); margin-top:5px;">Theo dõi chánh niệm</p>
                 </div>
                 <div class="choice-card" onclick="app.openModal(null, 'standard')">
                     <i class="fas fa-tasks" style="color: var(--primary);"></i>
-                    <h3>Công Việc</h3>
-                    <p style="font-size:12px; color:var(--text-light); margin-top:5px;">Theo dõi tiến độ</p>
+                    <h3>Tu Tập</h3>
+                    <p style="font-size:12px; color:var(--text-light); margin-top:5px;">Theo dõi tiến trình</p>
                 </div>
             </div>
             <button class="btn btn-secondary" style="width:100%; margin-top:20px;" onclick="app.closeChoiceModal()">Hủy</button>
@@ -415,7 +418,13 @@
                     <label>Tên mục tiêu</label>
                     <input type="text" id="g-name" class="form-control" required>
                 </div>
-                
+                <div class="form-group" id="g-unit-group" style="display: none;">
+    <label>Đơn vị đo lường</label>
+    <select id="g-unit" class="form-control" onchange="app.updateGoalHints()">
+        <option value="time">Thời gian (Phút)</option>
+        <option value="count">Số đếm (Điểm)</option>
+    </select>
+</div>
                 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
                     <div class="form-group">
                         <label>Danh mục</label>
@@ -496,10 +505,11 @@
                     <input type="datetime-local" id="s-date" class="form-control" required />
                 </div>
                 
-                <div class="form-group">
-                    <label>Thời lượng (Phút)</label>
-                    <input type="number" id="s-minutes" class="form-control" required min="1" />
-                </div>
+                
+				<div class="form-group">
+    <label id="s-minutes-label">Thời lượng (Phút)</label>
+    <input type="number" id="s-minutes" class="form-control" required min="1" />
+</div>
                 <div class="form-group" id="s-mindfulness-group" style="display:none; background: rgba(167, 139, 250, 0.1); padding: 10px; border-radius: 8px; border: 1px solid rgba(167, 139, 250, 0.3);">
     <label style="color: var(--zen);">Số lần chánh niệm</label>
     <input type="number" id="s-mindfulness" class="form-control" min="0" value="0" />
@@ -557,7 +567,7 @@
             </div>
 			<div class="form-group" style="background: rgba(255,255,255,0.05); padding: 12px; border-radius: 8px; margin: 15px 0;">
             <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:5px;">
-                <label style="margin:0; font-size: 13px;"><i class="fas fa-percentage"></i> Số lần thực tế:</label>
+                <label style="margin:0; font-size: 13px;"><i class="fas fa-percentage"></i> Số ghi nhận thực tế:</label>
                 <span id="med-efficiency-disp" style="font-weight:bold; color:var(--zen); font-size: 14px;">100%</span>
             </div>
             <input type="range" id="med-efficiency-slider" class="form-control" 
@@ -631,10 +641,13 @@
         
         <div style="display: flex; justify-content: center; gap: 10px; margin-bottom: 15px;">
             <button class="btn" id="btn-modal-time" style="padding: 5px 15px; font-size: 12px;" onclick="app.switchDayChart('time')">
-                <i class="fas fa-clock"></i> Thời gian
+                <i class="fas fa-clock"></i> 
             </button>
             <button class="btn btn-secondary" id="btn-modal-mind" style="padding: 5px 15px; font-size: 12px;" onclick="app.switchDayChart('mindfulness')">
-                <i class="fas fa-spa"></i> Chánh niệm
+                <i class="fas fa-spa"></i> 
+            </button>
+			<button class="btn btn-secondary" id="btn-modal-count" style="padding: 5px 15px; font-size: 12px;" onclick="app.switchDayChart('count')">
+                <i class="fas fa-layer-group"></i> 
             </button>
         </div>
 
@@ -642,7 +655,7 @@
             <canvas id="dayBreakdownChart"></canvas>
         </div>
 
-        <h3 style="font-size: 14px; color: var(--text-light); border-bottom: 1px solid var(--border); padding-bottom: 5px; margin-bottom: 10px;">Nhật ký hoạt động</h3>
+        <h3 style="font-size: 14px; color: var(--text-light); border-bottom: 1px solid var(--border); padding-bottom: 5px; margin-bottom: 10px;">Nhật ký tu tập</h3>
         <div id="day-session-list" style="max-height: 150px; overflow-y: auto;"></div>
         
         <div style="display: flex; justify-content: flex-end; margin-top: 20px; border-top: 1px solid var(--border); padding-top: 15px;">
@@ -739,10 +752,10 @@
                 <li><strong>Hai loại mục tiêu chính:</strong>
                     <ul>
                         <li><strong>ॐ Thiền Định:</strong> Theo dõi thời gian ngồi thiền và đếm số lần ghi nhận chánh niệm.</li>
-                        <li><strong>⚡ Công Việc:</strong> Đồng hồ đếm ngược truyền thống dùng cho công việc, học tập (Pomodoro) hoặc các thói quen khác.</li>
+                        <li><strong>⚡ Tu Tập:</strong> Đồng hồ đếm ngược truyền thống dùng cho công việc, học tập hoặc các bài thực hành khác.</li>
                     </ul>
                 </li>
-                <li><strong>Tùy biến:</strong> Tự đặt mục tiêu hằng ngày (số phút), thời gian cần dành để hoàn thành mục tiêu, màu sắc đại diện và danh mục quản lý.</li>
+                <li><strong>Tùy biến:</strong> Tự đặt mục tiêu hằng ngày, thời gian cần dành để hoàn thành mục tiêu, màu sắc đại diện và danh mục quản lý.</li>
             </ul>
 
             <h4 style="color: var(--primary); margin-top: 15px;">2. Cấu hình Tương Tác</h4>

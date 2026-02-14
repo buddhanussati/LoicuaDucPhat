@@ -108,10 +108,13 @@
         <section id="view-reports" class="view-section">
     <div style="display: flex; justify-content: center; gap: 15px; margin-bottom: 25px;">
         <button class="btn" id="btn-rep-time" onclick="app.setReportMode('time')">
-            <i class="fas fa-clock"></i> Time
+            <i class="fas fa-clock"></i> 
         </button>
         <button class="btn btn-secondary" id="btn-rep-mind" onclick="app.setReportMode('mindfulness')">
-            <i class="fas fa-spa"></i> Mindfulness
+            <i class="fas fa-spa"></i> 
+        </button>
+		 <button class="btn btn-secondary" id="btn-rep-count" onclick="app.setReportMode('count')">
+            <i class="fas fa-layer-group"></i> 
         </button>
     </div>
 
@@ -383,7 +386,7 @@
                 </div>
                 <div class="choice-card" onclick="app.openModal(null, 'standard')">
                     <i class="fas fa-tasks" style="color: var(--primary);"></i>
-                    <h3>Activity</h3>
+                    <h3>Cultivate</h3>
                     <p style="font-size:12px; color:var(--text-light); margin-top:5px;">Track Progress</p>
                 </div>
             </div>
@@ -402,7 +405,13 @@
                     <label>Goal Name</label>
                     <input type="text" id="g-name" class="form-control" required>
                 </div>
-                
+                <div class="form-group" id="g-unit-group" style="display: none;">
+    <label>Measurement Unit</label>
+    <select id="g-unit" class="form-control" onchange="app.updateGoalHints()">
+        <option value="time">Duration (Minutes)</option>
+        <option value="count">Counting (Points)</option>
+    </select>
+</div>
                 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
                     <div class="form-group">
                         <label>Category</label>
@@ -484,9 +493,9 @@
                 </div>
                 
                 <div class="form-group">
-                    <label>Duration (Minutes)</label>
-                    <input type="number" id="s-minutes" class="form-control" required min="1" />
-                </div>
+    <label id="s-minutes-label">Duration (Minutes)</label>
+    <input type="number" id="s-minutes" class="form-control" required min="1" />
+</div>
 <div class="form-group" id="s-mindfulness-group" style="display:none; background: rgba(167, 139, 250, 0.1); padding: 10px; border-radius: 8px; border: 1px solid rgba(167, 139, 250, 0.3);">
     <label style="color: var(--zen);">Mindfulness (Count)</label>
     <input type="number" id="s-mindfulness" class="form-control" min="0" value="0" />
@@ -613,10 +622,13 @@
         
         <div style="display: flex; justify-content: center; gap: 10px; margin-bottom: 15px;">
             <button class="btn" id="btn-modal-time" style="padding: 5px 15px; font-size: 12px;" onclick="app.switchDayChart('time')">
-                <i class="fas fa-clock"></i> Time
+                <i class="fas fa-clock"></i> 
             </button>
             <button class="btn btn-secondary" id="btn-modal-mind" style="padding: 5px 15px; font-size: 12px;" onclick="app.switchDayChart('mindfulness')">
-                <i class="fas fa-spa"></i> Mindfulness
+                <i class="fas fa-spa"></i> 
+            </button>
+			<button class="btn btn-secondary" id="btn-modal-count" style="padding: 5px 15px; font-size: 12px;" onclick="app.switchDayChart('count')">
+                <i class="fas fa-layer-group"></i> 
             </button>
         </div>
 
@@ -719,10 +731,10 @@
                 <li><strong>Two main types of goals:</strong>
                     <ul>
                         <li><strong>ॐ Meditation:</strong> Tracks meditation duration and counts mindfulness recognitions.</li>
-                        <li><strong>⚡ Work:</strong> A traditional countdown timer used for work, study (similar to Pomodoro), or other habits.</li>
+                        <li><strong>⚡ Cultivation:</strong> A traditional countdown timer used for work, study, or other practice.</li>
                     </ul>
                 </li>
-                <li><strong>Customization:</strong> Set daily goals (minutes), target completion time, representative colors, and management categories.</li>
+                <li><strong>Customization:</strong> Set daily goals, target completion time, representative colors, and management categories.</li>
             </ul>
             <h4 style="color: var(--primary); margin-top: 15px;">2. Interaction Settings</h4>
 <p>In the meditation interface, tap the <i class="fas fa-cog"></i> button to open interaction settings. The app supports haptic feedback vibration and helps you record two mental states simultaneously with 4 levels of mindfulness intensity.</p>
