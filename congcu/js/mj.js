@@ -2497,7 +2497,7 @@ get totalMindfulnessCounts() {
                 }
             }
 
-            saveGoal(e) {
+           saveGoal(e) {
                 e.preventDefault();
                 const id = document.getElementById('g-id').value;
                 const type = document.getElementById('g-type').value || 'standard';
@@ -2506,18 +2506,21 @@ get totalMindfulnessCounts() {
                 const color = document.getElementById('g-color').value;
                 const lifetimeTarget = parseInt(document.getElementById('g-lifetime-target').value);
                 const dailyTarget = parseInt(document.getElementById('g-daily-target').value);
+				const unit = document.getElementById('g-unit').value || 'time';
 
                 if (id) {
                     const goal = this.data.goals.find(g => g.id === id);
                     if (goal) {
                         goal.name = name; goal.category = category; goal.color = color;
                         goal.lifetimeTargetMinutes = lifetimeTarget; goal.dailyTargetMinutes = dailyTarget;
+						goal.unit = unit;
 						goal.lastUpdated = Date.now();
                         this.showToast('Goal Updated!');
                     }
                 } else {
                     const newGoal = {
                         id: Date.now().toString(), type, name, category, color,
+						unit: unit,
                         lifetimeTargetMinutes: lifetimeTarget, dailyTargetMinutes: dailyTarget || 0,
 						dailySessionTarget: 8,
 						lastUpdated: Date.now(),
@@ -3106,7 +3109,7 @@ setDailySessionTarget(id) {
 
     // --- PROMPT 2: Daily Target Amount (Minutes or Mindfulness Count) ---
     const isMeditation = goal.type === 'meditation';
-    const unitLabel = isMeditation ? 'mindfulness' : 'minutes';
+    const unitLabel = isMeditation ? 'mindfulness' : (goal.unit === 'count' ? 'points' : 'minutes');
     const currentTarget = goal.dailyTargetMinutes || 100;
 
     const inputTarget = prompt(`(2/2) Set daily ${unitLabel} goal:`, currentTarget);
@@ -3394,7 +3397,7 @@ calculateConsistencyScore(goal) {
 
         // CASE 3: Standard Goal Card (In Progress)
         // ... (Your existing card logic variables) ...
-        const unitLabel = isMeditation ? 'mindfulness' : 'mins';
+        const unitLabel = isMeditation ? 'mindfulness' : (goal.unit === 'count' ? 'points' : 'minutes');
         const overallPct = goal.lifetimeTargetMinutes > 0 ? Math.min((goal[targetProp] / goal.lifetimeTargetMinutes) * 100, 100) : 0;
         
         // Calculate Today's Values
@@ -3487,13 +3490,26 @@ calculateConsistencyScore(goal) {
             
             controlsHtml = `
                  <div class="timer-controls">
-                    <div style="font-size: 14px; color: var(--text-light); text-transform: uppercase;">${isCertGoal ? 'Meditation' : 'Meditation'}</div>
+                    <div style="font-size: 14px; color: var(--text-light); text-transform: uppercase;">${isCertGoal ? 'Meditate' : 'Meditate'}</div>
                     <div style="display:flex; gap: 10px;">
                         <button class="btn-icon btn-play" style="background: var(--zen); color: white;" onclick="app.toggleTimer('${goal.id}')" title="Start Meditate"><i class="fas fa-om"></i></button>
                         ${manualBtn}
                     </div>
                 </div>`;
         } else {
+    if (goal.unit === 'count') {
+        // Giao diện nếu là đếm Số Lần
+        sessionSectionHtml = `
+            <div class="section-label">Practice</div>
+            <div style="font-size:12px; color:var(--text-light); margin-bottom: 5px;">Manual entry via the (+) button</div>`;
+        controlsHtml = `
+            <div class="timer-controls">
+                <div style="font-size: 14px; color: var(--text-light); text-transform: uppercase;">Cultivate</div>
+                <div style="display:flex; gap: 10px;">
+                    <button class="btn-icon" style="background:var(--warning); color:#000;" onclick="app.openSessionModal('${goal.id}')"><i class="fas fa-plus"></i></button>
+                </div>
+            </div>`;
+    } else {
             sessionSectionHtml = `
                 <div class="section-label">Current Session</div>
                 <div class="progress-container"><div id="bar-session-${goal.id}" class="progress-bar" style="background:var(--success); width:0%;"></div></div>
@@ -3506,7 +3522,8 @@ calculateConsistencyScore(goal) {
                         <button class="btn-icon" style="background:var(--warning); color:#000;" onclick="app.openSessionModal('${goal.id}')"><i class="fas fa-plus"></i></button>
                     </div>
                 </div>`;
-        }
+         }
+}
 		const headerButtons = isCertGoal 
             ? `<span style="font-size:10px; background:var(--warning); color:#000; padding:2px 6px; border-radius:4px; font-weight:bold;">CERTIFICATE</span>`
             : `
@@ -3657,7 +3674,7 @@ closeInspect(goalId) {
         sLi.className = 'session-item';
         
         const notesDisplay = log.notes ? `<span class="session-notes">"${log.notes}"</span>` : '';
-
+const unitText = (!isMeditation && goal && goal.unit === 'count') ? 'points' : 'minutes';
         let actionButtons = '<div style="display:flex; gap:5px;">';
 
                     if (isMeditation && log.touches && log.touches.length > 0) {
@@ -3673,7 +3690,7 @@ closeInspect(goalId) {
 
                     sLi.innerHTML = `
                         <div class="session-content">
-                            <span class="session-date">${this.toDisplayDate(log.timestamp)}</span>: ${log.minutes} minutes 
+                            <span class="session-date">${this.toDisplayDate(log.timestamp)}</span>: ${log.minutes} ${unitText} 
                             ${notesDisplay}
                         </div>
                         ${actionButtons}
@@ -4138,47 +4155,75 @@ fallbackCopyText(text) {
             openChoiceModal() { document.getElementById('choice-modal').style.display = 'flex'; }
             closeChoiceModal() { document.getElementById('choice-modal').style.display = 'none'; }
 
+updateGoalHints() {
+    const type = document.getElementById('g-type').value;
+    const unit = document.getElementById('g-unit').value;
+    const dailyHint = document.getElementById('g-daily-hint');
+    const lifeHint = document.getElementById('g-life-hint');
+    
+    if (type === 'meditation') {
+        dailyHint.innerText = "mindfulness";
+        lifeHint.innerText = "mindfulness";
+    } else {
+        if (unit === 'count') {
+            dailyHint.innerText = "points per day";
+            lifeHint.innerText = "total points";
+        } else {
+            dailyHint.innerText = "minutes per day";
+            lifeHint.innerText = "total minutes";
+        }
+    }
+}
             openModal(goalId = null, type = 'standard') { 
-                this.closeChoiceModal(); 
-                const modal = document.getElementById('goal-modal');
-                const title = document.getElementById('modal-title');
-                const btn = document.getElementById('btn-save-goal');
-                const catSelect = document.getElementById('g-cat');
-                catSelect.innerHTML = '';
-                const cats = type === 'meditation' ? ['Sitting', 'Walking', 'Mindfulness of Breath', 'Contemplation', 'Bhavana'] : ['Work', 'Study', 'Health', 'Creative', 'Merit', 'Other'];
-                cats.forEach(c => { const opt = document.createElement('option'); opt.value = c; opt.innerText = c; catSelect.appendChild(opt); });
+    this.closeChoiceModal(); 
+    const modal = document.getElementById('goal-modal');
+    const title = document.getElementById('modal-title');
+    const btn = document.getElementById('btn-save-goal');
+    const catSelect = document.getElementById('g-cat');
+    catSelect.innerHTML = '';
+   const cats = type === 'meditation' ? ['Sitting', 'Walking', 'Mindfulness of Breath', 'Contemplation', 'Cultivation'] : ['Discipline', 'Cultivate', 'Work', 'Study', 'Health', 'Creative', 'Merit', 'Other'];
+    cats.forEach(c => { const opt = document.createElement('option'); opt.value = c; opt.innerText = c; catSelect.appendChild(opt); });
 
-                const dailyHint = document.getElementById('g-daily-hint');
-                const lifeHint = document.getElementById('g-life-hint');
-                if (type === 'meditation') { dailyHint.innerText = "Mindfulness per day"; lifeHint.innerText = "Mindfulness"; } 
-                else { dailyHint.innerText = "Mins per day"; lifeHint.innerText = "Minutes"; }
-                document.getElementById('g-type').value = type;
-if (goalId) {
-                    const goal = this.data.goals.find(g => g.id === goalId);
-					if (goal && goal.isCertification) {
+    document.getElementById('g-type').value = type;
+
+    // HIỂN THỊ/ẨN CHỌN ĐƠN VỊ
+    const unitGroup = document.getElementById('g-unit-group');
+    if (type === 'meditation') {
+        unitGroup.style.display = 'none';
+    } else {
+        unitGroup.style.display = 'block';
+    }
+
+    if (goalId) {
+        const goal = this.data.goals.find(g => g.id === goalId);
+        if (goal && goal.isCertification) {
             alert("Certificate goal parameters cannot be edited.");
             return;
         }
-                    if (goalId) {
-                        document.getElementById('g-id').value = goal.id;
-                        document.getElementById('g-name').value = goal.name;
-                        document.getElementById('g-cat').value = goal.category;
-                        document.getElementById('g-color').value = goal.color;
-                        document.getElementById('g-lifetime-target').value = goal.lifetimeTargetMinutes;
-                        document.getElementById('g-daily-target').value = goal.dailyTargetMinutes;
-                        document.getElementById('g-type').value = goal.type || 'standard';
-                        title.innerText = 'Edit Goal'; btn.innerText = 'Save';
-                    }
-                } else {
-                    document.getElementById('g-id').value = '';
-                    document.getElementById('g-name').value = '';
-                    document.getElementById('g-color').value = type === 'meditation' ? '#a78bfa' : '#818cf8';
-                    document.getElementById('g-lifetime-target').value = 1000;
-                    document.getElementById('g-daily-target').value = 100;
-                    title.innerText = type === 'meditation' ? 'New Meditation Goal' : 'New Activity Goal'; btn.innerText = 'Create';
-                }
-                modal.style.display = 'flex'; 
-            }
+        if (goalId) {
+            document.getElementById('g-id').value = goal.id;
+            document.getElementById('g-name').value = goal.name;
+            document.getElementById('g-cat').value = goal.category;
+            document.getElementById('g-color').value = goal.color;
+            document.getElementById('g-lifetime-target').value = goal.lifetimeTargetMinutes;
+            document.getElementById('g-daily-target').value = goal.dailyTargetMinutes;
+            document.getElementById('g-type').value = goal.type || 'standard';
+            document.getElementById('g-unit').value = goal.unit || 'time'; // Tải unit
+            title.innerText = 'Edit Goal'; btn.innerText = 'Save';
+        }
+    } else {
+        document.getElementById('g-id').value = '';
+        document.getElementById('g-name').value = '';
+        document.getElementById('g-color').value = type === 'meditation' ? '#a78bfa' : '#818cf8';
+        document.getElementById('g-lifetime-target').value = 1000;
+        document.getElementById('g-daily-target').value = 100;
+        document.getElementById('g-unit').value = 'time'; // Mặc định
+        title.innerText = type === 'meditation' ? 'New Goal' : 'New Goal'; btn.innerText = 'Create';
+    }
+    
+    this.updateGoalHints(); // Cập nhật chữ
+    modal.style.display = 'flex'; 
+}
             closeModal() { document.getElementById('goal-modal').style.display = 'none'; }
             
                         renderCalendar() {
@@ -4259,13 +4304,18 @@ switchDayChart(mode) {
 
     const btnTime = document.getElementById('btn-modal-time');
     const btnMind = document.getElementById('btn-modal-mind');
+    const btnCount = document.getElementById('btn-modal-count');
     
-    if (mode === 'time') {
+    if (btnTime) btnTime.className = 'btn btn-secondary';
+    if (btnMind) btnMind.className = 'btn btn-secondary';
+    if (btnCount) btnCount.className = 'btn btn-secondary';
+
+    if (mode === 'time' && btnTime) {
         btnTime.className = 'btn';
-        btnMind.className = 'btn btn-secondary';
-    } else {
-        btnTime.className = 'btn btn-secondary';
+    } else if (mode === 'mindfulness' && btnMind) {
         btnMind.className = 'btn';
+    } else if (mode === 'count' && btnCount) {
+        btnCount.className = 'btn';
     }
 
     if (this.currentViewDate) {
@@ -4288,20 +4338,21 @@ openDayStats(dateStr) {
     
     dayLogs.forEach(log => {
         const goal = this.data.goals.find(g => g.id === log.goalId);
+		const isMeditation = goal && goal.type === 'meditation'; // BỔ SUNG KHAI BÁO NÀY ĐỂ FIX LỖI
         const li = document.createElement('li');
         li.style.cssText = 'padding: 8px 0; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; font-size: 13px; align-items:center;';
 
         let graphBtnHtml = '';
-        if (goal && goal.type === 'meditation' && log.touches && log.touches.length > 0) {
+        if (isMeditation && log.touches && log.touches.length > 0) {
             graphBtnHtml = `<button class="btn-icon" style="background:transparent; color:var(--zen); height:24px; width:24px; margin-right:5px; cursor:pointer;" onclick="app.showSessionGraph('${log.timestamp}')"><i class="fas fa-chart-area" style="font-size:12px;"></i></button>`;
         }
 
         const satiCount = log.count !== undefined ? log.count : (log.touches ? log.touches.length : 0);
         const satiInfo = satiCount > 0 ? `<span style="color: var(--zen); font-size: 11px; margin-left: 5px; font-weight:bold;">(${satiCount} Mindfulness)</span>` : '';
-
+const unitText = (!isMeditation && goal && goal.unit === 'count') ? ' points' : 'm';
         const leftSide = `<div>
                            <span style="font-weight:600; color:${goal?goal.color:'#ccc'}">${goal?goal.name:'Deleted'}</span>
-                           <span style="margin-left:5px;">${log.minutes}m</span>
+                           <span style="margin-left:5px;">${log.minutes}${unitText}</span>
                            ${satiInfo}
                          </div>`;
         
@@ -4322,32 +4373,46 @@ openDayStats(dateStr) {
 
 renderDayChartOnly(dateStr) {
     const ctx = document.getElementById('dayBreakdownChart').getContext('2d');
-    const isMindfulness = this.dayChartMode === 'mindfulness';
-    const unitLabel = isMindfulness ? 'Mindfulness' : 'Minutes';
+    const mode = this.dayChartMode;
+    
+    let unitLabel = 'Minutes';
+    if (mode === 'mindfulness') unitLabel = 'Mindfulness';
+    else if (mode === 'count') unitLabel = 'points';
 
     const dayLogs = this.data.logs.filter(l => l.date === dateStr);
     const goalStats = {};
 
     dayLogs.forEach(log => {
-        if (isMindfulness) {
-             const val = log.count !== undefined ? log.count : (log.touches ? log.touches.length : 0);
-             if (val === 0) return;
+        const goal = this.data.goals.find(g => g.id === log.goalId);
+        
+        const isCountGoal = goal && goal.type !== 'meditation' && goal.unit === 'count';
+        const isMeditationGoal = goal && goal.type === 'meditation';
+        const isTimeGoal = goal && goal.type !== 'meditation' && goal.unit !== 'count';
+
+        let val = 0;
+        
+        // Phân loại dữ liệu theo Tab đang chọn
+        if (mode === 'mindfulness') {
+            if (!isMeditationGoal) return; 
+            val = log.count !== undefined ? log.count : (log.touches ? log.touches.length : 0);
+        } else if (mode === 'count') {
+            if (!isCountGoal) return;
+            val = log.minutes; // Với mục tiêu số lượng, dữ liệu nằm ở trường minutes
+        } else if (mode === 'time') {
+            if (!isTimeGoal && !isMeditationGoal) return; // Thiền cũng có thời gian
+            val = log.minutes;
         }
 
+        if (val === 0) return;
+
         if(!goalStats[log.goalId]) {
-            const goal = this.data.goals.find(g => g.id === log.goalId);
             goalStats[log.goalId] = { 
                 name: goal ? goal.name : 'Deleted', 
                 color: goal ? goal.color : '#ccc', 
                 value: 0 
             };
         }
-        
-        if (isMindfulness) {
-            goalStats[log.goalId].value += (log.count !== undefined ? log.count : (log.touches ? log.touches.length : 0));
-        } else {
-            goalStats[log.goalId].value += log.minutes;
-        }
+        goalStats[log.goalId].value += val;
     });
 
     if(this.charts.dayChart) this.charts.dayChart.destroy();
@@ -4358,7 +4423,6 @@ renderDayChartOnly(dateStr) {
         id: 'centerText',
         afterDatasetsDraw: function(chart) {
             const { ctx, chartArea: { top, bottom, left, right } } = chart;
-            
             ctx.save();
 
             let total = 0;
@@ -4368,49 +4432,51 @@ renderDayChartOnly(dateStr) {
             }
 
             let mainText = "";
-            if (!isMindfulness) {
-                // Hour/Minute logic
+			 let subText = "";
+            if (mode === 'time') {
                 if (total < 60) {
-                    mainText = total + "m";
+                    mainText = total;
+                    subText = "minutes";
                 } else {
-                    mainText = (total / 60).toFixed(1) + "h";
+                    mainText = (total / 60).toFixed(1);
+                    subText = "hours";
                 }
             } else {
                 mainText = total.toLocaleString(); 
-            }
+            } 
 
+		
+			
             const centerX = (left + right) / 2;
             const centerY = (top + bottom) / 2;
-
             const chartHeight = bottom - top;
-            const fontSizeMain = chartHeight / 10; // Larger for the number
-            const fontSizeSub = chartHeight / 20;  // Smaller for the label
+            const fontSizeMain = chartHeight / 10;
+            const fontSizeSub = chartHeight / 20;
 
             ctx.textAlign = 'center';
             ctx.textBaseline = 'middle';
 
-            if (isMindfulness) {
-                // --- LINE 1: The Value (White/Bold) ---
+            if (mode !== 'time') {
                 ctx.font = `bold ${fontSizeMain}px sans-serif`;
                 ctx.fillStyle = "#FFFFFF"; 
-                // Offset slightly upwards
                 ctx.fillText(mainText, centerX, centerY - (fontSizeMain * 0.15));
 
-                // --- LINE 2: The Unit Label (Gray/Normal) ---
                 ctx.font = `normal ${fontSizeSub}px sans-serif`;
                 ctx.fillStyle = "#9ca3af"; 
-                // Offset slightly downwards
                 ctx.fillText(unitLabel, centerX, centerY + (fontSizeMain * 0.65));
            } else {
-            // --- TIME MODE: Only draw the number in the center ---
-            ctx.font = `bold ${fontSizeMain}px sans-serif`;
-            ctx.fillStyle = "#FFFFFF"; 
-            ctx.fillText(mainText, centerX, centerY); 
-        }
+                ctx.font = `bold ${fontSizeMain}px sans-serif`;
+                ctx.fillStyle = "#FFFFFF"; 
+                ctx.fillText(mainText, centerX, centerY - (fontSizeMain * 0.15));
 
-        ctx.restore();
-    }
-};
+                ctx.font = `normal ${fontSizeSub}px sans-serif`;
+                ctx.fillStyle = "#9ca3af"; 
+                ctx.fillText(subText, centerX, centerY + (fontSizeMain * 0.65)); 
+            }
+            ctx.restore();
+        }
+    };
+
     this.charts.dayChart = new Chart(ctx, {
         type: 'doughnut',
         data: { 
@@ -4425,38 +4491,16 @@ renderDayChartOnly(dateStr) {
         options: { 
         maintainAspectRatio: false, 
         plugins: { 
-            legend: { 
-                position: 'right', 
-                labels: { color: '#9ca3af', font: {size: 11} } 
-            },
-            title: { 
-                display: dataValues.length === 0, 
-                text: 'No data available', 
-                position: 'bottom', 
-                color: '#6b7280' 
-            },
+            legend: { position: 'right', labels: { color: '#9ca3af', font: {size: 11} } },
+            title: { display: dataValues.length === 0, text: 'No data available', position: 'bottom', color: '#6b7280' },
             tooltip: {
-				backgroundColor: '#121821', // Màu Solid (Hex) trùng với var(--surface), chắn hoàn toàn chữ bên dưới
-                titleColor: '#f3f4f6',      // Màu chữ sáng (var(--text))
-                bodyColor: '#f3f4f6',
-                borderColor: '#374151',     // Viền xám (var(--border)) để tooltip nổi bật hơn
-                borderWidth: 1,
-                padding: 10,
-				z: 999,
+                backgroundColor: '#121821', titleColor: '#f3f4f6', bodyColor: '#f3f4f6',
+                borderColor: '#374151', borderWidth: 1, padding: 10, z: 999,
                 callbacks: {
                     label: function(context) {
                         const value = context.raw || 0;
-                        
-                        // 1. Calculate the total sum of the dataset
                         const total = context.dataset.data.reduce((acc, curr) => acc + curr, 0);
-                        
-                        // 2. Calculate percentage (prevent division by zero)
                         const percentage = total > 0 ? ((value / total) * 100).toFixed(0) : 0;
-
-                        // 3. Return the formatted string
-                        if (!isMindfulness) {
-                            return ` ${value} ${unitLabel} (${percentage}%)`;
-                        }
                         return ` ${value} ${unitLabel} (${percentage}%)`;
                     }
                 }
@@ -4472,13 +4516,20 @@ setReportMode(mode) {
 
     const btnTime = document.getElementById('btn-rep-time');
     const btnMind = document.getElementById('btn-rep-mind');
+    const btnCount = document.getElementById('btn-rep-count');
     
-    if (mode === 'time') {
+    // Đặt lại tất cả thành secondary
+    if (btnTime) btnTime.className = 'btn btn-secondary';
+    if (btnMind) btnMind.className = 'btn btn-secondary';
+    if (btnCount) btnCount.className = 'btn btn-secondary';
+
+    // Làm nổi bật nút được chọn
+    if (mode === 'time' && btnTime) {
         btnTime.className = 'btn'; 
-        btnMind.className = 'btn btn-secondary';
-    } else {
-        btnTime.className = 'btn btn-secondary';
+    } else if (mode === 'mindfulness' && btnMind) {
         btnMind.className = 'btn'; 
+    } else if (mode === 'count' && btnCount) {
+        btnCount.className = 'btn';
     }
 
     this.renderReports();
@@ -4487,10 +4538,21 @@ setReportMode(mode) {
 renderReports(resetDates = false) {
     if (!document.getElementById('weeklyChart')) return;
 
-    const isMindfulness = this.reportMode === 'mindfulness';
-    const unitLabel = isMindfulness ? 'Logs' : 'Minutes'; // Đổi đơn vị hiển thị
+   const isMindfulness = this.reportMode === 'mindfulness';
+const isCount = this.reportMode === 'count';
 
-    document.getElementById('breakdown-title').innerText = isMindfulness ? 'Mindfulness Chart' : 'Time Chart';
+let unitLabel = 'Minutes';
+let breakdownTitle = 'Time Chart';
+
+if (isMindfulness) {
+    unitLabel = 'logs';
+    breakdownTitle = 'Mindfulness Chart';
+} else if (isCount) {
+    unitLabel = 'points';
+    breakdownTitle = 'Cultivation Chart';
+}
+
+document.getElementById('breakdown-title').innerText = breakdownTitle;
 
     const rangeSelect = document.getElementById('report-range-select');
     const rangeMode = rangeSelect ? rangeSelect.value : 'all';
@@ -4597,15 +4659,24 @@ renderReports(resetDates = false) {
 
         datasets = [mindData, awareData];
 
-    } else {
-        // === CHẾ ĐỘ THỜI GIAN: CHIA THEO MỤC TIÊU (GOAL) ===
-        const goalDatasets = {};
-        this.data.goals.forEach(goal => {
+   } else {
+    // === CHẾ ĐỘ THỜI GIAN / SỐ LƯỢNG: CHIA THEO MỤC TIÊU (GOAL) ===
+    const goalDatasets = {};
+    this.data.goals.forEach(goal => {
+        const isGoalCount = goal.type !== 'meditation' && goal.unit === 'count';
+        
+        // UPDATE: Allow 'meditation' type OR standard goals that are not 'count' unit
+        const isGoalTime = goal.type === 'meditation' || goal.unit !== 'count';
+
+        // Lọc hiển thị mục tiêu theo tab đang chọn (Số lượng HOẶC Thời gian)
+        if ((this.reportMode === 'count' && isGoalCount) || 
+            (this.reportMode === 'time' && isGoalTime)) {
             goalDatasets[goal.id] = {
                 name: goal.name, color: goal.color,
                 breakdownTotal: 0, weekly: new Array(7).fill(0), monthly: new Array(monthlyLabels.length).fill(0)
             };
-        });
+        }
+    });
 
         this.data.logs.forEach(log => {
             if (!goalDatasets[log.goalId]) return;
@@ -4687,7 +4758,6 @@ renderReports(resetDates = false) {
         }
     };
 
-    // --- VẼ BIỂU ĐỒ TRÒN (BREAKDOWN) ---
     const ctxBreakdown = document.getElementById('goalBreakdownChart').getContext('2d');
     if (this.charts.breakdown) this.charts.breakdown.destroy();
 
@@ -4696,41 +4766,59 @@ renderReports(resetDates = false) {
         afterDatasetsDraw: function(chart) {
             const { ctx, chartArea: { top, bottom, left, right } } = chart;
             ctx.save();
+            
+            // 1. Calculate Total
             let total = 0;
             const data = chart.data.datasets[0].data;
-            data.forEach(val => total += val);
+            if (data) data.forEach(val => total += val);
 
+            // 2. Determine Text Content
             let mainText = "";
-            let currentUnit = typeof unitLabel !== 'undefined' ? unitLabel : '';
+            let subText = "";
 
-            if (currentUnit === 'Minutes') {
-                if (total < 60) mainText = total + "m";
-                else mainText = (total / 60).toFixed(1) + "h";
-            } else {
+            if (isMindfulness) {
+                // Mindfulness: Number + "Tổng"
                 mainText = total.toLocaleString();
+                subText = "Total";
+            } 
+            else if (typeof unitLabel !== 'undefined' && unitLabel === 'Minutes') { 
+                // Time Mode
+                if (total < 60) {
+                    mainText = total;
+                    subText = "minutes";
+                } else {
+                    mainText = (total / 60).toFixed(1);
+                    subText = "hours";
+                }
+            } 
+            else { 
+                // Count Mode (Default fallback)
+                mainText = total.toLocaleString();
+                subText = "points";
             }
 
+            // 3. Layout & Styling
             const centerX = (left + right) / 2;
             const centerY = (top + bottom) / 2;
             const chartHeight = bottom - top;
-            const fontSizeMain = chartHeight / 13;
+            
+            // Dynamic Font Sizes
+            const fontSizeMain = chartHeight / 13; 
             const fontSizeSub = chartHeight / 22;
 
             ctx.textAlign = "center";
             ctx.textBaseline = "middle";
 
-            if (isMindfulness) {
-                ctx.font = `bold ${fontSizeMain}px sans-serif`;
-                ctx.fillStyle = "#FFFFFF";
-                ctx.fillText(mainText, centerX, centerY - (fontSizeMain * 0.15));
-                ctx.font = `normal ${fontSizeSub}px sans-serif`;
-                ctx.fillStyle = "#9ca3af";
-                ctx.fillText("Total", centerX, centerY + (fontSizeMain * 0.75));
-            } else {
-                ctx.font = `bold ${fontSizeMain}px sans-serif`;
-                ctx.fillStyle = "#FFFFFF";
-                ctx.fillText(mainText, centerX, centerY);
-            }
+            // Draw Main Number (Centered, slightly up)
+            ctx.font = `bold ${fontSizeMain}px sans-serif`;
+            ctx.fillStyle = "#FFFFFF";
+            ctx.fillText(mainText, centerX, centerY - (fontSizeMain * 0.15));
+
+            // Draw Sub Label (Centered, below main number)
+            ctx.font = `normal ${fontSizeSub}px sans-serif`;
+            ctx.fillStyle = "#9ca3af";
+            ctx.fillText(subText, centerX, centerY + (fontSizeMain * 0.75));
+
             ctx.restore();
         }
     };
@@ -5743,7 +5831,15 @@ dbHelper.deleteLog(parseInt(logId)).then(() => {
     if (logId) deleteBtn.style.display = 'block'; 
     else deleteBtn.style.display = 'none';  
     
-    const goal = this.data.goals.find(g => g.id === goalId);
+     const goal = this.data.goals.find(g => g.id === goalId);
+const minLabel = document.getElementById('s-minutes-label');
+if (minLabel) {
+    if (goal && goal.type === 'standard' && goal.unit === 'count') {
+        minLabel.innerText = 'Points';
+    } else {
+        minLabel.innerText = 'Duration (Minutes)';
+    }
+}
 
     const mindGroup = document.getElementById('s-mindfulness-group');
     const mindInput = document.getElementById('s-mindfulness');

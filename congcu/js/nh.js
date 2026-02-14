@@ -2437,18 +2437,21 @@ get totalMindfulnessCounts() {
                 const color = document.getElementById('g-color').value;
                 const lifetimeTarget = parseInt(document.getElementById('g-lifetime-target').value);
                 const dailyTarget = parseInt(document.getElementById('g-daily-target').value);
+				const unit = document.getElementById('g-unit').value || 'time';
 
                 if (id) {
                     const goal = this.data.goals.find(g => g.id === id);
                     if (goal) {
                         goal.name = name; goal.category = category; goal.color = color;
                         goal.lifetimeTargetMinutes = lifetimeTarget; goal.dailyTargetMinutes = dailyTarget;
+						goal.unit = unit;
 						goal.lastUpdated = Date.now();
                         this.showToast('Đã cập nhật mục tiêu!');
                     }
                 } else {
                     const newGoal = {
                         id: Date.now().toString(), type, name, category, color,
+						unit: unit,
                         lifetimeTargetMinutes: lifetimeTarget, dailyTargetMinutes: dailyTarget || 0,
 						dailySessionTarget: 8,
 						lastUpdated: Date.now(),
@@ -3042,7 +3045,7 @@ setDailySessionTarget(id) {
 
     // --- PROMPT 2: Daily Target Amount (Minutes or Mindfulness Count) ---
     const isMeditation = goal.type === 'meditation';
-    const unitLabel = isMeditation ? 'số chánh niệm' : 'số phút';
+    const unitLabel = isMeditation ? 'số chánh niệm' : (goal.unit === 'count' ? 'số điểm' : 'số phút');
     const currentTarget = goal.dailyTargetMinutes || 100;
 
     const inputTarget = prompt(`(2/2) Đặt mục tiêu ${unitLabel} hằng ngày:`, currentTarget);
@@ -3335,7 +3338,7 @@ renderGoals() {
 
         // CASE 3: Standard Goal Card (In Progress)
         // ... (Your existing card logic variables) ...
-        const unitLabel = isMeditation ? 'chánh niệm' : 'phút';
+        const unitLabel = isMeditation ? 'chánh niệm' : (goal.unit === 'count' ? 'điểm' : 'phút');
         const overallPct = goal.lifetimeTargetMinutes > 0 ? Math.min((goal[targetProp] / goal.lifetimeTargetMinutes) * 100, 100) : 0;
         
         // Calculate Today's Values
@@ -3435,19 +3438,34 @@ renderGoals() {
                     </div>
                 </div>`;
         } else {
-            sessionSectionHtml = `
-                <div class="section-label">Phiên hiện tại</div>
-                <div class="progress-container"><div id="bar-session-${goal.id}" class="progress-bar" style="background:var(--success); width:0%;"></div></div>
-                <div style="display:flex; justify-content:space-between; font-size:12px; color:var(--text-light);"><span id="prog-text-session-${goal.id}">Sẵn sàng</span></div>`;
-            controlsHtml = `
-                <div class="timer-controls">
-                    <div id="timer-${goal.id}" class="timer-display">00:00</div>
-                    <div style="display:flex; gap: 10px;">
-                        <button class="btn-icon ${goal.isActive ? 'btn-stop' : 'btn-play'}" onclick="app.toggleTimer('${goal.id}')"><i class="fas ${goal.isActive ? 'fa-stop' : 'fa-play'}"></i></button>
-                        <button class="btn-icon" style="background:var(--warning); color:#000;" onclick="app.openSessionModal('${goal.id}')"><i class="fas fa-plus"></i></button>
-                    </div>
-                </div>`;
-        }
+    if (goal.unit === 'count') {
+        // Giao diện nếu là đếm Số Lần
+        sessionSectionHtml = `
+            <div class="section-label">Tiến trình</div>
+            <div style="font-size:12px; color:var(--text-light); margin-bottom: 5px;">Ghi nhận thủ công qua nút (+)</div>`;
+        controlsHtml = `
+            <div class="timer-controls">
+                <div style="font-size: 14px; color: var(--text-light); text-transform: uppercase;">Thực hành</div>
+                <div style="display:flex; gap: 10px;">
+                    <button class="btn-icon" style="background:var(--warning); color:#000;" onclick="app.openSessionModal('${goal.id}')"><i class="fas fa-plus"></i></button>
+                </div>
+            </div>`;
+    } else {
+        // Giao diện đếm giờ (mặc định cũ)
+        sessionSectionHtml = `
+            <div class="section-label">Phiên hiện tại</div>
+            <div class="progress-container"><div id="bar-session-${goal.id}" class="progress-bar" style="background:var(--success); width:0%;"></div></div>
+            <div style="display:flex; justify-content:space-between; font-size:12px; color:var(--text-light);"><span id="prog-text-session-${goal.id}">Sẵn sàng</span></div>`;
+        controlsHtml = `
+            <div class="timer-controls">
+                <div id="timer-${goal.id}" class="timer-display">00:00</div>
+                <div style="display:flex; gap: 10px;">
+                    <button class="btn-icon ${goal.isActive ? 'btn-stop' : 'btn-play'}" onclick="app.toggleTimer('${goal.id}')"><i class="fas ${goal.isActive ? 'fa-stop' : 'fa-play'}"></i></button>
+                    <button class="btn-icon" style="background:var(--warning); color:#000;" onclick="app.openSessionModal('${goal.id}')"><i class="fas fa-plus"></i></button>
+                </div>
+            </div>`;
+    }
+}
 		const headerButtons = isCertGoal 
             ? `<span style="font-size:10px; background:var(--warning); color:#000; padding:2px 6px; border-radius:4px; font-weight:bold;">CHỨNG CHỈ</span>`
             : `
@@ -3596,7 +3614,7 @@ closeInspect(goalId) {
         sLi.className = 'session-item';
         
         const notesDisplay = log.notes ? `<span class="session-notes">"${log.notes}"</span>` : '';
-
+const unitText = (!isMeditation && goal && goal.unit === 'count') ? 'điểm' : 'phút';
         let actionButtons = '<div style="display:flex; gap:5px;">';
 
                     if (isMeditation && log.touches && log.touches.length > 0) {
@@ -3612,7 +3630,7 @@ closeInspect(goalId) {
 
                     sLi.innerHTML = `
                         <div class="session-content">
-                            <span class="session-date">${this.toDisplayDate(log.timestamp)}</span>: ${log.minutes} phút 
+                            <span class="session-date">${this.toDisplayDate(log.timestamp)}</span>: ${log.minutes} ${unitText} 
                             ${notesDisplay}
                         </div>
                         ${actionButtons}
@@ -4078,48 +4096,78 @@ fallbackCopyText(text) {
             openChoiceModal() { document.getElementById('choice-modal').style.display = 'flex'; }
             closeChoiceModal() { document.getElementById('choice-modal').style.display = 'none'; }
 
-            openModal(goalId = null, type = 'standard') { 
-                this.closeChoiceModal(); 
-                const modal = document.getElementById('goal-modal');
-                const title = document.getElementById('modal-title');
-                const btn = document.getElementById('btn-save-goal');
-                const catSelect = document.getElementById('g-cat');
-                catSelect.innerHTML = '';
-                const cats = type === 'meditation' ? ['Thiền Toạ', 'Thiền Hành', 'Niệm Hơi Thở', 'Thiền Quán', 'Tu Tập'] : ['Công việc', 'Học tập', 'Sức khỏe', 'Sáng tạo', 'Tạo phước', 'Khác'];
-                cats.forEach(c => { const opt = document.createElement('option'); opt.value = c; opt.innerText = c; catSelect.appendChild(opt); });
+            // THÊM HÀM NÀY VÀO TRONG CLASS GoalTracker (ví dụ đặt dưới hàm closeModal):
+updateGoalHints() {
+    const type = document.getElementById('g-type').value;
+    const unit = document.getElementById('g-unit').value;
+    const dailyHint = document.getElementById('g-daily-hint');
+    const lifeHint = document.getElementById('g-life-hint');
+    
+    if (type === 'meditation') {
+        dailyHint.innerText = "chánh niệm";
+        lifeHint.innerText = "chánh niệm";
+    } else {
+        if (unit === 'count') {
+            dailyHint.innerText = "điểm mỗi ngày";
+            lifeHint.innerText = "tổng điểm";
+        } else {
+            dailyHint.innerText = "phút mỗi ngày";
+            lifeHint.innerText = "tổng số phút";
+        }
+    }
+}
 
-                const dailyHint = document.getElementById('g-daily-hint');
-                const lifeHint = document.getElementById('g-life-hint');
-                if (type === 'meditation') { dailyHint.innerText = "chánh niệm"; lifeHint.innerText = "chánh niệm"; } 
-                else { dailyHint.innerText = "phút"; lifeHint.innerText = "phút"; }
-                document.getElementById('g-type').value = type;
+// SỬA HÀM openModal() ĐỂ TÍCH HỢP TÍNH NĂNG CHỌN ĐƠN VỊ:
+openModal(goalId = null, type = 'standard') { 
+    this.closeChoiceModal(); 
+    const modal = document.getElementById('goal-modal');
+    const title = document.getElementById('modal-title');
+    const btn = document.getElementById('btn-save-goal');
+    const catSelect = document.getElementById('g-cat');
+    catSelect.innerHTML = '';
+    const cats = type === 'meditation' ? ['Thiền Toạ', 'Thiền Hành', 'Niệm Hơi Thở', 'Thiền Quán', 'Tu Tập'] : ['Tu Tập', 'Trì Giới', 'Công Việc', 'Học Tập', 'Sức Khỏe', 'Sáng Tạo', 'Tạo Phước', 'Khác'];
+    cats.forEach(c => { const opt = document.createElement('option'); opt.value = c; opt.innerText = c; catSelect.appendChild(opt); });
 
-                if (goalId) {
-                    const goal = this.data.goals.find(g => g.id === goalId);
-					if (goal && goal.isCertification) {
+    document.getElementById('g-type').value = type;
+
+    // HIỂN THỊ/ẨN CHỌN ĐƠN VỊ
+    const unitGroup = document.getElementById('g-unit-group');
+    if (type === 'meditation') {
+        unitGroup.style.display = 'none';
+    } else {
+        unitGroup.style.display = 'block';
+    }
+
+    if (goalId) {
+        const goal = this.data.goals.find(g => g.id === goalId);
+        if (goal && goal.isCertification) {
             alert("Mục tiêu Chứng chỉ không thể chỉnh sửa thông số.");
             return;
         }
-                    if (goalId) {
-                        document.getElementById('g-id').value = goal.id;
-                        document.getElementById('g-name').value = goal.name;
-                        document.getElementById('g-cat').value = goal.category;
-                        document.getElementById('g-color').value = goal.color;
-                        document.getElementById('g-lifetime-target').value = goal.lifetimeTargetMinutes;
-                        document.getElementById('g-daily-target').value = goal.dailyTargetMinutes;
-                        document.getElementById('g-type').value = goal.type || 'standard';
-                        title.innerText = 'Sửa mục tiêu'; btn.innerText = 'Lưu';
-                    }
-                } else {
-                    document.getElementById('g-id').value = '';
-                    document.getElementById('g-name').value = '';
-                    document.getElementById('g-color').value = type === 'meditation' ? '#a78bfa' : '#818cf8';
-                    document.getElementById('g-lifetime-target').value = 1000;
-                    document.getElementById('g-daily-target').value = 100;
-                    title.innerText = type === 'meditation' ? 'Mục tiêu Mới' : 'Mục tiêu Mới'; btn.innerText = 'Tạo';
-                }
-                modal.style.display = 'flex'; 
-            }
+        if (goalId) {
+            document.getElementById('g-id').value = goal.id;
+            document.getElementById('g-name').value = goal.name;
+            document.getElementById('g-cat').value = goal.category;
+            document.getElementById('g-color').value = goal.color;
+            document.getElementById('g-lifetime-target').value = goal.lifetimeTargetMinutes;
+            document.getElementById('g-daily-target').value = goal.dailyTargetMinutes;
+            document.getElementById('g-type').value = goal.type || 'standard';
+            document.getElementById('g-unit').value = goal.unit || 'time'; // Tải unit
+            title.innerText = 'Sửa mục tiêu'; btn.innerText = 'Lưu';
+        }
+    } else {
+        document.getElementById('g-id').value = '';
+        document.getElementById('g-name').value = '';
+        document.getElementById('g-color').value = type === 'meditation' ? '#a78bfa' : '#818cf8';
+        document.getElementById('g-lifetime-target').value = 1000;
+        document.getElementById('g-daily-target').value = 100;
+        document.getElementById('g-unit').value = 'time'; // Mặc định
+        title.innerText = type === 'meditation' ? 'Mục tiêu Mới' : 'Mục tiêu Mới'; btn.innerText = 'Tạo';
+    }
+    
+    this.updateGoalHints(); // Cập nhật chữ
+    modal.style.display = 'flex'; 
+}
             closeModal() { document.getElementById('goal-modal').style.display = 'none'; }
             
             renderCalendar() {
@@ -4210,20 +4258,23 @@ renderRandomQuote() {
     
     dayLogs.forEach(log => {
         const goal = this.data.goals.find(g => g.id === log.goalId);
+        const isMeditation = goal && goal.type === 'meditation'; // BỔ SUNG KHAI BÁO NÀY ĐỂ FIX LỖI
+
         const li = document.createElement('li');
         li.style.cssText = 'padding: 8px 0; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; font-size: 13px; align-items:center;';
 
         let graphBtnHtml = '';
-        if (goal && goal.type === 'meditation' && log.touches && log.touches.length > 0) {
+        if (isMeditation && log.touches && log.touches.length > 0) {
             graphBtnHtml = `<button class="btn-icon" style="background:transparent; color:var(--zen); height:24px; width:24px; margin-right:5px; cursor:pointer;" onclick="app.showSessionGraph('${log.timestamp}')"><i class="fas fa-chart-area" style="font-size:12px;"></i></button>`;
         }
 
         const satiCount = log.count !== undefined ? log.count : (log.touches ? log.touches.length : 0);
         const satiInfo = satiCount > 0 ? `<span style="color: var(--zen); font-size: 11px; margin-left: 5px; font-weight:bold;">(${satiCount} Chánh Niệm)</span>` : '';
-
+        const unitText = (!isMeditation && goal && goal.unit === 'count') ? ' điểm' : 'p';
+        
         const leftSide = `<div>
                            <span style="font-weight:600; color:${goal?goal.color:'#ccc'}">${goal?goal.name:'Đã xóa'}</span>
-                           <span style="margin-left:5px;">${log.minutes}p</span>
+                           <span style="margin-left:5px;">${log.minutes}${unitText}</span>
                            ${satiInfo}
                          </div>`;
         
@@ -4244,32 +4295,46 @@ renderRandomQuote() {
 
 renderDayChartOnly(dateStr) {
     const ctx = document.getElementById('dayBreakdownChart').getContext('2d');
-    const isMindfulness = this.dayChartMode === 'mindfulness';
-    const unitLabel = isMindfulness ? 'Chánh niệm' : 'Phút';
+    const mode = this.dayChartMode;
+    
+    let unitLabel = 'Phút';
+    if (mode === 'mindfulness') unitLabel = 'Chánh Niệm';
+    else if (mode === 'count') unitLabel = 'điểm';
 
     const dayLogs = this.data.logs.filter(l => l.date === dateStr);
     const goalStats = {};
 
     dayLogs.forEach(log => {
-        if (isMindfulness) {
-             const val = log.count !== undefined ? log.count : (log.touches ? log.touches.length : 0);
-             if (val === 0) return;
+        const goal = this.data.goals.find(g => g.id === log.goalId);
+        
+        const isCountGoal = goal && goal.type !== 'meditation' && goal.unit === 'count';
+        const isMeditationGoal = goal && goal.type === 'meditation';
+        const isTimeGoal = goal && goal.type !== 'meditation' && goal.unit !== 'count';
+
+        let val = 0;
+        
+        // Phân loại dữ liệu theo Tab đang chọn
+        if (mode === 'mindfulness') {
+            if (!isMeditationGoal) return; 
+            val = log.count !== undefined ? log.count : (log.touches ? log.touches.length : 0);
+        } else if (mode === 'count') {
+            if (!isCountGoal) return;
+            val = log.minutes; // Với mục tiêu số lượng, dữ liệu nằm ở trường minutes
+        } else if (mode === 'time') {
+            if (!isTimeGoal && !isMeditationGoal) return; // Thiền cũng có thời gian
+            val = log.minutes;
         }
 
+        if (val === 0) return;
+
         if(!goalStats[log.goalId]) {
-            const goal = this.data.goals.find(g => g.id === log.goalId);
             goalStats[log.goalId] = { 
                 name: goal ? goal.name : 'Đã xóa', 
                 color: goal ? goal.color : '#ccc', 
                 value: 0 
             };
         }
-        
-        if (isMindfulness) {
-            goalStats[log.goalId].value += (log.count !== undefined ? log.count : (log.touches ? log.touches.length : 0));
-        } else {
-            goalStats[log.goalId].value += log.minutes;
-        }
+        goalStats[log.goalId].value += val;
     });
 
     if(this.charts.dayChart) this.charts.dayChart.destroy();
@@ -4280,7 +4345,6 @@ renderDayChartOnly(dateStr) {
         id: 'centerText',
         afterDatasetsDraw: function(chart) {
             const { ctx, chartArea: { top, bottom, left, right } } = chart;
-            
             ctx.save();
 
             let total = 0;
@@ -4290,49 +4354,48 @@ renderDayChartOnly(dateStr) {
             }
 
             let mainText = "";
-            if (!isMindfulness) {
-                // Hour/Minute logic
+			 let subText = "";
+            if (mode === 'time') {
                 if (total < 60) {
-                    mainText = total + "p";
+                    mainText = total;
+                    subText = "phút";
                 } else {
-                    mainText = (total / 60).toFixed(1) + "h";
+                    mainText = (total / 60).toFixed(1);
+                    subText = "giờ";
                 }
             } else {
                 mainText = total.toLocaleString(); 
-            }
+            } 
 
             const centerX = (left + right) / 2;
             const centerY = (top + bottom) / 2;
-
             const chartHeight = bottom - top;
-            const fontSizeMain = chartHeight / 10; // Larger for the number
-            const fontSizeSub = chartHeight / 20;  // Smaller for the label
+            const fontSizeMain = chartHeight / 10;
+            const fontSizeSub = chartHeight / 20;
 
             ctx.textAlign = 'center';
             ctx.textBaseline = 'middle';
 
-            if (isMindfulness) {
-                // --- LINE 1: The Value (White/Bold) ---
+            if (mode !== 'time') {
                 ctx.font = `bold ${fontSizeMain}px sans-serif`;
                 ctx.fillStyle = "#FFFFFF"; 
-                // Offset slightly upwards
                 ctx.fillText(mainText, centerX, centerY - (fontSizeMain * 0.15));
 
-                // --- LINE 2: The Unit Label (Gray/Normal) ---
                 ctx.font = `normal ${fontSizeSub}px sans-serif`;
                 ctx.fillStyle = "#9ca3af"; 
-                // Offset slightly downwards
                 ctx.fillText(unitLabel, centerX, centerY + (fontSizeMain * 0.65));
            } else {
-            // --- TIME MODE: Only draw the number in the center ---
-            ctx.font = `bold ${fontSizeMain}px sans-serif`;
-            ctx.fillStyle = "#FFFFFF"; 
-            ctx.fillText(mainText, centerX, centerY); 
-        }
+                ctx.font = `bold ${fontSizeMain}px sans-serif`;
+                ctx.fillStyle = "#FFFFFF"; 
+                ctx.fillText(mainText, centerX, centerY - (fontSizeMain * 0.15));
 
-        ctx.restore();
-    }
-};
+                ctx.font = `normal ${fontSizeSub}px sans-serif`;
+                ctx.fillStyle = "#9ca3af"; 
+                ctx.fillText(subText, centerX, centerY + (fontSizeMain * 0.65)); 
+            }
+            ctx.restore();
+        }
+    };
 
     this.charts.dayChart = new Chart(ctx, {
         type: 'doughnut',
@@ -4348,38 +4411,16 @@ renderDayChartOnly(dateStr) {
         options: { 
         maintainAspectRatio: false, 
         plugins: { 
-            legend: { 
-                position: 'right', 
-                labels: { color: '#9ca3af', font: {size: 11} } 
-            },
-            title: { 
-                display: dataValues.length === 0, 
-                text: 'Chưa có dữ liệu', 
-                position: 'bottom', 
-                color: '#6b7280' 
-            },
+            legend: { position: 'right', labels: { color: '#9ca3af', font: {size: 11} } },
+            title: { display: dataValues.length === 0, text: 'Chưa có dữ liệu', position: 'bottom', color: '#6b7280' },
             tooltip: {
-				backgroundColor: '#121821', // Màu Solid (Hex) trùng với var(--surface), chắn hoàn toàn chữ bên dưới
-                titleColor: '#f3f4f6',      // Màu chữ sáng (var(--text))
-                bodyColor: '#f3f4f6',
-                borderColor: '#374151',     // Viền xám (var(--border)) để tooltip nổi bật hơn
-                borderWidth: 1,
-                padding: 10,
-				z: 999,
+                backgroundColor: '#121821', titleColor: '#f3f4f6', bodyColor: '#f3f4f6',
+                borderColor: '#374151', borderWidth: 1, padding: 10, z: 999,
                 callbacks: {
                     label: function(context) {
                         const value = context.raw || 0;
-                        
-                        // 1. Calculate the total sum of the dataset
                         const total = context.dataset.data.reduce((acc, curr) => acc + curr, 0);
-                        
-                        // 2. Calculate percentage (prevent division by zero)
                         const percentage = total > 0 ? ((value / total) * 100).toFixed(0) : 0;
-
-                        // 3. Return the formatted string
-                        if (!isMindfulness) {
-                            return ` ${value} ${unitLabel} (${percentage}%)`;
-                        }
                         return ` ${value} ${unitLabel} (${percentage}%)`;
                     }
                 }
@@ -4394,13 +4435,18 @@ switchDayChart(mode) {
 
     const btnTime = document.getElementById('btn-modal-time');
     const btnMind = document.getElementById('btn-modal-mind');
+    const btnCount = document.getElementById('btn-modal-count');
     
-    if (mode === 'time') {
+    if (btnTime) btnTime.className = 'btn btn-secondary';
+    if (btnMind) btnMind.className = 'btn btn-secondary';
+    if (btnCount) btnCount.className = 'btn btn-secondary';
+
+    if (mode === 'time' && btnTime) {
         btnTime.className = 'btn';
-        btnMind.className = 'btn btn-secondary';
-    } else {
-        btnTime.className = 'btn btn-secondary';
+    } else if (mode === 'mindfulness' && btnMind) {
         btnMind.className = 'btn';
+    } else if (mode === 'count' && btnCount) {
+        btnCount.className = 'btn';
     }
 
     if (this.currentViewDate) {
@@ -4408,18 +4454,26 @@ switchDayChart(mode) {
     }
 }
             closeDayModal() { document.getElementById('day-details-modal').style.display = 'none'; }
+// TÌM HÀM NÀY VÀ THAY THẾ TOÀN BỘ NỘI DUNG BÊN TRONG BẰNG:
 setReportMode(mode) {
     this.reportMode = mode;
 
     const btnTime = document.getElementById('btn-rep-time');
     const btnMind = document.getElementById('btn-rep-mind');
+    const btnCount = document.getElementById('btn-rep-count');
     
-    if (mode === 'time') {
+    // Đặt lại tất cả thành secondary
+    if (btnTime) btnTime.className = 'btn btn-secondary';
+    if (btnMind) btnMind.className = 'btn btn-secondary';
+    if (btnCount) btnCount.className = 'btn btn-secondary';
+
+    // Làm nổi bật nút được chọn
+    if (mode === 'time' && btnTime) {
         btnTime.className = 'btn'; 
-        btnMind.className = 'btn btn-secondary';
-    } else {
-        btnTime.className = 'btn btn-secondary';
+    } else if (mode === 'mindfulness' && btnMind) {
         btnMind.className = 'btn'; 
+    } else if (mode === 'count' && btnCount) {
+        btnCount.className = 'btn';
     }
 
     this.renderReports();
@@ -4429,9 +4483,20 @@ renderReports(resetDates = false) {
     if (!document.getElementById('weeklyChart')) return;
 
     const isMindfulness = this.reportMode === 'mindfulness';
-    const unitLabel = isMindfulness ? 'Lần' : 'Phút'; // Đổi đơn vị hiển thị
+const isCount = this.reportMode === 'count';
 
-    document.getElementById('breakdown-title').innerText = isMindfulness ? 'Biểu đồ Chánh niệm' : 'Biểu đồ Thời gian';
+let unitLabel = 'Phút';
+let breakdownTitle = 'Biểu đồ Thời gian';
+
+if (isMindfulness) {
+    unitLabel = 'lần';
+    breakdownTitle = 'Biểu đồ Chánh niệm';
+} else if (isCount) {
+    unitLabel = 'điểm';
+    breakdownTitle = 'Biểu đồ Tu tập';
+}
+
+document.getElementById('breakdown-title').innerText = breakdownTitle;
 
     const rangeSelect = document.getElementById('report-range-select');
     const rangeMode = rangeSelect ? rangeSelect.value : 'all';
@@ -4538,16 +4603,24 @@ renderReports(resetDates = false) {
 
         datasets = [mindData, awareData];
 
-    } else {
-        // === CHẾ ĐỘ THỜI GIAN: CHIA THEO MỤC TIÊU (GOAL) ===
-        const goalDatasets = {};
-        this.data.goals.forEach(goal => {
+   } else {
+   
+    const goalDatasets = {};
+    this.data.goals.forEach(goal => {
+        const isGoalCount = goal.type !== 'meditation' && goal.unit === 'count';
+        
+        // UPDATE: Allow 'meditation' type OR standard goals that are not 'count' unit
+        const isGoalTime = goal.type === 'meditation' || goal.unit !== 'count';
+
+        // Lọc hiển thị mục tiêu theo tab đang chọn (Số lượng HOẶC Thời gian)
+        if ((this.reportMode === 'count' && isGoalCount) || 
+            (this.reportMode === 'time' && isGoalTime)) {
             goalDatasets[goal.id] = {
                 name: goal.name, color: goal.color,
                 breakdownTotal: 0, weekly: new Array(7).fill(0), monthly: new Array(monthlyLabels.length).fill(0)
             };
-        });
-
+        }
+    });
         this.data.logs.forEach(log => {
             if (!goalDatasets[log.goalId]) return;
 
@@ -4637,41 +4710,59 @@ renderReports(resetDates = false) {
         afterDatasetsDraw: function(chart) {
             const { ctx, chartArea: { top, bottom, left, right } } = chart;
             ctx.save();
+            
+            // 1. Calculate Total
             let total = 0;
             const data = chart.data.datasets[0].data;
-            data.forEach(val => total += val);
+            if (data) data.forEach(val => total += val);
 
+            // 2. Determine Text Content
             let mainText = "";
-            let currentUnit = typeof unitLabel !== 'undefined' ? unitLabel : '';
+            let subText = "";
 
-            if (currentUnit === 'Phút') {
-                if (total < 60) mainText = total + "p";
-                else mainText = (total / 60).toFixed(1) + "h";
-            } else {
+            if (isMindfulness) {
+                // Mindfulness: Number + "Tổng"
                 mainText = total.toLocaleString();
+                subText = "Tổng";
+            } 
+            else if (typeof unitLabel !== 'undefined' && unitLabel === 'Phút') { 
+                // Time Mode
+                if (total < 60) {
+                    mainText = total;
+                    subText = "phút";
+                } else {
+                    mainText = (total / 60).toFixed(1);
+                    subText = "giờ";
+                }
+            } 
+            else { 
+                // Count Mode (Default fallback)
+                mainText = total.toLocaleString();
+                subText = "điểm";
             }
 
+            // 3. Layout & Styling
             const centerX = (left + right) / 2;
             const centerY = (top + bottom) / 2;
             const chartHeight = bottom - top;
-            const fontSizeMain = chartHeight / 13;
+            
+            // Dynamic Font Sizes
+            const fontSizeMain = chartHeight / 13; 
             const fontSizeSub = chartHeight / 22;
 
             ctx.textAlign = "center";
             ctx.textBaseline = "middle";
 
-            if (isMindfulness) {
-                ctx.font = `bold ${fontSizeMain}px sans-serif`;
-                ctx.fillStyle = "#FFFFFF";
-                ctx.fillText(mainText, centerX, centerY - (fontSizeMain * 0.15));
-                ctx.font = `normal ${fontSizeSub}px sans-serif`;
-                ctx.fillStyle = "#9ca3af";
-                ctx.fillText("Tổng", centerX, centerY + (fontSizeMain * 0.75));
-            } else {
-                ctx.font = `bold ${fontSizeMain}px sans-serif`;
-                ctx.fillStyle = "#FFFFFF";
-                ctx.fillText(mainText, centerX, centerY);
-            }
+            // Draw Main Number (Centered, slightly up)
+            ctx.font = `bold ${fontSizeMain}px sans-serif`;
+            ctx.fillStyle = "#FFFFFF";
+            ctx.fillText(mainText, centerX, centerY - (fontSizeMain * 0.15));
+
+            // Draw Sub Label (Centered, below main number)
+            ctx.font = `normal ${fontSizeSub}px sans-serif`;
+            ctx.fillStyle = "#9ca3af";
+            ctx.fillText(subText, centerX, centerY + (fontSizeMain * 0.75));
+
             ctx.restore();
         }
     };
@@ -5673,6 +5764,14 @@ openSessionModal(goalId, minutes = 0, logId = null, startTime = Date.now()) {
     else deleteBtn.style.display = 'none';  
     
     const goal = this.data.goals.find(g => g.id === goalId);
+const minLabel = document.getElementById('s-minutes-label');
+if (minLabel) {
+    if (goal && goal.type === 'standard' && goal.unit === 'count') {
+        minLabel.innerText = 'Số Điểm';
+    } else {
+        minLabel.innerText = 'Thời lượng (Phút)';
+    }
+}
 
     const mindGroup = document.getElementById('s-mindfulness-group');
     const mindInput = document.getElementById('s-mindfulness');
