@@ -29,17 +29,7 @@ document.addEventListener("DOMContentLoaded", function () {
   window.location.href = rootPath + selectedFile;
 }
 
- function openRandomSutta2() {
-  const randomIndex = Math.floor(Math.random() * suttaFiles.length);
-  const selectedFile = suttaFiles[randomIndex];
 
-  // Get root path of your site 
-  const currentPath = location.pathname;
-  const rootPath = currentPath.split("/").slice(0, -2).join("/") + "/";
-
-  // Redirect to the correct file
-  window.location.href = rootPath + selectedFile;
-}
 function openRandomSutta() {
   // Example: /bw2_20250319/dn/dn1.htm
   const currentPath = location.pathname;
@@ -724,5 +714,4 @@ function copySutta() {
     console.error("Copy failed:", err);
   });
 }
-
 
