@@ -2661,8 +2661,8 @@ startMeditationSetup(goal, overrideParams = null) {
     const threshStr = prompt('Distraction Threshold (secs):\n(max allowed time for 1 mindfulness log)', defaultThreshold);
     
     
-    if (threshStr && !isNaN(parseInt(threshStr)) && parseInt(threshStr) > 0) {
-        threshold = parseInt(threshStr);
+    if (threshStr && !isNaN(parseFloat(threshStr)) && parseFloat(threshStr) > 0) {
+        threshold = parseFloat(threshStr);
     }
 
     goal.lastDuration = min;
@@ -5895,7 +5895,7 @@ if (minLabel) {
     const minutes = parseInt(document.getElementById('s-minutes').value);
     
     const mindfulness = parseInt(document.getElementById('s-mindfulness').value) || 0;
-    const threshold = parseInt(document.getElementById('s-threshold').value) || 10; 
+    const threshold = parseFloat(document.getElementById('s-threshold').value) || 10; 
     let notes = document.getElementById('s-notes').value;
     
     if (minutes <= 0) return;

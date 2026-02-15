@@ -2593,8 +2593,8 @@ startMeditationSetup(goal, overrideParams = null) {
     const threshStr = prompt('Ngưỡng mất tập trung (giây):\n(thời gian tối đa cho 1 lần chánh niệm)', defaultThreshold);
     
     
-    if (threshStr && !isNaN(parseInt(threshStr)) && parseInt(threshStr) > 0) {
-        threshold = parseInt(threshStr);
+    if (threshStr && !isNaN(parseFloat(threshStr)) && parseFloat(threshStr) > 0) {
+        threshold = parseFloat(threshStr);
     }
 
     goal.lastDuration = min;
@@ -5827,7 +5827,7 @@ logSessionConfirm(e) {
         const minutes = parseInt(document.getElementById('s-minutes').value);
         
         const mindfulness = parseInt(document.getElementById('s-mindfulness').value) || 0;
-        const threshold = parseInt(document.getElementById('s-threshold').value) || 6; 
+        const threshold = parseFloat(document.getElementById('s-threshold').value) || 6; 
         let notes = document.getElementById('s-notes').value;
         
         if (minutes <= 0) return;
