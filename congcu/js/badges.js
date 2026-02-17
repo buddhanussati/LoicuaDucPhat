@@ -175,7 +175,7 @@ const BADGES = [
         id: 'cert_adv_pass', 
         icon: 'far fa-award-simple', 
         color: '#8b5cf6', 
-        title: 'Thiền Giả', 
+        title: 'Trí Giả', 
         desc: 'Vượt qua bài thi chứng chỉ Thiền Nâng Cao', 
         condition: (data) => data.goals.some(g => g.id === 'cert_adv_1' && g.certified === true) 
     },
@@ -184,7 +184,7 @@ const BADGES = [
         id: 'cert_master_pass', 
         icon: 'far fa-award', 
         color: '#ff6b6b', 
-        title: 'Trí Giả', 
+        title: 'Thiền Giả', 
         desc: 'Vượt qua bài thi chứng chỉ Thiền Chuyên Sâu', 
         condition: (data) => data.goals.some(g => g.id === 'cert_master_1' && g.certified === true) 
     } 

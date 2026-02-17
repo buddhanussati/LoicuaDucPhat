@@ -3655,7 +3655,7 @@ const unitText = (!isMeditation && goal && goal.unit === 'count') ? 'điểm' : 
         btn.style.fontSize = '12px';
         
         // Updated Text: Shows clearly we are loading the next batch, not everything
-        btn.innerHTML = `<i class="fas fa-chevron-down"></i> Tải thêm (${nextBatch} thời thiền)`;
+        btn.innerHTML = `<i class="fas fa-chevron-down"></i> Tải thêm (${nextBatch} phiên)`;
         
         btn.onclick = () => this.loadMoreSessions(goalId, isMeditation);
         
