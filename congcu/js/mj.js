@@ -5953,12 +5953,12 @@ if (minLabel) {
            logSessionConfirm(e) {
     e.preventDefault();
     const goalId = document.getElementById('s-goal-id').value;
-    const logId = document.getElementById('s-log-id').value;
+    const logId = document.getElementById('s-log-id').value; // logId is the original timestamp
     const dateTimeStr = document.getElementById('s-date').value;
     const minutes = parseInt(document.getElementById('s-minutes').value);
     
     const mindfulness = parseInt(document.getElementById('s-mindfulness').value) || 0;
-    const threshold = parseFloat(document.getElementById('s-threshold').value) || 10; 
+    const threshold = parseFloat(document.getElementById('s-threshold').value) || 6; 
     let notes = document.getElementById('s-notes').value;
     
     if (minutes <= 0) return;
@@ -5977,21 +5977,36 @@ if (minLabel) {
     }
 
     const dateObj = new Date(dateTimeStr);
-    const timestamp = dateObj.getTime();
+    let timestamp = dateObj.getTime();
     const dateKey = dateTimeStr.split('T')[0]; 
     
+    // --- FIX START: Ensure Unique Timestamp ---
+    // If this is a NEW log OR an EDIT where the time has changed
+    if (!logId || Number(logId) !== timestamp) {
+        // Loop to check if this timestamp already exists in data
+        // If it does, add 1 millisecond until we find a unique slot
+        while (this.data.logs.some(l => l.timestamp === timestamp)) {
+            timestamp += 1;
+        }
+    }
+    // --- FIX END ---
+
     if (logId) {
+    
         const log = this.data.logs.find(l => l.timestamp == logId);
+        
         if (log) {
             const oldMinutes = log.minutes;
             const oldMindfulness = log.count !== undefined ? log.count : (log.touches ? log.touches.length : 0);
-                    
-                if (Number(logId) !== timestamp) {
-                    dbHelper.deleteLog(logId);
-                }
+            
+           
+            if (Number(logId) !== timestamp) {
+                dbHelper.deleteLog(logId);
+            }
+            
             log.minutes = minutes; 
             log.date = dateKey; 
-            log.timestamp = timestamp; 
+            log.timestamp = timestamp; // Update to the new (potentially +ms) timestamp
             log.notes = notes; 
             log.count = mindfulness;
             log.threshold = threshold; 
@@ -6005,10 +6020,11 @@ if (minLabel) {
             }
         }
     } else {
+        // NEW MODE
         this.data.logs.push({ 
             goalId, 
             date: dateKey, 
-            timestamp, 
+            timestamp, // unique timestamp
             minutes, 
             notes, 
             count: mindfulness, 

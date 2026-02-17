@@ -5883,93 +5883,104 @@ if (minLabel) {
 }
             closeSessionModal() { document.getElementById('session-modal').style.display = 'none'; }
 logSessionConfirm(e) {
-        e.preventDefault();
-        const goalId = document.getElementById('s-goal-id').value;
-        const logId = document.getElementById('s-log-id').value;
-        const dateTimeStr = document.getElementById('s-date').value;
-        const minutes = parseInt(document.getElementById('s-minutes').value);
-        
-        const mindfulness = parseInt(document.getElementById('s-mindfulness').value) || 0;
-        const threshold = parseFloat(document.getElementById('s-threshold').value) || 6; 
-        let notes = document.getElementById('s-notes').value;
-        
-        if (minutes <= 0) return;
-        
-        const goal = this.data.goals.find(g => g.id === goalId);
-        
-        if (goal && goal.type === 'meditation') {
-            let cleanNotes = notes.replace(/^Chánh niệm: \d+(\.\s*)?/, '').trim();
-            if (mindfulness > 0) {
-                notes = `Chánh niệm: ${mindfulness}. ${cleanNotes}`;
-            } else {
-                notes = cleanNotes;
-            }
+    e.preventDefault();
+    const goalId = document.getElementById('s-goal-id').value;
+    const logId = document.getElementById('s-log-id').value; // logId is the original timestamp
+    const dateTimeStr = document.getElementById('s-date').value;
+    const minutes = parseInt(document.getElementById('s-minutes').value);
     
-            goal.lastThreshold = threshold;
-        }
+    const mindfulness = parseInt(document.getElementById('s-mindfulness').value) || 0;
+    const threshold = parseFloat(document.getElementById('s-threshold').value) || 6; 
+    let notes = document.getElementById('s-notes').value;
     
-        const dateObj = new Date(dateTimeStr);
-        const timestamp = dateObj.getTime();
-        const dateKey = dateTimeStr.split('T')[0]; 
-        
-        if (logId) {
-            const log = this.data.logs.find(l => l.timestamp == logId);
-            if (log) {
-                const oldMinutes = log.minutes;
-                const oldMindfulness = log.count !== undefined ? log.count : (log.touches ? log.touches.length : 0);
-                
-                // --- FIX: Check if timestamp changed ---
-                // If the time changed, the DB Key changes. We must delete the old Key manually
-                // because save() will only insert the new Key, leaving the old one as a duplicate.
-                if (Number(logId) !== timestamp) {
-                    dbHelper.deleteLog(logId);
-                }
-                // ---------------------------------------
-
-                log.minutes = minutes; 
-                log.date = dateKey; 
-                log.timestamp = timestamp; 
-                log.notes = notes; 
-                log.count = mindfulness;
-                log.threshold = threshold; 
-                
-                if (goal) {
-                    goal.totalMinutes += (minutes - oldMinutes);
-                    if (goal.type === 'meditation') {
-                        if (!goal.totalMindfulness) goal.totalMindfulness = 0;
-                        goal.totalMindfulness = goal.totalMindfulness - oldMindfulness + mindfulness;
-                    }
-                }
-            }
+    if (minutes <= 0) return;
+    
+    const goal = this.data.goals.find(g => g.id === goalId);
+    
+    if (goal && goal.type === 'meditation') {
+        let cleanNotes = notes.replace(/^Chánh niệm: \d+(\.\s*)?/, '').trim();
+        if (mindfulness > 0) {
+            notes = `Chánh niệm: ${mindfulness}. ${cleanNotes}`;
         } else {
-            this.data.logs.push({ 
-                goalId, 
-                date: dateKey, 
-                timestamp, 
-                minutes, 
-                notes, 
-                count: mindfulness, 
-                touches: [],
-                threshold: threshold 
-            });
+            notes = cleanNotes;
+        }
+
+        goal.lastThreshold = threshold;
+    }
+
+    const dateObj = new Date(dateTimeStr);
+    let timestamp = dateObj.getTime();
+    const dateKey = dateTimeStr.split('T')[0]; 
+    
+    // --- FIX START: Ensure Unique Timestamp ---
+    // If this is a NEW log OR an EDIT where the time has changed
+    if (!logId || Number(logId) !== timestamp) {
+        // Loop to check if this timestamp already exists in data
+        // If it does, add 1 millisecond until we find a unique slot
+        while (this.data.logs.some(l => l.timestamp === timestamp)) {
+            timestamp += 1;
+        }
+    }
+    // --- FIX END ---
+
+    if (logId) {
+    
+        const log = this.data.logs.find(l => l.timestamp == logId);
+        
+        if (log) {
+            const oldMinutes = log.minutes;
+            const oldMindfulness = log.count !== undefined ? log.count : (log.touches ? log.touches.length : 0);
+            
+           
+            if (Number(logId) !== timestamp) {
+                dbHelper.deleteLog(logId);
+            }
+            
+            log.minutes = minutes; 
+            log.date = dateKey; 
+            log.timestamp = timestamp; // Update to the new (potentially +ms) timestamp
+            log.notes = notes; 
+            log.count = mindfulness;
+            log.threshold = threshold; 
             
             if (goal) {
-                goal.totalMinutes += minutes;
+                goal.totalMinutes += (minutes - oldMinutes);
                 if (goal.type === 'meditation') {
                     if (!goal.totalMindfulness) goal.totalMindfulness = 0;
-                    goal.totalMindfulness += mindfulness;
+                    goal.totalMindfulness = goal.totalMindfulness - oldMindfulness + mindfulness;
                 }
             }
         }
+    } else {
+        // NEW MODE
+        this.data.logs.push({ 
+            goalId, 
+            date: dateKey, 
+            timestamp, // unique timestamp
+            minutes, 
+            notes, 
+            count: mindfulness, 
+            touches: [],
+            threshold: threshold 
+        });
         
-        this.save(); 
-        this.renderGoals(); 
-        this.renderCalendar(); 
-        this.renderReports(); 
-        const newBadges = this.checkAchievements(true);
-        this.closeSessionModal(); 
-        this.showToast(logId ? 'Đã cập nhật!' : 'Đã ghi!');
-        if (newBadges.length > 0) {
+        if (goal) {
+            goal.totalMinutes += minutes;
+            if (goal.type === 'meditation') {
+                if (!goal.totalMindfulness) goal.totalMindfulness = 0;
+                goal.totalMindfulness += mindfulness;
+            }
+        }
+    }
+    
+    this.save(); 
+    this.renderGoals(); 
+    this.renderCalendar(); 
+    this.renderReports(); 
+    const newBadges = this.checkAchievements(true);
+    this.closeSessionModal(); 
+    this.showToast(logId ? 'Đã cập nhật!' : 'Đã ghi!');
+    if (newBadges.length > 0) {
         setTimeout(() => {
             newBadges.forEach((title, index) => {
                 setTimeout(() => {
