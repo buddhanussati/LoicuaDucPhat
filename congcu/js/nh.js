@@ -521,7 +521,40 @@ const dbHelper = {
         this.checkAchievements();
         this.renderCalendar();
         this.loadActiveBadge();
-        setInterval(() => this.updateTimerUI(), 1000);
+        // --- MỚI: TẠO WEB WORKER ĐẾM GIÂY CHỐNG NGỦ ĐÔNG ---
+        const workerCode = `
+            let timerId = null;
+            self.onmessage = function(e) {
+                if (e.data === 'start' && !timerId) {
+                    timerId = setInterval(() => postMessage('tick'), 1000);
+                } else if (e.data === 'stop') {
+                    clearInterval(timerId);
+                    timerId = null;
+                }
+            };
+        `;
+        try {
+            const blob = new Blob([workerCode], { type: 'application/javascript' });
+            this.timerWorker = new Worker(URL.createObjectURL(blob));
+        } catch (e) {
+            // Dự phòng cho một số môi trường file:/// siêu nghiêm ngặt chặn Blob Worker
+            console.warn("Dùng fallback cho Worker");
+            this.timerWorker = {
+                postMessage: (cmd) => {
+                    if (cmd === 'start' && !this._fallbackTimer) {
+                        this._fallbackTimer = setInterval(() => this.timerWorker.onmessage({data: 'tick'}), 1000);
+                    }
+                }
+            };
+        }
+
+        this.timerWorker.onmessage = () => {
+            this.updateTimerUI();       // Cập nhật giao diện chung
+            this.checkStandardTimers();
+            this.checkMeditationTimer();			// Kiểm tra mục tiêu đếm giờ
+        };
+        this.timerWorker.postMessage('start');
+        // ---------------------------------------------------
         this.setupMeditationListeners();
         this.noSleepAudio = new Audio('data:audio/wav;base64,UklGRiQAAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQAAAAA=');
         this.noSleepAudio.loop = true;
@@ -2477,29 +2510,24 @@ toggleTimer(id) {
         if (g.isActive && g.id !== id && g.type === 'standard') this.toggleTimer(g.id);
     });
 
-    // Nếu là Thiền (Meditation) -> Chuyển sang hàm khác (không áp dụng fix này ở đây)
     if (goal.type === 'meditation') {
         this.startMeditationSetup(goal);
         return;
     }
 
     if (goal.isActive) {
-        // --- KHI BẤM DỪNG (STOP) ---
-        clearInterval(this.timers[id]);
+        // --- KHI BẤM DỪNG (STOP) CHỦ ĐỘNG ---
         goal.isActive = false;
 
-        // [QUAN TRỌNG] Tắt âm thanh nền để tiết kiệm pin khi không đếm giờ
         if (this.noSleepAudio) {
             this.noSleepAudio.pause();
             this.noSleepAudio.currentTime = 0;
         }
         
-        // Tính toán thời gian đã trôi qua
         const spentSeconds = goal.sessionTargetSeconds - goal.remainingSeconds;
         const minutesSpent = Math.floor(spentSeconds / 60);
         const startTime = goal.currentSessionStartTime || Date.now();
         
-        // Reset
         goal.sessionTargetSeconds = 0; 
         goal.remainingSeconds = 0; 
         goal.currentSessionStartTime = null;
@@ -2520,7 +2548,18 @@ toggleTimer(id) {
         goal.lastDuration = min; 
         this.save(); 
 
-        // [QUAN TRỌNG] Bật âm thanh nền để giữ trình duyệt thức
+        // [MẸO AUDIO PRIMING] Bật âm thanh ở mức Volume = 0 rồi dừng lại ngay lập tức
+        // Điều này giúp trình duyệt gỡ bỏ cảnh báo Autoplay vì người dùng vừa có "tương tác" bấm nút
+        const bellAudio = document.getElementById('bell');
+        if (bellAudio) {
+            bellAudio.volume = 0.01;
+            bellAudio.play().then(() => {
+                bellAudio.pause();
+                bellAudio.currentTime = 0;
+                bellAudio.volume = 1.0; // Phục hồi lại âm lượng
+            }).catch(e => console.log("Unlock audio bypass"));
+        }
+
         if (this.noSleepAudio) {
             this.noSleepAudio.play().catch(e => console.log("Audio block: cần tương tác"));
         }
@@ -2529,44 +2568,7 @@ toggleTimer(id) {
         goal.remainingSeconds = goal.sessionTargetSeconds;
         goal.isActive = true;
         goal.currentSessionStartTime = Date.now(); 
-        
-        // [FIX] Tính thời điểm kết thúc (Target Time)
         goal.targetEndTime = Date.now() + (goal.remainingSeconds * 1000);
-
-        this.timers[id] = setInterval(() => {
-            // [FIX] Tính giây còn lại dựa trên thời gian thực
-            const now = Date.now();
-            const secondsLeft = Math.ceil((goal.targetEndTime - now) / 1000);
-            
-            goal.remainingSeconds = secondsLeft > 0 ? secondsLeft : 0;
-
-            if (secondsLeft <= 0) {
-                // --- HOÀN THÀNH ---
-                clearInterval(this.timers[id]);
-                
-                // Chuông sẽ reo đúng giờ nhờ Audio giữ trình duyệt thức
-                this.playBell(); 
-                
-                // Tắt âm thanh nền
-                if (this.noSleepAudio) {
-                    this.noSleepAudio.pause();
-                    this.noSleepAudio.currentTime = 0;
-                }
-
-                goal.isActive = false;
-                goal.targetEndTime = null;
-                
-                const minutesSpent = Math.floor(goal.sessionTargetSeconds / 60);
-                const startTime = goal.currentSessionStartTime;
-                goal.sessionTargetSeconds = 0; 
-                goal.remainingSeconds = 0; 
-                goal.currentSessionStartTime = null;
-                
-                this.openSessionModal(id, minutesSpent, null, startTime);
-                this.showToast('Hoàn thành!');
-                this.renderGoals(); 
-            }
-        }, 1000);
     }
     this.renderGoals();
 }
@@ -2575,49 +2577,62 @@ startMeditationSetup(goal, overrideParams = null) {
     let min = 0;
     let threshold = 9;
 
-    // --- LOGIC MỚI: Kiểm tra xem có phải bài học (có overrideParams) không ---
     if (overrideParams) {
-        // Nếu là bài học: Lấy trực tiếp thông số, KHÔNG hiện prompt
         min = overrideParams.duration;
-        // Nếu bài học quy định ngưỡng thì dùng, không thì lấy ngưỡng mặc định của user
         threshold = overrideParams.threshold || (parseInt(goal.lastThreshold) || 9);
     } else {
-    const defaultTime = goal.lastDuration || '20';
-    const minStr = prompt('Thời gian thiền (phút):', defaultTime);
-    
-    if (!minStr) return;
-     min = parseInt(minStr);
-    if (isNaN(min) || min <= 0) return;
+        const defaultTime = goal.lastDuration || '20';
+        const minStr = prompt('Thời gian thiền (phút):', defaultTime);
+        
+        if (!minStr) return;
+        min = parseInt(minStr);
+        if (isNaN(min) || min <= 0) return;
 
-    const defaultThreshold = goal.lastThreshold || '9';
-    const threshStr = prompt('Ngưỡng mất tập trung (giây):\n(thời gian tối đa cho 1 lần chánh niệm)', defaultThreshold);
-    
-    
-    if (threshStr && !isNaN(parseFloat(threshStr)) && parseFloat(threshStr) > 0) {
-        threshold = parseFloat(threshStr);
+        const defaultThreshold = goal.lastThreshold || '9';
+        const threshStr = prompt('Ngưỡng mất tập trung (giây):\n(thời gian tối đa cho 1 lần chánh niệm)', defaultThreshold);
+        
+        if (threshStr && !isNaN(parseFloat(threshStr)) && parseFloat(threshStr) > 0) {
+            threshold = parseFloat(threshStr);
+        }
+
+        goal.lastDuration = min;
+        goal.lastThreshold = threshold;
+        this.save(); 
     }
 
-    goal.lastDuration = min;
-    goal.lastThreshold = threshold;
-    this.save(); 
+    // [MẸO AUDIO PRIMING] Mở khóa Audio trên file:///
+    const bellAudio = document.getElementById('bell');
+    if (bellAudio) {
+        bellAudio.volume = 0.01;
+        bellAudio.play().then(() => {
+            bellAudio.pause();
+            bellAudio.currentTime = 0;
+            bellAudio.volume = 1.0;
+        }).catch(e => console.log("Unlock audio bypass"));
     }
+
     if (typeof Website2APK !== 'undefined') {
         Website2APK.keepScreenOn(true); 
     }
 
+    const now = Date.now();
+    const totalDurationSec = min * 60;
+
     this.meditationState = {
         active: true, paused: false, goalId: goal.id, 
-        count: 0,           // Đếm Chánh niệm (Tap)
-        awarenessCount: 0,  // Đếm Tỉnh giác (Hold) - MỚI
-        startTime: Date.now(), totalDurationSeconds: min * 60,
-        remainingSeconds: min * 60, touches: [],
+        count: 0,           
+        awarenessCount: 0,  
+        startTime: now, 
+        totalDurationSeconds: totalDurationSec,
+        remainingSeconds: totalDurationSec, 
+        targetEndTime: now + (totalDurationSec * 1000), // Tính thời gian kết thúc chuẩn
+        touches: [],
         threshold: threshold, 
         quoteInterval: null,
         
         currentAutoLevel: 4,      
         comboCounter: 0,          
-        lastTouchTime: Date.now(), 
-        
+        lastTouchTime: now, 
         consecutiveGoodCount: 0, 
 
         pendingConfirmation: false,
@@ -2630,22 +2645,15 @@ startMeditationSetup(goal, overrideParams = null) {
     this.updateMedTimerDisplay();
 
     this.updateMeditationQuote(true); 
+    
+    // Interval này chỉ xử lý giao diện text trích dẫn, không ảnh hưởng thời gian nên cứ giữ nguyên
     this.meditationState.quoteInterval = setInterval(() => {
         if(!this.meditationState.paused) {
             this.updateMeditationQuote(false);
         }
     }, 8000); 
 
-    this.meditationState.timerRef = setInterval(() => {
-        if (!this.meditationState.paused) {
-            if (this.meditationState.remainingSeconds > 0) {
-                this.meditationState.remainingSeconds--;
-                this.updateMedTimerDisplay();
-            } else {
-                this.concludeMeditationSession('auto');
-            }
-        }
-    }, 1000);
+    // CHÚ Ý: Đã xóa setInterval đếm ngược giây tại đây vì đã có Worker lo!
 }
 
             updateMedTimerDisplay() {
@@ -2696,7 +2704,12 @@ startMeditationSetup(goal, overrideParams = null) {
             return;
         }
     }
-    clearInterval(this.meditationState.timerRef);
+    // --- Thay thế đoạn clearInterval cũ ---
+    if (this.meditationState.timerRef) {
+        clearInterval(this.meditationState.timerRef);
+    }
+    this.meditationState.targetEndTime = null; // Ngừng đếm Web worker
+    // ------------------------------------
 
     if (this.meditationState.quoteInterval) {
         clearInterval(this.meditationState.quoteInterval);
@@ -2976,8 +2989,55 @@ updateEfficiencyDisplay() {
                 this.updateStats(); 
             }
 
+checkStandardTimers() {
+    const now = Date.now();
+    this.data.goals.forEach(goal => {
+        if (goal.isActive && goal.type === 'standard' && goal.targetEndTime) {
+            const secondsLeft = Math.ceil((goal.targetEndTime - now) / 1000);
+            goal.remainingSeconds = secondsLeft > 0 ? secondsLeft : 0;
 
-// Cập nhật hàm openMedSettings
+            if (secondsLeft <= 0) {
+                // --- KẾT THÚC THỜI GIAN ---
+                goal.isActive = false;
+                goal.targetEndTime = null;
+
+                this.playBell(); // Gọi chuông
+
+                if (this.noSleepAudio) {
+                    this.noSleepAudio.pause();
+                    this.noSleepAudio.currentTime = 0;
+                }
+
+                const minutesSpent = Math.floor(goal.sessionTargetSeconds / 60);
+                const startTime = goal.currentSessionStartTime;
+                
+                goal.sessionTargetSeconds = 0;
+                goal.remainingSeconds = 0;
+                goal.currentSessionStartTime = null;
+
+                this.openSessionModal(goal.id, minutesSpent, null, startTime);
+                this.showToast('Hoàn thành!');
+                this.renderGoals();
+            }
+        }
+    });
+}
+checkMeditationTimer() {
+    if (this.meditationState && this.meditationState.active && !this.meditationState.paused && this.meditationState.targetEndTime) {
+        const now = Date.now();
+        // Tính giây dựa trên đồng hồ thực tế
+        const secondsLeft = Math.ceil((this.meditationState.targetEndTime - now) / 1000);
+        
+        this.meditationState.remainingSeconds = secondsLeft > 0 ? secondsLeft : 0;
+        this.updateMedTimerDisplay();
+
+        if (secondsLeft <= 0) {
+            // Ngắt targetEndTime để tránh gọi liên tục
+            this.meditationState.targetEndTime = null; 
+            this.concludeMeditationSession('auto'); // Tự động kết thúc và rung chuông
+        }
+    }
+}
 openMedSettings() {
     const s = this.data.medSettings;
     
@@ -3524,7 +3584,6 @@ startExamSession(goalId) {
     const goal = this.data.goals.find(g => g.id === goalId);
     if (!goal) return;
 
-    // Determine Duration
     let durationMins = 60;
     if (goalId === 'cert_adv_1' || goalId === 'cert_master_1') {
         durationMins = 120;
@@ -3532,22 +3591,35 @@ startExamSession(goalId) {
 
     if (!confirm(`⚠️ BẮT ĐẦU THI CUỐI KHOÁ ⚠️\n\n- Thời gian: ${durationMins} phút.\n- Không được phép tạm dừng quá lâu.\n- Kết quả sẽ được tính toán ngay sau khi kết thúc.\n\nBạn đã sẵn sàng?`)) return;
 
-    // Force settings
+    // [MẸO AUDIO PRIMING]
+    const bellAudio = document.getElementById('bell');
+    if (bellAudio) {
+        bellAudio.volume = 0.01;
+        bellAudio.play().then(() => {
+            bellAudio.pause();
+            bellAudio.currentTime = 0;
+            bellAudio.volume = 1.0;
+        }).catch(e => {});
+    }
+
     if (typeof Website2APK !== 'undefined') Website2APK.keepScreenOn(true);
+
+    const now = Date.now();
+    const totalDurationSec = durationMins * 60;
 
     this.meditationState = {
         active: true, paused: false, goalId: goal.id,
         count: 0, awarenessCount: 0,
-        startTime: Date.now(), 
-        totalDurationSeconds: durationMins * 60, // Set dynamic duration
-        remainingSeconds: durationMins * 60, 
+        startTime: now, 
+        totalDurationSeconds: totalDurationSec, 
+        remainingSeconds: totalDurationSec, 
+        targetEndTime: now + (totalDurationSec * 1000), // Tính chuẩn giờ kết thúc bài thi
         touches: [],
-        threshold: 9, // Standard threshold for exam
+        threshold: 9, 
         quoteInterval: null,
-        currentAutoLevel: 4, comboCounter: 0, lastTouchTime: Date.now(),
+        currentAutoLevel: 4, comboCounter: 0, lastTouchTime: now,
         consecutiveGoodCount: 0,
         
-        // EXAM FLAGS
         isExam: true,
         examResult: null
     };
@@ -3557,16 +3629,7 @@ startExamSession(goalId) {
     this.updateMedTimerDisplay();
     this.updateMeditationQuote(true); 
 
-    this.meditationState.timerRef = setInterval(() => {
-        if (!this.meditationState.paused) {
-            if (this.meditationState.remainingSeconds > 0) {
-                this.meditationState.remainingSeconds--;
-                this.updateMedTimerDisplay();
-            } else {
-                this.concludeMeditationSession('auto');
-            }
-        }
-    }, 1000);
+    // Đã xóa setInterval() đếm ngược giây tại đây!
 }
 closeInspect(goalId) {
     if (this.inspectingGoalId === goalId) {
@@ -5752,7 +5815,7 @@ showInteractionInfo() {
     alert(msg);
     // Hoặc nếu bạn có hàm showToast hoặc modal thông báo riêng thì có thể dùng thay cho alert
 }			
-openSessionModal(goalId, minutes = 0, logId = null, startTime = Date.now()) {
+openSessionModal(goalId, minutes, logId = null, startTime = Date.now()) {
     document.getElementById('session-modal').style.display = 'flex';
     document.getElementById('s-goal-id').value = goalId;
     document.getElementById('s-log-id').value = logId || '';
