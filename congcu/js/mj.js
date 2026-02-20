@@ -51,7 +51,7 @@ const COURSES = [
                 id: 's_1_posture', 
                 title: 'Correct Posture', 
                 desc: 'How to sit so the back is straight and the mind is at peace.', 
-                content: '<p>Find a quiet place. Sit cross-legged (half-lotus or full-lotus) or sit on a chair.</p><ul><li><strong>Back:</strong> Keep it naturally straight, do not tense up.</li><li><strong>Shoulders:</strong> Relax and lower naturally.</li><li><strong>Hands:</strong> Stacked on top of each other or resting on the knees.</li><li><strong>Eyes:</strong> Half-closed or gently closed.</li></ul><p><em>Complete the quiz to finish the lesson.</em></p>',
+                content: '<p>Find a quiet place. Sit cross-legged (half-lotus or full-lotus) or sit on a chair.</p><ul><li><strong>Back:</strong> Keep it naturally straight, do not tense up.</li><li><strong>Shoulders:</strong> Relaxed and lowered.</li><li><strong>Hands:</strong> Stacked on top of each other or resting on the knees.</li><li><strong>Eyes:</strong> Half-closed or gently closed.</li></ul><p><em>Complete the quiz to finish the lesson.</em></p>',
                 quiz: [
                     {
                         q: "What is the most important principle for the back when meditating?",
@@ -60,7 +60,7 @@ const COURSES = [
                     },
                     {
                         q: "How should the shoulders be?",
-                        options: ["Relaxed and lowered naturally", "Hunched up near the ears", "Tensed to maintain strength"],
+                        options: ["Relaxed and lowered", "Hunched up near the ears", "Tensed to maintain strength"],
                         correct: 0
                     },
                     {
@@ -2421,11 +2421,16 @@ triggerMindfulnessSuccess(quality = 4) {
     const isLowQuality = (finalQuality === 4);
     let needConfirm = false;
 
-    if (settings.confirmMode && isLowQuality) {
+    // Lấy trạng thái của mục tiêu, nếu chưa có thì dùng mặc định toàn cầu
+    const goal = this.data.goals.find(g => g.id === this.meditationState.goalId);
+    const isConfirmModeActive = goal && goal.confirmMode !== undefined ? goal.confirmMode : settings.confirmMode;
+    const activeConfirmProb = goal && goal.confirmProbability !== undefined ? goal.confirmProbability : (settings.confirmProbability || 100);
+
+    if (isConfirmModeActive && isLowQuality) {
         if (this.meditationState.pendingConfirmation) {
             needConfirm = true; 
         } else {
-            const chance = settings.confirmProbability || 100;
+            const chance = activeConfirmProb;
             const roll = Math.random() * 100;
             if (roll <= chance) {
                 needConfirm = true;
@@ -2885,7 +2890,8 @@ updateEfficiencyDisplay() {
         if (params.minMindfulness && this.meditationState.count < params.minMindfulness) isSuccess = false;
 
         // 4. Kiểm tra Chế độ xác nhận
-        if (params.requireConfirmMode && !this.data.medSettings.confirmMode) isSuccess = false;
+        const activeConfirmMode = goal && goal.confirmMode !== undefined ? goal.confirmMode : this.data.medSettings.confirmMode;
+        if (params.requireConfirmMode && !activeConfirmMode) isSuccess = false;
 
         // --- BỔ SUNG MỚI: Kiểm tra mức chú tâm ---
         if (params.minAverage || params.minGood) {
@@ -3105,18 +3111,30 @@ checkMeditationTimer() {
     }
 }
 openMedSettings() {
-    const s = this.data.medSettings;
+    let s = this.data.medSettings;
+    
+    // Context-aware load: If meditating, load the specific goal's settings
+    let currentConfirmMode = s.confirmMode || false;
+    let currentConfirmProb = (typeof s.confirmProbability !== 'undefined') ? s.confirmProbability : 100;
+
+    if (this.meditationState && this.meditationState.active) {
+        const goal = this.data.goals.find(g => g.id === this.meditationState.goalId);
+        if (goal && goal.confirmMode !== undefined) {
+            currentConfirmMode = goal.confirmMode;
+            currentConfirmProb = goal.confirmProbability;
+        }
+    }
     
     // Gán giá trị vào input
     document.getElementById('inp-hold-time').value = s.holdDuration || 500;
     document.getElementById('disp-hold-time').innerText = ((s.holdDuration || 500) / 1000) + 's';
     
     document.getElementById('inp-vibrate').checked = s.vibration;
-    document.getElementById('inp-confirm-mode').checked = s.confirmMode || false;
     
-    const prob = (typeof s.confirmProbability !== 'undefined') ? s.confirmProbability : 100;
-    document.getElementById('inp-confirm-prob').value = prob;
-    document.getElementById('disp-confirm-prob').innerText = prob + '%';
+    // Áp dụng giá trị linh hoạt theo mục tiêu
+    document.getElementById('inp-confirm-mode').checked = currentConfirmMode;
+    document.getElementById('inp-confirm-prob').value = currentConfirmProb;
+    document.getElementById('disp-confirm-prob').innerText = currentConfirmProb + '%';
     
     this.toggleConfirmSlider(); 
     
@@ -3125,14 +3143,26 @@ openMedSettings() {
     modal.style.display = 'flex';
 }
 
-// Cập nhật hàm saveMedSettings
 saveMedSettings() {
+    const confirmModeVal = document.getElementById('inp-confirm-mode').checked;
+    const confirmProbVal = parseInt(document.getElementById('inp-confirm-prob').value);
+    
+    // Lưu riêng rẽ cho mục tiêu hiện tại nếu đang trong phiên thiền
+    if (this.meditationState && this.meditationState.active) {
+        const goal = this.data.goals.find(g => g.id === this.meditationState.goalId);
+        if (goal) {
+            goal.confirmMode = confirmModeVal;
+            goal.confirmProbability = confirmProbVal;
+        }
+    }
+
     this.data.medSettings = {
         mode: 'unified', // Luôn cố định
         holdDuration: parseInt(document.getElementById('inp-hold-time').value),
         vibration: document.getElementById('inp-vibrate').checked,
-        confirmMode: document.getElementById('inp-confirm-mode').checked,
-        confirmProbability: parseInt(document.getElementById('inp-confirm-prob').value)
+        // Chỉ cập nhật cấu hình mặc định (Global) nếu không ở trong phiên thiền
+        confirmMode: (this.meditationState && this.meditationState.active) ? this.data.medSettings.confirmMode : confirmModeVal,
+        confirmProbability: (this.meditationState && this.meditationState.active) ? this.data.medSettings.confirmProbability : confirmProbVal
     };
 
     this.save();
