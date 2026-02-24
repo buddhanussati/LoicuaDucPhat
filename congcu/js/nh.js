@@ -1190,7 +1190,7 @@ scheduleNextGuidedVibration() {
     if (!this.meditationState.active || this.meditationState.paused || !this.meditationState.guidedMode) return;
 
     // Sử dụng thông số slider mới thay vì dùng chung với ngưỡng mất tập trung
-    const x = this.meditationState.guidedInterval || 12; 
+    const x = this.meditationState.guidedInterval || 9; 
     const variations = [-1, 0, 1, 2, 3];
     const randomVariation = variations[Math.floor(Math.random() * variations.length)];
     
@@ -4981,7 +4981,7 @@ document.getElementById('breakdown-title').innerText = breakdownTitle;
                     if (isTimeMode) {
                         if (value === 0) return 0;
                         if (value < 60) return value.toFixed(0) + 'p';
-                        return (value / 60).toFixed(0) + 'h';
+                        return (value / 60).toFixed(1) + 'h';
                     }
                     return value; // Keep as is for Mindfulness/Count mode
                 }
