@@ -113,7 +113,7 @@ const COURSES = [
                 id: 's_3_awareness',
                 title: 'Ghi nhận Tỉnh giác',
                 desc: 'Học cách nhận diện trạng thái tâm rõ ràng.',
-                content: `<p>Tỉnh giác là khi bạn <b>nhận biết</b> được trạng thái tâm mình (ví dụ: chợt nhận ra mình đang phóng tâm, đang có tạp niệm, hoặc đang mất tập trung trên đề mục thiền). Đây là khoảnh khắc của sự nhận biết & quay trở lại. Trong ứng dụng, chúng ta ghi nhận sự <strong>Tỉnh giác</strong> bằng cách <strong>Nhấn và Giữ</strong>:</p><ul><li><b>Tỉnh giác</b> được ví người giữ cửa thành hiền trí, thông minh, có trí, ngăn chặn những người lạ mặt, cho vào những người quen biết để bảo vệ những người ở trong thành <em>(chánh niệm)</em> và để chống cự những người bên ngoài <em>(tạp niệm)</em>. </li><li><b>Để thực hành</b>, khi bạn nhận ra tâm mình đang có tạp niệm, xao nhãng khỏi đề mục, hãy nhấn giữ vào màn hình cho đến khi thấy vòng tròn xanh <em>(khiên bảo vệ)</em> xuất hiện, và một "Tỉnh giác" sẽ được ghi lại.</li></ul><p><strong>Yêu cầu hoàn thành:</strong> Thực hiện một thời thiền 10 phút với ít nhất 5 lần ghi nhận Tỉnh giác.</p>`,
+                content: `<p>Tỉnh giác là khi bạn <b>nhận biết</b> được trạng thái tâm mình (ví dụ: chợt nhận ra mình đang phóng tâm, đang có tạp niệm, hoặc đang mất tập trung trên đề mục thiền). Đây là khoảnh khắc của sự nhận biết & quay trở lại. Trong ứng dụng, chúng ta ghi nhận sự <strong>Tỉnh giác</strong> bằng cách <strong>Nhấn và Giữ</strong>:</p><ul><li><b>Tỉnh giác</b> được ví người giữ cửa thành hiền trí, thông minh, có trí, ngăn chặn những người lạ mặt, cho vào những người quen biết để bảo vệ những người ở trong thành <em>(chánh niệm)</em> và để chống cự những người bên ngoài <em>(tạp niệm)</em>. </li><li><b>Để thực hành</b>, khi bạn nhận ra tâm mình đang có tạp niệm, xao nhãng khỏi đề mục, hãy nhấn giữ vào màn hình cho đến khi thấy vòng tròn xanh <em>(khiên bảo vệ)</em> xuất hiện, và một "Tỉnh giác" sẽ được ghi lại.</li></ul><em>*<strong>Chế độ Nhắc:</strong></em> Nếu bạn tiếp tục ấn giữ lâu hơn sau khi đã ghi nhận tỉnh giác <span class="text-q4"><strong> (vượt ngưỡng mất tập trung)</strong></span>, hệ thống sẽ kích hoạt <strong>rung ngẫu nhiên</strong> để giúp bạn tỉnh giác. Vì đây là sự hỗ trợ từ hệ thống, bạn sẽ không được tính điểm tỉnh giác cho lần ghi nhận đó.  <p style="padding-top: 10px;"><strong>Hoàn thành bài học:</strong> Thực hiện một thời thiền 10 phút với ít nhất 5 lần ghi nhận Tỉnh giác.</p>`,
                 practiceParams: { duration: 10, minAwareness: 5 }
             },
             {
@@ -148,7 +148,7 @@ const COURSES = [
         </ol>
 
         <p style="border-top: 1px solid var(--border); padding-top: 10px; font-size: 13px;">
-            <strong>Yêu cầu hoàn thành:</strong> Thực hiện thời thiền tối thiểu 10 phút, ghi nhận ít nhất 20 Chánh niệm, 5 Tỉnh giác và bắt buộc phải bật Chế độ Xác nhận trong suốt phiên tập.
+            <strong>Yêu cầu hoàn thành:</strong> Thực hiện thời thiền tối thiểu 10 phút, ghi nhận ít nhất 20 Chánh niệm, 5 Tỉnh giác và phải bật Chế độ Xác nhận trong suốt phiên tập.
         </p>
     `,
     practiceParams: { 
@@ -193,8 +193,45 @@ const COURSES = [
         duration: 10,  // Thời gian 10 phút để đủ trải nghiệm combo
         minAverage: 1, // Yêu cầu ít nhất 1 lần TB (quality = 3)
         minGood: 1     // Yêu cầu ít nhất 1 lần Tốt (quality = 2)
-    }
+    }	
 },
+
+// ... (bài s_3_levels ở trên) ...
+            {
+                id: 's_3_guided',
+                title: 'Thiền Hướng Dẫn: Nhịp Rung Chánh Niệm',
+                desc: 'Sử dụng nhịp rung ngẫu nhiên để neo giữ tâm trí về với hiện tại.',
+                content: `
+                    <p>Trong quá trình tọa thiền, sẽ có những lúc tâm trí chìm vào hôn trầm (buồn ngủ) hoặc trôi dạt quá xa mà chúng ta không hề hay biết. <strong>Chế độ Thiền Hướng Dẫn</strong> đóng vai trò như một tiếng gõ nhẹ của thiền sư để đánh thức sự tỉnh giác của bạn.</p>
+                    
+                    <div style="background: rgba(96, 165, 250, 0.1); border-left: 3px solid #60a5fa; padding: 10px; margin: 15px 0; font-size: 14px;">
+                        <strong style="color: #60a5fa;"><i class="fas fa-bell"></i> Cơ chế vận hành:</strong>
+                        <ul style="margin-top: 5px;">
+                           <li>Hệ thống sử dụng <strong>Khoảng cách mỗi lần rung</strong> bạn thiết lập để duy trì nhịp độ dẫn thiền.</li>
+						   
+                            <li>Tín hiệu rung (nhẹ và đa dạng) được thiết kế <strong>ngẫu nhiên</strong> về cả cường độ và thời điểm (biến thiên xoay quanh khoảng bạn chọn). Điều này giúp tâm luôn tỉnh giác và ngăn chặn sự hình thành phản xạ vô thức hoặc trạng thái "tự động".</li>
+                            <li><strong>Nhiệm vụ của bạn:</strong> Mỗi khi cảm nhận được nhịp rung, hãy dùng nó như một mỏ neo — kiểm tra xem tâm mình đang ở đâu, kéo nó về với hiện tại, và ghi nhận chánh niệm.</li>
+                        </ul>
+                    </div>
+
+                    <p style="margin-top: 15px;"><strong>Hướng dẫn thực hành:</strong></p>
+                    <ol>
+                        <li>Nhấn vào biểu tượng <strong>Cấu hình (bánh răng)</strong> trong mục tiêu Thiền.</li>
+                        <li>Bật <strong>"Thiền Hướng Dẫn"</strong>.</li>
+                        <li>Đảm bảo thiết bị của bạn không tắt chế độ rung.</li>
+                    </ol>
+
+                    <p style="border-top: 1px solid var(--border); padding-top: 10px; font-size: 13px;">
+                        <strong>Yêu cầu hoàn thành:</strong> Thực hiện thời thiền tối thiểu 10 phút và phải bật Chế độ Thiền Hướng Dẫn trong suốt phiên tập.
+                    </p>
+                `,
+                practiceParams: { 
+                    duration: 10, 
+                    requireGuidedMode: true 
+                }
+            },
+            // ... (bài s_4_cert ở dưới) ...
+
 			{
     id: 's_4_cert',
     title: 'Chứng Chỉ: Thiền Căn Bản',
@@ -1067,17 +1104,27 @@ setupMeditationListeners() {
             e.preventDefault(); 
             
             const settings = this.data.medSettings;
-            // Luôn dùng logic holdDuration
             this.holdTriggered = false; 
             
             counterEl.style.transform = "scale(0.9)";
             counterEl.style.transition = "transform 0.1s";
             
-            // Logic Giữ (Hold) -> Kích hoạt mức Tốt (Level 2) hoặc Cao (Level 1 - xử lý bên trong trigger)
+            // Logic Giữ (Hold)
             pressTimer = setTimeout(() => {
-                this.triggerAwarenessSuccess(); // <--- GỌI HÀM MỚI
+                this.triggerAwarenessSuccess(); 
                 this.holdTriggered = true;
                 pressTimer = null;
+
+                // --- NEW: Start Continuous Anti-Drowsiness Vibration ---
+                // Lấy ngưỡng mất tập trung (giây) đổi ra mili-giây
+                const thresholdMs = (this.meditationState.threshold || 9) * 1000;
+                
+                // Bắt đầu vòng lặp rung ngẫu nhiên
+                this.meditationState.continuousHoldInterval = setInterval(() => {
+                    this.triggerRandomWakeVibration();
+                }, thresholdMs);
+                // --------------------------------------------------------
+
             }, settings.holdDuration || 500);
         });
 
@@ -1085,6 +1132,14 @@ setupMeditationListeners() {
             if (e.target.closest('.med-controls')) return;
             
             if (pressTimer) { clearTimeout(pressTimer); pressTimer = null; }
+            
+            // --- NEW: Clear Continuous Interval on release ---
+            if (this.meditationState.continuousHoldInterval) {
+                clearInterval(this.meditationState.continuousHoldInterval);
+                this.meditationState.continuousHoldInterval = null;
+            }
+            // -------------------------------------------------
+
             counterEl.style.transform = "scale(1)";
             
             // Nếu đã kích hoạt Hold (Giữ) thì bỏ qua logic Tap (Chạm)
@@ -1101,15 +1156,13 @@ setupMeditationListeners() {
             counterEl.style.transform = "scale(0.95)";
             setTimeout(() => counterEl.style.transform = "scale(1)", 80);
             
-            // Đợi một chút để xem người dùng có chạm đúp (double tap) không
             this.tapState.timer = setTimeout(() => {
                 const taps = this.tapState.count;
-                let qualityVal = 4; // Mặc định chạm 1 cái là Thấp (Level 4) hoặc Trung bình (Level 3)
+                let qualityVal = 4; 
                 
-                // Logic phân loại của Pro cũ:
-                if (taps === 1) qualityVal = 4;      // 1 chạm: Thấp
-                else if (taps === 2) qualityVal = 3; // 2 chạm: Trung bình
-                else qualityVal = 2;                 // >2 chạm: Trung bình
+                if (taps === 1) qualityVal = 4;      
+                else if (taps === 2) qualityVal = 3; 
+                else qualityVal = 2;                 
                 
                 this.triggerMindfulnessSuccess(qualityVal);
                 this.tapState.count = 0; 
@@ -1121,10 +1174,108 @@ setupMeditationListeners() {
             if(pressTimer) clearTimeout(pressTimer);
             counterEl.style.transform = "scale(1)";
             this.holdTriggered = false;
+
+            // --- NEW: Clear Continuous Interval if finger leaves screen ---
+            if (this.meditationState.continuousHoldInterval) {
+                clearInterval(this.meditationState.continuousHoldInterval);
+                this.meditationState.continuousHoldInterval = null;
+            }
+            // --------------------------------------------------------------
         });
     }
 }
 
+
+scheduleNextGuidedVibration() {
+    if (!this.meditationState.active || this.meditationState.paused || !this.meditationState.guidedMode) return;
+
+    // Sử dụng thông số slider mới thay vì dùng chung với ngưỡng mất tập trung
+    const x = this.meditationState.guidedInterval || 12; 
+    const variations = [-1, 0, 1, 2, 3];
+    const randomVariation = variations[Math.floor(Math.random() * variations.length)];
+    
+    // y được tính dựa trên x nhưng luôn đảm bảo không nhỏ hơn 5 giây
+    const y = Math.max(5, x + randomVariation); 
+
+    this.meditationState.guidedTimeout = setTimeout(() => {
+        this.triggerGuidedVibration();
+        this.scheduleNextGuidedVibration(); // Đặt lại timer sau khi rung
+    }, y * 1000);
+}
+
+triggerGuidedVibration() {
+    if (!this.meditationState.active || this.meditationState.paused) return;
+
+    const settings = this.data.medSettings;
+    
+    // Pattern rung ngẫu nhiên như yêu cầu
+    if (settings.vibration && navigator.vibrate) {
+        const patternLength = Math.floor(Math.random() * 4) + 2; // Randomly 2 to 5 bursts
+        const pattern = [];
+        
+        for (let i = 0; i < patternLength; i++) {
+            // Vibrate duration: Random between 30ms and 150ms
+            pattern.push(Math.floor(Math.random() * 120) + 30);
+            // Pause duration: Random between 20ms and 80ms
+            pattern.push(Math.floor(Math.random() * 60) + 20);
+        }
+        navigator.vibrate(pattern);
+    }
+
+    // Hiệu ứng Visual nhẹ (Pulse màu xanh dương)
+    const counterEl = document.getElementById('med-counter');
+    if (counterEl) {
+        counterEl.style.transition = "transform 0.05s, color 0.1s";
+        counterEl.style.transform = "scale(1.1)";
+        counterEl.style.color = "#60a5fa"; 
+        
+        setTimeout(() => {
+            counterEl.style.transform = "scale(1)";
+            counterEl.style.color = "white";
+        }, 400);
+    }
+}
+
+triggerRandomWakeVibration() {
+    if (!this.meditationState.active || this.meditationState.paused) return;
+    
+    // --- LỘC GIC MỚI: Trừ 1 điểm Tỉnh giác (Awareness) để đảm bảo công bằng ---
+    // Sử dụng Math.max để đảm bảo điểm không bị âm
+    this.meditationState.awarenessCount = Math.max(0, this.meditationState.awarenessCount - 1);
+    
+    // Check if vibration is enabled globally
+    const settings = this.data.medSettings;
+    if (!settings.vibration || !navigator.vibrate) return;
+
+    // Generate an unpredictable vibration pattern
+    // Array format: [vibrate, pause, vibrate, pause, ...]
+    const patternLength = Math.floor(Math.random() * 4) + 2; // Randomly 2 to 5 bursts
+    const pattern = [];
+    
+    for (let i = 0; i < patternLength; i++) {
+        // Vibrate duration: Random between 30ms and 150ms (sharp vs heavy)
+        pattern.push(Math.floor(Math.random() * 120) + 30);
+        // Pause duration: Random between 20ms and 80ms
+        pattern.push(Math.floor(Math.random() * 60) + 20);
+    }
+    
+    navigator.vibrate(pattern);
+
+    const currentMindfulness = this.meditationState.count;
+    const counterEl = document.getElementById('med-counter');
+    if (counterEl) {
+        counterEl.style.transition = "transform 0.05s, color 0.1s";
+        counterEl.style.transform = "scale(1.15)";
+        counterEl.style.color = "#ff7675"; // A subtle alert color
+		counterEl.innerHTML = '<i class="fas fa-shield-alt"></i>';
+        
+        setTimeout(() => {
+            counterEl.style.transform = "scale(1)";
+            counterEl.style.color = "white";
+			counterEl.innerText = currentMindfulness;
+        }, 400);
+    }
+}
 triggerAwarenessSuccess() {
     if (!this.meditationState.active || this.meditationState.paused) return;
     
@@ -2650,7 +2801,24 @@ startMeditationSetup(goal, overrideParams = null) {
 
     this.updateMeditationQuote(true); 
     
-    // Interval này chỉ xử lý giao diện text trích dẫn, không ảnh hưởng thời gian nên cứ giữ nguyên
+   // --- BỔ SUNG MỚI CHO CHẾ ĐỘ DẪN THIỀN ---
+    let isGuidedModeActive = this.data.medSettings.guidedMode || false;
+    let activeGuidedInterval = this.data.medSettings.guidedInterval || 12; // Default
+    
+    if (goal && goal.guidedMode !== undefined) {
+        isGuidedModeActive = goal.guidedMode;
+        if (goal.guidedInterval !== undefined) {
+            activeGuidedInterval = goal.guidedInterval;
+        }
+    }
+    
+    this.meditationState.guidedMode = isGuidedModeActive;
+    this.meditationState.guidedInterval = activeGuidedInterval; // Lưu vào state
+
+    if (isGuidedModeActive) {
+        this.scheduleNextGuidedVibration();
+    }
+    // ----------------------------------------
     this.meditationState.quoteInterval = setInterval(() => {
         if(!this.meditationState.paused) {
             this.updateMeditationQuote(false);
@@ -2714,7 +2882,16 @@ startMeditationSetup(goal, overrideParams = null) {
     }
     this.meditationState.targetEndTime = null; // Ngừng đếm Web worker
     // ------------------------------------
-
+// --- NEW: Clean up the continuous hold interval if it's running ---
+    if (this.meditationState.continuousHoldInterval) {
+        clearInterval(this.meditationState.continuousHoldInterval);
+        this.meditationState.continuousHoldInterval = null;
+    }
+   // --- BỔ SUNG MỚI ---
+    if (this.meditationState.guidedTimeout) {
+        clearTimeout(this.meditationState.guidedTimeout);
+        this.meditationState.guidedTimeout = null;
+    }
     if (this.meditationState.quoteInterval) {
         clearInterval(this.meditationState.quoteInterval);
     }
@@ -2824,6 +3001,9 @@ updateEfficiencyDisplay() {
         // 4. Kiểm tra Chế độ xác nhận
         const activeConfirmMode = goal && goal.confirmMode !== undefined ? goal.confirmMode : this.data.medSettings.confirmMode;
         if (params.requireConfirmMode && !activeConfirmMode) isSuccess = false;
+		// 5. Kiểm tra Chế độ Dẫn thiền (BỔ SUNG MỚI)
+        const activeGuidedMode = goal && goal.guidedMode !== undefined ? goal.guidedMode : this.data.medSettings.guidedMode;
+        if (params.requireGuidedMode && !activeGuidedMode) isSuccess = false;
 
         // --- BỔ SUNG MỚI: Kiểm tra mức chú tâm ---
         if (params.minAverage || params.minGood) {
@@ -2954,6 +3134,7 @@ updateEfficiencyDisplay() {
     this.recalculateStreak();
     this.renderGoals();
     this.renderReports();
+	this.renderCalendar();
     const newBadges = this.checkAchievements(true);
     
     document.getElementById('meditation-finish-modal').style.display = 'none';
@@ -3046,9 +3227,10 @@ checkMeditationTimer() {
 openMedSettings() {
     let s = this.data.medSettings;
     
-    // Context-aware load: If meditating, load the specific goal's settings
     let currentConfirmMode = s.confirmMode || false;
     let currentConfirmProb = (typeof s.confirmProbability !== 'undefined') ? s.confirmProbability : 100;
+    let currentGuidedMode = s.guidedMode || false;
+    let currentGuidedInterval = s.guidedInterval || 12; // Mặc định 12s
 
     if (this.meditationState && this.meditationState.active) {
         const goal = this.data.goals.find(g => g.id === this.meditationState.goalId);
@@ -3056,22 +3238,28 @@ openMedSettings() {
             currentConfirmMode = goal.confirmMode;
             currentConfirmProb = goal.confirmProbability;
         }
+        if (goal && goal.guidedMode !== undefined) {
+            currentGuidedMode = goal.guidedMode;
+            if (goal.guidedInterval !== undefined) currentGuidedInterval = goal.guidedInterval;
+        }
     }
     
-    // Gán giá trị vào input
     document.getElementById('inp-hold-time').value = s.holdDuration || 500;
     document.getElementById('disp-hold-time').innerText = ((s.holdDuration || 500) / 1000) + 's';
-    
     document.getElementById('inp-vibrate').checked = s.vibration;
     
-    // Áp dụng giá trị linh hoạt theo mục tiêu
     document.getElementById('inp-confirm-mode').checked = currentConfirmMode;
     document.getElementById('inp-confirm-prob').value = currentConfirmProb;
     document.getElementById('disp-confirm-prob').innerText = currentConfirmProb + '%';
     
-    this.toggleConfirmSlider(); 
+    // Áp dụng dữ liệu cho khối Hướng dẫn
+    document.getElementById('inp-guided-mode').checked = currentGuidedMode;
+    document.getElementById('inp-guided-interval').value = currentGuidedInterval;
+    document.getElementById('disp-guided-interval').innerText = currentGuidedInterval + 's';
     
-    // Hiển thị modal
+    this.toggleConfirmSlider(); 
+    this.toggleGuidedSlider(); // Gọi hàm hiển thị khối slider mới
+    
     const modal = document.getElementById('med-settings-modal');
     modal.style.display = 'flex';
 }
@@ -3079,26 +3267,45 @@ openMedSettings() {
 saveMedSettings() {
     const confirmModeVal = document.getElementById('inp-confirm-mode').checked;
     const confirmProbVal = parseInt(document.getElementById('inp-confirm-prob').value);
-    
-    // Lưu riêng rẽ cho mục tiêu hiện tại nếu đang trong phiên thiền
+    const guidedModeVal = document.getElementById('inp-guided-mode').checked; 
+    const guidedIntervalVal = parseInt(document.getElementById('inp-guided-interval').value); // Lấy giá trị slider
+
     if (this.meditationState && this.meditationState.active) {
         const goal = this.data.goals.find(g => g.id === this.meditationState.goalId);
         if (goal) {
             goal.confirmMode = confirmModeVal;
             goal.confirmProbability = confirmProbVal;
+            goal.guidedMode = guidedModeVal; 
+            goal.guidedInterval = guidedIntervalVal; // Lưu vào mục tiêu
         }
     }
 
     this.data.medSettings = {
-        mode: 'unified', // Luôn cố định
+        mode: 'unified', 
         holdDuration: parseInt(document.getElementById('inp-hold-time').value),
         vibration: document.getElementById('inp-vibrate').checked,
-        // Chỉ cập nhật cấu hình mặc định (Global) nếu không ở trong phiên thiền
         confirmMode: (this.meditationState && this.meditationState.active) ? this.data.medSettings.confirmMode : confirmModeVal,
-        confirmProbability: (this.meditationState && this.meditationState.active) ? this.data.medSettings.confirmProbability : confirmProbVal
+        confirmProbability: (this.meditationState && this.meditationState.active) ? this.data.medSettings.confirmProbability : confirmProbVal,
+        guidedMode: (this.meditationState && this.meditationState.active) ? this.data.medSettings.guidedMode : guidedModeVal,
+        guidedInterval: (this.meditationState && this.meditationState.active) ? this.data.medSettings.guidedInterval : guidedIntervalVal // Cập nhật Global
     };
 
     this.save();
+    
+    // Kích hoạt/Cập nhật liền ngay trong phiên
+    if (this.meditationState && this.meditationState.active) {
+        this.meditationState.guidedMode = guidedModeVal;
+        this.meditationState.guidedInterval = guidedIntervalVal; // Áp dụng thông số mới
+        
+        if (guidedModeVal) {
+            // Xóa timeout cũ để apply khoảng thời gian mới lập tức
+            if (this.meditationState.guidedTimeout) clearTimeout(this.meditationState.guidedTimeout);
+            this.scheduleNextGuidedVibration();
+        } else if (!guidedModeVal && this.meditationState.guidedTimeout) {
+            clearTimeout(this.meditationState.guidedTimeout);
+            this.meditationState.guidedTimeout = null;
+        }
+    }
 }
 
 toggleConfirmSlider() {
@@ -3106,7 +3313,15 @@ toggleConfirmSlider() {
     document.getElementById('confirm-slider-group').style.display = isChecked ? 'block' : 'none';
 }
 
+toggleGuidedSlider() {
+    const isChecked = document.getElementById('inp-guided-mode').checked;
+    document.getElementById('guided-slider-group').style.display = isChecked ? 'block' : 'none';
+}
 
+updateGuidedIntervalDisplay() {
+    const val = document.getElementById('inp-guided-interval').value;
+    document.getElementById('disp-guided-interval').innerText = val + 's';
+}
 closeMedSettings() {
     this.saveMedSettings();
     document.getElementById('med-settings-modal').style.display = 'none';
@@ -4745,20 +4960,36 @@ document.getElementById('breakdown-title').innerText = breakdownTitle;
 
     const weekDays = ['T2', 'T3', 'T4', 'T5', 'T6', 'T7', 'CN'];
 
-    // --- CẤU HÌNH CHART CHUNG ---
-    const commonOptions = {
-        maintainAspectRatio: false,
-        scales: {
-            x: { stacked: true, grid: { color: '#374151' }, ticks: { color: '#9ca3af', font: { size: 11 } } },
-            y: {
-                stacked: true,
-                grid: { color: '#374151' },
-                title: { display: false },
-                ticks: { color: '#9ca3af', font: { size: 11 } }
-            }
+    const isTimeMode = (this.reportMode === 'time');
+   const commonOptions = {
+    maintainAspectRatio: false,
+    scales: {
+        x: {
+            stacked: true,
+            grid: { color: '#374151' },
+            ticks: { color: '#9ca3af', font: { size: 11 } }
         },
+        y: {
+            stacked: true,
+            grid: { color: '#374151' },
+            title: { display: false },
+            ticks: {
+                color: '#9ca3af',
+                font: { size: 11 },
+                // NEW: Convert axis units to hours if in time mode
+                callback: function(value) {
+                    if (isTimeMode) {
+                        if (value === 0) return 0;
+                        if (value < 60) return value.toFixed(0) + 'p';
+                        return (value / 60).toFixed(0) + 'h';
+                    }
+                    return value; // Keep as is for Mindfulness/Count mode
+                }
+            }
+        }
+    },
         plugins: {
-            legend: { labels: { color: '#9ca3af', font: { size: 11 } } },
+            legend: {display: false, labels: { color: '#9ca3af', font: { size: 11 } } },
             tooltip: {
                 
                 callbacks: {
@@ -4872,7 +5103,7 @@ document.getElementById('breakdown-title').innerText = breakdownTitle;
         options: {
             maintainAspectRatio: false,
             plugins: {
-                legend: { labels: { color: '#9ca3af' } },
+                legend: { labels: { color: '#9ca3af' }, position: 'bottom' },
                 title: { display: activeDataForDoughnut.length === 0, text: 'Chưa có dữ liệu', position: 'bottom', color: '#6b7280' },
                 tooltip: {
                     backgroundColor: '#121821', titleColor: '#f3f4f6', bodyColor: '#f3f4f6', borderColor: '#374151', borderWidth: 1, padding: 10, z: 999,
@@ -5107,8 +5338,8 @@ document.getElementById('breakdown-title').innerText = breakdownTitle;
         }
     }    
 changeReportWeek(dir) { this.currentWeekStart.setDate(this.currentWeekStart.getDate() + (dir * 7)); this.renderReports(); }
-            changeReportMonth(dir) { this.currentMonth.setMonth(this.currentMonth.getMonth() + dir); this.renderReports();this.renderDensityChart(); }
-            changeMonth(dir) { this.currentMonth.setMonth(this.currentMonth.getMonth() + dir); this.renderCalendar(); }
+            changeReportMonth(dir) { this.currentMonth.setMonth(this.currentMonth.getMonth() + dir); this.renderReports(); this.renderCalendar(); this.renderDensityChart() }
+            changeMonth(dir) { this.currentMonth.setMonth(this.currentMonth.getMonth() + dir); this.renderReports(); this.renderCalendar(); this.renderDensityChart() }
 
 updateStats() {
     this.recalculateStreak();
