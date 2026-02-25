@@ -1099,10 +1099,16 @@ setupMeditationListeners() {
     let pressTimer = null;
     
     if (medOverlay) {
+        // 1. NGĂN TRÌNH DUYỆT CUỘN/KÉO KHI CHẠM VÀO OVERLAY
+        medOverlay.style.touchAction = 'none'; 
+
          medOverlay.addEventListener('pointerdown', (e) => {
             if (e.target.closest('.med-controls') || e.target.closest('.modal')) return;
             e.preventDefault(); 
             
+            // 2. BẮT DÍNH POINTER ĐỂ KHÔNG BỊ RỚT SỰ KIỆN KHI NGÓN TAY DI CHUYỂN NHẸ
+            medOverlay.setPointerCapture(e.pointerId);
+
             const settings = this.data.medSettings;
             this.holdTriggered = false; 
             
@@ -1115,15 +1121,12 @@ setupMeditationListeners() {
                 this.holdTriggered = true;
                 pressTimer = null;
 
-                // --- NEW: Start Continuous Anti-Drowsiness Vibration ---
-                // Lấy ngưỡng mất tập trung (giây) đổi ra mili-giây
+                // Start Continuous Anti-Drowsiness Vibration
                 const thresholdMs = (this.meditationState.threshold || 9) * 1000;
                 
-                // Bắt đầu vòng lặp rung ngẫu nhiên
                 this.meditationState.continuousHoldInterval = setInterval(() => {
                     this.triggerRandomWakeVibration();
                 }, thresholdMs);
-                // --------------------------------------------------------
 
             }, settings.holdDuration || 500);
         });
@@ -1131,14 +1134,18 @@ setupMeditationListeners() {
         const handleRelease = (e) => {
             if (e.target.closest('.med-controls')) return;
             
+            // 3. NHẢ POINTER CAPTURE KHI NHẤC TAY LÊN
+            if (medOverlay.hasPointerCapture(e.pointerId)) {
+                medOverlay.releasePointerCapture(e.pointerId);
+            }
+
             if (pressTimer) { clearTimeout(pressTimer); pressTimer = null; }
             
-            // --- NEW: Clear Continuous Interval on release ---
+            // Clear Continuous Interval on release
             if (this.meditationState.continuousHoldInterval) {
                 clearInterval(this.meditationState.continuousHoldInterval);
                 this.meditationState.continuousHoldInterval = null;
             }
-            // -------------------------------------------------
 
             counterEl.style.transform = "scale(1)";
             
@@ -1170,17 +1177,22 @@ setupMeditationListeners() {
         };
         
         medOverlay.addEventListener('pointerup', handleRelease);
-        medOverlay.addEventListener('pointerleave', () => {
+        
+        // 4. LẮNG NGHE THÊM POINTERCANCEL ĐỂ DỌN DẸP NẾU BỊ HỆ THỐNG NGẮT
+        medOverlay.addEventListener('pointercancel', handleRelease);
+
+        medOverlay.addEventListener('pointerleave', (e) => {
+            // Nếu đang trong trạng thái capture (ngón tay vẫn đang đè xuống), thì bỏ qua việc leave
+            if (e.pointerId && medOverlay.hasPointerCapture(e.pointerId)) return;
+
             if(pressTimer) clearTimeout(pressTimer);
             counterEl.style.transform = "scale(1)";
             this.holdTriggered = false;
 
-            // --- NEW: Clear Continuous Interval if finger leaves screen ---
             if (this.meditationState.continuousHoldInterval) {
                 clearInterval(this.meditationState.continuousHoldInterval);
                 this.meditationState.continuousHoldInterval = null;
             }
-            // --------------------------------------------------------------
         });
     }
 }
