@@ -1,3 +1,15 @@
+<h2 class="left-align" style="margin-bottom:-10px">Giới thiệu</h2><br>
+<p lang="vi" class="vi" style="text-indent: 1em;">
+<b>Lời Của Đức Phật</b> là một công cụ website được xây dựng dựa trên nền tảng web của <a href="https://github.com/thebuddhaswords/BW2">thebuddhaswords.net</a>, nhằm mang đến cho người đọc bản dịch đáng tin cậy và dễ tiếp cận nhất về lời dạy của Đức Phật trong kinh điển Nikaya, bằng cả tiếng Việt và tiếng Pali. Trang web không chỉ đơn thuần là một kho tư liệu, mà còn là một công cụ học thuật, nghiên cứu hiện đại, giúp người dùng tra cứu, đối chiếu và tìm hiểu kinh điển một cách thuận tiện.
+<p lang="vi" class="vi">
+
+Với sự hỗ trợ của <a href="https://github.com/digitalpalidictionary">Digital Pali Dictionary</a>, gần như toàn bộ từ vựng Pali đều có thể được tra cứu tức thì, giúp việc học và nghiên cứu trở nên dễ dàng. Trang web cũng được thiết kế để hoạt động tốt trên nhiều thiết bị, từ máy tính đến điện thoại, và có thể sử dụng ngoại tuyến thông qua ứng dụng Kiwix hoặc từ bản lưu trữ Offline.
+
+Mục tiêu của <b>Lời Của Đức Phật</b> là tạo ra một không gian học pháp thân thiện, nơi mọi người có thể tiếp cận giáo lý nguyên thủy của Đức Phật, đồng thời tận dụng công nghệ hiện đại để nâng cao trải nghiệm nghiên cứu.</p>
+
+<p lang="vi" class="vi">
+Trang web hoạt động trực tuyến như một website bình thường và có thể sử dụng ngoại tuyến với đầy đủ chức năng.</p>
+
 <h3>Giấy Phép</h3>
 
 <p lang="vi" class="vi">
@@ -17,15 +29,3 @@ Creative Commons Attribution-NonCommercial 4.0 (CC BY-NC 4.0)
 </ul>
 
 <p class="mb-0" style="text-align: center;"><span style="font-size: 20px;">--ooOoo--</span></p>
-
-<h2 class="left-align" style="margin-bottom:-10px">Giới thiệu</h2><br>
-<p lang="vi" class="vi" style="text-indent: 1em;">
-<b>Lời Của Đức Phật</b> là một công cụ website được xây dựng dựa trên nền tảng web của <a href="https://github.com/thebuddhaswords/BW2">thebuddhaswords.net</a>, nhằm mang đến cho người đọc bản dịch đáng tin cậy và dễ tiếp cận nhất về lời dạy của Đức Phật trong kinh điển Nikaya, bằng cả tiếng Việt và tiếng Pali. Trang web không chỉ đơn thuần là một kho tư liệu, mà còn là một công cụ học thuật, nghiên cứu hiện đại, giúp người dùng tra cứu, đối chiếu và tìm hiểu kinh điển một cách thuận tiện.
-<p lang="vi" class="vi">
-
-Với sự hỗ trợ của <a href="https://github.com/digitalpalidictionary">Digital Pali Dictionary</a>, gần như toàn bộ từ vựng Pali đều có thể được tra cứu tức thì, giúp việc học và nghiên cứu trở nên dễ dàng. Trang web cũng được thiết kế để hoạt động tốt trên nhiều thiết bị, từ máy tính đến điện thoại, và có thể sử dụng ngoại tuyến thông qua ứng dụng Kiwix hoặc từ bản lưu trữ Offline.
-
-Mục tiêu của <b>Lời Của Đức Phật</b> là tạo ra một không gian học pháp thân thiện, nơi mọi người có thể tiếp cận giáo lý nguyên thủy của Đức Phật, đồng thời tận dụng công nghệ hiện đại để nâng cao trải nghiệm nghiên cứu.</p>
-
-<p lang="vi" class="vi">
-Trang web hoạt động trực tuyến như một website bình thường và có thể sử dụng ngoại tuyến với đầy đủ chức năng.</p>
