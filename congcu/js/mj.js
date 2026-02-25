@@ -1275,14 +1275,14 @@ triggerGuidedVibration() {
     
     // Pattern rung ngẫu nhiên như yêu cầu
     if (settings.vibration && navigator.vibrate) {
-        const patternLength = Math.floor(Math.random() * 4) + 2; // Randomly 2 to 5 bursts
+        const patternLength = Math.floor(Math.random() * 2) + 2; // Randomly 2 to 5 bursts
         const pattern = [];
         
         for (let i = 0; i < patternLength; i++) {
             // Vibrate duration: Random between 30ms and 150ms
-            pattern.push(Math.floor(Math.random() * 120) + 30);
+            pattern.push(Math.floor(Math.random() * 31) + 60);
             // Pause duration: Random between 20ms and 80ms
-            pattern.push(Math.floor(Math.random() * 60) + 20);
+            pattern.push(Math.floor(Math.random() * 50) + 100);
         }
         navigator.vibrate(pattern);
     }
@@ -1313,14 +1313,14 @@ triggerRandomWakeVibration() {
 
     // Generate an unpredictable vibration pattern
     // Array format: [vibrate, pause, vibrate, pause, ...]
-    const patternLength = Math.floor(Math.random() * 4) + 2; // Randomly 2 to 5 bursts
+    const patternLength = Math.floor(Math.random() * 2) + 2; // Randomly 2 to 5 bursts
     const pattern = [];
     
     for (let i = 0; i < patternLength; i++) {
         // Vibrate duration: Random between 30ms and 150ms (sharp vs heavy)
-        pattern.push(Math.floor(Math.random() * 120) + 30);
+        pattern.push(Math.floor(Math.random() * 31) + 60);
         // Pause duration: Random between 20ms and 80ms
-        pattern.push(Math.floor(Math.random() * 60) + 20);
+        pattern.push(Math.floor(Math.random() * 50) + 100);
     }
     
     navigator.vibrate(pattern);
@@ -2186,6 +2186,7 @@ renderComparisonTable(medGoalIds) {
                     stacked: true, display: true,
                     grid: { display: true, color: 'rgba(55, 65, 81, 0.5)' },
                     ticks: { 
+					    precision: 0,
                         display: true, color: '#9ca3af', font: { size: 10 },
                         callback: function(value) { return formatTime(value); }
                     }
@@ -2244,6 +2245,7 @@ renderComparisonTable(medGoalIds) {
                 grid: { color: '#374151' }, 
                 title: { display: false }, 
                 ticks: { 
+				    precision: 0,
                     color: '#9ca3af', font: { size: 10 },
                     callback: function(value) { return formatTime(value); }
                 } 
@@ -3199,6 +3201,7 @@ updateEfficiencyDisplay() {
     this.renderGoals();
     this.renderReports();
 	this.renderCalendar();
+	this.renderDate();
     const newBadges = this.checkAchievements(true);
     
     document.getElementById('meditation-finish-modal').style.display = 'none';
@@ -3293,7 +3296,7 @@ openMedSettings() {
     let currentConfirmMode = s.confirmMode || false;
     let currentConfirmProb = (typeof s.confirmProbability !== 'undefined') ? s.confirmProbability : 100;
     let currentGuidedMode = s.guidedMode || false;
-    let currentGuidedInterval = s.guidedInterval || 12; // Mặc định 12s
+    let currentGuidedInterval = s.guidedInterval || 9; // Mặc định 12s
 
     if (this.meditationState && this.meditationState.active) {
         const goal = this.data.goals.find(g => g.id === this.meditationState.goalId);
@@ -3322,7 +3325,16 @@ openMedSettings() {
     
     this.toggleConfirmSlider(); 
     this.toggleGuidedSlider(); // Gọi hàm hiển thị khối slider mới
-    
+    // --- THÊM ĐOẠN NÀY VÀO ĐỂ ẨN/HIỆN THEO TRẠNG THÁI THI ---
+    const guidedModeGroup = document.getElementById('setting-guided-mode-group');
+    if (guidedModeGroup) {
+        if (this.meditationState && this.meditationState.active && this.meditationState.isExam) {
+            guidedModeGroup.style.display = 'none'; // Ẩn khi đang thi
+        } else {
+            guidedModeGroup.style.display = 'block'; // Hiện bình thường
+        }
+    }
+    // --------------------------------------------------------
     const modal = document.getElementById('med-settings-modal');
     modal.style.display = 'flex';
 }
@@ -3357,16 +3369,26 @@ saveMedSettings() {
     
     // Kích hoạt/Cập nhật liền ngay trong phiên
     if (this.meditationState && this.meditationState.active) {
-        this.meditationState.guidedMode = guidedModeVal;
-        this.meditationState.guidedInterval = guidedIntervalVal; // Áp dụng thông số mới
-        
-        if (guidedModeVal) {
-            // Xóa timeout cũ để apply khoảng thời gian mới lập tức
-            if (this.meditationState.guidedTimeout) clearTimeout(this.meditationState.guidedTimeout);
-            this.scheduleNextGuidedVibration();
-        } else if (!guidedModeVal && this.meditationState.guidedTimeout) {
-            clearTimeout(this.meditationState.guidedTimeout);
-            this.meditationState.guidedTimeout = null;
+        // KIỂM TRA NẾU ĐANG THI CUỐI KHÓA THÌ CHẶN BẬT DẪN THIỀN
+        if (this.meditationState.isExam) {
+            this.meditationState.guidedMode = false;
+            if (this.meditationState.guidedTimeout) {
+                clearTimeout(this.meditationState.guidedTimeout);
+                this.meditationState.guidedTimeout = null;
+            }
+        } else {
+            // Logic bình thường cho các thời thiền tiêu chuẩn
+            this.meditationState.guidedMode = guidedModeVal;
+            this.meditationState.guidedInterval = guidedIntervalVal; // Áp dụng thông số mới
+            
+            if (guidedModeVal) {
+                // Xóa timeout cũ để apply khoảng thời gian mới lập tức
+                if (this.meditationState.guidedTimeout) clearTimeout(this.meditationState.guidedTimeout);
+                this.scheduleNextGuidedVibration();
+            } else if (!guidedModeVal && this.meditationState.guidedTimeout) {
+                clearTimeout(this.meditationState.guidedTimeout);
+                this.meditationState.guidedTimeout = null;
+            }
         }
     }
 }
@@ -3918,7 +3940,7 @@ startExamSession(goalId) {
         quoteInterval: null,
         currentAutoLevel: 4, comboCounter: 0, lastTouchTime: now,
         consecutiveGoodCount: 0,
-        
+        guidedMode: false,
         isExam: true,
         examResult: null
     };
@@ -4977,7 +4999,7 @@ document.getElementById('breakdown-title').innerText = breakdownTitle;
             (this.reportMode === 'time' && isGoalTime)) {
             goalDatasets[goal.id] = {
                 name: goal.name, color: goal.color,
-                breakdownTotal: 0, weekly: new Array(7).fill(0), monthly: new Array(monthlyLabels.length).fill(0)
+                breakdownTotal: 0, weekly: new Array(7).fill(0), monthly: new Array(monthlyLabels.length).fill(0), lastActivity: 0 //
             };
         }
     });
@@ -4990,7 +5012,9 @@ document.getElementById('breakdown-title').innerText = breakdownTitle;
             let logDateObj;
             if (!logTime) { logDateObj = new Date(log.date); logTime = logDateObj.getTime(); }
             else { logDateObj = new Date(logTime); }
-
+            if (logTime > goalDatasets[log.goalId].lastActivity) {
+            goalDatasets[log.goalId].lastActivity = logTime;
+        }
             if (logTime >= filterStart && logTime < filterEnd) {
                 goalDatasets[log.goalId].breakdownTotal += value;
             }
@@ -5009,7 +5033,12 @@ document.getElementById('breakdown-title').innerText = breakdownTitle;
     // Lọc dữ liệu hiển thị
     // Biểu đồ tròn: Chỉ hiện những cái > 0
     const activeDataForDoughnut = datasets.filter(d => d.breakdownTotal > 0);
-    // Biểu đồ cột: Hiện tất cả (hoặc lọc nếu muốn gọn)
+   const top5Indices = activeDataForDoughnut
+        .map((d, index) => ({ index, lastActivity: d.lastActivity || 0 }))
+        .sort((a, b) => b.lastActivity - a.lastActivity)
+        .slice(0, 5)
+        .map(x => x.index);
+    
     const allDataForBars = datasets; 
 
     const weekDays = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
@@ -5030,7 +5059,7 @@ document.getElementById('breakdown-title').innerText = breakdownTitle;
             ticks: {
                 color: '#9ca3af',
                 font: { size: 11 },
-                // NEW: Convert axis units to hours if in time mode
+                precision: 0,
                 callback: function(value) {
                     if (isTimeMode) {
                         if (value === 0) return 0;
@@ -5156,7 +5185,10 @@ document.getElementById('breakdown-title').innerText = breakdownTitle;
         options: {
             maintainAspectRatio: false,
             plugins: {
-                legend: { labels: { color: '#9ca3af' }, position: 'bottom' },
+                 legend: { labels: { color: '#9ca3af', filter: function(item, chart) {
+                            if (activeDataForDoughnut.length <= 5) return true;
+                            return top5Indices.includes(item.index);
+                        } }, position: 'bottom' },
                 title: { display: activeDataForDoughnut.length === 0, text: 'No data available', position: 'bottom', color: '#6b7280' },
                 tooltip: {
                     backgroundColor: '#121821', titleColor: '#f3f4f6', bodyColor: '#f3f4f6', borderColor: '#374151', borderWidth: 1, padding: 10, z: 999,
@@ -5909,6 +5941,7 @@ renderBadgeAltar() {
 				if (viewName === 'pro') this.renderProAnalytics();
 				if (viewName === 'achievements') {
         this.renderAchievementsUI();
+		this.renderDate();
         this.renderBadgeAltar(); 
     }
             }
@@ -6300,7 +6333,8 @@ if (minLabel) {
     
     this.save(); 
     this.renderGoals(); 
-    this.renderCalendar(); 
+    this.renderCalendar();
+    this.renderDate();	
     this.renderReports(); 
     const newBadges = this.checkAchievements(true);
     this.closeSessionModal(); 
