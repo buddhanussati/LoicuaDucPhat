@@ -217,7 +217,7 @@ const COURSES = [
                         <strong style="color: #60a5fa;"><i class="fas fa-bell"></i> How it works:</strong>
                         <ul style="margin-top: 5px;">
                             <li>The system utilizes your custom <strong>Vibration Interval</strong> to maintain a steady guiding rhythm for the meditation session.</li>
-                            <li>Haptic signals (gentle and varied) are <strong>randomized</strong> in both intensity and timing (varying slightly around your chosen setting). This keeps the mind alert and prevents the formation of "autopilot" or unconscious reflexes.</li>
+                            <li>Haptic signals (gentle and varied) are <strong>randomized</strong> in intensity, this keeps the mind alert and prevents the formation of "autopilot" or unconscious reflexes.</li>
                             <li><strong>Your task:</strong> Every time you feel the vibration, use it as an anchor — check where your mind is, gently pull it back to the present, and register a mindfulness touch.</li>
                         </ul>
                     </div>
@@ -1268,16 +1268,12 @@ scheduleNextGuidedVibration() {
 
     // Sử dụng thông số slider mới thay vì dùng chung với ngưỡng mất tập trung
     const x = this.meditationState.guidedInterval || 9; 
-    const variations = [-1, 0, 1, 2, 3];
-    const randomVariation = variations[Math.floor(Math.random() * variations.length)];
     
-    // y được tính dựa trên x nhưng luôn đảm bảo không nhỏ hơn 5 giây
-    const y = Math.max(5, x + randomVariation); 
 
     this.meditationState.guidedTimeout = setTimeout(() => {
         this.triggerGuidedVibration();
         this.scheduleNextGuidedVibration(); // Đặt lại timer sau khi rung
-    }, y * 1000);
+    }, x * 1000);
 }
 
 triggerGuidedVibration() {
@@ -1315,8 +1311,7 @@ triggerGuidedVibration() {
 triggerRandomWakeVibration() {
     if (!this.meditationState.active || this.meditationState.paused) return;
     
-    // --- LỘC GIC MỚI: Trừ 1 điểm Tỉnh giác (Awareness) để đảm bảo công bằng ---
-    // Sử dụng Math.max để đảm bảo điểm không bị âm
+    this.meditationState.wakeCount = (this.meditationState.wakeCount || 0) + 1;
     this.meditationState.awarenessCount = Math.max(0, this.meditationState.awarenessCount - 1);
     
     // Check if vibration is enabled globally
@@ -1484,11 +1479,13 @@ analyzeSingleSession(log) {
     }
 
     
+   // 2. Trừ đi thời gian phục hồi từ Tỉnh Giác (hold)
     const awarenessCount = log.awarenessCount || 0;
+	const wakeCount = log.wakeCount || 0;
     const holdDurationSec = (this.data.medSettings.holdDuration || 500) / 1000;
     const recoveryTime = awarenessCount * holdDurationSec;
-    
-    distractedSec -= recoveryTime;
+    const wakeVibrationTime = wakeCount * (thresholdSec / 2);
+    distractedSec -= (recoveryTime + wakeVibrationTime);
 
     // Đảm bảo không âm và không vượt quá tổng thời gian
     if (distractedSec < 0) distractedSec = 0;
@@ -2857,7 +2854,8 @@ startMeditationSetup(goal, overrideParams = null) {
     this.meditationState = {
         active: true, paused: false, goalId: goal.id, 
         count: 0,           
-        awarenessCount: 0,  
+        awarenessCount: 0,
+        wakeCount: 0,		
         startTime: now, 
         totalDurationSeconds: totalDurationSec,
         remainingSeconds: totalDurationSec, 
@@ -3195,6 +3193,7 @@ updateEfficiencyDisplay() {
         notes: `${autoNote} ${notes}`,
         count: adjustedCount, // SAVE THE ADJUSTED COUNT
         awarenessCount: this.meditationState.awarenessCount,
+		wakeCount: this.meditationState.wakeCount || 0,
         touches: this.meditationState.touches.map(t => {
             const delta = Math.max(0, t.t - this.meditationState.startTime);
             return t.v ? { d: delta, v: t.v } : delta;
@@ -3942,7 +3941,7 @@ startExamSession(goalId) {
 
     this.meditationState = {
         active: true, paused: false, goalId: goal.id,
-        count: 0, awarenessCount: 0,
+        count: 0, awarenessCount: 0, wakeCount: 0,
         startTime: now, 
         totalDurationSeconds: totalDurationSec, 
         remainingSeconds: totalDurationSec, 
