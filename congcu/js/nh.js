@@ -1419,7 +1419,7 @@ analyzeSingleSession(log) {
 	const wakeCount = log.wakeCount || 0;
     const holdDurationSec = (this.data.medSettings.holdDuration || 500) / 1000;
     const recoveryTime = awarenessCount * holdDurationSec;
-    const wakeVibrationTime = wakeCount * (thresholdSec / 2);
+    const wakeVibrationTime = wakeCount * (thresholdSec / 4);
     distractedSec -= (recoveryTime + wakeVibrationTime);
 
 
