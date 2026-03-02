@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="theme-color" content="#8b5cf6">
 	<link rel="icon" type="image/x-icon" href="./images/favicon6.ico">
+	<link href="./css/css.css" rel="stylesheet">
 	<link rel="apple-touch-icon" href="./images/icon-192-trichdan.png">
     <title>Trích Dẫn Kinh Điển Pali</title>
     
@@ -81,7 +82,7 @@
             top: 0;
             right: 0;
             background: transparent;
-            font-size: 1.5rem;
+            font-size: 1.2rem;
             cursor: pointer;
             color: var(--text-primary);
 			border: 1px solid #b3b3b3;
@@ -142,7 +143,15 @@
             transition: all 0.25s ease;
         }
 
-        
+        .quote-icon {
+            font-size: 2.5rem;
+            position: absolute;
+            top: 10px;
+            left: 20px;
+            color: var(--accent);
+            opacity: 0.2;
+            font-family: serif;
+        }
 
         #quote-content {
             font-family: 'Merriweather', serif;
@@ -241,15 +250,54 @@
 body.dark .quote-card:hover {
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
 }
+/* Nhóm chứa 2 nút ghim ở góc phải */
+.header-actions {
+    position: absolute;
+    top: 0;
+    right: 0;
+    display: flex;
+    gap: 8px; /* Khoảng cách giữa 2 nút */
+}
+
+/* Style chung cho các nút icon */
+.icon-btn {
+    background: transparent;
+    font-size: 1.2rem;
+    cursor: pointer;
+    color: var(--text-primary);
+    border: 1px solid #b3b3b3;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 6px; /* Chỉnh đệm cho cân đối */
+    text-decoration: none; /* Xóa gạch chân cho thẻ a */
+}
+
+/* Giao diện mobile */
+@media (max-width: 600px) {
+    .header-actions {
+        position: relative;
+        justify-content: center;
+        margin-bottom: 10px;
+    }
+}
     </style>
 </head>
 <body>
 
     <div class="container">
         <header>
-            <button class="theme-toggle" id="theme-toggle" title="Đổi giao diện">☀️</button>
-            <h1>Trích Lời Phật&nbsp;Dạy</h1>
-        </header>
+    <div class="header-actions">
+        <a href="https://buddhanussati.github.io/dhamma-quotes/suttavi.xml" target="_blank" title="Đăng ký kênh RSS" class="icon-btn" id="rss-link">
+            <i class="far fa-rss"></i>
+        </a>
+        <button class="icon-btn" id="theme-toggle" title="Đổi giao diện">
+            <i class="fa-solid fa-sun-bright"></i>
+        </button>
+    </div>
+    <h1>Trích Lời Phật&nbsp;Dạy</h1>
+</header>
 
         <div class="controls">
             <button class="filter-btn active" data-id="all">Tất cả</button>
@@ -267,6 +315,7 @@ body.dark .quote-card:hover {
         </div>
 
         <main class="quote-card">
+            <div class="quote-icon">“</div>
             <div id="quote-content">Đang Tải...</div>
             <div id="reference-container"></div>
         </main>
