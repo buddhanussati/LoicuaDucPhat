@@ -3,6 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="theme-color" content="#8b5cf6">
+	<link rel="icon" type="image/x-icon" href="./images/favicon6.ico">
+	<link rel="apple-touch-icon" href="./images/icon-192-trichdan.png">
     <title>Trích Dẫn Kinh Điển Pali</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -123,7 +126,7 @@
         .quote-card {
             background: var(--bg-card);
 			background-image: var(--bg-card-image);
-            padding: 50px 40px;
+            padding: 40px 30px;
             border-radius: var(--border-radius);
 			border: var(--bg-card-border);
             box-shadow: var(--shadow);
@@ -135,17 +138,11 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
+			cursor: pointer;           
+            transition: all 0.25s ease;
         }
 
-        .quote-icon {
-            font-size: 4rem;
-            position: absolute;
-            top: 10px;
-            left: 20px;
-            color: var(--accent);
-            opacity: 0.2;
-            font-family: serif;
-        }
+        
 
         #quote-content {
             font-family: 'Merriweather', serif;
@@ -229,9 +226,21 @@
         @media (max-width: 600px) {
             .theme-toggle { position: relative; display: block; margin: 0 auto 10px auto; }
             #quote-content { font-size: 1.1rem; }
+			.quote-card { padding: 50px 20px; }
+
             .actions { width: 100%; }
             .action-btn { width: 100%; justify-content: center; }
         }
+		
+
+.quote-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 40px rgba(139, 90, 43, 0.18);
+}
+
+body.dark .quote-card:hover {
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+}
     </style>
 </head>
 <body>
@@ -258,8 +267,7 @@
         </div>
 
         <main class="quote-card">
-            <div class="quote-icon">“</div>
-            <div id="quote-content">Loading...</div>
+            <div id="quote-content">Đang Tải...</div>
             <div id="reference-container"></div>
         </main>
 
