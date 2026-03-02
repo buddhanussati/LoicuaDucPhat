@@ -1596,7 +1596,7 @@ const quotesData = {
 
 { text: `Và này các Tỷ-kheo, những Sa-môn hay là Bà-la-môn nào biết rõ già, chết, biết rõ già, chết tập khởi, biết rõ già, chết đoạn diệt, biết rõ con đường đưa đến già, chết đoạn diệt … biết rõ sanh … hữu … thủ … ái … thọ … xúc … sáu xứ … danh sắc … thức … biết rõ các hành, biết rõ các hành tập khởi, biết rõ các hành đoạn diệt, biết rõ con đường đưa đến các hành đoạn diệt; các Sa-môn hay Bà-la-môn ấy được chấp nhận là Sa-môn giữa các Sa-môn, hay là Bà-la-môn giữa các Bà-la-môn. Và những bậc Tôn giả ấy, ngay trong đời sống hiện tại có thể với thắng trí tự mình giác ngộ, chứng đạt và an trú mục đích Sa-môn và mục đích Bà-la-môn hạnh.`, ref: "SN 12.13", url: "../sn/sn12.13.html#content" },
 
-{ text: `: “Chánh kiến, chánh kiến”, bạch Thế Tôn được nói đến như vậy. Bạch Thế Tôn, cho đến như thế nào là chánh kiến?\n- Này Kaccāyana, thế giới này phần lớn y chỉ vào hai cực đoan này: có và không có.\nNày Kaccāyana, ai với chánh trí tuệ thấy như chơn thế giới tập khởi, vị ấy không chấp nhận thế giới là không có. Này Kaccāyana, ai với chánh trí tuệ thấy như chơn thế giới đoạn diệt, vị ấy không chấp nhận thế giới là có.`, ref: "SN 12.15", url: "../sn/sn12.15.html#content" },
+{ text: `“Chánh kiến, chánh kiến”, bạch Thế Tôn được nói đến như vậy. Bạch Thế Tôn, cho đến như thế nào là chánh kiến?\n- Này Kaccāyana, thế giới này phần lớn y chỉ vào hai cực đoan này: có và không có.\nNày Kaccāyana, ai với chánh trí tuệ thấy như chơn thế giới tập khởi, vị ấy không chấp nhận thế giới là không có. Này Kaccāyana, ai với chánh trí tuệ thấy như chơn thế giới đoạn diệt, vị ấy không chấp nhận thế giới là có.`, ref: "SN 12.15", url: "../sn/sn12.15.html#content" },
 
 { text: `Này Kaccāyana, chấp thủ phương tiện và bị thiên kiến trói buộc, phần lớn thế giới này là vậy. Và ai với tâm không trú trước, không chấp thủ phương tiện ấy, không chấp thủ thiên chấp tùy miên ấy, không có chấp trước, không trú trước, vị ấy không có nghĩ: “Ðây là tự ngã của tôi”. Khi khổ sanh thời xem là sanh, khi khổ diệt thời xem là diệt; vị ấy không có nghi ngờ, không có phân vân, không duyên vào ai khác, trí ở đây là của vị ấy. Cho đến như vậy, này Kaccāyana, là chánh tri kiến.`, ref: "SN 12.15", url: "../sn/sn12.15.html#content" },
 
@@ -5198,7 +5198,143 @@ const quotesData = {
 { text: `1236. Ai nói lên lời gì,\nLời ấy không khổ mình,\nLời không làm hại người,\nLời ấy là thiện thuyết.\n\n1237. Ai nói lời ái ngữ,\nLời nói khiến hoan hỷ,\nLời nói không ác độc,\nLời nói là ái ngữ.\n\n1238. Lời chân, lời bất tử,\nThường pháp xưa là vậy,\nThiện nhân trú trên chân,\nTrên nghĩa và trên pháp.\n\n1239. Lời đức Phật nói lên,\nÐạt an ổn Niết-bàn,\nChấm dứt mọi khổ đau,\nThật nói lời tối thượng.`, ref: "Trưởng Lão Tăng Kệ 21.1", url: "../thag/thag21.1.html#content" },
             ],
             thig: [
-                { text: "Đang Cập Nhật", ref: "Thig 5.4", url: "../thig/thig5.4.html" }
+                { text: `Trưởng Lão Ni Muttà\n\n2. Hỡi này, giải thoát Ni\nHãy giải thoát các ách,\nNhư mặt trăng thoát khỏi,\nMiệng hàm của Ràhu,\nVới tâm tư giải thoát,\nKhỏi nợ nần trói buộc,\nHãy thọ hưởng món ăn,\nDo khất thực đem lại.`, ref: "Trưởng Lão Ni Kệ 1.2", url: "../thig/thig1.2.html#content" },
+
+{ text: `Trưởng Lão Ni Punnà\n\n3. Hỡi này, thành Mãn ni,\nHãy tràn đầy Chánh pháp,\nNhư mặt trăng tròn đầy,\nTrong ngày rằm trăng tròn,\nHãy tràn đầy trí tuệ,\nPhá tan khối si ám.`, ref: "Trưởng Lão Ni Kệ 1.3", url: "../thig/thig1.3.html#content" },
+
+{ text: `Trưởng Lão Ni Tissà\n\n4. Tissà hãy học tập,\nHọc trong những học pháp,\nChớ để cho các ách,\nVượt khỏi chi phối nàng.\nHãy sống không liên hệ,\nMọi ách không trói buộc,\nSống giữa thế giới này,\nKhông có các lậu hoặc.`, ref: "Trưởng Lão Ni Kệ 1.4", url: "../thig/thig1.4.html#content" },
+
+{ text: `Một Trưởng Lão Ni Tissà Khác\n\n5. Tissà, hãy cột tâm\nTập trung trên các pháp,\nChớ để từng sát-na\nUổng phí vượt khỏi nàng!\nNhững sát-na đã qua\nHọ sầu muộn, đau khổ,\nKhi họ bị rơi vào\nTrong cảnh giới địa ngục.`, ref: "Trưởng Lão Ni Kệ 1.5", url: "../thig/thig1.5.html#content" },
+
+{ text: `Trưởng Lão Ni Dhìra\n\n6. Dhìra, hãy cảm xúc,\nNhững cảm chứng đoạn diệt,\nTịnh chỉ các vọng tưởng,\nLà chân chánh an lạc,\nHãy thuận hướng Niết-bàn,\nÁch an ổn, vô thường.`, ref: "Trưởng Lão Ni Kệ 1.6", url: "../thig/thig1.6.html#content" },
+
+{ text: `Một Trưởng Lão Ni Dhìra Khác\n\n7. Dhìra, hãy kiên trì,\nNắm giữ các thiện pháp,\nHỡi này Tỷ-kheo-ni,\nCác căn được tu tập,\nHãy mang cái thân này,\nLà cái thân cuối cùng,\nSau khi đã chiến thắng,\nÁc ma nữ quân lực,\nSau khi đã chiến thắng,\nÁc ma với quân lực.`, ref: "Trưởng Lão Ni Kệ 1.7", url: "../thig/thig1.7.html#content" },
+
+{ text: `Trưởng Lão Ni Mittà\n\n8. Hỡi này Mittà bạn!\nVới lòng tin xuất gia,\nHãy tu tập rèn luyện,\nHân hoan trong bạn lành,\nHãy tu tập rèn luyện,\nTrong các pháp hiếu thiện,\nCố gắng đạt cho được,\nAn ổn khỏi ách nạn.`, ref: "Trưởng Lão Ni Kệ 1.8", url: "../thig/thig1.8.html#content" },
+
+{ text: `Trưởng Lão Ni Bhadhà\n\n9. Hỡi Bhàdha hiền thiện,\nVới lòng tin xuất gia,\nHãy sống vui hoan hỷ,\nTrong các pháp hiền thiện,\nHãy tu tập rèn luyện,\nTrong các pháp chí thiện,\nCố gắng đạt cho được,\nAn ổn khỏi ách nạn.`, ref: "Trưởng Lão Ni Kệ 1.9", url: "../thig/thig1.9.html#content" },
+
+{ text: `Trưởng Lão Ni Upasanà\n\n10. Hỡi Upasanà\nHãy vượt dòng nước mạnh,\nDòng nước khó vượt qua,\nBị thần chết chi phối,\nHãy mang cái thân này,\nLà cái thân cuối cùng,\nSau khi đã chiến thắng,\nÁc ma với quân lực.`, ref: "Trưởng Lão Ni Kệ 1.10", url: "../thig/thig1.10.html#content" },
+
+{ text: `Trưởng Lão Ni Muttà\n\n11. Lành thay giải thoát Ni,\nTa thật khéo giải thoát,\nGiải thoát ra khỏi được,\nBa vật còm và cong,\nThoát cối xay, cái chày,\nThoát ông chồng lưng còm,\nHỡi này giải thoát Ni!\nTa thoát được sống chết,\nNhững gì dẫn tái sanh,\nÐược nhổ lên tận gốc.`, ref: "Trưởng Lão Ni Kệ 1.11", url: "../thig/thig1.11.html#content" },
+
+{ text: `Trưởng Lão Ni Dhammadinnà\n\n12. Trong ai, lòng ước muốn,\nÐạt được quả vô sanh,\nÐược sanh khởi tỏa rộng,\nÐầy tràn cả tâm ý,\nTâm không bị trói buộc,\nTrong các dục chi phối,\nVị ấy được tên gọi\nLà bậc vào dòng trên.`, ref: "Trưởng Lão Ni Kệ 1.12", url: "../thig/thig1.12.html#content" },
+
+{ text: `Trưởng Lão Ni Visàkhà\n\n13. Hãy làm, hãy thực hành\nÐúng theo lời Phật dạy.\nVà sau khi làm xong,\nKhông có lòng ăn năn,\nHãy gấp rửa chân sạch,\nVà ngồi xuống một bên.`, ref: "Trưởng Lão Ni Kệ 1.13", url: "../thig/thig1.13.html#content" },
+
+{ text: `Trưởng Lão Ni Sumànà\n\n14. Sau khi thấy các giới,\nVới cái nhìn đau khổ,\nChớ có đi trở lại,\nVào con đường tái sanh,\nHãy từ bỏ, xả ly\nLòng dục trong sanh hữu,\nSống đời sống hành trì,\nTa mát lạnh tịch tịnh.`, ref: "Trưởng Lão Ni Kệ 1.14", url: "../thig/thig1.14.html#content" },
+
+{ text: `Trưởng Lão Ni Uttarà\n\n15. Ta đã chế ngự được,\nThân miệng và tâm tư,\nTa chinh phục khát ái,\nCho đến tận gốc rễ,\nTa sống được mát lạnh,\nTrong tịch tịnh, an lặng.`, ref: "Trưởng Lão Ni Kệ 1.15", url: "../thig/thig1.15.html#content" },
+
+{ text: `Trưởng Lão Ni Sumànà\n\n16. Hỡi này, lão Ni kia,\nHãy an lạc nằm nghỉ,\nÐắp phủ trong tấm y,\nChính tự mình làm lấy,\nLòng tham người an tịnh,\nNgười mát lạnh tịch tịnh.`, ref: "Trưởng Lão Ni Kệ 1.16", url: "../thig/thig1.16.html#content" },
+
+{ text: `Trưởng Lão Ni Dhammà\n\n17. Sau khi khất thực xong,\nYếu sức, chống trên gậy,\nVới chân tay run rẩy,\nTa ngã trên mặt đất,\nThấy nguy hiểm của thân,\nTâm ta được giải thoát.`, ref: "Trưởng Lão Ni Kệ 1.17", url: "../thig/thig1.17.html#content" },
+
+{ text: `Trưởng Lão Ni Sanjhà\n\n18. Bỏ gia đình, xuất gia,\nTa từ bỏ con cái,\nTừ bỏ gia súc quý,\nTừ bỏ tham và sân,\nCòn đối với vô minh,\nTa sống hạnh viễn ly,\nSau khi chinh phục được,\nTận gốc cả tham ái,\nTa được sống mát lạnh,\nTịch tịnh và an lặng.`, ref: "Trưởng Lão Ni Kệ 1.18", url: "../thig/thig1.18.html#content" },
+
+{ text: `Trưởng Lão Ni Abhirùpa Nandà\n\n19. Này Nandà, hãy nhìn,\nTấm thân chỗ quy tụ,\nNhiều bệnh hoạn, bất tịnh,\nÐầy hôi hám thối nát,\nTâm nàng hãy tu tập,\nQuán tri tánh bất tịnh,\nÐạt cho được nhất tâm,\nTâm tư khéo thiền định.\n\n20. Hãy tu tập vô tướng,\nHãy bỏ mạn tùy miên,\nDo thắng tri được mạn,\nNàng sẽ sống an tịnh.`, ref: "Trưởng Lão Ni Kệ 2.1", url: "../thig/thig2.1.html#content" },
+
+{ text: `Trưởng Lão Ni Jentì\n\n21. Chính Bảy giác chi này\nLà đường đạt Niết-bàn,\nTất cả, ta tu tập,\nNhư lời đức Phật dạy.\n\n22. Ta thấy được Thế Tôn,\nÐây thân tụ cuối cùng\nVòng sanh tử đoạn tận,\nNay không còn tái sanh.`, ref: "Trưởng Lão Ni Kệ 2.2", url: "../thig/thig2.2.html#content" },
+
+{ text: `Trưởng Lão Ni Mẹ Của Sumangala\n\n23. Hỡi thiện giải thoát Ni,\nLành thay khéo giải thoát,\nTa được khéo giải thoát,\nKhỏi cái chày giã gạo,\nTa không còn xấu hổ,\nVới ông chồng đan dù,\nVới soong chảo nấu ăn,\nVới nghèo đói tồi tàn.\n\n24. Chặt đứt được tham sân,\nTa sống không tham sân,\nTa đi đến gốc cây,\nÔi, an lạc ta thiền.`, ref: "Trưởng Lão Ni Kệ 2.3", url: "../thig/thig2.3.html#content" },
+
+{ text: `Trưởng Lão Ni Addhakasi\n\n25. Tiền lạc thú của ta,\nKhông thua thuế Kàsi,\nSau khi so sánh giá,\nThôn trưởng định giá vậy.\n\n26. Nay ta lại nhàm chán,\nChính sắc đẹp của ta,\nTa chán ngấy sắc ấy,\nTa không còn luyến tiếc.\nTa chớ có liên tục,\nChạy theo vòng luân hồi,\nBa minh ta chứng được,\nThành tựu lời Phật dạy.`, ref: "Trưởng Lão Ni Kệ 2.4", url: "../thig/thig2.4.html#content" },
+
+{ text: `Trưởng Lão Ni Città\n\n27. Dầu ta có mỏi mệt,\nBệnh hoạn quá yếu đuối,\nDựa trên gậy ta đi,\nTa leo lên đỉnh núi.\n\n28. Với đại y vắt ngang,\nVới bình bát lộn ngược,\nTa dựa mình tảng đá,\nPhá tan khối si ám.`, ref: "Trưởng Lão Ni Kệ 2.5", url: "../thig/thig2.5.html#content" },
+
+{ text: `Trưởng Lão Ni Mettikà\n\n29. Dầu ta có đau đớn,\nSức yếu, tuổi trẻ qua,\nDựa trên gậy, ta đi,\nTa leo lên đỉnh núi.\n\n30. Với đại y vắt ngang,\nVới bình bát lộn ngược,\nTa ngồi trên tảng đá,\nTâm ta được giải thoát.\nBa minh chứng đạt được,\nThành tựu lời Phật dạy.`, ref: "Trưởng Lão Ni Kệ 2.6", url: "../thig/thig2.6.html#content" },
+
+{ text: `Trưởng Lão Ni Mittà\n\n31. Ngày mười bốn, ngày rằm,\nNgày mồng tám giữa tháng,\nNgày thần túc nguyệt phần,\nTa thọ trì tám giới.\n\n32. Ta gìn giữ trai giới,\nKhiến chư Thiên hoan hỷ,\nMỗi ngày ăn một bữa,\nCạo đầu đắp đại y,\nTa đâu muốn thiên giới,\nTa nhiếp phục tâm khổ.`, ref: "Trưởng Lão Ni Kệ 2.7", url: "../thig/thig2.7.html#content" },
+
+{ text: `Trưởng Lão Ni Mẹ Của Abhayà\n\n33. Từ bàn chân trở lên,\nTừ đầu tóc trở xuống,\nHãy quán sát thân này,\nThân này thật bất tịnh,\nThật hôi hám thối tha.\n\n34. Ta an trú như vậy,\nMọi tham dục nhổ sạch,\nNhiệt não được đoạn trừ,\nTa mát lạnh, tịch tịnh.`, ref: "Trưởng Lão Ni Kệ 2.8", url: "../thig/thig2.8.html#content" },
+
+{ text: `Trưởng Lão Ni Abhaya\n\n35. Hỡi này vô úy Ni!\nThân này thật mỏng manh,\nChính ở đây phàm phu,\nƯa thích, thường tham đắm.\nTa sẽ bỏ thân này,\nTỉnh giác và chánh niệm\n\n36. Chú tâm không phóng dật,\nTa gắng thoát pháp khổ,\nÁi diệt, ta chứng đạt,\nThành tựu lời Phật dạy.`, ref: "Trưởng Lão Ni Kệ 2.9", url: "../thig/thig2.9.html#content" },
+
+{ text: `37. Bốn lần và năm lần,\nTa ra khỏi tinh xá,\nNhưng tâm không an tịnh,\nKhông nhiếp phục được tâm,\nNhưng đến đêm mồng tám,\nÁi được ta nhổ sạch.\n\n38. Chú tâm không phóng dật,\nTa gắng thoát pháp khổ,\nÁi diệt, ta chứng đạt,\nThành tựu lời Phật dạy.`, ref: "Trưởng Lão Ni Kệ 2.10", url: "../thig/thig2.10.html#content" },
+
+{ text: `Trưởng Lão Ni Sàmà Khác\n\n39. Ðã được hăm lăm năm,\nTừ khi ta xuất gia.\nTa không thắng tri tâm,\nKhông được tâm thăng bằng,\n\n40.Tâm không được an tịnh,\nKhông nhiếp phục được tâm\nDo vậy ta dao động,\nNhớ đến lời Phật dạy.\n\n41. Chú tâm không phóng dật\nTa gắng thoát pháp khổ,\nÁi diệt, ta chứng đạt,\nThành tựu lời Phật dạy\nHôm nay đêm mồng bảy,\nKhái ái được khô cạn.`, ref: "Trưởng Lão Ni Kệ 3.1", url: "../thig/thig3.1.html#content" },
+
+{ text: `Trưởng Lão Ni Uttama\n\n42. Bốn lần và năm lần,\nTa ra khỏi tinh xá.\nNhưng tâm không an tịnh,\nKhông nhiếp phục được tâm.\n\n43. Ta đến Tỷ-kheo -ni,\nVới ta đồng tín nữ,\nNàng thuyết pháp cho ta,\nVới uẩn, xứ và giới.\n\n44. Nghe xong pháp nàng thuyết,\nNhư nàng đã dạy ta,\nBảy ngày ngồi kiết-già,\nTa thọ hưởng hỷ lạc,\nMồng tám ta duỗi chân,\nPhá tan khối si ám.`, ref: "Trưởng Lão Ni Kệ 3.2", url: "../thig/thig3.2.html#content" },
+
+{ text: `Trưởng Lão Ni Uttarà Khác\n\n45. Bảy pháp giác chi này,\nCon đường đạt Niết-bàn,\nTất cả ta tu tập,\nNhư lời đức Phật dạy.\n\n46. Do quán không vô tướng\nTa đạt quả mong muốn,\nTa thành con gái Phật,\nSanh ra từ miệng Ngài,\nLuôn luôn ta hoan hỷ,\nTrong an lạc Niết-bàn.\n\n47. Mọi dục được đoạn diệt,\nDục trời và dục người,\nVòng sanh hữu đoạn tận,\nNay không còn tái sanh.`, ref: "Trưởng Lão Ni Kệ 3.3", url: "../thig/thig3.3.html#content" },
+
+{ text: `Trưởng Lão Ni Dantikà\n\n48. Ra khỏi ngôi tinh xá,\nÐể nghỉ trưa ban ngày,\nTrên đỉnh núi Linh Thứu,\nTa thấy một con voi,\nDầm nước xong đi lên,\nTrên bờ một con sông.\n\n49. Một người cầm cái móc,\nYêu cầu đưa chân lên,\nCon voi duỗi chân ra,\nVà người leo lên voi.\n\n50. Thấy kẻ chưa nhiếp phục,\nÐi đến được nhiếp phục,\nTa thấy nó vâng chịu,\nTheo quyền lực của người.\nNhư vậy, ta định tâm,\nÐi vào trong rừng ấy.`, ref: "Trưởng Lão Ni Kệ 3.4", url: "../thig/thig3.4.html#content" },
+
+{ text: `Trưởng Lão Ni Ubirì\n\n51. Hỡi nàng Ubirì,\nNàng khóc trong rừng sâu,\nKhóc than ôi Jivà,\nCon gái thân của tôi,\nHãy tự mình hồi tỉnh,\nHỡi này Ubirì!\nTrong bãi đốt thân này\nTất cả tám vạn tư,\nNgười đồng tên Jivà\nNàng khóc Jivà nào?\n\n52. Mũi tên khó nhìn thấy,\nÐâm dính nơi tâm ta,\nChắc chắn đã được Ngài,\nNhổ lên khỏi tâm ta,\nSầu muộn vì con gái,\nÐã được chấm dứt hẳn.\n\n53. Nay mũi tên được nhổ,\nMọi ham muốn lắng dịu,\nTa đi đến quy y\nBậc Mâu-ni ẩn sĩ,\nQuy y Ba ngôi báu\nPhật, Pháp và chúng Tăng.`, ref: "Trưởng Lão Ni Kệ 3.5", url: "../thig/thig3.5.html#content" },
+
+{ text: `Trưởng Lão Ni Sukkà\n\n54. Hỡi này người Vương Xá,\nCác người đã làm gì?\nGiống như người nằm mê,\nBị say vì uống mật!\nCác người không hầu hạ,\nSukkà thuyết lời Phật.\n\n55. Chúng tôi nghĩ bậc trí,\nUống được nước cam lồ,\nDòng nước thật thuần tinh,\nKhông gì chướng ngại nổi\nChẳng khác kẻ đi đường,\nÐón nhận nước trời mưa.\n\n56. Hỡi này nàng Sukkà!\nNgười con của ánh sáng!\nÐược ly tham định tĩnh,\nNhờ ánh sáng Chánh pháp,\nHãy mang thân cuối cùng,\nSau khi thấy ma quân.`, ref: "Trưởng Lão Ni Kệ 3.6", url: "../thig/thig3.6.html#content" },
+
+{ text: `Trưởng Lão Ni Selà\n\n57. Nàng sẽ không thoát khỏi,\nThoát ly khỏi đời này,\nNhư vậy hạnh viễn ly,\nNàng dùng để làm gì?\nHãy thọ hưởng dục lạc,\nChớ bứt rứt về sau.\n\n58. Các dục giống gươm giáo,\nChém nát các uẩn ta,\nNhững dục mà ngươi gọi,\nLà lạc thú cuộc đời.\n\n59. Ngày nay dục lạc ấy,\nVới ta không hấp dẫn,\nỞ tất cả mọi nơi,\nHỷ lạc được đoạn tận,\nKhối tối tăm mù ám,\nÐã bị làm tan nát,\nHỡi này kẻ Ác ma,\nNgươi hãy biết như vậy,\nNgươi chính là Ác ma\nNgươi đã bị bại trận.`, ref: "Trưởng Lão Ni Kệ 3.7", url: "../thig/thig3.7.html#content" },
+
+{ text: `Trưởng Lão Ni Somà\n\n60. Ðịa vị khó chứng đạt,\nChỉ thánh nhân chứng đạt,\nTrí nữ nhân hai ngón,\nSao hy vọng chứng đạt.\n\n61. Nữ tánh chướng ngại gì,\nKhi tâm khéo thiền định,\nKhi trí tuệ triển khai,\nChánh quán pháp vi diệu.\n\n62. Ở tất cả mọi nơi,\nHỷ lạc được đoạn tận,\nKhối tối tăm mù mịt,\nÐã bị làm tan nát.\nHỡi này kẻ Ác ma,\nNgươi hãy biết như vậy,\nNgươi chính là Ác ma,\nNgươi đã bị bại trận.`, ref: "Trưởng Lão Ni Kệ 3.8", url: "../thig/thig3.8.html#content" },
+
+{ text: `Trưởng Lão Ni Bhaddà\n\n63. Con được thừa tự Phật,\nCa-diếp khéo thiền định.\nBiết được đời quá khứ,\nThấy cõi trời đọa xứ.\n\n64. Ẩn sĩ đoạt diệt sanh,\nThắng trí được thành tựu\nCùng với Ba minh này,\nLà Phạm chí Ba minh.\n\n65. Cũng vậy nàng Bhaddà\nNgười xứ Kapila,\nNàng là bậc Ba minh,\nÐã đoạn được sự chết,\nMang thân này cuối cùng,\nSau khi thắng ma quân.\n\n66. Thấy nguy hại ở đời,\nHai chúng tôi xuất gia.\nChúng tôi được chế ngự,\nÐoạn tận các lậu hoặc,\nCảm xúc thành mát lạnh,\nÐược tịch tịnh giải thoát.`, ref: "Trưởng Lão Ni Kệ 4.1", url: "../thig/thig4.1.html#content" },
+
+{ text: `Trưởng Lão Ni Vô Danh\n\n67. Ðã được hai lăm năm,\nTừ khi ta xuất gia,\nCho đến búng ngón tay,\nTâm ta không lắng dịu.\n\n68. Tâm không được an tịnh,\nVì đầy ứ dục tham,\nTa giơ tay khóc than,\nTa đi vào tinh xá.\n\n69. Ta đến vị Ni ấy,\nÐồng tín nữ với ta,\nNàng thuyết pháp cho ta,\nVề uẩn, xứ và giới.\n\n70. Nghe pháp nàng giảng dạy,\nTa ngồi vào một bên,\nTa hết đời quá khứ,\nThiên nhãn được thanh tịnh,\n\n71. Với trí biết tâm người,\nLỗ tai được thanh tịnh.\nTa chứng thần túc thông,\nTa đạt được lậu tận,\nSáu thắng trí ta chứng,\nLời Phật dạy đã làm.`, ref: "Trưởng Lão Ni Kệ 5.1", url: "../thig/thig5.1.html#content" },
+
+{ text: `Trưởng Lão Ni Vimala, Xưa Là Một Kỹ Nữ\n\n72. Say mê với giai cấp,\nVới dung sắc tuổi xuân,\nVới danh xưng, danh vọng,\nTa ỷ lại tuổi trẻ,\nÐối với những người khác,\nTa khinh bỉ khinh thường.\n\n73. Thân này ta trang điểm,\nTa khêu gợi kẻ ngu,\nTa đứng trong khung cửa,\nTại cửa hàng buôn sắc,\nNhư thợ săn, ác độc,\nÐang gieo đặt bẫy mồi.\n\n74. Ta khoa trương trang sức,\nPhô bày nhiều chỗ kín,\nÐể châm biếm nhiều người,\nTa làm nhiều ảo thuật.\n\n75. Hôm nay ta khất thực,\nÐầu trọc, đắc đại y,\nTa ngồi dưới gốc cây,\nTa chứng định không tầm.\n\n76. Mọi khổ ách đoạn tận,\nCả cõi trời, cõi người,\nQuăng bỏ mọi lậu hoặc,\nTa mát lạnh tịch tịnh.`, ref: "Trưởng Lão Ni Kệ 5.2", url: "../thig/thig5.2.html#content" },
+
+{ text: `Trưởng Lão Ni Sìha\n\n77. Không như lý tác ý,\nBị dục tham ám ảnh,\nTa trước bị dao động\nKhông chế ngự được tâm.\n\n78. Bị phiền não chi phối,\nLạc tưởng ngự trị ta\nTâm ta không thăng bằng,\nBị tham tâm chi phối.\n\n79. Bảy năm sống ốm yếu,\nVàng da, dung sắc xấu\nÐêm ngày không an lạc\nTa sống chịu khổ đau.\n\n80. Do vậy ta lấy dây,\nÐi vào giữa khu rừng,\nTốt hơn ta treo cổ,\nCòn hơn sống hạ liệt.\n\n81. Làm chắc dây thòng lọng,\nTa cột ở cành cây,\nQuàng thòng lọng quanh cổ,\nTâm ta liền giải thoát.`, ref: "Trưởng Lão Ni Kệ 5.3", url: "../thig/thig5.3.html#content" },
+
+{ text: `Trưởng Lão Ni Sundarì Nandà\n\n82. Nandà, hãy nhìn thân,\nBệnh bất tịnh, hôi thúi,\nHãy tu tâm bất tịnh,\nNhất tâm khéo định tĩnh.\n\n83. Như thân này thân ấy,\nNhư thân ấy thân này,\nHôi thối và rữa nát,\nChỉ kẻ ngu thích thú.\n\n84. Như vậy quán thân này,\nNgày đêm không mệt mỏi,\nVới trí tuệ của con,\nDo vậy hãy thoát ly,\nVới trí tuệ của con,\nThoát khỏi kiêu sắc đẹp,\nVà người si nhìn thấy,\nVới cái nhìn như thật.\n\n85. Thành này làm bằng xương,\nQuét tô bằng máu thịt,\nỞ đây già và chết,\nMạn, lừa đảo chất chứa.\n\n86. Với tâm không phóng dật,\nNhư lý, quán thân ấy,\nTánh như thật thân này,\nÐược thấy trong và ngoài.\nTa nhàm chán thân thể,\nNội tâm được ly tham,\nKhông phóng dật ly hệ,\nTa an bình tịch tịnh.`, ref: "Trưởng Lão Ni Kệ 5.4", url: "../thig/thig5.4.html#content" },
+
+{ text: `Trưởng Lão Ni Manduttara\n\n87. Trước ta đảnh lễ lửa,\nTrăng, mặt trời chư thiên\nTa đi đến bến sông,\nTa xuống nước, lê tắm.\n\n88. Chấp nhận nhiều giới cấm\nTa chỉ cạo nửa đầu\nTa nằm ngủ dưới đất,\nCơm tối ta không ăn.\n\n89. Thích trang điểm trang sức,\nƯa tắm rửa, xoa bóp,\nThân này ta cung dưỡng,\nThỏa mãn các dục tham,\n\n90. Từ khi được lòng tin\nKhông nhà ta xuất gia,\nTa thấy thân như Phật,\nNhờ sạch các dục tham.\n\n91. Mọi sanh hữu chặt đứt,\nCả ham muốn hy cầu,\nMọi ách nạn giải tỏa,\nTa đạt tâm an tịnh.`, ref: "Trưởng Lão Ni Kệ 5.5", url: "../thig/thig5.5.html#content" },
+
+{ text: `Trưởng Lão Ni Mittakali\n\n92. Vì lòng tin, xuất gia,\nBỏ nhà, sống không nhà,\nTa sống tâm hướng mạnh,\nTheo lợi dưỡng cung kính.\n\n93. Từ bỏ đích tối thượng,\nPhục vụ đích hạ liệt,\nBị phiền não ngự trị,\nBỏ đích Sa-môn hạnh.\n\n94. Ngồi trong phòng tinh xá,\nTa cảm bị dao động\nTa đi vào tà đạo,\nKhát ái ngự trị ta.\n\n95. Ngắn ngủi sinh mạng ta,\nGià, bệnh đang đè nặng,\nTrước khi thân hủy diệt,\nGiờ phóng dật không còn.\n\n96. Như thật ta quán sát,\nSinh diệt của các uẩn,\nTâm giải thoát, ta chứng,\nLời Phật dạy làm xong.`, ref: "Trưởng Lão Ni Kệ 5.6", url: "../thig/thig5.6.html#content" },
+
+{ text: `Trưởng Lão Ni Sakulà\n\n97. Khi sống ở gia đình,\nNghe Tỷ kheo thuyết pháp,\nTa thấy pháp vô uế,\nÐạo Niết-bàn bất tử.\n\n98. Từ bỏ con trai, gái,\nCả tài sản lúa gạo,\nCạo tóc ta xuất gia\nSống đời sống không nhà.\n\n99. Ta làm người học nữ,\nTu tập con đường chánh,\nÐoạn tận tham và sân,\nÐoạn từng lậu hoặc một.\n\n100. Thọ giới Tỷ-kheo-ni,\nTa nhớ đời quá khứ,\nThiên nhãn ta thanh tịnh,\nKhông uế, khéo tu tập.\n\n101. Thấy các hàng ngoại diện,\nDo nhân sanh biến hoại,\nTa đoạn mọi lậu hoặc,\nMát lạnh ta tịch tịnh.`, ref: "Trưởng Lão Ni Kệ 5.7", url: "../thig/thig5.7.html#content" },
+
+{ text: `Trưởng Lão Ni Sonà\n\n102. Ta sanh được mười con,\nTrong thân chất chứa này,\nDo vậy ta già yếu,\nTa đến Tỷ-kheo-ni.\n\n103. Nàng thuyết pháp cho ta,\nVề uẩn xứ và giới,\nNghe pháp nàng thuyết giảng.\nCắt tóc ta xuất gia.\n\n104. Ta học lời nàng dạy,\nThiên nhãn ta thanh tịnh,\nTa biết các đời trước,\nChỗ ta sống đời trước.\n\n105. Ta tu pháp vô tướng,\nNhất tâm khéo thiền tịnh,\nTức thời ta giải thoát,\nKhông chấp thủ tịch tịnh.\n\n106. Năm uẩn được liễu tri,\nÐứng lại, gốc bị cắt,\nTham dục, ta không có,\nCăn cứ địa kiên trì?\nTừ nay ta không còn\nVấn đề phải tái sanh.`, ref: "Trưởng Lão Ni Kệ 5.8", url: "../thig/thig5.8.html#content" },
+
+{ text: `Trưởng Lão Ni Patàcàrà\n\n112. Với cây, cày ruộng đất,\nGieo hột giống trên đất,\nLoài Người được tài sản,\nNuôi dưỡng vợ và con.\n\n113. Sao ta, giới đầy đủ\nLàm theo Ðạo Sư dạy,\nLại không chứng Niết-bàn,\nKhông nhác, không dao động.\n\n114. Khi ta đang rửa chân,\nLàm cho dòng nước chảy,\nThấy được nước rửa chân\nTừ cao chảy xuống thấp,\n\n115. Nhờ vậy, tâm được định,\nNhư ngựa hiền khéo luyện.\nRồi ta cầm cây đèn,\nBước vào ngôi tinh xá,\nNằm trên chiếc giường nhỏ,\nTa nhìn quán ngọn đèn.\n\n116. Rồi lấy cây kim nhỏ,\nDìm tim đèn xuống dần,\nThấy cây đèn Niết-bàn,\nTâm ta được giải thoát.`, ref: "Trưởng Lão Ni Kệ 5.10", url: "../thig/thig5.10.html#content" },
+
+{ text: `30 Trưởng Lão Ni\n\n117. Loài Người trong tuổi trẻ,\nCầm chày giã lúa gạo,\nLoài Người được tài sản,\nNuôi dưỡng vợ và con.\n\n118. Hãy hành lời Phật dạy,\nKhông làm gì nhiệt não,\nRửa chân thật mau lẹ,\nHãy ngồi xuống một bên,\nChú tâm tu tâm chỉ,\nLàm theo lời Phật dạy.\n\n119. Sau khi nghe lời dạy,\nLời Patàcàrà,\nSau khi rửa chân xong,\nHọ vào ngồi một bên,\nChú tâm tu tâm chỉ,\nLàm theo lời Phật dạy.\n\n120. Trong đêm canh thứ nhất,\nHọ nhớ đời quá khứ\nTrong đêm canh chặng giữa,\nThiên nhãn được thanh tịnh,\nTrong đêm canh cuối cùng,\nKhối si ám phá tan.\n\n121. Ðứng dậy họ lễ chân,\nVị giáo giới cho họ,\nNhư Chư Thiên ba mươi\nÐảnh lễ vị Sakka,\nVị không bị đánh bại,\nỞ lại chỗ chiến trường,\nÐặt Patàcàrà,\nVào hàng bậc lãnh đạo,\nChúng tôi sẽ được sống,\nBa minh, không lậu hoặc.`, ref: "Trưởng Lão Ni Kệ 5.11", url: "../thig/thig5.11.html#content" },
+
+{ text: `Trưởng Lão Ni Candà\n\n122. Trước ta sống bất hạnh,\nKhông chồng và không con,\nKhông bè bạn, bà con,\nKhông có cơm, có áo.\n\n123. Ta cầm gậy bình bát\nÐi ăn xin từng nhà,\nBị lạnh nóng đày đọa,\nBảy năm ta sống vậy.\n\n124. Thấy được Tỷ-kheo-ni,\nTa nhận đồ ăn uống,\nSau khi đến, ta xin,\nÐược xuất gia không nhà.\n\n125. Nàng Patàcàrà,\nThương ta, cho xuất gia,\nRồi giảng dạy cho ta,\nHướng dẫn đến chân đế.\n\n126. Nghe xong lời nàng giảng.\nTa làm theo lời dạy,\nLời giảng bậc tôn Ni,\nKhông phải lời trống không,\nTa chứng được Ba minh,\nTa không còn lậu hoặc.`, ref: "Trưởng Lão Ni Kệ 5.12", url: "../thig/thig5.12.html#content" },
+
+{ text: `Trưởng Lão Ni Patàcàrà\n\n137. Ông không biết con đường\nNó đến hay nó đi,\nTừ đâu con trai đến,\nÔng lại khóc: 'Con tôi'.\n\n138. Ông đâu biết con đường,\nNó đến hay nó đi,\nÔng khóc nó làm gì?\nPháp hữu tình là vậy.\n\n129. Không có ai yêu cầu,\nTừ chỗ kia, nó đến,\nKhông có ai cho phép,\nTừ chỗ này, nó đi,\nTừ đâu, nó đến đây!\nÐược sống bấy nhiêu ngày.\n\n130. Mệnh chung, hình sắc người,\nLuân hồi, nó sẽ đi!\nÐến vậy, đi như kia,\nỞ đây, khóc than gì?\n\n131. Cây tên, khó thấy được,\nTừ tim ta, nhổ lên:\nNàng diệt sầu vì con,\nSầu ấy ám ảnh ta.\n\n132. Nay cây tên được nhổ\nKhông dục cầu, tịch tịnh\nTa quy y ẩn sĩ,\nPhật, Pháp và chúng Tăng.`, ref: "Trưởng Lão Ni Kệ 6.1", url: "../thig/thig6.1.html#content" },
+
+{ text: `Trưởng Lão Ni Vàsetthi\n\n133. Ta sầu muộn vì con\nKhổ, tâm cuồng tưởng loạn,\nLõa thể, tóc rối ren,\nÐời sống vậy, ta sống.\n\n134. Lang thang đường, đống rác,\nNghĩa địa, đường xe đi,\nBa năm ta đã sống,\nKham khổ, chịu đói khát.\n\n135. Rồi ta thấy Thiện Thệ,\nÐến thành Mi-thi-la,\nÐiều ngự kẻ chưa điều,\nBậc Giác Ngộ, vô úy.\n\n136. Lấy lui tâm bình tĩnh,\nTa đảnh lễ đến gần.\nThương ta, Gotama,\nNgài thuyết pháp cho ta.\n\n137. Nghe Ngài thuyết pháp xong,\nTa xuất gia, không nhà,\nTùy hành lời Ðạo Sư,\nTa chứng đạo an ổn.\n\n138. Mọi sầu muộn chặt đứt,\nÐoạn tận, được chấm dứt,\nTa liễu tri nền gốc,\nTừ đấy sầu muộn sanh.`, ref: "Trưởng Lão Ni Kệ 6.2", url: "../thig/thig6.2.html#content" },
+
+{ text: `Trưởng Lão Ni Khemà\n\n139. Nàng vừa trẻ vừa đẹp,\nTa vừa trẻ vừa xuân,\nVới cung đàn năm điệu,\nHãy vui hưởng, Khemà.\n\n140. Với thân hôi thối này,\nBệnh hoạn và mong manh,\nTa nhàm chán ghét bỏ,\nDục ái đã nhổ lên.\n\n141. Dục ví như gươm giáo,\nCác uẩn đoạn đầu đài,\nÐiều người nói dục lạc,\nNay ta đã xa lìa.\n\n142. Mọi nơi, hỷ duyệt đoạn,\nKhối si ám tan tành,\nHãy biết vậy, Ác ma!\nNgươi bị hại, Ma vương.\n\n143. Ngươi đánh lễ vầng sao!\nNgươi thờ lửa rừng sâu,\nNgươi không biết như thật,\nKẻ ngu nghĩ rằng tịnh.\n\n144. Còn ta, ta đảnh lễ,\nBậc Giác ngộ, Thượng nhân,\nGiải thoát mọi khổ đau,\nHành lời Ðạo Sư dạy.`, ref: "Trưởng Lão Ni Kệ 6.3", url: "../thig/thig6.3.html#content" },
+
+{ text: `Trưởng Lão Ni Sujàtà\n\n145. Trang sức, mặc áo đẹp\nVòng hoa, xức chiên đàn,\nÐeo mọi loại nữ trang\nCầm đầu chúng nữ tỳ.\n\n146. Mang theo đồ ăn uống,\nNhiều món ăn cứng mềm,\nTừ nhà ta đi ra,\nÐi đến vườn thưởng ngoạn.\n\n147. Tại đây ta vui chơi,\nRồi ta đi về nhà,\nTa thấy ngôi tinh xá,\nKhi ta bước vào rừng,\nRừng tên Anjanà,\nTại xứ Sàketa.\n\n148. Thấy hào quang thế giới,\nÐảnh lễ, ta tới gần,\nThương ta, bậc Pháp nhãn,\nNgài thuyết pháp cho ta.\n\n149. Nghe xong bậc Ðại tiên,\nTa thể nhập chân lý,\nTại đấy ta chứng pháp,\nLy trần tạo bất tử.\n\n150. Do liễu tri diệu pháp,\nTa xuất gia, không nhà,\nBa minh ta đạt được,\nKhông trống rỗng lời Phật.`, ref: "Trưởng Lão Ni Kệ 6.4", url: "../thig/thig6.4.html#content" },
+
+{ text: `Trưởng Lão Ni Anopamà\n\n151. Sanh gia đình cao quý,\nNhiều châu báu, tài sản,\nÐầy đủ dung sắc đẹp,\nCon gái cưng Majjha.\n\n152. Ðược con vua cầu hôn,\nCon phú gia xin cưới,\nSứ giả đến cha ta,\n"Hãy cho tôi Anopama."\n\n153. Công chúa con gái ngài,\nCân nặng như thế nào\nTôi sẽ tặng tám lần\nBằng vàng ròng châu báu.\n\n154. Ta thấy đấng Giác ngộ,\nBậc Thế Tôn vô thượng,\nTa đảnh lễ chân Ngài,\nÐến gần, ngồi một bên.\n\n155. Thương ta, Gotama,\nNgài thuyết pháp cho ta.\nNgay tại chỗ ngồi ấy,\nTa chứng quả thứ ba.\n\n156. Rồi ta cạo bỏ tóc,\nXuất gia, sống không nhà,\nHôm nay, đêm thứ bảy,\nKhát ái được gột sạch.`, ref: "Trưởng Lão Ni Kệ 6.5", url: "../thig/thig6.5.html#content" },
+
+{ text: `Trưởng Lão Ni Mahàpajàpatì Gotamì\n\n157. Bậc Giác ngộ anh hùng!\nCon xin đảnh lễ Ngài,\nNgài là bậc Tối thượng,\nGiữa mọi loài chúng sanh,\nNgài giải khổ cho con,\nCùng rất nhiều người khác.\n\n158. Liễu tri mọi đau khổ,\nGột sạch nhân khát ái,\nCon đường Thánh tám ngành,\nÐoạn diệt, ta chứng ngộ.\n\n159. Trước ta sống là mẹ,\nLà con, là cha, anh,\nLà ông nội, ông ngoại,\nÐời sống trước là vậy,\nKhông rõ biết như thật,\nLuân hồi, tìm không gặp.\n\n160. Nay ta thấy Thế Tôn,\nThân này thân tối hậu,\nSanh tử được đoạn tận,\nNay không còn tái sanh.\n\n161. Siêng, tinh cần nỗ lực,\nThường, kiên trì tinh tấn,\nHãy thắng đệ tử Phật,\nHòa hợp, đảnh lễ Ngài.\n\n162. Vì hạnh phúc nhiều người,\nMa-yà sanh Cù-đàm,\nGiải tỏa nhóm khổ đau\nCho người bị bệnh chết.`, ref: "Trưởng Lão Ni Kệ 6.6", url: "../thig/thig6.6.html#content" },
+
+{ text: `Trưởng Lão Ni Guttà\n\n163. Vì mục đích tối thượng,\nGuttà, người xuất gia,\nTừ bỏ cả con cái,\nCho đến bản thân mình,\nHãy nhiệt tâm hành trì,\nChớ để tâm chi phối.\n\n164. Tâm lừa đảo chúng sanh,\nƯa ác ma lãnh vực,\nLuân hồi nhiều đời sống,\nChúng dong ruổi, si mê.\n\n165. Dục vọng và sân hận,\nKể cả với thân kiến,\nCộng thêm giới cấm thủ\nVới nghi hoặc thứ năm.\n\n166. Hỡi này, Tỷ-kheo-ni,\nTừ bỏ kiết sử này,\nLà hạ phần kiết sử,\nNgươi hết lại đời này.\n\n167. Hãy tránh xa tham mạn,\nVô minh và trạo cử,\nChặt đứt kiến sử xong,\nNgươi sẽ dứt đau khổ.\n\n168. Quảng bỏ vòng sanh tử,\nLiễu tri sự tái sanh,\nHiện tại không ước vọng,\nNgươi sẽ sống an tịnh.`, ref: "Trưởng Lão Ni Kệ 6.7", url: "../thig/thig6.7.html#content" },
+
+{ text: `Trưởng Lão Ni Vijjayà\n\n169. Bốn lần và năm lần\nTa ra khỏi tinh xá,\nTâm không được an tịnh,\nKhông chế ngự được tâm.\n\n170. Ta đến Tỷ-kheo-ni,\nTa hỏi, đàm luận pháp,\nNàng thuyết pháp cho ta,\nVề giới và về xứ.\n\n171. Bốn sự thật bậc Thánh\nVề các căn, các lực,\nGiác chi, tám đường chánh,\nÐạt đạo tối thượng nghĩa.\n\n172. Nghe lời vị ấy dạy,\nTa làm theo giáo huấn,\nTrong đêm canh thứ nhất,\nTa nhớ đến đời trước.\n\n173. Trong đêm canh chặng giữa\nThiên nhãn được thanh tịnh,\nTrong đêm canh cuối cùng,\nKhối si ám tan tành.\n\n174. Từ đấy ta được sống,\nBiến mãn thân hỷ lạc,\nÐêm thứ bảy, duỗi chân,\nKhối si ám tan tành.`, ref: "Trưởng Lão Ni Kệ 6.8", url: "../thig/thig6.8.html#content" },
+
+{ text: `Trưởng Lão Ni Uttarà\n\n175. Loài Người trong tuổi trẻ,\nCầm chày giã lúa gạo,\nTuổi trẻ được tài sản,\nNuôi dưỡng vợ và con.\n\n176. Hãy hành lời Phật dạy,\nKhông làm gì nhiệt não,\nRửa chân thật mau lẹ,\nHãy ngồi xuống một bên.\n\n177. Sau khi an trú tâm,\nNhứt tâm, khéo định tĩnh,\nHãy quán sát các hành,\nThuộc ngoại, không thuộc ngã.\n\n178. Ta nghe lời giáo huấn,\nLời Patàcàrà;\nSau khi ta rửa chân,\nBước vào, ngồi một bên.\n\n179. Trong đêm canh thứ nhất,\nTa nhớ đời quá khứ,\nTrong đêm canh chặng giữa\nThiên nhãn được thanh tịnh.\n\n180. Trong đêm canh cuối cùng,\nKhỏi si ám tan tành,\nTừ ba minh, đứng dậy\nGiáo huấn Ngài, làm xong.\n\n181. Như Thiên chủ Sakka,\nỞ cõi trời Ba mươi,\nKhông bao giờ bại trận,\nỞ tại các chiến trường,\nTa sống, tôn xưng Ngài,\nLà bậc Thầy lãnh đạo,\nTa chứng được ba minh,\nTa không còn lậu hoặc.`, ref: "Trưởng Lão Ni Kệ 7.1", url: "../thig/thig7.1.html#content" },
+
+{ text: `Trưởng Lão Ni Calà\n\n182. Sau khi an trú niệm,\nTỷ-kheo-ni luyện căn,\nThể nhập đạo an tịnh,\nAn lạc tịnh các hành.\n\n183. Vì ai, ngươi đầu trọc,\nHiện tướng, Sa-môn ni?\nKhông theo hệ phái nào,\nSao sống si mê vậy?\n\n184. Các hệ phái ngoại đạo\nNương tựa trên tà kiến,\nHọ không hiểu Chánh pháp\nHọ không thuần thục pháp.\n\n185. Sanh gia tộc Thích-ca,\nÐức Phật, bậc vô tỷ\nNgài thuyết pháp cho ta,\nVượt qua các tà kiến.\n\n186. Ngài thuyết Tám thánh đạo,\nVề khổ, nguyên nhân khổ,\nVề vượt qua đau khổ\nVà con đường khổ diệt.\n\n187. Ta nghe lời Phật dạy,\nSống vui thích giáo pháp,\nBa minh đã đạt được,\nLời Phật dạy làm xong.\n\n188. Mọi nơi, hỷ duyệt đoạn,\nKhỏi si ám tan tành!\nHãy biết vậy, Ác ma!\nNgười bị hại, Ma vương.`, ref: "Trưởng Lão Ni Kệ 7.2", url: "../thig/thig7.2.html#content" },
+
+{ text: `Trưởng Lão Ni Upacàlà\n\n189. Trú niệm có pháp nhãn\nTỷ-kheo-ni luyện căn,\nThể nhập đạo an tịnh,\nBậc thượng nhân hành trì.\n\n190. Sao ngươi không thích sanh,\nCó sanh mới hưởng dục,\nHãy hưởng thọ dục lạc,\nChớ hối tiếc về sau.\n\n191. Ðã sanh, thời bị chết,\nTay chân bị đứt đoạn,\nBị giết, trói, phiền não.\nSau đưa đến khổ đau.\n\n192. Sanh gia bậc Thích-ca\nÐức Phật không chiến bại.\nNgài thuyết pháp cho ta,\nVượt qua khỏi sự sanh.\n\n193. Ngài thuyết Tám thánh đạo,\nVề khổ, nguyên nhân khổ,\nVề vượt qua đau khổ,\nVà con đường khổ diệt.\n\n194. Ta nghe lời Ngài dạy,\nSống vui thích giáo pháp,\nBa minh đã đạt được,\nLời Phật dạy làm xong.\n\n195. Mọi nơi, hỷ duyệt đoạn,\nKhỏi si ám tan tành,\nHãy biết vậy, Ác ma!\nNgươi bị hại, Ma vương.`, ref: "Trưởng Lão Ni Kệ 7.3", url: "../thig/thig7.3.html#content" },
+
+{ text: `Trưởng Lão Ni Sìsupacàlà\n\n196. Tỷ-kheo-ni giữ giới,\nKhéo hộ trì các căn,\nÐạt được đạo an tịnh,\nNước cam lồ thuần tịnh.\n\n199. Thời này đến thời khác,\nHữu này đến hữu khác,\nChúng đều bị thân kiến,\nLãnh đạo và chi phối,\nChúng không vượt thân kiến,\nLuân chuyển vòng sanh tử,\n\n200. Toàn thế giới bốc cháy\nToàn thế giới đồng cháy,\nToàn thế giới bừng cháy,\nToàn thế giới rung động.\n\n201. Phật thuyết pháp cho ta,\nPháp bất động vô tỷ,\nÐược bậc không phàm phu,\nPhục vụ và nhiệt hành,\nChỗ ấy, tâm ý ta,\nHân hoan và ưa thích.\n\n202. Ta nghe lời vị ấy,\nSống vui trong giáo pháp,\nBa minh đã đạt được,\nLời Phật dạy làm xong.\n\n203. Mọi chỗ, hỷ diệt đoạn,\nKhỏi si ám tan tành,\nHãy biết vậy, Ác ma!\nNgười bị bại, Ma Vương.`, ref: "Trưởng Lão Ni Kệ 8.1", url: "../thig/thig8.1.html#content" },
+
+{ text: `Trưởng Lão Ni Mẹ Của Vaddha\n\n204. Vaddha, chớ bao giờ,\nRơi vào cõi tham dục,\nNày con, chớ chia phần,\nTrong đau khổ liên tục.\n\n205. Hạnh phúc là ẩn sĩ,\nKhông tham, nghi đoạn tận,\nSống mát lạnh, chế ngự,\nKhông còn các lậu hoặc.\n\n206. Ẩn sĩ ấy hành trì,\nCon đường đạt chánh kiến,\nChấm dứt sự khổ đau,\nVaddha! Hãy tiến tu.\n\n207. Với tự tín mẹ nói,\nMục đích này cho con,\nMẹ thân! Con nghĩ rằng,\nMẹ không còn tham dục.\n\n208. Vaddha! Phàm hành gì,\nThấp, cao hay bậc trung,\nMột tí nhỏ tham dục,\nKhông có ở nơi ta.\n\n209. Ta đoạn mọi lậu hoặc,\nKhông phóng dật, thiền tu,\nBa minh đã đạt được,\nLàm xong lời dạy.\n\n210. Vi diệu thay, mẹ ta,\nKhích lệ, thúc đẩy ta,\nNhững kệ thuộc chân đế,\nVới lòng từ thương tưởng.\n\n211. Ta nghe lời mẹ dạy,\nLời giáo giới mẹ hiền,\nTa hành pháp cảm kích,\nÐạt an ổn khổ ách.\n\n212. Ta tinh tấn tinh cần,\nNgày đêm không biếng nhác,\nÐược mẹ khéo khích lệ,\nTa chứng tịnh tối tượng.`, ref: "Trưởng Lão Ni Kệ 9.1", url: "../thig/thig9.1.html#content" },
+
+{ text: `Trưởng Lão Ni Kisà Gotamì\n\n213. Bạn lành được ẩn sĩ,\nKhắp thế giới, ngợi khen,\nThân cận với bạn lành,\nKẻ ngu thành người trí.\n\n214. Hãy thân bậc chân nhân,\nThân vậy, trí tăng trưởng,\nThân cận bậc chân nhân,\nMọi khổ đau được thoát.\n\n215. Hãy biết, Bốn thánh đế,\nKhổ và khổ tập khởi,\nBiết về đau khổ diệt,\nVà đoạn Thánh tám ngành.\n\n216. Khổ thay phận nữ nhân,\nChính Ngài đã nói lên,\nBậc đánh xe điều ngự,\nNhững ai đáng điều ngự,\nKhổ thay phận chồng chung,\nNhiều người một lần sanh.\n\n217. Trong đau khổ đâm họng,\nMẹ yếu uống thuốc độc,\nTrường hợp gặp bào thai,\nBị chết khi đang sanh,\nCả hai mẹ và con,\nÐều cùng gặp tai nạn.\n\n218. Khi mang thai đi về,\nTa thấy chồng chết đường,\nVà khi ta sanh đẻ,\nTa không về đến nhà.\n\n219. Hai con đều bị chết,\nChồng nữ nhân khốn khổ,\nLại bị chết giữa đường;\nMẹ, cha và cả anh,\nÐều cùng bị thiêu đốt,\nDồn chung trên đống lửa.\n\n220. Ôi, nữ nhân khốn khổ,\nSanh gia cảnh khốn cùng,\nNgười phải chịu khổ đau,\nVô lượng, không kể xiết.\nNước mắt người đã khóc,\nTrải nhiều ngàn lần sanh.\n\n221. Ta thấy giữa nghĩa trang,\nThịt con ta bị ăn,\nGia đình bị tàn hại,\nBị mọi người khinh bỉ,\nTuy vậy, người chết chồng.\nÐạt được sự bất tử.\n\n222. Ta tu tập Thánh đạo,\nÐường tám ngành, bất tử,\nTa chứng được Niết-bàn,\nThấy được gương Chánh pháp.\n\n223. Trên ta, mũi tên đâm,\nÐã được rút ra khỏi,\nGánh nặng đã đặt xuống,\nViệc nên làm đã làm,\nTa là Trưởng lão Ni,\nKisà-Gotamì,\nVới tâm khéo giải thoát,\nTa nói lên đời này.`, ref: "Trưởng Lão Ni Kệ 10.1", url: "../thig/thig10.1.html#content" },
+
+{ text: `Trưởng Lão Ni Uppalavanna\n\n224. Hai, mẹ và con gái,\nChúng tôi sống một chồng,\nLời nàng đã nói lên\nLàm ta xúc động mạnh,\nCảnh ngộ thật hy hữu,\nLàm tóc lông dựng ngược.\n\n225. Ðáng ngán thay các dục,\nBất tịnh, hôi, nhiều gai,\nỞ đây, mẹ, con gái,\nChúng tôi lấy một chồng.\n\n226. Thấy nguy hiểm trong dục,\nViễn ly an ổn vững\nNàng xuất gia Vương Xá,\nBỏ nhà, sống không nhà.\n\n227. Ta biết các đời trước,\nThiên nhãn được thanh tịnh,\nTrí biết được tâm người,\nNhĩ giới được trong sạch.\n\n228. Ta chứng được thần thông,\nLậu tận ta đạt được,\nTa chứng sáu thắng trí,\nLời Phật dạy, làm xong.\n\n233. Với tâm khéo nhiếp phục,\nThần túc khéo tu trì,\nSáu thắng trí, ta chứng,\nLời Phật dạy, làm xong.\n\n234. Các dục giống gươm giáo,\nChém nát các uẩn ta,\nNhững dục mà ngươi gọi,\nLà lạc thú cuộc đời.\nNgày nay, dục lạc ấy.\nVới ta, không hấp dẫn.\n\n235. Ở tất cả mọi nơi,\nHỷ lạc được đoạn tận,\nKhối tối tăm mù ám,\nÐã bị làm tan nát,\nHỡi này kẻ Ác ma,\nNgươi hãy biết như vậy,\nNgươi chính là Ác ma,\nNgươi đã bị bại trận.`, ref: "Trưởng Lão Ni Kệ 11.1", url: "../thig/thig11.1.html#content" },
+
+{ text: `236. Mùa đông ta mang nước,\nLuôn luôn xuống dòng nước,\nTa sợ các hình phạt,\nLời trách móc các bà.\n\n237. Hỡi này Bà-la-môn,\nNgươi sợ hãi vì ai?\nLuôn luôn xuống dòng nước,\nTay chân run cầm cập.\nNgươi phải chịu cảm thọ,\nRét lạnh quá độ vậy?\n\n238. Và nàng có biết chăng\nHỡi này Punnikà?\nSao nàng lại đến hỏi\nVị làm các nghiệp lành,\nVị đã chận đứng lại,\nCác nghiệp ác bất thiện.\n\n239. Vị ấy già hay trẻ,\nLàm các nghiệp ác độc,\nNgười ấy nhờ rảy nước,\nÐược giải thoát ác nghiệp.\n\n240. Ai nói với ngươi vậy,\nKẻ ngu với kẻ ngu,\nNgười tin nhờ rảy nước,\nÐược giải thoát ác nghiệp.\n\n241. Tất cả những ếch, rùa,\nSẽ được lên cõi trời,\nCùng các rắn cá sấu,\nVà các thủy vậy khác.\n\n242. Kẻ giết bò giết heo,\nKẻ đánh cá sanh thú,\nCác kẻ cướp giết người,\nCác người làm ác khác,\nHọ nhờ có rảy nước,\nCó thể thoát ác nghiệp.\n\n243. Nếu những con sông này,\nCó thể làm trôi mất,\nÁc nghiệp xưa ngươi làm,\nChúng cũng làm trôi luôn,\nCác thiện nghiệp ngươi làm,\nKhiến ngươi thành rỗng không.\n\n244. Phạm chí vì cái gì,\nNgươi sợ phải xuống nước,\nCái ấy chớ có làm,\nChớ để lạnh hại da.\n\n245. Ta đi theo tà đạo,\nNàng hướng ta Thánh đạo,\nThưa nàng ta cho nàng,\nCái áo thấm nước này.\n\n246. Ngươi giữ cái áo lại,\nTa không muốn cái áo!\nNếu ngươi sợ đau khổ,\nNếu ngươi không thích khổ.\n\n247. Chớ làm các điều ác,\nCông khai hay kín đáo,\nNếu ngươi làm sẽ làm,\nLàm các điều ác nghiệp.\n\n248. Ngươi không thoát đau khổ,\nDầu thấy đến, ngươi chạy,\nNếu ngươi sợ đau khổ,\nKhông ưa thích đau khổ.\n\n249. Hãy đến quy y Phật,\nQuy y Pháp và Tăng,\nHãy chấp nhận Giới luật,\nNgươi sẽ được lợi ích.\n\n250. Ta đến quy y Phật,\nQuy y Pháp và Tăng,\nTa chấp nhận Giới luật,\nTa sẽ được lợi ích,\n\n251. Trước ta là bà con,\nVới tộc họ Phạm thiên,\nNay ta là Phạm chí,\nChân thật là như vậy,\nTa chứng ngộ Ba minh,\nÐầy đủ trí Vệ-đà,\nAn ổn đến với ta,\nTâm tư được gột sạch.`, ref: "Trưởng Lão Ni Kệ 12.1", url: "../thig/thig12.1.html#content" },
+
+{ text: `Trưởng Lão Ni Rohinì\n\n271. Nàng chỉ cho ta thấy,\nÐây là một Sa-môn,\nNàng thức ta tỉnh dậy,\nÐây là một Sa-môn,\nNàng khen tặng Sa-môn,\nMuốn thành nữ Sa-môn.\n\n272. Nàng tìm cho Sa-môn\nRất nhiều đồ ăn uống,\nNày hỡi, Rô-hi-ni,\nSao nàng quý Sa-môn?\n\n273. Họ nhác không thích làm,\nSống với đồ người cho,\nHọ ham lợi thích ngọt,\nSao nàng quý Sa-môn?\n\n274. (Rohini): "Cha thân đã lâu rồi,\nCha hỏi về Sa-môn,\nCon sẽ tán thán họ\nTuệ giới hạnh tinh cần.\n\n275. Họ thích làm không nhác,\nHọ làm việc tối thắng,\nHọ trừ bỏ tham sân,\nVì vậy con quý họ.\n\n276. Ba cội gốc điều ác,\nHọ quét sạch thanh tịnh,\nMọi điều ác đoạn tận,\nVì vậy con quý họ.\n\n277. Thân nghiệp họ trong sạch,\nKhẩu nghiệp họ cũng vậy,\nÝ nghiệp họ trong sạch,\nDo vậy con quý họ.\n\n278. Không cấu uế giải thoát,\nNhư vỏ ốc trong sạch,\nTrong sạch cả bên trong,\nTrong sạch cả bên ngoài,\nCông đức họ trắng tinh,\nDo vậy con quý họ.\n\n279. Nghe nhiều thọ trì pháp,\nMạng sống đúng Chánh pháp,\nHọ thuyết nghĩa thuyết pháp,\nDo vậy con quý họ.\n\n280. Nghe nhiều thọ trì pháp,\nMạng sống đúng Chánh pháp,\nNhất tâm giữ chánh niệm,\nDo vậy con quý họ.\n\n281. Đi xa, giữ chánh niệm\nLời sáng suốt khiêm nhường,\nHọ chấm dứt đau khổ,\nDo vậy con quý họ.\n\n282. Từ làng họ ra đi,\nKhông nhìn ngó vật gì,\nHọ đi không mong chờ,\nDo vậy con quý họ.\n\n283. Không tìm cầu kho tàng,\nKhông kho chứa, kho cất,\nHọ tầm cầu cứu cánh,\nDo vậy con quý họ.\n\n284. Họ không nắm giữ tiền,\nKhông nắm vàng, nắm bạc,\nHọ sống với hiện tại,\nDo vậy con quý họ.\n\n285. Từ gia đình quốc độ,\nHọ xuất gia khác nhau,\nNhưng họ thương kính nhau,\nDo vậy con quý họ."\n\n286. Hỡi này Rô-hi-ni,\nNàng sanh trong gia đình,\nNàng đem lại hạnh phúc,\nCho gia đình chúng ta,\nNàng tin Phật, Pháp, Tăng,\nLòng tín kính sắc bén.\n\n287. Nàng biết rõ cái này,\nLà ruộng phước vô thượng,\nChúng tôi cùng tín kính,\nCác vị Sa-môn này,\n\n288. Tế đàn thiết lập đây,\nÐối với ta rất lớn.\n(Rohini): "Nếu cha sợ đau khổ,\nNếu cha không thích khổ,\n\n289. Hãy quy y Phật-đà,\nQuy y Pháp và Tăng,\nHãy chấp nhận giới đức,\nCha sẽ được hạnh phúc.\n\n290. (Cha Rohini): "Ta quy y Phật-đà,\nQuy y Pháp và Tăng,\nTa chấp nhận giới luật,\nTa sẽ được hạnh phúc.\n\n291. Lúc trước ta chỉ là,\nBà con của Phạm thiên,\nNay ta thật chính là,\nMột vị Bà-la-môn,\nTa chứng đạt Ba minh,\nÐược an toàn yên ổn,\nBa Vệ-đà chứng ngộ,\nTa tắm rửa thật sạch.`, ref: "Trưởng Lão Ni Kệ 13.2", url: "../thig/thig13.2.html#content" },
+
+{ text: `339. Ta trước mặc áo trắng,\nÐược nghe giảng Chánh pháp,\nDo ta không phóng dật,\nChứng tri được chân lý.\n\n340. Nhờ vậy đối mọi dục,\nKhông còn tham muốn lớn,\nThấy sợ hãi thân kiến,\nTa mong muốn viễn ly.\n\n342. Từ bỏ, ta xuất gia,\nGia sản đâu có ít.\nNhờ diệu pháp khéo thuyết,\nRa đi, với lòng tin.\n\n343. Ta không thể hy cầu\nVật gì thuận gia sản\nVàng bạc ta đã bỏ,\nSao lại đi đến chúng?\n\n344. Vàng bạc không giác ngộ,\nKhông làm người an tịnh,\nKhông hợp hạnh Sa-môn,\nKhông phải tài sản thánh.\n\n345. Chính vàng hay bạc này\nLàm tham ái, đắm say,\nLàm con người ngu si,\nLàm tăng trưởng bụi trần,\nNguy hiểm nhiều ưu não,\nÐây, không gì trường cửu.\n\n346. Ðây, loài Người tham đắm,\nPhóng dật, tâm uế nhiễm,\nChống đối thù địch nhau\nRộng đường đấu tranh nhau.\n\n347. Giết hại, trói, tra tấn,\nHao tài sầu, ưu tư\nNhững ai chìm trong dục,\nGặp phải nhiều tai họa.\n\n348. Vì sao bà con ta\nGiống như kẻ thù ta,\nLại trói buộc ta vào,\nTrong vòng các dục lạc,\nHãy biết ta xuất gia,\nVì thấy dục đáng sợ.\n\n349. Bạc, vàng không có thể\nÐoạn được các lậu hoặc,\nCác dục là thù địch,\nSát nhân, chuyên giết hại,\nChúng là kẻ oán thù,\nLà mũi tên, dây trói.\n\n350. Vì sao bà con ta\nGiống như kẻ thù ta,\nLại trói buộc ta vào\nTrong vòng các dục lạc,\nHãy biết ta xuất gia,\nCạo tóc đắp đại y.\n\n351. Nuôi sống bằng đồ ăn,\nTích lũy nhờ khất thực,\nY áo được tác thành\nVới miếng vải lượm lặt\nSống vậy, thích hợp ta,\nCơ bản, sống không nhà.\n\n352. Dục đại sĩ từ bỏ\nDục loài Trời, loài Người,\nTrú an ổn, giải thoát\nKhông dao động an lạc.\n\n353. Chớ để ta đến dục,\nTrong dục, không an toàn,\nDục, thù địch sát nhân\nGây khổ, dụ đống lửa.\n\n354. Ðường hiểm, đầy sợ hãi,\nÐầy khổ hoạn, gai góc,\nTham ái đường gập ghềnh,\nHoang si mê rộng lớn.\n\n355. Tai họa đầy hãi hùng,\nCác dục dụ đầu rắn,\nKẻ ngu thích thú dục,\nKẻ mù lòa phàm phu.\n\n356. Chúng sanh chìm bùn đục,\nNhững kẻ không thấy đời,\nHọ không có rõ biết,\nSự chấm dứt sanh tử.\n\n357. Loài Người vì nhân dục,\nCon đường đến ác thú,\nPhần nhiều đi đường ấy,\nKhiến tự ngã bệnh hoạn.\n\n358. Như vậy dục sanh thù,\nNung nấu, làm uế nhiễm,\nDục thuộc về thể vật,\nTrói người vào tử vong.\n\n359. Dục làm cho diên cuồng,\nLoạn ngôn tâm thác loạn,\nLàm uế nhiễm chúng sanh,\nSắp rơi bẫy Ác ma.\n\n360. Dục nguy hiểm không cùng,\nNhiều khổ, thuốc độc lớn,\nNgọt ít, tạo đấu tranh,\nHéo tàn ngày tươi sáng.\n\n361. Ta quyết định như vậy,\nKhông trở lui dục nhân,\nTác thành điều bất hạnh,\nLuôn vui hưởng Niết-bàn.\n\n362. Quyết đấu tranh với dục,\nChờ đợi, mát, lắng dịu,\nSẽ sống không phóng dật,\nÐoạn diệt kiết sử dục.\n\n363. Ta đi theo đường ấy\nÐường đại sĩ đi qua,\nKhông sầu, không cấu uế,\nAn ổn, thẳng, Tám ngành.\n\n364. Hãy xem Subhà này,\nAn trú trên Chánh pháp,\nCon gái một thợ vàng,\nÐạt được không tham dục,\nNgồi hành trì thiền định,\nỞ dưới một gốc cây.`, ref: "Trưởng Lão Ni Kệ 13.5", url: "../thig/thig13.5.html#content" },
+
+{ text: `Trưởng Lão Ni Sumedhà\n\n450. Con gái vua Konca,\nVới hoàng hậu chánh ngôi,\nTại Matavatì,\nÐược sanh Sumedha,\nHân hoan gắng thực hành,\nLời dạy bậc Ðạo Sư.\n\n451. Giới hạnh thuyết giảng khéo,\nNghe nhiều khéo huấn luyện,\nTheo lời đức Phật dạy,\nNàng đến cha mẹ nàng,\nNói rằng: 'Thưa mẹ cha,\nCả hai, hãy nghe con!'.\n\n452. Con hân hoan Niết-bàn,\nDầu sanh hữu Chư Thiên,\nSanh hữu ấy vô thường,\nGiá trị gì các dục,\nTrống không, vị ngọt ít,\nCòn tàn hại thời nhiều.\n\n453. Các dục thật cay đắng,\nVí như nọc rắn độc,\nKẻ ngu mới tham đắm,\nTrong các loại dục ấy.\nNhững ai thọ hưởng dục,\nTrong một thời gian dài,\nBị khổ đau địa ngục,\nHành hạ và tàn hại.\n\n454. Những kẻ làm nghiệp ác,\nNhững kẻ tâm trí ác,\nBị đau đớn sầu khổ,\nTrong cảnh giới đọa xứ.\nKẻ ngu thường không nhiếp,\nChế ngự thân, khẩu, ý.\n\n455. Kẻ ngu có liệt tuệ,\nKhông tư duy quyết định,\nKhông ngăn chặn khổ tập,\nKhi có thời thuyết pháp,\nKhông biết lo học hỏi,\nKhông giác tri Thánh đế.\n\n456. Những sự thật, thưa mẹ,\nPhật thù thắng thuyết giảng,\nPhần lớn chúng quần sanh,\nKhông hiểu sự thật ấy;\nHọ hoan hỷ tái sanh,\nƯớc muốn sanh thiên giới.\n\n457. Sanh thiên không thường trú,\nSanh hữu là vô thường,\nKẻ ngu không sợ hãi,\nLuôn luôn phải tái sanh.\n\n458. Bị sanh bốn đọa xứ,\nÐược sanh Thiên, Nhân giới\nÐược chúng khó khăn thay,\nNhững ai rơi đọa xứ,\nTrong cảnh giới địa ngục,\nKhông có sự xuất gia.\n\n459. Mong cả hai cha mẹ,\nCho con được xuất gia,\nTrong giáo pháp thuyết giảng,\nCủa bậc chứng Mười lực,\nSống thong dong nhàn hạ,\nNỗ lực đoạn sanh tử.\n\n460. Sao con ưa tái sanh,\nVới thân tội lỗi này,\nThân trống rỗng, không lõi,\nVì mục đích đoạn diệt,\nTham ái được tái sanh,\nXin cho con xuất gia.\n\n461. Nay thời, Phật ra đời,\nPhi thời đã từ bỏ,\nThời cơ nay đã đến,\nCho đến trọn đời con,\nCon không làm tổn thương,\nGiới luật và Phạm hạnh.`, ref: "Trưởng Lão Ni Kệ 16.1", url: "../thig/thig16.1.html#content" },
+
+{ text: `Trưởng Lão Ni Sumedhà\n\n468. Sá gì thân hôi nhớp,\nPhát mùi, gây sợ hãi,\nBao da đựng xác chết,\nRỉ chảy đồ bất tịnh.\n\n469. Sá gì thân ta biết,\nGhê tởm, lấm máu thịt,\nChỗ chứa đựng loài sâu,\nMồi ăn cho chim chóc,\nThân xác này là vậy,\nNay đem đến cho ai?\n\n470. Thân thể bỏ nghĩa địa,\nKhông lâu, mất thức tri,\nNhư khúc gỗ quăng bỏ,\nBà con đều ghê tởm.\n\n471. Thân ấy quăng nghĩa địa,\nLàm mồi ăn kẻ khác,\nTrước chúng tắm rửa sạch,\nNay chúng sinh ghê tởm,\nCha mẹ còn như vậy,\nNói gì chung quần chúng.\n\n472. Họ mê thân không lõi,\nRàng buộc bởi gân xương,\nÐầy nước miếng, nước mắt,\nÐầy phân tiểu hôi hám.\n\n473. Nếu thân được mổ xẻ,\nLội nội phần ra ngoài,\nChính mẹ phải ghê tởm,\nKhông chịu nổi mùi hôi.\n\n474. Chính do uẩn, xứ, giới,\nTác thành các thân này,\nGốc tái sanh, đau khổ;\nHọ như lý nói lên,\nHoàn toàn không vui thích.\nVậy ai, tôi muốn cưới?\n\n475. Từng ngày trăm ngọn giáo,\nLuôn luôn mới đâm thân,\nDầu bị hại trăm năm,\nNhư vậy còn tốt hơn,\nVì khổ ấy cuối cùng,\nRồi cũng được tiêu diệt.\n\n476. Kẻ trí quyết bằng lòng\nSự giết hại như trên,\nBậc Ðạo Sư dạy rằng:\nHọ luân hồi dài dà,\nVới tâm tư giết hại,\nLiên tục nối tiếp nhau.\n\n477. Trong cảnh giới Trời, Người,\nBàng sanh, a-tu-la,\nNgạ quỷ và Ðịa ngục,\nChịu giết hại vô lượng.\n\n478. Trong địa ngục, rất nhiều,\nKẻ tâm uế, đọa lạc,\nChỗ trú ẩn Thiên giới,\nKhông có lạc Niết-bàn.\n\n479. Những ai đạt Niết-bàn,\nHọ liên hệ mật thiết,\nVới những lời thuyết dạy,\nCủa bậc đủ Mười lực,\nThong dong không rộn ràng,\nNỗ lực đoạn sanh tử.\n\n480. Thưa cha ngày hôm nay\nCon quyết tâm ra đi,\nNhững tài sản rỗng không,\nKhông có giá trị gì,\nCon ghê tởm các dục,\nCon chán ngấy các dục,\nHọ đã được tách thành,\nNhư thân cây Ta-la.`, ref: "Trưởng Lão Ni Kệ 16.1", url: "../thig/thig16.1.html#content" },
+
+{ text: `Trưởng Lão Ni Sumedhà\n\n489. Dầu có mười bảy báu,\nKhắp mười phương đầy tràn,\nKhông có dục thỏa mãn,\nNgười chết, chưa thỏa mãn.\n\n490. Các dục ví gươm giáo,\nCác dục ví đầu rắn,\nVí như bó đuốc cháy\nGiống xương gậm trơn tru.\n\n491. Các dục không thường còn,\nCũng không có thường hằng,\nKhổ nhiều, thuốc độc lớn,\nNhư hòn đạn cháy đỏ,\nNguồn gốc của bất hạnh,\nKết quả là đau khổ.\n\n492. Dục như trái của cây,\nNhư miếng thịt, khổ lụy,\nGiống như mộng như huyễn,\nDục như của vay mượn.\n\n493. Dục như gươm, như cọc,\nBệnh tật và cục bướu,\nBất hạnh và dao động,\nVí như hố than hừng,\nNguồn gốc của bất hạnh,\nSợ hãi và tàn sát.\n\n497. Kẻ ngu, đã lâu rồi,\nKhóc luân hồi nói tiếp,\nTừ vô thỉ đến nay,\nKhóc phải bị mệnh chung,\nKhóc anh em bị giết,\nKhóc tự mình bị giết.\n\n498. Hãy nhớ từ vô thỉ,\nNước mắt, sữa và máu,\nTuôn chảy theo luân hồi,\nKhông bao giờ dừng nghỉ,\nHãy nhớ các chúng sanh,\nLuân hồi xương chất đống.\n\n499. Hãy nhớ tràn bốn biển,\nÐầy nước mắt, sữa, máu,\nHãy nhớ xương một kiếp,\nCao bằng Vi-pu-la.\n\n500. Hãy nhớ từ vô thỉ,\nKhông đủ để làm thành,\nCả đất nước Diêm Phù,\nNhững nấm mồ hột táo,\nCủa mẹ cha luân hồi.\n\n501. Hãy nhớ từ vô thỉ,\nNhững cỏ cây cành lá,\nKhông đủ để chứa đựng,\nNhững ghè bốn ngón tay,\nChứa người cha, luân hồi.\n\n502. Hãy nhớ tới hình ảnh,\nCon rùa mù biển đông,\nCho đầu nó lọt vào,\nLỗ hổng khúc cây trôi,\nÐể nói lên ví dụ,\nÐược làm người khó vậy.`, ref: "Trưởng Lão Ni Kệ 16.1", url: "../thig/thig16.1.html#content" },
+
+{ text: `Trưởng Lão Ni Sumedhà\n\n503. Hãy nhớ thân sắc người,\nÐược ví bong bóng nước,\nÐầy cả những bất hạnh,\nTrống không không có lõi,\nHãy thấy uẩn vô thường!\nNhớ địa ngục nhiều họa.\n\n504. Hãy nhớ nghĩa địa lớn,\nNhờ tái sanh tiếp tục,\nNhờ sợ hãi thuồng luồng,\nHãy nhớ Bốn sự thật.\n\n505. Nước bất tử có đây,\nSao người uống trăm đắng,\nTất cả các dục lạc,\nThật trăm cay ngàn đắng.\n\n506. Nước bất tử có đây!\nSao người ưa dục não!\nMọi dục lạc đốt cháy\nSôi sùng sục nung nấu.\n\n507. Ðây không có kẻ thù!\nSao thích dục thù địch?\nVua lửa, trộm, nước, oán,\nThù chung thật là nhiều.\n\n508. Ở đây có giải thoát!\nSao để dục giết trói,\nTrong dục có giết trói!\nMê dục nhiều khổ đau.\n\n509. Ðuốc cỏ đang cháy rực,\nNắm, không thả, bị đốt,\nDục ví như bó đuốc,\nÐốt cháy ai không thoát.\n\n510. Chớ nhận dục lạc nhỏ,\nBỏ lạc lớn rộng rãi,\nChớ như cá nuốt câu,\nSau phải chịu hoạn nạn.\n\n511. Hãy nhiếp dục trong dục,\nNhư chó bị dây cột,\nChớ để dục ăn ngươi,\nNhư dân đói ăn chó.\n\n512. Khổ thật là vô lượng,\nKhiến tâm nhiều ưu tư,\nNgươi hệ lụy với dục,\nHãy bỏ dục vô thường.\n\n513. Ở đây, không có già!\nSao theo dục bị già?\nMọi sanh ở khắp nơi,\nBị bệnh chết chi phối,\n\n514. Ðây không già, không chết.\nÐây con đường không già,\nKhông chết, không sầu não,\nKhông thù địch trói buộc,\nKhông vấp ngã sợ hãi,\nKhông nung nấu đọa đầy.\n\n515. Ðích này, nhiều người đạt,\nÐích này là bất tử,\nNay cần phải chứng được,\nAi như lý chú tâm,\nNếu không có nỗ lực,\nKhông sao chứng đạt được.\n\n523. Ðây là nhân, là nguồn\nÐây chính là căn gốc,\nKham nhẫn lời Ðạo Sư!\nÐây dây chuyền thứ nhất\nÐấy chính là Niết-bàn,\nNếu chúng ta mến pháp.\n\n524. Như vậy với lòng tin,\nHọ thuyết rõ nên lời\nLời nói đầy trí tuệ,\nThù thắng và tối thượng\nHọ chán ghét tái sanh,\nDo chán ghét, tham diệt.`, ref: "Trưởng Lão Ni Kệ 16.1", url: "../thig/thig16.1.html#content" },
             ]
         };
 
@@ -5219,84 +5355,118 @@ const quotesData = {
             return list[Math.floor(Math.random() * list.length)];
         }
 
-        function renderQuote() {
-            quoteContentEl.classList.add('fade-out');
-            
-            setTimeout(() => {
-                const q = getRandomQuote(currentCategory);
-                
-                // 1. Cập nhật nội dung quote
-                quoteContentEl.textContent = q.text;
-                
-                // 2. TẠO VÀ CẬP NHẬT LINK
-                // Xóa nội dung cũ
-                refContainerEl.innerHTML = ''; 
-                
-                // Tạo thẻ <a>
-                const linkEl = document.createElement('a');
-                linkEl.id = 'quote-link';
-                linkEl.href = q.url;
-                linkEl.textContent = q.ref;
-                linkEl.target = "_blank"; // Mở link trong tab mới
-                
-                // Chèn thẻ <a> vào container
-                refContainerEl.appendChild(linkEl);
-                
-                quoteContentEl.classList.remove('fade-out');
-            }, 300);
+       // Your existing code here...
+
+// In td.js, the renderQuote function remains the same
+function renderQuote(autoFocus = true) { // Default to true
+    quoteContentEl.classList.add('fade-out');
+   
+    setTimeout(() => {
+        const q = getRandomQuote(currentCategory);
+       
+        // 1. Cập nhật nội dung quote
+        quoteContentEl.textContent = q.text;
+       
+        // 2. TẠO VÀ CẬP NHẬT LINK
+        // Xóa nội dung cũ
+        refContainerEl.innerHTML = '';
+       
+        // Tạo thẻ <a>
+        const linkEl = document.createElement('a');
+        linkEl.id = 'quote-link';
+        linkEl.href = q.url;
+        linkEl.textContent = q.ref;
+        linkEl.target = "_blank"; // Mở link trong tab mới
+       
+        // Chèn thẻ <a> vào container
+        refContainerEl.appendChild(linkEl);
+       
+        quoteContentEl.classList.remove('fade-out');
+       
+        // Only call if autoFocus is true
+        if (autoFocus) {
+            autoFocusQuoteCard();
         }
+    }, 300);
+}
 
-        // --- XỬ LÝ SỰ KIỆN (Giữ nguyên) ---
+// --- XỬ LÝ SỰ KIỆN ---
+// Nút New Quote (remains renderQuote() which defaults to true)
+document.getElementById('new-quote-btn').addEventListener('click', renderQuote);
 
-        // Nút New Quote
-        document.getElementById('new-quote-btn').addEventListener('click', renderQuote);
+// Nút Copy (unchanged)
+const copyBtn = document.getElementById('copy-btn');
+const copyTextEl = document.getElementById('copy-text');
+copyBtn.addEventListener('click', () => {
+    // Lấy text của link để sao chép cả tham chiếu
+    const refText = document.getElementById('quote-link').textContent;
+    const fullText = `"${quoteContentEl.textContent}"\n- ${refText}`;
+   
+    navigator.clipboard.writeText(fullText).then(() => {
+        const originalText = copyTextEl.textContent;
+        copyTextEl.textContent = "Đã chép!";
+        copyBtn.style.borderColor = "#4caf50";
+       
+        setTimeout(() => {
+            copyTextEl.textContent = originalText;
+            copyBtn.style.borderColor = "";
+        }, 2000);
+    });
+});
 
-        // Nút Copy
-        const copyBtn = document.getElementById('copy-btn');
-        const copyTextEl = document.getElementById('copy-text');
+// Bộ lọc (updated to pass false)
+document.querySelectorAll('.filter-btn').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+        e.target.classList.add('active');
+        currentCategory = e.target.dataset.id;
+        renderQuote(false); // Pass false to exclude autoFocusQuoteCard
+    });
+});
 
-        copyBtn.addEventListener('click', () => {
-            // Lấy text của link để sao chép cả tham chiếu
-            const refText = document.getElementById('quote-link').textContent;
-            const fullText = `"${quoteContentEl.textContent}"\n-  ${refText}`;
-            
-            navigator.clipboard.writeText(fullText).then(() => {
-                const originalText = copyTextEl.textContent;
-                copyTextEl.textContent = "Đã chép!";
-                copyBtn.style.borderColor = "#4caf50";
-                
-                setTimeout(() => {
-                    copyTextEl.textContent = originalText;
-                    copyBtn.style.borderColor = ""; 
-                }, 2000);
-            });
-        });
+// Dark Mode (unchanged)
+const themeToggle = document.getElementById('theme-toggle');
+if (localStorage.getItem('theme') === 'dark') {
+    document.body.classList.add('dark');
+    themeToggle.textContent = '🌙';
+}
+themeToggle.addEventListener('click', () => {
+    document.body.classList.toggle('dark');
+    if (document.body.classList.contains('dark')) {
+        themeToggle.textContent = '🌙';
+        localStorage.setItem('theme', 'dark');
+    } else {
+        themeToggle.textContent = '☀️';
+        localStorage.setItem('theme', 'light');
+    }
+});
 
-        // Bộ lọc
-        document.querySelectorAll('.filter-btn').forEach(btn => {
-            btn.addEventListener('click', (e) => {
-                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-                e.target.classList.add('active');
-                currentCategory = e.target.dataset.id;
-                renderQuote();
-            });
-        });
+// ==================== CLICK ON QUOTE CARD ====================
+const quoteCard = document.querySelector('.quote-card');
+// Make the whole card clickable (remains renderQuote() which defaults to true)
+quoteCard.addEventListener('click', function(e) {
+    // IMPORTANT: do NOT trigger new quote when user clicks the reference link
+    if (e.target.id === 'quote-link' || e.target.closest('#quote-link')) {
+        return;
+    }
+    renderQuote();
+});
+// Visual feedback - show hand cursor
+quoteCard.style.cursor = 'pointer';
 
-        // Dark Mode
-        const themeToggle = document.getElementById('theme-toggle');
-        if (localStorage.getItem('theme') === 'dark') {
-            document.body.classList.add('dark');
-            themeToggle.textContent = '🌙';
-        }
-        themeToggle.addEventListener('click', () => {
-            document.body.classList.toggle('dark');
-            if (document.body.classList.contains('dark')) {
-                themeToggle.textContent = '🌙';
-                localStorage.setItem('theme', 'dark');
-            } else {
-                themeToggle.textContent = '☀️';
-                localStorage.setItem('theme', 'light');
-            }
-        });
+// ==================== AUTO FOCUS / SCROLL WHEN NEW QUOTE ====================
+function autoFocusQuoteCard() {
+    quoteCard.scrollIntoView({
+        behavior: 'smooth', // nice smooth scroll
+        block: 'start' // centers the card perfectly
+    });
+   
+    // Optional: brief highlight so user clearly sees the new quote
+    quoteCard.classList.add('highlight-new');
+    setTimeout(() => {
+        quoteCard.classList.remove('highlight-new');
+    }, 1200);
+}
 
-        renderQuote();
+// Initial render (defaults to true)
+renderQuote();
