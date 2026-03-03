@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+ 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+ 	<link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+ 	<meta name="viewport" content="width=device-width, initial-scale=1">
+		<!-- Loading manifest -->
+	<link rel="manifest" href="../manifest.json">
+ 	<!-- Loading main and menu stylesheets -->
+ 	<link rel="stylesheet" href="../css/w3.css">
+ 	<link rel="stylesheet" href="../css/css.css">
+ 	<link rel="stylesheet" href="../css/menu.css">
+ 	<script src="../js/jquery-1.10.2.min.js"></script>
+ 	<script src="../js/controlpanel.js"></script>
+ 	<script src="../js/mousetrap.min.js"></script>
+    <script src="../js/pali-lookup-standalone.js"></script>
+
+ <script src="../js/suttaFiles.js"></script>
+
+
+</head>
+ <body class="container">
+ <div class="header-background">
+ <!-- Header -->
+ <div class="w3-header w3-content w3-padding w3-left-align bwcontainer">
+ 	<div class="centered">
+ 		<button class="light-mode-button" aria-label="Bật Chế Độ Sáng" onclick="toggle_light_mode()">
+ 			<span></span>
+ 			<span></span>
+ 		</button>
+ 		<span class="box-lbl">Sáng/Tối</span>
+ 	</div> <!-- Centered -->
+ 		<a href="../home/index.html" id="bwlogo"><img src="../images/headerlogo.png" alt="Logo Lời Của Đức Phật" class="w3-image"></a> 
+
+ 		<div class="w3-bar bwcontainer">
+  <div style="display:flex; align-items:center; gap:4px;">
+    <form id="form" class="inline-search" style="display:flex; align-items:center; gap:2px; margin:0;">
+      <input id="searchpage" type="text" placeholder="Tìm trên trang"
+             style="width:100px; font-size:12px;" />
+      <input class="go-button" type="submit" style="font-size:13px;" value="🔍" />
+      <button type="button" id="prev-btn" style="font-size:15px;" title="Kết quả trước (↑)">↑</button>
+      <button type="button" id="next-btn" style="font-size:15px;" title="Kết quả tiếp (↓)">↓</button>
+      <span id="result-info" style="font-size:13px;"></span>
+      <button type="button" id="close-float" title="Đóng" style="display:none;">✕</button>
+    </form>
+  </div>
+
+  <button id="toggleViBtn" onclick="toggleVi()">Pali</button>
+<button id="togglePaliBtn" onclick="togglePali()">Việt</button>
+
+
+
+<!-- Empty button chứa switch -->
+<button style="display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 4px 6px; border: 1px solid #ccc; border-radius: 4px; background: #aed0cd; height: 45px;">
+  <label class="switch" style="margin-bottom: 11px;">
+    <input type="checkbox" id="paliSwitch" checked onchange="togglePaliLookup(this.checked)">
+    <span class="slider round"></span>
+  </label>
+  <span style="font-size: 13px; color: black; line-height: 0.4;">Từ điển Pali</span>
+</button>
+<button id="randomSuttaBtn" class="sutta-button" onclick="openRandomSutta2()">
+  <span title="Bài Kinh Ngẫu Nhiên"> 📖 Ngẫu Nhiên</span>
+</button>
+
+<button id="dailySuttaBtn" class="sutta-button" style="background: #bb5d5d" onclick="SuttaQuotes()";>
+  <span title="Trích Dẫn Kinh Điển" style="color: #FFF8DC;">📖 Trích Dẫn</span>
+</button>
+
+<button id="SuttaTopicBtn" class="sutta-button" onclick="openSuttaTopic()" style=" background: #3566d0;">
+    <span title="Kinh Tuyển Chọn">📖 Tuyển Chọn</span>
+</button>
+<a href="../home/visearch.html" id="viSearchBtnOutline" class="search-outline">
+  🔍 Việt
+</a>
+
+<a href="../home/palisearch.html" id="paliSearchBtnOutline" class="search-outline">
+  🔍 Pali
+</a>
+<a href="../congcu/NikayaMp3.html" id="viSearchBtnOutline" class="search-outline" style="font-size:18px; text-decoration:none;" title="Nikaya Tuyển Chọn">
+ 🔊
+</a>
+<a href="../home/about.html" style="margin-left:4px;">
+  <img src="../images/help_icon.png" title="Thông Tin" alt="About">
+</a>
+</div>
+ 		</div> <!-- End w3-bar bwcontainer --> 	</div> <!-- End w3-header w3-content w3-padding w3-left-align bwcontainer -->
+ </div> <!-- End header-background -->
+ <!-- Top menu -->
+
+ <div class="w3-main w3-white bwcontainer2">
+ 	<div class="w3-button w3-padding-8 w3-left w3-hide-large" onclick="w3_open()">☰</div>
+ 		<div id="navbar" class="w3-hide-small w3-hide-medium bwcontainer3">
+ 			<ul id="css3menu0">
+ 				<li class="topfirst" id="home"><a href="../home/index.html" class="w3-hide-small">Trang Chủ</a></li>
+  				<li class="topmenu" id="dn"><a href="../dn/dn.html" class="pressed w3-hide-small">Trường Bộ Kinh</a></li>
+ 				<li class="topmenu" id="mn"><a href="../mn/mn.html" class="w3-hide-small">Trung Bộ Kinh</a></li>
+ 				<li class="topmenu" id="sn"><a href="../sn/sn.html" class="w3-hide-small"><i class="fa fa-caret-down"></i>&nbsp;Tương Ưng Bộ Kinh</a>
+ 					<ul>
+ 						<li><a href="../sn/sn01.html" class="w3-hide-small">Tập I - Thiên Có Kệ (SN 1-11)</a></li>
+ 						<li><a href="../sn/sn02.html" class="w3-hide-small">Tập II - Thiên Nhân Duyên (SN 12-21)</a></li>
+ 						<li><a href="../sn/sn03.html" class="w3-hide-small">Tập III - Thiên Uẩn (SN 22-34)</a></li>
+ 						<li><a href="../sn/sn04.html" class="w3-hide-small">Tập IV - Thiên Sáu Xứ (SN 35-44)</a></li>
+ 						<li><a href="../sn/sn05.html" class="w3-hide-small">Tập V - Thiên Ðại Phẩm (SN 45-56)</a></li>
+ 					</ul>
+ 				<li class="topmenu" id="an"><a href="../an/an.html" class="w3-hide-small"><i class="fa fa-caret-down"></i>&nbsp;Tăng Chi Bộ Kinh</a>
+ 					<ul>
+ 						<li><a href="../an/an1.html" class="w3-hide-small">AN 1: Chương Một Pháp</a></li>
+ 						<li><a href="../an/an2.html" class="w3-hide-small">AN 2: Chương Hai Pháp</a></li>
+ 						<li><a href="../an/an3.html" class="w3-hide-small">AN 3: Chương Ba Pháp</a></li>
+ 						<li><a href="../an/an4.html" class="w3-hide-small">AN 4: Chương Bốn Pháp</a></li>
+ 						<li><a href="../an/an5.html" class="w3-hide-small">AN 5: Chương Năm Pháp</a></li>
+ 						<li><a href="../an/an6.html" class="w3-hide-small">AN 6: Chương Sáu Pháp</a></li>
+ 						<li><a href="../an/an7.html" class="w3-hide-small">AN 7: Chương Bảy Pháp</a></li>
+ 						<li><a href="../an/an8.html" class="w3-hide-small">AN 8: Chương Tám Pháp</a></li>
+ 						<li><a href="../an/an9.html" class="w3-hide-small">AN 9: Chương Chín Pháp</a></li>
+ 						<li><a href="../an/an10.html" class="w3-hide-small">AN 10: Chương Mười Pháp</a></li>
+ 						<li><a href="../an/an11.html" class="w3-hide-small">AN 11: Chương Mười Một Pháp</a></li>
+ 					</ul>
+ 				</li>
+ 				<li class="topmenu" id="kn"><a href="../kn/kn.html" class="w3-hide-small"><i class="fa fa-caret-down"></i>&nbsp;Tiểu Bộ Kinh</a>
+ 					<ul>
+ 						<li><a href="../kp/kp.html" class="w3-hide-small">Khuddakapāṭha - Kinh Tiểu Tụng</a></li>
+ 						<li><a href="../dhp/dhp.html" class="w3-hide-small">Dhammapada - Kinh Pháp Cú</a></li>
+ 						<li><a href="../snp/snp.html" class="w3-hide-small">Sutta Nipāta - Kinh Tập</a></li>
+ 						<li><a href="../ud/ud.html" class="w3-hide-small">Udāna - Kinh Phật Tự Thuyết</a></li>
+ 						<li><a href="../iti/iti.html" class="w3-hide-small">Itivuttaka - Kinh Phật Thuyết Như Vậy</a></li>
+ 						<li><a href="../thag/thag.html" class="w3-hide-small">Theragāthā - Trưởng Lão Tăng Kệ</a></li>
+ 						<li><a href="../thig/thig.html" class="w3-hide-small">Therīgāthā - Trưởng Lão Ni Kệ</a></li>
+</ul>
+  </li>
+<li class="topmenu" id="gioiluat"><a href="../gioiluat/gioiluat.html" class="w3-hide-small">Giới Luật</a></li>
+<li class="topmenu" id="thiendinh"><a href="../thiendinh/thiendinh.html" class="w3-hide-small"></i>Thiền Định</a></li>
+				<li class="toplast" id="khac"><a href="../congcu/congcukhac.html" class="w3-hide-small"></i>»</a>
+ 					</ul>
+ 				</li>
+ 			</ul>
+ 			</div>
+ 		</div> <!--navbar-->
+
+<!-- Sidebar (hidden by default) -->
+ <nav class="w3-sidebar w3-bar-block w3-card w3-border w3-top w3-animate-left w3-hide-large" id="mySidebar">
+ 	<a href="javascript:void(0)" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-times fa-2x red-color"></i>&nbsp;&nbsp;&nbsp;Đóng</a><!-- Hides the sidebar when clicked -->
+ 		<div class="w3-bar-block w3-white">
+ 			<a href="../home/index.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-home fa-lg"></i>&nbsp;&nbsp;&nbsp;Trang Chủ</a>
+ 			
+ 			<a href="../dn/dn.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Trường Bộ Kinh</a>
+ 			<a href="../mn/mn.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Trung Bộ Kinh</a>
+ 			<a href="../sn/sn.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Tương Ưng Bộ Kinh</a>
+ 			<a href="../an/an.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Tăng Chi Bộ Kinh
+ 			<a href="../kn/kn.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Tiểu Bộ Kinh</a>
+
+			<a href="../gioiluat/gioiluat.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Giới Luật</a>
+			<a href="../thiendinh/thiendinh.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Thiền Định</a>
+			<a href="../congcu/congcukhac.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;☸️Công Cụ Khác☸️</a>
+ 		</div>
+ </nav>
+ 
+
+ 
+   <!-- !PAGE CONTENT! --> 
+<div class="w3-main w3-content w3-padding w3-left-align bwcontainer4">
+<div id="content">
+<h2>Dīgha Nikāya – Trường Bộ Kinh</h2>
+<h5><span style="font-style: italic;">Hoà Thượng Thích Minh Châu dịch Việt</span></h5>
+
+</div>
+
+<br>
+ 	<title>Trường Bộ 1</title>
+
+
+<p lang="vi"; style="text-align: center">Trường Bộ 1<br>
+<span lang="pi" class="pali">Dīgha Nikāya 1</span></p>
+
+<p lang="vi"; style="text-align: center">Kinh Phạm Võng<br>
+<span lang="pi" class="pali">Brahmajālasutta</span></p>
+
+
+<p lang="vi" class="vi">Này các Tỷ-kheo, lại có những pháp khác, sâu kín, khó thấu, khó chứng, tịch tịnh, mỹ diệu, vượt ngoài tầm của luận lý suông, tế nhị chỉ những người trí mới nhận hiểu. Những pháp ấy Như Lai đã tự chứng tri, giác ngộ và tuyên thuyết. Và chính những pháp ấy những ai như thật chân chánh tán thán Như Lai mới nói đến.<br>
+<span lang="pi" class="pali">Atthi, bhikkhave, aññeva dhammā gambhīrā duddasā duranubodhā santā paṇītā atakkāvacarā nipuṇā paṇḍitavedanīyā, ye tathāgato sayaṃ abhiññā sacchikatvā pavedeti, yehi tathāgatassa yathābhuccaṃ vaṇṇaṃ sammā vadamānā vadeyyuṃ.</span></p>
+
+<p lang="vi" class="vi">Này các Tỷ-kheo, thế nào là những pháp sâu kín, khó thấy, khó chứng, tịch tịnh, mỹ diệu, không thể nhận hiểu bởi luận lý suông, tế nhị, chỉ những người trí mới có thể nhận hiểu. Những pháp ấy Như Lai đã tự chứng tri, giác ngộ và tuyên thuyết, và chính những pháp ấy những ai như thật chân chánh tán thán Như Lai mới nói đến?<br>
+<span lang="pi" class="pali">Katame ca te, bhikkhave, dhammā gambhīrā duddasā duranubodhā santā paṇītā atakkāvacarā nipuṇā paṇḍitavedanīyā, ye tathāgato sayaṃ abhiññā sacchikatvā pavedeti, yehi tathāgatassa yathābhuccaṃ vaṇṇaṃ sammā vadamānā vadeyyuṃ?</span></p>
+
+<p lang="vi" class="vi">(62 loại Tà kiến)<br>
+
+<p lang="vi" class="vi">Này các Tỷ-kheo có những Sa-môn, Bà-la-môn, luận bàn về quá khứ tối sơ, chấp kiến về quá khứ tối sơ, y cứ về quá khứ tối sơ, đề xướng nhiều sở kiến sai khác, với mười tám luận chấp. Và y chỉ theo gì, căn cứ theo gì, những Sa-môn, Bà-la-môn ấy luận bàn về phía quá khứ tối sơ, chấp kiến về quá khứ tối sơ, y cứ về quá khứ tối sơ, đề xướng ra nhiều sở kiến sai khác với mười tám luận chấp?<br>
+<span lang="pi" class="pali">Santi, bhikkhave, eke samaṇabrāhmaṇā pubbantakappikā pubbantānudiṭṭhino, pubbantaṃ ārabbha anekavihitāni adhimuttipadāni abhivadanti aṭṭhārasahi vatthūhi. Te ca bhonto samaṇabrāhmaṇā kimāgamma kimārabbha pubbantakappikā pubbantānudiṭṭhino pubbantaṃ ārabbha anekavihitāni adhimuttipadāni abhivadanti aṭṭhārasahi vatthūhi?</span></p>
+
+
+<p lang="vi" class="vi">Này các Tỷ-kheo, có một số Sa-môn, Bà-la-môn, chủ trương Thường trú luận, chấp rằng: “Bản ngã về thế giới là thường còn” với bốn luận chấp. Và những Sa-môn, Bà-la-môn này, y chỉ gì, căn cứ gì, chủ trương Thường trú luận, và chấp bản ngã và thế giới là thường còn với bốn luận chấp?<br>
+<span lang="pi" class="pali">Santi, bhikkhave, eke samaṇabrāhmaṇā sassatavādā, sassataṃ attānañca lokañca paññapenti catūhi vatthūhi. Te ca bhonto samaṇabrāhmaṇā kimāgamma kimārabbha sassatavādā sassataṃ attānañca lokañca paññapenti catūhi vatthūhi?</span></p>
+
+<p lang="vi" class="vi">Này các Tỷ-kheo, nhờ nhiệt tâm, nhờ tinh tấn, nhờ cần mẫn, nhờ không phóng dật, nhờ chánh ức niệm, nên tâm nhập định; khi tâm nhập định, vị ấy nhớ được nhiều đời sống quá khứ, như một đời, hai đời, ba đời, bốn đời, năm đời, mười đời, trăm đời, ngàn đời, trăm ngàn đời, vô số trăm đời, vô số ngàn đời, vô số trăm ngàn đời, nhớ rằng:<br>
+<span lang="pi" class="pali">Idha, bhikkhave, ekacco samaṇo vā brāhmaṇo vā ātappamanvāya padhānamanvāya anuyogamanvāya appamādamanvāya sammāmanasikāramanvāya tathārūpaṃ cetosamādhiṃ phusati, yathāsamāhite citte (...) anekavihitaṃ pubbenivāsaṃ anussarati. Seyyathidaṃ—ekampi jātiṃ dvepi jātiyo tissopi jātiyo catassopi jātiyo pañcapi jātiyo dasapi jātiyo vīsampi jātiyo tiṃsampi jātiyo cattālīsampi jātiyo paññāsampi jātiyo jātisatampi jātisahassampi jātisatasahassampi anekānipi jātisatāni anekānipi jātisahassāni anekānipi jātisatasahassāni:</span></p>
+
+<p lang="vi" class="vi">“Khi được sanh tại chỗ ấy, tôi đã sống với tên như thế này, giòng họ như thế này, giai cấp như thế này, ăn uống như thế này, lạc thọ khổ thọ như thế này, tuổi thọ như thế này. Từ chỗ ấy chết đi, tôi lại được sanh đến chỗ kia. Tại chỗ kia, tôi đã sống tên như thế này, giòng họ như thế này, giai cấp như thế này, ăn uống như thế này, lạc thọ, khổ thọ như thế này, tuổi thọ như thế này. Từ chỗ kia chết đi tôi được sanh tại chỗ này”.<br>
+<span lang="pi" class="pali">‘Amutrāsiṃ evaṃnāmo evaṅgotto evaṃvaṇṇo evamāhāro evaṃ-sukhadukkha-ppaṭisaṃvedī evamāyupariyanto, so tato cuto amutra udapādiṃ; tatrāpāsiṃ evaṃnāmo evaṅgotto evaṃvaṇṇo evamāhāro evaṃ-sukhadukkha-ppaṭisaṃvedī evamāyupariyanto, so tato cuto idhūpapanno’ti.</span></p>
+
+<p lang="vi" class="vi">Như vậy người ấy nhớ nhiều đời quá khứ, với những đặc điểm và những chi tiết.<br>
+<span lang="pi" class="pali">Iti sākāraṃ sauddesaṃ anekavihitaṃ pubbenivāsaṃ anussarati.</span></p>
+
+<p lang="vi" class="vi">Người ấy nói rằng:<br>
+<span lang="pi" class="pali">So evamāha:</span></p>
+
+<p lang="vi" class="vi">“Bản ngã và thế giới là thường trú, bất sanh, vững chắc như đảnh núi, như trụ đá; còn những loại hữu tình kia thời lưu chuyển luân hồi, chết đi sanh lại, tuy vậy chúng vẫn thường trú.<br>
+<span lang="pi" class="pali">Sassato attā ca loko ca vañjho kūṭaṭṭho esikaṭṭhāyiṭṭhito; te ca sattā sandhāvanti saṃsaranti cavanti upapajjanti, atthi tveva sassatisamaṃ.</span></p>
+
+<p lang="vi" class="vi">Tại sao vậy?<br>
+<span lang="pi" class="pali">Taṃ kissa hetu?</span></p>
+
+<p lang="vi" class="vi">Này các Tỷ-kheo, nhờ nhiệt tâm, nhờ tinh tấn, nhờ cần mẫn, nhờ không phóng dật, nhờ chánh ức niệm, nên tâm nhập định; khi tâm nhập định, vị ấy nhớ được nhiều đời sống quá khứ, như một đời, hai đời, ba đời, bốn đời, năm đời, mười đời, trăm đời, ngàn đời, trăm ngàn đời, vô số trăm đời, vô số ngàn đời, vô số trăm ngàn đời, nhớ rằng:<br>
+<span lang="pi" class="pali">Ahañhi ātappamanvāya padhānamanvāya anuyogamanvāya appamādamanvāya sammāmanasikāramanvāya tathārūpaṃ cetosamādhiṃ phusāmi, yathāsamāhite citte anekavihitaṃ pubbenivāsaṃ anussarāmi. Seyyathidaṃ—ekampi jātiṃ dvepi jātiyo tissopi jātiyo catassopi jātiyo pañcapi jātiyo dasapi jātiyo vīsampi jātiyo tiṃsampi jātiyo cattālīsampi jātiyo paññāsampi jātiyo jātisatampi jātisahassampi jātisatasahassampi anekānipi jātisatāni anekānipi jātisahassāni anekānipi jātisatasahassāni:</span></p>
+
+<p lang="vi" class="vi">“Khi được sanh tại chỗ ấy, tôi đã sống với tên như thế này, giòng họ như thế này, giai cấp như thế này, ăn uống như thế này, lạc thọ khổ thọ như thế này, tuổi thọ như thế này. Từ chỗ ấy chết đi, tôi lại được sanh đến chỗ kia. Tại chỗ kia, tôi đã sống tên như thế này, giòng họ như thế này, giai cấp như thế này, ăn uống như thế này, lạc thọ, khổ thọ như thế này, tuổi thọ như thế này. Từ chỗ kia chết đi tôi được sanh tại chỗ này”<br>
+<span lang="pi" class="pali">“Amutrāsiṃ evaṃnāmo evaṅgotto evaṃvaṇṇo evamāhāro evaṃ-sukhadukkha-ppaṭisaṃvedī evamāyupariyanto, so tato cuto amutra udapādiṃ; tatrāpāsiṃ evaṃnāmo evaṅgotto evaṃvaṇṇo evamāhāro evaṃ-sukhadukkha-ppaṭisaṃvedī evamāyupariyanto, so tato cuto idhūpapanno”ti.</span></p>
+
+<p lang="vi" class="vi">Như vậy người ấy nhớ nhiều đời quá khứ, với những đặc điểm và những chi tiết.<br>
+<span lang="pi" class="pali">Iti sākāraṃ sauddesaṃ anekavihitaṃ pubbenivāsaṃ anussarāmi.</span></p>
+
+<p lang="vi" class="vi">Người ấy nói rằng:<br>
+<span lang="pi" class="pali">Imināmahaṃ etaṃ jānāmi:</span></p>
+
+<p lang="vi" class="vi">“Bản ngã và thế giới là thường trú, bất sanh, vững chắc như đảnh núi, như trụ đá; còn những loại hữu tình kia thời lưu chuyển luân hồi, chết đi sanh lại, tuy vậy chúng vẫn thường trú.”<br>
+<span lang="pi" class="pali">“Yathā sassato attā ca loko ca vañjho kūṭaṭṭho esikaṭṭhāyiṭṭhito; te ca sattā sandhāvanti saṃsaranti cavanti upapajjanti, atthi tveva sassatisaman”’ti.</span></p>
+
+<p lang="vi" class="vi">Này các Tỷ-kheo đó là lập trường thứ nhất, y chỉ theo đó, căn cứ theo đó, một số những vị Sa-môn, Bà-la-môn, chủ trương Thường trú luận, và chấp rằng bản ngã và thế giới là thường còn.<br>
+<span lang="pi" class="pali">Idaṃ, bhikkhave, paṭhamaṃ ṭhānaṃ, yaṃ āgamma yaṃ ārabbha eke samaṇabrāhmaṇā sassatavādā sassataṃ attānañca lokañca paññapenti.</span></p>
+
+<p lang="vi" class="vi">Trường hợp thứ hai, có những Sa-môn, Bà-la-môn y chỉ gì, căn cứ gì, chủ trương Thường trú luận, và chấp rằng bản ngã và thế giới là thường còn?<br>
+<span lang="pi" class="pali">Dutiye ca bhonto samaṇabrāhmaṇā kimāgamma kimārabbha sassatavādā sassataṃ attānañca lokañca paññapenti?</span></p>
+
+<p lang="vi" class="vi">Này các Tỷ-kheo, ở đời này có Sa-môn hay Bà-la-môn, nhờ nhất tâm, nhờ tinh tấn, nhờ cần mẫn, nhờ không phóng dật, nhờ chánh ức niệm, nên tâm nhập định, khi tâm nhập định, vị ấy nhớ được nhiều đời sống quá khứ, như một thành kiếp hoại kiếp, hai thành kiếp hoại kiếp, ba thành kiếp hoại kiếp, mười thành kiếp hoại kiếp; nhớ rằng:<br>
+<span lang="pi" class="pali">Idha, bhikkhave, ekacco samaṇo vā brāhmaṇo vā ātappamanvāya padhānamanvāya anuyogamanvāya appamādamanvāya sammāmanasikāramanvāya tathārūpaṃ cetosamādhiṃ phusati, yathāsamāhite citte anekavihitaṃ pubbenivāsaṃ anussarati. Seyyathidaṃ—ekampi saṃvaṭṭavivaṭṭaṃ dvepi saṃvaṭṭavivaṭṭāni tīṇipi saṃvaṭṭavivaṭṭāni cattāripi saṃvaṭṭavivaṭṭāni pañcapi saṃvaṭṭavivaṭṭāni dasapi saṃvaṭṭavivaṭṭāni:</span></p>
+
+<p lang="vi" class="vi">“Khi được sanh tại chỗ ấy, tôi đã sống với tên như thế này, dòng họ như thế này, giai cấp như thế này, ăn uống như thế này, lạc thọ khổ thọ như thế này. Từ chỗ ấy chết đi, tôi lại được sanh đến chỗ kia. Tại chỗ kia, tôi đã sống tên như thế này, dòng họ như thế này, giai cấp như thế này, ăn uống như thế này, lạc thọ, khổ thọ như thế này, tuổi thọ như thế này. Từ chỗ kia chết đi tôi được sanh tại chỗ này, còn những loại hữu tình kia lưu chuyển luân hồi, chết đi sanh lại, tuy vậy chúng vẫn thường trú”.<br>
+<span lang="pi" class="pali">“Amutrāsiṃ evaṃnāmo evaṅgotto evaṃvaṇṇo evamāhāro evaṃ-sukhadukkha-ppaṭisaṃvedī evamāyupariyanto, so tato cuto amutra udapādiṃ; tatrāpāsiṃ evaṃnāmo evaṅgotto evaṃvaṇṇo evamāhāro evaṃ-sukhadukkha-ppaṭisaṃvedī evamāyupariyanto, so tato cuto idhūpapanno’ti. “</span></p>
+
+<p lang="vi" class="vi">Như vậy người ấy nhớ nhiều đời quá khứ, với những đặc điểm và những chi tiết.<br>
+<span lang="pi" class="pali">Iti sākāraṃ sauddesaṃ anekavihitaṃ pubbenivāsaṃ anussarati.</span></p>
+
+<p lang="vi" class="vi">Người ấy nói rằng:<br>
+<span lang="pi" class="pali">So evamāha:</span></p>
+
+<p lang="vi" class="vi">“Bản ngã và thế giới là thường trú, bất sanh, vững chắc như đảnh núi, như trụ đá; còn những loại hữu tình kia thời lưu chuyển luân hồi, chết đi sanh lại, tuy vậy chúng vẫn thường trú.”<br>
+<span lang="pi" class="pali">“Sassato attā ca loko ca vañjho kūṭaṭṭho esikaṭṭhāyiṭṭhito; te ca sattā sandhāvanti saṃsaranti cavanti upapajjanti, atthi tveva sassatisamaṃ.”</span></p>
+
+<p lang="vi" class="vi">Tại sao vậy?<br>
+<span lang="pi" class="pali">Taṃ kissa hetu?</span></p>
+
+<p lang="vi" class="vi">Này các Tỷ-kheo, nhờ nhiệt tâm, nhờ tinh tấn, nhờ cần mẫn, nhờ không phóng dật, nhờ chánh ức niệm, nên tâm nhập định; khi tâm nhập định, vị ấy nhớ được nhiều đời sống quá khứ, như một đời, hai đời, ba đời, bốn đời, năm đời, mười đời, trăm đời, ngàn đời, trăm ngàn đời, vô số trăm đời, vô số ngàn đời, vô số trăm ngàn đời, nhớ rằng:<br>
+<span lang="pi" class="pali">Ahañhi ātappamanvāya padhānamanvāya anuyogamanvāya appamādamanvāya sammāmanasikāramanvāya tathārūpaṃ cetosamādhiṃ phusāmi yathāsamāhite citte anekavihitaṃ pubbenivāsaṃ anussarāmi. Seyyathidaṃ—ekampi saṃvaṭṭavivaṭṭaṃ dvepi saṃvaṭṭavivaṭṭāni tīṇipi saṃvaṭṭavivaṭṭāni cattāripi saṃvaṭṭavivaṭṭāni pañcapi saṃvaṭṭavivaṭṭāni dasapi saṃvaṭṭavivaṭṭāni:</span></p>
+
+<p lang="vi" class="vi">“Khi được sanh tại chỗ ấy, tôi đã sống với tên như thế này, dòng họ như thế này, giai cấp như thế này, ăn uống như thế này, lạc thọ khổ thọ như thế này, tuổi thọ như thế này. Từ chỗ ấy chết đi, tôi lại được sanh đến chỗ kia. Tại chỗ kia, tôi đã sống tên như thế này, dòng họ như thế này, giai cấp như thế này, ăn uống như thế này, lạc thọ, khổ thọ như thế này, tuổi thọ như thế này. Từ chỗ kia chết đi tôi được sanh tại chỗ này, còn những loại hữu tình kia lưu chuyển luân hồi, chết đi sanh lại, tuy vậy chúng vẫn thường trú.”<br>
+<span lang="pi" class="pali">“Amutrāsiṃ evaṃnāmo evaṅgotto evaṃvaṇṇo evamāhāro evaṃ-sukhadukkha-ppaṭisaṃvedī evamāyupariyanto, so tato cuto amutra udapādiṃ; tatrāpāsiṃ evaṃnāmo evaṅgotto evaṃvaṇṇo evamāhāro evaṃ-sukhadukkha-ppaṭisaṃvedī evamāyupariyanto, so tato cuto idhūpapanno”ti. “</span></p>
+
+<p lang="vi" class="vi">Như vậy người ấy nhớ nhiều đời quá khứ, với những đặc điểm và những chi tiết.<br>
+<span lang="pi" class="pali">Iti sākāraṃ sauddesaṃ anekavihitaṃ pubbenivāsaṃ anussarāmi.</span></p>
+
+<p lang="vi" class="vi">Người ấy nói rằng:<br>
+<span lang="pi" class="pali">Imināmahaṃ etaṃ jānāmi:</span></p>
+
+<p lang="vi" class="vi">“Bản ngã và thế giới là thường trú, bất sanh, vững chắc như đảnh núi, như trụ đá; còn những loại hữu tình kia thời lưu chuyển luân hồi, chết đi sanh lại, tuy vậy chúng vẫn thường trú.”<br>
+<span lang="pi" class="pali">“Yathā sassato attā ca loko ca vañjho kūṭaṭṭho esikaṭṭhāyiṭṭhito, te ca sattā sandhāvanti saṃsaranti cavanti upapajjanti, atthi tveva sassatisaman”’ti.</span></p>
+
+<p lang="vi" class="vi">Này các Tỷ-kheo, đó là lập trường thứ hai, y chỉ theo đó, căn cứ theo đó, một số những Sa-môn, Bà-la-môn, chủ trương Thường trú luận và chấp rằng, bản ngã và thế giới thường còn.<br>
+<span lang="pi" class="pali">Idaṃ, bhikkhave, dutiyaṃ ṭhānaṃ, yaṃ āgamma yaṃ ārabbha eke samaṇabrāhmaṇā sassatavādā sassataṃ attānañca lokañca paññapenti.</span></p>
+
+<p lang="vi" class="vi">Trường hợp thứ ba, những Sa-môn hay Bà-la-môn, y chỉ gì, căn cứ gì, chủ trương Thường trú luận, và cho rằng bản ngã và thế giới là thường còn?<br>
+<span lang="pi" class="pali">Tatiye ca bhonto samaṇabrāhmaṇā kimāgamma kimārabbha sassatavādā sassataṃ attānañca lokañca paññapenti?</span></p>
+
+<p lang="vi" class="vi">Này các Tỷ-kheo, ở đời này có Sa-môn hay Bà-la-môn, nhờ nhất tâm, nhờ tinh tấn, nhờ cần mẫn, nhờ không phóng dật, nhờ chánh ức niệm, nên tâm nhập định. Khi tâm nhập định, vị ấy nhớ được nhiều đời sống quá khứ, như mười thành kiếp hoại kiếp, hai mươi thành kiếp hoại kiếp, ba mươi thành kiếp hoại kiếp, bốn mươi thành kiếp hoại kiếp, năm mươi thành kiếp hoại kiếp; nhớ rằng:<br>
+<span lang="pi" class="pali">Idha, bhikkhave, ekacco samaṇo vā brāhmaṇo vā ātappamanvāya padhānamanvāya anuyogamanvāya appamādamanvāya sammāmanasikāramanvāya tathārūpaṃ cetosamādhiṃ phusati, yathāsamāhite citte anekavihitaṃ pubbenivāsaṃ anussarati. Seyyathidaṃ—dasapi saṃvaṭṭavivaṭṭāni vīsampi saṃvaṭṭavivaṭṭāni tiṃsampi saṃvaṭṭavivaṭṭāni cattālīsampi saṃvaṭṭavivaṭṭāni:</span></p>
+
+<p lang="vi" class="vi">“Khi được sanh tại chỗ ấy, tôi đã sống với tên như thế này, giòng họ như thế này, giai cấp như thế này, lạc thọ khổ thọ như thế này, tuổi thọ như thế này. Từ chỗ ấy, chết đi, tôi lại được sanh đến chỗ kia. Từ chỗ ấy, chết đi, tôi lại được sanh đến chỗ kia. Tại chỗ kia, tôi đã sống với tên như thế này, giòng họ như thế này, giai cấp như thế này, ăn uống như thế này, lạc thọ khổ thọ như thế này, tuổi thọ như thế này. Từ chỗ kia chết đi, tôi được sanh tại chỗ này”.<br>
+<span lang="pi" class="pali">‘Amutrāsiṃ evaṃnāmo evaṅgotto evaṃvaṇṇo evamāhāro evaṃ-sukhadukkha-ppaṭisaṃvedī evamāyupariyanto, so tato cuto amutra udapādiṃ; tatrāpāsiṃ evaṃnāmo evaṅgotto evaṃvaṇṇo evamāhāro evaṃ-sukhadukkha-ppaṭisaṃvedī evamāyupariyanto, so tato cuto idhūpapanno’ti.</span></p>
+
+<p lang="vi" class="vi">Như vậy người ấy nhớ nhiều đời quá khứ với những đặc điểm và những chi tiết.<br>
+<span lang="pi" class="pali">Iti sākāraṃ sauddesaṃ anekavihitaṃ pubbenivāsaṃ anussarati.</span></p>
+
+<p lang="vi" class="vi">Người ấy nói:<br>
+<span lang="pi" class="pali">So evamāha:</span></p>
+
+<p lang="vi" class="vi">“Bản ngã và thế giới là thường trú, bất sanh, vững chắc như đảnh núi, như trụ đá; còn những loại hữu tình kia thì lưu chuyển luân hồi, chết đi sanh lại, tuy vậy, chúng vẫn thường trú. Tại sao vậy?<br>
+<span lang="pi" class="pali">“Sassato attā ca loko ca vañjho kūṭaṭṭho esikaṭṭhāyiṭṭhito; te ca sattā sandhāvanti saṃsaranti cavanti upapajjanti, atthi tveva sassatisamaṃ. Taṃ kissa hetu?</span></p>
+
+<p lang="vi" class="vi">Này các Tỷ-kheo, nhờ nhiệt tâm, nhờ tinh tấn, nhờ cần mẫn, nhờ không phóng dật, nhờ chánh ức niệm, nên tâm nhập định; khi tâm nhập định, vị ấy nhớ được nhiều đời sống quá khứ, như một đời, hai đời, ba đời, bốn đời, năm đời, mười đời, trăm đời, ngàn đời, trăm ngàn đời, vô số trăm đời, vô số ngàn đời, vô số trăm ngàn đời, nhớ rằng:<br>
+<span lang="pi" class="pali">Ahañhi ātappamanvāya padhānamanvāya anuyogamanvāya appamādamanvāya sammāmanasikāramanvāya tathārūpaṃ cetosamādhiṃ phusāmi, yathāsamāhite citte anekavihitaṃ pubbenivāsaṃ anussarāmi. Seyyathidaṃ—dasapi saṃvaṭṭavivaṭṭāni vīsampi saṃvaṭṭavivaṭṭāni tiṃsampi saṃvaṭṭavivaṭṭāni cattālīsampi saṃvaṭṭavivaṭṭāni:</span></p>
+
+<p lang="vi" class="vi">Khi được sanh tại chỗ ấy, tôi đã sống với tên như thế này, giòng họ như thế này, giai cấp như thế này, ăn uống như thế này, lạc thọ khổ thọ như thế này, tuổi thọ như thế này. Từ chỗ ấy chết đi, tôi lại được sanh đến chỗ kia. Tại chỗ kia, tôi đã sống tên như thế này, giòng họ như thế này, giai cấp như thế này, ăn uống như thế này, lạc thọ, khổ thọ như thế này, tuổi thọ như thế này. Từ chỗ kia chết đi tôi được sanh tại chỗ này”<br>
+<span lang="pi" class="pali">“Amutrāsiṃ evaṃnāmo evaṅgotto evaṃvaṇṇo evamāhāro evaṃ-sukhadukkha-ppaṭisaṃvedī evamāyupariyanto, so tato cuto amutra udapādiṃ; tatrāpāsiṃ evaṃnāmo evaṅgotto evaṃvaṇṇo evamāhāro evaṃ-sukhadukkha-ppaṭisaṃvedī evamāyupariyanto, so tato cuto idhūpapanno”ti.</span></p>
+
+<p lang="vi" class="vi">Như vậy người ấy nhớ nhiều đời quá khứ với những với những đặc điểm và những chi tiết. Người ấy nói rằng:<br>
+<span lang="pi" class="pali">Iti sākāraṃ sauddesaṃ anekavihitaṃ pubbenivāsaṃ anussarāmi. Imināmahaṃ etaṃ jānāmi:</span></p>
+
+<p lang="vi" class="vi">Bản ngã và thế giới là thường trú, bất sanh, vững chắc như đảnh núi, như trụ đá; còn những loại hữu tình kia thì lưu chuyển luân hồi, chết đi sanh lại, tuy vậy, chúng vẫn thường trú.<br>
+<span lang="pi" class="pali">“Yathā sassato attā ca loko ca vañjho kūṭaṭṭho esikaṭṭhāyiṭṭhito, te ca sattā sandhāvanti saṃsaranti cavanti upapajjanti, atthi tveva sassatisaman”’ti.</span></p>
+
+<p lang="vi" class="vi">Này các Tỷ-kheo, đó là lập trường thứ ba, y chỉ theo đó, căn cứ theo đó, một số Sa-môn, Bà-la-môn, chủ trương Thường trú luận, chấp bản ngã và thế giới thường còn.<br>
+<span lang="pi" class="pali">Idaṃ, bhikkhave, tatiyaṃ ṭhānaṃ, yaṃ āgamma yaṃ ārabbha eke samaṇabrāhmaṇā sassatavādā sassataṃ attānañca lokañca paññapenti.</span></p>
+
+<p lang="vi" class="vi">Trường hợp thứ tư, những Sa-môn, Bà-la-môn y chỉ gì, căn cứ gì, chủ trương Thường trú luận, và chấp bản ngã và thế giới thường còn?<br>
+<span lang="pi" class="pali">Catutthe ca bhonto samaṇabrāhmaṇā kimāgamma kimārabbha sassatavādā sassataṃ attānañca lokañca paññapenti?</span></p>
+
+<p lang="vi" class="vi">Này các Tỷ-kheo, ở đời có Sa-môn hay Bà-la-môn, là nhà suy luận, là nhà thẩm sát. Do sự chia chẻ của suy luận, và sự tùy thuận theo thẩm sát, vị này tuyên bố như thế này:<br>
+<span lang="pi" class="pali">Idha, bhikkhave, ekacco samaṇo vā brāhmaṇo vā takkī hoti vīmaṃsī, so takkapariyāhataṃ vīmaṃsānucaritaṃ sayaṃ paṭibhānaṃ evamāha:</span></p>
+
+<p lang="vi" class="vi">“Bản ngã và thế giới là thường trú, bất sanh, vững chắc như đảnh núi, như trụ đá, còn những loại hữu tình kia thời lưu chuyển luân hồi, chết đi sanh lại, tuy vậy chúng vẫn thường còn”.<br>
+<span lang="pi" class="pali">“Sassato attā ca loko ca vañjho kūṭaṭṭho esikaṭṭhāyiṭṭhito; te ca sattā sandhāvanti saṃsaranti cavanti upapajjanti, atthi tveva sassatisaman’ti.”</span></p>
+
+<p lang="vi" class="vi">Này các Tỷ-kheo, đó là lập trường thứ tư, y chỉ theo đó, căn cứ theo đó, một số Sa-môn, Bà-la-môn, chủ trương Thường trú luận, chấp bản ngã và thế giới là thường còn.<br>
+<span lang="pi" class="pali">Idaṃ, bhikkhave, catutthaṃ ṭhānaṃ, yaṃ āgamma yaṃ ārabbha eke samaṇabrāhmaṇā sassatavādā sassataṃ attānañca lokañca paññapenti.</span></p>
+
+<p lang="vi" class="vi">Này các Tỷ-kheo, những Sa-môn, Bà-la-môn này, chủ trương Thường trú luận, chấp bản ngã và thế giới là thường còn, với bốn luận chấp.<br>
+<span lang="pi" class="pali">Imehi kho te, bhikkhave, samaṇabrāhmaṇā sassatavādā sassataṃ attānañca lokañca paññapenti catūhi vatthūhi.</span></p>
+
+<p lang="vi" class="vi">Nếu có những vị Sa-môn, Bà-la-môn nào chủ trương Thường trú luận, chấp rằng: “Bản ngã và thế giới là thường còn”, chúng sẽ chấp cả bốn luận chấp trên, hay một trong những luận chấp trên, ngoài ra không có luận chấp nào khác nữa.<br>
+<span lang="pi" class="pali">Ye hi keci, bhikkhave, samaṇā vā brāhmaṇā vā sassatavādā sassataṃ attānañca lokañca paññapenti, sabbe te imeheva catūhi vatthūhi, etesaṃ vā aññatarena; natthi ito bahiddhā.</span></p>
+
+<p lang="vi" class="vi">Này các Tỷ-kheo, Như Lai tuệ tri như thế này:<br>
+<span lang="pi" class="pali">Tayidaṃ, bhikkhave, tathāgato pajānāti:</span></p>
+
+<p lang="vi" class="vi">“Những sở kiến ấy, chấp trước như vậy, chấp thủ như vậy, sẽ đưa đến những cõi thú như vậy, sẽ tác thành những định mạng như vậy”. Như Lai biết như vậy, Ngài lại biết hơn thế nữa, và Ngài không chấp sở tri ấy. Nhờ không chấp trước sở tri ấy, nội tâm chứng được tịch tịnh. Ngài như thật biết sự tập khởi, sự diệt trừ của các thọ, vị ngọt, những nguy hiểm và sự xuất ly của chúng. Nhờ biết vậy, này các Tỷ-kheo, Như Lai được giải thoát hoàn toàn, không có chấp thủ.<br>
+<span lang="pi" class="pali">‘Ime diṭṭhiṭṭhānā evaṅgahitā evaṃparāmaṭṭhā evaṅgatikā bhavanti evaṃabhisamparāyā’ti, tañca tathāgato pajānāti, tato ca uttaritaraṃ pajānāti; tañca pajānanaṃ na parāmasati, aparāmasato cassa paccattaññeva nibbuti viditā. Vedanānaṃ samudayañca atthaṅgamañca assādañca ādīnavañca nissaraṇañca yathābhūtaṃ viditvā anupādāvimutto, bhikkhave, tathāgato.”</span></p>
+
+<p lang="vi" class="vi">Những chấp pháp ấy, này các Tỷ-kheo, là những pháp sâu kín, khó thấy, khó chứng, tịch tịnh, mỹ diệu, vượt ngoài tầm của luận lý suông, tế nhị, chỉ những người có trí mới có thể phân biệt. Những pháp ấy, Như Lai đã thắng tri, giác ngộ và tuyên thuyết; và chính những pháp ấy, những ai như thật chân chánh tán thán Như Lai mới nói đến.<br>
+<span lang="pi" class="pali">Ime kho te, bhikkhave, dhammā gambhīrā duddasā duranubodhā santā paṇītā atakkāvacarā nipuṇā paṇḍitavedanīyā, ye tathāgato sayaṃ abhiññā sacchikatvā pavedeti, yehi tathāgatassa yathābhuccaṃ vaṇṇaṃ sammā vadamānā vadeyyuṃ.</span></p>
+
+<br>
+
+
+<p><p style="text-align: right;font-style: italic;">Hoà Thượng Thích Minh Châu dịch Việt</span></p>
+
+
+
+</section>  <!-- End English and Pali -->
+
+
+<div id="nextprev"><a id="previous-sutta" href="./dn1.3.html#content"></a><a id="next-sutta" href="./dn1.5.html#content"></a></div>
+
+</div>  <!--End Content -->
+<!-- Footer -->
+		<footer>
+					 <!-- End bottom links -->
+</footer>
+
+ 
+ <!-- Scripts -->
+ 
+ <script src="../js/footer.js"></script><script src="../js/dpd_deconstructor.js"></script><script src="../js/dpd_ebts.js"></script><script src="../js/dpd_i2h.js"></script>
+ <script src="/sw.js"></script>
+ </body>
+ </html>
+
+

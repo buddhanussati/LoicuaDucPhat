@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+ 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+ 	<link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+ 	<meta name="viewport" content="width=device-width, initial-scale=1">
+		<!-- Loading manifest -->
+	<link rel="manifest" href="../manifest.json">
+ 	<!-- Loading main and menu stylesheets -->
+ 	<link rel="stylesheet" href="../css/w3.css">
+ 	<link rel="stylesheet" href="../css/css.css">
+ 	<link rel="stylesheet" href="../css/menu.css">
+ 	<script src="../js/jquery-1.10.2.min.js"></script>
+ 	<script src="../js/controlpanel.js"></script>
+ 	<script src="../js/mousetrap.min.js"></script>
+    <script src="../js/pali-lookup-standalone.js"></script>
+
+ <script src="../js/suttaFiles.js"></script>
+
+
+</head>
+ <body class="container">
+ <div class="header-background">
+ <!-- Header -->
+ <div class="w3-header w3-content w3-padding w3-left-align bwcontainer">
+ 	<div class="centered">
+ 		<button class="light-mode-button" aria-label="Bật Chế Độ Sáng" onclick="toggle_light_mode()">
+ 			<span></span>
+ 			<span></span>
+ 		</button>
+ 		<span class="box-lbl">Sáng/Tối</span>
+ 	</div> <!-- Centered -->
+ 		<a href="../home/index.html" id="bwlogo"><img src="../images/headerlogo.png" alt="Logo Lời Của Đức Phật" class="w3-image"></a> 
+
+ 		<div class="w3-bar bwcontainer">
+  <div style="display:flex; align-items:center; gap:4px;">
+    <form id="form" class="inline-search" style="display:flex; align-items:center; gap:2px; margin:0;">
+      <input id="searchpage" type="text" placeholder="Tìm trên trang"
+             style="width:100px; font-size:12px;" />
+      <input class="go-button" type="submit" style="font-size:13px;" value="🔍" />
+      <button type="button" id="prev-btn" style="font-size:15px;" title="Kết quả trước (↑)">↑</button>
+      <button type="button" id="next-btn" style="font-size:15px;" title="Kết quả tiếp (↓)">↓</button>
+      <span id="result-info" style="font-size:13px;"></span>
+      <button type="button" id="close-float" title="Đóng" style="display:none;">✕</button>
+    </form>
+  </div>
+
+  <button id="toggleViBtn" onclick="toggleVi()">Pali</button>
+<button id="togglePaliBtn" onclick="togglePali()">Việt</button>
+
+
+
+<!-- Empty button chứa switch -->
+<button style="display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 4px 6px; border: 1px solid #ccc; border-radius: 4px; background: #aed0cd; height: 45px;">
+  <label class="switch" style="margin-bottom: 11px;">
+    <input type="checkbox" id="paliSwitch" checked onchange="togglePaliLookup(this.checked)">
+    <span class="slider round"></span>
+  </label>
+  <span style="font-size: 13px; color: black; line-height: 0.4;">Từ điển Pali</span>
+</button>
+<button id="randomSuttaBtn" class="sutta-button" onclick="openRandomSutta2()">
+  <span title="Bài Kinh Ngẫu Nhiên"> 📖 Ngẫu Nhiên</span>
+</button>
+
+<button id="dailySuttaBtn" class="sutta-button" style="background: #bb5d5d" onclick="SuttaQuotes()";>
+  <span title="Trích Dẫn Kinh Điển" style="color: #FFF8DC;">📖 Trích Dẫn</span>
+</button>
+
+<button id="SuttaTopicBtn" class="sutta-button" onclick="openSuttaTopic()" style=" background: #3566d0;">
+    <span title="Kinh Tuyển Chọn">📖 Tuyển Chọn</span>
+</button>
+<a href="../home/visearch.html" id="viSearchBtnOutline" class="search-outline">
+  🔍 Việt
+</a>
+
+<a href="../home/palisearch.html" id="paliSearchBtnOutline" class="search-outline">
+  🔍 Pali
+</a>
+<a href="../congcu/NikayaMp3.html" id="viSearchBtnOutline" class="search-outline" style="font-size:18px; text-decoration:none;" title="Nikaya Tuyển Chọn">
+ 🔊
+</a>
+<a href="../home/about.html" style="margin-left:4px;">
+  <img src="../images/help_icon.png" title="Thông Tin" alt="About">
+</a>
+</div>
+ 		</div> <!-- End w3-bar bwcontainer --> 	</div> <!-- End w3-header w3-content w3-padding w3-left-align bwcontainer -->
+ </div> <!-- End header-background -->
+ <!-- Top menu -->
+
+ <div class="w3-main w3-white bwcontainer2">
+ 	<div class="w3-button w3-padding-8 w3-left w3-hide-large" onclick="w3_open()">☰</div>
+ 		<div id="navbar" class="w3-hide-small w3-hide-medium bwcontainer3">
+ 			<ul id="css3menu0">
+ 				<li class="topfirst" id="home"><a href="../home/index.html" class="w3-hide-small">Trang Chủ</a></li>
+  				<li class="topmenu" id="dn"><a href="../dn/dn.html" class="pressed w3-hide-small">Trường Bộ Kinh</a></li>
+ 				<li class="topmenu" id="mn"><a href="../mn/mn.html" class="w3-hide-small">Trung Bộ Kinh</a></li>
+ 				<li class="topmenu" id="sn"><a href="../sn/sn.html" class="w3-hide-small"><i class="fa fa-caret-down"></i>&nbsp;Tương Ưng Bộ Kinh</a>
+ 					<ul>
+ 						<li><a href="../sn/sn01.html" class="w3-hide-small">Tập I - Thiên Có Kệ (SN 1-11)</a></li>
+ 						<li><a href="../sn/sn02.html" class="w3-hide-small">Tập II - Thiên Nhân Duyên (SN 12-21)</a></li>
+ 						<li><a href="../sn/sn03.html" class="w3-hide-small">Tập III - Thiên Uẩn (SN 22-34)</a></li>
+ 						<li><a href="../sn/sn04.html" class="w3-hide-small">Tập IV - Thiên Sáu Xứ (SN 35-44)</a></li>
+ 						<li><a href="../sn/sn05.html" class="w3-hide-small">Tập V - Thiên Ðại Phẩm (SN 45-56)</a></li>
+ 					</ul>
+ 				<li class="topmenu" id="an"><a href="../an/an.html" class="w3-hide-small"><i class="fa fa-caret-down"></i>&nbsp;Tăng Chi Bộ Kinh</a>
+ 					<ul>
+ 						<li><a href="../an/an1.html" class="w3-hide-small">AN 1: Chương Một Pháp</a></li>
+ 						<li><a href="../an/an2.html" class="w3-hide-small">AN 2: Chương Hai Pháp</a></li>
+ 						<li><a href="../an/an3.html" class="w3-hide-small">AN 3: Chương Ba Pháp</a></li>
+ 						<li><a href="../an/an4.html" class="w3-hide-small">AN 4: Chương Bốn Pháp</a></li>
+ 						<li><a href="../an/an5.html" class="w3-hide-small">AN 5: Chương Năm Pháp</a></li>
+ 						<li><a href="../an/an6.html" class="w3-hide-small">AN 6: Chương Sáu Pháp</a></li>
+ 						<li><a href="../an/an7.html" class="w3-hide-small">AN 7: Chương Bảy Pháp</a></li>
+ 						<li><a href="../an/an8.html" class="w3-hide-small">AN 8: Chương Tám Pháp</a></li>
+ 						<li><a href="../an/an9.html" class="w3-hide-small">AN 9: Chương Chín Pháp</a></li>
+ 						<li><a href="../an/an10.html" class="w3-hide-small">AN 10: Chương Mười Pháp</a></li>
+ 						<li><a href="../an/an11.html" class="w3-hide-small">AN 11: Chương Mười Một Pháp</a></li>
+ 					</ul>
+ 				</li>
+ 				<li class="topmenu" id="kn"><a href="../kn/kn.html" class="w3-hide-small"><i class="fa fa-caret-down"></i>&nbsp;Tiểu Bộ Kinh</a>
+ 					<ul>
+ 						<li><a href="../kp/kp.html" class="w3-hide-small">Khuddakapāṭha - Kinh Tiểu Tụng</a></li>
+ 						<li><a href="../dhp/dhp.html" class="w3-hide-small">Dhammapada - Kinh Pháp Cú</a></li>
+ 						<li><a href="../snp/snp.html" class="w3-hide-small">Sutta Nipāta - Kinh Tập</a></li>
+ 						<li><a href="../ud/ud.html" class="w3-hide-small">Udāna - Kinh Phật Tự Thuyết</a></li>
+ 						<li><a href="../iti/iti.html" class="w3-hide-small">Itivuttaka - Kinh Phật Thuyết Như Vậy</a></li>
+ 						<li><a href="../thag/thag.html" class="w3-hide-small">Theragāthā - Trưởng Lão Tăng Kệ</a></li>
+ 						<li><a href="../thig/thig.html" class="w3-hide-small">Therīgāthā - Trưởng Lão Ni Kệ</a></li>
+</ul>
+  </li>
+<li class="topmenu" id="gioiluat"><a href="../gioiluat/gioiluat.html" class="w3-hide-small">Giới Luật</a></li>
+<li class="topmenu" id="thiendinh"><a href="../thiendinh/thiendinh.html" class="w3-hide-small"></i>Thiền Định</a></li>
+				<li class="toplast" id="khac"><a href="../congcu/congcukhac.html" class="w3-hide-small"></i>»</a>
+ 					</ul>
+ 				</li>
+ 			</ul>
+ 			</div>
+ 		</div> <!--navbar-->
+
+<!-- Sidebar (hidden by default) -->
+ <nav class="w3-sidebar w3-bar-block w3-card w3-border w3-top w3-animate-left w3-hide-large" id="mySidebar">
+ 	<a href="javascript:void(0)" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-times fa-2x red-color"></i>&nbsp;&nbsp;&nbsp;Đóng</a><!-- Hides the sidebar when clicked -->
+ 		<div class="w3-bar-block w3-white">
+ 			<a href="../home/index.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-home fa-lg"></i>&nbsp;&nbsp;&nbsp;Trang Chủ</a>
+ 			
+ 			<a href="../dn/dn.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Trường Bộ Kinh</a>
+ 			<a href="../mn/mn.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Trung Bộ Kinh</a>
+ 			<a href="../sn/sn.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Tương Ưng Bộ Kinh</a>
+ 			<a href="../an/an.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Tăng Chi Bộ Kinh
+ 			<a href="../kn/kn.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Tiểu Bộ Kinh</a>
+
+			<a href="../gioiluat/gioiluat.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Giới Luật</a>
+			<a href="../thiendinh/thiendinh.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Thiền Định</a>
+			<a href="../congcu/congcukhac.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;☸️Công Cụ Khác☸️</a>
+ 		</div>
+ </nav>
+ 
+
+ 
+   <!-- !PAGE CONTENT! --> 
+<div class="w3-main w3-content w3-padding w3-left-align bwcontainer4">
+<div id="content">
+<h2>Dīgha Nikāya – Trường Bộ Kinh</h2>
+<h5><span style="font-style: italic;">Hoà Thượng Thích Minh Châu dịch Việt</span></h5>
+
+</div>
+
+<br>
+ 	<title>Trường Bộ 1</title>
+
+
+<p lang="vi"; style="text-align: center">Trường Bộ 1<br>
+<span lang="pi" class="pali">Dīgha Nikāya 1</span></p>
+
+<p lang="vi"; style="text-align: center">Kinh Phạm Võng<br>
+<span lang="pi" class="pali">Brahmajālasutta</span></p>
+
+<p lang="vi" class="vi">(Trung Giới)<br>
+
+<p lang="vi" class="vi">Trong khi một số Sa-môn, Bà-la-môn dầu đã dùng các món ăn do tín thí cúng dường, vẫn còn sống làm hại các hạt giống và cây cối. Như các hạt giống từ rễ sanh, hạt giống từ ngành cây sanh, hạt giống từ đất sanh, hạt giống từ chiết cây sanh và thứ năm là hạt giống từ hạt giống sanh. Còn Sa-môn Gotama thì không làm hại hột giống hay cây cối nào — Này các Tỷ-kheo, như vậy người phàm phu tán thán Như Lai.<br>
+<span lang="pi" class="pali">Yathā vā paneke bhonto samaṇabrāhmaṇā saddhādeyyāni bhojanāni bhuñjitvā te evarūpaṃ bījagāmabhūtagāmasamārambhaṃ anuyuttā viharanti, seyyathidaṃ—mūlabījaṃ khandhabījaṃ phaḷubījaṃ aggabījaṃ bījabījameva pañcamaṃ iti evarūpā bījagāmabhūtagāmasamārambhā paṭivirato samaṇo gotamo’ti – iti vā hi, bhikkhave, puthujjano tathāgatassa vaṇṇaṃ vadamāno vadeyya.</span></p>
+
+<p lang="vi" class="vi">Trong khi một số Sa-môn, Bà-la-môn, dầu đã dùng các món ăn do tín thí cúng dường, vẫn còn sống cất chứa và thọ hưởng các đồ vật. Như cất chứa các món ăn, cất chứa các đồ uống, cất chứa vải, cất chứa xe cộ, cất chứa các đồ nằm, cất chứa các hương liệu, cất chứa các mỹ vị. Còn Sa-môn Gotama thì từ bỏ không cất chứa các vật trên. – Này các Tỷ-kheo, như vậy người phàm phu tán thán Như Lai.<br>
+<span lang="pi" class="pali">Yathā vā paneke bhonto samaṇabrāhmaṇā saddhādeyyāni bhojanāni bhuñjitvā te evarūpaṃ sannidhikāraparibhogaṃ anuyuttā viharanti, seyyathidaṃ—annasannidhiṃ pānasannidhiṃ vatthasannidhiṃ yānasannidhiṃ sayanasannidhiṃ gandhasannidhiṃ āmisasannidhiṃ iti vā iti evarūpā sannidhikāraparibhogā paṭivirato samaṇo gotamo’ti—iti vā hi, bhikkhave, puthujjano tathāgatassa vaṇṇaṃ vadamāno vadeyya.</span></p>
+
+<p lang="vi" class="vi">Trong khi một số Sa-môn, Bà-la-môn, dầu đã dùng các món ăn do tín thí cúng dường, vẫn còn sống theo các du hí không chân chánh như múa, hát, nhạc, kịch, ngâm vịnh, nhịp tay, tụng chú, đánh trống, diễn các tuồng thần tiên, mãi võ, đấu voi, đấu ngựa, đấu trâu, đấu bò đực, đấu dê, đấu cừu, đấu gà, đấu chim cun cút, đấu gậy, đấu quyền, đấu vật, đánh giặc giả, dàn trận, thao dượt, diễn binh. Còn Sa-môn Gotama thì từ bỏ các loại du hí không chân chánh như trên — Này các Tỷ-kheo, như vậy người phàm phu tán thán Như Lai.<br>
+<span lang="pi" class="pali">Yathā vā paneke bhonto samaṇabrāhmaṇā saddhādeyyāni bhojanāni bhuñjitvā te evarūpaṃ visūkadassanaṃ anuyuttā viharanti, seyyathidaṃ—naccaṃ gītaṃ vāditaṃ pekkhaṃ akkhānaṃ pāṇissaraṃ vetāḷaṃ kumbhathūṇaṃ sobhanakaṃ caṇḍālaṃ vaṃsaṃ dhovanaṃ hatthiyuddhaṃ assayuddhaṃ mahiṃsayuddhaṃ usabhayuddhaṃ ajayuddhaṃ meṇḍayuddhaṃ kukkuṭayuddhaṃ vaṭṭakayuddhaṃ daṇḍayuddhaṃ muṭṭhiyuddhaṃ nibbuddhaṃ uyyodhikaṃ balaggaṃ senābyūhaṃ anīkadassanaṃ iti vā iti evarūpā visūkadassanā paṭivirato samaṇo gotamo’ti—iti vā hi, bhikkhave, puthujjano tathāgatassa vaṇṇaṃ vadamāno vadeyya.</span></p>
+
+<p lang="vi" class="vi">Trong khi một số Sa-môn, Bà-la-môn dầu đã dùng các món ăn do tín thí cúng dường, vẫn còn sống đánh bài và theo các trò giải trí như cờ tám hình vuông, cờ mười hình vuông, cờ trên không, trò chơi trên đất, chỉ bước vào những ô có quyền bước, trò chơi quăng thẻ rồi chụp nhưng không cho sụp đống thẻ, chơi súc sắc, chơi khăng, lấy tay làm viết, chơi banh, chơi thổi kèn bằng lá, chơi xe con, chơi cung nhỏ, chơi đoán chữ viết thiếu trên không hay trên lưng, chơi đoán tư tưởng, chơi bắt chước bộ điệu. Còn Sa-môn Gotama thì từ bỏ đánh bài và các loại giải trí như trên — Này các Tỷ-kheo, như vậy người phàm phu tán thán Như Lai.<br>
+<span lang="pi" class="pali">Yathā vā paneke bhonto samaṇabrāhmaṇā saddhādeyyāni bhojanāni bhuñjitvā te evarūpaṃ jūtappamādaṭṭhānānuyogaṃ anuyuttā viharanti, seyyathidaṃ—aṭṭhapadaṃ dasapadaṃ ākāsaṃ parihārapathaṃ santikaṃ khalikaṃ ghaṭikaṃ salākahatthaṃ akkhaṃ paṅgacīraṃ vaṅkakaṃ mokkhacikaṃ ciṅgulikaṃ pattāḷhakaṃ rathakaṃ dhanukaṃ akkharikaṃ manesikaṃ yathāvajjaṃ iti vā iti evarūpā jūtappamādaṭṭhānānuyogā paṭivirato samaṇo gotamo’ti—iti vā hi, bhikkhave, puthujjano tathāgatassa vaṇṇaṃ vadamāno vadeyya.</span></p>
+
+<p lang="vi" class="vi">Trong khi một số Sa-môn, Bà-la-môn, dầu đã dùng các món ăn do tín thí cúng dường, cũng vẫn sống dùng các giường cao và giường lớn như ghế bành, ghế dài, nệm trải giường bằng len, vải trải giường nhiều tấm nhiều màu, chăn len trắng, chăn len thêu bông, nệm bông, nệm thêu hình các con thú, mền bằng lông thú cả hai phía, mền bằng lông thú một phía, mền có đính ngọc, mền bằng lụa, tấm thảm lớn có thể chứa mười sáu người múa, nệm voi, nệm ngựa, nệm xe, nệm bằng da sơn dương khâu lại với nhau, nệm bằng da con sơn dương gọi là kadali, tấm khảm với lầu che phía trên, ghế dài có đầu gối chân màu đỏ. Còn Sa-môn Gotama thì từ bỏ không dùng các giường cao và giường lớn như trên — Này các Tỷ-kheo, như vậy người phàm phu tán thán Như Lai.<br>
+<span lang="pi" class="pali">Yathā vā paneke bhonto samaṇabrāhmaṇā saddhādeyyāni bhojanāni bhuñjitvā te evarūpaṃ uccāsayanamahāsayanaṃ anuyuttā viharanti, seyyathidaṃ—āsandiṃ pallaṅkaṃ gonakaṃ cittakaṃ paṭikaṃ paṭalikaṃ tūlikaṃ vikatikaṃ uddalomiṃ ekantalomiṃ kaṭṭissaṃ koseyyaṃ kuttakaṃ hatthattharaṃ assattharaṃ rathattharaṃ ajinappaveṇiṃ kadali-miga-pavara-paccattharaṇaṃ sauttaracchadaṃ ubhatolohitakūpadhānaṃ iti vā iti evarūpā Uccāsayana-mahāsayanā paṭivirato samaṇo gotamo’ti—iti vā hi, bhikkhave, puthujjano tathāgatassa vaṇṇaṃ vadamāno vadeyya.</span></p>
+
+<p lang="vi" class="vi">Trong khi một số Sa-môn, Bà-la-môn dầu đã dùng các món ăn do tín thí cúng dường, cũng vẫn sống dùng các đồ trang sức và mỹ phẩm. Như thoa dầu, đấm bóp, tắm, đập tay chân cho mềm dẻo, gương, kem đánh mặt, vòng hoa và phấn son, phấn mặt, sáp mặt, vòng tay, tóc giả trên đầu, gậy cầm tay, ống thuốc, gươm, lọng, dép thêu, khăn đầu, ngọc, phất trần, vải trắng có viền tua dài. Còn Sa-môn Gotama thì từ bỏ không dùng các loại trang sức và mỹ phẩm như trên — Này các Tỷ-kheo, như vậy người phàm phu tán thán Như Lai.<br>
+<span lang="pi" class="pali">Yathā vā paneke bhonto samaṇabrāhmaṇā saddhādeyyāni bhojanāni bhuñjitvā te evarūpaṃ maṇḍanavibhūsanaṭṭhānānuyogaṃ anuyuttā viharanti, seyyathidaṃ—ucchādanaṃ parimaddanaṃ nhāpanaṃ sambāhanaṃ ādāsaṃ añjanaṃ mālāgandhavilepanaṃ mukhacuṇṇaṃ mukhalepanaṃ hatthabandhaṃ sikhābandhaṃ daṇḍaṃ nāḷikaṃ asiṃ chattaṃ citrupāhanaṃ uṇhīsaṃ maṇiṃ vālabījaniṃ odātāni vatthāni dīghadasāni iti vā iti evarūpā maṇḍanavibhūsanaṭṭhānānuyogā paṭivirato samaṇo gotamo’ti—iti vā hi, bhikkhave, puthujjano tathāgatassa vaṇṇaṃ vadamāno vadeyya.</span></p>
+
+<p lang="vi" class="vi">Trong khi một số Sa-môn, Bà-la-môn, dầu đã dùng các món ăn do tín thí cúng dường, vẫn còn sống nói những câu chuyện vô ích, tầm thường như câu chuyện về vua chúa, câu chuyện về ăn trộm, câu chuyện về đại thần, câu chuyện về binh lính, các câu chuyện hãi hùng, câu chuyện về chiến tranh, câu chuyện về đồ ăn, câu chuyện về đồ uống, câu chuyện về vải mặc, câu chuyện về giường nằm, câu chuyện về vòng hoa, câu chuyện về hương liệu, câu chuyện về bà con, câu chuyện về xe cộ, câu chuyện về làng xóm, câu chuyện về thị tứ, câu chuyện về thành phố, câu chuyện về quốc độ, câu chuyện về đàn bà, câu chuyện về đàn ông, câu chuyện về vị anh hùng, câu chuyện bên lề đường, câu chuyện tại chỗ lấy nước, câu chuyện về người đã chết, các câu chuyện tạp thoại, câu chuyện về hiện trạng của thế giới, hiện trạng của đại dương, câu chuyện về sự hiện hữu và sự không hiện hữu. Còn Sa-môn Gotama từ bỏ không nói những câu chuyện vô ích, tầm thường kể trên — Này các Tỷ-kheo, như vậy người phàm phu tán thán Như Lai.<br>
+<span lang="pi" class="pali">Yathā vā paneke bhonto samaṇabrāhmaṇā saddhādeyyāni bhojanāni bhuñjitvā te evarūpaṃ tiracchānakathaṃ anuyuttā viharanti, seyyathidaṃ—rājakathaṃ corakathaṃ mahāmattakathaṃ senākathaṃ bhayakathaṃ yuddhakathaṃ annakathaṃ pānakathaṃ vatthakathaṃ sayanakathaṃ mālākathaṃ gandhakathaṃ ñātikathaṃ yānakathaṃ gāmakathaṃ nigamakathaṃ nagarakathaṃ janapadakathaṃ itthikathaṃ sūrakathaṃ visikhākathaṃ kumbhaṭṭhānakathaṃ pubbapetakathaṃ nānattakathaṃ lokakkhāyikaṃ samuddakkhāyikaṃ itibhavābhavakathaṃ iti vā iti evarūpāya tiracchānakathāya paṭivirato samaṇo gotamo’ti—iti vā hi, bhikkhave, puthujjano tathāgatassa vaṇṇaṃ vadamāno vadeyya.</span></p>
+
+<p lang="vi" class="vi">Trong khi một số Sa-môn, Bà-la-môn dầu đã dùng các món ăn do tín thí cúng dường, vẫn còn sống bàn luận tranh chấp, như nói: “Ngươi không biết pháp và luật này, tôi biết pháp và luật này. Sao ngươi có thể biết pháp và luật này? Ngươi đã phạm vào tà kiến, tôi mới thật đúng chánh kiến; lời nói của tôi mới tương ưng, lời nói của ngươi không tương ưng; lời nói của ngươi không tương ưng, những điều đáng nói trước ngươi lại nói sau, những điều đáng nói sau ngươi lại nói trước, chủ kiến của ngươi đã bị bài bác; câu nói của ngươi đã bị thách đấu; ngươi đã bị thuyết bại. Hãy đến mà giải vây lời nói ấy; nếu có thể được, gắng thoát ra khỏi lối bí”. Còn Sa-môn Gotama thì từ bỏ những cuộc biện luận tranh chấp đã kể trên — Này các Tỷ-kheo, như vậy người phàm phu tán thán Như Lai.<br>
+<span lang="pi" class="pali">Yathā vā paneke bhonto samaṇabrāhmaṇā saddhādeyyāni bhojanāni bhuñjitvā te evarūpaṃ viggāhikakathaṃ anuyuttā viharanti, seyyathidaṃ—na tvaṃ imaṃ dhammavinayaṃ ājānāsi, ahaṃ imaṃ dhammavinayaṃ ājānāmi, kiṃ tvaṃ imaṃ dhammavinayaṃ ājānissasi, micchā paṭipanno tvamasi, ahamasmi sammā paṭipanno, sahitaṃ me, asahitaṃ te, purevacanīyaṃ pacchā avaca, pacchāvacanīyaṃ pure avaca, adhiciṇṇaṃ te viparāvattaṃ, āropito te vādo, niggahito tvamasi, cara vādappamokkhāya, nibbeṭhehi vā sace pahosīti iti vā iti evarūpāya viggāhikakathāya paṭivirato samaṇo gotamo’ti—iti vā hi, bhikkhave, puthujjano tathāgatassa vaṇṇaṃ vadamāno vadeyya.</span></p>
+
+<p lang="vi" class="vi">Trong khi một số Sa-môn, Bà-la-môn dầu đã dùng các món ăn do tín thí cúng dường, vẫn còn sống cho đưa các tin tức, hoặc tự đứng làm môi giới, như cho các vua, cho các đại thần của vua, cho các vị Sát-đế-lỵ, cho các vị Bà-la-môn, cho các gia chủ, cho các thanh niên và nói rằng: “Hãy đi đến chỗ ấy, hãy đi lại chỗ kia; mang cái này lại, đem cái này đến chỗ kia”. Còn Sa-môn Gotama thì từ bỏ không cho đưa các tin tức và tự đứng làm môi giới. Như vậy kẻ phàm phu tán thán Như Lai.<br>
+<span lang="pi" class="pali">Yathā vā paneke bhonto samaṇabrāhmaṇā saddhādeyyāni bhojanāni bhuñjitvā te evarūpaṃ dūteyyapahiṇagamanānuyogaṃ anuyuttā viharanti, seyyathidaṃ—raññaṃ, rājamahāmattānaṃ, khattiyānaṃ, brāhmaṇānaṃ, gahapatikānaṃ, kumārānaṃ “idha gaccha, amutrāgaccha, idaṃ hara, amutra idaṃ āharā”ti iti vā iti evarūpā Dūteyya-pahiṇa-gamana-anuyogā paṭivirato samaṇo gotamo’ti—iti vā hi, bhikkhave, puthujjano tathāgatassa vaṇṇaṃ vadamāno vadeyya.</span></p>
+
+<p lang="vi" class="vi">Trong khi một số Sa-môn, Bà-la-môn, dầu đã dùng các món ăn do tín thí cúng dường, vẫn còn sống lừa đảo, nói lời siểm nịnh, gợi ý, dèm pha, lấy lợi cầu lợi. Còn Sa-môn Gotama thì từ bỏ không lừa đảo và siểm nịnh như trên. Này các Tỷ-kheo, như vậy kẻ phàm phu tán thán Như Lai.<br>
+<span lang="pi" class="pali">Yathā vā paneke bhonto samaṇabrāhmaṇā saddhādeyyāni bhojanāni bhuñjitvā te kuhakā ca honti, lapakā ca nemittikā ca nippesikā ca, lābhena lābhaṃ nijigīsitāro ca iti evarūpā kuhanalapanā paṭivirato samaṇo gotamo’ti—iti vā hi, bhikkhave, puthujjano tathāgatassa vaṇṇaṃ vadamāno vadeyya.</span></p>
+
+<p lang="vi" class="vi">(Đại Giới)<br>
+
+<p lang="vi" class="vi">Trong khi một số Sa-môn, Bà-la-môn, dầu đã dùng các món ăn do tín thí cúng dường, vẫn còn tự nuôi sống bằng những tà hạnh như xem tướng tay chân, chiêm tướng, triệu tướng, mộng tướng, thân tướng, dấu chuột cắn, tế lửa, tế muỗng, dùng miệng phun hột cải v.v... vào lửa, tế vỏ lúa, tế tấm, tế gạo, tế thục tô, tế dầu, tế máu, khoa xem chi tiết, khoa xem địa lý, khoa xem mộng, khoa cầu thần ban phước, khoa cầu ma quỷ, khoa dùng bùa chú khi ở trong nhà bằng đất, khoa rắn, khoa thuốc độc, khoa bọ cạp, khoa chim, khoa chim quạ, khoa đoán số mạng, khoa ngừa tên bắn, khoa biết tiếng nói của chim. Còn Sa-môn Gotama thì tránh xa những tà hạnh kể trên — Này các Tỷ-kheo, như vậy kẻ phàm phu tán thán Như Lai.<br>
+<span lang="pi" class="pali">Yathā vā paneke bhonto samaṇabrāhmaṇā saddhādeyyāni bhojanāni bhuñjitvā te evarūpāya tiracchānavijjāya micchājīvena jīvitaṃ kappenti, seyyathidaṃ—aṅgaṃ nimittaṃ uppātaṃ supinaṃ lakkhaṇaṃ mūsikacchinnaṃ aggihomaṃ dabbihomaṃ thusahomaṃ kaṇahomaṃ taṇḍulahomaṃ sappihomaṃ telahomaṃ mukhahomaṃ lohitahomaṃ aṅgavijjā vatthuvijjā khattavijjā sivavijjā bhūtavijjā bhūrivijjā ahivijjā visavijjā vicchikavijjā mūsikavijjā sakuṇavijjā vāyasavijjā pakkajjhānaṃ saraparittāṇaṃ migacakkaṃ iti vā iti evarūpāya tiracchānavijjāya micchājīvā paṭivirato samaṇo gotamo’ti—iti vā hi, bhikkhave, puthujjano tathāgatassa vaṇṇaṃ vadamāno vadeyya.</span></p>
+
+<p lang="vi" class="vi">Trong khi một số Sa-môn, Bà-la-môn, dầu đã dùng các món ăn do tín thí cúng dường, vẫn còn nuôi sống mình bằng những tà mạng như xem tướng các hòn ngọc, tướng que gậy, tướng áo quần, tướng gươm kiếm, tướng mũi tên, tướng cây cung, tướng võ khí, tướng đàn bà, tướng đàn ông, tướng thiếu niên, tướng thiếu nữ, tướng đầy tớ nam, tường đầy tớ nữ, tướng voi, tướng ngựa, tướng trâu, tướng bò đực, tướng bò cái, tướng dê, tướng cừu, tướng gia cầm, tướng chim cun cút, tướng con cắc kè, tướng vật tai dài, tướng ma, tướng thú vật. Còn Sa-môn Gotama thì từ bỏ những tà mạng kể trên — Này các Tỷ-kheo, như vậy kẻ phàm phu tán thán Như Lai.<br>
+<span lang="pi" class="pali">Yathā vā paneke bhonto samaṇabrāhmaṇā saddhādeyyāni bhojanāni bhuñjitvā te evarūpāya tiracchānavijjāya micchājīvena jīvitaṃ kappenti, seyyathidaṃ—maṇilakkhaṇaṃ vatthalakkhaṇaṃ daṇḍalakkhaṇaṃ satthalakkhaṇaṃ asilakkhaṇaṃ usulakkhaṇaṃ dhanulakkhaṇaṃ āvudhalakkhaṇaṃ itthilakkhaṇaṃ purisalakkhaṇaṃ kumāralakkhaṇaṃ kumārilakkhaṇaṃ dāsalakkhaṇaṃ dāsilakkhaṇaṃ hatthilakkhaṇaṃ assalakkhaṇaṃ mahiṃsalakkhaṇaṃ usabhalakkhaṇaṃ golakkhaṇaṃ ajalakkhaṇaṃ meṇḍalakkhaṇaṃ kukkuṭalakkhaṇaṃ vaṭṭakalakkhaṇaṃ godhālakkhaṇaṃ kaṇṇikālakkhaṇaṃ kacchapalakkhaṇaṃ migalakkhaṇaṃ iti vā iti evarūpāya tiracchānavijjāya micchājīvā paṭivirato samaṇo gotamo’ti—iti vā hi, bhikkhave, puthujjano tathāgatassa vaṇṇaṃ vadamāno vadeyya.</span></p>
+
+<p lang="vi" class="vi">Trong khi một số Sa-môn, Bà-la-môn, dầu đã dùng các món ăn do tín thí cúng dường, vẫn còn tự nuôi sống bằng những tà mạng như đoán trước: Vua sẽ tiến quân, vua sẽ lui quân; vua bản xứ sẽ tấn công, vua ngoại bang sẽ triệt thối; vua ngoại bang sẽ tấn công, vua bản xứ sẽ triệt thối; vua bản xứ sẽ thắng trận, vua ngoại bang sẽ bại trận; vua ngoại bang sẽ thắng trận, vua bản xứ sẽ bại trận. Như vậy sẽ có sự thắng trận cho phe bên này, sẽ có sự thất bại cho phe bên kia. Còn Sa-môn Gotama thì từ bỏ những tà mạng kể trên. – Này các Tỷ-kheo, như vậy kẻ phàm phu tán thán Như Lai.<br>
+<span lang="pi" class="pali">Yathā vā paneke bhonto samaṇabrāhmaṇā saddhādeyyāni bhojanāni bhuñjitvā te evarūpāya tiracchānavijjāya micchājīvena jīvitaṃ kappenti, seyyathidaṃ—raññaṃ niyyānaṃ bhavissati, raññaṃ aniyyānaṃ bhavissati, abbhantarānaṃ raññaṃ upayānaṃ bhavissati, bāhirānaṃ raññaṃ apayānaṃ bhavissati, bāhirānaṃ raññaṃ upayānaṃ bhavissati, abbhantarānaṃ raññaṃ apayānaṃ bhavissati, abbhantarānaṃ raññaṃ jayo bhavissati, bāhirānaṃ raññaṃ parājayo bhavissati, bāhirānaṃ raññaṃ jayo bhavissati, abbhantarānaṃ raññaṃ parājayo bhavissati, iti imassa jayo bhavissati, imassa parājayo bhavissati iti vā iti evarūpāya tiracchānavijjāya micchājīvā paṭivirato samaṇo gotamo’ti—iti vā hi, bhikkhave, puthujjano tathāgatassa vaṇṇaṃ vadamāno vadeyya.</span></p>
+
+<p lang="vi" class="vi">Trong khi một số Sa-môn, Bà-la-môn, dầu đã dùng các món ăn do tín thí cúng dường, vẫn còn tự nuôi sống bằng những tà mạng như đoán trước sẽ có nguyệt thực, sẽ có nhựt thực, sẽ có tinh thực; mặt trăng, mặt trời sẽ đi đúng chánh đạo, mặt trăng, mặt trời sẽ đi ngoài chánh đạo, các tinh tú sẽ đi đúng chánh đạo, các tinh tú sẽ đi ngoài chánh đạo, sẽ có sao băng, sẽ có lửa cháy các phương hướng, sẽ có động đất, sẽ có sấm trời, mặt trăng, mặt trời, các sao sẽ mọc, sẽ lặn, sẽ mờ, sẽ sáng, nguyệt thực sẽ có kết quả như thế này, nhựt thực sẽ có kết quả như thế này, tinh thực sẽ có kết quả như thế này, mặt trăng mặt trời đi đúng chánh đạo sẽ có kết quả như thế này, mặt trăng mặt trời đi ngoài chánh đạo sẽ có kết quả như thế này, các tinh tú đi đúng chánh đạo sẽ có kết quả như thế này, sao băng sẽ có kết quả như thế này, lửa cháy các phương hướng sẽ có kết quả như thế này, động đất sẽ có những kết quả như thế này, sấm trời sẽ có kết quả như thế này, mặt trăng, mặt trời, các sao mọc, lặn, mờ, sáng, sẽ có kết quả như thế này. Còn Sa-môn Gotama thì tránh xa, không tự nuôi sống bằng những tà mạng kể trên — Này các Tỷ-kheo, như vậy kẻ phàm phu tán thán Như Lai.<br>
+<span lang="pi" class="pali">Yathā vā paneke bhonto samaṇabrāhmaṇā saddhādeyyāni bhojanāni bhuñjitvā te evarūpāya tiracchānavijjāya micchājīvena jīvitaṃ kappenti, seyyathidaṃ—candaggāho bhavissati, sūriyaggāho bhavissati, nakkhattaggāho bhavissati, candimasūriyānaṃ pathagamanaṃ bhavissati, candimasūriyānaṃ uppathagamanaṃ bhavissati, nakkhattānaṃ pathagamanaṃ bhavissati, nakkhattānaṃ uppathagamanaṃ bhavissati, ukkāpāto bhavissati, disāḍāho bhavissati, bhūmicālo bhavissati, devadudrabhi bhavissati, candimasūriyanakkhattānaṃ uggamanaṃ ogamanaṃ saṅkilesaṃ vodānaṃ bhavissati, evaṃvipāko candaggāho bhavissati, evaṃvipāko sūriyaggāho bhavissati, evaṃvipāko nakkhattaggāho bhavissati, evaṃvipākaṃ candimasūriyānaṃ pathagamanaṃ bhavissati, evaṃvipākaṃ candimasūriyānaṃ uppathagamanaṃ bhavissati, evaṃvipākaṃ nakkhattānaṃ pathagamanaṃ bhavissati, evaṃvipākaṃ nakkhattānaṃ uppathagamanaṃ bhavissati, evaṃvipāko ukkāpāto bhavissati, evaṃvipāko disāḍāho bhavissati, evaṃvipāko bhūmicālo bhavissati, evaṃvipāko devadudrabhi bhavissati, evaṃvipākaṃ candimasūriyanakkhattānaṃ uggamanaṃ ogamanaṃ saṅkilesaṃ vodānaṃ bhavissati iti vā iti evarūpāya tiracchānavijjāya micchājīvā paṭivirato samaṇo gotamo’ti—iti vā hi, bhikkhave, puthujjano tathāgatassa vaṇṇaṃ vadamāno vadeyya.</span></p>
+
+<p lang="vi" class="vi">Trong khi một số Sa-môn, Bà-la-môn, dầu đã dùng các món ăn do tín thí cúng dường, vẫn còn tự nuôi sống bằng những tà mạng như đoán trước sẽ có nhiều mưa, sẽ có đại hạn, sẽ được mùa, sẽ mất mùa, sẽ được an ổn, sẽ có hiểm họa, sẽ có bịnh, sẽ không có bịnh, hay làm các nghề như đếm trên ngón tay, kế toán, cộng số lớn, làm thư, làm theo thế tình. Còn Sa-môn Gotama tránh xa các tà hạnh kể trên — Này các Tỷ-kheo, như vậy kẻ phàm phu tán thán Như Lai.<br>
+<span lang="pi" class="pali">Yathā vā paneke bhonto samaṇabrāhmaṇā saddhādeyyāni bhojanāni bhuñjitvā te evarūpāya tiracchānavijjāya micchājīvena jīvitaṃ kappenti, seyyathidaṃ—suvuṭṭhikā bhavissati, dubbuṭṭhikā bhavissati, subhikkhaṃ bhavissati, dubbhikkhaṃ bhavissati, khemaṃ bhavissati, bhayaṃ bhavissati, rogo bhavissati, ārogyaṃ bhavissati, muddā, gaṇanā, saṅkhānaṃ, kāveyyaṃ, lokāyataṃ iti vā iti evarūpāya tiracchānavijjāya micchājīvā paṭivirato samaṇo gotamo’ti—iti vā hi, bhikkhave, puthujjano tathāgatassa vaṇṇaṃ vadamāno vadeyya.</span></p>
+
+<p lang="vi" class="vi">Trong khi một số Sa-môn, Bà-la-môn, dầu đã dùng các món ăn tín thí cúng dường, vẫn còn tự nuôi sống bằng những tà mạng. Như sắp đặt ngày lành để rước dâu hay rể, lựa ngày giờ tốt để hòa giải, lựa ngày giờ tốt để chia rẽ, lựa ngày giờ tốt để đòi nợ, lựa ngày giờ tốt để mượn hay tiêu tiền, dùng bùa chú để giúp người được may mắn, dùng bùa chú để khiến người bị rủi ro, dùng bùa chú để phá thai, dùng bùa chú làm cóng lưỡi, dùng bùa chú khiến quai hàm không cử động, dùng bùa chú khiến cho người phải bỏ tay xuống, dùng bùa chú khiến cho tai bị điếc, hỏi gương soi, hỏi phù đồng, thiếu nữ, hỏi thiên thần để biết họa phước, thờ mặt trời, thờ đại địa, phun ra lửa, cầu Siri thần tài. Còn Sa-môn Gotama tránh xa các tà mạng kể trên — Này các Tỷ-kheo, như vậy kẻ phàm phu tán thán Như Lai.<br>
+<span lang="pi" class="pali">Yathā vā paneke bhonto samaṇabrāhmaṇā saddhādeyyāni bhojanāni bhuñjitvā te evarūpāya tiracchānavijjāya micchājīvena jīvitaṃ kappenti, seyyathidaṃ—āvāhanaṃ vivāhanaṃ saṃvaraṇaṃ vivaraṇaṃ saṅkiraṇaṃ vikiraṇaṃ subhagakaraṇaṃ dubbhagakaraṇaṃ viruddhagabbhakaraṇaṃ jivhānibandhanaṃ hanusaṃhananaṃ hatthābhijappanaṃ hanujappanaṃ kaṇṇajappanaṃ ādāsapañhaṃ kumārikapañhaṃ devapañhaṃ ādiccupaṭṭhānaṃ mahatupaṭṭhānaṃ abbhujjalanaṃ sirivhāyanaṃ iti vā iti evarūpāya tiracchānavijjāya micchājīvā paṭivirato samaṇo gotamo’ti—iti vā hi, bhikkhave, puthujjano tathāgatassa vaṇṇaṃ vadamāno vadeyya.</span></p>
+
+<p lang="vi" class="vi">Trong khi một số Sa-môn, Bà-la-môn, dầu đã dùng các món ăn do tín thí cúng dường, vẫn còn tự nuôi sống bằng những tà mạng như dùng các ảo thuật để được yên ổn, để khỏi làm các điều đã hứa, để được che chở khi ở trong nhà đất, để dương được thịnh, để làm người liệt dương, để tìm đất tốt làm nhà, để cầu phước cho nhà mới, lễ rửa miệng, lễ hy sinh, làm cho mửa, làm cho xổ, bài tiết các nhơ bẩn về phía trên, bài tiết các nhơ bẩn về phía dưới, tẩy tịnh trong đầu, thoa dầu trong tai, nhỏ thuốc mắt, cho thuốc qua lỗ mũi, xức thuốc mắt, thoa dầu cho mắt, chữa bịnh đau mắt, làm thầy thuốc mổ xẻ, chữa bịnh cho con nít, cho uống thuốc làm bằng các loại rễ cây, ngăn ngừa công hiệu của thuốc. Còn Sa-môn Gotama tránh xa các tà mạng kể trên — Này các Tỷ-kheo, như vậy kẻ phàm phu tán thán Như Lai.<br>
+<span lang="pi" class="pali">Yathā vā paneke bhonto samaṇabrāhmaṇā saddhādeyyāni bhojanāni bhuñjitvā te evarūpāya tiracchānavijjāya micchājīvena jīvitaṃ kappenti, seyyathidaṃ—santikammaṃ paṇidhikammaṃ bhūtakammaṃ bhūrikammaṃ vassakammaṃ vossakammaṃ vatthukammaṃ vatthuparikammaṃ ācamanaṃ nhāpanaṃ juhanaṃ vamanaṃ virecanaṃ uddhaṃvirecanaṃ adhovirecanaṃ sīsavirecanaṃ kaṇṇatelaṃ nettatappanaṃ natthukammaṃ añjanaṃ paccañjanaṃ sālākiyaṃ sallakattiyaṃ dārakatikicchā mūlabhesajjānaṃ anuppadānaṃ osadhīnaṃ paṭimokkho iti vā iti evarūpāya tiracchānavijjāya micchājīvā paṭivirato samaṇo gotamo’ti—iti vā hi, bhikkhave, puthujjano tathāgatassa vaṇṇaṃ vadamāno vadeyya.</span></p>
+
+<p lang="vi" class="vi">Này các Tỷ-kheo, đấy là những vấn đề không quan trọng, nhỏ nhặt, chỉ thuộc giới luật mà kẻ phàm phu dùng để tán thán Như Lai.<br>
+<span lang="pi" class="pali">Idaṃ kho, bhikkhave, appamattakaṃ oramattakaṃ sīlamattakaṃ, yena puthujjano tathāgatassa vaṇṇaṃ vadamāno vadeyya.</span></p>
+
+<br>
+
+
+<p><p style="text-align: right;font-style: italic;">Hoà Thượng Thích Minh Châu dịch Việt</span></p>
+
+
+
+</section>  <!-- End English and Pali -->
+
+
+<div id="nextprev"><a id="previous-sutta" href="./dn1.2.html#content"></a><a id="next-sutta" href="./dn1.4.html#content"></a></div>
+
+</div>  <!--End Content -->
+<!-- Footer -->
+		<footer>
+					 <!-- End bottom links -->
+</footer>
+
+ 
+ <!-- Scripts -->
+ 
+ <script src="../js/footer.js"></script><script src="../js/dpd_deconstructor.js"></script><script src="../js/dpd_ebts.js"></script><script src="../js/dpd_i2h.js"></script>
+ <script src="/sw.js"></script>
+ </body>
+ </html>
+
+

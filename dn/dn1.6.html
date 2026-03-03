@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+ 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+ 	<link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+ 	<meta name="viewport" content="width=device-width, initial-scale=1">
+		<!-- Loading manifest -->
+	<link rel="manifest" href="../manifest.json">
+ 	<!-- Loading main and menu stylesheets -->
+ 	<link rel="stylesheet" href="../css/w3.css">
+ 	<link rel="stylesheet" href="../css/css.css">
+ 	<link rel="stylesheet" href="../css/menu.css">
+ 	<script src="../js/jquery-1.10.2.min.js"></script>
+ 	<script src="../js/controlpanel.js"></script>
+ 	<script src="../js/mousetrap.min.js"></script>
+    <script src="../js/pali-lookup-standalone.js"></script>
+
+ <script src="../js/suttaFiles.js"></script>
+
+
+</head>
+ <body class="container">
+ <div class="header-background">
+ <!-- Header -->
+ <div class="w3-header w3-content w3-padding w3-left-align bwcontainer">
+ 	<div class="centered">
+ 		<button class="light-mode-button" aria-label="Bật Chế Độ Sáng" onclick="toggle_light_mode()">
+ 			<span></span>
+ 			<span></span>
+ 		</button>
+ 		<span class="box-lbl">Sáng/Tối</span>
+ 	</div> <!-- Centered -->
+ 		<a href="../home/index.html" id="bwlogo"><img src="../images/headerlogo.png" alt="Logo Lời Của Đức Phật" class="w3-image"></a> 
+
+ 		<div class="w3-bar bwcontainer">
+  <div style="display:flex; align-items:center; gap:4px;">
+    <form id="form" class="inline-search" style="display:flex; align-items:center; gap:2px; margin:0;">
+      <input id="searchpage" type="text" placeholder="Tìm trên trang"
+             style="width:100px; font-size:12px;" />
+      <input class="go-button" type="submit" style="font-size:13px;" value="🔍" />
+      <button type="button" id="prev-btn" style="font-size:15px;" title="Kết quả trước (↑)">↑</button>
+      <button type="button" id="next-btn" style="font-size:15px;" title="Kết quả tiếp (↓)">↓</button>
+      <span id="result-info" style="font-size:13px;"></span>
+      <button type="button" id="close-float" title="Đóng" style="display:none;">✕</button>
+    </form>
+  </div>
+
+  <button id="toggleViBtn" onclick="toggleVi()">Pali</button>
+<button id="togglePaliBtn" onclick="togglePali()">Việt</button>
+
+
+
+<!-- Empty button chứa switch -->
+<button style="display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 4px 6px; border: 1px solid #ccc; border-radius: 4px; background: #aed0cd; height: 45px;">
+  <label class="switch" style="margin-bottom: 11px;">
+    <input type="checkbox" id="paliSwitch" checked onchange="togglePaliLookup(this.checked)">
+    <span class="slider round"></span>
+  </label>
+  <span style="font-size: 13px; color: black; line-height: 0.4;">Từ điển Pali</span>
+</button>
+<button id="randomSuttaBtn" class="sutta-button" onclick="openRandomSutta2()">
+  <span title="Bài Kinh Ngẫu Nhiên"> 📖 Ngẫu Nhiên</span>
+</button>
+
+<button id="dailySuttaBtn" class="sutta-button" style="background: #bb5d5d" onclick="SuttaQuotes()";>
+  <span title="Trích Dẫn Kinh Điển" style="color: #FFF8DC;">📖 Trích Dẫn</span>
+</button>
+
+<button id="SuttaTopicBtn" class="sutta-button" onclick="openSuttaTopic()" style=" background: #3566d0;">
+    <span title="Kinh Tuyển Chọn">📖 Tuyển Chọn</span>
+</button>
+<a href="../home/visearch.html" id="viSearchBtnOutline" class="search-outline">
+  🔍 Việt
+</a>
+
+<a href="../home/palisearch.html" id="paliSearchBtnOutline" class="search-outline">
+  🔍 Pali
+</a>
+<a href="../congcu/NikayaMp3.html" id="viSearchBtnOutline" class="search-outline" style="font-size:18px; text-decoration:none;" title="Nikaya Tuyển Chọn">
+ 🔊
+</a>
+<a href="../home/about.html" style="margin-left:4px;">
+  <img src="../images/help_icon.png" title="Thông Tin" alt="About">
+</a>
+</div>
+ 		</div> <!-- End w3-bar bwcontainer --> 	</div> <!-- End w3-header w3-content w3-padding w3-left-align bwcontainer -->
+ </div> <!-- End header-background -->
+ <!-- Top menu -->
+
+ <div class="w3-main w3-white bwcontainer2">
+ 	<div class="w3-button w3-padding-8 w3-left w3-hide-large" onclick="w3_open()">☰</div>
+ 		<div id="navbar" class="w3-hide-small w3-hide-medium bwcontainer3">
+ 			<ul id="css3menu0">
+ 				<li class="topfirst" id="home"><a href="../home/index.html" class="w3-hide-small">Trang Chủ</a></li>
+  				<li class="topmenu" id="dn"><a href="../dn/dn.html" class="pressed w3-hide-small">Trường Bộ Kinh</a></li>
+ 				<li class="topmenu" id="mn"><a href="../mn/mn.html" class="w3-hide-small">Trung Bộ Kinh</a></li>
+ 				<li class="topmenu" id="sn"><a href="../sn/sn.html" class="w3-hide-small"><i class="fa fa-caret-down"></i>&nbsp;Tương Ưng Bộ Kinh</a>
+ 					<ul>
+ 						<li><a href="../sn/sn01.html" class="w3-hide-small">Tập I - Thiên Có Kệ (SN 1-11)</a></li>
+ 						<li><a href="../sn/sn02.html" class="w3-hide-small">Tập II - Thiên Nhân Duyên (SN 12-21)</a></li>
+ 						<li><a href="../sn/sn03.html" class="w3-hide-small">Tập III - Thiên Uẩn (SN 22-34)</a></li>
+ 						<li><a href="../sn/sn04.html" class="w3-hide-small">Tập IV - Thiên Sáu Xứ (SN 35-44)</a></li>
+ 						<li><a href="../sn/sn05.html" class="w3-hide-small">Tập V - Thiên Ðại Phẩm (SN 45-56)</a></li>
+ 					</ul>
+ 				<li class="topmenu" id="an"><a href="../an/an.html" class="w3-hide-small"><i class="fa fa-caret-down"></i>&nbsp;Tăng Chi Bộ Kinh</a>
+ 					<ul>
+ 						<li><a href="../an/an1.html" class="w3-hide-small">AN 1: Chương Một Pháp</a></li>
+ 						<li><a href="../an/an2.html" class="w3-hide-small">AN 2: Chương Hai Pháp</a></li>
+ 						<li><a href="../an/an3.html" class="w3-hide-small">AN 3: Chương Ba Pháp</a></li>
+ 						<li><a href="../an/an4.html" class="w3-hide-small">AN 4: Chương Bốn Pháp</a></li>
+ 						<li><a href="../an/an5.html" class="w3-hide-small">AN 5: Chương Năm Pháp</a></li>
+ 						<li><a href="../an/an6.html" class="w3-hide-small">AN 6: Chương Sáu Pháp</a></li>
+ 						<li><a href="../an/an7.html" class="w3-hide-small">AN 7: Chương Bảy Pháp</a></li>
+ 						<li><a href="../an/an8.html" class="w3-hide-small">AN 8: Chương Tám Pháp</a></li>
+ 						<li><a href="../an/an9.html" class="w3-hide-small">AN 9: Chương Chín Pháp</a></li>
+ 						<li><a href="../an/an10.html" class="w3-hide-small">AN 10: Chương Mười Pháp</a></li>
+ 						<li><a href="../an/an11.html" class="w3-hide-small">AN 11: Chương Mười Một Pháp</a></li>
+ 					</ul>
+ 				</li>
+ 				<li class="topmenu" id="kn"><a href="../kn/kn.html" class="w3-hide-small"><i class="fa fa-caret-down"></i>&nbsp;Tiểu Bộ Kinh</a>
+ 					<ul>
+ 						<li><a href="../kp/kp.html" class="w3-hide-small">Khuddakapāṭha - Kinh Tiểu Tụng</a></li>
+ 						<li><a href="../dhp/dhp.html" class="w3-hide-small">Dhammapada - Kinh Pháp Cú</a></li>
+ 						<li><a href="../snp/snp.html" class="w3-hide-small">Sutta Nipāta - Kinh Tập</a></li>
+ 						<li><a href="../ud/ud.html" class="w3-hide-small">Udāna - Kinh Phật Tự Thuyết</a></li>
+ 						<li><a href="../iti/iti.html" class="w3-hide-small">Itivuttaka - Kinh Phật Thuyết Như Vậy</a></li>
+ 						<li><a href="../thag/thag.html" class="w3-hide-small">Theragāthā - Trưởng Lão Tăng Kệ</a></li>
+ 						<li><a href="../thig/thig.html" class="w3-hide-small">Therīgāthā - Trưởng Lão Ni Kệ</a></li>
+</ul>
+  </li>
+<li class="topmenu" id="gioiluat"><a href="../gioiluat/gioiluat.html" class="w3-hide-small">Giới Luật</a></li>
+<li class="topmenu" id="thiendinh"><a href="../thiendinh/thiendinh.html" class="w3-hide-small"></i>Thiền Định</a></li>
+				<li class="toplast" id="khac"><a href="../congcu/congcukhac.html" class="w3-hide-small"></i>»</a>
+ 					</ul>
+ 				</li>
+ 			</ul>
+ 			</div>
+ 		</div> <!--navbar-->
+
+<!-- Sidebar (hidden by default) -->
+ <nav class="w3-sidebar w3-bar-block w3-card w3-border w3-top w3-animate-left w3-hide-large" id="mySidebar">
+ 	<a href="javascript:void(0)" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-times fa-2x red-color"></i>&nbsp;&nbsp;&nbsp;Đóng</a><!-- Hides the sidebar when clicked -->
+ 		<div class="w3-bar-block w3-white">
+ 			<a href="../home/index.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-home fa-lg"></i>&nbsp;&nbsp;&nbsp;Trang Chủ</a>
+ 			
+ 			<a href="../dn/dn.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Trường Bộ Kinh</a>
+ 			<a href="../mn/mn.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Trung Bộ Kinh</a>
+ 			<a href="../sn/sn.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Tương Ưng Bộ Kinh</a>
+ 			<a href="../an/an.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Tăng Chi Bộ Kinh
+ 			<a href="../kn/kn.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Tiểu Bộ Kinh</a>
+
+			<a href="../gioiluat/gioiluat.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Giới Luật</a>
+			<a href="../thiendinh/thiendinh.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;Thiền Định</a>
+			<a href="../congcu/congcukhac.html#content" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-yellow"><i class="fa fa-book"></i>&nbsp;&nbsp;☸️Công Cụ Khác☸️</a>
+ 		</div>
+ </nav>
+ 
+
+ 
+   <!-- !PAGE CONTENT! --> 
+<div class="w3-main w3-content w3-padding w3-left-align bwcontainer4">
+<div id="content">
+<h2>Dīgha Nikāya – Trường Bộ Kinh</h2>
+<h5><span style="font-style: italic;">Hoà Thượng Thích Minh Châu dịch Việt</span></h5>
+
+</div>
+
+<br>
+ 	<title>Trường Bộ 1</title>
+
+
+<p lang="vi"; style="text-align: center">Trường Bộ 1<br>
+<span lang="pi" class="pali">Dīgha Nikāya 1</span></p>
+
+<p lang="vi"; style="text-align: center">Kinh Phạm Võng<br>
+<span lang="pi" class="pali">Brahmajālasutta</span></p>
+
+<p lang="vi" class="vi">Tụng phẩm thứ ba</p>
+
+
+<p lang="vi" class="vi">Này các Tỷ-kheo, có một số Sa-môn, Bà-la-môn, chủ trương Vô tưởng luận sau khi chết, chấp bản ngã không có tưởng sau khi chết với tám luận chấp. Và những Sa-môn, Bà-la-môn này, y chỉ gì, căn cứ gì, chủ trương Vô tưởng luận sau khi chết, chấp bản ngã không có tưởng sau khi chết với tám luận chấp?<br>
+<span lang="pi" class="pali">Santi, bhikkhave, eke samaṇabrāhmaṇā uddhamāghātanikā asaññīvādā uddhamāghātanaṃ asaññiṃ attānaṃ paññapenti aṭṭhahi vatthūhi. Te ca bhonto samaṇabrāhmaṇā kimāgamma kimārabbha uddhamāghātanikā asaññīvādā uddhamāghātanaṃ asaññiṃ attānaṃ paññapenti aṭṭhahi vatthūhi?</span></p>
+
+<p lang="vi" class="vi">Những vị này chủ trương : “Bản ngã có sắc, không có bệnh, sau khi chết không có tưởng”. “Bản ngã không có sắc ...”. “Bản ngã có sắc và cũng không có sắc ...”. “Bản ngã không có sắc và cũng không không có sắc ...”. “Là hữu biên ...”. “Là vô biên ...”. “Là hữu biên và vô biên ...”. Các vị này chấp bản ngã là phi hữu biên và phi vô biên, không có bệnh, sau khi chết không có tưởng.Rūpī attā hoti arogo paraṃ maraṇā asaññī’ti naṃ paññapenti. Arūpī attā hoti<br>
+<span lang="pi" class="pali">arogo paraṃ maraṇā asaññī’ti naṃ paññapenti. Rūpī ca arūpī ca attā hoti ...pe....Nevarūpī nārūpī attā hoti ....Antavā attā hoti ....Anantavā attā hoti ....Antavā ca anantavā ca attā hoti ....Nevantavā nānantavā attā hoti arogo paraṃ maraṇā asaññī’ti naṃ paññapenti.</span></p>
+
+<p lang="vi" class="vi">Này các Tỷ-kheo, những Sa-môn, Bà-la-môn này chủ trương Vô tưởng luận sau khi chết, chấp bản ngã không có tưởng sau khi chết với tám luận chấp. Này các Tỷ-kheo, nếu có những Sa-môn hay Bà-la-môn nào chủ trương Vô tưởng luận sau khi chết, chấp bản ngã không có tưởng sau khi chết, chúng sẽ chấp cả tám luận chấp trên, hay một trong những luận chấp trên, ngoài ra không có luận chấp nào khác nữa.<br>
+<span lang="pi" class="pali">Imehi kho te, bhikkhave, samaṇabrāhmaṇā uddhamāghātanikā asaññīvādā uddhamāghātanaṃ asaññiṃ attānaṃ paññapenti aṭṭhahi vatthūhi. Ye hi keci, bhikkhave, samaṇā vā brāhmaṇā vā uddhamāghātanikā asaññīvādā uddhamāghātanaṃ asaññiṃ attānaṃ paññapenti, sabbe te imeheva aṭṭhahi vatthūhi, etesaṃ vā aññatarena, natthi ito bahiddhā ...</span></p>
+
+<p lang="vi" class="vi">Này các Tỷ-kheo. Như Lai tuệ tri như thế này : “Những sở kiến ấy, chấp trước như vậy, chấp thủ như vậy, sẽ đưa đến những cõi thú như vậy, sẽ tác thành những định mạng như vậy”. Như Lai tuệ tri như vậy. Ngài lại tuệ tri hơn thế nữa, và Ngài không chấp sở tri ấy. Nhờ không chấp trước sở tri ấy, nội tâm được tịch tịnh. Ngài như thật tuệ tri sự tập khởi, sự diệt trừ của các thọ, vị ngọt, những nguy hiểm và sự xuất ly của chúng. Nhờ tuệ tri vậy, này các Tỷ-kheo, Như Lai được giải thoát hoàn toàn, không có chấp thủ. Những pháp ấy, này các Tỷ-kheo, là những pháp sâu kín, khó thấy, khó chứng, tịch tịnh, mỹ diệu, vượt ngoài tầm của luận lý suông, tế nhị, chỉ những người có trí mới có thể nhận biết. Những pháp ấy Như Lai tự chứng tri, giác ngộ và truyền thuyết;<br>
+<span lang="pi" class="pali">pe...</span></p>
+
+<p lang="vi" class="vi">và chính những pháp ấy những ai như thật chân chánh tán thán Như Lai mới nói đến.<br>
+<span lang="pi" class="pali">yehi tathāgatassa yathābhuccaṃ vaṇṇaṃ sammā vadamānā vadeyyuṃ.</span></p>
+
+
+
+<p lang="vi" class="vi">Này các Tỷ-kheo, có một số Sa-môn, Bà-la-môn chủ trương Phi Hữu tưởng Phi Vô tưởng luận sau khi chết, chấp bản ngã phi hữu tưởng phi vô tưởng với tám luận chấp. Và những Sa-môn, Bà-la-môn này, y chỉ gì, căn cứ gì, chủ trương Phi Hữu tưởng Phi Vô tưởng luận sau khi chết, chấp bản ngã phi hữu tưởng phi vô tưởng với tám luận chấp?<br>
+<span lang="pi" class="pali">Santi, bhikkhave, eke samaṇabrāhmaṇā uddhamāghātanikā nevasaññīnāsaññīvādā, uddhamāghātanaṃ nevasaññīnāsaññiṃ attānaṃ paññapenti aṭṭhahi vatthūhi. Te ca bhonto samaṇabrāhmaṇā kimāgamma kimārabbha uddhamāghātanikā nevasaññīnāsaññīvādā uddhamāghātanaṃ nevasaññīnāsaññiṃ attānaṃ paññapenti aṭṭhahi vatthūhi?</span></p>
+
+<p lang="vi" class="vi">Những vị này chấp: “Bản ngã có sắc, không có bệnh, sau khi chết phi hữu tưởng phi vô tưởng... “, “Bản ngã là vô sắc... “, “Bản ngã có sắc và cũng không có sắc... “, “Bản ngã là phi hữu sắc và cũng phi vô sắc... “, “Bản ngã là hữu biên... “, “Bản ngã là vô biên... “, “Bản ngã là hữu biên và vô biên... “.<br>
+<span lang="pi" class="pali">Rūpī attā hoti arogo paraṃ maraṇā nevasaññīnāsaññī’ti naṃ paññapenti. Arūpī attā hoti ...pe....Rūpī ca arūpī ca attā hoti ....Nevarūpī nārūpī attā hoti ....Antavā attā hoti ....Anantavā attā hoti ....Antavā ca anantavā ca attā hoti ....Nevantavā nānantavā attā hoti arogo paraṃ maraṇā nevasaññīnāsaññī’ti naṃ paññapenti.</span></p>
+
+<p lang="vi" class="vi">Những vị này chấp rằng. Bản ngã là phi hữu biên và cũng phi vô biên, không có bệnh, sau khi chết phi hữu tưởng phi vô tưởng, với tám luận chấp. Này các Tỷ-kheo, nếu có Sa-môn hay Bà-la-môn nào, chủ trương phi hữu tưởng phi vô tưởng, chúng sẽ chấp cả tám luận chấp trên, hay một trong những luận chấp trên, ngoài ra không có luận chấp nào khác nữa.<br>
+<span lang="pi" class="pali">Imehi kho te, bhikkhave, samaṇabrāhmaṇā uddhamāghātanikā nevasaññīnāsaññīvādā uddhamāghātanaṃ nevasaññīnāsaññiṃ attānaṃ paññapenti aṭṭhahi vatthūhi. Ye hi keci, bhikkhave, samaṇā vā brāhmaṇā vā uddhamāghātanikā nevasaññīnāsaññīvādā uddhamāghātanaṃ nevasaññīnāsaññiṃ attānaṃ paññapenti, sabbe te imeheva aṭṭhahi vatthūhi ...</span></p>
+
+<p lang="vi" class="vi">Này các Tỷ-kheo, Như Lai tuệ tri như thế này: “Những sở kiến ấy, chấp trước như vậy, sẽ đưa đến những cõi thú như vậy, sẽ tác thành những định mạng như vậy”. Như Lai tuệ tri như vậy. Ngài tuệ tri hơn thế nữa, và Ngài không chấp sở tri ấy. Nhờ không chấp trước sở tri ấy, nội tâm được tịch tịnh. Ngài như thật tuệ tri sự tập khởi, sự diệt trừ của các thọ, vị ngọt, những nguy hiểm và sự xuất ly của chúng. Nhờ tuệ tri vậy, này các Tỷ-kheo, Như Lai được giải thoát hoàn toàn, không có chấp thủ. Những pháp ấy, này các Tỷ-kheo, là những pháp sâu kín, khó thấy, khó chứng, tịch tịnh, mỹ diệu, vượt ngoài tầm của luận lý suông, tế nhị, chỉ những người có trí mới có thể nhận biết. Những pháp ấy Như Lai tự chứng tri, giác ngộ và truyền thuyết;<br>
+<span lang="pi" class="pali">pe...</span></p>
+
+<p lang="vi" class="vi">và chính những pháp ấy những ai như thật chân chánh tán thán Như Lai mới nói đến.<br>
+<span lang="pi" class="pali">yehi tathāgatassa yathābhuccaṃ vaṇṇaṃ sammā vadamānā vadeyyuṃ.</span></p>
+
+
+
+<p lang="vi" class="vi">Này các Tỷ-kheo, có một số Sa-môn, Bà-la-môn, chủ trương Ðoạn diệt luận, chấp trước sự đoạn diệt, sự tiêu thất, sự hủy hoại của loài hữu tình với bảy luận chấp. Và những Sa-môn, Bà-la-môn này, y chỉ gì, căn cứ gì, chấp trước sự đoạn diệt, sự tiêu thất, sự hủy hoại của loài hữu tình với bảy luận chấp?Santi, bhikkhave, eke samaṇabrāhmaṇā ucchedavādā sato sattassa ucchedaṃ vināsaṃ vibhavaṃ paññapenti sattahi vatthūhi. Te ca bhonto samaṇabrāhmaṇā kimāgamma kimārabbha ucchedavādā sato sattassa ucchedaṃ vināsaṃ vibhavaṃ paññapenti sattahi vatthūhi?</p>
+
+<p lang="vi" class="vi">Này các Tỷ-kheo, có Sa-môn hoặc Bà-la-môn chủ trương lý thuyết và ý kiến: “Vì bản ngã này có sắc, do bốn đại hợp thành, do cha mẹ sanh ra, khi thân hoại bị hủy nát tiêu diệt, sau khi chết không còn nữa, nên bản ngã này như thế hoàn toàn đoạn diệt”. Như vậy một số người chủ trương sự đoạn diệt, sự tiêu thất và sự hủy hoại của loài hữu tình.<br>
+<span lang="pi" class="pali">Idha, bhikkhave, ekacco samaṇo vā brāhmaṇo vā evaṃvādī hoti evaṃdiṭṭhi: ‘yato kho, bho, ayaṃ attā rūpī cātumahābhūtiko mātāpettikasambhavo kāyassa bhedā ucchijjati vinassati, na hoti paraṃ maraṇā, ettāvatā kho, bho, ayaṃ attā sammā samucchinno hotī’ti. Ittheke sato sattassa ucchedaṃ vināsaṃ vibhavaṃ paññapenti.</span></p>
+
+<p lang="vi" class="vi">Một vị khác lại nói:<br>
+<span lang="pi" class="pali">Tamañño evamāha:</span></p>
+
+<p lang="vi" class="vi">“Này ông, thật có bản ngã như ông nói. Tôi không nói bản ngã ấy không có; nhưng bản ngã ấy như thế không bị hoàn toàn đoạn diệt.<br>
+<span lang="pi" class="pali">“Atthi kho, bho, eso attā, yaṃ tvaṃ vadesi, neso natthīti vadāmi; no ca kho, bho, ayaṃ attā ettāvatā sammā samucchinno hoti.</span></p>
+
+<p lang="vi" class="vi">Lại còn một bản ngã khác có thiên tánh, có sắc, thuộc dục giới, ăn các đồ ăn đoàn thực.<br>
+<span lang="pi" class="pali">Atthi kho, bho, añño attā dibbo rūpī kāmāvacaro kabaḷīkārāhārabhakkho.</span></p>
+
+<p lang="vi" class="vi">Bản ngã ấy ông không biết, ông không thấy. Bản ngã ấy tôi biết, tôi thấy.<br>
+<span lang="pi" class="pali">Taṃ tvaṃ na jānāsi na passasi. Tamahaṃ jānāmi passāmi.</span></p>
+
+<p lang="vi" class="vi">Bản ngã ấy khi thân hoại, bị hủy nát tiêu diệt, sau khi chết không còn nữa, nên bản ngã ấy như thế hoàn toàn đoạn diệt”.<br>
+<span lang="pi" class="pali">So kho, bho, attā yato kāyassa bhedā ucchijjati vinassati, na hoti paraṃ maraṇā, ettāvatā kho, bho, ayaṃ attā sammā samucchinno hotī’ti.</span></p>
+
+<p lang="vi" class="vi">Như vậy có một số người chủ trương sự đoạn diệt, tiêu thất và hủy hoại của loài hữu tình.<br>
+<span lang="pi" class="pali">Ittheke sato sattassa ucchedaṃ vināsaṃ vibhavaṃ paññapenti.</span></p>
+
+<p lang="vi" class="vi">Một vị khác lại nói:<br>
+<span lang="pi" class="pali">Tamañño evamāha:</span></p>
+
+<p lang="vi" class="vi">“Này ông, thật có bản ngã ấy như ông nói. Tôi không nói bản ngã ấy không có; Nhưng bản ngã ấy như thế không bị hoàn toàn đoạn diệt.<br>
+<span lang="pi" class="pali">“Atthi kho, bho, eso attā, yaṃ tvaṃ vadesi, neso natthīti vadāmi; no ca kho, bho, ayaṃ attā ettāvatā sammā samucchinno hoti.</span></p>
+
+<p lang="vi" class="vi">Lại còn một bản ngã khác có thiên tánh, có sắc, do ý tạo thành, mọi chi tiết tay chân lớn nhỏ đều đầy đủ, không khuyết một căn nào.<br>
+<span lang="pi" class="pali">Atthi kho, bho, añño attā dibbo rūpī manomayo sabbaṅgapaccaṅgī ahīnindriyo.</span></p>
+
+<p lang="vi" class="vi">Bản ngã ấy ông không biết, ông không thấy. Bản ngã ấy tôi biết, tôi thấy.<br>
+<span lang="pi" class="pali">Taṃ tvaṃ na jānāsi na passasi. Tamahaṃ jānāmi passāmi.</span></p>
+
+<p lang="vi" class="vi">Bản ngã ấy khi thân hoại bị hủy nát, tiêu diệt, sau khi chết không còn nữa, nên bản ngã ấy như thế hoàn toàn đoạn diệt”.<br>
+<span lang="pi" class="pali">So kho, bho, attā yato kāyassa bhedā ucchijjati vinassati, na hoti paraṃ maraṇā, ettāvatā kho, bho, ayaṃ attā sammā samucchinno hotī’ti.</span></p>
+
+<p lang="vi" class="vi">Như vậy có một số người chủ trương sự đoạn diệt, tiêu thất và hủy hoại của loài hữu tình.<br>
+<span lang="pi" class="pali">Ittheke sato sattassa ucchedaṃ vināsaṃ vibhavaṃ paññapenti.</span></p>
+
+<p lang="vi" class="vi">Một vị khác lại nói: “Này ông, thật có bản ngã ấy như ông nói, tôi không nói bản ngã ấy không có. Nhưng bản ngã ấy như thế không bị hoàn toàn đoạn diệt. Lại còn một bản ngã khác vượt ngoài tất cả sắc tưởng, diệt trừ các tưởng chống đối, không ức niệm các dị tưởng, nhận hiểu hư không là vô biên, đạt đến không vô biên xứ. Bản ngã ấy ông không biết, ông không thấy. Bản ngã ấy tôi biết, tôi thấy. Bản ngã ấy khi thân hoại, bị hủy nát tiêu diệt, sau khi chết không còn nữa, nên bản ngã ấy như thế hoàn toàn đoạn diệt”. Như vậy có một số người chủ trương sự đoạn diệt, tiêu thất và hủy hoại của loài hữu tình.<br>
+<span lang="pi" class="pali">Tamañño evamāha: “Atthi kho, bho, eso attā, yaṃ tvaṃ vadesi, neso natthīti vadāmi. No ca kho, bho, ayaṃ attā ettāvatā sammā samucchinno hoti. Atthi kho, bho, añño attā sabbaso rūpasaññānaṃ samatikkamā paṭighasaññānaṃ atthaṅgamā nānattasaññānaṃ amanasikārā “ananto ākāso”ti ākāsānañcāyatanūpago. Taṃ tvaṃ na jānāsi na passasi. Tamahaṃ jānāmi passāmi. So kho, bho, attā yato kāyassa bhedā ucchijjati vinassati, na hoti paraṃ maraṇā, ettāvatā kho, bho, ayaṃ attā sammā samucchinno hotī’ti.” Ittheke sato sattassa ucchedaṃ vināsaṃ vibhavaṃ paññapenti.</span></p>
+
+<p lang="vi" class="vi">Một vị khác lại nói: “Này ông, thật có bản ngã ấy như ông nói, tôi không nói bản ngã ấy không có. Nhưng bản ngã ấy như thế không bị hoàn toàn đoạn diệt. Lại còn một bản ngã khác vượt ngoài tất cả không vô biên xứ, nhận hiểu: Thức là vô biên, đạt đến Thức vô biên xứ. Bản ngã ấy ông không biết, ông không thấy. Bản ngã ấy tôi biết, tôi thấy. Bản ngã ấy khi thân hoại, bị hủy nát, tiêu diệt, sau khi chết không còn nữa, nên bản ngã ấy như thế hoàn toàn đoạn diệt”. Như vậy có một số người chủ trương sự đoạn diệt, tiêu thất và hủy hoại của loài hữu tình.<br>
+<span lang="pi" class="pali">Tamañño evamāha: “Atthi kho, bho, eso attā yaṃ tvaṃ vadesi, neso natthīti vadāmi. No ca kho, bho, ayaṃ attā ettāvatā sammā samucchinno hoti. Atthi kho, bho, añño attā sabbaso ākāsānañcāyatanaṃ samatikkamma “anantaṃ viññāṇan”ti viññāṇañcāyatanūpago. Taṃ tvaṃ na jānāsi na passasi. Tamahaṃ jānāmi passāmi. So kho, bho, attā yato kāyassa bhedā ucchijjati vinassati, na hoti paraṃ maraṇā, ettāvatā kho, bho, ayaṃ attā sammā samucchinno hotī’ti”. Ittheke sato sattassa ucchedaṃ vināsaṃ vibhavaṃ paññapenti.</span></p>
+
+<p lang="vi" class="vi">Một vị khác lại nói: “Này ông, thật có bản ngã ấy như ông nói, tôi không nói bản ngã ấy không có. Nhưng bản ngã ấy như thế không bị hoàn toàn đoạn diệt. Lại còn một bản ngã khác vượt ngoài tất cả Thức vô biên xứ, nhận hiểu: không có sở hữu, đạt đến Vô sở hữu xứ. Bản ngã ấy ông không biết, ông không thấy. Bản ngã ấy tôi biết, tôi thấy. Bản ngã ấy khi thân hoại bị hủy nát, tiêu diệt, sau khi chết không còn nữa, nên bản ngã ấy như thế hoàn toàn đoạn diệt”. Như vậy có một số người chủ trương sự đoạn diệt, tiêu thất và hủy hoại của loài hữu tình.<br>
+<span lang="pi" class="pali">Tamañño evamāha: “Atthi kho, bho, eso attā yaṃ tvaṃ vadesi, neso natthīti vadāmi. No ca kho, bho, ayaṃ attā ettāvatā sammā samucchinno hoti. Atthi kho, bho, añño attā sabbaso viññāṇañcāyatanaṃ samatikkamma “natthi kiñcī”ti ākiñcaññāyatanūpago. Taṃ tvaṃ na jānāsi na passasi. Tamahaṃ jānāmi passāmi. So kho, bho, attā yato kāyassa bhedā ucchijjati vinassati, na hoti paraṃ maraṇā, ettāvatā kho, bho, ayaṃ attā sammā samucchinno hotī’ti”. Ittheke sato sattassa ucchedaṃ vināsaṃ vibhavaṃ paññapenti.</span></p>
+
+<p lang="vi" class="vi">Một vị khác lại nói: “Này ông, thật có bản ngã ấy như ông nói, tôi không nói bản ngã ấy không có. Nhưng bản ngã ấy như thế không bị hoàn toàn đoạn diệt. Lại còn một bản ngã khác vượt ngoài tất cả Vô sở hữu xứ, nhận hiểu: Ðây là tịch tịnh, đây là mỹ diệu, đạt đến Phi tưởng Phi phi tưởng xứ. Bản ngã ấy ông không biết, ông không thấy. Bản ngã ấy tôi biết, tôi thấy. Bản ngã ấy khi thân hoại, bị hủy nát tiêu diệt, sau khi chết không còn nữa, nên bản ngã ấy như thế hoàn toàn đoạn diệt”. Như vậy có một số người chủ trương sự đoạn diệt, tiêu thất và hủy hoại của loài hữu tình.<br>
+<span lang="pi" class="pali">Tamañño evamāha: “Atthi kho, bho, eso attā yaṃ tvaṃ vadesi, neso natthīti vadāmi. No ca kho, bho, ayaṃ attā ettāvatā sammā samucchinno hoti. Atthi kho, bho, añño attā sabbaso ākiñcaññāyatanaṃ samatikkamma “santametaṃ paṇītametan”ti nevasaññānāsaññāyatanūpago. Taṃ tvaṃ na jānāsi na passasi. Tamahaṃ jānāmi passāmi. So kho, bho, attā yato kāyassa bhedā ucchijjati vinassati, na hoti paraṃ maraṇā, ettāvatā kho, bho, ayaṃ attā sammā samucchinno hotī’ti”. Ittheke sato sattassa ucchedaṃ vināsaṃ vibhavaṃ paññapenti.</span></p>
+
+<p lang="vi" class="vi">Này các Tỷ-kheo, những Sa-môn, Bà-la-môn ấy, chủ trương Ðoạn diệt luận, chấp trước sự đoạn diệt, tiêu thất, hủy hoại của loài hữu tình với bảy luận chấp. Này các Tỷ-kheo, nếu có những vị Sa-môn hay Bà-la-môn nào chủ trương Ðoạn diệt luận, chấp trước sự đoạn diệt, tiêu thất, hủy hoại của loài hữu tình, chúng chấp cả bảy luận chấp trên, hay một trong những luận chấp trên, ngoài ra không có luận chấp nào khác nữa.<br>
+<span lang="pi" class="pali">Imehi kho te, bhikkhave, samaṇabrāhmaṇā ucchedavādā sato sattassa ucchedaṃ vināsaṃ vibhavaṃ paññapenti sattahi vatthūhi. Ye hi keci, bhikkhave, samaṇā vā brāhmaṇā vā ucchedavādā sato sattassa ucchedaṃ vināsaṃ vibhavaṃ paññapenti, sabbe te imeheva sattahi vatthūhi ...</span></p>
+
+<p lang="vi" class="vi">Này các Tỷ-kheo. Như Lai tuệ tri như thế này: “Những sở kiến ấy, chấp trước như vậy, sẽ đưa đến những cõi thú như vậy, sẽ tác thành những định mạng như vậy”. Như Lai tuệ tri. Như vậy, Ngài tuệ tri hơn thế nữa, và Ngài không chấp sở tri ấy. Nhờ không chấp trước sở tri ấy, nội tâm được tịch tịnh. Ngài như thật tuệ tri sự tập khởi, sự diệt trừ của các thọ, vị ngọt, những nguy hiểm và sự xuất ly của chúng. Nhờ tuệ tri như vậy, này các Tỷ-kheo, Như Lai được giải thoát hoàn toàn, không có chấp thủ. Những pháp ấy, này các Tỷ-kheo, là những pháp sâu kín, khó thấy, khó chứng, tịch tịnh, mỹ diệu, vượt ngoài tầm của luận lý suông, tế nhị, chỉ những người có trí mới có thể nhận biết. Những pháp ấy Như Lai tự chứng tri, giác ngộ và truyền thuyết:<br>
+<span lang="pi" class="pali">pe...</span></p>
+
+<p lang="vi" class="vi">và chính những pháp ấy những ai như thật chân chánh tán thán Như Lai mới nói đến.<br>
+<span lang="pi" class="pali">yehi tathāgatassa yathābhuccaṃ vaṇṇaṃ sammā vadamānā vadeyyuṃ.</span></p>
+
+
+
+<p lang="vi" class="vi">Này các Tỷ-kheo, có một số Sa-môn, Bà-la-môn chủ trương Hiện tại Niết Bàn luận, chấp trước sự tối thượng hiện tại Niết Bàn của loài hữu tình với năm luận chấp. Và những Sa-môn, Bà-la-môn này, y chỉ gì, căn cứ gì, chủ trương Hiện tại Niết bàn luận, chấp sự tối thượng hiện tại Niết Bàn của loài hữu tình với năm luận chấp?<br>
+<span lang="pi" class="pali">Santi, bhikkhave, eke samaṇabrāhmaṇā diṭṭhadhammanibbānavādā sato sattassa paramadiṭṭhadhammanibbānaṃ paññapenti pañcahi vatthūhi. Te ca bhonto samaṇabrāhmaṇā kimāgamma kimārabbha diṭṭhadhammanibbānavādā sato sattassa paramadiṭṭhadhammanibbānaṃ paññapenti pañcahi vatthūhi?</span></p>
+
+<p lang="vi" class="vi">Này các Tỷ-kheo, có Sa-môn hay Bà-la-môn chủ trương và quan niệm: “Khi nào bản ngã này tận hưởng, sung mãn năm món dục lạc, như thế bản ngã ấy đạt đến tối thượng Niết Bàn của loài hữu tình”. Như vậy có người chủ trương tối thượng hiện tại Niết Bàn của loài hữu tình.<br>
+<span lang="pi" class="pali">Idha, bhikkhave, ekacco samaṇo vā brāhmaṇo vā evaṃvādī hoti evaṃdiṭṭhi: “yato kho, bho, ayaṃ attā pañcahi kāmaguṇehi samappito samaṅgībhūto paricāreti, ettāvatā kho, bho, ayaṃ attā paramadiṭṭhadhammanibbānaṃ patto hotī”ti. Ittheke sato sattassa paramadiṭṭhadhammanibbānaṃ paññapenti.</span></p>
+
+<p lang="vi" class="vi">Một vị khác lại nói:<br>
+<span lang="pi" class="pali">Tamañño evamāha:</span></p>
+
+<p lang="vi" class="vi">“Này ông, thật có bản ngã ấy như ông nói, tôi không nói bản ngã ấy không có.<br>
+<span lang="pi" class="pali">“Atthi kho, bho, eso attā, yaṃ tvaṃ vadesi, neso natthīti vadāmi;</span></p>
+
+<p lang="vi" class="vi">Nhưng bản ngã ấy như thế, không phải hoàn toàn đạt đến tối thượng Niết Bàn.<br>
+<span lang="pi" class="pali">no ca kho, bho, ayaṃ attā ettāvatā paramadiṭṭhadhammanibbānaṃ patto hoti.</span></p>
+
+<p lang="vi" class="vi">Vì cớ sao?<br>
+<span lang="pi" class="pali">Taṃ kissa hetu?</span></p>
+
+<p lang="vi" class="vi">Vì rằng tính của dục lạc là vô thường, khổ, biến dịch. Vì tánh của chúng là biến dịch, chuyển hóa, nên ưu, bi, khổ, muộn, não phát sanh.<br>
+<span lang="pi" class="pali">Kāmā hi, bho, aniccā dukkhā vipariṇāmadhammā, tesaṃ vipariṇāmaññathābhāvā uppajjanti sokaparidevadukkhadomanassupāyāsā.</span></p>
+
+<p lang="vi" class="vi">Khi nào bản ngã ấy ly các dục lạc, ly các ác pháp, đạt đến và an trú vào đệ nhất thiền; thiền định này có tầm, có tứ, có hỷ và có lạc, do ly dục sanh. Như thế, bản ngã ấy đạt đến tối thượng hiện tại Niết Bàn”.<br>
+<span lang="pi" class="pali">Yato kho, bho, ayaṃ attā vivicceva kāmehi vivicca akusalehi dhammehi savitakkaṃ savicāraṃ vivekajaṃ pītisukhaṃ paṭhamaṃ jhānaṃ upasampajja viharati, ettāvatā kho, bho, ayaṃ attā paramadiṭṭhadhammanibbānaṃ patto hotī”ti.</span></p>
+
+<p lang="vi" class="vi">Như vậy có người chủ trương tối thượng hiện tại Niết Bàn của loài hữu tình.<br>
+<span lang="pi" class="pali">Ittheke sato sattassa paramadiṭṭhadhammanibbānaṃ paññapenti.</span></p>
+
+<p lang="vi" class="vi">Một vị khác lại nói: “Này ông, thật có bản ngã ấy như ông nói, tôi không nói bản ngã ấy không có. Nhưng bản ngã ấy như thế, không phải hoàn toàn đạt đến tối thượng hiện tại Niết Bàn. Vì cớ sao? Vì ở đây thiền định ấy có tầm, có tứ nên gọi là thô tháo. Khi nào bản ngã ấy có tầm và tứ, đạt đến và an trú đệ nhị thiền. Thiền định này nội tâm yên tĩnh, trí chuyên nhất cảnh, không tầm, không tứ, hỷ lạc do định sanh. Như thế, bản ngã ấy đạt đến tối thượng hiện tại Niết Bàn”. Như vậy có người chủ trương tối thượng hiện tại Niết Bàn của loài hữu tình.<br>
+<span lang="pi" class="pali">Tamañño evamāha:‘atthi kho, bho, eso attā, yaṃ tvaṃ vadesi, neso natthīti vadāmi; no ca kho, bho, ayaṃ attā ettāvatā paramadiṭṭhadhammanibbānaṃ patto hoti. Taṃ kissa hetu? Yadeva tattha vitakkitaṃ vicāritaṃ, etenetaṃ oḷārikaṃ akkhāyati. Yato kho, bho, ayaṃ attā vitakkavicārānaṃ vūpasamā ajjhattaṃ sampasādanaṃ cetaso ekodibhāvaṃ avitakkaṃ avicāraṃ samādhijaṃ pītisukhaṃ dutiyaṃ jhānaṃ upasampajja viharati, ettāvatā kho, bho, ayaṃ attā paramadiṭṭhadhammanibbānaṃ patto hotī’ti. Ittheke sato sattassa paramadiṭṭhadhammanibbānaṃ paññapenti.</span></p>
+
+<p lang="vi" class="vi">Một vị khác lại nói: “Này ông, thật có bản ngã ấy như ông nói. Tôi không nói bản ngã ấy không có. Nhưng bản ngã ấy như thế, không phải hoàn toàn đạt đến tối thượng hiện tại Niết Bàn. Vì cớ sao? Vì ở đây tâm trí có hỷ và bị kích động nên gọi là thô tháo. Khi nào bản ngã ấy không tham hỷ, trú xả, chánh niệm, chánh trí, thân hưởng lạc mà các bậc thánh gọi là Hỷ niệm lạc trú – đạt đến và an trú đệ tam thiền. Như thế, bản ngã ấy đạt đến tối thượng hiện tại Niết Bàn”. Như vậy, có người chủ trương tối thượng hiện tại Niết Bàn của loài hữu tình.<br>
+<span lang="pi" class="pali">Tamañño evamāha: ‘atthi kho, bho, eso attā, yaṃ tvaṃ vadesi, neso natthīti vadāmi; no ca kho, bho, ayaṃ attā ettāvatā paramadiṭṭhadhammanibbānaṃ patto hoti. Taṃ kissa hetu? Yadeva tattha pītigataṃ cetaso uppilāvitattaṃ, etenetaṃ oḷārikaṃ akkhāyati. Yato kho, bho, ayaṃ attā pītiyā ca virāgā upekkhako ca viharati, sato ca sampajāno, sukhañca kāyena paṭisaṃvedeti, yaṃ taṃ ariyā ācikkhanti “upekkhako satimā sukhavihārī”ti, tatiyaṃ jhānaṃ upasampajja viharati, ettāvatā kho, bho, ayaṃ attā paramadiṭṭhadhammanibbānaṃ patto hotī’ti. Ittheke sato sattassa paramadiṭṭhadhammanibbānaṃ paññapenti.</span></p>
+
+<p lang="vi" class="vi">Một vị khác lại nói: “Này ông, thật có bản ngã ấy như ông nói; tôi không nói bản ngã ấy không có. Nhưng bản ngã ấy như thế, không phải hoàn toàn đạt đến tối thượng hiện tại Niết bàn. Vì cớ sao? Vì ở đây tâm thọ lạc nên gọi là thô tháo. Khi nào bản ngã ấy xả lạc và xả khổ, diệt trừ hỷ và ưu về trước, đạt đến và an trú vào đệ tứ thiền. Thiền này không khổ, không lạc, xả niệm thanh tịnh. Như thế, bản ngã ấy đạt đến tối thượng hiện tại Niết Bàn”. Như vậy có người chủ trương tối thượng hiện tại Niết Bàn của loài hữu tình.<br>
+<span lang="pi" class="pali">Tamañño evamāha: ‘atthi kho, bho, eso attā, yaṃ tvaṃ vadesi, neso natthīti vadāmi; no ca kho, bho, ayaṃ attā ettāvatā paramadiṭṭhadhammanibbānaṃ patto hoti. Taṃ kissa hetu? Yadeva tattha sukhamiti cetaso ābhogo, etenetaṃ oḷārikaṃ akkhāyati. Yato kho, bho, ayaṃ attā sukhassa ca pahānā dukkhassa ca pahānā pubbeva somanassadomanassānaṃ atthaṅgamā adukkhamasukhaṃ upekkhāsatipārisuddhiṃ catutthaṃ jhānaṃ upasampajja viharati, ettāvatā kho, bho, ayaṃ attā paramadiṭṭhadhammanibbānaṃ patto hotī’ti. Ittheke sato sattassa paramadiṭṭhadhammanibbānaṃ paññapenti.</span></p>
+
+<p lang="vi" class="vi">Này các Tỷ-kheo, những Sa-môn, Bà-la-môn ấy chủ trương Hiện tại Niết-bàn luận, chấp trước sự tối thượng hiện tại Niết Bàn của loài hữu tình với năm luận chấp.<br>
+<span lang="pi" class="pali">Imehi kho te, bhikkhave, samaṇabrāhmaṇā diṭṭhadhammanibbānavādā sato sattassa paramadiṭṭhadhammanibbānaṃ paññapenti pañcahi vatthūhi.</span></p>
+
+<p lang="vi" class="vi">Này các Tỷ-kheo, nếu có những Sa-môn, Bà-la-môn nào chủ trương Hiện tại Niết-bàn luận, chấp sự tối thượng hiện tại Niết Bàn của loài hữu tình, những vị này sẽ chấp cả năm luận chấp trên, hay một trong năm luận chấp trên, ngoài ra không còn một luận chấp nào khác nữa.<br>
+<span lang="pi" class="pali">Ye hi keci, bhikkhave, samaṇā vā brāhmaṇā vā diṭṭhadhammanibbānavādā sato sattassa paramadiṭṭhadhammanibbānaṃ paññapenti, sabbe te imeheva pañcahi vatthūhi ...</span></p>
+
+<p lang="vi" class="vi">Này các Tỷ-kheo, Như Lai tuệ tri như thế này: “Những sở kiến ấy, chấp trước như vậy sẽ đưa đến những cõi thú như vậy, sẽ tác thành những định mạng như vậy”. Như Lai tuệ tri như vậy. Ngài tuệ tri hơn thế nữa, và Ngài không chấp sở tri ấy. Nhờ không chấp trước sở tri ấy, nội tâm được tịch tịnh. Ngài như thật tuệ tri sự tập khởi, sự diệt trừ của các thọ, vị ngọt, những nguy hiểm và sự xuất ly của chúng. Nhờ tuệ tri như vậy, này các Tỷ-kheo, Như Lai được giải thoát hoàn toàn không có chấp thủ. Những pháp ấy, này các Tỷ-kheo, là những pháp sâu kín, khó thấy, khó chứng, tịch tịnh, mỹ diệu, vượt ngoài tầm của luận lý suông, tế nhị, chỉ những người có trí mới có thể nhận biết. Những pháp ấy Như Lai tự chứng tri, giác ngộ và truyền thuyết;<br>
+<span lang="pi" class="pali">pe...</span></p>
+
+<p lang="vi" class="vi">và chính những pháp ấy những ai như thật chân chánh tán thán Như Lai mới nói đến.<br>
+<span lang="pi" class="pali">yehi tathāgatassa yathābhuccaṃ vaṇṇaṃ sammā vadamānā vadeyyuṃ.</span></p>
+
+<p lang="vi" class="vi">Này các Tỷ-kheo, những Sa-môn, Bà-la-môn ấy luận bàn về tương lai, chấp kiến về tương lai, y cứ về tương lai, sẽ đề xướng nhiều sở kiến sai khác với bốn mươi bốn luận chấp.<br>
+<span lang="pi" class="pali">Imehi kho te, bhikkhave, samaṇabrāhmaṇā aparantakappikā aparantānudiṭṭhino aparantaṃ ārabbha anekavihitāni adhimuttipadāni abhivadanti catucattārīsāya vatthūhi.</span></p>
+
+<p lang="vi" class="vi">Này các Tỷ-kheo, những Sa-môn hay Bà-la-môn nào, luận bàn về tương lai, chấp kiến về tương lai, y cứ về tương lai, đề xướng nhiều sở kiến sai khác. Chúng sẽ chấp bốn mươi bốn luận chấp trên, hay một trong những luận chấp trên, ngoài ra không có luận chấp nào khác nữa.<br>
+<span lang="pi" class="pali">Ye hi keci, bhikkhave, samaṇā vā brāhmaṇā vā aparantakappikā aparantānudiṭṭhino aparantaṃ ārabbha anekavihitāni adhimuttipadāni abhivadanti, sabbe te imeheva catucattārīsāya vatthūhi ...</span></p>
+
+<p lang="vi" class="vi">Này các Tỷ-kheo, Như Lai tuệ tri như thế này: “Những sở kiến ấy, chấp trước như vậy, sẽ đưa đến những cõi thú như vậy, sẽ tác thành những định mạng như vậy”. Như Lai tuệ tri như vậy. Ngài tuệ tri hơn thế nữa, và Ngài không chấp sở tri ấy. Nhờ không chấp trước sở tri ấy, nội tâm được tịch tịnh. Ngài như thật tuệ tri sư tập khởi, sự diệt trừ của các thọ, vị ngọt, những nguy hiểm và sự xuất ly của chúng. Nhờ tuệ tri như vậy, này các Tỷ-kheo, Như Lai được giải thoát hoàn toàn, không có chấp thủ.<br>
+<span lang="pi" class="pali">pe...</span></p>
+
+<p lang="vi" class="vi">và chính những pháp ấy những ai như thật chân chánh tán thán Như Lai mới nói đến.<br>
+<span lang="pi" class="pali">yehi tathāgatassa yathābhuccaṃ vaṇṇaṃ sammā vadamānā vadeyyuṃ.</span></p>
+
+<p lang="vi" class="vi">Này các Tỷ-kheo, những Sa-môn, Bà-la-môn ấy luận bàn về quá khứ tối sơ và luận bàn về tương lai, luận bàn về quá khứ tối sơ và tương lai, chấp kiến về quá khứ tối sơ và tương lai, y cứ về quá khứ tối sơ và tương lai, đề xướng nhiều sở kiến sai khác với sáu mươi hai luận chấp.<br>
+<span lang="pi" class="pali">Imehi kho te, bhikkhave, samaṇabrāhmaṇā pubbantakappikā ca aparantakappikā ca pubbantāparantakappikā ca pubbantāparantānudiṭṭhino pubbantāparantaṃ ārabbha anekavihitāni adhimuttipadāni abhivadanti dvāsaṭṭhiyā vatthūhi.</span></p>
+
+<p lang="vi" class="vi">Này các Tỷ-kheo, những Sa-môn hay Bà-la-môn nào, luận bàn về quá khứ tối sơ, luận bàn về tương lai, luận bàn về quá khứ tối sơ và tương lai, chấp kiến về quá khứ tối sơ và tương lai, y cứ về quá khứ tối sơ và tương lai, đề xướng nhiều sở kiến sai khác. Những vị ấy sẽ chấp sáu mươi hai luận chấp trên, hay một trong những luận chấp trên, ngoài ra không có luận chấp nào khác nữa.<br>
+<span lang="pi" class="pali">Ye hi keci, bhikkhave, samaṇā vā brāhmaṇā vā pubbantakappikā vā aparantakappikā vā pubbantāparantakappikā vā pubbantāparantānudiṭṭhino pubbantāparantaṃ ārabbha anekavihitāni adhimuttipadāni abhivadanti, sabbe te imeheva dvāsaṭṭhiyā vatthūhi, etesaṃ vā aññatarena; natthi ito bahiddhā.</span></p>
+
+<p lang="vi" class="vi">Này các Tỷ-kheo, Như Lai tuệ tri như thế này: “Những sở kiến ấy, chấp trước như vậy, sẽ đưa đến những cõi thú như vậy, sẽ tác thành những định mệnh như vậy”. Như Lai tuệ tri như vậy, Ngài tuệ tri hơn thế nữa, và Ngài không chấp sở tri ấy, nhờ không chấp trước sở tri ấy, nội tâm được tịch tịnh. Ngài như thật tuệ tri sự tập khởi sự diệt trừ của các thọ, vị ngọt, những nguy hiểm và sự xuất ly của chúng, nhờ tuệ tri như vậy, này các Tỷ-kheo, Như Lai được giải thoát hoàn toàn, không có chấp thủ.<br>
+<span lang="pi" class="pali">Tayidaṃ, bhikkhave, tathāgato pajānāti: ‘ime diṭṭhiṭṭhānā evaṅgahitā evaṃparāmaṭṭhā evaṅgatikā bhavanti evaṃabhisamparāyā’ti. Tañca tathāgato pajānāti, tato ca uttaritaraṃ pajānāti, tañca pajānanaṃ na parāmasati, aparāmasato cassa paccattaññeva nibbuti viditā. Vedanānaṃ samudayañca atthaṅgamañca assādañca ādīnavañca nissaraṇañca yathābhūtaṃ viditvā anupādāvimutto, bhikkhave, tathāgato.</span></p>
+
+<p lang="vi" class="vi">Những pháp ấy, này các Tỷ-kheo, là những pháp sâu kín, khó thấy, khó chứng, tịch tịnh, mỹ diệu, vượt ngoài tầm của luận lý suông, tế nhị, chỉ những người có trí mới có thể nhận biết. Những pháp ấy Như Lai tự chứng tri, giác ngộ và tuyên thuyết, và chính những pháp ấy những ai như thật chân chánh tán thán Như Lai mới nói đến.<br>
+<span lang="pi" class="pali">Ime kho te, bhikkhave, dhammā gambhīrā duddasā duranubodhā santā paṇītā atakkāvacarā nipuṇā paṇḍitavedanīyā, ye tathāgato sayaṃ abhiññā sacchikatvā pavedeti, yehi tathāgatassa yathābhuccaṃ vaṇṇaṃ sammā vadamānā vadeyyuṃ.</span></p>
+
+<p lang="vi" class="vi">Kết luận<br>
+
+
+<p lang="vi" class="vi">Này các Tỷ-kheo, ở đây có những Sa-môn, Bà-la-môn chủ trương Thường trú luận, chấp bản ngã và thế giới là thường trú với bốn luận chấp. Chủ trương ấy là kinh nghiệm cá nhân, là sự không biết, không thấy, sự cảm thọ của những Sa-môn, Bà-la-môn, là sự kích thích, dao động, xuyên tạc của những vị bị tham ái chi phối.<br>
+<span lang="pi" class="pali">Tatra, bhikkhave, ye te samaṇabrāhmaṇā sassatavādā sassataṃ attānañca lokañca paññapenti catūhi vatthūhi, tadapi tesaṃ bhavataṃ samaṇabrāhmaṇānaṃ ajānataṃ apassataṃ vedayitaṃ taṇhāgatānaṃ paritassitavipphanditameva.</span></p>
+
+<p lang="vi" class="vi">Này các Tỷ-kheo, ở đây có những Sa-môn, Bà-la-môn chủ trương một phần Thường trú luận, một phần Vô thường luận, chấp bản ngã và thế giới là thường còn đối với một hạng hữu tình và vô thường đối với một hạng hữu tình khác với bốn luận chấp. Chủ trương ấy là kinh nghiệm cá nhân, là sự không biết, không thấy, sự cảm thọ của những Sa-môn, Bà-la-môn, là sự kích thích, dao động, xuyên tạc của những vị bị tham ái chi phối.<br>
+<span lang="pi" class="pali">Tatra, bhikkhave, ye te samaṇabrāhmaṇā ekaccasassatikā ekaccaasassatikā ekaccaṃ sassataṃ ekaccaṃ asassataṃ attānañca lokañca paññapenti catūhi vatthūhi, tadapi tesaṃ bhavataṃ samaṇabrāhmaṇānaṃ ajānataṃ apassataṃ vedayitaṃ taṇhāgatānaṃ paritassitavipphanditameva.</span></p>
+
+<p lang="vi" class="vi">Này các Tỷ-kheo, ở đây có những Sa-môn, Bà-la-môn chủ trương Hữu biên Vô biên luận, chấp thế giới là hữu biên vô biên với bốn luận chấp. Chủ trương ấy là kinh nghiệm cá nhân, là sự không biết, không thấy, sự cảm thọ của những Sa-môn, Bà-la-môn, là sự kích thích dao động, xuyên tạc của những vị bị tham ái chi phối.<br>
+<span lang="pi" class="pali">Tatra, bhikkhave, ye te samaṇabrāhmaṇā antānantikā antānantaṃ lokassa paññapenti catūhi vatthūhi, tadapi tesaṃ bhavataṃ samaṇabrāhmaṇānaṃ ajānataṃ apassataṃ vedayitaṃ taṇhāgatānaṃ paritassitavipphanditameva.</span></p>
+
+<p lang="vi" class="vi">Này các Tỷ-kheo, ở đây có những Sa-môn, Bà-la-môn chủ trương Ngụy biện luận. Khi bị hỏi vấn đề này hay vấn đề khác dùng những lời ngụy biện trườn uốn như con lươn với bốn luận chấp. Chủ trương ấy là kinh nghiệm cá nhân, là sự không biết, không thấy, sự cảm thọ của những Sa-môn, Bà-la-môn, là sự kích thích, dao động, xuyên tạc của những vị bị tham ái chi phối.<br>
+<span lang="pi" class="pali">Tatra, bhikkhave, ye te samaṇabrāhmaṇā amarāvikkhepikā tattha tattha pañhaṃ puṭṭhā samānā vācāvikkhepaṃ āpajjanti amarāvikkhepaṃ catūhi vatthūhi, tadapi tesaṃ bhavataṃ samaṇabrāhmaṇānaṃ ajānataṃ apassataṃ vedayitaṃ taṇhāgatānaṃ paritassitavipphanditameva.</span></p>
+
+<p lang="vi" class="vi">Này các Tỷ-kheo, ở đây có những Sa-môn, Bà-la-môn, chủ trương Vô nhân luận, chấp bản ngã và thế giới do vô nhân sanh với hai luận chấp. Chủ trương ấy là kinh nghiệm cá nhân, là sự không biết không thấy, sự cảm thọ của những Sa-môn, Bà-la-môn, là sự kích thích, dao động, xuyên tạc của những vị bị tham ái chi phối.<br>
+<span lang="pi" class="pali">Tatra, bhikkhave, ye te samaṇabrāhmaṇā adhiccasamuppannikā adhiccasamuppannaṃ attānañca lokañca paññapenti dvīhi vatthūhi, tadapi tesaṃ bhavataṃ samaṇabrāhmaṇānaṃ ajānataṃ apassataṃ vedayitaṃ taṇhāgatānaṃ paritassitavipphanditameva.</span></p>
+
+<p lang="vi" class="vi">Này các Tỷ-kheo, ở đây có những Sa-môn, Bà-la-môn, luận bàn về quá khứ tối sơ, chấp kiến về quá khứ tối sơ, y cứ về quá khứ tối sơ, đề xướng nhiều ý kiến sai khác với mười tám luận chấp. Chủ trương ấy là kinh nghiệm cá nhân, là sự không biết, không thấy, sự cảm thọ của những Sa-môn, Bà-la-môn, là sự kích thích, dao động, xuyên tạc của những vị bị tham ái chi phối.<br>
+<span lang="pi" class="pali">Tatra, bhikkhave, ye te samaṇabrāhmaṇā pubbantakappikā pubbantānudiṭṭhino pubbantaṃ ārabbha anekavihitāni adhimuttipadāni abhivadanti aṭṭhārasahi vatthūhi, tadapi tesaṃ bhavataṃ samaṇabrāhmaṇānaṃ ajānataṃ apassataṃ vedayitaṃ taṇhāgatānaṃ paritassitavipphanditameva.</span></p>
+
+<p lang="vi" class="vi">Này các Tỷ-kheo, ở đây có những Sa-môn, Bà-la-môn chủ trương Hữu tưởng luận sau khi chết, chấp bản ngã có tưởng sau khi chết với mười sáu luận chấp. Chủ trương ấy là kinh nghiệm cá nhân, là sự không biết, không thấy, sự cảm thọ của những Sa-môn, Bà-la-môn, là sự kích thích, dao động xuyên tạc của những vị bị tham ái chi phối.<br>
+<span lang="pi" class="pali">Tatra, bhikkhave, ye te samaṇabrāhmaṇā uddhamāghātanikā saññīvādā uddhamāghātanaṃ saññiṃ attānaṃ paññapenti soḷasahi vatthūhi, tadapi tesaṃ bhavataṃ samaṇabrāhmaṇānaṃ ajānataṃ apassataṃ vedayitaṃ taṇhāgatānaṃ paritassitavipphanditameva.</span></p>
+
+<p lang="vi" class="vi">Này các Tỷ-kheo, ở đây có những Sa-môn, Bà-la-môn chủ trương Vô tưởng luận sau khi chết, chấp bản ngã không có tưởng sau khi chết với tám luận chấp. Chủ trương ấy là kinh nghiệm cá nhân, là sự không biết, không thấy, sự cảm thọ của những Sa-môn, Bà-la-môn, là sự kích thích, dao động, xuyên tạc của những vị bị tham ái chi phối.<br>
+<span lang="pi" class="pali">Tatra, bhikkhave, ye te samaṇabrāhmaṇā uddhamāghātanikā asaññīvādā uddhamāghātanaṃ asaññiṃ attānaṃ paññapenti aṭṭhahi vatthūhi, tadapi tesaṃ bhavataṃ samaṇabrāhmaṇānaṃ ajānataṃ apassataṃ vedayitaṃ taṇhāgatānaṃ paritassitavipphanditameva.</span></p>
+
+<p lang="vi" class="vi">Này các Tỷ-kheo, ở đây có những Sa-môn, Bà-la-môn chủ trương Phi Hữu tưởng Phi Vô tưởng sau khi chết, chấp bản ngã phi hữu tưởng phi vô tưởng sau khi chết với tám luận chấp. Chủ trương ấy là kinh nghiệm cá nhân, là sự không biết, không thấy, sự cảm thọ của những Sa-môn, Bà-la-môn, là sự kích thích, dao động, xuyên tạc của những vị bị tham ái chi phối.<br>
+<span lang="pi" class="pali">Tatra, bhikkhave, ye te samaṇabrāhmaṇā uddhamāghātanikā nevasaññīnāsaññīvādā uddhamāghātanaṃ nevasaññīnāsaññiṃ attānaṃ paññapenti aṭṭhahi vatthūhi, tadapi tesaṃ bhavataṃ samaṇabrāhmaṇānaṃ ajānataṃ apassataṃ vedayitaṃ taṇhāgatānaṃ paritassitavipphanditameva.</span></p>
+
+<p lang="vi" class="vi">Này các Tỷ-kheo, ở đây có những Sa-môn, Bà-la-môn chủ trương Ðoạn diệt luận, chấp trước sự đoạn diệt, tiêu mất, hủy hoại của loài hữu tình với bảy luận chấp. Chủ trương ấy là kinh nghiệm cá nhân, là sự không biết, không thấy, sự cảm thọ của những Sa-môn, Bà-la-môn, là sự kích thích, dao động, xuyên tạc của những vị bị tham ái chi phối.<br>
+<span lang="pi" class="pali">Tatra, bhikkhave, ye te samaṇabrāhmaṇā ucchedavādā sato sattassa ucchedaṃ vināsaṃ vibhavaṃ paññapenti sattahi vatthūhi, tadapi tesaṃ bhavataṃ samaṇabrāhmaṇānaṃ ajānataṃ apassataṃ vedayitaṃ taṇhāgatānaṃ paritassitavipphanditameva.</span></p>
+
+<p lang="vi" class="vi">Này các Tỷ-kheo, ở đây có những Sa-môn, Bà-la-môn chủ trương Hiện tại Niết Bàn luận, chấp trước sự hiện tại Niết Bàn của loài hữu tình với năm luận chấp. Chủ trương ấy là kinh nghiệm cá nhân, là sự không biết, không thấy, sự cảm thọ của những Sa-môn, Bà-la-môn, là sự kích thích, dao động, xuyên tạc của những vị bị tham ái chi phối.<br>
+<span lang="pi" class="pali">Tatra, bhikkhave, ye te samaṇabrāhmaṇā diṭṭhadhammanibbānavādā sato sattassa paramadiṭṭhadhammanibbānaṃ paññapenti pañcahi vatthūhi, tadapi tesaṃ bhavataṃ samaṇabrāhmaṇānaṃ ajānataṃ apassataṃ vedayitaṃ taṇhāgatānaṃ paritassitavipphanditameva.</span></p>
+
+<p lang="vi" class="vi">Này các Tỷ-kheo, ở đây có những Sa-môn, Bà-la-môn, luận bàn về tương lai, chấp kiến về tương lai, y cứ về tương lai, đề xướng nhiều sở kiến sai khác với bốn mươi bốn luận chấp. Chủ trương ấy là kinh nghiệm cá nhân, là sự không biết, không thấy, sự cảm thọ của những Sa-môn, Bà-la-môn, là sự kích thích, dao động, xuyên tạc của những vị bị tham ái chi phối.<br>
+<span lang="pi" class="pali">Tatra, bhikkhave, ye te samaṇabrāhmaṇā aparantakappikā aparantānudiṭṭhino aparantaṃ ārabbha anekavihitāni adhimuttipadāni abhivadanti catucattārīsāya vatthūhi, tadapi tesaṃ bhavataṃ samaṇabrāhmaṇānaṃ ajānataṃ apassataṃ vedayitaṃ taṇhāgatānaṃ paritassitavipphanditameva.</span></p>
+
+<p lang="vi" class="vi">Này các Tỷ-kheo, ở đây có những Sa-môn, Bà-la-môn, luận bàn về quá khứ tối sơ, luận bàn về tương lai, luận bàn về quá khứ tối sơ và tương lai, chấp kiến về quá khứ tối sơ và tương lai, y cứ về quá khứ tối sơ và tương lai, đề xướng nhiều sở kiến sai khác với sáu mươi hai luận chấp. Chủ trương ấy là kinh nghiệm cá nhân, là sự không biết, không thấy, sự cảm thọ của những Sa-môn, Bà-la-môn, là sự kích thích, dao động, xuyên tạc của những vị bị tham ái chi phối.<br>
+<span lang="pi" class="pali">Tatra, bhikkhave, ye te samaṇabrāhmaṇā pubbantakappikā ca aparantakappikā ca pubbantāparantakappikā ca pubbantāparantānudiṭṭhino pubbantāparantaṃ ārabbha anekavihitāni adhimuttipadāni abhivadanti dvāsaṭṭhiyā vatthūhi, tadapi tesaṃ bhavataṃ samaṇabrāhmaṇānaṃ ajānataṃ apassataṃ vedayitaṃ taṇhāgatānaṃ paritassitavipphanditameva.</span></p>
+
+
+
+<p lang="vi" class="vi">Này các Tỷ-kheo, ở đây có những Sa-môn, Bà-la-môn, chủ trương Thường trú luận, chấp bản ngã và thế giới là thường trú với bốn luận chấp. Chủ trương ấy phát khởi do sự xúc chạm (của các căn).<br>
+<span lang="pi" class="pali">Tatra, bhikkhave, ye te samaṇabrāhmaṇā sassatavādā sassataṃ attānañca lokañca paññapenti catūhi vatthūhi, tadapi phassapaccayā.</span></p>
+
+<p lang="vi" class="vi">Này các Tỷ-kheo, ở đây có những Sa-môn, Bà-la-môn chủ trương một phần Thường trú luận, một phần Vô thường luận, chấp bản ngã và thế giới là thường còn đối với một hạng hữu tình và vô thường đối với một hạng hữu tình khác với bốn luận chấp. Chủ trương ấy phát khởi do sự xúc chạm (của các căn).<br>
+<span lang="pi" class="pali">Tatra, bhikkhave, ye te samaṇabrāhmaṇā ekaccasassatikā ekaccaasassatikā ekaccaṃ sassataṃ ekaccaṃ asassataṃ attānañca lokañca paññapenti catūhi vatthūhi, tadapi phassapaccayā.</span></p>
+
+<p lang="vi" class="vi">Này các Tỷ-kheo, ở đây có những Sa-môn, Bà-la-môn chủ trương Hữu biên Vô biên luận, chấp thế giới là hữu biên vô biên với bốn luận chấp. Chủ trương ấy phát khởi do sự xúc chạm (của các căn).<br>
+<span lang="pi" class="pali">Tatra, bhikkhave, ye te samaṇabrāhmaṇā antānantikā antānantaṃ lokassa paññapenti catūhi vatthūhi, tadapi phassapaccayā.</span></p>
+
+<p lang="vi" class="vi">Này các Tỷ-kheo, ở đây có những Sa-môn, Bà-la-môn chủ trương Ngụy biện luận. Khi bị hỏi vấn đề này hay vấn đề khác dùng những lời ngụy biện trườn uốn như con lươn với bốn luận chấp. Chủ trương ấy phát khởi là do sự xúc chạm (của các căn).<br>
+<span lang="pi" class="pali">Tatra, bhikkhave, ye te samaṇabrāhmaṇā amarāvikkhepikā tattha tattha pañhaṃ puṭṭhā samānā vācāvikkhepaṃ āpajjanti amarāvikkhepaṃ catūhi vatthūhi, tadapi phassapaccayā.</span></p>
+
+<p lang="vi" class="vi">Này các Tỷ-kheo, ở đây có những Sa-môn, Bà-la-môn, chủ trương Vô nhân luận, chấp bản ngã và thế giới do vô nhân sanh với hai luận chấp. Chủ trương ấy phát khởi do sự xúc chạm (của các căn).<br>
+<span lang="pi" class="pali">Tatra, bhikkhave, ye te samaṇabrāhmaṇā adhiccasamuppannikā adhiccasamuppannaṃ attānañca lokañca paññapenti dvīhi vatthūhi, tadapi phassapaccayā.</span></p>
+
+<p lang="vi" class="vi">Này các Tỷ-kheo, ở đây có những Sa-môn, Bà-la-môn, luận bàn về quá khứ tối sơ, chấp kiến về quá khứ tối sơ, y chỉ về quá khứ tối sơ, đề xướng nhiều ý kiến sai khác với mười tám luận chấp. Chủ trương ấy phát khởi do sự xúc chạm (của các căn).<br>
+<span lang="pi" class="pali">Tatra, bhikkhave, ye te samaṇabrāhmaṇā pubbantakappikā pubbantānudiṭṭhino pubbantaṃ ārabbha anekavihitāni adhimuttipadāni abhivadanti aṭṭhārasahi vatthūhi, tadapi phassapaccayā.</span></p>
+
+<p lang="vi" class="vi">Này các Tỷ-kheo, ở đây có những Sa-môn, Bà-la-môn chủ trương Hữu tưởng luận sau khi chết, chấp bản ngã có tưởng sau khi chết với mười sáu luận chấp. Chủ trương ấy phát khởi do sự xúc chạm (của các căn).<br>
+<span lang="pi" class="pali">Tatra, bhikkhave, ye te samaṇabrāhmaṇā uddhamāghātanikā saññīvādā uddhamāghātanaṃ saññiṃ attānaṃ paññapenti soḷasahi vatthūhi, tadapi phassapaccayā.</span></p>
+
+<p lang="vi" class="vi">Này các Tỷ-kheo, ở đây có những Sa-môn, Bà-la-môn chủ trương Vô tưởng luận sau khi chết, chấp bản ngã không có tưởng sau khi chết với tám luận chấp. Chủ trương ấy phát khởi do sự xúc chạm (của các căn).<br>
+<span lang="pi" class="pali">Tatra, bhikkhave, ye te samaṇabrāhmaṇā uddhamāghātanikā asaññīvādā uddhamāghātanaṃ asaññiṃ attānaṃ paññapenti aṭṭhahi vatthūhi, tadapi phassapaccayā.</span></p>
+
+<p lang="vi" class="vi">Này các Tỷ-kheo, ở đây có những Sa-môn, Bà-la-môn chủ trương Phi Hữu tưởng Phi Vô tưởng luận sau khi chết, chấp bản ngã phi hữu tưởng phi vô tưởng sau khi chết với tám luận chấp. Chủ trương ấy phát khởi do sự xúc chạm (của các căn).<br>
+<span lang="pi" class="pali">Tatra, bhikkhave, ye te samaṇabrāhmaṇā uddhamāghātanikā nevasaññīnāsaññīvādā uddhamāghātanaṃ nevasaññīnāsaññiṃ attānaṃ paññapenti aṭṭhahi vatthūhi, tadapi phassapaccayā.</span></p>
+
+<p lang="vi" class="vi">Này các Tỷ-kheo, ở đây có những Sa-môn, Bà-la-môn chủ trương Ðoạn diệt luận, chấp trước sự đoạn diệt, tiêu mất, hủy hoại của loài hữu tình với bảy luận chấp. Chủ trương ấy phát khởi do sự xúc chạm (của các căn).<br>
+<span lang="pi" class="pali">Tatra, bhikkhave, ye te samaṇabrāhmaṇā ucchedavādā sato sattassa ucchedaṃ vināsaṃ vibhavaṃ paññapenti sattahi vatthūhi, tadapi phassapaccayā.</span></p>
+
+<p lang="vi" class="vi">Này các Tỷ-kheo, ở đây có những Sa-môn, Bà-la-môn chủ trương Hiện tại Niết bàn luận, chấp trước sự hiện tại Niết Bàn của loài hữu tình với năm luận chấp. Chủ trương ấy phát khởi do sự xúc chạm (của các căn).<br>
+<span lang="pi" class="pali">Tatra, bhikkhave, ye te samaṇabrāhmaṇā diṭṭhadhammanibbānavādā sato sattassa paramadiṭṭhadhammanibbānaṃ paññapenti pañcahi vatthūhi, tadapi phassapaccayā.</span></p>
+
+<p lang="vi" class="vi">Này các Tỷ-kheo, ở đây có những Sa-môn, Bà-la-môn, luận bàn về tương lai, chấp kiến về tương lai, y cứ về tương lai, đề xướng nhiều sở kiến sai khác với bốn mươi bốn luận chấp. Chủ trương ấy phát khởi do sự xúc chạm (của các căn).<br>
+<span lang="pi" class="pali">Tatra, bhikkhave, ye te samaṇabrāhmaṇā aparantakappikā aparantānudiṭṭhino aparantaṃ ārabbha anekavihitāni adhimuttipadāni abhivadanti catucattārīsāya vatthūhi, tadapi phassapaccayā.</span></p>
+
+<p lang="vi" class="vi">Này các Tỷ-kheo, ở đây có những Sa-môn, Bà-la-môn, luận bàn về quá khứ tối sơ, luận bàn về tương lai, luận bàn về quá khứ tối sơ và tương lai, chấp kiến về quá khứ tối sơ và tương lai, y cứ về quá khứ tối sơ và tương lai, đề xướng nhiều sở kiến sai khác với sáu mươi hai luận chấp. Chủ trương ấy phát khởi do sự xúc chạm (của các căn).<br>
+<span lang="pi" class="pali">Tatra, bhikkhave, ye te samaṇabrāhmaṇā pubbantakappikā ca aparantakappikā ca pubbantāparantakappikā ca pubbantāparantānudiṭṭhino pubbantāparantaṃ ārabbha anekavihitāni adhimuttipadāni abhivadanti dvāsaṭṭhiyā vatthūhi, tadapi phassapaccayā.</span></p>
+
+
+
+<p lang="vi" class="vi">Này các Tỷ-kheo, ở đây có những Sa-môn, Bà-la-môn, chủ trương Thường trú luận, chấp bản ngã và thế giới là thường trú với bốn luận chấp. Chủ trương ấy phát khởi do sự xúc chạm (của các căn), không thể không có sự xúc chạm.<br>
+<span lang="pi" class="pali">Tatra, bhikkhave, ye te samaṇabrāhmaṇā sassatavādā sassataṃ attānañca lokañca paññapenti catūhi vatthūhi, te vata aññatra phassā paṭisaṃvedissantīti netaṃ ṭhānaṃ vijjati.</span></p>
+
+<p lang="vi" class="vi">Này các Tỷ-kheo, ở đây có những Sa-môn, Bà-la-môn chủ trương một phần Thường trú luận, một phần Vô thường luận, chấp bản ngã và thế giới là thường còn đối với một hạng hữu tình và vô thường đối với một hạng hữu tình khác với bốn luận chấp. Chủ trương ấy phát khởi do sự xúc chạm (của các căn), không thể không có sự xúc chạm.<br>
+<span lang="pi" class="pali">Tatra, bhikkhave, ye te samaṇabrāhmaṇā ekaccasassatikā ekaccaasassatikā ekaccaṃ sassataṃ ekaccaṃ asassataṃ attānañca lokañca paññapenti catūhi vatthūhi, te vata aññatra phassā paṭisaṃvedissantīti netaṃ ṭhānaṃ vijjati.</span></p>
+
+<p lang="vi" class="vi">Này các Tỷ-kheo, ở đây có những Sa-môn, Bà-la-môn chủ trương Hữu biên Vô biên luận, chấp thế giới là hữu biên vô biên với bốn luận chấp. Chủ trương ấy phát khởi do sự xúc chạm (của các căn), không thể không có sự xúc chạm.<br>
+<span lang="pi" class="pali">Tatra, bhikkhave, ye te samaṇabrāhmaṇā antānantikā antānantaṃ lokassa paññapenti catūhi vatthūhi, te vata aññatra phassā paṭisaṃvedissantīti netaṃ ṭhānaṃ vijjati.</span></p>
+
+<p lang="vi" class="vi">Này các Tỷ-kheo, ở đây có những Sa-môn, Bà-la-môn chủ trương Ngụy biện luận. Khi bị hỏi vấn đề này hay vấn đề khác dùng những lời ngụy biện trườn uốn như con lươn với bốn luận chấp. Chủ trương ấy phát khởi do sự xúc chạm (của các căn), không thể không có sự xúc chạm.<br>
+<span lang="pi" class="pali">Tatra, bhikkhave, ye te samaṇabrāhmaṇā amarāvikkhepikā tattha tattha pañhaṃ puṭṭhā samānā vācāvikkhepaṃ āpajjanti amarāvikkhepaṃ catūhi vatthūhi, te vata aññatra phassā paṭisaṃvedissantīti netaṃ ṭhānaṃ vijjati.</span></p>
+
+<p lang="vi" class="vi">Này các Tỷ-kheo, ở đây có những Sa-môn, Bà-la-môn, chủ trương Vô nhân luận, chấp bản ngã và thế giới do vô nhân sanh với hai luận chấp. Chủ trương ấy phát khởi do sự xúc chạm (của các căn), không thể không có sự xúc chạm.<br>
+<span lang="pi" class="pali">Tatra, bhikkhave, ye te samaṇabrāhmaṇā adhiccasamuppannikā adhiccasamuppannaṃ attānañca lokañca paññapenti dvīhi vatthūhi, te vata aññatra phassā paṭisaṃvedissantīti netaṃ ṭhānaṃ vijjati.</span></p>
+
+<p lang="vi" class="vi">Này các Tỷ-kheo, ở đây có những Sa-môn, Bà-la-môn, luận bàn về quá khứ tối sơ, chấp kiến về quá khứ tối sơ, y chỉ về quá khứ tối sơ, đề xướng nhiều ý kiến sai khác với mười tám luận chấp. Chủ trương ấy phát khởi do sự xúc chạm (của các căn), không thể không có sự xúc chạm.<br>
+<span lang="pi" class="pali">Tatra, bhikkhave, ye te samaṇabrāhmaṇā pubbantakappikā pubbantānudiṭṭhino pubbantaṃ ārabbha anekavihitāni adhimuttipadāni abhivadanti aṭṭhārasahi vatthūhi, te vata aññatra phassā paṭisaṃvedissantīti netaṃ ṭhānaṃ vijjati.</span></p>
+
+<p lang="vi" class="vi">Này các Tỷ-kheo, ở đây có những Sa-môn, Bà-la-môn chủ trương Hữu tưởng luận sau khi chết, chấp bản ngã có tưởng sau khi chết với mười sáu luận chấp. Chủ trương ấy phát khởi do sự xúc chạm (của các căn), không thể không có sự xúc chạm.<br>
+<span lang="pi" class="pali">Tatra, bhikkhave, ye te samaṇabrāhmaṇā uddhamāghātanikā saññīvādā uddhamāghātanaṃ saññiṃ attānaṃ paññapenti soḷasahi vatthūhi, te vata aññatra phassā paṭisaṃvedissantīti netaṃ ṭhānaṃ vijjati.</span></p>
+
+<p lang="vi" class="vi">Này các Tỷ-kheo, ở đây có những Sa-môn, Bà-la-môn chủ trương Vô tưởng luận sau khi chết, chấp bản ngã không có tưởng sau khi chết với tám luận chấp. Chủ trương ấy phát khởi do sự xúc chạm (của các căn), không thể không có sự xúc chạm.<br>
+<span lang="pi" class="pali">Tatra, bhikkhave, ye te samaṇabrāhmaṇā uddhamāghātanikā asaññīvādā, uddhamāghātanaṃ asaññiṃ attānaṃ paññapenti aṭṭhahi vatthūhi, te vata aññatra phassā paṭisaṃvedissantīti netaṃ ṭhānaṃ vijjati.</span></p>
+
+<p lang="vi" class="vi">Này các Tỷ-kheo, ở đây có những Sa-môn, Bà-la-môn chủ trương Phi Hữu tưởng Phi Vô tưởng luận sau khi chết, chấp bản ngã phi hữu tưởng phi vô tưởng sau khi chết với tám luận chấp. Chủ trương ấy phát khởi do sự xúc chạm (của các căn), không thể không có sự xúc chạm.<br>
+<span lang="pi" class="pali">Tatra, bhikkhave, ye te samaṇabrāhmaṇā uddhamāghātanikā nevasaññīnāsaññīvādā uddhamāghātanaṃ nevasaññīnāsaññiṃ attānaṃ paññapenti aṭṭhahi vatthūhi, te vata aññatra phassā paṭisaṃvedissantīti netaṃ ṭhānaṃ vijjati.</span></p>
+
+<p lang="vi" class="vi">Này các Tỷ-kheo, ở đây có những Sa-môn, Bà-la-môn chủ trương Ðoạn diệt luận, chấp trước sự đoạn diệt, tiêu mất, hủy hoại của loài hữu tình với bảy luận chấp. Chủ trương ấy phát khởi do sự xúc chạm (của các căn), không thể không có sự xúc chạm.<br>
+<span lang="pi" class="pali">Tatra, bhikkhave, ye te samaṇabrāhmaṇā ucchedavādā sato sattassa ucchedaṃ vināsaṃ vibhavaṃ paññapenti sattahi vatthūhi, te vata aññatra phassā paṭisaṃvedissantīti netaṃ ṭhānaṃ vijjati.</span></p>
+
+<p lang="vi" class="vi">Này các Tỷ-kheo, ở đây có những Sa-môn, Bà-la-môn chủ trương Hiện tại Niết bàn luận, chấp trước sự hiện tại Niết Bàn của loài hữu tình với năm luận chấp. Chủ trương ấy phát khởi do sự xúc chạm (của các căn), không thể không có sự xúc chạm.<br>
+<span lang="pi" class="pali">Tatra, bhikkhave, ye te samaṇabrāhmaṇā diṭṭhadhammanibbānavādā sato sattassa paramadiṭṭhadhammanibbānaṃ paññapenti pañcahi vatthūhi, te vata aññatra phassā paṭisaṃvedissantīti netaṃ ṭhānaṃ vijjati.</span></p>
+
+<p lang="vi" class="vi">Này các Tỷ-kheo, ở đây có những Sa-môn, Bà-la-môn, luận bàn về tương lai, chấp kiến về tương lai, y cứ về tương lai, đề xướng nhiều sở kiến sai khác với bốn mươi bốn luận chấp. Chủ trương ấy phát khởi do sự xúc chạm (của các căn), không thể không có sự xúc chạm.<br>
+<span lang="pi" class="pali">Tatra, bhikkhave, ye te samaṇabrāhmaṇā aparantakappikā aparantānudiṭṭhino aparantaṃ ārabbha anekavihitāni adhimuttipadāni abhivadanti catucattārīsāya vatthūhi, te vata aññatra phassā paṭisaṃvedissantīti netaṃ ṭhānaṃ vijjati.</span></p>
+
+<p lang="vi" class="vi">Này các Tỷ-kheo, ở đây có những Sa-môn, Bà-la-môn, luận bàn về quá khứ tối sơ, luận bàn về tương lai, luận bàn về quá khứ tối sơ và tương lai, chấp kiến về quá khứ tối sơ và tương lai, y cứ về quá khứ tối sơ và tương lai, đề xướng nhiều sở kiến sai khác với sáu mươi hai luận chấp. Chủ trương ấy phát khởi do sự xúc chạm (của các căn), không thể không có sự xúc chạm.<br>
+<span lang="pi" class="pali">Tatra, bhikkhave, ye te samaṇabrāhmaṇā pubbantakappikā ca aparantakappikā ca pubbantāparantakappikā ca pubbantāparantānudiṭṭhino pubbantāparantaṃ ārabbha anekavihitāni adhimuttipadāni abhivadanti dvāsaṭṭhiyā vatthūhi, te vata aññatra phassā paṭisaṃvedissantīti netaṃ ṭhānaṃ vijjati.</span></p>
+
+
+
+<p lang="vi" class="vi">Này các Tỷ-kheo, ở đây có những Sa-môn, Bà-la-môn, chủ trương Thường trú luận, chấp bản ngã và thế giới là thường còn với bốn luận chấp. Những vị này không có thể cảm thọ những chủ trương trên, nếu không có cảm xúc.<br>
+<span lang="pi" class="pali">Tatra, bhikkhave, ye te samaṇabrāhmaṇā sassatavādā sassataṃ attānañca lokañca paññapenti catūhi vatthūhi,</span></p>
+
+<p lang="vi" class="vi">Này các Tỷ-kheo, ở đây có những Sa-môn, Bà-la-môn chủ trương một phần Thường trú luận, một phần Vô thường luận, chấp bản ngã và thế giới, là thường còn đối với một hạng hữu tình và vô thường đối với một hạng hữu tình khác với bốn luận chấp. Những vị này không có thể cảm thọ những chủ trương trên, nếu không có cảm xúc.<br>
+<span lang="pi" class="pali">yepi te samaṇabrāhmaṇā ekaccasassatikā ekaccaasassatikā ...pe...</span></p>
+
+<p lang="vi" class="vi">Này các Tỷ-kheo, ở đây có những Sa-môn, Bà-la-môn chủ trương Hữu biên Vô biên luận, chấp thế giới là hữu biên vô biên với bốn luận chấp. Những vị này không có thể cảm thọ những chủ trương trên, nếu không có cảm xúc.<br>
+<span lang="pi" class="pali">yepi te samaṇabrāhmaṇā antānantikā ...</span></p>
+
+<p lang="vi" class="vi">Này các Tỷ-kheo, ở đây có những Sa-môn, Bà-la-môn chủ trương Ngụy biện luận. Khi bị hỏi vấn đề này hay vấn đề khác dùng những lời ngụy biện trườn uốn như con lươn với bốn luận chấp. Những vị này không có thể cảm thọ những chủ trương trên, nếu không có cảm xúc.<br>
+<span lang="pi" class="pali">yepi te samaṇabrāhmaṇā amarāvikkhepikā ...</span></p>
+
+<p lang="vi" class="vi">Này các Tỷ-kheo, ở đây có những Sa-môn, Bà-la-môn, chủ trương Vô nhân luận, chấp bản ngã và thế giới do vô nhân sanh với hai luận chấp. Các vị này không có thể cảm thọ những chủ trương trên, nếu không có cảm xúc.<br>
+<span lang="pi" class="pali">yepi te samaṇabrāhmaṇā adhiccasamuppannikā ...</span></p>
+
+<p lang="vi" class="vi">Này các Tỷ-kheo, ở đây có những Sa-môn, Bà-la-môn, luận bàn về quá khứ tối sơ, chấp kiến về quá khứ tối sơ, y chỉ về quá khứ tối sơ, đề xướng nhiều ý kiến sai khác với mười tám luận chấp. Những vị này không có thể cảm thọ những chủ trương trên, nếu không có cảm xúc.<br>
+<span lang="pi" class="pali">yepi te samaṇabrāhmaṇā pubbantakappikā ...</span></p>
+
+<p lang="vi" class="vi">Này các Tỷ-kheo, ở đây có những Sa-môn, Bà-la-môn chủ trương Hữu tưởng luận sau khi chết, chấp bản ngã có tưởng sau khi chết với mười sáu luận chấp. Các vị này không có thể cảm thọ những chủ trương trên, nếu không có cảm xúc.<br>
+<span lang="pi" class="pali">yepi te samaṇabrāhmaṇā uddhamāghātanikā saññīvādā ...</span></p>
+
+<p lang="vi" class="vi">Này các Tỷ-kheo, ở đây có những Sa-môn, Bà-la-môn chủ trương Vô tưởng luận sau khi chết, chấp bản ngã không có tưởng sau khi chết với tám luận chấp. Các vị này không có thể cảm thọ những chủ trương trên, nếu không có cảm xúc.<br>
+<span lang="pi" class="pali">yepi te samaṇabrāhmaṇā uddhamāghātanikā asaññīvādā ...</span></p>
+
+<p lang="vi" class="vi">Này các Tỷ-kheo, ở đây có những Sa-môn, Bà-la-môn chủ trương Phi Hữu tưởng Phi Vô tưởng sau khi chết, chấp bản ngã phi hữu tưởng phi vô tưởng sau khi chết với tám luận chấp. Các vị này không có thể cảm thọ những chủ trương trên, nếu không có cảm xúc.<br>
+<span lang="pi" class="pali">yepi te samaṇabrāhmaṇā uddhamāghātanikā nevasaññīnāsaññīvādā ...</span></p>
+
+<p lang="vi" class="vi">Này các Tỷ-kheo, ở đây có những Sa-môn, Bà-la-môn chủ trương Ðoạn diệt luận, chấp trước sự đoạn diệt, tiêu mất, hủy hoại của loài hữu tình với bảy luận chấp. Các vị này không có thể cảm thọ những chủ trương, trên, nếu không có cảm xúc.<br>
+<span lang="pi" class="pali">yepi te samaṇabrāhmaṇā ucchedavādā ...</span></p>
+
+<p lang="vi" class="vi">Này các Tỷ-kheo, ở đây có những Sa-môn, Bà-la-môn chủ trương Hiện tại Niết Bàn luận, chấp trước hiên tại Niết Bàn của loài hữu tình với năm luận chấp. Các vị này không có thể cảm thọ những chủ trương trên, nếu không có cảm xúc.<br>
+<span lang="pi" class="pali">yepi te samaṇabrāhmaṇā diṭṭhadhammanibbānavādā ...</span></p>
+
+<p lang="vi" class="vi">Này các Tỷ-kheo, ở đây có những Sa-môn, Bà-la-môn, luận bàn về tương lai, chấp kiến về tương lai, y cứ về tương lai, đề xướng nhiều sở kiến sai khác với bốn mươi bốn luận chấp. Các vị này không có thể cảm thọ những chủ trương trên, nếu không có cảm xúc.<br>
+<span lang="pi" class="pali">yepi te samaṇabrāhmaṇā aparantakappikā ...</span></p>
+
+<p lang="vi" class="vi">Này các Tỷ-kheo, ở đây có những Sa-môn, Bà-la-môn, luận bàn về quá khứ tối sơ, luận bàn về tương lai, luận bàn về quá khứ tối sơ và tương lai, chấp kiến về quá khứ tối sơ và tương lai, y cứ về quá khứ tối sơ và tương lai, đề xướng nhiều sở kiến sai khác với sáu mươi hai luận chấp. Những vị này không có thể cảm thọ những chủ trương trên, nếu không có cảm xúc. Này các Tỷ-kheo, ở đây có những Sa-môn, Bà-la-môn, chủ trương Thường trú luận, chấp bản ngã và thế giới là thường còn với bốn luận chấp; những Sa-môn, Bà-la-môn chủ trương một phần Thường trú luận, một phần Vô thường luận; những Sa-môn, Bà-la-môn, chủ trương Ngụy biện luận; những Sa-môn, Bà-la-môn, chủ trương Vô nhân luận; những Sa-môn, Bà-la-môn, luận bàn về quá khứ tối sơ, những Sa-môn, Bà-la-môn chủ trương Hữu tưởng luận sau khi chết, những Sa-môn, Bà-la-môn chủ trương Vô tưởng luận sau khi chết; những Sa-môn, Bà-la-môn chủ trương Phi Hữu tưởng Phi Vô tưởng sau khi chết; những Sa-môn, Bà-la-môn chủ trương Ðoạn diệt luận; những Sa-môn, Bà-la-môn chủ trương hiện tại Niết Bàn luận; những Sa-môn, Bà-la-môn luận bàn về quá khứ tối sơ; những Sa-môn, Bà-la-môn luận bàn về tương lai, chấp kiến về quá khứ tối sơ và tương lai, y cứ vào quá khứ tối sơ và tương lai, đề xướng nhiều sở kiến sai khác với sáu mươi hai luận chấp. Tất cả những vị này có những cảm thọ (những chủ trương trên) do sự xúc chạm qua sáu xúc xứ. Do duyên với những cảm thọ mà tham ái phát khởi; do duyên tham ái, thủ phát khởi; do duyên thủ, hữu phát khởi; do duyên hữu, sanh phát khởi, do duyên sanh, già, chết, sầu, bi, khổ, ưu, não phát khởi.<br>
+<span lang="pi" class="pali">yepi te samaṇabrāhmaṇā pubbantakappikā ca aparantakappikā ca pubbantāparantakappikā ca pubbantāparantānudiṭṭhino pubbantāparantaṃ ārabbha anekavihitāni adhimuttipadāni abhivadanti dvāsaṭṭhiyā vatthūhi, sabbe te chahi phassāyatanehi phussa phussa paṭisaṃvedenti tesaṃ vedanāpaccayā taṇhā, taṇhāpaccayā upādānaṃ, upādānapaccayā bhavo, bhavapaccayā jāti, jātipaccayā jarāmaraṇaṃ sokaparidevadukkhadomanassupāyāsā sambhavanti.</span></p>
+
+
+
+<p lang="vi" class="vi">Này các Tỷ-kheo, khi Tỷ-kheo như thật biết sự tập khởi, sự diệt trừ, vị ngọt, sự nguy hiểm và sự xuất ly của sáu chỗ xuất xứ, vị ấy sẽ có một sự hiểu biết vượt ra ngoài những điều trên.<br>
+<span lang="pi" class="pali">Yato kho, bhikkhave, bhikkhu channaṃ phassāyatanānaṃ samudayañca atthaṅgamañca assādañca ādīnavañca nissaraṇañca yathābhūtaṃ pajānāti, ayaṃ imehi sabbeheva uttaritaraṃ pajānāti.</span></p>
+
+<p lang="vi" class="vi">Này các Tỷ-kheo, có những Sa-môn, Bà-la-môn nào luận bàn về quá khứ tối sơ, hay luận bàn về tương lai, hay luận bàn về quá khứ tối sơ và tương lai, chấp kiến về quá khứ tối sơ và tương lai, y cứ vào quá khứ tối sơ và tương lai, đề xướng nhiều sở kiến sai khác tất cả những vị này đều bị bao trùm bởi lưới của sáu mươi hai luận chấp này, dầu chúng nhảy vọt lên, chúng vẫn bị hạn cuộc bao phủ ở nơi đây.<br>
+<span lang="pi" class="pali">Ye hi keci, bhikkhave, samaṇā vā brāhmaṇā vā pubbantakappikā vā aparantakappikā vā pubbantāparantakappikā vā pubbantāparantānudiṭṭhino pubbantāparantaṃ ārabbha anekavihitāni adhimuttipadāni abhivadanti, sabbe te imeheva dvāsaṭṭhiyā vatthūhi antojālīkatā, ettha sitāva ummujjamānā ummujjanti, ettha pariyāpannā antojālīkatāva ummujjamānā ummujjanti.</span></p>
+
+<p lang="vi" class="vi">Này các Tỷ-kheo, cũng ví như người đánh cá lành nghề hay người học đánh cá vung lưới trên mặt hồ nước nhỏ có mắt sít sao. Người ấy nghĩ: “Những con cá lớn ở trong hồ nước nhỏ này, tất cả chúng đều bị bao phủ trong tấm lưới này, dầu chúng có nhảy vọt lên, chúng vẫn bị hạn cuộc bao phủ ở nơi đây”.<br>
+<span lang="pi" class="pali">Seyyathāpi, bhikkhave, dakkho kevaṭṭo vā kevaṭṭantevāsī vā sukhumacchikena jālena parittaṃ udakadahaṃ otthareyya. Tassa evamassa: ‘ye kho keci imasmiṃ udakadahe oḷārikā pāṇā, sabbe te antojālīkatā. Ettha sitāva ummujjamānā ummujjanti; ettha pariyāpannā antojālīkatāva ummujjamānā ummujjantī’ti;</span></p>
+
+<p lang="vi" class="vi">Cũng như vậy này các Tỷ-kheo, những Sa-môn, Bà-la-môn nào, luận bàn về quá khứ tối sơ, hay luận bàn về tương lai, hay luận bàn về quá khứ tối sơ và tương lai, chấp kiến về quá khứ tối sơ và tương lai, đề xướng nhiều sở kiến sai khác, tất cả những vị này đều bị bao phủ trong lưới của sáu mươi hai luận chấp này; dầu có nhảy vọt lên, những vị này vẫn bị hạn cuộc bao phủ ở nơi đây.<br>
+<span lang="pi" class="pali">evameva kho, bhikkhave, ye hi keci samaṇā vā brāhmaṇā vā pubbantakappikā vā aparantakappikā vā pubbantāparantakappikā vā pubbantāparantānudiṭṭhino pubbantāparantaṃ ārabbha anekavihitāni adhimuttipadāni abhivadanti, sabbe te imeheva dvāsaṭṭhiyā vatthūhi antojālīkatā ettha sitāva ummujjamānā ummujjanti, ettha pariyāpannā antojālīkatāva ummujjamānā ummujjanti.</span></p>
+
+<p lang="vi" class="vi">Này các Tỷ-kheo, thân của Như Lai còn tồn tại, nhưng cái khiến đưa đến đời sống khác đã bị chấm dứt.<br>
+<span lang="pi" class="pali">Ucchinnabhavanettiko, bhikkhave, tathāgatassa kāyo tiṭṭhati.</span></p>
+
+<p lang="vi" class="vi">Khi thân của vị này còn tồn tại thời chư Thiên và loài Người còn có thể thấy thân ấy.<br>
+<span lang="pi" class="pali">Yāvassa kāyo ṭhassati, tāva naṃ dakkhanti devamanussā.</span></p>
+
+<p lang="vi" class="vi">Khi thân hoại mạng chung, thời chư Thiên và loài Người không thể thấy được.<br>
+<span lang="pi" class="pali">Kāyassa bhedā uddhaṃ jīvitapariyādānā na naṃ dakkhanti devamanussā.</span></p>
+
+<p lang="vi" class="vi">Này các Tỷ-kheo, như nhánh có một chùm xoài bị chặt đứt, tất cả trái xoài dính với nhánh ấy đều bị chung một số phận với nhánh kia.<br>
+<span lang="pi" class="pali">Seyyathāpi, bhikkhave, ambapiṇḍiyā vaṇṭacchinnāya yāni kānici ambāni vaṇṭapaṭibandhāni, sabbāni tāni tadanvayāni bhavanti;</span></p>
+
+<p lang="vi" class="vi">Cũng như vậy này các Tỷ-kheo, thân của Như Lai còn tồn tại, nhưng cái khiến đưa đến một đời sống khác đã bị chặt đứt.<br>
+<span lang="pi" class="pali">evameva kho, bhikkhave, ucchinnabhavanettiko tathāgatassa kāyo tiṭṭhati,</span></p>
+
+<p lang="vi" class="vi">Khi thân của vị này còn tồn tại thời chư Thiên và loài Người có thể thấy thân ấy.<br>
+<span lang="pi" class="pali">yāvassa kāyo ṭhassati, tāva naṃ dakkhanti devamanussā,</span></p>
+
+<p lang="vi" class="vi">Khi thân hoại mạng chung thời chư Thiên và loài Người không thể thấy được.<br>
+<span lang="pi" class="pali">kāyassa bhedā uddhaṃ jīvitapariyādānā na naṃ dakkhanti devamanussā”ti.</span></p>
+
+<p lang="vi" class="vi">Khi nghe nói vậy, đại đức Ānanda bạch đức Thế Tôn:<br>
+<span lang="pi" class="pali">Evaṃ vutte, āyasmā ānando bhagavantaṃ etadavoca:</span></p>
+
+<p lang="vi" class="vi">Kỳ diệu thay, bạch Thế Tôn! Hy hữu thay, bạch Thế Tôn! Pháp môn này gọi là gì, bạch Thế Tôn?<br>
+<span lang="pi" class="pali">“acchariyaṃ, bhante, abbhutaṃ, bhante, ko nāmo ayaṃ, bhante, dhammapariyāyo”ti?</span></p>
+
+<p lang="vi" class="vi">Này Ānanda, pháp môn này gọi là “Lợi Võng”, hãy như vậy mà phụng trì; gọi là “Pháp Võng”, hãy như vậy mà phụng trì; gọi là “Phạm Võng”, hãy như vậy mà phụng trì; gọi là “Kiến Võng”, hãy như vậy mà phụng trì; gọi là “Vô thượng Chiến thắng”, hãy như vậy mà phụng trì.<br>
+<span lang="pi" class="pali">“Tasmātiha tvaṃ, ānanda, imaṃ dhammapariyāyaṃ atthajālantipi naṃ dhārehi, dhammajālantipi naṃ dhārehi, brahmajālantipi naṃ dhārehi, diṭṭhijālantipi naṃ dhārehi, anuttaro saṅgāmavijayotipi naṃ dhārehī”ti.</span></p>
+
+<p lang="vi" class="vi">Thế Tôn thuyết như vậy. Các Tỷ-kheo ấy hoan hỷ tín thọ lời Thế Tôn dạy. Trong khi kinh này được truyền thuyết, một ngàn thế giới đều rung động.<br>
+<span lang="pi" class="pali">Idamavoca bhagavā. Attamanā te bhikkhū bhagavato bhāsitaṃ abhinandunti. Imasmiñca pana veyyākaraṇasmiṃ bhaññamāne dasasahassī lokadhātu akampitthāti.</span></p>
+
+<p lang="vi" class="vi">Dứt bài Kinh Phạm Võng<br>
+<span lang="pi" class="pali">Brahmajālasuttaṃ niṭṭhitaṃ paṭhamaṃ.</span></p>
+
+<br>
+
+
+<p><p style="text-align: right;font-style: italic;">Hoà Thượng Thích Minh Châu dịch Việt</span></p>
+
+
+
+</section>  <!-- End English and Pali -->
+
+
+<div id="nextprev"><a id="previous-sutta" href="./dn1.5.html#content"></a><a id="next-sutta" href="./dn2.html#content"></a></div>
+
+</div>  <!--End Content -->
+<!-- Footer -->
+		<footer>
+					 <!-- End bottom links -->
+</footer>
+
+ 
+ <!-- Scripts -->
+ 
+ <script src="../js/footer.js"></script><script src="../js/dpd_deconstructor.js"></script><script src="../js/dpd_ebts.js"></script><script src="../js/dpd_i2h.js"></script>
+ <script src="/sw.js"></script>
+ </body>
+ </html>
+
+
