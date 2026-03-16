@@ -3555,7 +3555,7 @@ const quotesData = {
 
 { text: `Này các Tỷ-kheo, thế nào là đạo hành khổ, thắng trí chậm? Ở đây, có người bản tánh tham dục rất cường thịnh, luôn luôn cảm thọ khổ ưu do tham dục sanh; bản tánh sân rất cường thịnh, luôn luôn cảm thọ khổ ưu do sân hận sanh; bản tánh si rất cường thịnh, luôn luôn cảm thọ khổ ưu do si sanh. Với người ấy, năm căn này hiện ra rất mềm yếu, tín căn, tấn căn, niệm căn, định căn, tuệ căn. Do năm căn này mềm yếu, người ấy đạt được Vô gián định một cách chậm chạp để đoạn diệt các lậu hoặc. Này các Tỷ-kheo, đây gọi là đạo hành khổ, thắng trí chậm.`, ref: "Tăng Chi Bộ 4.162", url: "../an/an4.162.html#content" },
 
-{ text: `Và này các Tỷ-kheo, thế nào là đạo hành không kham nhẫn? Ở đây, này các Tỷ-kheo, có hạng người chưởi mắng lại kẻ đã chưởi mắng, sân hận lại với kẻ đã sân hận, gây lộn lại với kẻ đã gây lộn. Này các Tỷ-kheo, đây gọi là đạo hành không kham nhẫn.`, ref: "Tăng Chi Bộ 4.164", url: "../an/an4.164.html#content" },
+{ text: `Và này các Tỷ-kheo, thế nào là đạo hành không kham nhẫn? Ở đây, này các Tỷ-kheo, có hạng người chửi mắng lại kẻ đã chửi mắng, sân hận lại với kẻ đã sân hận, gây lộn lại với kẻ đã gây lộn. Này các Tỷ-kheo, đây gọi là đạo hành không kham nhẫn.`, ref: "Tăng Chi Bộ 4.164", url: "../an/an4.164.html#content" },
 
 { text: `Và này các Tỷ-kheo, thế nào là đạo hành kham nhẫn? Ở đây, này các Tỷ-kheo, có hạng người không nhiếc mắng lại kẻ đã nhiếc mắng, không sân hận lại kẻ đã sân hận, không gây lộn lại với kẻ đã gây lộn. Này các Tỷ-kheo, đây gọi là đạo hành kham nhẫn.`, ref: "Tăng Chi Bộ 4.164", url: "../an/an4.164.html#content" },
 
