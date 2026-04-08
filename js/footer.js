@@ -1689,7 +1689,7 @@ const suttaFiles3 = [
   "sn/sn43.1.html#content",
   "sn/sn43.11.html#content",
   "sn/sn43.12.html#content",
-  "sn/sn43.150.html#content",
+  "sn/sn43.44.html#content",
   "sn/sn43.2.html#content",
   "sn/sn44.1.html#content",
   "sn/sn44.10.html#content",
@@ -1702,7 +1702,6 @@ const suttaFiles3 = [
   "sn/sn45.12.html#content",
   "sn/sn45.139.html#content",
   "sn/sn45.140.html#content",
-  "sn/sn45.142.html#content",
   "sn/sn45.146-148.html#content",
   "sn/sn45.150.html#content",
   "sn/sn45.152.html#content",
@@ -1720,7 +1719,7 @@ const suttaFiles3 = [
   "sn/sn45.41.html#content",
   "sn/sn45.50-54.html#content",
   "sn/sn45.6.html#content",
-  "sn/sn45.64.html#content",
+  "sn/sn45.62.html#content",
   "sn/sn45.7.html#content",
   "sn/sn45.8.html#content",
   "sn/sn45.9.html#content",
@@ -3058,7 +3057,44 @@ if (firstPara) {
   document.body.appendChild(copyBtn);
 }
 
-// Copy function
+function showToast(message) {
+  // Create the toast element
+  const toast = document.createElement("div");
+  toast.innerText = message;
+  
+  // Apply inline styles for a clean, centered bottom toast
+  toast.style.cssText = `
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #333;
+    color: #fff;
+    padding: 12px 24px;
+    border-radius: 8px;
+    z-index: 10000;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+    font-family: sans-serif;
+    font-size: 14px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    pointer-events: none;
+  `;
+
+  document.body.appendChild(toast);
+
+  // Trigger reflow and fade in
+  requestAnimationFrame(() => {
+    toast.style.opacity = "1";
+  });
+
+  // Fade out and remove after 2 seconds
+  setTimeout(() => {
+    toast.style.opacity = "0";
+    toast.addEventListener("transitionend", () => toast.remove());
+  }, 2000);
+}
+
 function copySutta() {
   const paragraphs = document.querySelectorAll("p.vi, p[lang='vi'], p[lang='pi']");
   let textToCopy = "";
@@ -3071,42 +3107,10 @@ function copySutta() {
   });
 
   navigator.clipboard.writeText(textToCopy).then(() => {
-    alert("Kinh đã được chép!");
+    // Call the toast instead of the alert
+    showToast("Kinh đã được chép!");
   }).catch(err => {
     console.error("Copy failed:", err);
+    showToast("Lỗi: Không thể chép!"); // Added error toast just in case
   });
 }
-
-document.addEventListener("DOMContentLoaded", function() {
-    const currentUrl = window.location.href;
-    const backBtn = document.getElementById('persistentBackBtn');
-    
-    // 1. Define what your home page is. 
-    // This prevents the "looping back to index" problem.
-    const isHomePage = currentUrl.endsWith('index.html') || currentUrl.endsWith('/');
-
-    // 2. Only save the URL if it's NOT the home page.
-    if (!isHomePage) {
-        localStorage.setItem('lastContentPage', currentUrl);
-    }
-
-    // 3. Handle the button click
-    if (backBtn) {
-        backBtn.addEventListener('click', function(e) {
-            e.preventDefault();
-            const lastContent = localStorage.getItem('lastContentPage');
-
-            if (isHomePage) {
-                // If we are on the Home page, go to the last Sutta/Page we read
-                if (lastContent) {
-                    window.location.href = lastContent;
-                } else {
-                    alert("You haven't visited any other pages yet!");
-                }
-            } else {
-                // If we are already on a content page, 'Back' should take us home
-                window.location.href = 'index.html';
-            }
-        });
-    }
-});
