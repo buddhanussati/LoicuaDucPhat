@@ -1106,6 +1106,17 @@ setupMeditationListeners() {
             if (e.target.closest('.med-controls') || e.target.closest('.modal')) return;
             e.preventDefault(); 
             
+            // --- BUG FIX: Clear existing timers to prevent multi-touch orphans ---
+            if (pressTimer) {
+                clearTimeout(pressTimer);
+                pressTimer = null;
+            }
+            if (this.meditationState && this.meditationState.continuousHoldInterval) {
+                clearInterval(this.meditationState.continuousHoldInterval);
+                this.meditationState.continuousHoldInterval = null;
+            }
+            // -------------------------------------------------------------------
+
             // 2. BẮT DÍNH POINTER ĐỂ KHÔNG BỊ RỚT SỰ KIỆN KHI NGÓN TAY DI CHUYỂN NHẸ
             medOverlay.setPointerCapture(e.pointerId);
 
