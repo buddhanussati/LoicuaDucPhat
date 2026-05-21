@@ -1,0 +1,848 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="apple-touch-icon" href="icon-192.png">
+	<link href="./css/weather-icons.min.css" rel="stylesheet">
+    <link href="./css/css.css" rel="stylesheet">
+	<script src="./js/asubha.js"></script>
+    <title>Quán Bất Tịnh</title>
+    <style>
+       /* --- Theme Variables --- */
+        :root {
+            /* Dark Mode (Default) */
+            --bg-main: #121212;
+            --bg-panel: #1e1e1e;
+            --bg-hover: #2a2d2e;
+            --text-main: #e0e0e0;
+            --text-muted: #9e9e9e;
+            --accent: #58a6ff;
+            --border: #333333;
+            --transition-speed: 0.3s;
+			--fav-active: #ffca28;
+        }
+
+        body.light-mode {
+            /* Paper Mode (Soft Cream/Ink) */
+            --bg-main: #f4f1ea;     /* Classic book paper */
+            --bg-panel: #f5f5f5;    /* Slightly darker paper for panels */
+            --bg-hover: #dfdbcf;
+            --text-main: #2c2c2c;   /* Deep charcoal ink */
+            --text-muted: #5f5f5f;
+            --accent: #58a6ff;      /* Deeper blue for contrast on paper */
+            --border: #d1ccbc;
+			--fav-active: #b8860b;
+			
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-main);
+            color: var(--text-main);
+            transition: background-color var(--transition-speed), color var(--transition-speed);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            overflow: hidden;
+            user-select: none;
+        }
+
+        /* --- Top Bar Styling --- */
+        #top-bar {
+            background-color: var(--bg-panel);
+            border-bottom: 1px solid var(--border);
+			transition: background-color var(--transition-speed), border-color var(--transition-speed);
+            padding: 12px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+            z-index: 100;
+        }
+
+       #top-bar h1 {
+    font-size: clamp(0.85rem, 3.2vw, 1.1rem); /* Automatically scales between 0.85rem and 1.1rem */
+    white-space: nowrap;                      /* Prevents text from breaking into two lines */
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    color: var(--text-main);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-width: 0;                             /* Allows the flex item to scale down smoothly */
+}
+
+        .next-btn {
+            background-color: var(--accent);
+            color: #121212;
+            border: none;
+            padding: 4px 12px;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: opacity 0.2s, transform 0.1s;
+        }
+
+        .next-btn:hover {
+            opacity: 0.9;
+        }
+
+        .next-btn:active {
+            transform: scale(0.95);
+        }
+
+        /* --- Main Content Area --- */
+        #main-content {
+            flex: 1;
+            overflow-y: auto;
+            display: flex;
+            justify-content: center;
+            padding: 30px 20px;
+            cursor: pointer; /* Indicates the whole area is clickable */
+        }
+
+        #container {
+            max-width: 800px;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transition: opacity 0.2s ease-in-out;
+        }
+
+        /* --- Image & Text Styling --- */
+        #display-img {
+            max-width: 100%;
+            max-height: 70vh; /* MUCH larger image */
+            border-radius: 12px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.6);
+            object-fit: contain;
+            margin-bottom: 30px;
+            background-color: #000; /* Prevents white flashes on transparent images */
+        }
+
+        .text-content {
+            font-size: 1.2rem; /* Larger, readable text */
+            line-height: 1.6;
+            text-align: center;
+            margin-bottom: 20px;
+            width: 100%;
+        }
+@media screen and (max-width: 768px) {
+    .text-content {
+        font-size: 1.1rem;
+    }
+    
+    #top-bar {
+        padding: 12px 8px; /* Reduces side padding to make room for the new button */
+    }
+
+    #top-bar div[style*="display: flex"] {
+        gap: 6px !important; /* Tighter spacing between buttons on mobile screens */
+    }
+}
+
+        .reference {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            font-style: italic;
+            border-top: 1px dashed var(--border);
+            padding-top: 15px;
+            width: 80%;
+            text-align: center;
+        }
+
+        .hint {
+            color: var(--text-muted);
+            font-size: 0.8rem;
+            margin-top: 20px;
+            opacity: 0.6;
+        }
+        
+        /* --- Modal (Fullscreen Image) Styling --- */
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.85);
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-content {
+            max-width: 95vw;
+            max-height: 95vh;
+            object-fit: contain;
+            border-radius: 8px;
+            box-shadow: 0 4px 25px rgba(0,0,0,0.8);
+            cursor: grab;
+            /* Scale from the center of the image */
+            transform-origin: center; 
+			transition: transform 0.1s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        /* --- Info Content Modal Styling --- */
+        .info-modal-panel {
+            background-color: var(--bg-panel);
+            color: var(--text-main);
+            border-radius: 12px;
+            max-width: 680px;
+            width: 90%;
+            max-height: 85vh;
+            position: relative;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+            border: 1px solid var(--border);
+            user-select: text; /* Allow users to copy content inside info modal */
+            display: flex;
+            flex-direction: column;
+            overflow: hidden; /* Keeps the panel boundaries intact */
+        }
+
+        .info-modal-scroll {
+            overflow-y: auto; /* Scroll bar attaches here instead */
+            padding: 40px 30px 30px 30px;
+            line-height: 1.65;
+        }
+
+        .info-modal-panel h2 {
+            margin-top: 25px;
+            margin-bottom: 12px;
+            font-size: 1.35rem;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 6px;
+        }
+
+        .info-modal-panel h3 {
+            margin-top: 20px;
+            margin-bottom: 8px;
+            font-size: 1.1rem;
+        }
+
+        .info-modal-panel p, .info-modal-panel ul {
+            margin-bottom: 16px;
+        }
+
+        .info-modal-panel ul {
+            padding-left: 22px;
+        }
+
+        .info-modal-panel li {
+            margin-bottom: 8px;
+        }
+
+        .info-modal-panel hr {
+            border: 0;
+            border-top: 1px dashed var(--border);
+            margin: 25px 0;
+        }
+
+        .info-modal-panel a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+
+        .info-modal-panel a:hover {
+            text-decoration: underline;
+        }
+
+        body.light-mode .info-modal-panel a {
+            color: #2e5fb7;
+        }
+
+        @keyframes zoom {
+            from { transform: scale(0.9); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 20px;
+            right: 35px;
+            color: #f1f1f1;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: color 0.2s;
+            z-index: 1001;
+        }
+
+        .close-btn:hover {
+            color: var(--accent);
+        }
+
+        #close-info-modal {
+            top: 15px;
+            right: 20px;
+            color: var(--text-muted);
+        }
+
+        #close-info-modal:hover {
+            color: var(--text-main);
+        }
+		
+		/* --- Reference Link Styling --- */
+        .reference a {
+            color: var(--accent);
+            text-decoration: none;
+            transition: opacity 0.2s;
+        }
+
+        .reference a:hover {
+            text-decoration: underline;
+            opacity: 0.8;
+        }
+
+        /* --- Copy Button Styling --- */
+        .copy-btn {
+            background-color: transparent;
+            color: var(--text-muted);
+            border: 1px solid var(--border);
+            padding: 6px 16px;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            margin-top: 15px;
+            z-index: 10;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+        }
+
+        .copy-btn:hover {
+            background-color: var(--bg-hover);
+            color: var(--text-main);
+            border-color: var(--text-muted);
+        }
+
+        /* Specific color for Light Mode as requested */
+        body.light-mode .reference a {
+            color: #2e5fb7;
+        }
+        /* Hide the light-mode icon by default (Dark Mode) */
+        .icon-light {
+            display: none;
+        }
+
+        body.light-mode .icon-light {
+            display: inline-block;
+            font-size: 1.1em; 
+            
+        }
+
+        body.light-mode .icon-dark {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div id="image-modal" class="modal">
+        <span class="close-btn" id="close-modal"><i class="fas fa-xmark"></i></span>
+        <img class="modal-content" id="modal-img">
+    </div>
+
+    <div id="info-modal" class="modal">
+        <div class="info-modal-panel">
+            <span class="close-btn" id="close-info-modal"><i class="fas fa-xmark"></i></span>
+            
+            <div class="info-modal-scroll">
+            <p>Ứng dụng web <strong>Quán Bất Tịnh </strong> được thiết kế một cách trực quan và đơn giản, tập trung trực tiếp vào việc cung cấp nội dung mà không gây phức tạp kỹ thuật không cần thiết. Thay vì chú trọng vào cơ chế vận hành của ứng dụng, hướng dẫn này khám phá những lợi ích tâm lý sâu sắc của <em>asubha-bhāvanā</em> (quán chiếu về sự không đẹp đẽ/ô trược của thân thể) và cách thức công cụ này có thể hỗ trợ thực hành hàng ngày.</p>
+            
+            <hr>
+            
+            <h2>Căn bệnh: Rāga-Taṇhā (Ái Dục) như một căn bệnh tinh thần</h2>
+            <p>Trong các kinh điển Nguyên thủy Pali, các gốc bất thiện thường được ví như những căn bệnh. <em>Rāga-taṇhā</em> (ham muốn nhục dục và tình dục) không chỉ đơn thuần là một cảm xúc thoáng qua; nó vận hành như một căn bệnh tinh thần mạnh mẽ, ăn sâu vào tâm thức.</p>
+            <p>Sự thèm khát này có thể được ví chính xác như một loại virus sinh học:</p>
+            <ul>
+                <li><strong>Lây nhiễm và nhân lên:</strong> Một khi đối tượng dục lạc kích thích tâm trí, virus của sự tham dục xâm nhiễm vào ý thức, nhanh chóng nhân lên các tư tưởng bất thiện (<em>akusala-vitakka</em>).</li>
+                <li><strong>Phá hủy năng lực:</strong> Nó tiêu hao sự minh mẫn của tâm, phá hủy các căn lành (<em>indriya</em>) và làm suy yếu trí tuệ.</li>
+                <li><strong>Lây truyền:</strong> Nếu không được kiểm soát, nó thúc đẩy hành vi gây ra đau khổ tột cùng, lan truyền hậu quả hủy diệt của nó đến người khác và giam hãm chúng sinh trong vòng luân hồi (<em>saṃsāra</em>). Những ví dụ cực đoan trong lịch sử và đương đại về sự suy đồi đạo đức cho thấy mầm bệnh tinh thần này có thể hoàn toàn chiếm đoạt một cá nhân một cách tàn khốc như thế nào.</li>
+            </ul>
+            
+            <hr>
+            
+            <h2>Phương thuốc: Đức Phật là Vị Y Vương Tối Thượng</h2>
+            <p>May thay, Đức Phật được công nhận là <em>Bhisakka</em> – Vị Y Vương Tối Thượng. Bậc Toàn Giác đã chẩn đoán được mầm bệnh này và kê toa một giải độc đặc hiệu: <strong>Bất tịnh quán (Asubha-bhāvana)</strong>.</p>
+            <p>Nếu <em>rāga-taṇhā</em> là virus, thì <em>asubha</em> chính là liệu pháp kháng virus đặc trị. Giáo Pháp (Dhamma) cung cấp một khuôn khổ hoàn chỉnh để hoàn toàn tiêu diệt sự nhiễm trùng này và phục hồi sức khỏe tâm linh tối thượng (<em>Nibbāna</em>).</p>
+            
+            <h3>Cấp độ Sơ cơ: Quản lý tải lượng virus</h3>
+            <p>Đối với hầu hết hành giả, việc hoàn toàn nhổ sạch ham muốn nhục dục đòi hỏi các tầng giác ngộ cao cấp (cụ thể là giai đoạn <em>Anāgāmi</em>, Bất Lai). Tuy nhiên, việc sử dụng ứng dụng này một cách nhất quán hàng ngày đóng vai trò như một liều dự phòng mạnh mẽ.</p>
+            <ul>
+                <li>Nó làm giảm đáng kể “tải lượng virus” của tham dục trong dòng tâm thức.</li>
+                <li>Nó làm suy yếu sự kìm kẹp tức thời của các triền cái (<em>nīvaraṇa</em>), mang lại sự mát mẻ tâm hồn, sự minh mẫn sáng suốt và sức khỏe tinh thần ổn định ngay trong đời sống hàng ngày.</li>
+            </ul>
+            
+            <h3>Cấp độ Cao: Phát triển Thiền định (Jhāna)</h3>
+            <p>Đối với những ai mong muốn tiến xa đến các tầng định sâu, <em>bất tịnh quán</em> phục vụ như một phương tiện trực tiếp cho thiền <em>samatha</em> (chỉ tịnh).</p>
+            <ul>
+                <li>Thông qua quán chiếu bền bỉ và có hệ thống, đối tượng thị giác ban đầu chuyển hóa thành <em>uggaha-nimitta</em> (học tướng) và cuối cùng trở thành <em>paṭibhāga-nimitta</em> (tợ tướng) rực rỡ.</li>
+                <li>Sự thanh lọc tâm này dẫn trực tiếp đến chứng đạt <em>sơ thiền</em> (jhāna).</li>
+            </ul>
+            <p>Để có những hướng dẫn chi tiết về việc chuyển tiếp từ các hình ảnh bất tịnh cơ bản đến các tầng thiền cao hơn, các bộ sách hướng dẫn thiền toàn diện của Thiền Sư Pa-Auk Sayadaw cung cấp sự chỉ dẫn có thẩm quyền và tốt nhất. Các tác phẩm chính sau đây được giới thiệu để hành giả nghiên cứu:</p>
+            <ul>
+                <li><strong><a href="https://chuaphucminh.com/kinh-sach/anh-sang-cua-tue.pdf" target="_blank" rel="noopener noreferrer">Ánh Sáng của Tuệ (PDF)</a></strong></li>
+                <li><strong><a href="https://chuaphucminh.com/kinh-sach/biet-va-thay.pdf" target="_blank" rel="noopener noreferrer">Biết và Thấy (PDF)</a></strong></li>
+            </ul>
+            
+            <hr>
+            
+            <h2>Truy cập Công cụ</h2>
+            <p>Ứng dụng web này ghép cặp ngẫu nhiên các hình ảnh tham khảo <em>bất tịnh</em> với các đoạn kinh văn phù hợp nhằm phá vỡ nhận thức thông thường của tâm về thân thể này.</p>
+            <ul>
+                <li><strong>Mã nguồn:</strong> <a href="https://github.com/meormine/quanbattinh" target="_blank" rel="noopener noreferrer">https://github.com/meormine/quanbattinh</a></li>
+                <li><strong>Đường dẫn thay thế:</strong> <a href="https://quanbattinh.blogspot.com" target="_blank" rel="noopener noreferrer">https://quanbattinh.blogspot.com</a></li>
+                <li><strong>Ứng dụng Android:</strong> <a href="https://archive.org/download/quan-bat-tinh" target="_blank" rel="noopener noreferrer">https://archive.org/download/quan-bat-tinh</a></li>
+                <li><strong>RSS Feed cho Quán chiếu Hàng ngày:</strong> <a href="https://meormine.github.io/quanbattinh/asubha.xml" target="_blank" rel="noopener noreferrer">https://meormine.github.io/quanbattinh/asubha.xml</a></li>
+				
+    <li>
+    <strong>Hướng dẫn Tham khảo:</strong> 
+    <div style="display: block; width: 100%; aspect-ratio: 16 / 9; background: url('https://i.ytimg.com/vi/ysQ8Zvny5T4/hqdefault.jpg') 50% 50% / cover; border: 0; margin-top: 10px; position: relative; border-radius: 8px; overflow: hidden;">
+        
+        <iframe 
+            allowfullscreen="true" 
+            loading="lazy" 
+            scrolling="no" 
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; background: transparent;" 
+            src="https://www.youtube.com/embed/ysQ8Zvny5T4">
+        </iframe>
+        
+    </div>
+</li>
+            </ul>
+            <p style="margin-top: 15px; font-style: italic;">Cầu mong công cụ này là một phương tiện hỗ trợ hữu ích trên con đường diệt trừ các phiền não.</p>
+        </div> </div>
+    </div>
+
+   <header id="top-bar">
+    <h1><i class="fas fa-skull icon-dark"></i><i class="far fa-skull icon-light"></i> Quán Bất Tịnh</h1>
+    <div style="display: flex; gap: 10px;">
+        <button class="next-btn" id="btn-view-favorites" style="background: var(--bg-hover); color: var(--text-main); font-size:1rem; font-weight:normal;"><i class="far fa-star"></i></button>
+        <button class="next-btn" id="btn-theme" style="background: var(--bg-hover); color: var(--text-main); font-size:1.1rem; font-weight:normal;"><i class="wi wi-moon-alt-first-quarter"></i></button>
+        
+        <button class="next-btn" id="btn-rss" style="background: var(--bg-hover); color: var(--text-main); font-size:1rem; font-weight:normal;" onclick="window.open('https://meormine.github.io/quanbattinh/asubha.xml', '_blank')"><i class="far fa-rss"></i></button>
+        
+        <button class="next-btn" id="btn-next"><i class="fas fa-arrow-right"></i></button>
+    </div>
+</header>
+
+    <main id="main-content">
+        <div id="container">
+            <h2 style="color: var(--text-muted); margin-top: 20vh;">Loading...</h2>
+        </div>
+    </main>
+
+    <script>
+   // ==========================================
+// 1. DATA & STATE SETTINGS
+// ==========================================
+const TOTAL_IMAGES = 1429;
+const IMAGE_FOLDER = 'https://chuaphucminh.com/file/asubha';
+
+let isFavoritesMode = false;
+let currentFavIndex = 0;
+let currentTextIdx = null;
+let currentImgIdx = null;
+
+// ==========================================
+// 2. FAVORITES MANAGEMENT
+// ==========================================
+function getFavorites() {
+    return JSON.parse(localStorage.getItem('asubha_favorites') || '[]');
+}
+
+function saveFavorites(favs) {
+    localStorage.setItem('asubha_favorites', JSON.stringify(favs));
+}
+
+function isCurrentFavorited() {
+    const favs = getFavorites();
+    return favs.some(f => f.t === currentTextIdx && f.i === currentImgIdx);
+}
+
+function toggleFavorite() {
+    let favs = getFavorites();
+    const index = favs.findIndex(f => f.t === currentTextIdx && f.i === currentImgIdx);
+    
+    if (index > -1) {
+        favs.splice(index, 1);
+    } else {
+        favs.push({ t: currentTextIdx, i: currentImgIdx });
+    }
+    saveFavorites(favs);
+    updateFavButtonUI();
+}
+
+function updateFavButtonUI() {
+    const favBtn = document.getElementById('btn-toggle-fav');
+    if (!favBtn) return;
+    
+    const favs = getFavorites();
+    const isFav = favs.some(f => f.t === currentTextIdx && f.i === currentImgIdx);
+    
+    favBtn.innerHTML = isFav ? '<i class="fas fa-star"></i>' : '<i class="far fa-star"></i>';
+    
+    // Use the variable here
+    favBtn.style.color = isFav ? "var(--fav-active)" : "var(--text-muted)";
+    favBtn.style.borderColor = isFav ? "var(--fav-active)" : "var(--border)";
+}
+// ==========================================
+// 3. INDEXEDDB LOGIC (Existing)
+// ==========================================
+function initDB() {
+    return new Promise((resolve, reject) => {
+        const request = indexedDB.open('StandAsubhaDB', 1);
+        request.onupgradeneeded = (e) => {
+            const db = e.target.result;
+            if (!db.objectStoreNames.contains('cycles')) {
+                db.createObjectStore('cycles', { keyPath: 'id' });
+            }
+        };
+        request.onsuccess = (e) => resolve(e.target.result);
+        request.onerror = (e) => reject(e.target.error);
+    });
+}
+
+async function dbOperation(storeName, mode, operation) {
+    const db = await initDB();
+    return new Promise((resolve, reject) => {
+        const transaction = db.transaction(storeName, mode);
+        const store = transaction.objectStore(storeName);
+        const request = operation(store);
+        request.onsuccess = () => resolve(request.result);
+        request.onerror = () => reject(request.error);
+    });
+}
+
+async function getNextItemIndex(cycleId, maxItems) {
+    let cycleData = await dbOperation('cycles', 'readonly', store => store.get(cycleId));
+    if (!cycleData || cycleData.remaining.length === 0) {
+        let newArray = Array.from({length: maxItems}, (_, i) => i);
+        for (let i = newArray.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [newArray[i], newArray[j]] = [newArray[j], newArray[i]];
+        }
+        cycleData = { id: cycleId, remaining: newArray };
+    }
+    const nextIndex = cycleData.remaining.pop();
+    await dbOperation('cycles', 'readwrite', store => store.put(cycleData));
+    return nextIndex;
+}
+
+// ==========================================
+// 4. MAIN LOADING LOGIC
+// ==========================================
+async function loadRandomEntry() {
+    const container = document.getElementById('container');
+    const mainContent = document.getElementById('main-content');
+    const btnViewFavs = document.getElementById('btn-view-favorites');
+    
+    container.style.opacity = 0;
+
+    setTimeout(async () => {
+        if (isFavoritesMode) {
+    const favs = getFavorites();
+    if (favs.length === 0) {
+        isFavoritesMode = false;
+        btnViewFavs.style.color = "var(--text-main)";
+        btnViewFavs.querySelector('i').className = 'far fa-star'; 
+        return loadRandomEntry(); 
+    }
+            // Sequential cycling
+            const pair = favs[currentFavIndex];
+            currentTextIdx = pair.t;
+            currentImgIdx = pair.i;
+            currentFavIndex = (currentFavIndex + 1) % favs.length;
+        } else {
+            currentTextIdx = await getNextItemIndex('standalone_text_cycle', ASUBHA_DATA.length);
+            currentImgIdx = await getNextItemIndex('standalone_img_cycle', TOTAL_IMAGES);
+        }
+
+        const article = ASUBHA_DATA[currentTextIdx];
+        const imgFileName = String(currentImgIdx + 1).padStart(4, '0') + '.jpg';
+        const imgSrc = `${IMAGE_FOLDER}/${imgFileName}`;
+
+        const referenceHTML = article.url 
+            ? `<a href="${article.url}" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()">${article.ref}</a>` 
+            : article.ref;
+
+         container.innerHTML = `
+            <div class="img-container">
+                <div class="loader"></div>
+                <img id="display-img" src="${imgSrc}" alt="Asubha.jpg" 
+                     onload="this.style.opacity=1; this.previousElementSibling.style.display='none';" 
+                     onerror="this.style.opacity=1; this.style.backgroundColor='transparent'; this.style.boxShadow='none'; this.parentElement.style.minHeight='auto'; this.previousElementSibling.style.display='none';">
+            </div>
+            <div class="text-content">${article.text}</div>
+            <div class="reference"><strong>Trích:</strong> ${referenceHTML}</div>
+            <div style="display: flex; gap: 10px; margin-top: 15px;">
+                <button class="copy-btn" id="btn-info">
+                    <i class="far fa-info-circle"></i></button>
+                <button class="copy-btn" id="copy-text-btn">📋 Sao Chép</button>
+                <button class="copy-btn" id="btn-toggle-fav"></button>
+            </div>
+            <div class="hint">&nbsp;</div>
+        `;
+
+        updateFavButtonUI();
+        mainContent.scrollTop = 0;
+
+        // Info Button Trigger Event
+        document.getElementById('btn-info').addEventListener('click', (e) => {
+            e.stopPropagation();
+            document.getElementById('info-modal').style.display = 'flex';
+        });
+
+        // Image Click
+        document.getElementById('display-img').addEventListener('click', (e) => {
+            e.stopPropagation();
+            const modal = document.getElementById('image-modal');
+            document.getElementById('modal-img').src = e.target.src;
+            modal.style.display = 'flex';
+        });
+
+        // Copy Button
+        document.getElementById('copy-text-btn').addEventListener('click', (e) => {
+            e.stopPropagation();
+            const plainText = article.text.replace(/<br\s*[\/]?>/gi, '\n');
+            navigator.clipboard.writeText(`${plainText}\n\n Trích: ${article.ref}`).then(() => {
+                e.target.innerText = '✅ Đã sao chép!';
+                setTimeout(() => e.target.innerText = '📋 Sao Chép', 2000);
+            });
+        });
+
+        // Favorite Toggle Button
+        document.getElementById('btn-toggle-fav').addEventListener('click', (e) => {
+            e.stopPropagation();
+            toggleFavorite();
+        });
+
+        container.style.opacity = 1;
+    }, 200);
+}
+
+// ==========================================
+// 5. EVENT LISTENERS
+// ==========================================
+const btnTheme = document.getElementById('btn-theme');
+const btnViewFavs = document.getElementById('btn-view-favorites');
+
+if (localStorage.getItem('theme') === 'light') document.body.classList.add('light-mode');
+
+btnTheme.addEventListener('click', (e) => {
+    e.stopPropagation();
+    document.body.classList.toggle('light-mode');
+    localStorage.setItem('theme', document.body.classList.contains('light-mode') ? 'light' : 'dark');
+});
+
+btnViewFavs.addEventListener('click', (e) => {
+    e.stopPropagation();
+    const favs = getFavorites();
+    
+    if (favs.length === 0) {
+        alert("Bạn chưa có mục yêu thích nào!");
+        return;
+    }
+
+    isFavoritesMode = !isFavoritesMode;
+    currentFavIndex = 0;
+
+    // Update Icon and Color
+    const icon = btnViewFavs.querySelector('i');
+    if (isFavoritesMode) {
+        btnViewFavs.style.color = "var(--fav-active)"; 
+        icon.className = 'fas fa-star';
+    } else {
+        btnViewFavs.style.color = "var(--text-main)";
+        icon.className = 'far fa-star';
+    }
+
+    loadRandomEntry();
+});
+
+document.getElementById('main-content').addEventListener('click', loadRandomEntry);
+document.getElementById('btn-next').addEventListener('click', (e) => {
+    e.stopPropagation();
+    loadRandomEntry();
+});
+
+document.body.addEventListener('keydown', (e) => {
+    if (e.code === 'Space') {
+        e.preventDefault();
+        loadRandomEntry();
+    }
+});
+
+// Image Modal Close Logic
+const modalElement = document.getElementById('image-modal');
+document.getElementById('close-modal').addEventListener('click', () => { modalElement.style.display = 'none'; resetZoom(); });
+modalElement.addEventListener('click', (e) => { if (e.target === modalElement) { modalElement.style.display = 'none'; resetZoom(); } });
+
+// Info Modal Close Logic
+const infoModalElement = document.getElementById('info-modal');
+document.getElementById('close-info-modal').addEventListener('click', () => { infoModalElement.style.display = 'none'; });
+infoModalElement.addEventListener('click', (e) => { if (e.target === infoModalElement) { infoModalElement.style.display = 'none'; } });
+
+	// ==========================================
+        // 6. SELF-CENTERING ZOOM & PAN
+        // ==========================================
+        let scale = 1;
+        let pointX = 0;
+        let pointY = 0;
+        let panning = false;
+        let startX = 0;
+        let startY = 0;
+
+        const modalImg = document.getElementById('modal-img');
+
+        function setTransform() {
+            // translate then scale keeps the pan relative to the center
+            modalImg.style.transform = `translate(${pointX}px, ${pointY}px) scale(${scale})`;
+        }
+
+        function resetZoom() {
+            scale = 1;
+            pointX = 0;
+            pointY = 0;
+            setTransform();
+        }
+
+        // --- Double Click to Toggle ---
+        modalImg.addEventListener('dblclick', (e) => {
+            e.stopPropagation();
+            if (scale > 1) {
+                resetZoom();
+            } else {
+                scale = 3;
+                setTransform();
+            }
+        });
+
+        // --- Centered Wheel Zoom with Pan Attenuation ---
+        modalImg.addEventListener('wheel', (e) => {
+            e.preventDefault();
+            
+            const delta = -e.deltaY;
+            const zoomSpeed = 1.15; 
+            const oldScale = scale;
+
+            if (delta > 0) {
+                scale *= zoomSpeed;
+            } else {
+                scale /= zoomSpeed;
+                // Magnetic Centering: Reduce pan offset as we zoom out
+                pointX /= zoomSpeed;
+                pointY /= zoomSpeed;
+            }
+
+            // Constraints
+            scale = Math.min(Math.max(1, scale), 10);
+
+            // If we are back at 1x, force everything to absolute zero
+            if (scale <= 1.01) {
+                resetZoom();
+            } else {
+                setTransform();
+            }
+        });
+
+        // --- Drag to Pan ---
+        modalImg.addEventListener('mousedown', (e) => {
+            if (scale <= 1) return;
+            e.preventDefault();
+            panning = true;
+            startX = e.clientX - pointX;
+            startY = e.clientY - pointY;
+            modalImg.style.cursor = 'grabbing';
+        });
+
+        window.addEventListener('mousemove', (e) => {
+            if (!panning) return;
+            // Limit panning so they don't lose the image entirely
+            pointX = e.clientX - startX;
+            pointY = e.clientY - startY;
+            setTransform();
+        });
+
+        window.addEventListener('mouseup', () => {
+            panning = false;
+            if (modalImg) modalImg.style.cursor = scale > 1 ? 'grab' : 'default';
+        });
+		// --- Touch Support for Zoom & Pan ---
+        let initialDistance = 0;
+        let initialScale = 1;
+
+        modalImg.addEventListener('touchstart', (e) => {
+            if (e.touches.length === 1 && scale > 1) {
+                // Single touch for panning (only if already zoomed in)
+                panning = true;
+                startX = e.touches[0].clientX - pointX;
+                startY = e.touches[0].clientY - pointY;
+            } else if (e.touches.length === 2) {
+                // Two touches for pinch-to-zoom
+                panning = false;
+                initialDistance = Math.hypot(
+                    e.touches[0].clientX - e.touches[1].clientX,
+                    e.touches[0].clientY - e.touches[1].clientY
+                );
+                initialScale = scale;
+            }
+        }, { passive: false });
+
+        modalImg.addEventListener('touchmove', (e) => {
+            if (scale > 1 || e.touches.length === 2) {
+                e.preventDefault(); // Prevent native page scrolling while interacting
+            }
+            
+            if (e.touches.length === 1 && panning) {
+                // Panning logic
+                pointX = e.touches[0].clientX - startX;
+                pointY = e.touches[0].clientY - startY;
+                setTransform();
+            } else if (e.touches.length === 2 && initialDistance > 0) {
+                // Pinch-to-zoom logic
+                const currentDistance = Math.hypot(
+                    e.touches[0].clientX - e.touches[1].clientX,
+                    e.touches[0].clientY - e.touches[1].clientY
+                );
+                
+                scale = initialScale * (currentDistance / initialDistance);
+                
+                // Constrain scale (Min 1x, Max 10x)
+                scale = Math.min(Math.max(1, scale), 10);
+                
+                if (scale <= 1.01) {
+                    resetZoom();
+                } else {
+                    setTransform();
+                }
+            }
+        }, { passive: false });
+
+        window.addEventListener('touchend', () => {
+            panning = false;
+            initialDistance = 0;
+            if (scale <= 1.01) {
+                resetZoom();
+            }
+        });
+        window.onload = loadRandomEntry;
+
+    </script>
+</body>
+</html>
