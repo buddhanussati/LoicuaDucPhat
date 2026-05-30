@@ -3608,12 +3608,14 @@ function injectSlider(lineElement, idx) {
 
         container.appendChild(srsPanel);
 
-        // Event listener to toggle the SRS panel
+        // Event listener to toggle the SRS panel AND the text
         input.addEventListener('change', function() {
             if (this.checked) {
                 srsPanel.style.display = 'flex';
+                textSpan.style.display = 'none'; // Hides the "Đã thuộc" text
             } else {
                 srsPanel.style.display = 'none';
+                textSpan.style.display = 'inline'; // Shows the text again if unchecked
                 // Reset standard tracking if unchecked
                 saveLineScore(idx, 0); 
             }
@@ -3622,7 +3624,7 @@ function injectSlider(lineElement, idx) {
         // 3. Keep the old Practice Button
         const practiceBtn = document.createElement('button');
         practiceBtn.className = 'btn-practice';
-        practiceBtn.innerHTML = '<i class="fas fa-bullseye-arrow"></i> Luyện Tập';
+        practiceBtn.innerHTML = '<i class="fas fa-bullseye-arrow"></i>';
         practiceBtn.onclick = function() {
             startLineTest(idx, 'practice');
         };
@@ -3633,8 +3635,14 @@ function injectSlider(lineElement, idx) {
 
     // Sync Checkbox UI with Legacy system to maintain Dashboard heatmaps
     const currentScore = getLineScore(idx);
-    const input = container.querySelector('input');
-    input.checked = (currentScore >= 100);
+    const inputCheckbox = container.querySelector('input');
+    inputCheckbox.checked = (currentScore >= 100);
+    
+    // Ensure the text and panel reflect the saved state when the line first loads
+    if (inputCheckbox.checked) {
+        textSpan.style.display = 'none';
+        srsPanel.style.display = 'flex';
+    }
 }
 function handleSRSRating(lineIdx, ratingValue, checkboxElement, panelElement) {
     const sectionId = sections[currentSectionIndex].id;
